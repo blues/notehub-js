@@ -20,15 +20,15 @@
     factory(require('expect.js'), require(process.cwd()+'/src/index'));
   } else {
     // Browser globals (root is window)
-    factory(root.expect, root.BluesNotehubJs);
+    factory(root.expect, root.NotehubJs);
   }
-}(this, function(expect, BluesNotehubJs) {
+}(this, function(expect, NotehubJs) {
   'use strict';
 
   var instance;
 
   beforeEach(function() {
-    instance = new BluesNotehubJs.GetProjectEventsByCursor200Response();
+    instance = new NotehubJs.GetProjectEventsByCursor200Response();
   });
 
   var getProperty = function(object, getter, property) {
@@ -50,25 +50,25 @@
   describe('GetProjectEventsByCursor200Response', function() {
     it('should create an instance of GetProjectEventsByCursor200Response', function() {
       // uncomment below and update the code to test GetProjectEventsByCursor200Response
-      //var instance = new BluesNotehubJs.GetProjectEventsByCursor200Response();
-      //expect(instance).to.be.a(BluesNotehubJs.GetProjectEventsByCursor200Response);
+      //var instance = new NotehubJs.GetProjectEventsByCursor200Response();
+      //expect(instance).to.be.a(NotehubJs.GetProjectEventsByCursor200Response);
     });
 
     it('should have the property events (base name: "events")', function() {
       // uncomment below and update the code to test the property events
-      //var instance = new BluesNotehubJs.GetProjectEventsByCursor200Response();
+      //var instance = new NotehubJs.GetProjectEventsByCursor200Response();
       //expect(instance).to.be();
     });
 
     it('should have the property nextCursor (base name: "next_cursor")', function() {
       // uncomment below and update the code to test the property nextCursor
-      //var instance = new BluesNotehubJs.GetProjectEventsByCursor200Response();
+      //var instance = new NotehubJs.GetProjectEventsByCursor200Response();
       //expect(instance).to.be();
     });
 
     it('should have the property hasMore (base name: "has_more")', function() {
       // uncomment below and update the code to test the property hasMore
-      //var instance = new BluesNotehubJs.GetProjectEventsByCursor200Response();
+      //var instance = new NotehubJs.GetProjectEventsByCursor200Response();
       //expect(instance).to.be();
     });
 

@@ -20,15 +20,15 @@
     factory(require('expect.js'), require(process.cwd()+'/src/index'));
   } else {
     // Browser globals (root is window)
-    factory(root.expect, root.BluesNotehubJs);
+    factory(root.expect, root.NotehubJs);
   }
-}(this, function(expect, BluesNotehubJs) {
+}(this, function(expect, NotehubJs) {
   'use strict';
 
   var instance;
 
   beforeEach(function() {
-    instance = new BluesNotehubJs.GetDeviceHealthLog200Response();
+    instance = new NotehubJs.GetDeviceHealthLog200Response();
   });
 
   var getProperty = function(object, getter, property) {
@@ -50,13 +50,13 @@
   describe('GetDeviceHealthLog200Response', function() {
     it('should create an instance of GetDeviceHealthLog200Response', function() {
       // uncomment below and update the code to test GetDeviceHealthLog200Response
-      //var instance = new BluesNotehubJs.GetDeviceHealthLog200Response();
-      //expect(instance).to.be.a(BluesNotehubJs.GetDeviceHealthLog200Response);
+      //var instance = new NotehubJs.GetDeviceHealthLog200Response();
+      //expect(instance).to.be.a(NotehubJs.GetDeviceHealthLog200Response);
     });
 
     it('should have the property healthLog (base name: "health_log")', function() {
       // uncomment below and update the code to test the property healthLog
-      //var instance = new BluesNotehubJs.GetDeviceHealthLog200Response();
+      //var instance = new NotehubJs.GetDeviceHealthLog200Response();
       //expect(instance).to.be();
     });
 

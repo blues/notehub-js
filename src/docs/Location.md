@@ -1,4 +1,4 @@
-# BluesNotehubJs.Location
+# NotehubJs.Location
 
 ## Properties
 

@@ -1,4 +1,4 @@
-# BluesNotehubJs.GetDeviceLatest200Response
+# NotehubJs.GetDeviceLatest200Response
 
 ## Properties
 

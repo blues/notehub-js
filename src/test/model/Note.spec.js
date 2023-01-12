@@ -20,15 +20,15 @@
     factory(require('expect.js'), require(process.cwd()+'/src/index'));
   } else {
     // Browser globals (root is window)
-    factory(root.expect, root.BluesNotehubJs);
+    factory(root.expect, root.NotehubJs);
   }
-}(this, function(expect, BluesNotehubJs) {
+}(this, function(expect, NotehubJs) {
   'use strict';
 
   var instance;
 
   beforeEach(function() {
-    instance = new BluesNotehubJs.Note();
+    instance = new NotehubJs.Note();
   });
 
   var getProperty = function(object, getter, property) {
@@ -50,19 +50,19 @@
   describe('Note', function() {
     it('should create an instance of Note', function() {
       // uncomment below and update the code to test Note
-      //var instance = new BluesNotehubJs.Note();
-      //expect(instance).to.be.a(BluesNotehubJs.Note);
+      //var instance = new NotehubJs.Note();
+      //expect(instance).to.be.a(NotehubJs.Note);
     });
 
     it('should have the property body (base name: "body")', function() {
       // uncomment below and update the code to test the property body
-      //var instance = new BluesNotehubJs.Note();
+      //var instance = new NotehubJs.Note();
       //expect(instance).to.be();
     });
 
     it('should have the property payload (base name: "payload")', function() {
       // uncomment below and update the code to test the property payload
-      //var instance = new BluesNotehubJs.Note();
+      //var instance = new NotehubJs.Note();
       //expect(instance).to.be();
     });
 

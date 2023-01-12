@@ -1,4 +1,4 @@
-# BluesNotehubJs.RouteSchema
+# NotehubJs.RouteSchema
 
 ## Properties
 

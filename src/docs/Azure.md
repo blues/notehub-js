@@ -1,4 +1,4 @@
-# BluesNotehubJs.Azure
+# NotehubJs.Azure
 
 ## Properties
 

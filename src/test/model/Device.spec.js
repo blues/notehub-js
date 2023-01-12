@@ -20,15 +20,15 @@
     factory(require('expect.js'), require(process.cwd()+'/src/index'));
   } else {
     // Browser globals (root is window)
-    factory(root.expect, root.BluesNotehubJs);
+    factory(root.expect, root.NotehubJs);
   }
-}(this, function(expect, BluesNotehubJs) {
+}(this, function(expect, NotehubJs) {
   'use strict';
 
   var instance;
 
   beforeEach(function() {
-    instance = new BluesNotehubJs.Device();
+    instance = new NotehubJs.Device();
   });
 
   var getProperty = function(object, getter, property) {
@@ -50,91 +50,91 @@
   describe('Device', function() {
     it('should create an instance of Device', function() {
       // uncomment below and update the code to test Device
-      //var instance = new BluesNotehubJs.Device();
-      //expect(instance).to.be.a(BluesNotehubJs.Device);
+      //var instance = new NotehubJs.Device();
+      //expect(instance).to.be.a(NotehubJs.Device);
     });
 
     it('should have the property uid (base name: "uid")', function() {
       // uncomment below and update the code to test the property uid
-      //var instance = new BluesNotehubJs.Device();
+      //var instance = new NotehubJs.Device();
       //expect(instance).to.be();
     });
 
     it('should have the property serialNumber (base name: "serial_number")', function() {
       // uncomment below and update the code to test the property serialNumber
-      //var instance = new BluesNotehubJs.Device();
+      //var instance = new NotehubJs.Device();
       //expect(instance).to.be();
     });
 
     it('should have the property provisioned (base name: "provisioned")', function() {
       // uncomment below and update the code to test the property provisioned
-      //var instance = new BluesNotehubJs.Device();
+      //var instance = new NotehubJs.Device();
       //expect(instance).to.be();
     });
 
     it('should have the property lastActivity (base name: "last_activity")', function() {
       // uncomment below and update the code to test the property lastActivity
-      //var instance = new BluesNotehubJs.Device();
+      //var instance = new NotehubJs.Device();
       //expect(instance).to.be();
     });
 
     it('should have the property contact (base name: "contact")', function() {
       // uncomment below and update the code to test the property contact
-      //var instance = new BluesNotehubJs.Device();
+      //var instance = new NotehubJs.Device();
       //expect(instance).to.be();
     });
 
     it('should have the property productUid (base name: "product_uid")', function() {
       // uncomment below and update the code to test the property productUid
-      //var instance = new BluesNotehubJs.Device();
+      //var instance = new NotehubJs.Device();
       //expect(instance).to.be();
     });
 
     it('should have the property fleetUids (base name: "fleet_uids")', function() {
       // uncomment below and update the code to test the property fleetUids
-      //var instance = new BluesNotehubJs.Device();
+      //var instance = new NotehubJs.Device();
       //expect(instance).to.be();
     });
 
     it('should have the property towerInfo (base name: "tower_info")', function() {
       // uncomment below and update the code to test the property towerInfo
-      //var instance = new BluesNotehubJs.Device();
+      //var instance = new NotehubJs.Device();
       //expect(instance).to.be();
     });
 
     it('should have the property towerLocation (base name: "tower_location")', function() {
       // uncomment below and update the code to test the property towerLocation
-      //var instance = new BluesNotehubJs.Device();
+      //var instance = new NotehubJs.Device();
       //expect(instance).to.be();
     });
 
     it('should have the property gpsLocation (base name: "gps_location")', function() {
       // uncomment below and update the code to test the property gpsLocation
-      //var instance = new BluesNotehubJs.Device();
+      //var instance = new NotehubJs.Device();
       //expect(instance).to.be();
     });
 
     it('should have the property triangulatedLocation (base name: "triangulated_location")', function() {
       // uncomment below and update the code to test the property triangulatedLocation
-      //var instance = new BluesNotehubJs.Device();
+      //var instance = new NotehubJs.Device();
       //expect(instance).to.be();
     });
 
     it('should have the property voltage (base name: "voltage")', function() {
       // uncomment below and update the code to test the property voltage
-      //var instance = new BluesNotehubJs.Device();
+      //var instance = new NotehubJs.Device();
       //expect(instance).to.be();
     });
 
     it('should have the property temperature (base name: "temperature")', function() {
       // uncomment below and update the code to test the property temperature
-      //var instance = new BluesNotehubJs.Device();
+      //var instance = new NotehubJs.Device();
       //expect(instance).to.be();
     });
 
     it('should have the property dfu (base name: "dfu")', function() {
       // uncomment below and update the code to test the property dfu
-      //var instance = new BluesNotehubJs.Device();
+      //var instance = new NotehubJs.Device();
       //expect(instance).to.be();
     });
 

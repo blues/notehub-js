@@ -20,15 +20,15 @@
     factory(require('expect.js'), require(process.cwd()+'/src/index'));
   } else {
     // Browser globals (root is window)
-    factory(root.expect, root.BluesNotehubJs);
+    factory(root.expect, root.NotehubJs);
   }
-}(this, function(expect, BluesNotehubJs) {
+}(this, function(expect, NotehubJs) {
   'use strict';
 
   var instance;
 
   beforeEach(function() {
-    instance = new BluesNotehubJs.GetProjects200Response();
+    instance = new NotehubJs.GetProjects200Response();
   });
 
   var getProperty = function(object, getter, property) {
@@ -50,13 +50,13 @@
   describe('GetProjects200Response', function() {
     it('should create an instance of GetProjects200Response', function() {
       // uncomment below and update the code to test GetProjects200Response
-      //var instance = new BluesNotehubJs.GetProjects200Response();
-      //expect(instance).to.be.a(BluesNotehubJs.GetProjects200Response);
+      //var instance = new NotehubJs.GetProjects200Response();
+      //expect(instance).to.be.a(NotehubJs.GetProjects200Response);
     });
 
     it('should have the property projects (base name: "projects")', function() {
       // uncomment below and update the code to test the property projects
-      //var instance = new BluesNotehubJs.GetProjects200Response();
+      //var instance = new NotehubJs.GetProjects200Response();
       //expect(instance).to.be();
     });
 

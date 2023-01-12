@@ -1,4 +1,4 @@
-# BluesNotehubJs.DFUState
+# NotehubJs.DFUState
 
 ## Properties
 

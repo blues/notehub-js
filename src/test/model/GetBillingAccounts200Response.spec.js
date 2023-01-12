@@ -20,15 +20,15 @@
     factory(require('expect.js'), require(process.cwd()+'/src/index'));
   } else {
     // Browser globals (root is window)
-    factory(root.expect, root.BluesNotehubJs);
+    factory(root.expect, root.NotehubJs);
   }
-}(this, function(expect, BluesNotehubJs) {
+}(this, function(expect, NotehubJs) {
   'use strict';
 
   var instance;
 
   beforeEach(function() {
-    instance = new BluesNotehubJs.GetBillingAccounts200Response();
+    instance = new NotehubJs.GetBillingAccounts200Response();
   });
 
   var getProperty = function(object, getter, property) {
@@ -50,13 +50,13 @@
   describe('GetBillingAccounts200Response', function() {
     it('should create an instance of GetBillingAccounts200Response', function() {
       // uncomment below and update the code to test GetBillingAccounts200Response
-      //var instance = new BluesNotehubJs.GetBillingAccounts200Response();
-      //expect(instance).to.be.a(BluesNotehubJs.GetBillingAccounts200Response);
+      //var instance = new NotehubJs.GetBillingAccounts200Response();
+      //expect(instance).to.be.a(NotehubJs.GetBillingAccounts200Response);
     });
 
     it('should have the property billingAccounts (base name: "billing_accounts")', function() {
       // uncomment below and update the code to test the property billingAccounts
-      //var instance = new BluesNotehubJs.GetBillingAccounts200Response();
+      //var instance = new NotehubJs.GetBillingAccounts200Response();
       //expect(instance).to.be();
     });
 

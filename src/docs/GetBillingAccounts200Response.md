@@ -1,4 +1,4 @@
-# BluesNotehubJs.GetBillingAccounts200Response
+# NotehubJs.GetBillingAccounts200Response
 
 ## Properties
 

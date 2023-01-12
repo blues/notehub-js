@@ -20,15 +20,15 @@
     factory(require('expect.js'), require(process.cwd()+'/src/index'));
   } else {
     // Browser globals (root is window)
-    factory(root.expect, root.BluesNotehubJs);
+    factory(root.expect, root.NotehubJs);
   }
-}(this, function(expect, BluesNotehubJs) {
+}(this, function(expect, NotehubJs) {
   'use strict';
 
   var instance;
 
   beforeEach(function() {
-    instance = new BluesNotehubJs.SnowflakeTransform();
+    instance = new NotehubJs.SnowflakeTransform();
   });
 
   var getProperty = function(object, getter, property) {
@@ -50,19 +50,19 @@
   describe('SnowflakeTransform', function() {
     it('should create an instance of SnowflakeTransform', function() {
       // uncomment below and update the code to test SnowflakeTransform
-      //var instance = new BluesNotehubJs.SnowflakeTransform();
-      //expect(instance).to.be.a(BluesNotehubJs.SnowflakeTransform);
+      //var instance = new NotehubJs.SnowflakeTransform();
+      //expect(instance).to.be.a(NotehubJs.SnowflakeTransform);
     });
 
     it('should have the property format (base name: "format")', function() {
       // uncomment below and update the code to test the property format
-      //var instance = new BluesNotehubJs.SnowflakeTransform();
+      //var instance = new NotehubJs.SnowflakeTransform();
       //expect(instance).to.be();
     });
 
     it('should have the property jsonata (base name: "jsonata")', function() {
       // uncomment below and update the code to test the property jsonata
-      //var instance = new BluesNotehubJs.SnowflakeTransform();
+      //var instance = new NotehubJs.SnowflakeTransform();
       //expect(instance).to.be();
     });
 

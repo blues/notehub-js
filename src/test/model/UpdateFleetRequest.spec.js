@@ -20,15 +20,15 @@
     factory(require('expect.js'), require(process.cwd()+'/src/index'));
   } else {
     // Browser globals (root is window)
-    factory(root.expect, root.BluesNotehubJs);
+    factory(root.expect, root.NotehubJs);
   }
-}(this, function(expect, BluesNotehubJs) {
+}(this, function(expect, NotehubJs) {
   'use strict';
 
   var instance;
 
   beforeEach(function() {
-    instance = new BluesNotehubJs.UpdateFleetRequest();
+    instance = new NotehubJs.UpdateFleetRequest();
   });
 
   var getProperty = function(object, getter, property) {
@@ -50,25 +50,25 @@
   describe('UpdateFleetRequest', function() {
     it('should create an instance of UpdateFleetRequest', function() {
       // uncomment below and update the code to test UpdateFleetRequest
-      //var instance = new BluesNotehubJs.UpdateFleetRequest();
-      //expect(instance).to.be.a(BluesNotehubJs.UpdateFleetRequest);
+      //var instance = new NotehubJs.UpdateFleetRequest();
+      //expect(instance).to.be.a(NotehubJs.UpdateFleetRequest);
     });
 
     it('should have the property label (base name: "label")', function() {
       // uncomment below and update the code to test the property label
-      //var instance = new BluesNotehubJs.UpdateFleetRequest();
+      //var instance = new NotehubJs.UpdateFleetRequest();
       //expect(instance).to.be();
     });
 
     it('should have the property addDevices (base name: "addDevices")', function() {
       // uncomment below and update the code to test the property addDevices
-      //var instance = new BluesNotehubJs.UpdateFleetRequest();
+      //var instance = new NotehubJs.UpdateFleetRequest();
       //expect(instance).to.be();
     });
 
     it('should have the property removeDevices (base name: "removeDevices")', function() {
       // uncomment below and update the code to test the property removeDevices
-      //var instance = new BluesNotehubJs.UpdateFleetRequest();
+      //var instance = new NotehubJs.UpdateFleetRequest();
       //expect(instance).to.be();
     });
 

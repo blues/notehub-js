@@ -20,15 +20,15 @@
     factory(require('expect.js'), require(process.cwd()+'/src/index'));
   } else {
     // Browser globals (root is window)
-    factory(root.expect, root.BluesNotehubJs);
+    factory(root.expect, root.NotehubJs);
   }
-}(this, function(expect, BluesNotehubJs) {
+}(this, function(expect, NotehubJs) {
   'use strict';
 
   var instance;
 
   beforeEach(function() {
-    instance = new BluesNotehubJs.DFUEnv();
+    instance = new NotehubJs.DFUEnv();
   });
 
   var getProperty = function(object, getter, property) {
@@ -50,19 +50,19 @@
   describe('DFUEnv', function() {
     it('should create an instance of DFUEnv', function() {
       // uncomment below and update the code to test DFUEnv
-      //var instance = new BluesNotehubJs.DFUEnv();
-      //expect(instance).to.be.a(BluesNotehubJs.DFUEnv);
+      //var instance = new NotehubJs.DFUEnv();
+      //expect(instance).to.be.a(NotehubJs.DFUEnv);
     });
 
     it('should have the property card (base name: "card")', function() {
       // uncomment below and update the code to test the property card
-      //var instance = new BluesNotehubJs.DFUEnv();
+      //var instance = new NotehubJs.DFUEnv();
       //expect(instance).to.be();
     });
 
     it('should have the property user (base name: "user")', function() {
       // uncomment below and update the code to test the property user
-      //var instance = new BluesNotehubJs.DFUEnv();
+      //var instance = new NotehubJs.DFUEnv();
       //expect(instance).to.be();
     });
 

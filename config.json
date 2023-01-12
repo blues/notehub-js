@@ -1,5 +1,5 @@
 {
-  "projectName": "@blues/notehub-js",
+  "projectName": "notehub-js",
   "licenseName": "MIT",
   "sourceFolder": "src",
   "usePromises": true

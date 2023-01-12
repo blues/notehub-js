@@ -20,15 +20,15 @@
     factory(require('expect.js'), require(process.cwd()+'/src/index'));
   } else {
     // Browser globals (root is window)
-    factory(root.expect, root.BluesNotehubJs);
+    factory(root.expect, root.NotehubJs);
   }
-}(this, function(expect, BluesNotehubJs) {
+}(this, function(expect, NotehubJs) {
   'use strict';
 
   var instance;
 
   beforeEach(function() {
-    instance = new BluesNotehubJs.CreateProjectRequest();
+    instance = new NotehubJs.CreateProjectRequest();
   });
 
   var getProperty = function(object, getter, property) {
@@ -50,19 +50,19 @@
   describe('CreateProjectRequest', function() {
     it('should create an instance of CreateProjectRequest', function() {
       // uncomment below and update the code to test CreateProjectRequest
-      //var instance = new BluesNotehubJs.CreateProjectRequest();
-      //expect(instance).to.be.a(BluesNotehubJs.CreateProjectRequest);
+      //var instance = new NotehubJs.CreateProjectRequest();
+      //expect(instance).to.be.a(NotehubJs.CreateProjectRequest);
     });
 
     it('should have the property label (base name: "label")', function() {
       // uncomment below and update the code to test the property label
-      //var instance = new BluesNotehubJs.CreateProjectRequest();
+      //var instance = new NotehubJs.CreateProjectRequest();
       //expect(instance).to.be();
     });
 
     it('should have the property billingAccountUid (base name: "billing_account_uid")', function() {
       // uncomment below and update the code to test the property billingAccountUid
-      //var instance = new BluesNotehubJs.CreateProjectRequest();
+      //var instance = new NotehubJs.CreateProjectRequest();
       //expect(instance).to.be();
     });
 

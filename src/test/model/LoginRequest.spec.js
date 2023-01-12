@@ -20,15 +20,15 @@
     factory(require('expect.js'), require(process.cwd()+'/src/index'));
   } else {
     // Browser globals (root is window)
-    factory(root.expect, root.BluesNotehubJs);
+    factory(root.expect, root.NotehubJs);
   }
-}(this, function(expect, BluesNotehubJs) {
+}(this, function(expect, NotehubJs) {
   'use strict';
 
   var instance;
 
   beforeEach(function() {
-    instance = new BluesNotehubJs.LoginRequest();
+    instance = new NotehubJs.LoginRequest();
   });
 
   var getProperty = function(object, getter, property) {
@@ -50,19 +50,19 @@
   describe('LoginRequest', function() {
     it('should create an instance of LoginRequest', function() {
       // uncomment below and update the code to test LoginRequest
-      //var instance = new BluesNotehubJs.LoginRequest();
-      //expect(instance).to.be.a(BluesNotehubJs.LoginRequest);
+      //var instance = new NotehubJs.LoginRequest();
+      //expect(instance).to.be.a(NotehubJs.LoginRequest);
     });
 
     it('should have the property username (base name: "username")', function() {
       // uncomment below and update the code to test the property username
-      //var instance = new BluesNotehubJs.LoginRequest();
+      //var instance = new NotehubJs.LoginRequest();
       //expect(instance).to.be();
     });
 
     it('should have the property password (base name: "password")', function() {
       // uncomment below and update the code to test the property password
-      //var instance = new BluesNotehubJs.LoginRequest();
+      //var instance = new NotehubJs.LoginRequest();
       //expect(instance).to.be();
     });
 

@@ -20,15 +20,15 @@
     factory(require('expect.js'), require(process.cwd()+'/src/index'));
   } else {
     // Browser globals (root is window)
-    factory(root.expect, root.BluesNotehubJs);
+    factory(root.expect, root.NotehubJs);
   }
-}(this, function(expect, BluesNotehubJs) {
+}(this, function(expect, NotehubJs) {
   'use strict';
 
   var instance;
 
   beforeEach(function() {
-    instance = new BluesNotehubJs.CreateFleetRequest();
+    instance = new NotehubJs.CreateFleetRequest();
   });
 
   var getProperty = function(object, getter, property) {
@@ -50,13 +50,13 @@
   describe('CreateFleetRequest', function() {
     it('should create an instance of CreateFleetRequest', function() {
       // uncomment below and update the code to test CreateFleetRequest
-      //var instance = new BluesNotehubJs.CreateFleetRequest();
-      //expect(instance).to.be.a(BluesNotehubJs.CreateFleetRequest);
+      //var instance = new NotehubJs.CreateFleetRequest();
+      //expect(instance).to.be.a(NotehubJs.CreateFleetRequest);
     });
 
     it('should have the property label (base name: "label")', function() {
       // uncomment below and update the code to test the property label
-      //var instance = new BluesNotehubJs.CreateFleetRequest();
+      //var instance = new NotehubJs.CreateFleetRequest();
       //expect(instance).to.be();
     });
 

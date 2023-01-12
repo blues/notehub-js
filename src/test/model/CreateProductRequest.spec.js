@@ -20,15 +20,15 @@
     factory(require('expect.js'), require(process.cwd()+'/src/index'));
   } else {
     // Browser globals (root is window)
-    factory(root.expect, root.BluesNotehubJs);
+    factory(root.expect, root.NotehubJs);
   }
-}(this, function(expect, BluesNotehubJs) {
+}(this, function(expect, NotehubJs) {
   'use strict';
 
   var instance;
 
   beforeEach(function() {
-    instance = new BluesNotehubJs.CreateProductRequest();
+    instance = new NotehubJs.CreateProductRequest();
   });
 
   var getProperty = function(object, getter, property) {
@@ -50,31 +50,31 @@
   describe('CreateProductRequest', function() {
     it('should create an instance of CreateProductRequest', function() {
       // uncomment below and update the code to test CreateProductRequest
-      //var instance = new BluesNotehubJs.CreateProductRequest();
-      //expect(instance).to.be.a(BluesNotehubJs.CreateProductRequest);
+      //var instance = new NotehubJs.CreateProductRequest();
+      //expect(instance).to.be.a(NotehubJs.CreateProductRequest);
     });
 
     it('should have the property productUid (base name: "product_uid")', function() {
       // uncomment below and update the code to test the property productUid
-      //var instance = new BluesNotehubJs.CreateProductRequest();
+      //var instance = new NotehubJs.CreateProductRequest();
       //expect(instance).to.be();
     });
 
     it('should have the property label (base name: "label")', function() {
       // uncomment below and update the code to test the property label
-      //var instance = new BluesNotehubJs.CreateProductRequest();
+      //var instance = new NotehubJs.CreateProductRequest();
       //expect(instance).to.be();
     });
 
     it('should have the property autoProvisionFleets (base name: "auto_provision_fleets")', function() {
       // uncomment below and update the code to test the property autoProvisionFleets
-      //var instance = new BluesNotehubJs.CreateProductRequest();
+      //var instance = new NotehubJs.CreateProductRequest();
       //expect(instance).to.be();
     });
 
     it('should have the property disableDevicesByDefault (base name: "disable_devices_by_default")', function() {
       // uncomment below and update the code to test the property disableDevicesByDefault
-      //var instance = new BluesNotehubJs.CreateProductRequest();
+      //var instance = new NotehubJs.CreateProductRequest();
       //expect(instance).to.be();
     });
 

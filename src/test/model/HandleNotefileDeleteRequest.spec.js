@@ -20,15 +20,15 @@
     factory(require('expect.js'), require(process.cwd()+'/src/index'));
   } else {
     // Browser globals (root is window)
-    factory(root.expect, root.BluesNotehubJs);
+    factory(root.expect, root.NotehubJs);
   }
-}(this, function(expect, BluesNotehubJs) {
+}(this, function(expect, NotehubJs) {
   'use strict';
 
   var instance;
 
   beforeEach(function() {
-    instance = new BluesNotehubJs.HandleNotefileDeleteRequest();
+    instance = new NotehubJs.HandleNotefileDeleteRequest();
   });
 
   var getProperty = function(object, getter, property) {
@@ -50,13 +50,13 @@
   describe('HandleNotefileDeleteRequest', function() {
     it('should create an instance of HandleNotefileDeleteRequest', function() {
       // uncomment below and update the code to test HandleNotefileDeleteRequest
-      //var instance = new BluesNotehubJs.HandleNotefileDeleteRequest();
-      //expect(instance).to.be.a(BluesNotehubJs.HandleNotefileDeleteRequest);
+      //var instance = new NotehubJs.HandleNotefileDeleteRequest();
+      //expect(instance).to.be.a(NotehubJs.HandleNotefileDeleteRequest);
     });
 
     it('should have the property files (base name: "files")', function() {
       // uncomment below and update the code to test the property files
-      //var instance = new BluesNotehubJs.HandleNotefileDeleteRequest();
+      //var instance = new NotehubJs.HandleNotefileDeleteRequest();
       //expect(instance).to.be();
     });
 

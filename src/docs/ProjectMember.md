@@ -1,4 +1,4 @@
-# BluesNotehubJs.ProjectMember
+# NotehubJs.ProjectMember
 
 ## Properties
 

@@ -1,4 +1,4 @@
-# BluesNotehubJs.HandleNotefileDeleteRequest
+# NotehubJs.HandleNotefileDeleteRequest
 
 ## Properties
 

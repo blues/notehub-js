@@ -20,15 +20,15 @@
     factory(require('expect.js'), require(process.cwd()+'/src/index'));
   } else {
     // Browser globals (root is window)
-    factory(root.expect, root.BluesNotehubJs);
+    factory(root.expect, root.NotehubJs);
   }
-}(this, function(expect, BluesNotehubJs) {
+}(this, function(expect, NotehubJs) {
   'use strict';
 
   var instance;
 
   beforeEach(function() {
-    instance = new BluesNotehubJs.PutDeviceFleetsRequest();
+    instance = new NotehubJs.PutDeviceFleetsRequest();
   });
 
   var getProperty = function(object, getter, property) {
@@ -50,13 +50,13 @@
   describe('PutDeviceFleetsRequest', function() {
     it('should create an instance of PutDeviceFleetsRequest', function() {
       // uncomment below and update the code to test PutDeviceFleetsRequest
-      //var instance = new BluesNotehubJs.PutDeviceFleetsRequest();
-      //expect(instance).to.be.a(BluesNotehubJs.PutDeviceFleetsRequest);
+      //var instance = new NotehubJs.PutDeviceFleetsRequest();
+      //expect(instance).to.be.a(NotehubJs.PutDeviceFleetsRequest);
     });
 
     it('should have the property fleetUids (base name: "fleet_uids")', function() {
       // uncomment below and update the code to test the property fleetUids
-      //var instance = new BluesNotehubJs.PutDeviceFleetsRequest();
+      //var instance = new NotehubJs.PutDeviceFleetsRequest();
       //expect(instance).to.be();
     });
 

@@ -20,15 +20,15 @@
     factory(require('expect.js'), require(process.cwd()+'/src/index'));
   } else {
     // Browser globals (root is window)
-    factory(root.expect, root.BluesNotehubJs);
+    factory(root.expect, root.NotehubJs);
   }
-}(this, function(expect, BluesNotehubJs) {
+}(this, function(expect, NotehubJs) {
   'use strict';
 
   var instance;
 
   beforeEach(function() {
-    instance = new BluesNotehubJs.BillingAccount();
+    instance = new NotehubJs.BillingAccount();
   });
 
   var getProperty = function(object, getter, property) {
@@ -50,25 +50,25 @@
   describe('BillingAccount', function() {
     it('should create an instance of BillingAccount', function() {
       // uncomment below and update the code to test BillingAccount
-      //var instance = new BluesNotehubJs.BillingAccount();
-      //expect(instance).to.be.a(BluesNotehubJs.BillingAccount);
+      //var instance = new NotehubJs.BillingAccount();
+      //expect(instance).to.be.a(NotehubJs.BillingAccount);
     });
 
     it('should have the property uid (base name: "uid")', function() {
       // uncomment below and update the code to test the property uid
-      //var instance = new BluesNotehubJs.BillingAccount();
+      //var instance = new NotehubJs.BillingAccount();
       //expect(instance).to.be();
     });
 
     it('should have the property name (base name: "name")', function() {
       // uncomment below and update the code to test the property name
-      //var instance = new BluesNotehubJs.BillingAccount();
+      //var instance = new NotehubJs.BillingAccount();
       //expect(instance).to.be();
     });
 
     it('should have the property role (base name: "role")', function() {
       // uncomment below and update the code to test the property role
-      //var instance = new BluesNotehubJs.BillingAccount();
+      //var instance = new NotehubJs.BillingAccount();
       //expect(instance).to.be();
     });
 

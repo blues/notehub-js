@@ -20,15 +20,15 @@
     factory(require('expect.js'), require(process.cwd()+'/src/index'));
   } else {
     // Browser globals (root is window)
-    factory(root.expect, root.BluesNotehubJs);
+    factory(root.expect, root.NotehubJs);
   }
-}(this, function(expect, BluesNotehubJs) {
+}(this, function(expect, NotehubJs) {
   'use strict';
 
   var instance;
 
   beforeEach(function() {
-    instance = new BluesNotehubJs.RouteSchema();
+    instance = new NotehubJs.RouteSchema();
   });
 
   var getProperty = function(object, getter, property) {
@@ -50,217 +50,217 @@
   describe('RouteSchema', function() {
     it('should create an instance of RouteSchema', function() {
       // uncomment below and update the code to test RouteSchema
-      //var instance = new BluesNotehubJs.RouteSchema();
-      //expect(instance).to.be.a(BluesNotehubJs.RouteSchema);
+      //var instance = new NotehubJs.RouteSchema();
+      //expect(instance).to.be.a(NotehubJs.RouteSchema);
     });
 
     it('should have the property fleets (base name: "fleets")', function() {
       // uncomment below and update the code to test the property fleets
-      //var instance = new BluesNotehubJs.RouteSchema();
+      //var instance = new NotehubJs.RouteSchema();
       //expect(instance).to.be();
     });
 
     it('should have the property filter (base name: "filter")', function() {
       // uncomment below and update the code to test the property filter
-      //var instance = new BluesNotehubJs.RouteSchema();
+      //var instance = new NotehubJs.RouteSchema();
       //expect(instance).to.be();
     });
 
     it('should have the property transform (base name: "transform")', function() {
       // uncomment below and update the code to test the property transform
-      //var instance = new BluesNotehubJs.RouteSchema();
+      //var instance = new NotehubJs.RouteSchema();
       //expect(instance).to.be();
     });
 
     it('should have the property throttleMs (base name: "throttle_ms")', function() {
       // uncomment below and update the code to test the property throttleMs
-      //var instance = new BluesNotehubJs.RouteSchema();
+      //var instance = new NotehubJs.RouteSchema();
       //expect(instance).to.be();
     });
 
     it('should have the property url (base name: "url")', function() {
       // uncomment below and update the code to test the property url
-      //var instance = new BluesNotehubJs.RouteSchema();
+      //var instance = new NotehubJs.RouteSchema();
       //expect(instance).to.be();
     });
 
     it('should have the property httpHeaders (base name: "http_headers")', function() {
       // uncomment below and update the code to test the property httpHeaders
-      //var instance = new BluesNotehubJs.RouteSchema();
+      //var instance = new NotehubJs.RouteSchema();
       //expect(instance).to.be();
     });
 
     it('should have the property disableHttpHeaders (base name: "disable_http_headers")', function() {
       // uncomment below and update the code to test the property disableHttpHeaders
-      //var instance = new BluesNotehubJs.RouteSchema();
+      //var instance = new NotehubJs.RouteSchema();
       //expect(instance).to.be();
     });
 
     it('should have the property timeout (base name: "timeout")', function() {
       // uncomment below and update the code to test the property timeout
-      //var instance = new BluesNotehubJs.RouteSchema();
+      //var instance = new NotehubJs.RouteSchema();
       //expect(instance).to.be();
     });
 
     it('should have the property alias (base name: "alias")', function() {
       // uncomment below and update the code to test the property alias
-      //var instance = new BluesNotehubJs.RouteSchema();
+      //var instance = new NotehubJs.RouteSchema();
       //expect(instance).to.be();
     });
 
     it('should have the property broker (base name: "broker")', function() {
       // uncomment below and update the code to test the property broker
-      //var instance = new BluesNotehubJs.RouteSchema();
+      //var instance = new NotehubJs.RouteSchema();
       //expect(instance).to.be();
     });
 
     it('should have the property port (base name: "port")', function() {
       // uncomment below and update the code to test the property port
-      //var instance = new BluesNotehubJs.RouteSchema();
+      //var instance = new NotehubJs.RouteSchema();
       //expect(instance).to.be();
     });
 
     it('should have the property username (base name: "username")', function() {
       // uncomment below and update the code to test the property username
-      //var instance = new BluesNotehubJs.RouteSchema();
+      //var instance = new NotehubJs.RouteSchema();
       //expect(instance).to.be();
     });
 
     it('should have the property password (base name: "password")', function() {
       // uncomment below and update the code to test the property password
-      //var instance = new BluesNotehubJs.RouteSchema();
+      //var instance = new NotehubJs.RouteSchema();
       //expect(instance).to.be();
     });
 
     it('should have the property topic (base name: "topic")', function() {
       // uncomment below and update the code to test the property topic
-      //var instance = new BluesNotehubJs.RouteSchema();
+      //var instance = new NotehubJs.RouteSchema();
       //expect(instance).to.be();
     });
 
     it('should have the property certificate (base name: "certificate")', function() {
       // uncomment below and update the code to test the property certificate
-      //var instance = new BluesNotehubJs.RouteSchema();
+      //var instance = new NotehubJs.RouteSchema();
       //expect(instance).to.be();
     });
 
     it('should have the property certificateName (base name: "certificate_name")', function() {
       // uncomment below and update the code to test the property certificateName
-      //var instance = new BluesNotehubJs.RouteSchema();
+      //var instance = new NotehubJs.RouteSchema();
       //expect(instance).to.be();
     });
 
     it('should have the property key (base name: "key")', function() {
       // uncomment below and update the code to test the property key
-      //var instance = new BluesNotehubJs.RouteSchema();
+      //var instance = new NotehubJs.RouteSchema();
       //expect(instance).to.be();
     });
 
     it('should have the property privateKeyName (base name: "private_key_name")', function() {
       // uncomment below and update the code to test the property privateKeyName
-      //var instance = new BluesNotehubJs.RouteSchema();
+      //var instance = new NotehubJs.RouteSchema();
       //expect(instance).to.be();
     });
 
     it('should have the property region (base name: "region")', function() {
       // uncomment below and update the code to test the property region
-      //var instance = new BluesNotehubJs.RouteSchema();
+      //var instance = new NotehubJs.RouteSchema();
       //expect(instance).to.be();
     });
 
     it('should have the property accessKeyId (base name: "access_key_id")', function() {
       // uncomment below and update the code to test the property accessKeyId
-      //var instance = new BluesNotehubJs.RouteSchema();
+      //var instance = new NotehubJs.RouteSchema();
       //expect(instance).to.be();
     });
 
     it('should have the property accessKeySecret (base name: "access_key_secret")', function() {
       // uncomment below and update the code to test the property accessKeySecret
-      //var instance = new BluesNotehubJs.RouteSchema();
+      //var instance = new NotehubJs.RouteSchema();
       //expect(instance).to.be();
     });
 
     it('should have the property messageGroupId (base name: "message_group_id")', function() {
       // uncomment below and update the code to test the property messageGroupId
-      //var instance = new BluesNotehubJs.RouteSchema();
+      //var instance = new NotehubJs.RouteSchema();
       //expect(instance).to.be();
     });
 
     it('should have the property messageDeduplicationId (base name: "message_deduplication_id")', function() {
       // uncomment below and update the code to test the property messageDeduplicationId
-      //var instance = new BluesNotehubJs.RouteSchema();
+      //var instance = new NotehubJs.RouteSchema();
       //expect(instance).to.be();
     });
 
     it('should have the property channel (base name: "channel")', function() {
       // uncomment below and update the code to test the property channel
-      //var instance = new BluesNotehubJs.RouteSchema();
+      //var instance = new NotehubJs.RouteSchema();
       //expect(instance).to.be();
     });
 
     it('should have the property testApi (base name: "test_api")', function() {
       // uncomment below and update the code to test the property testApi
-      //var instance = new BluesNotehubJs.RouteSchema();
+      //var instance = new NotehubJs.RouteSchema();
       //expect(instance).to.be();
     });
 
     it('should have the property dataFeedKey (base name: "data_feed_key")', function() {
       // uncomment below and update the code to test the property dataFeedKey
-      //var instance = new BluesNotehubJs.RouteSchema();
+      //var instance = new NotehubJs.RouteSchema();
       //expect(instance).to.be();
     });
 
     it('should have the property clientId (base name: "client_id")', function() {
       // uncomment below and update the code to test the property clientId
-      //var instance = new BluesNotehubJs.RouteSchema();
+      //var instance = new NotehubJs.RouteSchema();
       //expect(instance).to.be();
     });
 
     it('should have the property clientSecret (base name: "client_secret")', function() {
       // uncomment below and update the code to test the property clientSecret
-      //var instance = new BluesNotehubJs.RouteSchema();
+      //var instance = new NotehubJs.RouteSchema();
       //expect(instance).to.be();
     });
 
     it('should have the property sasPolicyName (base name: "sas_policy_name")', function() {
       // uncomment below and update the code to test the property sasPolicyName
-      //var instance = new BluesNotehubJs.RouteSchema();
+      //var instance = new NotehubJs.RouteSchema();
       //expect(instance).to.be();
     });
 
     it('should have the property sasPolicyKey (base name: "sas_policy_key")', function() {
       // uncomment below and update the code to test the property sasPolicyKey
-      //var instance = new BluesNotehubJs.RouteSchema();
+      //var instance = new NotehubJs.RouteSchema();
       //expect(instance).to.be();
     });
 
     it('should have the property appKey (base name: "app_key")', function() {
       // uncomment below and update the code to test the property appKey
-      //var instance = new BluesNotehubJs.RouteSchema();
+      //var instance = new NotehubJs.RouteSchema();
       //expect(instance).to.be();
     });
 
     it('should have the property organizationName (base name: "organization_name")', function() {
       // uncomment below and update the code to test the property organizationName
-      //var instance = new BluesNotehubJs.RouteSchema();
+      //var instance = new NotehubJs.RouteSchema();
       //expect(instance).to.be();
     });
 
     it('should have the property accountName (base name: "account_name")', function() {
       // uncomment below and update the code to test the property accountName
-      //var instance = new BluesNotehubJs.RouteSchema();
+      //var instance = new NotehubJs.RouteSchema();
       //expect(instance).to.be();
     });
 
     it('should have the property userName (base name: "user_name")', function() {
       // uncomment below and update the code to test the property userName
-      //var instance = new BluesNotehubJs.RouteSchema();
+      //var instance = new NotehubJs.RouteSchema();
       //expect(instance).to.be();
     });
 
     it('should have the property pem (base name: "pem")', function() {
       // uncomment below and update the code to test the property pem
-      //var instance = new BluesNotehubJs.RouteSchema();
+      //var instance = new NotehubJs.RouteSchema();
       //expect(instance).to.be();
     });
 

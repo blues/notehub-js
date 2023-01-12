@@ -20,15 +20,15 @@
     factory(require('expect.js'), require(process.cwd()+'/src/index'));
   } else {
     // Browser globals (root is window)
-    factory(root.expect, root.BluesNotehubJs);
+    factory(root.expect, root.NotehubJs);
   }
-}(this, function(expect, BluesNotehubJs) {
+}(this, function(expect, NotehubJs) {
   'use strict';
 
   var instance;
 
   beforeEach(function() {
-    instance = new BluesNotehubJs.GetProjectDevicePublicKeys200Response();
+    instance = new NotehubJs.GetProjectDevicePublicKeys200Response();
   });
 
   var getProperty = function(object, getter, property) {
@@ -50,19 +50,19 @@
   describe('GetProjectDevicePublicKeys200Response', function() {
     it('should create an instance of GetProjectDevicePublicKeys200Response', function() {
       // uncomment below and update the code to test GetProjectDevicePublicKeys200Response
-      //var instance = new BluesNotehubJs.GetProjectDevicePublicKeys200Response();
-      //expect(instance).to.be.a(BluesNotehubJs.GetProjectDevicePublicKeys200Response);
+      //var instance = new NotehubJs.GetProjectDevicePublicKeys200Response();
+      //expect(instance).to.be.a(NotehubJs.GetProjectDevicePublicKeys200Response);
     });
 
     it('should have the property devicePublicKeys (base name: "device_public_keys")', function() {
       // uncomment below and update the code to test the property devicePublicKeys
-      //var instance = new BluesNotehubJs.GetProjectDevicePublicKeys200Response();
+      //var instance = new NotehubJs.GetProjectDevicePublicKeys200Response();
       //expect(instance).to.be();
     });
 
     it('should have the property hasMore (base name: "has_more")', function() {
       // uncomment below and update the code to test the property hasMore
-      //var instance = new BluesNotehubJs.GetProjectDevicePublicKeys200Response();
+      //var instance = new NotehubJs.GetProjectDevicePublicKeys200Response();
       //expect(instance).to.be();
     });
 

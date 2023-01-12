@@ -20,15 +20,15 @@
     factory(require('expect.js'), require(process.cwd()+'/src/index'));
   } else {
     // Browser globals (root is window)
-    factory(root.expect, root.BluesNotehubJs);
+    factory(root.expect, root.NotehubJs);
   }
-}(this, function(expect, BluesNotehubJs) {
+}(this, function(expect, NotehubJs) {
   'use strict';
 
   var instance;
 
   beforeEach(function() {
-    instance = new BluesNotehubJs.Mqtt();
+    instance = new NotehubJs.Mqtt();
   });
 
   var getProperty = function(object, getter, property) {
@@ -50,91 +50,91 @@
   describe('Mqtt', function() {
     it('should create an instance of Mqtt', function() {
       // uncomment below and update the code to test Mqtt
-      //var instance = new BluesNotehubJs.Mqtt();
-      //expect(instance).to.be.a(BluesNotehubJs.Mqtt);
+      //var instance = new NotehubJs.Mqtt();
+      //expect(instance).to.be.a(NotehubJs.Mqtt);
     });
 
     it('should have the property fleets (base name: "fleets")', function() {
       // uncomment below and update the code to test the property fleets
-      //var instance = new BluesNotehubJs.Mqtt();
+      //var instance = new NotehubJs.Mqtt();
       //expect(instance).to.be();
     });
 
     it('should have the property filter (base name: "filter")', function() {
       // uncomment below and update the code to test the property filter
-      //var instance = new BluesNotehubJs.Mqtt();
+      //var instance = new NotehubJs.Mqtt();
       //expect(instance).to.be();
     });
 
     it('should have the property transform (base name: "transform")', function() {
       // uncomment below and update the code to test the property transform
-      //var instance = new BluesNotehubJs.Mqtt();
+      //var instance = new NotehubJs.Mqtt();
       //expect(instance).to.be();
     });
 
     it('should have the property throttleMs (base name: "throttle_ms")', function() {
       // uncomment below and update the code to test the property throttleMs
-      //var instance = new BluesNotehubJs.Mqtt();
+      //var instance = new NotehubJs.Mqtt();
       //expect(instance).to.be();
     });
 
     it('should have the property timeout (base name: "timeout")', function() {
       // uncomment below and update the code to test the property timeout
-      //var instance = new BluesNotehubJs.Mqtt();
+      //var instance = new NotehubJs.Mqtt();
       //expect(instance).to.be();
     });
 
     it('should have the property broker (base name: "broker")', function() {
       // uncomment below and update the code to test the property broker
-      //var instance = new BluesNotehubJs.Mqtt();
+      //var instance = new NotehubJs.Mqtt();
       //expect(instance).to.be();
     });
 
     it('should have the property port (base name: "port")', function() {
       // uncomment below and update the code to test the property port
-      //var instance = new BluesNotehubJs.Mqtt();
+      //var instance = new NotehubJs.Mqtt();
       //expect(instance).to.be();
     });
 
     it('should have the property username (base name: "username")', function() {
       // uncomment below and update the code to test the property username
-      //var instance = new BluesNotehubJs.Mqtt();
+      //var instance = new NotehubJs.Mqtt();
       //expect(instance).to.be();
     });
 
     it('should have the property password (base name: "password")', function() {
       // uncomment below and update the code to test the property password
-      //var instance = new BluesNotehubJs.Mqtt();
+      //var instance = new NotehubJs.Mqtt();
       //expect(instance).to.be();
     });
 
     it('should have the property topic (base name: "topic")', function() {
       // uncomment below and update the code to test the property topic
-      //var instance = new BluesNotehubJs.Mqtt();
+      //var instance = new NotehubJs.Mqtt();
       //expect(instance).to.be();
     });
 
     it('should have the property certificate (base name: "certificate")', function() {
       // uncomment below and update the code to test the property certificate
-      //var instance = new BluesNotehubJs.Mqtt();
+      //var instance = new NotehubJs.Mqtt();
       //expect(instance).to.be();
     });
 
     it('should have the property certificateName (base name: "certificate_name")', function() {
       // uncomment below and update the code to test the property certificateName
-      //var instance = new BluesNotehubJs.Mqtt();
+      //var instance = new NotehubJs.Mqtt();
       //expect(instance).to.be();
     });
 
     it('should have the property key (base name: "key")', function() {
       // uncomment below and update the code to test the property key
-      //var instance = new BluesNotehubJs.Mqtt();
+      //var instance = new NotehubJs.Mqtt();
       //expect(instance).to.be();
     });
 
     it('should have the property privateKeyName (base name: "private_key_name")', function() {
       // uncomment below and update the code to test the property privateKeyName
-      //var instance = new BluesNotehubJs.Mqtt();
+      //var instance = new NotehubJs.Mqtt();
       //expect(instance).to.be();
     });
 

@@ -20,15 +20,15 @@
     factory(require('expect.js'), require(process.cwd()+'/src/index'));
   } else {
     // Browser globals (root is window)
-    factory(root.expect, root.BluesNotehubJs);
+    factory(root.expect, root.NotehubJs);
   }
-}(this, function(expect, BluesNotehubJs) {
+}(this, function(expect, NotehubJs) {
   'use strict';
 
   var instance;
 
   beforeEach(function() {
-    instance = new BluesNotehubJs.Twilio();
+    instance = new NotehubJs.Twilio();
   });
 
   var getProperty = function(object, getter, property) {
@@ -50,61 +50,61 @@
   describe('Twilio', function() {
     it('should create an instance of Twilio', function() {
       // uncomment below and update the code to test Twilio
-      //var instance = new BluesNotehubJs.Twilio();
-      //expect(instance).to.be.a(BluesNotehubJs.Twilio);
+      //var instance = new NotehubJs.Twilio();
+      //expect(instance).to.be.a(NotehubJs.Twilio);
     });
 
     it('should have the property fleets (base name: "fleets")', function() {
       // uncomment below and update the code to test the property fleets
-      //var instance = new BluesNotehubJs.Twilio();
+      //var instance = new NotehubJs.Twilio();
       //expect(instance).to.be();
     });
 
     it('should have the property filter (base name: "filter")', function() {
       // uncomment below and update the code to test the property filter
-      //var instance = new BluesNotehubJs.Twilio();
+      //var instance = new NotehubJs.Twilio();
       //expect(instance).to.be();
     });
 
     it('should have the property timeout (base name: "timeout")', function() {
       // uncomment below and update the code to test the property timeout
-      //var instance = new BluesNotehubJs.Twilio();
+      //var instance = new NotehubJs.Twilio();
       //expect(instance).to.be();
     });
 
     it('should have the property accountSid (base name: "account_sid")', function() {
       // uncomment below and update the code to test the property accountSid
-      //var instance = new BluesNotehubJs.Twilio();
+      //var instance = new NotehubJs.Twilio();
       //expect(instance).to.be();
     });
 
     it('should have the property authToken (base name: "auth_token")', function() {
       // uncomment below and update the code to test the property authToken
-      //var instance = new BluesNotehubJs.Twilio();
+      //var instance = new NotehubJs.Twilio();
       //expect(instance).to.be();
     });
 
     it('should have the property to (base name: "to")', function() {
       // uncomment below and update the code to test the property to
-      //var instance = new BluesNotehubJs.Twilio();
+      //var instance = new NotehubJs.Twilio();
       //expect(instance).to.be();
     });
 
     it('should have the property from (base name: "from")', function() {
       // uncomment below and update the code to test the property from
-      //var instance = new BluesNotehubJs.Twilio();
+      //var instance = new NotehubJs.Twilio();
       //expect(instance).to.be();
     });
 
     it('should have the property message (base name: "message")', function() {
       // uncomment below and update the code to test the property message
-      //var instance = new BluesNotehubJs.Twilio();
+      //var instance = new NotehubJs.Twilio();
       //expect(instance).to.be();
     });
 
     it('should have the property throttleMs (base name: "throttle_ms")', function() {
       // uncomment below and update the code to test the property throttleMs
-      //var instance = new BluesNotehubJs.Twilio();
+      //var instance = new NotehubJs.Twilio();
       //expect(instance).to.be();
     });
 

@@ -1,4 +1,4 @@
-# BluesNotehubJs.Error
+# NotehubJs.Error
 
 ## Properties
 

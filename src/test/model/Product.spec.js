@@ -20,15 +20,15 @@
     factory(require('expect.js'), require(process.cwd()+'/src/index'));
   } else {
     // Browser globals (root is window)
-    factory(root.expect, root.BluesNotehubJs);
+    factory(root.expect, root.NotehubJs);
   }
-}(this, function(expect, BluesNotehubJs) {
+}(this, function(expect, NotehubJs) {
   'use strict';
 
   var instance;
 
   beforeEach(function() {
-    instance = new BluesNotehubJs.Product();
+    instance = new NotehubJs.Product();
   });
 
   var getProperty = function(object, getter, property) {
@@ -50,31 +50,31 @@
   describe('Product', function() {
     it('should create an instance of Product', function() {
       // uncomment below and update the code to test Product
-      //var instance = new BluesNotehubJs.Product();
-      //expect(instance).to.be.a(BluesNotehubJs.Product);
+      //var instance = new NotehubJs.Product();
+      //expect(instance).to.be.a(NotehubJs.Product);
     });
 
     it('should have the property uid (base name: "uid")', function() {
       // uncomment below and update the code to test the property uid
-      //var instance = new BluesNotehubJs.Product();
+      //var instance = new NotehubJs.Product();
       //expect(instance).to.be();
     });
 
     it('should have the property label (base name: "label")', function() {
       // uncomment below and update the code to test the property label
-      //var instance = new BluesNotehubJs.Product();
+      //var instance = new NotehubJs.Product();
       //expect(instance).to.be();
     });
 
     it('should have the property autoProvisionFleets (base name: "auto_provision_fleets")', function() {
       // uncomment below and update the code to test the property autoProvisionFleets
-      //var instance = new BluesNotehubJs.Product();
+      //var instance = new NotehubJs.Product();
       //expect(instance).to.be();
     });
 
     it('should have the property disableDevicesByDefault (base name: "disable_devices_by_default")', function() {
       // uncomment below and update the code to test the property disableDevicesByDefault
-      //var instance = new BluesNotehubJs.Product();
+      //var instance = new NotehubJs.Product();
       //expect(instance).to.be();
     });
 

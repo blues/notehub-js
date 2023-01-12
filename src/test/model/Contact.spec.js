@@ -20,15 +20,15 @@
     factory(require('expect.js'), require(process.cwd()+'/src/index'));
   } else {
     // Browser globals (root is window)
-    factory(root.expect, root.BluesNotehubJs);
+    factory(root.expect, root.NotehubJs);
   }
-}(this, function(expect, BluesNotehubJs) {
+}(this, function(expect, NotehubJs) {
   'use strict';
 
   var instance;
 
   beforeEach(function() {
-    instance = new BluesNotehubJs.Contact();
+    instance = new NotehubJs.Contact();
   });
 
   var getProperty = function(object, getter, property) {
@@ -50,31 +50,31 @@
   describe('Contact', function() {
     it('should create an instance of Contact', function() {
       // uncomment below and update the code to test Contact
-      //var instance = new BluesNotehubJs.Contact();
-      //expect(instance).to.be.a(BluesNotehubJs.Contact);
+      //var instance = new NotehubJs.Contact();
+      //expect(instance).to.be.a(NotehubJs.Contact);
     });
 
     it('should have the property name (base name: "name")', function() {
       // uncomment below and update the code to test the property name
-      //var instance = new BluesNotehubJs.Contact();
+      //var instance = new NotehubJs.Contact();
       //expect(instance).to.be();
     });
 
     it('should have the property email (base name: "email")', function() {
       // uncomment below and update the code to test the property email
-      //var instance = new BluesNotehubJs.Contact();
+      //var instance = new NotehubJs.Contact();
       //expect(instance).to.be();
     });
 
     it('should have the property role (base name: "role")', function() {
       // uncomment below and update the code to test the property role
-      //var instance = new BluesNotehubJs.Contact();
+      //var instance = new NotehubJs.Contact();
       //expect(instance).to.be();
     });
 
     it('should have the property organization (base name: "organization")', function() {
       // uncomment below and update the code to test the property organization
-      //var instance = new BluesNotehubJs.Contact();
+      //var instance = new NotehubJs.Contact();
       //expect(instance).to.be();
     });
 

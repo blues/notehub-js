@@ -1,4 +1,4 @@
-# BluesNotehubJs.BillingAccountRole
+# NotehubJs.BillingAccountRole
 
 ## Enum
 

@@ -20,15 +20,15 @@
     factory(require('expect.js'), require(process.cwd()+'/src/index'));
   } else {
     // Browser globals (root is window)
-    factory(root.expect, root.BluesNotehubJs);
+    factory(root.expect, root.NotehubJs);
   }
-}(this, function(expect, BluesNotehubJs) {
+}(this, function(expect, NotehubJs) {
   'use strict';
 
   var instance;
 
   beforeEach(function() {
-    instance = new BluesNotehubJs.DeviceUsage();
+    instance = new NotehubJs.DeviceUsage();
   });
 
   var getProperty = function(object, getter, property) {
@@ -50,67 +50,67 @@
   describe('DeviceUsage', function() {
     it('should create an instance of DeviceUsage', function() {
       // uncomment below and update the code to test DeviceUsage
-      //var instance = new BluesNotehubJs.DeviceUsage();
-      //expect(instance).to.be.a(BluesNotehubJs.DeviceUsage);
+      //var instance = new NotehubJs.DeviceUsage();
+      //expect(instance).to.be.a(NotehubJs.DeviceUsage);
     });
 
     it('should have the property since (base name: "since")', function() {
       // uncomment below and update the code to test the property since
-      //var instance = new BluesNotehubJs.DeviceUsage();
+      //var instance = new NotehubJs.DeviceUsage();
       //expect(instance).to.be();
     });
 
     it('should have the property duration (base name: "duration")', function() {
       // uncomment below and update the code to test the property duration
-      //var instance = new BluesNotehubJs.DeviceUsage();
+      //var instance = new NotehubJs.DeviceUsage();
       //expect(instance).to.be();
     });
 
     it('should have the property bytesRcvd (base name: "bytes_rcvd")', function() {
       // uncomment below and update the code to test the property bytesRcvd
-      //var instance = new BluesNotehubJs.DeviceUsage();
+      //var instance = new NotehubJs.DeviceUsage();
       //expect(instance).to.be();
     });
 
     it('should have the property bytesSent (base name: "bytes_sent")', function() {
       // uncomment below and update the code to test the property bytesSent
-      //var instance = new BluesNotehubJs.DeviceUsage();
+      //var instance = new NotehubJs.DeviceUsage();
       //expect(instance).to.be();
     });
 
     it('should have the property bytesRcvdSecondary (base name: "bytes_rcvd_secondary")', function() {
       // uncomment below and update the code to test the property bytesRcvdSecondary
-      //var instance = new BluesNotehubJs.DeviceUsage();
+      //var instance = new NotehubJs.DeviceUsage();
       //expect(instance).to.be();
     });
 
     it('should have the property bytesSentSecondary (base name: "bytes_sent_secondary")', function() {
       // uncomment below and update the code to test the property bytesSentSecondary
-      //var instance = new BluesNotehubJs.DeviceUsage();
+      //var instance = new NotehubJs.DeviceUsage();
       //expect(instance).to.be();
     });
 
     it('should have the property sessionsTcp (base name: "sessions_tcp")', function() {
       // uncomment below and update the code to test the property sessionsTcp
-      //var instance = new BluesNotehubJs.DeviceUsage();
+      //var instance = new NotehubJs.DeviceUsage();
       //expect(instance).to.be();
     });
 
     it('should have the property sessionsTls (base name: "sessions_tls")', function() {
       // uncomment below and update the code to test the property sessionsTls
-      //var instance = new BluesNotehubJs.DeviceUsage();
+      //var instance = new NotehubJs.DeviceUsage();
       //expect(instance).to.be();
     });
 
     it('should have the property notesRcvd (base name: "notes_rcvd")', function() {
       // uncomment below and update the code to test the property notesRcvd
-      //var instance = new BluesNotehubJs.DeviceUsage();
+      //var instance = new NotehubJs.DeviceUsage();
       //expect(instance).to.be();
     });
 
     it('should have the property noteSent (base name: "note_sent")', function() {
       // uncomment below and update the code to test the property noteSent
-      //var instance = new BluesNotehubJs.DeviceUsage();
+      //var instance = new NotehubJs.DeviceUsage();
       //expect(instance).to.be();
     });
 

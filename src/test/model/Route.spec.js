@@ -20,15 +20,15 @@
     factory(require('expect.js'), require(process.cwd()+'/src/index'));
   } else {
     // Browser globals (root is window)
-    factory(root.expect, root.BluesNotehubJs);
+    factory(root.expect, root.NotehubJs);
   }
-}(this, function(expect, BluesNotehubJs) {
+}(this, function(expect, NotehubJs) {
   'use strict';
 
   var instance;
 
   beforeEach(function() {
-    instance = new BluesNotehubJs.Route();
+    instance = new NotehubJs.Route();
   });
 
   var getProperty = function(object, getter, property) {
@@ -50,43 +50,43 @@
   describe('Route', function() {
     it('should create an instance of Route', function() {
       // uncomment below and update the code to test Route
-      //var instance = new BluesNotehubJs.Route();
-      //expect(instance).to.be.a(BluesNotehubJs.Route);
+      //var instance = new NotehubJs.Route();
+      //expect(instance).to.be.a(NotehubJs.Route);
     });
 
     it('should have the property uid (base name: "uid")', function() {
       // uncomment below and update the code to test the property uid
-      //var instance = new BluesNotehubJs.Route();
+      //var instance = new NotehubJs.Route();
       //expect(instance).to.be();
     });
 
     it('should have the property label (base name: "label")', function() {
       // uncomment below and update the code to test the property label
-      //var instance = new BluesNotehubJs.Route();
+      //var instance = new NotehubJs.Route();
       //expect(instance).to.be();
     });
 
     it('should have the property routeType (base name: "route_type")', function() {
       // uncomment below and update the code to test the property routeType
-      //var instance = new BluesNotehubJs.Route();
+      //var instance = new NotehubJs.Route();
       //expect(instance).to.be();
     });
 
     it('should have the property modified (base name: "modified")', function() {
       // uncomment below and update the code to test the property modified
-      //var instance = new BluesNotehubJs.Route();
+      //var instance = new NotehubJs.Route();
       //expect(instance).to.be();
     });
 
     it('should have the property disabled (base name: "disabled")', function() {
       // uncomment below and update the code to test the property disabled
-      //var instance = new BluesNotehubJs.Route();
+      //var instance = new NotehubJs.Route();
       //expect(instance).to.be();
     });
 
     it('should have the property schema (base name: "schema")', function() {
       // uncomment below and update the code to test the property schema
-      //var instance = new BluesNotehubJs.Route();
+      //var instance = new NotehubJs.Route();
       //expect(instance).to.be();
     });
 

@@ -20,15 +20,15 @@
     factory(require('expect.js'), require(process.cwd()+'/src/index'));
   } else {
     // Browser globals (root is window)
-    factory(root.expect, root.BluesNotehubJs);
+    factory(root.expect, root.NotehubJs);
   }
-}(this, function(expect, BluesNotehubJs) {
+}(this, function(expect, NotehubJs) {
   'use strict';
 
   var instance;
 
   beforeEach(function() {
-    instance = new BluesNotehubJs.Body();
+    instance = new NotehubJs.Body();
   });
 
   var getProperty = function(object, getter, property) {
@@ -50,13 +50,13 @@
   describe('Body', function() {
     it('should create an instance of Body', function() {
       // uncomment below and update the code to test Body
-      //var instance = new BluesNotehubJs.Body();
-      //expect(instance).to.be.a(BluesNotehubJs.Body);
+      //var instance = new NotehubJs.Body();
+      //expect(instance).to.be.a(NotehubJs.Body);
     });
 
     it('should have the property body (base name: "body")', function() {
       // uncomment below and update the code to test the property body
-      //var instance = new BluesNotehubJs.Body();
+      //var instance = new NotehubJs.Body();
       //expect(instance).to.be();
     });
 

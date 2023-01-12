@@ -20,15 +20,15 @@
     factory(require('expect.js'), require(process.cwd()+'/src/index'));
   } else {
     // Browser globals (root is window)
-    factory(root.expect, root.BluesNotehubJs);
+    factory(root.expect, root.NotehubJs);
   }
-}(this, function(expect, BluesNotehubJs) {
+}(this, function(expect, NotehubJs) {
   'use strict';
 
   var instance;
 
   beforeEach(function() {
-    instance = new BluesNotehubJs.Location();
+    instance = new NotehubJs.Location();
   });
 
   var getProperty = function(object, getter, property) {
@@ -50,43 +50,43 @@
   describe('Location', function() {
     it('should create an instance of Location', function() {
       // uncomment below and update the code to test Location
-      //var instance = new BluesNotehubJs.Location();
-      //expect(instance).to.be.a(BluesNotehubJs.Location);
+      //var instance = new NotehubJs.Location();
+      //expect(instance).to.be.a(NotehubJs.Location);
     });
 
     it('should have the property when (base name: "when")', function() {
       // uncomment below and update the code to test the property when
-      //var instance = new BluesNotehubJs.Location();
+      //var instance = new NotehubJs.Location();
       //expect(instance).to.be();
     });
 
     it('should have the property name (base name: "name")', function() {
       // uncomment below and update the code to test the property name
-      //var instance = new BluesNotehubJs.Location();
+      //var instance = new NotehubJs.Location();
       //expect(instance).to.be();
     });
 
     it('should have the property country (base name: "country")', function() {
       // uncomment below and update the code to test the property country
-      //var instance = new BluesNotehubJs.Location();
+      //var instance = new NotehubJs.Location();
       //expect(instance).to.be();
     });
 
     it('should have the property timezone (base name: "timezone")', function() {
       // uncomment below and update the code to test the property timezone
-      //var instance = new BluesNotehubJs.Location();
+      //var instance = new NotehubJs.Location();
       //expect(instance).to.be();
     });
 
     it('should have the property latitude (base name: "latitude")', function() {
       // uncomment below and update the code to test the property latitude
-      //var instance = new BluesNotehubJs.Location();
+      //var instance = new NotehubJs.Location();
       //expect(instance).to.be();
     });
 
     it('should have the property longitude (base name: "longitude")', function() {
       // uncomment below and update the code to test the property longitude
-      //var instance = new BluesNotehubJs.Location();
+      //var instance = new NotehubJs.Location();
       //expect(instance).to.be();
     });
 

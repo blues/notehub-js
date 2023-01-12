@@ -20,15 +20,15 @@
     factory(require('expect.js'), require(process.cwd()+'/src/index'));
   } else {
     // Browser globals (root is window)
-    factory(root.expect, root.BluesNotehubJs);
+    factory(root.expect, root.NotehubJs);
   }
-}(this, function(expect, BluesNotehubJs) {
+}(this, function(expect, NotehubJs) {
   'use strict';
 
   var instance;
 
   beforeEach(function() {
-    instance = new BluesNotehubJs.HttpFilter();
+    instance = new NotehubJs.HttpFilter();
   });
 
   var getProperty = function(object, getter, property) {
@@ -50,25 +50,25 @@
   describe('HttpFilter', function() {
     it('should create an instance of HttpFilter', function() {
       // uncomment below and update the code to test HttpFilter
-      //var instance = new BluesNotehubJs.HttpFilter();
-      //expect(instance).to.be.a(BluesNotehubJs.HttpFilter);
+      //var instance = new NotehubJs.HttpFilter();
+      //expect(instance).to.be.a(NotehubJs.HttpFilter);
     });
 
     it('should have the property type (base name: "type")', function() {
       // uncomment below and update the code to test the property type
-      //var instance = new BluesNotehubJs.HttpFilter();
+      //var instance = new NotehubJs.HttpFilter();
       //expect(instance).to.be();
     });
 
     it('should have the property systemNotefiles (base name: "system_notefiles")', function() {
       // uncomment below and update the code to test the property systemNotefiles
-      //var instance = new BluesNotehubJs.HttpFilter();
+      //var instance = new NotehubJs.HttpFilter();
       //expect(instance).to.be();
     });
 
     it('should have the property files (base name: "files")', function() {
       // uncomment below and update the code to test the property files
-      //var instance = new BluesNotehubJs.HttpFilter();
+      //var instance = new NotehubJs.HttpFilter();
       //expect(instance).to.be();
     });
 

@@ -20,15 +20,15 @@
     factory(require('expect.js'), require(process.cwd()+'/src/index'));
   } else {
     // Browser globals (root is window)
-    factory(root.expect, root.BluesNotehubJs);
+    factory(root.expect, root.NotehubJs);
   }
-}(this, function(expect, BluesNotehubJs) {
+}(this, function(expect, NotehubJs) {
   'use strict';
 
   var instance;
 
   beforeEach(function() {
-    instance = new BluesNotehubJs.EnvironmentVariables();
+    instance = new NotehubJs.EnvironmentVariables();
   });
 
   var getProperty = function(object, getter, property) {
@@ -50,13 +50,13 @@
   describe('EnvironmentVariables', function() {
     it('should create an instance of EnvironmentVariables', function() {
       // uncomment below and update the code to test EnvironmentVariables
-      //var instance = new BluesNotehubJs.EnvironmentVariables();
-      //expect(instance).to.be.a(BluesNotehubJs.EnvironmentVariables);
+      //var instance = new NotehubJs.EnvironmentVariables();
+      //expect(instance).to.be.a(NotehubJs.EnvironmentVariables);
     });
 
     it('should have the property environmentVariables (base name: "environment_variables")', function() {
       // uncomment below and update the code to test the property environmentVariables
-      //var instance = new BluesNotehubJs.EnvironmentVariables();
+      //var instance = new NotehubJs.EnvironmentVariables();
       //expect(instance).to.be();
     });
 

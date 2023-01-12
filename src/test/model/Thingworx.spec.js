@@ -20,15 +20,15 @@
     factory(require('expect.js'), require(process.cwd()+'/src/index'));
   } else {
     // Browser globals (root is window)
-    factory(root.expect, root.BluesNotehubJs);
+    factory(root.expect, root.NotehubJs);
   }
-}(this, function(expect, BluesNotehubJs) {
+}(this, function(expect, NotehubJs) {
   'use strict';
 
   var instance;
 
   beforeEach(function() {
-    instance = new BluesNotehubJs.Thingworx();
+    instance = new NotehubJs.Thingworx();
   });
 
   var getProperty = function(object, getter, property) {
@@ -50,49 +50,49 @@
   describe('Thingworx', function() {
     it('should create an instance of Thingworx', function() {
       // uncomment below and update the code to test Thingworx
-      //var instance = new BluesNotehubJs.Thingworx();
-      //expect(instance).to.be.a(BluesNotehubJs.Thingworx);
+      //var instance = new NotehubJs.Thingworx();
+      //expect(instance).to.be.a(NotehubJs.Thingworx);
     });
 
     it('should have the property fleets (base name: "fleets")', function() {
       // uncomment below and update the code to test the property fleets
-      //var instance = new BluesNotehubJs.Thingworx();
+      //var instance = new NotehubJs.Thingworx();
       //expect(instance).to.be();
     });
 
     it('should have the property filter (base name: "filter")', function() {
       // uncomment below and update the code to test the property filter
-      //var instance = new BluesNotehubJs.Thingworx();
+      //var instance = new NotehubJs.Thingworx();
       //expect(instance).to.be();
     });
 
     it('should have the property transform (base name: "transform")', function() {
       // uncomment below and update the code to test the property transform
-      //var instance = new BluesNotehubJs.Thingworx();
+      //var instance = new NotehubJs.Thingworx();
       //expect(instance).to.be();
     });
 
     it('should have the property throttleMs (base name: "throttle_ms")', function() {
       // uncomment below and update the code to test the property throttleMs
-      //var instance = new BluesNotehubJs.Thingworx();
+      //var instance = new NotehubJs.Thingworx();
       //expect(instance).to.be();
     });
 
     it('should have the property url (base name: "url")', function() {
       // uncomment below and update the code to test the property url
-      //var instance = new BluesNotehubJs.Thingworx();
+      //var instance = new NotehubJs.Thingworx();
       //expect(instance).to.be();
     });
 
     it('should have the property timeout (base name: "timeout")', function() {
       // uncomment below and update the code to test the property timeout
-      //var instance = new BluesNotehubJs.Thingworx();
+      //var instance = new NotehubJs.Thingworx();
       //expect(instance).to.be();
     });
 
     it('should have the property appKey (base name: "app_key")', function() {
       // uncomment below and update the code to test the property appKey
-      //var instance = new BluesNotehubJs.Thingworx();
+      //var instance = new NotehubJs.Thingworx();
       //expect(instance).to.be();
     });
 

@@ -20,15 +20,15 @@
     factory(require('expect.js'), require(process.cwd()+'/src/index'));
   } else {
     // Browser globals (root is window)
-    factory(root.expect, root.BluesNotehubJs);
+    factory(root.expect, root.NotehubJs);
   }
-}(this, function(expect, BluesNotehubJs) {
+}(this, function(expect, NotehubJs) {
   'use strict';
 
   var instance;
 
   beforeEach(function() {
-    instance = new BluesNotehubJs.Radresponder();
+    instance = new NotehubJs.Radresponder();
   });
 
   var getProperty = function(object, getter, property) {
@@ -50,37 +50,37 @@
   describe('Radresponder', function() {
     it('should create an instance of Radresponder', function() {
       // uncomment below and update the code to test Radresponder
-      //var instance = new BluesNotehubJs.Radresponder();
-      //expect(instance).to.be.a(BluesNotehubJs.Radresponder);
+      //var instance = new NotehubJs.Radresponder();
+      //expect(instance).to.be.a(NotehubJs.Radresponder);
     });
 
     it('should have the property fleets (base name: "fleets")', function() {
       // uncomment below and update the code to test the property fleets
-      //var instance = new BluesNotehubJs.Radresponder();
+      //var instance = new NotehubJs.Radresponder();
       //expect(instance).to.be();
     });
 
     it('should have the property testApi (base name: "test_api")', function() {
       // uncomment below and update the code to test the property testApi
-      //var instance = new BluesNotehubJs.Radresponder();
+      //var instance = new NotehubJs.Radresponder();
       //expect(instance).to.be();
     });
 
     it('should have the property dataFeedKey (base name: "data_feed_key")', function() {
       // uncomment below and update the code to test the property dataFeedKey
-      //var instance = new BluesNotehubJs.Radresponder();
+      //var instance = new NotehubJs.Radresponder();
       //expect(instance).to.be();
     });
 
     it('should have the property clientId (base name: "client_id")', function() {
       // uncomment below and update the code to test the property clientId
-      //var instance = new BluesNotehubJs.Radresponder();
+      //var instance = new NotehubJs.Radresponder();
       //expect(instance).to.be();
     });
 
     it('should have the property clientSecret (base name: "client_secret")', function() {
       // uncomment below and update the code to test the property clientSecret
-      //var instance = new BluesNotehubJs.Radresponder();
+      //var instance = new NotehubJs.Radresponder();
       //expect(instance).to.be();
     });
 

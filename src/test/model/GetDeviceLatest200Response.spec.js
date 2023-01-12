@@ -20,15 +20,15 @@
     factory(require('expect.js'), require(process.cwd()+'/src/index'));
   } else {
     // Browser globals (root is window)
-    factory(root.expect, root.BluesNotehubJs);
+    factory(root.expect, root.NotehubJs);
   }
-}(this, function(expect, BluesNotehubJs) {
+}(this, function(expect, NotehubJs) {
   'use strict';
 
   var instance;
 
   beforeEach(function() {
-    instance = new BluesNotehubJs.GetDeviceLatest200Response();
+    instance = new NotehubJs.GetDeviceLatest200Response();
   });
 
   var getProperty = function(object, getter, property) {
@@ -50,13 +50,13 @@
   describe('GetDeviceLatest200Response', function() {
     it('should create an instance of GetDeviceLatest200Response', function() {
       // uncomment below and update the code to test GetDeviceLatest200Response
-      //var instance = new BluesNotehubJs.GetDeviceLatest200Response();
-      //expect(instance).to.be.a(BluesNotehubJs.GetDeviceLatest200Response);
+      //var instance = new NotehubJs.GetDeviceLatest200Response();
+      //expect(instance).to.be.a(NotehubJs.GetDeviceLatest200Response);
     });
 
     it('should have the property latestEvents (base name: "latest_events")', function() {
       // uncomment below and update the code to test the property latestEvents
-      //var instance = new BluesNotehubJs.GetDeviceLatest200Response();
+      //var instance = new NotehubJs.GetDeviceLatest200Response();
       //expect(instance).to.be();
     });
 

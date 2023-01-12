@@ -20,15 +20,15 @@
     factory(require('expect.js'), require(process.cwd()+'/src/index'));
   } else {
     // Browser globals (root is window)
-    factory(root.expect, root.BluesNotehubJs);
+    factory(root.expect, root.NotehubJs);
   }
-}(this, function(expect, BluesNotehubJs) {
+}(this, function(expect, NotehubJs) {
   'use strict';
 
   var instance;
 
   beforeEach(function() {
-    instance = new BluesNotehubJs.Snowflake();
+    instance = new NotehubJs.Snowflake();
   });
 
   var getProperty = function(object, getter, property) {
@@ -50,61 +50,61 @@
   describe('Snowflake', function() {
     it('should create an instance of Snowflake', function() {
       // uncomment below and update the code to test Snowflake
-      //var instance = new BluesNotehubJs.Snowflake();
-      //expect(instance).to.be.a(BluesNotehubJs.Snowflake);
+      //var instance = new NotehubJs.Snowflake();
+      //expect(instance).to.be.a(NotehubJs.Snowflake);
     });
 
     it('should have the property fleets (base name: "fleets")', function() {
       // uncomment below and update the code to test the property fleets
-      //var instance = new BluesNotehubJs.Snowflake();
+      //var instance = new NotehubJs.Snowflake();
       //expect(instance).to.be();
     });
 
     it('should have the property filter (base name: "filter")', function() {
       // uncomment below and update the code to test the property filter
-      //var instance = new BluesNotehubJs.Snowflake();
+      //var instance = new NotehubJs.Snowflake();
       //expect(instance).to.be();
     });
 
     it('should have the property transform (base name: "transform")', function() {
       // uncomment below and update the code to test the property transform
-      //var instance = new BluesNotehubJs.Snowflake();
+      //var instance = new NotehubJs.Snowflake();
       //expect(instance).to.be();
     });
 
     it('should have the property timeout (base name: "timeout")', function() {
       // uncomment below and update the code to test the property timeout
-      //var instance = new BluesNotehubJs.Snowflake();
+      //var instance = new NotehubJs.Snowflake();
       //expect(instance).to.be();
     });
 
     it('should have the property organizationName (base name: "organization_name")', function() {
       // uncomment below and update the code to test the property organizationName
-      //var instance = new BluesNotehubJs.Snowflake();
+      //var instance = new NotehubJs.Snowflake();
       //expect(instance).to.be();
     });
 
     it('should have the property accountName (base name: "account_name")', function() {
       // uncomment below and update the code to test the property accountName
-      //var instance = new BluesNotehubJs.Snowflake();
+      //var instance = new NotehubJs.Snowflake();
       //expect(instance).to.be();
     });
 
     it('should have the property userName (base name: "user_name")', function() {
       // uncomment below and update the code to test the property userName
-      //var instance = new BluesNotehubJs.Snowflake();
+      //var instance = new NotehubJs.Snowflake();
       //expect(instance).to.be();
     });
 
     it('should have the property privateKeyName (base name: "private_key_name")', function() {
       // uncomment below and update the code to test the property privateKeyName
-      //var instance = new BluesNotehubJs.Snowflake();
+      //var instance = new NotehubJs.Snowflake();
       //expect(instance).to.be();
     });
 
     it('should have the property pem (base name: "pem")', function() {
       // uncomment below and update the code to test the property pem
-      //var instance = new BluesNotehubJs.Snowflake();
+      //var instance = new NotehubJs.Snowflake();
       //expect(instance).to.be();
     });
 

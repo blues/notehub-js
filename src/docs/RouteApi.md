@@ -1,4 +1,4 @@
-# BluesNotehubJs.RouteApi
+# NotehubJs.RouteApi
 
 All URIs are relative to *https://api.notefile.net*
 
@@ -23,15 +23,15 @@ Create Route within a Project
 ### Example
 
 ```javascript
-import BluesNotehubJs from '@blues/notehub-js';
-let defaultClient = BluesNotehubJs.ApiClient.instance;
+import NotehubJs from 'notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //api_key.apiKeyPrefix = 'Token';
 
-let apiInstance = new BluesNotehubJs.RouteApi();
+let apiInstance = new NotehubJs.RouteApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 let route = {"label":"Route Label","type":"http","http":{"fleets":["fleet:1042ddc5-3b2c-4cec-b1fb-d3040538094d"],"throttle_ms":100,"url":"http://route.url"}}; // Route | Route to be Created
 apiInstance.createRoute(projectUID, route).then((data) => {
@@ -75,15 +75,15 @@ Delete single route within a project
 ### Example
 
 ```javascript
-import BluesNotehubJs from '@blues/notehub-js';
-let defaultClient = BluesNotehubJs.ApiClient.instance;
+import NotehubJs from 'notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //api_key.apiKeyPrefix = 'Token';
 
-let apiInstance = new BluesNotehubJs.RouteApi();
+let apiInstance = new NotehubJs.RouteApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 let routeUID = route:cbd20093cba58392c9f9bbdd0cdeb1a0; // String | 
 apiInstance.deleteRoute(projectUID, routeUID).then((data) => {
@@ -127,15 +127,15 @@ Get single route within a project
 ### Example
 
 ```javascript
-import BluesNotehubJs from '@blues/notehub-js';
-let defaultClient = BluesNotehubJs.ApiClient.instance;
+import NotehubJs from 'notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //api_key.apiKeyPrefix = 'Token';
 
-let apiInstance = new BluesNotehubJs.RouteApi();
+let apiInstance = new NotehubJs.RouteApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 let routeUID = route:cbd20093cba58392c9f9bbdd0cdeb1a0; // String | 
 apiInstance.getRoute(projectUID, routeUID).then((data) => {
@@ -179,15 +179,15 @@ Get all Routes within a Project
 ### Example
 
 ```javascript
-import BluesNotehubJs from '@blues/notehub-js';
-let defaultClient = BluesNotehubJs.ApiClient.instance;
+import NotehubJs from 'notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //api_key.apiKeyPrefix = 'Token';
 
-let apiInstance = new BluesNotehubJs.RouteApi();
+let apiInstance = new NotehubJs.RouteApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 apiInstance.getRoutes(projectUID).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -229,15 +229,15 @@ Update route by UID
 ### Example
 
 ```javascript
-import BluesNotehubJs from '@blues/notehub-js';
-let defaultClient = BluesNotehubJs.ApiClient.instance;
+import NotehubJs from 'notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //api_key.apiKeyPrefix = 'Token';
 
-let apiInstance = new BluesNotehubJs.RouteApi();
+let apiInstance = new NotehubJs.RouteApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 let routeUID = route:cbd20093cba58392c9f9bbdd0cdeb1a0; // String | 
 let route = {"http":{"filter":{"type":"include","system_notefiles":true,"files":["somefile.qo"]},"throttle_ms":50,"url":"http://new-route.url"}}; // Route | Route settings to be updated

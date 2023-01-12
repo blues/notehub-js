@@ -20,9 +20,9 @@
     factory(require('expect.js'), require(process.cwd()+'/src/index'));
   } else {
     // Browser globals (root is window)
-    factory(root.expect, root.BluesNotehubJs);
+    factory(root.expect, root.NotehubJs);
   }
-}(this, function(expect, BluesNotehubJs) {
+}(this, function(expect, NotehubJs) {
   'use strict';
 
   var instance;
@@ -49,8 +49,8 @@
   describe('Role', function() {
     it('should create an instance of Role', function() {
       // uncomment below and update the code to test Role
-      //var instance = new BluesNotehubJs.Role();
-      //expect(instance).to.be.a(BluesNotehubJs.Role);
+      //var instance = new NotehubJs.Role();
+      //expect(instance).to.be.a(NotehubJs.Role);
     });
 
   });

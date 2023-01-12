@@ -1,4 +1,4 @@
-# BluesNotehubJs.Device
+# NotehubJs.Device
 
 ## Properties
 

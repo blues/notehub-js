@@ -20,15 +20,15 @@
     factory(require('expect.js'), require(process.cwd()+'/src/index'));
   } else {
     // Browser globals (root is window)
-    factory(root.expect, root.BluesNotehubJs);
+    factory(root.expect, root.NotehubJs);
   }
-}(this, function(expect, BluesNotehubJs) {
+}(this, function(expect, NotehubJs) {
   'use strict';
 
   var instance;
 
   beforeEach(function() {
-    instance = new BluesNotehubJs.GetProjectDevices200Response();
+    instance = new NotehubJs.GetProjectDevices200Response();
   });
 
   var getProperty = function(object, getter, property) {
@@ -50,19 +50,19 @@
   describe('GetProjectDevices200Response', function() {
     it('should create an instance of GetProjectDevices200Response', function() {
       // uncomment below and update the code to test GetProjectDevices200Response
-      //var instance = new BluesNotehubJs.GetProjectDevices200Response();
-      //expect(instance).to.be.a(BluesNotehubJs.GetProjectDevices200Response);
+      //var instance = new NotehubJs.GetProjectDevices200Response();
+      //expect(instance).to.be.a(NotehubJs.GetProjectDevices200Response);
     });
 
     it('should have the property devices (base name: "devices")', function() {
       // uncomment below and update the code to test the property devices
-      //var instance = new BluesNotehubJs.GetProjectDevices200Response();
+      //var instance = new NotehubJs.GetProjectDevices200Response();
       //expect(instance).to.be();
     });
 
     it('should have the property hasMore (base name: "has_more")', function() {
       // uncomment below and update the code to test the property hasMore
-      //var instance = new BluesNotehubJs.GetProjectDevices200Response();
+      //var instance = new NotehubJs.GetProjectDevices200Response();
       //expect(instance).to.be();
     });
 

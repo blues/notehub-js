@@ -1,4 +1,4 @@
-# BluesNotehubJs.Role
+# NotehubJs.Role
 
 ## Enum
 

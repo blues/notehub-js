@@ -1,4 +1,4 @@
-# BluesNotehubJs.PutDeviceFleetsRequest
+# NotehubJs.PutDeviceFleetsRequest
 
 ## Properties
 

@@ -20,15 +20,15 @@
     factory(require('expect.js'), require(process.cwd()+'/src/index'));
   } else {
     // Browser globals (root is window)
-    factory(root.expect, root.BluesNotehubJs);
+    factory(root.expect, root.NotehubJs);
   }
-}(this, function(expect, BluesNotehubJs) {
+}(this, function(expect, NotehubJs) {
   'use strict';
 
   var instance;
 
   beforeEach(function() {
-    instance = new BluesNotehubJs.Project();
+    instance = new NotehubJs.Project();
   });
 
   var getProperty = function(object, getter, property) {
@@ -50,43 +50,43 @@
   describe('Project', function() {
     it('should create an instance of Project', function() {
       // uncomment below and update the code to test Project
-      //var instance = new BluesNotehubJs.Project();
-      //expect(instance).to.be.a(BluesNotehubJs.Project);
+      //var instance = new NotehubJs.Project();
+      //expect(instance).to.be.a(NotehubJs.Project);
     });
 
     it('should have the property uid (base name: "uid")', function() {
       // uncomment below and update the code to test the property uid
-      //var instance = new BluesNotehubJs.Project();
+      //var instance = new NotehubJs.Project();
       //expect(instance).to.be();
     });
 
     it('should have the property label (base name: "label")', function() {
       // uncomment below and update the code to test the property label
-      //var instance = new BluesNotehubJs.Project();
+      //var instance = new NotehubJs.Project();
       //expect(instance).to.be();
     });
 
     it('should have the property created (base name: "created")', function() {
       // uncomment below and update the code to test the property created
-      //var instance = new BluesNotehubJs.Project();
+      //var instance = new NotehubJs.Project();
       //expect(instance).to.be();
     });
 
     it('should have the property role (base name: "role")', function() {
       // uncomment below and update the code to test the property role
-      //var instance = new BluesNotehubJs.Project();
+      //var instance = new NotehubJs.Project();
       //expect(instance).to.be();
     });
 
     it('should have the property administrativeContact (base name: "administrative_contact")', function() {
       // uncomment below and update the code to test the property administrativeContact
-      //var instance = new BluesNotehubJs.Project();
+      //var instance = new NotehubJs.Project();
       //expect(instance).to.be();
     });
 
     it('should have the property technicalContact (base name: "technical_contact")', function() {
       // uncomment below and update the code to test the property technicalContact
-      //var instance = new BluesNotehubJs.Project();
+      //var instance = new NotehubJs.Project();
       //expect(instance).to.be();
     });
 

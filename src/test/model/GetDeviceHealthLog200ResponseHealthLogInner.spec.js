@@ -20,15 +20,15 @@
     factory(require('expect.js'), require(process.cwd()+'/src/index'));
   } else {
     // Browser globals (root is window)
-    factory(root.expect, root.BluesNotehubJs);
+    factory(root.expect, root.NotehubJs);
   }
-}(this, function(expect, BluesNotehubJs) {
+}(this, function(expect, NotehubJs) {
   'use strict';
 
   var instance;
 
   beforeEach(function() {
-    instance = new BluesNotehubJs.GetDeviceHealthLog200ResponseHealthLogInner();
+    instance = new NotehubJs.GetDeviceHealthLog200ResponseHealthLogInner();
   });
 
   var getProperty = function(object, getter, property) {
@@ -50,25 +50,25 @@
   describe('GetDeviceHealthLog200ResponseHealthLogInner', function() {
     it('should create an instance of GetDeviceHealthLog200ResponseHealthLogInner', function() {
       // uncomment below and update the code to test GetDeviceHealthLog200ResponseHealthLogInner
-      //var instance = new BluesNotehubJs.GetDeviceHealthLog200ResponseHealthLogInner();
-      //expect(instance).to.be.a(BluesNotehubJs.GetDeviceHealthLog200ResponseHealthLogInner);
+      //var instance = new NotehubJs.GetDeviceHealthLog200ResponseHealthLogInner();
+      //expect(instance).to.be.a(NotehubJs.GetDeviceHealthLog200ResponseHealthLogInner);
     });
 
     it('should have the property when (base name: "when")', function() {
       // uncomment below and update the code to test the property when
-      //var instance = new BluesNotehubJs.GetDeviceHealthLog200ResponseHealthLogInner();
+      //var instance = new NotehubJs.GetDeviceHealthLog200ResponseHealthLogInner();
       //expect(instance).to.be();
     });
 
     it('should have the property alert (base name: "alert")', function() {
       // uncomment below and update the code to test the property alert
-      //var instance = new BluesNotehubJs.GetDeviceHealthLog200ResponseHealthLogInner();
+      //var instance = new NotehubJs.GetDeviceHealthLog200ResponseHealthLogInner();
       //expect(instance).to.be();
     });
 
     it('should have the property text (base name: "text")', function() {
       // uncomment below and update the code to test the property text
-      //var instance = new BluesNotehubJs.GetDeviceHealthLog200ResponseHealthLogInner();
+      //var instance = new NotehubJs.GetDeviceHealthLog200ResponseHealthLogInner();
       //expect(instance).to.be();
     });
 

@@ -20,15 +20,15 @@
     factory(require('expect.js'), require(process.cwd()+'/src/index'));
   } else {
     // Browser globals (root is window)
-    factory(root.expect, root.BluesNotehubJs);
+    factory(root.expect, root.NotehubJs);
   }
-}(this, function(expect, BluesNotehubJs) {
+}(this, function(expect, NotehubJs) {
   'use strict';
 
   var instance;
 
   beforeEach(function() {
-    instance = new BluesNotehubJs.TowerLocation();
+    instance = new NotehubJs.TowerLocation();
   });
 
   var getProperty = function(object, getter, property) {
@@ -50,91 +50,91 @@
   describe('TowerLocation', function() {
     it('should create an instance of TowerLocation', function() {
       // uncomment below and update the code to test TowerLocation
-      //var instance = new BluesNotehubJs.TowerLocation();
-      //expect(instance).to.be.a(BluesNotehubJs.TowerLocation);
+      //var instance = new NotehubJs.TowerLocation();
+      //expect(instance).to.be.a(NotehubJs.TowerLocation);
     });
 
     it('should have the property time (base name: "time")', function() {
       // uncomment below and update the code to test the property time
-      //var instance = new BluesNotehubJs.TowerLocation();
+      //var instance = new NotehubJs.TowerLocation();
       //expect(instance).to.be();
     });
 
     it('should have the property n (base name: "n")', function() {
       // uncomment below and update the code to test the property n
-      //var instance = new BluesNotehubJs.TowerLocation();
+      //var instance = new NotehubJs.TowerLocation();
       //expect(instance).to.be();
     });
 
     it('should have the property c (base name: "c")', function() {
       // uncomment below and update the code to test the property c
-      //var instance = new BluesNotehubJs.TowerLocation();
+      //var instance = new NotehubJs.TowerLocation();
       //expect(instance).to.be();
     });
 
     it('should have the property lat (base name: "lat")', function() {
       // uncomment below and update the code to test the property lat
-      //var instance = new BluesNotehubJs.TowerLocation();
+      //var instance = new NotehubJs.TowerLocation();
       //expect(instance).to.be();
     });
 
     it('should have the property lon (base name: "lon")', function() {
       // uncomment below and update the code to test the property lon
-      //var instance = new BluesNotehubJs.TowerLocation();
+      //var instance = new NotehubJs.TowerLocation();
       //expect(instance).to.be();
     });
 
     it('should have the property zone (base name: "zone")', function() {
       // uncomment below and update the code to test the property zone
-      //var instance = new BluesNotehubJs.TowerLocation();
+      //var instance = new NotehubJs.TowerLocation();
       //expect(instance).to.be();
     });
 
     it('should have the property mcc (base name: "mcc")', function() {
       // uncomment below and update the code to test the property mcc
-      //var instance = new BluesNotehubJs.TowerLocation();
+      //var instance = new NotehubJs.TowerLocation();
       //expect(instance).to.be();
     });
 
     it('should have the property mnc (base name: "mnc")', function() {
       // uncomment below and update the code to test the property mnc
-      //var instance = new BluesNotehubJs.TowerLocation();
+      //var instance = new NotehubJs.TowerLocation();
       //expect(instance).to.be();
     });
 
     it('should have the property lac (base name: "lac")', function() {
       // uncomment below and update the code to test the property lac
-      //var instance = new BluesNotehubJs.TowerLocation();
+      //var instance = new NotehubJs.TowerLocation();
       //expect(instance).to.be();
     });
 
     it('should have the property cid (base name: "cid")', function() {
       // uncomment below and update the code to test the property cid
-      //var instance = new BluesNotehubJs.TowerLocation();
+      //var instance = new NotehubJs.TowerLocation();
       //expect(instance).to.be();
     });
 
     it('should have the property l (base name: "l")', function() {
       // uncomment below and update the code to test the property l
-      //var instance = new BluesNotehubJs.TowerLocation();
+      //var instance = new NotehubJs.TowerLocation();
       //expect(instance).to.be();
     });
 
     it('should have the property z (base name: "z")', function() {
       // uncomment below and update the code to test the property z
-      //var instance = new BluesNotehubJs.TowerLocation();
+      //var instance = new NotehubJs.TowerLocation();
       //expect(instance).to.be();
     });
 
     it('should have the property count (base name: "count")', function() {
       // uncomment below and update the code to test the property count
-      //var instance = new BluesNotehubJs.TowerLocation();
+      //var instance = new NotehubJs.TowerLocation();
       //expect(instance).to.be();
     });
 
     it('should have the property towers (base name: "towers")', function() {
       // uncomment below and update the code to test the property towers
-      //var instance = new BluesNotehubJs.TowerLocation();
+      //var instance = new NotehubJs.TowerLocation();
       //expect(instance).to.be();
     });
 

@@ -20,15 +20,15 @@
     factory(require('expect.js'), require(process.cwd()+'/src/index'));
   } else {
     // Browser globals (root is window)
-    factory(root.expect, root.BluesNotehubJs);
+    factory(root.expect, root.NotehubJs);
   }
-}(this, function(expect, BluesNotehubJs) {
+}(this, function(expect, NotehubJs) {
   'use strict';
 
   var instance;
 
   beforeEach(function() {
-    instance = new BluesNotehubJs.GetProjectEvents200Response();
+    instance = new NotehubJs.GetProjectEvents200Response();
   });
 
   var getProperty = function(object, getter, property) {
@@ -50,25 +50,25 @@
   describe('GetProjectEvents200Response', function() {
     it('should create an instance of GetProjectEvents200Response', function() {
       // uncomment below and update the code to test GetProjectEvents200Response
-      //var instance = new BluesNotehubJs.GetProjectEvents200Response();
-      //expect(instance).to.be.a(BluesNotehubJs.GetProjectEvents200Response);
+      //var instance = new NotehubJs.GetProjectEvents200Response();
+      //expect(instance).to.be.a(NotehubJs.GetProjectEvents200Response);
     });
 
     it('should have the property events (base name: "events")', function() {
       // uncomment below and update the code to test the property events
-      //var instance = new BluesNotehubJs.GetProjectEvents200Response();
+      //var instance = new NotehubJs.GetProjectEvents200Response();
       //expect(instance).to.be();
     });
 
     it('should have the property through (base name: "through")', function() {
       // uncomment below and update the code to test the property through
-      //var instance = new BluesNotehubJs.GetProjectEvents200Response();
+      //var instance = new NotehubJs.GetProjectEvents200Response();
       //expect(instance).to.be();
     });
 
     it('should have the property hasMore (base name: "has_more")', function() {
       // uncomment below and update the code to test the property hasMore
-      //var instance = new BluesNotehubJs.GetProjectEvents200Response();
+      //var instance = new NotehubJs.GetProjectEvents200Response();
       //expect(instance).to.be();
     });
 

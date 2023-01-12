@@ -20,15 +20,15 @@
     factory(require('expect.js'), require(process.cwd()+'/src/index'));
   } else {
     // Browser globals (root is window)
-    factory(root.expect, root.BluesNotehubJs);
+    factory(root.expect, root.NotehubJs);
   }
-}(this, function(expect, BluesNotehubJs) {
+}(this, function(expect, NotehubJs) {
   'use strict';
 
   var instance;
 
   beforeEach(function() {
-    instance = new BluesNotehubJs.HandleNotefileChanges200Response();
+    instance = new NotehubJs.HandleNotefileChanges200Response();
   });
 
   var getProperty = function(object, getter, property) {
@@ -50,25 +50,25 @@
   describe('HandleNotefileChanges200Response', function() {
     it('should create an instance of HandleNotefileChanges200Response', function() {
       // uncomment below and update the code to test HandleNotefileChanges200Response
-      //var instance = new BluesNotehubJs.HandleNotefileChanges200Response();
-      //expect(instance).to.be.a(BluesNotehubJs.HandleNotefileChanges200Response);
+      //var instance = new NotehubJs.HandleNotefileChanges200Response();
+      //expect(instance).to.be.a(NotehubJs.HandleNotefileChanges200Response);
     });
 
     it('should have the property total (base name: "total")', function() {
       // uncomment below and update the code to test the property total
-      //var instance = new BluesNotehubJs.HandleNotefileChanges200Response();
+      //var instance = new NotehubJs.HandleNotefileChanges200Response();
       //expect(instance).to.be();
     });
 
     it('should have the property changes (base name: "changes")', function() {
       // uncomment below and update the code to test the property changes
-      //var instance = new BluesNotehubJs.HandleNotefileChanges200Response();
+      //var instance = new NotehubJs.HandleNotefileChanges200Response();
       //expect(instance).to.be();
     });
 
     it('should have the property info (base name: "info")', function() {
       // uncomment below and update the code to test the property info
-      //var instance = new BluesNotehubJs.HandleNotefileChanges200Response();
+      //var instance = new NotehubJs.HandleNotefileChanges200Response();
       //expect(instance).to.be();
     });
 

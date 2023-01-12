@@ -20,15 +20,15 @@
     factory(require('expect.js'), require(process.cwd()+'/src/index'));
   } else {
     // Browser globals (root is window)
-    factory(root.expect, root.BluesNotehubJs);
+    factory(root.expect, root.NotehubJs);
   }
-}(this, function(expect, BluesNotehubJs) {
+}(this, function(expect, NotehubJs) {
   'use strict';
 
   var instance;
 
   beforeEach(function() {
-    instance = new BluesNotehubJs.Login200Response();
+    instance = new NotehubJs.Login200Response();
   });
 
   var getProperty = function(object, getter, property) {
@@ -50,13 +50,13 @@
   describe('Login200Response', function() {
     it('should create an instance of Login200Response', function() {
       // uncomment below and update the code to test Login200Response
-      //var instance = new BluesNotehubJs.Login200Response();
-      //expect(instance).to.be.a(BluesNotehubJs.Login200Response);
+      //var instance = new NotehubJs.Login200Response();
+      //expect(instance).to.be.a(NotehubJs.Login200Response);
     });
 
     it('should have the property sessionToken (base name: "session_token")', function() {
       // uncomment below and update the code to test the property sessionToken
-      //var instance = new BluesNotehubJs.Login200Response();
+      //var instance = new NotehubJs.Login200Response();
       //expect(instance).to.be();
     });
 

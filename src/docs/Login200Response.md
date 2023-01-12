@@ -1,4 +1,4 @@
-# BluesNotehubJs.Login200Response
+# NotehubJs.Login200Response
 
 ## Properties
 

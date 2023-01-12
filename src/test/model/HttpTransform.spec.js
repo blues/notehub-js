@@ -20,15 +20,15 @@
     factory(require('expect.js'), require(process.cwd()+'/src/index'));
   } else {
     // Browser globals (root is window)
-    factory(root.expect, root.BluesNotehubJs);
+    factory(root.expect, root.NotehubJs);
   }
-}(this, function(expect, BluesNotehubJs) {
+}(this, function(expect, NotehubJs) {
   'use strict';
 
   var instance;
 
   beforeEach(function() {
-    instance = new BluesNotehubJs.HttpTransform();
+    instance = new NotehubJs.HttpTransform();
   });
 
   var getProperty = function(object, getter, property) {
@@ -50,19 +50,19 @@
   describe('HttpTransform', function() {
     it('should create an instance of HttpTransform', function() {
       // uncomment below and update the code to test HttpTransform
-      //var instance = new BluesNotehubJs.HttpTransform();
-      //expect(instance).to.be.a(BluesNotehubJs.HttpTransform);
+      //var instance = new NotehubJs.HttpTransform();
+      //expect(instance).to.be.a(NotehubJs.HttpTransform);
     });
 
     it('should have the property format (base name: "format")', function() {
       // uncomment below and update the code to test the property format
-      //var instance = new BluesNotehubJs.HttpTransform();
+      //var instance = new NotehubJs.HttpTransform();
       //expect(instance).to.be();
     });
 
     it('should have the property jsonata (base name: "jsonata")', function() {
       // uncomment below and update the code to test the property jsonata
-      //var instance = new BluesNotehubJs.HttpTransform();
+      //var instance = new NotehubJs.HttpTransform();
       //expect(instance).to.be();
     });
 

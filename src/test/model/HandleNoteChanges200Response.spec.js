@@ -20,15 +20,15 @@
     factory(require('expect.js'), require(process.cwd()+'/src/index'));
   } else {
     // Browser globals (root is window)
-    factory(root.expect, root.BluesNotehubJs);
+    factory(root.expect, root.NotehubJs);
   }
-}(this, function(expect, BluesNotehubJs) {
+}(this, function(expect, NotehubJs) {
   'use strict';
 
   var instance;
 
   beforeEach(function() {
-    instance = new BluesNotehubJs.HandleNoteChanges200Response();
+    instance = new NotehubJs.HandleNoteChanges200Response();
   });
 
   var getProperty = function(object, getter, property) {
@@ -50,25 +50,25 @@
   describe('HandleNoteChanges200Response', function() {
     it('should create an instance of HandleNoteChanges200Response', function() {
       // uncomment below and update the code to test HandleNoteChanges200Response
-      //var instance = new BluesNotehubJs.HandleNoteChanges200Response();
-      //expect(instance).to.be.a(BluesNotehubJs.HandleNoteChanges200Response);
+      //var instance = new NotehubJs.HandleNoteChanges200Response();
+      //expect(instance).to.be.a(NotehubJs.HandleNoteChanges200Response);
     });
 
     it('should have the property total (base name: "total")', function() {
       // uncomment below and update the code to test the property total
-      //var instance = new BluesNotehubJs.HandleNoteChanges200Response();
+      //var instance = new NotehubJs.HandleNoteChanges200Response();
       //expect(instance).to.be();
     });
 
     it('should have the property changes (base name: "changes")', function() {
       // uncomment below and update the code to test the property changes
-      //var instance = new BluesNotehubJs.HandleNoteChanges200Response();
+      //var instance = new NotehubJs.HandleNoteChanges200Response();
       //expect(instance).to.be();
     });
 
     it('should have the property notes (base name: "notes")', function() {
       // uncomment below and update the code to test the property notes
-      //var instance = new BluesNotehubJs.HandleNoteChanges200Response();
+      //var instance = new NotehubJs.HandleNoteChanges200Response();
       //expect(instance).to.be();
     });
 

@@ -20,15 +20,15 @@
     factory(require('expect.js'), require(process.cwd()+'/src/index'));
   } else {
     // Browser globals (root is window)
-    factory(root.expect, root.BluesNotehubJs);
+    factory(root.expect, root.NotehubJs);
   }
-}(this, function(expect, BluesNotehubJs) {
+}(this, function(expect, NotehubJs) {
   'use strict';
 
   var instance;
 
   beforeEach(function() {
-    instance = new BluesNotehubJs.DeviceTowerInfo();
+    instance = new NotehubJs.DeviceTowerInfo();
   });
 
   var getProperty = function(object, getter, property) {
@@ -50,31 +50,31 @@
   describe('DeviceTowerInfo', function() {
     it('should create an instance of DeviceTowerInfo', function() {
       // uncomment below and update the code to test DeviceTowerInfo
-      //var instance = new BluesNotehubJs.DeviceTowerInfo();
-      //expect(instance).to.be.a(BluesNotehubJs.DeviceTowerInfo);
+      //var instance = new NotehubJs.DeviceTowerInfo();
+      //expect(instance).to.be.a(NotehubJs.DeviceTowerInfo);
     });
 
     it('should have the property mcc (base name: "mcc")', function() {
       // uncomment below and update the code to test the property mcc
-      //var instance = new BluesNotehubJs.DeviceTowerInfo();
+      //var instance = new NotehubJs.DeviceTowerInfo();
       //expect(instance).to.be();
     });
 
     it('should have the property mnc (base name: "mnc")', function() {
       // uncomment below and update the code to test the property mnc
-      //var instance = new BluesNotehubJs.DeviceTowerInfo();
+      //var instance = new NotehubJs.DeviceTowerInfo();
       //expect(instance).to.be();
     });
 
     it('should have the property lac (base name: "lac")', function() {
       // uncomment below and update the code to test the property lac
-      //var instance = new BluesNotehubJs.DeviceTowerInfo();
+      //var instance = new NotehubJs.DeviceTowerInfo();
       //expect(instance).to.be();
     });
 
     it('should have the property cellId (base name: "cell_id")', function() {
       // uncomment below and update the code to test the property cellId
-      //var instance = new BluesNotehubJs.DeviceTowerInfo();
+      //var instance = new NotehubJs.DeviceTowerInfo();
       //expect(instance).to.be();
     });
 

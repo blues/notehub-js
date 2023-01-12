@@ -20,15 +20,15 @@
     factory(require('expect.js'), require(process.cwd()+'/src/index'));
   } else {
     // Browser globals (root is window)
-    factory(root.expect, root.BluesNotehubJs);
+    factory(root.expect, root.NotehubJs);
   }
-}(this, function(expect, BluesNotehubJs) {
+}(this, function(expect, NotehubJs) {
   'use strict';
 
   var instance;
 
   beforeEach(function() {
-    instance = new BluesNotehubJs.DFUState();
+    instance = new NotehubJs.DFUState();
   });
 
   var getProperty = function(object, getter, property) {
@@ -50,85 +50,85 @@
   describe('DFUState', function() {
     it('should create an instance of DFUState', function() {
       // uncomment below and update the code to test DFUState
-      //var instance = new BluesNotehubJs.DFUState();
-      //expect(instance).to.be.a(BluesNotehubJs.DFUState);
+      //var instance = new NotehubJs.DFUState();
+      //expect(instance).to.be.a(NotehubJs.DFUState);
     });
 
     it('should have the property type (base name: "type")', function() {
       // uncomment below and update the code to test the property type
-      //var instance = new BluesNotehubJs.DFUState();
+      //var instance = new NotehubJs.DFUState();
       //expect(instance).to.be();
     });
 
     it('should have the property file (base name: "file")', function() {
       // uncomment below and update the code to test the property file
-      //var instance = new BluesNotehubJs.DFUState();
+      //var instance = new NotehubJs.DFUState();
       //expect(instance).to.be();
     });
 
     it('should have the property length (base name: "length")', function() {
       // uncomment below and update the code to test the property length
-      //var instance = new BluesNotehubJs.DFUState();
+      //var instance = new NotehubJs.DFUState();
       //expect(instance).to.be();
     });
 
     it('should have the property crc32 (base name: "crc32")', function() {
       // uncomment below and update the code to test the property crc32
-      //var instance = new BluesNotehubJs.DFUState();
+      //var instance = new NotehubJs.DFUState();
       //expect(instance).to.be();
     });
 
     it('should have the property md5 (base name: "md5")', function() {
       // uncomment below and update the code to test the property md5
-      //var instance = new BluesNotehubJs.DFUState();
+      //var instance = new NotehubJs.DFUState();
       //expect(instance).to.be();
     });
 
     it('should have the property mode (base name: "mode")', function() {
       // uncomment below and update the code to test the property mode
-      //var instance = new BluesNotehubJs.DFUState();
+      //var instance = new NotehubJs.DFUState();
       //expect(instance).to.be();
     });
 
     it('should have the property status (base name: "status")', function() {
       // uncomment below and update the code to test the property status
-      //var instance = new BluesNotehubJs.DFUState();
+      //var instance = new NotehubJs.DFUState();
       //expect(instance).to.be();
     });
 
     it('should have the property began (base name: "began")', function() {
       // uncomment below and update the code to test the property began
-      //var instance = new BluesNotehubJs.DFUState();
+      //var instance = new NotehubJs.DFUState();
       //expect(instance).to.be();
     });
 
     it('should have the property retry (base name: "retry")', function() {
       // uncomment below and update the code to test the property retry
-      //var instance = new BluesNotehubJs.DFUState();
+      //var instance = new NotehubJs.DFUState();
       //expect(instance).to.be();
     });
 
     it('should have the property errors (base name: "errors")', function() {
       // uncomment below and update the code to test the property errors
-      //var instance = new BluesNotehubJs.DFUState();
+      //var instance = new NotehubJs.DFUState();
       //expect(instance).to.be();
     });
 
     it('should have the property read (base name: "read")', function() {
       // uncomment below and update the code to test the property read
-      //var instance = new BluesNotehubJs.DFUState();
+      //var instance = new NotehubJs.DFUState();
       //expect(instance).to.be();
     });
 
     it('should have the property updated (base name: "updated")', function() {
       // uncomment below and update the code to test the property updated
-      //var instance = new BluesNotehubJs.DFUState();
+      //var instance = new NotehubJs.DFUState();
       //expect(instance).to.be();
     });
 
     it('should have the property version (base name: "version")', function() {
       // uncomment below and update the code to test the property version
-      //var instance = new BluesNotehubJs.DFUState();
+      //var instance = new NotehubJs.DFUState();
       //expect(instance).to.be();
     });
 

@@ -1,10 +1,11 @@
 {
-  "name": "@blues/notehub-js",
+  "name": "notehub-js",
   "version": "1.0.0",
   "description": "JavaScript library for accessing the Blues Wireless Notehub API endpoints",
   "main": "./src/dist/index.js",
   "scripts": {
-    "generate": "openapi-generator-cli generate -g javascript --library javascript -t libTemplate -o src -i openapi.yaml -c config.json",
+    "downloadJsTemplate": "openapi-generator-cli author template -g javascript --library javascript",
+    "generateDocs": "openapi-generator-cli generate -g javascript --library javascript -t libTemplate -o src -i openapi.yaml -c config.json",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

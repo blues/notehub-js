@@ -20,15 +20,15 @@
     factory(require('expect.js'), require(process.cwd()+'/src/index'));
   } else {
     // Browser globals (root is window)
-    factory(root.expect, root.BluesNotehubJs);
+    factory(root.expect, root.NotehubJs);
   }
-}(this, function(expect, BluesNotehubJs) {
+}(this, function(expect, NotehubJs) {
   'use strict';
 
   var instance;
 
   beforeEach(function() {
-    instance = new BluesNotehubJs.HandleNoteSignal200Response();
+    instance = new NotehubJs.HandleNoteSignal200Response();
   });
 
   var getProperty = function(object, getter, property) {
@@ -50,13 +50,13 @@
   describe('HandleNoteSignal200Response', function() {
     it('should create an instance of HandleNoteSignal200Response', function() {
       // uncomment below and update the code to test HandleNoteSignal200Response
-      //var instance = new BluesNotehubJs.HandleNoteSignal200Response();
-      //expect(instance).to.be.a(BluesNotehubJs.HandleNoteSignal200Response);
+      //var instance = new NotehubJs.HandleNoteSignal200Response();
+      //expect(instance).to.be.a(NotehubJs.HandleNoteSignal200Response);
     });
 
     it('should have the property connected (base name: "connected")', function() {
       // uncomment below and update the code to test the property connected
-      //var instance = new BluesNotehubJs.HandleNoteSignal200Response();
+      //var instance = new NotehubJs.HandleNoteSignal200Response();
       //expect(instance).to.be();
     });
 

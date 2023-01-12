@@ -20,15 +20,15 @@
     factory(require('expect.js'), require(process.cwd()+'/src/index'));
   } else {
     // Browser globals (root is window)
-    factory(root.expect, root.BluesNotehubJs);
+    factory(root.expect, root.NotehubJs);
   }
-}(this, function(expect, BluesNotehubJs) {
+}(this, function(expect, NotehubJs) {
   'use strict';
 
   var instance;
 
   beforeEach(function() {
-    instance = new BluesNotehubJs.GetDeviceEnvironmentVariables200Response();
+    instance = new NotehubJs.GetDeviceEnvironmentVariables200Response();
   });
 
   var getProperty = function(object, getter, property) {
@@ -50,19 +50,19 @@
   describe('GetDeviceEnvironmentVariables200Response', function() {
     it('should create an instance of GetDeviceEnvironmentVariables200Response', function() {
       // uncomment below and update the code to test GetDeviceEnvironmentVariables200Response
-      //var instance = new BluesNotehubJs.GetDeviceEnvironmentVariables200Response();
-      //expect(instance).to.be.a(BluesNotehubJs.GetDeviceEnvironmentVariables200Response);
+      //var instance = new NotehubJs.GetDeviceEnvironmentVariables200Response();
+      //expect(instance).to.be.a(NotehubJs.GetDeviceEnvironmentVariables200Response);
     });
 
     it('should have the property environmentVariables (base name: "environment_variables")', function() {
       // uncomment below and update the code to test the property environmentVariables
-      //var instance = new BluesNotehubJs.GetDeviceEnvironmentVariables200Response();
+      //var instance = new NotehubJs.GetDeviceEnvironmentVariables200Response();
       //expect(instance).to.be();
     });
 
     it('should have the property environmentVariablesEnvDefault (base name: "environment_variables_env_default")', function() {
       // uncomment below and update the code to test the property environmentVariablesEnvDefault
-      //var instance = new BluesNotehubJs.GetDeviceEnvironmentVariables200Response();
+      //var instance = new NotehubJs.GetDeviceEnvironmentVariables200Response();
       //expect(instance).to.be();
     });
 

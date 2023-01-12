@@ -20,15 +20,15 @@
     factory(require('expect.js'), require(process.cwd()+'/src/index'));
   } else {
     // Browser globals (root is window)
-    factory(root.expect, root.BluesNotehubJs);
+    factory(root.expect, root.NotehubJs);
   }
-}(this, function(expect, BluesNotehubJs) {
+}(this, function(expect, NotehubJs) {
   'use strict';
 
   var instance;
 
   beforeEach(function() {
-    instance = new BluesNotehubJs.GetDeviceSessions200Response();
+    instance = new NotehubJs.GetDeviceSessions200Response();
   });
 
   var getProperty = function(object, getter, property) {
@@ -50,19 +50,19 @@
   describe('GetDeviceSessions200Response', function() {
     it('should create an instance of GetDeviceSessions200Response', function() {
       // uncomment below and update the code to test GetDeviceSessions200Response
-      //var instance = new BluesNotehubJs.GetDeviceSessions200Response();
-      //expect(instance).to.be.a(BluesNotehubJs.GetDeviceSessions200Response);
+      //var instance = new NotehubJs.GetDeviceSessions200Response();
+      //expect(instance).to.be.a(NotehubJs.GetDeviceSessions200Response);
     });
 
     it('should have the property sessions (base name: "sessions")', function() {
       // uncomment below and update the code to test the property sessions
-      //var instance = new BluesNotehubJs.GetDeviceSessions200Response();
+      //var instance = new NotehubJs.GetDeviceSessions200Response();
       //expect(instance).to.be();
     });
 
     it('should have the property hasMore (base name: "has_more")', function() {
       // uncomment below and update the code to test the property hasMore
-      //var instance = new BluesNotehubJs.GetDeviceSessions200Response();
+      //var instance = new NotehubJs.GetDeviceSessions200Response();
       //expect(instance).to.be();
     });
 

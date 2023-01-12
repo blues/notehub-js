@@ -1,4 +1,4 @@
-# BluesNotehubJs.AuthorizationApi
+# NotehubJs.AuthorizationApi
 
 All URIs are relative to *https://api.notefile.net*
 
@@ -19,10 +19,10 @@ Gets a session token from the API from a username and password.
 ### Example
 
 ```javascript
-import BluesNotehubJs from '@blues/notehub-js';
+import NotehubJs from 'notehub-js';
 
-let apiInstance = new BluesNotehubJs.AuthorizationApi();
-let loginRequest = new BluesNotehubJs.LoginRequest(); // LoginRequest | 
+let apiInstance = new NotehubJs.AuthorizationApi();
+let loginRequest = new NotehubJs.LoginRequest(); // LoginRequest | 
 apiInstance.login(loginRequest).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
