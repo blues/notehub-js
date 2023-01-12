@@ -1,6 +1,6 @@
 {
   "name": "notehub-js",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "The OpenAPI definition for the Notehub.io API. ",
   "license": "MIT",
   "main": "dist/index.js",
@@ -11,6 +11,9 @@
   },
   "browser": {
     "fs": false
+  },
+  "publishConfig":{
+    "registry":"https://www.npmjs.com/package/notehub-js"
   },
   "dependencies": {
     "@babel/cli": "^7.0.0",

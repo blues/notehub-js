@@ -18,7 +18,7 @@ import HttpTransform from './HttpTransform';
 /**
  * The Http model module.
  * @module model/Http
- * @version 1.0.0
+ * @version 1.0.3
  */
 class Http {
     /**

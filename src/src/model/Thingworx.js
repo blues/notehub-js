@@ -18,7 +18,7 @@ import HttpTransform from './HttpTransform';
 /**
  * The Thingworx model module.
  * @module model/Thingworx
- * @version 1.0.0
+ * @version 1.0.3
  */
 class Thingworx {
     /**

@@ -1,6 +1,5 @@
 {
   "name": "notehub-js",
-  "version": "1.0.0",
   "description": "JavaScript library for accessing the Blues Wireless Notehub API endpoints",
   "main": "./src/dist/index.js",
   "scripts": {
@@ -10,9 +9,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/blues/notehub-js.git"
+    "url": "https://github.com/blues/notehub-js.git"
   },
-  "keywords": ["blues wireless", "notehub", "api"],
+  "keywords": [
+    "blues wireless",
+    "notehub",
+    "api"
+  ],
   "author": "Paige Niedringhaus",
   "license": "MIT",
   "bugs": {
