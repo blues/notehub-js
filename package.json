@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/blues/notehub-js#readme",
   "publishConfig": {
-    "registry": "https://registry.npmjs.org/",
+    "registry": "https://registry.npmjs.org",
     "directory": "./src"
   }
 }
