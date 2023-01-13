@@ -1,0 +1,4 @@
+name: "Publish"
+description: "Publish generated notehub-js package to npm"
+runs:
+  
