@@ -21,5 +21,6 @@
   "bugs": {
     "url": "https://github.com/blues/notehub-js/issues"
   },
-  "homepage": "https://github.com/blues/notehub-js#readme"
+  "homepage": "https://github.com/blues/notehub-js#readme",
+  "publishConfig": {"directory": "./src"}
 }
