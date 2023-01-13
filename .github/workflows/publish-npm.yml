@@ -5,28 +5,19 @@ on:
     types: [created]
 
 jobs:
-  build:
+  npm:
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: ./src
     steps:
-      - name: Checkout 
-        uses: actions/checkout@v3
-
-      - name: Use Node.js 16 
-        uses: actions/setup-node@v3
-        working-directory: ./src
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
           node-version: 16
           registry-url: https://registry.npmjs.org/
-
-      - name: Install dependencies
-        working-directory: ./src
-        run: npm ci --ignore-scripts
-
-      - name: Publish to npm
-        run: npm publish
-        working-directory: ./src
+          cache: npm
+      - run: npm ci 
+      - run: npm publish --access public
         env: 
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
