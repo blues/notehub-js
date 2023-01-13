@@ -22,5 +22,8 @@
     "url": "https://github.com/blues/notehub-js/issues"
   },
   "homepage": "https://github.com/blues/notehub-js#readme",
-  "publishConfig": {"directory": "./src"}
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "directory": "./src"
+  }
 }
