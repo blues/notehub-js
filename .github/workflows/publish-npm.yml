@@ -16,14 +16,17 @@ jobs:
 
       - name: Use Node.js 16 
         uses: actions/setup-node@v3
+        working-directory: ./src
         with:
           node-version: 16
-          registry-url: 'https://registry.npmjs.org/'
+          registry-url: https://registry.npmjs.org/
 
       - name: Install dependencies
+        working-directory: ./src
         run: npm ci --ignore-scripts
 
       - name: Publish to npm
-        run: yarn publish --ignore-scripts
+        run: npm publish
+        working-directory: ./src
         env: 
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
