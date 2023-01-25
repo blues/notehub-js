@@ -51,10 +51,10 @@
     describe('deleteDeviceEnvironmentVariable', function() {
       it('should call deleteDeviceEnvironmentVariable successfully', function(done) {
         //uncomment below and update the code to test deleteDeviceEnvironmentVariable
-        //instance.deleteDeviceEnvironmentVariable(function(error) {
-        //  if (error) throw error;
-        //expect().to.be();
-        //});
+        instance.deleteDeviceEnvironmentVariable(function(error) {
+         if (error) throw error;
+        expect().to.be();
+        });
         done();
       });
     });
