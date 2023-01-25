@@ -1,6 +1,7 @@
 name: Automatically create new pull request
 
-on: push
+on: 
+  push
 
 jobs:
   create_pr_repo_sync:
