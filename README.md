@@ -13,8 +13,6 @@ or C++. Your sketch may programmatically configure Notecard and send Notes to
 
 Coming soon.
 
-Minor change to trigger workflow run.
-
 ## Usage
 
 Coming soon.
