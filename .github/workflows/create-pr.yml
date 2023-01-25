@@ -3,16 +3,42 @@ name: Automatically create new pull request
 on: push
 
 jobs:
-  create_update_pr:
+  create_pr_peter_evans:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
 
-      - name: Create PR
+      - name: Create PR P Evans
         uses: peter-evans/create-pull-request@v4
         with: 
           commit-message: update notehub openapi.yaml file
           title: Update Notehub-js OpenAPI.yaml file
           branch: feat-automate-pr-creation
           assignees: paigen11
+          base: main
+
+  create_pr_repo_sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Create PR R Sync
+        id: open-pr
+        uses: repo-sync/pull-request@v2
+        with:
+          destination_branch: "main"
+          pr_title: "PR triggered by update to Notehub openapi docs"
+          # pr_template: ".github/PULL_REQUEST_TEMPLATE.md"
+          pr_reviewer: "paigen11"
+          pr_assignee: "paigen11"
+          pr_draft: true 
+      - name: output-url
+        run: echo ${{steps.open-pr.outputs.pr_url}}
+      - name: output-number
+        run: echo ${{steps.open-pr.outputs.pr_number}}
+      - name: output-created
+        run: echo ${{steps.open-pr.outputs.pr_created}}
+      - name: output-has-changed-files
+        run: echo ${{steps.open-pr.outputs.has_changed_files}}
+
+
 
