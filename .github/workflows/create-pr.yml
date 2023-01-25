@@ -3,19 +3,19 @@ name: Automatically create new pull request
 on: push
 
 jobs:
-  create_pr_peter_evans:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
+  # create_pr_peter_evans:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v3
 
-      - name: Create PR P Evans
-        uses: peter-evans/create-pull-request@v4
-        with: 
-          commit-message: update notehub openapi.yaml file
-          title: Update Notehub-js OpenAPI.yaml file
-          branch: feat-automate-pr-creation
-          assignees: paigen11
-          base: main
+  #     - name: Create PR P Evans
+  #       uses: peter-evans/create-pull-request@v4
+  #       with: 
+  #         commit-message: update notehub openapi.yaml file
+  #         title: Update Notehub-js OpenAPI.yaml file
+  #         branch: feat-automate-pr-creation
+  #         assignees: paigen11
+  #         base: 'main'
 
   create_pr_repo_sync:
     runs-on: ubuntu-latest
