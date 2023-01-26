@@ -1,7 +1,7 @@
 {
   "projectName": "notehub-js",
   "licenseName": "MIT",
-  "npmRepository": "https://www.npmjs.com/package/notehub-js",
+  "npmRepository": "https://registry.npmjs.org",
   "projectVersion": "1.0.3",
   "sourceFolder": "src",
   "usePromises": true

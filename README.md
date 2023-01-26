@@ -25,6 +25,12 @@ Coming soon.
 
 Coming soon.
 
+## Steps to publish new npm packages of this repo
+
+1. Adjust the version number in `config.json` file.
+2. Run `npm run generateDocs` to generate new docs for updated `openapi.yaml` file
+3. Commit and push the changes to GitHub
+4. Cut a new release in the style of [YYYY.MM-NUMBER-OF-RELEASES] for example: a release named 2023.01-04 means it was released some time in Jan, 2023 and is the 4th release that month.
 
 ## Contributing
 
