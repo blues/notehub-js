@@ -15,9 +15,29 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Generate release changelog
-        uses: heinrichreimer/github-changelog-generator-action@v2.3
+        uses: ardalanamini/auto-changelog@v3
+        id: changelog
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ github.token }}
+          commit-types: |
+            breaking: Breaking Changes
+            feat: New Features
+            fix: Bug Fixes
+            revert: Reverts
+            perf: Performance Improvements
+            refactor: Refactors
+            deps: Dependencies
+            docs: Documentation Changes
+            style: Code Style Changes
+            build: Build System
+            ci: Continuous Integration
+            test: Tests
+            chore: Chores
+            other: Other Changes
+          default-commit-type: Other Changes
+          mention-authors: true
+          include-compare: true 
+          mention-new-contributors: true 
 
       - name: Setup .npmrc file to publish to npm
         uses: actions/setup-node@v3
