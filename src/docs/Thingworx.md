@@ -1,4 +1,4 @@
-# NotehubJs.Thingworx
+# BluesIncNotehubJs.Thingworx
 
 ## Properties
 

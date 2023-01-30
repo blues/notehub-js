@@ -17,7 +17,7 @@ import RouteSchema from './RouteSchema';
 /**
  * The Route model module.
  * @module model/Route
- * @version 1.0.3
+ * @version 1.0.4
  */
 class Route {
     /**

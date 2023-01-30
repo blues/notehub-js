@@ -25,5 +25,8 @@
   "publishConfig": {
     "registry": "https://registry.npmjs.org",
     "directory": "./src"
+  },
+  "devDependencies": {
+    "@openapitools/openapi-generator-cli": "^2.5.2"
   }
 }

@@ -1,4 +1,4 @@
-# NotehubJs.HttpTransform
+# BluesIncNotehubJs.HttpTransform
 
 ## Properties
 

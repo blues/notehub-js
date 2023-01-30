@@ -1,4 +1,4 @@
-# NotehubJs.LoginRequest
+# BluesIncNotehubJs.LoginRequest
 
 ## Properties
 

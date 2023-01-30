@@ -1,4 +1,4 @@
-# NotehubJs.GetProjectProducts200Response
+# BluesIncNotehubJs.GetProjectProducts200Response
 
 ## Properties
 

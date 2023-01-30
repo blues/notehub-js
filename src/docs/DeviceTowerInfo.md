@@ -1,4 +1,4 @@
-# NotehubJs.DeviceTowerInfo
+# BluesIncNotehubJs.DeviceTowerInfo
 
 ## Properties
 

@@ -1,4 +1,4 @@
-# NotehubJs.Event
+# BluesIncNotehubJs.Event
 
 ## Properties
 

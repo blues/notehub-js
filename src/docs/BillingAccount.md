@@ -1,4 +1,4 @@
-# NotehubJs.BillingAccount
+# BluesIncNotehubJs.BillingAccount
 
 ## Properties
 

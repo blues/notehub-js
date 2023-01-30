@@ -1,4 +1,4 @@
-# NotehubJs.DevicesApi
+# BluesIncNotehubJs.DevicesApi
 
 All URIs are relative to *https://api.notefile.net*
 
@@ -23,15 +23,15 @@ Delete Device
 ### Example
 
 ```javascript
-import NotehubJs from 'notehub-js';
-let defaultClient = NotehubJs.ApiClient.instance;
+import BluesIncNotehubJs from '@blues-inc/notehub-js';
+let defaultClient = BluesIncNotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //api_key.apiKeyPrefix = 'Token';
 
-let apiInstance = new NotehubJs.DevicesApi();
+let apiInstance = new BluesIncNotehubJs.DevicesApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 let deviceUID = "deviceUID_example"; // String | 
 let purge = "'false'"; // String | 
@@ -77,15 +77,15 @@ Get Device
 ### Example
 
 ```javascript
-import NotehubJs from 'notehub-js';
-let defaultClient = NotehubJs.ApiClient.instance;
+import BluesIncNotehubJs from '@blues-inc/notehub-js';
+let defaultClient = BluesIncNotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //api_key.apiKeyPrefix = 'Token';
 
-let apiInstance = new NotehubJs.DevicesApi();
+let apiInstance = new BluesIncNotehubJs.DevicesApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 let deviceUID = "deviceUID_example"; // String | 
 apiInstance.getDevice(projectUID, deviceUID).then((data) => {
@@ -129,15 +129,15 @@ Get Device Public Keys of a Project
 ### Example
 
 ```javascript
-import NotehubJs from 'notehub-js';
-let defaultClient = NotehubJs.ApiClient.instance;
+import BluesIncNotehubJs from '@blues-inc/notehub-js';
+let defaultClient = BluesIncNotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //api_key.apiKeyPrefix = 'Token';
 
-let apiInstance = new NotehubJs.DevicesApi();
+let apiInstance = new BluesIncNotehubJs.DevicesApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 let opts = {
   'pageSize': 50, // Number | 
@@ -185,15 +185,15 @@ Get Devices of a Project
 ### Example
 
 ```javascript
-import NotehubJs from 'notehub-js';
-let defaultClient = NotehubJs.ApiClient.instance;
+import BluesIncNotehubJs from '@blues-inc/notehub-js';
+let defaultClient = BluesIncNotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //api_key.apiKeyPrefix = 'Token';
 
-let apiInstance = new NotehubJs.DevicesApi();
+let apiInstance = new BluesIncNotehubJs.DevicesApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 let opts = {
   'pageSize': 50, // Number | 
@@ -241,15 +241,15 @@ Get Devices of a Fleet within a Project
 ### Example
 
 ```javascript
-import NotehubJs from 'notehub-js';
-let defaultClient = NotehubJs.ApiClient.instance;
+import BluesIncNotehubJs from '@blues-inc/notehub-js';
+let defaultClient = BluesIncNotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //api_key.apiKeyPrefix = 'Token';
 
-let apiInstance = new NotehubJs.DevicesApi();
+let apiInstance = new BluesIncNotehubJs.DevicesApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 let fleetUID = "fleetUID_example"; // String | 
 let opts = {

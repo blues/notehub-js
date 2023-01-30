@@ -1,4 +1,4 @@
-# NotehubJs.GetProjectMembers200Response
+# BluesIncNotehubJs.GetProjectMembers200Response
 
 ## Properties
 

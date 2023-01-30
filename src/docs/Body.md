@@ -1,4 +1,4 @@
-# NotehubJs.Body
+# BluesIncNotehubJs.Body
 
 ## Properties
 

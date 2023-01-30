@@ -1,4 +1,4 @@
-# NotehubJs.HandleNoteSignal200Response
+# BluesIncNotehubJs.HandleNoteSignal200Response
 
 ## Properties
 

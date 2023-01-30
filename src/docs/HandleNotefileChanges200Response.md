@@ -1,4 +1,4 @@
-# NotehubJs.HandleNotefileChanges200Response
+# BluesIncNotehubJs.HandleNotefileChanges200Response
 
 ## Properties
 

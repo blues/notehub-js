@@ -1,4 +1,4 @@
-# NotehubJs.BillingAccountApi
+# BluesIncNotehubJs.BillingAccountApi
 
 All URIs are relative to *https://api.notefile.net*
 
@@ -19,15 +19,15 @@ Get Billing Accounts accessible by the api_key
 ### Example
 
 ```javascript
-import NotehubJs from 'notehub-js';
-let defaultClient = NotehubJs.ApiClient.instance;
+import BluesIncNotehubJs from '@blues-inc/notehub-js';
+let defaultClient = BluesIncNotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //api_key.apiKeyPrefix = 'Token';
 
-let apiInstance = new NotehubJs.BillingAccountApi();
+let apiInstance = new BluesIncNotehubJs.BillingAccountApi();
 apiInstance.getBillingAccounts().then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {

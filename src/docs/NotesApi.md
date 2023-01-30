@@ -1,4 +1,4 @@
-# NotehubJs.NotesApi
+# BluesIncNotehubJs.NotesApi
 
 All URIs are relative to *https://api.notefile.net*
 
@@ -24,19 +24,19 @@ Adds a Note to a Notefile, creating the Notefile if it doesn&#39;t yet exist.
 ### Example
 
 ```javascript
-import NotehubJs from 'notehub-js';
-let defaultClient = NotehubJs.ApiClient.instance;
+import BluesIncNotehubJs from '@blues-inc/notehub-js';
+let defaultClient = BluesIncNotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //api_key.apiKeyPrefix = 'Token';
 
-let apiInstance = new NotehubJs.NotesApi();
+let apiInstance = new BluesIncNotehubJs.NotesApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 let deviceUID = "deviceUID_example"; // String | 
 let notefileID = "notefileID_example"; // String | 
-let note = new NotehubJs.Note(); // Note | Body or payload of note to be added to the device
+let note = new BluesIncNotehubJs.Note(); // Note | Body or payload of note to be added to the device
 apiInstance.handleNoteAdd(projectUID, deviceUID, notefileID, note).then(() => {
   console.log('API called successfully.');
 }, (error) => {
@@ -80,15 +80,15 @@ Incrementally retrieve changes within a specific Notefile.
 ### Example
 
 ```javascript
-import NotehubJs from 'notehub-js';
-let defaultClient = NotehubJs.ApiClient.instance;
+import BluesIncNotehubJs from '@blues-inc/notehub-js';
+let defaultClient = BluesIncNotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //api_key.apiKeyPrefix = 'Token';
 
-let apiInstance = new NotehubJs.NotesApi();
+let apiInstance = new BluesIncNotehubJs.NotesApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 let deviceUID = "deviceUID_example"; // String | 
 let notefileID = "notefileID_example"; // String | 
@@ -148,20 +148,20 @@ Adds a Note to a Notefile, creating the Notefile if it doesn&#39;t yet exist.
 ### Example
 
 ```javascript
-import NotehubJs from 'notehub-js';
-let defaultClient = NotehubJs.ApiClient.instance;
+import BluesIncNotehubJs from '@blues-inc/notehub-js';
+let defaultClient = BluesIncNotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //api_key.apiKeyPrefix = 'Token';
 
-let apiInstance = new NotehubJs.NotesApi();
+let apiInstance = new BluesIncNotehubJs.NotesApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 let deviceUID = "deviceUID_example"; // String | 
 let notefileID = "notefileID_example"; // String | 
 let noteID = "noteID_example"; // String | 
-let note = new NotehubJs.Note(); // Note | Body or payload of note to be added to the device
+let note = new BluesIncNotehubJs.Note(); // Note | Body or payload of note to be added to the device
 apiInstance.handleNoteCreateAdd(projectUID, deviceUID, notefileID, noteID, note).then(() => {
   console.log('API called successfully.');
 }, (error) => {
@@ -206,15 +206,15 @@ Delete a note from a DB notefile
 ### Example
 
 ```javascript
-import NotehubJs from 'notehub-js';
-let defaultClient = NotehubJs.ApiClient.instance;
+import BluesIncNotehubJs from '@blues-inc/notehub-js';
+let defaultClient = BluesIncNotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //api_key.apiKeyPrefix = 'Token';
 
-let apiInstance = new NotehubJs.NotesApi();
+let apiInstance = new BluesIncNotehubJs.NotesApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 let deviceUID = "deviceUID_example"; // String | 
 let notefileID = "notefileID_example"; // String | 
@@ -262,15 +262,15 @@ Get a note from a DB notefile
 ### Example
 
 ```javascript
-import NotehubJs from 'notehub-js';
-let defaultClient = NotehubJs.ApiClient.instance;
+import BluesIncNotehubJs from '@blues-inc/notehub-js';
+let defaultClient = BluesIncNotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //api_key.apiKeyPrefix = 'Token';
 
-let apiInstance = new NotehubJs.NotesApi();
+let apiInstance = new BluesIncNotehubJs.NotesApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 let deviceUID = "deviceUID_example"; // String | 
 let notefileID = "notefileID_example"; // String | 
@@ -324,20 +324,20 @@ Update a note in a DB notefile
 ### Example
 
 ```javascript
-import NotehubJs from 'notehub-js';
-let defaultClient = NotehubJs.ApiClient.instance;
+import BluesIncNotehubJs from '@blues-inc/notehub-js';
+let defaultClient = BluesIncNotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //api_key.apiKeyPrefix = 'Token';
 
-let apiInstance = new NotehubJs.NotesApi();
+let apiInstance = new BluesIncNotehubJs.NotesApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 let deviceUID = "deviceUID_example"; // String | 
 let notefileID = "notefileID_example"; // String | 
 let noteID = "noteID_example"; // String | 
-let note = new NotehubJs.Note(); // Note | Body or payload of note to be added to the device
+let note = new BluesIncNotehubJs.Note(); // Note | Body or payload of note to be added to the device
 apiInstance.handleNoteUpdate(projectUID, deviceUID, notefileID, noteID, note).then(() => {
   console.log('API called successfully.');
 }, (error) => {

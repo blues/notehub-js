@@ -1,4 +1,4 @@
-# NotehubJs.Mqtt
+# BluesIncNotehubJs.Mqtt
 
 ## Properties
 

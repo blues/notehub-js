@@ -1,4 +1,4 @@
-# NotehubJs.CreateProductRequest
+# BluesIncNotehubJs.CreateProductRequest
 
 ## Properties
 

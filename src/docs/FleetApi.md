@@ -1,4 +1,4 @@
-# NotehubJs.FleetApi
+# BluesIncNotehubJs.FleetApi
 
 All URIs are relative to *https://api.notefile.net*
 
@@ -31,17 +31,17 @@ Create Fleet
 ### Example
 
 ```javascript
-import NotehubJs from 'notehub-js';
-let defaultClient = NotehubJs.ApiClient.instance;
+import BluesIncNotehubJs from '@blues-inc/notehub-js';
+let defaultClient = BluesIncNotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //api_key.apiKeyPrefix = 'Token';
 
-let apiInstance = new NotehubJs.FleetApi();
+let apiInstance = new BluesIncNotehubJs.FleetApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
-let createFleetRequest = new NotehubJs.CreateFleetRequest(); // CreateFleetRequest | Fleet to be added
+let createFleetRequest = new BluesIncNotehubJs.CreateFleetRequest(); // CreateFleetRequest | Fleet to be added
 apiInstance.createFleet(projectUID, createFleetRequest).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
@@ -83,18 +83,18 @@ Remove Device from Fleets
 ### Example
 
 ```javascript
-import NotehubJs from 'notehub-js';
-let defaultClient = NotehubJs.ApiClient.instance;
+import BluesIncNotehubJs from '@blues-inc/notehub-js';
+let defaultClient = BluesIncNotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //api_key.apiKeyPrefix = 'Token';
 
-let apiInstance = new NotehubJs.FleetApi();
+let apiInstance = new BluesIncNotehubJs.FleetApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 let deviceUID = "deviceUID_example"; // String | 
-let deleteDeviceFleetsRequest = new NotehubJs.DeleteDeviceFleetsRequest(); // DeleteDeviceFleetsRequest | The fleets to remove from the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error. 
+let deleteDeviceFleetsRequest = new BluesIncNotehubJs.DeleteDeviceFleetsRequest(); // DeleteDeviceFleetsRequest | The fleets to remove from the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error. 
 apiInstance.deleteDeviceFleets(projectUID, deviceUID, deleteDeviceFleetsRequest).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
@@ -137,15 +137,15 @@ Delete Fleet
 ### Example
 
 ```javascript
-import NotehubJs from 'notehub-js';
-let defaultClient = NotehubJs.ApiClient.instance;
+import BluesIncNotehubJs from '@blues-inc/notehub-js';
+let defaultClient = BluesIncNotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //api_key.apiKeyPrefix = 'Token';
 
-let apiInstance = new NotehubJs.FleetApi();
+let apiInstance = new BluesIncNotehubJs.FleetApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 let fleetUID = "fleetUID_example"; // String | 
 apiInstance.deleteFleet(projectUID, fleetUID).then(() => {
@@ -189,15 +189,15 @@ Delete environment variables of a fleet
 ### Example
 
 ```javascript
-import NotehubJs from 'notehub-js';
-let defaultClient = NotehubJs.ApiClient.instance;
+import BluesIncNotehubJs from '@blues-inc/notehub-js';
+let defaultClient = BluesIncNotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //api_key.apiKeyPrefix = 'Token';
 
-let apiInstance = new NotehubJs.FleetApi();
+let apiInstance = new BluesIncNotehubJs.FleetApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 let fleetUID = "fleetUID_example"; // String | 
 let key = "key_example"; // String | The environment variable key to delete.
@@ -243,15 +243,15 @@ Get Device Fleets
 ### Example
 
 ```javascript
-import NotehubJs from 'notehub-js';
-let defaultClient = NotehubJs.ApiClient.instance;
+import BluesIncNotehubJs from '@blues-inc/notehub-js';
+let defaultClient = BluesIncNotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //api_key.apiKeyPrefix = 'Token';
 
-let apiInstance = new NotehubJs.FleetApi();
+let apiInstance = new BluesIncNotehubJs.FleetApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 let deviceUID = "deviceUID_example"; // String | 
 apiInstance.getDeviceFleets(projectUID, deviceUID).then((data) => {
@@ -295,15 +295,15 @@ Get environment variables of a fleet
 ### Example
 
 ```javascript
-import NotehubJs from 'notehub-js';
-let defaultClient = NotehubJs.ApiClient.instance;
+import BluesIncNotehubJs from '@blues-inc/notehub-js';
+let defaultClient = BluesIncNotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //api_key.apiKeyPrefix = 'Token';
 
-let apiInstance = new NotehubJs.FleetApi();
+let apiInstance = new BluesIncNotehubJs.FleetApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 let fleetUID = "fleetUID_example"; // String | 
 apiInstance.getFleetEnvironmentVariables(projectUID, fleetUID).then((data) => {
@@ -347,15 +347,15 @@ Get Events of a Fleet
 ### Example
 
 ```javascript
-import NotehubJs from 'notehub-js';
-let defaultClient = NotehubJs.ApiClient.instance;
+import BluesIncNotehubJs from '@blues-inc/notehub-js';
+let defaultClient = BluesIncNotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //api_key.apiKeyPrefix = 'Token';
 
-let apiInstance = new NotehubJs.FleetApi();
+let apiInstance = new BluesIncNotehubJs.FleetApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 let fleetUID = "fleetUID_example"; // String | 
 let opts = {
@@ -415,15 +415,15 @@ Get Events of a Fleet by cursor
 ### Example
 
 ```javascript
-import NotehubJs from 'notehub-js';
-let defaultClient = NotehubJs.ApiClient.instance;
+import BluesIncNotehubJs from '@blues-inc/notehub-js';
+let defaultClient = BluesIncNotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //api_key.apiKeyPrefix = 'Token';
 
-let apiInstance = new NotehubJs.FleetApi();
+let apiInstance = new BluesIncNotehubJs.FleetApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 let fleetUID = "fleetUID_example"; // String | 
 let opts = {
@@ -475,15 +475,15 @@ Get Devices of a Fleet within a Project
 ### Example
 
 ```javascript
-import NotehubJs from 'notehub-js';
-let defaultClient = NotehubJs.ApiClient.instance;
+import BluesIncNotehubJs from '@blues-inc/notehub-js';
+let defaultClient = BluesIncNotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //api_key.apiKeyPrefix = 'Token';
 
-let apiInstance = new NotehubJs.FleetApi();
+let apiInstance = new BluesIncNotehubJs.FleetApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 let fleetUID = "fleetUID_example"; // String | 
 let opts = {
@@ -533,15 +533,15 @@ Get Project Fleets
 ### Example
 
 ```javascript
-import NotehubJs from 'notehub-js';
-let defaultClient = NotehubJs.ApiClient.instance;
+import BluesIncNotehubJs from '@blues-inc/notehub-js';
+let defaultClient = BluesIncNotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //api_key.apiKeyPrefix = 'Token';
 
-let apiInstance = new NotehubJs.FleetApi();
+let apiInstance = new BluesIncNotehubJs.FleetApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 apiInstance.getProjectFleets(projectUID).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -583,18 +583,18 @@ Add Device to Fleets
 ### Example
 
 ```javascript
-import NotehubJs from 'notehub-js';
-let defaultClient = NotehubJs.ApiClient.instance;
+import BluesIncNotehubJs from '@blues-inc/notehub-js';
+let defaultClient = BluesIncNotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //api_key.apiKeyPrefix = 'Token';
 
-let apiInstance = new NotehubJs.FleetApi();
+let apiInstance = new BluesIncNotehubJs.FleetApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 let deviceUID = "deviceUID_example"; // String | 
-let putDeviceFleetsRequest = new NotehubJs.PutDeviceFleetsRequest(); // PutDeviceFleetsRequest | The fleets to add to the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error. 
+let putDeviceFleetsRequest = new BluesIncNotehubJs.PutDeviceFleetsRequest(); // PutDeviceFleetsRequest | The fleets to add to the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error. 
 apiInstance.putDeviceFleets(projectUID, deviceUID, putDeviceFleetsRequest).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
@@ -637,18 +637,18 @@ Put environment variables of a fleet
 ### Example
 
 ```javascript
-import NotehubJs from 'notehub-js';
-let defaultClient = NotehubJs.ApiClient.instance;
+import BluesIncNotehubJs from '@blues-inc/notehub-js';
+let defaultClient = BluesIncNotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //api_key.apiKeyPrefix = 'Token';
 
-let apiInstance = new NotehubJs.FleetApi();
+let apiInstance = new BluesIncNotehubJs.FleetApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 let fleetUID = "fleetUID_example"; // String | 
-let environmentVariables = new NotehubJs.EnvironmentVariables(); // EnvironmentVariables | Environment variables to be added to the fleet
+let environmentVariables = new BluesIncNotehubJs.EnvironmentVariables(); // EnvironmentVariables | Environment variables to be added to the fleet
 apiInstance.putFleetEnvironmentVariables(projectUID, fleetUID, environmentVariables).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
@@ -691,18 +691,18 @@ Update Fleet
 ### Example
 
 ```javascript
-import NotehubJs from 'notehub-js';
-let defaultClient = NotehubJs.ApiClient.instance;
+import BluesIncNotehubJs from '@blues-inc/notehub-js';
+let defaultClient = BluesIncNotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //api_key.apiKeyPrefix = 'Token';
 
-let apiInstance = new NotehubJs.FleetApi();
+let apiInstance = new BluesIncNotehubJs.FleetApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 let fleetUID = "fleetUID_example"; // String | 
-let updateFleetRequest = new NotehubJs.UpdateFleetRequest(); // UpdateFleetRequest | Fleet details to update
+let updateFleetRequest = new BluesIncNotehubJs.UpdateFleetRequest(); // UpdateFleetRequest | Fleet details to update
 apiInstance.updateFleet(projectUID, fleetUID, updateFleetRequest).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {

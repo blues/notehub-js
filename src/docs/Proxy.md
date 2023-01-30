@@ -1,4 +1,4 @@
-# NotehubJs.Proxy
+# BluesIncNotehubJs.Proxy
 
 ## Properties
 

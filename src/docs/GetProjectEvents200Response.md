@@ -1,4 +1,4 @@
-# NotehubJs.GetProjectEvents200Response
+# BluesIncNotehubJs.GetProjectEvents200Response
 
 ## Properties
 

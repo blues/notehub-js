@@ -1,4 +1,4 @@
-# NotehubJs.GetProjectDevices200Response
+# BluesIncNotehubJs.GetProjectDevices200Response
 
 ## Properties
 

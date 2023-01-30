@@ -1,4 +1,4 @@
-# NotehubJs.Aws
+# BluesIncNotehubJs.Aws
 
 ## Properties
 
