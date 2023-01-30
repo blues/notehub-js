@@ -1,4 +1,4 @@
-# BluesIncNotehubJs.FilesApi
+# NotehubJs.FilesApi
 
 All URIs are relative to *https://api.notefile.net*
 
@@ -21,15 +21,15 @@ Used to perform queries on a single or multiple files to determine if new Notes 
 ### Example
 
 ```javascript
-import BluesIncNotehubJs from '@blues-inc/notehub-js';
-let defaultClient = BluesIncNotehubJs.ApiClient.instance;
+import NotehubJs from '@blues-inc/notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //api_key.apiKeyPrefix = 'Token';
 
-let apiInstance = new BluesIncNotehubJs.FilesApi();
+let apiInstance = new NotehubJs.FilesApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 let deviceUID = "deviceUID_example"; // String | 
 let opts = {
@@ -79,15 +79,15 @@ Returns info about file changes that are pending upload to Notehub or download t
 ### Example
 
 ```javascript
-import BluesIncNotehubJs from '@blues-inc/notehub-js';
-let defaultClient = BluesIncNotehubJs.ApiClient.instance;
+import NotehubJs from '@blues-inc/notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //api_key.apiKeyPrefix = 'Token';
 
-let apiInstance = new BluesIncNotehubJs.FilesApi();
+let apiInstance = new NotehubJs.FilesApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 let deviceUID = "deviceUID_example"; // String | 
 apiInstance.handleNotefileChangesPending(projectUID, deviceUID).then((data) => {
@@ -131,18 +131,18 @@ Deletes Notefiles and the Notes they contain.
 ### Example
 
 ```javascript
-import BluesIncNotehubJs from '@blues-inc/notehub-js';
-let defaultClient = BluesIncNotehubJs.ApiClient.instance;
+import NotehubJs from '@blues-inc/notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //api_key.apiKeyPrefix = 'Token';
 
-let apiInstance = new BluesIncNotehubJs.FilesApi();
+let apiInstance = new NotehubJs.FilesApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 let deviceUID = "deviceUID_example"; // String | 
-let handleNotefileDeleteRequest = new BluesIncNotehubJs.HandleNotefileDeleteRequest(); // HandleNotefileDeleteRequest | 
+let handleNotefileDeleteRequest = new NotehubJs.HandleNotefileDeleteRequest(); // HandleNotefileDeleteRequest | 
 apiInstance.handleNotefileDelete(projectUID, deviceUID, handleNotefileDeleteRequest).then(() => {
   console.log('API called successfully.');
 }, (error) => {

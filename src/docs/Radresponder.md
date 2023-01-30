@@ -1,4 +1,4 @@
-# BluesIncNotehubJs.Radresponder
+# NotehubJs.Radresponder
 
 ## Properties
 

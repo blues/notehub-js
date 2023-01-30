@@ -1,4 +1,4 @@
-# BluesIncNotehubJs.ProductApi
+# NotehubJs.ProductApi
 
 All URIs are relative to *https://api.notefile.net*
 
@@ -21,17 +21,17 @@ Create Product within a Project
 ### Example
 
 ```javascript
-import BluesIncNotehubJs from '@blues-inc/notehub-js';
-let defaultClient = BluesIncNotehubJs.ApiClient.instance;
+import NotehubJs from '@blues-inc/notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //api_key.apiKeyPrefix = 'Token';
 
-let apiInstance = new BluesIncNotehubJs.ProductApi();
+let apiInstance = new NotehubJs.ProductApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
-let createProductRequest = new BluesIncNotehubJs.CreateProductRequest(); // CreateProductRequest | Product to be created
+let createProductRequest = new NotehubJs.CreateProductRequest(); // CreateProductRequest | Product to be created
 apiInstance.createProduct(projectUID, createProductRequest).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
@@ -73,15 +73,15 @@ Get a Project by ProductUID
 ### Example
 
 ```javascript
-import BluesIncNotehubJs from '@blues-inc/notehub-js';
-let defaultClient = BluesIncNotehubJs.ApiClient.instance;
+import NotehubJs from '@blues-inc/notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //api_key.apiKeyPrefix = 'Token';
 
-let apiInstance = new BluesIncNotehubJs.ProductApi();
+let apiInstance = new NotehubJs.ProductApi();
 let productUID = com.blues.airnote; // String | 
 apiInstance.getProjectByProduct(productUID).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -123,15 +123,15 @@ Get Products within a Project
 ### Example
 
 ```javascript
-import BluesIncNotehubJs from '@blues-inc/notehub-js';
-let defaultClient = BluesIncNotehubJs.ApiClient.instance;
+import NotehubJs from '@blues-inc/notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //api_key.apiKeyPrefix = 'Token';
 
-let apiInstance = new BluesIncNotehubJs.ProductApi();
+let apiInstance = new NotehubJs.ProductApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 apiInstance.getProjectProducts(projectUID).then((data) => {
   console.log('API called successfully. Returned data: ' + data);

@@ -1,4 +1,4 @@
-# BluesIncNotehubJs.Route
+# NotehubJs.Route
 
 ## Properties
 

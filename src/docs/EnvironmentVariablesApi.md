@@ -1,4 +1,4 @@
-# BluesIncNotehubJs.EnvironmentVariablesApi
+# NotehubJs.EnvironmentVariablesApi
 
 All URIs are relative to *https://api.notefile.net*
 
@@ -29,15 +29,15 @@ Delete environment variable of a device
 ### Example
 
 ```javascript
-import BluesIncNotehubJs from '@blues-inc/notehub-js';
-let defaultClient = BluesIncNotehubJs.ApiClient.instance;
+import NotehubJs from '@blues-inc/notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //api_key.apiKeyPrefix = 'Token';
 
-let apiInstance = new BluesIncNotehubJs.EnvironmentVariablesApi();
+let apiInstance = new NotehubJs.EnvironmentVariablesApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 let deviceUID = "deviceUID_example"; // String | 
 let key = "key_example"; // String | The environment variable key to delete.
@@ -83,15 +83,15 @@ Delete environment variables of a fleet
 ### Example
 
 ```javascript
-import BluesIncNotehubJs from '@blues-inc/notehub-js';
-let defaultClient = BluesIncNotehubJs.ApiClient.instance;
+import NotehubJs from '@blues-inc/notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //api_key.apiKeyPrefix = 'Token';
 
-let apiInstance = new BluesIncNotehubJs.EnvironmentVariablesApi();
+let apiInstance = new NotehubJs.EnvironmentVariablesApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 let fleetUID = "fleetUID_example"; // String | 
 let key = "key_example"; // String | The environment variable key to delete.
@@ -137,15 +137,15 @@ Delete an environment variable of a project by key
 ### Example
 
 ```javascript
-import BluesIncNotehubJs from '@blues-inc/notehub-js';
-let defaultClient = BluesIncNotehubJs.ApiClient.instance;
+import NotehubJs from '@blues-inc/notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //api_key.apiKeyPrefix = 'Token';
 
-let apiInstance = new BluesIncNotehubJs.EnvironmentVariablesApi();
+let apiInstance = new NotehubJs.EnvironmentVariablesApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 let key = "key_example"; // String | The environment variable key to delete.
 apiInstance.deleteProjectEnvironmentVariable(projectUID, key).then((data) => {
@@ -189,15 +189,15 @@ Get environment variables of a device
 ### Example
 
 ```javascript
-import BluesIncNotehubJs from '@blues-inc/notehub-js';
-let defaultClient = BluesIncNotehubJs.ApiClient.instance;
+import NotehubJs from '@blues-inc/notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //api_key.apiKeyPrefix = 'Token';
 
-let apiInstance = new BluesIncNotehubJs.EnvironmentVariablesApi();
+let apiInstance = new NotehubJs.EnvironmentVariablesApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 let deviceUID = "deviceUID_example"; // String | 
 apiInstance.getDeviceEnvironmentVariables(projectUID, deviceUID).then((data) => {
@@ -241,15 +241,15 @@ Get environment variables of a device with device pin authorization
 ### Example
 
 ```javascript
-import BluesIncNotehubJs from '@blues-inc/notehub-js';
-let defaultClient = BluesIncNotehubJs.ApiClient.instance;
+import NotehubJs from '@blues-inc/notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: pin
 let pin = defaultClient.authentications['pin'];
 pin.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //pin.apiKeyPrefix = 'Token';
 
-let apiInstance = new BluesIncNotehubJs.EnvironmentVariablesApi();
+let apiInstance = new NotehubJs.EnvironmentVariablesApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 let deviceUID = "deviceUID_example"; // String | 
 apiInstance.getDeviceEnvironmentVariablesByPin(projectUID, deviceUID).then((data) => {
@@ -293,15 +293,15 @@ Get environment variables of a fleet
 ### Example
 
 ```javascript
-import BluesIncNotehubJs from '@blues-inc/notehub-js';
-let defaultClient = BluesIncNotehubJs.ApiClient.instance;
+import NotehubJs from '@blues-inc/notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //api_key.apiKeyPrefix = 'Token';
 
-let apiInstance = new BluesIncNotehubJs.EnvironmentVariablesApi();
+let apiInstance = new NotehubJs.EnvironmentVariablesApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 let fleetUID = "fleetUID_example"; // String | 
 apiInstance.getFleetEnvironmentVariables(projectUID, fleetUID).then((data) => {
@@ -345,15 +345,15 @@ Get environment variables of a project
 ### Example
 
 ```javascript
-import BluesIncNotehubJs from '@blues-inc/notehub-js';
-let defaultClient = BluesIncNotehubJs.ApiClient.instance;
+import NotehubJs from '@blues-inc/notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //api_key.apiKeyPrefix = 'Token';
 
-let apiInstance = new BluesIncNotehubJs.EnvironmentVariablesApi();
+let apiInstance = new NotehubJs.EnvironmentVariablesApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 apiInstance.getProjectEnvironmentVariables(projectUID).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -395,18 +395,18 @@ Put environment variables of a device
 ### Example
 
 ```javascript
-import BluesIncNotehubJs from '@blues-inc/notehub-js';
-let defaultClient = BluesIncNotehubJs.ApiClient.instance;
+import NotehubJs from '@blues-inc/notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //api_key.apiKeyPrefix = 'Token';
 
-let apiInstance = new BluesIncNotehubJs.EnvironmentVariablesApi();
+let apiInstance = new NotehubJs.EnvironmentVariablesApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 let deviceUID = "deviceUID_example"; // String | 
-let environmentVariables = new BluesIncNotehubJs.EnvironmentVariables(); // EnvironmentVariables | Environment variables to be added to the device
+let environmentVariables = new NotehubJs.EnvironmentVariables(); // EnvironmentVariables | Environment variables to be added to the device
 apiInstance.putDeviceEnvironmentVariables(projectUID, deviceUID, environmentVariables).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
@@ -449,18 +449,18 @@ Put environment variables of a device with device pin authorization
 ### Example
 
 ```javascript
-import BluesIncNotehubJs from '@blues-inc/notehub-js';
-let defaultClient = BluesIncNotehubJs.ApiClient.instance;
+import NotehubJs from '@blues-inc/notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: pin
 let pin = defaultClient.authentications['pin'];
 pin.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //pin.apiKeyPrefix = 'Token';
 
-let apiInstance = new BluesIncNotehubJs.EnvironmentVariablesApi();
+let apiInstance = new NotehubJs.EnvironmentVariablesApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 let deviceUID = "deviceUID_example"; // String | 
-let environmentVariables = new BluesIncNotehubJs.EnvironmentVariables(); // EnvironmentVariables | Environment variables to be added to the device
+let environmentVariables = new NotehubJs.EnvironmentVariables(); // EnvironmentVariables | Environment variables to be added to the device
 apiInstance.putDeviceEnvironmentVariablesByPin(projectUID, deviceUID, environmentVariables).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
@@ -503,18 +503,18 @@ Put environment variables of a fleet
 ### Example
 
 ```javascript
-import BluesIncNotehubJs from '@blues-inc/notehub-js';
-let defaultClient = BluesIncNotehubJs.ApiClient.instance;
+import NotehubJs from '@blues-inc/notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //api_key.apiKeyPrefix = 'Token';
 
-let apiInstance = new BluesIncNotehubJs.EnvironmentVariablesApi();
+let apiInstance = new NotehubJs.EnvironmentVariablesApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 let fleetUID = "fleetUID_example"; // String | 
-let environmentVariables = new BluesIncNotehubJs.EnvironmentVariables(); // EnvironmentVariables | Environment variables to be added to the fleet
+let environmentVariables = new NotehubJs.EnvironmentVariables(); // EnvironmentVariables | Environment variables to be added to the fleet
 apiInstance.putFleetEnvironmentVariables(projectUID, fleetUID, environmentVariables).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
@@ -557,18 +557,18 @@ Put environment variables of a project
 ### Example
 
 ```javascript
-import BluesIncNotehubJs from '@blues-inc/notehub-js';
-let defaultClient = BluesIncNotehubJs.ApiClient.instance;
+import NotehubJs from '@blues-inc/notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //api_key.apiKeyPrefix = 'Token';
 
-let apiInstance = new BluesIncNotehubJs.EnvironmentVariablesApi();
+let apiInstance = new NotehubJs.EnvironmentVariablesApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 let opts = {
-  'environmentVariables': new BluesIncNotehubJs.EnvironmentVariables() // EnvironmentVariables | 
+  'environmentVariables': new NotehubJs.EnvironmentVariables() // EnvironmentVariables | 
 };
 apiInstance.putProjectEnvironmentVariables(projectUID, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);

@@ -1,4 +1,4 @@
-# BluesIncNotehubJs.HttpFilter
+# NotehubJs.HttpFilter
 
 ## Properties
 

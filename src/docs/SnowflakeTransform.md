@@ -1,4 +1,4 @@
-# BluesIncNotehubJs.SnowflakeTransform
+# NotehubJs.SnowflakeTransform
 
 ## Properties
 

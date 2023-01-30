@@ -1,4 +1,4 @@
-# BluesIncNotehubJs.Location
+# NotehubJs.Location
 
 ## Properties
 

@@ -1,4 +1,4 @@
-# BluesIncNotehubJs.EnvironmentVariables
+# NotehubJs.EnvironmentVariables
 
 ## Properties
 

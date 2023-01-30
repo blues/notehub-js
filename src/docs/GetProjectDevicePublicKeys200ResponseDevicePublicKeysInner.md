@@ -1,4 +1,4 @@
-# BluesIncNotehubJs.GetProjectDevicePublicKeys200ResponseDevicePublicKeysInner
+# NotehubJs.GetProjectDevicePublicKeys200ResponseDevicePublicKeysInner
 
 ## Properties
 

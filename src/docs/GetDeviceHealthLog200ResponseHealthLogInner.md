@@ -1,4 +1,4 @@
-# BluesIncNotehubJs.GetDeviceHealthLog200ResponseHealthLogInner
+# NotehubJs.GetDeviceHealthLog200ResponseHealthLogInner
 
 ## Properties
 

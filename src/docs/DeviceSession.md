@@ -1,4 +1,4 @@
-# BluesIncNotehubJs.DeviceSession
+# NotehubJs.DeviceSession
 
 ## Properties
 

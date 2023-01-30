@@ -1,4 +1,4 @@
-# BluesIncNotehubJs.GetDeviceEnvironmentVariables200Response
+# NotehubJs.GetDeviceEnvironmentVariables200Response
 
 ## Properties
 

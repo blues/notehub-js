@@ -1,4 +1,4 @@
-# BluesIncNotehubJs.DFUEnv
+# NotehubJs.DFUEnv
 
 ## Properties
 

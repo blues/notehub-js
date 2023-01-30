@@ -1,4 +1,4 @@
-# BluesIncNotehubJs.CreateFleetRequest
+# NotehubJs.CreateFleetRequest
 
 ## Properties
 

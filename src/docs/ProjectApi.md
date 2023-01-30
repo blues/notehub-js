@@ -1,4 +1,4 @@
-# BluesIncNotehubJs.ProjectApi
+# NotehubJs.ProjectApi
 
 All URIs are relative to *https://api.notefile.net*
 
@@ -33,17 +33,17 @@ Create Product within a Project
 ### Example
 
 ```javascript
-import BluesIncNotehubJs from '@blues-inc/notehub-js';
-let defaultClient = BluesIncNotehubJs.ApiClient.instance;
+import NotehubJs from '@blues-inc/notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //api_key.apiKeyPrefix = 'Token';
 
-let apiInstance = new BluesIncNotehubJs.ProjectApi();
+let apiInstance = new NotehubJs.ProjectApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
-let createProductRequest = new BluesIncNotehubJs.CreateProductRequest(); // CreateProductRequest | Product to be created
+let createProductRequest = new NotehubJs.CreateProductRequest(); // CreateProductRequest | Product to be created
 apiInstance.createProduct(projectUID, createProductRequest).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
@@ -85,16 +85,16 @@ Create a Project
 ### Example
 
 ```javascript
-import BluesIncNotehubJs from '@blues-inc/notehub-js';
-let defaultClient = BluesIncNotehubJs.ApiClient.instance;
+import NotehubJs from '@blues-inc/notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //api_key.apiKeyPrefix = 'Token';
 
-let apiInstance = new BluesIncNotehubJs.ProjectApi();
-let createProjectRequest = new BluesIncNotehubJs.CreateProjectRequest(); // CreateProjectRequest | Project to be created
+let apiInstance = new NotehubJs.ProjectApi();
+let createProjectRequest = new NotehubJs.CreateProjectRequest(); // CreateProjectRequest | Project to be created
 apiInstance.createProject(createProjectRequest).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
@@ -135,15 +135,15 @@ Delete an environment variable of a project by key
 ### Example
 
 ```javascript
-import BluesIncNotehubJs from '@blues-inc/notehub-js';
-let defaultClient = BluesIncNotehubJs.ApiClient.instance;
+import NotehubJs from '@blues-inc/notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //api_key.apiKeyPrefix = 'Token';
 
-let apiInstance = new BluesIncNotehubJs.ProjectApi();
+let apiInstance = new NotehubJs.ProjectApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 let key = "key_example"; // String | The environment variable key to delete.
 apiInstance.deleteProjectEnvironmentVariable(projectUID, key).then((data) => {
@@ -187,15 +187,15 @@ Get a Project by ProjectUID
 ### Example
 
 ```javascript
-import BluesIncNotehubJs from '@blues-inc/notehub-js';
-let defaultClient = BluesIncNotehubJs.ApiClient.instance;
+import NotehubJs from '@blues-inc/notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //api_key.apiKeyPrefix = 'Token';
 
-let apiInstance = new BluesIncNotehubJs.ProjectApi();
+let apiInstance = new NotehubJs.ProjectApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 apiInstance.getProject(projectUID).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -237,15 +237,15 @@ Get a Project by ProductUID
 ### Example
 
 ```javascript
-import BluesIncNotehubJs from '@blues-inc/notehub-js';
-let defaultClient = BluesIncNotehubJs.ApiClient.instance;
+import NotehubJs from '@blues-inc/notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //api_key.apiKeyPrefix = 'Token';
 
-let apiInstance = new BluesIncNotehubJs.ProjectApi();
+let apiInstance = new NotehubJs.ProjectApi();
 let productUID = com.blues.airnote; // String | 
 apiInstance.getProjectByProduct(productUID).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -287,15 +287,15 @@ Get Device Public Keys of a Project
 ### Example
 
 ```javascript
-import BluesIncNotehubJs from '@blues-inc/notehub-js';
-let defaultClient = BluesIncNotehubJs.ApiClient.instance;
+import NotehubJs from '@blues-inc/notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //api_key.apiKeyPrefix = 'Token';
 
-let apiInstance = new BluesIncNotehubJs.ProjectApi();
+let apiInstance = new NotehubJs.ProjectApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 let opts = {
   'pageSize': 50, // Number | 
@@ -343,15 +343,15 @@ Get Devices of a Project
 ### Example
 
 ```javascript
-import BluesIncNotehubJs from '@blues-inc/notehub-js';
-let defaultClient = BluesIncNotehubJs.ApiClient.instance;
+import NotehubJs from '@blues-inc/notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //api_key.apiKeyPrefix = 'Token';
 
-let apiInstance = new BluesIncNotehubJs.ProjectApi();
+let apiInstance = new NotehubJs.ProjectApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 let opts = {
   'pageSize': 50, // Number | 
@@ -399,15 +399,15 @@ Get environment variables of a project
 ### Example
 
 ```javascript
-import BluesIncNotehubJs from '@blues-inc/notehub-js';
-let defaultClient = BluesIncNotehubJs.ApiClient.instance;
+import NotehubJs from '@blues-inc/notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //api_key.apiKeyPrefix = 'Token';
 
-let apiInstance = new BluesIncNotehubJs.ProjectApi();
+let apiInstance = new NotehubJs.ProjectApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 apiInstance.getProjectEnvironmentVariables(projectUID).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -449,15 +449,15 @@ Get Events of a Project
 ### Example
 
 ```javascript
-import BluesIncNotehubJs from '@blues-inc/notehub-js';
-let defaultClient = BluesIncNotehubJs.ApiClient.instance;
+import NotehubJs from '@blues-inc/notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //api_key.apiKeyPrefix = 'Token';
 
-let apiInstance = new BluesIncNotehubJs.ProjectApi();
+let apiInstance = new NotehubJs.ProjectApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 let opts = {
   'pageSize': 50, // Number | 
@@ -515,15 +515,15 @@ Get Events of a Project by cursor
 ### Example
 
 ```javascript
-import BluesIncNotehubJs from '@blues-inc/notehub-js';
-let defaultClient = BluesIncNotehubJs.ApiClient.instance;
+import NotehubJs from '@blues-inc/notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //api_key.apiKeyPrefix = 'Token';
 
-let apiInstance = new BluesIncNotehubJs.ProjectApi();
+let apiInstance = new NotehubJs.ProjectApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 let opts = {
   'limit': 50, // Number | 
@@ -573,15 +573,15 @@ Get Devices of a Fleet within a Project
 ### Example
 
 ```javascript
-import BluesIncNotehubJs from '@blues-inc/notehub-js';
-let defaultClient = BluesIncNotehubJs.ApiClient.instance;
+import NotehubJs from '@blues-inc/notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //api_key.apiKeyPrefix = 'Token';
 
-let apiInstance = new BluesIncNotehubJs.ProjectApi();
+let apiInstance = new NotehubJs.ProjectApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 let fleetUID = "fleetUID_example"; // String | 
 let opts = {
@@ -631,15 +631,15 @@ Get Project Members
 ### Example
 
 ```javascript
-import BluesIncNotehubJs from '@blues-inc/notehub-js';
-let defaultClient = BluesIncNotehubJs.ApiClient.instance;
+import NotehubJs from '@blues-inc/notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //api_key.apiKeyPrefix = 'Token';
 
-let apiInstance = new BluesIncNotehubJs.ProjectApi();
+let apiInstance = new NotehubJs.ProjectApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 apiInstance.getProjectMembers(projectUID).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -681,15 +681,15 @@ Get Products within a Project
 ### Example
 
 ```javascript
-import BluesIncNotehubJs from '@blues-inc/notehub-js';
-let defaultClient = BluesIncNotehubJs.ApiClient.instance;
+import NotehubJs from '@blues-inc/notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //api_key.apiKeyPrefix = 'Token';
 
-let apiInstance = new BluesIncNotehubJs.ProjectApi();
+let apiInstance = new NotehubJs.ProjectApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 apiInstance.getProjectProducts(projectUID).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -731,15 +731,15 @@ Get Projects accessible by the api_key
 ### Example
 
 ```javascript
-import BluesIncNotehubJs from '@blues-inc/notehub-js';
-let defaultClient = BluesIncNotehubJs.ApiClient.instance;
+import NotehubJs from '@blues-inc/notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //api_key.apiKeyPrefix = 'Token';
 
-let apiInstance = new BluesIncNotehubJs.ProjectApi();
+let apiInstance = new NotehubJs.ProjectApi();
 apiInstance.getProjects().then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
@@ -777,18 +777,18 @@ Put environment variables of a project
 ### Example
 
 ```javascript
-import BluesIncNotehubJs from '@blues-inc/notehub-js';
-let defaultClient = BluesIncNotehubJs.ApiClient.instance;
+import NotehubJs from '@blues-inc/notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //api_key.apiKeyPrefix = 'Token';
 
-let apiInstance = new BluesIncNotehubJs.ProjectApi();
+let apiInstance = new NotehubJs.ProjectApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 let opts = {
-  'environmentVariables': new BluesIncNotehubJs.EnvironmentVariables() // EnvironmentVariables | 
+  'environmentVariables': new NotehubJs.EnvironmentVariables() // EnvironmentVariables | 
 };
 apiInstance.putProjectEnvironmentVariables(projectUID, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);

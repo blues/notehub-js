@@ -1,4 +1,4 @@
-# BluesIncNotehubJs.GetDeviceSessions200Response
+# NotehubJs.GetDeviceSessions200Response
 
 ## Properties
 

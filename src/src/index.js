@@ -100,9 +100,9 @@ import RouteApi from './api/RouteApi';
 * <p>
 * An AMD (recommended!) or CommonJS application will generally do something equivalent to the following:
 * <pre>
-* var BluesIncNotehubJs = require('index'); // See note below*.
-* var xxxSvc = new BluesIncNotehubJs.XxxApi(); // Allocate the API class we're going to use.
-* var yyyModel = new BluesIncNotehubJs.Yyy(); // Construct a model instance.
+* var NotehubJs = require('index'); // See note below*.
+* var xxxSvc = new NotehubJs.XxxApi(); // Allocate the API class we're going to use.
+* var yyyModel = new NotehubJs.Yyy(); // Construct a model instance.
 * yyyModel.someProperty = 'someValue';
 * ...
 * var zzz = xxxSvc.doSomething(yyyModel); // Invoke the service.
@@ -114,8 +114,8 @@ import RouteApi from './api/RouteApi';
 * <p>
 * A non-AMD browser application (discouraged) might do something like this:
 * <pre>
-* var xxxSvc = new BluesIncNotehubJs.XxxApi(); // Allocate the API class we're going to use.
-* var yyy = new BluesIncNotehubJs.Yyy(); // Construct a model instance.
+* var xxxSvc = new NotehubJs.XxxApi(); // Allocate the API class we're going to use.
+* var yyy = new NotehubJs.Yyy(); // Construct a model instance.
 * yyyModel.someProperty = 'someValue';
 * ...
 * var zzz = xxxSvc.doSomething(yyyModel); // Invoke the service.
