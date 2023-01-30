@@ -23,7 +23,7 @@ Delete Device
 ### Example
 
 ```javascript
-import NotehubJs from 'notehub-js';
+import NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
@@ -77,7 +77,7 @@ Get Device
 ### Example
 
 ```javascript
-import NotehubJs from 'notehub-js';
+import NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
@@ -129,7 +129,7 @@ Get Device Public Keys of a Project
 ### Example
 
 ```javascript
-import NotehubJs from 'notehub-js';
+import NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
@@ -185,7 +185,7 @@ Get Devices of a Project
 ### Example
 
 ```javascript
-import NotehubJs from 'notehub-js';
+import NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
@@ -241,7 +241,7 @@ Get Devices of a Fleet within a Project
 ### Example
 
 ```javascript
-import NotehubJs from 'notehub-js';
+import NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];

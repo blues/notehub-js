@@ -16,7 +16,7 @@ import ApiClient from '../ApiClient';
 /**
  * The Radresponder model module.
  * @module model/Radresponder
- * @version 1.0.3
+ * @version 1.0.4
  */
 class Radresponder {
     /**

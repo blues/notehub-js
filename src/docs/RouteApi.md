@@ -23,7 +23,7 @@ Create Route within a Project
 ### Example
 
 ```javascript
-import NotehubJs from 'notehub-js';
+import NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
@@ -75,7 +75,7 @@ Delete single route within a project
 ### Example
 
 ```javascript
-import NotehubJs from 'notehub-js';
+import NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
@@ -127,7 +127,7 @@ Get single route within a project
 ### Example
 
 ```javascript
-import NotehubJs from 'notehub-js';
+import NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
@@ -179,7 +179,7 @@ Get all Routes within a Project
 ### Example
 
 ```javascript
-import NotehubJs from 'notehub-js';
+import NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
@@ -229,7 +229,7 @@ Update route by UID
 ### Example
 
 ```javascript
-import NotehubJs from 'notehub-js';
+import NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];

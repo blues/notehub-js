@@ -21,7 +21,7 @@ import HandleNotefileDeleteRequest from '../model/HandleNotefileDeleteRequest';
 /**
 * Files service.
 * @module api/FilesApi
-* @version 1.0.3
+* @version 1.0.4
 */
 export default class FilesApi {
 

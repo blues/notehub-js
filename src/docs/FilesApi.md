@@ -21,7 +21,7 @@ Used to perform queries on a single or multiple files to determine if new Notes 
 ### Example
 
 ```javascript
-import NotehubJs from 'notehub-js';
+import NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
@@ -79,7 +79,7 @@ Returns info about file changes that are pending upload to Notehub or download t
 ### Example
 
 ```javascript
-import NotehubJs from 'notehub-js';
+import NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
@@ -131,7 +131,7 @@ Deletes Notefiles and the Notes they contain.
 ### Example
 
 ```javascript
-import NotehubJs from 'notehub-js';
+import NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];

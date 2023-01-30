@@ -33,7 +33,7 @@ Create Product within a Project
 ### Example
 
 ```javascript
-import NotehubJs from 'notehub-js';
+import NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
@@ -85,7 +85,7 @@ Create a Project
 ### Example
 
 ```javascript
-import NotehubJs from 'notehub-js';
+import NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
@@ -135,7 +135,7 @@ Delete an environment variable of a project by key
 ### Example
 
 ```javascript
-import NotehubJs from 'notehub-js';
+import NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
@@ -187,7 +187,7 @@ Get a Project by ProjectUID
 ### Example
 
 ```javascript
-import NotehubJs from 'notehub-js';
+import NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
@@ -237,7 +237,7 @@ Get a Project by ProductUID
 ### Example
 
 ```javascript
-import NotehubJs from 'notehub-js';
+import NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
@@ -287,7 +287,7 @@ Get Device Public Keys of a Project
 ### Example
 
 ```javascript
-import NotehubJs from 'notehub-js';
+import NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
@@ -343,7 +343,7 @@ Get Devices of a Project
 ### Example
 
 ```javascript
-import NotehubJs from 'notehub-js';
+import NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
@@ -399,7 +399,7 @@ Get environment variables of a project
 ### Example
 
 ```javascript
-import NotehubJs from 'notehub-js';
+import NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
@@ -449,7 +449,7 @@ Get Events of a Project
 ### Example
 
 ```javascript
-import NotehubJs from 'notehub-js';
+import NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
@@ -515,7 +515,7 @@ Get Events of a Project by cursor
 ### Example
 
 ```javascript
-import NotehubJs from 'notehub-js';
+import NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
@@ -573,7 +573,7 @@ Get Devices of a Fleet within a Project
 ### Example
 
 ```javascript
-import NotehubJs from 'notehub-js';
+import NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
@@ -631,7 +631,7 @@ Get Project Members
 ### Example
 
 ```javascript
-import NotehubJs from 'notehub-js';
+import NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
@@ -681,7 +681,7 @@ Get Products within a Project
 ### Example
 
 ```javascript
-import NotehubJs from 'notehub-js';
+import NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
@@ -731,7 +731,7 @@ Get Projects accessible by the api_key
 ### Example
 
 ```javascript
-import NotehubJs from 'notehub-js';
+import NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
@@ -777,7 +777,7 @@ Put environment variables of a project
 ### Example
 
 ```javascript
-import NotehubJs from 'notehub-js';
+import NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];

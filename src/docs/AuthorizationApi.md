@@ -19,7 +19,7 @@ Gets a session token from the API from a username and password.
 ### Example
 
 ```javascript
-import NotehubJs from 'notehub-js';
+import NotehubJs from '@blues-inc/notehub-js';
 
 let apiInstance = new NotehubJs.AuthorizationApi();
 let loginRequest = new NotehubJs.LoginRequest(); // LoginRequest | 
