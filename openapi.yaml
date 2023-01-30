@@ -53,7 +53,7 @@
       post:
         tags: [authorization]
         operationId: login
-        description: Gets a session token from the API from a username and password.
+        description: Gets a session token from the API from a username and password
         requestBody:
           required: true
           content:
@@ -88,7 +88,7 @@
       get:
         tags: ["route"]
         operationId: getRoutes
-        description: Get all Routes within a Project
+        description: Get all Routes within a Project.
         security:
           - api_key: []
         parameters:
@@ -152,7 +152,7 @@
       post:
         tags: ["route"]
         operationId: createRoute
-        description: Create Route within a Project
+        description: Create Route within a Project.
         security:
           - api_key: []
         parameters:
