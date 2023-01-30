@@ -5,5 +5,3 @@
 ## Testing
 
 Automated tests pass?
-
-## Ticket(s)
