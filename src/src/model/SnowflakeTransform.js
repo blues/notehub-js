@@ -16,7 +16,7 @@ import ApiClient from '../ApiClient';
 /**
  * The SnowflakeTransform model module.
  * @module model/SnowflakeTransform
- * @version 1.0.4
+ * @version 1.0.5
  */
 class SnowflakeTransform {
     /**

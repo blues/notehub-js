@@ -20,7 +20,7 @@ import UserDbRoute from '../model/UserDbRoute';
 /**
 * Route service.
 * @module api/RouteApi
-* @version 1.0.4
+* @version 1.0.5
 */
 export default class RouteApi {
 
@@ -38,7 +38,7 @@ export default class RouteApi {
 
 
     /**
-     * Create Route within a Project
+     * Create Route within a Project.
      * @param {String} projectUID 
      * @param {module:model/Route} route Route to be Created
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Route} and HTTP response
@@ -76,7 +76,7 @@ export default class RouteApi {
     }
 
     /**
-     * Create Route within a Project
+     * Create Route within a Project.
      * @param {String} projectUID 
      * @param {module:model/Route} route Route to be Created
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Route}
@@ -143,7 +143,7 @@ export default class RouteApi {
 
 
     /**
-     * Get single route within a project
+     * Get single route within a project.
      * @param {String} projectUID 
      * @param {String} routeUID 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Route} and HTTP response
@@ -182,7 +182,7 @@ export default class RouteApi {
     }
 
     /**
-     * Get single route within a project
+     * Get single route within a project.
      * @param {String} projectUID 
      * @param {String} routeUID 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Route}
@@ -196,7 +196,7 @@ export default class RouteApi {
 
 
     /**
-     * Get all Routes within a Project
+     * Get all Routes within a Project.
      * @param {String} projectUID 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link Array.<module:model/UserDbRoute>} and HTTP response
      */
@@ -229,7 +229,7 @@ export default class RouteApi {
     }
 
     /**
-     * Get all Routes within a Project
+     * Get all Routes within a Project.
      * @param {String} projectUID 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link Array.<module:model/UserDbRoute>}
      */

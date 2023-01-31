@@ -21,7 +21,7 @@ import Note from '../model/Note';
 /**
 * Notes service.
 * @module api/NotesApi
-* @version 1.0.4
+* @version 1.0.5
 */
 export default class NotesApi {
 
