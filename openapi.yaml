@@ -88,7 +88,7 @@
       get:
         tags: ["route"]
         operationId: getRoutes
-        description: Get all Routes within a Project
+        description: Get all Routes within a Project.
         security:
           - api_key: []
         parameters:
@@ -152,7 +152,7 @@
       post:
         tags: ["route"]
         operationId: createRoute
-        description: Create Route within a Project
+        description: Create Route within a Project.
         security:
           - api_key: []
         parameters:
@@ -208,7 +208,7 @@
       get:
         tags: ["route"]
         operationId: getRoute
-        description: Get single route within a project
+        description: Get single route within a project.
         security:
           - api_key: []
         parameters:
