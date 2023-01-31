@@ -20,7 +20,7 @@ import GetDeviceEnvironmentVariables200Response from '../model/GetDeviceEnvironm
 /**
 * EnvironmentVariables service.
 * @module api/EnvironmentVariablesApi
-* @version 1.0.4
+* @version 1.0.5
 */
 export default class EnvironmentVariablesApi {
 

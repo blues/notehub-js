@@ -17,7 +17,7 @@ import Event from './Event';
 /**
  * The GetProjectEvents200Response model module.
  * @module model/GetProjectEvents200Response
- * @version 1.0.4
+ * @version 1.0.5
  */
 class GetProjectEvents200Response {
     /**

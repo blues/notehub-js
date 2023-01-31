@@ -20,7 +20,7 @@ import GetProjectEventsByCursor200Response from '../model/GetProjectEventsByCurs
 /**
 * Event service.
 * @module api/EventApi
-* @version 1.0.4
+* @version 1.0.5
 */
 export default class EventApi {
 
