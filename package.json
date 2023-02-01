@@ -28,5 +28,9 @@
   },
   "devDependencies": {
     "@openapitools/openapi-generator-cli": "^2.5.2"
+  },
+  "volta": {
+    "node": "18.13.0",
+    "npm": "9.4.0"
   }
 }
