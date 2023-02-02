@@ -15,7 +15,7 @@ Here are some ways *you* can contribute:
 * by writing code ( **no patch is too small** : fix typos, add comments,
 clean up inconsistent whitespace )
 * by refactoring code
-* by closing [issues][https://github.com/blues/notehub-js/issues]
+* by closing [issues][issues]
 * by reviewing patches
 
 [issues]: https://github.com/blues/notehub-js/issues
@@ -45,8 +45,11 @@ clean up inconsistent whitespace )
 1. [Fork][fork] the [official repository][repo].
 2. [Create a topic branch.][branch]
 3. Implement your feature or bug fix.
-4. Add, commit, and push your changes.
-5. [Submit a pull request.][pr]
+4. Add, commit, and push your changes. Please try to use [conventional commits][conventional commits] when pushing changes - this will ensure better changelog documentation when the next release is cut.
+5. [Submit a pull request][pr] with a conventional commit title.
+
+> **NOTE:** Examples of many of the conventional commit types accepted are visible in the [`publish-npm.yml`](/.github/workflows/publish-npm.yml) file under the `Generate release changelog` step.
+
 
 ## Notes
 
@@ -59,6 +62,7 @@ We love helping!
 [branch]:
 https://help.github.com/articles/creating-and-deleting-branches-within-your-repository/
 [pr]: https://help.github.com/articles/creating-a-pull-request-from-a-fork/
+[conventional commits]: https://www.conventionalcommits.org/
 
 Inspired by
 https://github.com/thoughtbot/factory_bot/blob/master/CONTRIBUTING.md
