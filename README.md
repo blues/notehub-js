@@ -12,6 +12,8 @@ tbd
 
 ## Installation of the notehub-js library
 
+<!-- todo does yarn work too? -->
+
 Using npm:
 
 ```shell
@@ -20,21 +22,64 @@ $ npm install @blues-inc/notehub-js
 
 Note: add --save if you are using npm < 5.0.0
 
-Once the package is installed, you can import the library using `require`:
+Once the package is installed, you can import the library using `import` or `require`:
+
+**import**
 
 ```javascript
-require example here
+import NotehubJs from "@blues-inc/notehub-js";
+
+const defaultClient = NotehubJs.ApiClient.instance;
+```
+
+> **NOTE:** Using `import` to access the library in a TypeScript project currently will cause an error because there is not yet a `@types` file for it. To make the error disappear, declare the module in a file with a `.d.ts` extension. ``declare module '@blues-inc/notehub-js';`
+
+**require**
+
+```javascript
+const NotehubJs = require("@blues-inc/notehub-js");
+
+const defaultClient = NotehubJs.ApiClient.instance;
 ```
 
 ## Examples
 
-code example here
+Here is an example of how to fetch all devices associated with a particular [Notehub project](https://dev.blues.io/reference/glossary/#project).
 
-Coming soon. We'll also provide links to this library being used in real projects.
+```javascript
+import NotehubJs from "@blues-inc/notehub-js";
+
+let defaultClient = NotehubJs.ApiClient.instance;
+
+// Configure API key authorization: api_key
+let api_key = defaultClient.authentications["api_key"];
+api_key.apiKey = "YOUR API KEY";
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//api_key.apiKeyPrefix = 'Token';
+
+let apiInstance = new NotehubJs.ProjectApi();
+let projectUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8;"; // String |
+let opts = {
+  pageSize: 50, // Number |
+  pageNum: 1, // Number |
+};
+
+// Want to use async/await? Add the 'async' keyword to your outer function/method.
+apiInstance.getProjectDevices(projectUID, opts).then(
+  (data) => {
+    console.log("API called successfully. Returned data: " + data);
+  },
+  (error) => {
+    console.error(error);
+  }
+);
+```
+
+Stay tuned. We'll also provide links to repos where this library being used in real world projects.
 
 ## Further Library Documentation & Examples
 
-Code examples of how to use each of the Notehub endpoints are located in the [`src/docs/`](src/docs/) folder.
+If you want more information, further code examples of how to use each of the Notehub API endpoints are located in the [`src/docs/`](src/docs/) folder and available on the [Blues Developer Experience site][blues.dev].
 
 Each endpoint had a `.md` file displaying:
 
@@ -143,9 +188,9 @@ The [`config.json`](config.json) file is the one that will require very slight c
 
 #### Updating the auto-generated notehub-js library
 
-When the `openapi.yaml` file is updated in the original Notehub repo which this library supports, the updated file is copied over into a new feature branch in this repo through the magic of GitHub Actions.
+When the `openapi.yaml` file is updated in the original Notehub repo which this library supports, the updated file is copied over into a new feature branch in this repo through the magic of [GitHub Actions](https://github.com/features/actions).
 
-When this occurs, it's time to update the generated JavaScript library based on the newly updated `openapi.yaml` file.
+When this occurs, it's time to regenerate the JavaScript library based on the newly updated `openapi.yaml` file.
 
 **To regenerate the notehub-js library:**
 
@@ -157,11 +202,49 @@ When this occurs, it's time to update the generated JavaScript library based on 
 $ npm run generateDocs
 ```
 
-This command will kick off the OpenAPI Generator tool to generate a new copy of the library inside of the `src/` folder, which can then be released to npm.
+This command will kick off the OpenAPI Generator tool to generate a new copy of the library inside of the `src/` folder, which can then be merged to the `main` repo branch and released to npm.
 
 ### Running the project locally
 
-If you'd like to test some changes you've made to the notehub-js API locally before submitting a new PR to the repo, tbd
+If you'd like to test some changes you've made to the notehub-js API locally before submitting a new PR to the repo, follow steps 1 - 3 above and then:
+
+4. Navigate into the `src/` folder in the project and install and build the newly generated project:
+
+Install first.
+
+```shell
+$ npm install
+```
+
+Build next.
+
+```shell
+$ npm run build
+```
+
+5. Still inside the `src/` folder, [link](https://docs.npmjs.com/cli/link) it globally with npm
+
+```shell
+$ npm link
+```
+
+6. Then go to the local JavaScript project where you want to use it, and add it as a local dependency in the project's `package.json` file with a relative path to the library. The file path will probably look something like:
+
+```json
+ "dependencies": {
+    "../../notehub-js": "^1.0.5"
+ }
+```
+
+7. Install the module inside of your project
+
+```shell
+npm install
+```
+
+8. Import the library using `import` or `require` as [documented above](#installation-of-the-notehub-js-library) and test it out.
+
+> **NOTE:** Even testing locally, you will need an `X-SESSION-TOKEN` (this is the 'api-key' referenced in the code examples). See [these directions](https://dev.blues.io/reference/notehub-api/api-introduction/#authentication) on the Blues Developer Experience site to generate one.
 
 ## Deploying notehub-js
 
@@ -175,7 +258,7 @@ Below are the necessary steps to take a new version of the `openapi.yaml` file a
 2. Run `npm run generateDocs` to generate new docs for updated `openapi.yaml` file (the )
 3. Commit and push the changes to a new branch in GitHub
 4. Cut a new release following the [semantic versioning](https://semver.org/) style of [vX.X.X]. For example: a new release named v1.0.2.
-5. After the GitHub Action workflow `publish-npm.yml` has successfully deployed the latest version, copy the
+5. After the GitHub Action workflow `publish-npm.yml` has successfully deployed the latest version, copy the changelog notes from the GitHub Action tbd
 
 ## Contributing
 
