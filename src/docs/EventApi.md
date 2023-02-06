@@ -41,7 +41,7 @@ let opts = {
   'endDate': 1657894210 // Number | Unix timestamp
 };
 apiInstance.getFleetEvents(projectUID, fleetUID, opts).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
 });
@@ -103,7 +103,7 @@ let opts = {
   'sortOrder': "'asc'" // String | 
 };
 apiInstance.getFleetEventsByCursor(projectUID, fleetUID, opts).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
 });
@@ -164,7 +164,7 @@ let opts = {
   'endDate': 1657894210 // Number | Unix timestamp
 };
 apiInstance.getProjectEvents(projectUID, opts).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
 });
@@ -224,7 +224,7 @@ let opts = {
   'sortOrder': "'asc'" // String | 
 };
 apiInstance.getProjectEventsByCursor(projectUID, opts).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
 });

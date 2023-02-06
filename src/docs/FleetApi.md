@@ -41,7 +41,7 @@ let apiInstance = new NotehubJs.FleetApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 let createFleetRequest = new NotehubJs.CreateFleetRequest(); // CreateFleetRequest | Fleet to be added
 apiInstance.createFleet(projectUID, createFleetRequest).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
 });
@@ -92,7 +92,7 @@ let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
 let deviceUID = "deviceUID_example"; // String | 
 let deleteDeviceFleetsRequest = new NotehubJs.DeleteDeviceFleetsRequest(); // DeleteDeviceFleetsRequest | The fleets to remove from the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error. 
 apiInstance.deleteDeviceFleets(projectUID, deviceUID, deleteDeviceFleetsRequest).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
 });
@@ -194,7 +194,7 @@ let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
 let fleetUID = "fleetUID_example"; // String | 
 let key = "key_example"; // String | The environment variable key to delete.
 apiInstance.deleteFleetEnvironmentVariable(projectUID, fleetUID, key).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
 });
@@ -245,7 +245,7 @@ let apiInstance = new NotehubJs.FleetApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 let deviceUID = "deviceUID_example"; // String | 
 apiInstance.getDeviceFleets(projectUID, deviceUID).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
 });
@@ -295,7 +295,7 @@ let apiInstance = new NotehubJs.FleetApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 let fleetUID = "fleetUID_example"; // String | 
 apiInstance.getFleetEnvironmentVariables(projectUID, fleetUID).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
 });
@@ -354,7 +354,7 @@ let opts = {
   'endDate': 1657894210 // Number | Unix timestamp
 };
 apiInstance.getFleetEvents(projectUID, fleetUID, opts).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
 });
@@ -416,7 +416,7 @@ let opts = {
   'sortOrder': "'asc'" // String | 
 };
 apiInstance.getFleetEventsByCursor(projectUID, fleetUID, opts).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
 });
@@ -473,7 +473,7 @@ let opts = {
   'pageNum': 1 // Number | 
 };
 apiInstance.getProjectFleetDevices(projectUID, fleetUID, opts).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
 });
@@ -524,7 +524,7 @@ api_key.apiKey = 'YOUR API KEY';
 let apiInstance = new NotehubJs.FleetApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 apiInstance.getProjectFleets(projectUID).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
 });
@@ -574,7 +574,7 @@ let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
 let deviceUID = "deviceUID_example"; // String | 
 let putDeviceFleetsRequest = new NotehubJs.PutDeviceFleetsRequest(); // PutDeviceFleetsRequest | The fleets to add to the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error. 
 apiInstance.putDeviceFleets(projectUID, deviceUID, putDeviceFleetsRequest).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
 });
@@ -626,7 +626,7 @@ let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
 let fleetUID = "fleetUID_example"; // String | 
 let environmentVariables = new NotehubJs.EnvironmentVariables(); // EnvironmentVariables | Environment variables to be added to the fleet
 apiInstance.putFleetEnvironmentVariables(projectUID, fleetUID, environmentVariables).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
 });
@@ -678,7 +678,7 @@ let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
 let fleetUID = "fleetUID_example"; // String | 
 let updateFleetRequest = new NotehubJs.UpdateFleetRequest(); // UpdateFleetRequest | Fleet details to update
 apiInstance.updateFleet(projectUID, fleetUID, updateFleetRequest).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
 });

@@ -43,7 +43,7 @@ let apiInstance = new NotehubJs.ProjectApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 let createProductRequest = new NotehubJs.CreateProductRequest(); // CreateProductRequest | Product to be created
 apiInstance.createProduct(projectUID, createProductRequest).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
 });
@@ -92,7 +92,7 @@ api_key.apiKey = 'YOUR API KEY';
 let apiInstance = new NotehubJs.ProjectApi();
 let createProjectRequest = new NotehubJs.CreateProjectRequest(); // CreateProjectRequest | Project to be created
 apiInstance.createProject(createProjectRequest).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
 });
@@ -141,7 +141,7 @@ let apiInstance = new NotehubJs.ProjectApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 let key = "key_example"; // String | The environment variable key to delete.
 apiInstance.deleteProjectEnvironmentVariable(projectUID, key).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
 });
@@ -190,7 +190,7 @@ api_key.apiKey = 'YOUR API KEY';
 let apiInstance = new NotehubJs.ProjectApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 apiInstance.getProject(projectUID).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
 });
@@ -238,7 +238,7 @@ api_key.apiKey = 'YOUR API KEY';
 let apiInstance = new NotehubJs.ProjectApi();
 let productUID = com.blues.airnote; // String | 
 apiInstance.getProjectByProduct(productUID).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
 });
@@ -290,7 +290,7 @@ let opts = {
   'pageNum': 1 // Number | 
 };
 apiInstance.getProjectDevicePublicKeys(projectUID, opts).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
 });
@@ -344,7 +344,7 @@ let opts = {
   'pageNum': 1 // Number | 
 };
 apiInstance.getProjectDevices(projectUID, opts).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
 });
@@ -394,7 +394,7 @@ api_key.apiKey = 'YOUR API KEY';
 let apiInstance = new NotehubJs.ProjectApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 apiInstance.getProjectEnvironmentVariables(projectUID).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
 });
@@ -451,7 +451,7 @@ let opts = {
   'endDate': 1657894210 // Number | Unix timestamp
 };
 apiInstance.getProjectEvents(projectUID, opts).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
 });
@@ -511,7 +511,7 @@ let opts = {
   'sortOrder': "'asc'" // String | 
 };
 apiInstance.getProjectEventsByCursor(projectUID, opts).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
 });
@@ -567,7 +567,7 @@ let opts = {
   'pageNum': 1 // Number | 
 };
 apiInstance.getProjectFleetDevices(projectUID, fleetUID, opts).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
 });
@@ -618,7 +618,7 @@ api_key.apiKey = 'YOUR API KEY';
 let apiInstance = new NotehubJs.ProjectApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 apiInstance.getProjectMembers(projectUID).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
 });
@@ -666,7 +666,7 @@ api_key.apiKey = 'YOUR API KEY';
 let apiInstance = new NotehubJs.ProjectApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 apiInstance.getProjectProducts(projectUID).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
 });
@@ -713,7 +713,7 @@ api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.ProjectApi();
 apiInstance.getProjects().then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
 });
@@ -761,7 +761,7 @@ let opts = {
   'environmentVariables': new NotehubJs.EnvironmentVariables() // EnvironmentVariables | 
 };
 apiInstance.putProjectEnvironmentVariables(projectUID, opts).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
 });

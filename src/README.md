@@ -106,7 +106,7 @@ var NotehubJs = require('@blues-inc/notehub-js');
 var api = new NotehubJs.AuthorizationApi()
 var loginRequest = new NotehubJs.LoginRequest(); // {LoginRequest} 
 api.login(loginRequest).then(function(data) {
-  console.log('API called successfully. Returned data: ' + data);
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, function(error) {
   console.error(error);
 });

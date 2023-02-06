@@ -35,7 +35,7 @@ let opts = {
   'files': ["null"] // [String] | One or more files to obtain change information from.
 };
 apiInstance.handleNotefileChanges(projectUID, deviceUID, opts).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
 });
@@ -87,7 +87,7 @@ let apiInstance = new NotehubJs.FilesApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 let deviceUID = "deviceUID_example"; // String | 
 apiInstance.handleNotefileChangesPending(projectUID, deviceUID).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
 });

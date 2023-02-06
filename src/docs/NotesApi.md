@@ -97,7 +97,7 @@ let opts = {
   '_delete': true // Boolean | true to delete the notes returned by the request.
 };
 apiInstance.handleNoteChanges(projectUID, deviceUID, notefileID, opts).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
 });
@@ -270,7 +270,7 @@ let opts = {
   'deleted': true // Boolean | Whether to return deleted notes
 };
 apiInstance.handleNoteGet(projectUID, deviceUID, notefileID, noteID, opts).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
 });

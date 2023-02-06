@@ -85,7 +85,7 @@ let apiInstance = new NotehubJs.DevicesApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 let deviceUID = "deviceUID_example"; // String | 
 apiInstance.getDevice(projectUID, deviceUID).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
 });
@@ -138,7 +138,7 @@ let opts = {
   'pageNum': 1 // Number | 
 };
 apiInstance.getProjectDevicePublicKeys(projectUID, opts).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
 });
@@ -192,7 +192,7 @@ let opts = {
   'pageNum': 1 // Number | 
 };
 apiInstance.getProjectDevices(projectUID, opts).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
 });
@@ -247,7 +247,7 @@ let opts = {
   'pageNum': 1 // Number | 
 };
 apiInstance.getProjectFleetDevices(projectUID, fleetUID, opts).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
 });

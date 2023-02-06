@@ -24,7 +24,7 @@ import NotehubJs from '@blues-inc/notehub-js';
 let apiInstance = new NotehubJs.AuthorizationApi();
 let loginRequest = new NotehubJs.LoginRequest(); // LoginRequest | 
 apiInstance.login(loginRequest).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
 });
