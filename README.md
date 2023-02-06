@@ -227,7 +227,7 @@ When this occurs, it's time to regenerate the notehub-js JavaScript library base
 $ git clone git@github.com:blues/notehub-js.git
 ```
 
-2. Checkout the newly created remote branch from GitHub locally. (It will be named something like `feat-XYZ`.)
+2. Check out the newly created remote branch from GitHub locally. (It will be named something like `feat-XYZ`.)
 3. Update the `config.json` file at the project's root so the `projectVersion` parameter is incremented (please follow [semantic versioning](https://semver.org/) practices here).
 4. At the root of the project, run the following script command from your terminal:
 
