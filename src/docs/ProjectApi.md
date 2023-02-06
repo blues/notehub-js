@@ -38,8 +38,6 @@ let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//api_key.apiKeyPrefix = 'Token';
 
 let apiInstance = new NotehubJs.ProjectApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
@@ -90,8 +88,6 @@ let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//api_key.apiKeyPrefix = 'Token';
 
 let apiInstance = new NotehubJs.ProjectApi();
 let createProjectRequest = new NotehubJs.CreateProjectRequest(); // CreateProjectRequest | Project to be created
@@ -140,8 +136,6 @@ let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//api_key.apiKeyPrefix = 'Token';
 
 let apiInstance = new NotehubJs.ProjectApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
@@ -192,8 +186,6 @@ let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//api_key.apiKeyPrefix = 'Token';
 
 let apiInstance = new NotehubJs.ProjectApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
@@ -242,8 +234,6 @@ let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//api_key.apiKeyPrefix = 'Token';
 
 let apiInstance = new NotehubJs.ProjectApi();
 let productUID = com.blues.airnote; // String | 
@@ -292,8 +282,6 @@ let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//api_key.apiKeyPrefix = 'Token';
 
 let apiInstance = new NotehubJs.ProjectApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
@@ -348,8 +336,6 @@ let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//api_key.apiKeyPrefix = 'Token';
 
 let apiInstance = new NotehubJs.ProjectApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
@@ -404,8 +390,6 @@ let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//api_key.apiKeyPrefix = 'Token';
 
 let apiInstance = new NotehubJs.ProjectApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
@@ -454,8 +438,6 @@ let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//api_key.apiKeyPrefix = 'Token';
 
 let apiInstance = new NotehubJs.ProjectApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
@@ -520,8 +502,6 @@ let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//api_key.apiKeyPrefix = 'Token';
 
 let apiInstance = new NotehubJs.ProjectApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
@@ -578,8 +558,6 @@ let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//api_key.apiKeyPrefix = 'Token';
 
 let apiInstance = new NotehubJs.ProjectApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
@@ -636,8 +614,6 @@ let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//api_key.apiKeyPrefix = 'Token';
 
 let apiInstance = new NotehubJs.ProjectApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
@@ -686,8 +662,6 @@ let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//api_key.apiKeyPrefix = 'Token';
 
 let apiInstance = new NotehubJs.ProjectApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
@@ -736,8 +710,6 @@ let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//api_key.apiKeyPrefix = 'Token';
 
 let apiInstance = new NotehubJs.ProjectApi();
 apiInstance.getProjects().then((data) => {
@@ -782,8 +754,6 @@ let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//api_key.apiKeyPrefix = 'Token';
 
 let apiInstance = new NotehubJs.ProjectApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 

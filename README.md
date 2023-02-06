@@ -37,8 +37,6 @@ Using npm:
 $ npm install @blues-inc/notehub-js
 ```
 
-Note: add --save if you are using npm < 5.0.0
-
 Using yarn:
 
 ```shell
@@ -69,6 +67,8 @@ const defaultClient = NotehubJs.ApiClient.instance;
 
 Here is an example of how to fetch all devices associated with a particular [Notehub project](https://dev.blues.io/reference/glossary/#project).
 
+The `api-key` variable declared below is an `X-SESSION-TOKEN` authentication token required for all Notehub API requests. To generate one, follow [these directions](https://dev.blues.io/reference/notehub-api/api-introduction/#authentication) on the Blues Developer Experience site.
+
 ```javascript
 import NotehubJs from "@blues-inc/notehub-js";
 
@@ -77,8 +77,6 @@ let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications["api_key"];
 api_key.apiKey = "YOUR API KEY";
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//api_key.apiKeyPrefix = 'Token';
 
 let apiInstance = new NotehubJs.ProjectApi();
 let projectUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8;"; // String |
@@ -90,7 +88,9 @@ let opts = {
 // Want to use async/await? Add the 'async' keyword to your outer function/method.
 apiInstance.getProjectDevices(projectUID, opts).then(
   (data) => {
-    console.log("API called successfully. Returned data: " + data);
+    console.log(
+      "API called successfully. Returned data: " + JSON.stringify(data)
+    );
   },
   (error) => {
     console.error(error);
@@ -320,7 +320,7 @@ For details on contributions we accept and the process for contributing, see our
 
 ## To learn more about Blues Wireless, the Notecard and Notehub, see:
 
-- [blues.com][blues]
+- [blues.io][blues]
 - [notehub.io][notehub]
 - [Blues Developer Experience Site][blues.dev]
 
@@ -329,7 +329,7 @@ For details on contributions we accept and the process for contributing, see our
 Copyright (c) 2023 Blues Inc. Released under the MIT license. See
 [LICENSE](LICENSE) for details.
 
-[blues]: https://blues.com
+[blues]: https://blues.io
 [blues.dev]: https://blues.dev
 [code of conduct]: https://blues.github.io/opensource/code-of-conduct
 [notehub]: https://notehub.io
