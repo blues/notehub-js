@@ -28,7 +28,7 @@ import UpdateFleetRequest from '../model/UpdateFleetRequest';
 /**
 * Fleet service.
 * @module api/FleetApi
-* @version 1.0.5
+* @version 1.0.6
 */
 export default class FleetApi {
 

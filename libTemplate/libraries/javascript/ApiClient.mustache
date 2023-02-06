@@ -323,12 +323,8 @@ class ApiClient {
                 case 'apiKey':
                     if (auth.apiKey) {
                         var data = {};
-                        if (auth.apiKeyPrefix) {
-                            data[auth.name] = auth.apiKeyPrefix + ' ' + auth.apiKey;
-                        } else {
-                            data[auth.name] = auth.apiKey;
-                        }
-
+                        data[auth.name] = auth.apiKey;
+                        
                         if (auth['in'] === 'header') {
                             request.set(data);
                         } else {

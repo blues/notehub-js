@@ -16,7 +16,7 @@ import ApiClient from '../ApiClient';
 /**
  * The GetDeviceEnvironmentVariables200Response model module.
  * @module model/GetDeviceEnvironmentVariables200Response
- * @version 1.0.5
+ * @version 1.0.6
  */
 class GetDeviceEnvironmentVariables200Response {
     /**

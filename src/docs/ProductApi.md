@@ -26,14 +26,12 @@ let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//api_key.apiKeyPrefix = 'Token';
 
 let apiInstance = new NotehubJs.ProductApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 let createProductRequest = new NotehubJs.CreateProductRequest(); // CreateProductRequest | Product to be created
 apiInstance.createProduct(projectUID, createProductRequest).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
 });
@@ -78,13 +76,11 @@ let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//api_key.apiKeyPrefix = 'Token';
 
 let apiInstance = new NotehubJs.ProductApi();
 let productUID = com.blues.airnote; // String | 
 apiInstance.getProjectByProduct(productUID).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
 });
@@ -128,13 +124,11 @@ let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//api_key.apiKeyPrefix = 'Token';
 
 let apiInstance = new NotehubJs.ProductApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 apiInstance.getProjectProducts(projectUID).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
 });

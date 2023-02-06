@@ -17,7 +17,7 @@ import querystring from "querystring";
 
 /**
 * @module ApiClient
-* @version 1.0.5
+* @version 1.0.6
 */
 
 /**
@@ -56,7 +56,7 @@ class ApiClient {
          * @default {}
          */
         this.defaultHeaders = {
-            'User-Agent': 'OpenAPI-Generator/1.0.5/Javascript'
+            'User-Agent': 'OpenAPI-Generator/1.0.6/Javascript'
         };
 
         /**
@@ -318,12 +318,8 @@ class ApiClient {
                 case 'apiKey':
                     if (auth.apiKey) {
                         var data = {};
-                        if (auth.apiKeyPrefix) {
-                            data[auth.name] = auth.apiKeyPrefix + ' ' + auth.apiKey;
-                        } else {
-                            data[auth.name] = auth.apiKey;
-                        }
-
+                        data[auth.name] = auth.apiKey;
+                        
                         if (auth['in'] === 'header') {
                             request.set(data);
                         } else {

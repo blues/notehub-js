@@ -18,7 +18,7 @@ Method | HTTP request | Description
 
 
 
-Create Route within a Project
+Create Route within a Project.
 
 ### Example
 
@@ -28,14 +28,12 @@ let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//api_key.apiKeyPrefix = 'Token';
 
 let apiInstance = new NotehubJs.RouteApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 let route = {"label":"Route Label","type":"http","http":{"fleets":["fleet:1042ddc5-3b2c-4cec-b1fb-d3040538094d"],"throttle_ms":100,"url":"http://route.url"}}; // Route | Route to be Created
 apiInstance.createRoute(projectUID, route).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
 });
@@ -80,14 +78,12 @@ let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//api_key.apiKeyPrefix = 'Token';
 
 let apiInstance = new NotehubJs.RouteApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 let routeUID = route:cbd20093cba58392c9f9bbdd0cdeb1a0; // String | 
 apiInstance.deleteRoute(projectUID, routeUID).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
 });
@@ -122,7 +118,7 @@ Name | Type | Description  | Notes
 
 
 
-Get single route within a project
+Get single route within a project.
 
 ### Example
 
@@ -132,14 +128,12 @@ let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//api_key.apiKeyPrefix = 'Token';
 
 let apiInstance = new NotehubJs.RouteApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 let routeUID = route:cbd20093cba58392c9f9bbdd0cdeb1a0; // String | 
 apiInstance.getRoute(projectUID, routeUID).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
 });
@@ -174,7 +168,7 @@ Name | Type | Description  | Notes
 
 
 
-Get all Routes within a Project
+Get all Routes within a Project.
 
 ### Example
 
@@ -184,13 +178,11 @@ let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//api_key.apiKeyPrefix = 'Token';
 
 let apiInstance = new NotehubJs.RouteApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 apiInstance.getRoutes(projectUID).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
 });
@@ -234,15 +226,13 @@ let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//api_key.apiKeyPrefix = 'Token';
 
 let apiInstance = new NotehubJs.RouteApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 let routeUID = route:cbd20093cba58392c9f9bbdd0cdeb1a0; // String | 
 let route = {"http":{"filter":{"type":"include","system_notefiles":true,"files":["somefile.qo"]},"throttle_ms":50,"url":"http://new-route.url"}}; // Route | Route settings to be updated
 apiInstance.updateRoute(projectUID, routeUID, route).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
 });
