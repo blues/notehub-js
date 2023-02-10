@@ -16,7 +16,7 @@ import ApiClient from '../ApiClient';
 /**
  * The Login200Response model module.
  * @module model/Login200Response
- * @version 1.0.6
+ * @version 1.0.7
  */
 class Login200Response {
     /**

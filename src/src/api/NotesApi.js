@@ -21,7 +21,7 @@ import Note from '../model/Note';
 /**
 * Notes service.
 * @module api/NotesApi
-* @version 1.0.6
+* @version 1.0.7
 */
 export default class NotesApi {
 
@@ -39,7 +39,7 @@ export default class NotesApi {
 
 
     /**
-     * Adds a Note to a Notefile, creating the Notefile if it doesn't yet exist.
+     * Adds a Note to a Notefile.
      * @param {String} projectUID 
      * @param {String} deviceUID 
      * @param {String} notefileID 
@@ -89,7 +89,7 @@ export default class NotesApi {
     }
 
     /**
-     * Adds a Note to a Notefile, creating the Notefile if it doesn't yet exist.
+     * Adds a Note to a Notefile.
      * @param {String} projectUID 
      * @param {String} deviceUID 
      * @param {String} notefileID 

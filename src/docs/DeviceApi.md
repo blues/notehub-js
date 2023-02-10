@@ -33,7 +33,7 @@ Delete environment variable of a device
 ### Example
 
 ```javascript
-import NotehubJs from '@blues-inc/notehub-js';
+import * as NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
@@ -85,7 +85,7 @@ Remove Device from Fleets
 ### Example
 
 ```javascript
-import NotehubJs from '@blues-inc/notehub-js';
+import * as NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
@@ -137,7 +137,7 @@ Disable Device
 ### Example
 
 ```javascript
-import NotehubJs from '@blues-inc/notehub-js';
+import * as NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
@@ -187,7 +187,7 @@ Enable Device
 ### Example
 
 ```javascript
-import NotehubJs from '@blues-inc/notehub-js';
+import * as NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
@@ -237,7 +237,7 @@ Get environment variables of a device
 ### Example
 
 ```javascript
-import NotehubJs from '@blues-inc/notehub-js';
+import * as NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
@@ -287,7 +287,7 @@ Get environment variables of a device with device pin authorization
 ### Example
 
 ```javascript
-import NotehubJs from '@blues-inc/notehub-js';
+import * as NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: pin
 let pin = defaultClient.authentications['pin'];
@@ -337,7 +337,7 @@ Get Device Fleets
 ### Example
 
 ```javascript
-import NotehubJs from '@blues-inc/notehub-js';
+import * as NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
@@ -387,7 +387,7 @@ Get Device Health Log
 ### Example
 
 ```javascript
-import NotehubJs from '@blues-inc/notehub-js';
+import * as NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
@@ -437,7 +437,7 @@ Get Device Latest Events
 ### Example
 
 ```javascript
-import NotehubJs from '@blues-inc/notehub-js';
+import * as NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
@@ -487,7 +487,7 @@ Get Device Public Key
 ### Example
 
 ```javascript
-import NotehubJs from '@blues-inc/notehub-js';
+import * as NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
@@ -537,7 +537,7 @@ Get Device Sessions
 ### Example
 
 ```javascript
-import NotehubJs from '@blues-inc/notehub-js';
+import * as NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
@@ -593,7 +593,7 @@ Send a signal from Notehub to a Notecard.
 ### Example
 
 ```javascript
-import NotehubJs from '@blues-inc/notehub-js';
+import * as NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
@@ -645,7 +645,7 @@ Put environment variables of a device
 ### Example
 
 ```javascript
-import NotehubJs from '@blues-inc/notehub-js';
+import * as NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
@@ -697,7 +697,7 @@ Put environment variables of a device with device pin authorization
 ### Example
 
 ```javascript
-import NotehubJs from '@blues-inc/notehub-js';
+import * as NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: pin
 let pin = defaultClient.authentications['pin'];
@@ -749,7 +749,7 @@ Add Device to Fleets
 ### Example
 
 ```javascript
-import NotehubJs from '@blues-inc/notehub-js';
+import * as NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];

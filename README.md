@@ -70,7 +70,7 @@ Here is an example of how to fetch all devices associated with a particular [Not
 The `api-key` variable declared below is an `X-SESSION-TOKEN` authentication token required for all Notehub API requests. To generate one, follow [these directions](https://dev.blues.io/reference/notehub-api/api-introduction/#authentication) on the Blues Developer Experience site.
 
 ```javascript
-import NotehubJs from "@blues-inc/notehub-js";
+import * as NotehubJs from "@blues-inc/notehub-js";
 
 let defaultClient = NotehubJs.ApiClient.instance;
 
