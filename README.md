@@ -48,7 +48,7 @@ Once the package is installed, you can import the library using `import` or `req
 **import**
 
 ```javascript
-import NotehubJs from "@blues-inc/notehub-js";
+import * as NotehubJs from "@blues-inc/notehub-js";
 
 const defaultClient = NotehubJs.ApiClient.instance;
 ```
@@ -67,7 +67,26 @@ const defaultClient = NotehubJs.ApiClient.instance;
 
 Here is an example of how to fetch all devices associated with a particular [Notehub project](https://dev.blues.io/reference/glossary/#project).
 
-The `api-key` variable declared below is an `X-SESSION-TOKEN` authentication token required for all Notehub API requests. To generate one, follow [these directions](https://dev.blues.io/reference/notehub-api/api-introduction/#authentication) on the Blues Developer Experience site.
+The `api-key` variable declared below is an `X-SESSION-TOKEN` authentication token required for all Notehub API requests.
+
+It can be obtained in two ways:
+
+**Manually cURL the token from the command line**
+
+Using the command line, a user can request a new token from the
+[Notehub API `/auth/login` endpoint](https://dev.blues.io/reference/notehub-api/api-introduction/#authentication-with-session-tokens-deprecated)
+using a Notehub username and password in the body of the request.
+
+**Use NotehubJs.AuthorizationApi login**
+
+Using this library, a user can programmatically call the Notehub API's `/auth/login` endpoint
+via the [NotehubJs.AuthorizationApi's `login()`](/src/docs/AuthorizationApi.md#login) method while supplying a Notehub username and
+password in the `loginRequest` object.
+
+Then supply the newly generated authentication token to whatever method the library needs, by setting it equal to: `api_key.apiKey = "YOUR API KEY";` in the code.
+
+> **NOTE**: Be aware that all Notehub API calls made using the Notehub JS library
+> utilize your account's [Consumption Credits](https://dev.blues.io/reference/glossary#consumption-credit) (CCs). For > more information, please consult our [pricing page](https://blues.io/pricing/).
 
 ```javascript
 import * as NotehubJs from "@blues-inc/notehub-js";
@@ -297,7 +316,7 @@ Below are the necessary steps to take a new version of the `openapi.yaml` file a
 4. Get the PR approved and merged to `main`.
 5. Create a new release with a tag following the [semantic versioning](https://semver.org/) style of [vX.X.X] and publish the release. For example: a new release with a tag named v1.0.2.
 6. After the GitHub Actions workflow `publish-npm.yml` has successfully deployed the latest version of notehub-js to npm, copy the changelog notes from the GitHub Action step `Generate release changelog`.
-7. Paste those into the appropriate release tag in the repo.
+7. Paste those notes into the appropriate release tag in the repo.
 
 ![Copy generated release notes from GitHub Actions workflow](images/generate-release-changelog.png)
 _Copy the formatted changelog notes from the GH Action workflow run._
