@@ -85,8 +85,7 @@ password in the `loginRequest` object.
 
 Then supply the newly generated authentication token to whatever method the library needs, by setting it equal to: `api_key.apiKey = "YOUR API KEY";` in the code.
 
-> **NOTE**: Be aware that all Notehub API calls made using the Notehub JS library
-> utilize your account's [Consumption Credits](https://dev.blues.io/reference/glossary#consumption-credit) (CCs). For > more information, please consult our [pricing page](https://blues.io/pricing/).
+> **NOTE**: Be aware that all Notehub API calls made using the Notehub JS library utilize your account's [Consumption Credits](https://dev.blues.io/reference/glossary#consumption-credit) (CCs). For > more information, please consult our [pricing page](https://blues.io/pricing/).
 
 ```javascript
 import * as NotehubJs from "@blues-inc/notehub-js";
