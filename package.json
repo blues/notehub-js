@@ -13,11 +13,12 @@
     "directory": "src"
   },
   "keywords": [
-    "blues wireless",
-    "notehub",
-    "api"
+    "blues-io",
+    "notehub-io",
+    "api",
+    "javascript"
   ],
-  "author": "Paige Niedringhaus",
+  "author": "Paige Niedringhaus <paige@blues.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/blues/notehub-js/issues"

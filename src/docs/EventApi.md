@@ -22,7 +22,7 @@ Get Events of a Fleet
 ### Example
 
 ```javascript
-import NotehubJs from '@blues-inc/notehub-js';
+import * as NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
@@ -88,7 +88,7 @@ Get Events of a Fleet by cursor
 ### Example
 
 ```javascript
-import NotehubJs from '@blues-inc/notehub-js';
+import * as NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
@@ -146,7 +146,7 @@ Get Events of a Project
 ### Example
 
 ```javascript
-import NotehubJs from '@blues-inc/notehub-js';
+import * as NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];
@@ -210,7 +210,7 @@ Get Events of a Project by cursor
 ### Example
 
 ```javascript
-import NotehubJs from '@blues-inc/notehub-js';
+import * as NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: api_key
 let api_key = defaultClient.authentications['api_key'];

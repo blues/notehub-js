@@ -20,7 +20,7 @@ import UserDbRoute from '../model/UserDbRoute';
 /**
 * Route service.
 * @module api/RouteApi
-* @version 1.0.6
+* @version 1.0.7
 */
 export default class RouteApi {
 
