@@ -19,7 +19,7 @@ Method | HTTP request | Description
 
 
 
-Adds a Note to a Notefile.
+Adds a Note to a Notefile, creating the Notefile if it doesn&#39;t yet exist.
 
 ### Example
 

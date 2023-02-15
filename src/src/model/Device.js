@@ -20,7 +20,7 @@ import Location from './Location';
 /**
  * The Device model module.
  * @module model/Device
- * @version 1.0.7
+ * @version 1.0.8
  */
 class Device {
     /**
@@ -107,6 +107,9 @@ class Device {
             if (data.hasOwnProperty('dfu')) {
                 obj['dfu'] = DFUEnv.constructFromObject(data['dfu']);
             }
+            if (data.hasOwnProperty('sku')) {
+                obj['sku'] = ApiClient.convertToType(data['sku'], 'String');
+            }
         } else if (data === null) {
             return null;
         }
@@ -164,6 +167,10 @@ class Device {
         // validate the optional field `dfu`
         if (data['dfu']) { // data not null
           DFUEnv.validateJSON(data['dfu']);
+        }
+        // ensure the json data is a string
+        if (data['sku'] && !(typeof data['sku'] === 'string' || data['sku'] instanceof String)) {
+            throw new Error("Expected the field `sku` to be a primitive type in the JSON string but got " + data['sku']);
         }
 
         return true;
@@ -243,6 +250,11 @@ Device.prototype['temperature'] = undefined;
  * @member {module:model/DFUEnv} dfu
  */
 Device.prototype['dfu'] = undefined;
+
+/**
+ * @member {String} sku
+ */
+Device.prototype['sku'] = undefined;
 
 
 

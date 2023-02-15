@@ -16,7 +16,7 @@ import ApiClient from '../ApiClient';
 /**
  * The EnvironmentVariables model module.
  * @module model/EnvironmentVariables
- * @version 1.0.7
+ * @version 1.0.8
  */
 class EnvironmentVariables {
     /**

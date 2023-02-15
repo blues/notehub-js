@@ -16,7 +16,7 @@ import ApiClient from '../ApiClient';
 /**
  * The GetDeviceHealthLog200ResponseHealthLogInner model module.
  * @module model/GetDeviceHealthLog200ResponseHealthLogInner
- * @version 1.0.7
+ * @version 1.0.8
  */
 class GetDeviceHealthLog200ResponseHealthLogInner {
     /**
