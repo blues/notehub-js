@@ -12,6 +12,7 @@ to [npm](https://www.npmjs.com/package/@blues-inc/notehub-js) for ease of use in
   - [Table of Contents](#table-of-contents)
   - [Installation](#installation)
   - [Sample Code](#sample-code)
+    - [Real World Use Cases of Notehub JS Library](#real-world-use-cases-of-notehub-js-library)
   - [Further Library Documentation \& Code Examples](#further-library-documentation--code-examples)
   - [Project Structure](#project-structure)
     - [High Level Project Overview](#high-level-project-overview)
@@ -116,7 +117,19 @@ apiInstance.getProjectDevices(projectUID, opts).then(
 );
 ```
 
-Stay tuned. We'll soon provide links to repos where this library being used in real world projects.
+### Real World Use Cases of Notehub JS Library
+
+As this library gains adoptions, we'll continue to provide new links to repos where this library being used in real world projects.
+
+[**Indoor Floor Level Tracker Project**](https://github.com/blues/app-accelerators/tree/main/01-indoor-floor-level-tracker/web-app)
+
+If you'd like to see examples of this library being used in real-world applications, check out [this indoor floor-level tracker project](https://github.com/blues/app-accelerators/tree/main/01-indoor-floor-level-tracker/web-app) in the [Blues App Accelerator repo](https://github.com/blues/app-accelerators/blob/main/) on GitHub.
+
+The files that deserve special attention are:
+
+- [`ServiceLocatorServer.ts`](https://github.com/blues/app-accelerators/blob/main/01-indoor-floor-level-tracker/web-app/src/services/ServiceLocatorServer.ts) - this file makes the variety of services composing the backend logic of the application discoverable to each other. For DRY-er code, the Notehub JS library's instances were created and passed to the various services that would require them to fetch and update data via the Notehub API. An instance of the Notehub JS client is created via `const notehubJsClient = NotehubJs.ApiClient.instance`, and passed to the `getDataProvider()` and `getAttributeStore()` services that will need to interact with the Notehub API to perform their duties.
+- [`NotehubDataProvider.ts`](https://github.com/blues/app-accelerators/blob/main/01-indoor-floor-level-tracker/web-app/src/services/notehub/NotehubDataProvider.ts) - this file is responsible for fetching data from the Notehub API for the application to display. It calls the project API's `getProjectFleetDevices()` and `getProjectEvents()` methods, and the fleet API's `getFleetEnvironmentVariables()` method as well.
+- [`NotehubAttributeStore.ts`](https://github.com/blues/app-accelerators/blob/main/01-indoor-floor-level-tracker/web-app/src/services/notehub/NotehubAttributeStore.ts) - this file sends updates to the Notehub API from the application like updated device name or updated environment variables. It calls two of the environment variable API's methods: `putDeviceEnvironmentVariables()` and `putFleetEnvironmentVariables()`.
 
 ## Further Library Documentation & Code Examples
 
