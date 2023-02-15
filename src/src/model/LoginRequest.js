@@ -16,7 +16,7 @@ import ApiClient from '../ApiClient';
 /**
  * The LoginRequest model module.
  * @module model/LoginRequest
- * @version 1.0.7
+ * @version 1.0.8
  */
 class LoginRequest {
     /**

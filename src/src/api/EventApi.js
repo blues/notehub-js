@@ -20,7 +20,7 @@ import GetProjectEventsByCursor200Response from '../model/GetProjectEventsByCurs
 /**
 * Event service.
 * @module api/EventApi
-* @version 1.0.7
+* @version 1.0.8
 */
 export default class EventApi {
 
@@ -49,6 +49,8 @@ export default class EventApi {
      * @param {module:model/String} opts.sortOrder  (default to 'asc')
      * @param {Number} opts.startDate Unix timestamp
      * @param {Number} opts.endDate Unix timestamp
+     * @param {Boolean} opts.systemFilesOnly 
+     * @param {String} opts.files 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetProjectEvents200Response} and HTTP response
      */
     getFleetEventsWithHttpInfo(projectUID, fleetUID, opts) {
@@ -74,7 +76,9 @@ export default class EventApi {
         'sortBy': opts['sortBy'],
         'sortOrder': opts['sortOrder'],
         'startDate': opts['startDate'],
-        'endDate': opts['endDate']
+        'endDate': opts['endDate'],
+        'systemFilesOnly': opts['systemFilesOnly'],
+        'files': opts['files']
       };
       let headerParams = {
       };
@@ -104,6 +108,8 @@ export default class EventApi {
      * @param {module:model/String} opts.sortOrder  (default to 'asc')
      * @param {Number} opts.startDate Unix timestamp
      * @param {Number} opts.endDate Unix timestamp
+     * @param {Boolean} opts.systemFilesOnly 
+     * @param {String} opts.files 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetProjectEvents200Response}
      */
     getFleetEvents(projectUID, fleetUID, opts) {
@@ -122,6 +128,8 @@ export default class EventApi {
      * @param {Number} opts.limit  (default to 50)
      * @param {String} opts.cursor A cursor, which can be obtained from the `next_cursor` value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included. 
      * @param {module:model/String} opts.sortOrder  (default to 'asc')
+     * @param {Boolean} opts.systemFilesOnly 
+     * @param {String} opts.files 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetProjectEventsByCursor200Response} and HTTP response
      */
     getFleetEventsByCursorWithHttpInfo(projectUID, fleetUID, opts) {
@@ -143,7 +151,9 @@ export default class EventApi {
       let queryParams = {
         'limit': opts['limit'],
         'cursor': opts['cursor'],
-        'sortOrder': opts['sortOrder']
+        'sortOrder': opts['sortOrder'],
+        'systemFilesOnly': opts['systemFilesOnly'],
+        'files': opts['files']
       };
       let headerParams = {
       };
@@ -169,6 +179,8 @@ export default class EventApi {
      * @param {Number} opts.limit  (default to 50)
      * @param {String} opts.cursor A cursor, which can be obtained from the `next_cursor` value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included. 
      * @param {module:model/String} opts.sortOrder  (default to 'asc')
+     * @param {Boolean} opts.systemFilesOnly 
+     * @param {String} opts.files 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetProjectEventsByCursor200Response}
      */
     getFleetEventsByCursor(projectUID, fleetUID, opts) {
@@ -190,6 +202,8 @@ export default class EventApi {
      * @param {module:model/String} opts.sortOrder  (default to 'asc')
      * @param {Number} opts.startDate Unix timestamp
      * @param {Number} opts.endDate Unix timestamp
+     * @param {Boolean} opts.systemFilesOnly 
+     * @param {String} opts.files 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetProjectEvents200Response} and HTTP response
      */
     getProjectEventsWithHttpInfo(projectUID, opts) {
@@ -210,7 +224,9 @@ export default class EventApi {
         'sortBy': opts['sortBy'],
         'sortOrder': opts['sortOrder'],
         'startDate': opts['startDate'],
-        'endDate': opts['endDate']
+        'endDate': opts['endDate'],
+        'systemFilesOnly': opts['systemFilesOnly'],
+        'files': opts['files']
       };
       let headerParams = {
       };
@@ -239,6 +255,8 @@ export default class EventApi {
      * @param {module:model/String} opts.sortOrder  (default to 'asc')
      * @param {Number} opts.startDate Unix timestamp
      * @param {Number} opts.endDate Unix timestamp
+     * @param {Boolean} opts.systemFilesOnly 
+     * @param {String} opts.files 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetProjectEvents200Response}
      */
     getProjectEvents(projectUID, opts) {
@@ -256,6 +274,8 @@ export default class EventApi {
      * @param {Number} opts.limit  (default to 50)
      * @param {String} opts.cursor A cursor, which can be obtained from the `next_cursor` value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included. 
      * @param {module:model/String} opts.sortOrder  (default to 'asc')
+     * @param {Boolean} opts.systemFilesOnly 
+     * @param {String} opts.files 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetProjectEventsByCursor200Response} and HTTP response
      */
     getProjectEventsByCursorWithHttpInfo(projectUID, opts) {
@@ -272,7 +292,9 @@ export default class EventApi {
       let queryParams = {
         'limit': opts['limit'],
         'cursor': opts['cursor'],
-        'sortOrder': opts['sortOrder']
+        'sortOrder': opts['sortOrder'],
+        'systemFilesOnly': opts['systemFilesOnly'],
+        'files': opts['files']
       };
       let headerParams = {
       };
@@ -297,6 +319,8 @@ export default class EventApi {
      * @param {Number} opts.limit  (default to 50)
      * @param {String} opts.cursor A cursor, which can be obtained from the `next_cursor` value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included. 
      * @param {module:model/String} opts.sortOrder  (default to 'asc')
+     * @param {Boolean} opts.systemFilesOnly 
+     * @param {String} opts.files 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetProjectEventsByCursor200Response}
      */
     getProjectEventsByCursor(projectUID, opts) {

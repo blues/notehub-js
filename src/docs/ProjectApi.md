@@ -448,7 +448,9 @@ let opts = {
   'sortBy': "'captured'", // String | 
   'sortOrder': "'asc'", // String | 
   'startDate': 1628631763, // Number | Unix timestamp
-  'endDate': 1657894210 // Number | Unix timestamp
+  'endDate': 1657894210, // Number | Unix timestamp
+  'systemFilesOnly': true, // Boolean | 
+  'files': _health.qo, data.qo // String | 
 };
 apiInstance.getProjectEvents(projectUID, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
@@ -471,6 +473,8 @@ Name | Type | Description  | Notes
  **sortOrder** | **String**|  | [optional] [default to &#39;asc&#39;]
  **startDate** | **Number**| Unix timestamp | [optional] 
  **endDate** | **Number**| Unix timestamp | [optional] 
+ **systemFilesOnly** | **Boolean**|  | [optional] 
+ **files** | **String**|  | [optional] 
 
 ### Return type
 
@@ -508,7 +512,9 @@ let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
 let opts = {
   'limit': 50, // Number | 
   'cursor': "cursor_example", // String | A cursor, which can be obtained from the `next_cursor` value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included. 
-  'sortOrder': "'asc'" // String | 
+  'sortOrder': "'asc'", // String | 
+  'systemFilesOnly': true, // Boolean | 
+  'files': _health.qo, data.qo // String | 
 };
 apiInstance.getProjectEventsByCursor(projectUID, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
@@ -527,6 +533,8 @@ Name | Type | Description  | Notes
  **limit** | **Number**|  | [optional] [default to 50]
  **cursor** | **String**| A cursor, which can be obtained from the &#x60;next_cursor&#x60; value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included.  | [optional] 
  **sortOrder** | **String**|  | [optional] [default to &#39;asc&#39;]
+ **systemFilesOnly** | **Boolean**|  | [optional] 
+ **files** | **String**|  | [optional] 
 
 ### Return type
 

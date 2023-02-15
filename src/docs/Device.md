@@ -18,5 +18,6 @@ Name | Type | Description | Notes
 **voltage** | **Number** |  | 
 **temperature** | **Number** |  | 
 **dfu** | [**DFUEnv**](DFUEnv.md) |  | [optional] 
+**sku** | **String** |  | [optional] 
 
 

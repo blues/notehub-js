@@ -18,7 +18,7 @@ Method | HTTP request | Description
 
 
 
-Create Route within a Project.
+Create Route within a Project
 
 ### Example
 
@@ -118,7 +118,7 @@ Name | Type | Description  | Notes
 
 
 
-Get single route within a project.
+Get single route within a project
 
 ### Example
 
@@ -168,7 +168,7 @@ Name | Type | Description  | Notes
 
 
 
-Get all Routes within a Project.
+Get all Routes within a Project
 
 ### Example
 
