@@ -1010,7 +1010,7 @@
           # query params
           - $ref: '#/components/parameters/pageSizeParam'
           - $ref: '#/components/parameters/pageNumParam'
-          - $ref: '#/components/parameters/deviceUIDsParam'
+          - $ref: '#/components/parameters/deviceUIDParam'
           - $ref: '#/components/parameters/sortByParam'
           - $ref: '#/components/parameters/sortOrderParam'
           - $ref: '#/components/parameters/startDateParam'
@@ -1040,6 +1040,9 @@
           - $ref: '#/components/parameters/sortOrderParam'
           - $ref: '#/components/parameters/systemFilesOnlyParam'
           - $ref: '#/components/parameters/filesParam'
+          - $ref: '#/components/parameters/deviceUIDParam'
+          - $ref: '#/components/parameters/startDateParam'
+          - $ref: '#/components/parameters/endDateParam'
         responses:
           "200":
             $ref: '#/components/responses/EventsByCursorResponse'
@@ -1061,7 +1064,7 @@
           # query params
           - $ref: '#/components/parameters/pageSizeParam'
           - $ref: '#/components/parameters/pageNumParam'
-          - $ref: '#/components/parameters/deviceUIDsParam'
+          - $ref: '#/components/parameters/deviceUIDParam'
           - $ref: '#/components/parameters/sortByParam'
           - $ref: '#/components/parameters/sortOrderParam'
           - $ref: '#/components/parameters/startDateParam'
@@ -1093,6 +1096,9 @@
           - $ref: '#/components/parameters/sortOrderParam'
           - $ref: '#/components/parameters/systemFilesOnlyParam'
           - $ref: '#/components/parameters/filesParam'
+          - $ref: '#/components/parameters/deviceUIDParam'
+          - $ref: '#/components/parameters/startDateParam'
+          - $ref: '#/components/parameters/endDateParam'
 
         responses:
           "200":
@@ -1726,20 +1732,13 @@
           minimum: 1
           default: 1
 
-      deviceUIDsParam:
-        name: deviceUIDs
-        description: A comma separated list of Device UIDs.
+      deviceUIDParam:
+        name: deviceUID
+        description: A Device UID.
         in: query
         required: false
         schema:
-          type: array
-          items:
-            type: string
-          minItems: 1
-        # These two options specify that we have comma separated values
-        # i.e., deviceUIDs=dev:test1,dev:test2
-        style: form
-        explode: false
+          type: string
 
       sortByParam:
         name: sortBy
