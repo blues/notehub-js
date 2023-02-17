@@ -30,7 +30,7 @@ import Project from '../model/Project';
 /**
 * Project service.
 * @module api/ProjectApi
-* @version 1.0.8
+* @version 1.0.9
 */
 export default class ProjectApi {
 

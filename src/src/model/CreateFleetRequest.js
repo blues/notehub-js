@@ -16,7 +16,7 @@ import ApiClient from '../ApiClient';
 /**
  * The CreateFleetRequest model module.
  * @module model/CreateFleetRequest
- * @version 1.0.8
+ * @version 1.0.9
  */
 class CreateFleetRequest {
     /**
