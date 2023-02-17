@@ -451,7 +451,7 @@ export default class ProjectApi {
      * @param {Object} opts Optional parameters
      * @param {Number} opts.pageSize  (default to 50)
      * @param {Number} opts.pageNum  (default to 1)
-     * @param {Array.<String>} opts.deviceUIDs A comma separated list of Device UIDs.
+     * @param {String} opts.deviceUID A Device UID.
      * @param {module:model/String} opts.sortBy  (default to 'captured')
      * @param {module:model/String} opts.sortOrder  (default to 'asc')
      * @param {Number} opts.startDate Unix timestamp
@@ -474,7 +474,7 @@ export default class ProjectApi {
       let queryParams = {
         'pageSize': opts['pageSize'],
         'pageNum': opts['pageNum'],
-        'deviceUIDs': this.apiClient.buildCollectionParam(opts['deviceUIDs'], 'csv'),
+        'deviceUID': opts['deviceUID'],
         'sortBy': opts['sortBy'],
         'sortOrder': opts['sortOrder'],
         'startDate': opts['startDate'],
@@ -504,7 +504,7 @@ export default class ProjectApi {
      * @param {Object} opts Optional parameters
      * @param {Number} opts.pageSize  (default to 50)
      * @param {Number} opts.pageNum  (default to 1)
-     * @param {Array.<String>} opts.deviceUIDs A comma separated list of Device UIDs.
+     * @param {String} opts.deviceUID A Device UID.
      * @param {module:model/String} opts.sortBy  (default to 'captured')
      * @param {module:model/String} opts.sortOrder  (default to 'asc')
      * @param {Number} opts.startDate Unix timestamp
@@ -530,6 +530,9 @@ export default class ProjectApi {
      * @param {module:model/String} opts.sortOrder  (default to 'asc')
      * @param {Boolean} opts.systemFilesOnly 
      * @param {String} opts.files 
+     * @param {String} opts.deviceUID A Device UID.
+     * @param {Number} opts.startDate Unix timestamp
+     * @param {Number} opts.endDate Unix timestamp
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetProjectEventsByCursor200Response} and HTTP response
      */
     getProjectEventsByCursorWithHttpInfo(projectUID, opts) {
@@ -548,7 +551,10 @@ export default class ProjectApi {
         'cursor': opts['cursor'],
         'sortOrder': opts['sortOrder'],
         'systemFilesOnly': opts['systemFilesOnly'],
-        'files': opts['files']
+        'files': opts['files'],
+        'deviceUID': opts['deviceUID'],
+        'startDate': opts['startDate'],
+        'endDate': opts['endDate']
       };
       let headerParams = {
       };
@@ -575,6 +581,9 @@ export default class ProjectApi {
      * @param {module:model/String} opts.sortOrder  (default to 'asc')
      * @param {Boolean} opts.systemFilesOnly 
      * @param {String} opts.files 
+     * @param {String} opts.deviceUID A Device UID.
+     * @param {Number} opts.startDate Unix timestamp
+     * @param {Number} opts.endDate Unix timestamp
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetProjectEventsByCursor200Response}
      */
     getProjectEventsByCursor(projectUID, opts) {

@@ -347,7 +347,7 @@ let fleetUID = "fleetUID_example"; // String |
 let opts = {
   'pageSize': 50, // Number | 
   'pageNum': 1, // Number | 
-  'deviceUIDs': ["null"], // [String] | A comma separated list of Device UIDs.
+  'deviceUID': "deviceUID_example", // String | A Device UID.
   'sortBy': "'captured'", // String | 
   'sortOrder': "'asc'", // String | 
   'startDate': 1628631763, // Number | Unix timestamp
@@ -372,7 +372,7 @@ Name | Type | Description  | Notes
  **fleetUID** | **String**|  | 
  **pageSize** | **Number**|  | [optional] [default to 50]
  **pageNum** | **Number**|  | [optional] [default to 1]
- **deviceUIDs** | [**[String]**](String.md)| A comma separated list of Device UIDs. | [optional] 
+ **deviceUID** | **String**| A Device UID. | [optional] 
  **sortBy** | **String**|  | [optional] [default to &#39;captured&#39;]
  **sortOrder** | **String**|  | [optional] [default to &#39;asc&#39;]
  **startDate** | **Number**| Unix timestamp | [optional] 
@@ -419,7 +419,10 @@ let opts = {
   'cursor': "cursor_example", // String | A cursor, which can be obtained from the `next_cursor` value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included. 
   'sortOrder': "'asc'", // String | 
   'systemFilesOnly': true, // Boolean | 
-  'files': _health.qo, data.qo // String | 
+  'files': _health.qo, data.qo, // String | 
+  'deviceUID': "deviceUID_example", // String | A Device UID.
+  'startDate': 1628631763, // Number | Unix timestamp
+  'endDate': 1657894210 // Number | Unix timestamp
 };
 apiInstance.getFleetEventsByCursor(projectUID, fleetUID, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
@@ -441,6 +444,9 @@ Name | Type | Description  | Notes
  **sortOrder** | **String**|  | [optional] [default to &#39;asc&#39;]
  **systemFilesOnly** | **Boolean**|  | [optional] 
  **files** | **String**|  | [optional] 
+ **deviceUID** | **String**| A Device UID. | [optional] 
+ **startDate** | **Number**| Unix timestamp | [optional] 
+ **endDate** | **Number**| Unix timestamp | [optional] 
 
 ### Return type
 
