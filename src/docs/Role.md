@@ -2,13 +2,10 @@
 
 ## Enum
 
+- `owner` (value: `"owner"`)
 
-* `owner` (value: `"owner"`)
+- `developer` (value: `"developer"`)
 
-* `developer` (value: `"developer"`)
+- `viewer` (value: `"viewer"`)
 
-* `viewer` (value: `"viewer"`)
-
-* `null` (value: `"null"`)
-
-
+- `null` (value: `"null"`)

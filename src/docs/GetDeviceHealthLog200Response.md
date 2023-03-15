@@ -2,8 +2,6 @@
 
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**healthLog** | [**[GetDeviceHealthLog200ResponseHealthLogInner]**](GetDeviceHealthLog200ResponseHealthLogInner.md) |  | 
-
-
+| Name          | Type                                                                                                | Description | Notes |
+| ------------- | --------------------------------------------------------------------------------------------------- | ----------- | ----- |
+| **healthLog** | [**[GetDeviceHealthLog200ResponseHealthLogInner]**](GetDeviceHealthLog200ResponseHealthLogInner.md) |             |

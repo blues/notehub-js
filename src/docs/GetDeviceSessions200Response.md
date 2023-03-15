@@ -2,9 +2,7 @@
 
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**sessions** | [**[DeviceSession]**](DeviceSession.md) |  | 
-**hasMore** | **Boolean** |  | 
-
-
+| Name         | Type                                    | Description | Notes |
+| ------------ | --------------------------------------- | ----------- | ----- |
+| **sessions** | [**[DeviceSession]**](DeviceSession.md) |             |
+| **hasMore**  | **Boolean**                             |             |

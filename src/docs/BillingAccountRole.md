@@ -2,11 +2,8 @@
 
 ## Enum
 
+- `billing_admin` (value: `"billing_admin"`)
 
-* `billing_admin` (value: `"billing_admin"`)
+- `billing_manager` (value: `"billing_manager"`)
 
-* `billing_manager` (value: `"billing_manager"`)
-
-* `project_creator` (value: `"project_creator"`)
-
-
+- `project_creator` (value: `"project_creator"`)

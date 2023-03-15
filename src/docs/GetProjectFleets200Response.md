@@ -2,8 +2,6 @@
 
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**fleets** | [**[Fleet]**](Fleet.md) |  | 
-
-
+| Name       | Type                    | Description | Notes |
+| ---------- | ----------------------- | ----------- | ----- |
+| **fleets** | [**[Fleet]**](Fleet.md) |             |

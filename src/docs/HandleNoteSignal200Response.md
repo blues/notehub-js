@@ -2,8 +2,6 @@
 
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**connected** | **Boolean** | true if the Notecard is connected to Notehub. | [optional] 
-
-
+| Name          | Type        | Description                                   | Notes      |
+| ------------- | ----------- | --------------------------------------------- | ---------- |
+| **connected** | **Boolean** | true if the Notecard is connected to Notehub. | [optional] |

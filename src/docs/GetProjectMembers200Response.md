@@ -2,8 +2,6 @@
 
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**members** | [**[ProjectMember]**](ProjectMember.md) |  | 
-
-
+| Name        | Type                                    | Description | Notes |
+| ----------- | --------------------------------------- | ----------- | ----- |
+| **members** | [**[ProjectMember]**](ProjectMember.md) |             |
