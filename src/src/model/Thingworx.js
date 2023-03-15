@@ -146,6 +146,7 @@ Thingworx.prototype['url'] = undefined;
 Thingworx.prototype['timeout'] = 15;
 
 /**
+ * This value is input-only and will be omitted from the response and replaced with a placeholder
  * @member {String} app_key
  */
 Thingworx.prototype['app_key'] = undefined;

@@ -123,7 +123,7 @@ Radresponder.prototype['data_feed_key'] = undefined;
 Radresponder.prototype['client_id'] = undefined;
 
 /**
- * Client Secret is input only, will not display on GET operations
+ * This value is input-only and will be omitted from the response and replaced with a placeholder
  * @member {String} client_secret
  */
 Radresponder.prototype['client_secret'] = undefined;

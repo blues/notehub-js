@@ -201,6 +201,7 @@ Mqtt.prototype['port'] = undefined;
 Mqtt.prototype['username'] = undefined;
 
 /**
+ * This value is input-only and will be omitted from the response and replaced with a placeholder
  * @member {String} password
  */
 Mqtt.prototype['password'] = undefined;
@@ -211,30 +212,28 @@ Mqtt.prototype['password'] = undefined;
 Mqtt.prototype['topic'] = undefined;
 
 /**
- * Certificate with \\n newlines.  Field is input only, will not show contents on GET operations.
+ * Certificate with \\n newlines.  This value is input-only and will be omitted from the response and replaced with a placeholder
  * @member {String} certificate
  */
 Mqtt.prototype['certificate'] = undefined;
 
 /**
- * Name of certificate.  If omitted, defaults to \"present\"
+ * Name of certificate.
  * @member {String} certificate_name
- * @default 'present'
  */
-Mqtt.prototype['certificate_name'] = 'present';
+Mqtt.prototype['certificate_name'] = undefined;
 
 /**
- * Key with \\n newlines.  Field is input only, will not show contents on GET operations.
+ * Key with \\n newlines.  This value is input-only and will be omitted from the response and replaced with a placeholder
  * @member {String} key
  */
 Mqtt.prototype['key'] = undefined;
 
 /**
- * Name of key.  If omitted, defaults to \"present\"
+ * Name of key
  * @member {String} private_key_name
- * @default 'present'
  */
-Mqtt.prototype['private_key_name'] = 'present';
+Mqtt.prototype['private_key_name'] = undefined;
 
 
 

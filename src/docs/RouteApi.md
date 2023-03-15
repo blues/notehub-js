@@ -31,7 +31,16 @@ api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.RouteApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
-let route = {"label":"Route Label","type":"http","http":{"fleets":["fleet:1042ddc5-3b2c-4cec-b1fb-d3040538094d"],"throttle_ms":100,"url":"http://route.url"}}; // Route | Route to be Created
+let route = {
+  "label": "Route Label",
+  "type":"http",
+  "http": {
+    "fleets": ["fleet:1042ddc5-3b2c-4cec-b1fb-d3040538094d"],
+    "throttle_ms": 100,
+    "url": "http://route.url"
+  }
+}
+; // Route | Route to be Created
 apiInstance.createRoute(projectUID, route).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
@@ -230,7 +239,18 @@ api_key.apiKey = 'YOUR API KEY';
 let apiInstance = new NotehubJs.RouteApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
 let routeUID = route:cbd20093cba58392c9f9bbdd0cdeb1a0; // String | 
-let route = {"http":{"filter":{"type":"include","system_notefiles":true,"files":["somefile.qo"]},"throttle_ms":50,"url":"http://new-route.url"}}; // Route | Route settings to be updated
+let route = {
+  "http" {
+    "filter": {
+      "type": "include",
+      "system_notefiles": true,
+      "files": ["somefile.qo"],
+    },
+    "throttle_ms": 50,
+    "url": "http://new-route.url",
+  },
+}
+; // Route | Route settings to be updated
 apiInstance.updateRoute(projectUID, routeUID, route).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
