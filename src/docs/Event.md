@@ -20,7 +20,7 @@
 | **updates**          | **Number**  |                                                                                                                                                        | [optional] |
 | **body**             | **Object**  | A JSON object containing event details                                                                                                                 | [optional] |
 | **payload**          | **String**  | A base64-encoded binary payload                                                                                                                        | [optional] |
-| **bestLocationType** | **String**  | One of "gps", "triangulated", or "tower"                                                                                                               | [optional] |
+| **bestLocationType** | **String**  | One of \&quot;gps\&quot;, \&quot;triangulated\&quot;, or \&quot;tower\&quot;                                                                           | [optional] |
 | **bestLocationWhen** | **Number**  | Unix timestamp                                                                                                                                         | [optional] |
 | **bestLat**          | **Number**  | Latitude                                                                                                                                               | [optional] |
 | **bestLon**          | **Number**  | Longitude                                                                                                                                              | [optional] |
@@ -58,4 +58,4 @@
 | **bars**             | **Number**  | Bars. Only available on \_session.qo events.                                                                                                           | [optional] |
 | **voltage**          | **Number**  | Device voltage. Only available on \_session.qo events.                                                                                                 | [optional] |
 | **temp**             | **Number**  | Device temperature. Only available on \_session.qo events.                                                                                             | [optional] |
-| **environment**      | **Object**  | Routed environment variables beginning with "$". Only available on \_session.qo events.                                                                | [optional] |
+| **environment**      | **Object**  | Routed environment variables beginning with \&quot;$\&quot;. Only available on \_session.qo events.                                                    | [optional] |

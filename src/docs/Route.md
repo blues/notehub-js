@@ -2,14 +2,14 @@
 
 ## Properties
 
-| Name          | Type                              | Description        | Notes                          |
-| ------------- | --------------------------------- | ------------------ | ------------------------------ |
-| **uid**       | **String**                        | Route UID          | [optional]                     |
-| **label**     | **String**                        | Route Label        | [optional]                     |
-| **routeType** | **String**                        | Type of route.     | [optional] [default to 'http'] |
-| **modified**  | **String**                        | Last Modified      | [optional]                     |
-| **disabled**  | **Boolean**                       | Is route disabled? | [optional] [default to false]  |
-| **schema**    | [**RouteSchema**](RouteSchema.md) |                    | [optional]                     |
+| Name          | Type                              | Description        | Notes                                  |
+| ------------- | --------------------------------- | ------------------ | -------------------------------------- |
+| **uid**       | **String**                        | Route UID          | [optional]                             |
+| **label**     | **String**                        | Route Label        | [optional]                             |
+| **routeType** | **String**                        | Type of route.     | [optional] [default to &#39;http&#39;] |
+| **modified**  | **String**                        | Last Modified      | [optional]                             |
+| **disabled**  | **Boolean**                       | Is route disabled? | [optional] [default to false]          |
+| **schema**    | [**RouteSchema**](RouteSchema.md) |                    | [optional]                             |
 
 ## Enum: RouteTypeEnum
 

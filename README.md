@@ -154,6 +154,8 @@ As this project is partially generated via the OpenAPI Generator tool, it has a 
 ├── .github/
 │   └── workflows/
 │       └── GH Action files
+├── .husky/
+│   └── pre-commit files
 ├── libTemplate/
 │   └── template files
 ├── src/
@@ -192,6 +194,8 @@ Files and folders to be aware of in the root of the project.
 
 - The [`config.json`](config.json) file is a configuration file of additional properties used by the OpenAPI Generator and its JavaScript library template to define certain variables like license type, project name, project version, etc.
 
+- The [`.husky/`](.husky/) folder is a set of pre-commit hooks that [Husky](https://typicode.github.io/husky/#/) runs on all files staged for commit to GitHub. It currently runs them through our [Prettier](https://prettier.io/) file formatting tool via the [pretty-quick](https://www.npmjs.com/package/pretty-quick) npm library.
+
 ### `src/` Folder
 
 The `src/` folder inside the root of the project contains the contents of the auto-generated `notehub-js` library that is eventually [published to npm](https://www.npmjs.com/package/@blues-inc/notehub-js), including:
@@ -218,7 +222,7 @@ This project uses [Node.js](https://nodejs.org/en/) as a runtime, [npm](https://
 $ volta install node npm
 ```
 
-3. Navigate to the root of the folder in your terminal or command prompt and run `npm install`, which installs the repo's npm dependencies.
+3. Navigate to the root of the folder in your terminal or command prompt and run `npm install`, which installs the repo's npm dependencies, including the [`prettier`](https://prettier.io/), [`pretty-quick`](https://www.npmjs.com/package/pretty-quick), and [`husky`](https://typicode.github.io/husky/#/?id=automatic-recommended) libraries which will format any files staged for commit according to our coding style as defined in the `.prettierrc` file.
 
 ```shell
 $ npm install

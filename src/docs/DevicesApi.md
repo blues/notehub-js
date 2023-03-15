@@ -39,11 +39,11 @@ apiInstance.deleteProjectDevice(projectUID, deviceUID, purge).then(() => {
 
 ### Parameters
 
-| Name           | Type       | Description | Notes                |
-| -------------- | ---------- | ----------- | -------------------- |
+| Name           | Type       | Description | Notes                        |
+| -------------- | ---------- | ----------- | ---------------------------- |
 | **projectUID** | **String** |             |
 | **deviceUID**  | **String** |             |
-| **purge**      | **String** |             | [default to 'false'] |
+| **purge**      | **String** |             | [default to &#39;false&#39;] |
 
 ### Return type
 

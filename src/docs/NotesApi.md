@@ -15,7 +15,7 @@ All URIs are relative to *https://api.notefile.net*
 
 > handleNoteAdd(projectUID, deviceUID, notefileID, note)
 
-Adds a Note to a Notefile, creating the Notefile if it doesn't yet exist.
+Adds a Note to a Notefile, creating the Notefile if it doesn&#39;t yet exist.
 
 ### Example
 
@@ -127,7 +127,7 @@ apiInstance.handleNoteChanges(projectUID, deviceUID, notefileID, opts).then((dat
 
 > handleNoteCreateAdd(projectUID, deviceUID, notefileID, noteID, note)
 
-Adds a Note to a Notefile, creating the Notefile if it doesn't yet exist.
+Adds a Note to a Notefile, creating the Notefile if it doesn&#39;t yet exist.
 
 ### Example
 
