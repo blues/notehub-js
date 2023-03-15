@@ -2,11 +2,9 @@
 
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**mcc** | **Number** |  | [optional] 
-**mnc** | **Number** |  | [optional] 
-**lac** | **Number** |  | [optional] 
-**cellId** | **Number** |  | [optional] 
-
-
+| Name       | Type       | Description | Notes      |
+| ---------- | ---------- | ----------- | ---------- |
+| **mcc**    | **Number** |             | [optional] |
+| **mnc**    | **Number** |             | [optional] |
+| **lac**    | **Number** |             | [optional] |
+| **cellId** | **Number** |             | [optional] |

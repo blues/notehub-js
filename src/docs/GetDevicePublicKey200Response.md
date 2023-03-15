@@ -2,9 +2,7 @@
 
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**uid** | **String** |  | 
-**key** | **String** |  | 
-
-
+| Name    | Type       | Description | Notes |
+| ------- | ---------- | ----------- | ----- |
+| **uid** | **String** |             |
+| **key** | **String** |             |

@@ -2,19 +2,15 @@
 
 All URIs are relative to *https://api.notefile.net*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**handleNotefileChanges**](FilesApi.md#handleNotefileChanges) | **GET** /v1/projects/{projectUID}/devices/{deviceUID}/files/changes | 
-[**handleNotefileChangesPending**](FilesApi.md#handleNotefileChangesPending) | **GET** /v1/projects/{projectUID}/devices/{deviceUID}/files/changes/pending | 
-[**handleNotefileDelete**](FilesApi.md#handleNotefileDelete) | **DELETE** /v1/projects/{projectUID}/devices/{deviceUID}/files | 
-
-
+| Method                                                                       | HTTP request                                                                | Description |
+| ---------------------------------------------------------------------------- | --------------------------------------------------------------------------- | ----------- |
+| [**handleNotefileChanges**](FilesApi.md#handleNotefileChanges)               | **GET** /v1/projects/{projectUID}/devices/{deviceUID}/files/changes         |
+| [**handleNotefileChangesPending**](FilesApi.md#handleNotefileChangesPending) | **GET** /v1/projects/{projectUID}/devices/{deviceUID}/files/changes/pending |
+| [**handleNotefileDelete**](FilesApi.md#handleNotefileDelete)                 | **DELETE** /v1/projects/{projectUID}/devices/{deviceUID}/files              |
 
 ## handleNotefileChanges
 
 > HandleNotefileChanges200Response handleNotefileChanges(projectUID, deviceUID, opts)
-
-
 
 Used to perform queries on a single or multiple files to determine if new Notes are available to read
 
@@ -28,8 +24,8 @@ let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.FilesApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
-let deviceUID = "deviceUID_example"; // String | 
+let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let deviceUID = "deviceUID_example"; // String |
 let opts = {
   'tracker': "tracker_example", // String | The change tracker ID.
   'files': ["null"] // [String] | One or more files to obtain change information from.
@@ -44,13 +40,12 @@ apiInstance.handleNotefileChanges(projectUID, deviceUID, opts).then((data) => {
 
 ### Parameters
 
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **projectUID** | **String**|  | 
- **deviceUID** | **String**|  | 
- **tracker** | **String**| The change tracker ID. | [optional] 
- **files** | [**[String]**](String.md)| One or more files to obtain change information from. | [optional] 
+| Name           | Type                      | Description                                          | Notes      |
+| -------------- | ------------------------- | ---------------------------------------------------- | ---------- |
+| **projectUID** | **String**                |                                                      |
+| **deviceUID**  | **String**                |                                                      |
+| **tracker**    | **String**                | The change tracker ID.                               | [optional] |
+| **files**      | [**[String]**](String.md) | One or more files to obtain change information from. | [optional] |
 
 ### Return type
 
@@ -65,12 +60,9 @@ Name | Type | Description  | Notes
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-
 ## handleNotefileChangesPending
 
 > HandleNotefileChangesPending200Response handleNotefileChangesPending(projectUID, deviceUID)
-
-
 
 Returns info about file changes that are pending upload to Notehub or download to the Notecard.
 
@@ -84,8 +76,8 @@ let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.FilesApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
-let deviceUID = "deviceUID_example"; // String | 
+let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let deviceUID = "deviceUID_example"; // String |
 apiInstance.handleNotefileChangesPending(projectUID, deviceUID).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
@@ -96,11 +88,10 @@ apiInstance.handleNotefileChangesPending(projectUID, deviceUID).then((data) => {
 
 ### Parameters
 
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **projectUID** | **String**|  | 
- **deviceUID** | **String**|  | 
+| Name           | Type       | Description | Notes |
+| -------------- | ---------- | ----------- | ----- |
+| **projectUID** | **String** |             |
+| **deviceUID**  | **String** |             |
 
 ### Return type
 
@@ -115,12 +106,9 @@ Name | Type | Description  | Notes
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-
 ## handleNotefileDelete
 
 > handleNotefileDelete(projectUID, deviceUID, handleNotefileDeleteRequest)
-
-
 
 Deletes Notefiles and the Notes they contain.
 
@@ -134,9 +122,9 @@ let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.FilesApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
-let deviceUID = "deviceUID_example"; // String | 
-let handleNotefileDeleteRequest = new NotehubJs.HandleNotefileDeleteRequest(); // HandleNotefileDeleteRequest | 
+let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let deviceUID = "deviceUID_example"; // String |
+let handleNotefileDeleteRequest = new NotehubJs.HandleNotefileDeleteRequest(); // HandleNotefileDeleteRequest |
 apiInstance.handleNotefileDelete(projectUID, deviceUID, handleNotefileDeleteRequest).then(() => {
   console.log('API called successfully.');
 }, (error) => {
@@ -147,12 +135,11 @@ apiInstance.handleNotefileDelete(projectUID, deviceUID, handleNotefileDeleteRequ
 
 ### Parameters
 
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **projectUID** | **String**|  | 
- **deviceUID** | **String**|  | 
- **handleNotefileDeleteRequest** | [**HandleNotefileDeleteRequest**](HandleNotefileDeleteRequest.md)|  | 
+| Name                            | Type                                                              | Description | Notes |
+| ------------------------------- | ----------------------------------------------------------------- | ----------- | ----- |
+| **projectUID**                  | **String**                                                        |             |
+| **deviceUID**                   | **String**                                                        |             |
+| **handleNotefileDeleteRequest** | [**HandleNotefileDeleteRequest**](HandleNotefileDeleteRequest.md) |             |
 
 ### Return type
 
@@ -166,4 +153,3 @@ null (empty response body)
 
 - **Content-Type**: application/json
 - **Accept**: application/json
-

@@ -2,8 +2,6 @@
 
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**files** | **[String]** | One or more files to obtain change information from. | [optional] 
-
-
+| Name      | Type         | Description                                          | Notes      |
+| --------- | ------------ | ---------------------------------------------------- | ---------- |
+| **files** | **[String]** | One or more files to obtain change information from. | [optional] |

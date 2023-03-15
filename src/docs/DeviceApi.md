@@ -2,31 +2,27 @@
 
 All URIs are relative to *https://api.notefile.net*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**deleteDeviceEnvironmentVariable**](DeviceApi.md#deleteDeviceEnvironmentVariable) | **DELETE** /v1/projects/{projectUID}/devices/{deviceUID}/environment_variables/{key} | 
-[**deleteDeviceFleets**](DeviceApi.md#deleteDeviceFleets) | **DELETE** /v1/projects/{projectUID}/devices/{deviceUID}/fleets | 
-[**disableDevice**](DeviceApi.md#disableDevice) | **POST** /v1/projects/{projectUID}/devices/{deviceUID}/disable | 
-[**enableDevice**](DeviceApi.md#enableDevice) | **POST** /v1/projects/{projectUID}/devices/{deviceUID}/enable | 
-[**getDeviceEnvironmentVariables**](DeviceApi.md#getDeviceEnvironmentVariables) | **GET** /v1/projects/{projectUID}/devices/{deviceUID}/environment_variables | 
-[**getDeviceEnvironmentVariablesByPin**](DeviceApi.md#getDeviceEnvironmentVariablesByPin) | **GET** /v1/projects/{projectUID}/devices/{deviceUID}/environment_variables_with_pin | 
-[**getDeviceFleets**](DeviceApi.md#getDeviceFleets) | **GET** /v1/projects/{projectUID}/devices/{deviceUID}/fleets | 
-[**getDeviceHealthLog**](DeviceApi.md#getDeviceHealthLog) | **GET** /v1/projects/{projectUID}/devices/{deviceUID}/health-log | 
-[**getDeviceLatest**](DeviceApi.md#getDeviceLatest) | **GET** /v1/projects/{projectUID}/devices/{deviceUID}/latest | 
-[**getDevicePublicKey**](DeviceApi.md#getDevicePublicKey) | **GET** /v1/projects/{projectUID}/devices/{deviceUID}/public-key | 
-[**getDeviceSessions**](DeviceApi.md#getDeviceSessions) | **GET** /v1/projects/{projectUID}/devices/{deviceUID}/sessions | 
-[**handleNoteSignal**](DeviceApi.md#handleNoteSignal) | **POST** /v1/projects/{projectUID}/devices/{deviceUID}/signal | 
-[**putDeviceEnvironmentVariables**](DeviceApi.md#putDeviceEnvironmentVariables) | **PUT** /v1/projects/{projectUID}/devices/{deviceUID}/environment_variables | 
-[**putDeviceEnvironmentVariablesByPin**](DeviceApi.md#putDeviceEnvironmentVariablesByPin) | **PUT** /v1/projects/{projectUID}/devices/{deviceUID}/environment_variables_with_pin | 
-[**putDeviceFleets**](DeviceApi.md#putDeviceFleets) | **PUT** /v1/projects/{projectUID}/devices/{deviceUID}/fleets | 
-
-
+| Method                                                                                    | HTTP request                                                                         | Description |
+| ----------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ | ----------- |
+| [**deleteDeviceEnvironmentVariable**](DeviceApi.md#deleteDeviceEnvironmentVariable)       | **DELETE** /v1/projects/{projectUID}/devices/{deviceUID}/environment_variables/{key} |
+| [**deleteDeviceFleets**](DeviceApi.md#deleteDeviceFleets)                                 | **DELETE** /v1/projects/{projectUID}/devices/{deviceUID}/fleets                      |
+| [**disableDevice**](DeviceApi.md#disableDevice)                                           | **POST** /v1/projects/{projectUID}/devices/{deviceUID}/disable                       |
+| [**enableDevice**](DeviceApi.md#enableDevice)                                             | **POST** /v1/projects/{projectUID}/devices/{deviceUID}/enable                        |
+| [**getDeviceEnvironmentVariables**](DeviceApi.md#getDeviceEnvironmentVariables)           | **GET** /v1/projects/{projectUID}/devices/{deviceUID}/environment_variables          |
+| [**getDeviceEnvironmentVariablesByPin**](DeviceApi.md#getDeviceEnvironmentVariablesByPin) | **GET** /v1/projects/{projectUID}/devices/{deviceUID}/environment_variables_with_pin |
+| [**getDeviceFleets**](DeviceApi.md#getDeviceFleets)                                       | **GET** /v1/projects/{projectUID}/devices/{deviceUID}/fleets                         |
+| [**getDeviceHealthLog**](DeviceApi.md#getDeviceHealthLog)                                 | **GET** /v1/projects/{projectUID}/devices/{deviceUID}/health-log                     |
+| [**getDeviceLatest**](DeviceApi.md#getDeviceLatest)                                       | **GET** /v1/projects/{projectUID}/devices/{deviceUID}/latest                         |
+| [**getDevicePublicKey**](DeviceApi.md#getDevicePublicKey)                                 | **GET** /v1/projects/{projectUID}/devices/{deviceUID}/public-key                     |
+| [**getDeviceSessions**](DeviceApi.md#getDeviceSessions)                                   | **GET** /v1/projects/{projectUID}/devices/{deviceUID}/sessions                       |
+| [**handleNoteSignal**](DeviceApi.md#handleNoteSignal)                                     | **POST** /v1/projects/{projectUID}/devices/{deviceUID}/signal                        |
+| [**putDeviceEnvironmentVariables**](DeviceApi.md#putDeviceEnvironmentVariables)           | **PUT** /v1/projects/{projectUID}/devices/{deviceUID}/environment_variables          |
+| [**putDeviceEnvironmentVariablesByPin**](DeviceApi.md#putDeviceEnvironmentVariablesByPin) | **PUT** /v1/projects/{projectUID}/devices/{deviceUID}/environment_variables_with_pin |
+| [**putDeviceFleets**](DeviceApi.md#putDeviceFleets)                                       | **PUT** /v1/projects/{projectUID}/devices/{deviceUID}/fleets                         |
 
 ## deleteDeviceEnvironmentVariable
 
 > EnvironmentVariables deleteDeviceEnvironmentVariable(projectUID, deviceUID, key)
-
-
 
 Delete environment variable of a device
 
@@ -40,8 +36,8 @@ let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.DeviceApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
-let deviceUID = "deviceUID_example"; // String | 
+let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let deviceUID = "deviceUID_example"; // String |
 let key = "key_example"; // String | The environment variable key to delete.
 apiInstance.deleteDeviceEnvironmentVariable(projectUID, deviceUID, key).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
@@ -53,12 +49,11 @@ apiInstance.deleteDeviceEnvironmentVariable(projectUID, deviceUID, key).then((da
 
 ### Parameters
 
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **projectUID** | **String**|  | 
- **deviceUID** | **String**|  | 
- **key** | **String**| The environment variable key to delete. | 
+| Name           | Type       | Description                             | Notes |
+| -------------- | ---------- | --------------------------------------- | ----- |
+| **projectUID** | **String** |                                         |
+| **deviceUID**  | **String** |                                         |
+| **key**        | **String** | The environment variable key to delete. |
 
 ### Return type
 
@@ -73,12 +68,9 @@ Name | Type | Description  | Notes
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-
 ## deleteDeviceFleets
 
 > GetProjectFleets200Response deleteDeviceFleets(projectUID, deviceUID, deleteDeviceFleetsRequest)
-
-
 
 Remove Device from Fleets
 
@@ -92,9 +84,9 @@ let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.DeviceApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
-let deviceUID = "deviceUID_example"; // String | 
-let deleteDeviceFleetsRequest = new NotehubJs.DeleteDeviceFleetsRequest(); // DeleteDeviceFleetsRequest | The fleets to remove from the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error. 
+let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let deviceUID = "deviceUID_example"; // String |
+let deleteDeviceFleetsRequest = new NotehubJs.DeleteDeviceFleetsRequest(); // DeleteDeviceFleetsRequest | The fleets to remove from the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error.
 apiInstance.deleteDeviceFleets(projectUID, deviceUID, deleteDeviceFleetsRequest).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
@@ -105,12 +97,11 @@ apiInstance.deleteDeviceFleets(projectUID, deviceUID, deleteDeviceFleetsRequest)
 
 ### Parameters
 
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **projectUID** | **String**|  | 
- **deviceUID** | **String**|  | 
- **deleteDeviceFleetsRequest** | [**DeleteDeviceFleetsRequest**](DeleteDeviceFleetsRequest.md)| The fleets to remove from the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error.  | 
+| Name                          | Type                                                          | Description                                                                                                                                                                                                                                                                                           | Notes |
+| ----------------------------- | ------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----- |
+| **projectUID**                | **String**                                                    |                                                                                                                                                                                                                                                                                                       |
+| **deviceUID**                 | **String**                                                    |                                                                                                                                                                                                                                                                                                       |
+| **deleteDeviceFleetsRequest** | [**DeleteDeviceFleetsRequest**](DeleteDeviceFleetsRequest.md) | The fleets to remove from the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error. |
 
 ### Return type
 
@@ -125,12 +116,9 @@ Name | Type | Description  | Notes
 - **Content-Type**: application/json
 - **Accept**: application/json
 
-
 ## disableDevice
 
 > disableDevice(projectUID, deviceUID)
-
-
 
 Disable Device
 
@@ -144,8 +132,8 @@ let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.DeviceApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
-let deviceUID = "deviceUID_example"; // String | 
+let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let deviceUID = "deviceUID_example"; // String |
 apiInstance.disableDevice(projectUID, deviceUID).then(() => {
   console.log('API called successfully.');
 }, (error) => {
@@ -156,11 +144,10 @@ apiInstance.disableDevice(projectUID, deviceUID).then(() => {
 
 ### Parameters
 
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **projectUID** | **String**|  | 
- **deviceUID** | **String**|  | 
+| Name           | Type       | Description | Notes |
+| -------------- | ---------- | ----------- | ----- |
+| **projectUID** | **String** |             |
+| **deviceUID**  | **String** |             |
 
 ### Return type
 
@@ -175,12 +162,9 @@ null (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-
 ## enableDevice
 
 > enableDevice(projectUID, deviceUID)
-
-
 
 Enable Device
 
@@ -194,8 +178,8 @@ let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.DeviceApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
-let deviceUID = "deviceUID_example"; // String | 
+let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let deviceUID = "deviceUID_example"; // String |
 apiInstance.enableDevice(projectUID, deviceUID).then(() => {
   console.log('API called successfully.');
 }, (error) => {
@@ -206,11 +190,10 @@ apiInstance.enableDevice(projectUID, deviceUID).then(() => {
 
 ### Parameters
 
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **projectUID** | **String**|  | 
- **deviceUID** | **String**|  | 
+| Name           | Type       | Description | Notes |
+| -------------- | ---------- | ----------- | ----- |
+| **projectUID** | **String** |             |
+| **deviceUID**  | **String** |             |
 
 ### Return type
 
@@ -225,12 +208,9 @@ null (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-
 ## getDeviceEnvironmentVariables
 
 > GetDeviceEnvironmentVariables200Response getDeviceEnvironmentVariables(projectUID, deviceUID)
-
-
 
 Get environment variables of a device
 
@@ -244,8 +224,8 @@ let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.DeviceApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
-let deviceUID = "deviceUID_example"; // String | 
+let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let deviceUID = "deviceUID_example"; // String |
 apiInstance.getDeviceEnvironmentVariables(projectUID, deviceUID).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
@@ -256,11 +236,10 @@ apiInstance.getDeviceEnvironmentVariables(projectUID, deviceUID).then((data) => 
 
 ### Parameters
 
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **projectUID** | **String**|  | 
- **deviceUID** | **String**|  | 
+| Name           | Type       | Description | Notes |
+| -------------- | ---------- | ----------- | ----- |
+| **projectUID** | **String** |             |
+| **deviceUID**  | **String** |             |
 
 ### Return type
 
@@ -275,12 +254,9 @@ Name | Type | Description  | Notes
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-
 ## getDeviceEnvironmentVariablesByPin
 
 > GetDeviceEnvironmentVariables200Response getDeviceEnvironmentVariablesByPin(projectUID, deviceUID)
-
-
 
 Get environment variables of a device with device pin authorization
 
@@ -294,8 +270,8 @@ let pin = defaultClient.authentications['pin'];
 pin.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.DeviceApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
-let deviceUID = "deviceUID_example"; // String | 
+let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let deviceUID = "deviceUID_example"; // String |
 apiInstance.getDeviceEnvironmentVariablesByPin(projectUID, deviceUID).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
@@ -306,11 +282,10 @@ apiInstance.getDeviceEnvironmentVariablesByPin(projectUID, deviceUID).then((data
 
 ### Parameters
 
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **projectUID** | **String**|  | 
- **deviceUID** | **String**|  | 
+| Name           | Type       | Description | Notes |
+| -------------- | ---------- | ----------- | ----- |
+| **projectUID** | **String** |             |
+| **deviceUID**  | **String** |             |
 
 ### Return type
 
@@ -325,12 +300,9 @@ Name | Type | Description  | Notes
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-
 ## getDeviceFleets
 
 > GetProjectFleets200Response getDeviceFleets(projectUID, deviceUID)
-
-
 
 Get Device Fleets
 
@@ -344,8 +316,8 @@ let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.DeviceApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
-let deviceUID = "deviceUID_example"; // String | 
+let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let deviceUID = "deviceUID_example"; // String |
 apiInstance.getDeviceFleets(projectUID, deviceUID).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
@@ -356,11 +328,10 @@ apiInstance.getDeviceFleets(projectUID, deviceUID).then((data) => {
 
 ### Parameters
 
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **projectUID** | **String**|  | 
- **deviceUID** | **String**|  | 
+| Name           | Type       | Description | Notes |
+| -------------- | ---------- | ----------- | ----- |
+| **projectUID** | **String** |             |
+| **deviceUID**  | **String** |             |
 
 ### Return type
 
@@ -375,12 +346,9 @@ Name | Type | Description  | Notes
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-
 ## getDeviceHealthLog
 
 > GetDeviceHealthLog200Response getDeviceHealthLog(projectUID, deviceUID)
-
-
 
 Get Device Health Log
 
@@ -394,8 +362,8 @@ let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.DeviceApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
-let deviceUID = "deviceUID_example"; // String | 
+let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let deviceUID = "deviceUID_example"; // String |
 apiInstance.getDeviceHealthLog(projectUID, deviceUID).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
@@ -406,11 +374,10 @@ apiInstance.getDeviceHealthLog(projectUID, deviceUID).then((data) => {
 
 ### Parameters
 
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **projectUID** | **String**|  | 
- **deviceUID** | **String**|  | 
+| Name           | Type       | Description | Notes |
+| -------------- | ---------- | ----------- | ----- |
+| **projectUID** | **String** |             |
+| **deviceUID**  | **String** |             |
 
 ### Return type
 
@@ -425,12 +392,9 @@ Name | Type | Description  | Notes
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-
 ## getDeviceLatest
 
 > GetDeviceLatest200Response getDeviceLatest(projectUID, deviceUID)
-
-
 
 Get Device Latest Events
 
@@ -444,8 +408,8 @@ let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.DeviceApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
-let deviceUID = "deviceUID_example"; // String | 
+let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let deviceUID = "deviceUID_example"; // String |
 apiInstance.getDeviceLatest(projectUID, deviceUID).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
@@ -456,11 +420,10 @@ apiInstance.getDeviceLatest(projectUID, deviceUID).then((data) => {
 
 ### Parameters
 
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **projectUID** | **String**|  | 
- **deviceUID** | **String**|  | 
+| Name           | Type       | Description | Notes |
+| -------------- | ---------- | ----------- | ----- |
+| **projectUID** | **String** |             |
+| **deviceUID**  | **String** |             |
 
 ### Return type
 
@@ -475,12 +438,9 @@ Name | Type | Description  | Notes
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-
 ## getDevicePublicKey
 
 > GetDevicePublicKey200Response getDevicePublicKey(projectUID, deviceUID)
-
-
 
 Get Device Public Key
 
@@ -494,8 +454,8 @@ let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.DeviceApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
-let deviceUID = "deviceUID_example"; // String | 
+let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let deviceUID = "deviceUID_example"; // String |
 apiInstance.getDevicePublicKey(projectUID, deviceUID).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
@@ -506,11 +466,10 @@ apiInstance.getDevicePublicKey(projectUID, deviceUID).then((data) => {
 
 ### Parameters
 
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **projectUID** | **String**|  | 
- **deviceUID** | **String**|  | 
+| Name           | Type       | Description | Notes |
+| -------------- | ---------- | ----------- | ----- |
+| **projectUID** | **String** |             |
+| **deviceUID**  | **String** |             |
 
 ### Return type
 
@@ -525,12 +484,9 @@ Name | Type | Description  | Notes
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-
 ## getDeviceSessions
 
 > GetDeviceSessions200Response getDeviceSessions(projectUID, deviceUID, opts)
-
-
 
 Get Device Sessions
 
@@ -544,11 +500,11 @@ let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.DeviceApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
-let deviceUID = "deviceUID_example"; // String | 
+let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let deviceUID = "deviceUID_example"; // String |
 let opts = {
-  'pageSize': 50, // Number | 
-  'pageNum': 1 // Number | 
+  'pageSize': 50, // Number |
+  'pageNum': 1 // Number |
 };
 apiInstance.getDeviceSessions(projectUID, deviceUID, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
@@ -560,13 +516,12 @@ apiInstance.getDeviceSessions(projectUID, deviceUID, opts).then((data) => {
 
 ### Parameters
 
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **projectUID** | **String**|  | 
- **deviceUID** | **String**|  | 
- **pageSize** | **Number**|  | [optional] [default to 50]
- **pageNum** | **Number**|  | [optional] [default to 1]
+| Name           | Type       | Description | Notes                      |
+| -------------- | ---------- | ----------- | -------------------------- |
+| **projectUID** | **String** |             |
+| **deviceUID**  | **String** |             |
+| **pageSize**   | **Number** |             | [optional] [default to 50] |
+| **pageNum**    | **Number** |             | [optional] [default to 1]  |
 
 ### Return type
 
@@ -581,12 +536,9 @@ Name | Type | Description  | Notes
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-
 ## handleNoteSignal
 
 > HandleNoteSignal200Response handleNoteSignal(projectUID, deviceUID, body)
-
-
 
 Send a signal from Notehub to a Notecard.
 
@@ -600,8 +552,8 @@ let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.DeviceApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
-let deviceUID = "deviceUID_example"; // String | 
+let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let deviceUID = "deviceUID_example"; // String |
 let body = new NotehubJs.Body(); // Body | Body or payload of singnal to be sent to the device
 apiInstance.handleNoteSignal(projectUID, deviceUID, body).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
@@ -613,12 +565,11 @@ apiInstance.handleNoteSignal(projectUID, deviceUID, body).then((data) => {
 
 ### Parameters
 
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **projectUID** | **String**|  | 
- **deviceUID** | **String**|  | 
- **body** | [**Body**](Body.md)| Body or payload of singnal to be sent to the device | 
+| Name           | Type                | Description                                         | Notes |
+| -------------- | ------------------- | --------------------------------------------------- | ----- |
+| **projectUID** | **String**          |                                                     |
+| **deviceUID**  | **String**          |                                                     |
+| **body**       | [**Body**](Body.md) | Body or payload of singnal to be sent to the device |
 
 ### Return type
 
@@ -633,12 +584,9 @@ Name | Type | Description  | Notes
 - **Content-Type**: application/json
 - **Accept**: application/json
 
-
 ## putDeviceEnvironmentVariables
 
 > EnvironmentVariables putDeviceEnvironmentVariables(projectUID, deviceUID, environmentVariables)
-
-
 
 Put environment variables of a device
 
@@ -652,8 +600,8 @@ let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.DeviceApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
-let deviceUID = "deviceUID_example"; // String | 
+let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let deviceUID = "deviceUID_example"; // String |
 let environmentVariables = new NotehubJs.EnvironmentVariables(); // EnvironmentVariables | Environment variables to be added to the device
 apiInstance.putDeviceEnvironmentVariables(projectUID, deviceUID, environmentVariables).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
@@ -665,12 +613,11 @@ apiInstance.putDeviceEnvironmentVariables(projectUID, deviceUID, environmentVari
 
 ### Parameters
 
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **projectUID** | **String**|  | 
- **deviceUID** | **String**|  | 
- **environmentVariables** | [**EnvironmentVariables**](EnvironmentVariables.md)| Environment variables to be added to the device | 
+| Name                     | Type                                                | Description                                     | Notes |
+| ------------------------ | --------------------------------------------------- | ----------------------------------------------- | ----- |
+| **projectUID**           | **String**                                          |                                                 |
+| **deviceUID**            | **String**                                          |                                                 |
+| **environmentVariables** | [**EnvironmentVariables**](EnvironmentVariables.md) | Environment variables to be added to the device |
 
 ### Return type
 
@@ -685,12 +632,9 @@ Name | Type | Description  | Notes
 - **Content-Type**: application/json
 - **Accept**: application/json
 
-
 ## putDeviceEnvironmentVariablesByPin
 
 > EnvironmentVariables putDeviceEnvironmentVariablesByPin(projectUID, deviceUID, environmentVariables)
-
-
 
 Put environment variables of a device with device pin authorization
 
@@ -704,8 +648,8 @@ let pin = defaultClient.authentications['pin'];
 pin.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.DeviceApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
-let deviceUID = "deviceUID_example"; // String | 
+let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let deviceUID = "deviceUID_example"; // String |
 let environmentVariables = new NotehubJs.EnvironmentVariables(); // EnvironmentVariables | Environment variables to be added to the device
 apiInstance.putDeviceEnvironmentVariablesByPin(projectUID, deviceUID, environmentVariables).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
@@ -717,12 +661,11 @@ apiInstance.putDeviceEnvironmentVariablesByPin(projectUID, deviceUID, environmen
 
 ### Parameters
 
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **projectUID** | **String**|  | 
- **deviceUID** | **String**|  | 
- **environmentVariables** | [**EnvironmentVariables**](EnvironmentVariables.md)| Environment variables to be added to the device | 
+| Name                     | Type                                                | Description                                     | Notes |
+| ------------------------ | --------------------------------------------------- | ----------------------------------------------- | ----- |
+| **projectUID**           | **String**                                          |                                                 |
+| **deviceUID**            | **String**                                          |                                                 |
+| **environmentVariables** | [**EnvironmentVariables**](EnvironmentVariables.md) | Environment variables to be added to the device |
 
 ### Return type
 
@@ -737,12 +680,9 @@ Name | Type | Description  | Notes
 - **Content-Type**: application/json
 - **Accept**: application/json
 
-
 ## putDeviceFleets
 
 > GetProjectFleets200Response putDeviceFleets(projectUID, deviceUID, putDeviceFleetsRequest)
-
-
 
 Add Device to Fleets
 
@@ -756,9 +696,9 @@ let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.DeviceApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String | 
-let deviceUID = "deviceUID_example"; // String | 
-let putDeviceFleetsRequest = new NotehubJs.PutDeviceFleetsRequest(); // PutDeviceFleetsRequest | The fleets to add to the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error. 
+let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let deviceUID = "deviceUID_example"; // String |
+let putDeviceFleetsRequest = new NotehubJs.PutDeviceFleetsRequest(); // PutDeviceFleetsRequest | The fleets to add to the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error.
 apiInstance.putDeviceFleets(projectUID, deviceUID, putDeviceFleetsRequest).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
@@ -769,12 +709,11 @@ apiInstance.putDeviceFleets(projectUID, deviceUID, putDeviceFleetsRequest).then(
 
 ### Parameters
 
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **projectUID** | **String**|  | 
- **deviceUID** | **String**|  | 
- **putDeviceFleetsRequest** | [**PutDeviceFleetsRequest**](PutDeviceFleetsRequest.md)| The fleets to add to the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error.  | 
+| Name                       | Type                                                    | Description                                                                                                                                                                                                                                                                                      | Notes |
+| -------------------------- | ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----- |
+| **projectUID**             | **String**                                              |                                                                                                                                                                                                                                                                                                  |
+| **deviceUID**              | **String**                                              |                                                                                                                                                                                                                                                                                                  |
+| **putDeviceFleetsRequest** | [**PutDeviceFleetsRequest**](PutDeviceFleetsRequest.md) | The fleets to add to the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error. |
 
 ### Return type
 
@@ -788,4 +727,3 @@ Name | Type | Description  | Notes
 
 - **Content-Type**: application/json
 - **Accept**: application/json
-

@@ -2,9 +2,7 @@
 
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**devices** | [**[Device]**](Device.md) |  | 
-**hasMore** | **Boolean** |  | 
-
-
+| Name        | Type                      | Description | Notes |
+| ----------- | ------------------------- | ----------- | ----- |
+| **devices** | [**[Device]**](Device.md) |             |
+| **hasMore** | **Boolean**               |             |

@@ -2,8 +2,6 @@
 
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**billingAccounts** | [**[BillingAccount]**](BillingAccount.md) |  | [optional] 
-
-
+| Name                | Type                                      | Description | Notes      |
+| ------------------- | ----------------------------------------- | ----------- | ---------- |
+| **billingAccounts** | [**[BillingAccount]**](BillingAccount.md) |             | [optional] |
