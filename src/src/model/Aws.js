@@ -208,6 +208,7 @@ Aws.prototype['region'] = undefined;
 Aws.prototype['access_key_id'] = undefined;
 
 /**
+ * This value is input-only and will be omitted from the response and replaced with a placeholder
  * @member {String} access_key_secret
  */
 Aws.prototype['access_key_secret'] = undefined;

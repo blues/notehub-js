@@ -150,7 +150,7 @@ Twilio.prototype['timeout'] = 15;
 Twilio.prototype['account_sid'] = undefined;
 
 /**
- * Twilio Auth Token
+ * Twilio Auth Token.  This value will be omitted from the response and replaced with a placeholder.
  * @member {String} auth_token
  */
 Twilio.prototype['auth_token'] = undefined;

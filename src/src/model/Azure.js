@@ -68,6 +68,9 @@ class Azure {
             if (data.hasOwnProperty('timeout')) {
                 obj['timeout'] = ApiClient.convertToType(data['timeout'], 'Number');
             }
+            if (data.hasOwnProperty('functions_key_secret')) {
+                obj['functions_key_secret'] = ApiClient.convertToType(data['functions_key_secret'], 'String');
+            }
             if (data.hasOwnProperty('sas_policy_name')) {
                 obj['sas_policy_name'] = ApiClient.convertToType(data['sas_policy_name'], 'String');
             }
@@ -101,6 +104,10 @@ class Azure {
         // ensure the json data is a string
         if (data['url'] && !(typeof data['url'] === 'string' || data['url'] instanceof String)) {
             throw new Error("Expected the field `url` to be a primitive type in the JSON string but got " + data['url']);
+        }
+        // ensure the json data is a string
+        if (data['functions_key_secret'] && !(typeof data['functions_key_secret'] === 'string' || data['functions_key_secret'] instanceof String)) {
+            throw new Error("Expected the field `functions_key_secret` to be a primitive type in the JSON string but got " + data['functions_key_secret']);
         }
         // ensure the json data is a string
         if (data['sas_policy_name'] && !(typeof data['sas_policy_name'] === 'string' || data['sas_policy_name'] instanceof String)) {
@@ -153,11 +160,18 @@ Azure.prototype['url'] = undefined;
 Azure.prototype['timeout'] = 15;
 
 /**
+ * This value is input-only and will be omitted from the response and replaced with a placeholder
+ * @member {String} functions_key_secret
+ */
+Azure.prototype['functions_key_secret'] = undefined;
+
+/**
  * @member {String} sas_policy_name
  */
 Azure.prototype['sas_policy_name'] = undefined;
 
 /**
+ * This value is input-only and will be omitted from the response and replaced with a placeholder
  * @member {String} sas_policy_key
  */
 Azure.prototype['sas_policy_key'] = undefined;

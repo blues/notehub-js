@@ -12,6 +12,6 @@ Name | Type | Description | Notes
 **accountName** | **String** |  | [optional] 
 **userName** | **String** |  | [optional] 
 **privateKeyName** | **String** | Name of PEM key.  If omitted, defaults to \&quot;present\&quot; | [optional] [default to &#39;present&#39;]
-**pem** | **String** | PEM key with \\n newlines.  Field is input only, will not show contents on GET operations. | [optional] 
+**pem** | **String** | PEM key with \\n newlines. This value is input-only and will be omitted from the response and replaced with a placeholder | [optional] 
 
 

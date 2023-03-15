@@ -307,6 +307,7 @@ RouteSchema.prototype['port'] = undefined;
 RouteSchema.prototype['username'] = undefined;
 
 /**
+ * This value is input-only and will be omitted from the response and replaced with a placeholder
  * @member {String} password
  */
 RouteSchema.prototype['password'] = undefined;
@@ -317,20 +318,19 @@ RouteSchema.prototype['password'] = undefined;
 RouteSchema.prototype['topic'] = undefined;
 
 /**
- * Certificate with \\n newlines.  Field is input only, will not show contents on GET operations.
+ * Certificate with \\n newlines.  This value is input-only and will be omitted from the response and replaced with a placeholder
  * @member {String} certificate
  */
 RouteSchema.prototype['certificate'] = undefined;
 
 /**
- * Name of certificate.  If omitted, defaults to \"present\"
+ * Name of certificate.
  * @member {String} certificate_name
- * @default 'present'
  */
-RouteSchema.prototype['certificate_name'] = 'present';
+RouteSchema.prototype['certificate_name'] = undefined;
 
 /**
- * Key with \\n newlines.  Field is input only, will not show contents on GET operations.
+ * Key with \\n newlines.  This value is input-only and will be omitted from the response and replaced with a placeholder
  * @member {String} key
  */
 RouteSchema.prototype['key'] = undefined;
@@ -353,6 +353,7 @@ RouteSchema.prototype['region'] = undefined;
 RouteSchema.prototype['access_key_id'] = undefined;
 
 /**
+ * This value is input-only and will be omitted from the response and replaced with a placeholder
  * @member {String} access_key_secret
  */
 RouteSchema.prototype['access_key_secret'] = undefined;
@@ -389,10 +390,16 @@ RouteSchema.prototype['data_feed_key'] = undefined;
 RouteSchema.prototype['client_id'] = undefined;
 
 /**
- * Client Secret is input only, will not display on GET operations
+ * This value is input-only and will be omitted from the response and replaced with a placeholder
  * @member {String} client_secret
  */
 RouteSchema.prototype['client_secret'] = undefined;
+
+/**
+ * This value is input-only and will be omitted from the response and replaced with a placeholder
+ * @member {String} functions_key_secret
+ */
+RouteSchema.prototype['functions_key_secret'] = undefined;
 
 /**
  * @member {String} sas_policy_name
@@ -400,11 +407,13 @@ RouteSchema.prototype['client_secret'] = undefined;
 RouteSchema.prototype['sas_policy_name'] = undefined;
 
 /**
+ * This value is input-only and will be omitted from the response and replaced with a placeholder
  * @member {String} sas_policy_key
  */
 RouteSchema.prototype['sas_policy_key'] = undefined;
 
 /**
+ * This value is input-only and will be omitted from the response and replaced with a placeholder
  * @member {String} app_key
  */
 RouteSchema.prototype['app_key'] = undefined;
@@ -425,7 +434,7 @@ RouteSchema.prototype['account_name'] = undefined;
 RouteSchema.prototype['user_name'] = undefined;
 
 /**
- * PEM key with \\n newlines.  Field is input only, will not show contents on GET operations.
+ * PEM key with \\n newlines. This value is input-only and will be omitted from the response and replaced with a placeholder
  * @member {String} pem
  */
 RouteSchema.prototype['pem'] = undefined;

@@ -176,7 +176,7 @@ Snowflake.prototype['user_name'] = undefined;
 Snowflake.prototype['private_key_name'] = 'present';
 
 /**
- * PEM key with \\n newlines.  Field is input only, will not show contents on GET operations.
+ * PEM key with \\n newlines. This value is input-only and will be omitted from the response and replaced with a placeholder
  * @member {String} pem
  */
 Snowflake.prototype['pem'] = undefined;

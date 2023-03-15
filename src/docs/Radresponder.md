@@ -8,6 +8,6 @@ Name | Type | Description | Notes
 **testApi** | **Boolean** |  | [optional] [default to false]
 **dataFeedKey** | **String** |  | [optional] 
 **clientId** | **String** |  | [optional] 
-**clientSecret** | **String** | Client Secret is input only, will not display on GET operations | [optional] 
+**clientSecret** | **String** | This value is input-only and will be omitted from the response and replaced with a placeholder | [optional] 
 
 

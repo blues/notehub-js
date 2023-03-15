@@ -10,6 +10,6 @@ Name | Type | Description | Notes
 **throttleMs** | **Number** |  | [optional] 
 **url** | **String** |  | [optional] 
 **timeout** | **Number** | Timeout in seconds for each request | [optional] [default to 15]
-**appKey** | **String** |  | [optional] 
+**appKey** | **String** | This value is input-only and will be omitted from the response and replaced with a placeholder | [optional] 
 
 

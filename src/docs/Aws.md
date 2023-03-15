@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **timeout** | **Number** | Timeout in seconds for each request | [optional] [default to 15]
 **region** | **String** |  | [optional] 
 **accessKeyId** | **String** |  | [optional] 
-**accessKeySecret** | **String** |  | [optional] 
+**accessKeySecret** | **String** | This value is input-only and will be omitted from the response and replaced with a placeholder | [optional] 
 **messageGroupId** | **String** |  | [optional] 
 **messageDeduplicationId** | **String** |  | [optional] 
 **channel** | **String** |  | [optional] 
