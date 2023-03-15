@@ -5,7 +5,8 @@
   "scripts": {
     "downloadJsTemplate": "openapi-generator-cli author template -g javascript --library javascript",
     "generateDocs": "openapi-generator-cli generate -g javascript --library javascript -t libTemplate -o src -i openapi.yaml -c config.json",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky install"
   },
   "husky": {
     "hooks": {
@@ -35,7 +36,7 @@
   },
   "devDependencies": {
     "@openapitools/openapi-generator-cli": "^2.5.2",
-    "husky": "^8.0.3",
+    "husky": "^8.0.0",
     "prettier": "^2.8.4",
     "pretty-quick": "^3.1.3"
   },

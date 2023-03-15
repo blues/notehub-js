@@ -1,4 +1,4 @@
-# NotehubJs.AuthorizationAPI
+# NotehubJs.AuthorizationApi
 
 All URIs are relative to *https://api.notefile.net*
 
