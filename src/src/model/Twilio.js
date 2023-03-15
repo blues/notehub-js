@@ -17,7 +17,7 @@ import HttpFilter from './HttpFilter';
 /**
  * The Twilio model module.
  * @module model/Twilio
- * @version 1.0.9
+ * @version 1.0.10
  */
 class Twilio {
     /**

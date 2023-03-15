@@ -20,7 +20,7 @@ import Location from './Location';
 /**
  * The Device model module.
  * @module model/Device
- * @version 1.0.9
+ * @version 1.0.10
  */
 class Device {
     /**
