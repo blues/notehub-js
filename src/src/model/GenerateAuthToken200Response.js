@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The GenerateAuthToken200Response model module.
  * @module model/GenerateAuthToken200Response
- * @version 1.0.10
+ * @version 1.0.11
  */
 class GenerateAuthToken200Response {
   /**

@@ -167,4 +167,3 @@ src/model/TowerLocation.js
 src/model/Twilio.js
 src/model/UpdateFleetRequest.js
 src/model/UserDbRoute.js
-test/model/GenerateAuthToken200Response.spec.js

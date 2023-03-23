@@ -122,7 +122,7 @@ import RouteApi from "./api/RouteApi";
  * </pre>
  * </p>
  * @module index
- * @version 1.0.10
+ * @version 1.0.11
  */
 export {
   /**
