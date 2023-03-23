@@ -49,56 +49,12 @@ tags:
     description: Management of notefiles
 
 paths:
-  /oauth2/token:
-    post:
-      tags: [authorization]
-      operationId: generateAuthToken
-      description: Gets an OAuth bearer token that lasts for 30 minutes from the API based on a Notehub user and Notehub project.
-      requestBody:
-        required: true
-        content:
-          application/x-www-form-urlencoded:
-            schema:
-              type: object
-              properties:
-                grant_type:
-                  type: string
-                client_id:
-                  type: string
-                client_secret:
-                  type: string     
-            example:
-              grant_type: client_credentials
-              client_id: your-client-id
-              client_secret: your-client-secret
-      responses:
-        "200":
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  access_token:
-                    type: string
-                  expires_in: 
-                    type: number
-                  scope:
-                    type: string
-                  token_type:
-                    type: string
-
-        "400":
-          description: Bad Request
-        # NOTE: We're already within `post`, so 405 should not occur here.
-        "500":
-          description: Internal Server Error
 
   /auth/login:
     post:
       tags: [authorization]
       operationId: login
-      description: DEPRECATED. Gets a session token from the API from a username and
+      description: Gets a session token from the API from a username and
                    password.
       requestBody:
         required: true
@@ -136,7 +92,7 @@ paths:
       operationId: getRoutes
       description: Get all Routes within a Project
       security:
-        - bearer_access_token: []
+        - api_key: []
       parameters:
         - $ref: '#/components/parameters/projectUIDParam'
       responses:
@@ -200,7 +156,7 @@ paths:
       operationId: createRoute
       description: Create Route within a Project
       security:
-        - bearer_access_token: []
+        - api_key: []
       parameters:
         - $ref: '#/components/parameters/projectUIDParam'
       requestBody:
@@ -257,7 +213,7 @@ paths:
       operationId: getRoute
       description: Get single route within a project
       security:
-        - bearer_access_token: []
+        - api_key: []
       parameters:
         - $ref: '#/components/parameters/projectUIDParam'
         - $ref: '#/components/parameters/routeUIDParam'
@@ -295,7 +251,7 @@ paths:
       operationId: updateRoute
       description: Update route by UID
       security:
-        - bearer_access_token: []
+        - api_key: []
       parameters:
         - $ref: '#/components/parameters/projectUIDParam'
         - $ref: '#/components/parameters/routeUIDParam'
@@ -356,7 +312,7 @@ paths:
       operationId: deleteRoute
       description: Delete single route within a project
       security:
-        - bearer_access_token: []
+        - api_key: []
       parameters:
         - $ref: '#/components/parameters/projectUIDParam'
         - $ref: '#/components/parameters/routeUIDParam'
@@ -377,7 +333,7 @@ paths:
       operationId: getProjectByProduct
       description: Get a Project by ProductUID
       security:
-        - bearer_access_token: []
+        - api_key: []
       parameters:
         - name: productUID
           in: path
@@ -399,9 +355,9 @@ paths:
     get:
       tags: ["billing_account"]
       operationId: getBillingAccounts
-      description: Get Billing Accounts accessible by the OAuth access token
+      description: Get Billing Accounts accessible by the api_key
       security:
-        - bearer_access_token: []
+        - api_key: []
       responses:
         "200":
           description: Successful operation
@@ -421,9 +377,9 @@ paths:
     get:
       tags: ["project"]
       operationId: getProjects
-      description: Get Projects accessible by the OAuth access token
+      description: Get Projects accessible by the api_key
       security:
-        - bearer_access_token: []
+        - api_key: []
       responses:
         "200":
           description: Successful operation
@@ -444,7 +400,7 @@ paths:
       operationId: createProject
       description: Create a Project
       security:
-        - bearer_access_token: []
+        - api_key: []
       requestBody:
         description: Project to be created
         required: true
@@ -481,7 +437,7 @@ paths:
       operationId: getProject
       description: Get a Project by ProjectUID
       security:
-        - bearer_access_token: []
+        - api_key: []
       parameters:
         - $ref: '#/components/parameters/projectUIDParam'
       responses:
@@ -503,7 +459,7 @@ paths:
       operationId: getProjectProducts
       description: Get Products within a Project
       security:
-        - bearer_access_token: []
+        - api_key: []
       responses:
         "200":
           description: Successful operation
@@ -524,7 +480,7 @@ paths:
       operationId: createProduct
       description: Create Product within a Project
       security:
-        - bearer_access_token: []
+        - api_key: []
       requestBody:
         description: Product to be created
         required: true
@@ -570,7 +526,7 @@ paths:
       operationId: getProjectFleets
       description: Get Project Fleets
       security:
-        - bearer_access_token: []
+        - api_key: []
       responses:
         "200":
           $ref: '#/components/responses/FleetsResponse'
@@ -582,7 +538,7 @@ paths:
       operationId: createFleet
       description: Create Fleet
       security:
-        - bearer_access_token: []
+        - api_key: []
       requestBody:
         description: Fleet to be added
         required: true
@@ -615,7 +571,7 @@ paths:
       operationId: updateFleet
       description: Update Fleet
       security:
-        - bearer_access_token: []
+        - api_key: []
       requestBody:
         description: Fleet details to update
         required: true
@@ -652,7 +608,7 @@ paths:
       operationId: deleteFleet
       description: Delete Fleet
       security:
-        - bearer_access_token: []
+        - api_key: []
       responses:
         "204":
           description: Successful operation
@@ -668,7 +624,7 @@ paths:
       operationId: getProjectMembers
       description: Get Project Members
       security:
-        - bearer_access_token: []
+        - api_key: []
       responses:
         "200":
           description: Successful operation
@@ -693,7 +649,7 @@ paths:
       operationId: getProjectDevices
       description: Get Devices of a Project
       security:
-        - bearer_access_token: []
+        - api_key: []
       parameters:
         - $ref: '#/components/parameters/projectUIDParam'
         - $ref: '#/components/parameters/pageSizeParam'
@@ -724,7 +680,7 @@ paths:
       operationId: getProjectFleetDevices
       description: Get Devices of a Fleet within a Project
       security:
-        - bearer_access_token: []
+        - api_key: []
       parameters:
         - $ref: '#/components/parameters/projectUIDParam'
         - $ref: '#/components/parameters/fleetUIDParam'
@@ -756,7 +712,7 @@ paths:
       operationId: getProjectDevicePublicKeys
       description: Get Device Public Keys of a Project
       security:
-        - bearer_access_token: []
+        - api_key: []
       parameters:
         - $ref: '#/components/parameters/projectUIDParam'
         - $ref: '#/components/parameters/pageSizeParam'
@@ -796,7 +752,7 @@ paths:
       operationId: getDevice
       description: Get Device
       security:
-        - bearer_access_token: []
+        - api_key: []
       responses:
         "200":
           description: Successful operation
@@ -812,7 +768,7 @@ paths:
       operationId: deleteProjectDevice
       description: Delete Device
       security:
-        - bearer_access_token: []
+        - api_key: []
       parameters:
         - name: purge
           in: query
@@ -840,7 +796,7 @@ paths:
       operationId: getDeviceFleets
       description: Get Device Fleets
       security:
-        - bearer_access_token: []
+        - api_key: []
       responses:
         "200":
           $ref: '#/components/responses/FleetsResponse'
@@ -852,7 +808,7 @@ paths:
       operationId: putDeviceFleets
       description: Add Device to Fleets
       security:
-        - bearer_access_token: []
+        - api_key: []
       requestBody:
         description: >
           The fleets to add to the device.
@@ -885,7 +841,7 @@ paths:
       operationId: deleteDeviceFleets
       description: Remove Device from Fleets
       security:
-        - bearer_access_token: []
+        - api_key: []
       requestBody:
         description: >
           The fleets to remove from the device.
@@ -919,7 +875,7 @@ paths:
       operationId: getDevicePublicKey
       description: Get Device Public Key
       security:
-        - bearer_access_token: []
+        - api_key: []
       parameters:
         - $ref: '#/components/parameters/projectUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
@@ -948,7 +904,7 @@ paths:
       operationId: getDeviceLatest
       description: Get Device Latest Events
       security:
-        - bearer_access_token: []
+        - api_key: []
       parameters:
         - $ref: '#/components/parameters/projectUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
@@ -965,7 +921,7 @@ paths:
       operationId: getDeviceHealthLog
       description: Get Device Health Log
       security:
-        - bearer_access_token: []
+        - api_key: []
       parameters:
         - $ref: '#/components/parameters/projectUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
@@ -1004,7 +960,7 @@ paths:
       operationId: enableDevice
       description: Enable Device
       security:
-        - bearer_access_token: []
+        - api_key: []
       parameters:
         - $ref: '#/components/parameters/projectUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
@@ -1020,7 +976,7 @@ paths:
       operationId: disableDevice
       description: Disable Device
       security:
-        - bearer_access_token: []
+        - api_key: []
       parameters:
         - $ref: '#/components/parameters/projectUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
@@ -1036,7 +992,7 @@ paths:
       operationId: getDeviceSessions
       description: Get Device Sessions
       security:
-        - bearer_access_token: []
+        - api_key: []
       parameters:
         - $ref: '#/components/parameters/projectUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
@@ -1054,7 +1010,7 @@ paths:
       operationId: getProjectEvents
       description: Get Events of a Project
       security:
-        - bearer_access_token: []
+        - api_key: []
 
       parameters:
         - $ref: '#/components/parameters/projectUIDParam'
@@ -1081,7 +1037,7 @@ paths:
       operationId: getProjectEventsByCursor
       description: Get Events of a Project by cursor
       security:
-        - bearer_access_token: []
+        - api_key: []
 
       parameters:
         - $ref: '#/components/parameters/projectUIDParam'
@@ -1107,7 +1063,7 @@ paths:
       operationId: getFleetEvents
       description: Get Events of a Fleet
       security:
-        - bearer_access_token: []
+        - api_key: []
 
       parameters:
         - $ref: '#/components/parameters/projectUIDParam'
@@ -1136,7 +1092,7 @@ paths:
       operationId: getFleetEventsByCursor
       description: Get Events of a Fleet by cursor
       security:
-        - bearer_access_token: []
+        - api_key: []
 
       parameters:
         - $ref: '#/components/parameters/projectUIDParam'
@@ -1168,7 +1124,7 @@ paths:
       tags: ["project", "environment_variables"]
       operationId: getProjectEnvironmentVariables
       security:
-        - bearer_access_token: []
+        - api_key: []
       responses:
         "200":
           $ref: '#/components/responses/EnvironmentVariablesResponse'
@@ -1180,7 +1136,7 @@ paths:
       tags: ["project", "environment_variables"]
       operationId: putProjectEnvironmentVariables
       security:
-        - bearer_access_token: []
+        - api_key: []
       requestBody:
         content:
           application/json:
@@ -1198,7 +1154,7 @@ paths:
       tags: ["project", "environment_variables"]
       operationId: deleteProjectEnvironmentVariable
       security:
-        - bearer_access_token: []
+        - api_key: []
       parameters:
         - $ref: '#/components/parameters/projectUIDParam'
         - name: key
@@ -1224,7 +1180,7 @@ paths:
       tags: ["fleet", "environment_variables"]
       operationId: getFleetEnvironmentVariables
       security:
-        - bearer_access_token: []
+        - api_key: []
       responses:
         "200":
           $ref: '#/components/responses/EnvironmentVariablesResponse'
@@ -1235,7 +1191,7 @@ paths:
       tags: ["fleet", "environment_variables"]
       operationId: putFleetEnvironmentVariables
       security:
-        - bearer_access_token: []
+        - api_key: []
       requestBody:
         description: Environment variables to be added to the fleet
         required: true
@@ -1255,7 +1211,7 @@ paths:
       tags: ["fleet", "environment_variables"]
       operationId: deleteFleetEnvironmentVariable
       security:
-        - bearer_access_token: []
+        - api_key: []
       parameters:
         - $ref: '#/components/parameters/projectUIDParam'
         - $ref: '#/components/parameters/fleetUIDParam'
@@ -1281,7 +1237,7 @@ paths:
       tags: ["device", "environment_variables"]
       operationId: getDeviceEnvironmentVariables
       security:
-        - bearer_access_token: []
+        - api_key: []
       responses:
         "200":
           $ref: '#/components/responses/GetDeviceEnvironmentVariablesResponse'
@@ -1293,7 +1249,7 @@ paths:
       tags: ["device", "environment_variables"]
       operationId: putDeviceEnvironmentVariables
       security:
-        - bearer_access_token: []
+        - api_key: []
       requestBody:
         description: Environment variables to be added to the device
         required: true
@@ -1313,7 +1269,7 @@ paths:
       tags: ["device", "environment_variables"]
       operationId: deleteDeviceEnvironmentVariable
       security:
-        - bearer_access_token: []
+        - api_key: []
       parameters:
         - $ref: '#/components/parameters/projectUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
@@ -1375,7 +1331,7 @@ paths:
       description: Adds a Note to a Notefile, creating the Notefile if it
                    doesn't yet exist.
       security:
-        - bearer_access_token: []
+        - api_key: []
       parameters:
         - $ref: '#/components/parameters/projectUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
@@ -1400,7 +1356,7 @@ paths:
       description: Adds a Note to a Notefile, creating the Notefile if it
                    doesn't yet exist.
       security:
-        - bearer_access_token: []
+        - api_key: []
       parameters:
         - $ref: '#/components/parameters/projectUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
@@ -1424,7 +1380,7 @@ paths:
       operationId: HandleNoteDelete
       description: Delete a note from a DB notefile
       security:
-        - bearer_access_token: []
+        - api_key: []
       parameters:
         - $ref: '#/components/parameters/projectUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
@@ -1441,7 +1397,7 @@ paths:
       operationId: HandleNoteGet
       description: Get a note from a DB notefile
       security:
-        - bearer_access_token: []
+        - api_key: []
       parameters:
         - $ref: '#/components/parameters/projectUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
@@ -1484,7 +1440,7 @@ paths:
       operationId: HandleNoteUpdate
       description: Update a note in a DB notefile
       security:
-        - bearer_access_token: []
+        - api_key: []
       parameters:
         - $ref: '#/components/parameters/projectUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
@@ -1509,7 +1465,7 @@ paths:
       operationId: HandleNoteChanges
       description: Incrementally retrieve changes within a specific Notefile.
       security:
-        - bearer_access_token: []
+        - api_key: []
       parameters:
         - $ref: '#/components/parameters/projectUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
@@ -1576,7 +1532,7 @@ paths:
       operationId: HandleNotefileChanges
       description: Used to perform queries on a single or multiple files to determine if new Notes are available to read
       security:
-        - bearer_access_token: []
+        - api_key: []
       parameters:
         - $ref: '#/components/parameters/projectUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
@@ -1620,7 +1576,7 @@ paths:
       operationId: HandleNotefileChangesPending
       description: Returns info about file changes that are pending upload to Notehub or download to the Notecard.
       security:
-        - bearer_access_token: []
+        - api_key: []
       parameters:
         - $ref: '#/components/parameters/projectUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
@@ -1653,7 +1609,7 @@ paths:
       operationId: HandleNotefileDelete
       description: Deletes Notefiles and the Notes they contain.
       security:
-        - bearer_access_token: []
+        - api_key: []
       parameters:
         - $ref: '#/components/parameters/projectUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
@@ -1681,12 +1637,12 @@ paths:
       operationId: HandleNoteSignal
       description: Send a signal from Notehub to a Notecard.
       security:
-        - bearer_access_token: []
+        - api_key: []
       parameters:
         - $ref: '#/components/parameters/projectUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
       requestBody:
-        description: Body or payload of signal to be sent to the device
+        description: Body or payload of singnal to be sent to the device
         required: true
         content:
           application/json:
@@ -1708,20 +1664,11 @@ paths:
 
 components:
   securitySchemes:
-    bearer_access_token:
-      type: http
-      name: Bearer
-      scheme: bearer
-      description: |
-        For accessing most endpoints.
-        To retrieve the token, see the /oauth2/token endpoint.
-
     api_key:
       type: apiKey
       in: header
       name: X-Session-Token
       description: |
-        DEPRECATED.
         For accessing most endpoints.
         To retrieve the key, see the /auth/login endpoint.
 
