@@ -29,9 +29,9 @@ Create Fleet
 ```javascript
 import * as NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure API key authorization: api_key
-let api_key = defaultClient.authentications['api_key'];
-api_key.apiKey = 'YOUR API KEY';
+// Configure Bearer access token for authorization: bearer_access_token
+let bearer_access_token = defaultClient.authentications['bearer_access_token'];
+bearer_access_token.accessToken = "YOUR ACCESS TOKEN"
 
 let apiInstance = new NotehubJs.FleetApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
@@ -57,7 +57,7 @@ apiInstance.createFleet(projectUID, createFleetRequest).then((data) => {
 
 ### Authorization
 
-[api_key](../README.md#api_key)
+[bearer_access_token](../README.md#bearer_access_token)
 
 ### HTTP request headers
 
@@ -75,9 +75,9 @@ Remove Device from Fleets
 ```javascript
 import * as NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure API key authorization: api_key
-let api_key = defaultClient.authentications['api_key'];
-api_key.apiKey = 'YOUR API KEY';
+// Configure Bearer access token for authorization: bearer_access_token
+let bearer_access_token = defaultClient.authentications['bearer_access_token'];
+bearer_access_token.accessToken = "YOUR ACCESS TOKEN"
 
 let apiInstance = new NotehubJs.FleetApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
@@ -105,7 +105,7 @@ apiInstance.deleteDeviceFleets(projectUID, deviceUID, deleteDeviceFleetsRequest)
 
 ### Authorization
 
-[api_key](../README.md#api_key)
+[bearer_access_token](../README.md#bearer_access_token)
 
 ### HTTP request headers
 
@@ -123,9 +123,9 @@ Delete Fleet
 ```javascript
 import * as NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure API key authorization: api_key
-let api_key = defaultClient.authentications['api_key'];
-api_key.apiKey = 'YOUR API KEY';
+// Configure Bearer access token for authorization: bearer_access_token
+let bearer_access_token = defaultClient.authentications['bearer_access_token'];
+bearer_access_token.accessToken = "YOUR ACCESS TOKEN"
 
 let apiInstance = new NotehubJs.FleetApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
@@ -151,7 +151,7 @@ null (empty response body)
 
 ### Authorization
 
-[api_key](../README.md#api_key)
+[bearer_access_token](../README.md#bearer_access_token)
 
 ### HTTP request headers
 
@@ -169,9 +169,9 @@ Delete environment variables of a fleet
 ```javascript
 import * as NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure API key authorization: api_key
-let api_key = defaultClient.authentications['api_key'];
-api_key.apiKey = 'YOUR API KEY';
+// Configure Bearer access token for authorization: bearer_access_token
+let bearer_access_token = defaultClient.authentications['bearer_access_token'];
+bearer_access_token.accessToken = "YOUR ACCESS TOKEN"
 
 let apiInstance = new NotehubJs.FleetApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
@@ -199,7 +199,7 @@ apiInstance.deleteFleetEnvironmentVariable(projectUID, fleetUID, key).then((data
 
 ### Authorization
 
-[api_key](../README.md#api_key)
+[bearer_access_token](../README.md#bearer_access_token)
 
 ### HTTP request headers
 
@@ -217,9 +217,9 @@ Get Device Fleets
 ```javascript
 import * as NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure API key authorization: api_key
-let api_key = defaultClient.authentications['api_key'];
-api_key.apiKey = 'YOUR API KEY';
+// Configure Bearer access token for authorization: bearer_access_token
+let bearer_access_token = defaultClient.authentications['bearer_access_token'];
+bearer_access_token.accessToken = "YOUR ACCESS TOKEN"
 
 let apiInstance = new NotehubJs.FleetApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
@@ -245,7 +245,7 @@ apiInstance.getDeviceFleets(projectUID, deviceUID).then((data) => {
 
 ### Authorization
 
-[api_key](../README.md#api_key)
+[bearer_access_token](../README.md#bearer_access_token)
 
 ### HTTP request headers
 
@@ -263,9 +263,9 @@ Get environment variables of a fleet
 ```javascript
 import * as NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure API key authorization: api_key
-let api_key = defaultClient.authentications['api_key'];
-api_key.apiKey = 'YOUR API KEY';
+// Configure Bearer access token for authorization: bearer_access_token
+let bearer_access_token = defaultClient.authentications['bearer_access_token'];
+bearer_access_token.accessToken = "YOUR ACCESS TOKEN"
 
 let apiInstance = new NotehubJs.FleetApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
@@ -291,7 +291,7 @@ apiInstance.getFleetEnvironmentVariables(projectUID, fleetUID).then((data) => {
 
 ### Authorization
 
-[api_key](../README.md#api_key)
+[bearer_access_token](../README.md#bearer_access_token)
 
 ### HTTP request headers
 
@@ -309,9 +309,9 @@ Get Events of a Fleet
 ```javascript
 import * as NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure API key authorization: api_key
-let api_key = defaultClient.authentications['api_key'];
-api_key.apiKey = 'YOUR API KEY';
+// Configure Bearer access token for authorization: bearer_access_token
+let bearer_access_token = defaultClient.authentications['bearer_access_token'];
+bearer_access_token.accessToken = "YOUR ACCESS TOKEN"
 
 let apiInstance = new NotehubJs.FleetApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
@@ -357,7 +357,7 @@ apiInstance.getFleetEvents(projectUID, fleetUID, opts).then((data) => {
 
 ### Authorization
 
-[api_key](../README.md#api_key)
+[bearer_access_token](../README.md#bearer_access_token)
 
 ### HTTP request headers
 
@@ -375,9 +375,9 @@ Get Events of a Fleet by cursor
 ```javascript
 import * as NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure API key authorization: api_key
-let api_key = defaultClient.authentications['api_key'];
-api_key.apiKey = 'YOUR API KEY';
+// Configure Bearer access token for authorization: bearer_access_token
+let bearer_access_token = defaultClient.authentications['bearer_access_token'];
+bearer_access_token.accessToken = "YOUR ACCESS TOKEN"
 
 let apiInstance = new NotehubJs.FleetApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
@@ -421,7 +421,7 @@ apiInstance.getFleetEventsByCursor(projectUID, fleetUID, opts).then((data) => {
 
 ### Authorization
 
-[api_key](../README.md#api_key)
+[bearer_access_token](../README.md#bearer_access_token)
 
 ### HTTP request headers
 
@@ -439,9 +439,9 @@ Get Devices of a Fleet within a Project
 ```javascript
 import * as NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure API key authorization: api_key
-let api_key = defaultClient.authentications['api_key'];
-api_key.apiKey = 'YOUR API KEY';
+// Configure Bearer access token for authorization: bearer_access_token
+let bearer_access_token = defaultClient.authentications['bearer_access_token'];
+bearer_access_token.accessToken = "YOUR ACCESS TOKEN"
 
 let apiInstance = new NotehubJs.FleetApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
@@ -473,7 +473,7 @@ apiInstance.getProjectFleetDevices(projectUID, fleetUID, opts).then((data) => {
 
 ### Authorization
 
-[api_key](../README.md#api_key)
+[bearer_access_token](../README.md#bearer_access_token)
 
 ### HTTP request headers
 
@@ -491,9 +491,9 @@ Get Project Fleets
 ```javascript
 import * as NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure API key authorization: api_key
-let api_key = defaultClient.authentications['api_key'];
-api_key.apiKey = 'YOUR API KEY';
+// Configure Bearer access token for authorization: bearer_access_token
+let bearer_access_token = defaultClient.authentications['bearer_access_token'];
+bearer_access_token.accessToken = "YOUR ACCESS TOKEN"
 
 let apiInstance = new NotehubJs.FleetApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
@@ -517,7 +517,7 @@ apiInstance.getProjectFleets(projectUID).then((data) => {
 
 ### Authorization
 
-[api_key](../README.md#api_key)
+[bearer_access_token](../README.md#bearer_access_token)
 
 ### HTTP request headers
 
@@ -535,9 +535,9 @@ Add Device to Fleets
 ```javascript
 import * as NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure API key authorization: api_key
-let api_key = defaultClient.authentications['api_key'];
-api_key.apiKey = 'YOUR API KEY';
+// Configure Bearer access token for authorization: bearer_access_token
+let bearer_access_token = defaultClient.authentications['bearer_access_token'];
+bearer_access_token.accessToken = "YOUR ACCESS TOKEN"
 
 let apiInstance = new NotehubJs.FleetApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
@@ -565,7 +565,7 @@ apiInstance.putDeviceFleets(projectUID, deviceUID, putDeviceFleetsRequest).then(
 
 ### Authorization
 
-[api_key](../README.md#api_key)
+[bearer_access_token](../README.md#bearer_access_token)
 
 ### HTTP request headers
 
@@ -583,9 +583,9 @@ Put environment variables of a fleet
 ```javascript
 import * as NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure API key authorization: api_key
-let api_key = defaultClient.authentications['api_key'];
-api_key.apiKey = 'YOUR API KEY';
+// Configure Bearer access token for authorization: bearer_access_token
+let bearer_access_token = defaultClient.authentications['bearer_access_token'];
+bearer_access_token.accessToken = "YOUR ACCESS TOKEN"
 
 let apiInstance = new NotehubJs.FleetApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
@@ -613,7 +613,7 @@ apiInstance.putFleetEnvironmentVariables(projectUID, fleetUID, environmentVariab
 
 ### Authorization
 
-[api_key](../README.md#api_key)
+[bearer_access_token](../README.md#bearer_access_token)
 
 ### HTTP request headers
 
@@ -631,9 +631,9 @@ Update Fleet
 ```javascript
 import * as NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure API key authorization: api_key
-let api_key = defaultClient.authentications['api_key'];
-api_key.apiKey = 'YOUR API KEY';
+// Configure Bearer access token for authorization: bearer_access_token
+let bearer_access_token = defaultClient.authentications['bearer_access_token'];
+bearer_access_token.accessToken = "YOUR ACCESS TOKEN"
 
 let apiInstance = new NotehubJs.FleetApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
@@ -661,7 +661,7 @@ apiInstance.updateFleet(projectUID, fleetUID, updateFleetRequest).then((data) =>
 
 ### Authorization
 
-[api_key](../README.md#api_key)
+[bearer_access_token](../README.md#bearer_access_token)
 
 ### HTTP request headers
 
