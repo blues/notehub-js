@@ -21,9 +21,9 @@ Create Route within a Project
 ```javascript
 import * as NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure API key authorization: api_key
-let api_key = defaultClient.authentications['api_key'];
-api_key.apiKey = 'YOUR API KEY';
+// Configure Bearer access token for authorization: bearer_access_token
+let bearer_access_token = defaultClient.authentications['bearer_access_token'];
+bearer_access_token.accessToken = "YOUR ACCESS TOKEN"
 
 let apiInstance = new NotehubJs.RouteApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
@@ -58,7 +58,7 @@ apiInstance.createRoute(projectUID, route).then((data) => {
 
 ### Authorization
 
-[api_key](../README.md#api_key)
+[bearer_access_token](../README.md#bearer_access_token)
 
 ### HTTP request headers
 
@@ -76,9 +76,9 @@ Delete single route within a project
 ```javascript
 import * as NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure API key authorization: api_key
-let api_key = defaultClient.authentications['api_key'];
-api_key.apiKey = 'YOUR API KEY';
+// Configure Bearer access token for authorization: bearer_access_token
+let bearer_access_token = defaultClient.authentications['bearer_access_token'];
+bearer_access_token.accessToken = "YOUR ACCESS TOKEN"
 
 let apiInstance = new NotehubJs.RouteApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
@@ -104,7 +104,7 @@ apiInstance.deleteRoute(projectUID, routeUID).then((data) => {
 
 ### Authorization
 
-[api_key](../README.md#api_key)
+[bearer_access_token](../README.md#bearer_access_token)
 
 ### HTTP request headers
 
@@ -122,9 +122,9 @@ Get single route within a project
 ```javascript
 import * as NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure API key authorization: api_key
-let api_key = defaultClient.authentications['api_key'];
-api_key.apiKey = 'YOUR API KEY';
+// Configure Bearer access token for authorization: bearer_access_token
+let bearer_access_token = defaultClient.authentications['bearer_access_token'];
+bearer_access_token.accessToken = "YOUR ACCESS TOKEN"
 
 let apiInstance = new NotehubJs.RouteApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
@@ -150,7 +150,7 @@ apiInstance.getRoute(projectUID, routeUID).then((data) => {
 
 ### Authorization
 
-[api_key](../README.md#api_key)
+[bearer_access_token](../README.md#bearer_access_token)
 
 ### HTTP request headers
 
@@ -168,9 +168,9 @@ Get all Routes within a Project
 ```javascript
 import * as NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure API key authorization: api_key
-let api_key = defaultClient.authentications['api_key'];
-api_key.apiKey = 'YOUR API KEY';
+// Configure Bearer access token for authorization: bearer_access_token
+let bearer_access_token = defaultClient.authentications['bearer_access_token'];
+bearer_access_token.accessToken = "YOUR ACCESS TOKEN"
 
 let apiInstance = new NotehubJs.RouteApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
@@ -194,7 +194,7 @@ apiInstance.getRoutes(projectUID).then((data) => {
 
 ### Authorization
 
-[api_key](../README.md#api_key)
+[bearer_access_token](../README.md#bearer_access_token)
 
 ### HTTP request headers
 
@@ -212,9 +212,9 @@ Update route by UID
 ```javascript
 import * as NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure API key authorization: api_key
-let api_key = defaultClient.authentications['api_key'];
-api_key.apiKey = 'YOUR API KEY';
+// Configure Bearer access token for authorization: bearer_access_token
+let bearer_access_token = defaultClient.authentications['bearer_access_token'];
+bearer_access_token.accessToken = "YOUR ACCESS TOKEN"
 
 let apiInstance = new NotehubJs.RouteApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
@@ -253,7 +253,7 @@ apiInstance.updateRoute(projectUID, routeUID, route).then((data) => {
 
 ### Authorization
 
-[api_key](../README.md#api_key)
+[bearer_access_token](../README.md#bearer_access_token)
 
 ### HTTP request headers
 

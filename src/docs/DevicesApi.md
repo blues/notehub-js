@@ -21,9 +21,9 @@ Delete Device
 ```javascript
 import * as NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure API key authorization: api_key
-let api_key = defaultClient.authentications['api_key'];
-api_key.apiKey = 'YOUR API KEY';
+// Configure Bearer access token for authorization: bearer_access_token
+let bearer_access_token = defaultClient.authentications['bearer_access_token'];
+bearer_access_token.accessToken = "YOUR ACCESS TOKEN"
 
 let apiInstance = new NotehubJs.DevicesApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
@@ -51,7 +51,7 @@ null (empty response body)
 
 ### Authorization
 
-[api_key](../README.md#api_key)
+[bearer_access_token](../README.md#bearer_access_token)
 
 ### HTTP request headers
 
@@ -69,9 +69,9 @@ Get Device
 ```javascript
 import * as NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure API key authorization: api_key
-let api_key = defaultClient.authentications['api_key'];
-api_key.apiKey = 'YOUR API KEY';
+// Configure Bearer access token for authorization: bearer_access_token
+let bearer_access_token = defaultClient.authentications['bearer_access_token'];
+bearer_access_token.accessToken = "YOUR ACCESS TOKEN"
 
 let apiInstance = new NotehubJs.DevicesApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
@@ -97,7 +97,7 @@ apiInstance.getDevice(projectUID, deviceUID).then((data) => {
 
 ### Authorization
 
-[api_key](../README.md#api_key)
+[bearer_access_token](../README.md#bearer_access_token)
 
 ### HTTP request headers
 
@@ -115,9 +115,9 @@ Get Device Public Keys of a Project
 ```javascript
 import * as NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure API key authorization: api_key
-let api_key = defaultClient.authentications['api_key'];
-api_key.apiKey = 'YOUR API KEY';
+// Configure Bearer access token for authorization: bearer_access_token
+let bearer_access_token = defaultClient.authentications['bearer_access_token'];
+bearer_access_token.accessToken = "YOUR ACCESS TOKEN"
 
 let apiInstance = new NotehubJs.DevicesApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
@@ -147,7 +147,7 @@ apiInstance.getProjectDevicePublicKeys(projectUID, opts).then((data) => {
 
 ### Authorization
 
-[api_key](../README.md#api_key)
+[bearer_access_token](../README.md#bearer_access_token)
 
 ### HTTP request headers
 
@@ -165,9 +165,9 @@ Get Devices of a Project
 ```javascript
 import * as NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure API key authorization: api_key
-let api_key = defaultClient.authentications['api_key'];
-api_key.apiKey = 'YOUR API KEY';
+// Configure Bearer access token for authorization: bearer_access_token
+let bearer_access_token = defaultClient.authentications['bearer_access_token'];
+bearer_access_token.accessToken = "YOUR ACCESS TOKEN"
 
 let apiInstance = new NotehubJs.DevicesApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
@@ -197,7 +197,7 @@ apiInstance.getProjectDevices(projectUID, opts).then((data) => {
 
 ### Authorization
 
-[api_key](../README.md#api_key)
+[bearer_access_token](../README.md#bearer_access_token)
 
 ### HTTP request headers
 
@@ -215,9 +215,9 @@ Get Devices of a Fleet within a Project
 ```javascript
 import * as NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure API key authorization: api_key
-let api_key = defaultClient.authentications['api_key'];
-api_key.apiKey = 'YOUR API KEY';
+// Configure Bearer access token for authorization: bearer_access_token
+let bearer_access_token = defaultClient.authentications['bearer_access_token'];
+bearer_access_token.accessToken = "YOUR ACCESS TOKEN"
 
 let apiInstance = new NotehubJs.DevicesApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
@@ -249,7 +249,7 @@ apiInstance.getProjectFleetDevices(projectUID, fleetUID, opts).then((data) => {
 
 ### Authorization
 
-[api_key](../README.md#api_key)
+[bearer_access_token](../README.md#bearer_access_token)
 
 ### HTTP request headers
 
