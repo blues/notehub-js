@@ -78,7 +78,7 @@ Using the command line, a user can request a new token from the
 [Notehub API `/oauth2/token` endpoint](https://dev.blues.io/reference/notehub-api/api-introduction/#authentication-with-oauth-bearer-tokens)
 using a Notehub project's `client_id` and `client_secret`, which can be obtained from the **Settings** of a Notehub project, under **Programmatic API Access**.
 
-**Use NotehubJs.AuthorizationApi login**
+**Use NotehubJs.AuthorizationApi generateAuthToken**
 
 Using this library, a user can programmatically call the Notehub API's `/oauth2/token` endpoint
 via the [NotehubJs.AuthorizationApi's `generateAuthToken()`](/src/docs/AuthorizationApi.md#generateAuthToken) method while supplying a Notehub project `client_id` and `client_secret` in the `opts` object.
