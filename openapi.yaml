@@ -2830,7 +2830,7 @@ components:
           description: Type of route.
           enum: ["http", "proxy", "google-function", "mqtt", "aws-lambda", "aws-lambda-with-access-key", "aws-sqs", "aws-sqs-with-access-key", "aws-sqs-fifo", 
                 "aws-sqs-fifo-with-access-key", "aws-iot-analytics", "radnote-radresp-fixed-survey", "radnote-radresp-mobile-survey", "azure-function",
-                "azure-function-with-key", "azure-service-bus-with-sas-token", "thingworx", "snowflake"]
+                "azure-function-with-key", "azure-service-bus-with-sas-token", "thingworx", "snowflake", "edgeimpulse"]
         modified:
           type: string
           description: Last Modified
@@ -3365,6 +3365,67 @@ components:
           description: Message to send, leave blank to use notefile.
         throttle_ms:
           type: integer
+    
+    edgeimpulse:
+      description: Route settings specific to edgeimpulse routes.  Only used for edgeimpulse route types
+      type: object
+      properties:
+        fleets:
+          type: array
+          items:
+            type: string
+          minItems: 0
+          description: list of Fleet UIDs to apply route to, if any.  If empty, applies to all Fleets
+        filter:
+          type: object
+          properties:
+            type:
+              type: string
+              description: What notefiles this route applies to.
+              enum: ["all", "include", "exclude"]
+            system_notefiles:
+              type: boolean
+              description: Whether system notefiles should be affected by this route
+            files:
+              type: array
+              items:
+                type: string
+                description: list of notefiles to filter.  For instance, if 'type' is set to "include", will only affect files listed here
+              minItems: 0
+          description: Route filtering settings
+        timeout:
+          type: integer
+          default: 15
+          description: Timeout in seconds for each request
+        api_key:
+          type: string
+          description: EdgeImpulse API Key
+        filename:
+          type: string
+          description: An identifier the collection of data points
+        device_type:
+          type: string
+          description: An identifier for the type of device generating the data
+        interval_ms:
+          type: integer
+          description: Frequency of data in miliseconds
+        device_name:
+          type: string
+          description: An identifier for the device generating the data
+        label:
+          type: string
+          description: A label for the data point
+        sensors:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              units:
+                type: string
+              value:
+                type: string
 
     EnvironmentVariables:
       type: object
