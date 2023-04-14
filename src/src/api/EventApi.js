@@ -19,7 +19,7 @@ import GetProjectEventsByCursor200Response from "../model/GetProjectEventsByCurs
 /**
  * Event service.
  * @module api/EventApi
- * @version 1.0.11
+ * @version 1.0.12
  */
 export default class EventApi {
   /**
@@ -83,7 +83,7 @@ export default class EventApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["bearer_access_token"];
+    let authNames = ["api_key"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = GetProjectEvents200Response;
@@ -175,7 +175,7 @@ export default class EventApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["bearer_access_token"];
+    let authNames = ["api_key"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = GetProjectEventsByCursor200Response;
@@ -262,7 +262,7 @@ export default class EventApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["bearer_access_token"];
+    let authNames = ["api_key"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = GetProjectEvents200Response;
@@ -345,7 +345,7 @@ export default class EventApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["bearer_access_token"];
+    let authNames = ["api_key"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = GetProjectEventsByCursor200Response;

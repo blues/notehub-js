@@ -27,7 +27,7 @@ import UpdateFleetRequest from "../model/UpdateFleetRequest";
 /**
  * Fleet service.
  * @module api/FleetApi
- * @version 1.0.11
+ * @version 1.0.12
  */
 export default class FleetApi {
   /**
@@ -69,7 +69,7 @@ export default class FleetApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["bearer_access_token"];
+    let authNames = ["api_key"];
     let contentTypes = ["application/json"];
     let accepts = ["application/json"];
     let returnType = Fleet;
@@ -146,7 +146,7 @@ export default class FleetApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["bearer_access_token"];
+    let authNames = ["api_key"];
     let contentTypes = ["application/json"];
     let accepts = ["application/json"];
     let returnType = GetProjectFleets200Response;
@@ -212,7 +212,7 @@ export default class FleetApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["bearer_access_token"];
+    let authNames = ["api_key"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = null;
@@ -283,7 +283,7 @@ export default class FleetApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["bearer_access_token"];
+    let authNames = ["api_key"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = EnvironmentVariables;
@@ -349,7 +349,7 @@ export default class FleetApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["bearer_access_token"];
+    let authNames = ["api_key"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = GetProjectFleets200Response;
@@ -412,7 +412,7 @@ export default class FleetApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["bearer_access_token"];
+    let authNames = ["api_key"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = EnvironmentVariables;
@@ -497,7 +497,7 @@ export default class FleetApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["bearer_access_token"];
+    let authNames = ["api_key"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = GetProjectEvents200Response;
@@ -589,7 +589,7 @@ export default class FleetApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["bearer_access_token"];
+    let authNames = ["api_key"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = GetProjectEventsByCursor200Response;
@@ -670,7 +670,7 @@ export default class FleetApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["bearer_access_token"];
+    let authNames = ["api_key"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = GetProjectDevices200Response;
@@ -730,7 +730,7 @@ export default class FleetApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["bearer_access_token"];
+    let authNames = ["api_key"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = GetProjectFleets200Response;
@@ -802,7 +802,7 @@ export default class FleetApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["bearer_access_token"];
+    let authNames = ["api_key"];
     let contentTypes = ["application/json"];
     let accepts = ["application/json"];
     let returnType = GetProjectFleets200Response;
@@ -879,7 +879,7 @@ export default class FleetApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["bearer_access_token"];
+    let authNames = ["api_key"];
     let contentTypes = ["application/json"];
     let accepts = ["application/json"];
     let returnType = EnvironmentVariables;
@@ -952,7 +952,7 @@ export default class FleetApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["bearer_access_token"];
+    let authNames = ["api_key"];
     let contentTypes = ["application/json"];
     let accepts = ["application/json"];
     let returnType = Fleet;

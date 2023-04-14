@@ -20,7 +20,7 @@ import Note from "../model/Note";
 /**
  * Notes service.
  * @module api/NotesApi
- * @version 1.0.11
+ * @version 1.0.12
  */
 export default class NotesApi {
   /**
@@ -78,7 +78,7 @@ export default class NotesApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["bearer_access_token"];
+    let authNames = ["api_key"];
     let contentTypes = ["application/json"];
     let accepts = ["application/json"];
     let returnType = null;
@@ -169,7 +169,7 @@ export default class NotesApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["bearer_access_token"];
+    let authNames = ["api_key"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = HandleNoteChanges200Response;
@@ -272,7 +272,7 @@ export default class NotesApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["bearer_access_token"];
+    let authNames = ["api_key"];
     let contentTypes = ["application/json"];
     let accepts = ["application/json"];
     let returnType = null;
@@ -358,7 +358,7 @@ export default class NotesApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["bearer_access_token"];
+    let authNames = ["api_key"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = null;
@@ -449,7 +449,7 @@ export default class NotesApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["bearer_access_token"];
+    let authNames = ["api_key"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = HandleNoteGet200Response;
@@ -550,7 +550,7 @@ export default class NotesApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["bearer_access_token"];
+    let authNames = ["api_key"];
     let contentTypes = ["application/json"];
     let accepts = ["application/json"];
     let returnType = null;

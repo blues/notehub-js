@@ -20,7 +20,7 @@ import GetProjectDevices200Response from "../model/GetProjectDevices200Response"
 /**
  * Devices service.
  * @module api/DevicesApi
- * @version 1.0.11
+ * @version 1.0.12
  */
 export default class DevicesApi {
   /**
@@ -72,7 +72,7 @@ export default class DevicesApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["bearer_access_token"];
+    let authNames = ["api_key"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = null;
@@ -138,7 +138,7 @@ export default class DevicesApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["bearer_access_token"];
+    let authNames = ["api_key"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = Device;
@@ -200,7 +200,7 @@ export default class DevicesApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["bearer_access_token"];
+    let authNames = ["api_key"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = GetProjectDevicePublicKeys200Response;
@@ -264,7 +264,7 @@ export default class DevicesApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["bearer_access_token"];
+    let authNames = ["api_key"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = GetProjectDevices200Response;
@@ -336,7 +336,7 @@ export default class DevicesApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["bearer_access_token"];
+    let authNames = ["api_key"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = GetProjectDevices200Response;

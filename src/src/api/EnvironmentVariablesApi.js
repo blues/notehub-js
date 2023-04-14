@@ -19,7 +19,7 @@ import GetDeviceEnvironmentVariables200Response from "../model/GetDeviceEnvironm
 /**
  * EnvironmentVariables service.
  * @module api/EnvironmentVariablesApi
- * @version 1.0.11
+ * @version 1.0.12
  */
 export default class EnvironmentVariablesApi {
   /**
@@ -70,7 +70,7 @@ export default class EnvironmentVariablesApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["bearer_access_token"];
+    let authNames = ["api_key"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = EnvironmentVariables;
@@ -144,7 +144,7 @@ export default class EnvironmentVariablesApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["bearer_access_token"];
+    let authNames = ["api_key"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = EnvironmentVariables;
@@ -210,7 +210,7 @@ export default class EnvironmentVariablesApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["bearer_access_token"];
+    let authNames = ["api_key"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = EnvironmentVariables;
@@ -274,7 +274,7 @@ export default class EnvironmentVariablesApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["bearer_access_token"];
+    let authNames = ["api_key"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = GetDeviceEnvironmentVariables200Response;
@@ -402,7 +402,7 @@ export default class EnvironmentVariablesApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["bearer_access_token"];
+    let authNames = ["api_key"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = EnvironmentVariables;
@@ -458,7 +458,7 @@ export default class EnvironmentVariablesApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["bearer_access_token"];
+    let authNames = ["api_key"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = EnvironmentVariables;
@@ -531,7 +531,7 @@ export default class EnvironmentVariablesApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["bearer_access_token"];
+    let authNames = ["api_key"];
     let contentTypes = ["application/json"];
     let accepts = ["application/json"];
     let returnType = EnvironmentVariables;
@@ -689,7 +689,7 @@ export default class EnvironmentVariablesApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["bearer_access_token"];
+    let authNames = ["api_key"];
     let contentTypes = ["application/json"];
     let accepts = ["application/json"];
     let returnType = EnvironmentVariables;
@@ -750,7 +750,7 @@ export default class EnvironmentVariablesApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["bearer_access_token"];
+    let authNames = ["api_key"];
     let contentTypes = ["application/json"];
     let accepts = ["application/json"];
     let returnType = EnvironmentVariables;

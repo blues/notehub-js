@@ -48,3 +48,5 @@
 - `thingworx` (value: `"thingworx"`)
 
 - `snowflake` (value: `"snowflake"`)
+
+- `edgeimpulse` (value: `"edgeimpulse"`)

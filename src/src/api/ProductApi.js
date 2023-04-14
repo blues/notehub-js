@@ -21,7 +21,7 @@ import Project from "../model/Project";
 /**
  * Product service.
  * @module api/ProductApi
- * @version 1.0.11
+ * @version 1.0.12
  */
 export default class ProductApi {
   /**
@@ -63,7 +63,7 @@ export default class ProductApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["bearer_access_token"];
+    let authNames = ["api_key"];
     let contentTypes = ["application/json"];
     let accepts = ["application/json"];
     let returnType = Product;
@@ -119,7 +119,7 @@ export default class ProductApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["bearer_access_token"];
+    let authNames = ["api_key"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = Project;
@@ -173,7 +173,7 @@ export default class ProductApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["bearer_access_token"];
+    let authNames = ["api_key"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = GetProjectProducts200Response;

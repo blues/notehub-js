@@ -28,7 +28,7 @@ import PutDeviceFleetsRequest from "../model/PutDeviceFleetsRequest";
 /**
  * Device service.
  * @module api/DeviceApi
- * @version 1.0.11
+ * @version 1.0.12
  */
 export default class DeviceApi {
   /**
@@ -79,7 +79,7 @@ export default class DeviceApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["bearer_access_token"];
+    let authNames = ["api_key"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = EnvironmentVariables;
@@ -159,7 +159,7 @@ export default class DeviceApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["bearer_access_token"];
+    let authNames = ["api_key"];
     let contentTypes = ["application/json"];
     let accepts = ["application/json"];
     let returnType = GetProjectFleets200Response;
@@ -225,7 +225,7 @@ export default class DeviceApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["bearer_access_token"];
+    let authNames = ["api_key"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = null;
@@ -288,7 +288,7 @@ export default class DeviceApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["bearer_access_token"];
+    let authNames = ["api_key"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = null;
@@ -351,7 +351,7 @@ export default class DeviceApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["bearer_access_token"];
+    let authNames = ["api_key"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = GetDeviceEnvironmentVariables200Response;
@@ -479,7 +479,7 @@ export default class DeviceApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["bearer_access_token"];
+    let authNames = ["api_key"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = GetProjectFleets200Response;
@@ -542,7 +542,7 @@ export default class DeviceApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["bearer_access_token"];
+    let authNames = ["api_key"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = GetDeviceHealthLog200Response;
@@ -605,7 +605,7 @@ export default class DeviceApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["bearer_access_token"];
+    let authNames = ["api_key"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = GetDeviceLatest200Response;
@@ -668,7 +668,7 @@ export default class DeviceApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["bearer_access_token"];
+    let authNames = ["api_key"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = GetDevicePublicKey200Response;
@@ -738,7 +738,7 @@ export default class DeviceApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["bearer_access_token"];
+    let authNames = ["api_key"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = GetDeviceSessions200Response;
@@ -779,7 +779,7 @@ export default class DeviceApi {
    * Send a signal from Notehub to a Notecard.
    * @param {String} projectUID
    * @param {String} deviceUID
-   * @param {module:model/Body} body Body or payload of signal to be sent to the device
+   * @param {module:model/Body} body Body or payload of singnal to be sent to the device
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/HandleNoteSignal200Response} and HTTP response
    */
   handleNoteSignalWithHttpInfo(projectUID, deviceUID, body) {
@@ -811,7 +811,7 @@ export default class DeviceApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["bearer_access_token"];
+    let authNames = ["api_key"];
     let contentTypes = ["application/json"];
     let accepts = ["application/json"];
     let returnType = HandleNoteSignal200Response;
@@ -835,7 +835,7 @@ export default class DeviceApi {
    * Send a signal from Notehub to a Notecard.
    * @param {String} projectUID
    * @param {String} deviceUID
-   * @param {module:model/Body} body Body or payload of signal to be sent to the device
+   * @param {module:model/Body} body Body or payload of singnal to be sent to the device
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/HandleNoteSignal200Response}
    */
   handleNoteSignal(projectUID, deviceUID, body) {
@@ -886,7 +886,7 @@ export default class DeviceApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["bearer_access_token"];
+    let authNames = ["api_key"];
     let contentTypes = ["application/json"];
     let accepts = ["application/json"];
     let returnType = EnvironmentVariables;
@@ -1043,7 +1043,7 @@ export default class DeviceApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["bearer_access_token"];
+    let authNames = ["api_key"];
     let contentTypes = ["application/json"];
     let accepts = ["application/json"];
     let returnType = GetProjectFleets200Response;
