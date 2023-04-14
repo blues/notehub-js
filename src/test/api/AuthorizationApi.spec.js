@@ -42,27 +42,4 @@
     if (typeof object[setter] === "function") object[setter](value);
     else object[property] = value;
   };
-
-  describe("AuthorizationApi", function () {
-    describe("login", function () {
-      it("should call login successfully", function (done) {
-        //uncomment below and update the code to test login
-        //instance.login(function(error) {
-        //  if (error) throw error;
-        //expect().to.be();
-        //});
-        done();
-      });
-    });
-    describe("generateAuthToken", function () {
-      it("should call generateAuthToken successfully", function (done) {
-        //uncomment below and update the code to test login
-        //instance.generateAuthToken(function(error) {
-        //  if (error) throw error;
-        //expect().to.be();
-        //});
-        done();
-      });
-    });
-  });
 });
