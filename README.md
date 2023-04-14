@@ -68,22 +68,23 @@ const defaultClient = NotehubJs.ApiClient.instance;
 
 Here is an example of how to fetch all devices associated with a particular [Notehub project](https://dev.blues.io/reference/glossary/#project).
 
-The `bearer_access_token` variable declared below is an Oauth bearer token required for most Notehub API requests. Each bearer token is unique based on the Notehub user and Notehub project.
+The `api-key` variable declared below is an `X-SESSION-TOKEN` authentication token required for all Notehub API requests.
 
 It can be obtained in two ways:
 
 **Manually cURL the token from the command line**
 
 Using the command line, a user can request a new token from the
-[Notehub API `/oauth2/token` endpoint](https://dev.blues.io/reference/notehub-api/api-introduction/#authentication-with-oauth-bearer-tokens)
-using a Notehub project's `client_id` and `client_secret`, which can be obtained from the **Settings** of a Notehub project, under **Programmatic API Access**.
+[Notehub API `/auth/login` endpoint](https://dev.blues.io/reference/notehub-api/api-introduction/#authentication-with-session-tokens-deprecated)
+using a Notehub username and password in the body of the request.
 
-**Use NotehubJs.AuthorizationApi generateAuthToken**
+**Use NotehubJs.AuthorizationApi login**
 
-Using this library, a user can programmatically call the Notehub API's `/oauth2/token` endpoint
-via the [NotehubJs.AuthorizationApi's `generateAuthToken()`](/src/docs/AuthorizationApi.md#generateAuthToken) method while supplying a Notehub project `client_id` and `client_secret` in the `opts` object.
+Using this library, a user can programmatically call the Notehub API's `/auth/login` endpoint
+via the [NotehubJs.AuthorizationApi's `login()`](/src/docs/AuthorizationApi.md#login) method while supplying a Notehub username and
+password in the `loginRequest` object.
 
-Then supply the newly generated authentication token to whatever method the library needs, by setting it equal to: `bearer_access_token.accessToken = "YOUR ACCESS TOKEN"` in the code.
+Then supply the newly generated authentication token to whatever method the library needs, by setting it equal to: `api_key.apiKey = "YOUR API KEY";` in the code.
 
 > **NOTE**: Be aware that all Notehub API calls made using the Notehub JS library utilize your account's [Consumption Credits](https://dev.blues.io/reference/glossary#consumption-credit) (CCs). For > more information, please consult our [pricing page](https://blues.io/pricing/).
 
@@ -92,9 +93,9 @@ import * as NotehubJs from "@blues-inc/notehub-js";
 
 let defaultClient = NotehubJs.ApiClient.instance;
 
-// Configure Bearer access token for authorization: bearer_access_token
-let bearer_access_token = defaultClient.authentications["bearer_access_token"];
-bearer_access_token.accessToken = "YOUR ACCESS TOKEN";
+// Configure API key authorization: api_key
+let api_key = defaultClient.authentications["api_key"];
+api_key.apiKey = "YOUR API KEY";
 
 let apiInstance = new NotehubJs.ProjectApi();
 let projectUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8;"; // String |
@@ -127,7 +128,7 @@ If you'd like to see examples of this library being used in real-world applicati
 The files that deserve special attention are:
 
 - [`ServiceLocatorServer.ts`](https://github.com/blues/app-accelerators/blob/main/01-indoor-floor-level-tracker/web-app/src/services/ServiceLocatorServer.ts) - this file makes the variety of services composing the backend logic of the application discoverable to each other. For DRY-er code, the Notehub JS library's instances were created and passed to the various services that would require them to fetch and update data via the Notehub API. An instance of the Notehub JS client is created via `const notehubJsClient = NotehubJs.ApiClient.instance`, and passed to the `getDataProvider()` and `getAttributeStore()` services that will need to interact with the Notehub API to perform their duties.
-- [`NotehubDataProvider.ts`](https://github.com/blues/app-accelerators/blob/main/01-indoor-floor-level-tracker/web-app/src/services/notehub/NotehubDataProvider.ts) - this file is responsible for fetching data from the Notehub API for the application to display. It generates a fresh OAuth token via the authorization API's `generateAuthToken()` function each time before calling the project API's `getProjectFleetDevices()` and `getProjectEvents()` methods, and the fleet API's `getFleetEnvironmentVariables()` method as well.
+- [`NotehubDataProvider.ts`](https://github.com/blues/app-accelerators/blob/main/01-indoor-floor-level-tracker/web-app/src/services/notehub/NotehubDataProvider.ts) - this file is responsible for fetching data from the Notehub API for the application to display. It calls the project API's `getProjectFleetDevices()` and `getProjectEvents()` methods, and the fleet API's `getFleetEnvironmentVariables()` method as well.
 - [`NotehubAttributeStore.ts`](https://github.com/blues/app-accelerators/blob/main/01-indoor-floor-level-tracker/web-app/src/services/notehub/NotehubAttributeStore.ts) - this file sends updates to the Notehub API from the application like updated device name or updated environment variables. It calls two of the environment variable API's methods: `putDeviceEnvironmentVariables()` and `putFleetEnvironmentVariables()`.
 
 ## Further Library Documentation & Code Examples
@@ -315,7 +316,7 @@ npm install
 
 All of these directions are also available in the auto-generated [`README.md`](src/README.md) in the `src/` folder as well, for reference.
 
-> **NOTE:** Even testing locally, you will need an OAuth access token (this is the `bearer_access_token` referenced in the code examples). See [these directions](https://dev.blues.io/reference/notehub-api/api-introduction/#authentication-with-oauth-bearer-tokens) on the Blues Developer Experience site to generate one.
+> **NOTE:** Even testing locally, you will need an `X-SESSION-TOKEN` (this is the 'api-key' referenced in the code examples). See [these directions](https://dev.blues.io/reference/notehub-api/api-introduction/#authentication-with-session-tokens-deprecated) on the Blues Developer Experience site to generate one.
 
 ## Deploying notehub-js to npm
 
@@ -330,7 +331,7 @@ Below are the necessary steps to take a new version of the `openapi.yaml` file a
 3. Commit and push the changes to a new branch in GitHub and open a new pull request when the branch is ready for review. See the [contribution documentation](CONTRIBUTING.md) for further details around a good PR and commit messages.
 4. Get the PR approved and merged to `main`.
 5. Create a new release with a tag following the [semantic versioning](https://semver.org/) style of [vX.X.X] and publish the release. For example: a new release with a tag named v1.0.2.
-6. After the GitHub Actions workflow `publish-npm.yml` has successfully deployed the latest version of notehub-js to npm, copy the change log notes from the GitHub Action step `Generate release changelog`.
+6. After the GitHub Actions workflow `publish-npm.yml` has successfully deployed the latest version of notehub-js to npm, copy the changelog notes from the GitHub Action step `Generate release changelog`.
 7. Paste those notes into the appropriate release tag in the repo.
 
 ![Copy generated release notes from GitHub Actions workflow](images/generate-release-changelog.png)
