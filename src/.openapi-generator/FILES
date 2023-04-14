@@ -22,6 +22,8 @@ docs/DeviceSession.md
 docs/DeviceTowerInfo.md
 docs/DeviceUsage.md
 docs/DevicesApi.md
+docs/Edgeimpulse.md
+docs/EdgeimpulseSensorsInner.md
 docs/EnvironmentVariables.md
 docs/EnvironmentVariablesApi.md
 docs/Error.md
@@ -30,7 +32,6 @@ docs/EventApi.md
 docs/FilesApi.md
 docs/Fleet.md
 docs/FleetApi.md
-docs/GenerateAuthToken200Response.md
 docs/GetBillingAccounts200Response.md
 docs/GetDeviceEnvironmentVariables200Response.md
 docs/GetDeviceHealthLog200Response.md
@@ -115,11 +116,12 @@ src/model/Device.js
 src/model/DeviceSession.js
 src/model/DeviceTowerInfo.js
 src/model/DeviceUsage.js
+src/model/Edgeimpulse.js
+src/model/EdgeimpulseSensorsInner.js
 src/model/EnvironmentVariables.js
 src/model/Error.js
 src/model/Event.js
 src/model/Fleet.js
-src/model/GenerateAuthToken200Response.js
 src/model/GetBillingAccounts200Response.js
 src/model/GetDeviceEnvironmentVariables200Response.js
 src/model/GetDeviceHealthLog200Response.js

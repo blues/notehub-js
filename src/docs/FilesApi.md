@@ -19,9 +19,9 @@ Used to perform queries on a single or multiple files to determine if new Notes 
 ```javascript
 import * as NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure Bearer access token for authorization: bearer_access_token
-let bearer_access_token = defaultClient.authentications['bearer_access_token'];
-bearer_access_token.accessToken = "YOUR ACCESS TOKEN"
+// Configure API key authorization: api_key
+let api_key = defaultClient.authentications['api_key'];
+api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.FilesApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
@@ -53,7 +53,7 @@ apiInstance.handleNotefileChanges(projectUID, deviceUID, opts).then((data) => {
 
 ### Authorization
 
-[bearer_access_token](../README.md#bearer_access_token)
+[api_key](../README.md#api_key)
 
 ### HTTP request headers
 
@@ -71,9 +71,9 @@ Returns info about file changes that are pending upload to Notehub or download t
 ```javascript
 import * as NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure Bearer access token for authorization: bearer_access_token
-let bearer_access_token = defaultClient.authentications['bearer_access_token'];
-bearer_access_token.accessToken = "YOUR ACCESS TOKEN"
+// Configure API key authorization: api_key
+let api_key = defaultClient.authentications['api_key'];
+api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.FilesApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
@@ -99,7 +99,7 @@ apiInstance.handleNotefileChangesPending(projectUID, deviceUID).then((data) => {
 
 ### Authorization
 
-[bearer_access_token](../README.md#bearer_access_token)
+[api_key](../README.md#api_key)
 
 ### HTTP request headers
 
@@ -117,9 +117,9 @@ Deletes Notefiles and the Notes they contain.
 ```javascript
 import * as NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure Bearer access token for authorization: bearer_access_token
-let bearer_access_token = defaultClient.authentications['bearer_access_token'];
-bearer_access_token.accessToken = "YOUR ACCESS TOKEN"
+// Configure API key authorization: api_key
+let api_key = defaultClient.authentications['api_key'];
+api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.FilesApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
@@ -147,7 +147,7 @@ null (empty response body)
 
 ### Authorization
 
-[bearer_access_token](../README.md#bearer_access_token)
+[api_key](../README.md#api_key)
 
 ### HTTP request headers
 

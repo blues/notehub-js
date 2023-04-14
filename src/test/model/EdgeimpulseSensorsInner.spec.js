@@ -28,7 +28,7 @@
   var instance;
 
   beforeEach(function () {
-    instance = new NotehubJs.GenerateAuthToken200Response();
+    instance = new NotehubJs.EdgeimpulseSensorsInner();
   });
 
   var getProperty = function (object, getter, property) {
@@ -43,34 +43,28 @@
     else object[property] = value;
   };
 
-  describe("GenerateAuthToken200Response", function () {
-    it("should create an instance of GenerateAuthToken200Response", function () {
-      // uncomment below and update the code to test GenerateAuthToken200Response
-      //var instance = new NotehubJs.GenerateAuthToken200Response();
-      //expect(instance).to.be.a(NotehubJs.GenerateAuthToken200Response);
+  describe("EdgeimpulseSensorsInner", function () {
+    it("should create an instance of EdgeimpulseSensorsInner", function () {
+      // uncomment below and update the code to test EdgeimpulseSensorsInner
+      //var instance = new NotehubJs.EdgeimpulseSensorsInner();
+      //expect(instance).to.be.a(NotehubJs.EdgeimpulseSensorsInner);
     });
 
-    it('should have the property accessToken (base name: "access_token")', function () {
-      // uncomment below and update the code to test the property accessToken
-      //var instance = new NotehubJs.GenerateAuthToken200Response();
+    it('should have the property name (base name: "name")', function () {
+      // uncomment below and update the code to test the property name
+      //var instance = new NotehubJs.EdgeimpulseSensorsInner();
       //expect(instance).to.be();
     });
 
-    it('should have the property expiresIn (base name: "expires_in")', function () {
-      // uncomment below and update the code to test the property expiresIn
-      //var instance = new NotehubJs.GenerateAuthToken200Response();
+    it('should have the property units (base name: "units")', function () {
+      // uncomment below and update the code to test the property units
+      //var instance = new NotehubJs.EdgeimpulseSensorsInner();
       //expect(instance).to.be();
     });
 
-    it('should have the property scope (base name: "scope")', function () {
-      // uncomment below and update the code to test the property scope
-      //var instance = new NotehubJs.GenerateAuthToken200Response();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property tokenType (base name: "token_type")', function () {
-      // uncomment below and update the code to test the property tokenType
-      //var instance = new NotehubJs.GenerateAuthToken200Response();
+    it('should have the property value (base name: "value")', function () {
+      // uncomment below and update the code to test the property value
+      //var instance = new NotehubJs.EdgeimpulseSensorsInner();
       //expect(instance).to.be();
     });
   });

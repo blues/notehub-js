@@ -29,7 +29,7 @@ import Project from "../model/Project";
 /**
  * Project service.
  * @module api/ProjectApi
- * @version 1.0.11
+ * @version 1.0.12
  */
 export default class ProjectApi {
   /**
@@ -71,7 +71,7 @@ export default class ProjectApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["bearer_access_token"];
+    let authNames = ["api_key"];
     let contentTypes = ["application/json"];
     let accepts = ["application/json"];
     let returnType = Product;
@@ -125,7 +125,7 @@ export default class ProjectApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["bearer_access_token"];
+    let authNames = ["api_key"];
     let contentTypes = ["application/json"];
     let accepts = ["application/json"];
     let returnType = Project;
@@ -187,7 +187,7 @@ export default class ProjectApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["bearer_access_token"];
+    let authNames = ["api_key"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = EnvironmentVariables;
@@ -243,7 +243,7 @@ export default class ProjectApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["bearer_access_token"];
+    let authNames = ["api_key"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = Project;
@@ -297,7 +297,7 @@ export default class ProjectApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["bearer_access_token"];
+    let authNames = ["api_key"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = Project;
@@ -358,7 +358,7 @@ export default class ProjectApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["bearer_access_token"];
+    let authNames = ["api_key"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = GetProjectDevicePublicKeys200Response;
@@ -422,7 +422,7 @@ export default class ProjectApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["bearer_access_token"];
+    let authNames = ["api_key"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = GetProjectDevices200Response;
@@ -479,7 +479,7 @@ export default class ProjectApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["bearer_access_token"];
+    let authNames = ["api_key"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = EnvironmentVariables;
@@ -554,7 +554,7 @@ export default class ProjectApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["bearer_access_token"];
+    let authNames = ["api_key"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = GetProjectEvents200Response;
@@ -637,7 +637,7 @@ export default class ProjectApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["bearer_access_token"];
+    let authNames = ["api_key"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = GetProjectEventsByCursor200Response;
@@ -715,7 +715,7 @@ export default class ProjectApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["bearer_access_token"];
+    let authNames = ["api_key"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = GetProjectDevices200Response;
@@ -775,7 +775,7 @@ export default class ProjectApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["bearer_access_token"];
+    let authNames = ["api_key"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = GetProjectMembers200Response;
@@ -829,7 +829,7 @@ export default class ProjectApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["bearer_access_token"];
+    let authNames = ["api_key"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = GetProjectProducts200Response;
@@ -863,7 +863,7 @@ export default class ProjectApi {
   }
 
   /**
-   * Get Projects accessible by the OAuth access token
+   * Get Projects accessible by the api_key
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetProjects200Response} and HTTP response
    */
   getProjectsWithHttpInfo() {
@@ -874,7 +874,7 @@ export default class ProjectApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["bearer_access_token"];
+    let authNames = ["api_key"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = GetProjects200Response;
@@ -895,7 +895,7 @@ export default class ProjectApi {
   }
 
   /**
-   * Get Projects accessible by the OAuth access token
+   * Get Projects accessible by the api_key
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetProjects200Response}
    */
   getProjects() {
@@ -928,7 +928,7 @@ export default class ProjectApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["bearer_access_token"];
+    let authNames = ["api_key"];
     let contentTypes = ["application/json"];
     let accepts = ["application/json"];
     let returnType = EnvironmentVariables;

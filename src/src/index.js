@@ -28,11 +28,12 @@ import Device from "./model/Device";
 import DeviceSession from "./model/DeviceSession";
 import DeviceTowerInfo from "./model/DeviceTowerInfo";
 import DeviceUsage from "./model/DeviceUsage";
+import Edgeimpulse from "./model/Edgeimpulse";
+import EdgeimpulseSensorsInner from "./model/EdgeimpulseSensorsInner";
 import EnvironmentVariables from "./model/EnvironmentVariables";
 import Error from "./model/Error";
 import Event from "./model/Event";
 import Fleet from "./model/Fleet";
-import GenerateAuthToken200Response from "./model/GenerateAuthToken200Response";
 import GetBillingAccounts200Response from "./model/GetBillingAccounts200Response";
 import GetDeviceEnvironmentVariables200Response from "./model/GetDeviceEnvironmentVariables200Response";
 import GetDeviceHealthLog200Response from "./model/GetDeviceHealthLog200Response";
@@ -122,7 +123,7 @@ import RouteApi from "./api/RouteApi";
  * </pre>
  * </p>
  * @module index
- * @version 1.0.11
+ * @version 1.0.12
  */
 export {
   /**
@@ -228,6 +229,18 @@ export {
   DeviceUsage,
 
   /**
+   * The Edgeimpulse model constructor.
+   * @property {module:model/Edgeimpulse}
+   */
+  Edgeimpulse,
+
+  /**
+   * The EdgeimpulseSensorsInner model constructor.
+   * @property {module:model/EdgeimpulseSensorsInner}
+   */
+  EdgeimpulseSensorsInner,
+
+  /**
    * The EnvironmentVariables model constructor.
    * @property {module:model/EnvironmentVariables}
    */
@@ -250,12 +263,6 @@ export {
    * @property {module:model/Fleet}
    */
   Fleet,
-
-  /**
-   * The GenerateAuthToken200Response model constructor.
-   * @property {module:model/GenerateAuthToken200Response}
-   */
-  GenerateAuthToken200Response,
 
   /**
    * The GetBillingAccounts200Response model constructor.

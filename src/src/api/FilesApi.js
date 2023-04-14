@@ -20,7 +20,7 @@ import HandleNotefileDeleteRequest from "../model/HandleNotefileDeleteRequest";
 /**
  * Files service.
  * @module api/FilesApi
- * @version 1.0.11
+ * @version 1.0.12
  */
 export default class FilesApi {
   /**
@@ -70,7 +70,7 @@ export default class FilesApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["bearer_access_token"];
+    let authNames = ["api_key"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = HandleNotefileChanges200Response;
@@ -138,7 +138,7 @@ export default class FilesApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["bearer_access_token"];
+    let authNames = ["api_key"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = HandleNotefileChangesPending200Response;
@@ -216,7 +216,7 @@ export default class FilesApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["bearer_access_token"];
+    let authNames = ["api_key"];
     let contentTypes = ["application/json"];
     let accepts = ["application/json"];
     let returnType = null;

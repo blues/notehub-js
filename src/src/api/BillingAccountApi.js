@@ -18,7 +18,7 @@ import GetBillingAccounts200Response from "../model/GetBillingAccounts200Respons
 /**
  * BillingAccount service.
  * @module api/BillingAccountApi
- * @version 1.0.11
+ * @version 1.0.12
  */
 export default class BillingAccountApi {
   /**
@@ -33,7 +33,7 @@ export default class BillingAccountApi {
   }
 
   /**
-   * Get Billing Accounts accessible by the OAuth access token
+   * Get Billing Accounts accessible by the api_key
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetBillingAccounts200Response} and HTTP response
    */
   getBillingAccountsWithHttpInfo() {
@@ -44,7 +44,7 @@ export default class BillingAccountApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["bearer_access_token"];
+    let authNames = ["api_key"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = GetBillingAccounts200Response;
@@ -65,7 +65,7 @@ export default class BillingAccountApi {
   }
 
   /**
-   * Get Billing Accounts accessible by the OAuth access token
+   * Get Billing Accounts accessible by the api_key
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetBillingAccounts200Response}
    */
   getBillingAccounts() {
