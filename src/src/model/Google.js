@@ -69,6 +69,9 @@ class Google {
       if (data.hasOwnProperty("timeout")) {
         obj["timeout"] = ApiClient.convertToType(data["timeout"], "Number");
       }
+      if (data.hasOwnProperty("token")) {
+        obj["token"] = ApiClient.convertToType(data["token"], "String");
+      }
     } else if (data === null) {
       return null;
     }
@@ -108,6 +111,16 @@ class Google {
           data["url"]
       );
     }
+    // ensure the json data is a string
+    if (
+      data["token"] &&
+      !(typeof data["token"] === "string" || data["token"] instanceof String)
+    ) {
+      throw new Error(
+        "Expected the field `token` to be a primitive type in the JSON string but got " +
+          data["token"]
+      );
+    }
 
     return true;
   }
@@ -145,5 +158,11 @@ Google.prototype["url"] = undefined;
  * @default 15
  */
 Google.prototype["timeout"] = 15;
+
+/**
+ * Optional authentication token
+ * @member {String} token
+ */
+Google.prototype["token"] = undefined;
 
 export default Google;
