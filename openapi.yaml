@@ -2972,6 +2972,9 @@ components:
           type: integer
           default: 15
           description: Timeout in seconds for each request
+        token:
+          description: Optional authentication token
+          type: string
 
     proxy:
       description: Route settings specific to Proxy routes.

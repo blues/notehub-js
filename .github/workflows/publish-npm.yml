@@ -14,7 +14,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-        # https://github.com/marketplace/actions/auto-changelog
+      # https://github.com/marketplace/actions/auto-changelog
       # require commit format are "type(category): description [flag]"
       - name: Generate release changelog
         uses: ardalanamini/auto-changelog@v3

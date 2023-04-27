@@ -294,6 +294,12 @@ RouteSchema.prototype["disable_http_headers"] = false;
 RouteSchema.prototype["timeout"] = 15;
 
 /**
+ * Optional authentication token
+ * @member {String} token
+ */
+RouteSchema.prototype["token"] = undefined;
+
+/**
  * @member {String} alias
  */
 RouteSchema.prototype["alias"] = undefined;

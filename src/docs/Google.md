@@ -10,3 +10,4 @@
 | **throttleMs** | **Number**                            |                                                                               | [optional]                 |
 | **url**        | **String**                            |                                                                               | [optional]                 |
 | **timeout**    | **Number**                            | Timeout in seconds for each request                                           | [optional] [default to 15] |
+| **token**      | **String**                            | Optional authentication token                                                 | [optional]                 |
