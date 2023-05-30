@@ -1,6 +1,6 @@
 /**
  * Notehub API
- * The OpenAPI definition for the Notehub.io API. 
+ * The OpenAPI definition for the Notehub.io API.
  *
  * The version of the OpenAPI document: 1.0.0
  * Contact: engineering@blues.io
@@ -11,50 +11,49 @@
  *
  */
 
-import ApiClient from '../ApiClient';
+import ApiClient from "../ApiClient";
 /**
-* Enum class Role.
-* @enum {}
-* @readonly
-*/
+ * Enum class Role.
+ * @enum {}
+ * @readonly
+ */
 export default class Role {
-    
-        /**
-         * value: "owner"
-         * @const
-         */
-        "owner" = "owner";
+  /**
+   * value: "owner"
+   * @const
+   */
+  owner = "owner";
 
-    
-        /**
-         * value: "developer"
-         * @const
-         */
-        "developer" = "developer";
+  /**
+   * value: "developer"
+   * @const
+   */
+  developer = "developer";
 
-    
-        /**
-         * value: "viewer"
-         * @const
-         */
-        "viewer" = "viewer";
+  /**
+   * value: "viewer"
+   * @const
+   */
+  viewer = "viewer";
 
-    
-        /**
-         * value: "null"
-         * @const
-         */
-        "null" = "null";
+  /**
+   * value: "support"
+   * @const
+   */
+  support = "support";
 
-    
+  /**
+   * value: "null"
+   * @const
+   */
+  null = "null";
 
-    /**
-    * Returns a <code>Role</code> enum value from a Javascript object name.
-    * @param {Object} data The plain JavaScript object containing the name of the enum value.
-    * @return {module:model/Role} The enum <code>Role</code> value.
-    */
-    static constructFromObject(object) {
-        return object;
-    }
+  /**
+   * Returns a <code>Role</code> enum value from a Javascript object name.
+   * @param {Object} data The plain JavaScript object containing the name of the enum value.
+   * @return {module:model/Role} The enum <code>Role</code> value.
+   */
+  static constructFromObject(object) {
+    return object;
+  }
 }
-
