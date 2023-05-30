@@ -8,4 +8,6 @@
 
 - `viewer` (value: `"viewer"`)
 
+- `support` (value: `"support"`)
+
 - `null` (value: `"null"`)
