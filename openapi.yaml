@@ -2227,6 +2227,7 @@ components:
         - owner
         - developer
         - viewer
+        - support
         - null
 
     Project:
