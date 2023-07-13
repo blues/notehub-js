@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The EdgeimpulseSensorsInner model module.
  * @module model/EdgeimpulseSensorsInner
- * @version 1.0.12
+ * @version 1.0.13
  */
 class EdgeimpulseSensorsInner {
   /**
