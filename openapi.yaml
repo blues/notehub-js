@@ -986,6 +986,38 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
 
+  /v1/projects/{projectUID}/devices/{deviceUID}/enable-connectivity-assurance:
+    post:
+      tags: ["device"]
+      operationId: enableDeviceConnectivityAssurance
+      description: Enable Connectivity Assurance
+      security:
+        - api_key: []
+      parameters:
+        - $ref: '#/components/parameters/projectUIDParam'
+        - $ref: '#/components/parameters/deviceUIDParam'
+      responses:
+        "200":
+          description: Successful operation
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+
+  /v1/projects/{projectUID}/devices/{deviceUID}/disable-connectivity-assurance:
+    post:
+      tags: ["device"]
+      operationId: disableDeviceConnectivityAssurance
+      description: Disable Connectivity Assurance
+      security:
+        - api_key: []
+      parameters:
+        - $ref: '#/components/parameters/projectUIDParam'
+        - $ref: '#/components/parameters/deviceUIDParam'
+      responses:
+        "200":
+          description: Successful operation
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+
   /v1/projects/{projectUID}/devices/{deviceUID}/sessions:
     get:
       tags: ["device"]

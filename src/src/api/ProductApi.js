@@ -21,7 +21,7 @@ import Project from "../model/Project";
 /**
  * Product service.
  * @module api/ProductApi
- * @version 1.0.12
+ * @version 1.0.13
  */
 export default class ProductApi {
   /**

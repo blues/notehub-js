@@ -28,7 +28,7 @@ import PutDeviceFleetsRequest from "../model/PutDeviceFleetsRequest";
 /**
  * Device service.
  * @module api/DeviceApi
- * @version 1.0.12
+ * @version 1.0.13
  */
 export default class DeviceApi {
   /**
@@ -260,6 +260,70 @@ export default class DeviceApi {
   }
 
   /**
+   * Disable Connectivity Assurance
+   * @param {String} projectUID
+   * @param {String} deviceUID
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
+   */
+  disableDeviceConnectivityAssuranceWithHttpInfo(projectUID, deviceUID) {
+    let postBody = null;
+    // verify the required parameter 'projectUID' is set
+    if (projectUID === undefined || projectUID === null) {
+      throw new Error(
+        "Missing the required parameter 'projectUID' when calling disableDeviceConnectivityAssurance"
+      );
+    }
+    // verify the required parameter 'deviceUID' is set
+    if (deviceUID === undefined || deviceUID === null) {
+      throw new Error(
+        "Missing the required parameter 'deviceUID' when calling disableDeviceConnectivityAssurance"
+      );
+    }
+
+    let pathParams = {
+      projectUID: projectUID,
+      deviceUID: deviceUID,
+    };
+    let queryParams = {};
+    let headerParams = {};
+    let formParams = {};
+
+    let authNames = ["api_key"];
+    let contentTypes = [];
+    let accepts = ["application/json"];
+    let returnType = null;
+    return this.apiClient.callApi(
+      "/v1/projects/{projectUID}/devices/{deviceUID}/disable-connectivity-assurance",
+      "POST",
+      pathParams,
+      queryParams,
+      headerParams,
+      formParams,
+      postBody,
+      authNames,
+      contentTypes,
+      accepts,
+      returnType,
+      null
+    );
+  }
+
+  /**
+   * Disable Connectivity Assurance
+   * @param {String} projectUID
+   * @param {String} deviceUID
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}
+   */
+  disableDeviceConnectivityAssurance(projectUID, deviceUID) {
+    return this.disableDeviceConnectivityAssuranceWithHttpInfo(
+      projectUID,
+      deviceUID
+    ).then(function (response_and_data) {
+      return response_and_data.data;
+    });
+  }
+
+  /**
    * Enable Device
    * @param {String} projectUID
    * @param {String} deviceUID
@@ -318,6 +382,70 @@ export default class DeviceApi {
     return this.enableDeviceWithHttpInfo(projectUID, deviceUID).then(function (
       response_and_data
     ) {
+      return response_and_data.data;
+    });
+  }
+
+  /**
+   * Enable Connectivity Assurance
+   * @param {String} projectUID
+   * @param {String} deviceUID
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
+   */
+  enableDeviceConnectivityAssuranceWithHttpInfo(projectUID, deviceUID) {
+    let postBody = null;
+    // verify the required parameter 'projectUID' is set
+    if (projectUID === undefined || projectUID === null) {
+      throw new Error(
+        "Missing the required parameter 'projectUID' when calling enableDeviceConnectivityAssurance"
+      );
+    }
+    // verify the required parameter 'deviceUID' is set
+    if (deviceUID === undefined || deviceUID === null) {
+      throw new Error(
+        "Missing the required parameter 'deviceUID' when calling enableDeviceConnectivityAssurance"
+      );
+    }
+
+    let pathParams = {
+      projectUID: projectUID,
+      deviceUID: deviceUID,
+    };
+    let queryParams = {};
+    let headerParams = {};
+    let formParams = {};
+
+    let authNames = ["api_key"];
+    let contentTypes = [];
+    let accepts = ["application/json"];
+    let returnType = null;
+    return this.apiClient.callApi(
+      "/v1/projects/{projectUID}/devices/{deviceUID}/enable-connectivity-assurance",
+      "POST",
+      pathParams,
+      queryParams,
+      headerParams,
+      formParams,
+      postBody,
+      authNames,
+      contentTypes,
+      accepts,
+      returnType,
+      null
+    );
+  }
+
+  /**
+   * Enable Connectivity Assurance
+   * @param {String} projectUID
+   * @param {String} deviceUID
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}
+   */
+  enableDeviceConnectivityAssurance(projectUID, deviceUID) {
+    return this.enableDeviceConnectivityAssuranceWithHttpInfo(
+      projectUID,
+      deviceUID
+    ).then(function (response_and_data) {
       return response_and_data.data;
     });
   }
