@@ -1201,6 +1201,54 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
 
+  /v1/projects/{projectUID}/global-transformation/enable:
+    post:
+      description: Enable the project-level event JSONata transformation
+      tags: ["project"]
+      operationId: enableGlobalTransformation
+      security:
+        - api_key: []
+      parameters:
+        - $ref: '#/components/parameters/projectUIDParam'
+      responses:
+        "200":
+          description: Successful operation
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+
+  /v1/projects/{projectUID}/global-transformation/disable:
+    post:
+      description: Disable the project-level event JSONata transformation
+      tags: ["project"]
+      operationId: disableGlobalTransformation
+      security:
+        - api_key: []
+      parameters:
+        - $ref: '#/components/parameters/projectUIDParam'
+      responses:
+        "200":
+          description: Successful operation
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+
+  /v1/projects/{projectUID}/global-transformation:
+    post:
+      description: Set the project-level event JSONata transformation
+      tags: ["project"]
+      operationId: setGlobalTransformation
+      security:
+        - api_key: []
+      parameters:
+        - $ref: '#/components/parameters/projectUIDParam'
+      requestBody:
+        description: JSONata expression which will be applied to each event before it is persisted and routed
+        required: true
+      responses:
+        "200":
+          description: Successful operation
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+
   # fleet environment variables
   /v1/projects/{projectUID}/fleets/{fleetUID}/environment_variables:
     parameters:
