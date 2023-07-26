@@ -1243,6 +1243,10 @@ paths:
       requestBody:
         description: JSONata expression which will be applied to each event before it is persisted and routed
         required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JSONata'
       responses:
         "200":
           description: Successful operation
@@ -2277,6 +2281,9 @@ components:
         - err
         - code
         - status
+
+    JSONata:
+      type: object
 
     BillingAccount:
       type: object
