@@ -17,7 +17,7 @@ import Event from "./Event";
 /**
  * The GetDeviceLatest200Response model module.
  * @module model/GetDeviceLatest200Response
- * @version 1.0.13
+ * @version 1.0.14
  */
 class GetDeviceLatest200Response {
   /**
