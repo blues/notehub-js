@@ -7,6 +7,8 @@ All URIs are relative to *https://api.notefile.net*
 | [**createProduct**](ProjectApi.md#createProduct)                                       | **POST** /v1/projects/{projectUID}/products                      |
 | [**createProject**](ProjectApi.md#createProject)                                       | **POST** /v1/projects                                            |
 | [**deleteProjectEnvironmentVariable**](ProjectApi.md#deleteProjectEnvironmentVariable) | **DELETE** /v1/projects/{projectUID}/environment_variables/{key} |
+| [**disableGlobalTransformation**](ProjectApi.md#disableGlobalTransformation)           | **POST** /v1/projects/{projectUID}/global-transformation/disable |
+| [**enableGlobalTransformation**](ProjectApi.md#enableGlobalTransformation)             | **POST** /v1/projects/{projectUID}/global-transformation/enable  |
 | [**getProject**](ProjectApi.md#getProject)                                             | **GET** /v1/projects/{projectUID}                                |
 | [**getProjectByProduct**](ProjectApi.md#getProjectByProduct)                           | **GET** /v1/products/{productUID}/project                        |
 | [**getProjectDevicePublicKeys**](ProjectApi.md#getProjectDevicePublicKeys)             | **GET** /v1/projects/{projectUID}/devices/public-keys            |
@@ -19,6 +21,7 @@ All URIs are relative to *https://api.notefile.net*
 | [**getProjectProducts**](ProjectApi.md#getProjectProducts)                             | **GET** /v1/projects/{projectUID}/products                       |
 | [**getProjects**](ProjectApi.md#getProjects)                                           | **GET** /v1/projects                                             |
 | [**putProjectEnvironmentVariables**](ProjectApi.md#putProjectEnvironmentVariables)     | **PUT** /v1/projects/{projectUID}/environment_variables          |
+| [**setGlobalTransformation**](ProjectApi.md#setGlobalTransformation)                   | **POST** /v1/projects/{projectUID}/global-transformation         |
 
 ## createProduct
 
@@ -150,6 +153,94 @@ apiInstance.deleteProjectEnvironmentVariable(projectUID, key).then((data) => {
 ### Return type
 
 [**EnvironmentVariables**](EnvironmentVariables.md)
+
+### Authorization
+
+[api_key](../README.md#api_key)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+## disableGlobalTransformation
+
+> disableGlobalTransformation(projectUID)
+
+Disable the project-level event JSONata transformation
+
+### Example
+
+```javascript
+import * as NotehubJs from '@blues-inc/notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
+// Configure API key authorization: api_key
+let api_key = defaultClient.authentications['api_key'];
+api_key.apiKey = 'YOUR API KEY';
+
+let apiInstance = new NotehubJs.ProjectApi();
+let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+apiInstance.disableGlobalTransformation(projectUID).then(() => {
+  console.log('API called successfully.');
+}, (error) => {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+| Name           | Type       | Description | Notes |
+| -------------- | ---------- | ----------- | ----- |
+| **projectUID** | **String** |             |
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[api_key](../README.md#api_key)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+## enableGlobalTransformation
+
+> enableGlobalTransformation(projectUID)
+
+Enable the project-level event JSONata transformation
+
+### Example
+
+```javascript
+import * as NotehubJs from '@blues-inc/notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
+// Configure API key authorization: api_key
+let api_key = defaultClient.authentications['api_key'];
+api_key.apiKey = 'YOUR API KEY';
+
+let apiInstance = new NotehubJs.ProjectApi();
+let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+apiInstance.enableGlobalTransformation(projectUID).then(() => {
+  console.log('API called successfully.');
+}, (error) => {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+| Name           | Type       | Description | Notes |
+| -------------- | ---------- | ----------- | ----- |
+| **projectUID** | **String** |             |
+
+### Return type
+
+null (empty response body)
 
 ### Authorization
 
@@ -745,6 +836,52 @@ apiInstance.putProjectEnvironmentVariables(projectUID, opts).then((data) => {
 ### Return type
 
 [**EnvironmentVariables**](EnvironmentVariables.md)
+
+### Authorization
+
+[api_key](../README.md#api_key)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+## setGlobalTransformation
+
+> setGlobalTransformation(projectUID, body)
+
+Set the project-level event JSONata transformation
+
+### Example
+
+```javascript
+import * as NotehubJs from '@blues-inc/notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
+// Configure API key authorization: api_key
+let api_key = defaultClient.authentications['api_key'];
+api_key.apiKey = 'YOUR API KEY';
+
+let apiInstance = new NotehubJs.ProjectApi();
+let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let body = {key: null}; // Object | JSONata expression which will be applied to each event before it is persisted and routed
+apiInstance.setGlobalTransformation(projectUID, body).then(() => {
+  console.log('API called successfully.');
+}, (error) => {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+| Name           | Type       | Description                                                                              | Notes |
+| -------------- | ---------- | ---------------------------------------------------------------------------------------- | ----- |
+| **projectUID** | **String** |                                                                                          |
+| **body**       | **Object** | JSONata expression which will be applied to each event before it is persisted and routed |
+
+### Return type
+
+null (empty response body)
 
 ### Authorization
 
