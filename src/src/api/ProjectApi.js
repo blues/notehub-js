@@ -223,6 +223,114 @@ export default class ProjectApi {
   }
 
   /**
+   * Disable the project-level event JSONata transformation
+   * @param {String} projectUID
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
+   */
+  disableGlobalTransformationWithHttpInfo(projectUID) {
+    let postBody = null;
+    // verify the required parameter 'projectUID' is set
+    if (projectUID === undefined || projectUID === null) {
+      throw new Error(
+        "Missing the required parameter 'projectUID' when calling disableGlobalTransformation"
+      );
+    }
+
+    let pathParams = {
+      projectUID: projectUID,
+    };
+    let queryParams = {};
+    let headerParams = {};
+    let formParams = {};
+
+    let authNames = ["api_key"];
+    let contentTypes = [];
+    let accepts = ["application/json"];
+    let returnType = null;
+    return this.apiClient.callApi(
+      "/v1/projects/{projectUID}/global-transformation/disable",
+      "POST",
+      pathParams,
+      queryParams,
+      headerParams,
+      formParams,
+      postBody,
+      authNames,
+      contentTypes,
+      accepts,
+      returnType,
+      null
+    );
+  }
+
+  /**
+   * Disable the project-level event JSONata transformation
+   * @param {String} projectUID
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}
+   */
+  disableGlobalTransformation(projectUID) {
+    return this.disableGlobalTransformationWithHttpInfo(projectUID).then(
+      function (response_and_data) {
+        return response_and_data.data;
+      }
+    );
+  }
+
+  /**
+   * Enable the project-level event JSONata transformation
+   * @param {String} projectUID
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
+   */
+  enableGlobalTransformationWithHttpInfo(projectUID) {
+    let postBody = null;
+    // verify the required parameter 'projectUID' is set
+    if (projectUID === undefined || projectUID === null) {
+      throw new Error(
+        "Missing the required parameter 'projectUID' when calling enableGlobalTransformation"
+      );
+    }
+
+    let pathParams = {
+      projectUID: projectUID,
+    };
+    let queryParams = {};
+    let headerParams = {};
+    let formParams = {};
+
+    let authNames = ["api_key"];
+    let contentTypes = [];
+    let accepts = ["application/json"];
+    let returnType = null;
+    return this.apiClient.callApi(
+      "/v1/projects/{projectUID}/global-transformation/enable",
+      "POST",
+      pathParams,
+      queryParams,
+      headerParams,
+      formParams,
+      postBody,
+      authNames,
+      contentTypes,
+      accepts,
+      returnType,
+      null
+    );
+  }
+
+  /**
+   * Enable the project-level event JSONata transformation
+   * @param {String} projectUID
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}
+   */
+  enableGlobalTransformation(projectUID) {
+    return this.enableGlobalTransformationWithHttpInfo(projectUID).then(
+      function (response_and_data) {
+        return response_and_data.data;
+      }
+    );
+  }
+
+  /**
    * Get a Project by ProjectUID
    * @param {String} projectUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Project} and HTTP response
@@ -962,5 +1070,67 @@ export default class ProjectApi {
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
+  }
+
+  /**
+   * Set the project-level event JSONata transformation
+   * @param {String} projectUID
+   * @param {Object.<String, Object>} body JSONata expression which will be applied to each event before it is persisted and routed
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
+   */
+  setGlobalTransformationWithHttpInfo(projectUID, body) {
+    let postBody = body;
+    // verify the required parameter 'projectUID' is set
+    if (projectUID === undefined || projectUID === null) {
+      throw new Error(
+        "Missing the required parameter 'projectUID' when calling setGlobalTransformation"
+      );
+    }
+    // verify the required parameter 'body' is set
+    if (body === undefined || body === null) {
+      throw new Error(
+        "Missing the required parameter 'body' when calling setGlobalTransformation"
+      );
+    }
+
+    let pathParams = {
+      projectUID: projectUID,
+    };
+    let queryParams = {};
+    let headerParams = {};
+    let formParams = {};
+
+    let authNames = ["api_key"];
+    let contentTypes = ["application/json"];
+    let accepts = ["application/json"];
+    let returnType = null;
+    return this.apiClient.callApi(
+      "/v1/projects/{projectUID}/global-transformation",
+      "POST",
+      pathParams,
+      queryParams,
+      headerParams,
+      formParams,
+      postBody,
+      authNames,
+      contentTypes,
+      accepts,
+      returnType,
+      null
+    );
+  }
+
+  /**
+   * Set the project-level event JSONata transformation
+   * @param {String} projectUID
+   * @param {Object.<String, Object>} body JSONata expression which will be applied to each event before it is persisted and routed
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}
+   */
+  setGlobalTransformation(projectUID, body) {
+    return this.setGlobalTransformationWithHttpInfo(projectUID, body).then(
+      function (response_and_data) {
+        return response_and_data.data;
+      }
+    );
   }
 }
