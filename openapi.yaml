@@ -327,6 +327,31 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
 
+  /v1/projects/{projectUID}/routes/{routeUID}/route-logs:
+    get:
+      tags: ["route_logs"]
+      operationId: getRouteLogsByRoute
+      description: Get Route Logs by Route UID
+      security:
+        - api_key: []
+      parameters:
+        - $ref: '#/components/parameters/projectUIDParam'
+        - $ref: '#/components/parameters/routeUIDParam'
+        - $ref: '#/components/parameters/pageSizeParam'
+        - $ref: '#/components/parameters/pageNumParam'
+        - $ref: '#/components/parameters/deviceUIDParamQuery'
+        - $ref: '#/components/parameters/sortByParam'
+        - $ref: '#/components/parameters/sortOrderParam'
+        - $ref: '#/components/parameters/startDateParam'
+        - $ref: '#/components/parameters/endDateParam'
+        - $ref: '#/components/parameters/systemFilesOnlyParam'
+        - $ref: '#/components/parameters/filesParam'
+      responses:
+        "200":
+          $ref: '#/components/responses/RouteLogsResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+
   /v1/products/{productUID}/project:
     get:
       tags: ["project", "product"]
@@ -1089,6 +1114,22 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
 
+  /v1/projects/{projectUID}/events/{eventUID}/route-logs:
+    get:
+      tags: ["route_logs"]
+      operationId: getRouteLogsByEvent
+      description: Get Route Logs by Event UID
+      security:
+        - api_key: []
+      parameters:
+        - $ref: '#/components/parameters/projectUIDParam'
+        - $ref: '#/components/parameters/eventUIDParam'
+      responses:
+        "200":
+          $ref: '#/components/responses/RouteLogsResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+
   /v1/projects/{projectUID}/fleets/{fleetUID}/events:
     get:
       tags: ["fleet", "event"]
@@ -1773,6 +1814,14 @@ components:
       # NOTE: Airnote's Project UID
       example: app:2606f411-dea6-44a0-9743-1130f57d77d8
 
+    eventUIDParam:
+      name: eventUID
+      in: path
+      required: true
+      schema:
+        type: string
+      example: 4506f411-dea6-44a0-9743-1130f57d7747
+
     fleetUIDParam:
       name: fleetUID
       in: path
@@ -2255,6 +2304,37 @@ components:
               tower_location: Waverly MI
               tower_timezone: America/Detroit
               tower_id: 310,410,20483,184692496
+
+    RouteLogsResponse:
+      description: The response body for a Route Logs request.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                date:
+                  type: string
+                  description: The date of the logs.
+                routeUID:
+                  type: string
+                  description: The route UID.
+                eventUID:
+                  type: string
+                  description: The event UID.
+                attn:
+                  type: boolean
+                  description: Whether the event was routed in error
+                status:
+                  type: string
+                  description: The status of the event.
+                text:
+                  type: string
+                  description: The response body of the route.
+                url:
+                  type: string
+                  description: The URL of the route.
 
   schemas:
     Error:
