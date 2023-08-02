@@ -2511,6 +2511,8 @@ components:
           $ref: '#/components/schemas/DFUEnv'
         sku:
           type: string
+        disabled:
+          type: boolean
       required:
         - uid
         - serial_number
