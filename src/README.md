@@ -209,6 +209,8 @@ All URIs are relative to *https://api.notefile.net*
 | _NotehubJs.RouteApi_                | [**getRoute**](docs/RouteApi.md#getRoute)                                                                    | **GET** /v1/projects/{projectUID}/routes/{routeUID}                                   |
 | _NotehubJs.RouteApi_                | [**getRoutes**](docs/RouteApi.md#getRoutes)                                                                  | **GET** /v1/projects/{projectUID}/routes                                              |
 | _NotehubJs.RouteApi_                | [**updateRoute**](docs/RouteApi.md#updateRoute)                                                              | **PUT** /v1/projects/{projectUID}/routes/{routeUID}                                   |
+| _NotehubJs.RouteLogsApi_            | [**getRouteLogsByEvent**](docs/RouteLogsApi.md#getRouteLogsByEvent)                                          | **GET** /v1/projects/{projectUID}/events/{eventUID}/route-logs                        |
+| _NotehubJs.RouteLogsApi_            | [**getRouteLogsByRoute**](docs/RouteLogsApi.md#getRouteLogsByRoute)                                          | **GET** /v1/projects/{projectUID}/routes/{routeUID}/route-logs                        |
 
 ## Documentation for Models
 
@@ -250,6 +252,7 @@ All URIs are relative to *https://api.notefile.net*
 - [NotehubJs.GetProjectMembers200Response](docs/GetProjectMembers200Response.md)
 - [NotehubJs.GetProjectProducts200Response](docs/GetProjectProducts200Response.md)
 - [NotehubJs.GetProjects200Response](docs/GetProjects200Response.md)
+- [NotehubJs.GetRouteLogsByRoute200ResponseInner](docs/GetRouteLogsByRoute200ResponseInner.md)
 - [NotehubJs.Google](docs/Google.md)
 - [NotehubJs.HandleNoteChanges200Response](docs/HandleNoteChanges200Response.md)
 - [NotehubJs.HandleNoteGet200Response](docs/HandleNoteGet200Response.md)

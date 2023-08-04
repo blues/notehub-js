@@ -50,6 +50,7 @@ import GetProjectFleets200Response from "./model/GetProjectFleets200Response";
 import GetProjectMembers200Response from "./model/GetProjectMembers200Response";
 import GetProjectProducts200Response from "./model/GetProjectProducts200Response";
 import GetProjects200Response from "./model/GetProjects200Response";
+import GetRouteLogsByRoute200ResponseInner from "./model/GetRouteLogsByRoute200ResponseInner";
 import Google from "./model/Google";
 import HandleNoteChanges200Response from "./model/HandleNoteChanges200Response";
 import HandleNoteGet200Response from "./model/HandleNoteGet200Response";
@@ -93,6 +94,7 @@ import NotesApi from "./api/NotesApi";
 import ProductApi from "./api/ProductApi";
 import ProjectApi from "./api/ProjectApi";
 import RouteApi from "./api/RouteApi";
+import RouteLogsApi from "./api/RouteLogsApi";
 
 /**
  * The OpenAPI definition for the Notehub.io API. .<br>
@@ -361,6 +363,12 @@ export {
   GetProjects200Response,
 
   /**
+   * The GetRouteLogsByRoute200ResponseInner model constructor.
+   * @property {module:model/GetRouteLogsByRoute200ResponseInner}
+   */
+  GetRouteLogsByRoute200ResponseInner,
+
+  /**
    * The Google model constructor.
    * @property {module:model/Google}
    */
@@ -617,4 +625,10 @@ export {
    * @property {module:api/RouteApi}
    */
   RouteApi,
+
+  /**
+   * The RouteLogsApi service constructor.
+   * @property {module:api/RouteLogsApi}
+   */
+  RouteLogsApi,
 };

@@ -19,3 +19,4 @@
 | **temperature**          | **Number**                                |             |
 | **dfu**                  | [**DFUEnv**](DFUEnv.md)                   |             | [optional] |
 | **sku**                  | **String**                                |             | [optional] |
+| **disabled**             | **Boolean**                               |             | [optional] |
