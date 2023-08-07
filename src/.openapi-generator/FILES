@@ -173,5 +173,3 @@ src/model/TowerLocation.js
 src/model/Twilio.js
 src/model/UpdateFleetRequest.js
 src/model/UserDbRoute.js
-test/api/RouteLogsApi.spec.js
-test/model/GetRouteLogsByRoute200ResponseInner.spec.js

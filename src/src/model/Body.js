@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The Body model module.
  * @module model/Body
- * @version 1.0.14
+ * @version 1.0.15
  */
 class Body {
   /**
