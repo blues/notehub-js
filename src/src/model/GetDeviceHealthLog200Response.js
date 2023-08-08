@@ -17,7 +17,7 @@ import GetDeviceHealthLog200ResponseHealthLogInner from "./GetDeviceHealthLog200
 /**
  * The GetDeviceHealthLog200Response model module.
  * @module model/GetDeviceHealthLog200Response
- * @version 1.0.14
+ * @version 1.0.15
  */
 class GetDeviceHealthLog200Response {
   /**

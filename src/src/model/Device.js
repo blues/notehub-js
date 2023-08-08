@@ -20,7 +20,7 @@ import Location from "./Location";
 /**
  * The Device model module.
  * @module model/Device
- * @version 1.0.14
+ * @version 1.0.15
  */
 class Device {
   /**
@@ -159,6 +159,9 @@ class Device {
       }
       if (data.hasOwnProperty("sku")) {
         obj["sku"] = ApiClient.convertToType(data["sku"], "String");
+      }
+      if (data.hasOwnProperty("disabled")) {
+        obj["disabled"] = ApiClient.convertToType(data["disabled"], "Boolean");
       }
     } else if (data === null) {
       return null;
@@ -355,5 +358,10 @@ Device.prototype["dfu"] = undefined;
  * @member {String} sku
  */
 Device.prototype["sku"] = undefined;
+
+/**
+ * @member {Boolean} disabled
+ */
+Device.prototype["disabled"] = undefined;
 
 export default Device;

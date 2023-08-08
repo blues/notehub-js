@@ -48,6 +48,7 @@ docs/GetProjectFleets200Response.md
 docs/GetProjectMembers200Response.md
 docs/GetProjectProducts200Response.md
 docs/GetProjects200Response.md
+docs/GetRouteLogsByRoute200ResponseInner.md
 docs/Google.md
 docs/HandleNoteChanges200Response.md
 docs/HandleNoteGet200Response.md
@@ -75,6 +76,7 @@ docs/Radresponder.md
 docs/Role.md
 docs/Route.md
 docs/RouteApi.md
+docs/RouteLogsApi.md
 docs/RouteSchema.md
 docs/Snowflake.md
 docs/SnowflakeTransform.md
@@ -99,6 +101,7 @@ src/api/NotesApi.js
 src/api/ProductApi.js
 src/api/ProjectApi.js
 src/api/RouteApi.js
+src/api/RouteLogsApi.js
 src/index.js
 src/model/Aws.js
 src/model/Azure.js
@@ -138,6 +141,7 @@ src/model/GetProjectFleets200Response.js
 src/model/GetProjectMembers200Response.js
 src/model/GetProjectProducts200Response.js
 src/model/GetProjects200Response.js
+src/model/GetRouteLogsByRoute200ResponseInner.js
 src/model/Google.js
 src/model/HandleNoteChanges200Response.js
 src/model/HandleNoteGet200Response.js

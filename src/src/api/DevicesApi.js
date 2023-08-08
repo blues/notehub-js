@@ -20,7 +20,7 @@ import GetProjectDevices200Response from "../model/GetProjectDevices200Response"
 /**
  * Devices service.
  * @module api/DevicesApi
- * @version 1.0.14
+ * @version 1.0.15
  */
 export default class DevicesApi {
   /**

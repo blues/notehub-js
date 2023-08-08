@@ -18,7 +18,7 @@ import HttpFilter from "./HttpFilter";
 /**
  * The Edgeimpulse model module.
  * @module model/Edgeimpulse
- * @version 1.0.14
+ * @version 1.0.15
  */
 class Edgeimpulse {
   /**
