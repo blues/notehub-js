@@ -464,6 +464,13 @@ paths:
       description: Clone a Project
       security:
         - api_key: []
+      parameters:
+        - name: projectUID
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The project UID to be cloned.
       requestBody:
         description: Project to be cloned
         required: true
