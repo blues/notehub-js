@@ -186,6 +186,7 @@ All URIs are relative to *https://api.notefile.net*
 | _NotehubJs.ProductApi_              | [**createProduct**](docs/ProductApi.md#createProduct)                                                        | **POST** /v1/projects/{projectUID}/products                                           |
 | _NotehubJs.ProductApi_              | [**getProjectByProduct**](docs/ProductApi.md#getProjectByProduct)                                            | **GET** /v1/products/{productUID}/project                                             |
 | _NotehubJs.ProductApi_              | [**getProjectProducts**](docs/ProductApi.md#getProjectProducts)                                              | **GET** /v1/projects/{projectUID}/products                                            |
+| _NotehubJs.ProjectApi_              | [**cloneProject**](docs/ProjectApi.md#cloneProject)                                                          | **POST** /v1/projects/{projectUID}/clone                                              |
 | _NotehubJs.ProjectApi_              | [**createProduct**](docs/ProjectApi.md#createProduct)                                                        | **POST** /v1/projects/{projectUID}/products                                           |
 | _NotehubJs.ProjectApi_              | [**createProject**](docs/ProjectApi.md#createProject)                                                        | **POST** /v1/projects                                                                 |
 | _NotehubJs.ProjectApi_              | [**deleteProjectEnvironmentVariable**](docs/ProjectApi.md#deleteProjectEnvironmentVariable)                  | **DELETE** /v1/projects/{projectUID}/environment_variables/{key}                      |
@@ -219,6 +220,7 @@ All URIs are relative to *https://api.notefile.net*
 - [NotehubJs.BillingAccount](docs/BillingAccount.md)
 - [NotehubJs.BillingAccountRole](docs/BillingAccountRole.md)
 - [NotehubJs.Body](docs/Body.md)
+- [NotehubJs.CloneProjectRequest](docs/CloneProjectRequest.md)
 - [NotehubJs.Contact](docs/Contact.md)
 - [NotehubJs.CreateFleetRequest](docs/CreateFleetRequest.md)
 - [NotehubJs.CreateProductRequest](docs/CreateProductRequest.md)
@@ -230,8 +232,6 @@ All URIs are relative to *https://api.notefile.net*
 - [NotehubJs.DeviceSession](docs/DeviceSession.md)
 - [NotehubJs.DeviceTowerInfo](docs/DeviceTowerInfo.md)
 - [NotehubJs.DeviceUsage](docs/DeviceUsage.md)
-- [NotehubJs.Edgeimpulse](docs/Edgeimpulse.md)
-- [NotehubJs.EdgeimpulseSensorsInner](docs/EdgeimpulseSensorsInner.md)
 - [NotehubJs.EnvironmentVariables](docs/EnvironmentVariables.md)
 - [NotehubJs.Error](docs/Error.md)
 - [NotehubJs.Event](docs/Event.md)

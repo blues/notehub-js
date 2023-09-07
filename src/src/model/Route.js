@@ -285,12 +285,6 @@ Route["RouteTypeEnum"] = {
    * @const
    */
   snowflake: "snowflake",
-
-  /**
-   * value: "edgeimpulse"
-   * @const
-   */
-  edgeimpulse: "edgeimpulse",
 };
 
 export default Route;
