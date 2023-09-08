@@ -17,6 +17,7 @@ import Azure from "./model/Azure";
 import BillingAccount from "./model/BillingAccount";
 import BillingAccountRole from "./model/BillingAccountRole";
 import Body from "./model/Body";
+import CloneProjectRequest from "./model/CloneProjectRequest";
 import Contact from "./model/Contact";
 import CreateFleetRequest from "./model/CreateFleetRequest";
 import CreateProductRequest from "./model/CreateProductRequest";
@@ -28,8 +29,6 @@ import Device from "./model/Device";
 import DeviceSession from "./model/DeviceSession";
 import DeviceTowerInfo from "./model/DeviceTowerInfo";
 import DeviceUsage from "./model/DeviceUsage";
-import Edgeimpulse from "./model/Edgeimpulse";
-import EdgeimpulseSensorsInner from "./model/EdgeimpulseSensorsInner";
 import EnvironmentVariables from "./model/EnvironmentVariables";
 import Error from "./model/Error";
 import Event from "./model/Event";
@@ -125,7 +124,7 @@ import RouteLogsApi from "./api/RouteLogsApi";
  * </pre>
  * </p>
  * @module index
- * @version 1.0.15
+ * @version 1.0.16
  */
 export {
   /**
@@ -163,6 +162,12 @@ export {
    * @property {module:model/Body}
    */
   Body,
+
+  /**
+   * The CloneProjectRequest model constructor.
+   * @property {module:model/CloneProjectRequest}
+   */
+  CloneProjectRequest,
 
   /**
    * The Contact model constructor.
@@ -229,18 +234,6 @@ export {
    * @property {module:model/DeviceUsage}
    */
   DeviceUsage,
-
-  /**
-   * The Edgeimpulse model constructor.
-   * @property {module:model/Edgeimpulse}
-   */
-  Edgeimpulse,
-
-  /**
-   * The EdgeimpulseSensorsInner model constructor.
-   * @property {module:model/EdgeimpulseSensorsInner}
-   */
-  EdgeimpulseSensorsInner,
 
   /**
    * The EnvironmentVariables model constructor.

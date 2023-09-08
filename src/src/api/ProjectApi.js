@@ -12,6 +12,7 @@
  */
 
 import ApiClient from "../ApiClient";
+import CloneProjectRequest from "../model/CloneProjectRequest";
 import CreateProductRequest from "../model/CreateProductRequest";
 import CreateProjectRequest from "../model/CreateProjectRequest";
 import EnvironmentVariables from "../model/EnvironmentVariables";
@@ -29,7 +30,7 @@ import Project from "../model/Project";
 /**
  * Project service.
  * @module api/ProjectApi
- * @version 1.0.15
+ * @version 1.0.16
  */
 export default class ProjectApi {
   /**
@@ -41,6 +42,68 @@ export default class ProjectApi {
    */
   constructor(apiClient) {
     this.apiClient = apiClient || ApiClient.instance;
+  }
+
+  /**
+   * Clone a Project
+   * @param {String} projectUID The project UID to be cloned.
+   * @param {module:model/CloneProjectRequest} cloneProjectRequest Project to be cloned
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Project} and HTTP response
+   */
+  cloneProjectWithHttpInfo(projectUID, cloneProjectRequest) {
+    let postBody = cloneProjectRequest;
+    // verify the required parameter 'projectUID' is set
+    if (projectUID === undefined || projectUID === null) {
+      throw new Error(
+        "Missing the required parameter 'projectUID' when calling cloneProject"
+      );
+    }
+    // verify the required parameter 'cloneProjectRequest' is set
+    if (cloneProjectRequest === undefined || cloneProjectRequest === null) {
+      throw new Error(
+        "Missing the required parameter 'cloneProjectRequest' when calling cloneProject"
+      );
+    }
+
+    let pathParams = {
+      projectUID: projectUID,
+    };
+    let queryParams = {};
+    let headerParams = {};
+    let formParams = {};
+
+    let authNames = ["api_key"];
+    let contentTypes = ["application/json"];
+    let accepts = ["application/json"];
+    let returnType = Project;
+    return this.apiClient.callApi(
+      "/v1/projects/{projectUID}/clone",
+      "POST",
+      pathParams,
+      queryParams,
+      headerParams,
+      formParams,
+      postBody,
+      authNames,
+      contentTypes,
+      accepts,
+      returnType,
+      null
+    );
+  }
+
+  /**
+   * Clone a Project
+   * @param {String} projectUID The project UID to be cloned.
+   * @param {module:model/CloneProjectRequest} cloneProjectRequest Project to be cloned
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Project}
+   */
+  cloneProject(projectUID, cloneProjectRequest) {
+    return this.cloneProjectWithHttpInfo(projectUID, cloneProjectRequest).then(
+      function (response_and_data) {
+        return response_and_data.data;
+      }
+    );
   }
 
   /**

@@ -4,6 +4,7 @@ All URIs are relative to *https://api.notefile.net*
 
 | Method                                                                                 | HTTP request                                                     | Description |
 | -------------------------------------------------------------------------------------- | ---------------------------------------------------------------- | ----------- |
+| [**cloneProject**](ProjectApi.md#cloneProject)                                         | **POST** /v1/projects/{projectUID}/clone                         |
 | [**createProduct**](ProjectApi.md#createProduct)                                       | **POST** /v1/projects/{projectUID}/products                      |
 | [**createProject**](ProjectApi.md#createProject)                                       | **POST** /v1/projects                                            |
 | [**deleteProjectEnvironmentVariable**](ProjectApi.md#deleteProjectEnvironmentVariable) | **DELETE** /v1/projects/{projectUID}/environment_variables/{key} |
@@ -22,6 +23,56 @@ All URIs are relative to *https://api.notefile.net*
 | [**getProjects**](ProjectApi.md#getProjects)                                           | **GET** /v1/projects                                             |
 | [**putProjectEnvironmentVariables**](ProjectApi.md#putProjectEnvironmentVariables)     | **PUT** /v1/projects/{projectUID}/environment_variables          |
 | [**setGlobalTransformation**](ProjectApi.md#setGlobalTransformation)                   | **POST** /v1/projects/{projectUID}/global-transformation         |
+
+## cloneProject
+
+> Project cloneProject(projectUID, cloneProjectRequest)
+
+Clone a Project
+
+### Example
+
+```javascript
+import * as NotehubJs from "@blues-inc/notehub-js";
+let defaultClient = NotehubJs.ApiClient.instance;
+// Configure API key authorization: api_key
+let api_key = defaultClient.authentications["api_key"];
+api_key.apiKey = "YOUR API KEY";
+
+let apiInstance = new NotehubJs.ProjectApi();
+let projectUID = "projectUID_example"; // String | The project UID to be cloned.
+let cloneProjectRequest = new NotehubJs.CloneProjectRequest(); // CloneProjectRequest | Project to be cloned
+apiInstance.cloneProject(projectUID, cloneProjectRequest).then(
+  (data) => {
+    console.log(
+      "API called successfully. Returned data: " + JSON.stringify(data)
+    );
+  },
+  (error) => {
+    console.error(error);
+  }
+);
+```
+
+### Parameters
+
+| Name                    | Type                                              | Description                   | Notes |
+| ----------------------- | ------------------------------------------------- | ----------------------------- | ----- |
+| **projectUID**          | **String**                                        | The project UID to be cloned. |
+| **cloneProjectRequest** | [**CloneProjectRequest**](CloneProjectRequest.md) | Project to be cloned          |
+
+### Return type
+
+[**Project**](Project.md)
+
+### Authorization
+
+[api_key](../README.md#api_key)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
 
 ## createProduct
 

@@ -14,19 +14,19 @@
 import ApiClient from "../ApiClient";
 
 /**
- * The CreateProjectRequest model module.
- * @module model/CreateProjectRequest
+ * The CloneProjectRequest model module.
+ * @module model/CloneProjectRequest
  * @version 1.0.16
  */
-class CreateProjectRequest {
+class CloneProjectRequest {
   /**
-   * Constructs a new <code>CreateProjectRequest</code>.
-   * @alias module:model/CreateProjectRequest
+   * Constructs a new <code>CloneProjectRequest</code>.
+   * @alias module:model/CloneProjectRequest
    * @param label {String} The label for the project.
    * @param billingAccountUid {String} The billing account UID for the project. The caller of the API must be able to create projects within the billing account, otherwise an error will be returned.
    */
   constructor(label, billingAccountUid) {
-    CreateProjectRequest.initialize(this, label, billingAccountUid);
+    CloneProjectRequest.initialize(this, label, billingAccountUid);
   }
 
   /**
@@ -40,15 +40,15 @@ class CreateProjectRequest {
   }
 
   /**
-   * Constructs a <code>CreateProjectRequest</code> from a plain JavaScript object, optionally creating a new instance.
+   * Constructs a <code>CloneProjectRequest</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/CreateProjectRequest} obj Optional instance to populate.
-   * @return {module:model/CreateProjectRequest} The populated <code>CreateProjectRequest</code> instance.
+   * @param {module:model/CloneProjectRequest} obj Optional instance to populate.
+   * @return {module:model/CloneProjectRequest} The populated <code>CloneProjectRequest</code> instance.
    */
   static constructFromObject(data, obj) {
     if (data) {
-      obj = obj || new CreateProjectRequest();
+      obj = obj || new CloneProjectRequest();
 
       if (data.hasOwnProperty("label")) {
         obj["label"] = ApiClient.convertToType(data["label"], "String");
@@ -59,6 +59,18 @@ class CreateProjectRequest {
           "String"
         );
       }
+      if (data.hasOwnProperty("disable_clone_routes")) {
+        obj["disable_clone_routes"] = ApiClient.convertToType(
+          data["disable_clone_routes"],
+          "Boolean"
+        );
+      }
+      if (data.hasOwnProperty("disable_clone_fleets")) {
+        obj["disable_clone_fleets"] = ApiClient.convertToType(
+          data["disable_clone_fleets"],
+          "Boolean"
+        );
+      }
     } else if (data === null) {
       return null;
     }
@@ -66,13 +78,13 @@ class CreateProjectRequest {
   }
 
   /**
-   * Validates the JSON data with respect to <code>CreateProjectRequest</code>.
+   * Validates the JSON data with respect to <code>CloneProjectRequest</code>.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @return {boolean} to indicate whether the JSON data is valid with respect to <code>CreateProjectRequest</code>.
+   * @return {boolean} to indicate whether the JSON data is valid with respect to <code>CloneProjectRequest</code>.
    */
   static validateJSON(data) {
     // check to make sure all required properties are present in the JSON string
-    for (const property of CreateProjectRequest.RequiredProperties) {
+    for (const property of CloneProjectRequest.RequiredProperties) {
       if (!data[property]) {
         throw new Error(
           "The required field `" +
@@ -110,18 +122,30 @@ class CreateProjectRequest {
   }
 }
 
-CreateProjectRequest.RequiredProperties = ["label", "billing_account_uid"];
+CloneProjectRequest.RequiredProperties = ["label", "billing_account_uid"];
 
 /**
  * The label for the project.
  * @member {String} label
  */
-CreateProjectRequest.prototype["label"] = undefined;
+CloneProjectRequest.prototype["label"] = undefined;
 
 /**
  * The billing account UID for the project. The caller of the API must be able to create projects within the billing account, otherwise an error will be returned.
  * @member {String} billing_account_uid
  */
-CreateProjectRequest.prototype["billing_account_uid"] = undefined;
+CloneProjectRequest.prototype["billing_account_uid"] = undefined;
 
-export default CreateProjectRequest;
+/**
+ * Whether to disallow the cloning of the routes from the parent project.  Default is false if not specified.
+ * @member {Boolean} disable_clone_routes
+ */
+CloneProjectRequest.prototype["disable_clone_routes"] = undefined;
+
+/**
+ * Whether to disallow the cloning of the fleets from the parent project.  Default is false if not specified.
+ * @member {Boolean} disable_clone_fleets
+ */
+CloneProjectRequest.prototype["disable_clone_fleets"] = undefined;
+
+export default CloneProjectRequest;

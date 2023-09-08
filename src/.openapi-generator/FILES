@@ -9,6 +9,7 @@ docs/BillingAccount.md
 docs/BillingAccountApi.md
 docs/BillingAccountRole.md
 docs/Body.md
+docs/CloneProjectRequest.md
 docs/Contact.md
 docs/CreateFleetRequest.md
 docs/CreateProductRequest.md
@@ -22,8 +23,6 @@ docs/DeviceSession.md
 docs/DeviceTowerInfo.md
 docs/DeviceUsage.md
 docs/DevicesApi.md
-docs/Edgeimpulse.md
-docs/EdgeimpulseSensorsInner.md
 docs/EnvironmentVariables.md
 docs/EnvironmentVariablesApi.md
 docs/Error.md
@@ -108,6 +107,7 @@ src/model/Azure.js
 src/model/BillingAccount.js
 src/model/BillingAccountRole.js
 src/model/Body.js
+src/model/CloneProjectRequest.js
 src/model/Contact.js
 src/model/CreateFleetRequest.js
 src/model/CreateProductRequest.js
@@ -119,8 +119,6 @@ src/model/Device.js
 src/model/DeviceSession.js
 src/model/DeviceTowerInfo.js
 src/model/DeviceUsage.js
-src/model/Edgeimpulse.js
-src/model/EdgeimpulseSensorsInner.js
 src/model/EnvironmentVariables.js
 src/model/Error.js
 src/model/Event.js

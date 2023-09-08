@@ -17,7 +17,7 @@ import RouteSchema from "./RouteSchema";
 /**
  * The Route model module.
  * @module model/Route
- * @version 1.0.15
+ * @version 1.0.16
  */
 class Route {
   /**
@@ -285,12 +285,6 @@ Route["RouteTypeEnum"] = {
    * @const
    */
   snowflake: "snowflake",
-
-  /**
-   * value: "edgeimpulse"
-   * @const
-   */
-  edgeimpulse: "edgeimpulse",
 };
 
 export default Route;

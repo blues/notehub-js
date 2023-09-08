@@ -28,7 +28,7 @@
   var instance;
 
   beforeEach(function () {
-    instance = new NotehubJs.EdgeimpulseSensorsInner();
+    instance = new NotehubJs.CloneProjectRequest();
   });
 
   var getProperty = function (object, getter, property) {
@@ -43,28 +43,34 @@
     else object[property] = value;
   };
 
-  describe("EdgeimpulseSensorsInner", function () {
-    it("should create an instance of EdgeimpulseSensorsInner", function () {
-      // uncomment below and update the code to test EdgeimpulseSensorsInner
-      //var instance = new NotehubJs.EdgeimpulseSensorsInner();
-      //expect(instance).to.be.a(NotehubJs.EdgeimpulseSensorsInner);
+  describe("CloneProjectRequest", function () {
+    it("should create an instance of CloneProjectRequest", function () {
+      // uncomment below and update the code to test CloneProjectRequest
+      //var instance = new NotehubJs.CloneProjectRequest();
+      //expect(instance).to.be.a(NotehubJs.CloneProjectRequest);
     });
 
-    it('should have the property name (base name: "name")', function () {
-      // uncomment below and update the code to test the property name
-      //var instance = new NotehubJs.EdgeimpulseSensorsInner();
+    it('should have the property label (base name: "label")', function () {
+      // uncomment below and update the code to test the property label
+      //var instance = new NotehubJs.CloneProjectRequest();
       //expect(instance).to.be();
     });
 
-    it('should have the property units (base name: "units")', function () {
-      // uncomment below and update the code to test the property units
-      //var instance = new NotehubJs.EdgeimpulseSensorsInner();
+    it('should have the property billingAccountUid (base name: "billing_account_uid")', function () {
+      // uncomment below and update the code to test the property billingAccountUid
+      //var instance = new NotehubJs.CloneProjectRequest();
       //expect(instance).to.be();
     });
 
-    it('should have the property value (base name: "value")', function () {
-      // uncomment below and update the code to test the property value
-      //var instance = new NotehubJs.EdgeimpulseSensorsInner();
+    it('should have the property disableCloneRoutes (base name: "disable_clone_routes")', function () {
+      // uncomment below and update the code to test the property disableCloneRoutes
+      //var instance = new NotehubJs.CloneProjectRequest();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property disableCloneFleets (base name: "disable_clone_fleets")', function () {
+      // uncomment below and update the code to test the property disableCloneFleets
+      //var instance = new NotehubJs.CloneProjectRequest();
       //expect(instance).to.be();
     });
   });
