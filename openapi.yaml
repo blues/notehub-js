@@ -3051,7 +3051,7 @@ components:
           description: Type of route.
           enum: ["http", "proxy", "google-function", "mqtt", "aws-lambda", "aws-lambda-with-access-key", "aws-sqs", "aws-sqs-with-access-key", "aws-sqs-fifo", 
                 "aws-sqs-fifo-with-access-key", "aws-iot-analytics", "radnote-radresp-fixed-survey", "radnote-radresp-mobile-survey", "azure-function",
-                "azure-function-with-key", "azure-service-bus-with-sas-token", "thingworx", "snowflake"]
+                "azure-function-with-key", "azure-service-bus-with-sas-token", "thingworx", "snowflake", "slack-bearer", "slack-webhook"]
         modified:
           type: string
           description: Last Modified
@@ -3070,6 +3070,7 @@ components:
             - $ref: '#/components/schemas/azure'
             - $ref: '#/components/schemas/thingworx'
             - $ref: '#/components/schemas/snowflake'
+            - $ref: '#/components/schemas/slack'
 
     UserDbRoute:
       type: object
@@ -3589,6 +3590,74 @@ components:
           description: Message to send, leave blank to use notefile.
         throttle_ms:
           type: integer
+
+    slack:
+      description: Route settings specific to Slack routes.  Only used for Slack route types
+      type: object
+      properties:
+        fleets:
+          type: array
+          items:
+            type: string
+          minItems: 0
+          description: list of Fleet UIDs to apply route to, if any.  If empty, applies to all Fleets
+        filter:
+          type: object
+          properties:
+            type:
+              type: string
+              description: What notefiles this route applies to.
+              enum: ["all", "include", "exclude"]
+            system_notefiles:
+              type: boolean
+              description: Whether system notefiles should be affected by this route
+            files:
+              type: array
+              items:
+                type: string
+                description: list of notefiles to filter.  For instance, if 'type' is set to "include", will only affect files listed here
+              minItems: 0
+          description: Route filtering settings
+        transform:
+          type: object
+          properties:
+            format:
+              type: string
+              description: Data transformation to apply.  Only "jsonata" is valid for Snowflake routes
+              default: "jsonata"
+            jsonata:
+              type: string
+              description: JSONata transformation
+        throttle_ms:
+          type: integer
+          description: Minimum time between requests in Miliseconds
+        timeout:
+          type: integer
+          default: 15
+          description: Timeout in seconds for each request
+        
+        slack_type:
+          type: string
+          description: The type of Slack message.  Must be one of "slack-bearer" for Bearer Token or "slack-webhook" for Webhook messages
+        bearer:
+          type: string
+          description: The Bearer Token for Slack messaging, if the "slack-bearer" type is selected
+          example: xoxb-1234-56789abcdefghijklmnop
+        channel:
+          type : string
+          description: The Channel ID for Bearer Token method, if the "slack-bearer" type is selected
+          example: C8675309
+        webhook_url:
+          type: string
+          description: The Webhook URL for Slack Messaging if the "slack-webhook" type is selected
+          example: https://hooks.slack.com/services/FOO4BAR/THIS4THAT/123xYzaBC456
+        text:
+          type: string
+          description: The simple text message to be sent, if the blocks message field is not in use.  Placeholders are available for this field.
+          example: "[.device] reported temp(s) of [.body.temp] at [.body.location]"
+        blocks:
+          type: string
+          description: The Blocks message to be sent.  If populated, this field overrides the text field within the Slack Messaging API.  Placeholders are available for this field.
     
     EnvironmentVariables:
       type: object

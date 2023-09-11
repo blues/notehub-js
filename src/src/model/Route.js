@@ -285,6 +285,18 @@ Route["RouteTypeEnum"] = {
    * @const
    */
   snowflake: "snowflake",
+
+  /**
+   * value: "slack-bearer"
+   * @const
+   */
+  "slack-bearer": "slack-bearer",
+
+  /**
+   * value: "slack-webhook"
+   * @const
+   */
+  "slack-webhook": "slack-webhook",
 };
 
 export default Route;

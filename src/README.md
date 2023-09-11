@@ -277,6 +277,7 @@ All URIs are relative to *https://api.notefile.net*
 - [NotehubJs.Role](docs/Role.md)
 - [NotehubJs.Route](docs/Route.md)
 - [NotehubJs.RouteSchema](docs/RouteSchema.md)
+- [NotehubJs.Slack](docs/Slack.md)
 - [NotehubJs.Snowflake](docs/Snowflake.md)
 - [NotehubJs.SnowflakeTransform](docs/SnowflakeTransform.md)
 - [NotehubJs.Thingworx](docs/Thingworx.md)

@@ -74,6 +74,7 @@ import Radresponder from "./model/Radresponder";
 import Role from "./model/Role";
 import Route from "./model/Route";
 import RouteSchema from "./model/RouteSchema";
+import Slack from "./model/Slack";
 import Snowflake from "./model/Snowflake";
 import SnowflakeTransform from "./model/SnowflakeTransform";
 import Thingworx from "./model/Thingworx";
@@ -504,6 +505,12 @@ export {
    * @property {module:model/RouteSchema}
    */
   RouteSchema,
+
+  /**
+   * The Slack model constructor.
+   * @property {module:model/Slack}
+   */
+  Slack,
 
   /**
    * The Snowflake model constructor.

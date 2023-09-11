@@ -48,3 +48,7 @@
 - `thingworx` (value: `"thingworx"`)
 
 - `snowflake` (value: `"snowflake"`)
+
+- `slack-bearer` (value: `"slack-bearer"`)
+
+- `slack-webhook` (value: `"slack-webhook"`)

@@ -77,6 +77,7 @@ docs/Route.md
 docs/RouteApi.md
 docs/RouteLogsApi.md
 docs/RouteSchema.md
+docs/Slack.md
 docs/Snowflake.md
 docs/SnowflakeTransform.md
 docs/Thingworx.md
@@ -164,6 +165,7 @@ src/model/Radresponder.js
 src/model/Role.js
 src/model/Route.js
 src/model/RouteSchema.js
+src/model/Slack.js
 src/model/Snowflake.js
 src/model/SnowflakeTransform.js
 src/model/Thingworx.js
@@ -171,3 +173,4 @@ src/model/TowerLocation.js
 src/model/Twilio.js
 src/model/UpdateFleetRequest.js
 src/model/UserDbRoute.js
+test/model/Slack.spec.js
