@@ -20,6 +20,7 @@ import HttpFilter from "./HttpFilter";
 import Mqtt from "./Mqtt";
 import Proxy from "./Proxy";
 import Radresponder from "./Radresponder";
+import Slack from "./Slack";
 import Snowflake from "./Snowflake";
 import SnowflakeTransform from "./SnowflakeTransform";
 import Thingworx from "./Thingworx";
@@ -33,7 +34,7 @@ class RouteSchema {
   /**
    * Constructs a new <code>RouteSchema</code>.
    * @alias module:model/RouteSchema
-   * @param {(module:model/Aws|module:model/Azure|module:model/Google|module:model/Http|module:model/Mqtt|module:model/Proxy|module:model/Radresponder|module:model/Snowflake|module:model/Thingworx)} instance The actual instance to initialize RouteSchema.
+   * @param {(module:model/Aws|module:model/Azure|module:model/Google|module:model/Http|module:model/Mqtt|module:model/Proxy|module:model/Radresponder|module:model/Slack|module:model/Snowflake|module:model/Thingworx)} instance The actual instance to initialize RouteSchema.
    */
   constructor(instance = null) {
     if (instance === null) {
@@ -186,15 +187,31 @@ class RouteSchema {
       errorMessages.push("Failed to construct Snowflake: " + err);
     }
 
+    try {
+      if (typeof instance === "Slack") {
+        this.actualInstance = instance;
+      } else {
+        // plain JS object
+        // validate the object
+        Slack.validateJSON(instance); // throw an exception if no match
+        // create Slack from JS object
+        this.actualInstance = Slack.constructFromObject(instance);
+      }
+      match++;
+    } catch (err) {
+      // json data failed to deserialize into Slack
+      errorMessages.push("Failed to construct Slack: " + err);
+    }
+
     if (match > 1) {
       throw new Error(
-        "Multiple matches found constructing `RouteSchema` with oneOf schemas Aws, Azure, Google, Http, Mqtt, Proxy, Radresponder, Snowflake, Thingworx. Input: " +
+        "Multiple matches found constructing `RouteSchema` with oneOf schemas Aws, Azure, Google, Http, Mqtt, Proxy, Radresponder, Slack, Snowflake, Thingworx. Input: " +
           JSON.stringify(instance)
       );
     } else if (match === 0) {
       this.actualInstance = null; // clear the actual instance in case there are multiple matches
       throw new Error(
-        "No match found constructing `RouteSchema` with oneOf schemas Aws, Azure, Google, Http, Mqtt, Proxy, Radresponder, Snowflake, Thingworx. Details: " +
+        "No match found constructing `RouteSchema` with oneOf schemas Aws, Azure, Google, Http, Mqtt, Proxy, Radresponder, Slack, Snowflake, Thingworx. Details: " +
           errorMessages.join(", ")
       );
     } else {
@@ -215,16 +232,16 @@ class RouteSchema {
   }
 
   /**
-   * Gets the actaul instance, which can be <code>Aws</code>, <code>Azure</code>, <code>Google</code>, <code>Http</code>, <code>Mqtt</code>, <code>Proxy</code>, <code>Radresponder</code>, <code>Snowflake</code>, <code>Thingworx</code>.
-   * @return {(module:model/Aws|module:model/Azure|module:model/Google|module:model/Http|module:model/Mqtt|module:model/Proxy|module:model/Radresponder|module:model/Snowflake|module:model/Thingworx)} The actual instance.
+   * Gets the actaul instance, which can be <code>Aws</code>, <code>Azure</code>, <code>Google</code>, <code>Http</code>, <code>Mqtt</code>, <code>Proxy</code>, <code>Radresponder</code>, <code>Slack</code>, <code>Snowflake</code>, <code>Thingworx</code>.
+   * @return {(module:model/Aws|module:model/Azure|module:model/Google|module:model/Http|module:model/Mqtt|module:model/Proxy|module:model/Radresponder|module:model/Slack|module:model/Snowflake|module:model/Thingworx)} The actual instance.
    */
   getActualInstance() {
     return this.actualInstance;
   }
 
   /**
-   * Sets the actaul instance, which can be <code>Aws</code>, <code>Azure</code>, <code>Google</code>, <code>Http</code>, <code>Mqtt</code>, <code>Proxy</code>, <code>Radresponder</code>, <code>Snowflake</code>, <code>Thingworx</code>.
-   * @param {(module:model/Aws|module:model/Azure|module:model/Google|module:model/Http|module:model/Mqtt|module:model/Proxy|module:model/Radresponder|module:model/Snowflake|module:model/Thingworx)} obj The actual instance.
+   * Sets the actaul instance, which can be <code>Aws</code>, <code>Azure</code>, <code>Google</code>, <code>Http</code>, <code>Mqtt</code>, <code>Proxy</code>, <code>Radresponder</code>, <code>Slack</code>, <code>Snowflake</code>, <code>Thingworx</code>.
+   * @param {(module:model/Aws|module:model/Azure|module:model/Google|module:model/Http|module:model/Mqtt|module:model/Proxy|module:model/Radresponder|module:model/Slack|module:model/Snowflake|module:model/Thingworx)} obj The actual instance.
    */
   setActualInstance(obj) {
     this.actualInstance =
@@ -266,6 +283,7 @@ RouteSchema.prototype["filter"] = undefined;
 RouteSchema.prototype["transform"] = undefined;
 
 /**
+ * Minimum time between requests in Miliseconds
  * @member {Number} throttle_ms
  */
 RouteSchema.prototype["throttle_ms"] = undefined;
@@ -382,6 +400,7 @@ RouteSchema.prototype["message_group_id"] = undefined;
 RouteSchema.prototype["message_deduplication_id"] = undefined;
 
 /**
+ * The Channel ID for Bearer Token method, if the \"slack-bearer\" type is selected
  * @member {String} channel
  */
 RouteSchema.prototype["channel"] = undefined;
@@ -452,6 +471,36 @@ RouteSchema.prototype["user_name"] = undefined;
  */
 RouteSchema.prototype["pem"] = undefined;
 
+/**
+ * The type of Slack message.  Must be one of \"slack-bearer\" for Bearer Token or \"slack-webhook\" for Webhook messages
+ * @member {String} slack_type
+ */
+RouteSchema.prototype["slack_type"] = undefined;
+
+/**
+ * The Bearer Token for Slack messaging, if the \"slack-bearer\" type is selected
+ * @member {String} bearer
+ */
+RouteSchema.prototype["bearer"] = undefined;
+
+/**
+ * The Webhook URL for Slack Messaging if the \"slack-webhook\" type is selected
+ * @member {String} webhook_url
+ */
+RouteSchema.prototype["webhook_url"] = undefined;
+
+/**
+ * The simple text message to be sent, if the blocks message field is not in use.  Placeholders are available for this field.
+ * @member {String} text
+ */
+RouteSchema.prototype["text"] = undefined;
+
+/**
+ * The Blocks message to be sent.  If populated, this field overrides the text field within the Slack Messaging API.  Placeholders are available for this field.
+ * @member {String} blocks
+ */
+RouteSchema.prototype["blocks"] = undefined;
+
 RouteSchema.OneOf = [
   "Aws",
   "Azure",
@@ -460,6 +509,7 @@ RouteSchema.OneOf = [
   "Mqtt",
   "Proxy",
   "Radresponder",
+  "Slack",
   "Snowflake",
   "Thingworx",
 ];
