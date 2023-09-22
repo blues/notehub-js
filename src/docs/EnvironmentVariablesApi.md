@@ -8,11 +8,11 @@ All URIs are relative to *https://api.notefile.net*
 | [**deleteFleetEnvironmentVariable**](EnvironmentVariablesApi.md#deleteFleetEnvironmentVariable)         | **DELETE** /v1/projects/{projectUID}/fleets/{fleetUID}/environment_variables/{key}   |
 | [**deleteProjectEnvironmentVariable**](EnvironmentVariablesApi.md#deleteProjectEnvironmentVariable)     | **DELETE** /v1/projects/{projectUID}/environment_variables/{key}                     |
 | [**getDeviceEnvironmentVariables**](EnvironmentVariablesApi.md#getDeviceEnvironmentVariables)           | **GET** /v1/projects/{projectUID}/devices/{deviceUID}/environment_variables          |
-| [**getDeviceEnvironmentVariablesByPin**](EnvironmentVariablesApi.md#getDeviceEnvironmentVariablesByPin) | **GET** /v1/projects/{projectUID}/devices/{deviceUID}/environment_variables_with_pin |
+| [**getDeviceEnvironmentVariablesByPin**](EnvironmentVariablesApi.md#getDeviceEnvironmentVariablesByPin) | **GET** /v1/products/{productUID}/devices/{deviceUID}/environment_variables_with_pin |
 | [**getFleetEnvironmentVariables**](EnvironmentVariablesApi.md#getFleetEnvironmentVariables)             | **GET** /v1/projects/{projectUID}/fleets/{fleetUID}/environment_variables            |
 | [**getProjectEnvironmentVariables**](EnvironmentVariablesApi.md#getProjectEnvironmentVariables)         | **GET** /v1/projects/{projectUID}/environment_variables                              |
 | [**putDeviceEnvironmentVariables**](EnvironmentVariablesApi.md#putDeviceEnvironmentVariables)           | **PUT** /v1/projects/{projectUID}/devices/{deviceUID}/environment_variables          |
-| [**putDeviceEnvironmentVariablesByPin**](EnvironmentVariablesApi.md#putDeviceEnvironmentVariablesByPin) | **PUT** /v1/projects/{projectUID}/devices/{deviceUID}/environment_variables_with_pin |
+| [**putDeviceEnvironmentVariablesByPin**](EnvironmentVariablesApi.md#putDeviceEnvironmentVariablesByPin) | **PUT** /v1/products/{productUID}/devices/{deviceUID}/environment_variables_with_pin |
 | [**putFleetEnvironmentVariables**](EnvironmentVariablesApi.md#putFleetEnvironmentVariables)             | **PUT** /v1/projects/{projectUID}/fleets/{fleetUID}/environment_variables            |
 | [**putProjectEnvironmentVariables**](EnvironmentVariablesApi.md#putProjectEnvironmentVariables)         | **PUT** /v1/projects/{projectUID}/environment_variables                              |
 

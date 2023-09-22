@@ -548,7 +548,7 @@ export default class DeviceApi {
     let accepts = ["application/json"];
     let returnType = GetDeviceEnvironmentVariables200Response;
     return this.apiClient.callApi(
-      "/v1/projects/{projectUID}/devices/{deviceUID}/environment_variables_with_pin",
+      "/v1/products/{productUID}/devices/{deviceUID}/environment_variables_with_pin",
       "GET",
       pathParams,
       queryParams,
@@ -1096,7 +1096,7 @@ export default class DeviceApi {
     let accepts = ["application/json"];
     let returnType = EnvironmentVariables;
     return this.apiClient.callApi(
-      "/v1/projects/{projectUID}/devices/{deviceUID}/environment_variables_with_pin",
+      "/v1/products/{productUID}/devices/{deviceUID}/environment_variables_with_pin",
       "PUT",
       pathParams,
       queryParams,
