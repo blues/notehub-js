@@ -18,7 +18,7 @@ import GetRouteLogsByRoute200ResponseInner from "../model/GetRouteLogsByRoute200
 /**
  * RouteLogs service.
  * @module api/RouteLogsApi
- * @version 1.0.17
+ * @version 1.0.16
  */
 export default class RouteLogsApi {
   /**
