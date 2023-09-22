@@ -350,39 +350,35 @@ apiInstance.getDeviceEnvironmentVariables(projectUID, deviceUID).then((data) => 
 
 ## getDeviceEnvironmentVariablesByPin
 
-> GetDeviceEnvironmentVariables200Response getDeviceEnvironmentVariablesByPin(productUID, deviceUID)
+> GetDeviceEnvironmentVariables200Response getDeviceEnvironmentVariablesByPin(projectUID, deviceUID)
 
 Get environment variables of a device with device pin authorization
 
 ### Example
 
 ```javascript
-import * as NotehubJs from "@blues-inc/notehub-js";
+import * as NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: pin
-let pin = defaultClient.authentications["pin"];
-pin.apiKey = "YOUR API KEY";
+let pin = defaultClient.authentications['pin'];
+pin.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.DeviceApi();
-let productUID = com.blues.airnote; // String |
+let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
 let deviceUID = "deviceUID_example"; // String |
-apiInstance.getDeviceEnvironmentVariablesByPin(productUID, deviceUID).then(
-  (data) => {
-    console.log(
-      "API called successfully. Returned data: " + JSON.stringify(data)
-    );
-  },
-  (error) => {
-    console.error(error);
-  }
-);
+apiInstance.getDeviceEnvironmentVariablesByPin(projectUID, deviceUID).then((data) => {
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
+}, (error) => {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
 
 | Name           | Type       | Description | Notes |
 | -------------- | ---------- | ----------- | ----- |
-| **productUID** | **String** |             |
+| **projectUID** | **String** |             |
 | **deviceUID**  | **String** |             |
 
 ### Return type
@@ -732,46 +728,36 @@ apiInstance.putDeviceEnvironmentVariables(projectUID, deviceUID, environmentVari
 
 ## putDeviceEnvironmentVariablesByPin
 
-> EnvironmentVariables putDeviceEnvironmentVariablesByPin(productUID, deviceUID, environmentVariables)
+> EnvironmentVariables putDeviceEnvironmentVariablesByPin(projectUID, deviceUID, environmentVariables)
 
 Put environment variables of a device with device pin authorization
 
 ### Example
 
 ```javascript
-import * as NotehubJs from "@blues-inc/notehub-js";
+import * as NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
 // Configure API key authorization: pin
-let pin = defaultClient.authentications["pin"];
-pin.apiKey = "YOUR API KEY";
+let pin = defaultClient.authentications['pin'];
+pin.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.DeviceApi();
-let productUID = com.blues.airnote; // String |
+let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
 let deviceUID = "deviceUID_example"; // String |
 let environmentVariables = new NotehubJs.EnvironmentVariables(); // EnvironmentVariables | Environment variables to be added to the device
-apiInstance
-  .putDeviceEnvironmentVariablesByPin(
-    productUID,
-    deviceUID,
-    environmentVariables
-  )
-  .then(
-    (data) => {
-      console.log(
-        "API called successfully. Returned data: " + JSON.stringify(data)
-      );
-    },
-    (error) => {
-      console.error(error);
-    }
-  );
+apiInstance.putDeviceEnvironmentVariablesByPin(projectUID, deviceUID, environmentVariables).then((data) => {
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
+}, (error) => {
+  console.error(error);
+});
+
 ```
 
 ### Parameters
 
 | Name                     | Type                                                | Description                                     | Notes |
 | ------------------------ | --------------------------------------------------- | ----------------------------------------------- | ----- |
-| **productUID**           | **String**                                          |                                                 |
+| **projectUID**           | **String**                                          |                                                 |
 | **deviceUID**            | **String**                                          |                                                 |
 | **environmentVariables** | [**EnvironmentVariables**](EnvironmentVariables.md) | Environment variables to be added to the device |
 

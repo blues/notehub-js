@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The CloneProjectRequest model module.
  * @module model/CloneProjectRequest
- * @version 1.0.16
+ * @version 1.0.17
  */
 class CloneProjectRequest {
   /**
