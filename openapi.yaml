@@ -1462,9 +1462,9 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
 
-  /v1/projects/{projectUID}/devices/{deviceUID}/environment_variables_with_pin:
+  /v1/products/{productUID}/devices/{deviceUID}/environment_variables_with_pin:
     parameters:
-      - $ref: '#/components/parameters/projectUIDParam'
+      - $ref: '#/components/parameters/productUIDParam'
       - $ref: '#/components/parameters/deviceUIDParam'
 
     get:
@@ -1865,6 +1865,14 @@ components:
         type: string
       # NOTE: Airnote's Project UID
       example: app:2606f411-dea6-44a0-9743-1130f57d77d8
+
+    productUIDParam:
+      name: productUID
+      in: path
+      required: true
+      schema:
+        type: string
+      example: com.blues.bridge:sensors
 
     eventUIDParam:
       name: eventUID

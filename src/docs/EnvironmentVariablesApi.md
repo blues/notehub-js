@@ -8,11 +8,11 @@ All URIs are relative to *https://api.notefile.net*
 | [**deleteFleetEnvironmentVariable**](EnvironmentVariablesApi.md#deleteFleetEnvironmentVariable)         | **DELETE** /v1/projects/{projectUID}/fleets/{fleetUID}/environment_variables/{key}   |
 | [**deleteProjectEnvironmentVariable**](EnvironmentVariablesApi.md#deleteProjectEnvironmentVariable)     | **DELETE** /v1/projects/{projectUID}/environment_variables/{key}                     |
 | [**getDeviceEnvironmentVariables**](EnvironmentVariablesApi.md#getDeviceEnvironmentVariables)           | **GET** /v1/projects/{projectUID}/devices/{deviceUID}/environment_variables          |
-| [**getDeviceEnvironmentVariablesByPin**](EnvironmentVariablesApi.md#getDeviceEnvironmentVariablesByPin) | **GET** /v1/projects/{projectUID}/devices/{deviceUID}/environment_variables_with_pin |
+| [**getDeviceEnvironmentVariablesByPin**](EnvironmentVariablesApi.md#getDeviceEnvironmentVariablesByPin) | **GET** /v1/products/{productUID}/devices/{deviceUID}/environment_variables_with_pin |
 | [**getFleetEnvironmentVariables**](EnvironmentVariablesApi.md#getFleetEnvironmentVariables)             | **GET** /v1/projects/{projectUID}/fleets/{fleetUID}/environment_variables            |
 | [**getProjectEnvironmentVariables**](EnvironmentVariablesApi.md#getProjectEnvironmentVariables)         | **GET** /v1/projects/{projectUID}/environment_variables                              |
 | [**putDeviceEnvironmentVariables**](EnvironmentVariablesApi.md#putDeviceEnvironmentVariables)           | **PUT** /v1/projects/{projectUID}/devices/{deviceUID}/environment_variables          |
-| [**putDeviceEnvironmentVariablesByPin**](EnvironmentVariablesApi.md#putDeviceEnvironmentVariablesByPin) | **PUT** /v1/projects/{projectUID}/devices/{deviceUID}/environment_variables_with_pin |
+| [**putDeviceEnvironmentVariablesByPin**](EnvironmentVariablesApi.md#putDeviceEnvironmentVariablesByPin) | **PUT** /v1/products/{productUID}/devices/{deviceUID}/environment_variables_with_pin |
 | [**putFleetEnvironmentVariables**](EnvironmentVariablesApi.md#putFleetEnvironmentVariables)             | **PUT** /v1/projects/{projectUID}/fleets/{fleetUID}/environment_variables            |
 | [**putProjectEnvironmentVariables**](EnvironmentVariablesApi.md#putProjectEnvironmentVariables)         | **PUT** /v1/projects/{projectUID}/environment_variables                              |
 
@@ -206,7 +206,7 @@ apiInstance.getDeviceEnvironmentVariables(projectUID, deviceUID).then((data) => 
 
 ## getDeviceEnvironmentVariablesByPin
 
-> GetDeviceEnvironmentVariables200Response getDeviceEnvironmentVariablesByPin(projectUID, deviceUID)
+> GetDeviceEnvironmentVariables200Response getDeviceEnvironmentVariablesByPin(productUID, deviceUID)
 
 Get environment variables of a device with device pin authorization
 
@@ -220,9 +220,9 @@ let pin = defaultClient.authentications['pin'];
 pin.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.EnvironmentVariablesApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let productUID = com.blues.bridge:sensors; // String |
 let deviceUID = "deviceUID_example"; // String |
-apiInstance.getDeviceEnvironmentVariablesByPin(projectUID, deviceUID).then((data) => {
+apiInstance.getDeviceEnvironmentVariablesByPin(productUID, deviceUID).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
@@ -234,7 +234,7 @@ apiInstance.getDeviceEnvironmentVariablesByPin(projectUID, deviceUID).then((data
 
 | Name           | Type       | Description | Notes |
 | -------------- | ---------- | ----------- | ----- |
-| **projectUID** | **String** |             |
+| **productUID** | **String** |             |
 | **deviceUID**  | **String** |             |
 
 ### Return type
@@ -390,7 +390,7 @@ apiInstance.putDeviceEnvironmentVariables(projectUID, deviceUID, environmentVari
 
 ## putDeviceEnvironmentVariablesByPin
 
-> EnvironmentVariables putDeviceEnvironmentVariablesByPin(projectUID, deviceUID, environmentVariables)
+> EnvironmentVariables putDeviceEnvironmentVariablesByPin(productUID, deviceUID, environmentVariables)
 
 Put environment variables of a device with device pin authorization
 
@@ -404,10 +404,10 @@ let pin = defaultClient.authentications['pin'];
 pin.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.EnvironmentVariablesApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let productUID = com.blues.bridge:sensors; // String |
 let deviceUID = "deviceUID_example"; // String |
 let environmentVariables = new NotehubJs.EnvironmentVariables(); // EnvironmentVariables | Environment variables to be added to the device
-apiInstance.putDeviceEnvironmentVariablesByPin(projectUID, deviceUID, environmentVariables).then((data) => {
+apiInstance.putDeviceEnvironmentVariablesByPin(productUID, deviceUID, environmentVariables).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
@@ -419,7 +419,7 @@ apiInstance.putDeviceEnvironmentVariablesByPin(projectUID, deviceUID, environmen
 
 | Name                     | Type                                                | Description                                     | Notes |
 | ------------------------ | --------------------------------------------------- | ----------------------------------------------- | ----- |
-| **projectUID**           | **String**                                          |                                                 |
+| **productUID**           | **String**                                          |                                                 |
 | **deviceUID**            | **String**                                          |                                                 |
 | **environmentVariables** | [**EnvironmentVariables**](EnvironmentVariables.md) | Environment variables to be added to the device |
 
