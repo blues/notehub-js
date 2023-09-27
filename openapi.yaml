@@ -751,6 +751,43 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
 
+  /v1/projects/{projectUID}/devices/{deviceUID}/provision:
+    post:
+      tags: ["project", "devices"]
+      operationId: postProvisionProjectDevice
+      description: Provision Device for a Project
+      security:
+        - api_key: []
+      parameters:
+        - $ref: '#/components/parameters/projectUIDParam'
+        - $ref: '#/components/parameters/deviceUIDParam'
+      requestBody:
+        description: Provision a device to a specific ProductUID
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                product_uid:
+                  type: string
+                  description: The ProductUID that the device should use.
+                device_sn:
+                  type: string
+                  description: The serial number to assign to the device.
+              required:
+                - product_uid
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                default: {}
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+
   /v1/projects/{projectUID}/fleets/{fleetUID}/devices:
     get:
       tags: ["project", "fleet", "devices"]
