@@ -65,6 +65,7 @@ import Login200Response from "./model/Login200Response";
 import LoginRequest from "./model/LoginRequest";
 import Mqtt from "./model/Mqtt";
 import Note from "./model/Note";
+import PostProvisionProjectDeviceRequest from "./model/PostProvisionProjectDeviceRequest";
 import Product from "./model/Product";
 import Project from "./model/Project";
 import ProjectMember from "./model/ProjectMember";
@@ -451,6 +452,12 @@ export {
    * @property {module:model/Note}
    */
   Note,
+
+  /**
+   * The PostProvisionProjectDeviceRequest model constructor.
+   * @property {module:model/PostProvisionProjectDeviceRequest}
+   */
+  PostProvisionProjectDeviceRequest,
 
   /**
    * The Product model constructor.
