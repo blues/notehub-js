@@ -24,13 +24,14 @@ import GetProjectEventsByCursor200Response from "../model/GetProjectEventsByCurs
 import GetProjectMembers200Response from "../model/GetProjectMembers200Response";
 import GetProjectProducts200Response from "../model/GetProjectProducts200Response";
 import GetProjects200Response from "../model/GetProjects200Response";
+import PostProvisionProjectDeviceRequest from "../model/PostProvisionProjectDeviceRequest";
 import Product from "../model/Product";
 import Project from "../model/Project";
 
 /**
  * Project service.
  * @module api/ProjectApi
- * @version 1.0.17
+ * @version 1.0.18
  */
 export default class ProjectApi {
   /**
@@ -1071,6 +1072,90 @@ export default class ProjectApi {
    */
   getProjects() {
     return this.getProjectsWithHttpInfo().then(function (response_and_data) {
+      return response_and_data.data;
+    });
+  }
+
+  /**
+   * Provision Device for a Project
+   * @param {String} projectUID
+   * @param {String} deviceUID
+   * @param {module:model/PostProvisionProjectDeviceRequest} postProvisionProjectDeviceRequest Provision a device to a specific ProductUID
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link Object} and HTTP response
+   */
+  postProvisionProjectDeviceWithHttpInfo(
+    projectUID,
+    deviceUID,
+    postProvisionProjectDeviceRequest
+  ) {
+    let postBody = postProvisionProjectDeviceRequest;
+    // verify the required parameter 'projectUID' is set
+    if (projectUID === undefined || projectUID === null) {
+      throw new Error(
+        "Missing the required parameter 'projectUID' when calling postProvisionProjectDevice"
+      );
+    }
+    // verify the required parameter 'deviceUID' is set
+    if (deviceUID === undefined || deviceUID === null) {
+      throw new Error(
+        "Missing the required parameter 'deviceUID' when calling postProvisionProjectDevice"
+      );
+    }
+    // verify the required parameter 'postProvisionProjectDeviceRequest' is set
+    if (
+      postProvisionProjectDeviceRequest === undefined ||
+      postProvisionProjectDeviceRequest === null
+    ) {
+      throw new Error(
+        "Missing the required parameter 'postProvisionProjectDeviceRequest' when calling postProvisionProjectDevice"
+      );
+    }
+
+    let pathParams = {
+      projectUID: projectUID,
+      deviceUID: deviceUID,
+    };
+    let queryParams = {};
+    let headerParams = {};
+    let formParams = {};
+
+    let authNames = ["api_key"];
+    let contentTypes = ["application/json"];
+    let accepts = ["application/json"];
+    let returnType = Object;
+    return this.apiClient.callApi(
+      "/v1/projects/{projectUID}/devices/{deviceUID}/provision",
+      "POST",
+      pathParams,
+      queryParams,
+      headerParams,
+      formParams,
+      postBody,
+      authNames,
+      contentTypes,
+      accepts,
+      returnType,
+      null
+    );
+  }
+
+  /**
+   * Provision Device for a Project
+   * @param {String} projectUID
+   * @param {String} deviceUID
+   * @param {module:model/PostProvisionProjectDeviceRequest} postProvisionProjectDeviceRequest Provision a device to a specific ProductUID
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link Object}
+   */
+  postProvisionProjectDevice(
+    projectUID,
+    deviceUID,
+    postProvisionProjectDeviceRequest
+  ) {
+    return this.postProvisionProjectDeviceWithHttpInfo(
+      projectUID,
+      deviceUID,
+      postProvisionProjectDeviceRequest
+    ).then(function (response_and_data) {
       return response_and_data.data;
     });
   }

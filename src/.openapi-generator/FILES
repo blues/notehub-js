@@ -64,6 +64,7 @@ docs/LoginRequest.md
 docs/Mqtt.md
 docs/Note.md
 docs/NotesApi.md
+docs/PostProvisionProjectDeviceRequest.md
 docs/Product.md
 docs/ProductApi.md
 docs/Project.md
@@ -156,6 +157,7 @@ src/model/Login200Response.js
 src/model/LoginRequest.js
 src/model/Mqtt.js
 src/model/Note.js
+src/model/PostProvisionProjectDeviceRequest.js
 src/model/Product.js
 src/model/Project.js
 src/model/ProjectMember.js

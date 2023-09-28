@@ -17,7 +17,7 @@ import Fleet from "./Fleet";
 /**
  * The GetProjectFleets200Response model module.
  * @module model/GetProjectFleets200Response
- * @version 1.0.17
+ * @version 1.0.18
  */
 class GetProjectFleets200Response {
   /**

@@ -21,6 +21,7 @@ All URIs are relative to *https://api.notefile.net*
 | [**getProjectMembers**](ProjectApi.md#getProjectMembers)                               | **GET** /v1/projects/{projectUID}/members                        |
 | [**getProjectProducts**](ProjectApi.md#getProjectProducts)                             | **GET** /v1/projects/{projectUID}/products                       |
 | [**getProjects**](ProjectApi.md#getProjects)                                           | **GET** /v1/projects                                             |
+| [**postProvisionProjectDevice**](ProjectApi.md#postProvisionProjectDevice)             | **POST** /v1/projects/{projectUID}/devices/{deviceUID}/provision |
 | [**putProjectEnvironmentVariables**](ProjectApi.md#putProjectEnvironmentVariables)     | **PUT** /v1/projects/{projectUID}/environment_variables          |
 | [**setGlobalTransformation**](ProjectApi.md#setGlobalTransformation)                   | **POST** /v1/projects/{projectUID}/global-transformation         |
 
@@ -847,6 +848,54 @@ This endpoint does not need any parameter.
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+## postProvisionProjectDevice
+
+> Object postProvisionProjectDevice(projectUID, deviceUID, postProvisionProjectDeviceRequest)
+
+Provision Device for a Project
+
+### Example
+
+```javascript
+import * as NotehubJs from '@blues-inc/notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
+// Configure API key authorization: api_key
+let api_key = defaultClient.authentications['api_key'];
+api_key.apiKey = 'YOUR API KEY';
+
+let apiInstance = new NotehubJs.ProjectApi();
+let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let deviceUID = "deviceUID_example"; // String |
+let postProvisionProjectDeviceRequest = new NotehubJs.PostProvisionProjectDeviceRequest(); // PostProvisionProjectDeviceRequest | Provision a device to a specific ProductUID
+apiInstance.postProvisionProjectDevice(projectUID, deviceUID, postProvisionProjectDeviceRequest).then((data) => {
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
+}, (error) => {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+| Name                                  | Type                                                                          | Description                                 | Notes |
+| ------------------------------------- | ----------------------------------------------------------------------------- | ------------------------------------------- | ----- |
+| **projectUID**                        | **String**                                                                    |                                             |
+| **deviceUID**                         | **String**                                                                    |                                             |
+| **postProvisionProjectDeviceRequest** | [**PostProvisionProjectDeviceRequest**](PostProvisionProjectDeviceRequest.md) | Provision a device to a specific ProductUID |
+
+### Return type
+
+**Object**
+
+### Authorization
+
+[api_key](../README.md#api_key)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 ## putProjectEnvironmentVariables
