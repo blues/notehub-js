@@ -1195,8 +1195,6 @@ paths:
         - $ref: '#/components/parameters/systemFilesOnlyParam'
         - $ref: '#/components/parameters/filesParam'
         - $ref: '#/components/parameters/deviceUIDParamQuery'
-        - $ref: '#/components/parameters/startDateParam'
-        - $ref: '#/components/parameters/endDateParam'
       responses:
         "200":
           $ref: '#/components/responses/EventsByCursorResponse'
