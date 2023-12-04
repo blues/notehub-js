@@ -526,6 +526,25 @@ paths:
                 $ref: '#/components/schemas/Project'
         default:
           $ref: '#/components/responses/ErrorResponse'
+    delete:
+      tags: ["project"]
+      operationId: deleteProject
+      description: Delete a Project by ProjectUID
+      security:
+        - api_key: []
+      parameters:
+        - $ref: '#/components/parameters/projectUIDParam'
+        - name: db
+          in: query
+          required: false
+          schema:
+            type: boolean
+            default: "false"
+      responses:
+        "200":
+          description: Successful operation
+        default:
+          $ref: '#/components/responses/ErrorResponse'
 
   /v1/projects/{projectUID}/products:
     parameters:
