@@ -21,7 +21,7 @@ import PostProvisionProjectDeviceRequest from "../model/PostProvisionProjectDevi
 /**
  * Devices service.
  * @module api/DevicesApi
- * @version 1.0.18
+ * @version 1.0.19
  */
 export default class DevicesApi {
   /**

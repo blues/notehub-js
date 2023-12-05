@@ -126,7 +126,7 @@ import RouteLogsApi from "./api/RouteLogsApi";
  * </pre>
  * </p>
  * @module index
- * @version 1.0.18
+ * @version 1.0.19
  */
 export {
   /**

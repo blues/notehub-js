@@ -17,7 +17,7 @@ import Device from "./Device";
 /**
  * The GetProjectDevices200Response model module.
  * @module model/GetProjectDevices200Response
- * @version 1.0.18
+ * @version 1.0.19
  */
 class GetProjectDevices200Response {
   /**
