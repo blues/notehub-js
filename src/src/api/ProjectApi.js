@@ -31,7 +31,7 @@ import Project from "../model/Project";
 /**
  * Project service.
  * @module api/ProjectApi
- * @version 1.0.18
+ * @version 1.0.19
  */
 export default class ProjectApi {
   /**
@@ -216,6 +216,67 @@ export default class ProjectApi {
    */
   createProject(createProjectRequest) {
     return this.createProjectWithHttpInfo(createProjectRequest).then(function (
+      response_and_data
+    ) {
+      return response_and_data.data;
+    });
+  }
+
+  /**
+   * Delete a Project by ProjectUID
+   * @param {String} projectUID
+   * @param {Object} opts Optional parameters
+   * @param {Boolean} opts.db  (default to false)
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
+   */
+  deleteProjectWithHttpInfo(projectUID, opts) {
+    opts = opts || {};
+    let postBody = null;
+    // verify the required parameter 'projectUID' is set
+    if (projectUID === undefined || projectUID === null) {
+      throw new Error(
+        "Missing the required parameter 'projectUID' when calling deleteProject"
+      );
+    }
+
+    let pathParams = {
+      projectUID: projectUID,
+    };
+    let queryParams = {
+      db: opts["db"],
+    };
+    let headerParams = {};
+    let formParams = {};
+
+    let authNames = ["api_key"];
+    let contentTypes = [];
+    let accepts = ["application/json"];
+    let returnType = null;
+    return this.apiClient.callApi(
+      "/v1/projects/{projectUID}",
+      "DELETE",
+      pathParams,
+      queryParams,
+      headerParams,
+      formParams,
+      postBody,
+      authNames,
+      contentTypes,
+      accepts,
+      returnType,
+      null
+    );
+  }
+
+  /**
+   * Delete a Project by ProjectUID
+   * @param {String} projectUID
+   * @param {Object} opts Optional parameters
+   * @param {Boolean} opts.db  (default to false)
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}
+   */
+  deleteProject(projectUID, opts) {
+    return this.deleteProjectWithHttpInfo(projectUID, opts).then(function (
       response_and_data
     ) {
       return response_and_data.data;
@@ -779,8 +840,6 @@ export default class ProjectApi {
    * @param {Boolean} opts.systemFilesOnly
    * @param {String} opts.files
    * @param {String} opts.deviceUID A Device UID.
-   * @param {Number} opts.startDate Unix timestamp
-   * @param {Number} opts.endDate Unix timestamp
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetProjectEventsByCursor200Response} and HTTP response
    */
   getProjectEventsByCursorWithHttpInfo(projectUID, opts) {
@@ -803,8 +862,6 @@ export default class ProjectApi {
       systemFilesOnly: opts["systemFilesOnly"],
       files: opts["files"],
       deviceUID: opts["deviceUID"],
-      startDate: opts["startDate"],
-      endDate: opts["endDate"],
     };
     let headerParams = {};
     let formParams = {};
@@ -839,8 +896,6 @@ export default class ProjectApi {
    * @param {Boolean} opts.systemFilesOnly
    * @param {String} opts.files
    * @param {String} opts.deviceUID A Device UID.
-   * @param {Number} opts.startDate Unix timestamp
-   * @param {Number} opts.endDate Unix timestamp
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetProjectEventsByCursor200Response}
    */
   getProjectEventsByCursor(projectUID, opts) {

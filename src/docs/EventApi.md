@@ -226,9 +226,7 @@ let opts = {
   'sortOrder': "'asc'", // String |
   'systemFilesOnly': true, // Boolean |
   'files': _health.qo, data.qo, // String |
-  'deviceUID': "deviceUID_example", // String | A Device UID.
-  'startDate': 1628631763, // Number | Unix timestamp
-  'endDate': 1657894210 // Number | Unix timestamp
+  'deviceUID': "deviceUID_example" // String | A Device UID.
 };
 apiInstance.getProjectEventsByCursor(projectUID, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
@@ -249,8 +247,6 @@ apiInstance.getProjectEventsByCursor(projectUID, opts).then((data) => {
 | **systemFilesOnly** | **Boolean** |                                                                                                                                                                                                                                                                                                                                                                            | [optional]                            |
 | **files**           | **String**  |                                                                                                                                                                                                                                                                                                                                                                            | [optional]                            |
 | **deviceUID**       | **String**  | A Device UID.                                                                                                                                                                                                                                                                                                                                                              | [optional]                            |
-| **startDate**       | **Number**  | Unix timestamp                                                                                                                                                                                                                                                                                                                                                             | [optional]                            |
-| **endDate**         | **Number**  | Unix timestamp                                                                                                                                                                                                                                                                                                                                                             | [optional]                            |
 
 ### Return type
 
