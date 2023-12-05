@@ -7,6 +7,7 @@ All URIs are relative to *https://api.notefile.net*
 | [**cloneProject**](ProjectApi.md#cloneProject)                                         | **POST** /v1/projects/{projectUID}/clone                         |
 | [**createProduct**](ProjectApi.md#createProduct)                                       | **POST** /v1/projects/{projectUID}/products                      |
 | [**createProject**](ProjectApi.md#createProject)                                       | **POST** /v1/projects                                            |
+| [**deleteProject**](ProjectApi.md#deleteProject)                                       | **DELETE** /v1/projects/{projectUID}                             |
 | [**deleteProjectEnvironmentVariable**](ProjectApi.md#deleteProjectEnvironmentVariable) | **DELETE** /v1/projects/{projectUID}/environment_variables/{key} |
 | [**disableGlobalTransformation**](ProjectApi.md#disableGlobalTransformation)           | **POST** /v1/projects/{projectUID}/global-transformation/disable |
 | [**enableGlobalTransformation**](ProjectApi.md#enableGlobalTransformation)             | **POST** /v1/projects/{projectUID}/global-transformation/enable  |
@@ -167,6 +168,54 @@ apiInstance.createProject(createProjectRequest).then(
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+## deleteProject
+
+> deleteProject(projectUID, opts)
+
+Delete a Project by ProjectUID
+
+### Example
+
+```javascript
+import * as NotehubJs from '@blues-inc/notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
+// Configure API key authorization: api_key
+let api_key = defaultClient.authentications['api_key'];
+api_key.apiKey = 'YOUR API KEY';
+
+let apiInstance = new NotehubJs.ProjectApi();
+let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let opts = {
+  'db': false // Boolean |
+};
+apiInstance.deleteProject(projectUID, opts).then(() => {
+  console.log('API called successfully.');
+}, (error) => {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+| Name           | Type        | Description | Notes                         |
+| -------------- | ----------- | ----------- | ----------------------------- |
+| **projectUID** | **String**  |             |
+| **db**         | **Boolean** |             | [optional] [default to false] |
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[api_key](../README.md#api_key)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 ## deleteProjectEnvironmentVariable
@@ -626,9 +675,7 @@ let opts = {
   'sortOrder': "'asc'", // String |
   'systemFilesOnly': true, // Boolean |
   'files': _health.qo, data.qo, // String |
-  'deviceUID': "deviceUID_example", // String | A Device UID.
-  'startDate': 1628631763, // Number | Unix timestamp
-  'endDate': 1657894210 // Number | Unix timestamp
+  'deviceUID': "deviceUID_example" // String | A Device UID.
 };
 apiInstance.getProjectEventsByCursor(projectUID, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
@@ -649,8 +696,6 @@ apiInstance.getProjectEventsByCursor(projectUID, opts).then((data) => {
 | **systemFilesOnly** | **Boolean** |                                                                                                                                                                                                                                                                                                                                                                            | [optional]                            |
 | **files**           | **String**  |                                                                                                                                                                                                                                                                                                                                                                            | [optional]                            |
 | **deviceUID**       | **String**  | A Device UID.                                                                                                                                                                                                                                                                                                                                                              | [optional]                            |
-| **startDate**       | **Number**  | Unix timestamp                                                                                                                                                                                                                                                                                                                                                             | [optional]                            |
-| **endDate**         | **Number**  | Unix timestamp                                                                                                                                                                                                                                                                                                                                                             | [optional]                            |
 
 ### Return type
 

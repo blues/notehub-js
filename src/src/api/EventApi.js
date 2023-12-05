@@ -315,8 +315,6 @@ export default class EventApi {
    * @param {Boolean} opts.systemFilesOnly
    * @param {String} opts.files
    * @param {String} opts.deviceUID A Device UID.
-   * @param {Number} opts.startDate Unix timestamp
-   * @param {Number} opts.endDate Unix timestamp
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetProjectEventsByCursor200Response} and HTTP response
    */
   getProjectEventsByCursorWithHttpInfo(projectUID, opts) {
@@ -339,8 +337,6 @@ export default class EventApi {
       systemFilesOnly: opts["systemFilesOnly"],
       files: opts["files"],
       deviceUID: opts["deviceUID"],
-      startDate: opts["startDate"],
-      endDate: opts["endDate"],
     };
     let headerParams = {};
     let formParams = {};
@@ -375,8 +371,6 @@ export default class EventApi {
    * @param {Boolean} opts.systemFilesOnly
    * @param {String} opts.files
    * @param {String} opts.deviceUID A Device UID.
-   * @param {Number} opts.startDate Unix timestamp
-   * @param {Number} opts.endDate Unix timestamp
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetProjectEventsByCursor200Response}
    */
   getProjectEventsByCursor(projectUID, opts) {
