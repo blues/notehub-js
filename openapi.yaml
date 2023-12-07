@@ -534,12 +534,6 @@ paths:
         - api_key: []
       parameters:
         - $ref: '#/components/parameters/projectUIDParam'
-        - name: db
-          in: query
-          required: false
-          schema:
-            type: boolean
-            default: "false"
       responses:
         "200":
           description: Successful operation
