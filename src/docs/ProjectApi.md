@@ -172,7 +172,7 @@ apiInstance.createProject(createProjectRequest).then(
 
 ## deleteProject
 
-> deleteProject(projectUID, opts)
+> deleteProject(projectUID)
 
 Delete a Project by ProjectUID
 
@@ -187,10 +187,7 @@ api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.ProjectApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
-let opts = {
-  'db': false // Boolean |
-};
-apiInstance.deleteProject(projectUID, opts).then(() => {
+apiInstance.deleteProject(projectUID).then(() => {
   console.log('API called successfully.');
 }, (error) => {
   console.error(error);
@@ -200,10 +197,9 @@ apiInstance.deleteProject(projectUID, opts).then(() => {
 
 ### Parameters
 
-| Name           | Type        | Description | Notes                         |
-| -------------- | ----------- | ----------- | ----------------------------- |
-| **projectUID** | **String**  |             |
-| **db**         | **Boolean** |             | [optional] [default to false] |
+| Name           | Type       | Description | Notes |
+| -------------- | ---------- | ----------- | ----- |
+| **projectUID** | **String** |             |
 
 ### Return type
 
