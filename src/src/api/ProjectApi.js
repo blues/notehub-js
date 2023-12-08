@@ -225,12 +225,9 @@ export default class ProjectApi {
   /**
    * Delete a Project by ProjectUID
    * @param {String} projectUID
-   * @param {Object} opts Optional parameters
-   * @param {Boolean} opts.db  (default to false)
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
    */
-  deleteProjectWithHttpInfo(projectUID, opts) {
-    opts = opts || {};
+  deleteProjectWithHttpInfo(projectUID) {
     let postBody = null;
     // verify the required parameter 'projectUID' is set
     if (projectUID === undefined || projectUID === null) {
@@ -242,9 +239,7 @@ export default class ProjectApi {
     let pathParams = {
       projectUID: projectUID,
     };
-    let queryParams = {
-      db: opts["db"],
-    };
+    let queryParams = {};
     let headerParams = {};
     let formParams = {};
 
@@ -271,12 +266,10 @@ export default class ProjectApi {
   /**
    * Delete a Project by ProjectUID
    * @param {String} projectUID
-   * @param {Object} opts Optional parameters
-   * @param {Boolean} opts.db  (default to false)
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}
    */
-  deleteProject(projectUID, opts) {
-    return this.deleteProjectWithHttpInfo(projectUID, opts).then(function (
+  deleteProject(projectUID) {
+    return this.deleteProjectWithHttpInfo(projectUID).then(function (
       response_and_data
     ) {
       return response_and_data.data;
