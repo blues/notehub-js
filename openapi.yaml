@@ -1207,6 +1207,7 @@ paths:
         - $ref: '#/components/parameters/sortOrderParam'
         - $ref: '#/components/parameters/systemFilesOnlyParam'
         - $ref: '#/components/parameters/filesParam'
+        - $ref: '#/components/parameters/fleetUIDParam'
         - $ref: '#/components/parameters/deviceUIDParamQuery'
       responses:
         "200":
