@@ -308,7 +308,6 @@ export default class EventApi {
   /**
    * Get Events of a Project by cursor
    * @param {String} projectUID
-   * @param {String} fleetUID
    * @param {Object} opts Optional parameters
    * @param {Number} opts.limit  (default to 50)
    * @param {String} opts.cursor A cursor, which can be obtained from the `next_cursor` value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included.
@@ -318,7 +317,7 @@ export default class EventApi {
    * @param {String} opts.deviceUID A Device UID.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetProjectEventsByCursor200Response} and HTTP response
    */
-  getProjectEventsByCursorWithHttpInfo(projectUID, fleetUID, opts) {
+  getProjectEventsByCursorWithHttpInfo(projectUID, opts) {
     opts = opts || {};
     let postBody = null;
     // verify the required parameter 'projectUID' is set
@@ -327,16 +326,9 @@ export default class EventApi {
         "Missing the required parameter 'projectUID' when calling getProjectEventsByCursor"
       );
     }
-    // verify the required parameter 'fleetUID' is set
-    if (fleetUID === undefined || fleetUID === null) {
-      throw new Error(
-        "Missing the required parameter 'fleetUID' when calling getProjectEventsByCursor"
-      );
-    }
 
     let pathParams = {
       projectUID: projectUID,
-      fleetUID: fleetUID,
     };
     let queryParams = {
       limit: opts["limit"],
@@ -372,7 +364,6 @@ export default class EventApi {
   /**
    * Get Events of a Project by cursor
    * @param {String} projectUID
-   * @param {String} fleetUID
    * @param {Object} opts Optional parameters
    * @param {Number} opts.limit  (default to 50)
    * @param {String} opts.cursor A cursor, which can be obtained from the `next_cursor` value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included.
@@ -382,13 +373,11 @@ export default class EventApi {
    * @param {String} opts.deviceUID A Device UID.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetProjectEventsByCursor200Response}
    */
-  getProjectEventsByCursor(projectUID, fleetUID, opts) {
-    return this.getProjectEventsByCursorWithHttpInfo(
-      projectUID,
-      fleetUID,
-      opts
-    ).then(function (response_and_data) {
-      return response_and_data.data;
-    });
+  getProjectEventsByCursor(projectUID, opts) {
+    return this.getProjectEventsByCursorWithHttpInfo(projectUID, opts).then(
+      function (response_and_data) {
+        return response_and_data.data;
+      }
+    );
   }
 }

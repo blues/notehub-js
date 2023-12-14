@@ -650,7 +650,7 @@ apiInstance.getProjectEvents(projectUID, opts).then((data) => {
 
 ## getProjectEventsByCursor
 
-> GetProjectEventsByCursor200Response getProjectEventsByCursor(projectUID, fleetUID, opts)
+> GetProjectEventsByCursor200Response getProjectEventsByCursor(projectUID, opts)
 
 Get Events of a Project by cursor
 
@@ -665,7 +665,6 @@ api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.ProjectApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
-let fleetUID = "fleetUID_example"; // String |
 let opts = {
   'limit': 50, // Number |
   'cursor': "cursor_example", // String | A cursor, which can be obtained from the `next_cursor` value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included.
@@ -674,7 +673,7 @@ let opts = {
   'files': _health.qo, data.qo, // String |
   'deviceUID': "deviceUID_example" // String | A Device UID.
 };
-apiInstance.getProjectEventsByCursor(projectUID, fleetUID, opts).then((data) => {
+apiInstance.getProjectEventsByCursor(projectUID, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
@@ -687,7 +686,6 @@ apiInstance.getProjectEventsByCursor(projectUID, fleetUID, opts).then((data) => 
 | Name                | Type        | Description                                                                                                                                                                                                                                                                                                                                                                | Notes                                 |
 | ------------------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------- |
 | **projectUID**      | **String**  |                                                                                                                                                                                                                                                                                                                                                                            |
-| **fleetUID**        | **String**  |                                                                                                                                                                                                                                                                                                                                                                            |
 | **limit**           | **Number**  |                                                                                                                                                                                                                                                                                                                                                                            | [optional] [default to 50]            |
 | **cursor**          | **String**  | A cursor, which can be obtained from the &#x60;next_cursor&#x60; value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included. | [optional]                            |
 | **sortOrder**       | **String**  |                                                                                                                                                                                                                                                                                                                                                                            | [optional] [default to &#39;asc&#39;] |
