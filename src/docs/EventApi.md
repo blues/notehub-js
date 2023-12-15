@@ -226,6 +226,7 @@ let opts = {
   'sortOrder': "'asc'", // String |
   'systemFilesOnly': true, // Boolean |
   'files': _health.qo, data.qo, // String |
+  'fleetUID': "fleetUID_example", // String |
   'deviceUID': "deviceUID_example" // String | A Device UID.
 };
 apiInstance.getProjectEventsByCursor(projectUID, opts).then((data) => {
@@ -246,6 +247,7 @@ apiInstance.getProjectEventsByCursor(projectUID, opts).then((data) => {
 | **sortOrder**       | **String**  |                                                                                                                                                                                                                                                                                                                                                                            | [optional] [default to &#39;asc&#39;] |
 | **systemFilesOnly** | **Boolean** |                                                                                                                                                                                                                                                                                                                                                                            | [optional]                            |
 | **files**           | **String**  |                                                                                                                                                                                                                                                                                                                                                                            | [optional]                            |
+| **fleetUID**        | **String**  |                                                                                                                                                                                                                                                                                                                                                                            | [optional]                            |
 | **deviceUID**       | **String**  | A Device UID.                                                                                                                                                                                                                                                                                                                                                              | [optional]                            |
 
 ### Return type

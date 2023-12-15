@@ -314,6 +314,7 @@ export default class EventApi {
    * @param {module:model/String} opts.sortOrder  (default to 'asc')
    * @param {Boolean} opts.systemFilesOnly
    * @param {String} opts.files
+   * @param {String} opts.fleetUID
    * @param {String} opts.deviceUID A Device UID.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetProjectEventsByCursor200Response} and HTTP response
    */
@@ -336,6 +337,7 @@ export default class EventApi {
       sortOrder: opts["sortOrder"],
       systemFilesOnly: opts["systemFilesOnly"],
       files: opts["files"],
+      fleetUID: opts["fleetUID"],
       deviceUID: opts["deviceUID"],
     };
     let headerParams = {};
@@ -370,6 +372,7 @@ export default class EventApi {
    * @param {module:model/String} opts.sortOrder  (default to 'asc')
    * @param {Boolean} opts.systemFilesOnly
    * @param {String} opts.files
+   * @param {String} opts.fleetUID
    * @param {String} opts.deviceUID A Device UID.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetProjectEventsByCursor200Response}
    */
