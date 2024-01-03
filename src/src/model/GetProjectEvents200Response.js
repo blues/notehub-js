@@ -24,11 +24,10 @@ class GetProjectEvents200Response {
    * Constructs a new <code>GetProjectEvents200Response</code>.
    * @alias module:model/GetProjectEvents200Response
    * @param events {Array.<module:model/Event>}
-   * @param through {String} the EventUID of the most recent event displayed
    * @param hasMore {Boolean} True if there are more events
    */
-  constructor(events, through, hasMore) {
-    GetProjectEvents200Response.initialize(this, events, through, hasMore);
+  constructor(events, hasMore) {
+    GetProjectEvents200Response.initialize(this, events, hasMore);
   }
 
   /**
@@ -36,9 +35,8 @@ class GetProjectEvents200Response {
    * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
    * Only for internal use.
    */
-  static initialize(obj, events, through, hasMore) {
+  static initialize(obj, events, hasMore) {
     obj["events"] = events;
-    obj["through"] = through;
     obj["has_more"] = hasMore;
   }
 
@@ -55,9 +53,6 @@ class GetProjectEvents200Response {
 
       if (data.hasOwnProperty("events")) {
         obj["events"] = ApiClient.convertToType(data["events"], [Event]);
-      }
-      if (data.hasOwnProperty("through")) {
-        obj["through"] = ApiClient.convertToType(data["through"], "String");
       }
       if (data.hasOwnProperty("has_more")) {
         obj["has_more"] = ApiClient.convertToType(data["has_more"], "Boolean");
@@ -99,39 +94,17 @@ class GetProjectEvents200Response {
         Event.validateJsonObject(item);
       }
     }
-    // ensure the json data is a string
-    if (
-      data["through"] &&
-      !(
-        typeof data["through"] === "string" || data["through"] instanceof String
-      )
-    ) {
-      throw new Error(
-        "Expected the field `through` to be a primitive type in the JSON string but got " +
-          data["through"]
-      );
-    }
 
     return true;
   }
 }
 
-GetProjectEvents200Response.RequiredProperties = [
-  "events",
-  "through",
-  "has_more",
-];
+GetProjectEvents200Response.RequiredProperties = ["events", "has_more"];
 
 /**
  * @member {Array.<module:model/Event>} events
  */
 GetProjectEvents200Response.prototype["events"] = undefined;
-
-/**
- * the EventUID of the most recent event displayed
- * @member {String} through
- */
-GetProjectEvents200Response.prototype["through"] = undefined;
 
 /**
  * True if there are more events

@@ -2107,15 +2107,11 @@ components:
                 type: array
                 items:
                   $ref: '#/components/schemas/Event'
-              through:
-                type: string
-                description: the EventUID of the most recent event displayed
               has_more:
                 type: boolean
                 description: True if there are more events
             required:
             - events
-            - through
             - has_more
           example:
             events:
@@ -2151,7 +2147,6 @@ components:
                 tri_country: US
                 tri_timezone: America/New_York
                 tri_points: 6
-            through: dfa3747d-688b-4250-935b-5dd60354313c
             has_more: true
 
     EventsByCursorResponse:
