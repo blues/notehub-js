@@ -27,26 +27,16 @@ class Device {
    * Constructs a new <code>Device</code>.
    * @alias module:model/Device
    * @param uid {String}
-   * @param serialNumber {String}
    * @param provisioned {Date}
    * @param productUid {String}
    * @param fleetUids {Array.<String>}
    * @param voltage {Number}
    * @param temperature {Number}
    */
-  constructor(
-    uid,
-    serialNumber,
-    provisioned,
-    productUid,
-    fleetUids,
-    voltage,
-    temperature
-  ) {
+  constructor(uid, provisioned, productUid, fleetUids, voltage, temperature) {
     Device.initialize(
       this,
       uid,
-      serialNumber,
       provisioned,
       productUid,
       fleetUids,
@@ -63,7 +53,6 @@ class Device {
   static initialize(
     obj,
     uid,
-    serialNumber,
     provisioned,
     productUid,
     fleetUids,
@@ -71,7 +60,6 @@ class Device {
     temperature
   ) {
     obj["uid"] = uid;
-    obj["serial_number"] = serialNumber;
     obj["provisioned"] = provisioned;
     obj["product_uid"] = productUid;
     obj["fleet_uids"] = fleetUids;
@@ -276,7 +264,6 @@ class Device {
 
 Device.RequiredProperties = [
   "uid",
-  "serial_number",
   "provisioned",
   "product_uid",
   "fleet_uids",

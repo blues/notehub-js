@@ -5,7 +5,7 @@
 | Name                     | Type                                      | Description | Notes      |
 | ------------------------ | ----------------------------------------- | ----------- | ---------- |
 | **uid**                  | **String**                                |             |
-| **serialNumber**         | **String**                                |             |
+| **serialNumber**         | **String**                                |             | [optional] |
 | **provisioned**          | **Date**                                  |             |
 | **lastActivity**         | **Date**                                  |             | [optional] |
 | **contact**              | [**Contact**](Contact.md)                 |             | [optional] |
