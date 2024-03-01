@@ -47,6 +47,8 @@ tags:
     description: Management of notes in notefiles
   - name: files
     description: Management of notefiles
+  - name: monitors
+    description: Management of monitors
 
 paths:
 
@@ -1888,6 +1890,98 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
 
+  /v1/projects/{projectUID}/monitors:
+    get:
+      tags: ["monitor", "project"]
+      operationId: getMonitors
+      description: Get list of defined Monitors
+      security:
+        - api_key: []
+      parameters:
+        - $ref: '#/components/parameters/projectUIDParam'
+      responses:
+        "200":
+          $ref: '#/components/responses/MonitorsResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+    post:
+      tags: ["monitor", "project"]
+      operationId: createMonitor
+      description: Create a new Monitor
+      security:
+        - api_key: []
+      parameters:
+        - $ref: '#/components/parameters/projectUIDParam'
+      responses:
+        "201":
+          $ref: '#/components/responses/MonitorsResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+
+  /v1/projects/{projectUID}/monitors/{monitorUID}:
+    get:
+      tags: ["monitor", "project"]
+      operationId: getMonitor
+      description: Get Monitor
+      security:
+        - api_key: []
+      parameters:
+        - $ref: '#/components/parameters/projectUIDParam'
+        - $ref: '#/components/parameters/monitorUIDParam'
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Monitor'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+    put:
+      tags: [ "monitor", "project" ]
+      operationId: updateMonitor
+      description: Update Monitor
+      security:
+        - api_key: [ ]
+      parameters:
+        - $ref: '#/components/parameters/projectUIDParam'
+        - $ref: '#/components/parameters/monitorUIDParam'
+      requestBody:
+        description: Body or payload of monitor to be created
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Monitor'
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Monitor'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+    delete:
+      tags: [ "monitor", "project" ]
+      operationId: deleteMonitor
+      description: Delete Monitor
+      security:
+        - api_key: [ ]
+      parameters:
+        - $ref: '#/components/parameters/projectUIDParam'
+        - $ref: '#/components/parameters/monitorUIDParam'
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Monitor'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+
+
 components:
   securitySchemes:
     api_key:
@@ -1966,6 +2060,14 @@ components:
       required: true
       schema:
         type: string
+
+    monitorUIDParam:
+      name: monitorUID
+      in: path
+      required: true
+      schema:
+        type: string
+      example: monitor:8bAdf00d-000f-51c-af-01d5eaf00dbad
 
     # querystring parameters
     pageSizeParam:
@@ -2446,6 +2548,20 @@ components:
                 url:
                   type: string
                   description: The URL of the route.
+
+    MonitorsResponse:
+      description: The response body from GET /monitors
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              monitors:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Monitor'
+            required:
+            - monitors
 
   schemas:
     Error:
@@ -3743,5 +3859,82 @@ components:
         body:
           type: object
 
+    Monitor:
+      type: object
+      properties:
+        uid:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+          enum: ["disabled", "enabled"]
+          description: The status of the monitor.
+        silenced:
+          type: boolean
+          description: If true, alerts will be created, but no notifications will be sent.
+
+        source_type:
+          type: string
+          enum: ["event"]
+          description: The type of source to monitor. Currently only "event" is supported.
+        source_selector:
+          type: string
+          description: A valid JSONata expression that selects the value to monitor from the source.
+            | It should return a single, numeric value.
+          example: body.temperature
+        condition_type:
+          type: string
+          enum:
+            - greater_than
+            - greater_than_or_equal_to
+            - less_than
+            - less_than_or_equal_to
+            - equal_to
+            - not_equal_to
+          description: The type of condition to apply to the value selected by the source_selector
+
+        notefile_filter:
+          type: array
+          items:
+            type: string
+        fleet_filter:
+          type: array
+          items:
+            type: string
+
+        severity:
+          type: string
+          enum: ["warn", "alarm"]
+        thresholds:
+          type: object
+          properties:
+            alarm:
+              type: number
+              description: The value that triggers the monitor at an alarm level
+            warn:
+              type: number
+              description: The value that triggers the monitor at a warning level
+            recover:
+              type: number
+              description: The value resolves the alarm or warning
+        routing_cooldown_period:
+          type: string
+          description: The time period to wait before routing another event after the monitor 
+            | has been triggered. It follows the format of a number followed by a time unit.
+          example: 10m or 5h30m40s
+
+        alert_routes:
+          type: array
+          items:
+            type: object
+            properties:
+              email_addresses:
+                type: array
+                items:
+                  type: string
+                description: List of email addresses in the project that will receive alerts.
     Empty:
       type: object
