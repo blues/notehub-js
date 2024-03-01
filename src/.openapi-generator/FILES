@@ -38,6 +38,7 @@ docs/GetDeviceHealthLog200ResponseHealthLogInner.md
 docs/GetDeviceLatest200Response.md
 docs/GetDevicePublicKey200Response.md
 docs/GetDeviceSessions200Response.md
+docs/GetMonitors200Response.md
 docs/GetProjectDevicePublicKeys200Response.md
 docs/GetProjectDevicePublicKeys200ResponseDevicePublicKeysInner.md
 docs/GetProjectDevices200Response.md
@@ -61,6 +62,10 @@ docs/HttpTransform.md
 docs/Location.md
 docs/Login200Response.md
 docs/LoginRequest.md
+docs/Monitor.md
+docs/MonitorAlertRoutesInner.md
+docs/MonitorApi.md
+docs/MonitorThresholds.md
 docs/Mqtt.md
 docs/Note.md
 docs/NotesApi.md
@@ -98,6 +103,7 @@ src/api/EnvironmentVariablesApi.js
 src/api/EventApi.js
 src/api/FilesApi.js
 src/api/FleetApi.js
+src/api/MonitorApi.js
 src/api/NotesApi.js
 src/api/ProductApi.js
 src/api/ProjectApi.js
@@ -132,6 +138,7 @@ src/model/GetDeviceHealthLog200ResponseHealthLogInner.js
 src/model/GetDeviceLatest200Response.js
 src/model/GetDevicePublicKey200Response.js
 src/model/GetDeviceSessions200Response.js
+src/model/GetMonitors200Response.js
 src/model/GetProjectDevicePublicKeys200Response.js
 src/model/GetProjectDevicePublicKeys200ResponseDevicePublicKeysInner.js
 src/model/GetProjectDevices200Response.js
@@ -155,6 +162,9 @@ src/model/HttpTransform.js
 src/model/Location.js
 src/model/Login200Response.js
 src/model/LoginRequest.js
+src/model/Monitor.js
+src/model/MonitorAlertRoutesInner.js
+src/model/MonitorThresholds.js
 src/model/Mqtt.js
 src/model/Note.js
 src/model/PostProvisionProjectDeviceRequest.js
@@ -175,3 +185,8 @@ src/model/TowerLocation.js
 src/model/Twilio.js
 src/model/UpdateFleetRequest.js
 src/model/UserDbRoute.js
+test/api/MonitorApi.spec.js
+test/model/GetMonitors200Response.spec.js
+test/model/Monitor.spec.js
+test/model/MonitorAlertRoutesInner.spec.js
+test/model/MonitorThresholds.spec.js
