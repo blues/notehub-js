@@ -185,8 +185,3 @@ src/model/TowerLocation.js
 src/model/Twilio.js
 src/model/UpdateFleetRequest.js
 src/model/UserDbRoute.js
-test/api/MonitorApi.spec.js
-test/model/GetMonitors200Response.spec.js
-test/model/Monitor.spec.js
-test/model/MonitorAlertRoutesInner.spec.js
-test/model/MonitorThresholds.spec.js

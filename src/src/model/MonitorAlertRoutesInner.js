@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The MonitorAlertRoutesInner model module.
  * @module model/MonitorAlertRoutesInner
- * @version 1.0.19
+ * @version 1.0.20
  */
 class MonitorAlertRoutesInner {
   /**
