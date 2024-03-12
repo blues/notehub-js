@@ -1912,6 +1912,13 @@ paths:
         - api_key: []
       parameters:
         - $ref: '#/components/parameters/projectUIDParam'
+      requestBody:
+        description: Body or payload of monitor to be created
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Monitor'
       responses:
         "201":
           $ref: '#/components/responses/MonitorsResponse'
