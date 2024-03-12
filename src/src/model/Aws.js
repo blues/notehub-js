@@ -18,7 +18,7 @@ import HttpTransform from "./HttpTransform";
 /**
  * The Aws model module.
  * @module model/Aws
- * @version 1.0.19
+ * @version 1.0.20
  */
 class Aws {
   /**

@@ -28,7 +28,7 @@ import PutDeviceFleetsRequest from "../model/PutDeviceFleetsRequest";
 /**
  * Device service.
  * @module api/DeviceApi
- * @version 1.0.19
+ * @version 1.0.20
  */
 export default class DeviceApi {
   /**
