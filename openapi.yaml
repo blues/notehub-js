@@ -3914,12 +3914,6 @@ components:
             alarm:
               type: number
               description: The value that triggers the monitor at an alarm level
-            warn:
-              type: number
-              description: The value that triggers the monitor at a warning level
-            recover:
-              type: number
-              description: The value resolves the alarm or warning
         routing_cooldown_period:
           type: string
           description: The time period to wait before routing another event after the monitor 

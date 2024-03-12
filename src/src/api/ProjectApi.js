@@ -17,7 +17,6 @@ import CreateProductRequest from "../model/CreateProductRequest";
 import CreateProjectRequest from "../model/CreateProjectRequest";
 import EnvironmentVariables from "../model/EnvironmentVariables";
 import Error from "../model/Error";
-import GetMonitors200Response from "../model/GetMonitors200Response";
 import GetProjectDevicePublicKeys200Response from "../model/GetProjectDevicePublicKeys200Response";
 import GetProjectDevices200Response from "../model/GetProjectDevices200Response";
 import GetProjectEvents200Response from "../model/GetProjectEvents200Response";
@@ -25,7 +24,6 @@ import GetProjectEventsByCursor200Response from "../model/GetProjectEventsByCurs
 import GetProjectMembers200Response from "../model/GetProjectMembers200Response";
 import GetProjectProducts200Response from "../model/GetProjectProducts200Response";
 import GetProjects200Response from "../model/GetProjects200Response";
-import Monitor from "../model/Monitor";
 import PostProvisionProjectDeviceRequest from "../model/PostProvisionProjectDeviceRequest";
 import Product from "../model/Product";
 import Project from "../model/Project";
@@ -33,7 +31,7 @@ import Project from "../model/Project";
 /**
  * Project service.
  * @module api/ProjectApi
- * @version 1.0.20
+ * @version 1.0.19
  */
 export default class ProjectApi {
   /**
@@ -107,60 +105,6 @@ export default class ProjectApi {
         return response_and_data.data;
       }
     );
-  }
-
-  /**
-   * Create a new Monitor
-   * @param {String} projectUID
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetMonitors200Response} and HTTP response
-   */
-  createMonitorWithHttpInfo(projectUID) {
-    let postBody = null;
-    // verify the required parameter 'projectUID' is set
-    if (projectUID === undefined || projectUID === null) {
-      throw new Error(
-        "Missing the required parameter 'projectUID' when calling createMonitor"
-      );
-    }
-
-    let pathParams = {
-      projectUID: projectUID,
-    };
-    let queryParams = {};
-    let headerParams = {};
-    let formParams = {};
-
-    let authNames = ["api_key"];
-    let contentTypes = [];
-    let accepts = ["application/json"];
-    let returnType = GetMonitors200Response;
-    return this.apiClient.callApi(
-      "/v1/projects/{projectUID}/monitors",
-      "POST",
-      pathParams,
-      queryParams,
-      headerParams,
-      formParams,
-      postBody,
-      authNames,
-      contentTypes,
-      accepts,
-      returnType,
-      null
-    );
-  }
-
-  /**
-   * Create a new Monitor
-   * @param {String} projectUID
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetMonitors200Response}
-   */
-  createMonitor(projectUID) {
-    return this.createMonitorWithHttpInfo(projectUID).then(function (
-      response_and_data
-    ) {
-      return response_and_data.data;
-    });
   }
 
   /**
@@ -276,69 +220,6 @@ export default class ProjectApi {
     ) {
       return response_and_data.data;
     });
-  }
-
-  /**
-   * Delete Monitor
-   * @param {String} projectUID
-   * @param {String} monitorUID
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Monitor} and HTTP response
-   */
-  deleteMonitorWithHttpInfo(projectUID, monitorUID) {
-    let postBody = null;
-    // verify the required parameter 'projectUID' is set
-    if (projectUID === undefined || projectUID === null) {
-      throw new Error(
-        "Missing the required parameter 'projectUID' when calling deleteMonitor"
-      );
-    }
-    // verify the required parameter 'monitorUID' is set
-    if (monitorUID === undefined || monitorUID === null) {
-      throw new Error(
-        "Missing the required parameter 'monitorUID' when calling deleteMonitor"
-      );
-    }
-
-    let pathParams = {
-      projectUID: projectUID,
-      monitorUID: monitorUID,
-    };
-    let queryParams = {};
-    let headerParams = {};
-    let formParams = {};
-
-    let authNames = ["api_key"];
-    let contentTypes = [];
-    let accepts = ["application/json"];
-    let returnType = Monitor;
-    return this.apiClient.callApi(
-      "/v1/projects/{projectUID}/monitors/{monitorUID}",
-      "DELETE",
-      pathParams,
-      queryParams,
-      headerParams,
-      formParams,
-      postBody,
-      authNames,
-      contentTypes,
-      accepts,
-      returnType,
-      null
-    );
-  }
-
-  /**
-   * Delete Monitor
-   * @param {String} projectUID
-   * @param {String} monitorUID
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Monitor}
-   */
-  deleteMonitor(projectUID, monitorUID) {
-    return this.deleteMonitorWithHttpInfo(projectUID, monitorUID).then(
-      function (response_and_data) {
-        return response_and_data.data;
-      }
-    );
   }
 
   /**
@@ -565,123 +446,6 @@ export default class ProjectApi {
         return response_and_data.data;
       }
     );
-  }
-
-  /**
-   * Get Monitor
-   * @param {String} projectUID
-   * @param {String} monitorUID
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Monitor} and HTTP response
-   */
-  getMonitorWithHttpInfo(projectUID, monitorUID) {
-    let postBody = null;
-    // verify the required parameter 'projectUID' is set
-    if (projectUID === undefined || projectUID === null) {
-      throw new Error(
-        "Missing the required parameter 'projectUID' when calling getMonitor"
-      );
-    }
-    // verify the required parameter 'monitorUID' is set
-    if (monitorUID === undefined || monitorUID === null) {
-      throw new Error(
-        "Missing the required parameter 'monitorUID' when calling getMonitor"
-      );
-    }
-
-    let pathParams = {
-      projectUID: projectUID,
-      monitorUID: monitorUID,
-    };
-    let queryParams = {};
-    let headerParams = {};
-    let formParams = {};
-
-    let authNames = ["api_key"];
-    let contentTypes = [];
-    let accepts = ["application/json"];
-    let returnType = Monitor;
-    return this.apiClient.callApi(
-      "/v1/projects/{projectUID}/monitors/{monitorUID}",
-      "GET",
-      pathParams,
-      queryParams,
-      headerParams,
-      formParams,
-      postBody,
-      authNames,
-      contentTypes,
-      accepts,
-      returnType,
-      null
-    );
-  }
-
-  /**
-   * Get Monitor
-   * @param {String} projectUID
-   * @param {String} monitorUID
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Monitor}
-   */
-  getMonitor(projectUID, monitorUID) {
-    return this.getMonitorWithHttpInfo(projectUID, monitorUID).then(function (
-      response_and_data
-    ) {
-      return response_and_data.data;
-    });
-  }
-
-  /**
-   * Get list of defined Monitors
-   * @param {String} projectUID
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetMonitors200Response} and HTTP response
-   */
-  getMonitorsWithHttpInfo(projectUID) {
-    let postBody = null;
-    // verify the required parameter 'projectUID' is set
-    if (projectUID === undefined || projectUID === null) {
-      throw new Error(
-        "Missing the required parameter 'projectUID' when calling getMonitors"
-      );
-    }
-
-    let pathParams = {
-      projectUID: projectUID,
-    };
-    let queryParams = {};
-    let headerParams = {};
-    let formParams = {};
-
-    let authNames = ["api_key"];
-    let contentTypes = [];
-    let accepts = ["application/json"];
-    let returnType = GetMonitors200Response;
-    return this.apiClient.callApi(
-      "/v1/projects/{projectUID}/monitors",
-      "GET",
-      pathParams,
-      queryParams,
-      headerParams,
-      formParams,
-      postBody,
-      authNames,
-      contentTypes,
-      accepts,
-      returnType,
-      null
-    );
-  }
-
-  /**
-   * Get list of defined Monitors
-   * @param {String} projectUID
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetMonitors200Response}
-   */
-  getMonitors(projectUID) {
-    return this.getMonitorsWithHttpInfo(projectUID).then(function (
-      response_and_data
-    ) {
-      return response_and_data.data;
-    });
   }
 
   /**
@@ -1563,77 +1327,6 @@ export default class ProjectApi {
    */
   setGlobalTransformation(projectUID, body) {
     return this.setGlobalTransformationWithHttpInfo(projectUID, body).then(
-      function (response_and_data) {
-        return response_and_data.data;
-      }
-    );
-  }
-
-  /**
-   * Update Monitor
-   * @param {String} projectUID
-   * @param {String} monitorUID
-   * @param {module:model/Monitor} monitor Body or payload of monitor to be created
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Monitor} and HTTP response
-   */
-  updateMonitorWithHttpInfo(projectUID, monitorUID, monitor) {
-    let postBody = monitor;
-    // verify the required parameter 'projectUID' is set
-    if (projectUID === undefined || projectUID === null) {
-      throw new Error(
-        "Missing the required parameter 'projectUID' when calling updateMonitor"
-      );
-    }
-    // verify the required parameter 'monitorUID' is set
-    if (monitorUID === undefined || monitorUID === null) {
-      throw new Error(
-        "Missing the required parameter 'monitorUID' when calling updateMonitor"
-      );
-    }
-    // verify the required parameter 'monitor' is set
-    if (monitor === undefined || monitor === null) {
-      throw new Error(
-        "Missing the required parameter 'monitor' when calling updateMonitor"
-      );
-    }
-
-    let pathParams = {
-      projectUID: projectUID,
-      monitorUID: monitorUID,
-    };
-    let queryParams = {};
-    let headerParams = {};
-    let formParams = {};
-
-    let authNames = ["api_key"];
-    let contentTypes = ["application/json"];
-    let accepts = ["application/json"];
-    let returnType = Monitor;
-    return this.apiClient.callApi(
-      "/v1/projects/{projectUID}/monitors/{monitorUID}",
-      "PUT",
-      pathParams,
-      queryParams,
-      headerParams,
-      formParams,
-      postBody,
-      authNames,
-      contentTypes,
-      accepts,
-      returnType,
-      null
-    );
-  }
-
-  /**
-   * Update Monitor
-   * @param {String} projectUID
-   * @param {String} monitorUID
-   * @param {module:model/Monitor} monitor Body or payload of monitor to be created
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Monitor}
-   */
-  updateMonitor(projectUID, monitorUID, monitor) {
-    return this.updateMonitorWithHttpInfo(projectUID, monitorUID, monitor).then(
       function (response_and_data) {
         return response_and_data.data;
       }
