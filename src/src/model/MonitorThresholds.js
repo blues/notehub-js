@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The MonitorThresholds model module.
  * @module model/MonitorThresholds
- * @version 1.0.20
+ * @version 1.0.19
  */
 class MonitorThresholds {
   /**
@@ -48,12 +48,6 @@ class MonitorThresholds {
       if (data.hasOwnProperty("alarm")) {
         obj["alarm"] = ApiClient.convertToType(data["alarm"], "Number");
       }
-      if (data.hasOwnProperty("warn")) {
-        obj["warn"] = ApiClient.convertToType(data["warn"], "Number");
-      }
-      if (data.hasOwnProperty("recover")) {
-        obj["recover"] = ApiClient.convertToType(data["recover"], "Number");
-      }
     } else if (data === null) {
       return null;
     }
@@ -75,17 +69,5 @@ class MonitorThresholds {
  * @member {Number} alarm
  */
 MonitorThresholds.prototype["alarm"] = undefined;
-
-/**
- * The value that triggers the monitor at a warning level
- * @member {Number} warn
- */
-MonitorThresholds.prototype["warn"] = undefined;
-
-/**
- * The value resolves the alarm or warning
- * @member {Number} recover
- */
-MonitorThresholds.prototype["recover"] = undefined;
 
 export default MonitorThresholds;
