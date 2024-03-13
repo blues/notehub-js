@@ -40,6 +40,7 @@ import GetDeviceHealthLog200ResponseHealthLogInner from "./model/GetDeviceHealth
 import GetDeviceLatest200Response from "./model/GetDeviceLatest200Response";
 import GetDevicePublicKey200Response from "./model/GetDevicePublicKey200Response";
 import GetDeviceSessions200Response from "./model/GetDeviceSessions200Response";
+import GetMonitors200Response from "./model/GetMonitors200Response";
 import GetProjectDevicePublicKeys200Response from "./model/GetProjectDevicePublicKeys200Response";
 import GetProjectDevicePublicKeys200ResponseDevicePublicKeysInner from "./model/GetProjectDevicePublicKeys200ResponseDevicePublicKeysInner";
 import GetProjectDevices200Response from "./model/GetProjectDevices200Response";
@@ -63,6 +64,9 @@ import HttpTransform from "./model/HttpTransform";
 import Location from "./model/Location";
 import Login200Response from "./model/Login200Response";
 import LoginRequest from "./model/LoginRequest";
+import Monitor from "./model/Monitor";
+import MonitorAlertRoutesInner from "./model/MonitorAlertRoutesInner";
+import MonitorThresholds from "./model/MonitorThresholds";
 import Mqtt from "./model/Mqtt";
 import Note from "./model/Note";
 import PostProvisionProjectDeviceRequest from "./model/PostProvisionProjectDeviceRequest";
@@ -91,6 +95,7 @@ import EnvironmentVariablesApi from "./api/EnvironmentVariablesApi";
 import EventApi from "./api/EventApi";
 import FilesApi from "./api/FilesApi";
 import FleetApi from "./api/FleetApi";
+import MonitorApi from "./api/MonitorApi";
 import NotesApi from "./api/NotesApi";
 import ProductApi from "./api/ProductApi";
 import ProjectApi from "./api/ProjectApi";
@@ -304,6 +309,12 @@ export {
   GetDeviceSessions200Response,
 
   /**
+   * The GetMonitors200Response model constructor.
+   * @property {module:model/GetMonitors200Response}
+   */
+  GetMonitors200Response,
+
+  /**
    * The GetProjectDevicePublicKeys200Response model constructor.
    * @property {module:model/GetProjectDevicePublicKeys200Response}
    */
@@ -440,6 +451,24 @@ export {
    * @property {module:model/LoginRequest}
    */
   LoginRequest,
+
+  /**
+   * The Monitor model constructor.
+   * @property {module:model/Monitor}
+   */
+  Monitor,
+
+  /**
+   * The MonitorAlertRoutesInner model constructor.
+   * @property {module:model/MonitorAlertRoutesInner}
+   */
+  MonitorAlertRoutesInner,
+
+  /**
+   * The MonitorThresholds model constructor.
+   * @property {module:model/MonitorThresholds}
+   */
+  MonitorThresholds,
 
   /**
    * The Mqtt model constructor.
@@ -608,6 +637,12 @@ export {
    * @property {module:api/FleetApi}
    */
   FleetApi,
+
+  /**
+   * The MonitorApi service constructor.
+   * @property {module:api/MonitorApi}
+   */
+  MonitorApi,
 
   /**
    * The NotesApi service constructor.
