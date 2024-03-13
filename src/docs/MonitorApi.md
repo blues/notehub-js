@@ -12,7 +12,7 @@ All URIs are relative to *https://api.notefile.net*
 
 ## createMonitor
 
-> GetMonitors200Response createMonitor(projectUID)
+> GetMonitors200Response createMonitor(projectUID, monitor)
 
 Create a new Monitor
 
@@ -27,7 +27,8 @@ api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.MonitorApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
-apiInstance.createMonitor(projectUID).then((data) => {
+let monitor = new NotehubJs.Monitor(); // Monitor | Body or payload of monitor to be created
+apiInstance.createMonitor(projectUID, monitor).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
@@ -37,9 +38,10 @@ apiInstance.createMonitor(projectUID).then((data) => {
 
 ### Parameters
 
-| Name           | Type       | Description | Notes |
-| -------------- | ---------- | ----------- | ----- |
-| **projectUID** | **String** |             |
+| Name           | Type                      | Description                              | Notes |
+| -------------- | ------------------------- | ---------------------------------------- | ----- |
+| **projectUID** | **String**                |                                          |
+| **monitor**    | [**Monitor**](Monitor.md) | Body or payload of monitor to be created |
 
 ### Return type
 
@@ -51,7 +53,7 @@ apiInstance.createMonitor(projectUID).then((data) => {
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 ## deleteMonitor

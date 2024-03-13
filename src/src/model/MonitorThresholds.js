@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The MonitorThresholds model module.
  * @module model/MonitorThresholds
- * @version 1.0.20
+ * @version 1.0.19
  */
 class MonitorThresholds {
   /**

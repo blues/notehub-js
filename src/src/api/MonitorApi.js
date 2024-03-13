@@ -19,7 +19,7 @@ import Monitor from "../model/Monitor";
 /**
  * Monitor service.
  * @module api/MonitorApi
- * @version 1.0.20
+ * @version 1.0.19
  */
 export default class MonitorApi {
   /**
@@ -36,14 +36,21 @@ export default class MonitorApi {
   /**
    * Create a new Monitor
    * @param {String} projectUID
+   * @param {module:model/Monitor} monitor Body or payload of monitor to be created
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetMonitors200Response} and HTTP response
    */
-  createMonitorWithHttpInfo(projectUID) {
-    let postBody = null;
+  createMonitorWithHttpInfo(projectUID, monitor) {
+    let postBody = monitor;
     // verify the required parameter 'projectUID' is set
     if (projectUID === undefined || projectUID === null) {
       throw new Error(
         "Missing the required parameter 'projectUID' when calling createMonitor"
+      );
+    }
+    // verify the required parameter 'monitor' is set
+    if (monitor === undefined || monitor === null) {
+      throw new Error(
+        "Missing the required parameter 'monitor' when calling createMonitor"
       );
     }
 
@@ -55,7 +62,7 @@ export default class MonitorApi {
     let formParams = {};
 
     let authNames = ["api_key"];
-    let contentTypes = [];
+    let contentTypes = ["application/json"];
     let accepts = ["application/json"];
     let returnType = GetMonitors200Response;
     return this.apiClient.callApi(
@@ -77,10 +84,11 @@ export default class MonitorApi {
   /**
    * Create a new Monitor
    * @param {String} projectUID
+   * @param {module:model/Monitor} monitor Body or payload of monitor to be created
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetMonitors200Response}
    */
-  createMonitor(projectUID) {
-    return this.createMonitorWithHttpInfo(projectUID).then(function (
+  createMonitor(projectUID, monitor) {
+    return this.createMonitorWithHttpInfo(projectUID, monitor).then(function (
       response_and_data
     ) {
       return response_and_data.data;
