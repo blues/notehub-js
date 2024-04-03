@@ -5,16 +5,12 @@ All URIs are relative to *https://api.notefile.net*
 | Method                                                                                 | HTTP request                                                     | Description |
 | -------------------------------------------------------------------------------------- | ---------------------------------------------------------------- | ----------- |
 | [**cloneProject**](ProjectApi.md#cloneProject)                                         | **POST** /v1/projects/{projectUID}/clone                         |
-| [**createMonitor**](ProjectApi.md#createMonitor)                                       | **POST** /v1/projects/{projectUID}/monitors                      |
 | [**createProduct**](ProjectApi.md#createProduct)                                       | **POST** /v1/projects/{projectUID}/products                      |
 | [**createProject**](ProjectApi.md#createProject)                                       | **POST** /v1/projects                                            |
-| [**deleteMonitor**](ProjectApi.md#deleteMonitor)                                       | **DELETE** /v1/projects/{projectUID}/monitors/{monitorUID}       |
 | [**deleteProject**](ProjectApi.md#deleteProject)                                       | **DELETE** /v1/projects/{projectUID}                             |
 | [**deleteProjectEnvironmentVariable**](ProjectApi.md#deleteProjectEnvironmentVariable) | **DELETE** /v1/projects/{projectUID}/environment_variables/{key} |
 | [**disableGlobalTransformation**](ProjectApi.md#disableGlobalTransformation)           | **POST** /v1/projects/{projectUID}/global-transformation/disable |
 | [**enableGlobalTransformation**](ProjectApi.md#enableGlobalTransformation)             | **POST** /v1/projects/{projectUID}/global-transformation/enable  |
-| [**getMonitor**](ProjectApi.md#getMonitor)                                             | **GET** /v1/projects/{projectUID}/monitors/{monitorUID}          |
-| [**getMonitors**](ProjectApi.md#getMonitors)                                           | **GET** /v1/projects/{projectUID}/monitors                       |
 | [**getProject**](ProjectApi.md#getProject)                                             | **GET** /v1/projects/{projectUID}                                |
 | [**getProjectByProduct**](ProjectApi.md#getProjectByProduct)                           | **GET** /v1/products/{productUID}/project                        |
 | [**getProjectDevicePublicKeys**](ProjectApi.md#getProjectDevicePublicKeys)             | **GET** /v1/projects/{projectUID}/devices/public-keys            |
@@ -29,7 +25,6 @@ All URIs are relative to *https://api.notefile.net*
 | [**postProvisionProjectDevice**](ProjectApi.md#postProvisionProjectDevice)             | **POST** /v1/projects/{projectUID}/devices/{deviceUID}/provision |
 | [**putProjectEnvironmentVariables**](ProjectApi.md#putProjectEnvironmentVariables)     | **PUT** /v1/projects/{projectUID}/environment_variables          |
 | [**setGlobalTransformation**](ProjectApi.md#setGlobalTransformation)                   | **POST** /v1/projects/{projectUID}/global-transformation         |
-| [**updateMonitor**](ProjectApi.md#updateMonitor)                                       | **PUT** /v1/projects/{projectUID}/monitors/{monitorUID}          |
 
 ## cloneProject
 
@@ -71,52 +66,6 @@ apiInstance.cloneProject(projectUID, cloneProjectRequest).then(
 ### Return type
 
 [**Project**](Project.md)
-
-### Authorization
-
-[api_key](../README.md#api_key)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-## createMonitor
-
-> GetMonitors200Response createMonitor(projectUID, monitor)
-
-Create a new Monitor
-
-### Example
-
-```javascript
-import * as NotehubJs from '@blues-inc/notehub-js';
-let defaultClient = NotehubJs.ApiClient.instance;
-// Configure API key authorization: api_key
-let api_key = defaultClient.authentications['api_key'];
-api_key.apiKey = 'YOUR API KEY';
-
-let apiInstance = new NotehubJs.ProjectApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
-let monitor = new NotehubJs.Monitor(); // Monitor | Body or payload of monitor to be created
-apiInstance.createMonitor(projectUID, monitor).then((data) => {
-  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
-}, (error) => {
-  console.error(error);
-});
-
-```
-
-### Parameters
-
-| Name           | Type                      | Description                              | Notes |
-| -------------- | ------------------------- | ---------------------------------------- | ----- |
-| **projectUID** | **String**                |                                          |
-| **monitor**    | [**Monitor**](Monitor.md) | Body or payload of monitor to be created |
-
-### Return type
-
-[**GetMonitors200Response**](GetMonitors200Response.md)
 
 ### Authorization
 
@@ -219,52 +168,6 @@ apiInstance.createProject(createProjectRequest).then(
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: application/json
-
-## deleteMonitor
-
-> Monitor deleteMonitor(projectUID, monitorUID)
-
-Delete Monitor
-
-### Example
-
-```javascript
-import * as NotehubJs from '@blues-inc/notehub-js';
-let defaultClient = NotehubJs.ApiClient.instance;
-// Configure API key authorization: api_key
-let api_key = defaultClient.authentications['api_key'];
-api_key.apiKey = 'YOUR API KEY';
-
-let apiInstance = new NotehubJs.ProjectApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
-let monitorUID = monitor:8bAdf00d-000f-51c-af-01d5eaf00dbad; // String |
-apiInstance.deleteMonitor(projectUID, monitorUID).then((data) => {
-  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
-}, (error) => {
-  console.error(error);
-});
-
-```
-
-### Parameters
-
-| Name           | Type       | Description | Notes |
-| -------------- | ---------- | ----------- | ----- |
-| **projectUID** | **String** |             |
-| **monitorUID** | **String** |             |
-
-### Return type
-
-[**Monitor**](Monitor.md)
-
-### Authorization
-
-[api_key](../README.md#api_key)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
 - **Accept**: application/json
 
 ## deleteProject
@@ -435,96 +338,6 @@ apiInstance.enableGlobalTransformation(projectUID).then(() => {
 ### Return type
 
 null (empty response body)
-
-### Authorization
-
-[api_key](../README.md#api_key)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-## getMonitor
-
-> Monitor getMonitor(projectUID, monitorUID)
-
-Get Monitor
-
-### Example
-
-```javascript
-import * as NotehubJs from '@blues-inc/notehub-js';
-let defaultClient = NotehubJs.ApiClient.instance;
-// Configure API key authorization: api_key
-let api_key = defaultClient.authentications['api_key'];
-api_key.apiKey = 'YOUR API KEY';
-
-let apiInstance = new NotehubJs.ProjectApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
-let monitorUID = monitor:8bAdf00d-000f-51c-af-01d5eaf00dbad; // String |
-apiInstance.getMonitor(projectUID, monitorUID).then((data) => {
-  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
-}, (error) => {
-  console.error(error);
-});
-
-```
-
-### Parameters
-
-| Name           | Type       | Description | Notes |
-| -------------- | ---------- | ----------- | ----- |
-| **projectUID** | **String** |             |
-| **monitorUID** | **String** |             |
-
-### Return type
-
-[**Monitor**](Monitor.md)
-
-### Authorization
-
-[api_key](../README.md#api_key)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-## getMonitors
-
-> GetMonitors200Response getMonitors(projectUID)
-
-Get list of defined Monitors
-
-### Example
-
-```javascript
-import * as NotehubJs from '@blues-inc/notehub-js';
-let defaultClient = NotehubJs.ApiClient.instance;
-// Configure API key authorization: api_key
-let api_key = defaultClient.authentications['api_key'];
-api_key.apiKey = 'YOUR API KEY';
-
-let apiInstance = new NotehubJs.ProjectApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
-apiInstance.getMonitors(projectUID).then((data) => {
-  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
-}, (error) => {
-  console.error(error);
-});
-
-```
-
-### Parameters
-
-| Name           | Type       | Description | Notes |
-| -------------- | ---------- | ----------- | ----- |
-| **projectUID** | **String** |             |
-
-### Return type
-
-[**GetMonitors200Response**](GetMonitors200Response.md)
 
 ### Authorization
 
@@ -1212,54 +1025,6 @@ apiInstance.setGlobalTransformation(projectUID, body).then(() => {
 ### Return type
 
 null (empty response body)
-
-### Authorization
-
-[api_key](../README.md#api_key)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-## updateMonitor
-
-> Monitor updateMonitor(projectUID, monitorUID, monitor)
-
-Update Monitor
-
-### Example
-
-```javascript
-import * as NotehubJs from '@blues-inc/notehub-js';
-let defaultClient = NotehubJs.ApiClient.instance;
-// Configure API key authorization: api_key
-let api_key = defaultClient.authentications['api_key'];
-api_key.apiKey = 'YOUR API KEY';
-
-let apiInstance = new NotehubJs.ProjectApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
-let monitorUID = monitor:8bAdf00d-000f-51c-af-01d5eaf00dbad; // String |
-let monitor = new NotehubJs.Monitor(); // Monitor | Body or payload of monitor to be created
-apiInstance.updateMonitor(projectUID, monitorUID, monitor).then((data) => {
-  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
-}, (error) => {
-  console.error(error);
-});
-
-```
-
-### Parameters
-
-| Name           | Type                      | Description                              | Notes |
-| -------------- | ------------------------- | ---------------------------------------- | ----- |
-| **projectUID** | **String**                |                                          |
-| **monitorUID** | **String**                |                                          |
-| **monitor**    | [**Monitor**](Monitor.md) | Body or payload of monitor to be created |
-
-### Return type
-
-[**Monitor**](Monitor.md)
 
 ### Authorization
 

@@ -178,11 +178,6 @@ All URIs are relative to *https://api.notefile.net*
 | _NotehubJs.FleetApi_                | [**putDeviceFleets**](docs/FleetApi.md#putDeviceFleets)                                                      | **PUT** /v1/projects/{projectUID}/devices/{deviceUID}/fleets                          |
 | _NotehubJs.FleetApi_                | [**putFleetEnvironmentVariables**](docs/FleetApi.md#putFleetEnvironmentVariables)                            | **PUT** /v1/projects/{projectUID}/fleets/{fleetUID}/environment_variables             |
 | _NotehubJs.FleetApi_                | [**updateFleet**](docs/FleetApi.md#updateFleet)                                                              | **PUT** /v1/projects/{projectUID}/fleets/{fleetUID}                                   |
-| _NotehubJs.MonitorApi_              | [**createMonitor**](docs/MonitorApi.md#createMonitor)                                                        | **POST** /v1/projects/{projectUID}/monitors                                           |
-| _NotehubJs.MonitorApi_              | [**deleteMonitor**](docs/MonitorApi.md#deleteMonitor)                                                        | **DELETE** /v1/projects/{projectUID}/monitors/{monitorUID}                            |
-| _NotehubJs.MonitorApi_              | [**getMonitor**](docs/MonitorApi.md#getMonitor)                                                              | **GET** /v1/projects/{projectUID}/monitors/{monitorUID}                               |
-| _NotehubJs.MonitorApi_              | [**getMonitors**](docs/MonitorApi.md#getMonitors)                                                            | **GET** /v1/projects/{projectUID}/monitors                                            |
-| _NotehubJs.MonitorApi_              | [**updateMonitor**](docs/MonitorApi.md#updateMonitor)                                                        | **PUT** /v1/projects/{projectUID}/monitors/{monitorUID}                               |
 | _NotehubJs.NotesApi_                | [**handleNoteAdd**](docs/NotesApi.md#handleNoteAdd)                                                          | **POST** /v1/projects/{projectUID}/devices/{deviceUID}/notes/{notefileID}             |
 | _NotehubJs.NotesApi_                | [**handleNoteChanges**](docs/NotesApi.md#handleNoteChanges)                                                  | **GET** /v1/projects/{projectUID}/devices/{deviceUID}/notes/{notefileID}/changes      |
 | _NotehubJs.NotesApi_                | [**handleNoteCreateAdd**](docs/NotesApi.md#handleNoteCreateAdd)                                              | **POST** /v1/projects/{projectUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}    |
@@ -193,16 +188,12 @@ All URIs are relative to *https://api.notefile.net*
 | _NotehubJs.ProductApi_              | [**getProjectByProduct**](docs/ProductApi.md#getProjectByProduct)                                            | **GET** /v1/products/{productUID}/project                                             |
 | _NotehubJs.ProductApi_              | [**getProjectProducts**](docs/ProductApi.md#getProjectProducts)                                              | **GET** /v1/projects/{projectUID}/products                                            |
 | _NotehubJs.ProjectApi_              | [**cloneProject**](docs/ProjectApi.md#cloneProject)                                                          | **POST** /v1/projects/{projectUID}/clone                                              |
-| _NotehubJs.ProjectApi_              | [**createMonitor**](docs/ProjectApi.md#createMonitor)                                                        | **POST** /v1/projects/{projectUID}/monitors                                           |
 | _NotehubJs.ProjectApi_              | [**createProduct**](docs/ProjectApi.md#createProduct)                                                        | **POST** /v1/projects/{projectUID}/products                                           |
 | _NotehubJs.ProjectApi_              | [**createProject**](docs/ProjectApi.md#createProject)                                                        | **POST** /v1/projects                                                                 |
-| _NotehubJs.ProjectApi_              | [**deleteMonitor**](docs/ProjectApi.md#deleteMonitor)                                                        | **DELETE** /v1/projects/{projectUID}/monitors/{monitorUID}                            |
 | _NotehubJs.ProjectApi_              | [**deleteProject**](docs/ProjectApi.md#deleteProject)                                                        | **DELETE** /v1/projects/{projectUID}                                                  |
 | _NotehubJs.ProjectApi_              | [**deleteProjectEnvironmentVariable**](docs/ProjectApi.md#deleteProjectEnvironmentVariable)                  | **DELETE** /v1/projects/{projectUID}/environment_variables/{key}                      |
 | _NotehubJs.ProjectApi_              | [**disableGlobalTransformation**](docs/ProjectApi.md#disableGlobalTransformation)                            | **POST** /v1/projects/{projectUID}/global-transformation/disable                      |
 | _NotehubJs.ProjectApi_              | [**enableGlobalTransformation**](docs/ProjectApi.md#enableGlobalTransformation)                              | **POST** /v1/projects/{projectUID}/global-transformation/enable                       |
-| _NotehubJs.ProjectApi_              | [**getMonitor**](docs/ProjectApi.md#getMonitor)                                                              | **GET** /v1/projects/{projectUID}/monitors/{monitorUID}                               |
-| _NotehubJs.ProjectApi_              | [**getMonitors**](docs/ProjectApi.md#getMonitors)                                                            | **GET** /v1/projects/{projectUID}/monitors                                            |
 | _NotehubJs.ProjectApi_              | [**getProject**](docs/ProjectApi.md#getProject)                                                              | **GET** /v1/projects/{projectUID}                                                     |
 | _NotehubJs.ProjectApi_              | [**getProjectByProduct**](docs/ProjectApi.md#getProjectByProduct)                                            | **GET** /v1/products/{productUID}/project                                             |
 | _NotehubJs.ProjectApi_              | [**getProjectDevicePublicKeys**](docs/ProjectApi.md#getProjectDevicePublicKeys)                              | **GET** /v1/projects/{projectUID}/devices/public-keys                                 |
@@ -217,7 +208,6 @@ All URIs are relative to *https://api.notefile.net*
 | _NotehubJs.ProjectApi_              | [**postProvisionProjectDevice**](docs/ProjectApi.md#postProvisionProjectDevice)                              | **POST** /v1/projects/{projectUID}/devices/{deviceUID}/provision                      |
 | _NotehubJs.ProjectApi_              | [**putProjectEnvironmentVariables**](docs/ProjectApi.md#putProjectEnvironmentVariables)                      | **PUT** /v1/projects/{projectUID}/environment_variables                               |
 | _NotehubJs.ProjectApi_              | [**setGlobalTransformation**](docs/ProjectApi.md#setGlobalTransformation)                                    | **POST** /v1/projects/{projectUID}/global-transformation                              |
-| _NotehubJs.ProjectApi_              | [**updateMonitor**](docs/ProjectApi.md#updateMonitor)                                                        | **PUT** /v1/projects/{projectUID}/monitors/{monitorUID}                               |
 | _NotehubJs.RouteApi_                | [**createRoute**](docs/RouteApi.md#createRoute)                                                              | **POST** /v1/projects/{projectUID}/routes                                             |
 | _NotehubJs.RouteApi_                | [**deleteRoute**](docs/RouteApi.md#deleteRoute)                                                              | **DELETE** /v1/projects/{projectUID}/routes/{routeUID}                                |
 | _NotehubJs.RouteApi_                | [**getRoute**](docs/RouteApi.md#getRoute)                                                                    | **GET** /v1/projects/{projectUID}/routes/{routeUID}                                   |
@@ -256,7 +246,6 @@ All URIs are relative to *https://api.notefile.net*
 - [NotehubJs.GetDeviceLatest200Response](docs/GetDeviceLatest200Response.md)
 - [NotehubJs.GetDevicePublicKey200Response](docs/GetDevicePublicKey200Response.md)
 - [NotehubJs.GetDeviceSessions200Response](docs/GetDeviceSessions200Response.md)
-- [NotehubJs.GetMonitors200Response](docs/GetMonitors200Response.md)
 - [NotehubJs.GetProjectDevicePublicKeys200Response](docs/GetProjectDevicePublicKeys200Response.md)
 - [NotehubJs.GetProjectDevicePublicKeys200ResponseDevicePublicKeysInner](docs/GetProjectDevicePublicKeys200ResponseDevicePublicKeysInner.md)
 - [NotehubJs.GetProjectDevices200Response](docs/GetProjectDevices200Response.md)
@@ -280,9 +269,6 @@ All URIs are relative to *https://api.notefile.net*
 - [NotehubJs.Location](docs/Location.md)
 - [NotehubJs.Login200Response](docs/Login200Response.md)
 - [NotehubJs.LoginRequest](docs/LoginRequest.md)
-- [NotehubJs.Monitor](docs/Monitor.md)
-- [NotehubJs.MonitorAlertRoutesInner](docs/MonitorAlertRoutesInner.md)
-- [NotehubJs.MonitorThresholds](docs/MonitorThresholds.md)
 - [NotehubJs.Mqtt](docs/Mqtt.md)
 - [NotehubJs.Note](docs/Note.md)
 - [NotehubJs.PostProvisionProjectDeviceRequest](docs/PostProvisionProjectDeviceRequest.md)
