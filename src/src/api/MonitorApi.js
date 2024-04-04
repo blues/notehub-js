@@ -13,7 +13,6 @@
 
 import ApiClient from "../ApiClient";
 import Error from "../model/Error";
-import GetMonitors200Response from "../model/GetMonitors200Response";
 import Monitor from "../model/Monitor";
 
 /**
@@ -37,7 +36,7 @@ export default class MonitorApi {
    * Create a new Monitor
    * @param {String} projectUID
    * @param {module:model/Monitor} monitor Body or payload of monitor to be created
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetMonitors200Response} and HTTP response
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link Array.<module:model/Monitor>} and HTTP response
    */
   createMonitorWithHttpInfo(projectUID, monitor) {
     let postBody = monitor;
@@ -64,7 +63,7 @@ export default class MonitorApi {
     let authNames = ["api_key"];
     let contentTypes = ["application/json"];
     let accepts = ["application/json"];
-    let returnType = GetMonitors200Response;
+    let returnType = [Monitor];
     return this.apiClient.callApi(
       "/v1/projects/{projectUID}/monitors",
       "POST",
@@ -85,7 +84,7 @@ export default class MonitorApi {
    * Create a new Monitor
    * @param {String} projectUID
    * @param {module:model/Monitor} monitor Body or payload of monitor to be created
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetMonitors200Response}
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link Array.<module:model/Monitor>}
    */
   createMonitor(projectUID, monitor) {
     return this.createMonitorWithHttpInfo(projectUID, monitor).then(function (
@@ -224,7 +223,7 @@ export default class MonitorApi {
   /**
    * Get list of defined Monitors
    * @param {String} projectUID
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetMonitors200Response} and HTTP response
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link Array.<module:model/Monitor>} and HTTP response
    */
   getMonitorsWithHttpInfo(projectUID) {
     let postBody = null;
@@ -245,7 +244,7 @@ export default class MonitorApi {
     let authNames = ["api_key"];
     let contentTypes = [];
     let accepts = ["application/json"];
-    let returnType = GetMonitors200Response;
+    let returnType = [Monitor];
     return this.apiClient.callApi(
       "/v1/projects/{projectUID}/monitors",
       "GET",
@@ -265,7 +264,7 @@ export default class MonitorApi {
   /**
    * Get list of defined Monitors
    * @param {String} projectUID
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetMonitors200Response}
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link Array.<module:model/Monitor>}
    */
   getMonitors(projectUID) {
     return this.getMonitorsWithHttpInfo(projectUID).then(function (

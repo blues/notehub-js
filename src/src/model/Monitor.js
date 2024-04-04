@@ -59,17 +59,28 @@ class Monitor {
           "String"
         );
       }
-      if (data.hasOwnProperty("status")) {
-        obj["status"] = ApiClient.convertToType(data["status"], "String");
-      }
-      if (data.hasOwnProperty("silenced")) {
-        obj["silenced"] = ApiClient.convertToType(data["silenced"], "Boolean");
-      }
       if (data.hasOwnProperty("source_type")) {
         obj["source_type"] = ApiClient.convertToType(
           data["source_type"],
           "String"
         );
+      }
+      if (data.hasOwnProperty("disabled")) {
+        obj["disabled"] = ApiClient.convertToType(data["disabled"], "Boolean");
+      }
+      if (data.hasOwnProperty("alert")) {
+        obj["alert"] = ApiClient.convertToType(data["alert"], "Boolean");
+      }
+      if (data.hasOwnProperty("notefile_filter")) {
+        obj["notefile_filter"] = ApiClient.convertToType(
+          data["notefile_filter"],
+          ["String"]
+        );
+      }
+      if (data.hasOwnProperty("fleet_filter")) {
+        obj["fleet_filter"] = ApiClient.convertToType(data["fleet_filter"], [
+          "String",
+        ]);
       }
       if (data.hasOwnProperty("source_selector")) {
         obj["source_selector"] = ApiClient.convertToType(
@@ -83,35 +94,30 @@ class Monitor {
           "String"
         );
       }
-      if (data.hasOwnProperty("notefile_filter")) {
-        obj["notefile_filter"] = ApiClient.convertToType(
-          data["notefile_filter"],
-          ["String"]
-        );
-      }
-      if (data.hasOwnProperty("fleet_filter")) {
-        obj["fleet_filter"] = ApiClient.convertToType(data["fleet_filter"], [
-          "String",
-        ]);
-      }
-      if (data.hasOwnProperty("severity")) {
-        obj["severity"] = ApiClient.convertToType(data["severity"], "String");
-      }
       if (data.hasOwnProperty("thresholds")) {
         obj["thresholds"] = MonitorThresholds.constructFromObject(
           data["thresholds"]
-        );
-      }
-      if (data.hasOwnProperty("routing_cooldown_period")) {
-        obj["routing_cooldown_period"] = ApiClient.convertToType(
-          data["routing_cooldown_period"],
-          "String"
         );
       }
       if (data.hasOwnProperty("alert_routes")) {
         obj["alert_routes"] = ApiClient.convertToType(data["alert_routes"], [
           MonitorAlertRoutesInner,
         ]);
+      }
+      if (data.hasOwnProperty("last_routed_at")) {
+        obj["last_routed_at"] = ApiClient.convertToType(
+          data["last_routed_at"],
+          "String"
+        );
+      }
+      if (data.hasOwnProperty("silenced")) {
+        obj["silenced"] = ApiClient.convertToType(data["silenced"], "Boolean");
+      }
+      if (data.hasOwnProperty("routing_cooldown_period")) {
+        obj["routing_cooldown_period"] = ApiClient.convertToType(
+          data["routing_cooldown_period"],
+          "String"
+        );
       }
     } else if (data === null) {
       return null;
@@ -160,16 +166,6 @@ class Monitor {
     }
     // ensure the json data is a string
     if (
-      data["status"] &&
-      !(typeof data["status"] === "string" || data["status"] instanceof String)
-    ) {
-      throw new Error(
-        "Expected the field `status` to be a primitive type in the JSON string but got " +
-          data["status"]
-      );
-    }
-    // ensure the json data is a string
-    if (
       data["source_type"] &&
       !(
         typeof data["source_type"] === "string" ||
@@ -179,6 +175,20 @@ class Monitor {
       throw new Error(
         "Expected the field `source_type` to be a primitive type in the JSON string but got " +
           data["source_type"]
+      );
+    }
+    // ensure the json data is an array
+    if (!Array.isArray(data["notefile_filter"])) {
+      throw new Error(
+        "Expected the field `notefile_filter` to be an array in the JSON data but got " +
+          data["notefile_filter"]
+      );
+    }
+    // ensure the json data is an array
+    if (!Array.isArray(data["fleet_filter"])) {
+      throw new Error(
+        "Expected the field `fleet_filter` to be an array in the JSON data but got " +
+          data["fleet_filter"]
       );
     }
     // ensure the json data is a string
@@ -207,50 +217,10 @@ class Monitor {
           data["condition_type"]
       );
     }
-    // ensure the json data is an array
-    if (!Array.isArray(data["notefile_filter"])) {
-      throw new Error(
-        "Expected the field `notefile_filter` to be an array in the JSON data but got " +
-          data["notefile_filter"]
-      );
-    }
-    // ensure the json data is an array
-    if (!Array.isArray(data["fleet_filter"])) {
-      throw new Error(
-        "Expected the field `fleet_filter` to be an array in the JSON data but got " +
-          data["fleet_filter"]
-      );
-    }
-    // ensure the json data is a string
-    if (
-      data["severity"] &&
-      !(
-        typeof data["severity"] === "string" ||
-        data["severity"] instanceof String
-      )
-    ) {
-      throw new Error(
-        "Expected the field `severity` to be a primitive type in the JSON string but got " +
-          data["severity"]
-      );
-    }
     // validate the optional field `thresholds`
     if (data["thresholds"]) {
       // data not null
       MonitorThresholds.validateJSON(data["thresholds"]);
-    }
-    // ensure the json data is a string
-    if (
-      data["routing_cooldown_period"] &&
-      !(
-        typeof data["routing_cooldown_period"] === "string" ||
-        data["routing_cooldown_period"] instanceof String
-      )
-    ) {
-      throw new Error(
-        "Expected the field `routing_cooldown_period` to be a primitive type in the JSON string but got " +
-          data["routing_cooldown_period"]
-      );
     }
     if (data["alert_routes"]) {
       // data not null
@@ -265,6 +235,32 @@ class Monitor {
       for (const item of data["alert_routes"]) {
         MonitorAlertRoutesInner.validateJsonObject(item);
       }
+    }
+    // ensure the json data is a string
+    if (
+      data["last_routed_at"] &&
+      !(
+        typeof data["last_routed_at"] === "string" ||
+        data["last_routed_at"] instanceof String
+      )
+    ) {
+      throw new Error(
+        "Expected the field `last_routed_at` to be a primitive type in the JSON string but got " +
+          data["last_routed_at"]
+      );
+    }
+    // ensure the json data is a string
+    if (
+      data["routing_cooldown_period"] &&
+      !(
+        typeof data["routing_cooldown_period"] === "string" ||
+        data["routing_cooldown_period"] instanceof String
+      )
+    ) {
+      throw new Error(
+        "Expected the field `routing_cooldown_period` to be a primitive type in the JSON string but got " +
+          data["routing_cooldown_period"]
+      );
     }
 
     return true;
@@ -287,22 +283,32 @@ Monitor.prototype["name"] = undefined;
 Monitor.prototype["description"] = undefined;
 
 /**
- * The status of the monitor.
- * @member {module:model/Monitor.StatusEnum} status
- */
-Monitor.prototype["status"] = undefined;
-
-/**
- * If true, alerts will be created, but no notifications will be sent.
- * @member {Boolean} silenced
- */
-Monitor.prototype["silenced"] = undefined;
-
-/**
  * The type of source to monitor. Currently only \"event\" is supported.
  * @member {module:model/Monitor.SourceTypeEnum} source_type
  */
 Monitor.prototype["source_type"] = undefined;
+
+/**
+ * If true, the monitor will not be evaluated.
+ * @member {Boolean} disabled
+ */
+Monitor.prototype["disabled"] = undefined;
+
+/**
+ * If true, the monitor is in alert state.
+ * @member {Boolean} alert
+ */
+Monitor.prototype["alert"] = undefined;
+
+/**
+ * @member {Array.<String>} notefile_filter
+ */
+Monitor.prototype["notefile_filter"] = undefined;
+
+/**
+ * @member {Array.<String>} fleet_filter
+ */
+Monitor.prototype["fleet_filter"] = undefined;
 
 /**
  * A valid JSONata expression that selects the value to monitor from the source. | It should return a single, numeric value.
@@ -317,30 +323,9 @@ Monitor.prototype["source_selector"] = undefined;
 Monitor.prototype["condition_type"] = undefined;
 
 /**
- * @member {Array.<String>} notefile_filter
- */
-Monitor.prototype["notefile_filter"] = undefined;
-
-/**
- * @member {Array.<String>} fleet_filter
- */
-Monitor.prototype["fleet_filter"] = undefined;
-
-/**
- * @member {module:model/Monitor.SeverityEnum} severity
- */
-Monitor.prototype["severity"] = undefined;
-
-/**
  * @member {module:model/MonitorThresholds} thresholds
  */
 Monitor.prototype["thresholds"] = undefined;
-
-/**
- * The time period to wait before routing another event after the monitor | has been triggered. It follows the format of a number followed by a time unit.
- * @member {String} routing_cooldown_period
- */
-Monitor.prototype["routing_cooldown_period"] = undefined;
 
 /**
  * @member {Array.<module:model/MonitorAlertRoutesInner>} alert_routes
@@ -348,23 +333,22 @@ Monitor.prototype["routing_cooldown_period"] = undefined;
 Monitor.prototype["alert_routes"] = undefined;
 
 /**
- * Allowed values for the <code>status</code> property.
- * @enum {String}
- * @readonly
+ * The last time the monitor was evaluated and routed.
+ * @member {String} last_routed_at
  */
-Monitor["StatusEnum"] = {
-  /**
-   * value: "disabled"
-   * @const
-   */
-  disabled: "disabled",
+Monitor.prototype["last_routed_at"] = undefined;
 
-  /**
-   * value: "enabled"
-   * @const
-   */
-  enabled: "enabled",
-};
+/**
+ * If true, alerts will be created, but no notifications will be sent.
+ * @member {Boolean} silenced
+ */
+Monitor.prototype["silenced"] = undefined;
+
+/**
+ * The time period to wait before routing another event after the monitor | has been triggered. It follows the format of a number followed by a time unit.
+ * @member {String} routing_cooldown_period
+ */
+Monitor.prototype["routing_cooldown_period"] = undefined;
 
 /**
  * Allowed values for the <code>source_type</code> property.
@@ -420,25 +404,6 @@ Monitor["ConditionTypeEnum"] = {
    * @const
    */
   not_equal_to: "not_equal_to",
-};
-
-/**
- * Allowed values for the <code>severity</code> property.
- * @enum {String}
- * @readonly
- */
-Monitor["SeverityEnum"] = {
-  /**
-   * value: "warn"
-   * @const
-   */
-  warn: "warn",
-
-  /**
-   * value: "alarm"
-   * @const
-   */
-  alarm: "alarm",
 };
 
 export default Monitor;

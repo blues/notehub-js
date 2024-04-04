@@ -63,6 +63,9 @@ import HttpTransform from "./model/HttpTransform";
 import Location from "./model/Location";
 import Login200Response from "./model/Login200Response";
 import LoginRequest from "./model/LoginRequest";
+import Monitor from "./model/Monitor";
+import MonitorAlertRoutesInner from "./model/MonitorAlertRoutesInner";
+import MonitorThresholds from "./model/MonitorThresholds";
 import Mqtt from "./model/Mqtt";
 import Note from "./model/Note";
 import PostProvisionProjectDeviceRequest from "./model/PostProvisionProjectDeviceRequest";
@@ -91,6 +94,7 @@ import EnvironmentVariablesApi from "./api/EnvironmentVariablesApi";
 import EventApi from "./api/EventApi";
 import FilesApi from "./api/FilesApi";
 import FleetApi from "./api/FleetApi";
+import MonitorApi from "./api/MonitorApi";
 import NotesApi from "./api/NotesApi";
 import ProductApi from "./api/ProductApi";
 import ProjectApi from "./api/ProjectApi";
@@ -442,6 +446,24 @@ export {
   LoginRequest,
 
   /**
+   * The Monitor model constructor.
+   * @property {module:model/Monitor}
+   */
+  Monitor,
+
+  /**
+   * The MonitorAlertRoutesInner model constructor.
+   * @property {module:model/MonitorAlertRoutesInner}
+   */
+  MonitorAlertRoutesInner,
+
+  /**
+   * The MonitorThresholds model constructor.
+   * @property {module:model/MonitorThresholds}
+   */
+  MonitorThresholds,
+
+  /**
    * The Mqtt model constructor.
    * @property {module:model/Mqtt}
    */
@@ -608,6 +630,12 @@ export {
    * @property {module:api/FleetApi}
    */
   FleetApi,
+
+  /**
+   * The MonitorApi service constructor.
+   * @property {module:api/MonitorApi}
+   */
+  MonitorApi,
 
   /**
    * The NotesApi service constructor.

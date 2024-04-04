@@ -12,7 +12,7 @@ All URIs are relative to *https://api.notefile.net*
 
 ## createMonitor
 
-> GetMonitors200Response createMonitor(projectUID, monitor)
+> [Monitor] createMonitor(projectUID, monitor)
 
 Create a new Monitor
 
@@ -45,7 +45,7 @@ apiInstance.createMonitor(projectUID, monitor).then((data) => {
 
 ### Return type
 
-[**GetMonitors200Response**](GetMonitors200Response.md)
+[**[Monitor]**](Monitor.md)
 
 ### Authorization
 
@@ -150,7 +150,7 @@ apiInstance.getMonitor(projectUID, monitorUID).then((data) => {
 
 ## getMonitors
 
-> GetMonitors200Response getMonitors(projectUID)
+> [Monitor] getMonitors(projectUID)
 
 Get list of defined Monitors
 
@@ -181,7 +181,7 @@ apiInstance.getMonitors(projectUID).then((data) => {
 
 ### Return type
 
-[**GetMonitors200Response**](GetMonitors200Response.md)
+[**[Monitor]**](Monitor.md)
 
 ### Authorization
 
