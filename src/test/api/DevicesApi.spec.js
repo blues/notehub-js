@@ -1,6 +1,6 @@
 /**
  * Notehub API
- * The OpenAPI definition for the Notehub.io API. 
+ * The OpenAPI definition for the Notehub.io API.
  *
  * The version of the OpenAPI document: 1.0.0
  * Contact: engineering@blues.io
@@ -11,45 +11,41 @@
  *
  */
 
-(function(root, factory) {
-  if (typeof define === 'function' && define.amd) {
+(function (root, factory) {
+  if (typeof define === "function" && define.amd) {
     // AMD.
-    define(['expect.js', process.cwd()+'/src/index'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+    define(["expect.js", process.cwd() + "/src/index"], factory);
+  } else if (typeof module === "object" && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    factory(require('expect.js'), require(process.cwd()+'/src/index'));
+    factory(require("expect.js"), require(process.cwd() + "/src/index"));
   } else {
     // Browser globals (root is window)
     factory(root.expect, root.NotehubJs);
   }
-}(this, function(expect, NotehubJs) {
-  'use strict';
+})(this, function (expect, NotehubJs) {
+  "use strict";
 
   var instance;
 
-  beforeEach(function() {
+  beforeEach(function () {
     instance = new NotehubJs.DevicesApi();
   });
 
-  var getProperty = function(object, getter, property) {
+  var getProperty = function (object, getter, property) {
     // Use getter method if present; otherwise, get the property directly.
-    if (typeof object[getter] === 'function')
-      return object[getter]();
-    else
-      return object[property];
-  }
+    if (typeof object[getter] === "function") return object[getter]();
+    else return object[property];
+  };
 
-  var setProperty = function(object, setter, property, value) {
+  var setProperty = function (object, setter, property, value) {
     // Use setter method if present; otherwise, set the property directly.
-    if (typeof object[setter] === 'function')
-      object[setter](value);
-    else
-      object[property] = value;
-  }
+    if (typeof object[setter] === "function") object[setter](value);
+    else object[property] = value;
+  };
 
-  describe('DevicesApi', function() {
-    describe('deleteProjectDevice', function() {
-      it('should call deleteProjectDevice successfully', function(done) {
+  describe("DevicesApi", function () {
+    describe("deleteProjectDevice", function () {
+      it("should call deleteProjectDevice successfully", function (done) {
         //uncomment below and update the code to test deleteProjectDevice
         //instance.deleteProjectDevice(function(error) {
         //  if (error) throw error;
@@ -58,8 +54,8 @@
         done();
       });
     });
-    describe('getDevice', function() {
-      it('should call getDevice successfully', function(done) {
+    describe("getDevice", function () {
+      it("should call getDevice successfully", function (done) {
         //uncomment below and update the code to test getDevice
         //instance.getDevice(function(error) {
         //  if (error) throw error;
@@ -68,8 +64,8 @@
         done();
       });
     });
-    describe('getProjectDevicePublicKeys', function() {
-      it('should call getProjectDevicePublicKeys successfully', function(done) {
+    describe("getProjectDevicePublicKeys", function () {
+      it("should call getProjectDevicePublicKeys successfully", function (done) {
         //uncomment below and update the code to test getProjectDevicePublicKeys
         //instance.getProjectDevicePublicKeys(function(error) {
         //  if (error) throw error;
@@ -78,8 +74,8 @@
         done();
       });
     });
-    describe('getProjectDevices', function() {
-      it('should call getProjectDevices successfully', function(done) {
+    describe("getProjectDevices", function () {
+      it("should call getProjectDevices successfully", function (done) {
         //uncomment below and update the code to test getProjectDevices
         //instance.getProjectDevices(function(error) {
         //  if (error) throw error;
@@ -88,8 +84,8 @@
         done();
       });
     });
-    describe('getProjectFleetDevices', function() {
-      it('should call getProjectFleetDevices successfully', function(done) {
+    describe("getProjectFleetDevices", function () {
+      it("should call getProjectFleetDevices successfully", function (done) {
         //uncomment below and update the code to test getProjectFleetDevices
         //instance.getProjectFleetDevices(function(error) {
         //  if (error) throw error;
@@ -98,6 +94,105 @@
         done();
       });
     });
+    describe("handleNoteAdd", function () {
+      it("should call handleNoteAdd successfully", function (done) {
+        //uncomment below and update the code to test handleNoteAdd
+        //instance.handleNoteAdd(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
+    describe("handleNoteChanges", function () {
+      it("should call handleNoteChanges successfully", function (done) {
+        //uncomment below and update the code to test handleNoteChanges
+        //instance.handleNoteChanges(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
+    describe("handleNoteCreateAdd", function () {
+      it("should call handleNoteCreateAdd successfully", function (done) {
+        //uncomment below and update the code to test handleNoteCreateAdd
+        //instance.handleNoteCreateAdd(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
+    describe("handleNoteDelete", function () {
+      it("should call handleNoteDelete successfully", function (done) {
+        //uncomment below and update the code to test handleNoteDelete
+        //instance.handleNoteDelete(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
+    describe("handleNoteGet", function () {
+      it("should call handleNoteGet successfully", function (done) {
+        //uncomment below and update the code to test handleNoteGet
+        //instance.handleNoteGet(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
+    describe("handleNoteUpdate", function () {
+      it("should call handleNoteUpdate successfully", function (done) {
+        //uncomment below and update the code to test handleNoteUpdate
+        //instance.handleNoteUpdate(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
+    describe("handleNotefileChanges", function () {
+      it("should call handleNotefileChanges successfully", function (done) {
+        //uncomment below and update the code to test handleNotefileChanges
+        //instance.handleNotefileChanges(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
+    describe("handleNotefileChangesPending", function () {
+      it("should call handleNotefileChangesPending successfully", function (done) {
+        //uncomment below and update the code to test handleNotefileChangesPending
+        //instance.handleNotefileChangesPending(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
+    describe("handleNotefileDelete", function () {
+      it("should call handleNotefileDelete successfully", function (done) {
+        //uncomment below and update the code to test handleNotefileDelete
+        //instance.handleNotefileDelete(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
+    describe("postProvisionProjectDevice", function () {
+      it("should call postProvisionProjectDevice successfully", function (done) {
+        //uncomment below and update the code to test postProvisionProjectDevice
+        //instance.postProvisionProjectDevice(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
   });
-
-}));
+});

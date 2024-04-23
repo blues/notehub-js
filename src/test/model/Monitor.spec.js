@@ -68,32 +68,20 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property status (base name: "status")', function () {
-      // uncomment below and update the code to test the property status
-      //var instance = new NotehubJs.Monitor();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property silenced (base name: "silenced")', function () {
-      // uncomment below and update the code to test the property silenced
-      //var instance = new NotehubJs.Monitor();
-      //expect(instance).to.be();
-    });
-
     it('should have the property sourceType (base name: "source_type")', function () {
       // uncomment below and update the code to test the property sourceType
       //var instance = new NotehubJs.Monitor();
       //expect(instance).to.be();
     });
 
-    it('should have the property sourceSelector (base name: "source_selector")', function () {
-      // uncomment below and update the code to test the property sourceSelector
+    it('should have the property disabled (base name: "disabled")', function () {
+      // uncomment below and update the code to test the property disabled
       //var instance = new NotehubJs.Monitor();
       //expect(instance).to.be();
     });
 
-    it('should have the property conditionType (base name: "condition_type")', function () {
-      // uncomment below and update the code to test the property conditionType
+    it('should have the property alert (base name: "alert")', function () {
+      // uncomment below and update the code to test the property alert
       //var instance = new NotehubJs.Monitor();
       //expect(instance).to.be();
     });
@@ -110,8 +98,14 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property severity (base name: "severity")', function () {
-      // uncomment below and update the code to test the property severity
+    it('should have the property sourceSelector (base name: "source_selector")', function () {
+      // uncomment below and update the code to test the property sourceSelector
+      //var instance = new NotehubJs.Monitor();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property conditionType (base name: "condition_type")', function () {
+      // uncomment below and update the code to test the property conditionType
       //var instance = new NotehubJs.Monitor();
       //expect(instance).to.be();
     });
@@ -122,14 +116,26 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property routingCooldownPeriod (base name: "routing_cooldown_period")', function () {
-      // uncomment below and update the code to test the property routingCooldownPeriod
+    it('should have the property alertRoutes (base name: "alert_routes")', function () {
+      // uncomment below and update the code to test the property alertRoutes
       //var instance = new NotehubJs.Monitor();
       //expect(instance).to.be();
     });
 
-    it('should have the property alertRoutes (base name: "alert_routes")', function () {
-      // uncomment below and update the code to test the property alertRoutes
+    it('should have the property lastRoutedAt (base name: "last_routed_at")', function () {
+      // uncomment below and update the code to test the property lastRoutedAt
+      //var instance = new NotehubJs.Monitor();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property silenced (base name: "silenced")', function () {
+      // uncomment below and update the code to test the property silenced
+      //var instance = new NotehubJs.Monitor();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property routingCooldownPeriod (base name: "routing_cooldown_period")', function () {
+      // uncomment below and update the code to test the property routingCooldownPeriod
       //var instance = new NotehubJs.Monitor();
       //expect(instance).to.be();
     });

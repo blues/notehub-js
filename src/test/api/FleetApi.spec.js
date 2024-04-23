@@ -1,6 +1,6 @@
 /**
  * Notehub API
- * The OpenAPI definition for the Notehub.io API. 
+ * The OpenAPI definition for the Notehub.io API.
  *
  * The version of the OpenAPI document: 1.0.0
  * Contact: engineering@blues.io
@@ -11,45 +11,41 @@
  *
  */
 
-(function(root, factory) {
-  if (typeof define === 'function' && define.amd) {
+(function (root, factory) {
+  if (typeof define === "function" && define.amd) {
     // AMD.
-    define(['expect.js', process.cwd()+'/src/index'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+    define(["expect.js", process.cwd() + "/src/index"], factory);
+  } else if (typeof module === "object" && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    factory(require('expect.js'), require(process.cwd()+'/src/index'));
+    factory(require("expect.js"), require(process.cwd() + "/src/index"));
   } else {
     // Browser globals (root is window)
     factory(root.expect, root.NotehubJs);
   }
-}(this, function(expect, NotehubJs) {
-  'use strict';
+})(this, function (expect, NotehubJs) {
+  "use strict";
 
   var instance;
 
-  beforeEach(function() {
+  beforeEach(function () {
     instance = new NotehubJs.FleetApi();
   });
 
-  var getProperty = function(object, getter, property) {
+  var getProperty = function (object, getter, property) {
     // Use getter method if present; otherwise, get the property directly.
-    if (typeof object[getter] === 'function')
-      return object[getter]();
-    else
-      return object[property];
-  }
+    if (typeof object[getter] === "function") return object[getter]();
+    else return object[property];
+  };
 
-  var setProperty = function(object, setter, property, value) {
+  var setProperty = function (object, setter, property, value) {
     // Use setter method if present; otherwise, set the property directly.
-    if (typeof object[setter] === 'function')
-      object[setter](value);
-    else
-      object[property] = value;
-  }
+    if (typeof object[setter] === "function") object[setter](value);
+    else object[property] = value;
+  };
 
-  describe('FleetApi', function() {
-    describe('createFleet', function() {
-      it('should call createFleet successfully', function(done) {
+  describe("FleetApi", function () {
+    describe("createFleet", function () {
+      it("should call createFleet successfully", function (done) {
         //uncomment below and update the code to test createFleet
         //instance.createFleet(function(error) {
         //  if (error) throw error;
@@ -58,18 +54,8 @@
         done();
       });
     });
-    describe('deleteDeviceFleets', function() {
-      it('should call deleteDeviceFleets successfully', function(done) {
-        //uncomment below and update the code to test deleteDeviceFleets
-        //instance.deleteDeviceFleets(function(error) {
-        //  if (error) throw error;
-        //expect().to.be();
-        //});
-        done();
-      });
-    });
-    describe('deleteFleet', function() {
-      it('should call deleteFleet successfully', function(done) {
+    describe("deleteFleet", function () {
+      it("should call deleteFleet successfully", function (done) {
         //uncomment below and update the code to test deleteFleet
         //instance.deleteFleet(function(error) {
         //  if (error) throw error;
@@ -78,18 +64,8 @@
         done();
       });
     });
-    describe('deleteFleetEnvironmentVariable', function() {
-      it('should call deleteFleetEnvironmentVariable successfully', function(done) {
-        //uncomment below and update the code to test deleteFleetEnvironmentVariable
-        //instance.deleteFleetEnvironmentVariable(function(error) {
-        //  if (error) throw error;
-        //expect().to.be();
-        //});
-        done();
-      });
-    });
-    describe('getDeviceFleets', function() {
-      it('should call getDeviceFleets successfully', function(done) {
+    describe("getDeviceFleets", function () {
+      it("should call getDeviceFleets successfully", function (done) {
         //uncomment below and update the code to test getDeviceFleets
         //instance.getDeviceFleets(function(error) {
         //  if (error) throw error;
@@ -98,48 +74,8 @@
         done();
       });
     });
-    describe('getFleetEnvironmentVariables', function() {
-      it('should call getFleetEnvironmentVariables successfully', function(done) {
-        //uncomment below and update the code to test getFleetEnvironmentVariables
-        //instance.getFleetEnvironmentVariables(function(error) {
-        //  if (error) throw error;
-        //expect().to.be();
-        //});
-        done();
-      });
-    });
-    describe('getFleetEvents', function() {
-      it('should call getFleetEvents successfully', function(done) {
-        //uncomment below and update the code to test getFleetEvents
-        //instance.getFleetEvents(function(error) {
-        //  if (error) throw error;
-        //expect().to.be();
-        //});
-        done();
-      });
-    });
-    describe('getFleetEventsByCursor', function() {
-      it('should call getFleetEventsByCursor successfully', function(done) {
-        //uncomment below and update the code to test getFleetEventsByCursor
-        //instance.getFleetEventsByCursor(function(error) {
-        //  if (error) throw error;
-        //expect().to.be();
-        //});
-        done();
-      });
-    });
-    describe('getProjectFleetDevices', function() {
-      it('should call getProjectFleetDevices successfully', function(done) {
-        //uncomment below and update the code to test getProjectFleetDevices
-        //instance.getProjectFleetDevices(function(error) {
-        //  if (error) throw error;
-        //expect().to.be();
-        //});
-        done();
-      });
-    });
-    describe('getProjectFleets', function() {
-      it('should call getProjectFleets successfully', function(done) {
+    describe("getProjectFleets", function () {
+      it("should call getProjectFleets successfully", function (done) {
         //uncomment below and update the code to test getProjectFleets
         //instance.getProjectFleets(function(error) {
         //  if (error) throw error;
@@ -148,8 +84,8 @@
         done();
       });
     });
-    describe('putDeviceFleets', function() {
-      it('should call putDeviceFleets successfully', function(done) {
+    describe("putDeviceFleets", function () {
+      it("should call putDeviceFleets successfully", function (done) {
         //uncomment below and update the code to test putDeviceFleets
         //instance.putDeviceFleets(function(error) {
         //  if (error) throw error;
@@ -158,18 +94,8 @@
         done();
       });
     });
-    describe('putFleetEnvironmentVariables', function() {
-      it('should call putFleetEnvironmentVariables successfully', function(done) {
-        //uncomment below and update the code to test putFleetEnvironmentVariables
-        //instance.putFleetEnvironmentVariables(function(error) {
-        //  if (error) throw error;
-        //expect().to.be();
-        //});
-        done();
-      });
-    });
-    describe('updateFleet', function() {
-      it('should call updateFleet successfully', function(done) {
+    describe("updateFleet", function () {
+      it("should call updateFleet successfully", function (done) {
         //uncomment below and update the code to test updateFleet
         //instance.updateFleet(function(error) {
         //  if (error) throw error;
@@ -179,5 +105,4 @@
       });
     });
   });
-
-}));
+});

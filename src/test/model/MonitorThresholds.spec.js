@@ -55,17 +55,5 @@
       //var instance = new NotehubJs.MonitorThresholds();
       //expect(instance).to.be();
     });
-
-    it('should have the property warn (base name: "warn")', function () {
-      // uncomment below and update the code to test the property warn
-      //var instance = new NotehubJs.MonitorThresholds();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property recover (base name: "recover")', function () {
-      // uncomment below and update the code to test the property recover
-      //var instance = new NotehubJs.MonitorThresholds();
-      //expect(instance).to.be();
-    });
   });
 });
