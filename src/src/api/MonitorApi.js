@@ -12,6 +12,7 @@
  */
 
 import ApiClient from "../ApiClient";
+import CreateMonitor from "../model/CreateMonitor";
 import Error from "../model/Error";
 import Monitor from "../model/Monitor";
 
@@ -35,21 +36,21 @@ export default class MonitorApi {
   /**
    * Create a new Monitor
    * @param {String} projectUID
-   * @param {module:model/Monitor} monitor Body or payload of monitor to be created
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link Array.<module:model/Monitor>} and HTTP response
+   * @param {module:model/CreateMonitor} createMonitor Body or payload of monitor to be created
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Monitor} and HTTP response
    */
-  createMonitorWithHttpInfo(projectUID, monitor) {
-    let postBody = monitor;
+  createMonitorWithHttpInfo(projectUID, createMonitor) {
+    let postBody = createMonitor;
     // verify the required parameter 'projectUID' is set
     if (projectUID === undefined || projectUID === null) {
       throw new Error(
         "Missing the required parameter 'projectUID' when calling createMonitor"
       );
     }
-    // verify the required parameter 'monitor' is set
-    if (monitor === undefined || monitor === null) {
+    // verify the required parameter 'createMonitor' is set
+    if (createMonitor === undefined || createMonitor === null) {
       throw new Error(
-        "Missing the required parameter 'monitor' when calling createMonitor"
+        "Missing the required parameter 'createMonitor' when calling createMonitor"
       );
     }
 
@@ -63,7 +64,7 @@ export default class MonitorApi {
     let authNames = ["api_key"];
     let contentTypes = ["application/json"];
     let accepts = ["application/json"];
-    let returnType = [Monitor];
+    let returnType = Monitor;
     return this.apiClient.callApi(
       "/v1/projects/{projectUID}/monitors",
       "POST",
@@ -83,15 +84,15 @@ export default class MonitorApi {
   /**
    * Create a new Monitor
    * @param {String} projectUID
-   * @param {module:model/Monitor} monitor Body or payload of monitor to be created
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link Array.<module:model/Monitor>}
+   * @param {module:model/CreateMonitor} createMonitor Body or payload of monitor to be created
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Monitor}
    */
-  createMonitor(projectUID, monitor) {
-    return this.createMonitorWithHttpInfo(projectUID, monitor).then(function (
-      response_and_data
-    ) {
-      return response_and_data.data;
-    });
+  createMonitor(projectUID, createMonitor) {
+    return this.createMonitorWithHttpInfo(projectUID, createMonitor).then(
+      function (response_and_data) {
+        return response_and_data.data;
+      }
+    );
   }
 
   /**

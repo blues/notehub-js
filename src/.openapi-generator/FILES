@@ -12,6 +12,7 @@ docs/Body.md
 docs/CloneProjectRequest.md
 docs/Contact.md
 docs/CreateFleetRequest.md
+docs/CreateMonitor.md
 docs/CreateProductRequest.md
 docs/CreateProjectRequest.md
 docs/DFUEnv.md
@@ -28,7 +29,8 @@ docs/EnvironmentVariablesApi.md
 docs/Error.md
 docs/Event.md
 docs/EventApi.md
-docs/FilesApi.md
+docs/FirmwareApi.md
+docs/FirmwareInfo.md
 docs/Fleet.md
 docs/FleetApi.md
 docs/GetBillingAccounts200Response.md
@@ -61,12 +63,14 @@ docs/HttpTransform.md
 docs/Location.md
 docs/Login200Response.md
 docs/LoginRequest.md
+docs/Monitor.md
+docs/MonitorAlertRoutesInner.md
+docs/MonitorApi.md
+docs/MonitorThresholds.md
 docs/Mqtt.md
 docs/Note.md
-docs/NotesApi.md
 docs/PostProvisionProjectDeviceRequest.md
 docs/Product.md
-docs/ProductApi.md
 docs/Project.md
 docs/ProjectApi.md
 docs/ProjectMember.md
@@ -96,10 +100,9 @@ src/api/DeviceApi.js
 src/api/DevicesApi.js
 src/api/EnvironmentVariablesApi.js
 src/api/EventApi.js
-src/api/FilesApi.js
+src/api/FirmwareApi.js
 src/api/FleetApi.js
-src/api/NotesApi.js
-src/api/ProductApi.js
+src/api/MonitorApi.js
 src/api/ProjectApi.js
 src/api/RouteApi.js
 src/api/RouteLogsApi.js
@@ -112,6 +115,7 @@ src/model/Body.js
 src/model/CloneProjectRequest.js
 src/model/Contact.js
 src/model/CreateFleetRequest.js
+src/model/CreateMonitor.js
 src/model/CreateProductRequest.js
 src/model/CreateProjectRequest.js
 src/model/DFUEnv.js
@@ -124,6 +128,7 @@ src/model/DeviceUsage.js
 src/model/EnvironmentVariables.js
 src/model/Error.js
 src/model/Event.js
+src/model/FirmwareInfo.js
 src/model/Fleet.js
 src/model/GetBillingAccounts200Response.js
 src/model/GetDeviceEnvironmentVariables200Response.js
@@ -155,6 +160,9 @@ src/model/HttpTransform.js
 src/model/Location.js
 src/model/Login200Response.js
 src/model/LoginRequest.js
+src/model/Monitor.js
+src/model/MonitorAlertRoutesInner.js
+src/model/MonitorThresholds.js
 src/model/Mqtt.js
 src/model/Note.js
 src/model/PostProvisionProjectDeviceRequest.js
@@ -175,3 +183,6 @@ src/model/TowerLocation.js
 src/model/Twilio.js
 src/model/UpdateFleetRequest.js
 src/model/UserDbRoute.js
+test/api/FirmwareApi.spec.js
+test/model/CreateMonitor.spec.js
+test/model/FirmwareInfo.spec.js

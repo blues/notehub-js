@@ -12,7 +12,7 @@ All URIs are relative to *https://api.notefile.net*
 
 ## createMonitor
 
-> [Monitor] createMonitor(projectUID, monitor)
+> Monitor createMonitor(projectUID, createMonitor)
 
 Create a new Monitor
 
@@ -27,8 +27,8 @@ api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.MonitorApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
-let monitor = new NotehubJs.Monitor(); // Monitor | Body or payload of monitor to be created
-apiInstance.createMonitor(projectUID, monitor).then((data) => {
+let createMonitor = new NotehubJs.CreateMonitor(); // CreateMonitor | Body or payload of monitor to be created
+apiInstance.createMonitor(projectUID, createMonitor).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
@@ -38,14 +38,14 @@ apiInstance.createMonitor(projectUID, monitor).then((data) => {
 
 ### Parameters
 
-| Name           | Type                      | Description                              | Notes |
-| -------------- | ------------------------- | ---------------------------------------- | ----- |
-| **projectUID** | **String**                |                                          |
-| **monitor**    | [**Monitor**](Monitor.md) | Body or payload of monitor to be created |
+| Name              | Type                                  | Description                              | Notes |
+| ----------------- | ------------------------------------- | ---------------------------------------- | ----- |
+| **projectUID**    | **String**                            |                                          |
+| **createMonitor** | [**CreateMonitor**](CreateMonitor.md) | Body or payload of monitor to be created |
 
 ### Return type
 
-[**[Monitor]**](Monitor.md)
+[**Monitor**](Monitor.md)
 
 ### Authorization
 

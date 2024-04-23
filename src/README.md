@@ -124,28 +124,30 @@ All URIs are relative to *https://api.notefile.net*
 | ----------------------------------- | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------- | ----------- |
 | _NotehubJs.AuthorizationApi_        | [**login**](docs/AuthorizationApi.md#login)                                                                  | **POST** /auth/login                                                                  |
 | _NotehubJs.BillingAccountApi_       | [**getBillingAccounts**](docs/BillingAccountApi.md#getBillingAccounts)                                       | **GET** /v1/billing-accounts                                                          |
-| _NotehubJs.DeviceApi_               | [**deleteDeviceEnvironmentVariable**](docs/DeviceApi.md#deleteDeviceEnvironmentVariable)                     | **DELETE** /v1/projects/{projectUID}/devices/{deviceUID}/environment_variables/{key}  |
 | _NotehubJs.DeviceApi_               | [**deleteDeviceFleets**](docs/DeviceApi.md#deleteDeviceFleets)                                               | **DELETE** /v1/projects/{projectUID}/devices/{deviceUID}/fleets                       |
 | _NotehubJs.DeviceApi_               | [**disableDevice**](docs/DeviceApi.md#disableDevice)                                                         | **POST** /v1/projects/{projectUID}/devices/{deviceUID}/disable                        |
 | _NotehubJs.DeviceApi_               | [**disableDeviceConnectivityAssurance**](docs/DeviceApi.md#disableDeviceConnectivityAssurance)               | **POST** /v1/projects/{projectUID}/devices/{deviceUID}/disable-connectivity-assurance |
 | _NotehubJs.DeviceApi_               | [**enableDevice**](docs/DeviceApi.md#enableDevice)                                                           | **POST** /v1/projects/{projectUID}/devices/{deviceUID}/enable                         |
 | _NotehubJs.DeviceApi_               | [**enableDeviceConnectivityAssurance**](docs/DeviceApi.md#enableDeviceConnectivityAssurance)                 | **POST** /v1/projects/{projectUID}/devices/{deviceUID}/enable-connectivity-assurance  |
-| _NotehubJs.DeviceApi_               | [**getDeviceEnvironmentVariables**](docs/DeviceApi.md#getDeviceEnvironmentVariables)                         | **GET** /v1/projects/{projectUID}/devices/{deviceUID}/environment_variables           |
-| _NotehubJs.DeviceApi_               | [**getDeviceEnvironmentVariablesByPin**](docs/DeviceApi.md#getDeviceEnvironmentVariablesByPin)               | **GET** /v1/products/{productUID}/devices/{deviceUID}/environment_variables_with_pin  |
-| _NotehubJs.DeviceApi_               | [**getDeviceFleets**](docs/DeviceApi.md#getDeviceFleets)                                                     | **GET** /v1/projects/{projectUID}/devices/{deviceUID}/fleets                          |
 | _NotehubJs.DeviceApi_               | [**getDeviceHealthLog**](docs/DeviceApi.md#getDeviceHealthLog)                                               | **GET** /v1/projects/{projectUID}/devices/{deviceUID}/health-log                      |
 | _NotehubJs.DeviceApi_               | [**getDeviceLatest**](docs/DeviceApi.md#getDeviceLatest)                                                     | **GET** /v1/projects/{projectUID}/devices/{deviceUID}/latest                          |
 | _NotehubJs.DeviceApi_               | [**getDevicePublicKey**](docs/DeviceApi.md#getDevicePublicKey)                                               | **GET** /v1/projects/{projectUID}/devices/{deviceUID}/public-key                      |
 | _NotehubJs.DeviceApi_               | [**getDeviceSessions**](docs/DeviceApi.md#getDeviceSessions)                                                 | **GET** /v1/projects/{projectUID}/devices/{deviceUID}/sessions                        |
 | _NotehubJs.DeviceApi_               | [**handleNoteSignal**](docs/DeviceApi.md#handleNoteSignal)                                                   | **POST** /v1/projects/{projectUID}/devices/{deviceUID}/signal                         |
-| _NotehubJs.DeviceApi_               | [**putDeviceEnvironmentVariables**](docs/DeviceApi.md#putDeviceEnvironmentVariables)                         | **PUT** /v1/projects/{projectUID}/devices/{deviceUID}/environment_variables           |
-| _NotehubJs.DeviceApi_               | [**putDeviceEnvironmentVariablesByPin**](docs/DeviceApi.md#putDeviceEnvironmentVariablesByPin)               | **PUT** /v1/products/{productUID}/devices/{deviceUID}/environment_variables_with_pin  |
-| _NotehubJs.DeviceApi_               | [**putDeviceFleets**](docs/DeviceApi.md#putDeviceFleets)                                                     | **PUT** /v1/projects/{projectUID}/devices/{deviceUID}/fleets                          |
 | _NotehubJs.DevicesApi_              | [**deleteProjectDevice**](docs/DevicesApi.md#deleteProjectDevice)                                            | **DELETE** /v1/projects/{projectUID}/devices/{deviceUID}                              |
 | _NotehubJs.DevicesApi_              | [**getDevice**](docs/DevicesApi.md#getDevice)                                                                | **GET** /v1/projects/{projectUID}/devices/{deviceUID}                                 |
 | _NotehubJs.DevicesApi_              | [**getProjectDevicePublicKeys**](docs/DevicesApi.md#getProjectDevicePublicKeys)                              | **GET** /v1/projects/{projectUID}/devices/public-keys                                 |
 | _NotehubJs.DevicesApi_              | [**getProjectDevices**](docs/DevicesApi.md#getProjectDevices)                                                | **GET** /v1/projects/{projectUID}/devices                                             |
 | _NotehubJs.DevicesApi_              | [**getProjectFleetDevices**](docs/DevicesApi.md#getProjectFleetDevices)                                      | **GET** /v1/projects/{projectUID}/fleets/{fleetUID}/devices                           |
+| _NotehubJs.DevicesApi_              | [**handleNoteAdd**](docs/DevicesApi.md#handleNoteAdd)                                                        | **POST** /v1/projects/{projectUID}/devices/{deviceUID}/notes/{notefileID}             |
+| _NotehubJs.DevicesApi_              | [**handleNoteChanges**](docs/DevicesApi.md#handleNoteChanges)                                                | **GET** /v1/projects/{projectUID}/devices/{deviceUID}/notes/{notefileID}/changes      |
+| _NotehubJs.DevicesApi_              | [**handleNoteCreateAdd**](docs/DevicesApi.md#handleNoteCreateAdd)                                            | **POST** /v1/projects/{projectUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}    |
+| _NotehubJs.DevicesApi_              | [**handleNoteDelete**](docs/DevicesApi.md#handleNoteDelete)                                                  | **DELETE** /v1/projects/{projectUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}  |
+| _NotehubJs.DevicesApi_              | [**handleNoteGet**](docs/DevicesApi.md#handleNoteGet)                                                        | **GET** /v1/projects/{projectUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}     |
+| _NotehubJs.DevicesApi_              | [**handleNoteUpdate**](docs/DevicesApi.md#handleNoteUpdate)                                                  | **PUT** /v1/projects/{projectUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}     |
+| _NotehubJs.DevicesApi_              | [**handleNotefileChanges**](docs/DevicesApi.md#handleNotefileChanges)                                        | **GET** /v1/projects/{projectUID}/devices/{deviceUID}/files/changes                   |
+| _NotehubJs.DevicesApi_              | [**handleNotefileChangesPending**](docs/DevicesApi.md#handleNotefileChangesPending)                          | **GET** /v1/projects/{projectUID}/devices/{deviceUID}/files/changes/pending           |
+| _NotehubJs.DevicesApi_              | [**handleNotefileDelete**](docs/DevicesApi.md#handleNotefileDelete)                                          | **DELETE** /v1/projects/{projectUID}/devices/{deviceUID}/files                        |
 | _NotehubJs.DevicesApi_              | [**postProvisionProjectDevice**](docs/DevicesApi.md#postProvisionProjectDevice)                              | **POST** /v1/projects/{projectUID}/devices/{deviceUID}/provision                      |
 | _NotehubJs.EnvironmentVariablesApi_ | [**deleteDeviceEnvironmentVariable**](docs/EnvironmentVariablesApi.md#deleteDeviceEnvironmentVariable)       | **DELETE** /v1/projects/{projectUID}/devices/{deviceUID}/environment_variables/{key}  |
 | _NotehubJs.EnvironmentVariablesApi_ | [**deleteFleetEnvironmentVariable**](docs/EnvironmentVariablesApi.md#deleteFleetEnvironmentVariable)         | **DELETE** /v1/projects/{projectUID}/fleets/{fleetUID}/environment_variables/{key}    |
@@ -162,51 +164,29 @@ All URIs are relative to *https://api.notefile.net*
 | _NotehubJs.EventApi_                | [**getFleetEventsByCursor**](docs/EventApi.md#getFleetEventsByCursor)                                        | **GET** /v1/projects/{projectUID}/fleets/{fleetUID}/events-cursor                     |
 | _NotehubJs.EventApi_                | [**getProjectEvents**](docs/EventApi.md#getProjectEvents)                                                    | **GET** /v1/projects/{projectUID}/events                                              |
 | _NotehubJs.EventApi_                | [**getProjectEventsByCursor**](docs/EventApi.md#getProjectEventsByCursor)                                    | **GET** /v1/projects/{projectUID}/events-cursor                                       |
-| _NotehubJs.FilesApi_                | [**handleNotefileChanges**](docs/FilesApi.md#handleNotefileChanges)                                          | **GET** /v1/projects/{projectUID}/devices/{deviceUID}/files/changes                   |
-| _NotehubJs.FilesApi_                | [**handleNotefileChangesPending**](docs/FilesApi.md#handleNotefileChangesPending)                            | **GET** /v1/projects/{projectUID}/devices/{deviceUID}/files/changes/pending           |
-| _NotehubJs.FilesApi_                | [**handleNotefileDelete**](docs/FilesApi.md#handleNotefileDelete)                                            | **DELETE** /v1/projects/{projectUID}/devices/{deviceUID}/files                        |
+| _NotehubJs.FirmwareApi_             | [**getFirmwareInfo**](docs/FirmwareApi.md#getFirmwareInfo)                                                   | **GET** /v1/projects/{projectUID}/firmware                                            |
 | _NotehubJs.FleetApi_                | [**createFleet**](docs/FleetApi.md#createFleet)                                                              | **POST** /v1/projects/{projectUID}/fleets                                             |
-| _NotehubJs.FleetApi_                | [**deleteDeviceFleets**](docs/FleetApi.md#deleteDeviceFleets)                                                | **DELETE** /v1/projects/{projectUID}/devices/{deviceUID}/fleets                       |
 | _NotehubJs.FleetApi_                | [**deleteFleet**](docs/FleetApi.md#deleteFleet)                                                              | **DELETE** /v1/projects/{projectUID}/fleets/{fleetUID}                                |
-| _NotehubJs.FleetApi_                | [**deleteFleetEnvironmentVariable**](docs/FleetApi.md#deleteFleetEnvironmentVariable)                        | **DELETE** /v1/projects/{projectUID}/fleets/{fleetUID}/environment_variables/{key}    |
 | _NotehubJs.FleetApi_                | [**getDeviceFleets**](docs/FleetApi.md#getDeviceFleets)                                                      | **GET** /v1/projects/{projectUID}/devices/{deviceUID}/fleets                          |
-| _NotehubJs.FleetApi_                | [**getFleetEnvironmentVariables**](docs/FleetApi.md#getFleetEnvironmentVariables)                            | **GET** /v1/projects/{projectUID}/fleets/{fleetUID}/environment_variables             |
-| _NotehubJs.FleetApi_                | [**getFleetEvents**](docs/FleetApi.md#getFleetEvents)                                                        | **GET** /v1/projects/{projectUID}/fleets/{fleetUID}/events                            |
-| _NotehubJs.FleetApi_                | [**getFleetEventsByCursor**](docs/FleetApi.md#getFleetEventsByCursor)                                        | **GET** /v1/projects/{projectUID}/fleets/{fleetUID}/events-cursor                     |
-| _NotehubJs.FleetApi_                | [**getProjectFleetDevices**](docs/FleetApi.md#getProjectFleetDevices)                                        | **GET** /v1/projects/{projectUID}/fleets/{fleetUID}/devices                           |
 | _NotehubJs.FleetApi_                | [**getProjectFleets**](docs/FleetApi.md#getProjectFleets)                                                    | **GET** /v1/projects/{projectUID}/fleets                                              |
 | _NotehubJs.FleetApi_                | [**putDeviceFleets**](docs/FleetApi.md#putDeviceFleets)                                                      | **PUT** /v1/projects/{projectUID}/devices/{deviceUID}/fleets                          |
-| _NotehubJs.FleetApi_                | [**putFleetEnvironmentVariables**](docs/FleetApi.md#putFleetEnvironmentVariables)                            | **PUT** /v1/projects/{projectUID}/fleets/{fleetUID}/environment_variables             |
 | _NotehubJs.FleetApi_                | [**updateFleet**](docs/FleetApi.md#updateFleet)                                                              | **PUT** /v1/projects/{projectUID}/fleets/{fleetUID}                                   |
-| _NotehubJs.NotesApi_                | [**handleNoteAdd**](docs/NotesApi.md#handleNoteAdd)                                                          | **POST** /v1/projects/{projectUID}/devices/{deviceUID}/notes/{notefileID}             |
-| _NotehubJs.NotesApi_                | [**handleNoteChanges**](docs/NotesApi.md#handleNoteChanges)                                                  | **GET** /v1/projects/{projectUID}/devices/{deviceUID}/notes/{notefileID}/changes      |
-| _NotehubJs.NotesApi_                | [**handleNoteCreateAdd**](docs/NotesApi.md#handleNoteCreateAdd)                                              | **POST** /v1/projects/{projectUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}    |
-| _NotehubJs.NotesApi_                | [**handleNoteDelete**](docs/NotesApi.md#handleNoteDelete)                                                    | **DELETE** /v1/projects/{projectUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}  |
-| _NotehubJs.NotesApi_                | [**handleNoteGet**](docs/NotesApi.md#handleNoteGet)                                                          | **GET** /v1/projects/{projectUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}     |
-| _NotehubJs.NotesApi_                | [**handleNoteUpdate**](docs/NotesApi.md#handleNoteUpdate)                                                    | **PUT** /v1/projects/{projectUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}     |
-| _NotehubJs.ProductApi_              | [**createProduct**](docs/ProductApi.md#createProduct)                                                        | **POST** /v1/projects/{projectUID}/products                                           |
-| _NotehubJs.ProductApi_              | [**getProjectByProduct**](docs/ProductApi.md#getProjectByProduct)                                            | **GET** /v1/products/{productUID}/project                                             |
-| _NotehubJs.ProductApi_              | [**getProjectProducts**](docs/ProductApi.md#getProjectProducts)                                              | **GET** /v1/projects/{projectUID}/products                                            |
+| _NotehubJs.MonitorApi_              | [**createMonitor**](docs/MonitorApi.md#createMonitor)                                                        | **POST** /v1/projects/{projectUID}/monitors                                           |
+| _NotehubJs.MonitorApi_              | [**deleteMonitor**](docs/MonitorApi.md#deleteMonitor)                                                        | **DELETE** /v1/projects/{projectUID}/monitors/{monitorUID}                            |
+| _NotehubJs.MonitorApi_              | [**getMonitor**](docs/MonitorApi.md#getMonitor)                                                              | **GET** /v1/projects/{projectUID}/monitors/{monitorUID}                               |
+| _NotehubJs.MonitorApi_              | [**getMonitors**](docs/MonitorApi.md#getMonitors)                                                            | **GET** /v1/projects/{projectUID}/monitors                                            |
+| _NotehubJs.MonitorApi_              | [**updateMonitor**](docs/MonitorApi.md#updateMonitor)                                                        | **PUT** /v1/projects/{projectUID}/monitors/{monitorUID}                               |
 | _NotehubJs.ProjectApi_              | [**cloneProject**](docs/ProjectApi.md#cloneProject)                                                          | **POST** /v1/projects/{projectUID}/clone                                              |
 | _NotehubJs.ProjectApi_              | [**createProduct**](docs/ProjectApi.md#createProduct)                                                        | **POST** /v1/projects/{projectUID}/products                                           |
 | _NotehubJs.ProjectApi_              | [**createProject**](docs/ProjectApi.md#createProject)                                                        | **POST** /v1/projects                                                                 |
 | _NotehubJs.ProjectApi_              | [**deleteProject**](docs/ProjectApi.md#deleteProject)                                                        | **DELETE** /v1/projects/{projectUID}                                                  |
-| _NotehubJs.ProjectApi_              | [**deleteProjectEnvironmentVariable**](docs/ProjectApi.md#deleteProjectEnvironmentVariable)                  | **DELETE** /v1/projects/{projectUID}/environment_variables/{key}                      |
 | _NotehubJs.ProjectApi_              | [**disableGlobalTransformation**](docs/ProjectApi.md#disableGlobalTransformation)                            | **POST** /v1/projects/{projectUID}/global-transformation/disable                      |
 | _NotehubJs.ProjectApi_              | [**enableGlobalTransformation**](docs/ProjectApi.md#enableGlobalTransformation)                              | **POST** /v1/projects/{projectUID}/global-transformation/enable                       |
 | _NotehubJs.ProjectApi_              | [**getProject**](docs/ProjectApi.md#getProject)                                                              | **GET** /v1/projects/{projectUID}                                                     |
 | _NotehubJs.ProjectApi_              | [**getProjectByProduct**](docs/ProjectApi.md#getProjectByProduct)                                            | **GET** /v1/products/{productUID}/project                                             |
-| _NotehubJs.ProjectApi_              | [**getProjectDevicePublicKeys**](docs/ProjectApi.md#getProjectDevicePublicKeys)                              | **GET** /v1/projects/{projectUID}/devices/public-keys                                 |
-| _NotehubJs.ProjectApi_              | [**getProjectDevices**](docs/ProjectApi.md#getProjectDevices)                                                | **GET** /v1/projects/{projectUID}/devices                                             |
-| _NotehubJs.ProjectApi_              | [**getProjectEnvironmentVariables**](docs/ProjectApi.md#getProjectEnvironmentVariables)                      | **GET** /v1/projects/{projectUID}/environment_variables                               |
-| _NotehubJs.ProjectApi_              | [**getProjectEvents**](docs/ProjectApi.md#getProjectEvents)                                                  | **GET** /v1/projects/{projectUID}/events                                              |
-| _NotehubJs.ProjectApi_              | [**getProjectEventsByCursor**](docs/ProjectApi.md#getProjectEventsByCursor)                                  | **GET** /v1/projects/{projectUID}/events-cursor                                       |
-| _NotehubJs.ProjectApi_              | [**getProjectFleetDevices**](docs/ProjectApi.md#getProjectFleetDevices)                                      | **GET** /v1/projects/{projectUID}/fleets/{fleetUID}/devices                           |
 | _NotehubJs.ProjectApi_              | [**getProjectMembers**](docs/ProjectApi.md#getProjectMembers)                                                | **GET** /v1/projects/{projectUID}/members                                             |
 | _NotehubJs.ProjectApi_              | [**getProjectProducts**](docs/ProjectApi.md#getProjectProducts)                                              | **GET** /v1/projects/{projectUID}/products                                            |
 | _NotehubJs.ProjectApi_              | [**getProjects**](docs/ProjectApi.md#getProjects)                                                            | **GET** /v1/projects                                                                  |
-| _NotehubJs.ProjectApi_              | [**postProvisionProjectDevice**](docs/ProjectApi.md#postProvisionProjectDevice)                              | **POST** /v1/projects/{projectUID}/devices/{deviceUID}/provision                      |
-| _NotehubJs.ProjectApi_              | [**putProjectEnvironmentVariables**](docs/ProjectApi.md#putProjectEnvironmentVariables)                      | **PUT** /v1/projects/{projectUID}/environment_variables                               |
 | _NotehubJs.ProjectApi_              | [**setGlobalTransformation**](docs/ProjectApi.md#setGlobalTransformation)                                    | **POST** /v1/projects/{projectUID}/global-transformation                              |
 | _NotehubJs.RouteApi_                | [**createRoute**](docs/RouteApi.md#createRoute)                                                              | **POST** /v1/projects/{projectUID}/routes                                             |
 | _NotehubJs.RouteApi_                | [**deleteRoute**](docs/RouteApi.md#deleteRoute)                                                              | **DELETE** /v1/projects/{projectUID}/routes/{routeUID}                                |
@@ -226,6 +206,7 @@ All URIs are relative to *https://api.notefile.net*
 - [NotehubJs.CloneProjectRequest](docs/CloneProjectRequest.md)
 - [NotehubJs.Contact](docs/Contact.md)
 - [NotehubJs.CreateFleetRequest](docs/CreateFleetRequest.md)
+- [NotehubJs.CreateMonitor](docs/CreateMonitor.md)
 - [NotehubJs.CreateProductRequest](docs/CreateProductRequest.md)
 - [NotehubJs.CreateProjectRequest](docs/CreateProjectRequest.md)
 - [NotehubJs.DFUEnv](docs/DFUEnv.md)
@@ -238,6 +219,7 @@ All URIs are relative to *https://api.notefile.net*
 - [NotehubJs.EnvironmentVariables](docs/EnvironmentVariables.md)
 - [NotehubJs.Error](docs/Error.md)
 - [NotehubJs.Event](docs/Event.md)
+- [NotehubJs.FirmwareInfo](docs/FirmwareInfo.md)
 - [NotehubJs.Fleet](docs/Fleet.md)
 - [NotehubJs.GetBillingAccounts200Response](docs/GetBillingAccounts200Response.md)
 - [NotehubJs.GetDeviceEnvironmentVariables200Response](docs/GetDeviceEnvironmentVariables200Response.md)
@@ -269,6 +251,9 @@ All URIs are relative to *https://api.notefile.net*
 - [NotehubJs.Location](docs/Location.md)
 - [NotehubJs.Login200Response](docs/Login200Response.md)
 - [NotehubJs.LoginRequest](docs/LoginRequest.md)
+- [NotehubJs.Monitor](docs/Monitor.md)
+- [NotehubJs.MonitorAlertRoutesInner](docs/MonitorAlertRoutesInner.md)
+- [NotehubJs.MonitorThresholds](docs/MonitorThresholds.md)
 - [NotehubJs.Mqtt](docs/Mqtt.md)
 - [NotehubJs.Note](docs/Note.md)
 - [NotehubJs.PostProvisionProjectDeviceRequest](docs/PostProvisionProjectDeviceRequest.md)
