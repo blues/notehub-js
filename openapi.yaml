@@ -53,7 +53,7 @@ tags:
 paths:
   /auth/login:
     post:
-      tags: [authorization]
+      tags: [ "authorization" ]
       operationId: login
       description: Gets a session token from the API from a username and
         password.
@@ -344,7 +344,7 @@ paths:
         - $ref: "#/components/parameters/startDateParam"
         - $ref: "#/components/parameters/endDateParam"
         - $ref: "#/components/parameters/systemFilesOnlyParam"
-        - $ref: "#/components/parameters/filesParam"
+        - $ref: "#/components/parameters/filesQueryParam"
       responses:
         "200":
           $ref: "#/components/responses/RouteLogsResponse"
@@ -353,7 +353,7 @@ paths:
 
   /v1/products/{productUID}/project:
     get:
-      tags: ["project", "product"]
+      tags: [ "project" ]
       operationId: getProjectByProduct
       description: Get a Project by ProductUID
       security:
@@ -543,7 +543,7 @@ paths:
       - $ref: "#/components/parameters/projectUIDParam"
 
     get:
-      tags: ["project", "product"]
+      tags: [ "project" ]
       operationId: getProjectProducts
       description: Get Products within a Project
       security:
@@ -564,7 +564,7 @@ paths:
           $ref: "#/components/responses/ErrorResponse"
 
     post:
-      tags: ["project", "product"]
+      tags: [ "project" ]
       operationId: createProduct
       description: Create Product within a Project
       security:
@@ -733,7 +733,7 @@ paths:
   # devices endpoints
   /v1/projects/{projectUID}/devices:
     get:
-      tags: ["project", "devices"]
+      tags: [ "devices" ]
       operationId: getProjectDevices
       description: Get Devices of a Project
       security:
@@ -764,7 +764,7 @@ paths:
 
   /v1/projects/{projectUID}/devices/{deviceUID}/provision:
     post:
-      tags: ["project", "devices"]
+      tags: [ "devices" ]
       operationId: postProvisionProjectDevice
       description: Provision Device for a Project
       security:
@@ -801,7 +801,7 @@ paths:
 
   /v1/projects/{projectUID}/fleets/{fleetUID}/devices:
     get:
-      tags: ["project", "fleet", "devices"]
+      tags: [ "devices" ]
       operationId: getProjectFleetDevices
       description: Get Devices of a Fleet within a Project
       security:
@@ -833,7 +833,7 @@ paths:
 
   /v1/projects/{projectUID}/devices/public-keys:
     get:
-      tags: ["project", "devices"]
+      tags: [ "devices" ]
       operationId: getProjectDevicePublicKeys
       description: Get Device Public Keys of a Project
       security:
@@ -917,7 +917,7 @@ paths:
       - $ref: "#/components/parameters/deviceUIDParam"
 
     get:
-      tags: ["device", "fleet"]
+      tags: [ "fleet" ]
       operationId: getDeviceFleets
       description: Get Device Fleets
       security:
@@ -929,7 +929,7 @@ paths:
           $ref: "#/components/responses/ErrorResponse"
 
     put:
-      tags: ["device", "fleet"]
+      tags: [ "fleet" ]
       operationId: putDeviceFleets
       description: Add Device to Fleets
       security:
@@ -962,7 +962,7 @@ paths:
           $ref: "#/components/responses/ErrorResponse"
 
     delete:
-      tags: ["device", "fleet"]
+      tags: [ "device" ]
       operationId: deleteDeviceFleets
       description: Remove Device from Fleets
       security:
@@ -1163,7 +1163,7 @@ paths:
 
   /v1/projects/{projectUID}/events:
     get:
-      tags: ["project", "event"]
+      tags: [ "event" ]
       operationId: getProjectEvents
       description: Get Events of a Project
       security:
@@ -1181,7 +1181,7 @@ paths:
         - $ref: "#/components/parameters/startDateParam"
         - $ref: "#/components/parameters/endDateParam"
         - $ref: "#/components/parameters/systemFilesOnlyParam"
-        - $ref: "#/components/parameters/filesParam"
+        - $ref: "#/components/parameters/filesQueryParam"
       responses:
         "200":
           $ref: "#/components/responses/EventsResponse"
@@ -1190,7 +1190,7 @@ paths:
 
   /v1/projects/{projectUID}/events-cursor:
     get:
-      tags: ["project", "event"]
+      tags: [ "event" ]
       operationId: getProjectEventsByCursor
       description: Get Events of a Project by cursor
       security:
@@ -1204,7 +1204,7 @@ paths:
         - $ref: "#/components/parameters/cursorParam"
         - $ref: "#/components/parameters/sortOrderParam"
         - $ref: "#/components/parameters/systemFilesOnlyParam"
-        - $ref: "#/components/parameters/filesParam"
+        - $ref: "#/components/parameters/filesQueryParam"
         - $ref: "#/components/parameters/fleetUIDQueryParam"
         - $ref: "#/components/parameters/deviceUIDParamQuery"
       responses:
@@ -1231,7 +1231,7 @@ paths:
 
   /v1/projects/{projectUID}/fleets/{fleetUID}/events:
     get:
-      tags: ["fleet", "event"]
+      tags: [ "event" ]
       operationId: getFleetEvents
       description: Get Events of a Fleet
       security:
@@ -1250,7 +1250,7 @@ paths:
         - $ref: "#/components/parameters/startDateParam"
         - $ref: "#/components/parameters/endDateParam"
         - $ref: "#/components/parameters/systemFilesOnlyParam"
-        - $ref: "#/components/parameters/filesParam"
+        - $ref: "#/components/parameters/filesQueryParam"
 
       responses:
         "200":
@@ -1260,7 +1260,7 @@ paths:
 
   /v1/projects/{projectUID}/fleets/{fleetUID}/events-cursor:
     get:
-      tags: ["fleet", "event"]
+      tags: [ "event" ]
       operationId: getFleetEventsByCursor
       description: Get Events of a Fleet by cursor
       security:
@@ -1275,7 +1275,7 @@ paths:
         - $ref: "#/components/parameters/cursorParam"
         - $ref: "#/components/parameters/sortOrderParam"
         - $ref: "#/components/parameters/systemFilesOnlyParam"
-        - $ref: "#/components/parameters/filesParam"
+        - $ref: "#/components/parameters/filesQueryParam"
         - $ref: "#/components/parameters/deviceUIDParamQuery"
         - $ref: "#/components/parameters/startDateParam"
         - $ref: "#/components/parameters/endDateParam"
@@ -1293,7 +1293,7 @@ paths:
 
     get:
       description: Get environment variables of a project
-      tags: ["project", "environment_variables"]
+      tags: [ "environment_variables" ]
       operationId: getProjectEnvironmentVariables
       security:
         - api_key: []
@@ -1305,7 +1305,7 @@ paths:
 
     put:
       description: Put environment variables of a project
-      tags: ["project", "environment_variables"]
+      tags: [ "environment_variables" ]
       operationId: putProjectEnvironmentVariables
       security:
         - api_key: []
@@ -1323,7 +1323,7 @@ paths:
   /v1/projects/{projectUID}/environment_variables/{key}:
     delete:
       description: Delete an environment variable of a project by key
-      tags: ["project", "environment_variables"]
+      tags: [ "environment_variables" ]
       operationId: deleteProjectEnvironmentVariable
       security:
         - api_key: []
@@ -1401,7 +1401,7 @@ paths:
 
     get:
       description: Get environment variables of a fleet
-      tags: ["fleet", "environment_variables"]
+      tags: [ "environment_variables" ]
       operationId: getFleetEnvironmentVariables
       security:
         - api_key: []
@@ -1412,7 +1412,7 @@ paths:
           $ref: "#/components/responses/ErrorResponse"
     put:
       description: Put environment variables of a fleet
-      tags: ["fleet", "environment_variables"]
+      tags: [ "environment_variables" ]
       operationId: putFleetEnvironmentVariables
       security:
         - api_key: []
@@ -1432,7 +1432,7 @@ paths:
   /v1/projects/{projectUID}/fleets/{fleetUID}/environment_variables/{key}:
     delete:
       description: Delete environment variables of a fleet
-      tags: ["fleet", "environment_variables"]
+      tags: [ "environment_variables" ]
       operationId: deleteFleetEnvironmentVariable
       security:
         - api_key: []
@@ -1458,7 +1458,7 @@ paths:
 
     get:
       description: Get environment variables of a device
-      tags: ["device", "environment_variables"]
+      tags: [ "environment_variables" ]
       operationId: getDeviceEnvironmentVariables
       security:
         - api_key: []
@@ -1470,7 +1470,7 @@ paths:
 
     put:
       description: Put environment variables of a device
-      tags: ["device", "environment_variables"]
+      tags: [ "environment_variables" ]
       operationId: putDeviceEnvironmentVariables
       security:
         - api_key: []
@@ -1490,7 +1490,7 @@ paths:
   /v1/projects/{projectUID}/devices/{deviceUID}/environment_variables/{key}:
     delete:
       description: Delete environment variable of a device
-      tags: ["device", "environment_variables"]
+      tags: [ "environment_variables" ]
       operationId: deleteDeviceEnvironmentVariable
       security:
         - api_key: []
@@ -1517,7 +1517,7 @@ paths:
     get:
       description: Get environment variables of a device with device pin
         authorization
-      tags: ["device", "environment_variables"]
+      tags: [ "environment_variables" ]
       operationId: getDeviceEnvironmentVariablesByPin
       security:
         - pin: []
@@ -1530,7 +1530,7 @@ paths:
     put:
       description: Put environment variables of a device with device pin
         authorization
-      tags: ["device", "environment_variables"]
+      tags: [ "environment_variables" ]
       operationId: putDeviceEnvironmentVariablesByPin
       security:
         - pin: []
@@ -1550,7 +1550,7 @@ paths:
   # note endpoints
   /v1/projects/{projectUID}/devices/{deviceUID}/notes/{notefileID}:
     post:
-      tags: ["notes"]
+      tags: [ "devices" ]
       operationId: HandleNoteAdd
       description: Adds a Note to a Notefile, creating the Notefile if it
         doesn't yet exist.
@@ -1575,7 +1575,7 @@ paths:
 
   /v1/projects/{projectUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}:
     post:
-      tags: ["notes"]
+      tags: [ "devices" ]
       operationId: HandleNoteCreateAdd
       description: Adds a Note to a Notefile, creating the Notefile if it
         doesn't yet exist.
@@ -1600,7 +1600,7 @@ paths:
           $ref: "#/components/responses/ErrorResponse"
 
     delete:
-      tags: ["notes"]
+      tags: [ "devices" ]
       operationId: HandleNoteDelete
       description: Delete a note from a DB notefile
       security:
@@ -1617,7 +1617,7 @@ paths:
           $ref: "#/components/responses/ErrorResponse"
 
     get:
-      tags: ["notes"]
+      tags: [ "devices" ]
       operationId: HandleNoteGet
       description: Get a note from a DB notefile
       security:
@@ -1660,7 +1660,7 @@ paths:
           $ref: "#/components/responses/ErrorResponse"
 
     put:
-      tags: ["notes"]
+      tags: [ "devices" ]
       operationId: HandleNoteUpdate
       description: Update a note in a DB notefile
       security:
@@ -1685,7 +1685,7 @@ paths:
 
   /v1/projects/{projectUID}/devices/{deviceUID}/notes/{notefileID}/changes:
     get:
-      tags: ["notes"]
+      tags: [ "devices" ]
       operationId: HandleNoteChanges
       description: Incrementally retrieve changes within a specific Notefile.
       security:
@@ -1752,7 +1752,7 @@ paths:
 
   /v1/projects/{projectUID}/devices/{deviceUID}/files/changes:
     get:
-      tags: ["files"]
+      tags: [ "devices" ]
       operationId: HandleNotefileChanges
       description: Used to perform queries on a single or multiple files to determine if new Notes are available to read
       security:
@@ -1796,7 +1796,7 @@ paths:
 
   /v1/projects/{projectUID}/devices/{deviceUID}/files/changes/pending:
     get:
-      tags: ["files"]
+      tags: [ "devices" ]
       operationId: HandleNotefileChangesPending
       description: Returns info about file changes that are pending upload to Notehub or download to the Notecard.
       security:
@@ -1829,7 +1829,7 @@ paths:
 
   /v1/projects/{projectUID}/devices/{deviceUID}/files:
     delete:
-      tags: ["files"]
+      tags: [ "devices" ]
       operationId: HandleNotefileDelete
       description: Deletes Notefiles and the Notes they contain.
       security:
@@ -1888,7 +1888,7 @@ paths:
 
   /v1/projects/{projectUID}/monitors:
     get:
-      tags: ["monitor", "project"]
+      tags: [ "monitor" ]
       operationId: getMonitors
       description: Get list of defined Monitors
       security:
@@ -1901,7 +1901,7 @@ paths:
         default:
           $ref: "#/components/responses/ErrorResponse"
     post:
-      tags: ["monitor", "project"]
+      tags: [ "monitor" ]
       operationId: createMonitor
       description: Create a new Monitor
       security:
@@ -1914,16 +1914,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Monitor"
+              $ref: "#/components/schemas/CreateMonitor"
       responses:
         "201":
-          $ref: "#/components/responses/MonitorsResponse"
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Monitor"
         default:
           $ref: "#/components/responses/ErrorResponse"
 
   /v1/projects/{projectUID}/monitors/{monitorUID}:
     get:
-      tags: ["monitor", "project"]
+      tags: [ "monitor" ]
       operationId: getMonitor
       description: Get Monitor
       security:
@@ -1941,7 +1945,7 @@ paths:
         default:
           $ref: "#/components/responses/ErrorResponse"
     put:
-      tags: ["monitor", "project"]
+      tags: [ "monitor" ]
       operationId: updateMonitor
       description: Update Monitor
       security:
@@ -1966,7 +1970,7 @@ paths:
         default:
           $ref: "#/components/responses/ErrorResponse"
     delete:
-      tags: ["monitor", "project"]
+      tags: [ "monitor" ]
       operationId: deleteMonitor
       description: Delete Monitor
       security:
@@ -1983,6 +1987,36 @@ paths:
                 $ref: "#/components/schemas/Monitor"
         default:
           $ref: "#/components/responses/ErrorResponse"
+  /v1/projects/{projectUID}/firmware:
+    get:
+      tags: [ "firmware" ]
+      operationId: getFirmwareInfo
+      description: Get Available Firmware Information
+      security:
+        - api_key: [ ]
+      parameters:
+        - $ref: "#/components/parameters/projectUIDParam"
+        - $ref: "#/components/parameters/productUIDQueryParam"
+        - $ref: "#/components/parameters/firmwareTypeQueryParam"
+        - $ref: "#/components/parameters/versionQueryParam"
+        - $ref: "#/components/parameters/targetQueryParam"
+        - $ref: "#/components/parameters/filenameQueryParam"
+        - $ref: "#/components/parameters/md5QueryParam"
+        - $ref: "#/components/parameters/unpublishedQueryParam"
+
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/FirmwareInfo"
+
+
+
+
 
 components:
   securitySchemes:
@@ -2184,13 +2218,63 @@ components:
       schema:
         type: string
 
-    filesParam:
+    filesQueryParam:
       name: files
       in: query
       required: false
       schema:
         type: string
       example: _health.qo, data.qo
+
+    filenameQueryParam:
+      name: filename
+      in: query
+      required: false
+      schema:
+        type: string
+      example: notecard-7.2.2.16518$20240410043100.bin
+
+    md5QueryParam:
+      name: md5
+      in: query
+      required: false
+      schema:
+        type: string
+
+    unpublishedQueryParam:
+      name: unpublished
+      in: query
+      required: false
+      schema:
+        type: boolean
+
+    versionQueryParam:
+      name: version
+      in: query
+      required: false
+      schema:
+        type: string
+
+    targetQueryParam:
+      name: target
+      in: query
+      required: false
+      schema:
+        type: string
+
+    firmwareTypeQueryParam:
+      name: firmwareType
+      in: query
+      required: false
+      schema:
+        type: string
+
+    productUIDQueryParam:
+      name: productUID
+      in: query
+      required: false
+      schema:
+        type: string
 
   responses:
     ErrorResponse:
@@ -4014,5 +4098,56 @@ components:
             | has been triggered. It follows the format of a number followed by a time unit.
           example: 10m or 5h30m40s
 
+    CreateMonitor:
+      allOf:
+        - $ref: "#/components/schemas/Monitor"
+        - required:
+            - name
+            - description
+            - notefile_filter
+            - alert_routes
+
+
     Empty:
       type: object
+
+    FirmwareInfo:
+      type: object
+      properties:
+        filename:
+          type: string
+          description: The name of the firmware file.
+        version:
+          type: string
+          description: The version of the firmware.
+        MD5:
+          type: string
+          description: The MD5 hash of the firmware file.
+        organization:
+          type: string
+          description: The organization that owns the firmware.
+        built:
+          type: string
+          description: The date the firmware was built.
+        product:
+          type: string
+          description: The product that the firmware is for.
+        description:
+          type: string
+          description: A description of the firmware.
+        tags:
+          type: string
+          description: A list of tags associated with the firmware.
+        type:
+          type: string
+          description: The type of firmware.
+        created:
+          type: string
+          description: The date the firmware was created.
+        target:
+          type: string
+          description: The target device for the firmware.
+        published:
+          type: boolean
+          description: True if the firmware is published.
+
