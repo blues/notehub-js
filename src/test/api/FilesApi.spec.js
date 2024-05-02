@@ -28,7 +28,7 @@
   var instance;
 
   beforeEach(function() {
-    instance = new NotehubJs.DevicesApi();
+    instance = new NotehubJs.FilesApi();
   });
 
   var getProperty = function(object, getter, property) {
@@ -47,51 +47,31 @@
       object[property] = value;
   }
 
-  describe('DevicesApi', function() {
-    describe('deleteProjectDevice', function() {
-      it('should call deleteProjectDevice successfully', function(done) {
-        //uncomment below and update the code to test deleteProjectDevice
-        //instance.deleteProjectDevice(function(error) {
+  describe('FilesApi', function() {
+    describe('handleNotefileChanges', function() {
+      it('should call handleNotefileChanges successfully', function(done) {
+        //uncomment below and update the code to test handleNotefileChanges
+        //instance.handleNotefileChanges(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});
         done();
       });
     });
-    describe('getDevice', function() {
-      it('should call getDevice successfully', function(done) {
-        //uncomment below and update the code to test getDevice
-        //instance.getDevice(function(error) {
+    describe('handleNotefileChangesPending', function() {
+      it('should call handleNotefileChangesPending successfully', function(done) {
+        //uncomment below and update the code to test handleNotefileChangesPending
+        //instance.handleNotefileChangesPending(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});
         done();
       });
     });
-    describe('getProjectDevicePublicKeys', function() {
-      it('should call getProjectDevicePublicKeys successfully', function(done) {
-        //uncomment below and update the code to test getProjectDevicePublicKeys
-        //instance.getProjectDevicePublicKeys(function(error) {
-        //  if (error) throw error;
-        //expect().to.be();
-        //});
-        done();
-      });
-    });
-    describe('getProjectDevices', function() {
-      it('should call getProjectDevices successfully', function(done) {
-        //uncomment below and update the code to test getProjectDevices
-        //instance.getProjectDevices(function(error) {
-        //  if (error) throw error;
-        //expect().to.be();
-        //});
-        done();
-      });
-    });
-    describe('getProjectFleetDevices', function() {
-      it('should call getProjectFleetDevices successfully', function(done) {
-        //uncomment below and update the code to test getProjectFleetDevices
-        //instance.getProjectFleetDevices(function(error) {
+    describe('handleNotefileDelete', function() {
+      it('should call handleNotefileDelete successfully', function(done) {
+        //uncomment below and update the code to test handleNotefileDelete
+        //instance.handleNotefileDelete(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});

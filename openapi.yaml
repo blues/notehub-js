@@ -25,30 +25,18 @@ servers:
 tags:
   - name: authorization
     description: Authorization operations
-  - name: route
-    description: Route operations
   - name: project
     description: Project operations
-  - name: product
-    description: Product operations
-  - name: fleet
-    description: Fleet operations
   - name: event
     description: Event retrieval operations
-  - name: devices
-    description: Multi device operations
   - name: device
-    description: Single device operations
-  - name: environment_variables
-    description: Operations on Environment Variables
+    description: Device operations
   - name: billing_account
     description: Billing Account operations
-  - name: notes
-    description: Management of notes in notefiles
-  - name: files
-    description: Management of notefiles
   - name: monitors
     description: Management of monitors
+  - name: route
+    description: Route operations
 
 paths:
   /auth/login:
@@ -328,7 +316,7 @@ paths:
 
   /v1/projects/{projectUID}/routes/{routeUID}/route-logs:
     get:
-      tags: ["route_logs"]
+      tags: [ "route" ]
       operationId: getRouteLogsByRoute
       description: Get Route Logs by Route UID
       security:
@@ -610,7 +598,7 @@ paths:
       - $ref: "#/components/parameters/projectUIDParam"
 
     get:
-      tags: ["fleet"]
+      tags: [ "project" ]
       operationId: getProjectFleets
       description: Get Project Fleets
       security:
@@ -622,7 +610,7 @@ paths:
           $ref: "#/components/responses/ErrorResponse"
 
     post:
-      tags: ["fleet"]
+      tags: [ "project" ]
       operationId: createFleet
       description: Create Fleet
       security:
@@ -655,7 +643,7 @@ paths:
       - $ref: "#/components/parameters/fleetUIDParam"
 
     put:
-      tags: ["fleet"]
+      tags: [ "project" ]
       operationId: updateFleet
       description: Update Fleet
       security:
@@ -692,7 +680,7 @@ paths:
           $ref: "#/components/responses/ErrorResponse"
 
     delete:
-      tags: ["fleet"]
+      tags: [ "project" ]
       operationId: deleteFleet
       description: Delete Fleet
       security:
@@ -733,7 +721,7 @@ paths:
   # devices endpoints
   /v1/projects/{projectUID}/devices:
     get:
-      tags: [ "devices" ]
+      tags: [ "device" ]
       operationId: getProjectDevices
       description: Get Devices of a Project
       security:
@@ -764,7 +752,7 @@ paths:
 
   /v1/projects/{projectUID}/devices/{deviceUID}/provision:
     post:
-      tags: [ "devices" ]
+      tags: [ "device" ]
       operationId: postProvisionProjectDevice
       description: Provision Device for a Project
       security:
@@ -801,7 +789,7 @@ paths:
 
   /v1/projects/{projectUID}/fleets/{fleetUID}/devices:
     get:
-      tags: [ "devices" ]
+      tags: [ "device" ]
       operationId: getProjectFleetDevices
       description: Get Devices of a Fleet within a Project
       security:
@@ -833,7 +821,7 @@ paths:
 
   /v1/projects/{projectUID}/devices/public-keys:
     get:
-      tags: [ "devices" ]
+      tags: [ "device" ]
       operationId: getProjectDevicePublicKeys
       description: Get Device Public Keys of a Project
       security:
@@ -873,7 +861,7 @@ paths:
       - $ref: "#/components/parameters/deviceUIDParam"
 
     get:
-      tags: ["devices"]
+      tags: [ "device" ]
       operationId: getDevice
       description: Get Device
       security:
@@ -889,7 +877,7 @@ paths:
           $ref: "#/components/responses/ErrorResponse"
 
     delete:
-      tags: ["devices"]
+      tags: [ "device" ]
       operationId: deleteProjectDevice
       description: Delete Device
       security:
@@ -917,7 +905,7 @@ paths:
       - $ref: "#/components/parameters/deviceUIDParam"
 
     get:
-      tags: [ "fleet" ]
+      tags: [ "project" ]
       operationId: getDeviceFleets
       description: Get Device Fleets
       security:
@@ -929,7 +917,7 @@ paths:
           $ref: "#/components/responses/ErrorResponse"
 
     put:
-      tags: [ "fleet" ]
+      tags: [ "project" ]
       operationId: putDeviceFleets
       description: Add Device to Fleets
       security:
@@ -962,7 +950,7 @@ paths:
           $ref: "#/components/responses/ErrorResponse"
 
     delete:
-      tags: [ "device" ]
+      tags: [ "project" ]
       operationId: deleteDeviceFleets
       description: Remove Device from Fleets
       security:
@@ -1215,7 +1203,7 @@ paths:
 
   /v1/projects/{projectUID}/events/{eventUID}/route-logs:
     get:
-      tags: ["route_logs"]
+      tags: [ "event" ]
       operationId: getRouteLogsByEvent
       description: Get Route Logs by Event UID
       security:
@@ -1293,7 +1281,7 @@ paths:
 
     get:
       description: Get environment variables of a project
-      tags: [ "environment_variables" ]
+      tags: [ "project" ]
       operationId: getProjectEnvironmentVariables
       security:
         - api_key: []
@@ -1305,7 +1293,7 @@ paths:
 
     put:
       description: Put environment variables of a project
-      tags: [ "environment_variables" ]
+      tags: [ "project" ]
       operationId: putProjectEnvironmentVariables
       security:
         - api_key: []
@@ -1323,7 +1311,7 @@ paths:
   /v1/projects/{projectUID}/environment_variables/{key}:
     delete:
       description: Delete an environment variable of a project by key
-      tags: [ "environment_variables" ]
+      tags: [ "project" ]
       operationId: deleteProjectEnvironmentVariable
       security:
         - api_key: []
@@ -1401,7 +1389,7 @@ paths:
 
     get:
       description: Get environment variables of a fleet
-      tags: [ "environment_variables" ]
+      tags: [ "project" ]
       operationId: getFleetEnvironmentVariables
       security:
         - api_key: []
@@ -1412,7 +1400,7 @@ paths:
           $ref: "#/components/responses/ErrorResponse"
     put:
       description: Put environment variables of a fleet
-      tags: [ "environment_variables" ]
+      tags: [ "project" ]
       operationId: putFleetEnvironmentVariables
       security:
         - api_key: []
@@ -1432,7 +1420,7 @@ paths:
   /v1/projects/{projectUID}/fleets/{fleetUID}/environment_variables/{key}:
     delete:
       description: Delete environment variables of a fleet
-      tags: [ "environment_variables" ]
+      tags: [ "project" ]
       operationId: deleteFleetEnvironmentVariable
       security:
         - api_key: []
@@ -1458,7 +1446,7 @@ paths:
 
     get:
       description: Get environment variables of a device
-      tags: [ "environment_variables" ]
+      tags: [ "device" ]
       operationId: getDeviceEnvironmentVariables
       security:
         - api_key: []
@@ -1470,7 +1458,7 @@ paths:
 
     put:
       description: Put environment variables of a device
-      tags: [ "environment_variables" ]
+      tags: [ "device" ]
       operationId: putDeviceEnvironmentVariables
       security:
         - api_key: []
@@ -1490,7 +1478,7 @@ paths:
   /v1/projects/{projectUID}/devices/{deviceUID}/environment_variables/{key}:
     delete:
       description: Delete environment variable of a device
-      tags: [ "environment_variables" ]
+      tags: [ "device" ]
       operationId: deleteDeviceEnvironmentVariable
       security:
         - api_key: []
@@ -1517,7 +1505,7 @@ paths:
     get:
       description: Get environment variables of a device with device pin
         authorization
-      tags: [ "environment_variables" ]
+      tags: [ "device" ]
       operationId: getDeviceEnvironmentVariablesByPin
       security:
         - pin: []
@@ -1530,7 +1518,7 @@ paths:
     put:
       description: Put environment variables of a device with device pin
         authorization
-      tags: [ "environment_variables" ]
+      tags: [ "device" ]
       operationId: putDeviceEnvironmentVariablesByPin
       security:
         - pin: []
@@ -1550,7 +1538,7 @@ paths:
   # note endpoints
   /v1/projects/{projectUID}/devices/{deviceUID}/notes/{notefileID}:
     post:
-      tags: [ "devices" ]
+      tags: [ "device" ]
       operationId: HandleNoteAdd
       description: Adds a Note to a Notefile, creating the Notefile if it
         doesn't yet exist.
@@ -1575,7 +1563,7 @@ paths:
 
   /v1/projects/{projectUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}:
     post:
-      tags: [ "devices" ]
+      tags: [ "device" ]
       operationId: HandleNoteCreateAdd
       description: Adds a Note to a Notefile, creating the Notefile if it
         doesn't yet exist.
@@ -1600,7 +1588,7 @@ paths:
           $ref: "#/components/responses/ErrorResponse"
 
     delete:
-      tags: [ "devices" ]
+      tags: [ "device" ]
       operationId: HandleNoteDelete
       description: Delete a note from a DB notefile
       security:
@@ -1617,7 +1605,7 @@ paths:
           $ref: "#/components/responses/ErrorResponse"
 
     get:
-      tags: [ "devices" ]
+      tags: [ "device" ]
       operationId: HandleNoteGet
       description: Get a note from a DB notefile
       security:
@@ -1660,7 +1648,7 @@ paths:
           $ref: "#/components/responses/ErrorResponse"
 
     put:
-      tags: [ "devices" ]
+      tags: [ "device" ]
       operationId: HandleNoteUpdate
       description: Update a note in a DB notefile
       security:
@@ -1685,7 +1673,7 @@ paths:
 
   /v1/projects/{projectUID}/devices/{deviceUID}/notes/{notefileID}/changes:
     get:
-      tags: [ "devices" ]
+      tags: [ "device" ]
       operationId: HandleNoteChanges
       description: Incrementally retrieve changes within a specific Notefile.
       security:
@@ -1752,7 +1740,7 @@ paths:
 
   /v1/projects/{projectUID}/devices/{deviceUID}/files/changes:
     get:
-      tags: [ "devices" ]
+      tags: [ "device" ]
       operationId: HandleNotefileChanges
       description: Used to perform queries on a single or multiple files to determine if new Notes are available to read
       security:
@@ -1796,7 +1784,7 @@ paths:
 
   /v1/projects/{projectUID}/devices/{deviceUID}/files/changes/pending:
     get:
-      tags: [ "devices" ]
+      tags: [ "device" ]
       operationId: HandleNotefileChangesPending
       description: Returns info about file changes that are pending upload to Notehub or download to the Notecard.
       security:
@@ -1829,7 +1817,7 @@ paths:
 
   /v1/projects/{projectUID}/devices/{deviceUID}/files:
     delete:
-      tags: [ "devices" ]
+      tags: [ "device" ]
       operationId: HandleNotefileDelete
       description: Deletes Notefiles and the Notes they contain.
       security:

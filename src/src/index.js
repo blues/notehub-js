@@ -20,7 +20,6 @@ import Body from "./model/Body";
 import CloneProjectRequest from "./model/CloneProjectRequest";
 import Contact from "./model/Contact";
 import CreateFleetRequest from "./model/CreateFleetRequest";
-import CreateMonitor from "./model/CreateMonitor";
 import CreateProductRequest from "./model/CreateProductRequest";
 import CreateProjectRequest from "./model/CreateProjectRequest";
 import DFUEnv from "./model/DFUEnv";
@@ -33,7 +32,6 @@ import DeviceUsage from "./model/DeviceUsage";
 import EnvironmentVariables from "./model/EnvironmentVariables";
 import Error from "./model/Error";
 import Event from "./model/Event";
-import FirmwareInfo from "./model/FirmwareInfo";
 import Fleet from "./model/Fleet";
 import GetBillingAccounts200Response from "./model/GetBillingAccounts200Response";
 import GetDeviceEnvironmentVariables200Response from "./model/GetDeviceEnvironmentVariables200Response";
@@ -65,9 +63,6 @@ import HttpTransform from "./model/HttpTransform";
 import Location from "./model/Location";
 import Login200Response from "./model/Login200Response";
 import LoginRequest from "./model/LoginRequest";
-import Monitor from "./model/Monitor";
-import MonitorAlertRoutesInner from "./model/MonitorAlertRoutesInner";
-import MonitorThresholds from "./model/MonitorThresholds";
 import Mqtt from "./model/Mqtt";
 import Note from "./model/Note";
 import PostProvisionProjectDeviceRequest from "./model/PostProvisionProjectDeviceRequest";
@@ -94,9 +89,10 @@ import DeviceApi from "./api/DeviceApi";
 import DevicesApi from "./api/DevicesApi";
 import EnvironmentVariablesApi from "./api/EnvironmentVariablesApi";
 import EventApi from "./api/EventApi";
-import FirmwareApi from "./api/FirmwareApi";
+import FilesApi from "./api/FilesApi";
 import FleetApi from "./api/FleetApi";
-import MonitorApi from "./api/MonitorApi";
+import NotesApi from "./api/NotesApi";
+import ProductApi from "./api/ProductApi";
 import ProjectApi from "./api/ProjectApi";
 import RouteApi from "./api/RouteApi";
 import RouteLogsApi from "./api/RouteLogsApi";
@@ -188,12 +184,6 @@ export {
   CreateFleetRequest,
 
   /**
-   * The CreateMonitor model constructor.
-   * @property {module:model/CreateMonitor}
-   */
-  CreateMonitor,
-
-  /**
    * The CreateProductRequest model constructor.
    * @property {module:model/CreateProductRequest}
    */
@@ -264,12 +254,6 @@ export {
    * @property {module:model/Event}
    */
   Event,
-
-  /**
-   * The FirmwareInfo model constructor.
-   * @property {module:model/FirmwareInfo}
-   */
-  FirmwareInfo,
 
   /**
    * The Fleet model constructor.
@@ -458,24 +442,6 @@ export {
   LoginRequest,
 
   /**
-   * The Monitor model constructor.
-   * @property {module:model/Monitor}
-   */
-  Monitor,
-
-  /**
-   * The MonitorAlertRoutesInner model constructor.
-   * @property {module:model/MonitorAlertRoutesInner}
-   */
-  MonitorAlertRoutesInner,
-
-  /**
-   * The MonitorThresholds model constructor.
-   * @property {module:model/MonitorThresholds}
-   */
-  MonitorThresholds,
-
-  /**
    * The Mqtt model constructor.
    * @property {module:model/Mqtt}
    */
@@ -632,10 +598,10 @@ export {
   EventApi,
 
   /**
-   * The FirmwareApi service constructor.
-   * @property {module:api/FirmwareApi}
+   * The FilesApi service constructor.
+   * @property {module:api/FilesApi}
    */
-  FirmwareApi,
+  FilesApi,
 
   /**
    * The FleetApi service constructor.
@@ -644,10 +610,16 @@ export {
   FleetApi,
 
   /**
-   * The MonitorApi service constructor.
-   * @property {module:api/MonitorApi}
+   * The NotesApi service constructor.
+   * @property {module:api/NotesApi}
    */
-  MonitorApi,
+  NotesApi,
+
+  /**
+   * The ProductApi service constructor.
+   * @property {module:api/ProductApi}
+   */
+  ProductApi,
 
   /**
    * The ProjectApi service constructor.

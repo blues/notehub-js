@@ -1,6 +1,6 @@
 /**
  * Notehub API
- * The OpenAPI definition for the Notehub.io API.
+ * The OpenAPI definition for the Notehub.io API. 
  *
  * The version of the OpenAPI document: 1.0.0
  * Contact: engineering@blues.io
@@ -11,97 +11,97 @@
  *
  */
 
-(function (root, factory) {
-  if (typeof define === "function" && define.amd) {
+(function(root, factory) {
+  if (typeof define === 'function' && define.amd) {
     // AMD.
-    define(["expect.js", process.cwd() + "/src/index"], factory);
-  } else if (typeof module === "object" && module.exports) {
+    define(['expect.js', process.cwd()+'/src/index'], factory);
+  } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    factory(require("expect.js"), require(process.cwd() + "/src/index"));
+    factory(require('expect.js'), require(process.cwd()+'/src/index'));
   } else {
     // Browser globals (root is window)
     factory(root.expect, root.NotehubJs);
   }
-})(this, function (expect, NotehubJs) {
-  "use strict";
+}(this, function(expect, NotehubJs) {
+  'use strict';
 
   var instance;
 
-  beforeEach(function () {
+  beforeEach(function() {
     instance = new NotehubJs.Azure();
   });
 
-  var getProperty = function (object, getter, property) {
+  var getProperty = function(object, getter, property) {
     // Use getter method if present; otherwise, get the property directly.
-    if (typeof object[getter] === "function") return object[getter]();
-    else return object[property];
-  };
+    if (typeof object[getter] === 'function')
+      return object[getter]();
+    else
+      return object[property];
+  }
 
-  var setProperty = function (object, setter, property, value) {
+  var setProperty = function(object, setter, property, value) {
     // Use setter method if present; otherwise, set the property directly.
-    if (typeof object[setter] === "function") object[setter](value);
-    else object[property] = value;
-  };
+    if (typeof object[setter] === 'function')
+      object[setter](value);
+    else
+      object[property] = value;
+  }
 
-  describe("Azure", function () {
-    it("should create an instance of Azure", function () {
+  describe('Azure', function() {
+    it('should create an instance of Azure', function() {
       // uncomment below and update the code to test Azure
       //var instance = new NotehubJs.Azure();
       //expect(instance).to.be.a(NotehubJs.Azure);
     });
 
-    it('should have the property fleets (base name: "fleets")', function () {
+    it('should have the property fleets (base name: "fleets")', function() {
       // uncomment below and update the code to test the property fleets
       //var instance = new NotehubJs.Azure();
       //expect(instance).to.be();
     });
 
-    it('should have the property filter (base name: "filter")', function () {
+    it('should have the property filter (base name: "filter")', function() {
       // uncomment below and update the code to test the property filter
       //var instance = new NotehubJs.Azure();
       //expect(instance).to.be();
     });
 
-    it('should have the property transform (base name: "transform")', function () {
+    it('should have the property transform (base name: "transform")', function() {
       // uncomment below and update the code to test the property transform
       //var instance = new NotehubJs.Azure();
       //expect(instance).to.be();
     });
 
-    it('should have the property throttleMs (base name: "throttle_ms")', function () {
+    it('should have the property throttleMs (base name: "throttle_ms")', function() {
       // uncomment below and update the code to test the property throttleMs
       //var instance = new NotehubJs.Azure();
       //expect(instance).to.be();
     });
 
-    it('should have the property url (base name: "url")', function () {
+    it('should have the property url (base name: "url")', function() {
       // uncomment below and update the code to test the property url
       //var instance = new NotehubJs.Azure();
       //expect(instance).to.be();
     });
 
-    it('should have the property timeout (base name: "timeout")', function () {
+    it('should have the property timeout (base name: "timeout")', function() {
       // uncomment below and update the code to test the property timeout
       //var instance = new NotehubJs.Azure();
       //expect(instance).to.be();
     });
 
-    it('should have the property functionsKeySecret (base name: "functions_key_secret")', function () {
-      // uncomment below and update the code to test the property functionsKeySecret
-      //var instance = new NotehubJs.Azure();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property sasPolicyName (base name: "sas_policy_name")', function () {
+    it('should have the property sasPolicyName (base name: "sas_policy_name")', function() {
       // uncomment below and update the code to test the property sasPolicyName
       //var instance = new NotehubJs.Azure();
       //expect(instance).to.be();
     });
 
-    it('should have the property sasPolicyKey (base name: "sas_policy_key")', function () {
+    it('should have the property sasPolicyKey (base name: "sas_policy_key")', function() {
       // uncomment below and update the code to test the property sasPolicyKey
       //var instance = new NotehubJs.Azure();
       //expect(instance).to.be();
     });
+
   });
-});
+
+}));

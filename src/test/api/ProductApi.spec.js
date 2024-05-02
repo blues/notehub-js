@@ -28,7 +28,7 @@
   var instance;
 
   beforeEach(function() {
-    instance = new NotehubJs.DevicesApi();
+    instance = new NotehubJs.ProductApi();
   });
 
   var getProperty = function(object, getter, property) {
@@ -47,51 +47,31 @@
       object[property] = value;
   }
 
-  describe('DevicesApi', function() {
-    describe('deleteProjectDevice', function() {
-      it('should call deleteProjectDevice successfully', function(done) {
-        //uncomment below and update the code to test deleteProjectDevice
-        //instance.deleteProjectDevice(function(error) {
+  describe('ProductApi', function() {
+    describe('createProduct', function() {
+      it('should call createProduct successfully', function(done) {
+        //uncomment below and update the code to test createProduct
+        //instance.createProduct(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});
         done();
       });
     });
-    describe('getDevice', function() {
-      it('should call getDevice successfully', function(done) {
-        //uncomment below and update the code to test getDevice
-        //instance.getDevice(function(error) {
+    describe('getProjectByProduct', function() {
+      it('should call getProjectByProduct successfully', function(done) {
+        //uncomment below and update the code to test getProjectByProduct
+        //instance.getProjectByProduct(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});
         done();
       });
     });
-    describe('getProjectDevicePublicKeys', function() {
-      it('should call getProjectDevicePublicKeys successfully', function(done) {
-        //uncomment below and update the code to test getProjectDevicePublicKeys
-        //instance.getProjectDevicePublicKeys(function(error) {
-        //  if (error) throw error;
-        //expect().to.be();
-        //});
-        done();
-      });
-    });
-    describe('getProjectDevices', function() {
-      it('should call getProjectDevices successfully', function(done) {
-        //uncomment below and update the code to test getProjectDevices
-        //instance.getProjectDevices(function(error) {
-        //  if (error) throw error;
-        //expect().to.be();
-        //});
-        done();
-      });
-    });
-    describe('getProjectFleetDevices', function() {
-      it('should call getProjectFleetDevices successfully', function(done) {
-        //uncomment below and update the code to test getProjectFleetDevices
-        //instance.getProjectFleetDevices(function(error) {
+    describe('getProjectProducts', function() {
+      it('should call getProjectProducts successfully', function(done) {
+        //uncomment below and update the code to test getProjectProducts
+        //instance.getProjectProducts(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});
