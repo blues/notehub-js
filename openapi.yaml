@@ -1975,6 +1975,24 @@ paths:
                 $ref: "#/components/schemas/Monitor"
         default:
           $ref: "#/components/responses/ErrorResponse"
+  
+  /v1/projects/{projectUID}/alerts:
+    get:
+      tags: [ "alert" ]
+      operationId: getAlerts
+      description: Get list of defined Alerts
+      security:
+        - api_key: []
+      parameters:
+        - $ref: "#/components/parameters/projectUIDParam"
+        - $ref: "#/components/parameters/pageSizeParam"
+        - $ref: "#/components/parameters/pageNumParam"
+      responses:
+        "200":
+          $ref: "#/components/responses/AlertsResponse"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+  
   /v1/projects/{projectUID}/firmware:
     get:
       tags: [ "firmware" ]
@@ -2633,6 +2651,25 @@ components:
               $ref: "#/components/schemas/Monitor"
             required:
               - monitors
+
+    AlertsResponse:
+      description: The response body from GET /alerts
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              alerts:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Alert"
+                description: The list of alerts
+              has_more:
+                type: boolean
+                description: True if there are more alerts
+            required:
+              - alerts
+              - has_more
 
   schemas:
     Error:
@@ -4095,7 +4132,6 @@ components:
             - notefile_filter
             - alert_routes
 
-
     Empty:
       type: object
 
@@ -4139,3 +4175,74 @@ components:
           type: boolean
           description: True if the firmware is published.
 
+    Alert:
+      type: object
+      properties:
+        uid:
+          type: string
+          description: Alert UID
+        monitor_uid:
+          type: string
+          description: Monitor UID  
+        device_uid:
+          type: string
+          description: Device UID
+        created_at:
+          type: integer
+          description: The time the alert was created
+        value:
+          type: number
+          description: The value that triggered the alert
+        resolved:
+          type: boolean
+          description: If true, the alert has been resolved
+        version:
+          type: integer
+          description: The version of the alert
+        alert_source:
+          type: string
+          enum: [app, device]
+          description: The source of the alert
+        source:
+          type: string
+          description: The UID of the source of the alert
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              alert_source:
+                type: string
+                enum: [app, device]
+                description: The source of the alert
+              source:
+                type: string
+                description: The UID of the source of the alert
+              source_type:
+                type: string
+                enum: [event]
+                description: The type of source.
+              value:
+                type: number
+                description: The value that triggered the alert
+              source_uid:
+                type: string
+                description: The UID of the source of the alert
+              when:
+                type: string
+                description: The time the alert was created
+        notifications:
+          type: array
+          items:
+            type: object
+            properties:
+              notification_type:
+                type: string
+                enum: [email, slack]
+                description: The type of notification
+              status:
+                type: number
+                description: The status of the notification
+              recipients:
+                type: string
+                description: The recipients of the notification
