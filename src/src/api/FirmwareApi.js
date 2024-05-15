@@ -17,7 +17,7 @@ import FirmwareInfo from "../model/FirmwareInfo";
 /**
  * Firmware service.
  * @module api/FirmwareApi
- * @version 1.0.19
+ * @version 1.0.20
  */
 export default class FirmwareApi {
   /**

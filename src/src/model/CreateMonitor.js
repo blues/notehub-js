@@ -19,7 +19,7 @@ import MonitorThresholds from "./MonitorThresholds";
 /**
  * The CreateMonitor model module.
  * @module model/CreateMonitor
- * @version 1.0.19
+ * @version 1.0.20
  */
 class CreateMonitor {
   /**

@@ -28,7 +28,7 @@ import Thingworx from "./Thingworx";
 /**
  * The RouteSchema model module.
  * @module model/RouteSchema
- * @version 1.0.19
+ * @version 1.0.20
  */
 class RouteSchema {
   /**

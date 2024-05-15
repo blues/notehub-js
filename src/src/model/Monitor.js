@@ -18,7 +18,7 @@ import MonitorThresholds from "./MonitorThresholds";
 /**
  * The Monitor model module.
  * @module model/Monitor
- * @version 1.0.19
+ * @version 1.0.20
  */
 class Monitor {
   /**
