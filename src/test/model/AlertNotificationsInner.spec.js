@@ -28,7 +28,7 @@
   var instance;
 
   beforeEach(function () {
-    instance = new NotehubJs.RouteLogsApi();
+    instance = new NotehubJs.AlertNotificationsInner();
   });
 
   var getProperty = function (object, getter, property) {
@@ -43,26 +43,29 @@
     else object[property] = value;
   };
 
-  describe("RouteLogsApi", function () {
-    describe("getRouteLogsByEvent", function () {
-      it("should call getRouteLogsByEvent successfully", function (done) {
-        //uncomment below and update the code to test getRouteLogsByEvent
-        //instance.getRouteLogsByEvent(function(error) {
-        //  if (error) throw error;
-        //expect().to.be();
-        //});
-        done();
-      });
+  describe("AlertNotificationsInner", function () {
+    it("should create an instance of AlertNotificationsInner", function () {
+      // uncomment below and update the code to test AlertNotificationsInner
+      //var instance = new NotehubJs.AlertNotificationsInner();
+      //expect(instance).to.be.a(NotehubJs.AlertNotificationsInner);
     });
-    describe("getRouteLogsByRoute", function () {
-      it("should call getRouteLogsByRoute successfully", function (done) {
-        //uncomment below and update the code to test getRouteLogsByRoute
-        //instance.getRouteLogsByRoute(function(error) {
-        //  if (error) throw error;
-        //expect().to.be();
-        //});
-        done();
-      });
+
+    it('should have the property notificationType (base name: "notification_type")', function () {
+      // uncomment below and update the code to test the property notificationType
+      //var instance = new NotehubJs.AlertNotificationsInner();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property status (base name: "status")', function () {
+      // uncomment below and update the code to test the property status
+      //var instance = new NotehubJs.AlertNotificationsInner();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property recipients (base name: "recipients")', function () {
+      // uncomment below and update the code to test the property recipients
+      //var instance = new NotehubJs.AlertNotificationsInner();
+      //expect(instance).to.be();
     });
   });
 });

@@ -8,6 +8,7 @@ All URIs are relative to *https://api.notefile.net*
 | [**getFleetEventsByCursor**](EventApi.md#getFleetEventsByCursor)     | **GET** /v1/projects/{projectUID}/fleets/{fleetUID}/events-cursor |
 | [**getProjectEvents**](EventApi.md#getProjectEvents)                 | **GET** /v1/projects/{projectUID}/events                          |
 | [**getProjectEventsByCursor**](EventApi.md#getProjectEventsByCursor) | **GET** /v1/projects/{projectUID}/events-cursor                   |
+| [**getRouteLogsByEvent**](EventApi.md#getRouteLogsByEvent)           | **GET** /v1/projects/{projectUID}/events/{eventUID}/route-logs    |
 
 ## getFleetEvents
 
@@ -253,6 +254,52 @@ apiInstance.getProjectEventsByCursor(projectUID, opts).then((data) => {
 ### Return type
 
 [**GetProjectEventsByCursor200Response**](GetProjectEventsByCursor200Response.md)
+
+### Authorization
+
+[api_key](../README.md#api_key)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+## getRouteLogsByEvent
+
+> [GetRouteLogsByRoute200ResponseInner] getRouteLogsByEvent(projectUID, eventUID)
+
+Get Route Logs by Event UID
+
+### Example
+
+```javascript
+import * as NotehubJs from '@blues-inc/notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
+// Configure API key authorization: api_key
+let api_key = defaultClient.authentications['api_key'];
+api_key.apiKey = 'YOUR API KEY';
+
+let apiInstance = new NotehubJs.EventApi();
+let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let eventUID = 4506f411-dea6-44a0-9743-1130f57d7747; // String |
+apiInstance.getRouteLogsByEvent(projectUID, eventUID).then((data) => {
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
+}, (error) => {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+| Name           | Type       | Description | Notes |
+| -------------- | ---------- | ----------- | ----- |
+| **projectUID** | **String** |             |
+| **eventUID**   | **String** |             |
+
+### Return type
+
+[**[GetRouteLogsByRoute200ResponseInner]**](GetRouteLogsByRoute200ResponseInner.md)
 
 ### Authorization
 

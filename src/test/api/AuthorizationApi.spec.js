@@ -42,4 +42,17 @@
     if (typeof object[setter] === "function") object[setter](value);
     else object[property] = value;
   };
+
+  describe("AuthorizationApi", function () {
+    describe("login", function () {
+      it("should call login successfully", function (done) {
+        //uncomment below and update the code to test login
+        //instance.login(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
+  });
 });

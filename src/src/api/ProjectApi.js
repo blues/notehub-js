@@ -13,20 +13,21 @@
 
 import ApiClient from "../ApiClient";
 import CloneProjectRequest from "../model/CloneProjectRequest";
+import CreateFleetRequest from "../model/CreateFleetRequest";
 import CreateProductRequest from "../model/CreateProductRequest";
 import CreateProjectRequest from "../model/CreateProjectRequest";
+import DeleteDeviceFleetsRequest from "../model/DeleteDeviceFleetsRequest";
 import EnvironmentVariables from "../model/EnvironmentVariables";
 import Error from "../model/Error";
-import GetProjectDevicePublicKeys200Response from "../model/GetProjectDevicePublicKeys200Response";
-import GetProjectDevices200Response from "../model/GetProjectDevices200Response";
-import GetProjectEvents200Response from "../model/GetProjectEvents200Response";
-import GetProjectEventsByCursor200Response from "../model/GetProjectEventsByCursor200Response";
+import Fleet from "../model/Fleet";
+import GetProjectFleets200Response from "../model/GetProjectFleets200Response";
 import GetProjectMembers200Response from "../model/GetProjectMembers200Response";
 import GetProjectProducts200Response from "../model/GetProjectProducts200Response";
 import GetProjects200Response from "../model/GetProjects200Response";
-import PostProvisionProjectDeviceRequest from "../model/PostProvisionProjectDeviceRequest";
 import Product from "../model/Product";
 import Project from "../model/Project";
+import PutDeviceFleetsRequest from "../model/PutDeviceFleetsRequest";
+import UpdateFleetRequest from "../model/UpdateFleetRequest";
 
 /**
  * Project service.
@@ -101,6 +102,68 @@ export default class ProjectApi {
    */
   cloneProject(projectUID, cloneProjectRequest) {
     return this.cloneProjectWithHttpInfo(projectUID, cloneProjectRequest).then(
+      function (response_and_data) {
+        return response_and_data.data;
+      }
+    );
+  }
+
+  /**
+   * Create Fleet
+   * @param {String} projectUID
+   * @param {module:model/CreateFleetRequest} createFleetRequest Fleet to be added
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Fleet} and HTTP response
+   */
+  createFleetWithHttpInfo(projectUID, createFleetRequest) {
+    let postBody = createFleetRequest;
+    // verify the required parameter 'projectUID' is set
+    if (projectUID === undefined || projectUID === null) {
+      throw new Error(
+        "Missing the required parameter 'projectUID' when calling createFleet"
+      );
+    }
+    // verify the required parameter 'createFleetRequest' is set
+    if (createFleetRequest === undefined || createFleetRequest === null) {
+      throw new Error(
+        "Missing the required parameter 'createFleetRequest' when calling createFleet"
+      );
+    }
+
+    let pathParams = {
+      projectUID: projectUID,
+    };
+    let queryParams = {};
+    let headerParams = {};
+    let formParams = {};
+
+    let authNames = ["api_key"];
+    let contentTypes = ["application/json"];
+    let accepts = ["application/json"];
+    let returnType = Fleet;
+    return this.apiClient.callApi(
+      "/v1/projects/{projectUID}/fleets",
+      "POST",
+      pathParams,
+      queryParams,
+      headerParams,
+      formParams,
+      postBody,
+      authNames,
+      contentTypes,
+      accepts,
+      returnType,
+      null
+    );
+  }
+
+  /**
+   * Create Fleet
+   * @param {String} projectUID
+   * @param {module:model/CreateFleetRequest} createFleetRequest Fleet to be added
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Fleet}
+   */
+  createFleet(projectUID, createFleetRequest) {
+    return this.createFleetWithHttpInfo(projectUID, createFleetRequest).then(
       function (response_and_data) {
         return response_and_data.data;
       }
@@ -218,6 +281,223 @@ export default class ProjectApi {
     return this.createProjectWithHttpInfo(createProjectRequest).then(function (
       response_and_data
     ) {
+      return response_and_data.data;
+    });
+  }
+
+  /**
+   * Remove Device from Fleets
+   * @param {String} projectUID
+   * @param {String} deviceUID
+   * @param {module:model/DeleteDeviceFleetsRequest} deleteDeviceFleetsRequest The fleets to remove from the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error.
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetProjectFleets200Response} and HTTP response
+   */
+  deleteDeviceFleetsWithHttpInfo(
+    projectUID,
+    deviceUID,
+    deleteDeviceFleetsRequest
+  ) {
+    let postBody = deleteDeviceFleetsRequest;
+    // verify the required parameter 'projectUID' is set
+    if (projectUID === undefined || projectUID === null) {
+      throw new Error(
+        "Missing the required parameter 'projectUID' when calling deleteDeviceFleets"
+      );
+    }
+    // verify the required parameter 'deviceUID' is set
+    if (deviceUID === undefined || deviceUID === null) {
+      throw new Error(
+        "Missing the required parameter 'deviceUID' when calling deleteDeviceFleets"
+      );
+    }
+    // verify the required parameter 'deleteDeviceFleetsRequest' is set
+    if (
+      deleteDeviceFleetsRequest === undefined ||
+      deleteDeviceFleetsRequest === null
+    ) {
+      throw new Error(
+        "Missing the required parameter 'deleteDeviceFleetsRequest' when calling deleteDeviceFleets"
+      );
+    }
+
+    let pathParams = {
+      projectUID: projectUID,
+      deviceUID: deviceUID,
+    };
+    let queryParams = {};
+    let headerParams = {};
+    let formParams = {};
+
+    let authNames = ["api_key"];
+    let contentTypes = ["application/json"];
+    let accepts = ["application/json"];
+    let returnType = GetProjectFleets200Response;
+    return this.apiClient.callApi(
+      "/v1/projects/{projectUID}/devices/{deviceUID}/fleets",
+      "DELETE",
+      pathParams,
+      queryParams,
+      headerParams,
+      formParams,
+      postBody,
+      authNames,
+      contentTypes,
+      accepts,
+      returnType,
+      null
+    );
+  }
+
+  /**
+   * Remove Device from Fleets
+   * @param {String} projectUID
+   * @param {String} deviceUID
+   * @param {module:model/DeleteDeviceFleetsRequest} deleteDeviceFleetsRequest The fleets to remove from the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error.
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetProjectFleets200Response}
+   */
+  deleteDeviceFleets(projectUID, deviceUID, deleteDeviceFleetsRequest) {
+    return this.deleteDeviceFleetsWithHttpInfo(
+      projectUID,
+      deviceUID,
+      deleteDeviceFleetsRequest
+    ).then(function (response_and_data) {
+      return response_and_data.data;
+    });
+  }
+
+  /**
+   * Delete Fleet
+   * @param {String} projectUID
+   * @param {String} fleetUID
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
+   */
+  deleteFleetWithHttpInfo(projectUID, fleetUID) {
+    let postBody = null;
+    // verify the required parameter 'projectUID' is set
+    if (projectUID === undefined || projectUID === null) {
+      throw new Error(
+        "Missing the required parameter 'projectUID' when calling deleteFleet"
+      );
+    }
+    // verify the required parameter 'fleetUID' is set
+    if (fleetUID === undefined || fleetUID === null) {
+      throw new Error(
+        "Missing the required parameter 'fleetUID' when calling deleteFleet"
+      );
+    }
+
+    let pathParams = {
+      projectUID: projectUID,
+      fleetUID: fleetUID,
+    };
+    let queryParams = {};
+    let headerParams = {};
+    let formParams = {};
+
+    let authNames = ["api_key"];
+    let contentTypes = [];
+    let accepts = ["application/json"];
+    let returnType = null;
+    return this.apiClient.callApi(
+      "/v1/projects/{projectUID}/fleets/{fleetUID}",
+      "DELETE",
+      pathParams,
+      queryParams,
+      headerParams,
+      formParams,
+      postBody,
+      authNames,
+      contentTypes,
+      accepts,
+      returnType,
+      null
+    );
+  }
+
+  /**
+   * Delete Fleet
+   * @param {String} projectUID
+   * @param {String} fleetUID
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}
+   */
+  deleteFleet(projectUID, fleetUID) {
+    return this.deleteFleetWithHttpInfo(projectUID, fleetUID).then(function (
+      response_and_data
+    ) {
+      return response_and_data.data;
+    });
+  }
+
+  /**
+   * Delete environment variables of a fleet
+   * @param {String} projectUID
+   * @param {String} fleetUID
+   * @param {String} key The environment variable key to delete.
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/EnvironmentVariables} and HTTP response
+   */
+  deleteFleetEnvironmentVariableWithHttpInfo(projectUID, fleetUID, key) {
+    let postBody = null;
+    // verify the required parameter 'projectUID' is set
+    if (projectUID === undefined || projectUID === null) {
+      throw new Error(
+        "Missing the required parameter 'projectUID' when calling deleteFleetEnvironmentVariable"
+      );
+    }
+    // verify the required parameter 'fleetUID' is set
+    if (fleetUID === undefined || fleetUID === null) {
+      throw new Error(
+        "Missing the required parameter 'fleetUID' when calling deleteFleetEnvironmentVariable"
+      );
+    }
+    // verify the required parameter 'key' is set
+    if (key === undefined || key === null) {
+      throw new Error(
+        "Missing the required parameter 'key' when calling deleteFleetEnvironmentVariable"
+      );
+    }
+
+    let pathParams = {
+      projectUID: projectUID,
+      fleetUID: fleetUID,
+      key: key,
+    };
+    let queryParams = {};
+    let headerParams = {};
+    let formParams = {};
+
+    let authNames = ["api_key"];
+    let contentTypes = [];
+    let accepts = ["application/json"];
+    let returnType = EnvironmentVariables;
+    return this.apiClient.callApi(
+      "/v1/projects/{projectUID}/fleets/{fleetUID}/environment_variables/{key}",
+      "DELETE",
+      pathParams,
+      queryParams,
+      headerParams,
+      formParams,
+      postBody,
+      authNames,
+      contentTypes,
+      accepts,
+      returnType,
+      null
+    );
+  }
+
+  /**
+   * Delete environment variables of a fleet
+   * @param {String} projectUID
+   * @param {String} fleetUID
+   * @param {String} key The environment variable key to delete.
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/EnvironmentVariables}
+   */
+  deleteFleetEnvironmentVariable(projectUID, fleetUID, key) {
+    return this.deleteFleetEnvironmentVariableWithHttpInfo(
+      projectUID,
+      fleetUID,
+      key
+    ).then(function (response_and_data) {
       return response_and_data.data;
     });
   }
@@ -449,6 +729,133 @@ export default class ProjectApi {
   }
 
   /**
+   * Get Device Fleets
+   * @param {String} projectUID
+   * @param {String} deviceUID
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetProjectFleets200Response} and HTTP response
+   */
+  getDeviceFleetsWithHttpInfo(projectUID, deviceUID) {
+    let postBody = null;
+    // verify the required parameter 'projectUID' is set
+    if (projectUID === undefined || projectUID === null) {
+      throw new Error(
+        "Missing the required parameter 'projectUID' when calling getDeviceFleets"
+      );
+    }
+    // verify the required parameter 'deviceUID' is set
+    if (deviceUID === undefined || deviceUID === null) {
+      throw new Error(
+        "Missing the required parameter 'deviceUID' when calling getDeviceFleets"
+      );
+    }
+
+    let pathParams = {
+      projectUID: projectUID,
+      deviceUID: deviceUID,
+    };
+    let queryParams = {};
+    let headerParams = {};
+    let formParams = {};
+
+    let authNames = ["api_key"];
+    let contentTypes = [];
+    let accepts = ["application/json"];
+    let returnType = GetProjectFleets200Response;
+    return this.apiClient.callApi(
+      "/v1/projects/{projectUID}/devices/{deviceUID}/fleets",
+      "GET",
+      pathParams,
+      queryParams,
+      headerParams,
+      formParams,
+      postBody,
+      authNames,
+      contentTypes,
+      accepts,
+      returnType,
+      null
+    );
+  }
+
+  /**
+   * Get Device Fleets
+   * @param {String} projectUID
+   * @param {String} deviceUID
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetProjectFleets200Response}
+   */
+  getDeviceFleets(projectUID, deviceUID) {
+    return this.getDeviceFleetsWithHttpInfo(projectUID, deviceUID).then(
+      function (response_and_data) {
+        return response_and_data.data;
+      }
+    );
+  }
+
+  /**
+   * Get environment variables of a fleet
+   * @param {String} projectUID
+   * @param {String} fleetUID
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/EnvironmentVariables} and HTTP response
+   */
+  getFleetEnvironmentVariablesWithHttpInfo(projectUID, fleetUID) {
+    let postBody = null;
+    // verify the required parameter 'projectUID' is set
+    if (projectUID === undefined || projectUID === null) {
+      throw new Error(
+        "Missing the required parameter 'projectUID' when calling getFleetEnvironmentVariables"
+      );
+    }
+    // verify the required parameter 'fleetUID' is set
+    if (fleetUID === undefined || fleetUID === null) {
+      throw new Error(
+        "Missing the required parameter 'fleetUID' when calling getFleetEnvironmentVariables"
+      );
+    }
+
+    let pathParams = {
+      projectUID: projectUID,
+      fleetUID: fleetUID,
+    };
+    let queryParams = {};
+    let headerParams = {};
+    let formParams = {};
+
+    let authNames = ["api_key"];
+    let contentTypes = [];
+    let accepts = ["application/json"];
+    let returnType = EnvironmentVariables;
+    return this.apiClient.callApi(
+      "/v1/projects/{projectUID}/fleets/{fleetUID}/environment_variables",
+      "GET",
+      pathParams,
+      queryParams,
+      headerParams,
+      formParams,
+      postBody,
+      authNames,
+      contentTypes,
+      accepts,
+      returnType,
+      null
+    );
+  }
+
+  /**
+   * Get environment variables of a fleet
+   * @param {String} projectUID
+   * @param {String} fleetUID
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/EnvironmentVariables}
+   */
+  getFleetEnvironmentVariables(projectUID, fleetUID) {
+    return this.getFleetEnvironmentVariablesWithHttpInfo(
+      projectUID,
+      fleetUID
+    ).then(function (response_and_data) {
+      return response_and_data.data;
+    });
+  }
+
+  /**
    * Get a Project by ProjectUID
    * @param {String} projectUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Project} and HTTP response
@@ -557,134 +964,6 @@ export default class ProjectApi {
   }
 
   /**
-   * Get Device Public Keys of a Project
-   * @param {String} projectUID
-   * @param {Object} opts Optional parameters
-   * @param {Number} opts.pageSize  (default to 50)
-   * @param {Number} opts.pageNum  (default to 1)
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetProjectDevicePublicKeys200Response} and HTTP response
-   */
-  getProjectDevicePublicKeysWithHttpInfo(projectUID, opts) {
-    opts = opts || {};
-    let postBody = null;
-    // verify the required parameter 'projectUID' is set
-    if (projectUID === undefined || projectUID === null) {
-      throw new Error(
-        "Missing the required parameter 'projectUID' when calling getProjectDevicePublicKeys"
-      );
-    }
-
-    let pathParams = {
-      projectUID: projectUID,
-    };
-    let queryParams = {
-      pageSize: opts["pageSize"],
-      pageNum: opts["pageNum"],
-    };
-    let headerParams = {};
-    let formParams = {};
-
-    let authNames = ["api_key"];
-    let contentTypes = [];
-    let accepts = ["application/json"];
-    let returnType = GetProjectDevicePublicKeys200Response;
-    return this.apiClient.callApi(
-      "/v1/projects/{projectUID}/devices/public-keys",
-      "GET",
-      pathParams,
-      queryParams,
-      headerParams,
-      formParams,
-      postBody,
-      authNames,
-      contentTypes,
-      accepts,
-      returnType,
-      null
-    );
-  }
-
-  /**
-   * Get Device Public Keys of a Project
-   * @param {String} projectUID
-   * @param {Object} opts Optional parameters
-   * @param {Number} opts.pageSize  (default to 50)
-   * @param {Number} opts.pageNum  (default to 1)
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetProjectDevicePublicKeys200Response}
-   */
-  getProjectDevicePublicKeys(projectUID, opts) {
-    return this.getProjectDevicePublicKeysWithHttpInfo(projectUID, opts).then(
-      function (response_and_data) {
-        return response_and_data.data;
-      }
-    );
-  }
-
-  /**
-   * Get Devices of a Project
-   * @param {String} projectUID
-   * @param {Object} opts Optional parameters
-   * @param {Number} opts.pageSize  (default to 50)
-   * @param {Number} opts.pageNum  (default to 1)
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetProjectDevices200Response} and HTTP response
-   */
-  getProjectDevicesWithHttpInfo(projectUID, opts) {
-    opts = opts || {};
-    let postBody = null;
-    // verify the required parameter 'projectUID' is set
-    if (projectUID === undefined || projectUID === null) {
-      throw new Error(
-        "Missing the required parameter 'projectUID' when calling getProjectDevices"
-      );
-    }
-
-    let pathParams = {
-      projectUID: projectUID,
-    };
-    let queryParams = {
-      pageSize: opts["pageSize"],
-      pageNum: opts["pageNum"],
-    };
-    let headerParams = {};
-    let formParams = {};
-
-    let authNames = ["api_key"];
-    let contentTypes = [];
-    let accepts = ["application/json"];
-    let returnType = GetProjectDevices200Response;
-    return this.apiClient.callApi(
-      "/v1/projects/{projectUID}/devices",
-      "GET",
-      pathParams,
-      queryParams,
-      headerParams,
-      formParams,
-      postBody,
-      authNames,
-      contentTypes,
-      accepts,
-      returnType,
-      null
-    );
-  }
-
-  /**
-   * Get Devices of a Project
-   * @param {String} projectUID
-   * @param {Object} opts Optional parameters
-   * @param {Number} opts.pageSize  (default to 50)
-   * @param {Number} opts.pageNum  (default to 1)
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetProjectDevices200Response}
-   */
-  getProjectDevices(projectUID, opts) {
-    return this.getProjectDevicesWithHttpInfo(projectUID, opts).then(function (
-      response_and_data
-    ) {
-      return response_and_data.data;
-    });
-  }
-
-  /**
    * Get environment variables of a project
    * @param {String} projectUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/EnvironmentVariables} and HTTP response
@@ -739,53 +1018,32 @@ export default class ProjectApi {
   }
 
   /**
-   * Get Events of a Project
+   * Get Project Fleets
    * @param {String} projectUID
-   * @param {Object} opts Optional parameters
-   * @param {Number} opts.pageSize  (default to 50)
-   * @param {Number} opts.pageNum  (default to 1)
-   * @param {String} opts.deviceUID A Device UID.
-   * @param {module:model/String} opts.sortBy  (default to 'captured')
-   * @param {module:model/String} opts.sortOrder  (default to 'asc')
-   * @param {Number} opts.startDate Unix timestamp
-   * @param {Number} opts.endDate Unix timestamp
-   * @param {Boolean} opts.systemFilesOnly
-   * @param {String} opts.files
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetProjectEvents200Response} and HTTP response
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetProjectFleets200Response} and HTTP response
    */
-  getProjectEventsWithHttpInfo(projectUID, opts) {
-    opts = opts || {};
+  getProjectFleetsWithHttpInfo(projectUID) {
     let postBody = null;
     // verify the required parameter 'projectUID' is set
     if (projectUID === undefined || projectUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectUID' when calling getProjectEvents"
+        "Missing the required parameter 'projectUID' when calling getProjectFleets"
       );
     }
 
     let pathParams = {
       projectUID: projectUID,
     };
-    let queryParams = {
-      pageSize: opts["pageSize"],
-      pageNum: opts["pageNum"],
-      deviceUID: opts["deviceUID"],
-      sortBy: opts["sortBy"],
-      sortOrder: opts["sortOrder"],
-      startDate: opts["startDate"],
-      endDate: opts["endDate"],
-      systemFilesOnly: opts["systemFilesOnly"],
-      files: opts["files"],
-    };
+    let queryParams = {};
     let headerParams = {};
     let formParams = {};
 
     let authNames = ["api_key"];
     let contentTypes = [];
     let accepts = ["application/json"];
-    let returnType = GetProjectEvents200Response;
+    let returnType = GetProjectFleets200Response;
     return this.apiClient.callApi(
-      "/v1/projects/{projectUID}/events",
+      "/v1/projects/{projectUID}/fleets",
       "GET",
       pathParams,
       queryParams,
@@ -801,178 +1059,14 @@ export default class ProjectApi {
   }
 
   /**
-   * Get Events of a Project
+   * Get Project Fleets
    * @param {String} projectUID
-   * @param {Object} opts Optional parameters
-   * @param {Number} opts.pageSize  (default to 50)
-   * @param {Number} opts.pageNum  (default to 1)
-   * @param {String} opts.deviceUID A Device UID.
-   * @param {module:model/String} opts.sortBy  (default to 'captured')
-   * @param {module:model/String} opts.sortOrder  (default to 'asc')
-   * @param {Number} opts.startDate Unix timestamp
-   * @param {Number} opts.endDate Unix timestamp
-   * @param {Boolean} opts.systemFilesOnly
-   * @param {String} opts.files
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetProjectEvents200Response}
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetProjectFleets200Response}
    */
-  getProjectEvents(projectUID, opts) {
-    return this.getProjectEventsWithHttpInfo(projectUID, opts).then(function (
+  getProjectFleets(projectUID) {
+    return this.getProjectFleetsWithHttpInfo(projectUID).then(function (
       response_and_data
     ) {
-      return response_and_data.data;
-    });
-  }
-
-  /**
-   * Get Events of a Project by cursor
-   * @param {String} projectUID
-   * @param {Object} opts Optional parameters
-   * @param {Number} opts.limit  (default to 50)
-   * @param {String} opts.cursor A cursor, which can be obtained from the `next_cursor` value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included.
-   * @param {module:model/String} opts.sortOrder  (default to 'asc')
-   * @param {Boolean} opts.systemFilesOnly
-   * @param {String} opts.files
-   * @param {String} opts.fleetUID
-   * @param {String} opts.deviceUID A Device UID.
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetProjectEventsByCursor200Response} and HTTP response
-   */
-  getProjectEventsByCursorWithHttpInfo(projectUID, opts) {
-    opts = opts || {};
-    let postBody = null;
-    // verify the required parameter 'projectUID' is set
-    if (projectUID === undefined || projectUID === null) {
-      throw new Error(
-        "Missing the required parameter 'projectUID' when calling getProjectEventsByCursor"
-      );
-    }
-
-    let pathParams = {
-      projectUID: projectUID,
-    };
-    let queryParams = {
-      limit: opts["limit"],
-      cursor: opts["cursor"],
-      sortOrder: opts["sortOrder"],
-      systemFilesOnly: opts["systemFilesOnly"],
-      files: opts["files"],
-      fleetUID: opts["fleetUID"],
-      deviceUID: opts["deviceUID"],
-    };
-    let headerParams = {};
-    let formParams = {};
-
-    let authNames = ["api_key"];
-    let contentTypes = [];
-    let accepts = ["application/json"];
-    let returnType = GetProjectEventsByCursor200Response;
-    return this.apiClient.callApi(
-      "/v1/projects/{projectUID}/events-cursor",
-      "GET",
-      pathParams,
-      queryParams,
-      headerParams,
-      formParams,
-      postBody,
-      authNames,
-      contentTypes,
-      accepts,
-      returnType,
-      null
-    );
-  }
-
-  /**
-   * Get Events of a Project by cursor
-   * @param {String} projectUID
-   * @param {Object} opts Optional parameters
-   * @param {Number} opts.limit  (default to 50)
-   * @param {String} opts.cursor A cursor, which can be obtained from the `next_cursor` value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included.
-   * @param {module:model/String} opts.sortOrder  (default to 'asc')
-   * @param {Boolean} opts.systemFilesOnly
-   * @param {String} opts.files
-   * @param {String} opts.fleetUID
-   * @param {String} opts.deviceUID A Device UID.
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetProjectEventsByCursor200Response}
-   */
-  getProjectEventsByCursor(projectUID, opts) {
-    return this.getProjectEventsByCursorWithHttpInfo(projectUID, opts).then(
-      function (response_and_data) {
-        return response_and_data.data;
-      }
-    );
-  }
-
-  /**
-   * Get Devices of a Fleet within a Project
-   * @param {String} projectUID
-   * @param {String} fleetUID
-   * @param {Object} opts Optional parameters
-   * @param {Number} opts.pageSize  (default to 50)
-   * @param {Number} opts.pageNum  (default to 1)
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetProjectDevices200Response} and HTTP response
-   */
-  getProjectFleetDevicesWithHttpInfo(projectUID, fleetUID, opts) {
-    opts = opts || {};
-    let postBody = null;
-    // verify the required parameter 'projectUID' is set
-    if (projectUID === undefined || projectUID === null) {
-      throw new Error(
-        "Missing the required parameter 'projectUID' when calling getProjectFleetDevices"
-      );
-    }
-    // verify the required parameter 'fleetUID' is set
-    if (fleetUID === undefined || fleetUID === null) {
-      throw new Error(
-        "Missing the required parameter 'fleetUID' when calling getProjectFleetDevices"
-      );
-    }
-
-    let pathParams = {
-      projectUID: projectUID,
-      fleetUID: fleetUID,
-    };
-    let queryParams = {
-      pageSize: opts["pageSize"],
-      pageNum: opts["pageNum"],
-    };
-    let headerParams = {};
-    let formParams = {};
-
-    let authNames = ["api_key"];
-    let contentTypes = [];
-    let accepts = ["application/json"];
-    let returnType = GetProjectDevices200Response;
-    return this.apiClient.callApi(
-      "/v1/projects/{projectUID}/fleets/{fleetUID}/devices",
-      "GET",
-      pathParams,
-      queryParams,
-      headerParams,
-      formParams,
-      postBody,
-      authNames,
-      contentTypes,
-      accepts,
-      returnType,
-      null
-    );
-  }
-
-  /**
-   * Get Devices of a Fleet within a Project
-   * @param {String} projectUID
-   * @param {String} fleetUID
-   * @param {Object} opts Optional parameters
-   * @param {Number} opts.pageSize  (default to 50)
-   * @param {Number} opts.pageNum  (default to 1)
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetProjectDevices200Response}
-   */
-  getProjectFleetDevices(projectUID, fleetUID, opts) {
-    return this.getProjectFleetDevicesWithHttpInfo(
-      projectUID,
-      fleetUID,
-      opts
-    ).then(function (response_and_data) {
       return response_and_data.data;
     });
   }
@@ -1128,37 +1222,33 @@ export default class ProjectApi {
   }
 
   /**
-   * Provision Device for a Project
+   * Add Device to Fleets
    * @param {String} projectUID
    * @param {String} deviceUID
-   * @param {module:model/PostProvisionProjectDeviceRequest} postProvisionProjectDeviceRequest Provision a device to a specific ProductUID
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link Object} and HTTP response
+   * @param {module:model/PutDeviceFleetsRequest} putDeviceFleetsRequest The fleets to add to the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error.
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetProjectFleets200Response} and HTTP response
    */
-  postProvisionProjectDeviceWithHttpInfo(
-    projectUID,
-    deviceUID,
-    postProvisionProjectDeviceRequest
-  ) {
-    let postBody = postProvisionProjectDeviceRequest;
+  putDeviceFleetsWithHttpInfo(projectUID, deviceUID, putDeviceFleetsRequest) {
+    let postBody = putDeviceFleetsRequest;
     // verify the required parameter 'projectUID' is set
     if (projectUID === undefined || projectUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectUID' when calling postProvisionProjectDevice"
+        "Missing the required parameter 'projectUID' when calling putDeviceFleets"
       );
     }
     // verify the required parameter 'deviceUID' is set
     if (deviceUID === undefined || deviceUID === null) {
       throw new Error(
-        "Missing the required parameter 'deviceUID' when calling postProvisionProjectDevice"
+        "Missing the required parameter 'deviceUID' when calling putDeviceFleets"
       );
     }
-    // verify the required parameter 'postProvisionProjectDeviceRequest' is set
+    // verify the required parameter 'putDeviceFleetsRequest' is set
     if (
-      postProvisionProjectDeviceRequest === undefined ||
-      postProvisionProjectDeviceRequest === null
+      putDeviceFleetsRequest === undefined ||
+      putDeviceFleetsRequest === null
     ) {
       throw new Error(
-        "Missing the required parameter 'postProvisionProjectDeviceRequest' when calling postProvisionProjectDevice"
+        "Missing the required parameter 'putDeviceFleetsRequest' when calling putDeviceFleets"
       );
     }
 
@@ -1173,10 +1263,10 @@ export default class ProjectApi {
     let authNames = ["api_key"];
     let contentTypes = ["application/json"];
     let accepts = ["application/json"];
-    let returnType = Object;
+    let returnType = GetProjectFleets200Response;
     return this.apiClient.callApi(
-      "/v1/projects/{projectUID}/devices/{deviceUID}/provision",
-      "POST",
+      "/v1/projects/{projectUID}/devices/{deviceUID}/fleets",
+      "PUT",
       pathParams,
       queryParams,
       headerParams,
@@ -1191,21 +1281,94 @@ export default class ProjectApi {
   }
 
   /**
-   * Provision Device for a Project
+   * Add Device to Fleets
    * @param {String} projectUID
    * @param {String} deviceUID
-   * @param {module:model/PostProvisionProjectDeviceRequest} postProvisionProjectDeviceRequest Provision a device to a specific ProductUID
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link Object}
+   * @param {module:model/PutDeviceFleetsRequest} putDeviceFleetsRequest The fleets to add to the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error.
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetProjectFleets200Response}
    */
-  postProvisionProjectDevice(
-    projectUID,
-    deviceUID,
-    postProvisionProjectDeviceRequest
-  ) {
-    return this.postProvisionProjectDeviceWithHttpInfo(
+  putDeviceFleets(projectUID, deviceUID, putDeviceFleetsRequest) {
+    return this.putDeviceFleetsWithHttpInfo(
       projectUID,
       deviceUID,
-      postProvisionProjectDeviceRequest
+      putDeviceFleetsRequest
+    ).then(function (response_and_data) {
+      return response_and_data.data;
+    });
+  }
+
+  /**
+   * Put environment variables of a fleet
+   * @param {String} projectUID
+   * @param {String} fleetUID
+   * @param {module:model/EnvironmentVariables} environmentVariables Environment variables to be added to the fleet
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/EnvironmentVariables} and HTTP response
+   */
+  putFleetEnvironmentVariablesWithHttpInfo(
+    projectUID,
+    fleetUID,
+    environmentVariables
+  ) {
+    let postBody = environmentVariables;
+    // verify the required parameter 'projectUID' is set
+    if (projectUID === undefined || projectUID === null) {
+      throw new Error(
+        "Missing the required parameter 'projectUID' when calling putFleetEnvironmentVariables"
+      );
+    }
+    // verify the required parameter 'fleetUID' is set
+    if (fleetUID === undefined || fleetUID === null) {
+      throw new Error(
+        "Missing the required parameter 'fleetUID' when calling putFleetEnvironmentVariables"
+      );
+    }
+    // verify the required parameter 'environmentVariables' is set
+    if (environmentVariables === undefined || environmentVariables === null) {
+      throw new Error(
+        "Missing the required parameter 'environmentVariables' when calling putFleetEnvironmentVariables"
+      );
+    }
+
+    let pathParams = {
+      projectUID: projectUID,
+      fleetUID: fleetUID,
+    };
+    let queryParams = {};
+    let headerParams = {};
+    let formParams = {};
+
+    let authNames = ["api_key"];
+    let contentTypes = ["application/json"];
+    let accepts = ["application/json"];
+    let returnType = EnvironmentVariables;
+    return this.apiClient.callApi(
+      "/v1/projects/{projectUID}/fleets/{fleetUID}/environment_variables",
+      "PUT",
+      pathParams,
+      queryParams,
+      headerParams,
+      formParams,
+      postBody,
+      authNames,
+      contentTypes,
+      accepts,
+      returnType,
+      null
+    );
+  }
+
+  /**
+   * Put environment variables of a fleet
+   * @param {String} projectUID
+   * @param {String} fleetUID
+   * @param {module:model/EnvironmentVariables} environmentVariables Environment variables to be added to the fleet
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/EnvironmentVariables}
+   */
+  putFleetEnvironmentVariables(projectUID, fleetUID, environmentVariables) {
+    return this.putFleetEnvironmentVariablesWithHttpInfo(
+      projectUID,
+      fleetUID,
+      environmentVariables
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -1331,5 +1494,78 @@ export default class ProjectApi {
         return response_and_data.data;
       }
     );
+  }
+
+  /**
+   * Update Fleet
+   * @param {String} projectUID
+   * @param {String} fleetUID
+   * @param {module:model/UpdateFleetRequest} updateFleetRequest Fleet details to update
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Fleet} and HTTP response
+   */
+  updateFleetWithHttpInfo(projectUID, fleetUID, updateFleetRequest) {
+    let postBody = updateFleetRequest;
+    // verify the required parameter 'projectUID' is set
+    if (projectUID === undefined || projectUID === null) {
+      throw new Error(
+        "Missing the required parameter 'projectUID' when calling updateFleet"
+      );
+    }
+    // verify the required parameter 'fleetUID' is set
+    if (fleetUID === undefined || fleetUID === null) {
+      throw new Error(
+        "Missing the required parameter 'fleetUID' when calling updateFleet"
+      );
+    }
+    // verify the required parameter 'updateFleetRequest' is set
+    if (updateFleetRequest === undefined || updateFleetRequest === null) {
+      throw new Error(
+        "Missing the required parameter 'updateFleetRequest' when calling updateFleet"
+      );
+    }
+
+    let pathParams = {
+      projectUID: projectUID,
+      fleetUID: fleetUID,
+    };
+    let queryParams = {};
+    let headerParams = {};
+    let formParams = {};
+
+    let authNames = ["api_key"];
+    let contentTypes = ["application/json"];
+    let accepts = ["application/json"];
+    let returnType = Fleet;
+    return this.apiClient.callApi(
+      "/v1/projects/{projectUID}/fleets/{fleetUID}",
+      "PUT",
+      pathParams,
+      queryParams,
+      headerParams,
+      formParams,
+      postBody,
+      authNames,
+      contentTypes,
+      accepts,
+      returnType,
+      null
+    );
+  }
+
+  /**
+   * Update Fleet
+   * @param {String} projectUID
+   * @param {String} fleetUID
+   * @param {module:model/UpdateFleetRequest} updateFleetRequest Fleet details to update
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Fleet}
+   */
+  updateFleet(projectUID, fleetUID, updateFleetRequest) {
+    return this.updateFleetWithHttpInfo(
+      projectUID,
+      fleetUID,
+      updateFleetRequest
+    ).then(function (response_and_data) {
+      return response_and_data.data;
+    });
   }
 }

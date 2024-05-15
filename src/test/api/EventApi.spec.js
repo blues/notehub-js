@@ -1,6 +1,6 @@
 /**
  * Notehub API
- * The OpenAPI definition for the Notehub.io API. 
+ * The OpenAPI definition for the Notehub.io API.
  *
  * The version of the OpenAPI document: 1.0.0
  * Contact: engineering@blues.io
@@ -11,45 +11,41 @@
  *
  */
 
-(function(root, factory) {
-  if (typeof define === 'function' && define.amd) {
+(function (root, factory) {
+  if (typeof define === "function" && define.amd) {
     // AMD.
-    define(['expect.js', process.cwd()+'/src/index'], factory);
-  } else if (typeof module === 'object' && module.exports) {
+    define(["expect.js", process.cwd() + "/src/index"], factory);
+  } else if (typeof module === "object" && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    factory(require('expect.js'), require(process.cwd()+'/src/index'));
+    factory(require("expect.js"), require(process.cwd() + "/src/index"));
   } else {
     // Browser globals (root is window)
     factory(root.expect, root.NotehubJs);
   }
-}(this, function(expect, NotehubJs) {
-  'use strict';
+})(this, function (expect, NotehubJs) {
+  "use strict";
 
   var instance;
 
-  beforeEach(function() {
+  beforeEach(function () {
     instance = new NotehubJs.EventApi();
   });
 
-  var getProperty = function(object, getter, property) {
+  var getProperty = function (object, getter, property) {
     // Use getter method if present; otherwise, get the property directly.
-    if (typeof object[getter] === 'function')
-      return object[getter]();
-    else
-      return object[property];
-  }
+    if (typeof object[getter] === "function") return object[getter]();
+    else return object[property];
+  };
 
-  var setProperty = function(object, setter, property, value) {
+  var setProperty = function (object, setter, property, value) {
     // Use setter method if present; otherwise, set the property directly.
-    if (typeof object[setter] === 'function')
-      object[setter](value);
-    else
-      object[property] = value;
-  }
+    if (typeof object[setter] === "function") object[setter](value);
+    else object[property] = value;
+  };
 
-  describe('EventApi', function() {
-    describe('getFleetEvents', function() {
-      it('should call getFleetEvents successfully', function(done) {
+  describe("EventApi", function () {
+    describe("getFleetEvents", function () {
+      it("should call getFleetEvents successfully", function (done) {
         //uncomment below and update the code to test getFleetEvents
         //instance.getFleetEvents(function(error) {
         //  if (error) throw error;
@@ -58,8 +54,8 @@
         done();
       });
     });
-    describe('getFleetEventsByCursor', function() {
-      it('should call getFleetEventsByCursor successfully', function(done) {
+    describe("getFleetEventsByCursor", function () {
+      it("should call getFleetEventsByCursor successfully", function (done) {
         //uncomment below and update the code to test getFleetEventsByCursor
         //instance.getFleetEventsByCursor(function(error) {
         //  if (error) throw error;
@@ -68,8 +64,8 @@
         done();
       });
     });
-    describe('getProjectEvents', function() {
-      it('should call getProjectEvents successfully', function(done) {
+    describe("getProjectEvents", function () {
+      it("should call getProjectEvents successfully", function (done) {
         //uncomment below and update the code to test getProjectEvents
         //instance.getProjectEvents(function(error) {
         //  if (error) throw error;
@@ -78,8 +74,8 @@
         done();
       });
     });
-    describe('getProjectEventsByCursor', function() {
-      it('should call getProjectEventsByCursor successfully', function(done) {
+    describe("getProjectEventsByCursor", function () {
+      it("should call getProjectEventsByCursor successfully", function (done) {
         //uncomment below and update the code to test getProjectEventsByCursor
         //instance.getProjectEventsByCursor(function(error) {
         //  if (error) throw error;
@@ -88,6 +84,15 @@
         done();
       });
     });
+    describe("getRouteLogsByEvent", function () {
+      it("should call getRouteLogsByEvent successfully", function (done) {
+        //uncomment below and update the code to test getRouteLogsByEvent
+        //instance.getRouteLogsByEvent(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
   });
-
-}));
+});

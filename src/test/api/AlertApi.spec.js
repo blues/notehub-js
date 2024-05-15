@@ -28,7 +28,7 @@
   var instance;
 
   beforeEach(function () {
-    instance = new NotehubJs.GetProjectEvents200Response();
+    instance = new NotehubJs.AlertApi();
   });
 
   var getProperty = function (object, getter, property) {
@@ -43,23 +43,16 @@
     else object[property] = value;
   };
 
-  describe("GetProjectEvents200Response", function () {
-    it("should create an instance of GetProjectEvents200Response", function () {
-      // uncomment below and update the code to test GetProjectEvents200Response
-      //var instance = new NotehubJs.GetProjectEvents200Response();
-      //expect(instance).to.be.a(NotehubJs.GetProjectEvents200Response);
-    });
-
-    it('should have the property events (base name: "events")', function () {
-      // uncomment below and update the code to test the property events
-      //var instance = new NotehubJs.GetProjectEvents200Response();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property hasMore (base name: "has_more")', function () {
-      // uncomment below and update the code to test the property hasMore
-      //var instance = new NotehubJs.GetProjectEvents200Response();
-      //expect(instance).to.be();
+  describe("AlertApi", function () {
+    describe("getAlerts", function () {
+      it("should call getAlerts successfully", function (done) {
+        //uncomment below and update the code to test getAlerts
+        //instance.getAlerts(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
     });
   });
 });

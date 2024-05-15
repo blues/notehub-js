@@ -12,6 +12,9 @@
  */
 
 import ApiClient from "./ApiClient";
+import Alert from "./model/Alert";
+import AlertDataInner from "./model/AlertDataInner";
+import AlertNotificationsInner from "./model/AlertNotificationsInner";
 import Aws from "./model/Aws";
 import Azure from "./model/Azure";
 import BillingAccount from "./model/BillingAccount";
@@ -20,6 +23,7 @@ import Body from "./model/Body";
 import CloneProjectRequest from "./model/CloneProjectRequest";
 import Contact from "./model/Contact";
 import CreateFleetRequest from "./model/CreateFleetRequest";
+import CreateMonitor from "./model/CreateMonitor";
 import CreateProductRequest from "./model/CreateProductRequest";
 import CreateProjectRequest from "./model/CreateProjectRequest";
 import DFUEnv from "./model/DFUEnv";
@@ -32,7 +36,9 @@ import DeviceUsage from "./model/DeviceUsage";
 import EnvironmentVariables from "./model/EnvironmentVariables";
 import Error from "./model/Error";
 import Event from "./model/Event";
+import FirmwareInfo from "./model/FirmwareInfo";
 import Fleet from "./model/Fleet";
+import GetAlerts200Response from "./model/GetAlerts200Response";
 import GetBillingAccounts200Response from "./model/GetBillingAccounts200Response";
 import GetDeviceEnvironmentVariables200Response from "./model/GetDeviceEnvironmentVariables200Response";
 import GetDeviceHealthLog200Response from "./model/GetDeviceHealthLog200Response";
@@ -63,6 +69,9 @@ import HttpTransform from "./model/HttpTransform";
 import Location from "./model/Location";
 import Login200Response from "./model/Login200Response";
 import LoginRequest from "./model/LoginRequest";
+import Monitor from "./model/Monitor";
+import MonitorAlertRoutesInner from "./model/MonitorAlertRoutesInner";
+import MonitorThresholds from "./model/MonitorThresholds";
 import Mqtt from "./model/Mqtt";
 import Note from "./model/Note";
 import PostProvisionProjectDeviceRequest from "./model/PostProvisionProjectDeviceRequest";
@@ -83,19 +92,15 @@ import TowerLocation from "./model/TowerLocation";
 import Twilio from "./model/Twilio";
 import UpdateFleetRequest from "./model/UpdateFleetRequest";
 import UserDbRoute from "./model/UserDbRoute";
+import AlertApi from "./api/AlertApi";
 import AuthorizationApi from "./api/AuthorizationApi";
 import BillingAccountApi from "./api/BillingAccountApi";
 import DeviceApi from "./api/DeviceApi";
-import DevicesApi from "./api/DevicesApi";
-import EnvironmentVariablesApi from "./api/EnvironmentVariablesApi";
 import EventApi from "./api/EventApi";
-import FilesApi from "./api/FilesApi";
-import FleetApi from "./api/FleetApi";
-import NotesApi from "./api/NotesApi";
-import ProductApi from "./api/ProductApi";
+import FirmwareApi from "./api/FirmwareApi";
+import MonitorApi from "./api/MonitorApi";
 import ProjectApi from "./api/ProjectApi";
 import RouteApi from "./api/RouteApi";
-import RouteLogsApi from "./api/RouteLogsApi";
 
 /**
  * The OpenAPI definition for the Notehub.io API. .<br>
@@ -134,6 +139,24 @@ export {
    * @property {module:ApiClient}
    */
   ApiClient,
+
+  /**
+   * The Alert model constructor.
+   * @property {module:model/Alert}
+   */
+  Alert,
+
+  /**
+   * The AlertDataInner model constructor.
+   * @property {module:model/AlertDataInner}
+   */
+  AlertDataInner,
+
+  /**
+   * The AlertNotificationsInner model constructor.
+   * @property {module:model/AlertNotificationsInner}
+   */
+  AlertNotificationsInner,
 
   /**
    * The Aws model constructor.
@@ -182,6 +205,12 @@ export {
    * @property {module:model/CreateFleetRequest}
    */
   CreateFleetRequest,
+
+  /**
+   * The CreateMonitor model constructor.
+   * @property {module:model/CreateMonitor}
+   */
+  CreateMonitor,
 
   /**
    * The CreateProductRequest model constructor.
@@ -256,10 +285,22 @@ export {
   Event,
 
   /**
+   * The FirmwareInfo model constructor.
+   * @property {module:model/FirmwareInfo}
+   */
+  FirmwareInfo,
+
+  /**
    * The Fleet model constructor.
    * @property {module:model/Fleet}
    */
   Fleet,
+
+  /**
+   * The GetAlerts200Response model constructor.
+   * @property {module:model/GetAlerts200Response}
+   */
+  GetAlerts200Response,
 
   /**
    * The GetBillingAccounts200Response model constructor.
@@ -442,6 +483,24 @@ export {
   LoginRequest,
 
   /**
+   * The Monitor model constructor.
+   * @property {module:model/Monitor}
+   */
+  Monitor,
+
+  /**
+   * The MonitorAlertRoutesInner model constructor.
+   * @property {module:model/MonitorAlertRoutesInner}
+   */
+  MonitorAlertRoutesInner,
+
+  /**
+   * The MonitorThresholds model constructor.
+   * @property {module:model/MonitorThresholds}
+   */
+  MonitorThresholds,
+
+  /**
    * The Mqtt model constructor.
    * @property {module:model/Mqtt}
    */
@@ -562,6 +621,12 @@ export {
   UserDbRoute,
 
   /**
+   * The AlertApi service constructor.
+   * @property {module:api/AlertApi}
+   */
+  AlertApi,
+
+  /**
    * The AuthorizationApi service constructor.
    * @property {module:api/AuthorizationApi}
    */
@@ -580,46 +645,22 @@ export {
   DeviceApi,
 
   /**
-   * The DevicesApi service constructor.
-   * @property {module:api/DevicesApi}
-   */
-  DevicesApi,
-
-  /**
-   * The EnvironmentVariablesApi service constructor.
-   * @property {module:api/EnvironmentVariablesApi}
-   */
-  EnvironmentVariablesApi,
-
-  /**
    * The EventApi service constructor.
    * @property {module:api/EventApi}
    */
   EventApi,
 
   /**
-   * The FilesApi service constructor.
-   * @property {module:api/FilesApi}
+   * The FirmwareApi service constructor.
+   * @property {module:api/FirmwareApi}
    */
-  FilesApi,
+  FirmwareApi,
 
   /**
-   * The FleetApi service constructor.
-   * @property {module:api/FleetApi}
+   * The MonitorApi service constructor.
+   * @property {module:api/MonitorApi}
    */
-  FleetApi,
-
-  /**
-   * The NotesApi service constructor.
-   * @property {module:api/NotesApi}
-   */
-  NotesApi,
-
-  /**
-   * The ProductApi service constructor.
-   * @property {module:api/ProductApi}
-   */
-  ProductApi,
+  MonitorApi,
 
   /**
    * The ProjectApi service constructor.
@@ -632,10 +673,4 @@ export {
    * @property {module:api/RouteApi}
    */
   RouteApi,
-
-  /**
-   * The RouteLogsApi service constructor.
-   * @property {module:api/RouteLogsApi}
-   */
-  RouteLogsApi,
 };
