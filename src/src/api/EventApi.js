@@ -15,11 +15,12 @@ import ApiClient from "../ApiClient";
 import Error from "../model/Error";
 import GetProjectEvents200Response from "../model/GetProjectEvents200Response";
 import GetProjectEventsByCursor200Response from "../model/GetProjectEventsByCursor200Response";
+import GetRouteLogsByRoute200ResponseInner from "../model/GetRouteLogsByRoute200ResponseInner";
 
 /**
  * Event service.
  * @module api/EventApi
- * @version 1.0.19
+ * @version 1.0.20
  */
 export default class EventApi {
   /**
@@ -378,6 +379,69 @@ export default class EventApi {
    */
   getProjectEventsByCursor(projectUID, opts) {
     return this.getProjectEventsByCursorWithHttpInfo(projectUID, opts).then(
+      function (response_and_data) {
+        return response_and_data.data;
+      }
+    );
+  }
+
+  /**
+   * Get Route Logs by Event UID
+   * @param {String} projectUID
+   * @param {String} eventUID
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link Array.<module:model/GetRouteLogsByRoute200ResponseInner>} and HTTP response
+   */
+  getRouteLogsByEventWithHttpInfo(projectUID, eventUID) {
+    let postBody = null;
+    // verify the required parameter 'projectUID' is set
+    if (projectUID === undefined || projectUID === null) {
+      throw new Error(
+        "Missing the required parameter 'projectUID' when calling getRouteLogsByEvent"
+      );
+    }
+    // verify the required parameter 'eventUID' is set
+    if (eventUID === undefined || eventUID === null) {
+      throw new Error(
+        "Missing the required parameter 'eventUID' when calling getRouteLogsByEvent"
+      );
+    }
+
+    let pathParams = {
+      projectUID: projectUID,
+      eventUID: eventUID,
+    };
+    let queryParams = {};
+    let headerParams = {};
+    let formParams = {};
+
+    let authNames = ["api_key"];
+    let contentTypes = [];
+    let accepts = ["application/json"];
+    let returnType = [GetRouteLogsByRoute200ResponseInner];
+    return this.apiClient.callApi(
+      "/v1/projects/{projectUID}/events/{eventUID}/route-logs",
+      "GET",
+      pathParams,
+      queryParams,
+      headerParams,
+      formParams,
+      postBody,
+      authNames,
+      contentTypes,
+      accepts,
+      returnType,
+      null
+    );
+  }
+
+  /**
+   * Get Route Logs by Event UID
+   * @param {String} projectUID
+   * @param {String} eventUID
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link Array.<module:model/GetRouteLogsByRoute200ResponseInner>}
+   */
+  getRouteLogsByEvent(projectUID, eventUID) {
+    return this.getRouteLogsByEventWithHttpInfo(projectUID, eventUID).then(
       function (response_and_data) {
         return response_and_data.data;
       }

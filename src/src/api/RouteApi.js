@@ -13,13 +13,14 @@
 
 import ApiClient from "../ApiClient";
 import Error from "../model/Error";
+import GetRouteLogsByRoute200ResponseInner from "../model/GetRouteLogsByRoute200ResponseInner";
 import Route from "../model/Route";
 import UserDbRoute from "../model/UserDbRoute";
 
 /**
  * Route service.
  * @module api/RouteApi
- * @version 1.0.19
+ * @version 1.0.20
  */
 export default class RouteApi {
   /**
@@ -217,6 +218,102 @@ export default class RouteApi {
     return this.getRouteWithHttpInfo(projectUID, routeUID).then(function (
       response_and_data
     ) {
+      return response_and_data.data;
+    });
+  }
+
+  /**
+   * Get Route Logs by Route UID
+   * @param {String} projectUID
+   * @param {String} routeUID
+   * @param {Object} opts Optional parameters
+   * @param {Number} opts.pageSize  (default to 50)
+   * @param {Number} opts.pageNum  (default to 1)
+   * @param {String} opts.deviceUID A Device UID.
+   * @param {module:model/String} opts.sortBy  (default to 'captured')
+   * @param {module:model/String} opts.sortOrder  (default to 'asc')
+   * @param {Number} opts.startDate Unix timestamp
+   * @param {Number} opts.endDate Unix timestamp
+   * @param {Boolean} opts.systemFilesOnly
+   * @param {String} opts.files
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link Array.<module:model/GetRouteLogsByRoute200ResponseInner>} and HTTP response
+   */
+  getRouteLogsByRouteWithHttpInfo(projectUID, routeUID, opts) {
+    opts = opts || {};
+    let postBody = null;
+    // verify the required parameter 'projectUID' is set
+    if (projectUID === undefined || projectUID === null) {
+      throw new Error(
+        "Missing the required parameter 'projectUID' when calling getRouteLogsByRoute"
+      );
+    }
+    // verify the required parameter 'routeUID' is set
+    if (routeUID === undefined || routeUID === null) {
+      throw new Error(
+        "Missing the required parameter 'routeUID' when calling getRouteLogsByRoute"
+      );
+    }
+
+    let pathParams = {
+      projectUID: projectUID,
+      routeUID: routeUID,
+    };
+    let queryParams = {
+      pageSize: opts["pageSize"],
+      pageNum: opts["pageNum"],
+      deviceUID: opts["deviceUID"],
+      sortBy: opts["sortBy"],
+      sortOrder: opts["sortOrder"],
+      startDate: opts["startDate"],
+      endDate: opts["endDate"],
+      systemFilesOnly: opts["systemFilesOnly"],
+      files: opts["files"],
+    };
+    let headerParams = {};
+    let formParams = {};
+
+    let authNames = ["api_key"];
+    let contentTypes = [];
+    let accepts = ["application/json"];
+    let returnType = [GetRouteLogsByRoute200ResponseInner];
+    return this.apiClient.callApi(
+      "/v1/projects/{projectUID}/routes/{routeUID}/route-logs",
+      "GET",
+      pathParams,
+      queryParams,
+      headerParams,
+      formParams,
+      postBody,
+      authNames,
+      contentTypes,
+      accepts,
+      returnType,
+      null
+    );
+  }
+
+  /**
+   * Get Route Logs by Route UID
+   * @param {String} projectUID
+   * @param {String} routeUID
+   * @param {Object} opts Optional parameters
+   * @param {Number} opts.pageSize  (default to 50)
+   * @param {Number} opts.pageNum  (default to 1)
+   * @param {String} opts.deviceUID A Device UID.
+   * @param {module:model/String} opts.sortBy  (default to 'captured')
+   * @param {module:model/String} opts.sortOrder  (default to 'asc')
+   * @param {Number} opts.startDate Unix timestamp
+   * @param {Number} opts.endDate Unix timestamp
+   * @param {Boolean} opts.systemFilesOnly
+   * @param {String} opts.files
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link Array.<module:model/GetRouteLogsByRoute200ResponseInner>}
+   */
+  getRouteLogsByRoute(projectUID, routeUID, opts) {
+    return this.getRouteLogsByRouteWithHttpInfo(
+      projectUID,
+      routeUID,
+      opts
+    ).then(function (response_and_data) {
       return response_and_data.data;
     });
   }

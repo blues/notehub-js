@@ -2,29 +2,33 @@
 
 All URIs are relative to *https://api.notefile.net*
 
-| Method                                                                                 | HTTP request                                                     | Description |
-| -------------------------------------------------------------------------------------- | ---------------------------------------------------------------- | ----------- |
-| [**cloneProject**](ProjectApi.md#cloneProject)                                         | **POST** /v1/projects/{projectUID}/clone                         |
-| [**createProduct**](ProjectApi.md#createProduct)                                       | **POST** /v1/projects/{projectUID}/products                      |
-| [**createProject**](ProjectApi.md#createProject)                                       | **POST** /v1/projects                                            |
-| [**deleteProject**](ProjectApi.md#deleteProject)                                       | **DELETE** /v1/projects/{projectUID}                             |
-| [**deleteProjectEnvironmentVariable**](ProjectApi.md#deleteProjectEnvironmentVariable) | **DELETE** /v1/projects/{projectUID}/environment_variables/{key} |
-| [**disableGlobalTransformation**](ProjectApi.md#disableGlobalTransformation)           | **POST** /v1/projects/{projectUID}/global-transformation/disable |
-| [**enableGlobalTransformation**](ProjectApi.md#enableGlobalTransformation)             | **POST** /v1/projects/{projectUID}/global-transformation/enable  |
-| [**getProject**](ProjectApi.md#getProject)                                             | **GET** /v1/projects/{projectUID}                                |
-| [**getProjectByProduct**](ProjectApi.md#getProjectByProduct)                           | **GET** /v1/products/{productUID}/project                        |
-| [**getProjectDevicePublicKeys**](ProjectApi.md#getProjectDevicePublicKeys)             | **GET** /v1/projects/{projectUID}/devices/public-keys            |
-| [**getProjectDevices**](ProjectApi.md#getProjectDevices)                               | **GET** /v1/projects/{projectUID}/devices                        |
-| [**getProjectEnvironmentVariables**](ProjectApi.md#getProjectEnvironmentVariables)     | **GET** /v1/projects/{projectUID}/environment_variables          |
-| [**getProjectEvents**](ProjectApi.md#getProjectEvents)                                 | **GET** /v1/projects/{projectUID}/events                         |
-| [**getProjectEventsByCursor**](ProjectApi.md#getProjectEventsByCursor)                 | **GET** /v1/projects/{projectUID}/events-cursor                  |
-| [**getProjectFleetDevices**](ProjectApi.md#getProjectFleetDevices)                     | **GET** /v1/projects/{projectUID}/fleets/{fleetUID}/devices      |
-| [**getProjectMembers**](ProjectApi.md#getProjectMembers)                               | **GET** /v1/projects/{projectUID}/members                        |
-| [**getProjectProducts**](ProjectApi.md#getProjectProducts)                             | **GET** /v1/projects/{projectUID}/products                       |
-| [**getProjects**](ProjectApi.md#getProjects)                                           | **GET** /v1/projects                                             |
-| [**postProvisionProjectDevice**](ProjectApi.md#postProvisionProjectDevice)             | **POST** /v1/projects/{projectUID}/devices/{deviceUID}/provision |
-| [**putProjectEnvironmentVariables**](ProjectApi.md#putProjectEnvironmentVariables)     | **PUT** /v1/projects/{projectUID}/environment_variables          |
-| [**setGlobalTransformation**](ProjectApi.md#setGlobalTransformation)                   | **POST** /v1/projects/{projectUID}/global-transformation         |
+| Method                                                                                 | HTTP request                                                                       | Description |
+| -------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ----------- |
+| [**cloneProject**](ProjectApi.md#cloneProject)                                         | **POST** /v1/projects/{projectUID}/clone                                           |
+| [**createFleet**](ProjectApi.md#createFleet)                                           | **POST** /v1/projects/{projectUID}/fleets                                          |
+| [**createProduct**](ProjectApi.md#createProduct)                                       | **POST** /v1/projects/{projectUID}/products                                        |
+| [**createProject**](ProjectApi.md#createProject)                                       | **POST** /v1/projects                                                              |
+| [**deleteDeviceFleets**](ProjectApi.md#deleteDeviceFleets)                             | **DELETE** /v1/projects/{projectUID}/devices/{deviceUID}/fleets                    |
+| [**deleteFleet**](ProjectApi.md#deleteFleet)                                           | **DELETE** /v1/projects/{projectUID}/fleets/{fleetUID}                             |
+| [**deleteFleetEnvironmentVariable**](ProjectApi.md#deleteFleetEnvironmentVariable)     | **DELETE** /v1/projects/{projectUID}/fleets/{fleetUID}/environment_variables/{key} |
+| [**deleteProject**](ProjectApi.md#deleteProject)                                       | **DELETE** /v1/projects/{projectUID}                                               |
+| [**deleteProjectEnvironmentVariable**](ProjectApi.md#deleteProjectEnvironmentVariable) | **DELETE** /v1/projects/{projectUID}/environment_variables/{key}                   |
+| [**disableGlobalTransformation**](ProjectApi.md#disableGlobalTransformation)           | **POST** /v1/projects/{projectUID}/global-transformation/disable                   |
+| [**enableGlobalTransformation**](ProjectApi.md#enableGlobalTransformation)             | **POST** /v1/projects/{projectUID}/global-transformation/enable                    |
+| [**getDeviceFleets**](ProjectApi.md#getDeviceFleets)                                   | **GET** /v1/projects/{projectUID}/devices/{deviceUID}/fleets                       |
+| [**getFleetEnvironmentVariables**](ProjectApi.md#getFleetEnvironmentVariables)         | **GET** /v1/projects/{projectUID}/fleets/{fleetUID}/environment_variables          |
+| [**getProject**](ProjectApi.md#getProject)                                             | **GET** /v1/projects/{projectUID}                                                  |
+| [**getProjectByProduct**](ProjectApi.md#getProjectByProduct)                           | **GET** /v1/products/{productUID}/project                                          |
+| [**getProjectEnvironmentVariables**](ProjectApi.md#getProjectEnvironmentVariables)     | **GET** /v1/projects/{projectUID}/environment_variables                            |
+| [**getProjectFleets**](ProjectApi.md#getProjectFleets)                                 | **GET** /v1/projects/{projectUID}/fleets                                           |
+| [**getProjectMembers**](ProjectApi.md#getProjectMembers)                               | **GET** /v1/projects/{projectUID}/members                                          |
+| [**getProjectProducts**](ProjectApi.md#getProjectProducts)                             | **GET** /v1/projects/{projectUID}/products                                         |
+| [**getProjects**](ProjectApi.md#getProjects)                                           | **GET** /v1/projects                                                               |
+| [**putDeviceFleets**](ProjectApi.md#putDeviceFleets)                                   | **PUT** /v1/projects/{projectUID}/devices/{deviceUID}/fleets                       |
+| [**putFleetEnvironmentVariables**](ProjectApi.md#putFleetEnvironmentVariables)         | **PUT** /v1/projects/{projectUID}/fleets/{fleetUID}/environment_variables          |
+| [**putProjectEnvironmentVariables**](ProjectApi.md#putProjectEnvironmentVariables)     | **PUT** /v1/projects/{projectUID}/environment_variables                            |
+| [**setGlobalTransformation**](ProjectApi.md#setGlobalTransformation)                   | **POST** /v1/projects/{projectUID}/global-transformation                           |
+| [**updateFleet**](ProjectApi.md#updateFleet)                                           | **PUT** /v1/projects/{projectUID}/fleets/{fleetUID}                                |
 
 ## cloneProject
 
@@ -66,6 +70,52 @@ apiInstance.cloneProject(projectUID, cloneProjectRequest).then(
 ### Return type
 
 [**Project**](Project.md)
+
+### Authorization
+
+[api_key](../README.md#api_key)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+## createFleet
+
+> Fleet createFleet(projectUID, createFleetRequest)
+
+Create Fleet
+
+### Example
+
+```javascript
+import * as NotehubJs from '@blues-inc/notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
+// Configure API key authorization: api_key
+let api_key = defaultClient.authentications['api_key'];
+api_key.apiKey = 'YOUR API KEY';
+
+let apiInstance = new NotehubJs.ProjectApi();
+let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let createFleetRequest = new NotehubJs.CreateFleetRequest(); // CreateFleetRequest | Fleet to be added
+apiInstance.createFleet(projectUID, createFleetRequest).then((data) => {
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
+}, (error) => {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+| Name                   | Type                                            | Description       | Notes |
+| ---------------------- | ----------------------------------------------- | ----------------- | ----- |
+| **projectUID**         | **String**                                      |                   |
+| **createFleetRequest** | [**CreateFleetRequest**](CreateFleetRequest.md) | Fleet to be added |
+
+### Return type
+
+[**Fleet**](Fleet.md)
 
 ### Authorization
 
@@ -168,6 +218,148 @@ apiInstance.createProject(createProjectRequest).then(
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+## deleteDeviceFleets
+
+> GetProjectFleets200Response deleteDeviceFleets(projectUID, deviceUID, deleteDeviceFleetsRequest)
+
+Remove Device from Fleets
+
+### Example
+
+```javascript
+import * as NotehubJs from '@blues-inc/notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
+// Configure API key authorization: api_key
+let api_key = defaultClient.authentications['api_key'];
+api_key.apiKey = 'YOUR API KEY';
+
+let apiInstance = new NotehubJs.ProjectApi();
+let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let deviceUID = "deviceUID_example"; // String |
+let deleteDeviceFleetsRequest = new NotehubJs.DeleteDeviceFleetsRequest(); // DeleteDeviceFleetsRequest | The fleets to remove from the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error.
+apiInstance.deleteDeviceFleets(projectUID, deviceUID, deleteDeviceFleetsRequest).then((data) => {
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
+}, (error) => {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+| Name                          | Type                                                          | Description                                                                                                                                                                                                                                                                                           | Notes |
+| ----------------------------- | ------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----- |
+| **projectUID**                | **String**                                                    |                                                                                                                                                                                                                                                                                                       |
+| **deviceUID**                 | **String**                                                    |                                                                                                                                                                                                                                                                                                       |
+| **deleteDeviceFleetsRequest** | [**DeleteDeviceFleetsRequest**](DeleteDeviceFleetsRequest.md) | The fleets to remove from the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error. |
+
+### Return type
+
+[**GetProjectFleets200Response**](GetProjectFleets200Response.md)
+
+### Authorization
+
+[api_key](../README.md#api_key)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+## deleteFleet
+
+> deleteFleet(projectUID, fleetUID)
+
+Delete Fleet
+
+### Example
+
+```javascript
+import * as NotehubJs from '@blues-inc/notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
+// Configure API key authorization: api_key
+let api_key = defaultClient.authentications['api_key'];
+api_key.apiKey = 'YOUR API KEY';
+
+let apiInstance = new NotehubJs.ProjectApi();
+let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let fleetUID = "fleetUID_example"; // String |
+apiInstance.deleteFleet(projectUID, fleetUID).then(() => {
+  console.log('API called successfully.');
+}, (error) => {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+| Name           | Type       | Description | Notes |
+| -------------- | ---------- | ----------- | ----- |
+| **projectUID** | **String** |             |
+| **fleetUID**   | **String** |             |
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[api_key](../README.md#api_key)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+## deleteFleetEnvironmentVariable
+
+> EnvironmentVariables deleteFleetEnvironmentVariable(projectUID, fleetUID, key)
+
+Delete environment variables of a fleet
+
+### Example
+
+```javascript
+import * as NotehubJs from '@blues-inc/notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
+// Configure API key authorization: api_key
+let api_key = defaultClient.authentications['api_key'];
+api_key.apiKey = 'YOUR API KEY';
+
+let apiInstance = new NotehubJs.ProjectApi();
+let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let fleetUID = "fleetUID_example"; // String |
+let key = "key_example"; // String | The environment variable key to delete.
+apiInstance.deleteFleetEnvironmentVariable(projectUID, fleetUID, key).then((data) => {
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
+}, (error) => {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+| Name           | Type       | Description                             | Notes |
+| -------------- | ---------- | --------------------------------------- | ----- |
+| **projectUID** | **String** |                                         |
+| **fleetUID**   | **String** |                                         |
+| **key**        | **String** | The environment variable key to delete. |
+
+### Return type
+
+[**EnvironmentVariables**](EnvironmentVariables.md)
+
+### Authorization
+
+[api_key](../README.md#api_key)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 ## deleteProject
@@ -348,6 +540,98 @@ null (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
+## getDeviceFleets
+
+> GetProjectFleets200Response getDeviceFleets(projectUID, deviceUID)
+
+Get Device Fleets
+
+### Example
+
+```javascript
+import * as NotehubJs from '@blues-inc/notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
+// Configure API key authorization: api_key
+let api_key = defaultClient.authentications['api_key'];
+api_key.apiKey = 'YOUR API KEY';
+
+let apiInstance = new NotehubJs.ProjectApi();
+let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let deviceUID = "deviceUID_example"; // String |
+apiInstance.getDeviceFleets(projectUID, deviceUID).then((data) => {
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
+}, (error) => {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+| Name           | Type       | Description | Notes |
+| -------------- | ---------- | ----------- | ----- |
+| **projectUID** | **String** |             |
+| **deviceUID**  | **String** |             |
+
+### Return type
+
+[**GetProjectFleets200Response**](GetProjectFleets200Response.md)
+
+### Authorization
+
+[api_key](../README.md#api_key)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+## getFleetEnvironmentVariables
+
+> EnvironmentVariables getFleetEnvironmentVariables(projectUID, fleetUID)
+
+Get environment variables of a fleet
+
+### Example
+
+```javascript
+import * as NotehubJs from '@blues-inc/notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
+// Configure API key authorization: api_key
+let api_key = defaultClient.authentications['api_key'];
+api_key.apiKey = 'YOUR API KEY';
+
+let apiInstance = new NotehubJs.ProjectApi();
+let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let fleetUID = "fleetUID_example"; // String |
+apiInstance.getFleetEnvironmentVariables(projectUID, fleetUID).then((data) => {
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
+}, (error) => {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+| Name           | Type       | Description | Notes |
+| -------------- | ---------- | ----------- | ----- |
+| **projectUID** | **String** |             |
+| **fleetUID**   | **String** |             |
+
+### Return type
+
+[**EnvironmentVariables**](EnvironmentVariables.md)
+
+### Authorization
+
+[api_key](../README.md#api_key)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
 ## getProject
 
 > Project getProject(projectUID)
@@ -440,106 +724,6 @@ apiInstance.getProjectByProduct(productUID).then(
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-## getProjectDevicePublicKeys
-
-> GetProjectDevicePublicKeys200Response getProjectDevicePublicKeys(projectUID, opts)
-
-Get Device Public Keys of a Project
-
-### Example
-
-```javascript
-import * as NotehubJs from '@blues-inc/notehub-js';
-let defaultClient = NotehubJs.ApiClient.instance;
-// Configure API key authorization: api_key
-let api_key = defaultClient.authentications['api_key'];
-api_key.apiKey = 'YOUR API KEY';
-
-let apiInstance = new NotehubJs.ProjectApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
-let opts = {
-  'pageSize': 50, // Number |
-  'pageNum': 1 // Number |
-};
-apiInstance.getProjectDevicePublicKeys(projectUID, opts).then((data) => {
-  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
-}, (error) => {
-  console.error(error);
-});
-
-```
-
-### Parameters
-
-| Name           | Type       | Description | Notes                      |
-| -------------- | ---------- | ----------- | -------------------------- |
-| **projectUID** | **String** |             |
-| **pageSize**   | **Number** |             | [optional] [default to 50] |
-| **pageNum**    | **Number** |             | [optional] [default to 1]  |
-
-### Return type
-
-[**GetProjectDevicePublicKeys200Response**](GetProjectDevicePublicKeys200Response.md)
-
-### Authorization
-
-[api_key](../README.md#api_key)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-## getProjectDevices
-
-> GetProjectDevices200Response getProjectDevices(projectUID, opts)
-
-Get Devices of a Project
-
-### Example
-
-```javascript
-import * as NotehubJs from '@blues-inc/notehub-js';
-let defaultClient = NotehubJs.ApiClient.instance;
-// Configure API key authorization: api_key
-let api_key = defaultClient.authentications['api_key'];
-api_key.apiKey = 'YOUR API KEY';
-
-let apiInstance = new NotehubJs.ProjectApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
-let opts = {
-  'pageSize': 50, // Number |
-  'pageNum': 1 // Number |
-};
-apiInstance.getProjectDevices(projectUID, opts).then((data) => {
-  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
-}, (error) => {
-  console.error(error);
-});
-
-```
-
-### Parameters
-
-| Name           | Type       | Description | Notes                      |
-| -------------- | ---------- | ----------- | -------------------------- |
-| **projectUID** | **String** |             |
-| **pageSize**   | **Number** |             | [optional] [default to 50] |
-| **pageNum**    | **Number** |             | [optional] [default to 1]  |
-
-### Return type
-
-[**GetProjectDevices200Response**](GetProjectDevices200Response.md)
-
-### Authorization
-
-[api_key](../README.md#api_key)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
 ## getProjectEnvironmentVariables
 
 > EnvironmentVariables getProjectEnvironmentVariables(projectUID)
@@ -584,75 +768,11 @@ apiInstance.getProjectEnvironmentVariables(projectUID).then((data) => {
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-## getProjectEvents
+## getProjectFleets
 
-> GetProjectEvents200Response getProjectEvents(projectUID, opts)
+> GetProjectFleets200Response getProjectFleets(projectUID)
 
-Get Events of a Project
-
-### Example
-
-```javascript
-import * as NotehubJs from '@blues-inc/notehub-js';
-let defaultClient = NotehubJs.ApiClient.instance;
-// Configure API key authorization: api_key
-let api_key = defaultClient.authentications['api_key'];
-api_key.apiKey = 'YOUR API KEY';
-
-let apiInstance = new NotehubJs.ProjectApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
-let opts = {
-  'pageSize': 50, // Number |
-  'pageNum': 1, // Number |
-  'deviceUID': "deviceUID_example", // String | A Device UID.
-  'sortBy': "'captured'", // String |
-  'sortOrder': "'asc'", // String |
-  'startDate': 1628631763, // Number | Unix timestamp
-  'endDate': 1657894210, // Number | Unix timestamp
-  'systemFilesOnly': true, // Boolean |
-  'files': _health.qo, data.qo // String |
-};
-apiInstance.getProjectEvents(projectUID, opts).then((data) => {
-  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
-}, (error) => {
-  console.error(error);
-});
-
-```
-
-### Parameters
-
-| Name                | Type        | Description    | Notes                                      |
-| ------------------- | ----------- | -------------- | ------------------------------------------ |
-| **projectUID**      | **String**  |                |
-| **pageSize**        | **Number**  |                | [optional] [default to 50]                 |
-| **pageNum**         | **Number**  |                | [optional] [default to 1]                  |
-| **deviceUID**       | **String**  | A Device UID.  | [optional]                                 |
-| **sortBy**          | **String**  |                | [optional] [default to &#39;captured&#39;] |
-| **sortOrder**       | **String**  |                | [optional] [default to &#39;asc&#39;]      |
-| **startDate**       | **Number**  | Unix timestamp | [optional]                                 |
-| **endDate**         | **Number**  | Unix timestamp | [optional]                                 |
-| **systemFilesOnly** | **Boolean** |                | [optional]                                 |
-| **files**           | **String**  |                | [optional]                                 |
-
-### Return type
-
-[**GetProjectEvents200Response**](GetProjectEvents200Response.md)
-
-### Authorization
-
-[api_key](../README.md#api_key)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-## getProjectEventsByCursor
-
-> GetProjectEventsByCursor200Response getProjectEventsByCursor(projectUID, opts)
-
-Get Events of a Project by cursor
+Get Project Fleets
 
 ### Example
 
@@ -665,16 +785,7 @@ api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.ProjectApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
-let opts = {
-  'limit': 50, // Number |
-  'cursor': "cursor_example", // String | A cursor, which can be obtained from the `next_cursor` value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included.
-  'sortOrder': "'asc'", // String |
-  'systemFilesOnly': true, // Boolean |
-  'files': _health.qo, data.qo, // String |
-  'fleetUID': "fleetUID_example", // String |
-  'deviceUID': "deviceUID_example" // String | A Device UID.
-};
-apiInstance.getProjectEventsByCursor(projectUID, opts).then((data) => {
+apiInstance.getProjectFleets(projectUID).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
@@ -684,72 +795,13 @@ apiInstance.getProjectEventsByCursor(projectUID, opts).then((data) => {
 
 ### Parameters
 
-| Name                | Type        | Description                                                                                                                                                                                                                                                                                                                                                                | Notes                                 |
-| ------------------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------- |
-| **projectUID**      | **String**  |                                                                                                                                                                                                                                                                                                                                                                            |
-| **limit**           | **Number**  |                                                                                                                                                                                                                                                                                                                                                                            | [optional] [default to 50]            |
-| **cursor**          | **String**  | A cursor, which can be obtained from the &#x60;next_cursor&#x60; value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included. | [optional]                            |
-| **sortOrder**       | **String**  |                                                                                                                                                                                                                                                                                                                                                                            | [optional] [default to &#39;asc&#39;] |
-| **systemFilesOnly** | **Boolean** |                                                                                                                                                                                                                                                                                                                                                                            | [optional]                            |
-| **files**           | **String**  |                                                                                                                                                                                                                                                                                                                                                                            | [optional]                            |
-| **fleetUID**        | **String**  |                                                                                                                                                                                                                                                                                                                                                                            | [optional]                            |
-| **deviceUID**       | **String**  | A Device UID.                                                                                                                                                                                                                                                                                                                                                              | [optional]                            |
-
-### Return type
-
-[**GetProjectEventsByCursor200Response**](GetProjectEventsByCursor200Response.md)
-
-### Authorization
-
-[api_key](../README.md#api_key)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-## getProjectFleetDevices
-
-> GetProjectDevices200Response getProjectFleetDevices(projectUID, fleetUID, opts)
-
-Get Devices of a Fleet within a Project
-
-### Example
-
-```javascript
-import * as NotehubJs from '@blues-inc/notehub-js';
-let defaultClient = NotehubJs.ApiClient.instance;
-// Configure API key authorization: api_key
-let api_key = defaultClient.authentications['api_key'];
-api_key.apiKey = 'YOUR API KEY';
-
-let apiInstance = new NotehubJs.ProjectApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
-let fleetUID = "fleetUID_example"; // String |
-let opts = {
-  'pageSize': 50, // Number |
-  'pageNum': 1 // Number |
-};
-apiInstance.getProjectFleetDevices(projectUID, fleetUID, opts).then((data) => {
-  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
-}, (error) => {
-  console.error(error);
-});
-
-```
-
-### Parameters
-
-| Name           | Type       | Description | Notes                      |
-| -------------- | ---------- | ----------- | -------------------------- |
+| Name           | Type       | Description | Notes |
+| -------------- | ---------- | ----------- | ----- |
 | **projectUID** | **String** |             |
-| **fleetUID**   | **String** |             |
-| **pageSize**   | **Number** |             | [optional] [default to 50] |
-| **pageNum**    | **Number** |             | [optional] [default to 1]  |
 
 ### Return type
 
-[**GetProjectDevices200Response**](GetProjectDevices200Response.md)
+[**GetProjectFleets200Response**](GetProjectFleets200Response.md)
 
 ### Authorization
 
@@ -893,11 +945,11 @@ This endpoint does not need any parameter.
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-## postProvisionProjectDevice
+## putDeviceFleets
 
-> Object postProvisionProjectDevice(projectUID, deviceUID, postProvisionProjectDeviceRequest)
+> GetProjectFleets200Response putDeviceFleets(projectUID, deviceUID, putDeviceFleetsRequest)
 
-Provision Device for a Project
+Add Device to Fleets
 
 ### Example
 
@@ -911,8 +963,8 @@ api_key.apiKey = 'YOUR API KEY';
 let apiInstance = new NotehubJs.ProjectApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
 let deviceUID = "deviceUID_example"; // String |
-let postProvisionProjectDeviceRequest = new NotehubJs.PostProvisionProjectDeviceRequest(); // PostProvisionProjectDeviceRequest | Provision a device to a specific ProductUID
-apiInstance.postProvisionProjectDevice(projectUID, deviceUID, postProvisionProjectDeviceRequest).then((data) => {
+let putDeviceFleetsRequest = new NotehubJs.PutDeviceFleetsRequest(); // PutDeviceFleetsRequest | The fleets to add to the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error.
+apiInstance.putDeviceFleets(projectUID, deviceUID, putDeviceFleetsRequest).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
@@ -922,15 +974,63 @@ apiInstance.postProvisionProjectDevice(projectUID, deviceUID, postProvisionProje
 
 ### Parameters
 
-| Name                                  | Type                                                                          | Description                                 | Notes |
-| ------------------------------------- | ----------------------------------------------------------------------------- | ------------------------------------------- | ----- |
-| **projectUID**                        | **String**                                                                    |                                             |
-| **deviceUID**                         | **String**                                                                    |                                             |
-| **postProvisionProjectDeviceRequest** | [**PostProvisionProjectDeviceRequest**](PostProvisionProjectDeviceRequest.md) | Provision a device to a specific ProductUID |
+| Name                       | Type                                                    | Description                                                                                                                                                                                                                                                                                      | Notes |
+| -------------------------- | ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----- |
+| **projectUID**             | **String**                                              |                                                                                                                                                                                                                                                                                                  |
+| **deviceUID**              | **String**                                              |                                                                                                                                                                                                                                                                                                  |
+| **putDeviceFleetsRequest** | [**PutDeviceFleetsRequest**](PutDeviceFleetsRequest.md) | The fleets to add to the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error. |
 
 ### Return type
 
-**Object**
+[**GetProjectFleets200Response**](GetProjectFleets200Response.md)
+
+### Authorization
+
+[api_key](../README.md#api_key)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+## putFleetEnvironmentVariables
+
+> EnvironmentVariables putFleetEnvironmentVariables(projectUID, fleetUID, environmentVariables)
+
+Put environment variables of a fleet
+
+### Example
+
+```javascript
+import * as NotehubJs from '@blues-inc/notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
+// Configure API key authorization: api_key
+let api_key = defaultClient.authentications['api_key'];
+api_key.apiKey = 'YOUR API KEY';
+
+let apiInstance = new NotehubJs.ProjectApi();
+let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let fleetUID = "fleetUID_example"; // String |
+let environmentVariables = new NotehubJs.EnvironmentVariables(); // EnvironmentVariables | Environment variables to be added to the fleet
+apiInstance.putFleetEnvironmentVariables(projectUID, fleetUID, environmentVariables).then((data) => {
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
+}, (error) => {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+| Name                     | Type                                                | Description                                    | Notes |
+| ------------------------ | --------------------------------------------------- | ---------------------------------------------- | ----- |
+| **projectUID**           | **String**                                          |                                                |
+| **fleetUID**             | **String**                                          |                                                |
+| **environmentVariables** | [**EnvironmentVariables**](EnvironmentVariables.md) | Environment variables to be added to the fleet |
+
+### Return type
+
+[**EnvironmentVariables**](EnvironmentVariables.md)
 
 ### Authorization
 
@@ -1025,6 +1125,54 @@ apiInstance.setGlobalTransformation(projectUID, body).then(() => {
 ### Return type
 
 null (empty response body)
+
+### Authorization
+
+[api_key](../README.md#api_key)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+## updateFleet
+
+> Fleet updateFleet(projectUID, fleetUID, updateFleetRequest)
+
+Update Fleet
+
+### Example
+
+```javascript
+import * as NotehubJs from '@blues-inc/notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
+// Configure API key authorization: api_key
+let api_key = defaultClient.authentications['api_key'];
+api_key.apiKey = 'YOUR API KEY';
+
+let apiInstance = new NotehubJs.ProjectApi();
+let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let fleetUID = "fleetUID_example"; // String |
+let updateFleetRequest = new NotehubJs.UpdateFleetRequest(); // UpdateFleetRequest | Fleet details to update
+apiInstance.updateFleet(projectUID, fleetUID, updateFleetRequest).then((data) => {
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
+}, (error) => {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+| Name                   | Type                                            | Description             | Notes |
+| ---------------------- | ----------------------------------------------- | ----------------------- | ----- |
+| **projectUID**         | **String**                                      |                         |
+| **fleetUID**           | **String**                                      |                         |
+| **updateFleetRequest** | [**UpdateFleetRequest**](UpdateFleetRequest.md) | Fleet details to update |
+
+### Return type
+
+[**Fleet**](Fleet.md)
 
 ### Authorization
 

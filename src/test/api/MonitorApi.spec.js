@@ -28,7 +28,7 @@
   var instance;
 
   beforeEach(function () {
-    instance = new NotehubJs.RouteLogsApi();
+    instance = new NotehubJs.MonitorApi();
   });
 
   var getProperty = function (object, getter, property) {
@@ -43,21 +43,51 @@
     else object[property] = value;
   };
 
-  describe("RouteLogsApi", function () {
-    describe("getRouteLogsByEvent", function () {
-      it("should call getRouteLogsByEvent successfully", function (done) {
-        //uncomment below and update the code to test getRouteLogsByEvent
-        //instance.getRouteLogsByEvent(function(error) {
+  describe("MonitorApi", function () {
+    describe("createMonitor", function () {
+      it("should call createMonitor successfully", function (done) {
+        //uncomment below and update the code to test createMonitor
+        //instance.createMonitor(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});
         done();
       });
     });
-    describe("getRouteLogsByRoute", function () {
-      it("should call getRouteLogsByRoute successfully", function (done) {
-        //uncomment below and update the code to test getRouteLogsByRoute
-        //instance.getRouteLogsByRoute(function(error) {
+    describe("deleteMonitor", function () {
+      it("should call deleteMonitor successfully", function (done) {
+        //uncomment below and update the code to test deleteMonitor
+        //instance.deleteMonitor(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
+    describe("getMonitor", function () {
+      it("should call getMonitor successfully", function (done) {
+        //uncomment below and update the code to test getMonitor
+        //instance.getMonitor(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
+    describe("getMonitors", function () {
+      it("should call getMonitors successfully", function (done) {
+        //uncomment below and update the code to test getMonitors
+        //instance.getMonitors(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
+    describe("updateMonitor", function () {
+      it("should call updateMonitor successfully", function (done) {
+        //uncomment below and update the code to test updateMonitor
+        //instance.updateMonitor(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});
