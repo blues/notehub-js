@@ -1975,14 +1975,14 @@ paths:
                 $ref: "#/components/schemas/Monitor"
         default:
           $ref: "#/components/responses/ErrorResponse"
-  
+
   /v1/projects/{projectUID}/alerts:
     get:
       tags: [ "alert" ]
       operationId: getAlerts
       description: Get list of defined Alerts
       security:
-        - api_key: []
+        - api_key: [ ]
       parameters:
         - $ref: "#/components/parameters/projectUIDParam"
         - $ref: "#/components/parameters/pageSizeParam"
@@ -1992,7 +1992,7 @@ paths:
           $ref: "#/components/responses/AlertsResponse"
         default:
           $ref: "#/components/responses/ErrorResponse"
-  
+
   /v1/projects/{projectUID}/firmware:
     get:
       tags: [ "project" ]
@@ -4186,23 +4186,17 @@ components:
             - less_than_or_equal_to
             - equal_to
             - not_equal_to
+          description: A comparison operation to apply to the value selected by the source_selector [greater_than, greater_than_or_equal_to, less_than, less_than_or_equal_to, equal_to, not_equal_to]
+        threshold:
+          type: integer
           description: The type of condition to apply to the value selected by the source_selector
-        thresholds:
-          type: object
-          properties:
-            alarm:
-              type: number
-              description: The value that triggers the monitor at an alarm level
         alert_routes:
           type: array
           items:
-            type: object
-            properties:
-              email_addresses:
-                type: array
-                items:
-                  type: string
-                description: List of email addresses in the project that will receive alerts.
+            oneOf:
+              - $ref: "#/components/schemas/SlackWebHookNotification"
+              - $ref: "#/components/schemas/SlackBearerNotification"
+              - $ref: "#/components/schemas/EmailNotification"
         last_routed_at:
           type: string
           description: The last time the monitor was evaluated and routed.
@@ -4214,7 +4208,29 @@ components:
           description:
             The time period to wait before routing another event after the monitor
             | has been triggered. It follows the format of a number followed by a time unit.
+          pattern: '^[0-9]+[smh]$'
           example: 10m or 5h30m40s
+        aggregate_function:
+          type: string
+          enum:
+            - none
+            - sum
+            - average
+            - max
+            - min
+          description: Aggregate function to apply to the selected values before applying the condition. [none, sum, average, max, min]
+        aggregate_window:
+          type: string
+          pattern: '^[0-9]+[smh]$'
+          description:
+            The time window to aggregate the selected values. It follows the format of a number followed by a time unit
+          example: 10m or 5h30m40s
+        per_device:
+          type: boolean
+          description: Only relevant when using an aggregate_function. If true, the monitor will be evaluated per device,
+            | rather than across the set of selected devices. If true then if a single device matches the specified criteria,
+            | and alert will be created, otherwise the aggregate function will be applied across all devices.
+
 
     CreateMonitor:
       allOf:
@@ -4276,7 +4292,7 @@ components:
           description: Alert UID
         monitor_uid:
           type: string
-          description: Monitor UID  
+          description: Monitor UID
         device_uid:
           type: string
           description: Device UID
@@ -4294,7 +4310,7 @@ components:
           description: The version of the alert
         alert_source:
           type: string
-          enum: [app, device]
+          enum: [ app, device ]
           description: The source of the alert
         source:
           type: string
@@ -4306,14 +4322,14 @@ components:
             properties:
               alert_source:
                 type: string
-                enum: [app, device]
+                enum: [ app, device ]
                 description: The source of the alert
               source:
                 type: string
                 description: The UID of the source of the alert
               source_type:
                 type: string
-                enum: [event]
+                enum: [ event ]
                 description: The type of source.
               value:
                 type: number
@@ -4331,7 +4347,7 @@ components:
             properties:
               notification_type:
                 type: string
-                enum: [email, slack]
+                enum: [ email, slack ]
                 description: The type of notification
               status:
                 type: number
@@ -4408,6 +4424,49 @@ components:
         built:
           type: string
           description: The date the firmware was built
+
+    SlackBearerNotification:
+      type: object
+      properties:
+        token:
+          type: string
+          description: The bearer token for the Slack app.
+        channel:
+          type: string
+          description: The channel to send the message to.
+        message_type:
+          type: string
+          enum:
+            - text
+            - blocks
+          description: text or blocks
+        text:
+          type: string
+          description: The text of the message, or the blocks definition
+
+    SlackWebHookNotification:
+      type: object
+      properties:
+        url:
+          type: string
+          description: The URL of the Slack webhook.
+        message_type:
+          type: string
+          enum:
+            - text
+            - blocks
+          description: text or blocks
+        text:
+          type: string
+          description: The text of the message, or the blocks definition
+
+    EmailNotification:
+      type: object
+      properties:
+        email:
+          type: string
+          description: Email Address
+          example: "example@blues.com"
 
     OTAUpdateRequest:
       type: object
