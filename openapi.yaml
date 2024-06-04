@@ -4361,6 +4361,9 @@ components:
         device_uid:
           type: string
           description: The device UID
+        tags:
+          type: string
+          description: The tags associated with the device
         notecard_current_firmware:
           $ref: "#/components/schemas/FirmwareStatus"
         notecard_dfu_began_at:
