@@ -16,12 +16,14 @@ All URIs are relative to *https://api.notefile.net*
 | [**disableGlobalTransformation**](ProjectApi.md#disableGlobalTransformation)           | **POST** /v1/projects/{projectUID}/global-transformation/disable                   |
 | [**enableGlobalTransformation**](ProjectApi.md#enableGlobalTransformation)             | **POST** /v1/projects/{projectUID}/global-transformation/enable                    |
 | [**getDeviceFleets**](ProjectApi.md#getDeviceFleets)                                   | **GET** /v1/projects/{projectUID}/devices/{deviceUID}/fleets                       |
+| [**getFirmwareInfo**](ProjectApi.md#getFirmwareInfo)                                   | **GET** /v1/projects/{projectUID}/firmware                                         |
 | [**getFleetEnvironmentVariables**](ProjectApi.md#getFleetEnvironmentVariables)         | **GET** /v1/projects/{projectUID}/fleets/{fleetUID}/environment_variables          |
 | [**getProject**](ProjectApi.md#getProject)                                             | **GET** /v1/projects/{projectUID}                                                  |
 | [**getProjectByProduct**](ProjectApi.md#getProjectByProduct)                           | **GET** /v1/products/{productUID}/project                                          |
 | [**getProjectEnvironmentVariables**](ProjectApi.md#getProjectEnvironmentVariables)     | **GET** /v1/projects/{projectUID}/environment_variables                            |
 | [**getProjectFleets**](ProjectApi.md#getProjectFleets)                                 | **GET** /v1/projects/{projectUID}/fleets                                           |
 | [**getProjectMembers**](ProjectApi.md#getProjectMembers)                               | **GET** /v1/projects/{projectUID}/members                                          |
+| [**getProjectOTAStatus**](ProjectApi.md#getProjectOTAStatus)                           | **GET** /v1/projects/{projectUID}/ota/status                                       |
 | [**getProjectProducts**](ProjectApi.md#getProjectProducts)                             | **GET** /v1/projects/{projectUID}/products                                         |
 | [**getProjects**](ProjectApi.md#getProjects)                                           | **GET** /v1/projects                                                               |
 | [**putDeviceFleets**](ProjectApi.md#putDeviceFleets)                                   | **PUT** /v1/projects/{projectUID}/devices/{deviceUID}/fleets                       |
@@ -29,6 +31,7 @@ All URIs are relative to *https://api.notefile.net*
 | [**putProjectEnvironmentVariables**](ProjectApi.md#putProjectEnvironmentVariables)     | **PUT** /v1/projects/{projectUID}/environment_variables                            |
 | [**setGlobalTransformation**](ProjectApi.md#setGlobalTransformation)                   | **POST** /v1/projects/{projectUID}/global-transformation                           |
 | [**updateFleet**](ProjectApi.md#updateFleet)                                           | **PUT** /v1/projects/{projectUID}/fleets/{fleetUID}                                |
+| [**updateProjectFirmware**](ProjectApi.md#updateProjectFirmware)                       | **POST** /v1/projects/{projectUID}/ota/update                                      |
 
 ## cloneProject
 
@@ -237,7 +240,7 @@ api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.ProjectApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
-let deviceUID = "deviceUID_example"; // String |
+let deviceUID = dev:000000000000000; // String |
 let deleteDeviceFleetsRequest = new NotehubJs.DeleteDeviceFleetsRequest(); // DeleteDeviceFleetsRequest | The fleets to remove from the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error.
 apiInstance.deleteDeviceFleets(projectUID, deviceUID, deleteDeviceFleetsRequest).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
@@ -557,7 +560,7 @@ api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.ProjectApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
-let deviceUID = "deviceUID_example"; // String |
+let deviceUID = dev:000000000000000; // String |
 apiInstance.getDeviceFleets(projectUID, deviceUID).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
@@ -576,6 +579,66 @@ apiInstance.getDeviceFleets(projectUID, deviceUID).then((data) => {
 ### Return type
 
 [**GetProjectFleets200Response**](GetProjectFleets200Response.md)
+
+### Authorization
+
+[api_key](../README.md#api_key)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+## getFirmwareInfo
+
+> [FirmwareInfo] getFirmwareInfo(projectUID, opts)
+
+Get Available Firmware Information
+
+### Example
+
+```javascript
+import * as NotehubJs from '@blues-inc/notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
+// Configure API key authorization: api_key
+let api_key = defaultClient.authentications['api_key'];
+api_key.apiKey = 'YOUR API KEY';
+
+let apiInstance = new NotehubJs.ProjectApi();
+let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let opts = {
+  'product': "product_example", // String |
+  'firmwareType': "firmwareType_example", // String |
+  'version': "version_example", // String |
+  'target': "target_example", // String |
+  'filename': notecard-7.2.2.16518$20240410043100.bin, // String |
+  'md5': "md5_example", // String |
+  'unpublished': true // Boolean |
+};
+apiInstance.getFirmwareInfo(projectUID, opts).then((data) => {
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
+}, (error) => {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+| Name             | Type        | Description | Notes      |
+| ---------------- | ----------- | ----------- | ---------- |
+| **projectUID**   | **String**  |             |
+| **product**      | **String**  |             | [optional] |
+| **firmwareType** | **String**  |             | [optional] |
+| **version**      | **String**  |             | [optional] |
+| **target**       | **String**  |             | [optional] |
+| **filename**     | **String**  |             | [optional] |
+| **md5**          | **String**  |             | [optional] |
+| **unpublished**  | **Boolean** |             | [optional] |
+
+### Return type
+
+[**[FirmwareInfo]**](FirmwareInfo.md)
 
 ### Authorization
 
@@ -856,6 +919,62 @@ apiInstance.getProjectMembers(projectUID).then((data) => {
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
+## getProjectOTAStatus
+
+> [OTAStatusList] getProjectOTAStatus(projectUID, opts)
+
+Get Project OTA Status
+
+### Example
+
+```javascript
+import * as NotehubJs from '@blues-inc/notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
+// Configure API key authorization: api_key
+let api_key = defaultClient.authentications['api_key'];
+api_key.apiKey = 'YOUR API KEY';
+
+let apiInstance = new NotehubJs.ProjectApi();
+let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let opts = {
+  'deviceUIDs': ["null"], // [String] | An array of Device UIDs.
+  'fleetUIDs': ["null"], // [String] |
+  'deviceTags': ["null"], // [String] |
+  'pageSize': 50, // Number |
+  'pageNum': 1 // Number |
+};
+apiInstance.getProjectOTAStatus(projectUID, opts).then((data) => {
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
+}, (error) => {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+| Name           | Type                      | Description              | Notes                      |
+| -------------- | ------------------------- | ------------------------ | -------------------------- |
+| **projectUID** | **String**                |                          |
+| **deviceUIDs** | [**[String]**](String.md) | An array of Device UIDs. | [optional]                 |
+| **fleetUIDs**  | [**[String]**](String.md) |                          | [optional]                 |
+| **deviceTags** | [**[String]**](String.md) |                          | [optional]                 |
+| **pageSize**   | **Number**                |                          | [optional] [default to 50] |
+| **pageNum**    | **Number**                |                          | [optional] [default to 1]  |
+
+### Return type
+
+[**[OTAStatusList]**](OTAStatusList.md)
+
+### Authorization
+
+[api_key](../README.md#api_key)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
 ## getProjectProducts
 
 > GetProjectProducts200Response getProjectProducts(projectUID)
@@ -962,7 +1081,7 @@ api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.ProjectApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
-let deviceUID = "deviceUID_example"; // String |
+let deviceUID = dev:000000000000000; // String |
 let putDeviceFleetsRequest = new NotehubJs.PutDeviceFleetsRequest(); // PutDeviceFleetsRequest | The fleets to add to the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error.
 apiInstance.putDeviceFleets(projectUID, deviceUID, putDeviceFleetsRequest).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
@@ -1173,6 +1292,52 @@ apiInstance.updateFleet(projectUID, fleetUID, updateFleetRequest).then((data) =>
 ### Return type
 
 [**Fleet**](Fleet.md)
+
+### Authorization
+
+[api_key](../README.md#api_key)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+## updateProjectFirmware
+
+> [OTAUpdateStatus] updateProjectFirmware(projectUID, oTAUpdateRequest)
+
+Update Project Firmware
+
+### Example
+
+```javascript
+import * as NotehubJs from '@blues-inc/notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
+// Configure API key authorization: api_key
+let api_key = defaultClient.authentications['api_key'];
+api_key.apiKey = 'YOUR API KEY';
+
+let apiInstance = new NotehubJs.ProjectApi();
+let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let oTAUpdateRequest = new NotehubJs.OTAUpdateRequest(); // OTAUpdateRequest | Body or payload of firmware update
+apiInstance.updateProjectFirmware(projectUID, oTAUpdateRequest).then((data) => {
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
+}, (error) => {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+| Name                 | Type                                        | Description                        | Notes |
+| -------------------- | ------------------------------------------- | ---------------------------------- | ----- |
+| **projectUID**       | **String**                                  |                                    |
+| **oTAUpdateRequest** | [**OTAUpdateRequest**](OTAUpdateRequest.md) | Body or payload of firmware update |
+
+### Return type
+
+[**[OTAUpdateStatus]**](OTAUpdateStatus.md)
 
 ### Authorization
 
