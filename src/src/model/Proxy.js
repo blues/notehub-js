@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The Proxy model module.
  * @module model/Proxy
- * @version 1.0.20
+ * @version 1.0.21
  */
 class Proxy {
   /**

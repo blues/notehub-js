@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The Note model module.
  * @module model/Note
- * @version 1.0.20
+ * @version 1.0.21
  */
 class Note {
   /**
