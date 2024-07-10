@@ -111,7 +111,8 @@ var api = new NotehubJs.AlertApi()
 var projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // {String}
 var opts = {
   'pageSize': 50, // {Number}
-  'pageNum': 1 // {Number}
+  'pageNum': 1, // {Number}
+  'monitorUID': "monitorUID_example" // {String}
 };
 api.getAlerts(projectUID, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));

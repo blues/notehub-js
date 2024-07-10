@@ -1987,6 +1987,7 @@ paths:
         - $ref: "#/components/parameters/projectUIDParam"
         - $ref: "#/components/parameters/pageSizeParam"
         - $ref: "#/components/parameters/pageNumParam"
+        - $ref: "#/components/parameters/monitorUIDQueryParam"
       responses:
         "200":
           $ref: "#/components/responses/AlertsResponse"
@@ -2368,6 +2369,13 @@ components:
 
     productQueryParam:
       name: product
+      in: query
+      required: false
+      schema:
+        type: string
+
+    monitorUIDQueryParam:
+      name: monitorUID
       in: query
       required: false
       schema:
