@@ -56,6 +56,12 @@ class Alert {
           "String"
         );
       }
+      if (data.hasOwnProperty("monitor_name")) {
+        obj["monitor_name"] = ApiClient.convertToType(
+          data["monitor_name"],
+          "String"
+        );
+      }
       if (data.hasOwnProperty("device_uid")) {
         obj["device_uid"] = ApiClient.convertToType(
           data["device_uid"],
@@ -127,6 +133,19 @@ class Alert {
       throw new Error(
         "Expected the field `monitor_uid` to be a primitive type in the JSON string but got " +
           data["monitor_uid"]
+      );
+    }
+    // ensure the json data is a string
+    if (
+      data["monitor_name"] &&
+      !(
+        typeof data["monitor_name"] === "string" ||
+        data["monitor_name"] instanceof String
+      )
+    ) {
+      throw new Error(
+        "Expected the field `monitor_name` to be a primitive type in the JSON string but got " +
+          data["monitor_name"]
       );
     }
     // ensure the json data is a string
@@ -209,6 +228,12 @@ Alert.prototype["uid"] = undefined;
  * @member {String} monitor_uid
  */
 Alert.prototype["monitor_uid"] = undefined;
+
+/**
+ * Monitor Name
+ * @member {String} monitor_name
+ */
+Alert.prototype["monitor_name"] = undefined;
 
 /**
  * Device UID

@@ -6,6 +6,7 @@
 | ----------------- | ----------------------------------------------------------- | ------------------------------------ | ---------- |
 | **uid**           | **String**                                                  | Alert UID                            | [optional] |
 | **monitorUid**    | **String**                                                  | Monitor UID                          | [optional] |
+| **monitorName**   | **String**                                                  | Monitor Name                         | [optional] |
 | **deviceUid**     | **String**                                                  | Device UID                           | [optional] |
 | **createdAt**     | **Number**                                                  | The time the alert was created       | [optional] |
 | **value**         | **Number**                                                  | The value that triggered the alert   | [optional] |

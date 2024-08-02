@@ -62,6 +62,12 @@
       //expect(instance).to.be();
     });
 
+    it('should have the property monitorName (base name: "monitor_name")', function () {
+      // uncomment below and update the code to test the property monitorName
+      //var instance = new NotehubJs.Alert();
+      //expect(instance).to.be();
+    });
+
     it('should have the property deviceUid (base name: "device_uid")', function () {
       // uncomment below and update the code to test the property deviceUid
       //var instance = new NotehubJs.Alert();
