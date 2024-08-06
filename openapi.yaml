@@ -1167,6 +1167,23 @@ paths:
         - $ref: "#/components/parameters/endDateParam"
         - $ref: "#/components/parameters/systemFilesOnlyParam"
         - $ref: "#/components/parameters/filesQueryParam"
+        - name: deviceUIDs
+          description: Deprecated.
+          in: query
+          required: false
+          deprecated: true
+          schema:
+            type: array
+            items:
+              type: string
+        - name: since
+          description: Deprecated. 
+          in: query
+          required: false
+          deprecated: true
+          schema:
+            type: string
+
       responses:
         "200":
           $ref: "#/components/responses/EventsResponse"
@@ -1236,6 +1253,22 @@ paths:
         - $ref: "#/components/parameters/endDateParam"
         - $ref: "#/components/parameters/systemFilesOnlyParam"
         - $ref: "#/components/parameters/filesQueryParam"
+        - name: deviceUIDs
+          description: Deprecated.
+          in: query
+          required: false
+          deprecated: true
+          schema:
+            type: array
+            items:
+              type: string
+        - name: since
+          description: Deprecated. 
+          in: query
+          required: false
+          deprecated: true
+          schema:
+            type: string
 
       responses:
         "200":
