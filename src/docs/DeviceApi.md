@@ -100,7 +100,7 @@ api_key.apiKey = 'YOUR API KEY';
 let apiInstance = new NotehubJs.DeviceApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
 let deviceUID = dev:000000000000000; // String |
-let purge = "'false'"; // String |
+let purge = false; // Boolean |
 apiInstance.deleteProjectDevice(projectUID, deviceUID, purge).then(() => {
   console.log('API called successfully.');
 }, (error) => {
@@ -111,11 +111,11 @@ apiInstance.deleteProjectDevice(projectUID, deviceUID, purge).then(() => {
 
 ### Parameters
 
-| Name           | Type       | Description | Notes                        |
-| -------------- | ---------- | ----------- | ---------------------------- |
-| **projectUID** | **String** |             |
-| **deviceUID**  | **String** |             |
-| **purge**      | **String** |             | [default to &#39;false&#39;] |
+| Name           | Type        | Description | Notes              |
+| -------------- | ----------- | ----------- | ------------------ |
+| **projectUID** | **String**  |             |
+| **deviceUID**  | **String**  |             |
+| **purge**      | **Boolean** |             | [default to false] |
 
 ### Return type
 

@@ -37,7 +37,9 @@ let opts = {
   'startDate': 1628631763, // Number | Unix timestamp
   'endDate': 1657894210, // Number | Unix timestamp
   'systemFilesOnly': true, // Boolean |
-  'files': _health.qo, data.qo // String |
+  'files': _health.qo, data.qo, // String |
+  'deviceUIDs': ["null"], // [String] | Deprecated.
+  'since': "since_example" // String | Deprecated.
 };
 apiInstance.getFleetEvents(projectUID, fleetUID, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
@@ -49,19 +51,21 @@ apiInstance.getFleetEvents(projectUID, fleetUID, opts).then((data) => {
 
 ### Parameters
 
-| Name                | Type        | Description    | Notes                                      |
-| ------------------- | ----------- | -------------- | ------------------------------------------ |
-| **projectUID**      | **String**  |                |
-| **fleetUID**        | **String**  |                |
-| **pageSize**        | **Number**  |                | [optional] [default to 50]                 |
-| **pageNum**         | **Number**  |                | [optional] [default to 1]                  |
-| **deviceUID**       | **String**  | A Device UID.  | [optional]                                 |
-| **sortBy**          | **String**  |                | [optional] [default to &#39;captured&#39;] |
-| **sortOrder**       | **String**  |                | [optional] [default to &#39;asc&#39;]      |
-| **startDate**       | **Number**  | Unix timestamp | [optional]                                 |
-| **endDate**         | **Number**  | Unix timestamp | [optional]                                 |
-| **systemFilesOnly** | **Boolean** |                | [optional]                                 |
-| **files**           | **String**  |                | [optional]                                 |
+| Name                | Type                      | Description    | Notes                                      |
+| ------------------- | ------------------------- | -------------- | ------------------------------------------ |
+| **projectUID**      | **String**                |                |
+| **fleetUID**        | **String**                |                |
+| **pageSize**        | **Number**                |                | [optional] [default to 50]                 |
+| **pageNum**         | **Number**                |                | [optional] [default to 1]                  |
+| **deviceUID**       | **String**                | A Device UID.  | [optional]                                 |
+| **sortBy**          | **String**                |                | [optional] [default to &#39;captured&#39;] |
+| **sortOrder**       | **String**                |                | [optional] [default to &#39;asc&#39;]      |
+| **startDate**       | **Number**                | Unix timestamp | [optional]                                 |
+| **endDate**         | **Number**                | Unix timestamp | [optional]                                 |
+| **systemFilesOnly** | **Boolean**               |                | [optional]                                 |
+| **files**           | **String**                |                | [optional]                                 |
+| **deviceUIDs**      | [**[String]**](String.md) | Deprecated.    | [optional]                                 |
+| **since**           | **String**                | Deprecated.    | [optional]                                 |
 
 ### Return type
 
@@ -166,7 +170,9 @@ let opts = {
   'startDate': 1628631763, // Number | Unix timestamp
   'endDate': 1657894210, // Number | Unix timestamp
   'systemFilesOnly': true, // Boolean |
-  'files': _health.qo, data.qo // String |
+  'files': _health.qo, data.qo, // String |
+  'deviceUIDs': ["null"], // [String] | Deprecated.
+  'since': "since_example" // String | Deprecated.
 };
 apiInstance.getProjectEvents(projectUID, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
@@ -178,18 +184,20 @@ apiInstance.getProjectEvents(projectUID, opts).then((data) => {
 
 ### Parameters
 
-| Name                | Type        | Description    | Notes                                      |
-| ------------------- | ----------- | -------------- | ------------------------------------------ |
-| **projectUID**      | **String**  |                |
-| **pageSize**        | **Number**  |                | [optional] [default to 50]                 |
-| **pageNum**         | **Number**  |                | [optional] [default to 1]                  |
-| **deviceUID**       | **String**  | A Device UID.  | [optional]                                 |
-| **sortBy**          | **String**  |                | [optional] [default to &#39;captured&#39;] |
-| **sortOrder**       | **String**  |                | [optional] [default to &#39;asc&#39;]      |
-| **startDate**       | **Number**  | Unix timestamp | [optional]                                 |
-| **endDate**         | **Number**  | Unix timestamp | [optional]                                 |
-| **systemFilesOnly** | **Boolean** |                | [optional]                                 |
-| **files**           | **String**  |                | [optional]                                 |
+| Name                | Type                      | Description    | Notes                                      |
+| ------------------- | ------------------------- | -------------- | ------------------------------------------ |
+| **projectUID**      | **String**                |                |
+| **pageSize**        | **Number**                |                | [optional] [default to 50]                 |
+| **pageNum**         | **Number**                |                | [optional] [default to 1]                  |
+| **deviceUID**       | **String**                | A Device UID.  | [optional]                                 |
+| **sortBy**          | **String**                |                | [optional] [default to &#39;captured&#39;] |
+| **sortOrder**       | **String**                |                | [optional] [default to &#39;asc&#39;]      |
+| **startDate**       | **Number**                | Unix timestamp | [optional]                                 |
+| **endDate**         | **Number**                | Unix timestamp | [optional]                                 |
+| **systemFilesOnly** | **Boolean**               |                | [optional]                                 |
+| **files**           | **String**                |                | [optional]                                 |
+| **deviceUIDs**      | [**[String]**](String.md) | Deprecated.    | [optional]                                 |
+| **since**           | **String**                | Deprecated.    | [optional]                                 |
 
 ### Return type
 
