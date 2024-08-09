@@ -127,7 +127,7 @@ export default class DeviceApi {
    * Delete Device
    * @param {String} projectUID
    * @param {String} deviceUID
-   * @param {module:model/String} purge
+   * @param {Boolean} purge
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
    */
   deleteProjectDeviceWithHttpInfo(projectUID, deviceUID, purge) {
@@ -185,7 +185,7 @@ export default class DeviceApi {
    * Delete Device
    * @param {String} projectUID
    * @param {String} deviceUID
-   * @param {module:model/String} purge
+   * @param {Boolean} purge
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}
    */
   deleteProjectDevice(projectUID, deviceUID, purge) {

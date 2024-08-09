@@ -48,6 +48,8 @@ export default class EventApi {
    * @param {Number} opts.endDate Unix timestamp
    * @param {Boolean} opts.systemFilesOnly
    * @param {String} opts.files
+   * @param {Array.<String>} opts.deviceUIDs Deprecated.
+   * @param {String} opts.since Deprecated.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetProjectEvents200Response} and HTTP response
    */
   getFleetEventsWithHttpInfo(projectUID, fleetUID, opts) {
@@ -80,6 +82,11 @@ export default class EventApi {
       endDate: opts["endDate"],
       systemFilesOnly: opts["systemFilesOnly"],
       files: opts["files"],
+      deviceUIDs: this.apiClient.buildCollectionParam(
+        opts["deviceUIDs"],
+        "multi"
+      ),
+      since: opts["since"],
     };
     let headerParams = {};
     let formParams = {};
@@ -118,6 +125,8 @@ export default class EventApi {
    * @param {Number} opts.endDate Unix timestamp
    * @param {Boolean} opts.systemFilesOnly
    * @param {String} opts.files
+   * @param {Array.<String>} opts.deviceUIDs Deprecated.
+   * @param {String} opts.since Deprecated.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetProjectEvents200Response}
    */
   getFleetEvents(projectUID, fleetUID, opts) {
@@ -234,6 +243,8 @@ export default class EventApi {
    * @param {Number} opts.endDate Unix timestamp
    * @param {Boolean} opts.systemFilesOnly
    * @param {String} opts.files
+   * @param {Array.<String>} opts.deviceUIDs Deprecated.
+   * @param {String} opts.since Deprecated.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetProjectEvents200Response} and HTTP response
    */
   getProjectEventsWithHttpInfo(projectUID, opts) {
@@ -259,6 +270,11 @@ export default class EventApi {
       endDate: opts["endDate"],
       systemFilesOnly: opts["systemFilesOnly"],
       files: opts["files"],
+      deviceUIDs: this.apiClient.buildCollectionParam(
+        opts["deviceUIDs"],
+        "multi"
+      ),
+      since: opts["since"],
     };
     let headerParams = {};
     let formParams = {};
@@ -296,6 +312,8 @@ export default class EventApi {
    * @param {Number} opts.endDate Unix timestamp
    * @param {Boolean} opts.systemFilesOnly
    * @param {String} opts.files
+   * @param {Array.<String>} opts.deviceUIDs Deprecated.
+   * @param {String} opts.since Deprecated.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetProjectEvents200Response}
    */
   getProjectEvents(projectUID, opts) {
