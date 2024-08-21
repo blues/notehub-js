@@ -2254,7 +2254,11 @@ components:
       in: query
       required: false
       schema:
-        type: string
+        type: array
+        items:
+          type: string
+      style: form
+      explode: true
 
     deviceUIDsParamQuery:
       name: deviceUIDs
@@ -2374,7 +2378,11 @@ components:
       in: query
       required: false
       schema:
-        type: string
+        type: array
+        items:
+          type: string
+      style: form
+      explode: true
       description: Filter by Serial Number
 
     fleetUIDFilterQueryParam:
@@ -2382,7 +2390,11 @@ components:
       in: query
       required: false
       schema:
-        type: string
+        type: array
+        items:
+          type: string
+      style: form
+      explode: true
       description: Filter by Fleet UID
 
     sessionUIDFilterParam:
@@ -2390,7 +2402,11 @@ components:
       in: query
       required: false
       schema:
-        type: string
+        type: array
+        items:
+          type: string
+      style: form
+      explode: true
       description: Filter by Session UID
 
     eventUIDFilterQueryParam:
@@ -2398,7 +2414,11 @@ components:
       in: query
       required: false
       schema:
-        type: string
+        type: array
+        items:
+          type: string
+      style: form
+      explode: true
       description: Filter by Event UID
 
     selectFieldsParam:
