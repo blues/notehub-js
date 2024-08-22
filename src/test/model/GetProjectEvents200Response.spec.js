@@ -61,5 +61,11 @@
       //var instance = new NotehubJs.GetProjectEvents200Response();
       //expect(instance).to.be();
     });
+
+    it('should have the property through (base name: "through")', function () {
+      // uncomment below and update the code to test the property through
+      //var instance = new NotehubJs.GetProjectEvents200Response();
+      //expect(instance).to.be();
+    });
   });
 });

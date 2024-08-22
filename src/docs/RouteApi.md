@@ -179,7 +179,7 @@ let routeUID = route:cbd20093cba58392c9f9bbdd0cdeb1a0; // String |
 let opts = {
   'pageSize': 50, // Number |
   'pageNum': 1, // Number |
-  'deviceUID': "deviceUID_example", // String | A Device UID.
+  'deviceUID': ["null"], // [String] | A Device UID.
   'sortBy': "'captured'", // String |
   'sortOrder': "'asc'", // String |
   'startDate': 1628631763, // Number | Unix timestamp
@@ -197,19 +197,19 @@ apiInstance.getRouteLogsByRoute(projectUID, routeUID, opts).then((data) => {
 
 ### Parameters
 
-| Name                | Type        | Description    | Notes                                      |
-| ------------------- | ----------- | -------------- | ------------------------------------------ |
-| **projectUID**      | **String**  |                |
-| **routeUID**        | **String**  |                |
-| **pageSize**        | **Number**  |                | [optional] [default to 50]                 |
-| **pageNum**         | **Number**  |                | [optional] [default to 1]                  |
-| **deviceUID**       | **String**  | A Device UID.  | [optional]                                 |
-| **sortBy**          | **String**  |                | [optional] [default to &#39;captured&#39;] |
-| **sortOrder**       | **String**  |                | [optional] [default to &#39;asc&#39;]      |
-| **startDate**       | **Number**  | Unix timestamp | [optional]                                 |
-| **endDate**         | **Number**  | Unix timestamp | [optional]                                 |
-| **systemFilesOnly** | **Boolean** |                | [optional]                                 |
-| **files**           | **String**  |                | [optional]                                 |
+| Name                | Type                      | Description    | Notes                                      |
+| ------------------- | ------------------------- | -------------- | ------------------------------------------ |
+| **projectUID**      | **String**                |                |
+| **routeUID**        | **String**                |                |
+| **pageSize**        | **Number**                |                | [optional] [default to 50]                 |
+| **pageNum**         | **Number**                |                | [optional] [default to 1]                  |
+| **deviceUID**       | [**[String]**](String.md) | A Device UID.  | [optional]                                 |
+| **sortBy**          | **String**                |                | [optional] [default to &#39;captured&#39;] |
+| **sortOrder**       | **String**                |                | [optional] [default to &#39;asc&#39;]      |
+| **startDate**       | **Number**                | Unix timestamp | [optional]                                 |
+| **endDate**         | **Number**                | Unix timestamp | [optional]                                 |
+| **systemFilesOnly** | **Boolean**               |                | [optional]                                 |
+| **files**           | **String**                |                | [optional]                                 |
 
 ### Return type
 
