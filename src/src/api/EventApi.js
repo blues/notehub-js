@@ -20,7 +20,7 @@ import GetRouteLogsByRoute200ResponseInner from "../model/GetRouteLogsByRoute200
 /**
  * Event service.
  * @module api/EventApi
- * @version 1.0.21
+ * @version 1.0.22
  */
 export default class EventApi {
   /**
@@ -37,22 +37,27 @@ export default class EventApi {
   /**
    * Get Events of a Fleet
    * @param {String} projectUID
-   * @param {String} fleetUID
    * @param {Object} opts Optional parameters
+   * @param {Array.<String>} opts.fleetUID Filter by Fleet UID
    * @param {Number} opts.pageSize  (default to 50)
    * @param {Number} opts.pageNum  (default to 1)
-   * @param {String} opts.deviceUID A Device UID.
+   * @param {Array.<String>} opts.deviceUID A Device UID.
    * @param {module:model/String} opts.sortBy  (default to 'captured')
    * @param {module:model/String} opts.sortOrder  (default to 'asc')
    * @param {Number} opts.startDate Unix timestamp
    * @param {Number} opts.endDate Unix timestamp
    * @param {Boolean} opts.systemFilesOnly
    * @param {String} opts.files
+   * @param {module:model/String} opts.format Response format (JSON or CSV) (default to 'json')
+   * @param {Array.<String>} opts.serialNumber Filter by Serial Number
+   * @param {Array.<String>} opts.sessionUID Filter by Session UID
+   * @param {Array.<String>} opts.eventUID Filter by Event UID
+   * @param {String} opts.selectFields Comma-separated list of fields to select from JSON payload (e.g., \"field1,field2.subfield,field3\"), this will reflect the columns in the CSV output.
    * @param {Array.<String>} opts.deviceUIDs Deprecated.
    * @param {String} opts.since Deprecated.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetProjectEvents200Response} and HTTP response
    */
-  getFleetEventsWithHttpInfo(projectUID, fleetUID, opts) {
+  getFleetEventsWithHttpInfo(projectUID, opts) {
     opts = opts || {};
     let postBody = null;
     // verify the required parameter 'projectUID' is set
@@ -61,27 +66,35 @@ export default class EventApi {
         "Missing the required parameter 'projectUID' when calling getFleetEvents"
       );
     }
-    // verify the required parameter 'fleetUID' is set
-    if (fleetUID === undefined || fleetUID === null) {
-      throw new Error(
-        "Missing the required parameter 'fleetUID' when calling getFleetEvents"
-      );
-    }
 
     let pathParams = {
       projectUID: projectUID,
-      fleetUID: fleetUID,
     };
     let queryParams = {
+      fleetUID: this.apiClient.buildCollectionParam(opts["fleetUID"], "multi"),
       pageSize: opts["pageSize"],
       pageNum: opts["pageNum"],
-      deviceUID: opts["deviceUID"],
+      deviceUID: this.apiClient.buildCollectionParam(
+        opts["deviceUID"],
+        "multi"
+      ),
       sortBy: opts["sortBy"],
       sortOrder: opts["sortOrder"],
       startDate: opts["startDate"],
       endDate: opts["endDate"],
       systemFilesOnly: opts["systemFilesOnly"],
       files: opts["files"],
+      format: opts["format"],
+      serialNumber: this.apiClient.buildCollectionParam(
+        opts["serialNumber"],
+        "multi"
+      ),
+      sessionUID: this.apiClient.buildCollectionParam(
+        opts["sessionUID"],
+        "multi"
+      ),
+      eventUID: this.apiClient.buildCollectionParam(opts["eventUID"], "multi"),
+      selectFields: opts["selectFields"],
       deviceUIDs: this.apiClient.buildCollectionParam(
         opts["deviceUIDs"],
         "multi"
@@ -93,7 +106,7 @@ export default class EventApi {
 
     let authNames = ["api_key"];
     let contentTypes = [];
-    let accepts = ["application/json"];
+    let accepts = ["application/json", "text/csv"];
     let returnType = GetProjectEvents200Response;
     return this.apiClient.callApi(
       "/v1/projects/{projectUID}/fleets/{fleetUID}/events",
@@ -114,27 +127,32 @@ export default class EventApi {
   /**
    * Get Events of a Fleet
    * @param {String} projectUID
-   * @param {String} fleetUID
    * @param {Object} opts Optional parameters
+   * @param {Array.<String>} opts.fleetUID Filter by Fleet UID
    * @param {Number} opts.pageSize  (default to 50)
    * @param {Number} opts.pageNum  (default to 1)
-   * @param {String} opts.deviceUID A Device UID.
+   * @param {Array.<String>} opts.deviceUID A Device UID.
    * @param {module:model/String} opts.sortBy  (default to 'captured')
    * @param {module:model/String} opts.sortOrder  (default to 'asc')
    * @param {Number} opts.startDate Unix timestamp
    * @param {Number} opts.endDate Unix timestamp
    * @param {Boolean} opts.systemFilesOnly
    * @param {String} opts.files
+   * @param {module:model/String} opts.format Response format (JSON or CSV) (default to 'json')
+   * @param {Array.<String>} opts.serialNumber Filter by Serial Number
+   * @param {Array.<String>} opts.sessionUID Filter by Session UID
+   * @param {Array.<String>} opts.eventUID Filter by Event UID
+   * @param {String} opts.selectFields Comma-separated list of fields to select from JSON payload (e.g., \"field1,field2.subfield,field3\"), this will reflect the columns in the CSV output.
    * @param {Array.<String>} opts.deviceUIDs Deprecated.
    * @param {String} opts.since Deprecated.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetProjectEvents200Response}
    */
-  getFleetEvents(projectUID, fleetUID, opts) {
-    return this.getFleetEventsWithHttpInfo(projectUID, fleetUID, opts).then(
-      function (response_and_data) {
-        return response_and_data.data;
-      }
-    );
+  getFleetEvents(projectUID, opts) {
+    return this.getFleetEventsWithHttpInfo(projectUID, opts).then(function (
+      response_and_data
+    ) {
+      return response_and_data.data;
+    });
   }
 
   /**
@@ -147,7 +165,7 @@ export default class EventApi {
    * @param {module:model/String} opts.sortOrder  (default to 'asc')
    * @param {Boolean} opts.systemFilesOnly
    * @param {String} opts.files
-   * @param {String} opts.deviceUID A Device UID.
+   * @param {Array.<String>} opts.deviceUID A Device UID.
    * @param {Number} opts.startDate Unix timestamp
    * @param {Number} opts.endDate Unix timestamp
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetProjectEventsByCursor200Response} and HTTP response
@@ -178,7 +196,10 @@ export default class EventApi {
       sortOrder: opts["sortOrder"],
       systemFilesOnly: opts["systemFilesOnly"],
       files: opts["files"],
-      deviceUID: opts["deviceUID"],
+      deviceUID: this.apiClient.buildCollectionParam(
+        opts["deviceUID"],
+        "multi"
+      ),
       startDate: opts["startDate"],
       endDate: opts["endDate"],
     };
@@ -215,7 +236,7 @@ export default class EventApi {
    * @param {module:model/String} opts.sortOrder  (default to 'asc')
    * @param {Boolean} opts.systemFilesOnly
    * @param {String} opts.files
-   * @param {String} opts.deviceUID A Device UID.
+   * @param {Array.<String>} opts.deviceUID A Device UID.
    * @param {Number} opts.startDate Unix timestamp
    * @param {Number} opts.endDate Unix timestamp
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetProjectEventsByCursor200Response}
@@ -236,13 +257,19 @@ export default class EventApi {
    * @param {Object} opts Optional parameters
    * @param {Number} opts.pageSize  (default to 50)
    * @param {Number} opts.pageNum  (default to 1)
-   * @param {String} opts.deviceUID A Device UID.
+   * @param {Array.<String>} opts.deviceUID A Device UID.
    * @param {module:model/String} opts.sortBy  (default to 'captured')
    * @param {module:model/String} opts.sortOrder  (default to 'asc')
    * @param {Number} opts.startDate Unix timestamp
    * @param {Number} opts.endDate Unix timestamp
    * @param {Boolean} opts.systemFilesOnly
    * @param {String} opts.files
+   * @param {module:model/String} opts.format Response format (JSON or CSV) (default to 'json')
+   * @param {Array.<String>} opts.serialNumber Filter by Serial Number
+   * @param {Array.<String>} opts.fleetUID Filter by Fleet UID
+   * @param {Array.<String>} opts.sessionUID Filter by Session UID
+   * @param {Array.<String>} opts.eventUID Filter by Event UID
+   * @param {String} opts.selectFields Comma-separated list of fields to select from JSON payload (e.g., \"field1,field2.subfield,field3\"), this will reflect the columns in the CSV output.
    * @param {Array.<String>} opts.deviceUIDs Deprecated.
    * @param {String} opts.since Deprecated.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetProjectEvents200Response} and HTTP response
@@ -263,13 +290,28 @@ export default class EventApi {
     let queryParams = {
       pageSize: opts["pageSize"],
       pageNum: opts["pageNum"],
-      deviceUID: opts["deviceUID"],
+      deviceUID: this.apiClient.buildCollectionParam(
+        opts["deviceUID"],
+        "multi"
+      ),
       sortBy: opts["sortBy"],
       sortOrder: opts["sortOrder"],
       startDate: opts["startDate"],
       endDate: opts["endDate"],
       systemFilesOnly: opts["systemFilesOnly"],
       files: opts["files"],
+      format: opts["format"],
+      serialNumber: this.apiClient.buildCollectionParam(
+        opts["serialNumber"],
+        "multi"
+      ),
+      fleetUID: this.apiClient.buildCollectionParam(opts["fleetUID"], "multi"),
+      sessionUID: this.apiClient.buildCollectionParam(
+        opts["sessionUID"],
+        "multi"
+      ),
+      eventUID: this.apiClient.buildCollectionParam(opts["eventUID"], "multi"),
+      selectFields: opts["selectFields"],
       deviceUIDs: this.apiClient.buildCollectionParam(
         opts["deviceUIDs"],
         "multi"
@@ -281,7 +323,7 @@ export default class EventApi {
 
     let authNames = ["api_key"];
     let contentTypes = [];
-    let accepts = ["application/json"];
+    let accepts = ["application/json", "text/csv"];
     let returnType = GetProjectEvents200Response;
     return this.apiClient.callApi(
       "/v1/projects/{projectUID}/events",
@@ -305,13 +347,19 @@ export default class EventApi {
    * @param {Object} opts Optional parameters
    * @param {Number} opts.pageSize  (default to 50)
    * @param {Number} opts.pageNum  (default to 1)
-   * @param {String} opts.deviceUID A Device UID.
+   * @param {Array.<String>} opts.deviceUID A Device UID.
    * @param {module:model/String} opts.sortBy  (default to 'captured')
    * @param {module:model/String} opts.sortOrder  (default to 'asc')
    * @param {Number} opts.startDate Unix timestamp
    * @param {Number} opts.endDate Unix timestamp
    * @param {Boolean} opts.systemFilesOnly
    * @param {String} opts.files
+   * @param {module:model/String} opts.format Response format (JSON or CSV) (default to 'json')
+   * @param {Array.<String>} opts.serialNumber Filter by Serial Number
+   * @param {Array.<String>} opts.fleetUID Filter by Fleet UID
+   * @param {Array.<String>} opts.sessionUID Filter by Session UID
+   * @param {Array.<String>} opts.eventUID Filter by Event UID
+   * @param {String} opts.selectFields Comma-separated list of fields to select from JSON payload (e.g., \"field1,field2.subfield,field3\"), this will reflect the columns in the CSV output.
    * @param {Array.<String>} opts.deviceUIDs Deprecated.
    * @param {String} opts.since Deprecated.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetProjectEvents200Response}
@@ -334,7 +382,7 @@ export default class EventApi {
    * @param {Boolean} opts.systemFilesOnly
    * @param {String} opts.files
    * @param {String} opts.fleetUID
-   * @param {String} opts.deviceUID A Device UID.
+   * @param {Array.<String>} opts.deviceUID A Device UID.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetProjectEventsByCursor200Response} and HTTP response
    */
   getProjectEventsByCursorWithHttpInfo(projectUID, opts) {
@@ -357,7 +405,10 @@ export default class EventApi {
       systemFilesOnly: opts["systemFilesOnly"],
       files: opts["files"],
       fleetUID: opts["fleetUID"],
-      deviceUID: opts["deviceUID"],
+      deviceUID: this.apiClient.buildCollectionParam(
+        opts["deviceUID"],
+        "multi"
+      ),
     };
     let headerParams = {};
     let formParams = {};
@@ -392,7 +443,7 @@ export default class EventApi {
    * @param {Boolean} opts.systemFilesOnly
    * @param {String} opts.files
    * @param {String} opts.fleetUID
-   * @param {String} opts.deviceUID A Device UID.
+   * @param {Array.<String>} opts.deviceUID A Device UID.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetProjectEventsByCursor200Response}
    */
   getProjectEventsByCursor(projectUID, opts) {

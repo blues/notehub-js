@@ -20,7 +20,7 @@ import UserDbRoute from "../model/UserDbRoute";
 /**
  * Route service.
  * @module api/RouteApi
- * @version 1.0.21
+ * @version 1.0.22
  */
 export default class RouteApi {
   /**
@@ -229,7 +229,7 @@ export default class RouteApi {
    * @param {Object} opts Optional parameters
    * @param {Number} opts.pageSize  (default to 50)
    * @param {Number} opts.pageNum  (default to 1)
-   * @param {String} opts.deviceUID A Device UID.
+   * @param {Array.<String>} opts.deviceUID A Device UID.
    * @param {module:model/String} opts.sortBy  (default to 'captured')
    * @param {module:model/String} opts.sortOrder  (default to 'asc')
    * @param {Number} opts.startDate Unix timestamp
@@ -261,7 +261,10 @@ export default class RouteApi {
     let queryParams = {
       pageSize: opts["pageSize"],
       pageNum: opts["pageNum"],
-      deviceUID: opts["deviceUID"],
+      deviceUID: this.apiClient.buildCollectionParam(
+        opts["deviceUID"],
+        "multi"
+      ),
       sortBy: opts["sortBy"],
       sortOrder: opts["sortOrder"],
       startDate: opts["startDate"],
@@ -299,7 +302,7 @@ export default class RouteApi {
    * @param {Object} opts Optional parameters
    * @param {Number} opts.pageSize  (default to 50)
    * @param {Number} opts.pageNum  (default to 1)
-   * @param {String} opts.deviceUID A Device UID.
+   * @param {Array.<String>} opts.deviceUID A Device UID.
    * @param {module:model/String} opts.sortBy  (default to 'captured')
    * @param {module:model/String} opts.sortOrder  (default to 'asc')
    * @param {Number} opts.startDate Unix timestamp

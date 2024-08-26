@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The OTAUpdateRequest model module.
  * @module model/OTAUpdateRequest
- * @version 1.0.21
+ * @version 1.0.22
  */
 class OTAUpdateRequest {
   /**

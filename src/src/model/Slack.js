@@ -18,7 +18,7 @@ import SnowflakeTransform from "./SnowflakeTransform";
 /**
  * The Slack model module.
  * @module model/Slack
- * @version 1.0.21
+ * @version 1.0.22
  */
 class Slack {
   /**

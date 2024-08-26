@@ -17,7 +17,7 @@ import Event from "./Event";
 /**
  * The GetProjectEvents200Response model module.
  * @module model/GetProjectEvents200Response
- * @version 1.0.21
+ * @version 1.0.22
  */
 class GetProjectEvents200Response {
   /**
@@ -57,6 +57,9 @@ class GetProjectEvents200Response {
       if (data.hasOwnProperty("has_more")) {
         obj["has_more"] = ApiClient.convertToType(data["has_more"], "Boolean");
       }
+      if (data.hasOwnProperty("through")) {
+        obj["through"] = ApiClient.convertToType(data["through"], "String");
+      }
     } else if (data === null) {
       return null;
     }
@@ -94,6 +97,18 @@ class GetProjectEvents200Response {
         Event.validateJsonObject(item);
       }
     }
+    // ensure the json data is a string
+    if (
+      data["through"] &&
+      !(
+        typeof data["through"] === "string" || data["through"] instanceof String
+      )
+    ) {
+      throw new Error(
+        "Expected the field `through` to be a primitive type in the JSON string but got " +
+          data["through"]
+      );
+    }
 
     return true;
   }
@@ -111,5 +126,11 @@ GetProjectEvents200Response.prototype["events"] = undefined;
  * @member {Boolean} has_more
  */
 GetProjectEvents200Response.prototype["has_more"] = undefined;
+
+/**
+ * The UID of the last event returned
+ * @member {String} through
+ */
+GetProjectEvents200Response.prototype["through"] = undefined;
 
 export default GetProjectEvents200Response;
