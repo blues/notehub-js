@@ -17,7 +17,7 @@ import FirmwareStatus from "./FirmwareStatus";
 /**
  * The OTAStatus model module.
  * @module model/OTAStatus
- * @version 1.0.21
+ * @version 1.0.22
  */
 class OTAStatus {
   /**

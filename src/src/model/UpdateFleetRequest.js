@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The UpdateFleetRequest model module.
  * @module model/UpdateFleetRequest
- * @version 1.0.21
+ * @version 1.0.22
  */
 class UpdateFleetRequest {
   /**
