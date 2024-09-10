@@ -730,6 +730,15 @@ paths:
         - $ref: "#/components/parameters/projectUIDParam"
         - $ref: "#/components/parameters/pageSizeParam"
         - $ref: "#/components/parameters/pageNumParam"
+        - $ref: "#/components/parameters/deviceUIDParamQuery"
+        - $ref: "#/components/parameters/tagParam"
+        - $ref: "#/components/parameters/serialNumberParam"
+        - $ref: "#/components/parameters/fleetUIDQueryParam"
+        - $ref: "#/components/parameters/notecardFirmwareParam"
+        - $ref: "#/components/parameters/locationParam"
+        - $ref: "#/components/parameters/hostFirmwareParam"
+        - $ref: "#/components/parameters/productUIDQueryParam"
+        - $ref: "#/components/parameters/skuParam"
       responses:
         "200":
           description: Successful operation
@@ -799,6 +808,14 @@ paths:
         - $ref: "#/components/parameters/fleetUIDParam"
         - $ref: "#/components/parameters/pageSizeParam"
         - $ref: "#/components/parameters/pageNumParam"
+        - $ref: "#/components/parameters/deviceUIDParamQuery"
+        - $ref: "#/components/parameters/tagParam"
+        - $ref: "#/components/parameters/serialNumberParam"
+        - $ref: "#/components/parameters/notecardFirmwareParam"
+        - $ref: "#/components/parameters/locationParam"
+        - $ref: "#/components/parameters/hostFirmwareParam"
+        - $ref: "#/components/parameters/productUIDQueryParam"
+        - $ref: "#/components/parameters/skuParam"
       responses:
         "200":
           description: Successful operation
@@ -2476,8 +2493,12 @@ components:
       name: productUID
       in: query
       required: false
+      style: form
+      explode: true
       schema:
-        type: string
+        type: array
+        items:
+          type: string
 
     productQueryParam:
       name: product
@@ -2490,8 +2511,86 @@ components:
       name: monitorUID
       in: query
       required: false
+      style: form
+      explode: true
       schema:
-        type: string
+        type: array
+        items:
+          type: string
+
+    tagParam:
+      name: tag
+      in: query
+      description: Tag filter
+      required: false
+      style: form
+      explode: true
+      schema:
+        type: array
+        items:
+          type: string
+
+    serialNumberParam:
+      name: serialNumber
+      in: query
+      description: Serial number filter
+      required: false
+      style: form
+      explode: true
+      schema:
+        type: array
+        items:
+          type: string
+
+    notecardFirmwareParam:
+      name: notecardFirmware
+      in: query
+      description: Firmware version filter
+      required: false
+      style: form
+      explode: true
+      schema:
+        type: array
+        items:
+          type: string
+
+    locationParam:
+      name: location
+      in: query
+      description: Location filter
+      required: false
+      style: form
+      explode: true
+      schema:
+        type: array
+        items:
+          type: string
+
+    hostFirmwareParam:
+      name: hostFirmware
+      in: query
+      description: Host firmware filter
+      required: false
+      style: form
+      explode: true
+      schema:
+        type: array
+        items:
+          type: string
+
+    skuParam:
+      name: sku
+      in: query
+      description: SKU filter
+      required: false
+      style: form
+      explode: true
+      schema:
+        type: array
+        items:
+          type: string
+
+
 
   responses:
     ErrorResponse:
