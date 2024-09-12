@@ -711,7 +711,16 @@ let apiInstance = new NotehubJs.DeviceApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
 let opts = {
   'pageSize': 50, // Number |
-  'pageNum': 1 // Number |
+  'pageNum': 1, // Number |
+  'deviceUID': ["null"], // [String] | A Device UID.
+  'tag': ["null"], // [String] | Tag filter
+  'serialNumber': ["null"], // [String] | Serial number filter
+  'fleetUID': "fleetUID_example", // String |
+  'notecardFirmware': ["null"], // [String] | Firmware version filter
+  'location': ["null"], // [String] | Location filter
+  'hostFirmware': ["null"], // [String] | Host firmware filter
+  'productUID': ["null"], // [String] |
+  'sku': ["null"] // [String] | SKU filter
 };
 apiInstance.getProjectDevices(projectUID, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
@@ -723,11 +732,20 @@ apiInstance.getProjectDevices(projectUID, opts).then((data) => {
 
 ### Parameters
 
-| Name           | Type       | Description | Notes                      |
-| -------------- | ---------- | ----------- | -------------------------- |
-| **projectUID** | **String** |             |
-| **pageSize**   | **Number** |             | [optional] [default to 50] |
-| **pageNum**    | **Number** |             | [optional] [default to 1]  |
+| Name                 | Type                      | Description             | Notes                      |
+| -------------------- | ------------------------- | ----------------------- | -------------------------- |
+| **projectUID**       | **String**                |                         |
+| **pageSize**         | **Number**                |                         | [optional] [default to 50] |
+| **pageNum**          | **Number**                |                         | [optional] [default to 1]  |
+| **deviceUID**        | [**[String]**](String.md) | A Device UID.           | [optional]                 |
+| **tag**              | [**[String]**](String.md) | Tag filter              | [optional]                 |
+| **serialNumber**     | [**[String]**](String.md) | Serial number filter    | [optional]                 |
+| **fleetUID**         | **String**                |                         | [optional]                 |
+| **notecardFirmware** | [**[String]**](String.md) | Firmware version filter | [optional]                 |
+| **location**         | [**[String]**](String.md) | Location filter         | [optional]                 |
+| **hostFirmware**     | [**[String]**](String.md) | Host firmware filter    | [optional]                 |
+| **productUID**       | [**[String]**](String.md) |                         | [optional]                 |
+| **sku**              | [**[String]**](String.md) | SKU filter              | [optional]                 |
 
 ### Return type
 
@@ -762,7 +780,15 @@ let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
 let fleetUID = "fleetUID_example"; // String |
 let opts = {
   'pageSize': 50, // Number |
-  'pageNum': 1 // Number |
+  'pageNum': 1, // Number |
+  'deviceUID': ["null"], // [String] | A Device UID.
+  'tag': ["null"], // [String] | Tag filter
+  'serialNumber': ["null"], // [String] | Serial number filter
+  'notecardFirmware': ["null"], // [String] | Firmware version filter
+  'location': ["null"], // [String] | Location filter
+  'hostFirmware': ["null"], // [String] | Host firmware filter
+  'productUID': ["null"], // [String] |
+  'sku': ["null"] // [String] | SKU filter
 };
 apiInstance.getProjectFleetDevices(projectUID, fleetUID, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
@@ -774,12 +800,20 @@ apiInstance.getProjectFleetDevices(projectUID, fleetUID, opts).then((data) => {
 
 ### Parameters
 
-| Name           | Type       | Description | Notes                      |
-| -------------- | ---------- | ----------- | -------------------------- |
-| **projectUID** | **String** |             |
-| **fleetUID**   | **String** |             |
-| **pageSize**   | **Number** |             | [optional] [default to 50] |
-| **pageNum**    | **Number** |             | [optional] [default to 1]  |
+| Name                 | Type                      | Description             | Notes                      |
+| -------------------- | ------------------------- | ----------------------- | -------------------------- |
+| **projectUID**       | **String**                |                         |
+| **fleetUID**         | **String**                |                         |
+| **pageSize**         | **Number**                |                         | [optional] [default to 50] |
+| **pageNum**          | **Number**                |                         | [optional] [default to 1]  |
+| **deviceUID**        | [**[String]**](String.md) | A Device UID.           | [optional]                 |
+| **tag**              | [**[String]**](String.md) | Tag filter              | [optional]                 |
+| **serialNumber**     | [**[String]**](String.md) | Serial number filter    | [optional]                 |
+| **notecardFirmware** | [**[String]**](String.md) | Firmware version filter | [optional]                 |
+| **location**         | [**[String]**](String.md) | Location filter         | [optional]                 |
+| **hostFirmware**     | [**[String]**](String.md) | Host firmware filter    | [optional]                 |
+| **productUID**       | [**[String]**](String.md) |                         | [optional]                 |
+| **sku**              | [**[String]**](String.md) | SKU filter              | [optional]                 |
 
 ### Return type
 

@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The FirmwareStatus model module.
  * @module model/FirmwareStatus
- * @version 1.0.22
+ * @version 1.0.23
  */
 class FirmwareStatus {
   /**

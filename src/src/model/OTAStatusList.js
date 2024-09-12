@@ -17,7 +17,7 @@ import OTAStatus from "./OTAStatus";
 /**
  * The OTAStatusList model module.
  * @module model/OTAStatusList
- * @version 1.0.22
+ * @version 1.0.23
  */
 class OTAStatusList {
   /**
