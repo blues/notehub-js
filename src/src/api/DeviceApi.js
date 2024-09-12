@@ -975,6 +975,15 @@ export default class DeviceApi {
    * @param {Object} opts Optional parameters
    * @param {Number} opts.pageSize  (default to 50)
    * @param {Number} opts.pageNum  (default to 1)
+   * @param {Array.<String>} opts.deviceUID A Device UID.
+   * @param {Array.<String>} opts.tag Tag filter
+   * @param {Array.<String>} opts.serialNumber Serial number filter
+   * @param {String} opts.fleetUID
+   * @param {Array.<String>} opts.notecardFirmware Firmware version filter
+   * @param {Array.<String>} opts.location Location filter
+   * @param {Array.<String>} opts.hostFirmware Host firmware filter
+   * @param {Array.<String>} opts.productUID
+   * @param {Array.<String>} opts.sku SKU filter
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetProjectDevices200Response} and HTTP response
    */
   getProjectDevicesWithHttpInfo(projectUID, opts) {
@@ -993,6 +1002,30 @@ export default class DeviceApi {
     let queryParams = {
       pageSize: opts["pageSize"],
       pageNum: opts["pageNum"],
+      deviceUID: this.apiClient.buildCollectionParam(
+        opts["deviceUID"],
+        "multi"
+      ),
+      tag: this.apiClient.buildCollectionParam(opts["tag"], "multi"),
+      serialNumber: this.apiClient.buildCollectionParam(
+        opts["serialNumber"],
+        "multi"
+      ),
+      fleetUID: opts["fleetUID"],
+      notecardFirmware: this.apiClient.buildCollectionParam(
+        opts["notecardFirmware"],
+        "multi"
+      ),
+      location: this.apiClient.buildCollectionParam(opts["location"], "multi"),
+      hostFirmware: this.apiClient.buildCollectionParam(
+        opts["hostFirmware"],
+        "multi"
+      ),
+      productUID: this.apiClient.buildCollectionParam(
+        opts["productUID"],
+        "multi"
+      ),
+      sku: this.apiClient.buildCollectionParam(opts["sku"], "multi"),
     };
     let headerParams = {};
     let formParams = {};
@@ -1023,6 +1056,15 @@ export default class DeviceApi {
    * @param {Object} opts Optional parameters
    * @param {Number} opts.pageSize  (default to 50)
    * @param {Number} opts.pageNum  (default to 1)
+   * @param {Array.<String>} opts.deviceUID A Device UID.
+   * @param {Array.<String>} opts.tag Tag filter
+   * @param {Array.<String>} opts.serialNumber Serial number filter
+   * @param {String} opts.fleetUID
+   * @param {Array.<String>} opts.notecardFirmware Firmware version filter
+   * @param {Array.<String>} opts.location Location filter
+   * @param {Array.<String>} opts.hostFirmware Host firmware filter
+   * @param {Array.<String>} opts.productUID
+   * @param {Array.<String>} opts.sku SKU filter
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetProjectDevices200Response}
    */
   getProjectDevices(projectUID, opts) {
@@ -1040,6 +1082,14 @@ export default class DeviceApi {
    * @param {Object} opts Optional parameters
    * @param {Number} opts.pageSize  (default to 50)
    * @param {Number} opts.pageNum  (default to 1)
+   * @param {Array.<String>} opts.deviceUID A Device UID.
+   * @param {Array.<String>} opts.tag Tag filter
+   * @param {Array.<String>} opts.serialNumber Serial number filter
+   * @param {Array.<String>} opts.notecardFirmware Firmware version filter
+   * @param {Array.<String>} opts.location Location filter
+   * @param {Array.<String>} opts.hostFirmware Host firmware filter
+   * @param {Array.<String>} opts.productUID
+   * @param {Array.<String>} opts.sku SKU filter
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetProjectDevices200Response} and HTTP response
    */
   getProjectFleetDevicesWithHttpInfo(projectUID, fleetUID, opts) {
@@ -1065,6 +1115,29 @@ export default class DeviceApi {
     let queryParams = {
       pageSize: opts["pageSize"],
       pageNum: opts["pageNum"],
+      deviceUID: this.apiClient.buildCollectionParam(
+        opts["deviceUID"],
+        "multi"
+      ),
+      tag: this.apiClient.buildCollectionParam(opts["tag"], "multi"),
+      serialNumber: this.apiClient.buildCollectionParam(
+        opts["serialNumber"],
+        "multi"
+      ),
+      notecardFirmware: this.apiClient.buildCollectionParam(
+        opts["notecardFirmware"],
+        "multi"
+      ),
+      location: this.apiClient.buildCollectionParam(opts["location"], "multi"),
+      hostFirmware: this.apiClient.buildCollectionParam(
+        opts["hostFirmware"],
+        "multi"
+      ),
+      productUID: this.apiClient.buildCollectionParam(
+        opts["productUID"],
+        "multi"
+      ),
+      sku: this.apiClient.buildCollectionParam(opts["sku"], "multi"),
     };
     let headerParams = {};
     let formParams = {};
@@ -1096,6 +1169,14 @@ export default class DeviceApi {
    * @param {Object} opts Optional parameters
    * @param {Number} opts.pageSize  (default to 50)
    * @param {Number} opts.pageNum  (default to 1)
+   * @param {Array.<String>} opts.deviceUID A Device UID.
+   * @param {Array.<String>} opts.tag Tag filter
+   * @param {Array.<String>} opts.serialNumber Serial number filter
+   * @param {Array.<String>} opts.notecardFirmware Firmware version filter
+   * @param {Array.<String>} opts.location Location filter
+   * @param {Array.<String>} opts.hostFirmware Host firmware filter
+   * @param {Array.<String>} opts.productUID
+   * @param {Array.<String>} opts.sku SKU filter
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetProjectDevices200Response}
    */
   getProjectFleetDevices(projectUID, fleetUID, opts) {

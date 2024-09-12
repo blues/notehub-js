@@ -38,7 +38,7 @@ export default class AlertApi {
    * @param {Object} opts Optional parameters
    * @param {Number} opts.pageSize  (default to 50)
    * @param {Number} opts.pageNum  (default to 1)
-   * @param {String} opts.monitorUID
+   * @param {Array.<String>} opts.monitorUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetAlerts200Response} and HTTP response
    */
   getAlertsWithHttpInfo(projectUID, opts) {
@@ -57,7 +57,10 @@ export default class AlertApi {
     let queryParams = {
       pageSize: opts["pageSize"],
       pageNum: opts["pageNum"],
-      monitorUID: opts["monitorUID"],
+      monitorUID: this.apiClient.buildCollectionParam(
+        opts["monitorUID"],
+        "multi"
+      ),
     };
     let headerParams = {};
     let formParams = {};
@@ -88,7 +91,7 @@ export default class AlertApi {
    * @param {Object} opts Optional parameters
    * @param {Number} opts.pageSize  (default to 50)
    * @param {Number} opts.pageNum  (default to 1)
-   * @param {String} opts.monitorUID
+   * @param {Array.<String>} opts.monitorUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetAlerts200Response}
    */
   getAlerts(projectUID, opts) {
