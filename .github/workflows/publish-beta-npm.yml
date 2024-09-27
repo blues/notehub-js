@@ -7,6 +7,10 @@ on:
         description: 'Beta version suffix, e.g., "1", "2" for 1.0.21-beta.1, 1.0.21-beta.2'
         required: true
         default: "1"
+      dry_run:
+        description: "If true, run without actually publishing the package"
+        required: false
+        default: "false"
 
 jobs:
   publish-beta:
@@ -59,7 +63,12 @@ jobs:
       - name: Publish Beta Version to npm
         run: |
           cd src
-          npm publish --tag beta --access public
+          if [ "${{ github.event.inputs.dry_run }}" == "true" ]; then
+            echo "Dry run mode enabled: Skipping actual npm publish"
+          else
+            npm publish --tag next --access public
+          fi
+
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
