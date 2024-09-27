@@ -5,6 +5,7 @@ on:
   push:
     branches-ignore:
       - "main"
+      - "test-release-*"
 
 jobs:
   create_pr_repo_sync:

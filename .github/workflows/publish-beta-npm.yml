@@ -1,0 +1,81 @@
+name: Publish beta version of notehub-js to npm
+
+on:
+  workflow_dispatch:
+    inputs:
+      beta_version_suffix:
+        description: 'Beta version suffix, e.g., "1", "2" for 1.0.21-beta.1, 1.0.21-beta.2'
+        required: true
+        default: "1"
+      dry_run:
+        description: "If true, run without actually publishing the package"
+        required: false
+        default: "true"
+
+jobs:
+  publish-beta:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Get current version from config.json
+        id: get_version
+        run: |
+          CURRENT_VERSION=$(jq -r .projectVersion config.json)
+          echo "Current project version: $CURRENT_VERSION"
+          echo "current_version=$CURRENT_VERSION" >> $GITHUB_ENV
+
+      - name: Update Version to Beta
+        id: update_version
+        run: |
+          # Extract major, minor, and patch parts of the version
+          IFS='.' read -r MAJOR MINOR PATCH <<<"$CURRENT_VERSION"
+
+          # Get the beta suffix from the input
+          BETA_SUFFIX=${{ github.event.inputs.beta_version_suffix }}
+
+          # Update the version to include the beta identifier
+          NEW_VERSION="$MAJOR.$MINOR.$PATCH-beta.$BETA_SUFFIX"
+
+          # Update config.json with the new version
+          jq --arg new_version "$NEW_VERSION" '.projectVersion = $new_version' config.json > config.tmp.json && mv config.tmp.json config.json
+
+          echo "Updated project version to: $NEW_VERSION"
+          echo "new_version=$NEW_VERSION" >> $GITHUB_ENV
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Remove Outdated SDK Folder
+        run: rm -rf src
+
+      - name: Generate New SDK
+        run: npm run generateDocs
+
+      - name: Setup .npmrc file to publish to npm
+        uses: actions/setup-node@v3
+        with:
+          node-version: "16.x"
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Publish Beta Version to npm
+        run: |
+          cd src
+          if [ "${{ github.event.inputs.dry_run }}" == "true" ]; then
+            echo "Dry run mode enabled: Skipping actual npm publish"
+          else
+            npm publish --tag next --access public
+          fi
+
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Commit Updated config.json
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add config.json
+          git commit -m "Update project version to ${{ steps.update_version.outputs.new_version }} [skip ci]"
+          git push
