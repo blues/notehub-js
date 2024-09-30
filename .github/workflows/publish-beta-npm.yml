@@ -10,7 +10,7 @@ on:
       dry_run:
         description: "If true, run without actually publishing the package"
         required: false
-        default: "true"
+        default: "false"
 
 jobs:
   publish-beta:
@@ -18,7 +18,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Get current version from config.json
         id: get_version
@@ -30,14 +30,11 @@ jobs:
       - name: Update Version to Beta
         id: update_version
         run: |
-          # Extract major, minor, and patch parts of the version
-          IFS='.' read -r MAJOR MINOR PATCH <<<"$CURRENT_VERSION"
-
           # Get the beta suffix from the input
           BETA_SUFFIX=${{ github.event.inputs.beta_version_suffix }}
 
           # Update the version to include the beta identifier
-          NEW_VERSION="$MAJOR.$MINOR.$PATCH-beta.$BETA_SUFFIX"
+          NEW_VERSION="$CURRENT_VERSION-beta.$BETA_SUFFIX"
 
           # Update config.json with the new version
           jq --arg new_version "$NEW_VERSION" '.projectVersion = $new_version' config.json > config.tmp.json && mv config.tmp.json config.json
@@ -57,7 +54,7 @@ jobs:
       - name: Setup .npmrc file to publish to npm
         uses: actions/setup-node@v3
         with:
-          node-version: "16.x"
+          node-version: "20.x"
           registry-url: "https://registry.npmjs.org"
 
       - name: Publish Beta Version to npm
@@ -68,7 +65,6 @@ jobs:
           else
             npm publish --tag next --access public
           fi
-
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
