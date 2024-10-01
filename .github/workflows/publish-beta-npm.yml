@@ -1,6 +1,7 @@
 name: Publish beta version of notehub-js to npm
 
 on:
+  # todo refactor to be automated version bump upon update to PR with branch name of `text-release-*`
   workflow_dispatch:
     inputs:
       beta_version_suffix:
@@ -63,7 +64,7 @@ jobs:
           if [ "${{ github.event.inputs.dry_run }}" == "true" ]; then
             echo "Dry run mode enabled: Skipping actual npm publish"
           else
-            npm publish --tag next --access public
+            npm publish --tag beta --access public
           fi
 
         env:
