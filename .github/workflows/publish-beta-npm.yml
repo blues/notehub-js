@@ -1,17 +1,11 @@
 name: Publish beta version of notehub-js to npm
 
 on:
-  # todo refactor to be automated version bump upon update to PR with branch name of `text-release-*`
-  workflow_dispatch:
-    inputs:
-      beta_version_suffix:
-        description: 'Beta version suffix, e.g., "1", "2" for 1.0.21-beta.1, 1.0.21-beta.2'
-        required: true
-        default: "1"
-      dry_run:
-        description: "If true, run without actually publishing the package"
-        required: false
-        default: "false"
+  push:
+    branches:
+      - "test-release-*"
+    paths:
+      - "openapi.yaml"
 
 jobs:
   publish-beta:
@@ -28,20 +22,22 @@ jobs:
           echo "Current project version: $CURRENT_VERSION"
           echo "CURRENT_VERSION=$CURRENT_VERSION" >> $GITHUB_ENV
 
-      - name: Update Version to Beta
+      - name: Increment Beta Version
         id: update_version
         run: |
-          # Get the beta suffix from the input
-          BETA_SUFFIX="${{ github.event.inputs.beta_version_suffix }}"
-
-          # If the current version already has a beta suffix, replace it with the new one
-          if [[ "$CURRENT_VERSION" =~ ^([0-9]+)\.([0-9]+)\.([0-9]+)(-beta\.[0-9]+)?$ ]]; then
-            # Extract major, minor, and patch parts of the version
+          # Check if the current version already has a beta suffix
+          if [[ "$CURRENT_VERSION" =~ ^([0-9]+)\.([0-9]+)\.([0-9]+)(-beta\.([0-9]+))?$ ]]; then
+            # Extract major, minor, patch, and the current beta version number
             MAJOR="${BASH_REMATCH[1]}"
             MINOR="${BASH_REMATCH[2]}"
             PATCH="${BASH_REMATCH[3]}"
-            # Replace or add the new beta suffix
-            NEW_VERSION="$MAJOR.$MINOR.$PATCH-beta.$BETA_SUFFIX"
+            CURRENT_BETA="${BASH_REMATCH[5]:-0}"  # Use 0 if no beta suffix is present
+
+            # Increment the beta version by 1
+            NEW_BETA=$((CURRENT_BETA + 1))
+            
+            # Construct the new version with the incremented beta suffix
+            NEW_VERSION="$MAJOR.$MINOR.$PATCH-beta.$NEW_BETA"
           else
             echo "Error: Current version format is not compatible. Please ensure it follows the semantic versioning format."
             exit 1
@@ -70,13 +66,9 @@ jobs:
 
       - name: Publish Beta Version to npm
         run: |
-          cd src
-          if [ "${{ github.event.inputs.dry_run }}" == "true" ]; then
-            echo "Dry run mode enabled: Skipping actual npm publish"
-          else
-            npm publish --tag beta --access public
-          fi
-
+          echo "Publishing beta version to npm... $NEW_VERSION"
+          # cd src
+          # npm publish --tag beta --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 

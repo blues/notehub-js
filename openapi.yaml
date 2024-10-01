@@ -5,7 +5,7 @@ info:
   title: Notehub API
   version: 1.1.0
   description: |
-    The OpenAPI definition for the Notehub.io API. Change 5
+    The OpenAPI definition for the Notehub.io API. Change
   contact:
     name: Blues Engineering
     email: engineering@blues.io
@@ -1201,7 +1201,7 @@ paths:
             items:
               type: string
         - name: since
-          description: Deprecated. 
+          description: Deprecated.
           in: query
           required: false
           deprecated: true
@@ -1293,7 +1293,7 @@ paths:
             items:
               type: string
         - name: since
-          description: Deprecated. 
+          description: Deprecated.
           in: query
           required: false
           deprecated: true
@@ -2587,8 +2587,6 @@ components:
         type: array
         items:
           type: string
-
-
 
   responses:
     ErrorResponse:
