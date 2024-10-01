@@ -82,9 +82,9 @@ jobs:
 
       - name: Publish Beta Version to npm
         run: |
-          echo "Publishing beta version to npm... $NEW_VERSION"
-          # cd src
-          # npm publish --tag beta --access public
+          echo "Publishing beta version to npm... $new_version"
+          cd src
+          npm publish --tag beta --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
