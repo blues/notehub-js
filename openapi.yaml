@@ -1201,7 +1201,7 @@ paths:
             items:
               type: string
         - name: since
-          description: Deprecated. 
+          description: Deprecated.
           in: query
           required: false
           deprecated: true
@@ -1293,7 +1293,7 @@ paths:
             items:
               type: string
         - name: since
-          description: Deprecated. 
+          description: Deprecated.
           in: query
           required: false
           deprecated: true
@@ -2589,8 +2589,6 @@ components:
         type: array
         items:
           type: string
-
-
 
   responses:
     ErrorResponse:

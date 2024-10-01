@@ -25,6 +25,7 @@ to [npm](https://www.npmjs.com/package/@blues-inc/notehub-js) for ease of use in
     - [Testing the Library Locally](#testing-the-library-locally)
   - [Deploying notehub-js to npm](#deploying-notehub-js-to-npm)
     - [Steps to Publish an Updated npm Version of Repo](#steps-to-publish-an-updated-npm-version-of-repo)
+    - [Steps to Publish a Beta Version of Repo to npm](#steps-to-publish-a-beta-version-of-repo-to-npm)
   - [Contributing](#contributing)
     - [Resources](#resources)
   - [To learn more about Blues Wireless, the Notecard and Notehub, see:](#to-learn-more-about-blues-wireless-the-notecard-and-notehub-see)
@@ -339,6 +340,21 @@ _Copy the formatted changelog notes from the GH Action workflow run._
 
 ![Paste changelog notes into release tag in GH](images/update-changelog-github.png)
 _Paste the notes into the newest release tag._
+
+### Steps to Publish a Beta Version of Repo to npm
+
+During the course of the development cycle, it may make sense to have beta versions of a repo available on npm for testing purposes. These versions of the notehub-js repo are considered unstable and should not be used long term in production apps, they are meant for internal testing of new features before they're ready for public consumption. Here are the steps to deploy a beta version of the SDK to npm:
+
+1. Create a new feature branch with the name `test-release-BRANCH-NAME-OF-CHOICE`, and modify the `openapi.yaml` file. Commit that new branch back to the Notehub JS repo.
+2. Once committed, two GitHub Action workflows will detect the branch name contains `test-release-*` and one will create a new PR to document that a new beta release of the Notehub JS SDK is happening, and the other will actually perform the release automatically (update the project version with a `beta.XX` tag, regenerate the SDK with the new `openapi.yaml` file, publish it as a beta version to npm, commit the newly update project version back to the PR, etc.)
+
+Now, anyone can download the beta version of the Notehub JS with the following command:
+
+```shell
+npm install @blues-inc/notehub-js@1.0.23-beta.XX
+```
+
+You can see all available project versions by visiting the [Notehub JS npm page and clicking the "Versions" tab](https://www.npmjs.com/package/@blues-inc/notehub-js?activeTab=versions).
 
 ## Contributing
 

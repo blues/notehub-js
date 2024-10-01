@@ -1,0 +1,19 @@
+name: Automatically create / update beta pull request
+
+# run this workflow only on new beta testing feature branches
+on:
+  push:
+    branches:
+      - "test-release-*"
+
+jobs:
+  create_pr_repo_sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Create pull request
+        id: open-pr
+        uses: repo-sync/pull-request@v2
+        with:
+          destination_branch: "main"
+          pr_draft: true
