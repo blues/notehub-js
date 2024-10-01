@@ -29,32 +29,36 @@ jobs:
           EXISTING_VERSIONS=$(npm show @blues-inc/notehub-js versions --json)
           echo "Existing versions on npm: $EXISTING_VERSIONS"
 
-          # Extract beta versions for the current major.minor.patch version using regex
-          CURRENT_BETA_VERSIONS=$(echo "$EXISTING_VERSIONS" | jq -r '.[]' | grep -E "^${CURRENT_VERSION}-beta\.[0-9]+$" || true)
+          # Extract current version without any existing beta suffix
+          BASE_VERSION=$(echo "$CURRENT_VERSION" | sed -E 's/-beta\.[0-9]+$//')
+
+          # Extract only the beta versions for the current base version (e.g., 1.0.23-beta.X)
+          CURRENT_BETA_VERSIONS=$(echo "$EXISTING_VERSIONS" | jq -r '.[]' | grep -E "^${BASE_VERSION}-beta\.[0-9]+$" || true)
           echo "Current beta versions: $CURRENT_BETA_VERSIONS"
 
-          # If no beta versions exist, set the initial beta version number
+          # Determine the next beta version number
           if [ -z "$CURRENT_BETA_VERSIONS" ]; then
             NEXT_BETA_VERSION=1
           else
-            # Get the highest beta version number and increment it
+            # Extract numeric suffixes of all beta versions, sort, and get the highest
             HIGHEST_BETA_VERSION=$(echo "$CURRENT_BETA_VERSIONS" | sed -E 's/.*-beta\.([0-9]+)$/\1/' | sort -n | tail -n 1)
             NEXT_BETA_VERSION=$((HIGHEST_BETA_VERSION + 1))
           fi
 
           # Set the new version as `MAJOR.MINOR.PATCH-beta.N`
-          NEW_VERSION="${CURRENT_VERSION%-beta.*}-beta.$NEXT_BETA_VERSION"
+          NEW_VERSION="${BASE_VERSION}-beta.$NEXT_BETA_VERSION"
 
           echo "Next beta version: $NEW_VERSION"
 
           # Save to GitHub environment variables
           echo "new_version=$NEW_VERSION" >> $GITHUB_ENV
-            - name: Update version to beta
-              run: |
-                # Update config.json with the new beta version
-                jq --arg new_version "$new_version" '.projectVersion = $new_version' config.json > config.tmp.json && mv config.tmp.json config.json
 
-                echo "Updated project version to: $new_version"
+      - name: Update version to beta
+        run: |
+          # Update config.json with the new beta version
+          jq --arg new_version "$new_version" '.projectVersion = $new_version' config.json > config.tmp.json && mv config.tmp.json config.json
+
+          echo "Updated project version to: $new_version"
 
       - name: Install Dependencies
         run: npm install
