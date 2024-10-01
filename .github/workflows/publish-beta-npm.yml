@@ -47,7 +47,7 @@ jobs:
           jq --arg new_version "$NEW_VERSION" '.projectVersion = $new_version' config.json > config.tmp.json && mv config.tmp.json config.json
 
           echo "Updated project version to: $NEW_VERSION"
-          echo "new_version=$NEW_VERSION" >> $GITHUB_ENV
+          echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_ENV
 
       - name: Install Dependencies
         run: npm install
