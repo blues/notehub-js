@@ -30,12 +30,17 @@ jobs:
           echo "Existing versions on npm: $EXISTING_VERSIONS"
 
           # Extract only beta versions for the current major.minor.patch version
-          CURRENT_BETA_VERSIONS=$(echo "$EXISTING_VERSIONS" | jq -r '.[]' | grep -E "^${CURRENT_VERSION}-beta\.[0-9]+$")
+          CURRENT_BETA_VERSIONS=$(echo "$EXISTING_VERSIONS" | jq -r '.[]' | grep -E "^${CURRENT_VERSION}-beta\.[0-9]+$" || true)
           echo "Current beta versions: $CURRENT_BETA_VERSIONS"
 
-          # Get the highest beta version number and increment it
-          HIGHEST_BETA_VERSION=$(echo "$CURRENT_BETA_VERSIONS" | grep -oE 'beta\.[0-9]+' | sort -V | tail -n 1 | grep -oE '[0-9]+')
-          NEXT_BETA_VERSION=$((HIGHEST_BETA_VERSION + 1))
+          if [ -z "$CURRENT_BETA_VERSIONS" ]; then
+            # If no beta versions exist, set the initial beta version number
+            NEXT_BETA_VERSION=1
+          else
+            # Get the highest beta version number and increment it
+            HIGHEST_BETA_VERSION=$(echo "$CURRENT_BETA_VERSIONS" | grep -oE 'beta\.[0-9]+' | sort -V | tail -n 1 | grep -oE '[0-9]+')
+            NEXT_BETA_VERSION=$((HIGHEST_BETA_VERSION + 1))
+          fi
           echo "Next beta version: $NEXT_BETA_VERSION"
 
           # Use the branch name to create a unique version suffix
@@ -44,7 +49,6 @@ jobs:
 
           echo "Updated version will be: $UNIQUE_VERSION"
           echo "NEW_VERSION=$UNIQUE_VERSION" >> $GITHUB_ENV
-
       - name: Update version to beta
         run: |
           # Update config.json with the new beta version

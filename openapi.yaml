@@ -3,9 +3,9 @@ openapi: "3.0.3"
 
 info:
   title: Notehub API
-  version: 1.1.1
+  version: 1.1.0
   description: |
-    The OpenAPI definition for the Notehub.io API. Beta test change
+    The OpenAPI definition for the Notehub.io API. Beta test change.
   contact:
     name: Blues Engineering
     email: engineering@blues.io
