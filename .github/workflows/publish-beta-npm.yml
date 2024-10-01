@@ -31,11 +31,14 @@ jobs:
       - name: Update Version to Beta
         id: update_version
         run: |
+          # Extract major, minor, and patch parts of the version
+          IFS='.' read -r MAJOR MINOR PATCH <<<"$CURRENT_VERSION"
+
           # Get the beta suffix from the input
           BETA_SUFFIX=${{ github.event.inputs.beta_version_suffix }}
 
           # Update the version to include the beta identifier
-          NEW_VERSION="$CURRENT_VERSION-beta.$BETA_SUFFIX"
+          NEW_VERSION="$MAJOR.$MINOR.$PATCH-beta.$BETA_SUFFIX"
 
           # Update config.json with the new version
           jq --arg new_version "$NEW_VERSION" '.projectVersion = $new_version' config.json > config.tmp.json && mv config.tmp.json config.json
