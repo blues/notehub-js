@@ -3,7 +3,7 @@ name: Publish beta version of notehub-js to npm
 on:
   push:
     branches:
-      - "test-release-*"
+      - "test-release-**"
     paths:
       - "openapi.yaml"
 
@@ -56,8 +56,8 @@ jobs:
       - name: Publish Beta Version to npm
         run: |
           echo "Publishing beta version to npm... $new_version"
-          # cd src
-          # npm publish --tag beta --access public
+          cd src
+          npm publish --tag beta --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
