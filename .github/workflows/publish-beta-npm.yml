@@ -24,7 +24,7 @@ jobs:
 
       - name: Get existing beta versions from npm
         id: get_existing_versions
-        run: bash ./.github/scripts/get-existing-beta-versions.sh $CURRENT_VERSION
+        run: bash ./.github/workflows/scripts/get-existing-beta-versions.sh $CURRENT_VERSION
 
       - name: Update version to beta
         run: |
