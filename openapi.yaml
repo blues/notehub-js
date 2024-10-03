@@ -2163,7 +2163,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/OtaActionRequest"
+              $ref: "#/components/schemas/DfuActionRequest"
       responses:
         200:
           description: Success
@@ -4787,7 +4787,7 @@ components:
           description: Email Address
           example: "example@blues.com"
 
-    OtaActionRequest:
+    DfuActionRequest:
       type: object
       properties:
         filename:
