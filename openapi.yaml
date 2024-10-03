@@ -1201,7 +1201,7 @@ paths:
             items:
               type: string
         - name: since
-          description: Deprecated.
+          description: Deprecated. 
           in: query
           required: false
           deprecated: true
@@ -1293,7 +1293,7 @@ paths:
             items:
               type: string
         - name: since
-          description: Deprecated.
+          description: Deprecated. 
           in: query
           required: false
           deprecated: true
@@ -2083,59 +2083,90 @@ paths:
         default:
           $ref: "#/components/responses/ErrorResponse"
 
-  /v1/projects/{projectUID}/ota/status:
+  /v1/projects/{projectUID}/devices/{deviceUID}/dfu/{firmwareType}/status:
     get:
       tags: ["project"]
-      operationId: getProjectOTAStatus
-      description: Get Project OTA Status
+      operationId: getDeviceDfuStatus
+      description: Get device DFU status for host or Notecard firmware
       security:
         - api_key: []
       parameters:
         - $ref: "#/components/parameters/projectUIDParam"
-        - $ref: "#/components/parameters/deviceUIDsParamQuery"
-        - $ref: "#/components/parameters/fleetUIDsParam"
-        - $ref: "#/components/parameters/deviceTagsParam"
-        - $ref: "#/components/parameters/pageSizeParam"
-        - $ref: "#/components/parameters/pageNumParam"
-
+        - $ref: "#/components/parameters/deviceUIDParam"
+        - $ref: "#/components/parameters/firmwareTypeParam"
       responses:
         200:
           description: Success
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/OTAStatusList"
+                $ref: "#/components/schemas/DeviceOtaStatus"
         default:
           $ref: "#/components/responses/ErrorResponse"
 
-  /v1/projects/{projectUID}/ota/update:
-    post:
+  /v1/projects/{projectUID}/dfu/{firmwareType}/status:
+    get:
       tags: ["project"]
-      operationId: updateProjectFirmware
-      description: Update Project Firmware
+      operationId: getDevicesDfuStatus
+      description: Get host or Notecard DFU status for all devices that match the filter criteria
       security:
         - api_key: []
       parameters:
         - $ref: "#/components/parameters/projectUIDParam"
-      requestBody:
-        description: Body or payload of firmware update
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/OTAUpdateRequest"
-
+        - $ref: "#/components/parameters/firmwareTypeParam"
+        - $ref: "#/components/parameters/pageSizeParam"
+        - $ref: "#/components/parameters/pageNumParam"
+        - $ref: "#/components/parameters/sortByParam"
+        - $ref: "#/components/parameters/sortOrderParam"
+        - $ref: "#/components/parameters/deviceUIDParamQuery"
+        - $ref: "#/components/parameters/tagParam"
+        - $ref: "#/components/parameters/serialNumberParam"
+        - $ref: "#/components/parameters/fleetUIDQueryParam"
+        - $ref: "#/components/parameters/notecardFirmwareParam"
+        - $ref: "#/components/parameters/locationParam"
+        - $ref: "#/components/parameters/hostFirmwareParam"
+        - $ref: "#/components/parameters/productUIDQueryParam"
+        - $ref: "#/components/parameters/skuParam"
       responses:
         200:
           description: Success
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/OTAUpdateStatus"
+                $ref: "#/components/schemas/DeviceOtaStatusPage"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+
+  /v1/projects/{projectUID}/dfu/{firmwareType}/{action}:
+    post:
+      tags: ["project"]
+      operationId: dfuAction 
+      description: Update/cancel host or notecard firmware updates
+      security:
+        - api_key: []
+      parameters:
+        - $ref: "#/components/parameters/projectUIDParam"
+        - $ref: "#/components/parameters/firmwareTypeParam"
+        - $ref: "#/components/parameters/otaActionParam"
+        - $ref: "#/components/parameters/deviceUIDParamQuery"
+        - $ref: "#/components/parameters/tagParam"
+        - $ref: "#/components/parameters/serialNumberParam"
+        - $ref: "#/components/parameters/fleetUIDQueryParam"
+        - $ref: "#/components/parameters/notecardFirmwareParam"
+        - $ref: "#/components/parameters/locationParam"
+        - $ref: "#/components/parameters/hostFirmwareParam"
+        - $ref: "#/components/parameters/productUIDQueryParam"
+        - $ref: "#/components/parameters/skuParam"
+      requestBody:
+        description: Which firmware in the case of an update action 
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OtaActionRequest"
+      responses:
+        200:
+          description: Success
         default:
           $ref: "#/components/responses/ErrorResponse"
 
@@ -2214,6 +2245,26 @@ components:
       schema:
         type: string
       example: dev:000000000000000
+    
+    firmwareTypeParam:
+      name: firmwareType
+      in: path
+      required: true
+      schema:
+        type: string
+        enum:
+          - host
+          - notecard
+    
+    otaActionParam:
+      name: action 
+      in: path
+      required: true
+      schema:
+        type: string
+        enum:
+          - update
+          - 
 
     notefileIDParam:
       name: notefileID
@@ -2514,9 +2565,7 @@ components:
       style: form
       explode: true
       schema:
-        type: array
-        items:
-          type: string
+        type: string
 
     tagParam:
       name: tag
@@ -2589,6 +2638,8 @@ components:
         type: array
         items:
           type: string
+
+
 
   responses:
     ErrorResponse:
@@ -4589,78 +4640,109 @@ components:
               recipients:
                 type: string
                 description: The recipients of the notification
-    OTAStatus:
+
+    UserFirmwareInfo:
       type: object
       properties:
-        device_uid:
-          type: string
-          description: The device UID
-        tags:
-          type: string
-          description: The tags associated with the device
-        notecard_current_firmware:
-          $ref: "#/components/schemas/FirmwareStatus"
-        notecard_dfu_began_at:
-          type: string
-          description: The time the Notecard DFU began
-        notecard_dfu_status:
-          type: string
-          description: The status of the Notecard DFU
-        notecard_requested_firmware:
-          $ref: "#/components/schemas/FirmwareStatus"
-        notecard_requested_at:
-          type: string
-          description: The time the Notecard firmware was requested
-        notecard_requested_scope:
-          type: string
-          description: The scope of the Notecard firmware request
-        notecard_requested_show_details:
-          type: boolean
-          description: Whether to show details of the Notecard firmware request
-        notecard_requested_status:
-          type: string
-          description: The status of the Notecard firmware request
-        host_current_firmware:
-          $ref: "#/components/schemas/FirmwareStatus"
-        host_dfu_began_at:
-          type: string
-          description: The time the host DFU began
-        host_dfu_status:
-          type: string
-          description: The status of the host DFU
-        host_requested_firmware:
-          $ref: "#/components/schemas/FirmwareStatus"
-        host_requested_at:
-          type: string
-          description: The time the host firmware was requested
-        host_requested_scope:
-          type: string
-          description: The scope of the host firmware request
-        host_requested_show_details:
-          type: boolean
-          description: Whether to show details of the host firmware request
-        host_requested_status:
-          type: string
-          description: The status of the host firmware request
+        current_firmware:
+          $ref: '#/components/schemas/CurrentFirmware'
+        firmware_update:
+          $ref: '#/components/schemas/UserDfuStateMachine'
+          nullable: true
 
-    FirmwareStatus:
+    UserDfuStateMachine:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/UserDfuStateMachineStatus'
+        created:
+          type: string
+          format: date-time
+          nullable: true
+        from_version:
+          type: string
+        metadata:
+          $ref: '#/components/schemas/UploadMetadata'
+
+
+    UserDfuStateMachineStatus:
+      type: object
+      properties:
+        phase:
+          type: string
+        phase_description:
+          type: string
+        date:
+          type: string
+          format: date-time
+          nullable: true
+        status:
+          type: string
+
+    CurrentFirmware:
       type: object
       properties:
         version:
           type: string
-          description: The version of the firmware
-        organization:
+        metadata:
+          $ref: '#/components/schemas/Firmware'
+
+    UploadMetadata:
+      type: object
+      properties:
+        name:
           type: string
-          description: The organization that owns the firmware
-        description:
+        length:
+          type: integer
+        md5:
           type: string
-          description: A description of the firmware
+        crc32:
+          type: integer
+        created:
+          type: integer
+        modified:
+          type: integer
+        source:
+          type: string
+        contains:
+          type: string
+        found:
+          type: string
+        type:
+          type: string
+        tags:
+          type: string
+        notes:
+          type: string
+        firmware:
+          $ref: '#/components/schemas/Firmware'
+
+    Firmware:
+      type: object
+      properties:
+        org:
+          type: string
         product:
           type: string
-          description: The product that the firmware is for
+        firmware:
+          type: string
+        version:
+          type: string
+        target:
+          type: string
+        ver_major:
+          type: integer
+        ver_minor:
+          type: integer
+        ver_patch:
+          type: integer
+        ver_build:
+          type: integer
         built:
           type: string
-          description: The date the firmware was built
+        builder:
+          type: string
+      nullable: true
 
     SlackBearerNotification:
       type: object
@@ -4705,73 +4787,88 @@ components:
           description: Email Address
           example: "example@blues.com"
 
-    OTAUpdateRequest:
+    OtaActionRequest:
       type: object
       properties:
         filename:
           type: string
           description: The name of the firmware file
-        device_uids:
-          type: array
-          items:
-            type: string
-          description: The device UIDs to update
-        fleet_uids:
-          type: array
-          items:
-            type: string
-          description: The fleet UIDs to update
-        device_tags:
-          type: array
-          items:
-            type: string
-          description: The device tags to update
-        version:
-          type: string
-          description: The version of the firmware
-        MD5:
-          type: string
-          description: The MD5 hash of the firmware file
-        type:
-          type: string
-          description: The type of firmware
-        product:
-          type: string
-          description: The product that the firmware is for
-        target:
-          type: string
-          description: The target device for the firmware
-        unpublished:
-          type: boolean
-          description: If true, the firmware is unpublished
-        cancel_dfu:
-          type: boolean
-          description: If true, the DFU is canceled
 
-    OTAUpdateStatus:
+    DeviceOtaStatus:
       type: object
       properties:
-        status:
+        device_uid:
           type: string
-          description: The status of the OTA request
-        successful:
+          description: Device UID
+        current:
+          type: object
+          description: Description of the current firmware
+          properties:
+            version:
+              type: string
+              description: Firmware version
+            organization:
+              type: string
+              description: Firmware organization
+            description:
+              type: string
+              description: Firmware description
+            product:
+              type: string
+              description: Firmware product
+            built:
+              type: string
+              description: Firmware build date
+            builder:
+              type: string
+              description: Firmware author
+        history:
           type: array
           items:
-            type: string
-          description: The successful device UIDs
-        failed:
-          type: array
-          items:
-            type: string
-          description: The failed device UIDs
+            $ref: "#/components/schemas/DeviceOtaStateMachine"
 
-    OTAStatusList:
+    DeviceOtaStatusPage:
       type: object
       properties:
         devices:
           type: array
           items:
-            $ref: "#/components/schemas/OTAStatus"
+            $ref: "#/components/schemas/DeviceOtaStatus"
         has_more:
           type: boolean
-          description: Indicates whether more items are available
+          default: false
+
+    DeviceOtaStateMachine:
+      type: object
+      description: Represents a single request to update the host or Notecard firmware
+      properties:
+        requested_version:
+          type: string
+          description: Version of the firmware that was requested to be installed
+        current_version:
+          type: string
+          description: Version of the firmware that was installed prior to this request
+        initiated:
+          type: string
+          description: RFC3339 datetime of when this update was requested
+        updates:
+          type: array
+          items:
+            $ref: "#/components/schemas/DeviceOtaStateMachineNode"
+    
+    DeviceOtaStateMachineNode:
+      type: object
+      description: Represents a single request to update the host or Notecard firmware
+      properties:
+        status:
+          type: string
+          description: Status for this step in the firmware update process
+        phase:
+          type: string
+          description: Phase for this step in the firmware update process
+        datetime:
+          type: string
+          description: RFC3339 compatible datetime of when this status update happened
+        description:
+          type: string
+          description: Additional information 
