@@ -1182,6 +1182,7 @@ paths:
         - $ref: "#/components/parameters/sortOrderParam"
         - $ref: "#/components/parameters/startDateParam"
         - $ref: "#/components/parameters/endDateParam"
+        - $ref: "#/components/parameters/dateTypeParam"
         - $ref: "#/components/parameters/systemFilesOnlyParam"
         - $ref: "#/components/parameters/filesQueryParam"
         - $ref: "#/components/parameters/formatParam"
@@ -1201,7 +1202,7 @@ paths:
             items:
               type: string
         - name: since
-          description: Deprecated.
+          description: Deprecated. 
           in: query
           required: false
           deprecated: true
@@ -1275,6 +1276,7 @@ paths:
         - $ref: "#/components/parameters/sortOrderParam"
         - $ref: "#/components/parameters/startDateParam"
         - $ref: "#/components/parameters/endDateParam"
+        - $ref: "#/components/parameters/dateTypeParam"
         - $ref: "#/components/parameters/systemFilesOnlyParam"
         - $ref: "#/components/parameters/filesQueryParam"
         - $ref: "#/components/parameters/formatParam"
@@ -1293,7 +1295,7 @@ paths:
             items:
               type: string
         - name: since
-          description: Deprecated.
+          description: Deprecated. 
           in: query
           required: false
           deprecated: true
@@ -2336,6 +2338,19 @@ components:
       # July 15th, 2022
       example: 1657894210
 
+    dateTypeParam:
+      name: dateType
+      in: query
+      required: false
+      description: Which date to filter on, either 'captured' or 'uploaded'
+      schema:
+        type: string
+        default: captured
+        enum:
+        - captured
+        - uploaded
+      example: uploaded
+
     cursorParam:
       name: cursor
       in: query
@@ -2514,9 +2529,7 @@ components:
       style: form
       explode: true
       schema:
-        type: array
-        items:
-          type: string
+        type: string
 
     tagParam:
       name: tag
@@ -2589,6 +2602,8 @@ components:
         type: array
         items:
           type: string
+
+
 
   responses:
     ErrorResponse:
@@ -4549,6 +4564,13 @@ components:
         source:
           type: string
           description: The UID of the source of the alert
+        monitor_type:
+          type: string
+          enum: [event, device]
+          description: The type of monitor that triggered the alert
+        field_name:
+          type: string
+          description: The field name that triggered the alert
         data:
           type: array
           items:
