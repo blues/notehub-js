@@ -5,7 +5,7 @@ info:
   title: Notehub API
   version: 1.1.0
   description: |
-    The OpenAPI definition for the Notehub.io API.
+    The OpenAPI definition for the Notehub.io API. Test GH Actions Workflow
   contact:
     name: Blues Engineering
     email: engineering@blues.io
@@ -1201,7 +1201,7 @@ paths:
             items:
               type: string
         - name: since
-          description: Deprecated.
+          description: Deprecated. 
           in: query
           required: false
           deprecated: true
@@ -1293,7 +1293,7 @@ paths:
             items:
               type: string
         - name: since
-          description: Deprecated.
+          description: Deprecated. 
           in: query
           required: false
           deprecated: true
@@ -2514,9 +2514,7 @@ components:
       style: form
       explode: true
       schema:
-        type: array
-        items:
-          type: string
+        type: string
 
     tagParam:
       name: tag
@@ -2589,6 +2587,8 @@ components:
         type: array
         items:
           type: string
+
+
 
   responses:
     ErrorResponse:
@@ -4549,6 +4549,13 @@ components:
         source:
           type: string
           description: The UID of the source of the alert
+        monitor_type:
+          type: string
+          enum: [event, device]
+          description: The type of monitor that triggered the alert
+        field_name:
+          type: string
+          description: The field name that triggered the alert
         data:
           type: array
           items:
