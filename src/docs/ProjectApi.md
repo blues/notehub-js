@@ -13,9 +13,14 @@ All URIs are relative to *https://api.notefile.net*
 | [**deleteFleetEnvironmentVariable**](ProjectApi.md#deleteFleetEnvironmentVariable)     | **DELETE** /v1/projects/{projectUID}/fleets/{fleetUID}/environment_variables/{key} |
 | [**deleteProject**](ProjectApi.md#deleteProject)                                       | **DELETE** /v1/projects/{projectUID}                                               |
 | [**deleteProjectEnvironmentVariable**](ProjectApi.md#deleteProjectEnvironmentVariable) | **DELETE** /v1/projects/{projectUID}/environment_variables/{key}                   |
+| [**dfuAction**](ProjectApi.md#dfuAction)                                               | **POST** /v1/projects/{projectUID}/dfu/{firmwareType}/{action}                     |
 | [**disableGlobalTransformation**](ProjectApi.md#disableGlobalTransformation)           | **POST** /v1/projects/{projectUID}/global-transformation/disable                   |
 | [**enableGlobalTransformation**](ProjectApi.md#enableGlobalTransformation)             | **POST** /v1/projects/{projectUID}/global-transformation/enable                    |
+| [**getDeviceDfuHistory**](ProjectApi.md#getDeviceDfuHistory)                           | **GET** /v1/projects/{projectUID}/devices/{deviceUID}/dfu/{firmwareType}/history   |
+| [**getDeviceDfuStatus**](ProjectApi.md#getDeviceDfuStatus)                             | **GET** /v1/projects/{projectUID}/devices/{deviceUID}/dfu/{firmwareType}/status    |
 | [**getDeviceFleets**](ProjectApi.md#getDeviceFleets)                                   | **GET** /v1/projects/{projectUID}/devices/{deviceUID}/fleets                       |
+| [**getDevicesDfuHistory**](ProjectApi.md#getDevicesDfuHistory)                         | **GET** /v1/projects/{projectUID}/dfu/{firmwareType}/history                       |
+| [**getDevicesDfuStatus**](ProjectApi.md#getDevicesDfuStatus)                           | **GET** /v1/projects/{projectUID}/dfu/{firmwareType}/status                        |
 | [**getFirmwareInfo**](ProjectApi.md#getFirmwareInfo)                                   | **GET** /v1/projects/{projectUID}/firmware                                         |
 | [**getFleetEnvironmentVariables**](ProjectApi.md#getFleetEnvironmentVariables)         | **GET** /v1/projects/{projectUID}/fleets/{fleetUID}/environment_variables          |
 | [**getProject**](ProjectApi.md#getProject)                                             | **GET** /v1/projects/{projectUID}                                                  |
@@ -23,7 +28,6 @@ All URIs are relative to *https://api.notefile.net*
 | [**getProjectEnvironmentVariables**](ProjectApi.md#getProjectEnvironmentVariables)     | **GET** /v1/projects/{projectUID}/environment_variables                            |
 | [**getProjectFleets**](ProjectApi.md#getProjectFleets)                                 | **GET** /v1/projects/{projectUID}/fleets                                           |
 | [**getProjectMembers**](ProjectApi.md#getProjectMembers)                               | **GET** /v1/projects/{projectUID}/members                                          |
-| [**getProjectOTAStatus**](ProjectApi.md#getProjectOTAStatus)                           | **GET** /v1/projects/{projectUID}/ota/status                                       |
 | [**getProjectProducts**](ProjectApi.md#getProjectProducts)                             | **GET** /v1/projects/{projectUID}/products                                         |
 | [**getProjects**](ProjectApi.md#getProjects)                                           | **GET** /v1/projects                                                               |
 | [**putDeviceFleets**](ProjectApi.md#putDeviceFleets)                                   | **PUT** /v1/projects/{projectUID}/devices/{deviceUID}/fleets                       |
@@ -31,7 +35,6 @@ All URIs are relative to *https://api.notefile.net*
 | [**putProjectEnvironmentVariables**](ProjectApi.md#putProjectEnvironmentVariables)     | **PUT** /v1/projects/{projectUID}/environment_variables                            |
 | [**setGlobalTransformation**](ProjectApi.md#setGlobalTransformation)                   | **POST** /v1/projects/{projectUID}/global-transformation                           |
 | [**updateFleet**](ProjectApi.md#updateFleet)                                           | **PUT** /v1/projects/{projectUID}/fleets/{fleetUID}                                |
-| [**updateProjectFirmware**](ProjectApi.md#updateProjectFirmware)                       | **POST** /v1/projects/{projectUID}/ota/update                                      |
 
 ## cloneProject
 
@@ -455,6 +458,76 @@ apiInstance.deleteProjectEnvironmentVariable(projectUID, key).then((data) => {
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
+## dfuAction
+
+> dfuAction(projectUID, firmwareType, action, opts)
+
+Update/cancel host or notecard firmware updates
+
+### Example
+
+```javascript
+import * as NotehubJs from '@blues-inc/notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
+// Configure API key authorization: api_key
+let api_key = defaultClient.authentications['api_key'];
+api_key.apiKey = 'YOUR API KEY';
+
+let apiInstance = new NotehubJs.ProjectApi();
+let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let firmwareType = "firmwareType_example"; // String |
+let action = "action_example"; // String |
+let opts = {
+  'deviceUID': ["null"], // [String] | A Device UID.
+  'tag': ["null"], // [String] | Tag filter
+  'serialNumber': ["null"], // [String] | Serial number filter
+  'fleetUID': "fleetUID_example", // String |
+  'notecardFirmware': ["null"], // [String] | Firmware version filter
+  'location': ["null"], // [String] | Location filter
+  'hostFirmware': ["null"], // [String] | Host firmware filter
+  'productUID': ["null"], // [String] |
+  'sku': ["null"], // [String] | SKU filter
+  'dfuActionRequest': new NotehubJs.DfuActionRequest() // DfuActionRequest | Which firmware in the case of an update action
+};
+apiInstance.dfuAction(projectUID, firmwareType, action, opts).then(() => {
+  console.log('API called successfully.');
+}, (error) => {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+| Name                 | Type                                        | Description                                    | Notes      |
+| -------------------- | ------------------------------------------- | ---------------------------------------------- | ---------- |
+| **projectUID**       | **String**                                  |                                                |
+| **firmwareType**     | **String**                                  |                                                |
+| **action**           | **String**                                  |                                                |
+| **deviceUID**        | [**[String]**](String.md)                   | A Device UID.                                  | [optional] |
+| **tag**              | [**[String]**](String.md)                   | Tag filter                                     | [optional] |
+| **serialNumber**     | [**[String]**](String.md)                   | Serial number filter                           | [optional] |
+| **fleetUID**         | **String**                                  |                                                | [optional] |
+| **notecardFirmware** | [**[String]**](String.md)                   | Firmware version filter                        | [optional] |
+| **location**         | [**[String]**](String.md)                   | Location filter                                | [optional] |
+| **hostFirmware**     | [**[String]**](String.md)                   | Host firmware filter                           | [optional] |
+| **productUID**       | [**[String]**](String.md)                   |                                                | [optional] |
+| **sku**              | [**[String]**](String.md)                   | SKU filter                                     | [optional] |
+| **dfuActionRequest** | [**DfuActionRequest**](DfuActionRequest.md) | Which firmware in the case of an update action | [optional] |
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[api_key](../README.md#api_key)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
 ## disableGlobalTransformation
 
 > disableGlobalTransformation(projectUID)
@@ -543,6 +616,102 @@ null (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
+## getDeviceDfuHistory
+
+> DeviceDfuHistory getDeviceDfuHistory(projectUID, deviceUID, firmwareType)
+
+Get device DFU history for host or Notecard firmware
+
+### Example
+
+```javascript
+import * as NotehubJs from '@blues-inc/notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
+// Configure API key authorization: api_key
+let api_key = defaultClient.authentications['api_key'];
+api_key.apiKey = 'YOUR API KEY';
+
+let apiInstance = new NotehubJs.ProjectApi();
+let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let deviceUID = dev:000000000000000; // String |
+let firmwareType = "firmwareType_example"; // String |
+apiInstance.getDeviceDfuHistory(projectUID, deviceUID, firmwareType).then((data) => {
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
+}, (error) => {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+| Name             | Type       | Description | Notes |
+| ---------------- | ---------- | ----------- | ----- |
+| **projectUID**   | **String** |             |
+| **deviceUID**    | **String** |             |
+| **firmwareType** | **String** |             |
+
+### Return type
+
+[**DeviceDfuHistory**](DeviceDfuHistory.md)
+
+### Authorization
+
+[api_key](../README.md#api_key)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+## getDeviceDfuStatus
+
+> DeviceDfuStatus getDeviceDfuStatus(projectUID, deviceUID, firmwareType)
+
+Get device DFU history for host or Notecard firmware
+
+### Example
+
+```javascript
+import * as NotehubJs from '@blues-inc/notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
+// Configure API key authorization: api_key
+let api_key = defaultClient.authentications['api_key'];
+api_key.apiKey = 'YOUR API KEY';
+
+let apiInstance = new NotehubJs.ProjectApi();
+let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let deviceUID = dev:000000000000000; // String |
+let firmwareType = "firmwareType_example"; // String |
+apiInstance.getDeviceDfuStatus(projectUID, deviceUID, firmwareType).then((data) => {
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
+}, (error) => {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+| Name             | Type       | Description | Notes |
+| ---------------- | ---------- | ----------- | ----- |
+| **projectUID**   | **String** |             |
+| **deviceUID**    | **String** |             |
+| **firmwareType** | **String** |             |
+
+### Return type
+
+[**DeviceDfuStatus**](DeviceDfuStatus.md)
+
+### Authorization
+
+[api_key](../README.md#api_key)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
 ## getDeviceFleets
 
 > GetProjectFleets200Response getDeviceFleets(projectUID, deviceUID)
@@ -579,6 +748,154 @@ apiInstance.getDeviceFleets(projectUID, deviceUID).then((data) => {
 ### Return type
 
 [**GetProjectFleets200Response**](GetProjectFleets200Response.md)
+
+### Authorization
+
+[api_key](../README.md#api_key)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+## getDevicesDfuHistory
+
+> DeviceDfuHistoryPage getDevicesDfuHistory(projectUID, firmwareType, opts)
+
+Get host or Notecard DFU history for all devices that match the filter criteria
+
+### Example
+
+```javascript
+import * as NotehubJs from '@blues-inc/notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
+// Configure API key authorization: api_key
+let api_key = defaultClient.authentications['api_key'];
+api_key.apiKey = 'YOUR API KEY';
+
+let apiInstance = new NotehubJs.ProjectApi();
+let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let firmwareType = "firmwareType_example"; // String |
+let opts = {
+  'pageSize': 50, // Number |
+  'pageNum': 1, // Number |
+  'sortBy': "'captured'", // String |
+  'sortOrder': "'asc'", // String |
+  'deviceUID': ["null"], // [String] | A Device UID.
+  'tag': ["null"], // [String] | Tag filter
+  'serialNumber': ["null"], // [String] | Serial number filter
+  'fleetUID': "fleetUID_example", // String |
+  'notecardFirmware': ["null"], // [String] | Firmware version filter
+  'location': ["null"], // [String] | Location filter
+  'hostFirmware': ["null"], // [String] | Host firmware filter
+  'productUID': ["null"], // [String] |
+  'sku': ["null"] // [String] | SKU filter
+};
+apiInstance.getDevicesDfuHistory(projectUID, firmwareType, opts).then((data) => {
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
+}, (error) => {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+| Name                 | Type                      | Description             | Notes                                      |
+| -------------------- | ------------------------- | ----------------------- | ------------------------------------------ |
+| **projectUID**       | **String**                |                         |
+| **firmwareType**     | **String**                |                         |
+| **pageSize**         | **Number**                |                         | [optional] [default to 50]                 |
+| **pageNum**          | **Number**                |                         | [optional] [default to 1]                  |
+| **sortBy**           | **String**                |                         | [optional] [default to &#39;captured&#39;] |
+| **sortOrder**        | **String**                |                         | [optional] [default to &#39;asc&#39;]      |
+| **deviceUID**        | [**[String]**](String.md) | A Device UID.           | [optional]                                 |
+| **tag**              | [**[String]**](String.md) | Tag filter              | [optional]                                 |
+| **serialNumber**     | [**[String]**](String.md) | Serial number filter    | [optional]                                 |
+| **fleetUID**         | **String**                |                         | [optional]                                 |
+| **notecardFirmware** | [**[String]**](String.md) | Firmware version filter | [optional]                                 |
+| **location**         | [**[String]**](String.md) | Location filter         | [optional]                                 |
+| **hostFirmware**     | [**[String]**](String.md) | Host firmware filter    | [optional]                                 |
+| **productUID**       | [**[String]**](String.md) |                         | [optional]                                 |
+| **sku**              | [**[String]**](String.md) | SKU filter              | [optional]                                 |
+
+### Return type
+
+[**DeviceDfuHistoryPage**](DeviceDfuHistoryPage.md)
+
+### Authorization
+
+[api_key](../README.md#api_key)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+## getDevicesDfuStatus
+
+> DeviceDfuStatusPage getDevicesDfuStatus(projectUID, firmwareType, opts)
+
+Get host or Notecard DFU history for all devices that match the filter criteria
+
+### Example
+
+```javascript
+import * as NotehubJs from '@blues-inc/notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
+// Configure API key authorization: api_key
+let api_key = defaultClient.authentications['api_key'];
+api_key.apiKey = 'YOUR API KEY';
+
+let apiInstance = new NotehubJs.ProjectApi();
+let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let firmwareType = "firmwareType_example"; // String |
+let opts = {
+  'pageSize': 50, // Number |
+  'pageNum': 1, // Number |
+  'sortBy': "'captured'", // String |
+  'sortOrder': "'asc'", // String |
+  'deviceUID': ["null"], // [String] | A Device UID.
+  'tag': ["null"], // [String] | Tag filter
+  'serialNumber': ["null"], // [String] | Serial number filter
+  'fleetUID': "fleetUID_example", // String |
+  'notecardFirmware': ["null"], // [String] | Firmware version filter
+  'location': ["null"], // [String] | Location filter
+  'hostFirmware': ["null"], // [String] | Host firmware filter
+  'productUID': ["null"], // [String] |
+  'sku': ["null"] // [String] | SKU filter
+};
+apiInstance.getDevicesDfuStatus(projectUID, firmwareType, opts).then((data) => {
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
+}, (error) => {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+| Name                 | Type                      | Description             | Notes                                      |
+| -------------------- | ------------------------- | ----------------------- | ------------------------------------------ |
+| **projectUID**       | **String**                |                         |
+| **firmwareType**     | **String**                |                         |
+| **pageSize**         | **Number**                |                         | [optional] [default to 50]                 |
+| **pageNum**          | **Number**                |                         | [optional] [default to 1]                  |
+| **sortBy**           | **String**                |                         | [optional] [default to &#39;captured&#39;] |
+| **sortOrder**        | **String**                |                         | [optional] [default to &#39;asc&#39;]      |
+| **deviceUID**        | [**[String]**](String.md) | A Device UID.           | [optional]                                 |
+| **tag**              | [**[String]**](String.md) | Tag filter              | [optional]                                 |
+| **serialNumber**     | [**[String]**](String.md) | Serial number filter    | [optional]                                 |
+| **fleetUID**         | **String**                |                         | [optional]                                 |
+| **notecardFirmware** | [**[String]**](String.md) | Firmware version filter | [optional]                                 |
+| **location**         | [**[String]**](String.md) | Location filter         | [optional]                                 |
+| **hostFirmware**     | [**[String]**](String.md) | Host firmware filter    | [optional]                                 |
+| **productUID**       | [**[String]**](String.md) |                         | [optional]                                 |
+| **sku**              | [**[String]**](String.md) | SKU filter              | [optional]                                 |
+
+### Return type
+
+[**DeviceDfuStatusPage**](DeviceDfuStatusPage.md)
 
 ### Authorization
 
@@ -919,62 +1236,6 @@ apiInstance.getProjectMembers(projectUID).then((data) => {
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-## getProjectOTAStatus
-
-> [OTAStatusList] getProjectOTAStatus(projectUID, opts)
-
-Get Project OTA Status
-
-### Example
-
-```javascript
-import * as NotehubJs from '@blues-inc/notehub-js';
-let defaultClient = NotehubJs.ApiClient.instance;
-// Configure API key authorization: api_key
-let api_key = defaultClient.authentications['api_key'];
-api_key.apiKey = 'YOUR API KEY';
-
-let apiInstance = new NotehubJs.ProjectApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
-let opts = {
-  'deviceUIDs': ["null"], // [String] | An array of Device UIDs.
-  'fleetUIDs': ["null"], // [String] |
-  'deviceTags': ["null"], // [String] |
-  'pageSize': 50, // Number |
-  'pageNum': 1 // Number |
-};
-apiInstance.getProjectOTAStatus(projectUID, opts).then((data) => {
-  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
-}, (error) => {
-  console.error(error);
-});
-
-```
-
-### Parameters
-
-| Name           | Type                      | Description              | Notes                      |
-| -------------- | ------------------------- | ------------------------ | -------------------------- |
-| **projectUID** | **String**                |                          |
-| **deviceUIDs** | [**[String]**](String.md) | An array of Device UIDs. | [optional]                 |
-| **fleetUIDs**  | [**[String]**](String.md) |                          | [optional]                 |
-| **deviceTags** | [**[String]**](String.md) |                          | [optional]                 |
-| **pageSize**   | **Number**                |                          | [optional] [default to 50] |
-| **pageNum**    | **Number**                |                          | [optional] [default to 1]  |
-
-### Return type
-
-[**[OTAStatusList]**](OTAStatusList.md)
-
-### Authorization
-
-[api_key](../README.md#api_key)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
 ## getProjectProducts
 
 > GetProjectProducts200Response getProjectProducts(projectUID)
@@ -1292,52 +1553,6 @@ apiInstance.updateFleet(projectUID, fleetUID, updateFleetRequest).then((data) =>
 ### Return type
 
 [**Fleet**](Fleet.md)
-
-### Authorization
-
-[api_key](../README.md#api_key)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-## updateProjectFirmware
-
-> [OTAUpdateStatus] updateProjectFirmware(projectUID, oTAUpdateRequest)
-
-Update Project Firmware
-
-### Example
-
-```javascript
-import * as NotehubJs from '@blues-inc/notehub-js';
-let defaultClient = NotehubJs.ApiClient.instance;
-// Configure API key authorization: api_key
-let api_key = defaultClient.authentications['api_key'];
-api_key.apiKey = 'YOUR API KEY';
-
-let apiInstance = new NotehubJs.ProjectApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
-let oTAUpdateRequest = new NotehubJs.OTAUpdateRequest(); // OTAUpdateRequest | Body or payload of firmware update
-apiInstance.updateProjectFirmware(projectUID, oTAUpdateRequest).then((data) => {
-  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
-}, (error) => {
-  console.error(error);
-});
-
-```
-
-### Parameters
-
-| Name                 | Type                                        | Description                        | Notes |
-| -------------------- | ------------------------------------------- | ---------------------------------- | ----- |
-| **projectUID**       | **String**                                  |                                    |
-| **oTAUpdateRequest** | [**OTAUpdateRequest**](OTAUpdateRequest.md) | Body or payload of firmware update |
-
-### Return type
-
-[**[OTAUpdateStatus]**](OTAUpdateStatus.md)
 
 ### Authorization
 
