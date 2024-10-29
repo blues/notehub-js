@@ -2400,6 +2400,7 @@ components:
       schema:
         type: string
         enum:
+          - best_id
           - device_serial
           - device_uid
           - captured
@@ -2407,6 +2408,7 @@ components:
           - device_location
           - tower_location
           - triangulated_location
+          - best_location
         default: captured
 
     sortOrderParam:
@@ -2446,7 +2448,7 @@ components:
       name: dateType
       in: query
       required: false
-      description: Which date to filter on, either 'captured' or 'uploaded'
+      description: Which date to filter on, either 'captured' or 'uploaded'.  This will apply to the startDate and endDate parameters
       schema:
         type: string
         default: captured
