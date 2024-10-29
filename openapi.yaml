@@ -3,7 +3,7 @@ openapi: "3.0.3"
 
 info:
   title: Notehub API
-  version: 1.2.0
+  version: 1.1.0
   description: |
     The OpenAPI definition for the Notehub.io API.
   contact:
@@ -1202,7 +1202,7 @@ paths:
             items:
               type: string
         - name: since
-          description: Deprecated. 
+          description: Deprecated.
           in: query
           required: false
           deprecated: true
@@ -1294,7 +1294,7 @@ paths:
             items:
               type: string
         - name: since
-          description: Deprecated. 
+          description: Deprecated.
           in: query
           required: false
           deprecated: true
@@ -2195,7 +2195,7 @@ paths:
   /v1/projects/{projectUID}/dfu/{firmwareType}/{action}:
     post:
       tags: ["project"]
-      operationId: dfuAction 
+      operationId: dfuAction
       description: Update/cancel host or notecard firmware updates
       security:
         - api_key: []
@@ -2213,7 +2213,7 @@ paths:
         - $ref: "#/components/parameters/productUIDQueryParam"
         - $ref: "#/components/parameters/skuParam"
       requestBody:
-        description: Which firmware in the case of an update action 
+        description: Which firmware in the case of an update action
         required: false
         content:
           application/json:
@@ -2300,7 +2300,7 @@ components:
       schema:
         type: string
       example: dev:000000000000000
-    
+
     firmwareTypeParam:
       name: firmwareType
       in: path
@@ -2310,9 +2310,9 @@ components:
         enum:
           - host
           - notecard
-    
+
     dfuActionParam:
-      name: action 
+      name: action
       in: path
       required: true
       schema:
@@ -2453,8 +2453,8 @@ components:
         type: string
         default: captured
         enum:
-        - captured
-        - uploaded
+          - captured
+          - uploaded
       example: uploaded
 
     cursorParam:
@@ -2708,8 +2708,6 @@ components:
         type: array
         items:
           type: string
-
-
 
   responses:
     ErrorResponse:
@@ -4722,16 +4720,16 @@ components:
       type: object
       properties:
         current_firmware:
-          $ref: '#/components/schemas/CurrentFirmware'
+          $ref: "#/components/schemas/CurrentFirmware"
         firmware_update:
-          $ref: '#/components/schemas/UserDfuStateMachine'
+          $ref: "#/components/schemas/UserDfuStateMachine"
           nullable: true
 
     UserDfuStateMachine:
       type: object
       properties:
         status:
-          $ref: '#/components/schemas/UserDfuStateMachineStatus'
+          $ref: "#/components/schemas/UserDfuStateMachineStatus"
         created:
           type: string
           format: date-time
@@ -4739,8 +4737,7 @@ components:
         from_version:
           type: string
         metadata:
-          $ref: '#/components/schemas/UploadMetadata'
-
+          $ref: "#/components/schemas/UploadMetadata"
 
     UserDfuStateMachineStatus:
       type: object
@@ -4762,7 +4759,7 @@ components:
         version:
           type: string
         metadata:
-          $ref: '#/components/schemas/Firmware'
+          $ref: "#/components/schemas/Firmware"
 
     UploadMetadata:
       type: object
@@ -4792,7 +4789,7 @@ components:
         notes:
           type: string
         firmware:
-          $ref: '#/components/schemas/Firmware'
+          $ref: "#/components/schemas/Firmware"
 
     Firmware:
       type: object
@@ -4977,7 +4974,7 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/DeviceDfuStateMachineNode"
-    
+
     DeviceDfuStateMachineNode:
       type: object
       description: Represents a single request to update the host or Notecard firmware
@@ -4993,4 +4990,4 @@ components:
           description: RFC3339 compatible datetime of when this status update happened
         description:
           type: string
-          description: Additional information 
+          description: Additional information
