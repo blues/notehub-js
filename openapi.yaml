@@ -3,9 +3,9 @@ openapi: "3.0.3"
 
 info:
   title: Notehub API
-  version: 1.1.0
+  version: 1.2.0
   description: |
-    The OpenAPI definition for the Notehub.io API. Test the API
+    The OpenAPI definition for the Notehub.io API.
   contact:
     name: Blues Engineering
     email: engineering@blues.io
@@ -155,7 +155,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Route"
+              $ref: "#/components/schemas/NotehubRoute"
             example: >
               {
                 "label": "Route Label",
@@ -172,7 +172,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Route"
+                $ref: "#/components/schemas/NotehubRoute"
               example:
                 {
                   "uid": "route:8d65a087d5d290ce5bdf03aeff2becc0",
@@ -211,7 +211,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Route"
+                $ref: "#/components/schemas/NotehubRoute"
               example:
                 {
                   "uid": "route:8d65a087d5d290ce5bdf03aeff2becc0",
@@ -248,7 +248,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Route"
+              $ref: "#/components/schemas/NotehubRoute"
             example: >
               {
                 "http" {
@@ -268,7 +268,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Route"
+                $ref: "#/components/schemas/NotehubRoute"
               example: >
                 {
                   "uid": "route:8d65a087d5d290ce5bdf03aeff2becc0",
@@ -1182,6 +1182,7 @@ paths:
         - $ref: "#/components/parameters/sortOrderParam"
         - $ref: "#/components/parameters/startDateParam"
         - $ref: "#/components/parameters/endDateParam"
+        - $ref: "#/components/parameters/dateTypeParam"
         - $ref: "#/components/parameters/systemFilesOnlyParam"
         - $ref: "#/components/parameters/filesQueryParam"
         - $ref: "#/components/parameters/formatParam"
@@ -1275,11 +1276,11 @@ paths:
         - $ref: "#/components/parameters/sortOrderParam"
         - $ref: "#/components/parameters/startDateParam"
         - $ref: "#/components/parameters/endDateParam"
+        - $ref: "#/components/parameters/dateTypeParam"
         - $ref: "#/components/parameters/systemFilesOnlyParam"
         - $ref: "#/components/parameters/filesQueryParam"
         - $ref: "#/components/parameters/formatParam"
         - $ref: "#/components/parameters/serialNumberFilterParam"
-        - $ref: "#/components/parameters/fleetUIDFilterQueryParam"
         - $ref: "#/components/parameters/sessionUIDFilterParam"
         - $ref: "#/components/parameters/eventUIDFilterQueryParam"
         - $ref: "#/components/parameters/selectFieldsParam"
@@ -2399,6 +2400,7 @@ components:
       schema:
         type: string
         enum:
+          - best_id
           - device_serial
           - device_uid
           - captured
@@ -2406,6 +2408,7 @@ components:
           - device_location
           - tower_location
           - triangulated_location
+          - best_location
         default: captured
 
     sortOrderParam:
@@ -2440,6 +2443,19 @@ components:
         minimum: 0
       # July 15th, 2022
       example: 1657894210
+
+    dateTypeParam:
+      name: dateType
+      in: query
+      required: false
+      description: Which date to filter on, either 'captured' or 'uploaded'.  This will apply to the startDate and endDate parameters
+      schema:
+        type: string
+        default: captured
+        enum:
+        - captured
+        - uploaded
+      example: uploaded
 
     cursorParam:
       name: cursor
@@ -3758,7 +3774,7 @@ components:
         note_sent:
           type: number
 
-    Route:
+    NotehubRoute:
       type: object
       properties:
         uid:
