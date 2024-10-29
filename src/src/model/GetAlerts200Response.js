@@ -17,7 +17,7 @@ import Alert from "./Alert";
 /**
  * The GetAlerts200Response model module.
  * @module model/GetAlerts200Response
- * @version 1.0.23&#x60;
+ * @version 1.0.23
  */
 class GetAlerts200Response {
   /**
