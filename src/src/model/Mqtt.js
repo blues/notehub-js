@@ -18,7 +18,7 @@ import HttpTransform from "./HttpTransform";
 /**
  * The Mqtt model module.
  * @module model/Mqtt
- * @version 1.0.23-beta.3
+ * @version 1.0.23&#x60;
  */
 class Mqtt {
   /**

@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The HttpTransform model module.
  * @module model/HttpTransform
- * @version 1.0.23-beta.3
+ * @version 1.0.23&#x60;
  */
 class HttpTransform {
   /**

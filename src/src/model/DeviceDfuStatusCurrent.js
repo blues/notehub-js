@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The DeviceDfuStatusCurrent model module.
  * @module model/DeviceDfuStatusCurrent
- * @version 1.0.23-beta.3
+ * @version 1.0.23&#x60;
  */
 class DeviceDfuStatusCurrent {
   /**

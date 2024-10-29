@@ -28,7 +28,7 @@ import Thingworx from "./Thingworx";
 /**
  * The NotehubRouteSchema model module.
  * @module model/NotehubRouteSchema
- * @version 1.0.23-beta.3
+ * @version 1.0.23&#x60;
  */
 class NotehubRouteSchema {
   /**

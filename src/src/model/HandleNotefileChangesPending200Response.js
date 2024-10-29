@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The HandleNotefileChangesPending200Response model module.
  * @module model/HandleNotefileChangesPending200Response
- * @version 1.0.23-beta.3
+ * @version 1.0.23&#x60;
  */
 class HandleNotefileChangesPending200Response {
   /**
