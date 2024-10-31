@@ -3,9 +3,9 @@ openapi: "3.0.3"
 
 info:
   title: Notehub API
-  version: 1.1.0
+  version: 1.2.0
   description: |
-    The OpenAPI definition for the Notehub.io API. Test the API
+    The OpenAPI definition for the Notehub.io API.
   contact:
     name: Blues Engineering
     email: engineering@blues.io
@@ -155,7 +155,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Route"
+              $ref: "#/components/schemas/NotehubRoute"
             example: >
               {
                 "label": "Route Label",
@@ -172,7 +172,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Route"
+                $ref: "#/components/schemas/NotehubRoute"
               example:
                 {
                   "uid": "route:8d65a087d5d290ce5bdf03aeff2becc0",
@@ -211,7 +211,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Route"
+                $ref: "#/components/schemas/NotehubRoute"
               example:
                 {
                   "uid": "route:8d65a087d5d290ce5bdf03aeff2becc0",
@@ -248,7 +248,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Route"
+              $ref: "#/components/schemas/NotehubRoute"
             example: >
               {
                 "http" {
@@ -268,7 +268,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Route"
+                $ref: "#/components/schemas/NotehubRoute"
               example: >
                 {
                   "uid": "route:8d65a087d5d290ce5bdf03aeff2becc0",
@@ -1182,6 +1182,7 @@ paths:
         - $ref: "#/components/parameters/sortOrderParam"
         - $ref: "#/components/parameters/startDateParam"
         - $ref: "#/components/parameters/endDateParam"
+        - $ref: "#/components/parameters/dateTypeParam"
         - $ref: "#/components/parameters/systemFilesOnlyParam"
         - $ref: "#/components/parameters/filesQueryParam"
         - $ref: "#/components/parameters/formatParam"
@@ -1201,7 +1202,7 @@ paths:
             items:
               type: string
         - name: since
-          description: Deprecated. 
+          description: Deprecated.
           in: query
           required: false
           deprecated: true
@@ -1275,11 +1276,11 @@ paths:
         - $ref: "#/components/parameters/sortOrderParam"
         - $ref: "#/components/parameters/startDateParam"
         - $ref: "#/components/parameters/endDateParam"
+        - $ref: "#/components/parameters/dateTypeParam"
         - $ref: "#/components/parameters/systemFilesOnlyParam"
         - $ref: "#/components/parameters/filesQueryParam"
         - $ref: "#/components/parameters/formatParam"
         - $ref: "#/components/parameters/serialNumberFilterParam"
-        - $ref: "#/components/parameters/fleetUIDFilterQueryParam"
         - $ref: "#/components/parameters/sessionUIDFilterParam"
         - $ref: "#/components/parameters/eventUIDFilterQueryParam"
         - $ref: "#/components/parameters/selectFieldsParam"
@@ -1293,7 +1294,7 @@ paths:
             items:
               type: string
         - name: since
-          description: Deprecated. 
+          description: Deprecated.
           in: query
           required: false
           deprecated: true
@@ -2194,7 +2195,7 @@ paths:
   /v1/projects/{projectUID}/dfu/{firmwareType}/{action}:
     post:
       tags: ["project"]
-      operationId: dfuAction 
+      operationId: dfuAction
       description: Update/cancel host or notecard firmware updates
       security:
         - api_key: []
@@ -2212,7 +2213,7 @@ paths:
         - $ref: "#/components/parameters/productUIDQueryParam"
         - $ref: "#/components/parameters/skuParam"
       requestBody:
-        description: Which firmware in the case of an update action 
+        description: Which firmware in the case of an update action
         required: false
         content:
           application/json:
@@ -2299,7 +2300,7 @@ components:
       schema:
         type: string
       example: dev:000000000000000
-    
+
     firmwareTypeParam:
       name: firmwareType
       in: path
@@ -2309,9 +2310,9 @@ components:
         enum:
           - host
           - notecard
-    
+
     dfuActionParam:
-      name: action 
+      name: action
       in: path
       required: true
       schema:
@@ -2399,6 +2400,7 @@ components:
       schema:
         type: string
         enum:
+          - best_id
           - device_serial
           - device_uid
           - captured
@@ -2406,6 +2408,7 @@ components:
           - device_location
           - tower_location
           - triangulated_location
+          - best_location
         default: captured
 
     sortOrderParam:
@@ -2440,6 +2443,19 @@ components:
         minimum: 0
       # July 15th, 2022
       example: 1657894210
+
+    dateTypeParam:
+      name: dateType
+      in: query
+      required: false
+      description: Which date to filter on, either 'captured' or 'uploaded'.  This will apply to the startDate and endDate parameters
+      schema:
+        type: string
+        default: captured
+        enum:
+          - captured
+          - uploaded
+      example: uploaded
 
     cursorParam:
       name: cursor
@@ -2692,8 +2708,6 @@ components:
         type: array
         items:
           type: string
-
-
 
   responses:
     ErrorResponse:
@@ -3758,7 +3772,7 @@ components:
         note_sent:
           type: number
 
-    Route:
+    NotehubRoute:
       type: object
       properties:
         uid:
@@ -4706,16 +4720,16 @@ components:
       type: object
       properties:
         current_firmware:
-          $ref: '#/components/schemas/CurrentFirmware'
+          $ref: "#/components/schemas/CurrentFirmware"
         firmware_update:
-          $ref: '#/components/schemas/UserDfuStateMachine'
+          $ref: "#/components/schemas/UserDfuStateMachine"
           nullable: true
 
     UserDfuStateMachine:
       type: object
       properties:
         status:
-          $ref: '#/components/schemas/UserDfuStateMachineStatus'
+          $ref: "#/components/schemas/UserDfuStateMachineStatus"
         created:
           type: string
           format: date-time
@@ -4723,8 +4737,7 @@ components:
         from_version:
           type: string
         metadata:
-          $ref: '#/components/schemas/UploadMetadata'
-
+          $ref: "#/components/schemas/UploadMetadata"
 
     UserDfuStateMachineStatus:
       type: object
@@ -4746,7 +4759,7 @@ components:
         version:
           type: string
         metadata:
-          $ref: '#/components/schemas/Firmware'
+          $ref: "#/components/schemas/Firmware"
 
     UploadMetadata:
       type: object
@@ -4776,7 +4789,7 @@ components:
         notes:
           type: string
         firmware:
-          $ref: '#/components/schemas/Firmware'
+          $ref: "#/components/schemas/Firmware"
 
     Firmware:
       type: object
@@ -4961,7 +4974,7 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/DeviceDfuStateMachineNode"
-    
+
     DeviceDfuStateMachineNode:
       type: object
       description: Represents a single request to update the host or Notecard firmware
@@ -4977,4 +4990,4 @@ components:
           description: RFC3339 compatible datetime of when this status update happened
         description:
           type: string
-          description: Additional information 
+          description: Additional information

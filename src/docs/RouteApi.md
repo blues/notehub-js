@@ -13,7 +13,7 @@ All URIs are relative to *https://api.notefile.net*
 
 ## createRoute
 
-> Route createRoute(projectUID, route)
+> NotehubRoute createRoute(projectUID, notehubRoute)
 
 Create Route within a Project
 
@@ -28,7 +28,7 @@ api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.RouteApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
-let route = {
+let notehubRoute = {
   "label": "Route Label",
   "type":"http",
   "http": {
@@ -37,8 +37,8 @@ let route = {
     "url": "http://route.url"
   }
 }
-; // Route | Route to be Created
-apiInstance.createRoute(projectUID, route).then((data) => {
+; // NotehubRoute | Route to be Created
+apiInstance.createRoute(projectUID, notehubRoute).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
@@ -48,14 +48,14 @@ apiInstance.createRoute(projectUID, route).then((data) => {
 
 ### Parameters
 
-| Name           | Type                  | Description         | Notes |
-| -------------- | --------------------- | ------------------- | ----- |
-| **projectUID** | **String**            |                     |
-| **route**      | [**Route**](Route.md) | Route to be Created |
+| Name             | Type                                | Description         | Notes |
+| ---------------- | ----------------------------------- | ------------------- | ----- |
+| **projectUID**   | **String**                          |                     |
+| **notehubRoute** | [**NotehubRoute**](NotehubRoute.md) | Route to be Created |
 
 ### Return type
 
-[**Route**](Route.md)
+[**NotehubRoute**](NotehubRoute.md)
 
 ### Authorization
 
@@ -114,7 +114,7 @@ apiInstance.deleteRoute(projectUID, routeUID).then((data) => {
 
 ## getRoute
 
-> Route getRoute(projectUID, routeUID)
+> NotehubRoute getRoute(projectUID, routeUID)
 
 Get single route within a project
 
@@ -147,7 +147,7 @@ apiInstance.getRoute(projectUID, routeUID).then((data) => {
 
 ### Return type
 
-[**Route**](Route.md)
+[**NotehubRoute**](NotehubRoute.md)
 
 ### Authorization
 
@@ -270,7 +270,7 @@ apiInstance.getRoutes(projectUID).then((data) => {
 
 ## updateRoute
 
-> Route updateRoute(projectUID, routeUID, route)
+> NotehubRoute updateRoute(projectUID, routeUID, notehubRoute)
 
 Update route by UID
 
@@ -286,7 +286,7 @@ api_key.apiKey = 'YOUR API KEY';
 let apiInstance = new NotehubJs.RouteApi();
 let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
 let routeUID = route:cbd20093cba58392c9f9bbdd0cdeb1a0; // String |
-let route = {
+let notehubRoute = {
   "http" {
     "filter": {
       "type": "include",
@@ -297,8 +297,8 @@ let route = {
     "url": "http://new-route.url",
   },
 }
-; // Route | Route settings to be updated
-apiInstance.updateRoute(projectUID, routeUID, route).then((data) => {
+; // NotehubRoute | Route settings to be updated
+apiInstance.updateRoute(projectUID, routeUID, notehubRoute).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
@@ -308,15 +308,15 @@ apiInstance.updateRoute(projectUID, routeUID, route).then((data) => {
 
 ### Parameters
 
-| Name           | Type                  | Description                  | Notes |
-| -------------- | --------------------- | ---------------------------- | ----- |
-| **projectUID** | **String**            |                              |
-| **routeUID**   | **String**            |                              |
-| **route**      | [**Route**](Route.md) | Route settings to be updated |
+| Name             | Type                                | Description                  | Notes |
+| ---------------- | ----------------------------------- | ---------------------------- | ----- |
+| **projectUID**   | **String**                          |                              |
+| **routeUID**     | **String**                          |                              |
+| **notehubRoute** | [**NotehubRoute**](NotehubRoute.md) | Route settings to be updated |
 
 ### Return type
 
-[**Route**](Route.md)
+[**NotehubRoute**](NotehubRoute.md)
 
 ### Authorization
 
