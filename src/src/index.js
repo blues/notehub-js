@@ -1,6 +1,6 @@
 /**
  * Notehub API
- * The OpenAPI definition for the Notehub.io API.
+ * The OpenAPI definition for the Notehub.io API. Trigger beta deployment.
  *
  * The version of the OpenAPI document: 1.2.0
  * Contact: engineering@blues.io
@@ -118,7 +118,7 @@ import ProjectApi from "./api/ProjectApi";
 import RouteApi from "./api/RouteApi";
 
 /**
- * The OpenAPI definition for the Notehub.io API. .<br>
+ * The OpenAPI definition for the Notehub.io API. Trigger beta deployment. .<br>
  * The <code>index</code> module provides access to constructors for all the classes which comprise the public API.
  * <p>
  * An AMD (recommended!) or CommonJS application will generally do something equivalent to the following:

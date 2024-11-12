@@ -1,6 +1,6 @@
 /**
  * Notehub API
- * The OpenAPI definition for the Notehub.io API.
+ * The OpenAPI definition for the Notehub.io API. Trigger beta deployment.
  *
  * The version of the OpenAPI document: 1.2.0
  * Contact: engineering@blues.io
