@@ -1,6 +1,6 @@
 /**
  * Notehub API
- * The OpenAPI definition for the Notehub.io API. Trigger beta deployment.
+ * The OpenAPI definition for the Notehub.io API. Trigger another beta deploy to npm
  *
  * The version of the OpenAPI document: 1.2.0
  * Contact: engineering@blues.io
@@ -54,9 +54,10 @@ class ApiClient {
      * @type {Array.<String>}
      * @default {}
      */
-    this.defaultHeaders = {
-      "User-Agent": "OpenAPI-Generator/1.0.24/Javascript",
-    };
+    this.defaultHeaders = {};
+    if (typeof window === "undefined") {
+      this.defaultHeaders["User-Agent"] = "OpenAPI-Generator/1.0.24/Javascript";
+    }
 
     /**
      * The default HTTP timeout for all API calls.

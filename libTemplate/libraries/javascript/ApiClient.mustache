@@ -57,8 +57,9 @@ class ApiClient {
          * @type {Array.<String>}
          * @default {}
          */{{/emitJSDoc}}
-        this.defaultHeaders = {
-            'User-Agent': '{{{httpUserAgent}}}{{^httpUserAgent}}OpenAPI-Generator/{{projectVersion}}/Javascript{{/httpUserAgent}}'
+        this.defaultHeaders = {}
+        if(typeof window === 'undefined') {
+            this.defaultHeaders['User-Agent'] = '{{{httpUserAgent}}}{{^httpUserAgent}}OpenAPI-Generator/{{projectVersion}}/Javascript{{/httpUserAgent}}'
         };
 
         /**
