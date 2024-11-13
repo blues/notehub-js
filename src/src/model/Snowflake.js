@@ -18,7 +18,7 @@ import SnowflakeTransform from "./SnowflakeTransform";
 /**
  * The Snowflake model module.
  * @module model/Snowflake
- * @version 1.0.24
+ * @version 1.0.25
  */
 class Snowflake {
   /**
