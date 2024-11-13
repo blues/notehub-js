@@ -1,7 +1,7 @@
 {
   "name": "@blues-inc/notehub-js",
-  "version": "1.0.24-beta.9",
-  "description": "The OpenAPI definition for the Notehub.io API. Trigger third beta deploy to npm ",
+  "version": "1.0.24-beta.10",
+  "description": "The OpenAPI definition for the Notehub.io API. Trigger fourth beta deploy to npm ",
   "license": "MIT",
   "main": "dist/index.js",
   "scripts": {

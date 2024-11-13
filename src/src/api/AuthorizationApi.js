@@ -1,6 +1,6 @@
 /**
  * Notehub API
- * The OpenAPI definition for the Notehub.io API. Trigger third beta deploy to npm
+ * The OpenAPI definition for the Notehub.io API. Trigger fourth beta deploy to npm
  *
  * The version of the OpenAPI document: 1.2.0
  * Contact: engineering@blues.io
@@ -18,7 +18,7 @@ import LoginRequest from "../model/LoginRequest";
 /**
  * Authorization service.
  * @module api/AuthorizationApi
- * @version 1.0.24-beta.9
+ * @version 1.0.24-beta.10
  */
 export default class AuthorizationApi {
   /**

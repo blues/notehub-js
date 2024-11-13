@@ -1,6 +1,6 @@
 /**
  * Notehub API
- * The OpenAPI definition for the Notehub.io API. Trigger third beta deploy to npm
+ * The OpenAPI definition for the Notehub.io API. Trigger fourth beta deploy to npm
  *
  * The version of the OpenAPI document: 1.2.0
  * Contact: engineering@blues.io
@@ -17,7 +17,7 @@ import GetDeviceHealthLog200ResponseHealthLogInner from "./GetDeviceHealthLog200
 /**
  * The GetDeviceHealthLog200Response model module.
  * @module model/GetDeviceHealthLog200Response
- * @version 1.0.24-beta.9
+ * @version 1.0.24-beta.10
  */
 class GetDeviceHealthLog200Response {
   /**
