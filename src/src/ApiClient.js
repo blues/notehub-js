@@ -54,9 +54,10 @@ class ApiClient {
      * @type {Array.<String>}
      * @default {}
      */
-    this.defaultHeaders = {
-      "User-Agent": "OpenAPI-Generator/1.0.25/Javascript",
-    };
+    this.defaultHeaders = {};
+    if (typeof window === "undefined") {
+      this.defaultHeaders["User-Agent"] = "OpenAPI-Generator/1.0.25/Javascript";
+    }
 
     /**
      * The default HTTP timeout for all API calls.
@@ -78,7 +79,7 @@ class ApiClient {
      * response, and return them in the next request.
      * @default false
      */
-    this.enableCookies = false;
+    this.enableCookies = true;
 
     /*
      * Used to save and return cookies in a node.js (non-browser) setting,
@@ -490,7 +491,7 @@ class ApiClient {
       if (typeof window === "undefined") {
         this.agent._attachCookies(request);
       } else {
-        request.withCredentials();
+        request.withCredentials(); // Allows credentials to be sent with cross-origin requests in the browser
       }
     }
 
