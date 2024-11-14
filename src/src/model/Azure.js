@@ -18,7 +18,7 @@ import HttpTransform from "./HttpTransform";
 /**
  * The Azure model module.
  * @module model/Azure
- * @version 1.0.24
+ * @version 1.0.25
  */
 class Azure {
   /**

@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The PostProvisionProjectDeviceRequest model module.
  * @module model/PostProvisionProjectDeviceRequest
- * @version 1.0.24
+ * @version 1.0.25
  */
 class PostProvisionProjectDeviceRequest {
   /**
@@ -56,6 +56,11 @@ class PostProvisionProjectDeviceRequest {
       }
       if (data.hasOwnProperty("device_sn")) {
         obj["device_sn"] = ApiClient.convertToType(data["device_sn"], "String");
+      }
+      if (data.hasOwnProperty("fleet_uids")) {
+        obj["fleet_uids"] = ApiClient.convertToType(data["fleet_uids"], [
+          "String",
+        ]);
       }
     } else if (data === null) {
       return null;
@@ -106,6 +111,13 @@ class PostProvisionProjectDeviceRequest {
           data["device_sn"]
       );
     }
+    // ensure the json data is an array
+    if (!Array.isArray(data["fleet_uids"])) {
+      throw new Error(
+        "Expected the field `fleet_uids` to be an array in the JSON data but got " +
+          data["fleet_uids"]
+      );
+    }
 
     return true;
   }
@@ -124,5 +136,11 @@ PostProvisionProjectDeviceRequest.prototype["product_uid"] = undefined;
  * @member {String} device_sn
  */
 PostProvisionProjectDeviceRequest.prototype["device_sn"] = undefined;
+
+/**
+ * The fleetUIDs to provision the device to.
+ * @member {Array.<String>} fleet_uids
+ */
+PostProvisionProjectDeviceRequest.prototype["fleet_uids"] = undefined;
 
 export default PostProvisionProjectDeviceRequest;

@@ -61,5 +61,11 @@
       //var instance = new NotehubJs.PostProvisionProjectDeviceRequest();
       //expect(instance).to.be();
     });
+
+    it('should have the property fleetUids (base name: "fleet_uids")', function () {
+      // uncomment below and update the code to test the property fleetUids
+      //var instance = new NotehubJs.PostProvisionProjectDeviceRequest();
+      //expect(instance).to.be();
+    });
   });
 });
