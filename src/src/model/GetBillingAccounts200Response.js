@@ -17,7 +17,7 @@ import BillingAccount from "./BillingAccount";
 /**
  * The GetBillingAccounts200Response model module.
  * @module model/GetBillingAccounts200Response
- * @version 1.0.24
+ * @version 1.0.25
  */
 class GetBillingAccounts200Response {
   /**
