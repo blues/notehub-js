@@ -186,7 +186,7 @@ Files and folders to be aware of in the root of the project.
 
 - The [`openapi.yaml`](openapi.yaml) is a key player for this project: it provides the documentation of all the Notehub API endpoints that the OpenAPI Generator tool uses to build the library - without this file, the project doesn't exist.
 
-> **NOTE:** Later, the [`filter-deprecated-params.js`](.github/scripts/filter-deprecated-params.js) file and [`openapi.filtered.yaml`](openapi.filtered.yaml) file were added to the SDK library. The `filter-deprecated-params.js` file makes a copy of the `openapi.yaml` file and removes any query params that have been marked as `deprecated`. Removing these now deprecated params ensures the generated SDK docs and sample code is clear and up to date, and no longer has potentially confusing artifacts to trip up users.
+> **NOTE:** Later, the [`filter-deprecated-params.js`](.github/scripts/filter-deprecated-params.js) file and [`openapi.filtered.yaml`](openapi.filtered.yaml) file were added to the SDK library. The `filter-deprecated-params.js` file makes a copy of the `openapi.yaml` file and removes any query params that have been marked as `deprecated`. Eliminating these deprecated params makes the generated SDK docs and sample code easier to understand, and free from potentially confusing elements that could mislead users.
 
 - The [`libTemplate/`](/libTemplate/) folder is the JavaScript library template that the OpenAPI generator uses to generate the `src/` folder where auto-generated JS library is created.
 
@@ -278,7 +278,7 @@ $ git clone git@github.com:blues/notehub-js.git
 $ npm run filterOpenapi
 ```
 
-This command will make a copy of the `openapi.yaml` file named `openapi.filtered.yaml` which has removed any query parameters marked as `deprecated` from the `openapi.yaml` file. Removing these now deprecated params ensures the generated SDK docs and sample code is clear and up to date, and no longer has potentially confusing artifacts to trip up users.
+This command will make a copy of the `openapi.yaml` file named `openapi.filtered.yaml` which has removed any query parameters marked as `deprecated` from the `openapi.yaml` file. Removing these now deprecated params ensures the generated SDK docs and sample code is clear,up-to-date, and free from potentially confusing artifacts to trip up users.
 
 5. Still at the root of the project, run the following script command from your terminal:
 
@@ -344,7 +344,7 @@ Below are the necessary steps to take a new version of the `openapi.yaml` file a
 
 1. Adjust the version number (`"projectVersion"`) in the `config.json` file. (Failure to adjust `"projectVersion"` will cause the release to npm to fail; the same version number can't be published more than once.)
 2. Run `npm run filterOpenapi` to create a fresh version of the `openapi.filtered.yaml` file that removes all deprecated query params from the original `openapi.yaml` file.
-3. Run `npm run generateDocs` to generate new docs for the updated `openapi.filtered.yaml` file.
+3. Run `npm run generateDocs` to generate new docs from the `openapi.filtered.yaml` file.
 4. Commit and push the changes to a new branch in GitHub and open a new pull request when the branch is ready for review. See the [contribution documentation](CONTRIBUTING.md) for further details around a good PR and commit messages.
 5. Get the PR approved and merged to `main`.
 6. Create a new release with a tag following the [semantic versioning](https://semver.org/) style of [vX.X.X] and publish the release. For example: a new release with a tag named v1.0.2.
