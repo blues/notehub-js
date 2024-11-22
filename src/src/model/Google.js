@@ -18,7 +18,7 @@ import HttpTransform from "./HttpTransform";
 /**
  * The Google model module.
  * @module model/Google
- * @version 1.0.25-beta.2
+ * @version 1.0.26
  */
 class Google {
   /**

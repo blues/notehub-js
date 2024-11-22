@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The TowerLocation model module.
  * @module model/TowerLocation
- * @version 1.0.25-beta.2
+ * @version 1.0.26
  */
 class TowerLocation {
   /**
