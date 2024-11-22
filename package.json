@@ -4,7 +4,8 @@
   "main": "./src/dist/index.js",
   "scripts": {
     "downloadJsTemplate": "openapi-generator-cli author template -g javascript --library javascript",
-    "generateDocs": "openapi-generator-cli generate -g javascript --library javascript -t libTemplate -o src -i openapi.yaml -c config.json",
+    "generateDocs": "openapi-generator-cli generate -g javascript --library javascript -t libTemplate -o src -i openapi.filtered.yaml -c config.json",
+    "filterOpenapi": "node ./.github/scripts/filter-deprecated-params.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepare": "husky install"
   },
@@ -38,7 +39,9 @@
     "@openapitools/openapi-generator-cli": "^2.5.2",
     "husky": "^8.0.0",
     "prettier": "^2.8.4",
-    "pretty-quick": "^3.1.3"
+    "pretty-quick": "^3.1.3",
+    "fs": "^0.0.1-security",
+    "yaml": "^2.6.1"
   },
   "volta": {
     "node": "18.13.0",
