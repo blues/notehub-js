@@ -153,6 +153,8 @@ As this project is partially generated via the OpenAPI Generator tool, it has a 
 ```
 .
 ├── .github/
+│   └── scripts/
+│       └── filter-deprecated-params.js
 │   └── workflows/
 │       └── GH Action files
 ├── .husky/
@@ -170,6 +172,7 @@ As this project is partially generated via the OpenAPI Generator tool, it has a 
 │   │   └── bundled src folder for npm
 │   └── package.json
 ├── openapi.yaml
+├── openapi.filtered.yaml
 ├── config.json
 ├── README.md
 └── package.json
@@ -179,9 +182,11 @@ As this project is partially generated via the OpenAPI Generator tool, it has a 
 
 Files and folders to be aware of in the root of the project.
 
-- The [`.github/`](.github/) folder holds the GitHub Actions workflows that automate common tasks in the repo. See the [Modifying the Project](#modifying-the-project) section for further information.
+- The [`.github/`](.github/) folder holds the helper scripts and GitHub Actions workflows that automate common tasks in the repo. See the [Modifying the Project](#modifying-the-project) section for further information.
 
 - The [`openapi.yaml`](openapi.yaml) is a key player for this project: it provides the documentation of all the Notehub API endpoints that the OpenAPI Generator tool uses to build the library - without this file, the project doesn't exist.
+
+> **NOTE:** Later, the [`filter-deprecated-params.js`](.github/scripts/filter-deprecated-params.js) file and [`openapi.filtered.yaml`](openapi.filtered.yaml) file were added to the SDK library. The `filter-deprecated-params.js` file makes a copy of the `openapi.yaml` file and removes any query params that have been marked as `deprecated`. Eliminating these deprecated params makes the generated SDK docs and sample code easier to understand, and free from potentially confusing elements that could mislead users.
 
 - The [`libTemplate/`](/libTemplate/) folder is the JavaScript library template that the OpenAPI generator uses to generate the `src/` folder where auto-generated JS library is created.
 
@@ -243,9 +248,11 @@ Most of the files stored at the root of this project should require little to no
 
 The [`lib/template`](libTemplate/) folder holds the JavaScript generator template files the OpenAPI Generator tool relies upon to build its library in the `src/` folder.
 
-The [`.github/`](.github/) folder holds a set of GitHub Actions workflows that automate common tasks like [creating PRs](.github/workflows/create-pr.yml) out of new branches, running automated tests, and publishing new releases to npm.
+The [`.github/`](.github/) folder holds helper scripts and a set of GitHub Actions workflows that automate common tasks like [creating PRs](.github/workflows/create-pr.yml) out of new branches, running automated tests, and publishing new releases to npm.
 
 The [`openapi.yaml`](openapi.yaml) file is a copy of the one in the Notehub repo (a private Blues repository). Anytime a new version of [Notehub.io][notehub] is deployed and the `openapi.yaml` file there is updated, a fresh copy of that file is added to this project in a new branch via a GitHub Actions workflow.
+
+The [`filter-deprecated-params.js`](.github/scripts/filter-deprecated-params.js`) file, contained within the `.github/scripts/` directory makes a copy of the `openapi.yaml` file called `openapi.filtered.yaml` which removes any query params marked as deprecated in the original `openapi.yaml` to prevent confusion for users about which query params are current vs deprecated. The `openapi.filtered.yaml` is what ends up being used to generate the Notehub JS SDK library.
 
 The [`config.json`](config.json) file is the one that will require slight changes before a new version of the library is released to npm. The [next section](#updating-the-auto-generated-notehub-js-library) will elaborate further.
 
@@ -268,6 +275,14 @@ $ git clone git@github.com:blues/notehub-js.git
 4. At the root of the project, run the following script command from your terminal:
 
 ```shell
+$ npm run filterOpenapi
+```
+
+This command will make a copy of the `openapi.yaml` file named `openapi.filtered.yaml` which has removed any query parameters marked as `deprecated` from the `openapi.yaml` file. Removing these now deprecated params ensures the generated SDK docs and sample code is clear,up-to-date, and free from potentially confusing artifacts to trip up users.
+
+5. Still at the root of the project, run the following script command from your terminal:
+
+```shell
 $ npm run generateDocs
 ```
 
@@ -279,7 +294,7 @@ This command will kick off the OpenAPI Generator tool to generate a new copy of 
 
 If you'd like to test some changes you've made to the notehub-js API locally before submitting a new PR to the repo, follow steps 1 - 4 above and then:
 
-5. Navigate into the `src/` folder in the project and install and build the newly generated project.
+6. Navigate into the `src/` folder in the project and install and build the newly generated project.
 
 - Install first.
 
@@ -293,13 +308,13 @@ $ npm install
 $ npm run build
 ```
 
-6. Still inside the `src/` folder, [link](https://docs.npmjs.com/cli/link) it globally with npm.
+7. Still inside the `src/` folder, [link](https://docs.npmjs.com/cli/link) it globally with npm.
 
 ```shell
 $ npm link
 ```
 
-7. Then go to the local JavaScript project where you want to use it, and add it as a local dependency in the project's `package.json` file with a relative path to the local library on your machine. The file path will probably look something like:
+8. Then go to the local JavaScript project where you want to use it, and add it as a local dependency in the project's `package.json` file with a relative path to the local library on your machine. The file path will probably look something like:
 
 ```json
  "dependencies": {
@@ -307,13 +322,13 @@ $ npm link
  }
 ```
 
-8. Install the module inside of your project.
+9. Install the module inside of your project.
 
 ```shell
 npm install
 ```
 
-9. Import the library using `import` or `require` as [documented above](#installation-of-the-notehub-js-library) in your application code and test it out.
+10. Import the library using `import` or `require` as [documented above](#installation-of-the-notehub-js-library) in your application code and test it out.
 
 All of these directions are also available in the auto-generated [`README.md`](src/README.md) in the `src/` folder as well, for reference.
 
@@ -328,12 +343,13 @@ Below are the necessary steps to take a new version of the `openapi.yaml` file a
 ### Steps to Publish an Updated npm Version of Repo
 
 1. Adjust the version number (`"projectVersion"`) in the `config.json` file. (Failure to adjust `"projectVersion"` will cause the release to npm to fail; the same version number can't be published more than once.)
-2. Run `npm run generateDocs` to generate new docs for the updated `openapi.yaml` file.
-3. Commit and push the changes to a new branch in GitHub and open a new pull request when the branch is ready for review. See the [contribution documentation](CONTRIBUTING.md) for further details around a good PR and commit messages.
-4. Get the PR approved and merged to `main`.
-5. Create a new release with a tag following the [semantic versioning](https://semver.org/) style of [vX.X.X] and publish the release. For example: a new release with a tag named v1.0.2.
-6. After the GitHub Actions workflow `publish-npm.yml` has successfully deployed the latest version of notehub-js to npm, copy the changelog notes from the GitHub Action step `Generate release changelog`.
-7. Paste those notes into the appropriate release tag in the repo.
+2. Run `npm run filterOpenapi` to create a fresh version of the `openapi.filtered.yaml` file that removes all deprecated query params from the original `openapi.yaml` file.
+3. Run `npm run generateDocs` to generate new docs from the `openapi.filtered.yaml` file.
+4. Commit and push the changes to a new branch in GitHub and open a new pull request when the branch is ready for review. See the [contribution documentation](CONTRIBUTING.md) for further details around a good PR and commit messages.
+5. Get the PR approved and merged to `main`.
+6. Create a new release with a tag following the [semantic versioning](https://semver.org/) style of [vX.X.X] and publish the release. For example: a new release with a tag named v1.0.2.
+7. After the GitHub Actions workflow `publish-npm.yml` has successfully deployed the latest version of notehub-js to npm, copy the changelog notes from the GitHub Action step `Generate release changelog`.
+8. Paste those notes into the appropriate release tag in the repo.
 
 ![Copy generated release notes from GitHub Actions workflow](images/generate-release-changelog.png)
 _Copy the formatted changelog notes from the GH Action workflow run._

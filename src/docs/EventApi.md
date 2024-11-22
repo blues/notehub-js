@@ -43,9 +43,7 @@ let opts = {
   'serialNumber': ["null"], // [String] | Filter by Serial Number
   'sessionUID': ["null"], // [String] | Filter by Session UID
   'eventUID': ["null"], // [String] | Filter by Event UID
-  'selectFields': "selectFields_example", // String | Comma-separated list of fields to select from JSON payload (e.g., \"field1,field2.subfield,field3\"), this will reflect the columns in the CSV output.
-  'deviceUIDs': ["null"], // [String] | Deprecated.
-  'since': "since_example" // String | Deprecated.
+  'selectFields': "selectFields_example" // String | Comma-separated list of fields to select from JSON payload (e.g., \"field1,field2.subfield,field3\"), this will reflect the columns in the CSV output.
 };
 apiInstance.getFleetEvents(projectUID, fleetUID, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
@@ -76,8 +74,6 @@ apiInstance.getFleetEvents(projectUID, fleetUID, opts).then((data) => {
 | **sessionUID**      | [**[String]**](String.md) | Filter by Session UID                                                                                                                                            | [optional]                                 |
 | **eventUID**        | [**[String]**](String.md) | Filter by Event UID                                                                                                                                              | [optional]                                 |
 | **selectFields**    | **String**                | Comma-separated list of fields to select from JSON payload (e.g., \&quot;field1,field2.subfield,field3\&quot;), this will reflect the columns in the CSV output. | [optional]                                 |
-| **deviceUIDs**      | [**[String]**](String.md) | Deprecated.                                                                                                                                                      | [optional]                                 |
-| **since**           | **String**                | Deprecated.                                                                                                                                                      | [optional]                                 |
 
 ### Return type
 
@@ -189,9 +185,7 @@ let opts = {
   'fleetUID': ["null"], // [String] | Filter by Fleet UID
   'sessionUID': ["null"], // [String] | Filter by Session UID
   'eventUID': ["null"], // [String] | Filter by Event UID
-  'selectFields': "selectFields_example", // String | Comma-separated list of fields to select from JSON payload (e.g., \"field1,field2.subfield,field3\"), this will reflect the columns in the CSV output.
-  'deviceUIDs': ["null"], // [String] | Deprecated.
-  'since': "since_example" // String | Deprecated.
+  'selectFields': "selectFields_example" // String | Comma-separated list of fields to select from JSON payload (e.g., \"field1,field2.subfield,field3\"), this will reflect the columns in the CSV output.
 };
 apiInstance.getProjectEvents(projectUID, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
@@ -222,8 +216,6 @@ apiInstance.getProjectEvents(projectUID, opts).then((data) => {
 | **sessionUID**      | [**[String]**](String.md) | Filter by Session UID                                                                                                                                            | [optional]                                 |
 | **eventUID**        | [**[String]**](String.md) | Filter by Event UID                                                                                                                                              | [optional]                                 |
 | **selectFields**    | **String**                | Comma-separated list of fields to select from JSON payload (e.g., \&quot;field1,field2.subfield,field3\&quot;), this will reflect the columns in the CSV output. | [optional]                                 |
-| **deviceUIDs**      | [**[String]**](String.md) | Deprecated.                                                                                                                                                      | [optional]                                 |
-| **since**           | **String**                | Deprecated.                                                                                                                                                      | [optional]                                 |
 
 ### Return type
 

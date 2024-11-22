@@ -39,6 +39,9 @@ jobs:
       - name: Remove Outdated SDK Folder
         run: rm -rf src
 
+      - name: Remove deprecated query params from openapi.yaml
+        run: npm run filterOpenapi
+
       - name: Generate New SDK
         run: npm run generateDocs
 

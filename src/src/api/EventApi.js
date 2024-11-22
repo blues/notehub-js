@@ -20,7 +20,7 @@ import GetRouteLogsByRoute200ResponseInner from "../model/GetRouteLogsByRoute200
 /**
  * Event service.
  * @module api/EventApi
- * @version 1.0.25
+ * @version 1.0.26
  */
 export default class EventApi {
   /**
@@ -54,8 +54,6 @@ export default class EventApi {
    * @param {Array.<String>} opts.sessionUID Filter by Session UID
    * @param {Array.<String>} opts.eventUID Filter by Event UID
    * @param {String} opts.selectFields Comma-separated list of fields to select from JSON payload (e.g., \"field1,field2.subfield,field3\"), this will reflect the columns in the CSV output.
-   * @param {Array.<String>} opts.deviceUIDs Deprecated.
-   * @param {String} opts.since Deprecated.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetProjectEvents200Response} and HTTP response
    */
   getFleetEventsWithHttpInfo(projectUID, fleetUID, opts) {
@@ -103,11 +101,6 @@ export default class EventApi {
       ),
       eventUID: this.apiClient.buildCollectionParam(opts["eventUID"], "multi"),
       selectFields: opts["selectFields"],
-      deviceUIDs: this.apiClient.buildCollectionParam(
-        opts["deviceUIDs"],
-        "multi"
-      ),
-      since: opts["since"],
     };
     let headerParams = {};
     let formParams = {};
@@ -152,8 +145,6 @@ export default class EventApi {
    * @param {Array.<String>} opts.sessionUID Filter by Session UID
    * @param {Array.<String>} opts.eventUID Filter by Event UID
    * @param {String} opts.selectFields Comma-separated list of fields to select from JSON payload (e.g., \"field1,field2.subfield,field3\"), this will reflect the columns in the CSV output.
-   * @param {Array.<String>} opts.deviceUIDs Deprecated.
-   * @param {String} opts.since Deprecated.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetProjectEvents200Response}
    */
   getFleetEvents(projectUID, fleetUID, opts) {
@@ -280,8 +271,6 @@ export default class EventApi {
    * @param {Array.<String>} opts.sessionUID Filter by Session UID
    * @param {Array.<String>} opts.eventUID Filter by Event UID
    * @param {String} opts.selectFields Comma-separated list of fields to select from JSON payload (e.g., \"field1,field2.subfield,field3\"), this will reflect the columns in the CSV output.
-   * @param {Array.<String>} opts.deviceUIDs Deprecated.
-   * @param {String} opts.since Deprecated.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetProjectEvents200Response} and HTTP response
    */
   getProjectEventsWithHttpInfo(projectUID, opts) {
@@ -323,11 +312,6 @@ export default class EventApi {
       ),
       eventUID: this.apiClient.buildCollectionParam(opts["eventUID"], "multi"),
       selectFields: opts["selectFields"],
-      deviceUIDs: this.apiClient.buildCollectionParam(
-        opts["deviceUIDs"],
-        "multi"
-      ),
-      since: opts["since"],
     };
     let headerParams = {};
     let formParams = {};
@@ -372,8 +356,6 @@ export default class EventApi {
    * @param {Array.<String>} opts.sessionUID Filter by Session UID
    * @param {Array.<String>} opts.eventUID Filter by Event UID
    * @param {String} opts.selectFields Comma-separated list of fields to select from JSON payload (e.g., \"field1,field2.subfield,field3\"), this will reflect the columns in the CSV output.
-   * @param {Array.<String>} opts.deviceUIDs Deprecated.
-   * @param {String} opts.since Deprecated.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetProjectEvents200Response}
    */
   getProjectEvents(projectUID, opts) {
