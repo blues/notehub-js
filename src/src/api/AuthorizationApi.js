@@ -18,7 +18,7 @@ import LoginRequest from "../model/LoginRequest";
 /**
  * Authorization service.
  * @module api/AuthorizationApi
- * @version 1.0.25
+ * @version 1.0.25-beta.2
  */
 export default class AuthorizationApi {
   /**

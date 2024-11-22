@@ -17,7 +17,7 @@ import Project from "./Project";
 /**
  * The GetProjects200Response model module.
  * @module model/GetProjects200Response
- * @version 1.0.25
+ * @version 1.0.25-beta.2
  */
 class GetProjects200Response {
   /**

@@ -17,7 +17,7 @@ import Firmware from "./Firmware";
 /**
  * The UploadMetadata model module.
  * @module model/UploadMetadata
- * @version 1.0.25
+ * @version 1.0.25-beta.2
  */
 class UploadMetadata {
   /**

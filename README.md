@@ -186,7 +186,7 @@ Files and folders to be aware of in the root of the project.
 
 - The [`openapi.yaml`](openapi.yaml) is a key player for this project: it provides the documentation of all the Notehub API endpoints that the OpenAPI Generator tool uses to build the library - without this file, the project doesn't exist.
 
-> **NOTE:** Later on, the [`filter-deprecated-params.js`](.github/scripts/filter-deprecated-params.js) and [`openapi.filtered.yaml`](openapi.filtered.yaml) file were added to the SDK library. The `filter-deprecated-params.js` makes a copy of the `openapi.yaml` file and removes any query params that have been marked as `deprecated`. Removing these now deprecated params ensures the generated SDK docs and sample code is clear and up to date, and no longer has potentially confusing artifacts to trip up users.
+> **NOTE:** Later, the [`filter-deprecated-params.js`](.github/scripts/filter-deprecated-params.js) file and [`openapi.filtered.yaml`](openapi.filtered.yaml) file were added to the SDK library. The `filter-deprecated-params.js` file makes a copy of the `openapi.yaml` file and removes any query params that have been marked as `deprecated`. Removing these now deprecated params ensures the generated SDK docs and sample code is clear and up to date, and no longer has potentially confusing artifacts to trip up users.
 
 - The [`libTemplate/`](/libTemplate/) folder is the JavaScript library template that the OpenAPI generator uses to generate the `src/` folder where auto-generated JS library is created.
 

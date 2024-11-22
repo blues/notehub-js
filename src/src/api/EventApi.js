@@ -20,7 +20,7 @@ import GetRouteLogsByRoute200ResponseInner from "../model/GetRouteLogsByRoute200
 /**
  * Event service.
  * @module api/EventApi
- * @version 1.0.25
+ * @version 1.0.25-beta.2
  */
 export default class EventApi {
   /**
