@@ -626,6 +626,9 @@ paths:
                 label:
                   type: string
                   description: The label, or name,  for the Fleet.
+                smartRule:
+                  $ref: "#/components/schemas/FleetRule"
+
 
       responses:
         "201":
@@ -692,6 +695,20 @@ paths:
           description: Successful operation
         default:
           $ref: "#/components/responses/ErrorResponse"
+
+    get:
+      tags: [ "project" ]
+      operationId: getFleet
+      description: Get Fleet
+      security:
+        - api_key: [ ]
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Fleet"
 
   /v1/projects/{projectUID}/members:
     parameters:
