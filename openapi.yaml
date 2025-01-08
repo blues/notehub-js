@@ -626,7 +626,7 @@ paths:
                 label:
                   type: string
                   description: The label, or name,  for the Fleet.
-                smartRule:
+                smart:
                   $ref: "#/components/schemas/FleetRule"
 
 
@@ -672,7 +672,7 @@ paths:
                   items:
                     type: string
                   description: List of DeviceUIDs to remove from fleet
-                smartRule:
+                smart:
                   $ref: "#/components/schemas/FleetRule"
       responses:
         "200":
@@ -3292,7 +3292,7 @@ components:
           type: string
           format: date-time
           description: RFC3339 timestamp in UTC
-        smartRule:
+        smart:
           $ref: "#/components/schemas/FleetRule"
 
       required:
