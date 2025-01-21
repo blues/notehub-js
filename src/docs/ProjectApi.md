@@ -22,6 +22,7 @@ All URIs are relative to *https://api.notefile.net*
 | [**getDevicesDfuHistory**](ProjectApi.md#getDevicesDfuHistory)                         | **GET** /v1/projects/{projectUID}/dfu/{firmwareType}/history                       |
 | [**getDevicesDfuStatus**](ProjectApi.md#getDevicesDfuStatus)                           | **GET** /v1/projects/{projectUID}/dfu/{firmwareType}/status                        |
 | [**getFirmwareInfo**](ProjectApi.md#getFirmwareInfo)                                   | **GET** /v1/projects/{projectUID}/firmware                                         |
+| [**getFleet**](ProjectApi.md#getFleet)                                                 | **GET** /v1/projects/{projectUID}/fleets/{fleetUID}                                |
 | [**getFleetEnvironmentVariables**](ProjectApi.md#getFleetEnvironmentVariables)         | **GET** /v1/projects/{projectUID}/fleets/{fleetUID}/environment_variables          |
 | [**getProject**](ProjectApi.md#getProject)                                             | **GET** /v1/projects/{projectUID}                                                  |
 | [**getProjectByProduct**](ProjectApi.md#getProjectByProduct)                           | **GET** /v1/products/{productUID}/project                                          |
@@ -956,6 +957,52 @@ apiInstance.getFirmwareInfo(projectUID, opts).then((data) => {
 ### Return type
 
 [**[FirmwareInfo]**](FirmwareInfo.md)
+
+### Authorization
+
+[api_key](../README.md#api_key)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+## getFleet
+
+> Fleet getFleet(projectUID, fleetUID)
+
+Get Fleet
+
+### Example
+
+```javascript
+import * as NotehubJs from '@blues-inc/notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
+// Configure API key authorization: api_key
+let api_key = defaultClient.authentications['api_key'];
+api_key.apiKey = 'YOUR API KEY';
+
+let apiInstance = new NotehubJs.ProjectApi();
+let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let fleetUID = "fleetUID_example"; // String |
+apiInstance.getFleet(projectUID, fleetUID).then((data) => {
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
+}, (error) => {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+| Name           | Type       | Description | Notes |
+| -------------- | ---------- | ----------- | ----- |
+| **projectUID** | **String** |             |
+| **fleetUID**   | **String** |             |
+
+### Return type
+
+[**Fleet**](Fleet.md)
 
 ### Authorization
 

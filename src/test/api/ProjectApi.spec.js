@@ -224,6 +224,16 @@
         done();
       });
     });
+    describe("getFleet", function () {
+      it("should call getFleet successfully", function (done) {
+        //uncomment below and update the code to test getFleet
+        //instance.getFleet(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
     describe("getFleetEnvironmentVariables", function () {
       it("should call getFleetEnvironmentVariables successfully", function (done) {
         //uncomment below and update the code to test getFleetEnvironmentVariables

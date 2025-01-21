@@ -55,5 +55,11 @@
       //var instance = new NotehubJs.CreateFleetRequest();
       //expect(instance).to.be();
     });
+
+    it('should have the property smartRule (base name: "smart_rule")', function () {
+      // uncomment below and update the code to test the property smartRule
+      //var instance = new NotehubJs.CreateFleetRequest();
+      //expect(instance).to.be();
+    });
   });
 });

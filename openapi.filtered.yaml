@@ -604,7 +604,9 @@ paths:
               properties:
                 label:
                   type: string
-                  description: The label for the Fleet.
+                  description: The label, or name,  for the Fleet.
+                smart_rule:
+                  $ref: "#/components/schemas/FleetRule"
       responses:
         "201":
           description: Successful operation
@@ -646,6 +648,8 @@ paths:
                   items:
                     type: string
                   description: List of DeviceUIDs to remove from fleet
+                smart_rule:
+                  $ref: "#/components/schemas/FleetRule"
       responses:
         "200":
           description: Successful operation
@@ -667,6 +671,20 @@ paths:
           description: Successful operation
         default:
           $ref: "#/components/responses/ErrorResponse"
+    get:
+      tags:
+        - project
+      operationId: getFleet
+      description: Get Fleet
+      security:
+        - api_key: []
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Fleet"
   /v1/projects/{projectUID}/members:
     parameters:
       - $ref: "#/components/parameters/projectUIDParam"
@@ -3118,16 +3136,27 @@ components:
         - uid
         - label
         - disable_devices_by_default
+    FleetRule:
+      type: string
+      description: JSONata expression that will be evaluated to determine device
+        membership into this fleet, if the expression evaluates to a 1, the
+        device will be included, if it evaluates to -1 it will be removed, and
+        if it evaluates to 0 or errors it will be left unchanged.
     Fleet:
       type: object
       properties:
         uid:
           type: string
+          description: Fleet UID
         label:
           type: string
+          description: Fleet label
         created:
           type: string
           format: date-time
+          description: RFC3339 timestamp in UTC
+        smart_rule:
+          $ref: "#/components/schemas/FleetRule"
       required:
         - uid
         - label
