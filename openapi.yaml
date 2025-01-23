@@ -752,7 +752,7 @@ paths:
         - $ref: "#/components/parameters/deviceUIDParamQuery"
         - $ref: "#/components/parameters/tagParam"
         - $ref: "#/components/parameters/serialNumberParam"
-        - $ref: "#/components/parameters/fleetUIDQueryParam"
+        - $ref: "#/components/parameters/fleetUIDsQueryParam"
         - $ref: "#/components/parameters/notecardFirmwareParam"
         - $ref: "#/components/parameters/locationParam"
         - $ref: "#/components/parameters/hostFirmwareParam"
@@ -2520,6 +2520,15 @@ components:
       schema:
         type: string
 
+    fleetUIDsQueryParam:
+      name: fleetUID
+      in: query
+      required: false
+      schema:
+        type: array
+        items:
+          type: string
+
     filesQueryParam:
       name: files
       in: query
@@ -3302,6 +3311,7 @@ components:
 
     DFUState:
       type: object
+      nullable: true
       properties:
         type:
           type: string
@@ -3364,6 +3374,7 @@ components:
 
     DFUEnv:
       type: object
+      nullable: true
       properties:
         card:
           $ref: "#/components/schemas/DFUState"
@@ -3393,6 +3404,7 @@ components:
             type: string
         tower_info:
           type: object
+          nullable: true
           properties:
             mcc:
               type: integer
