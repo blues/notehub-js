@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The HandleNoteSignal200Response model module.
  * @module model/HandleNoteSignal200Response
- * @version 1.0.26
+ * @version 1.0.27
  */
 class HandleNoteSignal200Response {
   /**

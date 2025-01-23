@@ -16,15 +16,15 @@ import ApiClient from "../ApiClient";
 /**
  * The Fleet model module.
  * @module model/Fleet
- * @version 1.0.26
+ * @version 1.0.27
  */
 class Fleet {
   /**
    * Constructs a new <code>Fleet</code>.
    * @alias module:model/Fleet
-   * @param uid {String}
-   * @param label {String}
-   * @param created {Date}
+   * @param uid {String} Fleet UID
+   * @param label {String} Fleet label
+   * @param created {Date} RFC3339 timestamp in UTC
    */
   constructor(uid, label, created) {
     Fleet.initialize(this, uid, label, created);
@@ -60,6 +60,12 @@ class Fleet {
       }
       if (data.hasOwnProperty("created")) {
         obj["created"] = ApiClient.convertToType(data["created"], "Date");
+      }
+      if (data.hasOwnProperty("smart_rule")) {
+        obj["smart_rule"] = ApiClient.convertToType(
+          data["smart_rule"],
+          "String"
+        );
       }
     } else if (data === null) {
       return null;
@@ -104,6 +110,19 @@ class Fleet {
           data["label"]
       );
     }
+    // ensure the json data is a string
+    if (
+      data["smart_rule"] &&
+      !(
+        typeof data["smart_rule"] === "string" ||
+        data["smart_rule"] instanceof String
+      )
+    ) {
+      throw new Error(
+        "Expected the field `smart_rule` to be a primitive type in the JSON string but got " +
+          data["smart_rule"]
+      );
+    }
 
     return true;
   }
@@ -112,18 +131,27 @@ class Fleet {
 Fleet.RequiredProperties = ["uid", "label", "created"];
 
 /**
+ * Fleet UID
  * @member {String} uid
  */
 Fleet.prototype["uid"] = undefined;
 
 /**
+ * Fleet label
  * @member {String} label
  */
 Fleet.prototype["label"] = undefined;
 
 /**
+ * RFC3339 timestamp in UTC
  * @member {Date} created
  */
 Fleet.prototype["created"] = undefined;
+
+/**
+ * JSONata expression that will be evaluated to determine device membership into this fleet, if the expression evaluates to a 1, the device will be included, if it evaluates to -1 it will be removed, and if it evaluates to 0 or errors it will be left unchanged.
+ * @member {String} smart_rule
+ */
+Fleet.prototype["smart_rule"] = undefined;
 
 export default Fleet;

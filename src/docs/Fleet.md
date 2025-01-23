@@ -2,8 +2,9 @@
 
 ## Properties
 
-| Name        | Type       | Description | Notes |
-| ----------- | ---------- | ----------- | ----- |
-| **uid**     | **String** |             |
-| **label**   | **String** |             |
-| **created** | **Date**   |             |
+| Name          | Type       | Description                                                                                                                                                                                                                                                        | Notes      |
+| ------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- |
+| **uid**       | **String** | Fleet UID                                                                                                                                                                                                                                                          |
+| **label**     | **String** | Fleet label                                                                                                                                                                                                                                                        |
+| **created**   | **Date**   | RFC3339 timestamp in UTC                                                                                                                                                                                                                                           |
+| **smartRule** | **String** | JSONata expression that will be evaluated to determine device membership into this fleet, if the expression evaluates to a 1, the device will be included, if it evaluates to -1 it will be removed, and if it evaluates to 0 or errors it will be left unchanged. | [optional] |

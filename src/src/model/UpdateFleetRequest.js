@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The UpdateFleetRequest model module.
  * @module model/UpdateFleetRequest
- * @version 1.0.26
+ * @version 1.0.27
  */
 class UpdateFleetRequest {
   /**
@@ -58,6 +58,12 @@ class UpdateFleetRequest {
           "String",
         ]);
       }
+      if (data.hasOwnProperty("smart_rule")) {
+        obj["smart_rule"] = ApiClient.convertToType(
+          data["smart_rule"],
+          "String"
+        );
+      }
     } else if (data === null) {
       return null;
     }
@@ -94,6 +100,19 @@ class UpdateFleetRequest {
           data["removeDevices"]
       );
     }
+    // ensure the json data is a string
+    if (
+      data["smart_rule"] &&
+      !(
+        typeof data["smart_rule"] === "string" ||
+        data["smart_rule"] instanceof String
+      )
+    ) {
+      throw new Error(
+        "Expected the field `smart_rule` to be a primitive type in the JSON string but got " +
+          data["smart_rule"]
+      );
+    }
 
     return true;
   }
@@ -116,5 +135,11 @@ UpdateFleetRequest.prototype["addDevices"] = undefined;
  * @member {Array.<String>} removeDevices
  */
 UpdateFleetRequest.prototype["removeDevices"] = undefined;
+
+/**
+ * JSONata expression that will be evaluated to determine device membership into this fleet, if the expression evaluates to a 1, the device will be included, if it evaluates to -1 it will be removed, and if it evaluates to 0 or errors it will be left unchanged.
+ * @member {String} smart_rule
+ */
+UpdateFleetRequest.prototype["smart_rule"] = undefined;
 
 export default UpdateFleetRequest;

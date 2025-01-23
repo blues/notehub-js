@@ -38,7 +38,7 @@ import UpdateFleetRequest from "../model/UpdateFleetRequest";
 /**
  * Project service.
  * @module api/ProjectApi
- * @version 1.0.26
+ * @version 1.0.27
  */
 export default class ProjectApi {
   /**
@@ -1387,6 +1387,69 @@ export default class ProjectApi {
    */
   getFirmwareInfo(projectUID, opts) {
     return this.getFirmwareInfoWithHttpInfo(projectUID, opts).then(function (
+      response_and_data
+    ) {
+      return response_and_data.data;
+    });
+  }
+
+  /**
+   * Get Fleet
+   * @param {String} projectUID
+   * @param {String} fleetUID
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Fleet} and HTTP response
+   */
+  getFleetWithHttpInfo(projectUID, fleetUID) {
+    let postBody = null;
+    // verify the required parameter 'projectUID' is set
+    if (projectUID === undefined || projectUID === null) {
+      throw new Error(
+        "Missing the required parameter 'projectUID' when calling getFleet"
+      );
+    }
+    // verify the required parameter 'fleetUID' is set
+    if (fleetUID === undefined || fleetUID === null) {
+      throw new Error(
+        "Missing the required parameter 'fleetUID' when calling getFleet"
+      );
+    }
+
+    let pathParams = {
+      projectUID: projectUID,
+      fleetUID: fleetUID,
+    };
+    let queryParams = {};
+    let headerParams = {};
+    let formParams = {};
+
+    let authNames = ["api_key"];
+    let contentTypes = [];
+    let accepts = ["application/json"];
+    let returnType = Fleet;
+    return this.apiClient.callApi(
+      "/v1/projects/{projectUID}/fleets/{fleetUID}",
+      "GET",
+      pathParams,
+      queryParams,
+      headerParams,
+      formParams,
+      postBody,
+      authNames,
+      contentTypes,
+      accepts,
+      returnType,
+      null
+    );
+  }
+
+  /**
+   * Get Fleet
+   * @param {String} projectUID
+   * @param {String} fleetUID
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Fleet}
+   */
+  getFleet(projectUID, fleetUID) {
+    return this.getFleetWithHttpInfo(projectUID, fleetUID).then(function (
       response_and_data
     ) {
       return response_and_data.data;
