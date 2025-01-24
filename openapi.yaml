@@ -3394,6 +3394,7 @@ components:
         last_activity:
           type: string
           format: date-time
+          nullable: true
         contact:
           $ref: "#/components/schemas/Contact"
         product_uid:
