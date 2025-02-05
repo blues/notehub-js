@@ -593,6 +593,81 @@ paths:
         default:
           $ref: "#/components/responses/ErrorResponse"
 
+  /v1/projects/{projectUID}/analytics-engine/create-data-set:
+    put:
+      tags: ["analytics"]
+      operationId: createAnalyticsDataset
+      description: Create a new analytics dataset
+      security:
+        - api_key: []
+      parameters:
+        - $ref: "#/components/parameters/projectUIDParam"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - time
+              properties:
+                name:
+                  type: string
+                  description: The name of the data set
+                time:
+                  type: string
+                  description: Time field mapping (e.g. session.session_began)
+                lat:
+                  type: string
+                  description: Latitude field mapping
+                lon:
+                  type: string
+                  description: Longitude field mapping
+                fields:
+                  type: object
+                  additionalProperties:
+                    type: string
+                  description: Additional field mappings
+      responses:
+        "201":
+          description: Dataset created successfully
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+
+  /v1/projects/{projectUID}/analytics-engine/query:
+    get:
+      tags: ["analytics"]
+      operationId: queryAnalyticsDataset
+      description: Query an analytics dataset with support for time ranges, field selection, filtering, and location-based queries
+      security:
+        - api_key: []
+      parameters:
+        - $ref: "#/components/parameters/projectUIDParam"
+        - $ref: "#/components/parameters/analyticsDatasetNameParam"
+        - $ref: "#/components/parameters/analyticsStartParam"
+        - $ref: "#/components/parameters/analyticsEndParam"
+        - $ref: "#/components/parameters/analyticsSelectParam"
+        - $ref: "#/components/parameters/analyticsWhereParam"
+        - $ref: "#/components/parameters/analyticsAggregateWindowParam"
+        - $ref: "#/components/parameters/analyticsLocationNearParam"
+        - $ref: "#/components/parameters/analyticsLocationRadiusParam"
+        - $ref: "#/components/parameters/analyticsLocationStateParam"
+        - $ref: "#/components/parameters/analyticsLocationGeomParam"
+      responses:
+        "200":
+          description: Successful query
+          content:
+            text/csv:
+              schema:
+                type: string
+                format: binary
+              example: |
+                lat,lon,device,session_began
+                42.393125,-71.185015,dev:1234,2024-01-01T12:34:56Z
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+
   /v1/projects/{projectUID}/fleets:
     parameters:
       - $ref: "#/components/parameters/projectUIDParam"
@@ -2636,6 +2711,86 @@ components:
       required: false
       schema:
         type: string
+
+    analyticsDatasetNameParam:
+      name: name
+      in: query
+      required: true
+      schema:
+        type: string
+      description: The name of the data set
+
+    analyticsStartParam:
+      name: start
+      in: query
+      required: true
+      schema:
+        type: string
+      description: Start of the time range, as an ISO-8601 date or relative to now (e.g. -1y). Relative dates follow the Postgres INTERVAL format.
+
+    analyticsEndParam:
+      name: end
+      in: query
+      required: false
+      schema:
+        type: string
+      description: End of the time range, as an ISO-8601 date or relative to now. If omitted, current time is used.
+
+    analyticsSelectParam:
+      name: select
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Comma separated list of fields to include. Supports aggregate functions (avg, sum, min, max, count, most_recent).
+
+    analyticsWhereParam:
+      name: where
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Additional filters using boolean logic mini-language (e.g. and.(device.eq.dev:123,temp.gt.100))
+
+    analyticsAggregateWindowParam:
+      name: aggregate_window
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Aggregate results into buckets for a time duration, expressed in Postgres INTERVAL format
+
+    analyticsLocationNearParam:
+      name: location_near
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Lat/lon coordinates for location-based filtering (format: lat,lon)
+
+    analyticsLocationRadiusParam:
+      name: location_near_radius
+      in: query
+      required: false
+      schema:
+        type: integer
+      description: Distance from location_near in meters
+
+    analyticsLocationStateParam:
+      name: location_state
+      in: query
+      required: false
+      schema:
+        type: string
+      description: State-based location lookup
+
+    analyticsLocationGeomParam:
+      name: location_in_geom
+      in: query
+      required: false
+      schema:
+        type: string
+      description: GeoJSON for spatial queries
 
     productUIDQueryParam:
       name: productUID
@@ -5029,4 +5184,4 @@ components:
           description: RFC3339 compatible datetime of when this status update happened
         description:
           type: string
-          description: Additional information 
+          description: Additional information        
