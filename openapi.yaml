@@ -3605,13 +3605,13 @@ components:
           type: string
           description: SKU. Only available on _session.qo events.
         ordering_code:
-          type: string;
+          type: string
           description: Ordering code. Only available on _session.qo events.
         ssid:
-          type: string;
+          type: string
           description: SSID. Only available on _session.qo events.
         bssid:
-          type: string;
+          type: string
           description: BSSID. Only available on _session.qo events.
 
     Location:
