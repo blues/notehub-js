@@ -2184,6 +2184,185 @@ paths:
         default:
           $ref: "#/components/responses/ErrorResponse"
 
+  /v1/storage-service/repository:
+    post:
+        tags: ["storage_service"]
+        operationId: createStorageServiceRepository
+        description: Create a new analytics dataset using the provided mappings and field selections
+        security:
+            - api_key: []
+        requestBody:
+            required: true
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/CreateUpdateDataRepository"
+        responses:
+            "201":
+              description: Dataset created successfully
+              content:
+                application/json:
+                  schema:
+                    $ref: "#/components/schemas/DataRepository"
+            default:
+              $ref: "#/components/responses/ErrorResponse"
+
+  /v1/storage-service/repository/{repositoryUID}:
+    put:
+      tags: ["storage_service"]
+      operationId: updateStorageServiceAnalyticsDataset
+      description: Update an analytics dataset using the provided mappings and field selections
+      security:
+        - api_key: []
+      parameters:
+        - $ref: "#/components/parameters/repositoryUIDParam"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateUpdateDataRepository"
+      responses:
+        "200":
+          description: Dataset updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DataRepository"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+
+    delete:
+        tags: ["storage_service"]
+        operationId: deleteStorageServiceRepository
+        description: Delete an analytics dataset
+        security:
+          - api_key: []
+        parameters:
+          - $ref: "#/components/parameters/repositoryUIDParam"
+        responses:
+          "200":
+            description: Dataset deleted successfully
+          default:
+            $ref: "#/components/responses/ErrorResponse"
+
+  /v1/storage-service/repository/{repositoryUID}/datasets:
+    post:
+      tags: ["storage_service"]
+      operationId: createStorageServiceAnalyticsDataset
+      description: Create a new analytics dataset using the provided mappings and field selections
+      security:
+        - api_key: []
+      parameters:
+        - $ref: "#/components/parameters/repositoryUIDParam"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DataSet"
+      responses:
+        "201":
+          description: Dataset created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DataSet"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+
+  /v1/storage-service/projects/{repositoryUID}/datasets/{analyticsDatasetNameParam}:
+    get:
+      tags: ["storage_service"]
+      operationId: getStorageServiceAnalyticsDataset
+      description: Get the details of an analytics dataset
+      security:
+        - api_key: []
+      parameters:
+        - $ref: "#/components/parameters/repositoryUIDParam"
+        - $ref: '#/components/parameters/analyticsDatasetNameParam'
+      responses:
+        "200":
+          description: Dataset details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DataSet"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+    delete:
+      tags: ["storage_service"]
+      operationId: deleteStorageServiceAnalyticsDataset
+      description: Delete an analytics dataset
+      security:
+        - api_key: []
+      parameters:
+        - $ref: "#/components/parameters/repositoryUIDParam"
+        - $ref: "#/components/parameters/analyticsDatasetNameParam"
+      responses:
+        "200":
+          description: Dataset deleted successfully
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+
+  /v1/storage-service/projects/{repositoryUID}/datasets/{analyticsDatasetNameParam}/query:
+    get:
+      tags: ["storage_service"]
+      operationId: queryAnalyticsDataset
+      description: Query an analytics dataset with support for time ranges, field selection, filtering, and location-based queries
+      security:
+        - api_key: []
+      parameters:
+        - $ref: "#/components/parameters/repositoryUIDParam"
+        - $ref: "#/components/parameters/analyticsDatasetNameParam"
+        - $ref: "#/components/parameters/analyticsStartParam"
+        - $ref: "#/components/parameters/analyticsEndParam"
+        - $ref: "#/components/parameters/analyticsSelectParam"
+        - $ref: "#/components/parameters/analyticsWhereParam"
+        - $ref: "#/components/parameters/analyticsAggregateWindowParam"
+        - $ref: "#/components/parameters/analyticsLocationNearParam"
+        - $ref: "#/components/parameters/analyticsLocationRadiusParam"
+        - $ref: "#/components/parameters/analyticsLocationStateParam"
+        - $ref: "#/components/parameters/analyticsLocationGeomParam"
+        - $ref: "#/components/parameters/analyticsLimitParam"
+        - $ref: "#/components/parameters/analyticsOrderByParam"
+        - $ref: "#/components/parameters/analyticsDistinctParam"
+      responses:
+        "200":
+          description: Successful query
+          content:
+            text/csv:
+              schema:
+                type: string
+                format: binary
+              example: |
+                lat,lon,device,session_began
+                42.393125,-71.185015,dev:1234,2024-01-01T12:34:56Z
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+
+  /v1/storage-service/project/{repositoryUID}/data:
+    get:
+      tags: ["storage_service"]
+      operationId: getStorageServiceData
+      description: Get Raw data for a Storage Service Project
+      security:
+        - api_key: []
+      parameters:
+        - $ref: "#/components/parameters/repositoryUIDParam"
+        - $ref: "#/components/parameters/analyticsStartParam"
+        - $ref: "#/components/parameters/analyticsEndParam"
+      responses:
+        "200":
+          description: Successful query
+          content:
+            text/csv:
+              schema:
+                type: string
+                format: binary
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+
   /v1/projects/{projectUID}/dfu/{firmwareType}/status:
     get:
       tags: ["project"]
@@ -2301,7 +2480,6 @@ components:
       schema:
         type: string
 
-
     fleetUIDsParam:
       name: fleetUIDs
       in: query
@@ -2377,6 +2555,119 @@ components:
       schema:
         type: string
       example: monitor:8bAdf00d-000f-51c-af-01d5eaf00dbad
+
+    repositoryUIDParam:
+      name: repositoryUID
+      in: path
+      required: true
+      schema:
+        type: string
+        example: rid:2606f411-dea6-44a0-9743-1130f57d77d8
+
+    analyticsDatasetNameParam:
+      name: name
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The name of the data set
+
+    analyticsStartParam:
+      name: start
+      in: query
+      required: true
+      schema:
+        type: string
+      description: Start of the time range, as an ISO-8601 date or relative to now (e.g. -1y). Relative dates follow the Postgres INTERVAL format.
+
+    analyticsEndParam:
+      name: end
+      in: query
+      required: false
+      schema:
+        type: string
+      description: End of the time range, as an ISO-8601 date or relative to now. If omitted, current time is used.
+
+    analyticsSelectParam:
+      name: select
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Comma separated list of fields to include. Supports aggregate functions (avg, sum, min, max, count, most_recent).
+
+    analyticsWhereParam:
+      name: where
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Additional filters using boolean logic mini-language (e.g. and.(device.eq.dev:123,temp.gt.100))
+
+    analyticsAggregateWindowParam:
+      name: aggregate_window
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Aggregate results into buckets for a time duration, expressed in Postgres INTERVAL format
+
+    analyticsLocationNearParam:
+      name: location_near
+      in: query
+      required: false
+      schema:
+        type: string
+        example: 42.393125,-71.185015
+      description: Latitude and Longitude for location-based filtering, location_near_radius must also be provided
+
+    analyticsLocationRadiusParam:
+      name: location_near_radius
+      in: query
+      required: false
+      schema:
+        type: integer
+      description: Distance from location_near in meters, location_near must also be provided
+
+    analyticsLocationStateParam:
+      name: location_state
+      in: query
+      required: false
+      schema:
+        type: string
+      description: State-based location lookup
+
+    analyticsLocationGeomParam:
+      name: location_in_geom
+      in: query
+      required: false
+      schema:
+        type: string
+      description: GeoJSON for spatial queries
+
+    analyticsLimitParam:
+      name: limit
+      in: query
+      required: false
+      schema:
+        type: integer
+      description: Limit the number of results returned
+
+    analyticsOrderByParam:
+      name: order_by
+      in: query
+      required: false
+      description: Order the results by a field
+      schema:
+        type: string
+
+    analyticsDistinctParam:
+      name: distinct
+      in: query
+      required: false
+      schema:
+        type: boolean
+      description: Return only distinct results
 
     # querystring parameters
     pageSizeParam:
@@ -2735,8 +3026,6 @@ components:
         type: array
         items:
           type: string
-
-
 
   responses:
     ErrorResponse:
@@ -4777,7 +5066,6 @@ components:
         metadata:
           $ref: '#/components/schemas/UploadMetadata'
 
-
     UserDfuStateMachineStatus:
       type: object
       properties:
@@ -5030,3 +5318,125 @@ components:
         description:
           type: string
           description: Additional information 
+
+    DataField:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the field
+
+    DataSetField:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the field
+        datatype:
+          type: integer
+          description: The datatype of the field
+          enum:
+            - 0  # String
+            - 1  # Integer
+            - 2  # Float
+            - 3  # Timestamp
+            - 4  # Location
+
+    DataSet:
+      properties:
+        name:
+          type: string
+          description: The name of the data set
+        time:
+          type: string
+          description: JSONata expression resulting in the relevant time field
+        lat:
+          type: string
+          description: JSONata expression resulting in the latitude field
+        lon:
+          type: string
+          description: JSONata expression resulting in the Longitude field
+        fields:
+          type: array
+          items:
+            $ref: "#/components/schemas/DataSetField"
+
+
+    QuestionDataResponseLineChart:
+      type: object
+      additionalProperties: false
+      required:
+        - type
+        - title
+        - property
+        - displayValue
+      properties:
+        type:
+          type: string
+          enum: [ "lineChart" ]
+          description: "Graph type must be 'lineChart' for a line chart."
+        title:
+          type: string
+          description: "Title of the chart."
+        property:
+          type: string
+          description: "The property displayed as the Y-axis for the line chart."
+        displayValue:
+          type: string
+          description: "Label of the Y-axis for the line chart."
+        splitBy:
+          type: string
+          description: "Optional. Split the data by this property to create multiple lines on the chart."
+        startDate:
+          type: string
+          format: date-time
+          description: "Optional start date for filtering/charting data."
+        endDate:
+          type: string
+          format: date-time
+          description: "Optional end date for filtering/charting data."
+
+
+    QuestionDataResponseMap:
+      type: object
+      additionalProperties: false
+      required:
+        - type
+        - title
+      properties:
+        type:
+          type: string
+          enum: [ "map" ]
+          description: "Graph type must be 'map' for a map visualization."
+        title:
+          type: string
+          description: "Title of the map."
+
+    FleetsUIDList:
+        type: array
+        items:
+          type: string
+
+    AppUIDList:
+        type: array
+        items:
+          type: string
+
+    CreateUpdateDataRepository:
+      type: object
+      properties:
+        fleetUIDs:
+            $ref: "#/components/schemas/FleetsUIDList"
+        projectUIDs:
+            $ref: "#/components/schemas/AppUIDList"
+
+    DataRepository:
+      type: object
+      properties:
+        uid:
+          type: string
+          description: The unique identifier for the data repository
+        fleetUIDs:
+          $ref: "#/components/schemas/FleetsUIDList"
+        projectUIDs:
+          $ref: "#/components/schemas/AppUIDList"
