@@ -267,6 +267,21 @@ class Event {
           Object
         );
       }
+      if (data.hasOwnProperty("sku")) {
+        obj["sku"] = ApiClient.convertToType(data["sku"], "String");
+      }
+      if (data.hasOwnProperty("ordering_code")) {
+        obj["ordering_code"] = ApiClient.convertToType(
+          data["ordering_code"],
+          "String"
+        );
+      }
+      if (data.hasOwnProperty("ssid")) {
+        obj["ssid"] = ApiClient.convertToType(data["ssid"], "String");
+      }
+      if (data.hasOwnProperty("bssid")) {
+        obj["bssid"] = ApiClient.convertToType(data["bssid"], "String");
+      }
     } else if (data === null) {
       return null;
     }
@@ -615,6 +630,49 @@ class Event {
           data["rat"]
       );
     }
+    // ensure the json data is a string
+    if (
+      data["sku"] &&
+      !(typeof data["sku"] === "string" || data["sku"] instanceof String)
+    ) {
+      throw new Error(
+        "Expected the field `sku` to be a primitive type in the JSON string but got " +
+          data["sku"]
+      );
+    }
+    // ensure the json data is a string
+    if (
+      data["ordering_code"] &&
+      !(
+        typeof data["ordering_code"] === "string" ||
+        data["ordering_code"] instanceof String
+      )
+    ) {
+      throw new Error(
+        "Expected the field `ordering_code` to be a primitive type in the JSON string but got " +
+          data["ordering_code"]
+      );
+    }
+    // ensure the json data is a string
+    if (
+      data["ssid"] &&
+      !(typeof data["ssid"] === "string" || data["ssid"] instanceof String)
+    ) {
+      throw new Error(
+        "Expected the field `ssid` to be a primitive type in the JSON string but got " +
+          data["ssid"]
+      );
+    }
+    // ensure the json data is a string
+    if (
+      data["bssid"] &&
+      !(typeof data["bssid"] === "string" || data["bssid"] instanceof String)
+    ) {
+      throw new Error(
+        "Expected the field `bssid` to be a primitive type in the JSON string but got " +
+          data["bssid"]
+      );
+    }
 
     return true;
   }
@@ -948,5 +1006,29 @@ Event.prototype["temp"] = undefined;
  * @member {Object} environment
  */
 Event.prototype["environment"] = undefined;
+
+/**
+ * SKU. Only available on _session.qo events.
+ * @member {String} sku
+ */
+Event.prototype["sku"] = undefined;
+
+/**
+ * Ordering code. Only available on _session.qo events.
+ * @member {String} ordering_code
+ */
+Event.prototype["ordering_code"] = undefined;
+
+/**
+ * SSID. Only available on _session.qo events.
+ * @member {String} ssid
+ */
+Event.prototype["ssid"] = undefined;
+
+/**
+ * BSSID. Only available on _session.qo events.
+ * @member {String} bssid
+ */
+Event.prototype["bssid"] = undefined;
 
 export default Event;

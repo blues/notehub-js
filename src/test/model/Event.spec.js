@@ -379,5 +379,29 @@
       //var instance = new NotehubJs.Event();
       //expect(instance).to.be();
     });
+
+    it('should have the property sku (base name: "sku")', function () {
+      // uncomment below and update the code to test the property sku
+      //var instance = new NotehubJs.Event();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property orderingCode (base name: "ordering_code")', function () {
+      // uncomment below and update the code to test the property orderingCode
+      //var instance = new NotehubJs.Event();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property ssid (base name: "ssid")', function () {
+      // uncomment below and update the code to test the property ssid
+      //var instance = new NotehubJs.Event();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property bssid (base name: "bssid")', function () {
+      // uncomment below and update the code to test the property bssid
+      //var instance = new NotehubJs.Event();
+      //expect(instance).to.be();
+    });
   });
 });

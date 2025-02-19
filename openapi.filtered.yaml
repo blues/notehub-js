@@ -3484,6 +3484,18 @@ components:
           description:
             Routed environment variables beginning with "$". Only available on
             _session.qo events.
+        sku:
+          type: string
+          description: SKU. Only available on _session.qo events.
+        ordering_code:
+          type: string
+          description: Ordering code. Only available on _session.qo events.
+        ssid:
+          type: string
+          description: SSID. Only available on _session.qo events.
+        bssid:
+          type: string
+          description: BSSID. Only available on _session.qo events.
     Location:
       type: object
       nullable: true

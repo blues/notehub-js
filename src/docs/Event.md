@@ -59,3 +59,7 @@
 | **voltage**          | **Number**  | Device voltage. Only available on \_session.qo events.                                                                                                 | [optional] |
 | **temp**             | **Number**  | Device temperature. Only available on \_session.qo events.                                                                                             | [optional] |
 | **environment**      | **Object**  | Routed environment variables beginning with \&quot;$\&quot;. Only available on \_session.qo events.                                                    | [optional] |
+| **sku**              | **String**  | SKU. Only available on \_session.qo events.                                                                                                            | [optional] |
+| **orderingCode**     | **String**  | Ordering code. Only available on \_session.qo events.                                                                                                  | [optional] |
+| **ssid**             | **String**  | SSID. Only available on \_session.qo events.                                                                                                           | [optional] |
+| **bssid**            | **String**  | BSSID. Only available on \_session.qo events.                                                                                                          | [optional] |
