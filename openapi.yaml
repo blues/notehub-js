@@ -3311,7 +3311,6 @@ components:
 
     DFUState:
       type: object
-      nullable: true
       properties:
         type:
           type: string
@@ -3374,7 +3373,6 @@ components:
 
     DFUEnv:
       type: object
-      nullable: true
       properties:
         card:
           $ref: "#/components/schemas/DFUState"
@@ -3394,7 +3392,6 @@ components:
         last_activity:
           type: string
           format: date-time
-          nullable: true
         contact:
           $ref: "#/components/schemas/Contact"
         product_uid:
@@ -3405,7 +3402,6 @@ components:
             type: string
         tower_info:
           type: object
-          nullable: true
           properties:
             mcc:
               type: integer
