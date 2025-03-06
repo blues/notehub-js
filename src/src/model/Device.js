@@ -145,6 +145,18 @@ class Device {
       if (data.hasOwnProperty("dfu")) {
         obj["dfu"] = DFUEnv.constructFromObject(data["dfu"]);
       }
+      if (data.hasOwnProperty("firmware_host")) {
+        obj["firmware_host"] = ApiClient.convertToType(
+          data["firmware_host"],
+          "String"
+        );
+      }
+      if (data.hasOwnProperty("firmware_notecard")) {
+        obj["firmware_notecard"] = ApiClient.convertToType(
+          data["firmware_notecard"],
+          "String"
+        );
+      }
       if (data.hasOwnProperty("sku")) {
         obj["sku"] = ApiClient.convertToType(data["sku"], "String");
       }
@@ -249,6 +261,32 @@ class Device {
     }
     // ensure the json data is a string
     if (
+      data["firmware_host"] &&
+      !(
+        typeof data["firmware_host"] === "string" ||
+        data["firmware_host"] instanceof String
+      )
+    ) {
+      throw new Error(
+        "Expected the field `firmware_host` to be a primitive type in the JSON string but got " +
+          data["firmware_host"]
+      );
+    }
+    // ensure the json data is a string
+    if (
+      data["firmware_notecard"] &&
+      !(
+        typeof data["firmware_notecard"] === "string" ||
+        data["firmware_notecard"] instanceof String
+      )
+    ) {
+      throw new Error(
+        "Expected the field `firmware_notecard` to be a primitive type in the JSON string but got " +
+          data["firmware_notecard"]
+      );
+    }
+    // ensure the json data is a string
+    if (
       data["sku"] &&
       !(typeof data["sku"] === "string" || data["sku"] instanceof String)
     ) {
@@ -340,6 +378,16 @@ Device.prototype["temperature"] = undefined;
  * @member {module:model/DFUEnv} dfu
  */
 Device.prototype["dfu"] = undefined;
+
+/**
+ * @member {String} firmware_host
+ */
+Device.prototype["firmware_host"] = undefined;
+
+/**
+ * @member {String} firmware_notecard
+ */
+Device.prototype["firmware_notecard"] = undefined;
 
 /**
  * @member {String} sku
