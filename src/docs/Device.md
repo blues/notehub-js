@@ -18,5 +18,7 @@
 | **voltage**              | **Number**                                |             |
 | **temperature**          | **Number**                                |             |
 | **dfu**                  | [**DFUEnv**](DFUEnv.md)                   |             | [optional] |
+| **firmwareHost**         | **String**                                |             | [optional] |
+| **firmwareNotecard**     | **String**                                |             | [optional] |
 | **sku**                  | **String**                                |             | [optional] |
 | **disabled**             | **Boolean**                               |             | [optional] |

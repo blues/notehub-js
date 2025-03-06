@@ -134,6 +134,18 @@
       //expect(instance).to.be();
     });
 
+    it('should have the property firmwareHost (base name: "firmware_host")', function () {
+      // uncomment below and update the code to test the property firmwareHost
+      //var instance = new NotehubJs.Device();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property firmwareNotecard (base name: "firmware_notecard")', function () {
+      // uncomment below and update the code to test the property firmwareNotecard
+      //var instance = new NotehubJs.Device();
+      //expect(instance).to.be();
+    });
+
     it('should have the property sku (base name: "sku")', function () {
       // uncomment below and update the code to test the property sku
       //var instance = new NotehubJs.Device();

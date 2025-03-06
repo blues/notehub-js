@@ -3285,6 +3285,10 @@ components:
           format: double
         dfu:
           $ref: "#/components/schemas/DFUEnv"
+        firmware_host:
+          type: string
+        firmware_notecard:
+          type: string
         sku:
           type: string
         disabled:
