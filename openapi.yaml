@@ -752,7 +752,7 @@ paths:
         - $ref: "#/components/parameters/deviceUIDParamQuery"
         - $ref: "#/components/parameters/tagParam"
         - $ref: "#/components/parameters/serialNumberParam"
-        - $ref: "#/components/parameters/fleetUIDQueryParam"
+        - $ref: "#/components/parameters/fleetUIDsQueryParam"
         - $ref: "#/components/parameters/notecardFirmwareParam"
         - $ref: "#/components/parameters/locationParam"
         - $ref: "#/components/parameters/hostFirmwareParam"
@@ -2519,6 +2519,15 @@ components:
       required: false
       schema:
         type: string
+
+    fleetUIDsQueryParam:
+      name: fleetUID
+      in: query
+      required: false
+      schema:
+        type: array
+        items:
+          type: string
 
     filesQueryParam:
       name: files
