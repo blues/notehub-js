@@ -752,7 +752,7 @@ paths:
         - $ref: "#/components/parameters/deviceUIDParamQuery"
         - $ref: "#/components/parameters/tagParam"
         - $ref: "#/components/parameters/serialNumberParam"
-        - $ref: "#/components/parameters/fleetUIDQueryParam"
+        - $ref: "#/components/parameters/fleetUIDsQueryParam"
         - $ref: "#/components/parameters/notecardFirmwareParam"
         - $ref: "#/components/parameters/locationParam"
         - $ref: "#/components/parameters/hostFirmwareParam"
@@ -2520,6 +2520,15 @@ components:
       schema:
         type: string
 
+    fleetUIDsQueryParam:
+      name: fleetUID
+      in: query
+      required: false
+      schema:
+        type: array
+        items:
+          type: string
+
     filesQueryParam:
       name: files
       in: query
@@ -2905,6 +2914,15 @@ components:
                 # https://swagger.io/docs/specification/data-models/dictionaries/
                 additionalProperties:
                   type: string
+              environment_variables_effective:
+                type: object
+                description: The environment variables as they will be seen by the device,
+                  fully resolved with project/fleet/device prioritization rules.
+                # string to string dictionary
+                # https://swagger.io/docs/specification/data-models/dictionaries/
+                additionalProperties:
+                  type: string
+          type: object
             required:
               - environment_variables
               - environment_variables_env_default
@@ -3292,6 +3310,10 @@ components:
           type: string
           format: date-time
           description: RFC3339 timestamp in UTC
+        environment_variables:
+          type: object
+          description: The environment variables for this device that have been set
+            using the Notehub API or UI.
         smart_rule:
           $ref: "#/components/schemas/FleetRule"
 
@@ -3302,6 +3324,7 @@ components:
 
     DFUState:
       type: object
+      nullable: true
       properties:
         type:
           type: string
@@ -3364,6 +3387,7 @@ components:
 
     DFUEnv:
       type: object
+      nullable: true
       properties:
         card:
           $ref: "#/components/schemas/DFUState"
@@ -3383,6 +3407,7 @@ components:
         last_activity:
           type: string
           format: date-time
+          nullable: true
         contact:
           $ref: "#/components/schemas/Contact"
         product_uid:
@@ -3393,6 +3418,7 @@ components:
             type: string
         tower_info:
           type: object
+          nullable: true
           properties:
             mcc:
               type: integer
