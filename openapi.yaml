@@ -2922,7 +2922,6 @@ components:
                 # https://swagger.io/docs/specification/data-models/dictionaries/
                 additionalProperties:
                   type: string
-          type: object
             required:
               - environment_variables
               - environment_variables_env_default
