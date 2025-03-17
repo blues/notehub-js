@@ -3313,6 +3313,8 @@ components:
           type: object
           description: The environment variables for this device that have been set
             using the Notehub API or UI.
+          additionalProperties:
+            type: string
         smart_rule:
           $ref: "#/components/schemas/FleetRule"
 
