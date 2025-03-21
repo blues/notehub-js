@@ -715,7 +715,7 @@ let opts = {
   'deviceUID': ["null"], // [String] | A Device UID.
   'tag': ["null"], // [String] | Tag filter
   'serialNumber': ["null"], // [String] | Serial number filter
-  'fleetUID': "fleetUID_example", // String |
+  'fleetUID': ["null"], // [String] |
   'notecardFirmware': ["null"], // [String] | Firmware version filter
   'location': ["null"], // [String] | Location filter
   'hostFirmware': ["null"], // [String] | Host firmware filter
@@ -740,7 +740,7 @@ apiInstance.getProjectDevices(projectUID, opts).then((data) => {
 | **deviceUID**        | [**[String]**](String.md) | A Device UID.           | [optional]                 |
 | **tag**              | [**[String]**](String.md) | Tag filter              | [optional]                 |
 | **serialNumber**     | [**[String]**](String.md) | Serial number filter    | [optional]                 |
-| **fleetUID**         | **String**                |                         | [optional]                 |
+| **fleetUID**         | [**[String]**](String.md) |                         | [optional]                 |
 | **notecardFirmware** | [**[String]**](String.md) | Firmware version filter | [optional]                 |
 | **location**         | [**[String]**](String.md) | Location filter         | [optional]                 |
 | **hostFirmware**     | [**[String]**](String.md) | Host firmware filter    | [optional]                 |

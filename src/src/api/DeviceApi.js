@@ -978,7 +978,7 @@ export default class DeviceApi {
    * @param {Array.<String>} opts.deviceUID A Device UID.
    * @param {Array.<String>} opts.tag Tag filter
    * @param {Array.<String>} opts.serialNumber Serial number filter
-   * @param {String} opts.fleetUID
+   * @param {Array.<String>} opts.fleetUID
    * @param {Array.<String>} opts.notecardFirmware Firmware version filter
    * @param {Array.<String>} opts.location Location filter
    * @param {Array.<String>} opts.hostFirmware Host firmware filter
@@ -1011,7 +1011,7 @@ export default class DeviceApi {
         opts["serialNumber"],
         "multi"
       ),
-      fleetUID: opts["fleetUID"],
+      fleetUID: this.apiClient.buildCollectionParam(opts["fleetUID"], "multi"),
       notecardFirmware: this.apiClient.buildCollectionParam(
         opts["notecardFirmware"],
         "multi"
@@ -1059,7 +1059,7 @@ export default class DeviceApi {
    * @param {Array.<String>} opts.deviceUID A Device UID.
    * @param {Array.<String>} opts.tag Tag filter
    * @param {Array.<String>} opts.serialNumber Serial number filter
-   * @param {String} opts.fleetUID
+   * @param {Array.<String>} opts.fleetUID
    * @param {Array.<String>} opts.notecardFirmware Firmware version filter
    * @param {Array.<String>} opts.location Location filter
    * @param {Array.<String>} opts.hostFirmware Host firmware filter
