@@ -18,7 +18,7 @@ import DeviceDfuStatusCurrent from "./DeviceDfuStatusCurrent";
 /**
  * The DeviceDfuHistory model module.
  * @module model/DeviceDfuHistory
- * @version 1.0.27
+ * @version 1.0.28
  */
 class DeviceDfuHistory {
   /**

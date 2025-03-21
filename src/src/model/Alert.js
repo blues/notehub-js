@@ -18,7 +18,7 @@ import AlertNotificationsInner from "./AlertNotificationsInner";
 /**
  * The Alert model module.
  * @module model/Alert
- * @version 1.0.27
+ * @version 1.0.28
  */
 class Alert {
   /**
