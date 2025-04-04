@@ -2397,18 +2397,21 @@ paths:
     post:
       tags: ["repository"]
       operationId: queryRepositorySql
-      description: Query a repository raw SQL
+      description: Run a raw Clickhouse-compatible SQL statement against the repository's database. Results are returned in CSV format
       security:
         - api_key: []
       parameters:
         - $ref: "#/components/parameters/repositoryUIDParam"
         - $ref: "#/components/parameters/repositoryKey"
         - in: header
+          description: Specify the format of the response data. This functions the same as the 
+            ClickHouse `FORMAT` clause. Supported values include `CSV`, `JSON`, `JSONEachRow`, 
+            `TabSeparated`, and `NDJSON`. If not specified, defaults to `TabSeparated`.
           name: X-ClickHouse-Format
           schema:
             type: string
       requestBody:
-        description: SQL query
+        description: Clickhouse-compatible SQL statement
         required: true
         content:
           text/plain:
