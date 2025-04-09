@@ -2250,6 +2250,242 @@ paths:
         default:
           $ref: "#/components/responses/ErrorResponse"
 
+  /v1/repositories:
+    post:
+        tags: ["repository"]
+        operationId: createRepository
+        description: Create a new repository 
+        security:
+            - api_key: []
+        requestBody:
+            required: true
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/CreateUpdateRepository"
+        responses:
+            "201":
+              description: Repository created successfully
+              content:
+                application/json:
+                  schema:
+                    $ref: "#/components/schemas/Repository"
+            default:
+              $ref: "#/components/responses/ErrorResponse"
+
+  /v1/repositories/{repositoryUID}:
+    get:
+      tags: ["repository"]
+      operationId: getRepository
+      description: Get repository information
+      security:
+        - api_key: []
+      parameters:
+        - $ref: "#/components/parameters/repositoryUIDParam"
+        - $ref: "#/components/parameters/repositoryKey"
+      responses:
+        "200":
+          description: Dataset updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Repository"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+    put:
+      tags: ["repository"]
+      operationId: putRepository 
+      description: Update a repository
+      security:
+        - api_key: []
+      parameters:
+        - $ref: "#/components/parameters/repositoryUIDParam"
+        - $ref: "#/components/parameters/repositoryKey"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateUpdateRepository"
+      responses:
+        "200":
+          description: Dataset updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Repository"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+    delete:
+        tags: ["repository"]
+        operationId: deleteRepository
+        description: Delete a repository
+        security:
+          - api_key: []
+        parameters:
+          - $ref: "#/components/parameters/repositoryUIDParam"
+          - $ref: "#/components/parameters/repositoryKey"
+        responses:
+          "200":
+            description: Dataset deleted successfully
+          default:
+            $ref: "#/components/responses/ErrorResponse"
+
+  /v1/repositories/{repositoryUID}/datasets:
+    put:
+      tags: ["repository"]
+      operationId: createRepositoryDataset
+      description: Create a new dataset within a repository 
+      security:
+        - api_key: []
+      parameters:
+        - $ref: "#/components/parameters/repositoryUIDParam"
+        - $ref: "#/components/parameters/repositoryKey"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DataSet"
+      responses:
+        "201":
+          description: Dataset created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DataSet"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+
+  /v1/repositories/{repositoryUID}/datasets/{name}:
+    get:
+      tags: ["repository"]
+      operationId: getRepositoryDataset
+      description: Get the details of a dataset
+      security:
+        - api_key: []
+      parameters:
+        - $ref: "#/components/parameters/repositoryUIDParam"
+        - $ref: '#/components/parameters/datasetNameParam'
+        - $ref: "#/components/parameters/repositoryKey"
+      responses:
+        "200":
+          description: Dataset details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DataSet"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+    delete:
+      tags: ["repository"]
+      operationId: deleteRepositoryDataset
+      description: Delete a dataset
+      security:
+        - api_key: []
+      parameters:
+        - $ref: "#/components/parameters/repositoryUIDParam"
+        - $ref: "#/components/parameters/datasetNameParam"
+        - $ref: "#/components/parameters/repositoryKey"
+      responses:
+        "200":
+          description: Dataset deleted successfully
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+
+  /v1/repositories/{repositoryUID}/sql:
+    post:
+      tags: ["repository"]
+      operationId: queryRepositorySql
+      description: Run a raw Clickhouse-compatible SQL statement against the repository's database. Results are returned in CSV format
+      security:
+        - api_key: []
+      parameters:
+        - $ref: "#/components/parameters/repositoryUIDParam"
+        - $ref: "#/components/parameters/repositoryKey"
+        - in: header
+          description: Specify the format of the response data. This functions the same as the 
+            ClickHouse `FORMAT` clause. Supported values include `CSV`, `JSON`, `JSONEachRow`, 
+            `TabSeparated`, and `NDJSON`. If not specified, defaults to `TabSeparated`.
+          name: X-ClickHouse-Format
+          schema:
+            type: string
+      requestBody:
+        description: Clickhouse-compatible SQL statement
+        required: true
+        content:
+          text/plain:
+            schema:
+              type: string
+      responses:
+        "200":
+          description: Successful query
+          content:
+            text/plain:
+              schema:
+                type: string
+                format: binary
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+
+  /v1/repositories/{repositoryUID}/datasets/{name}/query:
+    get:
+      tags: ["repository"]
+      operationId: queryRepositoryDataset
+      description: Query a dataset with support for time ranges, field selection, filtering, and location-based queries
+      security:
+        - api_key: []
+      parameters:
+        - $ref: "#/components/parameters/repositoryKey"
+        - $ref: "#/components/parameters/repositoryUIDParam"
+        - $ref: "#/components/parameters/datasetNameParam"
+        - $ref: "#/components/parameters/datasetStartQueryParam"
+        - $ref: "#/components/parameters/datasetEndQueryParam"
+        - $ref: "#/components/parameters/datasetSelectQueryParam"
+        - $ref: "#/components/parameters/datasetWhereQueryParam"
+        - $ref: "#/components/parameters/datasetAggregateWindowQueryParam"
+        - $ref: "#/components/parameters/datasetLocationNearQueryParam"
+        - $ref: "#/components/parameters/datasetLocationRadiusQueryParam"
+        - $ref: "#/components/parameters/datasetLimitQueryParam"
+        - $ref: "#/components/parameters/datasetOrderByQueryParam"
+        - $ref: "#/components/parameters/datasetDistinctQueryParam"
+      responses:
+        "200":
+          description: Successful query
+          content:
+            text/csv:
+              schema:
+                type: string
+                format: binary
+              example: |
+                lat,lon,device,session_began
+                42.393125,-71.185015,dev:1234,2024-01-01T12:34:56Z
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+
+  /v1/repositories/{repositoryUID}/data:
+    get:
+      tags: ["repository"]
+      operationId: getRepositoryData 
+      description: Get event and session data from a repository in NDJSON format.
+      security:
+        - api_key: []
+      parameters:
+        - $ref: "#/components/parameters/repositoryKey"
+        - $ref: "#/components/parameters/repositoryUIDParam"
+        - $ref: "#/components/parameters/datasetStartQueryParam"
+        - $ref: "#/components/parameters/datasetEndQueryParam"
+      responses:
+        "200":
+          description: Successful request returning NDJSON encoded event and session objects.
+          content:
+            text/csv:
+              schema:
+                type: string
+                format: binary
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+
 components:
 
   securitySchemes:
@@ -2300,7 +2536,6 @@ components:
       required: true
       schema:
         type: string
-
 
     fleetUIDsParam:
       name: fleetUIDs
@@ -2377,6 +2612,103 @@ components:
       schema:
         type: string
       example: monitor:8bAdf00d-000f-51c-af-01d5eaf00dbad
+
+    repositoryUIDParam:
+      name: repositoryUID
+      in: path
+      required: true
+      schema:
+        type: string
+        example: rid:2606f411-dea6-44a0-9743-1130f57d77d8
+
+    datasetNameParam:
+      name: name
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The name of the data set
+
+    datasetStartQueryParam:
+      name: start
+      in: query
+      required: true
+      schema:
+        type: string
+      description: Start of the time range, as an ISO-8601 date or relative to now (e.g. -1y). Relative dates follow the Postgres INTERVAL format.
+
+    datasetEndQueryParam:
+      name: end
+      in: query
+      required: false
+      schema:
+        type: string
+      description: End of the time range, as an ISO-8601 date or relative to now. If omitted, current time is used.
+
+    datasetSelectQueryParam:
+      name: select
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Comma separated list of fields to include. Supports aggregate functions (avg, sum, min, max, count, most_recent).
+
+    datasetWhereQueryParam:
+      name: where
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Additional filters using boolean logic mini-language (e.g. and.(device.eq.dev:123,temp.gt.100))
+
+    datasetAggregateWindowQueryParam:
+      name: aggregate_window
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Aggregate results into buckets for a time duration, expressed in Postgres INTERVAL format
+
+    datasetLocationNearQueryParam:
+      name: location_near
+      in: query
+      required: false
+      schema:
+        type: string
+        example: 42.393125,-71.185015
+      description: Latitude and Longitude for location-based filtering, location_near_radius must also be provided
+
+    datasetLocationRadiusQueryParam:
+      name: location_near_radius
+      in: query
+      required: false
+      schema:
+        type: integer
+      description: Distance from location_near in meters, location_near must also be provided
+
+    datasetLimitQueryParam:
+      name: limit
+      in: query
+      required: false
+      schema:
+        type: integer
+      description: Limit the number of results returned
+
+    datasetOrderByQueryParam:
+      name: order_by
+      in: query
+      required: false
+      description: Order the results by a field
+      schema:
+        type: string
+
+    datasetDistinctQueryParam:
+      name: distinct
+      in: query
+      required: false
+      schema:
+        type: boolean
+      description: Return only distinct results
 
     # querystring parameters
     pageSizeParam:
@@ -2745,7 +3077,13 @@ components:
         items:
           type: string
 
-
+    repositoryKey:
+      name: X-Repository-Key
+      in: header
+      required: true
+      schema:
+        type: string
+      description: The secret key used to access this repository
 
   responses:
     ErrorResponse:
@@ -2910,6 +3248,14 @@ components:
               environment_variables_env_default:
                 type: object
                 description: The environment variables that have been set using the env.default request through the Notecard API.
+                # string to string dictionary
+                # https://swagger.io/docs/specification/data-models/dictionaries/
+                additionalProperties:
+                  type: string
+              environment_variables_effective:
+                type: object
+                description: The environment variables as they will be seen by the device,
+                  fully resolved with project/fleet/device prioritization rules.
                 # string to string dictionary
                 # https://swagger.io/docs/specification/data-models/dictionaries/
                 additionalProperties:
@@ -3301,6 +3647,12 @@ components:
           type: string
           format: date-time
           description: RFC3339 timestamp in UTC
+        environment_variables:
+          type: object
+          description: The environment variables for this device that have been set
+            using the Notehub API or UI.
+          additionalProperties:
+            type: string
         smart_rule:
           $ref: "#/components/schemas/FleetRule"
 
@@ -4806,7 +5158,6 @@ components:
         metadata:
           $ref: '#/components/schemas/UploadMetadata'
 
-
     UserDfuStateMachineStatus:
       type: object
       properties:
@@ -5059,3 +5410,131 @@ components:
         description:
           type: string
           description: Additional information 
+
+    DataField:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the field
+
+    DataSetField:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the field
+        datatype:
+          type: integer
+          description: The datatype of the field
+          enum:
+            - 0  # String
+            - 1  # Integer
+            - 2  # Float
+        jsonata:
+          type: string
+          description: the JSONata expression used to populate this field
+
+    DataSet:
+      properties:
+        name:
+          type: string
+          description: The name of the data set
+        time:
+          type: string
+          description: JSONata expression resulting in the relevant time field
+        lat:
+          type: string
+          description: JSONata expression resulting in the latitude field
+        lon:
+          type: string
+          description: JSONata expression resulting in the Longitude field
+        fields:
+          type: array
+          items:
+            $ref: "#/components/schemas/DataSetField"
+
+
+    QuestionDataResponseLineChart:
+      type: object
+      additionalProperties: false
+      required:
+        - type
+        - title
+        - property
+        - displayValue
+      properties:
+        type:
+          type: string
+          enum: [ "lineChart" ]
+          description: "Graph type must be 'lineChart' for a line chart."
+        title:
+          type: string
+          description: "Title of the chart."
+        property:
+          type: string
+          description: "The property displayed as the Y-axis for the line chart."
+        displayValue:
+          type: string
+          description: "Label of the Y-axis for the line chart."
+        splitBy:
+          type: string
+          description: "Optional. Split the data by this property to create multiple lines on the chart."
+        startDate:
+          type: string
+          format: date-time
+          description: "Optional start date for filtering/charting data."
+        endDate:
+          type: string
+          format: date-time
+          description: "Optional end date for filtering/charting data."
+
+
+    QuestionDataResponseMap:
+      type: object
+      additionalProperties: false
+      required:
+        - type
+        - title
+      properties:
+        type:
+          type: string
+          enum: [ "map" ]
+          description: "Graph type must be 'map' for a map visualization."
+        title:
+          type: string
+          description: "Title of the map."
+
+    FleetsUIDList:
+        type: array
+        items:
+          type: string
+
+    AppUIDList:
+        type: array
+        items:
+          type: string
+
+    CreateUpdateRepository:
+      type: object
+      properties:
+        name:
+          type: string
+        fleetUIDs:
+          $ref: "#/components/schemas/FleetsUIDList"
+        projectUIDs:
+          $ref: "#/components/schemas/AppUIDList"
+
+    Repository:
+      type: object
+      properties:
+        uid:
+          type: string
+          description: The unique identifier for the data repository
+        name:
+          type: string
+          description: repository name
+        fleetUIDs:
+          $ref: "#/components/schemas/FleetsUIDList"
+        projectUIDs:
+          $ref: "#/components/schemas/AppUIDList"
