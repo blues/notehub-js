@@ -203,6 +203,16 @@ All URIs are relative to *https://api.notefile.net*
 | _NotehubJs.ProjectApi_        | [**putProjectEnvironmentVariables**](docs/ProjectApi.md#putProjectEnvironmentVariables)        | **PUT** /v1/projects/{projectUID}/environment_variables                               |
 | _NotehubJs.ProjectApi_        | [**setGlobalTransformation**](docs/ProjectApi.md#setGlobalTransformation)                      | **POST** /v1/projects/{projectUID}/global-transformation                              |
 | _NotehubJs.ProjectApi_        | [**updateFleet**](docs/ProjectApi.md#updateFleet)                                              | **PUT** /v1/projects/{projectUID}/fleets/{fleetUID}                                   |
+| _NotehubJs.RepositoryApi_     | [**createRepository**](docs/RepositoryApi.md#createRepository)                                 | **POST** /v1/repositories                                                             |
+| _NotehubJs.RepositoryApi_     | [**createRepositoryDataset**](docs/RepositoryApi.md#createRepositoryDataset)                   | **PUT** /v1/repositories/{repositoryUID}/datasets                                     |
+| _NotehubJs.RepositoryApi_     | [**deleteRepository**](docs/RepositoryApi.md#deleteRepository)                                 | **DELETE** /v1/repositories/{repositoryUID}                                           |
+| _NotehubJs.RepositoryApi_     | [**deleteRepositoryDataset**](docs/RepositoryApi.md#deleteRepositoryDataset)                   | **DELETE** /v1/repositories/{repositoryUID}/datasets/{name}                           |
+| _NotehubJs.RepositoryApi_     | [**getRepository**](docs/RepositoryApi.md#getRepository)                                       | **GET** /v1/repositories/{repositoryUID}                                              |
+| _NotehubJs.RepositoryApi_     | [**getRepositoryData**](docs/RepositoryApi.md#getRepositoryData)                               | **GET** /v1/repositories/{repositoryUID}/data                                         |
+| _NotehubJs.RepositoryApi_     | [**getRepositoryDataset**](docs/RepositoryApi.md#getRepositoryDataset)                         | **GET** /v1/repositories/{repositoryUID}/datasets/{name}                              |
+| _NotehubJs.RepositoryApi_     | [**putRepository**](docs/RepositoryApi.md#putRepository)                                       | **PUT** /v1/repositories/{repositoryUID}                                              |
+| _NotehubJs.RepositoryApi_     | [**queryRepositoryDataset**](docs/RepositoryApi.md#queryRepositoryDataset)                     | **GET** /v1/repositories/{repositoryUID}/datasets/{name}/query                        |
+| _NotehubJs.RepositoryApi_     | [**queryRepositorySql**](docs/RepositoryApi.md#queryRepositorySql)                             | **POST** /v1/repositories/{repositoryUID}/sql                                         |
 | _NotehubJs.RouteApi_          | [**createRoute**](docs/RouteApi.md#createRoute)                                                | **POST** /v1/projects/{projectUID}/routes                                             |
 | _NotehubJs.RouteApi_          | [**deleteRoute**](docs/RouteApi.md#deleteRoute)                                                | **DELETE** /v1/projects/{projectUID}/routes/{routeUID}                                |
 | _NotehubJs.RouteApi_          | [**getRoute**](docs/RouteApi.md#getRoute)                                                      | **GET** /v1/projects/{projectUID}/routes/{routeUID}                                   |
@@ -226,9 +236,13 @@ All URIs are relative to *https://api.notefile.net*
 - [NotehubJs.CreateMonitor](docs/CreateMonitor.md)
 - [NotehubJs.CreateProductRequest](docs/CreateProductRequest.md)
 - [NotehubJs.CreateProjectRequest](docs/CreateProjectRequest.md)
+- [NotehubJs.CreateUpdateRepository](docs/CreateUpdateRepository.md)
 - [NotehubJs.CurrentFirmware](docs/CurrentFirmware.md)
 - [NotehubJs.DFUEnv](docs/DFUEnv.md)
 - [NotehubJs.DFUState](docs/DFUState.md)
+- [NotehubJs.DataField](docs/DataField.md)
+- [NotehubJs.DataSet](docs/DataSet.md)
+- [NotehubJs.DataSetField](docs/DataSetField.md)
 - [NotehubJs.DeleteDeviceFleetsRequest](docs/DeleteDeviceFleetsRequest.md)
 - [NotehubJs.Device](docs/Device.md)
 - [NotehubJs.DeviceDfuHistory](docs/DeviceDfuHistory.md)
@@ -292,7 +306,10 @@ All URIs are relative to *https://api.notefile.net*
 - [NotehubJs.ProjectMember](docs/ProjectMember.md)
 - [NotehubJs.Proxy](docs/Proxy.md)
 - [NotehubJs.PutDeviceFleetsRequest](docs/PutDeviceFleetsRequest.md)
+- [NotehubJs.QuestionDataResponseLineChart](docs/QuestionDataResponseLineChart.md)
+- [NotehubJs.QuestionDataResponseMap](docs/QuestionDataResponseMap.md)
 - [NotehubJs.Radresponder](docs/Radresponder.md)
+- [NotehubJs.Repository](docs/Repository.md)
 - [NotehubJs.Role](docs/Role.md)
 - [NotehubJs.Slack](docs/Slack.md)
 - [NotehubJs.SlackBearerNotification](docs/SlackBearerNotification.md)
