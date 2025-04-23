@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The QuestionDataResponseLineChart model module.
  * @module model/QuestionDataResponseLineChart
- * @version 1.0.28
+ * @version 1.0.29
  */
 class QuestionDataResponseLineChart {
   /**

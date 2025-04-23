@@ -20,7 +20,7 @@ import Repository from "../model/Repository";
 /**
  * Repository service.
  * @module api/RepositoryApi
- * @version 1.0.28
+ * @version 1.0.29
  */
 export default class RepositoryApi {
   /**
