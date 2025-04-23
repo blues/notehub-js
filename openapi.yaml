@@ -2250,7 +2250,7 @@ paths:
         default:
           $ref: "#/components/responses/ErrorResponse"
 
-  /v1/project/{projectUID}/bulk-provision:
+  /v1/projects/{projectUID}/bulk-provision:
     post:
       summary: Bulk provision devices via CSV upload
       tags: ["project"]
