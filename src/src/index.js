@@ -26,9 +26,13 @@ import CreateFleetRequest from "./model/CreateFleetRequest";
 import CreateMonitor from "./model/CreateMonitor";
 import CreateProductRequest from "./model/CreateProductRequest";
 import CreateProjectRequest from "./model/CreateProjectRequest";
+import CreateUpdateRepository from "./model/CreateUpdateRepository";
 import CurrentFirmware from "./model/CurrentFirmware";
 import DFUEnv from "./model/DFUEnv";
 import DFUState from "./model/DFUState";
+import DataField from "./model/DataField";
+import DataSet from "./model/DataSet";
+import DataSetField from "./model/DataSetField";
 import DeleteDeviceFleetsRequest from "./model/DeleteDeviceFleetsRequest";
 import Device from "./model/Device";
 import DeviceDfuHistory from "./model/DeviceDfuHistory";
@@ -92,7 +96,10 @@ import Project from "./model/Project";
 import ProjectMember from "./model/ProjectMember";
 import Proxy from "./model/Proxy";
 import PutDeviceFleetsRequest from "./model/PutDeviceFleetsRequest";
+import QuestionDataResponseLineChart from "./model/QuestionDataResponseLineChart";
+import QuestionDataResponseMap from "./model/QuestionDataResponseMap";
 import Radresponder from "./model/Radresponder";
+import Repository from "./model/Repository";
 import Role from "./model/Role";
 import Slack from "./model/Slack";
 import SlackBearerNotification from "./model/SlackBearerNotification";
@@ -115,6 +122,7 @@ import DeviceApi from "./api/DeviceApi";
 import EventApi from "./api/EventApi";
 import MonitorApi from "./api/MonitorApi";
 import ProjectApi from "./api/ProjectApi";
+import RepositoryApi from "./api/RepositoryApi";
 import RouteApi from "./api/RouteApi";
 
 /**
@@ -146,7 +154,7 @@ import RouteApi from "./api/RouteApi";
  * </pre>
  * </p>
  * @module index
- * @version 1.0.28
+ * @version 1.0.29
  */
 export {
   /**
@@ -240,6 +248,12 @@ export {
   CreateProjectRequest,
 
   /**
+   * The CreateUpdateRepository model constructor.
+   * @property {module:model/CreateUpdateRepository}
+   */
+  CreateUpdateRepository,
+
+  /**
    * The CurrentFirmware model constructor.
    * @property {module:model/CurrentFirmware}
    */
@@ -256,6 +270,24 @@ export {
    * @property {module:model/DFUState}
    */
   DFUState,
+
+  /**
+   * The DataField model constructor.
+   * @property {module:model/DataField}
+   */
+  DataField,
+
+  /**
+   * The DataSet model constructor.
+   * @property {module:model/DataSet}
+   */
+  DataSet,
+
+  /**
+   * The DataSetField model constructor.
+   * @property {module:model/DataSetField}
+   */
+  DataSetField,
 
   /**
    * The DeleteDeviceFleetsRequest model constructor.
@@ -636,10 +668,28 @@ export {
   PutDeviceFleetsRequest,
 
   /**
+   * The QuestionDataResponseLineChart model constructor.
+   * @property {module:model/QuestionDataResponseLineChart}
+   */
+  QuestionDataResponseLineChart,
+
+  /**
+   * The QuestionDataResponseMap model constructor.
+   * @property {module:model/QuestionDataResponseMap}
+   */
+  QuestionDataResponseMap,
+
+  /**
    * The Radresponder model constructor.
    * @property {module:model/Radresponder}
    */
   Radresponder,
+
+  /**
+   * The Repository model constructor.
+   * @property {module:model/Repository}
+   */
+  Repository,
 
   /**
    * The Role model constructor.
@@ -772,6 +822,12 @@ export {
    * @property {module:api/ProjectApi}
    */
   ProjectApi,
+
+  /**
+   * The RepositoryApi service constructor.
+   * @property {module:api/RepositoryApi}
+   */
+  RepositoryApi,
 
   /**
    * The RouteApi service constructor.
