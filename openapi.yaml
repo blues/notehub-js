@@ -2250,6 +2250,27 @@ paths:
         default:
           $ref: "#/components/responses/ErrorResponse"
 
+  /v1/project/{projectUID}/bulk-provision:
+    post:
+      summary: Bulk provision devices via CSV upload
+      tags: ["project"]
+      operationId: bulkProvision 
+      parameters:
+        - $ref: "#/components/parameters/projectUIDParam"
+      requestBody:
+        required: true
+        content:
+          text/csv:
+            schema:
+              type: string
+      responses:
+        '202':
+          description: Successfully processed CSV and provisioned resources
+        '400':
+          description: Bad request (e.g. invalid CSV)
+        '500':
+          description: Internal server error
+
   /v1/repositories:
     post:
         tags: ["repository"]
