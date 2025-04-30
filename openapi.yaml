@@ -2490,7 +2490,7 @@ paths:
         default:
           $ref: "#/components/responses/ErrorResponse"
 
-  /products/{productUID}/webhooks:
+  /v1/products/{productUID}/webhooks:
     get:
       tags: ["webhook"]
       security:
@@ -2509,7 +2509,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/WebhookSettings'
 
-  /products/{productUID}/webhooks/{webhookUID}:
+  /v1/products/{productUID}/webhooks/{webhookUID}:
     post:
       tags: ["webhook"]
       security:
@@ -2582,7 +2582,7 @@ paths:
         200:
           description: Webhook deleted successfully
 
-  /products/{productUID}/webhooks/{webhookUID}/event:
+  /v1/products/{productUID}/webhooks/{webhookUID}/event:
     post:
       tags: ["webhook"]
       security:
@@ -2604,12 +2604,12 @@ paths:
         200:
           description: Event Created Successfully
 
-  /products/{productUID}/ext-devices/{deviceUID}/event:
+  /v1/products/{productUID}/ext-devices/{deviceUID}/event:
     post:
       tags: ["external devices"]
       security:
         - api_key: []
-      operationId: CreateEvent
+      operationId: CreateEventExtDevice
       description: Creates an event using specified webhook
       parameters:
         - $ref: '#/components/parameters/productUIDParam'
@@ -2626,7 +2626,7 @@ paths:
           description: Event Created Successfully
 
 
-  /products/{productUID}/ext-devices/{deviceUID}/session/open:
+  /v1/products/{productUID}/ext-devices/{deviceUID}/session/open:
     post:
       tags: ["external devices"]
       security:
@@ -2648,7 +2648,7 @@ paths:
         200:
           description: Session Created Successfully
 
-  /products/{productUID}/ext-devices/{deviceUID}/session/close:
+  /v1/products/{productUID}/ext-devices/{deviceUID}/session/close:
     post:
       tags: ["external devices"]
       security:
@@ -5732,6 +5732,9 @@ components:
     WebhookSettings:
       type: object
       properties:
+        name:
+          type: string
+          description: the name of the webhook
         disabled:
           type: boolean
           description: Flag indicating if the webhook is disabled
