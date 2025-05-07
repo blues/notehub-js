@@ -2485,6 +2485,23 @@ paths:
                 format: binary
         default:
           $ref: "#/components/responses/ErrorResponse"
+  
+  /v1/projects/{projectUID}/schemas:
+    get:
+      tags: ["project"]
+      operationId: getNotefileSchemas
+      summary: Get variable format for a notefile
+      parameters:
+        - $ref: "#/components/parameters/projectUIDParam"
+      responses:
+        '200':
+          description: List of notefile schema definitions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NotefileSchema'
 
 components:
 
@@ -3252,6 +3269,14 @@ components:
                 # https://swagger.io/docs/specification/data-models/dictionaries/
                 additionalProperties:
                   type: string
+              environment_variables_effective:
+                type: object
+                description: The environment variables as they will be seen by the device,
+                  fully resolved with project/fleet/device prioritization rules.
+                # string to string dictionary
+                # https://swagger.io/docs/specification/data-models/dictionaries/
+                additionalProperties:
+                  type: string
             required:
               - environment_variables
               - environment_variables_env_default
@@ -3639,6 +3664,12 @@ components:
           type: string
           format: date-time
           description: RFC3339 timestamp in UTC
+        environment_variables:
+          type: object
+          description: The environment variables for this device that have been set
+            using the Notehub API or UI.
+          additionalProperties:
+            type: string
         smart_rule:
           $ref: "#/components/schemas/FleetRule"
 
@@ -5524,3 +5555,42 @@ components:
           $ref: "#/components/schemas/FleetsUIDList"
         projectUIDs:
           $ref: "#/components/schemas/AppUIDList"
+
+    NotefileSchema:
+      type: object
+      properties:
+        notefile:
+          type: string
+        properties:
+          type: array
+          items:
+            $ref: '#/components/schemas/SchemaProperty'
+      required:
+        - notefile
+        - properties
+
+    SchemaProperty:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the field (optional for array/object children)
+        type:
+          type: string
+          enum: [string, number, boolean, array, object]
+        updatedAt:
+          type: string
+          format: date-time
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/SchemaProperty'
+          description: Used if type is array
+        properties:
+          type: array
+          items:
+            $ref: '#/components/schemas/SchemaProperty'
+          description: Used if type is object
+      required:
+        - type
+        - updatedAt
