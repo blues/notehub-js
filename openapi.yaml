@@ -2500,14 +2500,19 @@ paths:
       parameters:
         - $ref: '#/components/parameters/productUIDParam'
       responses:
+        default:
+          $ref: "#/components/responses/ErrorResponse"
         200:
           description: Webhooks retrieved successfully
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/WebhookSettings'
+                type: object
+                properties:
+                  webhooks:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/WebhookSettings'
 
   /v1/products/{productUID}/webhooks/{webhookUID}:
     post:
@@ -2518,6 +2523,7 @@ paths:
       description: Creates a webhook for the specified product with the given name. The name |
         must be unique within the project.
       parameters:
+        - $ref: '#/components/parameters/productUIDParam'
         - $ref: '#/components/parameters/webhookUIDParam'
       requestBody:
         required: true
@@ -2531,6 +2537,8 @@ paths:
                 id: Abc_123-2646f411-dc56-44a0-9743-4130f47a74h8
                 transform: '{"device":body.end_device_ids.dev_eui,"sn":body.end_device_ids.device_id,"body":body.uplink_message.decoded_payload,"details":body}'
       responses:
+        default:
+          $ref: "#/components/responses/ErrorResponse"
         200:
           description: Webhook created successfully
 
@@ -2542,6 +2550,7 @@ paths:
       description: Updates the configuration settings for the specified webhook. |
         Webhook will be created if it does not exist. Update body will completely replace the existing settings.
       parameters:
+        - $ref: '#/components/parameters/productUIDParam'
         - $ref: '#/components/parameters/webhookUIDParam'
       requestBody:
         required: true
@@ -2553,17 +2562,22 @@ paths:
               disabled: False
               transform: '{"device":body.end_device_ids.dev_eui,"sn":body.end_device_ids.device_id,"body":body.uplink_message.decoded_payload,"details":body}'
       responses:
+        default:
+          $ref: "#/components/responses/ErrorResponse"
         200:
           description: Webhook updated successfully
     get:
       tags: ["webhook"]
       security:
         - api_key: []
-      operationId: GetWebhookSettings
+      operationId: GetWebhook
       description: Retrieves the configuration settings for the specified webhook
       parameters:
+        - $ref: '#/components/parameters/productUIDParam'
         - $ref: '#/components/parameters/webhookUIDParam'
       responses:
+        default:
+          $ref: "#/components/responses/ErrorResponse"
         200:
           description: Webhook settings retrieved successfully
           content:
@@ -2577,32 +2591,13 @@ paths:
       operationId: DeleteWebhook
       description: Deletes the specified webhook
       parameters:
+        - $ref: '#/components/parameters/productUIDParam'
         - $ref: '#/components/parameters/webhookUIDParam'
       responses:
+        default:
+          $ref: "#/components/responses/ErrorResponse"
         200:
           description: Webhook deleted successfully
-
-  /v1/products/{productUID}/webhooks/{webhookUID}/event:
-    post:
-      tags: ["webhook"]
-      security:
-        - api_key: []
-      operationId: CreateEvent
-      description: Creates an event using specified webhook
-      parameters:
-        - $ref: '#/components/parameters/productUIDParam'
-        - $ref: '#/components/parameters/deviceUIDParam'
-        - $ref: '#/components/parameters/webhookUIDParam'
-      requestBody:
-        required: true
-        description: Event Object
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Event'
-      responses:
-        200:
-          description: Event Created Successfully
 
   /v1/products/{productUID}/ext-devices/{deviceUID}/event:
     post:
@@ -2622,6 +2617,8 @@ paths:
             schema:
               $ref: '#/components/schemas/Event'
       responses:
+        default:
+          $ref: "#/components/responses/ErrorResponse"
         200:
           description: Event Created Successfully
 
@@ -2631,7 +2628,7 @@ paths:
       tags: ["external devices"]
       security:
         - api_key: []
-      operationId: WebhookSession
+      operationId: ExtDeviceSessionOpen
       description: Create a Session for the specified device.  |
         If a session is currently open it will be closed and a new one opened.
       parameters:
@@ -2645,6 +2642,8 @@ paths:
             schema:
               $ref: '#/components/schemas/ExtDeviceSession'
       responses:
+        default:
+          $ref: "#/components/responses/ErrorResponse"
         200:
           description: Session Created Successfully
 
@@ -2653,7 +2652,7 @@ paths:
       tags: ["external devices"]
       security:
         - api_key: []
-      operationId: CloseSession
+      operationId: ExtDeviceSessionClose
       description: Closes the session for the specified device if open
       parameters:
         - $ref: '#/components/parameters/productUIDParam'
@@ -2666,6 +2665,8 @@ paths:
             schema:
               $ref: '#/components/schemas/ExtDeviceSession'
       responses:
+        default:
+          $ref: "#/components/responses/ErrorResponse"
         200:
           description: Session closed
 
@@ -5732,9 +5733,6 @@ components:
     WebhookSettings:
       type: object
       properties:
-        name:
-          type: string
-          description: the name of the webhook
         disabled:
           type: boolean
           description: Flag indicating if the webhook is disabled
