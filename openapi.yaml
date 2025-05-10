@@ -2657,7 +2657,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ExtDeviceSession'
+              $ref: '#/components/schemas/DeviceSession'
       responses:
         default:
           $ref: "#/components/responses/ErrorResponse"
@@ -2680,7 +2680,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ExtDeviceSession'
+              $ref: '#/components/schemas/DeviceSession'
       responses:
         default:
           $ref: "#/components/responses/ErrorResponse"
@@ -4214,10 +4214,13 @@ components:
     TowerLocation:
       type: object
       properties:
+        source:
+          description: The source of this location
+          type: string
         time:
           type: integer
           format: int64
-          description: Time when this location was ascertained
+          description: Unix timestamp when this location was ascertained
         n:
           type: string
           description: Name of the location
@@ -4226,11 +4229,11 @@ components:
           description: Country code
         lat:
           type: number
-          format: float
+          format: double
           description: Latitude
         lon:
           type: number
-          format: float
+          format: double
           description: Longitude
         zone:
           type: string
@@ -4253,10 +4256,6 @@ components:
         z:
           type: integer
           description: Timezone ID
-        count:
-          type: integer
-          format: int64
-          description: Number of times this location was recently used
         towers:
           type: integer
           description: Number of triangulation points
@@ -4268,6 +4267,20 @@ components:
         session:
           type: string
           description: Session UID
+        session_began:
+          type: integer
+          description: UNIX timestamp of session start
+          format: int64
+        why_session_opened:
+          type: string
+          description: Reason for session opening
+        session_ended:
+          type: integer
+          description: UNIX timestamp of session end
+          format: int64
+        why_session_closed:
+          type: string
+          description: Reason for session closing
         device:
           type: string
           description: Device UID
@@ -4287,19 +4300,24 @@ components:
           description: Cell ID where the session originated and quality ("mcc,mnc,lac,cellid")
         scan:
           type: string
-          format: byte
+          format: byte # this isn't working. I also tried x-go-type and that didn't either
         triangulate:
           type: object
         rssi:
-          type: number
+          type: integer
+          format: int
         sinr:
-          type: number
+          type: integer
+          format: int
         rsrp:
-          type: number
+          type: integer
+          format: int
         rsrq:
-          type: number
+          type: integer
+          format: int
         bars:
-          type: number
+          type: integer
+          format: int
         rat:
           type: string
         bearer:
@@ -4314,24 +4332,30 @@ components:
           type: string
         apn:
           type: string
+        transport:
+          type: string
+          description: Type of network transport
         tower:
           $ref: "#/components/schemas/TowerLocation"
         tri:
           $ref: "#/components/schemas/TowerLocation"
         when:
-          type: number
-          description: Last known capture time of a note routed through this session
+          type: integer
+          description: Last known capture time of a note routed through this session in Unix timestamp
+          format: int64
         where_when:
-          type: number
+          type: integer
+          format: int64
+          description: Unix timestamp of last GPS location
         where:
           type: string
-          description: Where OLC
+          description: Open Location Code from last GPS location
         where_lat:
           type: number
-          format: float
+          format: double
         where_lon:
           type: number
-          format: float
+          format: double
         where_location:
           type: string
         where_country:
@@ -4342,62 +4366,104 @@ components:
           type: boolean
         voltage:
           type: number
-          format: float
+          format: double
         temp:
           type: number
-          format: float
+          format: double
         continuous:
           type: boolean
+          description: Was this a continuous connection?
         tls:
           type: boolean
+          description: Was TLS used?
         work:
-          type: number
-          description: Last time work was done for this session
+          type: integer
+          description: Unix timestamp of the last time work was done for this session
+          format: int64
         events:
-          type: number
+          type: integer
           description: Number of events routed
+          format: int64
         moved:
-          type: number
+          type: integer
+          format: int64
         orientation:
           type: string
         hp_secs_total:
-          type: number
+          type: integer
+          description: Total number of seconds in high power mode
+          format: int64
         hp_secs_data:
-          type: number
+          type: integer
+          format: int64
         hp_secs_gps:
-          type: number
+          type: integer
+          format: int64
         hp_cycles_total:
-          type: number
+          type: integer
+          format: int64
         hp_cycles_data:
-          type: number
+          type: integer
+          format: int64
         hp_cycles_gps:
-          type: number
+          type: integer
+          format: int64
         period:
           $ref: "#/components/schemas/DeviceUsage"
+        power_charging:
+          type: boolean
+        power_usb:
+          type: boolean
+        power_primary:
+          type: boolean
+        power_mah:
+          type: number
+          format: double
+        penalty_secs:
+          type: integer
+          format: int64
+          description: Number of seconds in penalty in the prior session
+        failed_connects:
+          type: integer
+          format: int64
+          description: Number of failed connection attempts in the prior session
+
 
     DeviceUsage:
       type: object
       properties:
         since:
-          type: number
+          type: integer
+          description: Unix timestamp
+          format: int64
         duration:
-          type: number
+          type: integer
+          description: Duration in seconds
+          format: int64
         bytes_rcvd:
-          type: number
+          type: integer
+          format: int64
         bytes_sent:
-          type: number
+          type: integer
+          format: int64
         bytes_rcvd_secondary:
-          type: number
+          type: integer
+          format: int64
         bytes_sent_secondary:
-          type: number
+          type: integer
+          format: int64
         sessions_tcp:
-          type: number
+          type: integer
+          format: int64
         sessions_tls:
-          type: number
+          type: integer
+          format: int64
         notes_rcvd:
-          type: number
-        note_sent:
-          type: number
+          type: integer
+          format: int64
+        notes_sent:
+          type: integer
+          format: int64
 
     NotehubRoute:
       type: object
@@ -5799,169 +5865,3 @@ components:
           type: string
           description: Transformation to be applied to the event
 
-    ExtDeviceSession:
-      type: object
-      description: Session object for external devices
-      required:
-        - device
-        - product
-        - why
-      properties:
-        why:
-          type: string
-          description: Why a session was opened or closed
-        device:
-          type: string
-          description: Device UID
-        sn:
-          type: string
-          description: Device Serial Number
-        product:
-          type: string
-          description: Product UID
-        fleets:
-          type: array
-          items:
-            type: string
-          description: Array of Fleet UIDs
-        cell:
-          type: string
-          description: (internal) Cell ID where the session originated and quality ("mcc,mnc,lac,cellid")
-        scan:
-          type: string
-          format: byte
-          description: (internal) Parameters passed by device as a result of scanning towers/APs
-        triangulate:
-          type: object
-          additionalProperties: true
-          description: (internal) Network connection information sent by the notecard
-        rssi:
-          type: integer
-          description: (internal) RSSI value
-        sinr:
-          type: integer
-          description: (internal) SINR value
-        rsrp:
-          type: integer
-          description: (internal) RSRP value
-        rsrq:
-          type: integer
-          description: (internal) RSRQ value
-        bars:
-          type: integer
-          description: (internal) Number of signal bars
-        rat:
-          type: string
-          description: (internal) RAT value
-        bearer:
-          type: string
-          description: (internal) Bearer value
-        ip:
-          type: string
-          description: (internal) IP address
-        bssid:
-          type: string
-          description: (internal) BSSID value
-        ssid:
-          type: string
-          description: (internal) SSID value
-        iccid:
-          type: string
-          description: (internal) ICCID value
-        apn:
-          type: string
-          description: (internal) APN value
-        transport:
-          type: string
-          description: (internal) Composed by wire.go for use in Request.Transport && Event.Transport
-        tower:
-          $ref: '#/components/schemas/TowerLocation'
-          description: (internal) Tower location
-        tri:
-          $ref: '#/components/schemas/TowerLocation'
-          description: (internal) Triangulated location
-        where:
-          type: string
-          description: (internal) Where OLC
-        where_lat:
-          type: number
-          format: float
-          description: (internal) Latitude of the last known GPS location
-        where_lon:
-          type: number
-          format: float
-          description: (internal) Longitude of the last known GPS location
-        where_location:
-          type: string
-          description: (internal) Last known location
-        where_country:
-          type: string
-          description: (internal) Country of the last known location
-        where_timezone:
-          type: string
-          description: (internal) Timezone of the last known location
-        usage_actual:
-          type: boolean
-          description: Flag indicating whether the usage data is based on actual stats from the device
-        voltage:
-          type: number
-          format: float
-          description: Voltage value
-        temp:
-          type: number
-          format: float
-          description: Temperature value
-        continuous:
-          type: boolean
-          description: Flag indicating if the session is continuous
-        tls:
-          type: boolean
-          description: Flag indicating if the session uses TLS
-        events:
-          type: integer
-          format: int64
-          description: Number of events routed
-        moved:
-          type: integer
-          format: int64
-          description: Motion of the notecard
-        orientation:
-          type: string
-          description: Orientation of the notecard
-        hp_secs_total:
-          type: integer
-          format: uint32
-          description: Total high power seconds
-        hp_secs_data:
-          type: integer
-          format: uint32
-          description: High power seconds for data
-        hp_secs_gps:
-          type: integer
-          format: uint32
-          description: High power seconds for GPS
-        hp_cycles_total:
-          type: integer
-          format: uint32
-          description: Total high power cycles
-        hp_cycles_data:
-          type: integer
-          format: uint32
-          description: High power cycles for data
-        hp_cycles_gps:
-          type: integer
-          format: uint32
-          description: High power cycles for GPS
-        power_charging:
-          type: boolean
-          description: Flag indicating if the device is charging
-        power_usb:
-          type: boolean
-          description: Flag indicating if the device is using USB power
-        power_primary:
-          type: boolean
-          description: Flag indicating if the device is using primary power
-        power_mah:
-          type: number
-          format: float
-          description: Mojo power usage in mAh
