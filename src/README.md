@@ -314,6 +314,7 @@ All URIs are relative to *https://api.notefile.net*
 - [NotehubJs.Repository](docs/Repository.md)
 - [NotehubJs.Role](docs/Role.md)
 - [NotehubJs.SchemaProperty](docs/SchemaProperty.md)
+- [NotehubJs.SimUsage](docs/SimUsage.md)
 - [NotehubJs.Slack](docs/Slack.md)
 - [NotehubJs.SlackBearerNotification](docs/SlackBearerNotification.md)
 - [NotehubJs.SlackWebHookNotification](docs/SlackWebHookNotification.md)
