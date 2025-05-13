@@ -17,7 +17,7 @@ import Product from "./Product";
 /**
  * The GetProjectProducts200Response model module.
  * @module model/GetProjectProducts200Response
- * @version 1.0.30
+ * @version 1.0.31
  */
 class GetProjectProducts200Response {
   /**

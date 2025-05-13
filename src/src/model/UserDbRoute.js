@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The UserDbRoute model module.
  * @module model/UserDbRoute
- * @version 1.0.30
+ * @version 1.0.31
  */
 class UserDbRoute {
   /**
