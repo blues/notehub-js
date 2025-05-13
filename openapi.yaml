@@ -41,7 +41,7 @@ tags:
 paths:
   /auth/login:
     post:
-      tags: [ "authorization" ]
+      tags: ["authorization"]
       operationId: login
       description: Gets a session token from the API from a username and
         password.
@@ -77,11 +77,11 @@ paths:
 
   /v1/projects/{projectUID}/routes:
     get:
-      tags: [ "route" ]
+      tags: ["route"]
       operationId: getRoutes
       description: Get all Routes within a Project
       security:
-        - api_key: [ ]
+        - api_key: []
       parameters:
         - $ref: "#/components/parameters/projectUIDParam"
       responses:
@@ -142,11 +142,11 @@ paths:
         default:
           $ref: "#/components/responses/ErrorResponse"
     post:
-      tags: [ "route" ]
+      tags: ["route"]
       operationId: createRoute
       description: Create Route within a Project
       security:
-        - api_key: [ ]
+        - api_key: []
       parameters:
         - $ref: "#/components/parameters/projectUIDParam"
       requestBody:
@@ -182,9 +182,9 @@ paths:
                   "disabled": "false",
                   "http":
                     {
-                      "fleets": [ "fleet:1042ddc5-3b2c-4cec-b1fb-d3040538094d" ],
+                      "fleets": ["fleet:1042ddc5-3b2c-4cec-b1fb-d3040538094d"],
                       "filter": { "type": "", "system_notefiles": false },
-                      "transform": { },
+                      "transform": {},
                       "throttle_ms": 100,
                       "url": "http://route.url",
                       "http_headers": null,
@@ -197,11 +197,11 @@ paths:
 
   /v1/projects/{projectUID}/routes/{routeUID}:
     get:
-      tags: [ "route" ]
+      tags: ["route"]
       operationId: getRoute
       description: Get single route within a project
       security:
-        - api_key: [ ]
+        - api_key: []
       parameters:
         - $ref: "#/components/parameters/projectUIDParam"
         - $ref: "#/components/parameters/routeUIDParam"
@@ -221,9 +221,9 @@ paths:
                   "disabled": "false",
                   "http":
                     {
-                      "fleets": [ "fleet:1042ddc5-3b2c-4cec-b1fb-d3040538094d" ],
+                      "fleets": ["fleet:1042ddc5-3b2c-4cec-b1fb-d3040538094d"],
                       "filter": { "type": "", "system_notefiles": false },
-                      "transform": { },
+                      "transform": {},
                       "throttle_ms": 100,
                       "url": "http://route.url",
                       "http_headers": null,
@@ -234,11 +234,11 @@ paths:
         default:
           $ref: "#/components/responses/ErrorResponse"
     put:
-      tags: [ "route" ]
+      tags: ["route"]
       operationId: updateRoute
       description: Update route by UID
       security:
-        - api_key: [ ]
+        - api_key: []
       parameters:
         - $ref: "#/components/parameters/projectUIDParam"
         - $ref: "#/components/parameters/routeUIDParam"
@@ -295,11 +295,11 @@ paths:
         default:
           $ref: "#/components/responses/ErrorResponse"
     delete:
-      tags: [ "route" ]
+      tags: ["route"]
       operationId: deleteRoute
       description: Delete single route within a project
       security:
-        - api_key: [ ]
+        - api_key: []
       parameters:
         - $ref: "#/components/parameters/projectUIDParam"
         - $ref: "#/components/parameters/routeUIDParam"
@@ -310,17 +310,17 @@ paths:
             application/json:
               schema:
                 type: object
-                default: { }
+                default: {}
         default:
           $ref: "#/components/responses/ErrorResponse"
 
   /v1/projects/{projectUID}/routes/{routeUID}/route-logs:
     get:
-      tags: [ "route" ]
+      tags: ["route"]
       operationId: getRouteLogsByRoute
       description: Get Route Logs by Route UID
       security:
-        - api_key: [ ]
+        - api_key: []
       parameters:
         - $ref: "#/components/parameters/projectUIDParam"
         - $ref: "#/components/parameters/routeUIDParam"
@@ -341,11 +341,11 @@ paths:
 
   /v1/products/{productUID}/project:
     get:
-      tags: [ "project" ]
+      tags: ["project"]
       operationId: getProjectByProduct
       description: Get a Project by ProductUID
       security:
-        - api_key: [ ]
+        - api_key: []
       parameters:
         - name: productUID
           in: path
@@ -365,11 +365,11 @@ paths:
 
   /v1/billing-accounts:
     get:
-      tags: [ "billing_account" ]
+      tags: ["billing_account"]
       operationId: getBillingAccounts
       description: Get Billing Accounts accessible by the api_key
       security:
-        - api_key: [ ]
+        - api_key: []
       responses:
         "200":
           description: Successful operation
@@ -387,11 +387,11 @@ paths:
 
   /v1/projects:
     get:
-      tags: [ "project" ]
+      tags: ["project"]
       operationId: getProjects
       description: Get Projects accessible by the api_key
       security:
-        - api_key: [ ]
+        - api_key: []
       responses:
         "200":
           description: Successful operation
@@ -408,11 +408,11 @@ paths:
           $ref: "#/components/responses/ErrorResponse"
 
     post:
-      tags: [ "project" ]
+      tags: ["project"]
       operationId: createProject
       description: Create a Project
       security:
-        - api_key: [ ]
+        - api_key: []
       requestBody:
         description: Project to be created
         required: true
@@ -446,11 +446,11 @@ paths:
 
   /v1/projects/{projectUID}/clone:
     post:
-      tags: [ "project" ]
+      tags: ["project"]
       operationId: cloneProject
       description: Clone a Project
       security:
-        - api_key: [ ]
+        - api_key: []
       parameters:
         - name: projectUID
           in: path
@@ -496,11 +496,11 @@ paths:
 
   /v1/projects/{projectUID}:
     get:
-      tags: [ "project" ]
+      tags: ["project"]
       operationId: getProject
       description: Get a Project by ProjectUID
       security:
-        - api_key: [ ]
+        - api_key: []
       parameters:
         - $ref: "#/components/parameters/projectUIDParam"
       responses:
@@ -513,11 +513,11 @@ paths:
         default:
           $ref: "#/components/responses/ErrorResponse"
     delete:
-      tags: [ "project" ]
+      tags: ["project"]
       operationId: deleteProject
       description: Delete a Project by ProjectUID
       security:
-        - api_key: [ ]
+        - api_key: []
       parameters:
         - $ref: "#/components/parameters/projectUIDParam"
       responses:
@@ -531,11 +531,11 @@ paths:
       - $ref: "#/components/parameters/projectUIDParam"
 
     get:
-      tags: [ "project" ]
+      tags: ["project"]
       operationId: getProjectProducts
       description: Get Products within a Project
       security:
-        - api_key: [ ]
+        - api_key: []
       responses:
         "200":
           description: Successful operation
@@ -552,11 +552,11 @@ paths:
           $ref: "#/components/responses/ErrorResponse"
 
     post:
-      tags: [ "project" ]
+      tags: ["project"]
       operationId: createProduct
       description: Create Product within a Project
       security:
-        - api_key: [ ]
+        - api_key: []
       requestBody:
         description: Product to be created
         required: true
@@ -598,11 +598,11 @@ paths:
       - $ref: "#/components/parameters/projectUIDParam"
 
     get:
-      tags: [ "project" ]
+      tags: ["project"]
       operationId: getProjectFleets
       description: Get Project Fleets
       security:
-        - api_key: [ ]
+        - api_key: []
       responses:
         "200":
           $ref: "#/components/responses/FleetsResponse"
@@ -610,11 +610,11 @@ paths:
           $ref: "#/components/responses/ErrorResponse"
 
     post:
-      tags: [ "project" ]
+      tags: ["project"]
       operationId: createFleet
       description: Create Fleet
       security:
-        - api_key: [ ]
+        - api_key: []
       requestBody:
         description: Fleet to be added
         required: true
@@ -646,11 +646,11 @@ paths:
       - $ref: "#/components/parameters/fleetUIDParam"
 
     put:
-      tags: [ "project" ]
+      tags: ["project"]
       operationId: updateFleet
       description: Update Fleet
       security:
-        - api_key: [ ]
+        - api_key: []
       requestBody:
         description: Fleet details to update
         required: true
@@ -685,11 +685,11 @@ paths:
           $ref: "#/components/responses/ErrorResponse"
 
     delete:
-      tags: [ "project" ]
+      tags: ["project"]
       operationId: deleteFleet
       description: Delete Fleet
       security:
-        - api_key: [ ]
+        - api_key: []
       responses:
         "204":
           description: Successful operation
@@ -715,11 +715,11 @@ paths:
       - $ref: "#/components/parameters/projectUIDParam"
 
     get:
-      tags: [ "project" ]
+      tags: ["project"]
       operationId: getProjectMembers
       description: Get Project Members
       security:
-        - api_key: [ ]
+        - api_key: []
       responses:
         "200":
           description: Successful operation
@@ -740,11 +740,11 @@ paths:
   # devices endpoints
   /v1/projects/{projectUID}/devices:
     get:
-      tags: [ "device" ]
+      tags: ["device"]
       operationId: getProjectDevices
       description: Get Devices of a Project
       security:
-        - api_key: [ ]
+        - api_key: []
       parameters:
         - $ref: "#/components/parameters/projectUIDParam"
         - $ref: "#/components/parameters/pageSizeParam"
@@ -766,11 +766,11 @@ paths:
 
   /v1/projects/{projectUID}/devices/{deviceUID}/provision:
     post:
-      tags: [ "device" ]
+      tags: ["device"]
       operationId: postProvisionProjectDevice
       description: Provision Device for a Project
       security:
-        - api_key: [ ]
+        - api_key: []
       parameters:
         - $ref: "#/components/parameters/projectUIDParam"
         - $ref: "#/components/parameters/deviceUIDParam"
@@ -803,17 +803,17 @@ paths:
             application/json:
               schema:
                 type: object
-                default: { }
+                default: {}
         default:
           $ref: "#/components/responses/ErrorResponse"
 
   /v1/projects/{projectUID}/fleets/{fleetUID}/devices:
     get:
-      tags: [ "device" ]
+      tags: ["device"]
       operationId: getProjectFleetDevices
       description: Get Devices of a Fleet within a Project
       security:
-        - api_key: [ ]
+        - api_key: []
       parameters:
         - $ref: "#/components/parameters/projectUIDParam"
         - $ref: "#/components/parameters/fleetUIDParam"
@@ -835,11 +835,11 @@ paths:
 
   /v1/projects/{projectUID}/devices/public-keys:
     get:
-      tags: [ "device" ]
+      tags: ["device"]
       operationId: getProjectDevicePublicKeys
       description: Get Device Public Keys of a Project
       security:
-        - api_key: [ ]
+        - api_key: []
       parameters:
         - $ref: "#/components/parameters/projectUIDParam"
         - $ref: "#/components/parameters/pageSizeParam"
@@ -875,11 +875,11 @@ paths:
       - $ref: "#/components/parameters/deviceUIDParam"
 
     get:
-      tags: [ "device" ]
+      tags: ["device"]
       operationId: getDevice
       description: Get Device
       security:
-        - api_key: [ ]
+        - api_key: []
       responses:
         "200":
           description: Successful operation
@@ -891,11 +891,11 @@ paths:
           $ref: "#/components/responses/ErrorResponse"
 
     delete:
-      tags: [ "device" ]
+      tags: ["device"]
       operationId: deleteProjectDevice
       description: Delete Device
       security:
-        - api_key: [ ]
+        - api_key: []
       parameters:
         - name: purge
           in: query
@@ -916,11 +916,11 @@ paths:
       - $ref: "#/components/parameters/deviceUIDParam"
 
     get:
-      tags: [ "project" ]
+      tags: ["project"]
       operationId: getDeviceFleets
       description: Get Device Fleets
       security:
-        - api_key: [ ]
+        - api_key: []
       responses:
         "200":
           $ref: "#/components/responses/FleetsResponse"
@@ -928,11 +928,11 @@ paths:
           $ref: "#/components/responses/ErrorResponse"
 
     put:
-      tags: [ "project" ]
+      tags: ["project"]
       operationId: putDeviceFleets
       description: Add Device to Fleets
       security:
-        - api_key: [ ]
+        - api_key: []
       requestBody:
         description: >
           The fleets to add to the device.
@@ -961,11 +961,11 @@ paths:
           $ref: "#/components/responses/ErrorResponse"
 
     delete:
-      tags: [ "project" ]
+      tags: ["project"]
       operationId: deleteDeviceFleets
       description: Remove Device from Fleets
       security:
-        - api_key: [ ]
+        - api_key: []
       requestBody:
         description: >
           The fleets to remove from the device.
@@ -995,11 +995,11 @@ paths:
 
   /v1/projects/{projectUID}/devices/{deviceUID}/public-key:
     get:
-      tags: [ "device" ]
+      tags: ["device"]
       operationId: getDevicePublicKey
       description: Get Device Public Key
       security:
-        - api_key: [ ]
+        - api_key: []
       parameters:
         - $ref: "#/components/parameters/projectUIDParam"
         - $ref: "#/components/parameters/deviceUIDParam"
@@ -1024,11 +1024,11 @@ paths:
 
   /v1/projects/{projectUID}/devices/{deviceUID}/latest:
     get:
-      tags: [ "device" ]
+      tags: ["device"]
       operationId: getDeviceLatest
       description: Get Device Latest Events
       security:
-        - api_key: [ ]
+        - api_key: []
       parameters:
         - $ref: "#/components/parameters/projectUIDParam"
         - $ref: "#/components/parameters/deviceUIDParam"
@@ -1041,11 +1041,11 @@ paths:
 
   /v1/projects/{projectUID}/devices/{deviceUID}/health-log:
     get:
-      tags: [ "device" ]
+      tags: ["device"]
       operationId: getDeviceHealthLog
       description: Get Device Health Log
       security:
-        - api_key: [ ]
+        - api_key: []
       parameters:
         - $ref: "#/components/parameters/projectUIDParam"
         - $ref: "#/components/parameters/deviceUIDParam"
@@ -1080,11 +1080,11 @@ paths:
 
   /v1/projects/{projectUID}/devices/{deviceUID}/enable:
     post:
-      tags: [ "device" ]
+      tags: ["device"]
       operationId: enableDevice
       description: Enable Device
       security:
-        - api_key: [ ]
+        - api_key: []
       parameters:
         - $ref: "#/components/parameters/projectUIDParam"
         - $ref: "#/components/parameters/deviceUIDParam"
@@ -1096,11 +1096,11 @@ paths:
 
   /v1/projects/{projectUID}/devices/{deviceUID}/disable:
     post:
-      tags: [ "device" ]
+      tags: ["device"]
       operationId: disableDevice
       description: Disable Device
       security:
-        - api_key: [ ]
+        - api_key: []
       parameters:
         - $ref: "#/components/parameters/projectUIDParam"
         - $ref: "#/components/parameters/deviceUIDParam"
@@ -1112,11 +1112,11 @@ paths:
 
   /v1/projects/{projectUID}/devices/{deviceUID}/enable-connectivity-assurance:
     post:
-      tags: [ "device" ]
+      tags: ["device"]
       operationId: enableDeviceConnectivityAssurance
       description: Enable Connectivity Assurance
       security:
-        - api_key: [ ]
+        - api_key: []
       parameters:
         - $ref: "#/components/parameters/projectUIDParam"
         - $ref: "#/components/parameters/deviceUIDParam"
@@ -1128,11 +1128,11 @@ paths:
 
   /v1/projects/{projectUID}/devices/{deviceUID}/disable-connectivity-assurance:
     post:
-      tags: [ "device" ]
+      tags: ["device"]
       operationId: disableDeviceConnectivityAssurance
       description: Disable Connectivity Assurance
       security:
-        - api_key: [ ]
+        - api_key: []
       parameters:
         - $ref: "#/components/parameters/projectUIDParam"
         - $ref: "#/components/parameters/deviceUIDParam"
@@ -1144,11 +1144,11 @@ paths:
 
   /v1/projects/{projectUID}/devices/{deviceUID}/sessions:
     get:
-      tags: [ "device" ]
+      tags: ["device"]
       operationId: getDeviceSessions
       description: Get Device Sessions
       security:
-        - api_key: [ ]
+        - api_key: []
       parameters:
         - $ref: "#/components/parameters/projectUIDParam"
         - $ref: "#/components/parameters/deviceUIDParam"
@@ -1162,11 +1162,11 @@ paths:
 
   /v1/projects/{projectUID}/events:
     get:
-      tags: [ "event" ]
+      tags: ["event"]
       operationId: getProjectEvents
       description: Get Events of a Project
       security:
-        - api_key: [ ]
+        - api_key: []
 
       parameters:
         - $ref: "#/components/parameters/projectUIDParam"
@@ -1199,7 +1199,7 @@ paths:
             items:
               type: string
         - name: since
-          description: Deprecated.
+          description: Deprecated. 
           in: query
           required: false
           deprecated: true
@@ -1214,11 +1214,11 @@ paths:
 
   /v1/projects/{projectUID}/events-cursor:
     get:
-      tags: [ "event" ]
+      tags: ["event"]
       operationId: getProjectEventsByCursor
       description: Get Events of a Project by cursor
       security:
-        - api_key: [ ]
+        - api_key: []
 
       parameters:
         - $ref: "#/components/parameters/projectUIDParam"
@@ -1239,11 +1239,11 @@ paths:
 
   /v1/projects/{projectUID}/events/{eventUID}/route-logs:
     get:
-      tags: [ "event" ]
+      tags: ["event"]
       operationId: getRouteLogsByEvent
       description: Get Route Logs by Event UID
       security:
-        - api_key: [ ]
+        - api_key: []
       parameters:
         - $ref: "#/components/parameters/projectUIDParam"
         - $ref: "#/components/parameters/eventUIDParam"
@@ -1255,11 +1255,11 @@ paths:
 
   /v1/projects/{projectUID}/fleets/{fleetUID}/events:
     get:
-      tags: [ "event" ]
+      tags: ["event"]
       operationId: getFleetEvents
       description: Get Events of a Fleet
       security:
-        - api_key: [ ]
+        - api_key: []
 
       parameters:
         - $ref: "#/components/parameters/projectUIDParam"
@@ -1291,7 +1291,7 @@ paths:
             items:
               type: string
         - name: since
-          description: Deprecated.
+          description: Deprecated. 
           in: query
           required: false
           deprecated: true
@@ -1306,11 +1306,11 @@ paths:
 
   /v1/projects/{projectUID}/fleets/{fleetUID}/events-cursor:
     get:
-      tags: [ "event" ]
+      tags: ["event"]
       operationId: getFleetEventsByCursor
       description: Get Events of a Fleet by cursor
       security:
-        - api_key: [ ]
+        - api_key: []
 
       parameters:
         - $ref: "#/components/parameters/projectUIDParam"
@@ -1339,10 +1339,10 @@ paths:
 
     get:
       description: Get environment variables of a project
-      tags: [ "project" ]
+      tags: ["project"]
       operationId: getProjectEnvironmentVariables
       security:
-        - api_key: [ ]
+        - api_key: []
       responses:
         "200":
           $ref: "#/components/responses/EnvironmentVariablesResponse"
@@ -1351,10 +1351,10 @@ paths:
 
     put:
       description: Put environment variables of a project
-      tags: [ "project" ]
+      tags: ["project"]
       operationId: putProjectEnvironmentVariables
       security:
-        - api_key: [ ]
+        - api_key: []
       requestBody:
         content:
           application/json:
@@ -1369,10 +1369,10 @@ paths:
   /v1/projects/{projectUID}/environment_variables/{key}:
     delete:
       description: Delete an environment variable of a project by key
-      tags: [ "project" ]
+      tags: ["project"]
       operationId: deleteProjectEnvironmentVariable
       security:
-        - api_key: [ ]
+        - api_key: []
       parameters:
         - $ref: "#/components/parameters/projectUIDParam"
         - name: key
@@ -1390,10 +1390,10 @@ paths:
   /v1/projects/{projectUID}/global-transformation/enable:
     post:
       description: Enable the project-level event JSONata transformation
-      tags: [ "project" ]
+      tags: ["project"]
       operationId: enableGlobalTransformation
       security:
-        - api_key: [ ]
+        - api_key: []
       parameters:
         - $ref: "#/components/parameters/projectUIDParam"
       responses:
@@ -1405,10 +1405,10 @@ paths:
   /v1/projects/{projectUID}/global-transformation/disable:
     post:
       description: Disable the project-level event JSONata transformation
-      tags: [ "project" ]
+      tags: ["project"]
       operationId: disableGlobalTransformation
       security:
-        - api_key: [ ]
+        - api_key: []
       parameters:
         - $ref: "#/components/parameters/projectUIDParam"
       responses:
@@ -1420,10 +1420,10 @@ paths:
   /v1/projects/{projectUID}/global-transformation:
     post:
       description: Set the project-level event JSONata transformation
-      tags: [ "project" ]
+      tags: ["project"]
       operationId: setGlobalTransformation
       security:
-        - api_key: [ ]
+        - api_key: []
       parameters:
         - $ref: "#/components/parameters/projectUIDParam"
       requestBody:
@@ -1447,10 +1447,10 @@ paths:
 
     get:
       description: Get environment variables of a fleet
-      tags: [ "project" ]
+      tags: ["project"]
       operationId: getFleetEnvironmentVariables
       security:
-        - api_key: [ ]
+        - api_key: []
       responses:
         "200":
           $ref: "#/components/responses/EnvironmentVariablesResponse"
@@ -1458,10 +1458,10 @@ paths:
           $ref: "#/components/responses/ErrorResponse"
     put:
       description: Put environment variables of a fleet
-      tags: [ "project" ]
+      tags: ["project"]
       operationId: putFleetEnvironmentVariables
       security:
-        - api_key: [ ]
+        - api_key: []
       requestBody:
         description: Environment variables to be added to the fleet
         required: true
@@ -1478,10 +1478,10 @@ paths:
   /v1/projects/{projectUID}/fleets/{fleetUID}/environment_variables/{key}:
     delete:
       description: Delete environment variables of a fleet
-      tags: [ "project" ]
+      tags: ["project"]
       operationId: deleteFleetEnvironmentVariable
       security:
-        - api_key: [ ]
+        - api_key: []
       parameters:
         - $ref: "#/components/parameters/projectUIDParam"
         - $ref: "#/components/parameters/fleetUIDParam"
@@ -1504,10 +1504,10 @@ paths:
 
     get:
       description: Get environment variables of a device
-      tags: [ "device" ]
+      tags: ["device"]
       operationId: getDeviceEnvironmentVariables
       security:
-        - api_key: [ ]
+        - api_key: []
       responses:
         "200":
           $ref: "#/components/responses/GetDeviceEnvironmentVariablesResponse"
@@ -1516,10 +1516,10 @@ paths:
 
     put:
       description: Put environment variables of a device
-      tags: [ "device" ]
+      tags: ["device"]
       operationId: putDeviceEnvironmentVariables
       security:
-        - api_key: [ ]
+        - api_key: []
       requestBody:
         description: Environment variables to be added to the device
         required: true
@@ -1536,10 +1536,10 @@ paths:
   /v1/projects/{projectUID}/devices/{deviceUID}/environment_variables/{key}:
     delete:
       description: Delete environment variable of a device
-      tags: [ "device" ]
+      tags: ["device"]
       operationId: deleteDeviceEnvironmentVariable
       security:
-        - api_key: [ ]
+        - api_key: []
       parameters:
         - $ref: "#/components/parameters/projectUIDParam"
         - $ref: "#/components/parameters/deviceUIDParam"
@@ -1563,10 +1563,10 @@ paths:
     get:
       description: Get environment variables of a device with device pin
         authorization
-      tags: [ "device" ]
+      tags: ["device"]
       operationId: getDeviceEnvironmentVariablesByPin
       security:
-        - pin: [ ]
+        - pin: []
       responses:
         "200":
           $ref: "#/components/responses/GetDeviceEnvironmentVariablesResponse"
@@ -1576,10 +1576,10 @@ paths:
     put:
       description: Put environment variables of a device with device pin
         authorization
-      tags: [ "device" ]
+      tags: ["device"]
       operationId: putDeviceEnvironmentVariablesByPin
       security:
-        - pin: [ ]
+        - pin: []
       requestBody:
         description: Environment variables to be added to the device
         required: true
@@ -1596,12 +1596,12 @@ paths:
   # note endpoints
   /v1/projects/{projectUID}/devices/{deviceUID}/notes/{notefileID}:
     post:
-      tags: [ "device" ]
+      tags: ["device"]
       operationId: HandleNoteAdd
       description: Adds a Note to a Notefile, creating the Notefile if it
         doesn't yet exist.
       security:
-        - api_key: [ ]
+        - api_key: []
       parameters:
         - $ref: "#/components/parameters/projectUIDParam"
         - $ref: "#/components/parameters/deviceUIDParam"
@@ -1621,12 +1621,12 @@ paths:
 
   /v1/projects/{projectUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}:
     post:
-      tags: [ "device" ]
+      tags: ["device"]
       operationId: HandleNoteCreateAdd
       description: Adds a Note to a Notefile, creating the Notefile if it
         doesn't yet exist.
       security:
-        - api_key: [ ]
+        - api_key: []
       parameters:
         - $ref: "#/components/parameters/projectUIDParam"
         - $ref: "#/components/parameters/deviceUIDParam"
@@ -1646,11 +1646,11 @@ paths:
           $ref: "#/components/responses/ErrorResponse"
 
     delete:
-      tags: [ "device" ]
+      tags: ["device"]
       operationId: HandleNoteDelete
       description: Delete a note from a DB notefile
       security:
-        - api_key: [ ]
+        - api_key: []
       parameters:
         - $ref: "#/components/parameters/projectUIDParam"
         - $ref: "#/components/parameters/deviceUIDParam"
@@ -1663,11 +1663,11 @@ paths:
           $ref: "#/components/responses/ErrorResponse"
 
     get:
-      tags: [ "device" ]
+      tags: ["device"]
       operationId: HandleNoteGet
       description: Get a note from a DB notefile
       security:
-        - api_key: [ ]
+        - api_key: []
       parameters:
         - $ref: "#/components/parameters/projectUIDParam"
         - $ref: "#/components/parameters/deviceUIDParam"
@@ -1706,11 +1706,11 @@ paths:
           $ref: "#/components/responses/ErrorResponse"
 
     put:
-      tags: [ "device" ]
+      tags: ["device"]
       operationId: HandleNoteUpdate
       description: Update a note in a DB notefile
       security:
-        - api_key: [ ]
+        - api_key: []
       parameters:
         - $ref: "#/components/parameters/projectUIDParam"
         - $ref: "#/components/parameters/deviceUIDParam"
@@ -1731,11 +1731,11 @@ paths:
 
   /v1/projects/{projectUID}/devices/{deviceUID}/notes/{notefileID}/changes:
     get:
-      tags: [ "device" ]
+      tags: ["device"]
       operationId: HandleNoteChanges
       description: Incrementally retrieve changes within a specific Notefile.
       security:
-        - api_key: [ ]
+        - api_key: []
       parameters:
         - $ref: "#/components/parameters/projectUIDParam"
         - $ref: "#/components/parameters/deviceUIDParam"
@@ -1798,11 +1798,11 @@ paths:
 
   /v1/projects/{projectUID}/devices/{deviceUID}/files/changes:
     get:
-      tags: [ "device" ]
+      tags: ["device"]
       operationId: HandleNotefileChanges
       description: Used to perform queries on a single or multiple files to determine if new Notes are available to read
       security:
-        - api_key: [ ]
+        - api_key: []
       parameters:
         - $ref: "#/components/parameters/projectUIDParam"
         - $ref: "#/components/parameters/deviceUIDParam"
@@ -1842,11 +1842,11 @@ paths:
 
   /v1/projects/{projectUID}/devices/{deviceUID}/files/changes/pending:
     get:
-      tags: [ "device" ]
+      tags: ["device"]
       operationId: HandleNotefileChangesPending
       description: Returns info about file changes that are pending upload to Notehub or download to the Notecard.
       security:
-        - api_key: [ ]
+        - api_key: []
       parameters:
         - $ref: "#/components/parameters/projectUIDParam"
         - $ref: "#/components/parameters/deviceUIDParam"
@@ -1875,11 +1875,11 @@ paths:
 
   /v1/projects/{projectUID}/devices/{deviceUID}/files:
     delete:
-      tags: [ "device" ]
+      tags: ["device"]
       operationId: HandleNotefileDelete
       description: Deletes Notefiles and the Notes they contain.
       security:
-        - api_key: [ ]
+        - api_key: []
       parameters:
         - $ref: "#/components/parameters/projectUIDParam"
         - $ref: "#/components/parameters/deviceUIDParam"
@@ -1903,11 +1903,11 @@ paths:
 
   /v1/projects/{projectUID}/devices/{deviceUID}/signal:
     post:
-      tags: [ "device" ]
+      tags: ["device"]
       operationId: HandleNoteSignal
       description: Send a signal from Notehub to a Notecard.
       security:
-        - api_key: [ ]
+        - api_key: []
       parameters:
         - $ref: "#/components/parameters/projectUIDParam"
         - $ref: "#/components/parameters/deviceUIDParam"
@@ -1934,11 +1934,11 @@ paths:
 
   /v1/projects/{projectUID}/monitors:
     get:
-      tags: [ "monitor" ]
+      tags: ["monitor"]
       operationId: getMonitors
       description: Get list of defined Monitors
       security:
-        - api_key: [ ]
+        - api_key: []
       parameters:
         - $ref: "#/components/parameters/projectUIDParam"
       responses:
@@ -1947,11 +1947,11 @@ paths:
         default:
           $ref: "#/components/responses/ErrorResponse"
     post:
-      tags: [ "monitor" ]
+      tags: ["monitor"]
       operationId: createMonitor
       description: Create a new Monitor
       security:
-        - api_key: [ ]
+        - api_key: []
       parameters:
         - $ref: "#/components/parameters/projectUIDParam"
       requestBody:
@@ -1973,11 +1973,11 @@ paths:
 
   /v1/projects/{projectUID}/monitors/{monitorUID}:
     get:
-      tags: [ "monitor" ]
+      tags: ["monitor"]
       operationId: getMonitor
       description: Get Monitor
       security:
-        - api_key: [ ]
+        - api_key: []
       parameters:
         - $ref: "#/components/parameters/projectUIDParam"
         - $ref: "#/components/parameters/monitorUIDParam"
@@ -1991,11 +1991,11 @@ paths:
         default:
           $ref: "#/components/responses/ErrorResponse"
     put:
-      tags: [ "monitor" ]
+      tags: ["monitor"]
       operationId: updateMonitor
       description: Update Monitor
       security:
-        - api_key: [ ]
+        - api_key: []
       parameters:
         - $ref: "#/components/parameters/projectUIDParam"
         - $ref: "#/components/parameters/monitorUIDParam"
@@ -2016,11 +2016,11 @@ paths:
         default:
           $ref: "#/components/responses/ErrorResponse"
     delete:
-      tags: [ "monitor" ]
+      tags: ["monitor"]
       operationId: deleteMonitor
       description: Delete Monitor
       security:
-        - api_key: [ ]
+        - api_key: []
       parameters:
         - $ref: "#/components/parameters/projectUIDParam"
         - $ref: "#/components/parameters/monitorUIDParam"
@@ -2036,11 +2036,11 @@ paths:
 
   /v1/projects/{projectUID}/alerts:
     get:
-      tags: [ "alert" ]
+      tags: ["alert"]
       operationId: getAlerts
       description: Get list of defined Alerts
       security:
-        - api_key: [ ]
+        - api_key: []
       parameters:
         - $ref: "#/components/parameters/projectUIDParam"
         - $ref: "#/components/parameters/pageSizeParam"
@@ -2054,11 +2054,11 @@ paths:
 
   /v1/projects/{projectUID}/firmware:
     get:
-      tags: [ "project" ]
+      tags: ["project"]
       operationId: getFirmwareInfo
       description: Get Available Firmware Information
       security:
-        - api_key: [ ]
+        - api_key: []
       parameters:
         - $ref: "#/components/parameters/projectUIDParam"
         - $ref: "#/components/parameters/productQueryParam"
@@ -2083,11 +2083,11 @@ paths:
 
   /v1/projects/{projectUID}/devices/{deviceUID}/dfu/{firmwareType}/history:
     get:
-      tags: [ "project" ]
+      tags: ["project"]
       operationId: getDeviceDfuHistory
       description: Get device DFU history for host or Notecard firmware
       security:
-        - api_key: [ ]
+        - api_key: []
       parameters:
         - $ref: "#/components/parameters/projectUIDParam"
         - $ref: "#/components/parameters/deviceUIDParam"
@@ -2104,11 +2104,11 @@ paths:
 
   /v1/projects/{projectUID}/devices/{deviceUID}/dfu/{firmwareType}/status:
     get:
-      tags: [ "project" ]
+      tags: ["project"]
       operationId: getDeviceDfuStatus
       description: Get device DFU history for host or Notecard firmware
       security:
-        - api_key: [ ]
+        - api_key: []
       parameters:
         - $ref: "#/components/parameters/projectUIDParam"
         - $ref: "#/components/parameters/deviceUIDParam"
@@ -2125,11 +2125,11 @@ paths:
 
   /v1/projects/{projectUID}/dfu/{firmwareType}/history:
     get:
-      tags: [ "project" ]
+      tags: ["project"]
       operationId: getDevicesDfuHistory
       description: Get host or Notecard DFU history for all devices that match the filter criteria
       security:
-        - api_key: [ ]
+        - api_key: []
       parameters:
         - $ref: "#/components/parameters/projectUIDParam"
         - $ref: "#/components/parameters/firmwareTypeParam"
@@ -2158,11 +2158,11 @@ paths:
 
   /v1/projects/{projectUID}/dfu/{firmwareType}/status:
     get:
-      tags: [ "project" ]
+      tags: ["project"]
       operationId: getDevicesDfuStatus
       description: Get host or Notecard DFU history for all devices that match the filter criteria
       security:
-        - api_key: [ ]
+        - api_key: []
       parameters:
         - $ref: "#/components/parameters/projectUIDParam"
         - $ref: "#/components/parameters/firmwareTypeParam"
@@ -2191,11 +2191,11 @@ paths:
 
   /v1/projects/{projectUID}/dfu/{firmwareType}/{action}:
     post:
-      tags: [ "project" ]
-      operationId: dfuAction
+      tags: ["project"]
+      operationId: dfuAction 
       description: Update/cancel host or notecard firmware updates
       security:
-        - api_key: [ ]
+        - api_key: []
       parameters:
         - $ref: "#/components/parameters/projectUIDParam"
         - $ref: "#/components/parameters/firmwareTypeParam"
@@ -2210,7 +2210,7 @@ paths:
         - $ref: "#/components/parameters/productUIDQueryParam"
         - $ref: "#/components/parameters/skuParam"
       requestBody:
-        description: Which firmware in the case of an update action
+        description: Which firmware in the case of an update action 
         required: false
         content:
           application/json:
@@ -2224,34 +2224,34 @@ paths:
 
   /v1/repositories:
     post:
-      tags: [ "repository" ]
-      operationId: createRepository
-      description: Create a new repository
-      security:
-        - api_key: [ ]
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/CreateUpdateRepository"
-      responses:
-        "201":
-          description: Repository created successfully
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Repository"
-        default:
-          $ref: "#/components/responses/ErrorResponse"
+        tags: ["repository"]
+        operationId: createRepository
+        description: Create a new repository 
+        security:
+            - api_key: []
+        requestBody:
+            required: true
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/CreateUpdateRepository"
+        responses:
+            "201":
+              description: Repository created successfully
+              content:
+                application/json:
+                  schema:
+                    $ref: "#/components/schemas/Repository"
+            default:
+              $ref: "#/components/responses/ErrorResponse"
 
   /v1/repositories/{repositoryUID}:
     get:
-      tags: [ "repository" ]
+      tags: ["repository"]
       operationId: getRepository
       description: Get repository information
       security:
-        - api_key: [ ]
+        - api_key: []
       parameters:
         - $ref: "#/components/parameters/repositoryUIDParam"
         - $ref: "#/components/parameters/repositoryKey"
@@ -2265,11 +2265,11 @@ paths:
         default:
           $ref: "#/components/responses/ErrorResponse"
     put:
-      tags: [ "repository" ]
-      operationId: putRepository
+      tags: ["repository"]
+      operationId: putRepository 
       description: Update a repository
       security:
-        - api_key: [ ]
+        - api_key: []
       parameters:
         - $ref: "#/components/parameters/repositoryUIDParam"
         - $ref: "#/components/parameters/repositoryKey"
@@ -2289,27 +2289,27 @@ paths:
         default:
           $ref: "#/components/responses/ErrorResponse"
     delete:
-      tags: [ "repository" ]
-      operationId: deleteRepository
-      description: Delete a repository
-      security:
-        - api_key: [ ]
-      parameters:
-        - $ref: "#/components/parameters/repositoryUIDParam"
-        - $ref: "#/components/parameters/repositoryKey"
-      responses:
-        "200":
-          description: Dataset deleted successfully
-        default:
-          $ref: "#/components/responses/ErrorResponse"
+        tags: ["repository"]
+        operationId: deleteRepository
+        description: Delete a repository
+        security:
+          - api_key: []
+        parameters:
+          - $ref: "#/components/parameters/repositoryUIDParam"
+          - $ref: "#/components/parameters/repositoryKey"
+        responses:
+          "200":
+            description: Dataset deleted successfully
+          default:
+            $ref: "#/components/responses/ErrorResponse"
 
   /v1/repositories/{repositoryUID}/datasets:
     put:
-      tags: [ "repository" ]
+      tags: ["repository"]
       operationId: createRepositoryDataset
-      description: Create a new dataset within a repository
+      description: Create a new dataset within a repository 
       security:
-        - api_key: [ ]
+        - api_key: []
       parameters:
         - $ref: "#/components/parameters/repositoryUIDParam"
         - $ref: "#/components/parameters/repositoryKey"
@@ -2331,11 +2331,11 @@ paths:
 
   /v1/repositories/{repositoryUID}/datasets/{name}:
     get:
-      tags: [ "repository" ]
+      tags: ["repository"]
       operationId: getRepositoryDataset
       description: Get the details of a dataset
       security:
-        - api_key: [ ]
+        - api_key: []
       parameters:
         - $ref: "#/components/parameters/repositoryUIDParam"
         - $ref: '#/components/parameters/datasetNameParam'
@@ -2350,11 +2350,11 @@ paths:
         default:
           $ref: "#/components/responses/ErrorResponse"
     delete:
-      tags: [ "repository" ]
+      tags: ["repository"]
       operationId: deleteRepositoryDataset
       description: Delete a dataset
       security:
-        - api_key: [ ]
+        - api_key: []
       parameters:
         - $ref: "#/components/parameters/repositoryUIDParam"
         - $ref: "#/components/parameters/datasetNameParam"
@@ -2367,17 +2367,17 @@ paths:
 
   /v1/repositories/{repositoryUID}/sql:
     post:
-      tags: [ "repository" ]
+      tags: ["repository"]
       operationId: queryRepositorySql
       description: Run a raw Clickhouse-compatible SQL statement against the repository's database. Results are returned in CSV format
       security:
-        - api_key: [ ]
+        - api_key: []
       parameters:
         - $ref: "#/components/parameters/repositoryUIDParam"
         - $ref: "#/components/parameters/repositoryKey"
         - in: header
-          description: Specify the format of the response data. This functions the same as the
-            ClickHouse `FORMAT` clause. Supported values include `CSV`, `JSON`, `JSONEachRow`,
+          description: Specify the format of the response data. This functions the same as the 
+            ClickHouse `FORMAT` clause. Supported values include `CSV`, `JSON`, `JSONEachRow`, 
             `TabSeparated`, and `NDJSON`. If not specified, defaults to `TabSeparated`.
           name: X-ClickHouse-Format
           schema:
@@ -2402,11 +2402,11 @@ paths:
 
   /v1/repositories/{repositoryUID}/datasets/{name}/query:
     get:
-      tags: [ "repository" ]
+      tags: ["repository"]
       operationId: queryRepositoryDataset
       description: Query a dataset with support for time ranges, field selection, filtering, and location-based queries
       security:
-        - api_key: [ ]
+        - api_key: []
       parameters:
         - $ref: "#/components/parameters/repositoryKey"
         - $ref: "#/components/parameters/repositoryUIDParam"
@@ -2437,11 +2437,11 @@ paths:
 
   /v1/repositories/{repositoryUID}/data:
     get:
-      tags: [ "repository" ]
-      operationId: getRepositoryData
+      tags: ["repository"]
+      operationId: getRepositoryData 
       description: Get event and session data from a repository in NDJSON format.
       security:
-        - api_key: [ ]
+        - api_key: []
       parameters:
         - $ref: "#/components/parameters/repositoryKey"
         - $ref: "#/components/parameters/repositoryUIDParam"
@@ -2457,7 +2457,7 @@ paths:
                 format: binary
         default:
           $ref: "#/components/responses/ErrorResponse"
-
+  
   /v1/projects/{projectUID}/schemas:
     get:
       tags: ["project"]
@@ -2563,7 +2563,7 @@ components:
           - notecard
     
     dfuActionParam:
-      name: action
+      name: action 
       in: path
       required: true
       schema:
@@ -2801,8 +2801,8 @@ components:
         type: string
         default: captured
         enum:
-          - captured
-          - uploaded
+        - captured
+        - uploaded
       example: uploaded
 
     cursorParam:
@@ -2864,7 +2864,7 @@ components:
       required: false
       schema:
         type: string
-        enum: [ json, csv ]
+        enum: [json, csv]
         default: json
       description: Response format (JSON or CSV)
 
@@ -3338,7 +3338,7 @@ components:
                   l: 86MG3HF5+P25
                   count: 7
                   towers: 1
-                tri: { }
+                tri: {}
                 when: 1667251044
                 voltage: 4.174
                 temp: 24.437
@@ -3659,7 +3659,7 @@ components:
       properties:
         type:
           type: string
-          enum: [ "card", "user" ]
+          enum: ["card", "user"]
         file:
           type: string
           description: Firmware filename
@@ -4276,7 +4276,7 @@ components:
             type:
               type: string
               description: What notefiles this route applies to.
-              enum: [ "all", "include", "exclude" ]
+              enum: ["all", "include", "exclude"]
             system_notefiles:
               type: boolean
               description: Whether system notefiles should be affected by this route
@@ -4343,7 +4343,7 @@ components:
             type:
               type: string
               description: What notefiles this route applies to.
-              enum: [ "all", "include", "exclude" ]
+              enum: ["all", "include", "exclude"]
             system_notefiles:
               type: boolean
               description: Whether system notefiles should be affected by this route
@@ -4427,7 +4427,7 @@ components:
             type:
               type: string
               description: What notefiles this route applies to.
-              enum: [ "all", "include", "exclude" ]
+              enum: ["all", "include", "exclude"]
             system_notefiles:
               type: boolean
               description: Whether system notefiles should be affected by this route
@@ -4505,7 +4505,7 @@ components:
             type:
               type: string
               description: What notefiles this route applies to.
-              enum: [ "all", "include", "exclude" ]
+              enum: ["all", "include", "exclude"]
             system_notefiles:
               type: boolean
               description: Whether system notefiles should be affected by this route
@@ -4568,7 +4568,7 @@ components:
             type:
               type: string
               description: What notefiles this route applies to.
-              enum: [ "all", "include", "exclude" ]
+              enum: ["all", "include", "exclude"]
             system_notefiles:
               type: boolean
               description: Whether system notefiles should be affected by this route
@@ -4626,7 +4626,7 @@ components:
             type:
               type: string
               description: What notefiles this route applies to.
-              enum: [ "all", "include", "exclude" ]
+              enum: ["all", "include", "exclude"]
             system_notefiles:
               type: boolean
               description: Whether system notefiles should be affected by this route
@@ -4725,7 +4725,7 @@ components:
             type:
               type: string
               description: What notefiles this route applies to.
-              enum: [ "all", "include", "exclude" ]
+              enum: ["all", "include", "exclude"]
             system_notefiles:
               type: boolean
               description: Whether system notefiles should be affected by this route
@@ -4781,7 +4781,7 @@ components:
             type:
               type: string
               description: What notefiles this route applies to.
-              enum: [ "all", "include", "exclude" ]
+              enum: ["all", "include", "exclude"]
             system_notefiles:
               type: boolean
               description: Whether system notefiles should be affected by this route
@@ -4830,7 +4830,7 @@ components:
             type:
               type: string
               description: What notefiles this route applies to.
-              enum: [ "all", "include", "exclude" ]
+              enum: ["all", "include", "exclude"]
             system_notefiles:
               type: boolean
               description: Whether system notefiles should be affected by this route
@@ -4919,7 +4919,7 @@ components:
           type: string
         source_type:
           type: string
-          enum: [ "event" ]
+          enum: ["event"]
           description: The type of source to monitor. Currently only "event" is supported.
         disabled:
           type: boolean
@@ -5076,14 +5076,14 @@ components:
           description: The version of the alert
         alert_source:
           type: string
-          enum: [ app, device ]
+          enum: [app, device]
           description: The source of the alert
         source:
           type: string
           description: The UID of the source of the alert
         monitor_type:
           type: string
-          enum: [ event, device ]
+          enum: [event, device]
           description: The type of monitor that triggered the alert
         field_name:
           type: string
@@ -5095,14 +5095,14 @@ components:
             properties:
               alert_source:
                 type: string
-                enum: [ app, device ]
+                enum: [app, device]
                 description: The source of the alert
               source:
                 type: string
                 description: The UID of the source of the alert
               source_type:
                 type: string
-                enum: [ event ]
+                enum: [event]
                 description: The type of source.
               value:
                 type: number
@@ -5120,7 +5120,7 @@ components:
             properties:
               notification_type:
                 type: string
-                enum: [ email, slack ]
+                enum: [email, slack]
                 description: The type of notification
               status:
                 type: number
@@ -5403,7 +5403,7 @@ components:
           description: RFC3339 compatible datetime of when this status update happened
         description:
           type: string
-          description: Additional information
+          description: Additional information 
 
     DataField:
       type: object
@@ -5500,14 +5500,14 @@ components:
           description: "Title of the map."
 
     FleetsUIDList:
-      type: array
-      items:
-        type: string
+        type: array
+        items:
+          type: string
 
     AppUIDList:
-      type: array
-      items:
-        type: string
+        type: array
+        items:
+          type: string
 
     CreateUpdateRepository:
       type: object
@@ -5571,7 +5571,6 @@ components:
       required:
         - type
         - updatedAt
-
     CellularUsage:
       type: array
       items:
