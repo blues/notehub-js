@@ -760,21 +760,7 @@ paths:
         - $ref: "#/components/parameters/skuParam"
       responses:
         "200":
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  devices:
-                    type: array
-                    items:
-                      $ref: "#/components/schemas/Device"
-                  has_more:
-                    type: boolean
-                required:
-                  - devices
-                  - has_more
+          $ref: "#/components/responses/DevicesResponse"
         default:
           $ref: "#/components/responses/ErrorResponse"
 
@@ -843,21 +829,7 @@ paths:
         - $ref: "#/components/parameters/skuParam"
       responses:
         "200":
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  devices:
-                    type: array
-                    items:
-                      $ref: "#/components/schemas/Device"
-                  has_more:
-                    type: boolean
-                required:
-                  - devices
-                  - has_more
+          $ref: "#/components/responses/DevicesResponse"
         default:
           $ref: "#/components/responses/ErrorResponse"
 
@@ -3287,6 +3259,23 @@ components:
             required:
               - fleets
 
+    DevicesResponse:
+      description: List of Devices
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              devices:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Device"
+              has_more:
+                type: boolean
+            required:
+              - devices
+              - has_more
+
     NoteResponse:
       description: The response body from a note endpoint.
       content:
@@ -3792,6 +3781,8 @@ components:
           type: string
         disabled:
           type: boolean
+        cellular_usage:
+          $ref: "#/components/schemas/CellularUsage"
       required:
         - uid
         - provisioned
@@ -5580,3 +5571,30 @@ components:
       required:
         - type
         - updatedAt
+    CellularUsage:
+      type: array
+      items:
+        $ref: "#/components/schemas/SimUsage"
+
+    SimUsage:
+      type: object
+      properties:
+        iccid:
+          type: string
+          description: ICCID of the SIM card
+        used:
+          type: integer
+          format: int64
+          description: Bytes used on the SIMs current data plan
+        limit:
+          type: integer
+          format: int64
+          description: Limit in bytes of the SIMs current data plan
+        lifetimeUsed:
+          type: integer
+          format: int64
+          description: Total number of bytes used by SIM
+        lastUpdated:
+          type: integer
+          format: int64
+          description: Time this usage information was last updated
