@@ -30,6 +30,7 @@ import GetProjectFleets200Response from "../model/GetProjectFleets200Response";
 import GetProjectMembers200Response from "../model/GetProjectMembers200Response";
 import GetProjectProducts200Response from "../model/GetProjectProducts200Response";
 import GetProjects200Response from "../model/GetProjects200Response";
+import NotefileSchema from "../model/NotefileSchema";
 import Product from "../model/Product";
 import Project from "../model/Project";
 import PutDeviceFleetsRequest from "../model/PutDeviceFleetsRequest";
@@ -1516,6 +1517,60 @@ export default class ProjectApi {
       projectUID,
       fleetUID
     ).then(function (response_and_data) {
+      return response_and_data.data;
+    });
+  }
+
+  /**
+   * Get variable format for a notefile
+   * @param {String} projectUID
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link Array.<module:model/NotefileSchema>} and HTTP response
+   */
+  getNotefileSchemasWithHttpInfo(projectUID) {
+    let postBody = null;
+    // verify the required parameter 'projectUID' is set
+    if (projectUID === undefined || projectUID === null) {
+      throw new Error(
+        "Missing the required parameter 'projectUID' when calling getNotefileSchemas"
+      );
+    }
+
+    let pathParams = {
+      projectUID: projectUID,
+    };
+    let queryParams = {};
+    let headerParams = {};
+    let formParams = {};
+
+    let authNames = [];
+    let contentTypes = [];
+    let accepts = ["application/json"];
+    let returnType = [NotefileSchema];
+    return this.apiClient.callApi(
+      "/v1/projects/{projectUID}/schemas",
+      "GET",
+      pathParams,
+      queryParams,
+      headerParams,
+      formParams,
+      postBody,
+      authNames,
+      contentTypes,
+      accepts,
+      returnType,
+      null
+    );
+  }
+
+  /**
+   * Get variable format for a notefile
+   * @param {String} projectUID
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link Array.<module:model/NotefileSchema>}
+   */
+  getNotefileSchemas(projectUID) {
+    return this.getNotefileSchemasWithHttpInfo(projectUID).then(function (
+      response_and_data
+    ) {
       return response_and_data.data;
     });
   }

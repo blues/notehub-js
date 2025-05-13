@@ -88,6 +88,7 @@ import Monitor from "./model/Monitor";
 import MonitorAlertRoutesInner from "./model/MonitorAlertRoutesInner";
 import Mqtt from "./model/Mqtt";
 import Note from "./model/Note";
+import NotefileSchema from "./model/NotefileSchema";
 import NotehubRoute from "./model/NotehubRoute";
 import NotehubRouteSchema from "./model/NotehubRouteSchema";
 import PostProvisionProjectDeviceRequest from "./model/PostProvisionProjectDeviceRequest";
@@ -101,6 +102,7 @@ import QuestionDataResponseMap from "./model/QuestionDataResponseMap";
 import Radresponder from "./model/Radresponder";
 import Repository from "./model/Repository";
 import Role from "./model/Role";
+import SchemaProperty from "./model/SchemaProperty";
 import Slack from "./model/Slack";
 import SlackBearerNotification from "./model/SlackBearerNotification";
 import SlackWebHookNotification from "./model/SlackWebHookNotification";
@@ -620,6 +622,12 @@ export {
   Note,
 
   /**
+   * The NotefileSchema model constructor.
+   * @property {module:model/NotefileSchema}
+   */
+  NotefileSchema,
+
+  /**
    * The NotehubRoute model constructor.
    * @property {module:model/NotehubRoute}
    */
@@ -696,6 +704,12 @@ export {
    * @property {module:model/Role}
    */
   Role,
+
+  /**
+   * The SchemaProperty model constructor.
+   * @property {module:model/SchemaProperty}
+   */
+  SchemaProperty,
 
   /**
    * The Slack model constructor.
