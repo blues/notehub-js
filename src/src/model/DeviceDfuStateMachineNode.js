@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The DeviceDfuStateMachineNode model module.
  * @module model/DeviceDfuStateMachineNode
- * @version 1.0.29
+ * @version 1.0.30
  */
 class DeviceDfuStateMachineNode {
   /**

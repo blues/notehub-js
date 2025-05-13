@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The QuestionDataResponseMap model module.
  * @module model/QuestionDataResponseMap
- * @version 1.0.29
+ * @version 1.0.30
  */
 class QuestionDataResponseMap {
   /**

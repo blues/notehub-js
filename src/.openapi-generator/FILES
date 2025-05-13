@@ -85,6 +85,7 @@ docs/MonitorAlertRoutesInner.md
 docs/MonitorApi.md
 docs/Mqtt.md
 docs/Note.md
+docs/NotefileSchema.md
 docs/NotehubRoute.md
 docs/NotehubRouteSchema.md
 docs/PostProvisionProjectDeviceRequest.md
@@ -101,6 +102,7 @@ docs/Repository.md
 docs/RepositoryApi.md
 docs/Role.md
 docs/RouteApi.md
+docs/SchemaProperty.md
 docs/Slack.md
 docs/SlackBearerNotification.md
 docs/SlackWebHookNotification.md
@@ -205,6 +207,7 @@ src/model/Monitor.js
 src/model/MonitorAlertRoutesInner.js
 src/model/Mqtt.js
 src/model/Note.js
+src/model/NotefileSchema.js
 src/model/NotehubRoute.js
 src/model/NotehubRouteSchema.js
 src/model/PostProvisionProjectDeviceRequest.js
@@ -218,6 +221,7 @@ src/model/QuestionDataResponseMap.js
 src/model/Radresponder.js
 src/model/Repository.js
 src/model/Role.js
+src/model/SchemaProperty.js
 src/model/Slack.js
 src/model/SlackBearerNotification.js
 src/model/SlackWebHookNotification.js
@@ -317,6 +321,7 @@ test/model/Monitor.spec.js
 test/model/MonitorAlertRoutesInner.spec.js
 test/model/Mqtt.spec.js
 test/model/Note.spec.js
+test/model/NotefileSchema.spec.js
 test/model/NotehubRoute.spec.js
 test/model/NotehubRouteSchema.spec.js
 test/model/PostProvisionProjectDeviceRequest.spec.js
@@ -330,6 +335,7 @@ test/model/QuestionDataResponseMap.spec.js
 test/model/Radresponder.spec.js
 test/model/Repository.spec.js
 test/model/Role.spec.js
+test/model/SchemaProperty.spec.js
 test/model/Slack.spec.js
 test/model/SlackBearerNotification.spec.js
 test/model/SlackWebHookNotification.spec.js

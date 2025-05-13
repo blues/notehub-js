@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The CreateUpdateRepository model module.
  * @module model/CreateUpdateRepository
- * @version 1.0.29
+ * @version 1.0.30
  */
 class CreateUpdateRepository {
   /**

@@ -244,6 +244,16 @@
         done();
       });
     });
+    describe("getNotefileSchemas", function () {
+      it("should call getNotefileSchemas successfully", function (done) {
+        //uncomment below and update the code to test getNotefileSchemas
+        //instance.getNotefileSchemas(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
     describe("getProject", function () {
       it("should call getProject successfully", function (done) {
         //uncomment below and update the code to test getProject

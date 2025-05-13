@@ -2,8 +2,8 @@
 
 All URIs are relative to *https://api.notefile.net*
 
-| Method                                                                                 | HTTP request                                                                       | Description |
-| -------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ----------- |
+| Method                                                                                 | HTTP request                                                                       | Description                        |
+| -------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------- |
 | [**cloneProject**](ProjectApi.md#cloneProject)                                         | **POST** /v1/projects/{projectUID}/clone                                           |
 | [**createFleet**](ProjectApi.md#createFleet)                                           | **POST** /v1/projects/{projectUID}/fleets                                          |
 | [**createProduct**](ProjectApi.md#createProduct)                                       | **POST** /v1/projects/{projectUID}/products                                        |
@@ -24,6 +24,7 @@ All URIs are relative to *https://api.notefile.net*
 | [**getFirmwareInfo**](ProjectApi.md#getFirmwareInfo)                                   | **GET** /v1/projects/{projectUID}/firmware                                         |
 | [**getFleet**](ProjectApi.md#getFleet)                                                 | **GET** /v1/projects/{projectUID}/fleets/{fleetUID}                                |
 | [**getFleetEnvironmentVariables**](ProjectApi.md#getFleetEnvironmentVariables)         | **GET** /v1/projects/{projectUID}/fleets/{fleetUID}/environment_variables          |
+| [**getNotefileSchemas**](ProjectApi.md#getNotefileSchemas)                             | **GET** /v1/projects/{projectUID}/schemas                                          | Get variable format for a notefile |
 | [**getProject**](ProjectApi.md#getProject)                                             | **GET** /v1/projects/{projectUID}                                                  |
 | [**getProjectByProduct**](ProjectApi.md#getProjectByProduct)                           | **GET** /v1/products/{productUID}/project                                          |
 | [**getProjectEnvironmentVariables**](ProjectApi.md#getProjectEnvironmentVariables)     | **GET** /v1/projects/{projectUID}/environment_variables                            |
@@ -1053,6 +1054,46 @@ apiInstance.getFleetEnvironmentVariables(projectUID, fleetUID).then((data) => {
 ### Authorization
 
 [api_key](../README.md#api_key)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+## getNotefileSchemas
+
+> [NotefileSchema] getNotefileSchemas(projectUID)
+
+Get variable format for a notefile
+
+### Example
+
+```javascript
+import * as NotehubJs from '@blues-inc/notehub-js';
+
+let apiInstance = new NotehubJs.ProjectApi();
+let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+apiInstance.getNotefileSchemas(projectUID).then((data) => {
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
+}, (error) => {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+| Name           | Type       | Description | Notes |
+| -------------- | ---------- | ----------- | ----- |
+| **projectUID** | **String** |             |
+
+### Return type
+
+[**[NotefileSchema]**](NotefileSchema.md)
+
+### Authorization
+
+No authorization required
 
 ### HTTP request headers
 
