@@ -103,6 +103,7 @@ docs/RepositoryApi.md
 docs/Role.md
 docs/RouteApi.md
 docs/SchemaProperty.md
+docs/SimUsage.md
 docs/Slack.md
 docs/SlackBearerNotification.md
 docs/SlackWebHookNotification.md
@@ -222,6 +223,7 @@ src/model/Radresponder.js
 src/model/Repository.js
 src/model/Role.js
 src/model/SchemaProperty.js
+src/model/SimUsage.js
 src/model/Slack.js
 src/model/SlackBearerNotification.js
 src/model/SlackWebHookNotification.js
@@ -336,6 +338,7 @@ test/model/Radresponder.spec.js
 test/model/Repository.spec.js
 test/model/Role.spec.js
 test/model/SchemaProperty.spec.js
+test/model/SimUsage.spec.js
 test/model/Slack.spec.js
 test/model/SlackBearerNotification.spec.js
 test/model/SlackWebHookNotification.spec.js

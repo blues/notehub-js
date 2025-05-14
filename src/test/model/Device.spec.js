@@ -157,5 +157,11 @@
       //var instance = new NotehubJs.Device();
       //expect(instance).to.be();
     });
+
+    it('should have the property cellularUsage (base name: "cellular_usage")', function () {
+      // uncomment below and update the code to test the property cellularUsage
+      //var instance = new NotehubJs.Device();
+      //expect(instance).to.be();
+    });
   });
 });

@@ -22,3 +22,4 @@
 | **firmwareNotecard**     | **String**                                |             | [optional] |
 | **sku**                  | **String**                                |             | [optional] |
 | **disabled**             | **Boolean**                               |             | [optional] |
+| **cellularUsage**        | [**[SimUsage]**](SimUsage.md)             |             | [optional] |

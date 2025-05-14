@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The AlertDataInner model module.
  * @module model/AlertDataInner
- * @version 1.0.30
+ * @version 1.0.31
  */
 class AlertDataInner {
   /**

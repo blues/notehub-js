@@ -16,11 +16,12 @@ import Contact from "./Contact";
 import DFUEnv from "./DFUEnv";
 import DeviceTowerInfo from "./DeviceTowerInfo";
 import Location from "./Location";
+import SimUsage from "./SimUsage";
 
 /**
  * The Device model module.
  * @module model/Device
- * @version 1.0.30
+ * @version 1.0.31
  */
 class Device {
   /**
@@ -163,6 +164,12 @@ class Device {
       if (data.hasOwnProperty("disabled")) {
         obj["disabled"] = ApiClient.convertToType(data["disabled"], "Boolean");
       }
+      if (data.hasOwnProperty("cellular_usage")) {
+        obj["cellular_usage"] = ApiClient.convertToType(
+          data["cellular_usage"],
+          [SimUsage]
+        );
+      }
     } else if (data === null) {
       return null;
     }
@@ -295,6 +302,20 @@ class Device {
           data["sku"]
       );
     }
+    if (data["cellular_usage"]) {
+      // data not null
+      // ensure the json data is an array
+      if (!Array.isArray(data["cellular_usage"])) {
+        throw new Error(
+          "Expected the field `cellular_usage` to be an array in the JSON data but got " +
+            data["cellular_usage"]
+        );
+      }
+      // validate the optional field `cellular_usage` (array)
+      for (const item of data["cellular_usage"]) {
+        SimUsage.validateJsonObject(item);
+      }
+    }
 
     return true;
   }
@@ -398,5 +419,10 @@ Device.prototype["sku"] = undefined;
  * @member {Boolean} disabled
  */
 Device.prototype["disabled"] = undefined;
+
+/**
+ * @member {Array.<module:model/SimUsage>} cellular_usage
+ */
+Device.prototype["cellular_usage"] = undefined;
 
 export default Device;

@@ -103,6 +103,7 @@ import Radresponder from "./model/Radresponder";
 import Repository from "./model/Repository";
 import Role from "./model/Role";
 import SchemaProperty from "./model/SchemaProperty";
+import SimUsage from "./model/SimUsage";
 import Slack from "./model/Slack";
 import SlackBearerNotification from "./model/SlackBearerNotification";
 import SlackWebHookNotification from "./model/SlackWebHookNotification";
@@ -156,7 +157,7 @@ import RouteApi from "./api/RouteApi";
  * </pre>
  * </p>
  * @module index
- * @version 1.0.30
+ * @version 1.0.31
  */
 export {
   /**
@@ -710,6 +711,12 @@ export {
    * @property {module:model/SchemaProperty}
    */
   SchemaProperty,
+
+  /**
+   * The SimUsage model constructor.
+   * @property {module:model/SimUsage}
+   */
+  SimUsage,
 
   /**
    * The Slack model constructor.

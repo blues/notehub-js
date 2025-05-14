@@ -17,7 +17,7 @@ import DeviceDfuStateMachineNode from "./DeviceDfuStateMachineNode";
 /**
  * The DeviceDfuStateMachine model module.
  * @module model/DeviceDfuStateMachine
- * @version 1.0.30
+ * @version 1.0.31
  */
 class DeviceDfuStateMachine {
   /**
