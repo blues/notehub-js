@@ -4305,7 +4305,7 @@ components:
           description: Cell ID where the session originated and quality ("mcc,mnc,lac,cellid")
         scan:
           type: string
-          format: byte # this isn't working. I also tried x-go-type and that didn't either
+          format: byte
         triangulate:
           type: object
         rssi:
