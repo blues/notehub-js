@@ -39,7 +39,7 @@ import UpdateFleetRequest from "../model/UpdateFleetRequest";
 /**
  * Project service.
  * @module api/ProjectApi
- * @version 1.0.31
+ * @version 1.0.32
  */
 export default class ProjectApi {
   /**
