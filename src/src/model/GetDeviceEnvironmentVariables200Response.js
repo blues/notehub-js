@@ -66,6 +66,12 @@ class GetDeviceEnvironmentVariables200Response {
           { String: "String" }
         );
       }
+      if (data.hasOwnProperty("environment_variables_effective")) {
+        obj["environment_variables_effective"] = ApiClient.convertToType(
+          data["environment_variables_effective"],
+          { String: "String" }
+        );
+      }
     } else if (data === null) {
       return null;
     }
@@ -112,6 +118,14 @@ GetDeviceEnvironmentVariables200Response.prototype["environment_variables"] =
  */
 GetDeviceEnvironmentVariables200Response.prototype[
   "environment_variables_env_default"
+] = undefined;
+
+/**
+ * The environment variables as they will be seen by the device, fully resolved with project/fleet/device prioritization rules.
+ * @member {Object.<String, String>} environment_variables_effective
+ */
+GetDeviceEnvironmentVariables200Response.prototype[
+  "environment_variables_effective"
 ] = undefined;
 
 export default GetDeviceEnvironmentVariables200Response;

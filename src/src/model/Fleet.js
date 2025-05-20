@@ -61,6 +61,12 @@ class Fleet {
       if (data.hasOwnProperty("created")) {
         obj["created"] = ApiClient.convertToType(data["created"], "Date");
       }
+      if (data.hasOwnProperty("environment_variables")) {
+        obj["environment_variables"] = ApiClient.convertToType(
+          data["environment_variables"],
+          { String: "String" }
+        );
+      }
       if (data.hasOwnProperty("smart_rule")) {
         obj["smart_rule"] = ApiClient.convertToType(
           data["smart_rule"],
@@ -147,6 +153,12 @@ Fleet.prototype["label"] = undefined;
  * @member {Date} created
  */
 Fleet.prototype["created"] = undefined;
+
+/**
+ * The environment variables for this device that have been set using the Notehub API or UI.
+ * @member {Object.<String, String>} environment_variables
+ */
+Fleet.prototype["environment_variables"] = undefined;
 
 /**
  * JSONata expression that will be evaluated to determine device membership into this fleet, if the expression evaluates to a 1, the device will be included, if it evaluates to -1 it will be removed, and if it evaluates to 0 or errors it will be left unchanged.
