@@ -2051,6 +2051,33 @@ paths:
           $ref: "#/components/responses/AlertsResponse"
         default:
           $ref: "#/components/responses/ErrorResponse"
+  
+  /v1/projects/{projectUID}/firmware/{firmwareType}/{filename}:
+    put:
+      tags: ["project"]
+      operationId: uploadFirmware
+      description: Upload firmware binary
+      security:
+        - api_key: []
+      parameters:
+        - $ref: "#/components/parameters/projectUIDParam"
+        - $ref: "#/components/parameters/firmwareTypeParam"
+        - name: filename
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: contents of the firmware binary
+        required: true
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+      responses:
+        '204':
+          description: Upload successful
 
   /v1/projects/{projectUID}/firmware:
     get:
@@ -3241,6 +3268,14 @@ components:
                 # https://swagger.io/docs/specification/data-models/dictionaries/
                 additionalProperties:
                   type: string
+              environment_variables_effective:
+                type: object
+                description: The environment variables as they will be seen by the device,
+                  fully resolved with project/fleet/device prioritization rules.
+                # string to string dictionary
+                # https://swagger.io/docs/specification/data-models/dictionaries/
+                additionalProperties:
+                  type: string
             required:
               - environment_variables
               - environment_variables_env_default
@@ -3645,6 +3680,12 @@ components:
           type: string
           format: date-time
           description: RFC3339 timestamp in UTC
+        environment_variables:
+          type: object
+          description: The environment variables for this device that have been set
+            using the Notehub API or UI.
+          additionalProperties:
+            type: string
         smart_rule:
           $ref: "#/components/schemas/FleetRule"
 
