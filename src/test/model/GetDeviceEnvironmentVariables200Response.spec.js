@@ -61,5 +61,11 @@
       //var instance = new NotehubJs.GetDeviceEnvironmentVariables200Response();
       //expect(instance).to.be();
     });
+
+    it('should have the property environmentVariablesEffective (base name: "environment_variables_effective")', function () {
+      // uncomment below and update the code to test the property environmentVariablesEffective
+      //var instance = new NotehubJs.GetDeviceEnvironmentVariables200Response();
+      //expect(instance).to.be();
+    });
   });
 });
