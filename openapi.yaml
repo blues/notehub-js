@@ -2076,8 +2076,14 @@ paths:
               type: string
               format: binary
       responses:
-        '204':
+        200:
           description: Upload successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FirmwareInfo"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
 
   /v1/projects/{projectUID}/firmware:
     get:
