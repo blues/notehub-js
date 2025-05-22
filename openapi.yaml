@@ -2051,6 +2051,39 @@ paths:
           $ref: "#/components/responses/AlertsResponse"
         default:
           $ref: "#/components/responses/ErrorResponse"
+  
+  /v1/projects/{projectUID}/firmware/{firmwareType}/{filename}:
+    put:
+      tags: ["project"]
+      operationId: uploadFirmware
+      description: Upload firmware binary
+      security:
+        - api_key: []
+      parameters:
+        - $ref: "#/components/parameters/projectUIDParam"
+        - $ref: "#/components/parameters/firmwareTypeParam"
+        - name: filename
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: contents of the firmware binary
+        required: true
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+      responses:
+        200:
+          description: Upload successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FirmwareInfo"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
 
   /v1/projects/{projectUID}/firmware:
     get:
