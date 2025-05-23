@@ -2288,4 +2288,87 @@ export default class ProjectApi {
       return response_and_data.data;
     });
   }
+
+  /**
+   * Upload firmware binary
+   * @param {String} projectUID
+   * @param {module:model/String} firmwareType
+   * @param {String} filename
+   * @param {File} body contents of the firmware binary
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/FirmwareInfo} and HTTP response
+   */
+  uploadFirmwareWithHttpInfo(projectUID, firmwareType, filename, body) {
+    let postBody = body;
+    // verify the required parameter 'projectUID' is set
+    if (projectUID === undefined || projectUID === null) {
+      throw new Error(
+        "Missing the required parameter 'projectUID' when calling uploadFirmware"
+      );
+    }
+    // verify the required parameter 'firmwareType' is set
+    if (firmwareType === undefined || firmwareType === null) {
+      throw new Error(
+        "Missing the required parameter 'firmwareType' when calling uploadFirmware"
+      );
+    }
+    // verify the required parameter 'filename' is set
+    if (filename === undefined || filename === null) {
+      throw new Error(
+        "Missing the required parameter 'filename' when calling uploadFirmware"
+      );
+    }
+    // verify the required parameter 'body' is set
+    if (body === undefined || body === null) {
+      throw new Error(
+        "Missing the required parameter 'body' when calling uploadFirmware"
+      );
+    }
+
+    let pathParams = {
+      projectUID: projectUID,
+      firmwareType: firmwareType,
+      filename: filename,
+    };
+    let queryParams = {};
+    let headerParams = {};
+    let formParams = {};
+
+    let authNames = ["api_key"];
+    let contentTypes = ["application/octet-stream"];
+    let accepts = ["application/json"];
+    let returnType = FirmwareInfo;
+    return this.apiClient.callApi(
+      "/v1/projects/{projectUID}/firmware/{firmwareType}/{filename}",
+      "PUT",
+      pathParams,
+      queryParams,
+      headerParams,
+      formParams,
+      postBody,
+      authNames,
+      contentTypes,
+      accepts,
+      returnType,
+      null
+    );
+  }
+
+  /**
+   * Upload firmware binary
+   * @param {String} projectUID
+   * @param {module:model/String} firmwareType
+   * @param {String} filename
+   * @param {File} body contents of the firmware binary
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/FirmwareInfo}
+   */
+  uploadFirmware(projectUID, firmwareType, filename, body) {
+    return this.uploadFirmwareWithHttpInfo(
+      projectUID,
+      firmwareType,
+      filename,
+      body
+    ).then(function (response_and_data) {
+      return response_and_data.data;
+    });
+  }
 }

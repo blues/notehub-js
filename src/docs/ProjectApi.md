@@ -37,6 +37,7 @@ All URIs are relative to *https://api.notefile.net*
 | [**putProjectEnvironmentVariables**](ProjectApi.md#putProjectEnvironmentVariables)     | **PUT** /v1/projects/{projectUID}/environment_variables                            |
 | [**setGlobalTransformation**](ProjectApi.md#setGlobalTransformation)                   | **POST** /v1/projects/{projectUID}/global-transformation                           |
 | [**updateFleet**](ProjectApi.md#updateFleet)                                           | **PUT** /v1/projects/{projectUID}/fleets/{fleetUID}                                |
+| [**uploadFirmware**](ProjectApi.md#uploadFirmware)                                     | **PUT** /v1/projects/{projectUID}/firmware/{firmwareType}/{filename}               |
 
 ## cloneProject
 
@@ -1649,4 +1650,54 @@ apiInstance.updateFleet(projectUID, fleetUID, updateFleetRequest).then((data) =>
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+## uploadFirmware
+
+> FirmwareInfo uploadFirmware(projectUID, firmwareType, filename, body)
+
+Upload firmware binary
+
+### Example
+
+```javascript
+import * as NotehubJs from '@blues-inc/notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
+// Configure API key authorization: api_key
+let api_key = defaultClient.authentications['api_key'];
+api_key.apiKey = 'YOUR API KEY';
+
+let apiInstance = new NotehubJs.ProjectApi();
+let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let firmwareType = "firmwareType_example"; // String |
+let filename = "filename_example"; // String |
+let body = "/path/to/file"; // File | contents of the firmware binary
+apiInstance.uploadFirmware(projectUID, firmwareType, filename, body).then((data) => {
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
+}, (error) => {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+| Name             | Type       | Description                     | Notes |
+| ---------------- | ---------- | ------------------------------- | ----- |
+| **projectUID**   | **String** |                                 |
+| **firmwareType** | **String** |                                 |
+| **filename**     | **String** |                                 |
+| **body**         | **File**   | contents of the firmware binary |
+
+### Return type
+
+[**FirmwareInfo**](FirmwareInfo.md)
+
+### Authorization
+
+[api_key](../README.md#api_key)
+
+### HTTP request headers
+
+- **Content-Type**: application/octet-stream
 - **Accept**: application/json
