@@ -374,5 +374,15 @@
         done();
       });
     });
+    describe("uploadFirmware", function () {
+      it("should call uploadFirmware successfully", function (done) {
+        //uncomment below and update the code to test uploadFirmware
+        //instance.uploadFirmware(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
   });
 });
