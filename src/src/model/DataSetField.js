@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The DataSetField model module.
  * @module model/DataSetField
- * @version 1.0.32
+ * @version 1.0.33
  */
 class DataSetField {
   /**
