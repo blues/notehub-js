@@ -4044,6 +4044,9 @@ components:
         tls:
           type: boolean
           description: Whether TLS was used on the connection between the device and notehub. Only available on _session.qo events.
+        transport:
+          type: string
+          description: The transport used for this event, e.g., "cellular", "wifi", ", etc.
         best_id:
           type: string
           description: The device serial number, or the DeviceUID if the serial number is not set
