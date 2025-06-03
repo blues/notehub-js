@@ -2507,7 +2507,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/NotefileSchema'
 
-  /v1/products/{productUID}/webhooks:
+  /v1/projects/{projectOrProductUIDParam}/webhooks:
     get:
       tags: ["webhook"]
       security:
@@ -2515,7 +2515,7 @@ paths:
       operationId: GetWebhooks
       description: Retrieves all webhooks for the specified project
       parameters:
-        - $ref: '#/components/parameters/productUIDParam'
+        - $ref: '#/components/parameters/projectOrProductUIDParam'
       responses:
         default:
           $ref: "#/components/responses/ErrorResponse"
@@ -2531,7 +2531,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/WebhookSettings'
 
-  /v1/products/{productUID}/webhooks/{webhookUID}:
+  /v1/projects/{projectOrProductUIDParam}/webhooks/{webhookUID}:
     post:
       tags: ["webhook"]
       security:
@@ -2540,7 +2540,7 @@ paths:
       description: Creates a webhook for the specified product with the given name. The name |
         must be unique within the project.
       parameters:
-        - $ref: '#/components/parameters/productUIDParam'
+        - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/webhookUIDParam'
       requestBody:
         required: true
@@ -2567,7 +2567,7 @@ paths:
       description: Updates the configuration settings for the specified webhook. |
         Webhook will be created if it does not exist. Update body will completely replace the existing settings.
       parameters:
-        - $ref: '#/components/parameters/productUIDParam'
+        - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/webhookUIDParam'
       requestBody:
         required: true
@@ -2590,7 +2590,7 @@ paths:
       operationId: GetWebhook
       description: Retrieves the configuration settings for the specified webhook
       parameters:
-        - $ref: '#/components/parameters/productUIDParam'
+        - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/webhookUIDParam'
       responses:
         default:
@@ -2608,7 +2608,7 @@ paths:
       operationId: DeleteWebhook
       description: Deletes the specified webhook
       parameters:
-        - $ref: '#/components/parameters/productUIDParam'
+        - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/webhookUIDParam'
       responses:
         default:
