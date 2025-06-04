@@ -36,7 +36,7 @@ export default class EventApi {
 
   /**
    * Get Events of a Fleet
-   * @param {String} projectUID
+   * @param {String} projectOrProductUID
    * @param {String} fleetUID
    * @param {Object} opts Optional parameters
    * @param {Number} opts.pageSize  (default to 50)
@@ -56,13 +56,13 @@ export default class EventApi {
    * @param {String} opts.selectFields Comma-separated list of fields to select from JSON payload (e.g., \"field1,field2.subfield,field3\"), this will reflect the columns in the CSV output.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetProjectEvents200Response} and HTTP response
    */
-  getFleetEventsWithHttpInfo(projectUID, fleetUID, opts) {
+  getFleetEventsWithHttpInfo(projectOrProductUID, fleetUID, opts) {
     opts = opts || {};
     let postBody = null;
-    // verify the required parameter 'projectUID' is set
-    if (projectUID === undefined || projectUID === null) {
+    // verify the required parameter 'projectOrProductUID' is set
+    if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectUID' when calling getFleetEvents"
+        "Missing the required parameter 'projectOrProductUID' when calling getFleetEvents"
       );
     }
     // verify the required parameter 'fleetUID' is set
@@ -73,7 +73,7 @@ export default class EventApi {
     }
 
     let pathParams = {
-      projectUID: projectUID,
+      projectOrProductUID: projectOrProductUID,
       fleetUID: fleetUID,
     };
     let queryParams = {
@@ -110,7 +110,7 @@ export default class EventApi {
     let accepts = ["application/json", "text/csv"];
     let returnType = GetProjectEvents200Response;
     return this.apiClient.callApi(
-      "/v1/projects/{projectUID}/fleets/{fleetUID}/events",
+      "/v1/projects/{projectOrProductUID}/fleets/{fleetUID}/events",
       "GET",
       pathParams,
       queryParams,
@@ -127,7 +127,7 @@ export default class EventApi {
 
   /**
    * Get Events of a Fleet
-   * @param {String} projectUID
+   * @param {String} projectOrProductUID
    * @param {String} fleetUID
    * @param {Object} opts Optional parameters
    * @param {Number} opts.pageSize  (default to 50)
@@ -147,17 +147,19 @@ export default class EventApi {
    * @param {String} opts.selectFields Comma-separated list of fields to select from JSON payload (e.g., \"field1,field2.subfield,field3\"), this will reflect the columns in the CSV output.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetProjectEvents200Response}
    */
-  getFleetEvents(projectUID, fleetUID, opts) {
-    return this.getFleetEventsWithHttpInfo(projectUID, fleetUID, opts).then(
-      function (response_and_data) {
-        return response_and_data.data;
-      }
-    );
+  getFleetEvents(projectOrProductUID, fleetUID, opts) {
+    return this.getFleetEventsWithHttpInfo(
+      projectOrProductUID,
+      fleetUID,
+      opts
+    ).then(function (response_and_data) {
+      return response_and_data.data;
+    });
   }
 
   /**
    * Get Events of a Fleet by cursor
-   * @param {String} projectUID
+   * @param {String} projectOrProductUID
    * @param {String} fleetUID
    * @param {Object} opts Optional parameters
    * @param {Number} opts.limit  (default to 50)
@@ -170,13 +172,13 @@ export default class EventApi {
    * @param {Number} opts.endDate Unix timestamp
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetProjectEventsByCursor200Response} and HTTP response
    */
-  getFleetEventsByCursorWithHttpInfo(projectUID, fleetUID, opts) {
+  getFleetEventsByCursorWithHttpInfo(projectOrProductUID, fleetUID, opts) {
     opts = opts || {};
     let postBody = null;
-    // verify the required parameter 'projectUID' is set
-    if (projectUID === undefined || projectUID === null) {
+    // verify the required parameter 'projectOrProductUID' is set
+    if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectUID' when calling getFleetEventsByCursor"
+        "Missing the required parameter 'projectOrProductUID' when calling getFleetEventsByCursor"
       );
     }
     // verify the required parameter 'fleetUID' is set
@@ -187,7 +189,7 @@ export default class EventApi {
     }
 
     let pathParams = {
-      projectUID: projectUID,
+      projectOrProductUID: projectOrProductUID,
       fleetUID: fleetUID,
     };
     let queryParams = {
@@ -211,7 +213,7 @@ export default class EventApi {
     let accepts = ["application/json"];
     let returnType = GetProjectEventsByCursor200Response;
     return this.apiClient.callApi(
-      "/v1/projects/{projectUID}/fleets/{fleetUID}/events-cursor",
+      "/v1/projects/{projectOrProductUID}/fleets/{fleetUID}/events-cursor",
       "GET",
       pathParams,
       queryParams,
@@ -228,7 +230,7 @@ export default class EventApi {
 
   /**
    * Get Events of a Fleet by cursor
-   * @param {String} projectUID
+   * @param {String} projectOrProductUID
    * @param {String} fleetUID
    * @param {Object} opts Optional parameters
    * @param {Number} opts.limit  (default to 50)
@@ -241,9 +243,9 @@ export default class EventApi {
    * @param {Number} opts.endDate Unix timestamp
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetProjectEventsByCursor200Response}
    */
-  getFleetEventsByCursor(projectUID, fleetUID, opts) {
+  getFleetEventsByCursor(projectOrProductUID, fleetUID, opts) {
     return this.getFleetEventsByCursorWithHttpInfo(
-      projectUID,
+      projectOrProductUID,
       fleetUID,
       opts
     ).then(function (response_and_data) {
@@ -253,7 +255,7 @@ export default class EventApi {
 
   /**
    * Get Events of a Project
-   * @param {String} projectUID
+   * @param {String} projectOrProductUID
    * @param {Object} opts Optional parameters
    * @param {Number} opts.pageSize  (default to 50)
    * @param {Number} opts.pageNum  (default to 1)
@@ -273,18 +275,18 @@ export default class EventApi {
    * @param {String} opts.selectFields Comma-separated list of fields to select from JSON payload (e.g., \"field1,field2.subfield,field3\"), this will reflect the columns in the CSV output.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetProjectEvents200Response} and HTTP response
    */
-  getProjectEventsWithHttpInfo(projectUID, opts) {
+  getProjectEventsWithHttpInfo(projectOrProductUID, opts) {
     opts = opts || {};
     let postBody = null;
-    // verify the required parameter 'projectUID' is set
-    if (projectUID === undefined || projectUID === null) {
+    // verify the required parameter 'projectOrProductUID' is set
+    if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectUID' when calling getProjectEvents"
+        "Missing the required parameter 'projectOrProductUID' when calling getProjectEvents"
       );
     }
 
     let pathParams = {
-      projectUID: projectUID,
+      projectOrProductUID: projectOrProductUID,
     };
     let queryParams = {
       pageSize: opts["pageSize"],
@@ -321,7 +323,7 @@ export default class EventApi {
     let accepts = ["application/json", "text/csv"];
     let returnType = GetProjectEvents200Response;
     return this.apiClient.callApi(
-      "/v1/projects/{projectUID}/events",
+      "/v1/projects/{projectOrProductUID}/events",
       "GET",
       pathParams,
       queryParams,
@@ -338,7 +340,7 @@ export default class EventApi {
 
   /**
    * Get Events of a Project
-   * @param {String} projectUID
+   * @param {String} projectOrProductUID
    * @param {Object} opts Optional parameters
    * @param {Number} opts.pageSize  (default to 50)
    * @param {Number} opts.pageNum  (default to 1)
@@ -358,17 +360,17 @@ export default class EventApi {
    * @param {String} opts.selectFields Comma-separated list of fields to select from JSON payload (e.g., \"field1,field2.subfield,field3\"), this will reflect the columns in the CSV output.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetProjectEvents200Response}
    */
-  getProjectEvents(projectUID, opts) {
-    return this.getProjectEventsWithHttpInfo(projectUID, opts).then(function (
-      response_and_data
-    ) {
-      return response_and_data.data;
-    });
+  getProjectEvents(projectOrProductUID, opts) {
+    return this.getProjectEventsWithHttpInfo(projectOrProductUID, opts).then(
+      function (response_and_data) {
+        return response_and_data.data;
+      }
+    );
   }
 
   /**
    * Get Events of a Project by cursor
-   * @param {String} projectUID
+   * @param {String} projectOrProductUID
    * @param {Object} opts Optional parameters
    * @param {Number} opts.limit  (default to 50)
    * @param {String} opts.cursor A cursor, which can be obtained from the `next_cursor` value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included.
@@ -379,18 +381,18 @@ export default class EventApi {
    * @param {Array.<String>} opts.deviceUID A Device UID.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetProjectEventsByCursor200Response} and HTTP response
    */
-  getProjectEventsByCursorWithHttpInfo(projectUID, opts) {
+  getProjectEventsByCursorWithHttpInfo(projectOrProductUID, opts) {
     opts = opts || {};
     let postBody = null;
-    // verify the required parameter 'projectUID' is set
-    if (projectUID === undefined || projectUID === null) {
+    // verify the required parameter 'projectOrProductUID' is set
+    if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectUID' when calling getProjectEventsByCursor"
+        "Missing the required parameter 'projectOrProductUID' when calling getProjectEventsByCursor"
       );
     }
 
     let pathParams = {
-      projectUID: projectUID,
+      projectOrProductUID: projectOrProductUID,
     };
     let queryParams = {
       limit: opts["limit"],
@@ -412,7 +414,7 @@ export default class EventApi {
     let accepts = ["application/json"];
     let returnType = GetProjectEventsByCursor200Response;
     return this.apiClient.callApi(
-      "/v1/projects/{projectUID}/events-cursor",
+      "/v1/projects/{projectOrProductUID}/events-cursor",
       "GET",
       pathParams,
       queryParams,
@@ -429,7 +431,7 @@ export default class EventApi {
 
   /**
    * Get Events of a Project by cursor
-   * @param {String} projectUID
+   * @param {String} projectOrProductUID
    * @param {Object} opts Optional parameters
    * @param {Number} opts.limit  (default to 50)
    * @param {String} opts.cursor A cursor, which can be obtained from the `next_cursor` value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included.
@@ -440,26 +442,27 @@ export default class EventApi {
    * @param {Array.<String>} opts.deviceUID A Device UID.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetProjectEventsByCursor200Response}
    */
-  getProjectEventsByCursor(projectUID, opts) {
-    return this.getProjectEventsByCursorWithHttpInfo(projectUID, opts).then(
-      function (response_and_data) {
-        return response_and_data.data;
-      }
-    );
+  getProjectEventsByCursor(projectOrProductUID, opts) {
+    return this.getProjectEventsByCursorWithHttpInfo(
+      projectOrProductUID,
+      opts
+    ).then(function (response_and_data) {
+      return response_and_data.data;
+    });
   }
 
   /**
    * Get Route Logs by Event UID
-   * @param {String} projectUID
+   * @param {String} projectOrProductUID
    * @param {String} eventUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link Array.<module:model/GetRouteLogsByRoute200ResponseInner>} and HTTP response
    */
-  getRouteLogsByEventWithHttpInfo(projectUID, eventUID) {
+  getRouteLogsByEventWithHttpInfo(projectOrProductUID, eventUID) {
     let postBody = null;
-    // verify the required parameter 'projectUID' is set
-    if (projectUID === undefined || projectUID === null) {
+    // verify the required parameter 'projectOrProductUID' is set
+    if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectUID' when calling getRouteLogsByEvent"
+        "Missing the required parameter 'projectOrProductUID' when calling getRouteLogsByEvent"
       );
     }
     // verify the required parameter 'eventUID' is set
@@ -470,7 +473,7 @@ export default class EventApi {
     }
 
     let pathParams = {
-      projectUID: projectUID,
+      projectOrProductUID: projectOrProductUID,
       eventUID: eventUID,
     };
     let queryParams = {};
@@ -482,7 +485,7 @@ export default class EventApi {
     let accepts = ["application/json"];
     let returnType = [GetRouteLogsByRoute200ResponseInner];
     return this.apiClient.callApi(
-      "/v1/projects/{projectUID}/events/{eventUID}/route-logs",
+      "/v1/projects/{projectOrProductUID}/events/{eventUID}/route-logs",
       "GET",
       pathParams,
       queryParams,
@@ -499,15 +502,16 @@ export default class EventApi {
 
   /**
    * Get Route Logs by Event UID
-   * @param {String} projectUID
+   * @param {String} projectOrProductUID
    * @param {String} eventUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link Array.<module:model/GetRouteLogsByRoute200ResponseInner>}
    */
-  getRouteLogsByEvent(projectUID, eventUID) {
-    return this.getRouteLogsByEventWithHttpInfo(projectUID, eventUID).then(
-      function (response_and_data) {
-        return response_and_data.data;
-      }
-    );
+  getRouteLogsByEvent(projectOrProductUID, eventUID) {
+    return this.getRouteLogsByEventWithHttpInfo(
+      projectOrProductUID,
+      eventUID
+    ).then(function (response_and_data) {
+      return response_and_data.data;
+    });
   }
 }

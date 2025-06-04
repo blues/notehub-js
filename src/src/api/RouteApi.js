@@ -36,16 +36,16 @@ export default class RouteApi {
 
   /**
    * Create Route within a Project
-   * @param {String} projectUID
+   * @param {String} projectOrProductUID
    * @param {module:model/NotehubRoute} notehubRoute Route to be Created
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/NotehubRoute} and HTTP response
    */
-  createRouteWithHttpInfo(projectUID, notehubRoute) {
+  createRouteWithHttpInfo(projectOrProductUID, notehubRoute) {
     let postBody = notehubRoute;
-    // verify the required parameter 'projectUID' is set
-    if (projectUID === undefined || projectUID === null) {
+    // verify the required parameter 'projectOrProductUID' is set
+    if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectUID' when calling createRoute"
+        "Missing the required parameter 'projectOrProductUID' when calling createRoute"
       );
     }
     // verify the required parameter 'notehubRoute' is set
@@ -56,7 +56,7 @@ export default class RouteApi {
     }
 
     let pathParams = {
-      projectUID: projectUID,
+      projectOrProductUID: projectOrProductUID,
     };
     let queryParams = {};
     let headerParams = {};
@@ -67,7 +67,7 @@ export default class RouteApi {
     let accepts = ["application/json"];
     let returnType = NotehubRoute;
     return this.apiClient.callApi(
-      "/v1/projects/{projectUID}/routes",
+      "/v1/projects/{projectOrProductUID}/routes",
       "POST",
       pathParams,
       queryParams,
@@ -84,12 +84,12 @@ export default class RouteApi {
 
   /**
    * Create Route within a Project
-   * @param {String} projectUID
+   * @param {String} projectOrProductUID
    * @param {module:model/NotehubRoute} notehubRoute Route to be Created
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/NotehubRoute}
    */
-  createRoute(projectUID, notehubRoute) {
-    return this.createRouteWithHttpInfo(projectUID, notehubRoute).then(
+  createRoute(projectOrProductUID, notehubRoute) {
+    return this.createRouteWithHttpInfo(projectOrProductUID, notehubRoute).then(
       function (response_and_data) {
         return response_and_data.data;
       }
@@ -98,16 +98,16 @@ export default class RouteApi {
 
   /**
    * Delete single route within a project
-   * @param {String} projectUID
+   * @param {String} projectOrProductUID
    * @param {String} routeUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link Object} and HTTP response
    */
-  deleteRouteWithHttpInfo(projectUID, routeUID) {
+  deleteRouteWithHttpInfo(projectOrProductUID, routeUID) {
     let postBody = null;
-    // verify the required parameter 'projectUID' is set
-    if (projectUID === undefined || projectUID === null) {
+    // verify the required parameter 'projectOrProductUID' is set
+    if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectUID' when calling deleteRoute"
+        "Missing the required parameter 'projectOrProductUID' when calling deleteRoute"
       );
     }
     // verify the required parameter 'routeUID' is set
@@ -118,7 +118,7 @@ export default class RouteApi {
     }
 
     let pathParams = {
-      projectUID: projectUID,
+      projectOrProductUID: projectOrProductUID,
       routeUID: routeUID,
     };
     let queryParams = {};
@@ -130,7 +130,7 @@ export default class RouteApi {
     let accepts = ["application/json"];
     let returnType = Object;
     return this.apiClient.callApi(
-      "/v1/projects/{projectUID}/routes/{routeUID}",
+      "/v1/projects/{projectOrProductUID}/routes/{routeUID}",
       "DELETE",
       pathParams,
       queryParams,
@@ -147,30 +147,30 @@ export default class RouteApi {
 
   /**
    * Delete single route within a project
-   * @param {String} projectUID
+   * @param {String} projectOrProductUID
    * @param {String} routeUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link Object}
    */
-  deleteRoute(projectUID, routeUID) {
-    return this.deleteRouteWithHttpInfo(projectUID, routeUID).then(function (
-      response_and_data
-    ) {
-      return response_and_data.data;
-    });
+  deleteRoute(projectOrProductUID, routeUID) {
+    return this.deleteRouteWithHttpInfo(projectOrProductUID, routeUID).then(
+      function (response_and_data) {
+        return response_and_data.data;
+      }
+    );
   }
 
   /**
    * Get single route within a project
-   * @param {String} projectUID
+   * @param {String} projectOrProductUID
    * @param {String} routeUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/NotehubRoute} and HTTP response
    */
-  getRouteWithHttpInfo(projectUID, routeUID) {
+  getRouteWithHttpInfo(projectOrProductUID, routeUID) {
     let postBody = null;
-    // verify the required parameter 'projectUID' is set
-    if (projectUID === undefined || projectUID === null) {
+    // verify the required parameter 'projectOrProductUID' is set
+    if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectUID' when calling getRoute"
+        "Missing the required parameter 'projectOrProductUID' when calling getRoute"
       );
     }
     // verify the required parameter 'routeUID' is set
@@ -181,7 +181,7 @@ export default class RouteApi {
     }
 
     let pathParams = {
-      projectUID: projectUID,
+      projectOrProductUID: projectOrProductUID,
       routeUID: routeUID,
     };
     let queryParams = {};
@@ -193,7 +193,7 @@ export default class RouteApi {
     let accepts = ["application/json"];
     let returnType = NotehubRoute;
     return this.apiClient.callApi(
-      "/v1/projects/{projectUID}/routes/{routeUID}",
+      "/v1/projects/{projectOrProductUID}/routes/{routeUID}",
       "GET",
       pathParams,
       queryParams,
@@ -210,21 +210,21 @@ export default class RouteApi {
 
   /**
    * Get single route within a project
-   * @param {String} projectUID
+   * @param {String} projectOrProductUID
    * @param {String} routeUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/NotehubRoute}
    */
-  getRoute(projectUID, routeUID) {
-    return this.getRouteWithHttpInfo(projectUID, routeUID).then(function (
-      response_and_data
-    ) {
-      return response_and_data.data;
-    });
+  getRoute(projectOrProductUID, routeUID) {
+    return this.getRouteWithHttpInfo(projectOrProductUID, routeUID).then(
+      function (response_and_data) {
+        return response_and_data.data;
+      }
+    );
   }
 
   /**
    * Get Route Logs by Route UID
-   * @param {String} projectUID
+   * @param {String} projectOrProductUID
    * @param {String} routeUID
    * @param {Object} opts Optional parameters
    * @param {Number} opts.pageSize  (default to 50)
@@ -238,13 +238,13 @@ export default class RouteApi {
    * @param {String} opts.files
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link Array.<module:model/GetRouteLogsByRoute200ResponseInner>} and HTTP response
    */
-  getRouteLogsByRouteWithHttpInfo(projectUID, routeUID, opts) {
+  getRouteLogsByRouteWithHttpInfo(projectOrProductUID, routeUID, opts) {
     opts = opts || {};
     let postBody = null;
-    // verify the required parameter 'projectUID' is set
-    if (projectUID === undefined || projectUID === null) {
+    // verify the required parameter 'projectOrProductUID' is set
+    if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectUID' when calling getRouteLogsByRoute"
+        "Missing the required parameter 'projectOrProductUID' when calling getRouteLogsByRoute"
       );
     }
     // verify the required parameter 'routeUID' is set
@@ -255,7 +255,7 @@ export default class RouteApi {
     }
 
     let pathParams = {
-      projectUID: projectUID,
+      projectOrProductUID: projectOrProductUID,
       routeUID: routeUID,
     };
     let queryParams = {
@@ -280,7 +280,7 @@ export default class RouteApi {
     let accepts = ["application/json"];
     let returnType = [GetRouteLogsByRoute200ResponseInner];
     return this.apiClient.callApi(
-      "/v1/projects/{projectUID}/routes/{routeUID}/route-logs",
+      "/v1/projects/{projectOrProductUID}/routes/{routeUID}/route-logs",
       "GET",
       pathParams,
       queryParams,
@@ -297,7 +297,7 @@ export default class RouteApi {
 
   /**
    * Get Route Logs by Route UID
-   * @param {String} projectUID
+   * @param {String} projectOrProductUID
    * @param {String} routeUID
    * @param {Object} opts Optional parameters
    * @param {Number} opts.pageSize  (default to 50)
@@ -311,9 +311,9 @@ export default class RouteApi {
    * @param {String} opts.files
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link Array.<module:model/GetRouteLogsByRoute200ResponseInner>}
    */
-  getRouteLogsByRoute(projectUID, routeUID, opts) {
+  getRouteLogsByRoute(projectOrProductUID, routeUID, opts) {
     return this.getRouteLogsByRouteWithHttpInfo(
-      projectUID,
+      projectOrProductUID,
       routeUID,
       opts
     ).then(function (response_and_data) {
@@ -323,20 +323,20 @@ export default class RouteApi {
 
   /**
    * Get all Routes within a Project
-   * @param {String} projectUID
+   * @param {String} projectOrProductUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link Array.<module:model/UserDbRoute>} and HTTP response
    */
-  getRoutesWithHttpInfo(projectUID) {
+  getRoutesWithHttpInfo(projectOrProductUID) {
     let postBody = null;
-    // verify the required parameter 'projectUID' is set
-    if (projectUID === undefined || projectUID === null) {
+    // verify the required parameter 'projectOrProductUID' is set
+    if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectUID' when calling getRoutes"
+        "Missing the required parameter 'projectOrProductUID' when calling getRoutes"
       );
     }
 
     let pathParams = {
-      projectUID: projectUID,
+      projectOrProductUID: projectOrProductUID,
     };
     let queryParams = {};
     let headerParams = {};
@@ -347,7 +347,7 @@ export default class RouteApi {
     let accepts = ["application/json"];
     let returnType = [UserDbRoute];
     return this.apiClient.callApi(
-      "/v1/projects/{projectUID}/routes",
+      "/v1/projects/{projectOrProductUID}/routes",
       "GET",
       pathParams,
       queryParams,
@@ -364,11 +364,11 @@ export default class RouteApi {
 
   /**
    * Get all Routes within a Project
-   * @param {String} projectUID
+   * @param {String} projectOrProductUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link Array.<module:model/UserDbRoute>}
    */
-  getRoutes(projectUID) {
-    return this.getRoutesWithHttpInfo(projectUID).then(function (
+  getRoutes(projectOrProductUID) {
+    return this.getRoutesWithHttpInfo(projectOrProductUID).then(function (
       response_and_data
     ) {
       return response_and_data.data;
@@ -377,17 +377,17 @@ export default class RouteApi {
 
   /**
    * Update route by UID
-   * @param {String} projectUID
+   * @param {String} projectOrProductUID
    * @param {String} routeUID
    * @param {module:model/NotehubRoute} notehubRoute Route settings to be updated
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/NotehubRoute} and HTTP response
    */
-  updateRouteWithHttpInfo(projectUID, routeUID, notehubRoute) {
+  updateRouteWithHttpInfo(projectOrProductUID, routeUID, notehubRoute) {
     let postBody = notehubRoute;
-    // verify the required parameter 'projectUID' is set
-    if (projectUID === undefined || projectUID === null) {
+    // verify the required parameter 'projectOrProductUID' is set
+    if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectUID' when calling updateRoute"
+        "Missing the required parameter 'projectOrProductUID' when calling updateRoute"
       );
     }
     // verify the required parameter 'routeUID' is set
@@ -404,7 +404,7 @@ export default class RouteApi {
     }
 
     let pathParams = {
-      projectUID: projectUID,
+      projectOrProductUID: projectOrProductUID,
       routeUID: routeUID,
     };
     let queryParams = {};
@@ -416,7 +416,7 @@ export default class RouteApi {
     let accepts = ["application/json"];
     let returnType = NotehubRoute;
     return this.apiClient.callApi(
-      "/v1/projects/{projectUID}/routes/{routeUID}",
+      "/v1/projects/{projectOrProductUID}/routes/{routeUID}",
       "PUT",
       pathParams,
       queryParams,
@@ -433,14 +433,14 @@ export default class RouteApi {
 
   /**
    * Update route by UID
-   * @param {String} projectUID
+   * @param {String} projectOrProductUID
    * @param {String} routeUID
    * @param {module:model/NotehubRoute} notehubRoute Route settings to be updated
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/NotehubRoute}
    */
-  updateRoute(projectUID, routeUID, notehubRoute) {
+  updateRoute(projectOrProductUID, routeUID, notehubRoute) {
     return this.updateRouteWithHttpInfo(
-      projectUID,
+      projectOrProductUID,
       routeUID,
       notehubRoute
     ).then(function (response_and_data) {

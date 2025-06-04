@@ -50,6 +50,12 @@
       //expect(instance).to.be.a(NotehubJs.TowerLocation);
     });
 
+    it('should have the property source (base name: "source")', function () {
+      // uncomment below and update the code to test the property source
+      //var instance = new NotehubJs.TowerLocation();
+      //expect(instance).to.be();
+    });
+
     it('should have the property time (base name: "time")', function () {
       // uncomment below and update the code to test the property time
       //var instance = new NotehubJs.TowerLocation();
@@ -118,12 +124,6 @@
 
     it('should have the property z (base name: "z")', function () {
       // uncomment below and update the code to test the property z
-      //var instance = new NotehubJs.TowerLocation();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property count (base name: "count")', function () {
-      // uncomment below and update the code to test the property count
       //var instance = new NotehubJs.TowerLocation();
       //expect(instance).to.be();
     });

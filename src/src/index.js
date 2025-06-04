@@ -71,6 +71,7 @@ import GetProjectMembers200Response from "./model/GetProjectMembers200Response";
 import GetProjectProducts200Response from "./model/GetProjectProducts200Response";
 import GetProjects200Response from "./model/GetProjects200Response";
 import GetRouteLogsByRoute200ResponseInner from "./model/GetRouteLogsByRoute200ResponseInner";
+import GetWebhooks200Response from "./model/GetWebhooks200Response";
 import Google from "./model/Google";
 import HandleNoteChanges200Response from "./model/HandleNoteChanges200Response";
 import HandleNoteGet200Response from "./model/HandleNoteGet200Response";
@@ -118,15 +119,18 @@ import UserDbRoute from "./model/UserDbRoute";
 import UserDfuStateMachine from "./model/UserDfuStateMachine";
 import UserDfuStateMachineStatus from "./model/UserDfuStateMachineStatus";
 import UserFirmwareInfo from "./model/UserFirmwareInfo";
+import WebhookSettings from "./model/WebhookSettings";
 import AlertApi from "./api/AlertApi";
 import AuthorizationApi from "./api/AuthorizationApi";
 import BillingAccountApi from "./api/BillingAccountApi";
 import DeviceApi from "./api/DeviceApi";
 import EventApi from "./api/EventApi";
+import ExternalDevicesApi from "./api/ExternalDevicesApi";
 import MonitorApi from "./api/MonitorApi";
 import ProjectApi from "./api/ProjectApi";
 import RepositoryApi from "./api/RepositoryApi";
 import RouteApi from "./api/RouteApi";
+import WebhookApi from "./api/WebhookApi";
 
 /**
  * The OpenAPI definition for the Notehub.io API. .<br>
@@ -521,6 +525,12 @@ export {
   GetRouteLogsByRoute200ResponseInner,
 
   /**
+   * The GetWebhooks200Response model constructor.
+   * @property {module:model/GetWebhooks200Response}
+   */
+  GetWebhooks200Response,
+
+  /**
    * The Google model constructor.
    * @property {module:model/Google}
    */
@@ -803,6 +813,12 @@ export {
   UserFirmwareInfo,
 
   /**
+   * The WebhookSettings model constructor.
+   * @property {module:model/WebhookSettings}
+   */
+  WebhookSettings,
+
+  /**
    * The AlertApi service constructor.
    * @property {module:api/AlertApi}
    */
@@ -833,6 +849,12 @@ export {
   EventApi,
 
   /**
+   * The ExternalDevicesApi service constructor.
+   * @property {module:api/ExternalDevicesApi}
+   */
+  ExternalDevicesApi,
+
+  /**
    * The MonitorApi service constructor.
    * @property {module:api/MonitorApi}
    */
@@ -855,4 +877,10 @@ export {
    * @property {module:api/RouteApi}
    */
   RouteApi,
+
+  /**
+   * The WebhookApi service constructor.
+   * @property {module:api/WebhookApi}
+   */
+  WebhookApi,
 };

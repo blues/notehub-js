@@ -35,16 +35,16 @@ export default class MonitorApi {
 
   /**
    * Create a new Monitor
-   * @param {String} projectUID
+   * @param {String} projectOrProductUID
    * @param {module:model/CreateMonitor} createMonitor Body or payload of monitor to be created
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Monitor} and HTTP response
    */
-  createMonitorWithHttpInfo(projectUID, createMonitor) {
+  createMonitorWithHttpInfo(projectOrProductUID, createMonitor) {
     let postBody = createMonitor;
-    // verify the required parameter 'projectUID' is set
-    if (projectUID === undefined || projectUID === null) {
+    // verify the required parameter 'projectOrProductUID' is set
+    if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectUID' when calling createMonitor"
+        "Missing the required parameter 'projectOrProductUID' when calling createMonitor"
       );
     }
     // verify the required parameter 'createMonitor' is set
@@ -55,7 +55,7 @@ export default class MonitorApi {
     }
 
     let pathParams = {
-      projectUID: projectUID,
+      projectOrProductUID: projectOrProductUID,
     };
     let queryParams = {};
     let headerParams = {};
@@ -66,7 +66,7 @@ export default class MonitorApi {
     let accepts = ["application/json"];
     let returnType = Monitor;
     return this.apiClient.callApi(
-      "/v1/projects/{projectUID}/monitors",
+      "/v1/projects/{projectOrProductUID}/monitors",
       "POST",
       pathParams,
       queryParams,
@@ -83,30 +83,31 @@ export default class MonitorApi {
 
   /**
    * Create a new Monitor
-   * @param {String} projectUID
+   * @param {String} projectOrProductUID
    * @param {module:model/CreateMonitor} createMonitor Body or payload of monitor to be created
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Monitor}
    */
-  createMonitor(projectUID, createMonitor) {
-    return this.createMonitorWithHttpInfo(projectUID, createMonitor).then(
-      function (response_and_data) {
-        return response_and_data.data;
-      }
-    );
+  createMonitor(projectOrProductUID, createMonitor) {
+    return this.createMonitorWithHttpInfo(
+      projectOrProductUID,
+      createMonitor
+    ).then(function (response_and_data) {
+      return response_and_data.data;
+    });
   }
 
   /**
    * Delete Monitor
-   * @param {String} projectUID
+   * @param {String} projectOrProductUID
    * @param {String} monitorUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Monitor} and HTTP response
    */
-  deleteMonitorWithHttpInfo(projectUID, monitorUID) {
+  deleteMonitorWithHttpInfo(projectOrProductUID, monitorUID) {
     let postBody = null;
-    // verify the required parameter 'projectUID' is set
-    if (projectUID === undefined || projectUID === null) {
+    // verify the required parameter 'projectOrProductUID' is set
+    if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectUID' when calling deleteMonitor"
+        "Missing the required parameter 'projectOrProductUID' when calling deleteMonitor"
       );
     }
     // verify the required parameter 'monitorUID' is set
@@ -117,7 +118,7 @@ export default class MonitorApi {
     }
 
     let pathParams = {
-      projectUID: projectUID,
+      projectOrProductUID: projectOrProductUID,
       monitorUID: monitorUID,
     };
     let queryParams = {};
@@ -129,7 +130,7 @@ export default class MonitorApi {
     let accepts = ["application/json"];
     let returnType = Monitor;
     return this.apiClient.callApi(
-      "/v1/projects/{projectUID}/monitors/{monitorUID}",
+      "/v1/projects/{projectOrProductUID}/monitors/{monitorUID}",
       "DELETE",
       pathParams,
       queryParams,
@@ -146,12 +147,12 @@ export default class MonitorApi {
 
   /**
    * Delete Monitor
-   * @param {String} projectUID
+   * @param {String} projectOrProductUID
    * @param {String} monitorUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Monitor}
    */
-  deleteMonitor(projectUID, monitorUID) {
-    return this.deleteMonitorWithHttpInfo(projectUID, monitorUID).then(
+  deleteMonitor(projectOrProductUID, monitorUID) {
+    return this.deleteMonitorWithHttpInfo(projectOrProductUID, monitorUID).then(
       function (response_and_data) {
         return response_and_data.data;
       }
@@ -160,16 +161,16 @@ export default class MonitorApi {
 
   /**
    * Get Monitor
-   * @param {String} projectUID
+   * @param {String} projectOrProductUID
    * @param {String} monitorUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Monitor} and HTTP response
    */
-  getMonitorWithHttpInfo(projectUID, monitorUID) {
+  getMonitorWithHttpInfo(projectOrProductUID, monitorUID) {
     let postBody = null;
-    // verify the required parameter 'projectUID' is set
-    if (projectUID === undefined || projectUID === null) {
+    // verify the required parameter 'projectOrProductUID' is set
+    if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectUID' when calling getMonitor"
+        "Missing the required parameter 'projectOrProductUID' when calling getMonitor"
       );
     }
     // verify the required parameter 'monitorUID' is set
@@ -180,7 +181,7 @@ export default class MonitorApi {
     }
 
     let pathParams = {
-      projectUID: projectUID,
+      projectOrProductUID: projectOrProductUID,
       monitorUID: monitorUID,
     };
     let queryParams = {};
@@ -192,7 +193,7 @@ export default class MonitorApi {
     let accepts = ["application/json"];
     let returnType = Monitor;
     return this.apiClient.callApi(
-      "/v1/projects/{projectUID}/monitors/{monitorUID}",
+      "/v1/projects/{projectOrProductUID}/monitors/{monitorUID}",
       "GET",
       pathParams,
       queryParams,
@@ -209,34 +210,34 @@ export default class MonitorApi {
 
   /**
    * Get Monitor
-   * @param {String} projectUID
+   * @param {String} projectOrProductUID
    * @param {String} monitorUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Monitor}
    */
-  getMonitor(projectUID, monitorUID) {
-    return this.getMonitorWithHttpInfo(projectUID, monitorUID).then(function (
-      response_and_data
-    ) {
-      return response_and_data.data;
-    });
+  getMonitor(projectOrProductUID, monitorUID) {
+    return this.getMonitorWithHttpInfo(projectOrProductUID, monitorUID).then(
+      function (response_and_data) {
+        return response_and_data.data;
+      }
+    );
   }
 
   /**
    * Get list of defined Monitors
-   * @param {String} projectUID
+   * @param {String} projectOrProductUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link Array.<module:model/Monitor>} and HTTP response
    */
-  getMonitorsWithHttpInfo(projectUID) {
+  getMonitorsWithHttpInfo(projectOrProductUID) {
     let postBody = null;
-    // verify the required parameter 'projectUID' is set
-    if (projectUID === undefined || projectUID === null) {
+    // verify the required parameter 'projectOrProductUID' is set
+    if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectUID' when calling getMonitors"
+        "Missing the required parameter 'projectOrProductUID' when calling getMonitors"
       );
     }
 
     let pathParams = {
-      projectUID: projectUID,
+      projectOrProductUID: projectOrProductUID,
     };
     let queryParams = {};
     let headerParams = {};
@@ -247,7 +248,7 @@ export default class MonitorApi {
     let accepts = ["application/json"];
     let returnType = [Monitor];
     return this.apiClient.callApi(
-      "/v1/projects/{projectUID}/monitors",
+      "/v1/projects/{projectOrProductUID}/monitors",
       "GET",
       pathParams,
       queryParams,
@@ -264,11 +265,11 @@ export default class MonitorApi {
 
   /**
    * Get list of defined Monitors
-   * @param {String} projectUID
+   * @param {String} projectOrProductUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link Array.<module:model/Monitor>}
    */
-  getMonitors(projectUID) {
-    return this.getMonitorsWithHttpInfo(projectUID).then(function (
+  getMonitors(projectOrProductUID) {
+    return this.getMonitorsWithHttpInfo(projectOrProductUID).then(function (
       response_and_data
     ) {
       return response_and_data.data;
@@ -277,17 +278,17 @@ export default class MonitorApi {
 
   /**
    * Update Monitor
-   * @param {String} projectUID
+   * @param {String} projectOrProductUID
    * @param {String} monitorUID
    * @param {module:model/Monitor} monitor Body or payload of monitor to be created
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Monitor} and HTTP response
    */
-  updateMonitorWithHttpInfo(projectUID, monitorUID, monitor) {
+  updateMonitorWithHttpInfo(projectOrProductUID, monitorUID, monitor) {
     let postBody = monitor;
-    // verify the required parameter 'projectUID' is set
-    if (projectUID === undefined || projectUID === null) {
+    // verify the required parameter 'projectOrProductUID' is set
+    if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectUID' when calling updateMonitor"
+        "Missing the required parameter 'projectOrProductUID' when calling updateMonitor"
       );
     }
     // verify the required parameter 'monitorUID' is set
@@ -304,7 +305,7 @@ export default class MonitorApi {
     }
 
     let pathParams = {
-      projectUID: projectUID,
+      projectOrProductUID: projectOrProductUID,
       monitorUID: monitorUID,
     };
     let queryParams = {};
@@ -316,7 +317,7 @@ export default class MonitorApi {
     let accepts = ["application/json"];
     let returnType = Monitor;
     return this.apiClient.callApi(
-      "/v1/projects/{projectUID}/monitors/{monitorUID}",
+      "/v1/projects/{projectOrProductUID}/monitors/{monitorUID}",
       "PUT",
       pathParams,
       queryParams,
@@ -333,16 +334,18 @@ export default class MonitorApi {
 
   /**
    * Update Monitor
-   * @param {String} projectUID
+   * @param {String} projectOrProductUID
    * @param {String} monitorUID
    * @param {module:model/Monitor} monitor Body or payload of monitor to be created
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Monitor}
    */
-  updateMonitor(projectUID, monitorUID, monitor) {
-    return this.updateMonitorWithHttpInfo(projectUID, monitorUID, monitor).then(
-      function (response_and_data) {
-        return response_and_data.data;
-      }
-    );
+  updateMonitor(projectOrProductUID, monitorUID, monitor) {
+    return this.updateMonitorWithHttpInfo(
+      projectOrProductUID,
+      monitorUID,
+      monitor
+    ).then(function (response_and_data) {
+      return response_and_data.data;
+    });
   }
 }

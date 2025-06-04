@@ -45,6 +45,9 @@ class TowerLocation {
     if (data) {
       obj = obj || new TowerLocation();
 
+      if (data.hasOwnProperty("source")) {
+        obj["source"] = ApiClient.convertToType(data["source"], "String");
+      }
       if (data.hasOwnProperty("time")) {
         obj["time"] = ApiClient.convertToType(data["time"], "Number");
       }
@@ -81,9 +84,6 @@ class TowerLocation {
       if (data.hasOwnProperty("z")) {
         obj["z"] = ApiClient.convertToType(data["z"], "Number");
       }
-      if (data.hasOwnProperty("count")) {
-        obj["count"] = ApiClient.convertToType(data["count"], "Number");
-      }
       if (data.hasOwnProperty("towers")) {
         obj["towers"] = ApiClient.convertToType(data["towers"], "Number");
       }
@@ -99,6 +99,16 @@ class TowerLocation {
    * @return {boolean} to indicate whether the JSON data is valid with respect to <code>TowerLocation</code>.
    */
   static validateJSON(data) {
+    // ensure the json data is a string
+    if (
+      data["source"] &&
+      !(typeof data["source"] === "string" || data["source"] instanceof String)
+    ) {
+      throw new Error(
+        "Expected the field `source` to be a primitive type in the JSON string but got " +
+          data["source"]
+      );
+    }
     // ensure the json data is a string
     if (
       data["n"] &&
@@ -145,6 +155,13 @@ class TowerLocation {
 }
 
 /**
+ * The source of this location
+ * @member {String} source
+ */
+TowerLocation.prototype["source"] = undefined;
+
+/**
+ * Unix timestamp when this location was ascertained
  * @member {Number} time
  */
 TowerLocation.prototype["time"] = undefined;
@@ -162,42 +179,49 @@ TowerLocation.prototype["n"] = undefined;
 TowerLocation.prototype["c"] = undefined;
 
 /**
+ * Latitude
  * @member {Number} lat
  */
 TowerLocation.prototype["lat"] = undefined;
 
 /**
+ * Longitude
  * @member {Number} lon
  */
 TowerLocation.prototype["lon"] = undefined;
 
 /**
+ * Timezone name
  * @member {String} zone
  */
 TowerLocation.prototype["zone"] = undefined;
 
 /**
+ * Mobile Country Code
  * @member {Number} mcc
  */
 TowerLocation.prototype["mcc"] = undefined;
 
 /**
+ * Mobile Network Code
  * @member {Number} mnc
  */
 TowerLocation.prototype["mnc"] = undefined;
 
 /**
+ * Location Area Code
  * @member {Number} lac
  */
 TowerLocation.prototype["lac"] = undefined;
 
 /**
+ * Cell ID
  * @member {Number} cid
  */
 TowerLocation.prototype["cid"] = undefined;
 
 /**
- * Open location code
+ * Open Location Code
  * @member {String} l
  */
 TowerLocation.prototype["l"] = undefined;
@@ -207,12 +231,6 @@ TowerLocation.prototype["l"] = undefined;
  * @member {Number} z
  */
 TowerLocation.prototype["z"] = undefined;
-
-/**
- * Number of times this location was recently used
- * @member {Number} count
- */
-TowerLocation.prototype["count"] = undefined;
 
 /**
  * Number of triangulation points

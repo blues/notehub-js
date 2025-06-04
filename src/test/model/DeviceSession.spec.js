@@ -56,6 +56,30 @@
       //expect(instance).to.be();
     });
 
+    it('should have the property sessionBegan (base name: "session_began")', function () {
+      // uncomment below and update the code to test the property sessionBegan
+      //var instance = new NotehubJs.DeviceSession();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property whySessionOpened (base name: "why_session_opened")', function () {
+      // uncomment below and update the code to test the property whySessionOpened
+      //var instance = new NotehubJs.DeviceSession();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property sessionEnded (base name: "session_ended")', function () {
+      // uncomment below and update the code to test the property sessionEnded
+      //var instance = new NotehubJs.DeviceSession();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property whySessionClosed (base name: "why_session_closed")', function () {
+      // uncomment below and update the code to test the property whySessionClosed
+      //var instance = new NotehubJs.DeviceSession();
+      //expect(instance).to.be();
+    });
+
     it('should have the property device (base name: "device")', function () {
       // uncomment below and update the code to test the property device
       //var instance = new NotehubJs.DeviceSession();
@@ -166,6 +190,12 @@
 
     it('should have the property apn (base name: "apn")', function () {
       // uncomment below and update the code to test the property apn
+      //var instance = new NotehubJs.DeviceSession();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property transport (base name: "transport")', function () {
+      // uncomment below and update the code to test the property transport
       //var instance = new NotehubJs.DeviceSession();
       //expect(instance).to.be();
     });
@@ -322,6 +352,42 @@
 
     it('should have the property period (base name: "period")', function () {
       // uncomment below and update the code to test the property period
+      //var instance = new NotehubJs.DeviceSession();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property powerCharging (base name: "power_charging")', function () {
+      // uncomment below and update the code to test the property powerCharging
+      //var instance = new NotehubJs.DeviceSession();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property powerUsb (base name: "power_usb")', function () {
+      // uncomment below and update the code to test the property powerUsb
+      //var instance = new NotehubJs.DeviceSession();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property powerPrimary (base name: "power_primary")', function () {
+      // uncomment below and update the code to test the property powerPrimary
+      //var instance = new NotehubJs.DeviceSession();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property powerMah (base name: "power_mah")', function () {
+      // uncomment below and update the code to test the property powerMah
+      //var instance = new NotehubJs.DeviceSession();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property penaltySecs (base name: "penalty_secs")', function () {
+      // uncomment below and update the code to test the property penaltySecs
+      //var instance = new NotehubJs.DeviceSession();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property failedConnects (base name: "failed_connects")', function () {
+      // uncomment below and update the code to test the property failedConnects
       //var instance = new NotehubJs.DeviceSession();
       //expect(instance).to.be();
     });
