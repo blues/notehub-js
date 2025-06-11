@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The HandleNotefileDeleteRequest model module.
  * @module model/HandleNotefileDeleteRequest
- * @version 1.0.33
+ * @version 1.0.34
  */
 class HandleNotefileDeleteRequest {
   /**

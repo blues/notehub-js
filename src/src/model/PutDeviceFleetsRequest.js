@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The PutDeviceFleetsRequest model module.
  * @module model/PutDeviceFleetsRequest
- * @version 1.0.33
+ * @version 1.0.34
  */
 class PutDeviceFleetsRequest {
   /**
