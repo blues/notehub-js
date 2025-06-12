@@ -18,7 +18,7 @@ import GetAlerts200Response from "../model/GetAlerts200Response";
 /**
  * Alert service.
  * @module api/AlertApi
- * @version 1.0.33
+ * @version 1.0.34
  */
 export default class AlertApi {
   /**
@@ -34,25 +34,25 @@ export default class AlertApi {
 
   /**
    * Get list of defined Alerts
-   * @param {String} projectUID
+   * @param {String} projectOrProductUID
    * @param {Object} opts Optional parameters
    * @param {Number} opts.pageSize  (default to 50)
    * @param {Number} opts.pageNum  (default to 1)
    * @param {String} opts.monitorUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetAlerts200Response} and HTTP response
    */
-  getAlertsWithHttpInfo(projectUID, opts) {
+  getAlertsWithHttpInfo(projectOrProductUID, opts) {
     opts = opts || {};
     let postBody = null;
-    // verify the required parameter 'projectUID' is set
-    if (projectUID === undefined || projectUID === null) {
+    // verify the required parameter 'projectOrProductUID' is set
+    if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectUID' when calling getAlerts"
+        "Missing the required parameter 'projectOrProductUID' when calling getAlerts"
       );
     }
 
     let pathParams = {
-      projectUID: projectUID,
+      projectOrProductUID: projectOrProductUID,
     };
     let queryParams = {
       pageSize: opts["pageSize"],
@@ -67,7 +67,7 @@ export default class AlertApi {
     let accepts = ["application/json"];
     let returnType = GetAlerts200Response;
     return this.apiClient.callApi(
-      "/v1/projects/{projectUID}/alerts",
+      "/v1/projects/{projectOrProductUID}/alerts",
       "GET",
       pathParams,
       queryParams,
@@ -84,15 +84,15 @@ export default class AlertApi {
 
   /**
    * Get list of defined Alerts
-   * @param {String} projectUID
+   * @param {String} projectOrProductUID
    * @param {Object} opts Optional parameters
    * @param {Number} opts.pageSize  (default to 50)
    * @param {Number} opts.pageNum  (default to 1)
    * @param {String} opts.monitorUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetAlerts200Response}
    */
-  getAlerts(projectUID, opts) {
-    return this.getAlertsWithHttpInfo(projectUID, opts).then(function (
+  getAlerts(projectOrProductUID, opts) {
+    return this.getAlertsWithHttpInfo(projectOrProductUID, opts).then(function (
       response_and_data
     ) {
       return response_and_data.data;

@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The GetRouteLogsByRoute200ResponseInner model module.
  * @module model/GetRouteLogsByRoute200ResponseInner
- * @version 1.0.33
+ * @version 1.0.34
  */
 class GetRouteLogsByRoute200ResponseInner {
   /**

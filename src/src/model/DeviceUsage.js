@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The DeviceUsage model module.
  * @module model/DeviceUsage
- * @version 1.0.33
+ * @version 1.0.34
  */
 class DeviceUsage {
   /**
@@ -93,8 +93,11 @@ class DeviceUsage {
           "Number"
         );
       }
-      if (data.hasOwnProperty("note_sent")) {
-        obj["note_sent"] = ApiClient.convertToType(data["note_sent"], "Number");
+      if (data.hasOwnProperty("notes_sent")) {
+        obj["notes_sent"] = ApiClient.convertToType(
+          data["notes_sent"],
+          "Number"
+        );
       }
     } else if (data === null) {
       return null;
@@ -113,11 +116,13 @@ class DeviceUsage {
 }
 
 /**
+ * Unix timestamp
  * @member {Number} since
  */
 DeviceUsage.prototype["since"] = undefined;
 
 /**
+ * Duration in seconds
  * @member {Number} duration
  */
 DeviceUsage.prototype["duration"] = undefined;
@@ -158,8 +163,8 @@ DeviceUsage.prototype["sessions_tls"] = undefined;
 DeviceUsage.prototype["notes_rcvd"] = undefined;
 
 /**
- * @member {Number} note_sent
+ * @member {Number} notes_sent
  */
-DeviceUsage.prototype["note_sent"] = undefined;
+DeviceUsage.prototype["notes_sent"] = undefined;
 
 export default DeviceUsage;

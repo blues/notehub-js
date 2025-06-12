@@ -2,41 +2,41 @@
 
 All URIs are relative to *https://api.notefile.net*
 
-| Method                                                                                    | HTTP request                                                                          | Description |
-| ----------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ----------- |
-| [**deleteDeviceEnvironmentVariable**](DeviceApi.md#deleteDeviceEnvironmentVariable)       | **DELETE** /v1/projects/{projectUID}/devices/{deviceUID}/environment_variables/{key}  |
-| [**deleteProjectDevice**](DeviceApi.md#deleteProjectDevice)                               | **DELETE** /v1/projects/{projectUID}/devices/{deviceUID}                              |
-| [**disableDevice**](DeviceApi.md#disableDevice)                                           | **POST** /v1/projects/{projectUID}/devices/{deviceUID}/disable                        |
-| [**disableDeviceConnectivityAssurance**](DeviceApi.md#disableDeviceConnectivityAssurance) | **POST** /v1/projects/{projectUID}/devices/{deviceUID}/disable-connectivity-assurance |
-| [**enableDevice**](DeviceApi.md#enableDevice)                                             | **POST** /v1/projects/{projectUID}/devices/{deviceUID}/enable                         |
-| [**enableDeviceConnectivityAssurance**](DeviceApi.md#enableDeviceConnectivityAssurance)   | **POST** /v1/projects/{projectUID}/devices/{deviceUID}/enable-connectivity-assurance  |
-| [**getDevice**](DeviceApi.md#getDevice)                                                   | **GET** /v1/projects/{projectUID}/devices/{deviceUID}                                 |
-| [**getDeviceEnvironmentVariables**](DeviceApi.md#getDeviceEnvironmentVariables)           | **GET** /v1/projects/{projectUID}/devices/{deviceUID}/environment_variables           |
-| [**getDeviceEnvironmentVariablesByPin**](DeviceApi.md#getDeviceEnvironmentVariablesByPin) | **GET** /v1/products/{productUID}/devices/{deviceUID}/environment_variables_with_pin  |
-| [**getDeviceHealthLog**](DeviceApi.md#getDeviceHealthLog)                                 | **GET** /v1/projects/{projectUID}/devices/{deviceUID}/health-log                      |
-| [**getDeviceLatest**](DeviceApi.md#getDeviceLatest)                                       | **GET** /v1/projects/{projectUID}/devices/{deviceUID}/latest                          |
-| [**getDevicePublicKey**](DeviceApi.md#getDevicePublicKey)                                 | **GET** /v1/projects/{projectUID}/devices/{deviceUID}/public-key                      |
-| [**getDeviceSessions**](DeviceApi.md#getDeviceSessions)                                   | **GET** /v1/projects/{projectUID}/devices/{deviceUID}/sessions                        |
-| [**getProjectDevicePublicKeys**](DeviceApi.md#getProjectDevicePublicKeys)                 | **GET** /v1/projects/{projectUID}/devices/public-keys                                 |
-| [**getProjectDevices**](DeviceApi.md#getProjectDevices)                                   | **GET** /v1/projects/{projectUID}/devices                                             |
-| [**getProjectFleetDevices**](DeviceApi.md#getProjectFleetDevices)                         | **GET** /v1/projects/{projectUID}/fleets/{fleetUID}/devices                           |
-| [**handleNoteAdd**](DeviceApi.md#handleNoteAdd)                                           | **POST** /v1/projects/{projectUID}/devices/{deviceUID}/notes/{notefileID}             |
-| [**handleNoteChanges**](DeviceApi.md#handleNoteChanges)                                   | **GET** /v1/projects/{projectUID}/devices/{deviceUID}/notes/{notefileID}/changes      |
-| [**handleNoteCreateAdd**](DeviceApi.md#handleNoteCreateAdd)                               | **POST** /v1/projects/{projectUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}    |
-| [**handleNoteDelete**](DeviceApi.md#handleNoteDelete)                                     | **DELETE** /v1/projects/{projectUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}  |
-| [**handleNoteGet**](DeviceApi.md#handleNoteGet)                                           | **GET** /v1/projects/{projectUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}     |
-| [**handleNoteSignal**](DeviceApi.md#handleNoteSignal)                                     | **POST** /v1/projects/{projectUID}/devices/{deviceUID}/signal                         |
-| [**handleNoteUpdate**](DeviceApi.md#handleNoteUpdate)                                     | **PUT** /v1/projects/{projectUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}     |
-| [**handleNotefileChanges**](DeviceApi.md#handleNotefileChanges)                           | **GET** /v1/projects/{projectUID}/devices/{deviceUID}/files/changes                   |
-| [**handleNotefileChangesPending**](DeviceApi.md#handleNotefileChangesPending)             | **GET** /v1/projects/{projectUID}/devices/{deviceUID}/files/changes/pending           |
-| [**handleNotefileDelete**](DeviceApi.md#handleNotefileDelete)                             | **DELETE** /v1/projects/{projectUID}/devices/{deviceUID}/files                        |
-| [**postProvisionProjectDevice**](DeviceApi.md#postProvisionProjectDevice)                 | **POST** /v1/projects/{projectUID}/devices/{deviceUID}/provision                      |
-| [**putDeviceEnvironmentVariables**](DeviceApi.md#putDeviceEnvironmentVariables)           | **PUT** /v1/projects/{projectUID}/devices/{deviceUID}/environment_variables           |
-| [**putDeviceEnvironmentVariablesByPin**](DeviceApi.md#putDeviceEnvironmentVariablesByPin) | **PUT** /v1/products/{productUID}/devices/{deviceUID}/environment_variables_with_pin  |
+| Method                                                                                    | HTTP request                                                                                   | Description |
+| ----------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ----------- |
+| [**deleteDeviceEnvironmentVariable**](DeviceApi.md#deleteDeviceEnvironmentVariable)       | **DELETE** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_variables/{key}  |
+| [**deleteProjectDevice**](DeviceApi.md#deleteProjectDevice)                               | **DELETE** /v1/projects/{projectOrProductUID}/devices/{deviceUID}                              |
+| [**disableDevice**](DeviceApi.md#disableDevice)                                           | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/disable                        |
+| [**disableDeviceConnectivityAssurance**](DeviceApi.md#disableDeviceConnectivityAssurance) | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/disable-connectivity-assurance |
+| [**enableDevice**](DeviceApi.md#enableDevice)                                             | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/enable                         |
+| [**enableDeviceConnectivityAssurance**](DeviceApi.md#enableDeviceConnectivityAssurance)   | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/enable-connectivity-assurance  |
+| [**getDevice**](DeviceApi.md#getDevice)                                                   | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}                                 |
+| [**getDeviceEnvironmentVariables**](DeviceApi.md#getDeviceEnvironmentVariables)           | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_variables           |
+| [**getDeviceEnvironmentVariablesByPin**](DeviceApi.md#getDeviceEnvironmentVariablesByPin) | **GET** /v1/products/{productUID}/devices/{deviceUID}/environment_variables_with_pin           |
+| [**getDeviceHealthLog**](DeviceApi.md#getDeviceHealthLog)                                 | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/health-log                      |
+| [**getDeviceLatest**](DeviceApi.md#getDeviceLatest)                                       | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/latest                          |
+| [**getDevicePublicKey**](DeviceApi.md#getDevicePublicKey)                                 | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/public-key                      |
+| [**getDeviceSessions**](DeviceApi.md#getDeviceSessions)                                   | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/sessions                        |
+| [**getProjectDevicePublicKeys**](DeviceApi.md#getProjectDevicePublicKeys)                 | **GET** /v1/projects/{projectOrProductUID}/devices/public-keys                                 |
+| [**getProjectDevices**](DeviceApi.md#getProjectDevices)                                   | **GET** /v1/projects/{projectOrProductUID}/devices                                             |
+| [**getProjectFleetDevices**](DeviceApi.md#getProjectFleetDevices)                         | **GET** /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/devices                           |
+| [**handleNoteAdd**](DeviceApi.md#handleNoteAdd)                                           | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}             |
+| [**handleNoteChanges**](DeviceApi.md#handleNoteChanges)                                   | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/changes      |
+| [**handleNoteCreateAdd**](DeviceApi.md#handleNoteCreateAdd)                               | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}    |
+| [**handleNoteDelete**](DeviceApi.md#handleNoteDelete)                                     | **DELETE** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}  |
+| [**handleNoteGet**](DeviceApi.md#handleNoteGet)                                           | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}     |
+| [**handleNoteSignal**](DeviceApi.md#handleNoteSignal)                                     | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/signal                         |
+| [**handleNoteUpdate**](DeviceApi.md#handleNoteUpdate)                                     | **PUT** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}     |
+| [**handleNotefileChanges**](DeviceApi.md#handleNotefileChanges)                           | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/files/changes                   |
+| [**handleNotefileChangesPending**](DeviceApi.md#handleNotefileChangesPending)             | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/files/changes/pending           |
+| [**handleNotefileDelete**](DeviceApi.md#handleNotefileDelete)                             | **DELETE** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/files                        |
+| [**postProvisionProjectDevice**](DeviceApi.md#postProvisionProjectDevice)                 | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/provision                      |
+| [**putDeviceEnvironmentVariables**](DeviceApi.md#putDeviceEnvironmentVariables)           | **PUT** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_variables           |
+| [**putDeviceEnvironmentVariablesByPin**](DeviceApi.md#putDeviceEnvironmentVariablesByPin) | **PUT** /v1/products/{productUID}/devices/{deviceUID}/environment_variables_with_pin           |
 
 ## deleteDeviceEnvironmentVariable
 
-> EnvironmentVariables deleteDeviceEnvironmentVariable(projectUID, deviceUID, key)
+> EnvironmentVariables deleteDeviceEnvironmentVariable(projectOrProductUID, deviceUID, key)
 
 Delete environment variable of a device
 
@@ -50,10 +50,10 @@ let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.DeviceApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
 let deviceUID = dev:000000000000000; // String |
 let key = "key_example"; // String | The environment variable key to delete.
-apiInstance.deleteDeviceEnvironmentVariable(projectUID, deviceUID, key).then((data) => {
+apiInstance.deleteDeviceEnvironmentVariable(projectOrProductUID, deviceUID, key).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
@@ -63,11 +63,11 @@ apiInstance.deleteDeviceEnvironmentVariable(projectUID, deviceUID, key).then((da
 
 ### Parameters
 
-| Name           | Type       | Description                             | Notes |
-| -------------- | ---------- | --------------------------------------- | ----- |
-| **projectUID** | **String** |                                         |
-| **deviceUID**  | **String** |                                         |
-| **key**        | **String** | The environment variable key to delete. |
+| Name                    | Type       | Description                             | Notes |
+| ----------------------- | ---------- | --------------------------------------- | ----- |
+| **projectOrProductUID** | **String** |                                         |
+| **deviceUID**           | **String** |                                         |
+| **key**                 | **String** | The environment variable key to delete. |
 
 ### Return type
 
@@ -84,7 +84,7 @@ apiInstance.deleteDeviceEnvironmentVariable(projectUID, deviceUID, key).then((da
 
 ## deleteProjectDevice
 
-> deleteProjectDevice(projectUID, deviceUID, purge)
+> deleteProjectDevice(projectOrProductUID, deviceUID, purge)
 
 Delete Device
 
@@ -98,10 +98,10 @@ let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.DeviceApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
 let deviceUID = dev:000000000000000; // String |
 let purge = false; // Boolean |
-apiInstance.deleteProjectDevice(projectUID, deviceUID, purge).then(() => {
+apiInstance.deleteProjectDevice(projectOrProductUID, deviceUID, purge).then(() => {
   console.log('API called successfully.');
 }, (error) => {
   console.error(error);
@@ -111,11 +111,11 @@ apiInstance.deleteProjectDevice(projectUID, deviceUID, purge).then(() => {
 
 ### Parameters
 
-| Name           | Type        | Description | Notes              |
-| -------------- | ----------- | ----------- | ------------------ |
-| **projectUID** | **String**  |             |
-| **deviceUID**  | **String**  |             |
-| **purge**      | **Boolean** |             | [default to false] |
+| Name                    | Type        | Description | Notes              |
+| ----------------------- | ----------- | ----------- | ------------------ |
+| **projectOrProductUID** | **String**  |             |
+| **deviceUID**           | **String**  |             |
+| **purge**               | **Boolean** |             | [default to false] |
 
 ### Return type
 
@@ -132,7 +132,7 @@ null (empty response body)
 
 ## disableDevice
 
-> disableDevice(projectUID, deviceUID)
+> disableDevice(projectOrProductUID, deviceUID)
 
 Disable Device
 
@@ -146,9 +146,9 @@ let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.DeviceApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
 let deviceUID = dev:000000000000000; // String |
-apiInstance.disableDevice(projectUID, deviceUID).then(() => {
+apiInstance.disableDevice(projectOrProductUID, deviceUID).then(() => {
   console.log('API called successfully.');
 }, (error) => {
   console.error(error);
@@ -158,10 +158,10 @@ apiInstance.disableDevice(projectUID, deviceUID).then(() => {
 
 ### Parameters
 
-| Name           | Type       | Description | Notes |
-| -------------- | ---------- | ----------- | ----- |
-| **projectUID** | **String** |             |
-| **deviceUID**  | **String** |             |
+| Name                    | Type       | Description | Notes |
+| ----------------------- | ---------- | ----------- | ----- |
+| **projectOrProductUID** | **String** |             |
+| **deviceUID**           | **String** |             |
 
 ### Return type
 
@@ -178,7 +178,7 @@ null (empty response body)
 
 ## disableDeviceConnectivityAssurance
 
-> disableDeviceConnectivityAssurance(projectUID, deviceUID)
+> disableDeviceConnectivityAssurance(projectOrProductUID, deviceUID)
 
 Disable Connectivity Assurance
 
@@ -192,9 +192,9 @@ let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.DeviceApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
 let deviceUID = dev:000000000000000; // String |
-apiInstance.disableDeviceConnectivityAssurance(projectUID, deviceUID).then(() => {
+apiInstance.disableDeviceConnectivityAssurance(projectOrProductUID, deviceUID).then(() => {
   console.log('API called successfully.');
 }, (error) => {
   console.error(error);
@@ -204,10 +204,10 @@ apiInstance.disableDeviceConnectivityAssurance(projectUID, deviceUID).then(() =>
 
 ### Parameters
 
-| Name           | Type       | Description | Notes |
-| -------------- | ---------- | ----------- | ----- |
-| **projectUID** | **String** |             |
-| **deviceUID**  | **String** |             |
+| Name                    | Type       | Description | Notes |
+| ----------------------- | ---------- | ----------- | ----- |
+| **projectOrProductUID** | **String** |             |
+| **deviceUID**           | **String** |             |
 
 ### Return type
 
@@ -224,7 +224,7 @@ null (empty response body)
 
 ## enableDevice
 
-> enableDevice(projectUID, deviceUID)
+> enableDevice(projectOrProductUID, deviceUID)
 
 Enable Device
 
@@ -238,9 +238,9 @@ let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.DeviceApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
 let deviceUID = dev:000000000000000; // String |
-apiInstance.enableDevice(projectUID, deviceUID).then(() => {
+apiInstance.enableDevice(projectOrProductUID, deviceUID).then(() => {
   console.log('API called successfully.');
 }, (error) => {
   console.error(error);
@@ -250,10 +250,10 @@ apiInstance.enableDevice(projectUID, deviceUID).then(() => {
 
 ### Parameters
 
-| Name           | Type       | Description | Notes |
-| -------------- | ---------- | ----------- | ----- |
-| **projectUID** | **String** |             |
-| **deviceUID**  | **String** |             |
+| Name                    | Type       | Description | Notes |
+| ----------------------- | ---------- | ----------- | ----- |
+| **projectOrProductUID** | **String** |             |
+| **deviceUID**           | **String** |             |
 
 ### Return type
 
@@ -270,7 +270,7 @@ null (empty response body)
 
 ## enableDeviceConnectivityAssurance
 
-> enableDeviceConnectivityAssurance(projectUID, deviceUID)
+> enableDeviceConnectivityAssurance(projectOrProductUID, deviceUID)
 
 Enable Connectivity Assurance
 
@@ -284,9 +284,9 @@ let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.DeviceApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
 let deviceUID = dev:000000000000000; // String |
-apiInstance.enableDeviceConnectivityAssurance(projectUID, deviceUID).then(() => {
+apiInstance.enableDeviceConnectivityAssurance(projectOrProductUID, deviceUID).then(() => {
   console.log('API called successfully.');
 }, (error) => {
   console.error(error);
@@ -296,10 +296,10 @@ apiInstance.enableDeviceConnectivityAssurance(projectUID, deviceUID).then(() => 
 
 ### Parameters
 
-| Name           | Type       | Description | Notes |
-| -------------- | ---------- | ----------- | ----- |
-| **projectUID** | **String** |             |
-| **deviceUID**  | **String** |             |
+| Name                    | Type       | Description | Notes |
+| ----------------------- | ---------- | ----------- | ----- |
+| **projectOrProductUID** | **String** |             |
+| **deviceUID**           | **String** |             |
 
 ### Return type
 
@@ -316,7 +316,7 @@ null (empty response body)
 
 ## getDevice
 
-> Device getDevice(projectUID, deviceUID)
+> Device getDevice(projectOrProductUID, deviceUID)
 
 Get Device
 
@@ -330,9 +330,9 @@ let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.DeviceApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
 let deviceUID = dev:000000000000000; // String |
-apiInstance.getDevice(projectUID, deviceUID).then((data) => {
+apiInstance.getDevice(projectOrProductUID, deviceUID).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
@@ -342,10 +342,10 @@ apiInstance.getDevice(projectUID, deviceUID).then((data) => {
 
 ### Parameters
 
-| Name           | Type       | Description | Notes |
-| -------------- | ---------- | ----------- | ----- |
-| **projectUID** | **String** |             |
-| **deviceUID**  | **String** |             |
+| Name                    | Type       | Description | Notes |
+| ----------------------- | ---------- | ----------- | ----- |
+| **projectOrProductUID** | **String** |             |
+| **deviceUID**           | **String** |             |
 
 ### Return type
 
@@ -362,7 +362,7 @@ apiInstance.getDevice(projectUID, deviceUID).then((data) => {
 
 ## getDeviceEnvironmentVariables
 
-> GetDeviceEnvironmentVariables200Response getDeviceEnvironmentVariables(projectUID, deviceUID)
+> GetDeviceEnvironmentVariables200Response getDeviceEnvironmentVariables(projectOrProductUID, deviceUID)
 
 Get environment variables of a device
 
@@ -376,9 +376,9 @@ let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.DeviceApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
 let deviceUID = dev:000000000000000; // String |
-apiInstance.getDeviceEnvironmentVariables(projectUID, deviceUID).then((data) => {
+apiInstance.getDeviceEnvironmentVariables(projectOrProductUID, deviceUID).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
@@ -388,10 +388,10 @@ apiInstance.getDeviceEnvironmentVariables(projectUID, deviceUID).then((data) => 
 
 ### Parameters
 
-| Name           | Type       | Description | Notes |
-| -------------- | ---------- | ----------- | ----- |
-| **projectUID** | **String** |             |
-| **deviceUID**  | **String** |             |
+| Name                    | Type       | Description | Notes |
+| ----------------------- | ---------- | ----------- | ----- |
+| **projectOrProductUID** | **String** |             |
+| **deviceUID**           | **String** |             |
 
 ### Return type
 
@@ -454,7 +454,7 @@ apiInstance.getDeviceEnvironmentVariablesByPin(productUID, deviceUID).then((data
 
 ## getDeviceHealthLog
 
-> GetDeviceHealthLog200Response getDeviceHealthLog(projectUID, deviceUID)
+> GetDeviceHealthLog200Response getDeviceHealthLog(projectOrProductUID, deviceUID)
 
 Get Device Health Log
 
@@ -468,9 +468,9 @@ let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.DeviceApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
 let deviceUID = dev:000000000000000; // String |
-apiInstance.getDeviceHealthLog(projectUID, deviceUID).then((data) => {
+apiInstance.getDeviceHealthLog(projectOrProductUID, deviceUID).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
@@ -480,10 +480,10 @@ apiInstance.getDeviceHealthLog(projectUID, deviceUID).then((data) => {
 
 ### Parameters
 
-| Name           | Type       | Description | Notes |
-| -------------- | ---------- | ----------- | ----- |
-| **projectUID** | **String** |             |
-| **deviceUID**  | **String** |             |
+| Name                    | Type       | Description | Notes |
+| ----------------------- | ---------- | ----------- | ----- |
+| **projectOrProductUID** | **String** |             |
+| **deviceUID**           | **String** |             |
 
 ### Return type
 
@@ -500,7 +500,7 @@ apiInstance.getDeviceHealthLog(projectUID, deviceUID).then((data) => {
 
 ## getDeviceLatest
 
-> GetDeviceLatest200Response getDeviceLatest(projectUID, deviceUID)
+> GetDeviceLatest200Response getDeviceLatest(projectOrProductUID, deviceUID)
 
 Get Device Latest Events
 
@@ -514,9 +514,9 @@ let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.DeviceApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
 let deviceUID = dev:000000000000000; // String |
-apiInstance.getDeviceLatest(projectUID, deviceUID).then((data) => {
+apiInstance.getDeviceLatest(projectOrProductUID, deviceUID).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
@@ -526,10 +526,10 @@ apiInstance.getDeviceLatest(projectUID, deviceUID).then((data) => {
 
 ### Parameters
 
-| Name           | Type       | Description | Notes |
-| -------------- | ---------- | ----------- | ----- |
-| **projectUID** | **String** |             |
-| **deviceUID**  | **String** |             |
+| Name                    | Type       | Description | Notes |
+| ----------------------- | ---------- | ----------- | ----- |
+| **projectOrProductUID** | **String** |             |
+| **deviceUID**           | **String** |             |
 
 ### Return type
 
@@ -546,7 +546,7 @@ apiInstance.getDeviceLatest(projectUID, deviceUID).then((data) => {
 
 ## getDevicePublicKey
 
-> GetDevicePublicKey200Response getDevicePublicKey(projectUID, deviceUID)
+> GetDevicePublicKey200Response getDevicePublicKey(projectOrProductUID, deviceUID)
 
 Get Device Public Key
 
@@ -560,9 +560,9 @@ let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.DeviceApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
 let deviceUID = dev:000000000000000; // String |
-apiInstance.getDevicePublicKey(projectUID, deviceUID).then((data) => {
+apiInstance.getDevicePublicKey(projectOrProductUID, deviceUID).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
@@ -572,10 +572,10 @@ apiInstance.getDevicePublicKey(projectUID, deviceUID).then((data) => {
 
 ### Parameters
 
-| Name           | Type       | Description | Notes |
-| -------------- | ---------- | ----------- | ----- |
-| **projectUID** | **String** |             |
-| **deviceUID**  | **String** |             |
+| Name                    | Type       | Description | Notes |
+| ----------------------- | ---------- | ----------- | ----- |
+| **projectOrProductUID** | **String** |             |
+| **deviceUID**           | **String** |             |
 
 ### Return type
 
@@ -592,7 +592,7 @@ apiInstance.getDevicePublicKey(projectUID, deviceUID).then((data) => {
 
 ## getDeviceSessions
 
-> GetDeviceSessions200Response getDeviceSessions(projectUID, deviceUID, opts)
+> GetDeviceSessions200Response getDeviceSessions(projectOrProductUID, deviceUID, opts)
 
 Get Device Sessions
 
@@ -606,13 +606,13 @@ let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.DeviceApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
 let deviceUID = dev:000000000000000; // String |
 let opts = {
   'pageSize': 50, // Number |
   'pageNum': 1 // Number |
 };
-apiInstance.getDeviceSessions(projectUID, deviceUID, opts).then((data) => {
+apiInstance.getDeviceSessions(projectOrProductUID, deviceUID, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
@@ -622,12 +622,12 @@ apiInstance.getDeviceSessions(projectUID, deviceUID, opts).then((data) => {
 
 ### Parameters
 
-| Name           | Type       | Description | Notes                      |
-| -------------- | ---------- | ----------- | -------------------------- |
-| **projectUID** | **String** |             |
-| **deviceUID**  | **String** |             |
-| **pageSize**   | **Number** |             | [optional] [default to 50] |
-| **pageNum**    | **Number** |             | [optional] [default to 1]  |
+| Name                    | Type       | Description | Notes                      |
+| ----------------------- | ---------- | ----------- | -------------------------- |
+| **projectOrProductUID** | **String** |             |
+| **deviceUID**           | **String** |             |
+| **pageSize**            | **Number** |             | [optional] [default to 50] |
+| **pageNum**             | **Number** |             | [optional] [default to 1]  |
 
 ### Return type
 
@@ -644,7 +644,7 @@ apiInstance.getDeviceSessions(projectUID, deviceUID, opts).then((data) => {
 
 ## getProjectDevicePublicKeys
 
-> GetProjectDevicePublicKeys200Response getProjectDevicePublicKeys(projectUID, opts)
+> GetProjectDevicePublicKeys200Response getProjectDevicePublicKeys(projectOrProductUID, opts)
 
 Get Device Public Keys of a Project
 
@@ -658,12 +658,12 @@ let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.DeviceApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
 let opts = {
   'pageSize': 50, // Number |
   'pageNum': 1 // Number |
 };
-apiInstance.getProjectDevicePublicKeys(projectUID, opts).then((data) => {
+apiInstance.getProjectDevicePublicKeys(projectOrProductUID, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
@@ -673,11 +673,11 @@ apiInstance.getProjectDevicePublicKeys(projectUID, opts).then((data) => {
 
 ### Parameters
 
-| Name           | Type       | Description | Notes                      |
-| -------------- | ---------- | ----------- | -------------------------- |
-| **projectUID** | **String** |             |
-| **pageSize**   | **Number** |             | [optional] [default to 50] |
-| **pageNum**    | **Number** |             | [optional] [default to 1]  |
+| Name                    | Type       | Description | Notes                      |
+| ----------------------- | ---------- | ----------- | -------------------------- |
+| **projectOrProductUID** | **String** |             |
+| **pageSize**            | **Number** |             | [optional] [default to 50] |
+| **pageNum**             | **Number** |             | [optional] [default to 1]  |
 
 ### Return type
 
@@ -694,7 +694,7 @@ apiInstance.getProjectDevicePublicKeys(projectUID, opts).then((data) => {
 
 ## getProjectDevices
 
-> GetProjectDevices200Response getProjectDevices(projectUID, opts)
+> GetProjectDevices200Response getProjectDevices(projectOrProductUID, opts)
 
 Get Devices of a Project
 
@@ -708,7 +708,7 @@ let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.DeviceApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
 let opts = {
   'pageSize': 50, // Number |
   'pageNum': 1, // Number |
@@ -722,7 +722,7 @@ let opts = {
   'productUID': ["null"], // [String] |
   'sku': ["null"] // [String] | SKU filter
 };
-apiInstance.getProjectDevices(projectUID, opts).then((data) => {
+apiInstance.getProjectDevices(projectOrProductUID, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
@@ -732,20 +732,20 @@ apiInstance.getProjectDevices(projectUID, opts).then((data) => {
 
 ### Parameters
 
-| Name                 | Type                      | Description             | Notes                      |
-| -------------------- | ------------------------- | ----------------------- | -------------------------- |
-| **projectUID**       | **String**                |                         |
-| **pageSize**         | **Number**                |                         | [optional] [default to 50] |
-| **pageNum**          | **Number**                |                         | [optional] [default to 1]  |
-| **deviceUID**        | [**[String]**](String.md) | A Device UID.           | [optional]                 |
-| **tag**              | [**[String]**](String.md) | Tag filter              | [optional]                 |
-| **serialNumber**     | [**[String]**](String.md) | Serial number filter    | [optional]                 |
-| **fleetUID**         | [**[String]**](String.md) |                         | [optional]                 |
-| **notecardFirmware** | [**[String]**](String.md) | Firmware version filter | [optional]                 |
-| **location**         | [**[String]**](String.md) | Location filter         | [optional]                 |
-| **hostFirmware**     | [**[String]**](String.md) | Host firmware filter    | [optional]                 |
-| **productUID**       | [**[String]**](String.md) |                         | [optional]                 |
-| **sku**              | [**[String]**](String.md) | SKU filter              | [optional]                 |
+| Name                    | Type                      | Description             | Notes                      |
+| ----------------------- | ------------------------- | ----------------------- | -------------------------- |
+| **projectOrProductUID** | **String**                |                         |
+| **pageSize**            | **Number**                |                         | [optional] [default to 50] |
+| **pageNum**             | **Number**                |                         | [optional] [default to 1]  |
+| **deviceUID**           | [**[String]**](String.md) | A Device UID.           | [optional]                 |
+| **tag**                 | [**[String]**](String.md) | Tag filter              | [optional]                 |
+| **serialNumber**        | [**[String]**](String.md) | Serial number filter    | [optional]                 |
+| **fleetUID**            | [**[String]**](String.md) |                         | [optional]                 |
+| **notecardFirmware**    | [**[String]**](String.md) | Firmware version filter | [optional]                 |
+| **location**            | [**[String]**](String.md) | Location filter         | [optional]                 |
+| **hostFirmware**        | [**[String]**](String.md) | Host firmware filter    | [optional]                 |
+| **productUID**          | [**[String]**](String.md) |                         | [optional]                 |
+| **sku**                 | [**[String]**](String.md) | SKU filter              | [optional]                 |
 
 ### Return type
 
@@ -762,7 +762,7 @@ apiInstance.getProjectDevices(projectUID, opts).then((data) => {
 
 ## getProjectFleetDevices
 
-> GetProjectDevices200Response getProjectFleetDevices(projectUID, fleetUID, opts)
+> GetProjectDevices200Response getProjectFleetDevices(projectOrProductUID, fleetUID, opts)
 
 Get Devices of a Fleet within a Project
 
@@ -776,7 +776,7 @@ let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.DeviceApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
 let fleetUID = "fleetUID_example"; // String |
 let opts = {
   'pageSize': 50, // Number |
@@ -790,7 +790,7 @@ let opts = {
   'productUID': ["null"], // [String] |
   'sku': ["null"] // [String] | SKU filter
 };
-apiInstance.getProjectFleetDevices(projectUID, fleetUID, opts).then((data) => {
+apiInstance.getProjectFleetDevices(projectOrProductUID, fleetUID, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
@@ -800,20 +800,20 @@ apiInstance.getProjectFleetDevices(projectUID, fleetUID, opts).then((data) => {
 
 ### Parameters
 
-| Name                 | Type                      | Description             | Notes                      |
-| -------------------- | ------------------------- | ----------------------- | -------------------------- |
-| **projectUID**       | **String**                |                         |
-| **fleetUID**         | **String**                |                         |
-| **pageSize**         | **Number**                |                         | [optional] [default to 50] |
-| **pageNum**          | **Number**                |                         | [optional] [default to 1]  |
-| **deviceUID**        | [**[String]**](String.md) | A Device UID.           | [optional]                 |
-| **tag**              | [**[String]**](String.md) | Tag filter              | [optional]                 |
-| **serialNumber**     | [**[String]**](String.md) | Serial number filter    | [optional]                 |
-| **notecardFirmware** | [**[String]**](String.md) | Firmware version filter | [optional]                 |
-| **location**         | [**[String]**](String.md) | Location filter         | [optional]                 |
-| **hostFirmware**     | [**[String]**](String.md) | Host firmware filter    | [optional]                 |
-| **productUID**       | [**[String]**](String.md) |                         | [optional]                 |
-| **sku**              | [**[String]**](String.md) | SKU filter              | [optional]                 |
+| Name                    | Type                      | Description             | Notes                      |
+| ----------------------- | ------------------------- | ----------------------- | -------------------------- |
+| **projectOrProductUID** | **String**                |                         |
+| **fleetUID**            | **String**                |                         |
+| **pageSize**            | **Number**                |                         | [optional] [default to 50] |
+| **pageNum**             | **Number**                |                         | [optional] [default to 1]  |
+| **deviceUID**           | [**[String]**](String.md) | A Device UID.           | [optional]                 |
+| **tag**                 | [**[String]**](String.md) | Tag filter              | [optional]                 |
+| **serialNumber**        | [**[String]**](String.md) | Serial number filter    | [optional]                 |
+| **notecardFirmware**    | [**[String]**](String.md) | Firmware version filter | [optional]                 |
+| **location**            | [**[String]**](String.md) | Location filter         | [optional]                 |
+| **hostFirmware**        | [**[String]**](String.md) | Host firmware filter    | [optional]                 |
+| **productUID**          | [**[String]**](String.md) |                         | [optional]                 |
+| **sku**                 | [**[String]**](String.md) | SKU filter              | [optional]                 |
 
 ### Return type
 
@@ -830,7 +830,7 @@ apiInstance.getProjectFleetDevices(projectUID, fleetUID, opts).then((data) => {
 
 ## handleNoteAdd
 
-> handleNoteAdd(projectUID, deviceUID, notefileID, note)
+> handleNoteAdd(projectOrProductUID, deviceUID, notefileID, note)
 
 Adds a Note to a Notefile, creating the Notefile if it doesn&#39;t yet exist.
 
@@ -844,11 +844,11 @@ let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.DeviceApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
 let deviceUID = dev:000000000000000; // String |
 let notefileID = "notefileID_example"; // String |
 let note = new NotehubJs.Note(); // Note | Body or payload of note to be added to the device
-apiInstance.handleNoteAdd(projectUID, deviceUID, notefileID, note).then(() => {
+apiInstance.handleNoteAdd(projectOrProductUID, deviceUID, notefileID, note).then(() => {
   console.log('API called successfully.');
 }, (error) => {
   console.error(error);
@@ -858,12 +858,12 @@ apiInstance.handleNoteAdd(projectUID, deviceUID, notefileID, note).then(() => {
 
 ### Parameters
 
-| Name           | Type                | Description                                       | Notes |
-| -------------- | ------------------- | ------------------------------------------------- | ----- |
-| **projectUID** | **String**          |                                                   |
-| **deviceUID**  | **String**          |                                                   |
-| **notefileID** | **String**          |                                                   |
-| **note**       | [**Note**](Note.md) | Body or payload of note to be added to the device |
+| Name                    | Type                | Description                                       | Notes |
+| ----------------------- | ------------------- | ------------------------------------------------- | ----- |
+| **projectOrProductUID** | **String**          |                                                   |
+| **deviceUID**           | **String**          |                                                   |
+| **notefileID**          | **String**          |                                                   |
+| **note**                | [**Note**](Note.md) | Body or payload of note to be added to the device |
 
 ### Return type
 
@@ -880,7 +880,7 @@ null (empty response body)
 
 ## handleNoteChanges
 
-> HandleNoteChanges200Response handleNoteChanges(projectUID, deviceUID, notefileID, opts)
+> HandleNoteChanges200Response handleNoteChanges(projectOrProductUID, deviceUID, notefileID, opts)
 
 Incrementally retrieve changes within a specific Notefile.
 
@@ -894,7 +894,7 @@ let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.DeviceApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
 let deviceUID = dev:000000000000000; // String |
 let notefileID = "notefileID_example"; // String |
 let opts = {
@@ -905,7 +905,7 @@ let opts = {
   'deleted': true, // Boolean | true to return deleted notes.
   '_delete': true // Boolean | true to delete the notes returned by the request.
 };
-apiInstance.handleNoteChanges(projectUID, deviceUID, notefileID, opts).then((data) => {
+apiInstance.handleNoteChanges(projectOrProductUID, deviceUID, notefileID, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
@@ -915,17 +915,17 @@ apiInstance.handleNoteChanges(projectUID, deviceUID, notefileID, opts).then((dat
 
 ### Parameters
 
-| Name           | Type        | Description                                           | Notes      |
-| -------------- | ----------- | ----------------------------------------------------- | ---------- |
-| **projectUID** | **String**  |                                                       |
-| **deviceUID**  | **String**  |                                                       |
-| **notefileID** | **String**  |                                                       |
-| **tracker**    | **String**  | The change tracker ID.                                | [optional] |
-| **max**        | **Number**  | The maximum number of Notes to return in the request. | [optional] |
-| **start**      | **Boolean** | true to reset the tracker to the beginning.           | [optional] |
-| **stop**       | **Boolean** | true to delete the tracker.                           | [optional] |
-| **deleted**    | **Boolean** | true to return deleted notes.                         | [optional] |
-| **\_delete**   | **Boolean** | true to delete the notes returned by the request.     | [optional] |
+| Name                    | Type        | Description                                           | Notes      |
+| ----------------------- | ----------- | ----------------------------------------------------- | ---------- |
+| **projectOrProductUID** | **String**  |                                                       |
+| **deviceUID**           | **String**  |                                                       |
+| **notefileID**          | **String**  |                                                       |
+| **tracker**             | **String**  | The change tracker ID.                                | [optional] |
+| **max**                 | **Number**  | The maximum number of Notes to return in the request. | [optional] |
+| **start**               | **Boolean** | true to reset the tracker to the beginning.           | [optional] |
+| **stop**                | **Boolean** | true to delete the tracker.                           | [optional] |
+| **deleted**             | **Boolean** | true to return deleted notes.                         | [optional] |
+| **\_delete**            | **Boolean** | true to delete the notes returned by the request.     | [optional] |
 
 ### Return type
 
@@ -942,7 +942,7 @@ apiInstance.handleNoteChanges(projectUID, deviceUID, notefileID, opts).then((dat
 
 ## handleNoteCreateAdd
 
-> handleNoteCreateAdd(projectUID, deviceUID, notefileID, noteID, note)
+> handleNoteCreateAdd(projectOrProductUID, deviceUID, notefileID, noteID, note)
 
 Adds a Note to a Notefile, creating the Notefile if it doesn&#39;t yet exist.
 
@@ -956,12 +956,12 @@ let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.DeviceApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
 let deviceUID = dev:000000000000000; // String |
 let notefileID = "notefileID_example"; // String |
 let noteID = "noteID_example"; // String |
 let note = new NotehubJs.Note(); // Note | Body or payload of note to be added to the device
-apiInstance.handleNoteCreateAdd(projectUID, deviceUID, notefileID, noteID, note).then(() => {
+apiInstance.handleNoteCreateAdd(projectOrProductUID, deviceUID, notefileID, noteID, note).then(() => {
   console.log('API called successfully.');
 }, (error) => {
   console.error(error);
@@ -971,13 +971,13 @@ apiInstance.handleNoteCreateAdd(projectUID, deviceUID, notefileID, noteID, note)
 
 ### Parameters
 
-| Name           | Type                | Description                                       | Notes |
-| -------------- | ------------------- | ------------------------------------------------- | ----- |
-| **projectUID** | **String**          |                                                   |
-| **deviceUID**  | **String**          |                                                   |
-| **notefileID** | **String**          |                                                   |
-| **noteID**     | **String**          |                                                   |
-| **note**       | [**Note**](Note.md) | Body or payload of note to be added to the device |
+| Name                    | Type                | Description                                       | Notes |
+| ----------------------- | ------------------- | ------------------------------------------------- | ----- |
+| **projectOrProductUID** | **String**          |                                                   |
+| **deviceUID**           | **String**          |                                                   |
+| **notefileID**          | **String**          |                                                   |
+| **noteID**              | **String**          |                                                   |
+| **note**                | [**Note**](Note.md) | Body or payload of note to be added to the device |
 
 ### Return type
 
@@ -994,7 +994,7 @@ null (empty response body)
 
 ## handleNoteDelete
 
-> handleNoteDelete(projectUID, deviceUID, notefileID, noteID)
+> handleNoteDelete(projectOrProductUID, deviceUID, notefileID, noteID)
 
 Delete a note from a DB notefile
 
@@ -1008,11 +1008,11 @@ let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.DeviceApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
 let deviceUID = dev:000000000000000; // String |
 let notefileID = "notefileID_example"; // String |
 let noteID = "noteID_example"; // String |
-apiInstance.handleNoteDelete(projectUID, deviceUID, notefileID, noteID).then(() => {
+apiInstance.handleNoteDelete(projectOrProductUID, deviceUID, notefileID, noteID).then(() => {
   console.log('API called successfully.');
 }, (error) => {
   console.error(error);
@@ -1022,12 +1022,12 @@ apiInstance.handleNoteDelete(projectUID, deviceUID, notefileID, noteID).then(() 
 
 ### Parameters
 
-| Name           | Type       | Description | Notes |
-| -------------- | ---------- | ----------- | ----- |
-| **projectUID** | **String** |             |
-| **deviceUID**  | **String** |             |
-| **notefileID** | **String** |             |
-| **noteID**     | **String** |             |
+| Name                    | Type       | Description | Notes |
+| ----------------------- | ---------- | ----------- | ----- |
+| **projectOrProductUID** | **String** |             |
+| **deviceUID**           | **String** |             |
+| **notefileID**          | **String** |             |
+| **noteID**              | **String** |             |
 
 ### Return type
 
@@ -1044,7 +1044,7 @@ null (empty response body)
 
 ## handleNoteGet
 
-> HandleNoteGet200Response handleNoteGet(projectUID, deviceUID, notefileID, noteID, opts)
+> HandleNoteGet200Response handleNoteGet(projectOrProductUID, deviceUID, notefileID, noteID, opts)
 
 Get a note from a DB notefile
 
@@ -1058,7 +1058,7 @@ let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.DeviceApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
 let deviceUID = dev:000000000000000; // String |
 let notefileID = "notefileID_example"; // String |
 let noteID = "noteID_example"; // String |
@@ -1066,7 +1066,7 @@ let opts = {
   '_delete': true, // Boolean | Whether to delete the note from the DB notefile
   'deleted': true // Boolean | Whether to return deleted notes
 };
-apiInstance.handleNoteGet(projectUID, deviceUID, notefileID, noteID, opts).then((data) => {
+apiInstance.handleNoteGet(projectOrProductUID, deviceUID, notefileID, noteID, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
@@ -1076,14 +1076,14 @@ apiInstance.handleNoteGet(projectUID, deviceUID, notefileID, noteID, opts).then(
 
 ### Parameters
 
-| Name           | Type        | Description                                     | Notes      |
-| -------------- | ----------- | ----------------------------------------------- | ---------- |
-| **projectUID** | **String**  |                                                 |
-| **deviceUID**  | **String**  |                                                 |
-| **notefileID** | **String**  |                                                 |
-| **noteID**     | **String**  |                                                 |
-| **\_delete**   | **Boolean** | Whether to delete the note from the DB notefile | [optional] |
-| **deleted**    | **Boolean** | Whether to return deleted notes                 | [optional] |
+| Name                    | Type        | Description                                     | Notes      |
+| ----------------------- | ----------- | ----------------------------------------------- | ---------- |
+| **projectOrProductUID** | **String**  |                                                 |
+| **deviceUID**           | **String**  |                                                 |
+| **notefileID**          | **String**  |                                                 |
+| **noteID**              | **String**  |                                                 |
+| **\_delete**            | **Boolean** | Whether to delete the note from the DB notefile | [optional] |
+| **deleted**             | **Boolean** | Whether to return deleted notes                 | [optional] |
 
 ### Return type
 
@@ -1100,7 +1100,7 @@ apiInstance.handleNoteGet(projectUID, deviceUID, notefileID, noteID, opts).then(
 
 ## handleNoteSignal
 
-> HandleNoteSignal200Response handleNoteSignal(projectUID, deviceUID, body)
+> HandleNoteSignal200Response handleNoteSignal(projectOrProductUID, deviceUID, body)
 
 Send a signal from Notehub to a Notecard.
 
@@ -1114,10 +1114,10 @@ let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.DeviceApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
 let deviceUID = dev:000000000000000; // String |
 let body = new NotehubJs.Body(); // Body | Body or payload of singnal to be sent to the device
-apiInstance.handleNoteSignal(projectUID, deviceUID, body).then((data) => {
+apiInstance.handleNoteSignal(projectOrProductUID, deviceUID, body).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
@@ -1127,11 +1127,11 @@ apiInstance.handleNoteSignal(projectUID, deviceUID, body).then((data) => {
 
 ### Parameters
 
-| Name           | Type                | Description                                         | Notes |
-| -------------- | ------------------- | --------------------------------------------------- | ----- |
-| **projectUID** | **String**          |                                                     |
-| **deviceUID**  | **String**          |                                                     |
-| **body**       | [**Body**](Body.md) | Body or payload of singnal to be sent to the device |
+| Name                    | Type                | Description                                         | Notes |
+| ----------------------- | ------------------- | --------------------------------------------------- | ----- |
+| **projectOrProductUID** | **String**          |                                                     |
+| **deviceUID**           | **String**          |                                                     |
+| **body**                | [**Body**](Body.md) | Body or payload of singnal to be sent to the device |
 
 ### Return type
 
@@ -1148,7 +1148,7 @@ apiInstance.handleNoteSignal(projectUID, deviceUID, body).then((data) => {
 
 ## handleNoteUpdate
 
-> handleNoteUpdate(projectUID, deviceUID, notefileID, noteID, note)
+> handleNoteUpdate(projectOrProductUID, deviceUID, notefileID, noteID, note)
 
 Update a note in a DB notefile
 
@@ -1162,12 +1162,12 @@ let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.DeviceApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
 let deviceUID = dev:000000000000000; // String |
 let notefileID = "notefileID_example"; // String |
 let noteID = "noteID_example"; // String |
 let note = new NotehubJs.Note(); // Note | Body or payload of note to be added to the device
-apiInstance.handleNoteUpdate(projectUID, deviceUID, notefileID, noteID, note).then(() => {
+apiInstance.handleNoteUpdate(projectOrProductUID, deviceUID, notefileID, noteID, note).then(() => {
   console.log('API called successfully.');
 }, (error) => {
   console.error(error);
@@ -1177,13 +1177,13 @@ apiInstance.handleNoteUpdate(projectUID, deviceUID, notefileID, noteID, note).th
 
 ### Parameters
 
-| Name           | Type                | Description                                       | Notes |
-| -------------- | ------------------- | ------------------------------------------------- | ----- |
-| **projectUID** | **String**          |                                                   |
-| **deviceUID**  | **String**          |                                                   |
-| **notefileID** | **String**          |                                                   |
-| **noteID**     | **String**          |                                                   |
-| **note**       | [**Note**](Note.md) | Body or payload of note to be added to the device |
+| Name                    | Type                | Description                                       | Notes |
+| ----------------------- | ------------------- | ------------------------------------------------- | ----- |
+| **projectOrProductUID** | **String**          |                                                   |
+| **deviceUID**           | **String**          |                                                   |
+| **notefileID**          | **String**          |                                                   |
+| **noteID**              | **String**          |                                                   |
+| **note**                | [**Note**](Note.md) | Body or payload of note to be added to the device |
 
 ### Return type
 
@@ -1200,7 +1200,7 @@ null (empty response body)
 
 ## handleNotefileChanges
 
-> HandleNotefileChanges200Response handleNotefileChanges(projectUID, deviceUID, opts)
+> HandleNotefileChanges200Response handleNotefileChanges(projectOrProductUID, deviceUID, opts)
 
 Used to perform queries on a single or multiple files to determine if new Notes are available to read
 
@@ -1214,13 +1214,13 @@ let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.DeviceApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
 let deviceUID = dev:000000000000000; // String |
 let opts = {
   'tracker': "tracker_example", // String | The change tracker ID.
   'files': ["null"] // [String] | One or more files to obtain change information from.
 };
-apiInstance.handleNotefileChanges(projectUID, deviceUID, opts).then((data) => {
+apiInstance.handleNotefileChanges(projectOrProductUID, deviceUID, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
@@ -1230,12 +1230,12 @@ apiInstance.handleNotefileChanges(projectUID, deviceUID, opts).then((data) => {
 
 ### Parameters
 
-| Name           | Type                      | Description                                          | Notes      |
-| -------------- | ------------------------- | ---------------------------------------------------- | ---------- |
-| **projectUID** | **String**                |                                                      |
-| **deviceUID**  | **String**                |                                                      |
-| **tracker**    | **String**                | The change tracker ID.                               | [optional] |
-| **files**      | [**[String]**](String.md) | One or more files to obtain change information from. | [optional] |
+| Name                    | Type                      | Description                                          | Notes      |
+| ----------------------- | ------------------------- | ---------------------------------------------------- | ---------- |
+| **projectOrProductUID** | **String**                |                                                      |
+| **deviceUID**           | **String**                |                                                      |
+| **tracker**             | **String**                | The change tracker ID.                               | [optional] |
+| **files**               | [**[String]**](String.md) | One or more files to obtain change information from. | [optional] |
 
 ### Return type
 
@@ -1252,7 +1252,7 @@ apiInstance.handleNotefileChanges(projectUID, deviceUID, opts).then((data) => {
 
 ## handleNotefileChangesPending
 
-> HandleNotefileChangesPending200Response handleNotefileChangesPending(projectUID, deviceUID)
+> HandleNotefileChangesPending200Response handleNotefileChangesPending(projectOrProductUID, deviceUID)
 
 Returns info about file changes that are pending upload to Notehub or download to the Notecard.
 
@@ -1266,9 +1266,9 @@ let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.DeviceApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
 let deviceUID = dev:000000000000000; // String |
-apiInstance.handleNotefileChangesPending(projectUID, deviceUID).then((data) => {
+apiInstance.handleNotefileChangesPending(projectOrProductUID, deviceUID).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
@@ -1278,10 +1278,10 @@ apiInstance.handleNotefileChangesPending(projectUID, deviceUID).then((data) => {
 
 ### Parameters
 
-| Name           | Type       | Description | Notes |
-| -------------- | ---------- | ----------- | ----- |
-| **projectUID** | **String** |             |
-| **deviceUID**  | **String** |             |
+| Name                    | Type       | Description | Notes |
+| ----------------------- | ---------- | ----------- | ----- |
+| **projectOrProductUID** | **String** |             |
+| **deviceUID**           | **String** |             |
 
 ### Return type
 
@@ -1298,7 +1298,7 @@ apiInstance.handleNotefileChangesPending(projectUID, deviceUID).then((data) => {
 
 ## handleNotefileDelete
 
-> handleNotefileDelete(projectUID, deviceUID, handleNotefileDeleteRequest)
+> handleNotefileDelete(projectOrProductUID, deviceUID, handleNotefileDeleteRequest)
 
 Deletes Notefiles and the Notes they contain.
 
@@ -1312,10 +1312,10 @@ let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.DeviceApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
 let deviceUID = dev:000000000000000; // String |
 let handleNotefileDeleteRequest = new NotehubJs.HandleNotefileDeleteRequest(); // HandleNotefileDeleteRequest |
-apiInstance.handleNotefileDelete(projectUID, deviceUID, handleNotefileDeleteRequest).then(() => {
+apiInstance.handleNotefileDelete(projectOrProductUID, deviceUID, handleNotefileDeleteRequest).then(() => {
   console.log('API called successfully.');
 }, (error) => {
   console.error(error);
@@ -1327,7 +1327,7 @@ apiInstance.handleNotefileDelete(projectUID, deviceUID, handleNotefileDeleteRequ
 
 | Name                            | Type                                                              | Description | Notes |
 | ------------------------------- | ----------------------------------------------------------------- | ----------- | ----- |
-| **projectUID**                  | **String**                                                        |             |
+| **projectOrProductUID**         | **String**                                                        |             |
 | **deviceUID**                   | **String**                                                        |             |
 | **handleNotefileDeleteRequest** | [**HandleNotefileDeleteRequest**](HandleNotefileDeleteRequest.md) |             |
 
@@ -1346,7 +1346,7 @@ null (empty response body)
 
 ## postProvisionProjectDevice
 
-> Object postProvisionProjectDevice(projectUID, deviceUID, postProvisionProjectDeviceRequest)
+> Object postProvisionProjectDevice(projectOrProductUID, deviceUID, postProvisionProjectDeviceRequest)
 
 Provision Device for a Project
 
@@ -1360,10 +1360,10 @@ let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.DeviceApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
 let deviceUID = dev:000000000000000; // String |
 let postProvisionProjectDeviceRequest = new NotehubJs.PostProvisionProjectDeviceRequest(); // PostProvisionProjectDeviceRequest | Provision a device to a specific ProductUID
-apiInstance.postProvisionProjectDevice(projectUID, deviceUID, postProvisionProjectDeviceRequest).then((data) => {
+apiInstance.postProvisionProjectDevice(projectOrProductUID, deviceUID, postProvisionProjectDeviceRequest).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
@@ -1375,7 +1375,7 @@ apiInstance.postProvisionProjectDevice(projectUID, deviceUID, postProvisionProje
 
 | Name                                  | Type                                                                          | Description                                 | Notes |
 | ------------------------------------- | ----------------------------------------------------------------------------- | ------------------------------------------- | ----- |
-| **projectUID**                        | **String**                                                                    |                                             |
+| **projectOrProductUID**               | **String**                                                                    |                                             |
 | **deviceUID**                         | **String**                                                                    |                                             |
 | **postProvisionProjectDeviceRequest** | [**PostProvisionProjectDeviceRequest**](PostProvisionProjectDeviceRequest.md) | Provision a device to a specific ProductUID |
 
@@ -1394,7 +1394,7 @@ apiInstance.postProvisionProjectDevice(projectUID, deviceUID, postProvisionProje
 
 ## putDeviceEnvironmentVariables
 
-> EnvironmentVariables putDeviceEnvironmentVariables(projectUID, deviceUID, environmentVariables)
+> EnvironmentVariables putDeviceEnvironmentVariables(projectOrProductUID, deviceUID, environmentVariables)
 
 Put environment variables of a device
 
@@ -1408,10 +1408,10 @@ let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.DeviceApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
 let deviceUID = dev:000000000000000; // String |
 let environmentVariables = new NotehubJs.EnvironmentVariables(); // EnvironmentVariables | Environment variables to be added to the device
-apiInstance.putDeviceEnvironmentVariables(projectUID, deviceUID, environmentVariables).then((data) => {
+apiInstance.putDeviceEnvironmentVariables(projectOrProductUID, deviceUID, environmentVariables).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
@@ -1423,7 +1423,7 @@ apiInstance.putDeviceEnvironmentVariables(projectUID, deviceUID, environmentVari
 
 | Name                     | Type                                                | Description                                     | Notes |
 | ------------------------ | --------------------------------------------------- | ----------------------------------------------- | ----- |
-| **projectUID**           | **String**                                          |                                                 |
+| **projectOrProductUID**  | **String**                                          |                                                 |
 | **deviceUID**            | **String**                                          |                                                 |
 | **environmentVariables** | [**EnvironmentVariables**](EnvironmentVariables.md) | Environment variables to be added to the device |
 

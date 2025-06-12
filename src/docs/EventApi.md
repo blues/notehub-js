@@ -2,17 +2,17 @@
 
 All URIs are relative to *https://api.notefile.net*
 
-| Method                                                               | HTTP request                                                      | Description |
-| -------------------------------------------------------------------- | ----------------------------------------------------------------- | ----------- |
-| [**getFleetEvents**](EventApi.md#getFleetEvents)                     | **GET** /v1/projects/{projectUID}/fleets/{fleetUID}/events        |
-| [**getFleetEventsByCursor**](EventApi.md#getFleetEventsByCursor)     | **GET** /v1/projects/{projectUID}/fleets/{fleetUID}/events-cursor |
-| [**getProjectEvents**](EventApi.md#getProjectEvents)                 | **GET** /v1/projects/{projectUID}/events                          |
-| [**getProjectEventsByCursor**](EventApi.md#getProjectEventsByCursor) | **GET** /v1/projects/{projectUID}/events-cursor                   |
-| [**getRouteLogsByEvent**](EventApi.md#getRouteLogsByEvent)           | **GET** /v1/projects/{projectUID}/events/{eventUID}/route-logs    |
+| Method                                                               | HTTP request                                                               | Description |
+| -------------------------------------------------------------------- | -------------------------------------------------------------------------- | ----------- |
+| [**getFleetEvents**](EventApi.md#getFleetEvents)                     | **GET** /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/events        |
+| [**getFleetEventsByCursor**](EventApi.md#getFleetEventsByCursor)     | **GET** /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/events-cursor |
+| [**getProjectEvents**](EventApi.md#getProjectEvents)                 | **GET** /v1/projects/{projectOrProductUID}/events                          |
+| [**getProjectEventsByCursor**](EventApi.md#getProjectEventsByCursor) | **GET** /v1/projects/{projectOrProductUID}/events-cursor                   |
+| [**getRouteLogsByEvent**](EventApi.md#getRouteLogsByEvent)           | **GET** /v1/projects/{projectOrProductUID}/events/{eventUID}/route-logs    |
 
 ## getFleetEvents
 
-> GetProjectEvents200Response getFleetEvents(projectUID, fleetUID, opts)
+> GetProjectEvents200Response getFleetEvents(projectOrProductUID, fleetUID, opts)
 
 Get Events of a Fleet
 
@@ -26,7 +26,7 @@ let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.EventApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
 let fleetUID = "fleetUID_example"; // String |
 let opts = {
   'pageSize': 50, // Number |
@@ -45,7 +45,7 @@ let opts = {
   'eventUID': ["null"], // [String] | Filter by Event UID
   'selectFields': "selectFields_example" // String | Comma-separated list of fields to select from JSON payload (e.g., \"field1,field2.subfield,field3\"), this will reflect the columns in the CSV output.
 };
-apiInstance.getFleetEvents(projectUID, fleetUID, opts).then((data) => {
+apiInstance.getFleetEvents(projectOrProductUID, fleetUID, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
@@ -55,25 +55,25 @@ apiInstance.getFleetEvents(projectUID, fleetUID, opts).then((data) => {
 
 ### Parameters
 
-| Name                | Type                      | Description                                                                                                                                                      | Notes                                      |
-| ------------------- | ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------ |
-| **projectUID**      | **String**                |                                                                                                                                                                  |
-| **fleetUID**        | **String**                |                                                                                                                                                                  |
-| **pageSize**        | **Number**                |                                                                                                                                                                  | [optional] [default to 50]                 |
-| **pageNum**         | **Number**                |                                                                                                                                                                  | [optional] [default to 1]                  |
-| **deviceUID**       | [**[String]**](String.md) | A Device UID.                                                                                                                                                    | [optional]                                 |
-| **sortBy**          | **String**                |                                                                                                                                                                  | [optional] [default to &#39;captured&#39;] |
-| **sortOrder**       | **String**                |                                                                                                                                                                  | [optional] [default to &#39;asc&#39;]      |
-| **startDate**       | **Number**                | Unix timestamp                                                                                                                                                   | [optional]                                 |
-| **endDate**         | **Number**                | Unix timestamp                                                                                                                                                   | [optional]                                 |
-| **dateType**        | **String**                | Which date to filter on, either &#39;captured&#39; or &#39;uploaded&#39;. This will apply to the startDate and endDate parameters                                | [optional] [default to &#39;captured&#39;] |
-| **systemFilesOnly** | **Boolean**               |                                                                                                                                                                  | [optional]                                 |
-| **files**           | **String**                |                                                                                                                                                                  | [optional]                                 |
-| **format**          | **String**                | Response format (JSON or CSV)                                                                                                                                    | [optional] [default to &#39;json&#39;]     |
-| **serialNumber**    | [**[String]**](String.md) | Filter by Serial Number                                                                                                                                          | [optional]                                 |
-| **sessionUID**      | [**[String]**](String.md) | Filter by Session UID                                                                                                                                            | [optional]                                 |
-| **eventUID**        | [**[String]**](String.md) | Filter by Event UID                                                                                                                                              | [optional]                                 |
-| **selectFields**    | **String**                | Comma-separated list of fields to select from JSON payload (e.g., \&quot;field1,field2.subfield,field3\&quot;), this will reflect the columns in the CSV output. | [optional]                                 |
+| Name                    | Type                      | Description                                                                                                                                                      | Notes                                      |
+| ----------------------- | ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------ |
+| **projectOrProductUID** | **String**                |                                                                                                                                                                  |
+| **fleetUID**            | **String**                |                                                                                                                                                                  |
+| **pageSize**            | **Number**                |                                                                                                                                                                  | [optional] [default to 50]                 |
+| **pageNum**             | **Number**                |                                                                                                                                                                  | [optional] [default to 1]                  |
+| **deviceUID**           | [**[String]**](String.md) | A Device UID.                                                                                                                                                    | [optional]                                 |
+| **sortBy**              | **String**                |                                                                                                                                                                  | [optional] [default to &#39;captured&#39;] |
+| **sortOrder**           | **String**                |                                                                                                                                                                  | [optional] [default to &#39;asc&#39;]      |
+| **startDate**           | **Number**                | Unix timestamp                                                                                                                                                   | [optional]                                 |
+| **endDate**             | **Number**                | Unix timestamp                                                                                                                                                   | [optional]                                 |
+| **dateType**            | **String**                | Which date to filter on, either &#39;captured&#39; or &#39;uploaded&#39;. This will apply to the startDate and endDate parameters                                | [optional] [default to &#39;captured&#39;] |
+| **systemFilesOnly**     | **Boolean**               |                                                                                                                                                                  | [optional]                                 |
+| **files**               | **String**                |                                                                                                                                                                  | [optional]                                 |
+| **format**              | **String**                | Response format (JSON or CSV)                                                                                                                                    | [optional] [default to &#39;json&#39;]     |
+| **serialNumber**        | [**[String]**](String.md) | Filter by Serial Number                                                                                                                                          | [optional]                                 |
+| **sessionUID**          | [**[String]**](String.md) | Filter by Session UID                                                                                                                                            | [optional]                                 |
+| **eventUID**            | [**[String]**](String.md) | Filter by Event UID                                                                                                                                              | [optional]                                 |
+| **selectFields**        | **String**                | Comma-separated list of fields to select from JSON payload (e.g., \&quot;field1,field2.subfield,field3\&quot;), this will reflect the columns in the CSV output. | [optional]                                 |
 
 ### Return type
 
@@ -90,7 +90,7 @@ apiInstance.getFleetEvents(projectUID, fleetUID, opts).then((data) => {
 
 ## getFleetEventsByCursor
 
-> GetProjectEventsByCursor200Response getFleetEventsByCursor(projectUID, fleetUID, opts)
+> GetProjectEventsByCursor200Response getFleetEventsByCursor(projectOrProductUID, fleetUID, opts)
 
 Get Events of a Fleet by cursor
 
@@ -104,7 +104,7 @@ let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.EventApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
 let fleetUID = "fleetUID_example"; // String |
 let opts = {
   'limit': 50, // Number |
@@ -116,7 +116,7 @@ let opts = {
   'startDate': 1628631763, // Number | Unix timestamp
   'endDate': 1657894210 // Number | Unix timestamp
 };
-apiInstance.getFleetEventsByCursor(projectUID, fleetUID, opts).then((data) => {
+apiInstance.getFleetEventsByCursor(projectOrProductUID, fleetUID, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
@@ -126,18 +126,18 @@ apiInstance.getFleetEventsByCursor(projectUID, fleetUID, opts).then((data) => {
 
 ### Parameters
 
-| Name                | Type                      | Description                                                                                                                                                                                                                                                                                                                                                                | Notes                                 |
-| ------------------- | ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------- |
-| **projectUID**      | **String**                |                                                                                                                                                                                                                                                                                                                                                                            |
-| **fleetUID**        | **String**                |                                                                                                                                                                                                                                                                                                                                                                            |
-| **limit**           | **Number**                |                                                                                                                                                                                                                                                                                                                                                                            | [optional] [default to 50]            |
-| **cursor**          | **String**                | A cursor, which can be obtained from the &#x60;next_cursor&#x60; value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included. | [optional]                            |
-| **sortOrder**       | **String**                |                                                                                                                                                                                                                                                                                                                                                                            | [optional] [default to &#39;asc&#39;] |
-| **systemFilesOnly** | **Boolean**               |                                                                                                                                                                                                                                                                                                                                                                            | [optional]                            |
-| **files**           | **String**                |                                                                                                                                                                                                                                                                                                                                                                            | [optional]                            |
-| **deviceUID**       | [**[String]**](String.md) | A Device UID.                                                                                                                                                                                                                                                                                                                                                              | [optional]                            |
-| **startDate**       | **Number**                | Unix timestamp                                                                                                                                                                                                                                                                                                                                                             | [optional]                            |
-| **endDate**         | **Number**                | Unix timestamp                                                                                                                                                                                                                                                                                                                                                             | [optional]                            |
+| Name                    | Type                      | Description                                                                                                                                                                                                                                                                                                                                                                | Notes                                 |
+| ----------------------- | ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------- |
+| **projectOrProductUID** | **String**                |                                                                                                                                                                                                                                                                                                                                                                            |
+| **fleetUID**            | **String**                |                                                                                                                                                                                                                                                                                                                                                                            |
+| **limit**               | **Number**                |                                                                                                                                                                                                                                                                                                                                                                            | [optional] [default to 50]            |
+| **cursor**              | **String**                | A cursor, which can be obtained from the &#x60;next_cursor&#x60; value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included. | [optional]                            |
+| **sortOrder**           | **String**                |                                                                                                                                                                                                                                                                                                                                                                            | [optional] [default to &#39;asc&#39;] |
+| **systemFilesOnly**     | **Boolean**               |                                                                                                                                                                                                                                                                                                                                                                            | [optional]                            |
+| **files**               | **String**                |                                                                                                                                                                                                                                                                                                                                                                            | [optional]                            |
+| **deviceUID**           | [**[String]**](String.md) | A Device UID.                                                                                                                                                                                                                                                                                                                                                              | [optional]                            |
+| **startDate**           | **Number**                | Unix timestamp                                                                                                                                                                                                                                                                                                                                                             | [optional]                            |
+| **endDate**             | **Number**                | Unix timestamp                                                                                                                                                                                                                                                                                                                                                             | [optional]                            |
 
 ### Return type
 
@@ -154,7 +154,7 @@ apiInstance.getFleetEventsByCursor(projectUID, fleetUID, opts).then((data) => {
 
 ## getProjectEvents
 
-> GetProjectEvents200Response getProjectEvents(projectUID, opts)
+> GetProjectEvents200Response getProjectEvents(projectOrProductUID, opts)
 
 Get Events of a Project
 
@@ -168,7 +168,7 @@ let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.EventApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
 let opts = {
   'pageSize': 50, // Number |
   'pageNum': 1, // Number |
@@ -187,7 +187,7 @@ let opts = {
   'eventUID': ["null"], // [String] | Filter by Event UID
   'selectFields': "selectFields_example" // String | Comma-separated list of fields to select from JSON payload (e.g., \"field1,field2.subfield,field3\"), this will reflect the columns in the CSV output.
 };
-apiInstance.getProjectEvents(projectUID, opts).then((data) => {
+apiInstance.getProjectEvents(projectOrProductUID, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
@@ -197,25 +197,25 @@ apiInstance.getProjectEvents(projectUID, opts).then((data) => {
 
 ### Parameters
 
-| Name                | Type                      | Description                                                                                                                                                      | Notes                                      |
-| ------------------- | ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------ |
-| **projectUID**      | **String**                |                                                                                                                                                                  |
-| **pageSize**        | **Number**                |                                                                                                                                                                  | [optional] [default to 50]                 |
-| **pageNum**         | **Number**                |                                                                                                                                                                  | [optional] [default to 1]                  |
-| **deviceUID**       | [**[String]**](String.md) | A Device UID.                                                                                                                                                    | [optional]                                 |
-| **sortBy**          | **String**                |                                                                                                                                                                  | [optional] [default to &#39;captured&#39;] |
-| **sortOrder**       | **String**                |                                                                                                                                                                  | [optional] [default to &#39;asc&#39;]      |
-| **startDate**       | **Number**                | Unix timestamp                                                                                                                                                   | [optional]                                 |
-| **endDate**         | **Number**                | Unix timestamp                                                                                                                                                   | [optional]                                 |
-| **dateType**        | **String**                | Which date to filter on, either &#39;captured&#39; or &#39;uploaded&#39;. This will apply to the startDate and endDate parameters                                | [optional] [default to &#39;captured&#39;] |
-| **systemFilesOnly** | **Boolean**               |                                                                                                                                                                  | [optional]                                 |
-| **files**           | **String**                |                                                                                                                                                                  | [optional]                                 |
-| **format**          | **String**                | Response format (JSON or CSV)                                                                                                                                    | [optional] [default to &#39;json&#39;]     |
-| **serialNumber**    | [**[String]**](String.md) | Filter by Serial Number                                                                                                                                          | [optional]                                 |
-| **fleetUID**        | [**[String]**](String.md) | Filter by Fleet UID                                                                                                                                              | [optional]                                 |
-| **sessionUID**      | [**[String]**](String.md) | Filter by Session UID                                                                                                                                            | [optional]                                 |
-| **eventUID**        | [**[String]**](String.md) | Filter by Event UID                                                                                                                                              | [optional]                                 |
-| **selectFields**    | **String**                | Comma-separated list of fields to select from JSON payload (e.g., \&quot;field1,field2.subfield,field3\&quot;), this will reflect the columns in the CSV output. | [optional]                                 |
+| Name                    | Type                      | Description                                                                                                                                                      | Notes                                      |
+| ----------------------- | ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------ |
+| **projectOrProductUID** | **String**                |                                                                                                                                                                  |
+| **pageSize**            | **Number**                |                                                                                                                                                                  | [optional] [default to 50]                 |
+| **pageNum**             | **Number**                |                                                                                                                                                                  | [optional] [default to 1]                  |
+| **deviceUID**           | [**[String]**](String.md) | A Device UID.                                                                                                                                                    | [optional]                                 |
+| **sortBy**              | **String**                |                                                                                                                                                                  | [optional] [default to &#39;captured&#39;] |
+| **sortOrder**           | **String**                |                                                                                                                                                                  | [optional] [default to &#39;asc&#39;]      |
+| **startDate**           | **Number**                | Unix timestamp                                                                                                                                                   | [optional]                                 |
+| **endDate**             | **Number**                | Unix timestamp                                                                                                                                                   | [optional]                                 |
+| **dateType**            | **String**                | Which date to filter on, either &#39;captured&#39; or &#39;uploaded&#39;. This will apply to the startDate and endDate parameters                                | [optional] [default to &#39;captured&#39;] |
+| **systemFilesOnly**     | **Boolean**               |                                                                                                                                                                  | [optional]                                 |
+| **files**               | **String**                |                                                                                                                                                                  | [optional]                                 |
+| **format**              | **String**                | Response format (JSON or CSV)                                                                                                                                    | [optional] [default to &#39;json&#39;]     |
+| **serialNumber**        | [**[String]**](String.md) | Filter by Serial Number                                                                                                                                          | [optional]                                 |
+| **fleetUID**            | [**[String]**](String.md) | Filter by Fleet UID                                                                                                                                              | [optional]                                 |
+| **sessionUID**          | [**[String]**](String.md) | Filter by Session UID                                                                                                                                            | [optional]                                 |
+| **eventUID**            | [**[String]**](String.md) | Filter by Event UID                                                                                                                                              | [optional]                                 |
+| **selectFields**        | **String**                | Comma-separated list of fields to select from JSON payload (e.g., \&quot;field1,field2.subfield,field3\&quot;), this will reflect the columns in the CSV output. | [optional]                                 |
 
 ### Return type
 
@@ -232,7 +232,7 @@ apiInstance.getProjectEvents(projectUID, opts).then((data) => {
 
 ## getProjectEventsByCursor
 
-> GetProjectEventsByCursor200Response getProjectEventsByCursor(projectUID, opts)
+> GetProjectEventsByCursor200Response getProjectEventsByCursor(projectOrProductUID, opts)
 
 Get Events of a Project by cursor
 
@@ -246,7 +246,7 @@ let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.EventApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
 let opts = {
   'limit': 50, // Number |
   'cursor': "cursor_example", // String | A cursor, which can be obtained from the `next_cursor` value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included.
@@ -256,7 +256,7 @@ let opts = {
   'fleetUID': "fleetUID_example", // String |
   'deviceUID': ["null"] // [String] | A Device UID.
 };
-apiInstance.getProjectEventsByCursor(projectUID, opts).then((data) => {
+apiInstance.getProjectEventsByCursor(projectOrProductUID, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
@@ -266,16 +266,16 @@ apiInstance.getProjectEventsByCursor(projectUID, opts).then((data) => {
 
 ### Parameters
 
-| Name                | Type                      | Description                                                                                                                                                                                                                                                                                                                                                                | Notes                                 |
-| ------------------- | ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------- |
-| **projectUID**      | **String**                |                                                                                                                                                                                                                                                                                                                                                                            |
-| **limit**           | **Number**                |                                                                                                                                                                                                                                                                                                                                                                            | [optional] [default to 50]            |
-| **cursor**          | **String**                | A cursor, which can be obtained from the &#x60;next_cursor&#x60; value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included. | [optional]                            |
-| **sortOrder**       | **String**                |                                                                                                                                                                                                                                                                                                                                                                            | [optional] [default to &#39;asc&#39;] |
-| **systemFilesOnly** | **Boolean**               |                                                                                                                                                                                                                                                                                                                                                                            | [optional]                            |
-| **files**           | **String**                |                                                                                                                                                                                                                                                                                                                                                                            | [optional]                            |
-| **fleetUID**        | **String**                |                                                                                                                                                                                                                                                                                                                                                                            | [optional]                            |
-| **deviceUID**       | [**[String]**](String.md) | A Device UID.                                                                                                                                                                                                                                                                                                                                                              | [optional]                            |
+| Name                    | Type                      | Description                                                                                                                                                                                                                                                                                                                                                                | Notes                                 |
+| ----------------------- | ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------- |
+| **projectOrProductUID** | **String**                |                                                                                                                                                                                                                                                                                                                                                                            |
+| **limit**               | **Number**                |                                                                                                                                                                                                                                                                                                                                                                            | [optional] [default to 50]            |
+| **cursor**              | **String**                | A cursor, which can be obtained from the &#x60;next_cursor&#x60; value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included. | [optional]                            |
+| **sortOrder**           | **String**                |                                                                                                                                                                                                                                                                                                                                                                            | [optional] [default to &#39;asc&#39;] |
+| **systemFilesOnly**     | **Boolean**               |                                                                                                                                                                                                                                                                                                                                                                            | [optional]                            |
+| **files**               | **String**                |                                                                                                                                                                                                                                                                                                                                                                            | [optional]                            |
+| **fleetUID**            | **String**                |                                                                                                                                                                                                                                                                                                                                                                            | [optional]                            |
+| **deviceUID**           | [**[String]**](String.md) | A Device UID.                                                                                                                                                                                                                                                                                                                                                              | [optional]                            |
 
 ### Return type
 
@@ -292,7 +292,7 @@ apiInstance.getProjectEventsByCursor(projectUID, opts).then((data) => {
 
 ## getRouteLogsByEvent
 
-> [GetRouteLogsByRoute200ResponseInner] getRouteLogsByEvent(projectUID, eventUID)
+> [GetRouteLogsByRoute200ResponseInner] getRouteLogsByEvent(projectOrProductUID, eventUID)
 
 Get Route Logs by Event UID
 
@@ -306,9 +306,9 @@ let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.EventApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
 let eventUID = 4506f411-dea6-44a0-9743-1130f57d7747; // String |
-apiInstance.getRouteLogsByEvent(projectUID, eventUID).then((data) => {
+apiInstance.getRouteLogsByEvent(projectOrProductUID, eventUID).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
@@ -318,10 +318,10 @@ apiInstance.getRouteLogsByEvent(projectUID, eventUID).then((data) => {
 
 ### Parameters
 
-| Name           | Type       | Description | Notes |
-| -------------- | ---------- | ----------- | ----- |
-| **projectUID** | **String** |             |
-| **eventUID**   | **String** |             |
+| Name                    | Type       | Description | Notes |
+| ----------------------- | ---------- | ----------- | ----- |
+| **projectOrProductUID** | **String** |             |
+| **eventUID**            | **String** |             |
 
 ### Return type
 

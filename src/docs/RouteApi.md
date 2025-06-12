@@ -2,18 +2,18 @@
 
 All URIs are relative to *https://api.notefile.net*
 
-| Method                                                     | HTTP request                                                   | Description |
-| ---------------------------------------------------------- | -------------------------------------------------------------- | ----------- |
-| [**createRoute**](RouteApi.md#createRoute)                 | **POST** /v1/projects/{projectUID}/routes                      |
-| [**deleteRoute**](RouteApi.md#deleteRoute)                 | **DELETE** /v1/projects/{projectUID}/routes/{routeUID}         |
-| [**getRoute**](RouteApi.md#getRoute)                       | **GET** /v1/projects/{projectUID}/routes/{routeUID}            |
-| [**getRouteLogsByRoute**](RouteApi.md#getRouteLogsByRoute) | **GET** /v1/projects/{projectUID}/routes/{routeUID}/route-logs |
-| [**getRoutes**](RouteApi.md#getRoutes)                     | **GET** /v1/projects/{projectUID}/routes                       |
-| [**updateRoute**](RouteApi.md#updateRoute)                 | **PUT** /v1/projects/{projectUID}/routes/{routeUID}            |
+| Method                                                     | HTTP request                                                            | Description |
+| ---------------------------------------------------------- | ----------------------------------------------------------------------- | ----------- |
+| [**createRoute**](RouteApi.md#createRoute)                 | **POST** /v1/projects/{projectOrProductUID}/routes                      |
+| [**deleteRoute**](RouteApi.md#deleteRoute)                 | **DELETE** /v1/projects/{projectOrProductUID}/routes/{routeUID}         |
+| [**getRoute**](RouteApi.md#getRoute)                       | **GET** /v1/projects/{projectOrProductUID}/routes/{routeUID}            |
+| [**getRouteLogsByRoute**](RouteApi.md#getRouteLogsByRoute) | **GET** /v1/projects/{projectOrProductUID}/routes/{routeUID}/route-logs |
+| [**getRoutes**](RouteApi.md#getRoutes)                     | **GET** /v1/projects/{projectOrProductUID}/routes                       |
+| [**updateRoute**](RouteApi.md#updateRoute)                 | **PUT** /v1/projects/{projectOrProductUID}/routes/{routeUID}            |
 
 ## createRoute
 
-> NotehubRoute createRoute(projectUID, notehubRoute)
+> NotehubRoute createRoute(projectOrProductUID, notehubRoute)
 
 Create Route within a Project
 
@@ -27,7 +27,7 @@ let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.RouteApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
 let notehubRoute = {
   "label": "Route Label",
   "type":"http",
@@ -38,7 +38,7 @@ let notehubRoute = {
   }
 }
 ; // NotehubRoute | Route to be Created
-apiInstance.createRoute(projectUID, notehubRoute).then((data) => {
+apiInstance.createRoute(projectOrProductUID, notehubRoute).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
@@ -48,10 +48,10 @@ apiInstance.createRoute(projectUID, notehubRoute).then((data) => {
 
 ### Parameters
 
-| Name             | Type                                | Description         | Notes |
-| ---------------- | ----------------------------------- | ------------------- | ----- |
-| **projectUID**   | **String**                          |                     |
-| **notehubRoute** | [**NotehubRoute**](NotehubRoute.md) | Route to be Created |
+| Name                    | Type                                | Description         | Notes |
+| ----------------------- | ----------------------------------- | ------------------- | ----- |
+| **projectOrProductUID** | **String**                          |                     |
+| **notehubRoute**        | [**NotehubRoute**](NotehubRoute.md) | Route to be Created |
 
 ### Return type
 
@@ -68,7 +68,7 @@ apiInstance.createRoute(projectUID, notehubRoute).then((data) => {
 
 ## deleteRoute
 
-> Object deleteRoute(projectUID, routeUID)
+> Object deleteRoute(projectOrProductUID, routeUID)
 
 Delete single route within a project
 
@@ -82,9 +82,9 @@ let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.RouteApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
 let routeUID = route:cbd20093cba58392c9f9bbdd0cdeb1a0; // String |
-apiInstance.deleteRoute(projectUID, routeUID).then((data) => {
+apiInstance.deleteRoute(projectOrProductUID, routeUID).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
@@ -94,10 +94,10 @@ apiInstance.deleteRoute(projectUID, routeUID).then((data) => {
 
 ### Parameters
 
-| Name           | Type       | Description | Notes |
-| -------------- | ---------- | ----------- | ----- |
-| **projectUID** | **String** |             |
-| **routeUID**   | **String** |             |
+| Name                    | Type       | Description | Notes |
+| ----------------------- | ---------- | ----------- | ----- |
+| **projectOrProductUID** | **String** |             |
+| **routeUID**            | **String** |             |
 
 ### Return type
 
@@ -114,7 +114,7 @@ apiInstance.deleteRoute(projectUID, routeUID).then((data) => {
 
 ## getRoute
 
-> NotehubRoute getRoute(projectUID, routeUID)
+> NotehubRoute getRoute(projectOrProductUID, routeUID)
 
 Get single route within a project
 
@@ -128,9 +128,9 @@ let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.RouteApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
 let routeUID = route:cbd20093cba58392c9f9bbdd0cdeb1a0; // String |
-apiInstance.getRoute(projectUID, routeUID).then((data) => {
+apiInstance.getRoute(projectOrProductUID, routeUID).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
@@ -140,10 +140,10 @@ apiInstance.getRoute(projectUID, routeUID).then((data) => {
 
 ### Parameters
 
-| Name           | Type       | Description | Notes |
-| -------------- | ---------- | ----------- | ----- |
-| **projectUID** | **String** |             |
-| **routeUID**   | **String** |             |
+| Name                    | Type       | Description | Notes |
+| ----------------------- | ---------- | ----------- | ----- |
+| **projectOrProductUID** | **String** |             |
+| **routeUID**            | **String** |             |
 
 ### Return type
 
@@ -160,7 +160,7 @@ apiInstance.getRoute(projectUID, routeUID).then((data) => {
 
 ## getRouteLogsByRoute
 
-> [GetRouteLogsByRoute200ResponseInner] getRouteLogsByRoute(projectUID, routeUID, opts)
+> [GetRouteLogsByRoute200ResponseInner] getRouteLogsByRoute(projectOrProductUID, routeUID, opts)
 
 Get Route Logs by Route UID
 
@@ -174,7 +174,7 @@ let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.RouteApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
 let routeUID = route:cbd20093cba58392c9f9bbdd0cdeb1a0; // String |
 let opts = {
   'pageSize': 50, // Number |
@@ -187,7 +187,7 @@ let opts = {
   'systemFilesOnly': true, // Boolean |
   'files': _health.qo, data.qo // String |
 };
-apiInstance.getRouteLogsByRoute(projectUID, routeUID, opts).then((data) => {
+apiInstance.getRouteLogsByRoute(projectOrProductUID, routeUID, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
@@ -197,19 +197,19 @@ apiInstance.getRouteLogsByRoute(projectUID, routeUID, opts).then((data) => {
 
 ### Parameters
 
-| Name                | Type                      | Description    | Notes                                      |
-| ------------------- | ------------------------- | -------------- | ------------------------------------------ |
-| **projectUID**      | **String**                |                |
-| **routeUID**        | **String**                |                |
-| **pageSize**        | **Number**                |                | [optional] [default to 50]                 |
-| **pageNum**         | **Number**                |                | [optional] [default to 1]                  |
-| **deviceUID**       | [**[String]**](String.md) | A Device UID.  | [optional]                                 |
-| **sortBy**          | **String**                |                | [optional] [default to &#39;captured&#39;] |
-| **sortOrder**       | **String**                |                | [optional] [default to &#39;asc&#39;]      |
-| **startDate**       | **Number**                | Unix timestamp | [optional]                                 |
-| **endDate**         | **Number**                | Unix timestamp | [optional]                                 |
-| **systemFilesOnly** | **Boolean**               |                | [optional]                                 |
-| **files**           | **String**                |                | [optional]                                 |
+| Name                    | Type                      | Description    | Notes                                      |
+| ----------------------- | ------------------------- | -------------- | ------------------------------------------ |
+| **projectOrProductUID** | **String**                |                |
+| **routeUID**            | **String**                |                |
+| **pageSize**            | **Number**                |                | [optional] [default to 50]                 |
+| **pageNum**             | **Number**                |                | [optional] [default to 1]                  |
+| **deviceUID**           | [**[String]**](String.md) | A Device UID.  | [optional]                                 |
+| **sortBy**              | **String**                |                | [optional] [default to &#39;captured&#39;] |
+| **sortOrder**           | **String**                |                | [optional] [default to &#39;asc&#39;]      |
+| **startDate**           | **Number**                | Unix timestamp | [optional]                                 |
+| **endDate**             | **Number**                | Unix timestamp | [optional]                                 |
+| **systemFilesOnly**     | **Boolean**               |                | [optional]                                 |
+| **files**               | **String**                |                | [optional]                                 |
 
 ### Return type
 
@@ -226,7 +226,7 @@ apiInstance.getRouteLogsByRoute(projectUID, routeUID, opts).then((data) => {
 
 ## getRoutes
 
-> [UserDbRoute] getRoutes(projectUID)
+> [UserDbRoute] getRoutes(projectOrProductUID)
 
 Get all Routes within a Project
 
@@ -240,8 +240,8 @@ let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.RouteApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
-apiInstance.getRoutes(projectUID).then((data) => {
+let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+apiInstance.getRoutes(projectOrProductUID).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
@@ -251,9 +251,9 @@ apiInstance.getRoutes(projectUID).then((data) => {
 
 ### Parameters
 
-| Name           | Type       | Description | Notes |
-| -------------- | ---------- | ----------- | ----- |
-| **projectUID** | **String** |             |
+| Name                    | Type       | Description | Notes |
+| ----------------------- | ---------- | ----------- | ----- |
+| **projectOrProductUID** | **String** |             |
 
 ### Return type
 
@@ -270,7 +270,7 @@ apiInstance.getRoutes(projectUID).then((data) => {
 
 ## updateRoute
 
-> NotehubRoute updateRoute(projectUID, routeUID, notehubRoute)
+> NotehubRoute updateRoute(projectOrProductUID, routeUID, notehubRoute)
 
 Update route by UID
 
@@ -284,7 +284,7 @@ let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.RouteApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
 let routeUID = route:cbd20093cba58392c9f9bbdd0cdeb1a0; // String |
 let notehubRoute = {
   "http" {
@@ -298,7 +298,7 @@ let notehubRoute = {
   },
 }
 ; // NotehubRoute | Route settings to be updated
-apiInstance.updateRoute(projectUID, routeUID, notehubRoute).then((data) => {
+apiInstance.updateRoute(projectOrProductUID, routeUID, notehubRoute).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
@@ -308,11 +308,11 @@ apiInstance.updateRoute(projectUID, routeUID, notehubRoute).then((data) => {
 
 ### Parameters
 
-| Name             | Type                                | Description                  | Notes |
-| ---------------- | ----------------------------------- | ---------------------------- | ----- |
-| **projectUID**   | **String**                          |                              |
-| **routeUID**     | **String**                          |                              |
-| **notehubRoute** | [**NotehubRoute**](NotehubRoute.md) | Route settings to be updated |
+| Name                    | Type                                | Description                  | Notes |
+| ----------------------- | ----------------------------------- | ---------------------------- | ----- |
+| **projectOrProductUID** | **String**                          |                              |
+| **routeUID**            | **String**                          |                              |
+| **notehubRoute**        | [**NotehubRoute**](NotehubRoute.md) | Route settings to be updated |
 
 ### Return type
 

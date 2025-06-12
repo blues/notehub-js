@@ -2,17 +2,17 @@
 
 All URIs are relative to *https://api.notefile.net*
 
-| Method                                           | HTTP request                                               | Description |
-| ------------------------------------------------ | ---------------------------------------------------------- | ----------- |
-| [**createMonitor**](MonitorApi.md#createMonitor) | **POST** /v1/projects/{projectUID}/monitors                |
-| [**deleteMonitor**](MonitorApi.md#deleteMonitor) | **DELETE** /v1/projects/{projectUID}/monitors/{monitorUID} |
-| [**getMonitor**](MonitorApi.md#getMonitor)       | **GET** /v1/projects/{projectUID}/monitors/{monitorUID}    |
-| [**getMonitors**](MonitorApi.md#getMonitors)     | **GET** /v1/projects/{projectUID}/monitors                 |
-| [**updateMonitor**](MonitorApi.md#updateMonitor) | **PUT** /v1/projects/{projectUID}/monitors/{monitorUID}    |
+| Method                                           | HTTP request                                                        | Description |
+| ------------------------------------------------ | ------------------------------------------------------------------- | ----------- |
+| [**createMonitor**](MonitorApi.md#createMonitor) | **POST** /v1/projects/{projectOrProductUID}/monitors                |
+| [**deleteMonitor**](MonitorApi.md#deleteMonitor) | **DELETE** /v1/projects/{projectOrProductUID}/monitors/{monitorUID} |
+| [**getMonitor**](MonitorApi.md#getMonitor)       | **GET** /v1/projects/{projectOrProductUID}/monitors/{monitorUID}    |
+| [**getMonitors**](MonitorApi.md#getMonitors)     | **GET** /v1/projects/{projectOrProductUID}/monitors                 |
+| [**updateMonitor**](MonitorApi.md#updateMonitor) | **PUT** /v1/projects/{projectOrProductUID}/monitors/{monitorUID}    |
 
 ## createMonitor
 
-> Monitor createMonitor(projectUID, createMonitor)
+> Monitor createMonitor(projectOrProductUID, createMonitor)
 
 Create a new Monitor
 
@@ -26,9 +26,9 @@ let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.MonitorApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
 let createMonitor = new NotehubJs.CreateMonitor(); // CreateMonitor | Body or payload of monitor to be created
-apiInstance.createMonitor(projectUID, createMonitor).then((data) => {
+apiInstance.createMonitor(projectOrProductUID, createMonitor).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
@@ -38,10 +38,10 @@ apiInstance.createMonitor(projectUID, createMonitor).then((data) => {
 
 ### Parameters
 
-| Name              | Type                                  | Description                              | Notes |
-| ----------------- | ------------------------------------- | ---------------------------------------- | ----- |
-| **projectUID**    | **String**                            |                                          |
-| **createMonitor** | [**CreateMonitor**](CreateMonitor.md) | Body or payload of monitor to be created |
+| Name                    | Type                                  | Description                              | Notes |
+| ----------------------- | ------------------------------------- | ---------------------------------------- | ----- |
+| **projectOrProductUID** | **String**                            |                                          |
+| **createMonitor**       | [**CreateMonitor**](CreateMonitor.md) | Body or payload of monitor to be created |
 
 ### Return type
 
@@ -58,7 +58,7 @@ apiInstance.createMonitor(projectUID, createMonitor).then((data) => {
 
 ## deleteMonitor
 
-> Monitor deleteMonitor(projectUID, monitorUID)
+> Monitor deleteMonitor(projectOrProductUID, monitorUID)
 
 Delete Monitor
 
@@ -72,9 +72,9 @@ let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.MonitorApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
 let monitorUID = monitor:8bAdf00d-000f-51c-af-01d5eaf00dbad; // String |
-apiInstance.deleteMonitor(projectUID, monitorUID).then((data) => {
+apiInstance.deleteMonitor(projectOrProductUID, monitorUID).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
@@ -84,10 +84,10 @@ apiInstance.deleteMonitor(projectUID, monitorUID).then((data) => {
 
 ### Parameters
 
-| Name           | Type       | Description | Notes |
-| -------------- | ---------- | ----------- | ----- |
-| **projectUID** | **String** |             |
-| **monitorUID** | **String** |             |
+| Name                    | Type       | Description | Notes |
+| ----------------------- | ---------- | ----------- | ----- |
+| **projectOrProductUID** | **String** |             |
+| **monitorUID**          | **String** |             |
 
 ### Return type
 
@@ -104,7 +104,7 @@ apiInstance.deleteMonitor(projectUID, monitorUID).then((data) => {
 
 ## getMonitor
 
-> Monitor getMonitor(projectUID, monitorUID)
+> Monitor getMonitor(projectOrProductUID, monitorUID)
 
 Get Monitor
 
@@ -118,9 +118,9 @@ let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.MonitorApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
 let monitorUID = monitor:8bAdf00d-000f-51c-af-01d5eaf00dbad; // String |
-apiInstance.getMonitor(projectUID, monitorUID).then((data) => {
+apiInstance.getMonitor(projectOrProductUID, monitorUID).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
@@ -130,10 +130,10 @@ apiInstance.getMonitor(projectUID, monitorUID).then((data) => {
 
 ### Parameters
 
-| Name           | Type       | Description | Notes |
-| -------------- | ---------- | ----------- | ----- |
-| **projectUID** | **String** |             |
-| **monitorUID** | **String** |             |
+| Name                    | Type       | Description | Notes |
+| ----------------------- | ---------- | ----------- | ----- |
+| **projectOrProductUID** | **String** |             |
+| **monitorUID**          | **String** |             |
 
 ### Return type
 
@@ -150,7 +150,7 @@ apiInstance.getMonitor(projectUID, monitorUID).then((data) => {
 
 ## getMonitors
 
-> [Monitor] getMonitors(projectUID)
+> [Monitor] getMonitors(projectOrProductUID)
 
 Get list of defined Monitors
 
@@ -164,8 +164,8 @@ let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.MonitorApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
-apiInstance.getMonitors(projectUID).then((data) => {
+let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+apiInstance.getMonitors(projectOrProductUID).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
@@ -175,9 +175,9 @@ apiInstance.getMonitors(projectUID).then((data) => {
 
 ### Parameters
 
-| Name           | Type       | Description | Notes |
-| -------------- | ---------- | ----------- | ----- |
-| **projectUID** | **String** |             |
+| Name                    | Type       | Description | Notes |
+| ----------------------- | ---------- | ----------- | ----- |
+| **projectOrProductUID** | **String** |             |
 
 ### Return type
 
@@ -194,7 +194,7 @@ apiInstance.getMonitors(projectUID).then((data) => {
 
 ## updateMonitor
 
-> Monitor updateMonitor(projectUID, monitorUID, monitor)
+> Monitor updateMonitor(projectOrProductUID, monitorUID, monitor)
 
 Update Monitor
 
@@ -208,10 +208,10 @@ let api_key = defaultClient.authentications['api_key'];
 api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.MonitorApi();
-let projectUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
 let monitorUID = monitor:8bAdf00d-000f-51c-af-01d5eaf00dbad; // String |
 let monitor = new NotehubJs.Monitor(); // Monitor | Body or payload of monitor to be created
-apiInstance.updateMonitor(projectUID, monitorUID, monitor).then((data) => {
+apiInstance.updateMonitor(projectOrProductUID, monitorUID, monitor).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
@@ -221,11 +221,11 @@ apiInstance.updateMonitor(projectUID, monitorUID, monitor).then((data) => {
 
 ### Parameters
 
-| Name           | Type                      | Description                              | Notes |
-| -------------- | ------------------------- | ---------------------------------------- | ----- |
-| **projectUID** | **String**                |                                          |
-| **monitorUID** | **String**                |                                          |
-| **monitor**    | [**Monitor**](Monitor.md) | Body or payload of monitor to be created |
+| Name                    | Type                      | Description                              | Notes |
+| ----------------------- | ------------------------- | ---------------------------------------- | ----- |
+| **projectOrProductUID** | **String**                |                                          |
+| **monitorUID**          | **String**                |                                          |
+| **monitor**             | [**Monitor**](Monitor.md) | Body or payload of monitor to be created |
 
 ### Return type
 

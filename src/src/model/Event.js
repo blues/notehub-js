@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The Event model module.
  * @module model/Event
- * @version 1.0.33
+ * @version 1.0.34
  */
 class Event {
   /**
@@ -53,6 +53,9 @@ class Event {
       }
       if (data.hasOwnProperty("tls")) {
         obj["tls"] = ApiClient.convertToType(data["tls"], "Boolean");
+      }
+      if (data.hasOwnProperty("transport")) {
+        obj["transport"] = ApiClient.convertToType(data["transport"], "String");
       }
       if (data.hasOwnProperty("best_id")) {
         obj["best_id"] = ApiClient.convertToType(data["best_id"], "String");
@@ -314,6 +317,19 @@ class Event {
       throw new Error(
         "Expected the field `session` to be a primitive type in the JSON string but got " +
           data["session"]
+      );
+    }
+    // ensure the json data is a string
+    if (
+      data["transport"] &&
+      !(
+        typeof data["transport"] === "string" ||
+        data["transport"] instanceof String
+      )
+    ) {
+      throw new Error(
+        "Expected the field `transport` to be a primitive type in the JSON string but got " +
+          data["transport"]
       );
     }
     // ensure the json data is a string
@@ -695,6 +711,12 @@ Event.prototype["session"] = undefined;
  * @member {Boolean} tls
  */
 Event.prototype["tls"] = undefined;
+
+/**
+ * The transport used for this event, e.g., \"cellular\", \"wifi\", \", etc.
+ * @member {String} transport
+ */
+Event.prototype["transport"] = undefined;
 
 /**
  * The device serial number, or the DeviceUID if the serial number is not set

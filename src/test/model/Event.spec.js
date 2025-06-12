@@ -68,6 +68,12 @@
       //expect(instance).to.be();
     });
 
+    it('should have the property transport (base name: "transport")', function () {
+      // uncomment below and update the code to test the property transport
+      //var instance = new NotehubJs.Event();
+      //expect(instance).to.be();
+    });
+
     it('should have the property bestId (base name: "best_id")', function () {
       // uncomment below and update the code to test the property bestId
       //var instance = new NotehubJs.Event();

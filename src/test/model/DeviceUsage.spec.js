@@ -104,8 +104,8 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property noteSent (base name: "note_sent")', function () {
-      // uncomment below and update the code to test the property noteSent
+    it('should have the property notesSent (base name: "notes_sent")', function () {
+      // uncomment below and update the code to test the property notesSent
       //var instance = new NotehubJs.DeviceUsage();
       //expect(instance).to.be();
     });
