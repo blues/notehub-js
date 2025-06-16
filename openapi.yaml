@@ -336,10 +336,17 @@ paths:
         - $ref: "#/components/parameters/startDateParam"
         - $ref: "#/components/parameters/endDateParam"
         - $ref: "#/components/parameters/systemFilesOnlyParam"
+        - $ref: "#/components/parameters/mostRecentOnlyParam"
         - $ref: "#/components/parameters/filesQueryParam"
       responses:
         "200":
-          $ref: "#/components/responses/RouteLogsResponse"
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/RouteLog"
         default:
           $ref: "#/components/responses/ErrorResponse"
 
@@ -1248,7 +1255,13 @@ paths:
         - $ref: "#/components/parameters/eventUIDParam"
       responses:
         "200":
-          $ref: "#/components/responses/RouteLogsResponse"
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/RouteLog"
         default:
           $ref: "#/components/responses/ErrorResponse"
 
@@ -3047,6 +3060,13 @@ components:
       schema:
         type: boolean
 
+    mostRecentOnlyParam:
+      name: mostRecentOnly
+      in: query
+      required: false
+      schema:
+        type: boolean
+
     fleetUIDQueryParam:
       name: fleetUID
       in: query
@@ -3665,37 +3685,6 @@ components:
                 tower_location: Waverly MI
                 tower_timezone: America/Detroit
                 tower_id: 310,410,20483,184692496
-
-    RouteLogsResponse:
-      description: The response body for a Route Logs request.
-      content:
-        application/json:
-          schema:
-            type: array
-            items:
-              type: object
-              properties:
-                date:
-                  type: string
-                  description: The date of the logs.
-                routeUID:
-                  type: string
-                  description: The route UID.
-                eventUID:
-                  type: string
-                  description: The event UID.
-                attn:
-                  type: boolean
-                  description: Whether the event was routed in error
-                status:
-                  type: string
-                  description: The status of the event.
-                text:
-                  type: string
-                  description: The response body of the route.
-                url:
-                  type: string
-                  description: The URL of the route.
 
     MonitorsResponse:
       description: The response body from GET /monitors
@@ -5209,6 +5198,31 @@ components:
             type: string
       required:
         - environment_variables
+
+    RouteLog:
+      type: object
+      properties:
+        date:
+          type: string
+          description: The date of the logs.
+        routeUID:
+          type: string
+          description: The route UID.
+        eventUID:
+          type: string
+          description: The event UID.
+        attn:
+          type: boolean
+          description: If true, an error was returned when routing
+        status:
+          type: string
+          description: The status of the event.
+        text:
+          type: string
+          description: The response body of the route.
+        url:
+          type: string
+          description: The URL of the route.
 
     Note:
       type: object
