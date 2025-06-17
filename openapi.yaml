@@ -331,8 +331,8 @@ paths:
         - $ref: "#/components/parameters/pageSizeParam"
         - $ref: "#/components/parameters/pageNumParam"
         - $ref: "#/components/parameters/deviceUIDParamQuery"
-        - $ref: "#/components/parameters/sortByParam"
-        - $ref: "#/components/parameters/sortOrderParam"
+        - $ref: "#/components/parameters/routeLogsSortByParam"
+        - $ref: "#/components/parameters/routeLogsSortOrderParam"
         - $ref: "#/components/parameters/startDateParam"
         - $ref: "#/components/parameters/endDateParam"
         - $ref: "#/components/parameters/systemFilesOnlyParam"
@@ -2984,6 +2984,29 @@ components:
           - triangulated_location
           - best_location
         default: captured
+
+    routeLogsSortByParam:
+      name: sortBy
+      in: query
+      required: false
+      schema:
+        type: string
+        enum:
+          - date
+          - event
+        default: date
+
+    # same as sortOrderParam, but with a different default
+    routeLogsSortOrderParam:
+      name: sortOrder
+      in: query
+      required: false
+      schema:
+        type: string
+        enum:
+          - asc
+          - desc
+        default: desc
 
     sortOrderParam:
       name: sortOrder
