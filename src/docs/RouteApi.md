@@ -160,7 +160,7 @@ apiInstance.getRoute(projectOrProductUID, routeUID).then((data) => {
 
 ## getRouteLogsByRoute
 
-> [GetRouteLogsByRoute200ResponseInner] getRouteLogsByRoute(projectOrProductUID, routeUID, opts)
+> [RouteLog] getRouteLogsByRoute(projectOrProductUID, routeUID, opts)
 
 Get Route Logs by Route UID
 
@@ -180,11 +180,12 @@ let opts = {
   'pageSize': 50, // Number |
   'pageNum': 1, // Number |
   'deviceUID': ["null"], // [String] | A Device UID.
-  'sortBy': "'captured'", // String |
-  'sortOrder': "'asc'", // String |
+  'sortBy': "'date'", // String |
+  'sortOrder': "'desc'", // String |
   'startDate': 1628631763, // Number | Unix timestamp
   'endDate': 1657894210, // Number | Unix timestamp
   'systemFilesOnly': true, // Boolean |
+  'mostRecentOnly': true, // Boolean |
   'files': _health.qo, data.qo // String |
 };
 apiInstance.getRouteLogsByRoute(projectOrProductUID, routeUID, opts).then((data) => {
@@ -197,23 +198,24 @@ apiInstance.getRouteLogsByRoute(projectOrProductUID, routeUID, opts).then((data)
 
 ### Parameters
 
-| Name                    | Type                      | Description    | Notes                                      |
-| ----------------------- | ------------------------- | -------------- | ------------------------------------------ |
+| Name                    | Type                      | Description    | Notes                                  |
+| ----------------------- | ------------------------- | -------------- | -------------------------------------- |
 | **projectOrProductUID** | **String**                |                |
 | **routeUID**            | **String**                |                |
-| **pageSize**            | **Number**                |                | [optional] [default to 50]                 |
-| **pageNum**             | **Number**                |                | [optional] [default to 1]                  |
-| **deviceUID**           | [**[String]**](String.md) | A Device UID.  | [optional]                                 |
-| **sortBy**              | **String**                |                | [optional] [default to &#39;captured&#39;] |
-| **sortOrder**           | **String**                |                | [optional] [default to &#39;asc&#39;]      |
-| **startDate**           | **Number**                | Unix timestamp | [optional]                                 |
-| **endDate**             | **Number**                | Unix timestamp | [optional]                                 |
-| **systemFilesOnly**     | **Boolean**               |                | [optional]                                 |
-| **files**               | **String**                |                | [optional]                                 |
+| **pageSize**            | **Number**                |                | [optional] [default to 50]             |
+| **pageNum**             | **Number**                |                | [optional] [default to 1]              |
+| **deviceUID**           | [**[String]**](String.md) | A Device UID.  | [optional]                             |
+| **sortBy**              | **String**                |                | [optional] [default to &#39;date&#39;] |
+| **sortOrder**           | **String**                |                | [optional] [default to &#39;desc&#39;] |
+| **startDate**           | **Number**                | Unix timestamp | [optional]                             |
+| **endDate**             | **Number**                | Unix timestamp | [optional]                             |
+| **systemFilesOnly**     | **Boolean**               |                | [optional]                             |
+| **mostRecentOnly**      | **Boolean**               |                | [optional]                             |
+| **files**               | **String**                |                | [optional]                             |
 
 ### Return type
 
-[**[GetRouteLogsByRoute200ResponseInner]**](GetRouteLogsByRoute200ResponseInner.md)
+[**[RouteLog]**](RouteLog.md)
 
 ### Authorization
 

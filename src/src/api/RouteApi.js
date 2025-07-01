@@ -13,14 +13,14 @@
 
 import ApiClient from "../ApiClient";
 import Error from "../model/Error";
-import GetRouteLogsByRoute200ResponseInner from "../model/GetRouteLogsByRoute200ResponseInner";
 import NotehubRoute from "../model/NotehubRoute";
+import RouteLog from "../model/RouteLog";
 import UserDbRoute from "../model/UserDbRoute";
 
 /**
  * Route service.
  * @module api/RouteApi
- * @version 1.0.34
+ * @version 1.0.35
  */
 export default class RouteApi {
   /**
@@ -230,13 +230,14 @@ export default class RouteApi {
    * @param {Number} opts.pageSize  (default to 50)
    * @param {Number} opts.pageNum  (default to 1)
    * @param {Array.<String>} opts.deviceUID A Device UID.
-   * @param {module:model/String} opts.sortBy  (default to 'captured')
-   * @param {module:model/String} opts.sortOrder  (default to 'asc')
+   * @param {module:model/String} opts.sortBy  (default to 'date')
+   * @param {module:model/String} opts.sortOrder  (default to 'desc')
    * @param {Number} opts.startDate Unix timestamp
    * @param {Number} opts.endDate Unix timestamp
    * @param {Boolean} opts.systemFilesOnly
+   * @param {Boolean} opts.mostRecentOnly
    * @param {String} opts.files
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link Array.<module:model/GetRouteLogsByRoute200ResponseInner>} and HTTP response
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link Array.<module:model/RouteLog>} and HTTP response
    */
   getRouteLogsByRouteWithHttpInfo(projectOrProductUID, routeUID, opts) {
     opts = opts || {};
@@ -270,6 +271,7 @@ export default class RouteApi {
       startDate: opts["startDate"],
       endDate: opts["endDate"],
       systemFilesOnly: opts["systemFilesOnly"],
+      mostRecentOnly: opts["mostRecentOnly"],
       files: opts["files"],
     };
     let headerParams = {};
@@ -278,7 +280,7 @@ export default class RouteApi {
     let authNames = ["api_key"];
     let contentTypes = [];
     let accepts = ["application/json"];
-    let returnType = [GetRouteLogsByRoute200ResponseInner];
+    let returnType = [RouteLog];
     return this.apiClient.callApi(
       "/v1/projects/{projectOrProductUID}/routes/{routeUID}/route-logs",
       "GET",
@@ -303,13 +305,14 @@ export default class RouteApi {
    * @param {Number} opts.pageSize  (default to 50)
    * @param {Number} opts.pageNum  (default to 1)
    * @param {Array.<String>} opts.deviceUID A Device UID.
-   * @param {module:model/String} opts.sortBy  (default to 'captured')
-   * @param {module:model/String} opts.sortOrder  (default to 'asc')
+   * @param {module:model/String} opts.sortBy  (default to 'date')
+   * @param {module:model/String} opts.sortOrder  (default to 'desc')
    * @param {Number} opts.startDate Unix timestamp
    * @param {Number} opts.endDate Unix timestamp
    * @param {Boolean} opts.systemFilesOnly
+   * @param {Boolean} opts.mostRecentOnly
    * @param {String} opts.files
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link Array.<module:model/GetRouteLogsByRoute200ResponseInner>}
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link Array.<module:model/RouteLog>}
    */
   getRouteLogsByRoute(projectOrProductUID, routeUID, opts) {
     return this.getRouteLogsByRouteWithHttpInfo(

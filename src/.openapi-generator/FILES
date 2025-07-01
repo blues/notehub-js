@@ -67,7 +67,6 @@ docs/GetProjectFleets200Response.md
 docs/GetProjectMembers200Response.md
 docs/GetProjectProducts200Response.md
 docs/GetProjects200Response.md
-docs/GetRouteLogsByRoute200ResponseInner.md
 docs/GetWebhooks200Response.md
 docs/Google.md
 docs/HandleNoteChanges200Response.md
@@ -104,6 +103,7 @@ docs/Repository.md
 docs/RepositoryApi.md
 docs/Role.md
 docs/RouteApi.md
+docs/RouteLog.md
 docs/SchemaProperty.md
 docs/SimUsage.md
 docs/Slack.md
@@ -196,7 +196,6 @@ src/model/GetProjectFleets200Response.js
 src/model/GetProjectMembers200Response.js
 src/model/GetProjectProducts200Response.js
 src/model/GetProjects200Response.js
-src/model/GetRouteLogsByRoute200ResponseInner.js
 src/model/GetWebhooks200Response.js
 src/model/Google.js
 src/model/HandleNoteChanges200Response.js
@@ -229,6 +228,7 @@ src/model/QuestionDataResponseMap.js
 src/model/Radresponder.js
 src/model/Repository.js
 src/model/Role.js
+src/model/RouteLog.js
 src/model/SchemaProperty.js
 src/model/SimUsage.js
 src/model/Slack.js
@@ -315,7 +315,6 @@ test/model/GetProjectFleets200Response.spec.js
 test/model/GetProjectMembers200Response.spec.js
 test/model/GetProjectProducts200Response.spec.js
 test/model/GetProjects200Response.spec.js
-test/model/GetRouteLogsByRoute200ResponseInner.spec.js
 test/model/GetWebhooks200Response.spec.js
 test/model/Google.spec.js
 test/model/HandleNoteChanges200Response.spec.js
@@ -348,6 +347,7 @@ test/model/QuestionDataResponseMap.spec.js
 test/model/Radresponder.spec.js
 test/model/Repository.spec.js
 test/model/Role.spec.js
+test/model/RouteLog.spec.js
 test/model/SchemaProperty.spec.js
 test/model/SimUsage.spec.js
 test/model/Slack.spec.js

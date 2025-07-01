@@ -292,7 +292,7 @@ apiInstance.getProjectEventsByCursor(projectOrProductUID, opts).then((data) => {
 
 ## getRouteLogsByEvent
 
-> [GetRouteLogsByRoute200ResponseInner] getRouteLogsByEvent(projectOrProductUID, eventUID)
+> [RouteLog] getRouteLogsByEvent(projectOrProductUID, eventUID)
 
 Get Route Logs by Event UID
 
@@ -325,7 +325,7 @@ apiInstance.getRouteLogsByEvent(projectOrProductUID, eventUID).then((data) => {
 
 ### Return type
 
-[**[GetRouteLogsByRoute200ResponseInner]**](GetRouteLogsByRoute200ResponseInner.md)
+[**[RouteLog]**](RouteLog.md)
 
 ### Authorization
 

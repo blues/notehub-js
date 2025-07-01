@@ -17,7 +17,7 @@ import Firmware from "./Firmware";
 /**
  * The CurrentFirmware model module.
  * @module model/CurrentFirmware
- * @version 1.0.34
+ * @version 1.0.35
  */
 class CurrentFirmware {
   /**

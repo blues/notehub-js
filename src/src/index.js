@@ -70,7 +70,6 @@ import GetProjectFleets200Response from "./model/GetProjectFleets200Response";
 import GetProjectMembers200Response from "./model/GetProjectMembers200Response";
 import GetProjectProducts200Response from "./model/GetProjectProducts200Response";
 import GetProjects200Response from "./model/GetProjects200Response";
-import GetRouteLogsByRoute200ResponseInner from "./model/GetRouteLogsByRoute200ResponseInner";
 import GetWebhooks200Response from "./model/GetWebhooks200Response";
 import Google from "./model/Google";
 import HandleNoteChanges200Response from "./model/HandleNoteChanges200Response";
@@ -103,6 +102,7 @@ import QuestionDataResponseMap from "./model/QuestionDataResponseMap";
 import Radresponder from "./model/Radresponder";
 import Repository from "./model/Repository";
 import Role from "./model/Role";
+import RouteLog from "./model/RouteLog";
 import SchemaProperty from "./model/SchemaProperty";
 import SimUsage from "./model/SimUsage";
 import Slack from "./model/Slack";
@@ -161,7 +161,7 @@ import WebhookApi from "./api/WebhookApi";
  * </pre>
  * </p>
  * @module index
- * @version 1.0.34
+ * @version 1.0.35
  */
 export {
   /**
@@ -519,12 +519,6 @@ export {
   GetProjects200Response,
 
   /**
-   * The GetRouteLogsByRoute200ResponseInner model constructor.
-   * @property {module:model/GetRouteLogsByRoute200ResponseInner}
-   */
-  GetRouteLogsByRoute200ResponseInner,
-
-  /**
    * The GetWebhooks200Response model constructor.
    * @property {module:model/GetWebhooks200Response}
    */
@@ -715,6 +709,12 @@ export {
    * @property {module:model/Role}
    */
   Role,
+
+  /**
+   * The RouteLog model constructor.
+   * @property {module:model/RouteLog}
+   */
+  RouteLog,
 
   /**
    * The SchemaProperty model constructor.

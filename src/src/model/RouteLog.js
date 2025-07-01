@@ -14,17 +14,17 @@
 import ApiClient from "../ApiClient";
 
 /**
- * The GetRouteLogsByRoute200ResponseInner model module.
- * @module model/GetRouteLogsByRoute200ResponseInner
- * @version 1.0.34
+ * The RouteLog model module.
+ * @module model/RouteLog
+ * @version 1.0.35
  */
-class GetRouteLogsByRoute200ResponseInner {
+class RouteLog {
   /**
-   * Constructs a new <code>GetRouteLogsByRoute200ResponseInner</code>.
-   * @alias module:model/GetRouteLogsByRoute200ResponseInner
+   * Constructs a new <code>RouteLog</code>.
+   * @alias module:model/RouteLog
    */
   constructor() {
-    GetRouteLogsByRoute200ResponseInner.initialize(this);
+    RouteLog.initialize(this);
   }
 
   /**
@@ -35,15 +35,15 @@ class GetRouteLogsByRoute200ResponseInner {
   static initialize(obj) {}
 
   /**
-   * Constructs a <code>GetRouteLogsByRoute200ResponseInner</code> from a plain JavaScript object, optionally creating a new instance.
+   * Constructs a <code>RouteLog</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/GetRouteLogsByRoute200ResponseInner} obj Optional instance to populate.
-   * @return {module:model/GetRouteLogsByRoute200ResponseInner} The populated <code>GetRouteLogsByRoute200ResponseInner</code> instance.
+   * @param {module:model/RouteLog} obj Optional instance to populate.
+   * @return {module:model/RouteLog} The populated <code>RouteLog</code> instance.
    */
   static constructFromObject(data, obj) {
     if (data) {
-      obj = obj || new GetRouteLogsByRoute200ResponseInner();
+      obj = obj || new RouteLog();
 
       if (data.hasOwnProperty("date")) {
         obj["date"] = ApiClient.convertToType(data["date"], "String");
@@ -73,9 +73,9 @@ class GetRouteLogsByRoute200ResponseInner {
   }
 
   /**
-   * Validates the JSON data with respect to <code>GetRouteLogsByRoute200ResponseInner</code>.
+   * Validates the JSON data with respect to <code>RouteLog</code>.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @return {boolean} to indicate whether the JSON data is valid with respect to <code>GetRouteLogsByRoute200ResponseInner</code>.
+   * @return {boolean} to indicate whether the JSON data is valid with respect to <code>RouteLog</code>.
    */
   static validateJSON(data) {
     // ensure the json data is a string
@@ -153,42 +153,42 @@ class GetRouteLogsByRoute200ResponseInner {
  * The date of the logs.
  * @member {String} date
  */
-GetRouteLogsByRoute200ResponseInner.prototype["date"] = undefined;
+RouteLog.prototype["date"] = undefined;
 
 /**
  * The route UID.
  * @member {String} routeUID
  */
-GetRouteLogsByRoute200ResponseInner.prototype["routeUID"] = undefined;
+RouteLog.prototype["routeUID"] = undefined;
 
 /**
  * The event UID.
  * @member {String} eventUID
  */
-GetRouteLogsByRoute200ResponseInner.prototype["eventUID"] = undefined;
+RouteLog.prototype["eventUID"] = undefined;
 
 /**
- * Whether the event was routed in error
+ * If true, an error was returned when routing
  * @member {Boolean} attn
  */
-GetRouteLogsByRoute200ResponseInner.prototype["attn"] = undefined;
+RouteLog.prototype["attn"] = undefined;
 
 /**
  * The status of the event.
  * @member {String} status
  */
-GetRouteLogsByRoute200ResponseInner.prototype["status"] = undefined;
+RouteLog.prototype["status"] = undefined;
 
 /**
  * The response body of the route.
  * @member {String} text
  */
-GetRouteLogsByRoute200ResponseInner.prototype["text"] = undefined;
+RouteLog.prototype["text"] = undefined;
 
 /**
  * The URL of the route.
  * @member {String} url
  */
-GetRouteLogsByRoute200ResponseInner.prototype["url"] = undefined;
+RouteLog.prototype["url"] = undefined;
 
-export default GetRouteLogsByRoute200ResponseInner;
+export default RouteLog;
