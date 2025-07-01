@@ -17,7 +17,7 @@ import DataSetField from "./DataSetField";
 /**
  * The DataSet model module.
  * @module model/DataSet
- * @version 1.0.34
+ * @version 1.0.35
  */
 class DataSet {
   /**

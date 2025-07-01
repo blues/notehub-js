@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The GetDevicePublicKey200Response model module.
  * @module model/GetDevicePublicKey200Response
- * @version 1.0.34
+ * @version 1.0.35
  */
 class GetDevicePublicKey200Response {
   /**

@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The Fleet model module.
  * @module model/Fleet
- * @version 1.0.34
+ * @version 1.0.35
  */
 class Fleet {
   /**
