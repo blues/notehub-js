@@ -15,7 +15,7 @@ import ApiClient from "../ApiClient";
 import Error from "../model/Error";
 import GetProjectEvents200Response from "../model/GetProjectEvents200Response";
 import GetProjectEventsByCursor200Response from "../model/GetProjectEventsByCursor200Response";
-import GetRouteLogsByRoute200ResponseInner from "../model/GetRouteLogsByRoute200ResponseInner";
+import RouteLog from "../model/RouteLog";
 
 /**
  * Event service.
@@ -455,7 +455,7 @@ export default class EventApi {
    * Get Route Logs by Event UID
    * @param {String} projectOrProductUID
    * @param {String} eventUID
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link Array.<module:model/GetRouteLogsByRoute200ResponseInner>} and HTTP response
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link Array.<module:model/RouteLog>} and HTTP response
    */
   getRouteLogsByEventWithHttpInfo(projectOrProductUID, eventUID) {
     let postBody = null;
@@ -483,7 +483,7 @@ export default class EventApi {
     let authNames = ["api_key"];
     let contentTypes = [];
     let accepts = ["application/json"];
-    let returnType = [GetRouteLogsByRoute200ResponseInner];
+    let returnType = [RouteLog];
     return this.apiClient.callApi(
       "/v1/projects/{projectOrProductUID}/events/{eventUID}/route-logs",
       "GET",
@@ -504,7 +504,7 @@ export default class EventApi {
    * Get Route Logs by Event UID
    * @param {String} projectOrProductUID
    * @param {String} eventUID
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link Array.<module:model/GetRouteLogsByRoute200ResponseInner>}
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link Array.<module:model/RouteLog>}
    */
   getRouteLogsByEvent(projectOrProductUID, eventUID) {
     return this.getRouteLogsByEventWithHttpInfo(

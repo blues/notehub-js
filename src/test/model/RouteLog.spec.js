@@ -28,7 +28,7 @@
   var instance;
 
   beforeEach(function () {
-    instance = new NotehubJs.GetRouteLogsByRoute200ResponseInner();
+    instance = new NotehubJs.RouteLog();
   });
 
   var getProperty = function (object, getter, property) {
@@ -43,52 +43,52 @@
     else object[property] = value;
   };
 
-  describe("GetRouteLogsByRoute200ResponseInner", function () {
-    it("should create an instance of GetRouteLogsByRoute200ResponseInner", function () {
-      // uncomment below and update the code to test GetRouteLogsByRoute200ResponseInner
-      //var instance = new NotehubJs.GetRouteLogsByRoute200ResponseInner();
-      //expect(instance).to.be.a(NotehubJs.GetRouteLogsByRoute200ResponseInner);
+  describe("RouteLog", function () {
+    it("should create an instance of RouteLog", function () {
+      // uncomment below and update the code to test RouteLog
+      //var instance = new NotehubJs.RouteLog();
+      //expect(instance).to.be.a(NotehubJs.RouteLog);
     });
 
     it('should have the property date (base name: "date")', function () {
       // uncomment below and update the code to test the property date
-      //var instance = new NotehubJs.GetRouteLogsByRoute200ResponseInner();
+      //var instance = new NotehubJs.RouteLog();
       //expect(instance).to.be();
     });
 
     it('should have the property routeUID (base name: "routeUID")', function () {
       // uncomment below and update the code to test the property routeUID
-      //var instance = new NotehubJs.GetRouteLogsByRoute200ResponseInner();
+      //var instance = new NotehubJs.RouteLog();
       //expect(instance).to.be();
     });
 
     it('should have the property eventUID (base name: "eventUID")', function () {
       // uncomment below and update the code to test the property eventUID
-      //var instance = new NotehubJs.GetRouteLogsByRoute200ResponseInner();
+      //var instance = new NotehubJs.RouteLog();
       //expect(instance).to.be();
     });
 
     it('should have the property attn (base name: "attn")', function () {
       // uncomment below and update the code to test the property attn
-      //var instance = new NotehubJs.GetRouteLogsByRoute200ResponseInner();
+      //var instance = new NotehubJs.RouteLog();
       //expect(instance).to.be();
     });
 
     it('should have the property status (base name: "status")', function () {
       // uncomment below and update the code to test the property status
-      //var instance = new NotehubJs.GetRouteLogsByRoute200ResponseInner();
+      //var instance = new NotehubJs.RouteLog();
       //expect(instance).to.be();
     });
 
     it('should have the property text (base name: "text")', function () {
       // uncomment below and update the code to test the property text
-      //var instance = new NotehubJs.GetRouteLogsByRoute200ResponseInner();
+      //var instance = new NotehubJs.RouteLog();
       //expect(instance).to.be();
     });
 
     it('should have the property url (base name: "url")', function () {
       // uncomment below and update the code to test the property url
-      //var instance = new NotehubJs.GetRouteLogsByRoute200ResponseInner();
+      //var instance = new NotehubJs.RouteLog();
       //expect(instance).to.be();
     });
   });
