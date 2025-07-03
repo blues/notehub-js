@@ -187,7 +187,7 @@ paths:
                   "http":
                     {
                       "fleets": ["fleet:1042ddc5-3b2c-4cec-b1fb-d3040538094d"],
-                      "filter": { "type": "", "system_notefiles": false },
+                      "filter": {"type": "", "system_notefiles": false},
                       "transform": {},
                       "throttle_ms": 100,
                       "url": "http://route.url",
@@ -226,7 +226,7 @@ paths:
                   "http":
                     {
                       "fleets": ["fleet:1042ddc5-3b2c-4cec-b1fb-d3040538094d"],
-                      "filter": { "type": "", "system_notefiles": false },
+                      "filter": {"type": "", "system_notefiles": false},
                       "transform": {},
                       "throttle_ms": 100,
                       "url": "http://route.url",
@@ -703,11 +703,11 @@ paths:
           $ref: "#/components/responses/ErrorResponse"
 
     get:
-      tags: [ "project" ]
+      tags: ["project"]
       operationId: getFleet
       description: Get Fleet
       security:
-        - api_key: [ ]
+        - api_key: []
       responses:
         "200":
           description: Successful operation
@@ -1205,7 +1205,7 @@ paths:
             items:
               type: string
         - name: since
-          description: Deprecated. 
+          description: Deprecated.
           in: query
           required: false
           deprecated: true
@@ -1303,7 +1303,7 @@ paths:
             items:
               type: string
         - name: since
-          description: Deprecated. 
+          description: Deprecated.
           in: query
           required: false
           deprecated: true
@@ -2237,7 +2237,7 @@ paths:
   /v1/projects/{projectOrProductUID}/dfu/{firmwareType}/{action}:
     post:
       tags: ["project"]
-      operationId: dfuAction 
+      operationId: dfuAction
       description: Update/cancel host or notecard firmware updates
       security:
         - api_key: []
@@ -2255,7 +2255,7 @@ paths:
         - $ref: "#/components/parameters/productUIDQueryParam"
         - $ref: "#/components/parameters/skuParam"
       requestBody:
-        description: Which firmware in the case of an update action 
+        description: Which firmware in the case of an update action
         required: false
         content:
           application/json:
@@ -2269,26 +2269,26 @@ paths:
 
   /v1/repositories:
     post:
-        tags: ["repository"]
-        operationId: createRepository
-        description: Create a new repository 
-        security:
-            - api_key: []
-        requestBody:
-            required: true
-            content:
-              application/json:
-                schema:
-                  $ref: "#/components/schemas/CreateUpdateRepository"
-        responses:
-            "201":
-              description: Repository created successfully
-              content:
-                application/json:
-                  schema:
-                    $ref: "#/components/schemas/Repository"
-            default:
-              $ref: "#/components/responses/ErrorResponse"
+      tags: ["repository"]
+      operationId: createRepository
+      description: Create a new repository
+      security:
+        - api_key: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateUpdateRepository"
+      responses:
+        "201":
+          description: Repository created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Repository"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
 
   /v1/repositories/{repositoryUID}:
     get:
@@ -2311,7 +2311,7 @@ paths:
           $ref: "#/components/responses/ErrorResponse"
     put:
       tags: ["repository"]
-      operationId: putRepository 
+      operationId: putRepository
       description: Update a repository
       security:
         - api_key: []
@@ -2334,25 +2334,25 @@ paths:
         default:
           $ref: "#/components/responses/ErrorResponse"
     delete:
-        tags: ["repository"]
-        operationId: deleteRepository
-        description: Delete a repository
-        security:
-          - api_key: []
-        parameters:
-          - $ref: "#/components/parameters/repositoryUIDParam"
-          - $ref: "#/components/parameters/repositoryKey"
-        responses:
-          "200":
-            description: Dataset deleted successfully
-          default:
-            $ref: "#/components/responses/ErrorResponse"
+      tags: ["repository"]
+      operationId: deleteRepository
+      description: Delete a repository
+      security:
+        - api_key: []
+      parameters:
+        - $ref: "#/components/parameters/repositoryUIDParam"
+        - $ref: "#/components/parameters/repositoryKey"
+      responses:
+        "200":
+          description: Dataset deleted successfully
+        default:
+          $ref: "#/components/responses/ErrorResponse"
 
   /v1/repositories/{repositoryUID}/datasets:
     put:
       tags: ["repository"]
       operationId: createRepositoryDataset
-      description: Create a new dataset within a repository 
+      description: Create a new dataset within a repository
       security:
         - api_key: []
       parameters:
@@ -2421,8 +2421,8 @@ paths:
         - $ref: "#/components/parameters/repositoryUIDParam"
         - $ref: "#/components/parameters/repositoryKey"
         - in: header
-          description: Specify the format of the response data. This functions the same as the 
-            ClickHouse `FORMAT` clause. Supported values include `CSV`, `JSON`, `JSONEachRow`, 
+          description: Specify the format of the response data. This functions the same as the
+            ClickHouse `FORMAT` clause. Supported values include `CSV`, `JSON`, `JSONEachRow`,
             `TabSeparated`, and `NDJSON`. If not specified, defaults to `TabSeparated`.
           name: X-ClickHouse-Format
           schema:
@@ -2483,7 +2483,7 @@ paths:
   /v1/repositories/{repositoryUID}/data:
     get:
       tags: ["repository"]
-      operationId: getRepositoryData 
+      operationId: getRepositoryData
       description: Get event and session data from a repository in NDJSON format.
       security:
         - api_key: []
@@ -2699,6 +2699,67 @@ paths:
           $ref: "#/components/responses/ErrorResponse"
         200:
           description: Session closed
+
+  /analytics/{projectOrProductUID}/events:
+    get:
+      tags: ["analytics"]
+      security:
+        - api_key: []
+      operationId: getEventsAnalytics
+      parameters:
+        - $ref: '#/components/parameters/projectOrProductUIDParam'
+        - $ref: '#/components/parameters/deviceUIDsParamQuery'
+        - $ref: '#/components/parameters/startDateParam'
+        - $ref: '#/components/parameters/endDateParam'
+        - name: partitionBy
+          in: query
+          schema:
+            type: string
+            enum:
+              - device
+              - notefile
+        - name: timeInterval
+          in: query
+          schema:
+            type: string
+            enum:
+              - hour
+              - minute
+              - day
+              - week
+              - month
+      responses:
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+        200:
+          description: Successful response containing a list of events.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  events:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        device:
+                          type: string
+                          example: UID
+                        time:
+                          type: string
+                          format: date-time
+                          example: "2025-07-03T12:34:56Z"
+                        events:
+                          type: integer
+                          example: 10
+                        platform_events:
+                          type: integer
+                          example: 10
+
+
+
+
 
 
 components:
