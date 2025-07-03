@@ -3841,9 +3841,16 @@ components:
         uid:
           type: string
           description: Unique and public identifier
-        created_by_account_uid:
-          type: string
+        created_by:
+          type: object
           description: The user that created this key
+          properties:
+            uid:
+              type: string
+            email:
+              type: string
+            name:
+              type: string
         billing_account_uid:
           type: string
           description: Optional billing account for keys defined at the billing account level
@@ -3860,6 +3867,31 @@ components:
           format: date-time
           nullable: true
           description: When it was last used, if ever
+        permissions:
+          type: object
+          properties:
+            project:
+              type: array
+              items:
+                $ref: '#/components/schemas/ApiKeyPermissionEntry'
+            billing_account:
+              type: array
+              items:
+                $ref: '#/components/schemas/ApiKeyPermissionEntry'
+    
+    ApiKeyPermissionEntry:
+      type: object
+      properties:
+        uid:
+          type: string
+        label:
+          type: string
+        role:
+          type: string
+        allowed_roles:
+          type: array
+          items:
+            type: string
     
     UpdateApiKeyRequest:
       type: object
