@@ -2699,7 +2699,77 @@ paths:
           $ref: "#/components/responses/ErrorResponse"
         200:
           description: Session closed
-
+  
+  /v1/api-keys:
+    get:
+      summary: List API keys
+      tags: ["api_access"]
+      operationId: listApiKeys
+      security:
+        - api_key: []
+      responses:
+        '200':
+          description: A list of API keys
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ApiKey'
+  
+  /v1/api-keys/{apiKeyUID}:
+    get:
+      summary: Get API key by UID
+      tags: ["api_access"]
+      operationId: getApiKey
+      security:
+        - api_key: []
+      parameters:
+        - name: apiKeyUID
+          in: path
+          required: true
+          schema:
+            type: string
+          description: UID of the API key
+      responses:
+        '200':
+          description: A single API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiKey'
+        '404':
+          description: API key not found
+    post:
+      summary: Update API key (e.g. expiration date)
+      tags: ["api_access"]
+      operationId: updateApiKey
+      security:
+        - api_key: []
+      parameters:
+        - name: apiKeyUID
+          in: path
+          required: true
+          schema:
+            type: string
+          description: UID of the API key to update
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateApiKeyRequest'
+      responses:
+        '200':
+          description: Updated API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiKey'
+        '404':
+          description: API key not found
+        '400':
+          description: Invalid input
 
 components:
 
@@ -3764,6 +3834,42 @@ components:
         - err
         - code
         - status
+    
+    ApiKey:
+      type: object
+      properties:
+        uid:
+          type: string
+          description: Unique and public identifier
+        created_by_account_uid:
+          type: string
+          description: The user that created this key
+        billing_account_uid:
+          type: string
+          description: Optional billing account for keys defined at the billing account level
+        expires_at:
+          type: string
+          format: date-time
+          description: When the key expires
+        created_at:
+          type: string
+          format: date-time
+          description: When the key was created
+        last_used:
+          type: string
+          format: date-time
+          nullable: true
+          description: When it was last used, if ever
+    
+    UpdateApiKeyRequest:
+      type: object
+      required:
+        - expiresAt
+      properties:
+        expiresAt:
+          type: string
+          format: date-time
+          description: New expiration timestamp for the API key
 
     JSONata:
       type: object
