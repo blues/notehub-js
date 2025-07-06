@@ -2716,6 +2716,30 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/ApiKey'
+    post:
+      summary: Create new API Key
+      tags: ["api_access"]
+      operationId: createApiKey
+      security:
+        - api_key: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateApiKeyRequest'
+      responses:
+        '200':
+          description: New API ID and Secret
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiKeySecret'
+        '404':
+          description: API key not found
+        '400':
+          description: Invalid input
+
   
   /v1/api-keys/{apiKeyUID}:
     get:
@@ -3893,6 +3917,16 @@ components:
           items:
             type: string
     
+    ApiKeySecret:
+      type: object
+      properties:
+        uid:
+          type: string
+          description: Unique and public identifier
+        secret:
+          type: string
+          description: The secret
+          
     UpdateApiKeyRequest:
       type: object
       required:
@@ -3902,6 +3936,27 @@ components:
           type: string
           format: date-time
           description: New expiration timestamp for the API key
+        roles:
+          type: object
+          properties:
+            project:
+              type: array
+              items:
+                type: object
+                properties:
+                  app_serial:
+                    type: int 
+                  role:
+                    type: string
+            billing_account:
+              type: array
+              items:
+                type: object
+                properties:
+                  billing_account_serial:
+                    type: int
+                  role:
+                    type: string
 
     JSONata:
       type: object
