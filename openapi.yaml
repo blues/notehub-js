@@ -2794,6 +2794,24 @@ paths:
           description: API key not found
         '400':
           description: Invalid input
+    delete:
+      summary: Delete an API key by UID
+      tags: ["api_access"]
+      operationId: deleteApiKey
+      security:
+        - api_key: []
+      parameters:
+        - name: apiKeyUID
+          in: path
+          required: true
+          schema:
+            type: string
+          description: UID of the API key
+      responses:
+        '204':
+          description: API Key was deleted
+        '404':
+          description: API key not found
 
 components:
 
@@ -3865,6 +3883,12 @@ components:
         uid:
           type: string
           description: Unique and public identifier
+        name:
+          type: string
+          description: Name for this API Key
+        description:
+          type: string
+          description: Optional description for this API Key
         created_by:
           type: object
           description: The user that created this key
@@ -3926,12 +3950,16 @@ components:
         secret:
           type: string
           description: The secret
-          
+
     UpdateApiKeyRequest:
       type: object
       required:
         - expiresAt
       properties:
+        name:
+          type: string
+        description:
+          type: string
         expiresAt:
           type: string
           format: date-time
