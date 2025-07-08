@@ -3970,21 +3970,19 @@ components:
             project:
               type: array
               items:
-                type: object
-                properties:
-                  app_uid:
-                    type: string
-                  role:
-                    type: string
+                $ref: "#/components/schemas/UpdateApiKeyRole"
             billing_account:
               type: array
               items:
-                type: object
-                properties:
-                  billing_account_uid:
-                    type: string
-                  role:
-                    type: string
+                $ref: "#/components/schemas/UpdateApiKeyRole"
+
+    UpdateApiKeyRole:
+      type: object
+      properties:
+        uid:
+          type: string
+        role:
+          type: string
 
     JSONata:
       type: object
