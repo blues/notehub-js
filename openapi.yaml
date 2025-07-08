@@ -3960,7 +3960,7 @@ components:
           type: string
         description:
           type: string
-        expiresAt:
+        expires_at:
           type: string
           format: date-time
           description: New expiration timestamp for the API key
@@ -3972,8 +3972,8 @@ components:
               items:
                 type: object
                 properties:
-                  app_serial:
-                    type: int 
+                  app_uid:
+                    type: string
                   role:
                     type: string
             billing_account:
@@ -3981,8 +3981,8 @@ components:
               items:
                 type: object
                 properties:
-                  billing_account_serial:
-                    type: int
+                  billing_account_uid:
+                    type: string
                   role:
                     type: string
 
