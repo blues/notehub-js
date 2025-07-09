@@ -2727,7 +2727,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateApiKeyRequest'
+              $ref: '#/components/schemas/ApiKeyInfo'
       responses:
         '200':
           description: New API ID and Secret
@@ -2782,7 +2782,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateApiKeyRequest'
+              $ref: '#/components/schemas/ApiKeyInfo'
       responses:
         '200':
           description: Updated API key
@@ -3952,7 +3952,7 @@ components:
           type: string
           description: The secret
 
-    UpdateApiKeyRequest:
+    ApiKeyInfo:
       type: object
       required:
         - expiresAt
@@ -3975,13 +3975,13 @@ components:
             project:
               type: array
               items:
-                $ref: "#/components/schemas/UpdateApiKeyRole"
+                $ref: "#/components/schemas/ApiKeyRole"
             billing_account:
               type: array
               items:
-                $ref: "#/components/schemas/UpdateApiKeyRole"
+                $ref: "#/components/schemas/ApiKeyRole"
 
-    UpdateApiKeyRole:
+    ApiKeyRole:
       type: object
       properties:
         uid:
