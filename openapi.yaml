@@ -3905,6 +3905,7 @@ components:
         expires_at:
           type: string
           format: date-time
+          nullable: true
           description: When the key expires
         created_at:
           type: string
@@ -3963,6 +3964,7 @@ components:
         expires_at:
           type: string
           format: date-time
+          nullable: true
           description: New expiration timestamp for the API key
         user_permissions:
           type: boolean
