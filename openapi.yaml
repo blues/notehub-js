@@ -3964,6 +3964,9 @@ components:
           type: string
           format: date-time
           description: New expiration timestamp for the API key
+        user_permissions:
+          type: boolean
+          description: for user API Keys (not billing account ones), this makes the key have the same roles as the owner
         roles:
           type: object
           properties:
