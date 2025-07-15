@@ -2544,34 +2544,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/WebhookSettings'
 
-  /v1/projects/{projectOrProductUIDParam}/webhooks/{webhookUID}:
-    post:
-      tags: ["webhook"]
-      security:
-        - api_key: []
-      operationId: CreateWebhook
-      description: Creates a webhook for the specified product with the given name. The name |
-        must be unique within the project.
-      parameters:
-        - $ref: '#/components/parameters/projectOrProductUIDParam'
-        - $ref: '#/components/parameters/webhookUIDParam'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/WebhookSettings'
-            example:
-              settings:
-                disabled: False
-                id: Abc_123-2646f411-dc56-44a0-9743-4130f47a74h8
-                transform: '{"device":body.end_device_ids.dev_eui,"sn":body.end_device_ids.device_id,"body":body.uplink_message.decoded_payload,"details":body}'
-      responses:
-        default:
-          $ref: "#/components/responses/ErrorResponse"
-        200:
-          description: Webhook created successfully
-
+  /v1/projects/{projectOrProductUID}/webhooks/{webhookUID}:
     put:
       tags: ["webhook"]
       security:
