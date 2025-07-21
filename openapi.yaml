@@ -13,6 +13,7 @@ info:
     # TODO
     # license:
     # termsOfService: https://notehub.io/subscription-agreement (?)
+    # some more comments
 
 externalDocs:
   description: Find out more about Blues
@@ -60,8 +61,6 @@ paths:
                   type: string
                 password:
                   type: string
-                test:
-                  type: boolean
             example:
               username: name@example.com
               password: test-password
