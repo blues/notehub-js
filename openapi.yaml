@@ -60,6 +60,8 @@ paths:
                   type: string
                 password:
                   type: string
+                test:
+                  type: boolean
             example:
               username: name@example.com
               password: test-password
