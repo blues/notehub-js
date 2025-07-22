@@ -13,7 +13,7 @@ info:
     # TODO
     # license:
     # termsOfService: https://notehub.io/subscription-agreement (?)
-
+    
 externalDocs:
   description: Find out more about Blues
   url: https://blues.io
@@ -1160,6 +1160,8 @@ paths:
         - $ref: "#/components/parameters/deviceUIDParam"
         - $ref: "#/components/parameters/pageSizeParam"
         - $ref: "#/components/parameters/pageNumParam"
+        - $ref: "#/components/parameters/startDateParam"
+        - $ref: "#/components/parameters/endDateParam"
       responses:
         "200":
           $ref: "#/components/responses/SessionResponse"
@@ -2520,7 +2522,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/NotefileSchema'
 
-  /v1/projects/{projectOrProductUIDParam}/webhooks:
+  /v1/projects/{projectOrProductUID}/webhooks:
     get:
       tags: ["webhook"]
       security:
@@ -2544,7 +2546,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/WebhookSettings'
 
-  /v1/projects/{projectOrProductUIDParam}/webhooks/{webhookUID}:
+  /v1/projects/{projectOrProductUID}/webhooks/{webhookUID}:
     post:
       tags: ["webhook"]
       security:
