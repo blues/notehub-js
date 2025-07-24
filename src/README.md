@@ -224,11 +224,11 @@ All URIs are relative to *https://api.notefile.net*
 | _NotehubJs.RouteApi_           | [**getRouteLogsByRoute**](docs/RouteApi.md#getRouteLogsByRoute)                                | **GET** /v1/projects/{projectOrProductUID}/routes/{routeUID}/route-logs                        |
 | _NotehubJs.RouteApi_           | [**getRoutes**](docs/RouteApi.md#getRoutes)                                                    | **GET** /v1/projects/{projectOrProductUID}/routes                                              |
 | _NotehubJs.RouteApi_           | [**updateRoute**](docs/RouteApi.md#updateRoute)                                                | **PUT** /v1/projects/{projectOrProductUID}/routes/{routeUID}                                   |
-| _NotehubJs.WebhookApi_         | [**createWebhook**](docs/WebhookApi.md#createWebhook)                                          | **POST** /v1/projects/{projectOrProductUIDParam}/webhooks/{webhookUID}                         |
-| _NotehubJs.WebhookApi_         | [**deleteWebhook**](docs/WebhookApi.md#deleteWebhook)                                          | **DELETE** /v1/projects/{projectOrProductUIDParam}/webhooks/{webhookUID}                       |
-| _NotehubJs.WebhookApi_         | [**getWebhook**](docs/WebhookApi.md#getWebhook)                                                | **GET** /v1/projects/{projectOrProductUIDParam}/webhooks/{webhookUID}                          |
-| _NotehubJs.WebhookApi_         | [**getWebhooks**](docs/WebhookApi.md#getWebhooks)                                              | **GET** /v1/projects/{projectOrProductUIDParam}/webhooks                                       |
-| _NotehubJs.WebhookApi_         | [**updateWebhook**](docs/WebhookApi.md#updateWebhook)                                          | **PUT** /v1/projects/{projectOrProductUIDParam}/webhooks/{webhookUID}                          |
+| _NotehubJs.WebhookApi_         | [**createWebhook**](docs/WebhookApi.md#createWebhook)                                          | **POST** /v1/projects/{projectOrProductUID}/webhooks/{webhookUID}                              |
+| _NotehubJs.WebhookApi_         | [**deleteWebhook**](docs/WebhookApi.md#deleteWebhook)                                          | **DELETE** /v1/projects/{projectOrProductUID}/webhooks/{webhookUID}                            |
+| _NotehubJs.WebhookApi_         | [**getWebhook**](docs/WebhookApi.md#getWebhook)                                                | **GET** /v1/projects/{projectOrProductUID}/webhooks/{webhookUID}                               |
+| _NotehubJs.WebhookApi_         | [**getWebhooks**](docs/WebhookApi.md#getWebhooks)                                              | **GET** /v1/projects/{projectOrProductUID}/webhooks                                            |
+| _NotehubJs.WebhookApi_         | [**updateWebhook**](docs/WebhookApi.md#updateWebhook)                                          | **PUT** /v1/projects/{projectOrProductUID}/webhooks/{webhookUID}                               |
 
 ## Documentation for Models
 
