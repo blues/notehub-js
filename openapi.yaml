@@ -13,7 +13,7 @@ info:
     # TODO
     # license:
     # termsOfService: https://notehub.io/subscription-agreement (?)
-
+    
 externalDocs:
   description: Find out more about Blues
   url: https://blues.io
@@ -2520,7 +2520,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/NotefileSchema'
 
-  /v1/projects/{projectOrProductUIDParam}/webhooks:
+  /v1/projects/{projectOrProductUID}/webhooks:
     get:
       tags: ["webhook"]
       security:
@@ -2544,7 +2544,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/WebhookSettings'
 
-  /v1/projects/{projectOrProductUIDParam}/webhooks/{webhookUID}:
+  /v1/projects/{projectOrProductUID}/webhooks/{webhookUID}:
     post:
       tags: ["webhook"]
       security:
@@ -2699,7 +2699,119 @@ paths:
           $ref: "#/components/responses/ErrorResponse"
         200:
           description: Session closed
+  
+  /v1/api-keys:
+    get:
+      summary: List API keys
+      tags: ["api_access"]
+      operationId: listApiKeys
+      security:
+        - api_key: []
+      responses:
+        '200':
+          description: A list of API keys
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ApiKey'
+    post:
+      summary: Create new API Key
+      tags: ["api_access"]
+      operationId: createApiKey
+      security:
+        - api_key: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiKeyInfo'
+      responses:
+        '200':
+          description: New API ID and Secret
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiKeySecret'
+        '404':
+          description: API key not found
+        '400':
+          description: Invalid input
 
+  
+  /v1/api-keys/{apiKeyUID}:
+    get:
+      summary: Get API key by UID
+      tags: ["api_access"]
+      operationId: getApiKey
+      security:
+        - api_key: []
+      parameters:
+        - name: apiKeyUID
+          in: path
+          required: true
+          schema:
+            type: string
+          description: UID of the API key
+      responses:
+        '200':
+          description: A single API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiKey'
+        '404':
+          description: API key not found
+    post:
+      summary: Update API key (e.g. expiration date)
+      tags: ["api_access"]
+      operationId: updateApiKey
+      security:
+        - api_key: []
+      parameters:
+        - name: apiKeyUID
+          in: path
+          required: true
+          schema:
+            type: string
+          description: UID of the API key to update
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiKeyInfo'
+      responses:
+        '200':
+          description: Updated API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiKey'
+        '404':
+          description: API key not found
+        '400':
+          description: Invalid input
+    delete:
+      summary: Delete an API key by UID
+      tags: ["api_access"]
+      operationId: deleteApiKey
+      security:
+        - api_key: []
+      parameters:
+        - name: apiKeyUID
+          in: path
+          required: true
+          schema:
+            type: string
+          description: UID of the API key
+      responses:
+        '204':
+          description: API Key was deleted
+        '404':
+          description: API key not found
 
 components:
 
@@ -3764,6 +3876,69 @@ components:
         - err
         - code
         - status
+    
+    ApiKey:
+      type: object
+      properties:
+        uid:
+          type: string
+          description: Unique and public identifier
+        name:
+          type: string
+          description: Name for this API Key
+        description:
+          type: string
+          description: Optional description for this API Key
+        created_by:
+          type: object
+          description: The user that created this key
+          properties:
+            uid:
+              type: string
+            email:
+              type: string
+            name:
+              type: string
+        expires_at:
+          type: string
+          format: date-time
+          nullable: true
+          description: When the key expires
+        created_at:
+          type: string
+          format: date-time
+          description: When the key was created
+        last_used:
+          type: string
+          format: date-time
+          nullable: true
+          description: When it was last used, if ever
+
+    
+    ApiKeySecret:
+      type: object
+      properties:
+        uid:
+          type: string
+          description: Unique and public identifier
+        secret:
+          type: string
+          description: The secret
+
+    ApiKeyInfo:
+      type: object
+      required:
+        - expiresAt
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        expires_at:
+          type: string
+          format: date-time
+          nullable: true
+          description: New expiration timestamp for the API key
 
     JSONata:
       type: object
