@@ -74,7 +74,7 @@ export default class WebhookApi {
     let accepts = ["application/json"];
     let returnType = null;
     return this.apiClient.callApi(
-      "/v1/projects/{projectOrProductUIDParam}/webhooks/{webhookUID}",
+      "/v1/projects/{projectOrProductUID}/webhooks/{webhookUID}",
       "POST",
       pathParams,
       queryParams,
@@ -140,7 +140,7 @@ export default class WebhookApi {
     let accepts = ["application/json"];
     let returnType = null;
     return this.apiClient.callApi(
-      "/v1/projects/{projectOrProductUIDParam}/webhooks/{webhookUID}",
+      "/v1/projects/{projectOrProductUID}/webhooks/{webhookUID}",
       "DELETE",
       pathParams,
       queryParams,
@@ -203,7 +203,7 @@ export default class WebhookApi {
     let accepts = ["application/json"];
     let returnType = WebhookSettings;
     return this.apiClient.callApi(
-      "/v1/projects/{projectOrProductUIDParam}/webhooks/{webhookUID}",
+      "/v1/projects/{projectOrProductUID}/webhooks/{webhookUID}",
       "GET",
       pathParams,
       queryParams,
@@ -258,7 +258,7 @@ export default class WebhookApi {
     let accepts = ["application/json"];
     let returnType = GetWebhooks200Response;
     return this.apiClient.callApi(
-      "/v1/projects/{projectOrProductUIDParam}/webhooks",
+      "/v1/projects/{projectOrProductUID}/webhooks",
       "GET",
       pathParams,
       queryParams,
@@ -327,7 +327,7 @@ export default class WebhookApi {
     let accepts = ["application/json"];
     let returnType = null;
     return this.apiClient.callApi(
-      "/v1/projects/{projectOrProductUIDParam}/webhooks/{webhookUID}",
+      "/v1/projects/{projectOrProductUID}/webhooks/{webhookUID}",
       "PUT",
       pathParams,
       queryParams,
