@@ -4031,6 +4031,8 @@ components:
           type: boolean
         cellular_usage:
           $ref: "#/components/schemas/CellularUsage"
+        connectivity_assurance:
+          $ref: "#/components/schemas/DeviceConnectivityAssurance"
       required:
         - uid
         - provisioned
@@ -5928,6 +5930,19 @@ components:
       type: array
       items:
         $ref: "#/components/schemas/SimUsage"
+
+    DeviceConnectivityAssurance:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          description: Whether Connectivity Assurance is enabled for this device
+        disabled_at:
+          type: string
+          enum: ["billing_account", "project", "device"]
+          description: The level at which Connectivity Assurance is disabled
+      required:
+        - enabled
 
     SimUsage:
       type: object
