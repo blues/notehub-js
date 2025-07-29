@@ -680,6 +680,10 @@ paths:
                   description: List of DeviceUIDs to remove from fleet
                 smart_rule:
                   $ref: "#/components/schemas/FleetRule"
+                watchdog_mins:
+                  type: integer
+                  format: int64
+                  description: A watchdog timer is used to generate an event every N minutes of inactivity. 0 means no watchdog
       responses:
         "200":
           description: Successful operation
@@ -1160,6 +1164,8 @@ paths:
         - $ref: "#/components/parameters/deviceUIDParam"
         - $ref: "#/components/parameters/pageSizeParam"
         - $ref: "#/components/parameters/pageNumParam"
+        - $ref: "#/components/parameters/startDateParam"
+        - $ref: "#/components/parameters/endDateParam"
       responses:
         "200":
           $ref: "#/components/responses/SessionResponse"
@@ -3023,7 +3029,7 @@ components:
       name: startDate
       in: query
       required: false
-      description: Unix timestamp
+      description: Start date for filtering results, specified as a Unix timestamp
       schema:
         type: integer
         minimum: 0
@@ -3034,7 +3040,7 @@ components:
       name: endDate
       in: query
       required: false
-      description: Unix timestamp
+      description: End date for filtering results, specified as a Unix timestamp
       schema:
         type: integer
         minimum: 0
@@ -3895,6 +3901,10 @@ components:
             type: string
         smart_rule:
           $ref: "#/components/schemas/FleetRule"
+        watchdog_mins:
+          type: integer
+          format: int64
+          description: A watchdog timer is used to generate an event every N minutes of inactivity. 0 means no watchdog
 
       required:
         - uid
