@@ -1164,6 +1164,8 @@ paths:
         - $ref: "#/components/parameters/deviceUIDParam"
         - $ref: "#/components/parameters/pageSizeParam"
         - $ref: "#/components/parameters/pageNumParam"
+        - $ref: "#/components/parameters/startDateParam"
+        - $ref: "#/components/parameters/endDateParam"
       responses:
         "200":
           $ref: "#/components/responses/SessionResponse"
@@ -3027,7 +3029,7 @@ components:
       name: startDate
       in: query
       required: false
-      description: Unix timestamp
+      description: Start date for filtering results, specified as a Unix timestamp
       schema:
         type: integer
         minimum: 0
@@ -3038,7 +3040,7 @@ components:
       name: endDate
       in: query
       required: false
-      description: Unix timestamp
+      description: End date for filtering results, specified as a Unix timestamp
       schema:
         type: integer
         minimum: 0
