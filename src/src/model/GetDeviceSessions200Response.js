@@ -17,7 +17,7 @@ import DeviceSession from "./DeviceSession";
 /**
  * The GetDeviceSessions200Response model module.
  * @module model/GetDeviceSessions200Response
- * @version 1.0.35
+ * @version 1.0.36
  */
 class GetDeviceSessions200Response {
   /**
