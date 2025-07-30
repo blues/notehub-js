@@ -1389,6 +1389,8 @@ paths:
       summary: Get environment variable hierarchy for a device
       tags: ["project"]
       operationId: getProjectEnvironmentHierarchy
+      security:
+        - api_key: []
       parameters:
         - $ref: "#/components/parameters/projectOrProductUIDParam"
       responses:
@@ -1518,6 +1520,8 @@ paths:
       summary: Get environment variable hierarchy for a device
       tags: ["project"]
       operationId: getFleetEnvironmentHierarchy
+      security:
+        - api_key: []
       parameters:
         - $ref: "#/components/parameters/projectOrProductUIDParam"
         - $ref: "#/components/parameters/fleetUIDParam"
@@ -1596,6 +1600,8 @@ paths:
       summary: Get environment variable hierarchy for a device
       tags: ["device"]
       operationId: getDeviceEnvironmentHierarchy
+      security:
+        - api_key: []
       parameters:
         - $ref: "#/components/parameters/projectOrProductUIDParam"
         - $ref: "#/components/parameters/deviceUIDParam"
