@@ -20,7 +20,7 @@ import UserDbRoute from "../model/UserDbRoute";
 /**
  * Route service.
  * @module api/RouteApi
- * @version 1.0.35
+ * @version 1.0.36
  */
 export default class RouteApi {
   /**
@@ -232,8 +232,8 @@ export default class RouteApi {
    * @param {Array.<String>} opts.deviceUID A Device UID.
    * @param {module:model/String} opts.sortBy  (default to 'date')
    * @param {module:model/String} opts.sortOrder  (default to 'desc')
-   * @param {Number} opts.startDate Unix timestamp
-   * @param {Number} opts.endDate Unix timestamp
+   * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
+   * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
    * @param {Boolean} opts.systemFilesOnly
    * @param {Boolean} opts.mostRecentOnly
    * @param {String} opts.files
@@ -307,8 +307,8 @@ export default class RouteApi {
    * @param {Array.<String>} opts.deviceUID A Device UID.
    * @param {module:model/String} opts.sortBy  (default to 'date')
    * @param {module:model/String} opts.sortOrder  (default to 'desc')
-   * @param {Number} opts.startDate Unix timestamp
-   * @param {Number} opts.endDate Unix timestamp
+   * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
+   * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
    * @param {Boolean} opts.systemFilesOnly
    * @param {Boolean} opts.mostRecentOnly
    * @param {String} opts.files

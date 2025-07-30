@@ -656,6 +656,12 @@ paths:
                   description: List of DeviceUIDs to remove from fleet
                 smart_rule:
                   $ref: "#/components/schemas/FleetRule"
+                watchdog_mins:
+                  type: integer
+                  format: int64
+                  description:
+                    A watchdog timer is used to generate an event every N minutes of
+                    inactivity. 0 means no watchdog
       responses:
         "200":
           description: Successful operation
@@ -1127,6 +1133,8 @@ paths:
         - $ref: "#/components/parameters/deviceUIDParam"
         - $ref: "#/components/parameters/pageSizeParam"
         - $ref: "#/components/parameters/pageNumParam"
+        - $ref: "#/components/parameters/startDateParam"
+        - $ref: "#/components/parameters/endDateParam"
       responses:
         "200":
           $ref: "#/components/responses/SessionResponse"
@@ -1294,6 +1302,27 @@ paths:
           $ref: "#/components/responses/EnvironmentVariablesResponse"
         default:
           $ref: "#/components/responses/ErrorResponse"
+  /v1/projects/{projectOrProductUID}/environment_hierarchy:
+    get:
+      summary: Get environment variable hierarchy for a device
+      tags:
+        - project
+      operationId: getProjectEnvironmentHierarchy
+      security:
+        - api_key: []
+      parameters:
+        - $ref: "#/components/parameters/projectOrProductUIDParam"
+      responses:
+        "200":
+          description: Successfully retrieved project environment hierarchy
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EnvTreeJsonNode"
+        "404":
+          description: Project or device not found
+        "500":
+          description: Server error
   /v1/projects/{projectOrProductUID}/environment_variables/{key}:
     delete:
       description: Delete an environment variable of a project by key
@@ -1404,6 +1433,28 @@ paths:
           $ref: "#/components/responses/EnvironmentVariablesResponse"
         default:
           $ref: "#/components/responses/ErrorResponse"
+  /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/environment_hierarchy:
+    get:
+      summary: Get environment variable hierarchy for a device
+      tags:
+        - project
+      operationId: getFleetEnvironmentHierarchy
+      security:
+        - api_key: []
+      parameters:
+        - $ref: "#/components/parameters/projectOrProductUIDParam"
+        - $ref: "#/components/parameters/fleetUIDParam"
+      responses:
+        "200":
+          description: Successfully retrieved fleet environment hierarchy
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EnvTreeJsonNode"
+        "404":
+          description: Project or device not found
+        "500":
+          description: Server error
   /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/environment_variables/{key}:
     delete:
       description: Delete environment variables of a fleet
@@ -1461,6 +1512,28 @@ paths:
           $ref: "#/components/responses/EnvironmentVariablesResponse"
         default:
           $ref: "#/components/responses/ErrorResponse"
+  /v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_hierarchy:
+    get:
+      summary: Get environment variable hierarchy for a device
+      tags:
+        - device
+      operationId: getDeviceEnvironmentHierarchy
+      security:
+        - api_key: []
+      parameters:
+        - $ref: "#/components/parameters/projectOrProductUIDParam"
+        - $ref: "#/components/parameters/deviceUIDParam"
+      responses:
+        "200":
+          description: Successfully retrieved device environment hierarchy
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EnvTreeJsonNode"
+        "404":
+          description: Project or device not found
+        "500":
+          description: Server error
   /v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_variables/{key}:
     delete:
       description: Delete environment variable of a device
@@ -2936,7 +3009,7 @@ components:
       name: startDate
       in: query
       required: false
-      description: Unix timestamp
+      description: Start date for filtering results, specified as a Unix timestamp
       schema:
         type: integer
         minimum: 0
@@ -2945,7 +3018,7 @@ components:
       name: endDate
       in: query
       required: false
-      description: Unix timestamp
+      description: End date for filtering results, specified as a Unix timestamp
       schema:
         type: integer
         minimum: 0
@@ -3766,6 +3839,12 @@ components:
             type: string
         smart_rule:
           $ref: "#/components/schemas/FleetRule"
+        watchdog_mins:
+          type: integer
+          format: int64
+          description:
+            A watchdog timer is used to generate an event every N minutes of
+            inactivity. 0 means no watchdog
       required:
         - uid
         - label
@@ -5234,6 +5313,9 @@ components:
         url:
           type: string
           description: The URL of the route.
+        duration:
+          type: integer
+          description: The duration of the route in milliseconds
     Note:
       type: object
       properties:
@@ -5945,3 +6027,50 @@ components:
         transform:
           type: string
           description: Transformation to be applied to the event
+    EnvTreeJsonNode:
+      type: object
+      properties:
+        var_count:
+          type: int
+        inherited_var_count:
+          type: int
+        type:
+          type: string
+        variables:
+          type: array
+          items:
+            $ref: "#/components/schemas/EnvVar"
+        children:
+          type: array
+          items:
+            $ref: "#/components/schemas/EnvTreeJsonNode"
+        device_uid:
+          type: string
+        fleet_label:
+          type: string
+        fleet_uid:
+          type: string
+        app_uid:
+          type: string
+        app_label:
+          type: string
+        url:
+          type: string
+          format: uri
+      required:
+        - var_count
+        - inherited_var_count
+        - type
+        - variables
+        - children
+    EnvVar:
+      type: object
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+        used:
+          type: boolean
+        precedence:
+          type: int

@@ -11,3 +11,4 @@
 | **status**   | **String**  | The status of the event.                    | [optional] |
 | **text**     | **String**  | The response body of the route.             | [optional] |
 | **url**      | **String**  | The URL of the route.                       | [optional] |
+| **duration** | **Number**  | The duration of the route in milliseconds   | [optional] |

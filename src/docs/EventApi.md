@@ -34,8 +34,8 @@ let opts = {
   'deviceUID': ["null"], // [String] | A Device UID.
   'sortBy': "'captured'", // String |
   'sortOrder': "'asc'", // String |
-  'startDate': 1628631763, // Number | Unix timestamp
-  'endDate': 1657894210, // Number | Unix timestamp
+  'startDate': 1628631763, // Number | Start date for filtering results, specified as a Unix timestamp
+  'endDate': 1657894210, // Number | End date for filtering results, specified as a Unix timestamp
   'dateType': uploaded, // String | Which date to filter on, either 'captured' or 'uploaded'.  This will apply to the startDate and endDate parameters
   'systemFilesOnly': true, // Boolean |
   'files': _health.qo, data.qo, // String |
@@ -64,8 +64,8 @@ apiInstance.getFleetEvents(projectOrProductUID, fleetUID, opts).then((data) => {
 | **deviceUID**           | [**[String]**](String.md) | A Device UID.                                                                                                                                                    | [optional]                                 |
 | **sortBy**              | **String**                |                                                                                                                                                                  | [optional] [default to &#39;captured&#39;] |
 | **sortOrder**           | **String**                |                                                                                                                                                                  | [optional] [default to &#39;asc&#39;]      |
-| **startDate**           | **Number**                | Unix timestamp                                                                                                                                                   | [optional]                                 |
-| **endDate**             | **Number**                | Unix timestamp                                                                                                                                                   | [optional]                                 |
+| **startDate**           | **Number**                | Start date for filtering results, specified as a Unix timestamp                                                                                                  | [optional]                                 |
+| **endDate**             | **Number**                | End date for filtering results, specified as a Unix timestamp                                                                                                    | [optional]                                 |
 | **dateType**            | **String**                | Which date to filter on, either &#39;captured&#39; or &#39;uploaded&#39;. This will apply to the startDate and endDate parameters                                | [optional] [default to &#39;captured&#39;] |
 | **systemFilesOnly**     | **Boolean**               |                                                                                                                                                                  | [optional]                                 |
 | **files**               | **String**                |                                                                                                                                                                  | [optional]                                 |
@@ -113,8 +113,8 @@ let opts = {
   'systemFilesOnly': true, // Boolean |
   'files': _health.qo, data.qo, // String |
   'deviceUID': ["null"], // [String] | A Device UID.
-  'startDate': 1628631763, // Number | Unix timestamp
-  'endDate': 1657894210 // Number | Unix timestamp
+  'startDate': 1628631763, // Number | Start date for filtering results, specified as a Unix timestamp
+  'endDate': 1657894210 // Number | End date for filtering results, specified as a Unix timestamp
 };
 apiInstance.getFleetEventsByCursor(projectOrProductUID, fleetUID, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
@@ -136,8 +136,8 @@ apiInstance.getFleetEventsByCursor(projectOrProductUID, fleetUID, opts).then((da
 | **systemFilesOnly**     | **Boolean**               |                                                                                                                                                                                                                                                                                                                                                                            | [optional]                            |
 | **files**               | **String**                |                                                                                                                                                                                                                                                                                                                                                                            | [optional]                            |
 | **deviceUID**           | [**[String]**](String.md) | A Device UID.                                                                                                                                                                                                                                                                                                                                                              | [optional]                            |
-| **startDate**           | **Number**                | Unix timestamp                                                                                                                                                                                                                                                                                                                                                             | [optional]                            |
-| **endDate**             | **Number**                | Unix timestamp                                                                                                                                                                                                                                                                                                                                                             | [optional]                            |
+| **startDate**           | **Number**                | Start date for filtering results, specified as a Unix timestamp                                                                                                                                                                                                                                                                                                            | [optional]                            |
+| **endDate**             | **Number**                | End date for filtering results, specified as a Unix timestamp                                                                                                                                                                                                                                                                                                              | [optional]                            |
 
 ### Return type
 
@@ -175,8 +175,8 @@ let opts = {
   'deviceUID': ["null"], // [String] | A Device UID.
   'sortBy': "'captured'", // String |
   'sortOrder': "'asc'", // String |
-  'startDate': 1628631763, // Number | Unix timestamp
-  'endDate': 1657894210, // Number | Unix timestamp
+  'startDate': 1628631763, // Number | Start date for filtering results, specified as a Unix timestamp
+  'endDate': 1657894210, // Number | End date for filtering results, specified as a Unix timestamp
   'dateType': uploaded, // String | Which date to filter on, either 'captured' or 'uploaded'.  This will apply to the startDate and endDate parameters
   'systemFilesOnly': true, // Boolean |
   'files': _health.qo, data.qo, // String |
@@ -205,8 +205,8 @@ apiInstance.getProjectEvents(projectOrProductUID, opts).then((data) => {
 | **deviceUID**           | [**[String]**](String.md) | A Device UID.                                                                                                                                                    | [optional]                                 |
 | **sortBy**              | **String**                |                                                                                                                                                                  | [optional] [default to &#39;captured&#39;] |
 | **sortOrder**           | **String**                |                                                                                                                                                                  | [optional] [default to &#39;asc&#39;]      |
-| **startDate**           | **Number**                | Unix timestamp                                                                                                                                                   | [optional]                                 |
-| **endDate**             | **Number**                | Unix timestamp                                                                                                                                                   | [optional]                                 |
+| **startDate**           | **Number**                | Start date for filtering results, specified as a Unix timestamp                                                                                                  | [optional]                                 |
+| **endDate**             | **Number**                | End date for filtering results, specified as a Unix timestamp                                                                                                    | [optional]                                 |
 | **dateType**            | **String**                | Which date to filter on, either &#39;captured&#39; or &#39;uploaded&#39;. This will apply to the startDate and endDate parameters                                | [optional] [default to &#39;captured&#39;] |
 | **systemFilesOnly**     | **Boolean**               |                                                                                                                                                                  | [optional]                                 |
 | **files**               | **String**                |                                                                                                                                                                  | [optional]                                 |

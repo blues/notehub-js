@@ -42,6 +42,8 @@ docs/DeviceTowerInfo.md
 docs/DeviceUsage.md
 docs/DfuActionRequest.md
 docs/EmailNotification.md
+docs/EnvTreeJsonNode.md
+docs/EnvVar.md
 docs/EnvironmentVariables.md
 docs/Error.md
 docs/Event.md
@@ -173,6 +175,8 @@ src/model/DeviceTowerInfo.js
 src/model/DeviceUsage.js
 src/model/DfuActionRequest.js
 src/model/EmailNotification.js
+src/model/EnvTreeJsonNode.js
+src/model/EnvVar.js
 src/model/EnvironmentVariables.js
 src/model/Error.js
 src/model/Event.js
@@ -292,6 +296,8 @@ test/model/DeviceTowerInfo.spec.js
 test/model/DeviceUsage.spec.js
 test/model/DfuActionRequest.spec.js
 test/model/EmailNotification.spec.js
+test/model/EnvTreeJsonNode.spec.js
+test/model/EnvVar.spec.js
 test/model/EnvironmentVariables.spec.js
 test/model/Error.spec.js
 test/model/Event.spec.js

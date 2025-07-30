@@ -79,5 +79,11 @@
       //var instance = new NotehubJs.Fleet();
       //expect(instance).to.be();
     });
+
+    it('should have the property watchdogMins (base name: "watchdog_mins")', function () {
+      // uncomment below and update the code to test the property watchdogMins
+      //var instance = new NotehubJs.Fleet();
+      //expect(instance).to.be();
+    });
   });
 });

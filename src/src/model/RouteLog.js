@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The RouteLog model module.
  * @module model/RouteLog
- * @version 1.0.35
+ * @version 1.0.36
  */
 class RouteLog {
   /**
@@ -65,6 +65,9 @@ class RouteLog {
       }
       if (data.hasOwnProperty("url")) {
         obj["url"] = ApiClient.convertToType(data["url"], "String");
+      }
+      if (data.hasOwnProperty("duration")) {
+        obj["duration"] = ApiClient.convertToType(data["duration"], "Number");
       }
     } else if (data === null) {
       return null;
@@ -190,5 +193,11 @@ RouteLog.prototype["text"] = undefined;
  * @member {String} url
  */
 RouteLog.prototype["url"] = undefined;
+
+/**
+ * The duration of the route in milliseconds
+ * @member {Number} duration
+ */
+RouteLog.prototype["duration"] = undefined;
 
 export default RouteLog;

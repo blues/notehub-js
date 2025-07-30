@@ -22,6 +22,7 @@ import DeviceDfuHistoryPage from "../model/DeviceDfuHistoryPage";
 import DeviceDfuStatus from "../model/DeviceDfuStatus";
 import DeviceDfuStatusPage from "../model/DeviceDfuStatusPage";
 import DfuActionRequest from "../model/DfuActionRequest";
+import EnvTreeJsonNode from "../model/EnvTreeJsonNode";
 import EnvironmentVariables from "../model/EnvironmentVariables";
 import Error from "../model/Error";
 import FirmwareInfo from "../model/FirmwareInfo";
@@ -39,7 +40,7 @@ import UpdateFleetRequest from "../model/UpdateFleetRequest";
 /**
  * Project service.
  * @module api/ProjectApi
- * @version 1.0.35
+ * @version 1.0.36
  */
 export default class ProjectApi {
   /**
@@ -1473,6 +1474,70 @@ export default class ProjectApi {
   }
 
   /**
+   * Get environment variable hierarchy for a device
+   * @param {String} projectOrProductUID
+   * @param {String} fleetUID
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/EnvTreeJsonNode} and HTTP response
+   */
+  getFleetEnvironmentHierarchyWithHttpInfo(projectOrProductUID, fleetUID) {
+    let postBody = null;
+    // verify the required parameter 'projectOrProductUID' is set
+    if (projectOrProductUID === undefined || projectOrProductUID === null) {
+      throw new Error(
+        "Missing the required parameter 'projectOrProductUID' when calling getFleetEnvironmentHierarchy"
+      );
+    }
+    // verify the required parameter 'fleetUID' is set
+    if (fleetUID === undefined || fleetUID === null) {
+      throw new Error(
+        "Missing the required parameter 'fleetUID' when calling getFleetEnvironmentHierarchy"
+      );
+    }
+
+    let pathParams = {
+      projectOrProductUID: projectOrProductUID,
+      fleetUID: fleetUID,
+    };
+    let queryParams = {};
+    let headerParams = {};
+    let formParams = {};
+
+    let authNames = ["api_key"];
+    let contentTypes = [];
+    let accepts = ["application/json"];
+    let returnType = EnvTreeJsonNode;
+    return this.apiClient.callApi(
+      "/v1/projects/{projectOrProductUID}/fleets/{fleetUID}/environment_hierarchy",
+      "GET",
+      pathParams,
+      queryParams,
+      headerParams,
+      formParams,
+      postBody,
+      authNames,
+      contentTypes,
+      accepts,
+      returnType,
+      null
+    );
+  }
+
+  /**
+   * Get environment variable hierarchy for a device
+   * @param {String} projectOrProductUID
+   * @param {String} fleetUID
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/EnvTreeJsonNode}
+   */
+  getFleetEnvironmentHierarchy(projectOrProductUID, fleetUID) {
+    return this.getFleetEnvironmentHierarchyWithHttpInfo(
+      projectOrProductUID,
+      fleetUID
+    ).then(function (response_and_data) {
+      return response_and_data.data;
+    });
+  }
+
+  /**
    * Get environment variables of a fleet
    * @param {String} projectOrProductUID
    * @param {String} fleetUID
@@ -1694,6 +1759,60 @@ export default class ProjectApi {
     return this.getProjectByProductWithHttpInfo(productUID).then(function (
       response_and_data
     ) {
+      return response_and_data.data;
+    });
+  }
+
+  /**
+   * Get environment variable hierarchy for a device
+   * @param {String} projectOrProductUID
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/EnvTreeJsonNode} and HTTP response
+   */
+  getProjectEnvironmentHierarchyWithHttpInfo(projectOrProductUID) {
+    let postBody = null;
+    // verify the required parameter 'projectOrProductUID' is set
+    if (projectOrProductUID === undefined || projectOrProductUID === null) {
+      throw new Error(
+        "Missing the required parameter 'projectOrProductUID' when calling getProjectEnvironmentHierarchy"
+      );
+    }
+
+    let pathParams = {
+      projectOrProductUID: projectOrProductUID,
+    };
+    let queryParams = {};
+    let headerParams = {};
+    let formParams = {};
+
+    let authNames = ["api_key"];
+    let contentTypes = [];
+    let accepts = ["application/json"];
+    let returnType = EnvTreeJsonNode;
+    return this.apiClient.callApi(
+      "/v1/projects/{projectOrProductUID}/environment_hierarchy",
+      "GET",
+      pathParams,
+      queryParams,
+      headerParams,
+      formParams,
+      postBody,
+      authNames,
+      contentTypes,
+      accepts,
+      returnType,
+      null
+    );
+  }
+
+  /**
+   * Get environment variable hierarchy for a device
+   * @param {String} projectOrProductUID
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/EnvTreeJsonNode}
+   */
+  getProjectEnvironmentHierarchy(projectOrProductUID) {
+    return this.getProjectEnvironmentHierarchyWithHttpInfo(
+      projectOrProductUID
+    ).then(function (response_and_data) {
       return response_and_data.data;
     });
   }

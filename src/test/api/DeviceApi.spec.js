@@ -114,6 +114,16 @@
         done();
       });
     });
+    describe("getDeviceEnvironmentHierarchy", function () {
+      it("should call getDeviceEnvironmentHierarchy successfully", function (done) {
+        //uncomment below and update the code to test getDeviceEnvironmentHierarchy
+        //instance.getDeviceEnvironmentHierarchy(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
     describe("getDeviceEnvironmentVariables", function () {
       it("should call getDeviceEnvironmentVariables successfully", function (done) {
         //uncomment below and update the code to test getDeviceEnvironmentVariables

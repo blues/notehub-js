@@ -182,8 +182,8 @@ let opts = {
   'deviceUID': ["null"], // [String] | A Device UID.
   'sortBy': "'date'", // String |
   'sortOrder': "'desc'", // String |
-  'startDate': 1628631763, // Number | Unix timestamp
-  'endDate': 1657894210, // Number | Unix timestamp
+  'startDate': 1628631763, // Number | Start date for filtering results, specified as a Unix timestamp
+  'endDate': 1657894210, // Number | End date for filtering results, specified as a Unix timestamp
   'systemFilesOnly': true, // Boolean |
   'mostRecentOnly': true, // Boolean |
   'files': _health.qo, data.qo // String |
@@ -198,20 +198,20 @@ apiInstance.getRouteLogsByRoute(projectOrProductUID, routeUID, opts).then((data)
 
 ### Parameters
 
-| Name                    | Type                      | Description    | Notes                                  |
-| ----------------------- | ------------------------- | -------------- | -------------------------------------- |
-| **projectOrProductUID** | **String**                |                |
-| **routeUID**            | **String**                |                |
-| **pageSize**            | **Number**                |                | [optional] [default to 50]             |
-| **pageNum**             | **Number**                |                | [optional] [default to 1]              |
-| **deviceUID**           | [**[String]**](String.md) | A Device UID.  | [optional]                             |
-| **sortBy**              | **String**                |                | [optional] [default to &#39;date&#39;] |
-| **sortOrder**           | **String**                |                | [optional] [default to &#39;desc&#39;] |
-| **startDate**           | **Number**                | Unix timestamp | [optional]                             |
-| **endDate**             | **Number**                | Unix timestamp | [optional]                             |
-| **systemFilesOnly**     | **Boolean**               |                | [optional]                             |
-| **mostRecentOnly**      | **Boolean**               |                | [optional]                             |
-| **files**               | **String**                |                | [optional]                             |
+| Name                    | Type                      | Description                                                     | Notes                                  |
+| ----------------------- | ------------------------- | --------------------------------------------------------------- | -------------------------------------- |
+| **projectOrProductUID** | **String**                |                                                                 |
+| **routeUID**            | **String**                |                                                                 |
+| **pageSize**            | **Number**                |                                                                 | [optional] [default to 50]             |
+| **pageNum**             | **Number**                |                                                                 | [optional] [default to 1]              |
+| **deviceUID**           | [**[String]**](String.md) | A Device UID.                                                   | [optional]                             |
+| **sortBy**              | **String**                |                                                                 | [optional] [default to &#39;date&#39;] |
+| **sortOrder**           | **String**                |                                                                 | [optional] [default to &#39;desc&#39;] |
+| **startDate**           | **Number**                | Start date for filtering results, specified as a Unix timestamp | [optional]                             |
+| **endDate**             | **Number**                | End date for filtering results, specified as a Unix timestamp   | [optional]                             |
+| **systemFilesOnly**     | **Boolean**               |                                                                 | [optional]                             |
+| **mostRecentOnly**      | **Boolean**               |                                                                 | [optional]                             |
+| **files**               | **String**                |                                                                 | [optional]                             |
 
 ### Return type
 

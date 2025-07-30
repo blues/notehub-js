@@ -234,6 +234,16 @@
         done();
       });
     });
+    describe("getFleetEnvironmentHierarchy", function () {
+      it("should call getFleetEnvironmentHierarchy successfully", function (done) {
+        //uncomment below and update the code to test getFleetEnvironmentHierarchy
+        //instance.getFleetEnvironmentHierarchy(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
     describe("getFleetEnvironmentVariables", function () {
       it("should call getFleetEnvironmentVariables successfully", function (done) {
         //uncomment below and update the code to test getFleetEnvironmentVariables
@@ -268,6 +278,16 @@
       it("should call getProjectByProduct successfully", function (done) {
         //uncomment below and update the code to test getProjectByProduct
         //instance.getProjectByProduct(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
+    describe("getProjectEnvironmentHierarchy", function () {
+      it("should call getProjectEnvironmentHierarchy successfully", function (done) {
+        //uncomment below and update the code to test getProjectEnvironmentHierarchy
+        //instance.getProjectEnvironmentHierarchy(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});

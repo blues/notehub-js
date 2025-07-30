@@ -19,7 +19,7 @@ import WebhookSettings from "../model/WebhookSettings";
 /**
  * Webhook service.
  * @module api/WebhookApi
- * @version 1.0.35
+ * @version 1.0.36
  */
 export default class WebhookApi {
   /**

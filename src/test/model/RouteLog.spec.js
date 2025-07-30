@@ -91,5 +91,11 @@
       //var instance = new NotehubJs.RouteLog();
       //expect(instance).to.be();
     });
+
+    it('should have the property duration (base name: "duration")', function () {
+      // uncomment below and update the code to test the property duration
+      //var instance = new NotehubJs.RouteLog();
+      //expect(instance).to.be();
+    });
   });
 });
