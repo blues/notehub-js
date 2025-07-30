@@ -28,7 +28,7 @@
   var instance;
 
   beforeEach(function () {
-    instance = new NotehubJs.UpdateFleetRequest();
+    instance = new NotehubJs.EnvVar();
   });
 
   var getProperty = function (object, getter, property) {
@@ -43,40 +43,34 @@
     else object[property] = value;
   };
 
-  describe("UpdateFleetRequest", function () {
-    it("should create an instance of UpdateFleetRequest", function () {
-      // uncomment below and update the code to test UpdateFleetRequest
-      //var instance = new NotehubJs.UpdateFleetRequest();
-      //expect(instance).to.be.a(NotehubJs.UpdateFleetRequest);
+  describe("EnvVar", function () {
+    it("should create an instance of EnvVar", function () {
+      // uncomment below and update the code to test EnvVar
+      //var instance = new NotehubJs.EnvVar();
+      //expect(instance).to.be.a(NotehubJs.EnvVar);
     });
 
-    it('should have the property label (base name: "label")', function () {
-      // uncomment below and update the code to test the property label
-      //var instance = new NotehubJs.UpdateFleetRequest();
+    it('should have the property key (base name: "key")', function () {
+      // uncomment below and update the code to test the property key
+      //var instance = new NotehubJs.EnvVar();
       //expect(instance).to.be();
     });
 
-    it('should have the property addDevices (base name: "addDevices")', function () {
-      // uncomment below and update the code to test the property addDevices
-      //var instance = new NotehubJs.UpdateFleetRequest();
+    it('should have the property value (base name: "value")', function () {
+      // uncomment below and update the code to test the property value
+      //var instance = new NotehubJs.EnvVar();
       //expect(instance).to.be();
     });
 
-    it('should have the property removeDevices (base name: "removeDevices")', function () {
-      // uncomment below and update the code to test the property removeDevices
-      //var instance = new NotehubJs.UpdateFleetRequest();
+    it('should have the property used (base name: "used")', function () {
+      // uncomment below and update the code to test the property used
+      //var instance = new NotehubJs.EnvVar();
       //expect(instance).to.be();
     });
 
-    it('should have the property smartRule (base name: "smart_rule")', function () {
-      // uncomment below and update the code to test the property smartRule
-      //var instance = new NotehubJs.UpdateFleetRequest();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property watchdogMins (base name: "watchdog_mins")', function () {
-      // uncomment below and update the code to test the property watchdogMins
-      //var instance = new NotehubJs.UpdateFleetRequest();
+    it('should have the property precedence (base name: "precedence")', function () {
+      // uncomment below and update the code to test the property precedence
+      //var instance = new NotehubJs.EnvVar();
       //expect(instance).to.be();
     });
   });

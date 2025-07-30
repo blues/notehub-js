@@ -66,6 +66,9 @@ class RouteLog {
       if (data.hasOwnProperty("url")) {
         obj["url"] = ApiClient.convertToType(data["url"], "String");
       }
+      if (data.hasOwnProperty("duration")) {
+        obj["duration"] = ApiClient.convertToType(data["duration"], "Number");
+      }
     } else if (data === null) {
       return null;
     }
@@ -190,5 +193,11 @@ RouteLog.prototype["text"] = undefined;
  * @member {String} url
  */
 RouteLog.prototype["url"] = undefined;
+
+/**
+ * The duration of the route in milliseconds
+ * @member {Number} duration
+ */
+RouteLog.prototype["duration"] = undefined;
 
 export default RouteLog;

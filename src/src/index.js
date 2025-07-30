@@ -47,6 +47,8 @@ import DeviceTowerInfo from "./model/DeviceTowerInfo";
 import DeviceUsage from "./model/DeviceUsage";
 import DfuActionRequest from "./model/DfuActionRequest";
 import EmailNotification from "./model/EmailNotification";
+import EnvTreeJsonNode from "./model/EnvTreeJsonNode";
+import EnvVar from "./model/EnvVar";
 import EnvironmentVariables from "./model/EnvironmentVariables";
 import Error from "./model/Error";
 import Event from "./model/Event";
@@ -379,6 +381,18 @@ export {
    * @property {module:model/EmailNotification}
    */
   EmailNotification,
+
+  /**
+   * The EnvTreeJsonNode model constructor.
+   * @property {module:model/EnvTreeJsonNode}
+   */
+  EnvTreeJsonNode,
+
+  /**
+   * The EnvVar model constructor.
+   * @property {module:model/EnvVar}
+   */
+  EnvVar,
 
   /**
    * The EnvironmentVariables model constructor.

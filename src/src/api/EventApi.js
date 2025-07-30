@@ -44,8 +44,8 @@ export default class EventApi {
    * @param {Array.<String>} opts.deviceUID A Device UID.
    * @param {module:model/String} opts.sortBy  (default to 'captured')
    * @param {module:model/String} opts.sortOrder  (default to 'asc')
-   * @param {Number} opts.startDate Unix timestamp
-   * @param {Number} opts.endDate Unix timestamp
+   * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
+   * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
    * @param {module:model/String} opts.dateType Which date to filter on, either 'captured' or 'uploaded'.  This will apply to the startDate and endDate parameters (default to 'captured')
    * @param {Boolean} opts.systemFilesOnly
    * @param {String} opts.files
@@ -135,8 +135,8 @@ export default class EventApi {
    * @param {Array.<String>} opts.deviceUID A Device UID.
    * @param {module:model/String} opts.sortBy  (default to 'captured')
    * @param {module:model/String} opts.sortOrder  (default to 'asc')
-   * @param {Number} opts.startDate Unix timestamp
-   * @param {Number} opts.endDate Unix timestamp
+   * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
+   * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
    * @param {module:model/String} opts.dateType Which date to filter on, either 'captured' or 'uploaded'.  This will apply to the startDate and endDate parameters (default to 'captured')
    * @param {Boolean} opts.systemFilesOnly
    * @param {String} opts.files
@@ -168,8 +168,8 @@ export default class EventApi {
    * @param {Boolean} opts.systemFilesOnly
    * @param {String} opts.files
    * @param {Array.<String>} opts.deviceUID A Device UID.
-   * @param {Number} opts.startDate Unix timestamp
-   * @param {Number} opts.endDate Unix timestamp
+   * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
+   * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetProjectEventsByCursor200Response} and HTTP response
    */
   getFleetEventsByCursorWithHttpInfo(projectOrProductUID, fleetUID, opts) {
@@ -239,8 +239,8 @@ export default class EventApi {
    * @param {Boolean} opts.systemFilesOnly
    * @param {String} opts.files
    * @param {Array.<String>} opts.deviceUID A Device UID.
-   * @param {Number} opts.startDate Unix timestamp
-   * @param {Number} opts.endDate Unix timestamp
+   * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
+   * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetProjectEventsByCursor200Response}
    */
   getFleetEventsByCursor(projectOrProductUID, fleetUID, opts) {
@@ -262,8 +262,8 @@ export default class EventApi {
    * @param {Array.<String>} opts.deviceUID A Device UID.
    * @param {module:model/String} opts.sortBy  (default to 'captured')
    * @param {module:model/String} opts.sortOrder  (default to 'asc')
-   * @param {Number} opts.startDate Unix timestamp
-   * @param {Number} opts.endDate Unix timestamp
+   * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
+   * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
    * @param {module:model/String} opts.dateType Which date to filter on, either 'captured' or 'uploaded'.  This will apply to the startDate and endDate parameters (default to 'captured')
    * @param {Boolean} opts.systemFilesOnly
    * @param {String} opts.files
@@ -347,8 +347,8 @@ export default class EventApi {
    * @param {Array.<String>} opts.deviceUID A Device UID.
    * @param {module:model/String} opts.sortBy  (default to 'captured')
    * @param {module:model/String} opts.sortOrder  (default to 'asc')
-   * @param {Number} opts.startDate Unix timestamp
-   * @param {Number} opts.endDate Unix timestamp
+   * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
+   * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
    * @param {module:model/String} opts.dateType Which date to filter on, either 'captured' or 'uploaded'.  This will apply to the startDate and endDate parameters (default to 'captured')
    * @param {Boolean} opts.systemFilesOnly
    * @param {String} opts.files

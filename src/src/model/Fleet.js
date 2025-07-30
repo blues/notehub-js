@@ -73,6 +73,12 @@ class Fleet {
           "String"
         );
       }
+      if (data.hasOwnProperty("watchdog_mins")) {
+        obj["watchdog_mins"] = ApiClient.convertToType(
+          data["watchdog_mins"],
+          "Number"
+        );
+      }
     } else if (data === null) {
       return null;
     }
@@ -165,5 +171,11 @@ Fleet.prototype["environment_variables"] = undefined;
  * @member {String} smart_rule
  */
 Fleet.prototype["smart_rule"] = undefined;
+
+/**
+ * A watchdog timer is used to generate an event every N minutes of inactivity. 0 means no watchdog
+ * @member {Number} watchdog_mins
+ */
+Fleet.prototype["watchdog_mins"] = undefined;
 
 export default Fleet;

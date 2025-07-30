@@ -14,6 +14,7 @@
 import ApiClient from "../ApiClient";
 import Body from "../model/Body";
 import Device from "../model/Device";
+import EnvTreeJsonNode from "../model/EnvTreeJsonNode";
 import EnvironmentVariables from "../model/EnvironmentVariables";
 import Error from "../model/Error";
 import GetDeviceEnvironmentVariables200Response from "../model/GetDeviceEnvironmentVariables200Response";
@@ -526,6 +527,70 @@ export default class DeviceApi {
   }
 
   /**
+   * Get environment variable hierarchy for a device
+   * @param {String} projectOrProductUID
+   * @param {String} deviceUID
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/EnvTreeJsonNode} and HTTP response
+   */
+  getDeviceEnvironmentHierarchyWithHttpInfo(projectOrProductUID, deviceUID) {
+    let postBody = null;
+    // verify the required parameter 'projectOrProductUID' is set
+    if (projectOrProductUID === undefined || projectOrProductUID === null) {
+      throw new Error(
+        "Missing the required parameter 'projectOrProductUID' when calling getDeviceEnvironmentHierarchy"
+      );
+    }
+    // verify the required parameter 'deviceUID' is set
+    if (deviceUID === undefined || deviceUID === null) {
+      throw new Error(
+        "Missing the required parameter 'deviceUID' when calling getDeviceEnvironmentHierarchy"
+      );
+    }
+
+    let pathParams = {
+      projectOrProductUID: projectOrProductUID,
+      deviceUID: deviceUID,
+    };
+    let queryParams = {};
+    let headerParams = {};
+    let formParams = {};
+
+    let authNames = [];
+    let contentTypes = [];
+    let accepts = ["application/json"];
+    let returnType = EnvTreeJsonNode;
+    return this.apiClient.callApi(
+      "/v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_hierarchy",
+      "GET",
+      pathParams,
+      queryParams,
+      headerParams,
+      formParams,
+      postBody,
+      authNames,
+      contentTypes,
+      accepts,
+      returnType,
+      null
+    );
+  }
+
+  /**
+   * Get environment variable hierarchy for a device
+   * @param {String} projectOrProductUID
+   * @param {String} deviceUID
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/EnvTreeJsonNode}
+   */
+  getDeviceEnvironmentHierarchy(projectOrProductUID, deviceUID) {
+    return this.getDeviceEnvironmentHierarchyWithHttpInfo(
+      projectOrProductUID,
+      deviceUID
+    ).then(function (response_and_data) {
+      return response_and_data.data;
+    });
+  }
+
+  /**
    * Get environment variables of a device
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
@@ -852,6 +917,8 @@ export default class DeviceApi {
    * @param {Object} opts Optional parameters
    * @param {Number} opts.pageSize  (default to 50)
    * @param {Number} opts.pageNum  (default to 1)
+   * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
+   * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetDeviceSessions200Response} and HTTP response
    */
   getDeviceSessionsWithHttpInfo(projectOrProductUID, deviceUID, opts) {
@@ -877,6 +944,8 @@ export default class DeviceApi {
     let queryParams = {
       pageSize: opts["pageSize"],
       pageNum: opts["pageNum"],
+      startDate: opts["startDate"],
+      endDate: opts["endDate"],
     };
     let headerParams = {};
     let formParams = {};
@@ -908,6 +977,8 @@ export default class DeviceApi {
    * @param {Object} opts Optional parameters
    * @param {Number} opts.pageSize  (default to 50)
    * @param {Number} opts.pageNum  (default to 1)
+   * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
+   * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetDeviceSessions200Response}
    */
   getDeviceSessions(projectOrProductUID, deviceUID, opts) {

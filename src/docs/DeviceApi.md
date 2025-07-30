@@ -2,8 +2,8 @@
 
 All URIs are relative to *https://api.notefile.net*
 
-| Method                                                                                    | HTTP request                                                                                   | Description |
-| ----------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ----------- |
+| Method                                                                                    | HTTP request                                                                                   | Description                                     |
+| ----------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ----------------------------------------------- |
 | [**deleteDeviceEnvironmentVariable**](DeviceApi.md#deleteDeviceEnvironmentVariable)       | **DELETE** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_variables/{key}  |
 | [**deleteProjectDevice**](DeviceApi.md#deleteProjectDevice)                               | **DELETE** /v1/projects/{projectOrProductUID}/devices/{deviceUID}                              |
 | [**disableDevice**](DeviceApi.md#disableDevice)                                           | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/disable                        |
@@ -11,6 +11,7 @@ All URIs are relative to *https://api.notefile.net*
 | [**enableDevice**](DeviceApi.md#enableDevice)                                             | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/enable                         |
 | [**enableDeviceConnectivityAssurance**](DeviceApi.md#enableDeviceConnectivityAssurance)   | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/enable-connectivity-assurance  |
 | [**getDevice**](DeviceApi.md#getDevice)                                                   | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}                                 |
+| [**getDeviceEnvironmentHierarchy**](DeviceApi.md#getDeviceEnvironmentHierarchy)           | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_hierarchy           | Get environment variable hierarchy for a device |
 | [**getDeviceEnvironmentVariables**](DeviceApi.md#getDeviceEnvironmentVariables)           | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_variables           |
 | [**getDeviceEnvironmentVariablesByPin**](DeviceApi.md#getDeviceEnvironmentVariablesByPin) | **GET** /v1/products/{productUID}/devices/{deviceUID}/environment_variables_with_pin           |
 | [**getDeviceHealthLog**](DeviceApi.md#getDeviceHealthLog)                                 | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/health-log                      |
@@ -360,6 +361,48 @@ apiInstance.getDevice(projectOrProductUID, deviceUID).then((data) => {
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
+## getDeviceEnvironmentHierarchy
+
+> EnvTreeJsonNode getDeviceEnvironmentHierarchy(projectOrProductUID, deviceUID)
+
+Get environment variable hierarchy for a device
+
+### Example
+
+```javascript
+import * as NotehubJs from '@blues-inc/notehub-js';
+
+let apiInstance = new NotehubJs.DeviceApi();
+let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let deviceUID = dev:000000000000000; // String |
+apiInstance.getDeviceEnvironmentHierarchy(projectOrProductUID, deviceUID).then((data) => {
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
+}, (error) => {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+| Name                    | Type       | Description | Notes |
+| ----------------------- | ---------- | ----------- | ----- |
+| **projectOrProductUID** | **String** |             |
+| **deviceUID**           | **String** |             |
+
+### Return type
+
+[**EnvTreeJsonNode**](EnvTreeJsonNode.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
 ## getDeviceEnvironmentVariables
 
 > GetDeviceEnvironmentVariables200Response getDeviceEnvironmentVariables(projectOrProductUID, deviceUID)
@@ -610,7 +653,9 @@ let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
 let deviceUID = dev:000000000000000; // String |
 let opts = {
   'pageSize': 50, // Number |
-  'pageNum': 1 // Number |
+  'pageNum': 1, // Number |
+  'startDate': 1628631763, // Number | Start date for filtering results, specified as a Unix timestamp
+  'endDate': 1657894210 // Number | End date for filtering results, specified as a Unix timestamp
 };
 apiInstance.getDeviceSessions(projectOrProductUID, deviceUID, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
@@ -622,12 +667,14 @@ apiInstance.getDeviceSessions(projectOrProductUID, deviceUID, opts).then((data) 
 
 ### Parameters
 
-| Name                    | Type       | Description | Notes                      |
-| ----------------------- | ---------- | ----------- | -------------------------- |
-| **projectOrProductUID** | **String** |             |
-| **deviceUID**           | **String** |             |
-| **pageSize**            | **Number** |             | [optional] [default to 50] |
-| **pageNum**             | **Number** |             | [optional] [default to 1]  |
+| Name                    | Type       | Description                                                     | Notes                      |
+| ----------------------- | ---------- | --------------------------------------------------------------- | -------------------------- |
+| **projectOrProductUID** | **String** |                                                                 |
+| **deviceUID**           | **String** |                                                                 |
+| **pageSize**            | **Number** |                                                                 | [optional] [default to 50] |
+| **pageNum**             | **Number** |                                                                 | [optional] [default to 1]  |
+| **startDate**           | **Number** | Start date for filtering results, specified as a Unix timestamp | [optional]                 |
+| **endDate**             | **Number** | End date for filtering results, specified as a Unix timestamp   | [optional]                 |
 
 ### Return type
 
