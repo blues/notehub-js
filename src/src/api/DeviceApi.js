@@ -555,7 +555,7 @@ export default class DeviceApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = [];
+    let authNames = ["api_key"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = EnvTreeJsonNode;

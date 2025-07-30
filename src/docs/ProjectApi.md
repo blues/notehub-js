@@ -1023,6 +1023,10 @@ Get environment variable hierarchy for a device
 
 ```javascript
 import * as NotehubJs from '@blues-inc/notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
+// Configure API key authorization: api_key
+let api_key = defaultClient.authentications['api_key'];
+api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.ProjectApi();
 let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
@@ -1048,7 +1052,7 @@ apiInstance.getFleetEnvironmentHierarchy(projectOrProductUID, fleetUID).then((da
 
 ### Authorization
 
-No authorization required
+[api_key](../README.md#api_key)
 
 ### HTTP request headers
 
@@ -1243,6 +1247,10 @@ Get environment variable hierarchy for a device
 
 ```javascript
 import * as NotehubJs from '@blues-inc/notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
+// Configure API key authorization: api_key
+let api_key = defaultClient.authentications['api_key'];
+api_key.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.ProjectApi();
 let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
@@ -1266,7 +1274,7 @@ apiInstance.getProjectEnvironmentHierarchy(projectOrProductUID).then((data) => {
 
 ### Authorization
 
-No authorization required
+[api_key](../README.md#api_key)
 
 ### HTTP request headers
 
