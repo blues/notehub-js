@@ -2151,6 +2151,18 @@ paths:
           required: true
           schema:
             type: string
+        - name: version
+          in: query
+          required: false
+          description: Firmware version. If not provided, defaults to UTC timestamp (e.g., 2025-04-23T11:42:31Z)
+          schema:
+            type: string
+        - name: notes
+          in: query
+          required: false
+          description: Optional notes describing what's different about this firmware version
+          schema:
+            type: string
       requestBody:
         description: contents of the firmware binary
         required: true
