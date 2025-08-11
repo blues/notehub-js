@@ -2836,7 +2836,7 @@ paths:
                 $ref: '#/components/schemas/ApiKey'
         '404':
           description: API key not found
-    post:
+    put:
       summary: Update API key (e.g. expiration date)
       tags: ["api_access"]
       operationId: updateApiKey
