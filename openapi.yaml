@@ -3497,6 +3497,9 @@ components:
           format: date-time
           nullable: true
           description: When it was last used, if ever
+        suspended:
+          type: boolean
+          description: if true, this token cannot be used
     PersonalAccessTokenSecret:
       type: object
       properties:
@@ -3520,6 +3523,9 @@ components:
           format: date-time
           nullable: true
           description: New expiration timestamp for the personal access token
+        suspended:
+          type: boolean
+          description: if true, the token is temporarily suspended
     AnalyticsEventsResponse:
       type: object
       properties:
