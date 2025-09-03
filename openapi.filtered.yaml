@@ -33,13 +33,15 @@ tags:
     description: Webhook APIs for non-notecard event ingestion
   - name: external devices
     description: APIs for events and sessions for external devices
+  - name: analytics
+    description: Analytics operations
 paths:
   /auth/login:
     post:
       tags:
         - authorization
       operationId: login
-      description: Gets a session token from the API from a username and password.
+      description: Gets an API key from username and password
       requestBody:
         required: true
         content:
@@ -2268,252 +2270,6 @@ paths:
           description: Success
         default:
           $ref: "#/components/responses/ErrorResponse"
-  /v1/repositories:
-    post:
-      tags:
-        - repository
-      operationId: createRepository
-      description: Create a new repository
-      security:
-        - api_key: []
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/CreateUpdateRepository"
-      responses:
-        "201":
-          description: Repository created successfully
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Repository"
-        default:
-          $ref: "#/components/responses/ErrorResponse"
-  /v1/repositories/{repositoryUID}:
-    get:
-      tags:
-        - repository
-      operationId: getRepository
-      description: Get repository information
-      security:
-        - api_key: []
-      parameters:
-        - $ref: "#/components/parameters/repositoryUIDParam"
-        - $ref: "#/components/parameters/repositoryKey"
-      responses:
-        "200":
-          description: Dataset updated successfully
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Repository"
-        default:
-          $ref: "#/components/responses/ErrorResponse"
-    put:
-      tags:
-        - repository
-      operationId: putRepository
-      description: Update a repository
-      security:
-        - api_key: []
-      parameters:
-        - $ref: "#/components/parameters/repositoryUIDParam"
-        - $ref: "#/components/parameters/repositoryKey"
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/CreateUpdateRepository"
-      responses:
-        "200":
-          description: Dataset updated successfully
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Repository"
-        default:
-          $ref: "#/components/responses/ErrorResponse"
-    delete:
-      tags:
-        - repository
-      operationId: deleteRepository
-      description: Delete a repository
-      security:
-        - api_key: []
-      parameters:
-        - $ref: "#/components/parameters/repositoryUIDParam"
-        - $ref: "#/components/parameters/repositoryKey"
-      responses:
-        "200":
-          description: Dataset deleted successfully
-        default:
-          $ref: "#/components/responses/ErrorResponse"
-  /v1/repositories/{repositoryUID}/datasets:
-    put:
-      tags:
-        - repository
-      operationId: createRepositoryDataset
-      description: Create a new dataset within a repository
-      security:
-        - api_key: []
-      parameters:
-        - $ref: "#/components/parameters/repositoryUIDParam"
-        - $ref: "#/components/parameters/repositoryKey"
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/DataSet"
-      responses:
-        "201":
-          description: Dataset created successfully
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/DataSet"
-        default:
-          $ref: "#/components/responses/ErrorResponse"
-  /v1/repositories/{repositoryUID}/datasets/{name}:
-    get:
-      tags:
-        - repository
-      operationId: getRepositoryDataset
-      description: Get the details of a dataset
-      security:
-        - api_key: []
-      parameters:
-        - $ref: "#/components/parameters/repositoryUIDParam"
-        - $ref: "#/components/parameters/datasetNameParam"
-        - $ref: "#/components/parameters/repositoryKey"
-      responses:
-        "200":
-          description: Dataset details
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/DataSet"
-        default:
-          $ref: "#/components/responses/ErrorResponse"
-    delete:
-      tags:
-        - repository
-      operationId: deleteRepositoryDataset
-      description: Delete a dataset
-      security:
-        - api_key: []
-      parameters:
-        - $ref: "#/components/parameters/repositoryUIDParam"
-        - $ref: "#/components/parameters/datasetNameParam"
-        - $ref: "#/components/parameters/repositoryKey"
-      responses:
-        "200":
-          description: Dataset deleted successfully
-        default:
-          $ref: "#/components/responses/ErrorResponse"
-  /v1/repositories/{repositoryUID}/sql:
-    post:
-      tags:
-        - repository
-      operationId: queryRepositorySql
-      description: Run a raw Clickhouse-compatible SQL statement against the
-        repository's database. Results are returned in CSV format
-      security:
-        - api_key: []
-      parameters:
-        - $ref: "#/components/parameters/repositoryUIDParam"
-        - $ref: "#/components/parameters/repositoryKey"
-        - in: header
-          description:
-            Specify the format of the response data. This functions the same as
-            the ClickHouse `FORMAT` clause. Supported values include `CSV`,
-            `JSON`, `JSONEachRow`, `TabSeparated`, and `NDJSON`. If not
-            specified, defaults to `TabSeparated`.
-          name: X-ClickHouse-Format
-          schema:
-            type: string
-      requestBody:
-        description: Clickhouse-compatible SQL statement
-        required: true
-        content:
-          text/plain:
-            schema:
-              type: string
-      responses:
-        "200":
-          description: Successful query
-          content:
-            text/plain:
-              schema:
-                type: string
-                format: binary
-        default:
-          $ref: "#/components/responses/ErrorResponse"
-  /v1/repositories/{repositoryUID}/datasets/{name}/query:
-    get:
-      tags:
-        - repository
-      operationId: queryRepositoryDataset
-      description:
-        Query a dataset with support for time ranges, field selection,
-        filtering, and location-based queries
-      security:
-        - api_key: []
-      parameters:
-        - $ref: "#/components/parameters/repositoryKey"
-        - $ref: "#/components/parameters/repositoryUIDParam"
-        - $ref: "#/components/parameters/datasetNameParam"
-        - $ref: "#/components/parameters/datasetStartQueryParam"
-        - $ref: "#/components/parameters/datasetEndQueryParam"
-        - $ref: "#/components/parameters/datasetSelectQueryParam"
-        - $ref: "#/components/parameters/datasetWhereQueryParam"
-        - $ref: "#/components/parameters/datasetAggregateWindowQueryParam"
-        - $ref: "#/components/parameters/datasetLocationNearQueryParam"
-        - $ref: "#/components/parameters/datasetLocationRadiusQueryParam"
-        - $ref: "#/components/parameters/datasetLimitQueryParam"
-        - $ref: "#/components/parameters/datasetOrderByQueryParam"
-        - $ref: "#/components/parameters/datasetDistinctQueryParam"
-      responses:
-        "200":
-          description: Successful query
-          content:
-            text/csv:
-              schema:
-                type: string
-                format: binary
-              example: |
-                lat,lon,device,session_began
-                42.393125,-71.185015,dev:1234,2024-01-01T12:34:56Z
-        default:
-          $ref: "#/components/responses/ErrorResponse"
-  /v1/repositories/{repositoryUID}/data:
-    get:
-      tags:
-        - repository
-      operationId: getRepositoryData
-      description: Get event and session data from a repository in NDJSON format.
-      security:
-        - api_key: []
-      parameters:
-        - $ref: "#/components/parameters/repositoryKey"
-        - $ref: "#/components/parameters/repositoryUIDParam"
-        - $ref: "#/components/parameters/datasetStartQueryParam"
-        - $ref: "#/components/parameters/datasetEndQueryParam"
-      responses:
-        "200":
-          description:
-            Successful request returning NDJSON encoded event and session
-            objects.
-          content:
-            text/csv:
-              schema:
-                type: string
-                format: binary
-        default:
-          $ref: "#/components/responses/ErrorResponse"
   /v1/projects/{projectOrProductUID}/schemas:
     get:
       tags:
@@ -3713,6 +3469,157 @@ components:
         - err
         - code
         - status
+    PersonalAccessToken:
+      type: object
+      properties:
+        uid:
+          type: string
+          description: Unique and public identifier
+        name:
+          type: string
+          description: Name for this API Key
+        description:
+          type: string
+          description: Optional description for this API Key
+        created_by:
+          type: object
+          description: The user that created this key
+          properties:
+            uid:
+              type: string
+            email:
+              type: string
+            name:
+              type: string
+        expires_at:
+          type: string
+          format: date-time
+          nullable: true
+          description: When the key expires
+        created_at:
+          type: string
+          format: date-time
+          description: When the key was created
+        last_used:
+          type: string
+          format: date-time
+          nullable: true
+          description: When it was last used, if ever
+        suspended:
+          type: boolean
+          description: if true, this token cannot be used
+    PersonalAccessTokenSecret:
+      type: object
+      properties:
+        uid:
+          type: string
+          description: Unique and public identifier
+        secret:
+          type: string
+          description: The secret
+    PersonalAccessTokenInfo:
+      type: object
+      required:
+        - expiresAt
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        expires_at:
+          type: string
+          format: date-time
+          nullable: true
+          description: New expiration timestamp for the personal access token
+        suspended:
+          type: boolean
+          description: if true, the token is temporarily suspended
+    AnalyticsEventsResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/AnalyticsEventsData"
+      required:
+        - data
+    AnalyticsEventsData:
+      type: object
+      properties:
+        period:
+          type: string
+          format: date-time
+          example: 2025-07-23T00:00:00Z
+        events:
+          type: integer
+          example: 42
+        platform_events:
+          type: integer
+          example: 15
+      required:
+        - period
+        - events
+        - platform_events
+    AnalyticsRouteLogsResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/AnalyticsRouteLogsData"
+      required:
+        - data
+    AnalyticsRouteLogsData:
+      type: object
+      properties:
+        period:
+          type: string
+          format: date-time
+          example: 2025-07-23T00:00:00Z
+        successful_routes:
+          type: integer
+          example: 38
+        failed_routes:
+          type: integer
+          example: 4
+        total_routes:
+          type: integer
+          example: 42
+      required:
+        - period
+        - successful_routes
+        - failed_routes
+        - total_routes
+    AnalyticsSessionsResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/AnalyticsSessionsData"
+      required:
+        - data
+    AnalyticsSessionsData:
+      type: object
+      properties:
+        period:
+          type: string
+          format: date-time
+          example: 2025-07-23T00:00:00Z
+        sessions:
+          type: integer
+          example: 12
+        unique_devices:
+          type: integer
+          example: 8
+        total_bytes:
+          type: integer
+          example: 1048576
+      required:
+        - period
+        - sessions
+        - unique_devices
+        - total_bytes
     JSONata:
       type: object
     BillingAccount:

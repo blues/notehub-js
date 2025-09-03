@@ -10,7 +10,7 @@ All URIs are relative to *https://api.notefile.net*
 
 > Login200Response login(loginRequest)
 
-Gets a session token from the API from a username and password.
+Gets an API key from username and password
 
 ### Example
 
