@@ -14,37 +14,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # https://github.com/marketplace/actions/auto-changelog
-      # require commit format are "type(category): description [flag]"
-      - name: Generate release changelog
-        uses: ardalanamini/auto-changelog@v3
-        id: changelog
-        with:
-          github-token: ${{ github.token }}
-          commit-types: |
-            breaking: Breaking Changes
-            feat: New Features
-            fix: Bug Fixes
-            revert: Reverts
-            perf: Performance Improvements
-            refactor: Refactors
-            deps: Dependencies
-            docs: Documentation Changes
-            style: Code Style Changes
-            build: Build System
-            ci: Continuous Integration
-            test: Tests
-            chore: Chores
-            other: Other Changes
-          default-commit-type: Other Changes
-          mention-authors: true
-          include-compare: true
-          mention-new-contributors: true
-
       - name: Setup .npmrc file to publish to npm
         uses: actions/setup-node@v3
         with:
-          node-version: "16.x"
+          node-version: "22.x"
           registry-url: "https://registry.npmjs.org"
 
       - name: Install dependencies
