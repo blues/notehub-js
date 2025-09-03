@@ -17,7 +17,7 @@ import AnalyticsSessionsData from "./AnalyticsSessionsData";
 /**
  * The AnalyticsSessionsResponse model module.
  * @module model/AnalyticsSessionsResponse
- * @version 1.0.36
+ * @version 1.0.37
  */
 class AnalyticsSessionsResponse {
   /**

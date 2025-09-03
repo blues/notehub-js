@@ -17,7 +17,7 @@ import AnalyticsRouteLogsData from "./AnalyticsRouteLogsData";
 /**
  * The AnalyticsRouteLogsResponse model module.
  * @module model/AnalyticsRouteLogsResponse
- * @version 1.0.36
+ * @version 1.0.37
  */
 class AnalyticsRouteLogsResponse {
   /**

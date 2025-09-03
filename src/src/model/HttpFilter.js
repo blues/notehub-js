@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The HttpFilter model module.
  * @module model/HttpFilter
- * @version 1.0.36
+ * @version 1.0.37
  */
 class HttpFilter {
   /**
