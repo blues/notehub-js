@@ -18,7 +18,7 @@ import LoginRequest from "../model/LoginRequest";
 /**
  * Authorization service.
  * @module api/AuthorizationApi
- * @version 1.0.36
+ * @version 1.0.37
  */
 export default class AuthorizationApi {
   /**
@@ -33,7 +33,7 @@ export default class AuthorizationApi {
   }
 
   /**
-   * Gets a session token from the API from a username and password.
+   * Gets an API key from username and password
    * @param {module:model/LoginRequest} loginRequest
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Login200Response} and HTTP response
    */
@@ -72,7 +72,7 @@ export default class AuthorizationApi {
   }
 
   /**
-   * Gets a session token from the API from a username and password.
+   * Gets an API key from username and password
    * @param {module:model/LoginRequest} loginRequest
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Login200Response}
    */

@@ -15,6 +15,12 @@ import ApiClient from "./ApiClient";
 import Alert from "./model/Alert";
 import AlertDataInner from "./model/AlertDataInner";
 import AlertNotificationsInner from "./model/AlertNotificationsInner";
+import AnalyticsEventsData from "./model/AnalyticsEventsData";
+import AnalyticsEventsResponse from "./model/AnalyticsEventsResponse";
+import AnalyticsRouteLogsData from "./model/AnalyticsRouteLogsData";
+import AnalyticsRouteLogsResponse from "./model/AnalyticsRouteLogsResponse";
+import AnalyticsSessionsData from "./model/AnalyticsSessionsData";
+import AnalyticsSessionsResponse from "./model/AnalyticsSessionsResponse";
 import Aws from "./model/Aws";
 import Azure from "./model/Azure";
 import BillingAccount from "./model/BillingAccount";
@@ -93,6 +99,10 @@ import Note from "./model/Note";
 import NotefileSchema from "./model/NotefileSchema";
 import NotehubRoute from "./model/NotehubRoute";
 import NotehubRouteSchema from "./model/NotehubRouteSchema";
+import PersonalAccessToken from "./model/PersonalAccessToken";
+import PersonalAccessTokenCreatedBy from "./model/PersonalAccessTokenCreatedBy";
+import PersonalAccessTokenInfo from "./model/PersonalAccessTokenInfo";
+import PersonalAccessTokenSecret from "./model/PersonalAccessTokenSecret";
 import PostProvisionProjectDeviceRequest from "./model/PostProvisionProjectDeviceRequest";
 import Product from "./model/Product";
 import Project from "./model/Project";
@@ -130,7 +140,6 @@ import EventApi from "./api/EventApi";
 import ExternalDevicesApi from "./api/ExternalDevicesApi";
 import MonitorApi from "./api/MonitorApi";
 import ProjectApi from "./api/ProjectApi";
-import RepositoryApi from "./api/RepositoryApi";
 import RouteApi from "./api/RouteApi";
 import WebhookApi from "./api/WebhookApi";
 
@@ -163,7 +172,7 @@ import WebhookApi from "./api/WebhookApi";
  * </pre>
  * </p>
  * @module index
- * @version 1.0.36
+ * @version 1.0.37
  */
 export {
   /**
@@ -189,6 +198,42 @@ export {
    * @property {module:model/AlertNotificationsInner}
    */
   AlertNotificationsInner,
+
+  /**
+   * The AnalyticsEventsData model constructor.
+   * @property {module:model/AnalyticsEventsData}
+   */
+  AnalyticsEventsData,
+
+  /**
+   * The AnalyticsEventsResponse model constructor.
+   * @property {module:model/AnalyticsEventsResponse}
+   */
+  AnalyticsEventsResponse,
+
+  /**
+   * The AnalyticsRouteLogsData model constructor.
+   * @property {module:model/AnalyticsRouteLogsData}
+   */
+  AnalyticsRouteLogsData,
+
+  /**
+   * The AnalyticsRouteLogsResponse model constructor.
+   * @property {module:model/AnalyticsRouteLogsResponse}
+   */
+  AnalyticsRouteLogsResponse,
+
+  /**
+   * The AnalyticsSessionsData model constructor.
+   * @property {module:model/AnalyticsSessionsData}
+   */
+  AnalyticsSessionsData,
+
+  /**
+   * The AnalyticsSessionsResponse model constructor.
+   * @property {module:model/AnalyticsSessionsResponse}
+   */
+  AnalyticsSessionsResponse,
 
   /**
    * The Aws model constructor.
@@ -659,6 +704,30 @@ export {
   NotehubRouteSchema,
 
   /**
+   * The PersonalAccessToken model constructor.
+   * @property {module:model/PersonalAccessToken}
+   */
+  PersonalAccessToken,
+
+  /**
+   * The PersonalAccessTokenCreatedBy model constructor.
+   * @property {module:model/PersonalAccessTokenCreatedBy}
+   */
+  PersonalAccessTokenCreatedBy,
+
+  /**
+   * The PersonalAccessTokenInfo model constructor.
+   * @property {module:model/PersonalAccessTokenInfo}
+   */
+  PersonalAccessTokenInfo,
+
+  /**
+   * The PersonalAccessTokenSecret model constructor.
+   * @property {module:model/PersonalAccessTokenSecret}
+   */
+  PersonalAccessTokenSecret,
+
+  /**
    * The PostProvisionProjectDeviceRequest model constructor.
    * @property {module:model/PostProvisionProjectDeviceRequest}
    */
@@ -879,12 +948,6 @@ export {
    * @property {module:api/ProjectApi}
    */
   ProjectApi,
-
-  /**
-   * The RepositoryApi service constructor.
-   * @property {module:api/RepositoryApi}
-   */
-  RepositoryApi,
 
   /**
    * The RouteApi service constructor.
