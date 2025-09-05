@@ -2078,6 +2078,20 @@ paths:
         required: true
         schema:
           type: string
+      - name: version
+        in: query
+        required: false
+        description: Firmware version (optional). If not provided, the version will
+          be extracted from firmware binary if available, otherwise left empty
+        schema:
+          type: string
+      - name: notes
+        in: query
+        required: false
+        description: Optional notes describing what's different about this firmware
+          version
+        schema:
+          type: string
       requestBody:
         description: contents of the firmware binary
         required: true
@@ -5476,6 +5490,9 @@ components:
           type: string
         firmware:
           $ref: '#/components/schemas/Firmware'
+        version:
+          type: string
+          description: User-specified version string provided at time of upload
     Firmware:
       type: object
       properties:
