@@ -5797,7 +5797,7 @@ components:
         expires:
           type: integer
           format: int64
-          description: Expiration date of the SIM card as Unix timestamp
+          description: Date when the cellular plan expires as Unix timestamp
           example: 1925097600
         plan_type:
           type: string
