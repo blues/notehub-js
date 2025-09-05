@@ -3084,6 +3084,10 @@ components:
         platform_events:
           type: integer
           example: 15
+      required:
+        - period
+        - events
+        - platform_events
     AnalyticsEventsResponse:
       type: object
       properties:
@@ -3091,6 +3095,8 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AnalyticsEventsData'
+      required:
+        - data
     AnalyticsRouteLogsData:
       type: object
       properties:
@@ -3107,6 +3113,11 @@ components:
         total_routes:
           type: integer
           example: 42
+      required:
+        - period
+        - successful_routes
+        - failed_routes
+        - total_routes
     AnalyticsRouteLogsResponse:
       type: object
       properties:
@@ -3114,6 +3125,8 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AnalyticsRouteLogsData'
+      required:
+        - data
     AnalyticsSessionsData:
       type: object
       properties:
@@ -3130,6 +3143,11 @@ components:
         unique_devices:
           type: integer
           example: 8
+      required:
+        - period
+        - sessions
+        - unique_devices
+        - total_bytes
     AnalyticsSessionsResponse:
       type: object
       properties:
@@ -3137,8 +3155,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AnalyticsSessionsData'
+      required:
+        - data
     AppUIDList:
       type: array
+      items:
+        type: string
       properties: {}
     BillingAccount:
       type: object
@@ -3149,9 +3171,17 @@ components:
           $ref: '#/components/schemas/BillingAccountRole'
         uid:
           type: string
+      required:
+        - uid
+        - name
+        - role
     BillingAccountRole:
       type: string
       properties: {}
+      enum:
+        - billing_admin
+        - billing_manager
+        - project_creator
     Body:
       type: object
       properties:
@@ -3159,6 +3189,8 @@ components:
           type: object
     CellularUsage:
       type: array
+      items:
+        $ref: '#/components/schemas/SimUsage'
       properties: {}
     Contact:
       type: object
@@ -3171,9 +3203,17 @@ components:
           type: string
         role:
           type: string
+      nullable: true
     CreateMonitor:
       type: ''
       properties: {}
+      allOf:
+        - $ref: '#/components/schemas/Monitor'
+        - required:
+            - name
+            - description
+            - notefile_filter
+            - alert_routes
     CreateUpdateRepository:
       type: object
       properties:
@@ -3197,6 +3237,7 @@ components:
           $ref: '#/components/schemas/DFUState'
         user:
           $ref: '#/components/schemas/DFUState'
+      nullable: true
     DFUState:
       type: object
       properties:
@@ -3258,6 +3299,7 @@ components:
         version:
           description: 'Last known version, which is generally a JSON object contained within the firmware image'
           type: string
+      nullable: true
     DataField:
       type: object
       properties:
@@ -3357,6 +3399,13 @@ components:
         voltage:
           type: number
           format: double
+      required:
+        - uid
+        - provisioned
+        - product_uid
+        - fleet_uids
+        - voltage
+        - temperature
     DeviceDfuHistory:
       type: object
       properties:
@@ -3400,6 +3449,7 @@ components:
           type: boolean
           default: false
     DeviceDfuStateMachine:
+      description: Represents a single request to update the host or Notecard firmware
       type: object
       properties:
         current_version:
@@ -3416,6 +3466,7 @@ components:
           items:
             $ref: '#/components/schemas/DeviceDfuStateMachineNode'
     DeviceDfuStateMachineNode:
+      description: Represents a single request to update the host or Notecard firmware
       type: object
       properties:
         datetime:
@@ -3720,6 +3771,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/EnvVar'
+      required:
+        - var_count
+        - inherited_var_count
+        - type
+        - variables
+        - children
     EnvVar:
       type: object
       properties:
@@ -3738,6 +3795,8 @@ components:
           type: object
           additionalProperties:
             type: string
+      required:
+        - environment_variables
     Error:
       type: object
       properties:
@@ -3758,6 +3817,10 @@ components:
         status:
           description: Machine readable representation of the HTTP error code.
           type: string
+      required:
+        - err
+        - code
+        - status
     Event:
       type: object
       properties:
@@ -3976,6 +4039,7 @@ components:
           type: integer
         version:
           type: string
+      nullable: true
     FirmwareInfo:
       type: object
       properties:
@@ -4039,11 +4103,18 @@ components:
           description: A watchdog timer is used to generate an event every N minutes of inactivity. 0 means no watchdog
           type: integer
           format: int64
+      required:
+        - uid
+        - label
+        - created
     FleetRule:
+      description: 'JSONata expression that will be evaluated to determine device membership into this fleet, if the expression evaluates to a 1, the device will be included, if it evaluates to -1 it will be removed, and if it evaluates to 0 or errors it will be left unchanged.'
       type: string
       properties: {}
     FleetsUIDList:
       type: array
+      items:
+        type: string
       properties: {}
     JSONata:
       type: object
@@ -4065,6 +4136,14 @@ components:
           type: string
         when:
           type: string
+      nullable: true
+      required:
+        - when
+        - name
+        - country
+        - timezone
+        - latitude
+        - longitude
     Monitor:
       type: object
       properties:
@@ -4161,6 +4240,9 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/SchemaProperty'
+      required:
+        - notefile
+        - properties
     NotehubRoute:
       type: object
       properties:
@@ -4268,6 +4350,8 @@ components:
         suspended:
           description: 'if true, the token is temporarily suspended'
           type: boolean
+      required:
+        - expiresAt
     PersonalAccessTokenSecret:
       type: object
       properties:
@@ -4291,6 +4375,10 @@ components:
           type: string
         uid:
           type: string
+      required:
+        - uid
+        - label
+        - disable_devices_by_default
     Project:
       type: object
       properties:
@@ -4307,6 +4395,10 @@ components:
           $ref: '#/components/schemas/Contact'
         uid:
           type: string
+      required:
+        - uid
+        - label
+        - created
     ProjectMember:
       type: object
       properties:
@@ -4319,6 +4411,10 @@ components:
           type: string
         role:
           $ref: '#/components/schemas/Role'
+      required:
+        - name
+        - email
+        - role
     Repository:
       type: object
       properties:
@@ -4335,6 +4431,13 @@ components:
     Role:
       type: string
       properties: {}
+      enum:
+        - owner
+        - developer
+        - viewer
+        - support
+        - null
+      nullable: true
     RouteLog:
       type: object
       properties:
@@ -4389,6 +4492,9 @@ components:
         updated_at:
           type: string
           format: date-time
+      required:
+        - type
+        - updatedAt
     SimUsage:
       type: object
       properties:
@@ -4586,6 +4692,7 @@ components:
           description: Transformation to be applied to the event
           type: string
     aws:
+      description: Route settings specific to AWS routes.
       type: object
       properties:
         access_key_id:
@@ -4663,6 +4770,7 @@ components:
         url:
           type: string
     azure:
+      description: Route settings specific to Azure routes.  Only used for Azure route types
       type: object
       properties:
         filter:
@@ -4725,6 +4833,7 @@ components:
         url:
           type: string
     google:
+      description: Route settings specific to Google routes.
       type: object
       properties:
         filter:
@@ -4782,6 +4891,7 @@ components:
         url:
           type: string
     http:
+      description: Route settings specific to HTTP routes.
       type: object
       properties:
         disable_http_headers:
@@ -4848,6 +4958,7 @@ components:
           description: Route URL
           type: string
     mqtt:
+      description: Route settings specific to MQTT routes.  Only used for MQTT route types
       type: object
       properties:
         broker:
@@ -4925,6 +5036,7 @@ components:
         username:
           type: string
     proxy:
+      description: Route settings specific to Proxy routes.
       type: object
       properties:
         alias:
@@ -4949,6 +5061,7 @@ components:
         url:
           type: string
     radresponder:
+      description: Route settings specific to RadResponder routes.  Only used for RadResponder route types
       type: object
       properties:
         client_id:
@@ -4968,6 +5081,7 @@ components:
           type: boolean
           default: false
     slack:
+      description: Route settings specific to Slack routes.  Only used for Slack route types
       type: object
       properties:
         bearer:
@@ -5036,6 +5150,7 @@ components:
           type: string
           example: 'https://hooks.slack.com/services/FOO4BAR/THIS4THAT/123xYzaBC456'
     snowflake:
+      description: Route settings specific to Snowflake routes.  Only used for Snowflake route types
       type: object
       properties:
         account_name:
@@ -5093,6 +5208,7 @@ components:
         user_name:
           type: string
     thingworx:
+      description: Route settings specific to ThingWorx routes.  Only used for ThingWorx route types
       type: object
       properties:
         app_key:
@@ -5150,6 +5266,7 @@ components:
         url:
           type: string
     twilio:
+      description: Route settings specific to Twilio routes.  Only used for Twilio route types
       type: object
       properties:
         account_sid:
@@ -5215,6 +5332,9 @@ components:
               has_more:
                 description: True if there are more alerts
                 type: boolean
+            required:
+              - alerts
+              - has_more
     DevicesResponse:
       description: List of Devices
       content:
@@ -5228,6 +5348,9 @@ components:
                   $ref: '#/components/schemas/Device'
               has_more:
                 type: boolean
+            required:
+              - devices
+              - has_more
     EnvironmentVariablesResponse:
       description: The response body from an environment variables request.
       content:
@@ -5235,6 +5358,7 @@ components:
           schema:
             type: ''
             properties: {}
+            $ref: '#/components/schemas/EnvironmentVariables'
     ErrorResponse:
       description: The response body in case of an API error.
       content:
@@ -5242,6 +5366,7 @@ components:
           schema:
             type: ''
             properties: {}
+            $ref: '#/components/schemas/Error'
     EventsByCursorResponse:
       description: The response body from a GET events by cursor request.
       content:
@@ -5260,6 +5385,46 @@ components:
                 description: |
                   The cursor value of the next result, which is intended to be used as the "cursor" parameter value of the next call to this method. An empty string is returned if there are no more results after this results set.
                 type: string
+            required:
+              - events
+              - next_cursor
+              - has_more
+          example:
+            events:
+              - app: 'app:218f6217-9f78-432e-9fe0-02ca8b5a216c'
+                best_country: US
+                best_id: My Device
+                best_lat: 34.82476372
+                best_location: Atlanta GA
+                best_location_type: triangulated
+                best_location_when: 1652709545
+                best_lon: -83.32261614
+                best_timezone: America/New_York
+                body:
+                  humidity: 40.375
+                  pressure: 97705.66
+                  temperature: 24.0625
+                  voltage: 2.598
+                device: 'dev:5c0272311928'
+                event: dfa3747d-688b-4250-935b-5dd60354313c
+                file: air.qo
+                product: 'product:com.blues.project.demo'
+                received: 1656011227.006928
+                req: note.add
+                session: b623132c-6afb-4740-bc39-e3634e38f064
+                sn: My Device
+                tower_id: '0,0,0,0'
+                tri_country: US
+                tri_lat: 34.82475372
+                tri_location: Atlanta GA
+                tri_lon: -83.32261614
+                tri_points: 6
+                tri_timezone: America/New_York
+                tri_when: 1652709545
+                updates: 1
+                when: 1656010061
+            has_more: false
+            next_cursor: ''
     EventsResponse:
       description: The response body from a GET events request.
       headers:
@@ -5282,10 +5447,54 @@ components:
               through:
                 description: The UID of the last event returned
                 type: string
+            required:
+              - events
+              - has_more
+          example:
+            events:
+              - app: 'app:218f6217-9f78-432e-9fe0-02ca8b5a216c'
+                best_country: US
+                best_id: My Device
+                best_lat: 34.82476372
+                best_location: Atlanta GA
+                best_location_type: triangulated
+                best_location_when: 1652709545
+                best_lon: -83.32261614
+                best_timezone: America/New_York
+                body:
+                  humidity: 40.375
+                  pressure: 97705.66
+                  temperature: 24.0625
+                  voltage: 2.598
+                device: 'dev:5c0272311928'
+                event: dfa3747d-688b-4250-935b-5dd60354313c
+                file: air.qo
+                product: 'product:com.blues.project.demo'
+                received: 1656011227.006928
+                req: note.add
+                session: b623132c-6afb-4740-bc39-e3634e38f064
+                sn: My Device
+                tower_id: '0,0,0,0'
+                tri_country: US
+                tri_lat: 34.82475372
+                tri_location: Atlanta GA
+                tri_lon: -83.32261614
+                tri_points: 6
+                tri_timezone: America/New_York
+                tri_when: 1652709545
+                updates: 1
+                when: 1656010061
+            has_more: true
         text/csv:
           schema:
             type: string
             properties: {}
+            format: binary
+          example: |
+            eventUID,deviceUID,when,best_location_type,best_lat,best_lon,body.temperature,body.humidity
+            e123456-7890-abcd-ef01-234567890abc,dev:000000000000001,1625097600,gps,37.7749,-122.4194,22.5,45.2
+            f234567-8901-bcde-fg12-345678901bcd,dev:000000000000002,1625097660,triangulated,40.7128,-74.0060,24.3,48.7
+            g345678-9012-cdef-gh23-456789012cde,dev:000000000000003,1625097720,tower,51.5074,-0.1278,20.1,52.9
     FleetsResponse:
       description: The response body from a fleets endpoint.
       content:
@@ -5297,6 +5506,8 @@ components:
                 type: array
                 items:
                   $ref: '#/components/schemas/Fleet'
+            required:
+              - fleets
     GetDeviceEnvironmentVariablesResponse:
       description: The response body from a get device environment variables request.
       content:
@@ -5319,6 +5530,9 @@ components:
                 type: object
                 additionalProperties:
                   type: string
+            required:
+              - environment_variables
+              - environment_variables_env_default
     LatestResponse:
       description: The response body for a Latest Events request.
       content:
@@ -5331,13 +5545,78 @@ components:
                 type: array
                 items:
                   $ref: '#/components/schemas/Event'
+          example:
+            latest_events:
+              - app: 'app:2e49f10a-76a9-4e2d-8b18-cef0b8b46446'
+                body:
+                  why: sensors.qo requested sync (sensors.qo) (TLS)
+                device: 'dev:864475040523995'
+                event: 81bd2bf1-0399-4978-bc46-8f779b4af350
+                file: _session.qo
+                product: 'product:com.blues.app:myapp'
+                received: 1669667707.564694
+                req: session.begin
+                session: ed18884b-f2a6-419f-b856-d28dc8f0892b
+                tls: true
+                tower_country: US
+                tower_id: '310,410,20483,184692495'
+                tower_lat: 43.769062500000004
+                tower_location: Waverly MI
+                tower_lon: -83.657359375
+                tower_timezone: America/Detroit
+                tower_when: 1669667691
+                when: 1669667707
+              - app: 'app:2e49f10a-76a9-4e2d-8b18-cef0b8b46446'
+                body:
+                  humid: 56.23
+                  temp: 35.5
+                device: 'dev:864475040523995'
+                event: 916d4c81-06ae-4263-9b55-7a3a0f73cb5a
+                file: data.qo
+                product: 'product:com.blues.app:myapp'
+                received: 1669667713.221659
+                req: note.add
+                session: 28cdc39f-9f62-4789-b0a3-2f35f9448ced
+                sn: tj-1
+                tower_country: US
+                tower_id: '310,410,20483,184692495'
+                tower_lat: 43.769062500000004
+                tower_location: Waverly MI
+                tower_lon: -83.657359375
+                tower_timezone: America/Detroit
+                tower_when: 1669667677
+                when: 1669667689
+              - app: 'app:2e49f10a-76a9-4e2d-8b18-cef0b8b46446'
+                body:
+                  humidity: 69.88647200683693
+                  pressure: 993.6294496104914
+                  temp: 21.273027181770885
+                device: 'dev:864475040523995'
+                event: e98c2c3b-edbe-4fe7-af57-2196cc843eb7
+                file: sensors.qo
+                product: 'product:com.blues.app:myapp'
+                received: 1669667711.85316
+                req: note.add
+                session: 7211392c-6895-43f8-9256-790655348be5
+                tower_country: US
+                tower_id: '310,410,20483,184692496'
+                tower_lat: 43.747037500000005
+                tower_location: Waverly MI
+                tower_lon: -83.665859375
+                tower_timezone: America/Detroit
+                tower_when: 1669667689
+                when: 1669667695
     MonitorsResponse:
       description: The response body from GET /monitors
       content:
         application/json:
           schema:
             type: array
+            items:
+              $ref: '#/components/schemas/Monitor'
             properties: {}
+            required:
+              - monitors
     NoteResponse:
       description: The response body from a note endpoint.
       content:
@@ -5364,6 +5643,64 @@ components:
                 type: array
                 items:
                   $ref: '#/components/schemas/DeviceSession'
+            required:
+              - sessions
+              - has_more
+          example:
+            has_more: true
+            sessions:
+              - apn: a-notehub.com.attz
+                bars: 2
+                bearer: LTE FDD
+                cell: '310,410,17169,77315594'
+                continuous: true
+                device: 'dev:000000000000000'
+                events: 14
+                fleets:
+                  - 'fleet:46be9834-5te6-42c1-0000-b5ea05e248d7'
+                hp_cycles_data: 3
+                hp_cycles_total: 3
+                hp_secs_data: 7659
+                hp_secs_total: 7659
+                iccid: '89011704278500000000'
+                ip: 10.68.56.193
+                moved: 1667250807
+                orientation: face-up
+                period:
+                  bytes_rcvd: 2501
+                  bytes_sent: 4138
+                  duration: 215
+                  notes_sent: 12
+                  sessions_tls: 1
+                  since: 1667250832
+                product: 'product:com.blues.demo:project'
+                rat: lte
+                rsrp: -91
+                rsrq: -13
+                rssi: -61
+                session: d76689be-37cd-423c-b695-7e0c19a2a264
+                sinr: 183
+                temp: 24.437
+                tls: true
+                tower:
+                  c: US
+                  cid: 77315594
+                  count: 7
+                  l: 86MG3HF5+P25
+                  lac: 17169
+                  lat: 43.0742625
+                  lon: -89.44239062499999
+                  mcc: 310
+                  mnc: 410
+                  'n': Shorewood Hills WI
+                  time: 1667250835
+                  towers: 1
+                  zone: America/Chicago
+                tri: {}
+                trigger: first sync; continuous connection mode
+                voltage: 4.174
+                when: 1667251044
+                work: 1667251046
   securitySchemes:
     api_key:
       description: |
