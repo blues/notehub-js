@@ -42,7 +42,7 @@ paths:
       tags:
       - authorization
       operationId: login
-      description: Gets an API key from username and password
+      description: Gets a session token from the API from a username and password.
       requestBody:
         required: true
         content:
@@ -3461,71 +3461,6 @@ components:
       - err
       - code
       - status
-    PersonalAccessToken:
-      type: object
-      properties:
-        uid:
-          type: string
-          description: Unique and public identifier
-        name:
-          type: string
-          description: Name for this API Key
-        description:
-          type: string
-          description: Optional description for this API Key
-        created_by:
-          type: object
-          description: The user that created this key
-          properties:
-            uid:
-              type: string
-            email:
-              type: string
-            name:
-              type: string
-        expires_at:
-          type: string
-          format: date-time
-          nullable: true
-          description: When the key expires
-        created_at:
-          type: string
-          format: date-time
-          description: When the key was created
-        last_used:
-          type: string
-          format: date-time
-          nullable: true
-          description: When it was last used, if ever
-        suspended:
-          type: boolean
-          description: if true, this token cannot be used
-    PersonalAccessTokenSecret:
-      type: object
-      properties:
-        uid:
-          type: string
-          description: Unique and public identifier
-        secret:
-          type: string
-          description: The secret
-    PersonalAccessTokenInfo:
-      type: object
-      required:
-      - expiresAt
-      properties:
-        name:
-          type: string
-        description:
-          type: string
-        expires_at:
-          type: string
-          format: date-time
-          nullable: true
-          description: New expiration timestamp for the personal access token
-        suspended:
-          type: boolean
-          description: if true, the token is temporarily suspended
     AnalyticsEventsResponse:
       type: object
       properties:
@@ -5854,6 +5789,19 @@ components:
           type: integer
           format: int64
           description: Time this usage information was last updated
+        activated:
+          type: integer
+          format: int64
+          description: Activation date of the SIM card as Unix timestamp
+          example: 1609459200
+        expires:
+          type: integer
+          format: int64
+          description: Expiration date of the SIM card as Unix timestamp
+          example: 1925097600
+        plan_type:
+          type: string
+          description: Plan type name
     WebhookSettings:
       type: object
       properties:
