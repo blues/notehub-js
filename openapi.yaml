@@ -15,7 +15,7 @@ paths:
   /auth/login:
     post:
       operationId: login
-      description: Gets a session token from the API from a username and password.
+      description: Gets an API key from username and password
       requestBody:
         required: true
         content:
@@ -4213,6 +4213,69 @@ components:
             - $ref: '#/components/schemas/slack'
         uid:
           description: Route UID
+          type: string
+    PersonalAccessToken:
+      type: object
+      properties:
+        created_at:
+          description: When the key was created
+          type: string
+          format: date-time
+        created_by:
+          description: The user that created this key
+          type: object
+          properties:
+            email:
+              type: string
+            name:
+              type: string
+            uid:
+              type: string
+        description:
+          description: Optional description for this API Key
+          type: string
+        expires_at:
+          description: When the key expires
+          type: string
+          format: date-time
+          nullable: true
+        last_used:
+          description: 'When it was last used, if ever'
+          type: string
+          format: date-time
+          nullable: true
+        name:
+          description: Name for this API Key
+          type: string
+        suspended:
+          description: 'if true, this token cannot be used'
+          type: boolean
+        uid:
+          description: Unique and public identifier
+          type: string
+    PersonalAccessTokenInfo:
+      type: object
+      properties:
+        description:
+          type: string
+        expires_at:
+          description: New expiration timestamp for the personal access token
+          type: string
+          format: date-time
+          nullable: true
+        name:
+          type: string
+        suspended:
+          description: 'if true, the token is temporarily suspended'
+          type: boolean
+    PersonalAccessTokenSecret:
+      type: object
+      properties:
+        secret:
+          description: The secret
+          type: string
+        uid:
+          description: Unique and public identifier
           type: string
     Product:
       type: object
