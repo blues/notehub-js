@@ -5867,6 +5867,14 @@ components:
         plan_type:
           type: string
           description: Plan type name
+        imsi:
+          type: string
+          description: IMSI of the SIM card
+          example: '310170830688975'
+        is_bundled:
+          type: boolean
+          description: Whether this SIM uses an internal bundled data plan (AT&T)
+          example: true
     WebhookSettings:
       type: object
       properties:
