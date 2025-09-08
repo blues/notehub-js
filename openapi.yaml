@@ -5846,11 +5846,11 @@ components:
           type: integer
           format: int64
           description: Limit in bytes of the SIMs current data plan
-        lifetimeUsed:
+        lifetime_used:
           type: integer
           format: int64
           description: Total number of bytes used by SIM
-        lastUpdated:
+        last_updated:
           type: integer
           format: int64
           description: Time this usage information was last updated
