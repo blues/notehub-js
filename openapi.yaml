@@ -46,6 +46,81 @@ paths:
           description: Internal Server Error
       tags:
         - authorization
+  /oauth2/token:
+    post:
+      operationId: OAuth2ClientCredentials
+      summary: Issue an OAuth 2.0 access token (Client Credentials)
+      description: |
+        Exchanges client credentials for an access token. Parameters must be sent as application/x-www-form-urlencoded.
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                client_id:
+                  type: string
+                  format: uuid
+                  example: d37ae69a-c739-44e9-9722-81a4cb7aeb67
+                client_secret:
+                  type: string
+                  format: password
+                  example: 2a40832d028a3e24a717f023fdcaa8ab452dd12223d472aff38223ffdfeee4bf
+                grant_type:
+                  type: string
+                  example: client_credentials
+                  enum:
+                    - client_credentials
+                scope:
+                  description: Space-delimited scopes.
+                  type: string
+                  example: openid
+              required:
+                - grant_type
+                - client_id
+                - client_secret
+      responses:
+        '200':
+          description: Successful token response
+          content:
+            application/json:
+              example:
+                access_token: 7VEVIiNVr_Q_eqjWpddz18qmYVWVgKHtlYsuoYzS7v0.3BUMglZCKBF1Swz0WLQQ9-DgSBtkroKbpXmF1sJ-NE0
+                expires_in: 1800
+                scope: openid
+                token_type: bearer
+              schema:
+                $ref: '#/components/schemas/OAuth2TokenResponse'
+        '400':
+          description: Invalid request (missing or malformed parameters)
+          content:
+            application/json:
+              example:
+                error: invalid_request
+                error_description: 'Missing parameter: client_id'
+              schema:
+                $ref: '#/components/schemas/OAuth2Error'
+        '401':
+          description: Invalid client authentication
+          content:
+            application/json:
+              example:
+                error: invalid_client
+                error_description: Client authentication failed
+              schema:
+                $ref: '#/components/schemas/OAuth2Error'
+        '403':
+          description: Unauthorized scope
+          content:
+            application/json:
+              example:
+                error: invalid_scope
+                error_description: Requested scope is invalid
+              schema:
+                $ref: '#/components/schemas/OAuth2Error'
+      tags:
+        - authorization
   /v1/billing-accounts:
     get:
       operationId: getBillingAccounts
@@ -4296,6 +4371,46 @@ components:
         uid:
           description: Route UID
           type: string
+    OAuth2Error:
+      type: object
+      properties:
+        error:
+          description: RFC 6749 error code.
+          type: string
+          enum:
+            - invalid_request
+            - invalid_client
+            - invalid_grant
+            - unauthorized_client
+            - unsupported_grant_type
+            - invalid_scope
+        error_description:
+          description: Human-readable explanation of the error.
+          type: string
+      required:
+        - error
+    OAuth2TokenResponse:
+      type: object
+      properties:
+        access_token:
+          description: The issued access token
+          type: string
+        expires_in:
+          description: Lifetime in seconds of the access token.
+          type: integer
+          example: 1799
+        scope:
+          description: Granted scopes (space-delimited).
+          type: string
+          example: openid
+        token_type:
+          description: Usually 'bearer'
+          type: string
+          example: bearer
+      required:
+        - access_token
+        - token_type
+        - expires_in
     PersonalAccessToken:
       type: object
       properties:
