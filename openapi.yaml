@@ -3885,6 +3885,14 @@ components:
           type: boolean
         cellular_usage:
           $ref: '#/components/schemas/CellularUsage'
+        cellular_plan:
+          type: array
+          items:
+            $ref: '#/components/schemas/CellularPlan'
+        satellite_plan:
+          allOf:
+          - $ref: '#/components/schemas/SatellitePlan'
+          nullable: true
       required:
       - uid
       - provisioned
@@ -5854,27 +5862,6 @@ components:
           type: integer
           format: int64
           description: Time this usage information was last updated
-        activated:
-          type: integer
-          format: int64
-          description: Activation date of the SIM card as Unix timestamp
-          example: 1609459200
-        expires:
-          type: integer
-          format: int64
-          description: Date when the cellular plan expires as Unix timestamp
-          example: 1925097600
-        plan_type:
-          type: string
-          description: Plan type name
-        imsi:
-          type: string
-          description: IMSI of the SIM card
-          example: '310170830688975'
-        is_bundled:
-          type: boolean
-          description: Whether this SIM uses an internal bundled data plan (AT&T)
-          example: true
     WebhookSettings:
       type: object
       properties:
@@ -5934,3 +5921,90 @@ components:
           type: boolean
         precedence:
           type: int
+    CellularPlan:
+      type: object
+      properties:
+        iccid:
+          type: string
+          description: The Integrated Circuit Card Identifier of the SIM card
+          example: '345678432765434567890765746354465786'
+        imsi:
+          type: string
+          description: IMSI of the SIM card
+          example: '310170830688975'
+        activated:
+          type: integer
+          format: int64
+          description: Activation date of the SIM card as Unix timestamp
+          example: 1609459200
+        expires:
+          type: integer
+          format: int64
+          description: Expiration date of the SIM card as Unix timestamp
+          example: 1925097600
+        plan_type:
+          type: string
+          description: Description of the SIM plan type including data allowance,
+            region, and validity period
+          example: 500MB, North America, 10-year lifetime
+        is_bundled:
+          type: boolean
+          description: Whether this SIM uses an internal bundled data plan (AT&T)
+          example: true
+        cumulative_data_usage:
+          $ref: '#/components/schemas/CumulativeDataUsage'
+        last_updated:
+          type: integer
+          format: int64
+          description: Time this plan information was last updated
+          example: 1656010061
+    SatellitePlan:
+      type: object
+      required:
+      - ntn_provider
+      - psid
+      - activated
+      - cumulative_billable_bytes
+      properties:
+        ntn_provider:
+          type: string
+          description: Non-Terrestrial Network provider name
+          example: Skylo
+        psid:
+          type: string
+          description: Provider-specific identifier for the satellite subscription
+          example: skylo:5746354465786
+        activated:
+          type: integer
+          format: int64
+          description: Activation date of the satellite plan as Unix timestamp
+          example: 1609459200
+        cumulative_billable_bytes:
+          $ref: '#/components/schemas/CumulativeDataUsage'
+        last_updated:
+          type: integer
+          format: int64
+          description: Time this plan information was last updated
+          example: 1656010061
+    CumulativeDataUsage:
+      type: object
+      required:
+      - kb_total
+      - kb_used
+      - kb_remaining
+      properties:
+        kb_total:
+          type: number
+          format: double
+          description: Total Kilobytes included in the plan
+          example: 500
+        kb_used:
+          type: number
+          format: double
+          description: Kilobytes used to date
+          example: 127.45
+        kb_remaining:
+          type: number
+          format: double
+          description: Kilobytes remaining in the plan
+          example: 372.55
