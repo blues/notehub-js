@@ -2365,6 +2365,38 @@ paths:
                   $ref: '#/components/schemas/NotefileSchema'
       tags:
         - project
+  '/v1/projects/{projectOrProductUID}/usage/data':
+    get:
+      operationId: getProjectDataUsage
+      description: Get data usage in bytes for a project with time range and period aggregation
+      parameters:
+        - $ref: '#/components/parameters/projectOrProductUIDParam'
+        - $ref: '#/components/parameters/startDateParam'
+        - $ref: '#/components/parameters/endDateParam'
+        - $ref: '#/components/parameters/deviceUIDParamQuery'
+        - name: period
+          in: query
+          description: Period type for aggregation
+          required: true
+          schema:
+            type: string
+            enum:
+              - day
+              - week
+              - month
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsageDataResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - api_key: []
+      tags:
+        - usage
   '/v1/projects/{projectOrProductUID}/usage/events':
     get:
       operationId: getProjectEventsUsage
@@ -4752,6 +4784,57 @@ components:
           type: string
         type:
           type: string
+    UsageData:
+      type: object
+      properties:
+        bytes_received:
+          type: integer
+          example: 524288
+        bytes_sent:
+          type: integer
+          example: 524288
+        period:
+          type: string
+          format: date-time
+          example: '2025-07-23T00:00:00Z'
+        total_bytes:
+          type: integer
+          example: 1048576
+      required:
+        - period
+        - total_bytes
+    UsageDataResponse:
+      type: array
+      items:
+        properties:
+          data:
+            type: array
+            items:
+              $ref: '#/components/schemas/UsageData'
+          device:
+            description: The device UID this usage data belongs to
+            type: string
+            example: 'dev:123456789012345'
+          iccid:
+            description: The ICCID of the cellular SIM card (only present when type is 'cellular')
+            type: string
+            example: '12345678901234567890'
+          imsi:
+            description: The IMSI of the satellite device (only present when type is 'satellite')
+            type: string
+            example: '123456789012345'
+          type:
+            description: The type of connectivity
+            type: string
+            enum:
+              - cellular
+              - satellite
+        required:
+          - device
+          - type
+          - data
+        type: object
+      properties: {}
     UsageEventsData:
       type: object
       properties:
