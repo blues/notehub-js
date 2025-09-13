@@ -2365,6 +2365,102 @@ paths:
                   $ref: '#/components/schemas/NotefileSchema'
       tags:
         - project
+  '/v1/projects/{projectOrProductUID}/usage/events':
+    get:
+      operationId: getProjectEventsUsage
+      description: Get events usage for a project with time range and period aggregation
+      parameters:
+        - $ref: '#/components/parameters/projectOrProductUIDParam'
+        - $ref: '#/components/parameters/startDateParam'
+        - $ref: '#/components/parameters/endDateParam'
+        - $ref: '#/components/parameters/deviceUIDParamQuery'
+        - name: period
+          in: query
+          description: Period type for aggregation
+          required: true
+          schema:
+            type: string
+            enum:
+              - day
+              - week
+              - month
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsageEventsResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - api_key: []
+      tags:
+        - usage
+  '/v1/projects/{projectOrProductUID}/usage/route-logs':
+    get:
+      operationId: getRouteLogsUsage
+      description: Get route logs usage for a project with time range and period aggregation
+      parameters:
+        - $ref: '#/components/parameters/projectOrProductUIDParam'
+        - $ref: '#/components/parameters/startDateParam'
+        - $ref: '#/components/parameters/endDateParam'
+        - $ref: '#/components/parameters/deviceUIDParamQuery'
+        - name: period
+          in: query
+          description: Period type for aggregation
+          required: true
+          schema:
+            type: string
+            enum:
+              - day
+              - week
+              - month
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsageRouteLogsResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - api_key: []
+      tags:
+        - usage
+  '/v1/projects/{projectOrProductUID}/usage/sessions':
+    get:
+      operationId: getSessionsUsage
+      description: Get sessions usage for a project with time range and period aggregation
+      parameters:
+        - $ref: '#/components/parameters/projectOrProductUIDParam'
+        - $ref: '#/components/parameters/startDateParam'
+        - $ref: '#/components/parameters/endDateParam'
+        - $ref: '#/components/parameters/deviceUIDParamQuery'
+        - name: period
+          in: query
+          description: Period type for aggregation
+          required: true
+          schema:
+            type: string
+            enum:
+              - day
+              - week
+              - month
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsageSessionsResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - api_key: []
+      tags:
+        - usage
   '/v1/projects/{projectOrProductUID}/webhooks':
     get:
       operationId: GetWebhooks
@@ -3146,92 +3242,6 @@ components:
         version:
           description: The version of the alert
           type: integer
-    AnalyticsEventsData:
-      type: object
-      properties:
-        events:
-          type: integer
-          example: 42
-        period:
-          type: string
-          format: date-time
-          example: '2025-07-23T00:00:00Z'
-        platform_events:
-          type: integer
-          example: 15
-      required:
-        - period
-        - events
-        - platform_events
-    AnalyticsEventsResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/AnalyticsEventsData'
-      required:
-        - data
-    AnalyticsRouteLogsData:
-      type: object
-      properties:
-        failed_routes:
-          type: integer
-          example: 4
-        period:
-          type: string
-          format: date-time
-          example: '2025-07-23T00:00:00Z'
-        successful_routes:
-          type: integer
-          example: 38
-        total_routes:
-          type: integer
-          example: 42
-      required:
-        - period
-        - successful_routes
-        - failed_routes
-        - total_routes
-    AnalyticsRouteLogsResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/AnalyticsRouteLogsData'
-      required:
-        - data
-    AnalyticsSessionsData:
-      type: object
-      properties:
-        period:
-          type: string
-          format: date-time
-          example: '2025-07-23T00:00:00Z'
-        sessions:
-          type: integer
-          example: 12
-        total_bytes:
-          type: integer
-          example: 1048576
-        unique_devices:
-          type: integer
-          example: 8
-      required:
-        - period
-        - sessions
-        - unique_devices
-        - total_bytes
-    AnalyticsSessionsResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/AnalyticsSessionsData'
-      required:
-        - data
     AppUIDList:
       type: array
       items:
@@ -4742,6 +4752,97 @@ components:
           type: string
         type:
           type: string
+    UsageEventsData:
+      type: object
+      properties:
+        device:
+          type: string
+        period:
+          type: string
+          format: date-time
+          example: '2025-07-23T00:00:00Z'
+        platform_events:
+          type: integer
+          example: 15
+        total_events:
+          type: integer
+          example: 42
+      required:
+        - period
+        - total_events
+        - platform_events
+        - device
+    UsageEventsResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/UsageEventsData'
+      required:
+        - data
+    UsageRouteLogsData:
+      type: object
+      properties:
+        device:
+          type: string
+        failed_routes:
+          type: integer
+          example: 4
+        period:
+          type: string
+          format: date-time
+          example: '2025-07-23T00:00:00Z'
+        successful_routes:
+          type: integer
+          example: 38
+        total_routes:
+          type: integer
+          example: 42
+      required:
+        - period
+        - successful_routes
+        - failed_routes
+        - total_routes
+        - device
+    UsageRouteLogsResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/UsageRouteLogsData'
+      required:
+        - data
+    UsageSessionsData:
+      type: object
+      properties:
+        device:
+          type: string
+        period:
+          type: string
+          format: date-time
+          example: '2025-07-23T00:00:00Z'
+        sessions:
+          type: integer
+          example: 12
+        total_bytes:
+          type: integer
+          example: 1048576
+      required:
+        - period
+        - sessions
+        - total_bytes
+        - device
+    UsageSessionsResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/UsageSessionsData'
+      required:
+        - data
     UserDbRoute:
       type: object
       properties:
@@ -5849,8 +5950,8 @@ tags:
     name: webhook
   - description: APIs for events and sessions for external devices
     name: external devices
-  - description: Analytics operations
-    name: analytics
+  - description: 'Project Usage information related to events, route logs, sessions, and data usage'
+    name: usage
 externalDocs:
   description: Find out more about Blues
   url: 'https://blues.io'
