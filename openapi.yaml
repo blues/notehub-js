@@ -3523,6 +3523,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/CellularPlan'
+          nullable: true
         cellular_usage:
           $ref: '#/components/schemas/CellularUsage'
         contact:
@@ -3551,9 +3552,7 @@ components:
           type: string
           format: date-time
         satellite_plan:
-          allOf:
-            - $ref: '#/components/schemas/SatellitePlan'
-          nullable: true
+          $ref: '#/components/schemas/SatellitePlan'
         serial_number:
           type: string
         sku:
@@ -4711,6 +4710,7 @@ components:
           description: Provider-specific identifier for the satellite subscription
           type: string
           example: 'skylo:5746354465786'
+      nullable: true
       required:
         - ntn_provider
         - psid
