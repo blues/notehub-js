@@ -48,23 +48,23 @@ class SimUsage {
       if (data.hasOwnProperty("iccid")) {
         obj["iccid"] = ApiClient.convertToType(data["iccid"], "String");
       }
-      if (data.hasOwnProperty("used")) {
-        obj["used"] = ApiClient.convertToType(data["used"], "Number");
+      if (data.hasOwnProperty("last_updated")) {
+        obj["last_updated"] = ApiClient.convertToType(
+          data["last_updated"],
+          "Number"
+        );
+      }
+      if (data.hasOwnProperty("lifetime_used")) {
+        obj["lifetime_used"] = ApiClient.convertToType(
+          data["lifetime_used"],
+          "Number"
+        );
       }
       if (data.hasOwnProperty("limit")) {
         obj["limit"] = ApiClient.convertToType(data["limit"], "Number");
       }
-      if (data.hasOwnProperty("lifetimeUsed")) {
-        obj["lifetimeUsed"] = ApiClient.convertToType(
-          data["lifetimeUsed"],
-          "Number"
-        );
-      }
-      if (data.hasOwnProperty("lastUpdated")) {
-        obj["lastUpdated"] = ApiClient.convertToType(
-          data["lastUpdated"],
-          "Number"
-        );
+      if (data.hasOwnProperty("used")) {
+        obj["used"] = ApiClient.convertToType(data["used"], "Number");
       }
     } else if (data === null) {
       return null;
@@ -100,10 +100,16 @@ class SimUsage {
 SimUsage.prototype["iccid"] = undefined;
 
 /**
- * Bytes used on the SIMs current data plan
- * @member {Number} used
+ * Time this usage information was last updated
+ * @member {Number} last_updated
  */
-SimUsage.prototype["used"] = undefined;
+SimUsage.prototype["last_updated"] = undefined;
+
+/**
+ * Total number of bytes used by SIM
+ * @member {Number} lifetime_used
+ */
+SimUsage.prototype["lifetime_used"] = undefined;
 
 /**
  * Limit in bytes of the SIMs current data plan
@@ -112,15 +118,9 @@ SimUsage.prototype["used"] = undefined;
 SimUsage.prototype["limit"] = undefined;
 
 /**
- * Total number of bytes used by SIM
- * @member {Number} lifetimeUsed
+ * Bytes used on the SIMs current data plan
+ * @member {Number} used
  */
-SimUsage.prototype["lifetimeUsed"] = undefined;
-
-/**
- * Time this usage information was last updated
- * @member {Number} lastUpdated
- */
-SimUsage.prototype["lastUpdated"] = undefined;
+SimUsage.prototype["used"] = undefined;
 
 export default SimUsage;

@@ -15,13 +15,9 @@ import ApiClient from "./ApiClient";
 import Alert from "./model/Alert";
 import AlertDataInner from "./model/AlertDataInner";
 import AlertNotificationsInner from "./model/AlertNotificationsInner";
-import AnalyticsEventsData from "./model/AnalyticsEventsData";
-import AnalyticsEventsResponse from "./model/AnalyticsEventsResponse";
-import AnalyticsRouteLogsData from "./model/AnalyticsRouteLogsData";
-import AnalyticsRouteLogsResponse from "./model/AnalyticsRouteLogsResponse";
-import AnalyticsSessionsData from "./model/AnalyticsSessionsData";
-import AnalyticsSessionsResponse from "./model/AnalyticsSessionsResponse";
 import Aws from "./model/Aws";
+import AwsFilter from "./model/AwsFilter";
+import AwsTransform from "./model/AwsTransform";
 import Azure from "./model/Azure";
 import BillingAccount from "./model/BillingAccount";
 import BillingAccountRole from "./model/BillingAccountRole";
@@ -37,16 +33,15 @@ import CurrentFirmware from "./model/CurrentFirmware";
 import DFUEnv from "./model/DFUEnv";
 import DFUState from "./model/DFUState";
 import DataField from "./model/DataField";
-import DataSet from "./model/DataSet";
 import DataSetField from "./model/DataSetField";
 import DeleteDeviceFleetsRequest from "./model/DeleteDeviceFleetsRequest";
 import Device from "./model/Device";
 import DeviceDfuHistory from "./model/DeviceDfuHistory";
+import DeviceDfuHistoryCurrent from "./model/DeviceDfuHistoryCurrent";
 import DeviceDfuHistoryPage from "./model/DeviceDfuHistoryPage";
 import DeviceDfuStateMachine from "./model/DeviceDfuStateMachine";
 import DeviceDfuStateMachineNode from "./model/DeviceDfuStateMachineNode";
 import DeviceDfuStatus from "./model/DeviceDfuStatus";
-import DeviceDfuStatusCurrent from "./model/DeviceDfuStatusCurrent";
 import DeviceDfuStatusPage from "./model/DeviceDfuStatusPage";
 import DeviceSession from "./model/DeviceSession";
 import DeviceTowerInfo from "./model/DeviceTowerInfo";
@@ -63,7 +58,8 @@ import FirmwareInfo from "./model/FirmwareInfo";
 import Fleet from "./model/Fleet";
 import GetAlerts200Response from "./model/GetAlerts200Response";
 import GetBillingAccounts200Response from "./model/GetBillingAccounts200Response";
-import GetDeviceEnvironmentVariables200Response from "./model/GetDeviceEnvironmentVariables200Response";
+import GetDeviceEnvironmentVariablesByPin200Response from "./model/GetDeviceEnvironmentVariablesByPin200Response";
+import GetDeviceFleets200Response from "./model/GetDeviceFleets200Response";
 import GetDeviceHealthLog200Response from "./model/GetDeviceHealthLog200Response";
 import GetDeviceHealthLog200ResponseHealthLogInner from "./model/GetDeviceHealthLog200ResponseHealthLogInner";
 import GetDeviceLatest200Response from "./model/GetDeviceLatest200Response";
@@ -74,7 +70,6 @@ import GetProjectDevicePublicKeys200ResponseDevicePublicKeysInner from "./model/
 import GetProjectDevices200Response from "./model/GetProjectDevices200Response";
 import GetProjectEvents200Response from "./model/GetProjectEvents200Response";
 import GetProjectEventsByCursor200Response from "./model/GetProjectEventsByCursor200Response";
-import GetProjectFleets200Response from "./model/GetProjectFleets200Response";
 import GetProjectMembers200Response from "./model/GetProjectMembers200Response";
 import GetProjectProducts200Response from "./model/GetProjectProducts200Response";
 import GetProjects200Response from "./model/GetProjects200Response";
@@ -87,8 +82,6 @@ import HandleNotefileChanges200Response from "./model/HandleNotefileChanges200Re
 import HandleNotefileChangesPending200Response from "./model/HandleNotefileChangesPending200Response";
 import HandleNotefileDeleteRequest from "./model/HandleNotefileDeleteRequest";
 import Http from "./model/Http";
-import HttpFilter from "./model/HttpFilter";
-import HttpTransform from "./model/HttpTransform";
 import Location from "./model/Location";
 import Login200Response from "./model/Login200Response";
 import LoginRequest from "./model/LoginRequest";
@@ -99,6 +92,8 @@ import Note from "./model/Note";
 import NotefileSchema from "./model/NotefileSchema";
 import NotehubRoute from "./model/NotehubRoute";
 import NotehubRouteSchema from "./model/NotehubRouteSchema";
+import OAuth2Error from "./model/OAuth2Error";
+import OAuth2TokenResponse from "./model/OAuth2TokenResponse";
 import PersonalAccessToken from "./model/PersonalAccessToken";
 import PersonalAccessTokenCreatedBy from "./model/PersonalAccessTokenCreatedBy";
 import PersonalAccessTokenInfo from "./model/PersonalAccessTokenInfo";
@@ -109,8 +104,6 @@ import Project from "./model/Project";
 import ProjectMember from "./model/ProjectMember";
 import Proxy from "./model/Proxy";
 import PutDeviceFleetsRequest from "./model/PutDeviceFleetsRequest";
-import QuestionDataResponseLineChart from "./model/QuestionDataResponseLineChart";
-import QuestionDataResponseMap from "./model/QuestionDataResponseMap";
 import Radresponder from "./model/Radresponder";
 import Repository from "./model/Repository";
 import Role from "./model/Role";
@@ -119,14 +112,21 @@ import SchemaProperty from "./model/SchemaProperty";
 import SimUsage from "./model/SimUsage";
 import Slack from "./model/Slack";
 import SlackBearerNotification from "./model/SlackBearerNotification";
+import SlackTransform from "./model/SlackTransform";
 import SlackWebHookNotification from "./model/SlackWebHookNotification";
 import Snowflake from "./model/Snowflake";
-import SnowflakeTransform from "./model/SnowflakeTransform";
 import Thingworx from "./model/Thingworx";
 import TowerLocation from "./model/TowerLocation";
 import Twilio from "./model/Twilio";
 import UpdateFleetRequest from "./model/UpdateFleetRequest";
 import UploadMetadata from "./model/UploadMetadata";
+import UsageData from "./model/UsageData";
+import UsageEventsData from "./model/UsageEventsData";
+import UsageEventsResponse from "./model/UsageEventsResponse";
+import UsageRouteLogsData from "./model/UsageRouteLogsData";
+import UsageRouteLogsResponse from "./model/UsageRouteLogsResponse";
+import UsageSessionsData from "./model/UsageSessionsData";
+import UsageSessionsResponse from "./model/UsageSessionsResponse";
 import UserDbRoute from "./model/UserDbRoute";
 import UserDfuStateMachine from "./model/UserDfuStateMachine";
 import UserDfuStateMachineStatus from "./model/UserDfuStateMachineStatus";
@@ -141,6 +141,7 @@ import ExternalDevicesApi from "./api/ExternalDevicesApi";
 import MonitorApi from "./api/MonitorApi";
 import ProjectApi from "./api/ProjectApi";
 import RouteApi from "./api/RouteApi";
+import UsageApi from "./api/UsageApi";
 import WebhookApi from "./api/WebhookApi";
 
 /**
@@ -200,46 +201,22 @@ export {
   AlertNotificationsInner,
 
   /**
-   * The AnalyticsEventsData model constructor.
-   * @property {module:model/AnalyticsEventsData}
-   */
-  AnalyticsEventsData,
-
-  /**
-   * The AnalyticsEventsResponse model constructor.
-   * @property {module:model/AnalyticsEventsResponse}
-   */
-  AnalyticsEventsResponse,
-
-  /**
-   * The AnalyticsRouteLogsData model constructor.
-   * @property {module:model/AnalyticsRouteLogsData}
-   */
-  AnalyticsRouteLogsData,
-
-  /**
-   * The AnalyticsRouteLogsResponse model constructor.
-   * @property {module:model/AnalyticsRouteLogsResponse}
-   */
-  AnalyticsRouteLogsResponse,
-
-  /**
-   * The AnalyticsSessionsData model constructor.
-   * @property {module:model/AnalyticsSessionsData}
-   */
-  AnalyticsSessionsData,
-
-  /**
-   * The AnalyticsSessionsResponse model constructor.
-   * @property {module:model/AnalyticsSessionsResponse}
-   */
-  AnalyticsSessionsResponse,
-
-  /**
    * The Aws model constructor.
    * @property {module:model/Aws}
    */
   Aws,
+
+  /**
+   * The AwsFilter model constructor.
+   * @property {module:model/AwsFilter}
+   */
+  AwsFilter,
+
+  /**
+   * The AwsTransform model constructor.
+   * @property {module:model/AwsTransform}
+   */
+  AwsTransform,
 
   /**
    * The Azure model constructor.
@@ -332,12 +309,6 @@ export {
   DataField,
 
   /**
-   * The DataSet model constructor.
-   * @property {module:model/DataSet}
-   */
-  DataSet,
-
-  /**
    * The DataSetField model constructor.
    * @property {module:model/DataSetField}
    */
@@ -362,6 +333,12 @@ export {
   DeviceDfuHistory,
 
   /**
+   * The DeviceDfuHistoryCurrent model constructor.
+   * @property {module:model/DeviceDfuHistoryCurrent}
+   */
+  DeviceDfuHistoryCurrent,
+
+  /**
    * The DeviceDfuHistoryPage model constructor.
    * @property {module:model/DeviceDfuHistoryPage}
    */
@@ -384,12 +361,6 @@ export {
    * @property {module:model/DeviceDfuStatus}
    */
   DeviceDfuStatus,
-
-  /**
-   * The DeviceDfuStatusCurrent model constructor.
-   * @property {module:model/DeviceDfuStatusCurrent}
-   */
-  DeviceDfuStatusCurrent,
 
   /**
    * The DeviceDfuStatusPage model constructor.
@@ -488,10 +459,16 @@ export {
   GetBillingAccounts200Response,
 
   /**
-   * The GetDeviceEnvironmentVariables200Response model constructor.
-   * @property {module:model/GetDeviceEnvironmentVariables200Response}
+   * The GetDeviceEnvironmentVariablesByPin200Response model constructor.
+   * @property {module:model/GetDeviceEnvironmentVariablesByPin200Response}
    */
-  GetDeviceEnvironmentVariables200Response,
+  GetDeviceEnvironmentVariablesByPin200Response,
+
+  /**
+   * The GetDeviceFleets200Response model constructor.
+   * @property {module:model/GetDeviceFleets200Response}
+   */
+  GetDeviceFleets200Response,
 
   /**
    * The GetDeviceHealthLog200Response model constructor.
@@ -552,12 +529,6 @@ export {
    * @property {module:model/GetProjectEventsByCursor200Response}
    */
   GetProjectEventsByCursor200Response,
-
-  /**
-   * The GetProjectFleets200Response model constructor.
-   * @property {module:model/GetProjectFleets200Response}
-   */
-  GetProjectFleets200Response,
 
   /**
    * The GetProjectMembers200Response model constructor.
@@ -632,18 +603,6 @@ export {
   Http,
 
   /**
-   * The HttpFilter model constructor.
-   * @property {module:model/HttpFilter}
-   */
-  HttpFilter,
-
-  /**
-   * The HttpTransform model constructor.
-   * @property {module:model/HttpTransform}
-   */
-  HttpTransform,
-
-  /**
    * The Location model constructor.
    * @property {module:model/Location}
    */
@@ -702,6 +661,18 @@ export {
    * @property {module:model/NotehubRouteSchema}
    */
   NotehubRouteSchema,
+
+  /**
+   * The OAuth2Error model constructor.
+   * @property {module:model/OAuth2Error}
+   */
+  OAuth2Error,
+
+  /**
+   * The OAuth2TokenResponse model constructor.
+   * @property {module:model/OAuth2TokenResponse}
+   */
+  OAuth2TokenResponse,
 
   /**
    * The PersonalAccessToken model constructor.
@@ -764,18 +735,6 @@ export {
   PutDeviceFleetsRequest,
 
   /**
-   * The QuestionDataResponseLineChart model constructor.
-   * @property {module:model/QuestionDataResponseLineChart}
-   */
-  QuestionDataResponseLineChart,
-
-  /**
-   * The QuestionDataResponseMap model constructor.
-   * @property {module:model/QuestionDataResponseMap}
-   */
-  QuestionDataResponseMap,
-
-  /**
    * The Radresponder model constructor.
    * @property {module:model/Radresponder}
    */
@@ -824,6 +783,12 @@ export {
   SlackBearerNotification,
 
   /**
+   * The SlackTransform model constructor.
+   * @property {module:model/SlackTransform}
+   */
+  SlackTransform,
+
+  /**
    * The SlackWebHookNotification model constructor.
    * @property {module:model/SlackWebHookNotification}
    */
@@ -834,12 +799,6 @@ export {
    * @property {module:model/Snowflake}
    */
   Snowflake,
-
-  /**
-   * The SnowflakeTransform model constructor.
-   * @property {module:model/SnowflakeTransform}
-   */
-  SnowflakeTransform,
 
   /**
    * The Thingworx model constructor.
@@ -870,6 +829,48 @@ export {
    * @property {module:model/UploadMetadata}
    */
   UploadMetadata,
+
+  /**
+   * The UsageData model constructor.
+   * @property {module:model/UsageData}
+   */
+  UsageData,
+
+  /**
+   * The UsageEventsData model constructor.
+   * @property {module:model/UsageEventsData}
+   */
+  UsageEventsData,
+
+  /**
+   * The UsageEventsResponse model constructor.
+   * @property {module:model/UsageEventsResponse}
+   */
+  UsageEventsResponse,
+
+  /**
+   * The UsageRouteLogsData model constructor.
+   * @property {module:model/UsageRouteLogsData}
+   */
+  UsageRouteLogsData,
+
+  /**
+   * The UsageRouteLogsResponse model constructor.
+   * @property {module:model/UsageRouteLogsResponse}
+   */
+  UsageRouteLogsResponse,
+
+  /**
+   * The UsageSessionsData model constructor.
+   * @property {module:model/UsageSessionsData}
+   */
+  UsageSessionsData,
+
+  /**
+   * The UsageSessionsResponse model constructor.
+   * @property {module:model/UsageSessionsResponse}
+   */
+  UsageSessionsResponse,
 
   /**
    * The UserDbRoute model constructor.
@@ -954,6 +955,12 @@ export {
    * @property {module:api/RouteApi}
    */
   RouteApi,
+
+  /**
+   * The UsageApi service constructor.
+   * @property {module:api/UsageApi}
+   */
+  UsageApi,
 
   /**
    * The WebhookApi service constructor.

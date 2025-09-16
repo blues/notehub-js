@@ -4,7 +4,7 @@
 
 | Name             | Type       | Description | Notes      |
 | ---------------- | ---------- | ----------- | ---------- |
-| **name**         | **String** |             | [optional] |
 | **email**        | **String** |             | [optional] |
-| **role**         | **String** |             | [optional] |
+| **name**         | **String** |             | [optional] |
 | **organization** | **String** |             | [optional] |
+| **role**         | **String** |             | [optional] |

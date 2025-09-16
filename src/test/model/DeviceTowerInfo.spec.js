@@ -50,14 +50,8 @@
       //expect(instance).to.be.a(NotehubJs.DeviceTowerInfo);
     });
 
-    it('should have the property mcc (base name: "mcc")', function () {
-      // uncomment below and update the code to test the property mcc
-      //var instance = new NotehubJs.DeviceTowerInfo();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property mnc (base name: "mnc")', function () {
-      // uncomment below and update the code to test the property mnc
+    it('should have the property cellId (base name: "cell_id")', function () {
+      // uncomment below and update the code to test the property cellId
       //var instance = new NotehubJs.DeviceTowerInfo();
       //expect(instance).to.be();
     });
@@ -68,8 +62,14 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property cellId (base name: "cell_id")', function () {
-      // uncomment below and update the code to test the property cellId
+    it('should have the property mcc (base name: "mcc")', function () {
+      // uncomment below and update the code to test the property mcc
+      //var instance = new NotehubJs.DeviceTowerInfo();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property mnc (base name: "mnc")', function () {
+      // uncomment below and update the code to test the property mnc
       //var instance = new NotehubJs.DeviceTowerInfo();
       //expect(instance).to.be();
     });

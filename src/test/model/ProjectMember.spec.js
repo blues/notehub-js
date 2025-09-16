@@ -50,14 +50,14 @@
       //expect(instance).to.be.a(NotehubJs.ProjectMember);
     });
 
-    it('should have the property name (base name: "name")', function () {
-      // uncomment below and update the code to test the property name
+    it('should have the property email (base name: "email")', function () {
+      // uncomment below and update the code to test the property email
       //var instance = new NotehubJs.ProjectMember();
       //expect(instance).to.be();
     });
 
-    it('should have the property email (base name: "email")', function () {
-      // uncomment below and update the code to test the property email
+    it('should have the property name (base name: "name")', function () {
+      // uncomment below and update the code to test the property name
       //var instance = new NotehubJs.ProjectMember();
       //expect(instance).to.be();
     });

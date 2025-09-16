@@ -4,9 +4,9 @@
 
 | Name                      | Type                      | Description | Notes      |
 | ------------------------- | ------------------------- | ----------- | ---------- |
-| **uid**                   | **String**                |             |
-| **label**                 | **String**                |             |
-| **created**               | **Date**                  |             |
-| **role**                  | [**Role**](Role.md)       |             | [optional] |
 | **administrativeContact** | [**Contact**](Contact.md) |             | [optional] |
+| **created**               | **Date**                  |             |
+| **label**                 | **String**                |             |
+| **role**                  | [**Role**](Role.md)       |             | [optional] |
 | **technicalContact**      | [**Contact**](Contact.md) |             | [optional] |
+| **uid**                   | **String**                |             |

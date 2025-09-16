@@ -14,6 +14,8 @@
 import ApiClient from "../ApiClient";
 import Login200Response from "../model/Login200Response";
 import LoginRequest from "../model/LoginRequest";
+import OAuth2Error from "../model/OAuth2Error";
+import OAuth2TokenResponse from "../model/OAuth2TokenResponse";
 
 /**
  * Authorization service.
@@ -80,6 +82,89 @@ export default class AuthorizationApi {
     return this.loginWithHttpInfo(loginRequest).then(function (
       response_and_data
     ) {
+      return response_and_data.data;
+    });
+  }
+
+  /**
+   * Issue an OAuth 2.0 access token (Client Credentials)
+   * Exchanges client credentials for an access token. Parameters must be sent as application/x-www-form-urlencoded.
+   * @param {String} clientId
+   * @param {String} clientSecret
+   * @param {module:model/String} grantType
+   * @param {Object} opts Optional parameters
+   * @param {String} opts.scope Space-delimited scopes.
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/OAuth2TokenResponse} and HTTP response
+   */
+  oAuth2ClientCredentialsWithHttpInfo(clientId, clientSecret, grantType, opts) {
+    opts = opts || {};
+    let postBody = null;
+    // verify the required parameter 'clientId' is set
+    if (clientId === undefined || clientId === null) {
+      throw new Error(
+        "Missing the required parameter 'clientId' when calling oAuth2ClientCredentials"
+      );
+    }
+    // verify the required parameter 'clientSecret' is set
+    if (clientSecret === undefined || clientSecret === null) {
+      throw new Error(
+        "Missing the required parameter 'clientSecret' when calling oAuth2ClientCredentials"
+      );
+    }
+    // verify the required parameter 'grantType' is set
+    if (grantType === undefined || grantType === null) {
+      throw new Error(
+        "Missing the required parameter 'grantType' when calling oAuth2ClientCredentials"
+      );
+    }
+
+    let pathParams = {};
+    let queryParams = {};
+    let headerParams = {};
+    let formParams = {
+      client_id: clientId,
+      client_secret: clientSecret,
+      grant_type: grantType,
+      scope: opts["scope"],
+    };
+
+    let authNames = [];
+    let contentTypes = ["application/x-www-form-urlencoded"];
+    let accepts = ["application/json"];
+    let returnType = OAuth2TokenResponse;
+    return this.apiClient.callApi(
+      "/oauth2/token",
+      "POST",
+      pathParams,
+      queryParams,
+      headerParams,
+      formParams,
+      postBody,
+      authNames,
+      contentTypes,
+      accepts,
+      returnType,
+      null
+    );
+  }
+
+  /**
+   * Issue an OAuth 2.0 access token (Client Credentials)
+   * Exchanges client credentials for an access token. Parameters must be sent as application/x-www-form-urlencoded.
+   * @param {String} clientId
+   * @param {String} clientSecret
+   * @param {module:model/String} grantType
+   * @param {Object} opts Optional parameters
+   * @param {String} opts.scope Space-delimited scopes.
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/OAuth2TokenResponse}
+   */
+  oAuth2ClientCredentials(clientId, clientSecret, grantType, opts) {
+    return this.oAuth2ClientCredentialsWithHttpInfo(
+      clientId,
+      clientSecret,
+      grantType,
+      opts
+    ).then(function (response_and_data) {
       return response_and_data.data;
     });
   }

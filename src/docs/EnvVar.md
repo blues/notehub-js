@@ -5,6 +5,6 @@
 | Name           | Type        | Description | Notes      |
 | -------------- | ----------- | ----------- | ---------- |
 | **key**        | **String**  |             | [optional] |
-| **value**      | **String**  |             | [optional] |
-| **used**       | **Boolean** |             | [optional] |
 | **precedence** | **Number**  |             | [optional] |
+| **used**       | **Boolean** |             | [optional] |
+| **value**      | **String**  |             | [optional] |

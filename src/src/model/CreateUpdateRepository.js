@@ -45,16 +45,16 @@ class CreateUpdateRepository {
     if (data) {
       obj = obj || new CreateUpdateRepository();
 
-      if (data.hasOwnProperty("name")) {
-        obj["name"] = ApiClient.convertToType(data["name"], "String");
-      }
-      if (data.hasOwnProperty("fleetUIDs")) {
-        obj["fleetUIDs"] = ApiClient.convertToType(data["fleetUIDs"], [
+      if (data.hasOwnProperty("fleet_uids")) {
+        obj["fleet_uids"] = ApiClient.convertToType(data["fleet_uids"], [
           "String",
         ]);
       }
-      if (data.hasOwnProperty("projectUIDs")) {
-        obj["projectUIDs"] = ApiClient.convertToType(data["projectUIDs"], [
+      if (data.hasOwnProperty("name")) {
+        obj["name"] = ApiClient.convertToType(data["name"], "String");
+      }
+      if (data.hasOwnProperty("project_uids")) {
+        obj["project_uids"] = ApiClient.convertToType(data["project_uids"], [
           "String",
         ]);
       }
@@ -70,6 +70,13 @@ class CreateUpdateRepository {
    * @return {boolean} to indicate whether the JSON data is valid with respect to <code>CreateUpdateRepository</code>.
    */
   static validateJSON(data) {
+    // ensure the json data is an array
+    if (!Array.isArray(data["fleet_uids"])) {
+      throw new Error(
+        "Expected the field `fleet_uids` to be an array in the JSON data but got " +
+          data["fleet_uids"]
+      );
+    }
     // ensure the json data is a string
     if (
       data["name"] &&
@@ -81,17 +88,10 @@ class CreateUpdateRepository {
       );
     }
     // ensure the json data is an array
-    if (!Array.isArray(data["fleetUIDs"])) {
+    if (!Array.isArray(data["project_uids"])) {
       throw new Error(
-        "Expected the field `fleetUIDs` to be an array in the JSON data but got " +
-          data["fleetUIDs"]
-      );
-    }
-    // ensure the json data is an array
-    if (!Array.isArray(data["projectUIDs"])) {
-      throw new Error(
-        "Expected the field `projectUIDs` to be an array in the JSON data but got " +
-          data["projectUIDs"]
+        "Expected the field `project_uids` to be an array in the JSON data but got " +
+          data["project_uids"]
       );
     }
 
@@ -100,18 +100,18 @@ class CreateUpdateRepository {
 }
 
 /**
+ * @member {Array.<String>} fleet_uids
+ */
+CreateUpdateRepository.prototype["fleet_uids"] = undefined;
+
+/**
  * @member {String} name
  */
 CreateUpdateRepository.prototype["name"] = undefined;
 
 /**
- * @member {Array.<String>} fleetUIDs
+ * @member {Array.<String>} project_uids
  */
-CreateUpdateRepository.prototype["fleetUIDs"] = undefined;
-
-/**
- * @member {Array.<String>} projectUIDs
- */
-CreateUpdateRepository.prototype["projectUIDs"] = undefined;
+CreateUpdateRepository.prototype["project_uids"] = undefined;
 
 export default CreateUpdateRepository;

@@ -45,9 +45,6 @@ class SlackWebHookNotification {
     if (data) {
       obj = obj || new SlackWebHookNotification();
 
-      if (data.hasOwnProperty("url")) {
-        obj["url"] = ApiClient.convertToType(data["url"], "String");
-      }
       if (data.hasOwnProperty("message_type")) {
         obj["message_type"] = ApiClient.convertToType(
           data["message_type"],
@@ -56,6 +53,9 @@ class SlackWebHookNotification {
       }
       if (data.hasOwnProperty("text")) {
         obj["text"] = ApiClient.convertToType(data["text"], "String");
+      }
+      if (data.hasOwnProperty("url")) {
+        obj["url"] = ApiClient.convertToType(data["url"], "String");
       }
     } else if (data === null) {
       return null;
@@ -69,16 +69,6 @@ class SlackWebHookNotification {
    * @return {boolean} to indicate whether the JSON data is valid with respect to <code>SlackWebHookNotification</code>.
    */
   static validateJSON(data) {
-    // ensure the json data is a string
-    if (
-      data["url"] &&
-      !(typeof data["url"] === "string" || data["url"] instanceof String)
-    ) {
-      throw new Error(
-        "Expected the field `url` to be a primitive type in the JSON string but got " +
-          data["url"]
-      );
-    }
     // ensure the json data is a string
     if (
       data["message_type"] &&
@@ -102,16 +92,20 @@ class SlackWebHookNotification {
           data["text"]
       );
     }
+    // ensure the json data is a string
+    if (
+      data["url"] &&
+      !(typeof data["url"] === "string" || data["url"] instanceof String)
+    ) {
+      throw new Error(
+        "Expected the field `url` to be a primitive type in the JSON string but got " +
+          data["url"]
+      );
+    }
 
     return true;
   }
 }
-
-/**
- * The URL of the Slack webhook.
- * @member {String} url
- */
-SlackWebHookNotification.prototype["url"] = undefined;
 
 /**
  * text or blocks
@@ -124,6 +118,12 @@ SlackWebHookNotification.prototype["message_type"] = undefined;
  * @member {String} text
  */
 SlackWebHookNotification.prototype["text"] = undefined;
+
+/**
+ * The URL of the Slack webhook.
+ * @member {String} url
+ */
+SlackWebHookNotification.prototype["url"] = undefined;
 
 /**
  * Allowed values for the <code>message_type</code> property.

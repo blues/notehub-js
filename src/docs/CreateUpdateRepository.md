@@ -4,6 +4,6 @@
 
 | Name            | Type         | Description | Notes      |
 | --------------- | ------------ | ----------- | ---------- |
+| **fleetUids**   | **[String]** |             | [optional] |
 | **name**        | **String**   |             | [optional] |
-| **fleetUIDs**   | **[String]** |             | [optional] |
-| **projectUIDs** | **[String]** |             | [optional] |
+| **projectUids** | **[String]** |             | [optional] |

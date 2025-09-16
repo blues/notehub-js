@@ -51,14 +51,14 @@ class AlertNotificationsInner {
           "String"
         );
       }
-      if (data.hasOwnProperty("status")) {
-        obj["status"] = ApiClient.convertToType(data["status"], "Number");
-      }
       if (data.hasOwnProperty("recipients")) {
         obj["recipients"] = ApiClient.convertToType(
           data["recipients"],
           "String"
         );
+      }
+      if (data.hasOwnProperty("status")) {
+        obj["status"] = ApiClient.convertToType(data["status"], "Number");
       }
     } else if (data === null) {
       return null;
@@ -110,16 +110,16 @@ class AlertNotificationsInner {
 AlertNotificationsInner.prototype["notification_type"] = undefined;
 
 /**
- * The status of the notification
- * @member {Number} status
- */
-AlertNotificationsInner.prototype["status"] = undefined;
-
-/**
  * The recipients of the notification
  * @member {String} recipients
  */
 AlertNotificationsInner.prototype["recipients"] = undefined;
+
+/**
+ * The status of the notification
+ * @member {Number} status
+ */
+AlertNotificationsInner.prototype["status"] = undefined;
 
 /**
  * Allowed values for the <code>notification_type</code> property.

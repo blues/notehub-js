@@ -50,14 +50,14 @@
       //expect(instance).to.be.a(NotehubJs.CurrentFirmware);
     });
 
-    it('should have the property version (base name: "version")', function () {
-      // uncomment below and update the code to test the property version
+    it('should have the property metadata (base name: "metadata")', function () {
+      // uncomment below and update the code to test the property metadata
       //var instance = new NotehubJs.CurrentFirmware();
       //expect(instance).to.be();
     });
 
-    it('should have the property metadata (base name: "metadata")', function () {
-      // uncomment below and update the code to test the property metadata
+    it('should have the property version (base name: "version")', function () {
+      // uncomment below and update the code to test the property version
       //var instance = new NotehubJs.CurrentFirmware();
       //expect(instance).to.be();
     });

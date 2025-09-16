@@ -17,7 +17,7 @@ import Device from "../model/Device";
 import EnvTreeJsonNode from "../model/EnvTreeJsonNode";
 import EnvironmentVariables from "../model/EnvironmentVariables";
 import Error from "../model/Error";
-import GetDeviceEnvironmentVariables200Response from "../model/GetDeviceEnvironmentVariables200Response";
+import GetDeviceEnvironmentVariablesByPin200Response from "../model/GetDeviceEnvironmentVariablesByPin200Response";
 import GetDeviceHealthLog200Response from "../model/GetDeviceHealthLog200Response";
 import GetDeviceLatest200Response from "../model/GetDeviceLatest200Response";
 import GetDevicePublicKey200Response from "../model/GetDevicePublicKey200Response";
@@ -594,7 +594,7 @@ export default class DeviceApi {
    * Get environment variables of a device
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetDeviceEnvironmentVariables200Response} and HTTP response
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetDeviceEnvironmentVariablesByPin200Response} and HTTP response
    */
   getDeviceEnvironmentVariablesWithHttpInfo(projectOrProductUID, deviceUID) {
     let postBody = null;
@@ -622,7 +622,7 @@ export default class DeviceApi {
     let authNames = ["api_key"];
     let contentTypes = [];
     let accepts = ["application/json"];
-    let returnType = GetDeviceEnvironmentVariables200Response;
+    let returnType = GetDeviceEnvironmentVariablesByPin200Response;
     return this.apiClient.callApi(
       "/v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_variables",
       "GET",
@@ -643,7 +643,7 @@ export default class DeviceApi {
    * Get environment variables of a device
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetDeviceEnvironmentVariables200Response}
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetDeviceEnvironmentVariablesByPin200Response}
    */
   getDeviceEnvironmentVariables(projectOrProductUID, deviceUID) {
     return this.getDeviceEnvironmentVariablesWithHttpInfo(
@@ -658,7 +658,7 @@ export default class DeviceApi {
    * Get environment variables of a device with device pin authorization
    * @param {String} productUID
    * @param {String} deviceUID
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetDeviceEnvironmentVariables200Response} and HTTP response
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetDeviceEnvironmentVariablesByPin200Response} and HTTP response
    */
   getDeviceEnvironmentVariablesByPinWithHttpInfo(productUID, deviceUID) {
     let postBody = null;
@@ -686,7 +686,7 @@ export default class DeviceApi {
     let authNames = ["pin"];
     let contentTypes = [];
     let accepts = ["application/json"];
-    let returnType = GetDeviceEnvironmentVariables200Response;
+    let returnType = GetDeviceEnvironmentVariablesByPin200Response;
     return this.apiClient.callApi(
       "/v1/products/{productUID}/devices/{deviceUID}/environment_variables_with_pin",
       "GET",
@@ -707,7 +707,7 @@ export default class DeviceApi {
    * Get environment variables of a device with device pin authorization
    * @param {String} productUID
    * @param {String} deviceUID
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetDeviceEnvironmentVariables200Response}
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetDeviceEnvironmentVariablesByPin200Response}
    */
   getDeviceEnvironmentVariablesByPin(productUID, deviceUID) {
     return this.getDeviceEnvironmentVariablesByPinWithHttpInfo(

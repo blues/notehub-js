@@ -4,6 +4,6 @@
 
 | Name      | Type        | Description | Notes |
 | --------- | ----------- | ----------- | ----- |
-| **when**  | **Date**    |             |
 | **alert** | **Boolean** |             |
 | **text**  | **String**  |             |
+| **when**  | **Date**    |             |

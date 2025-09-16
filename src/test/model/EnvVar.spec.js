@@ -56,8 +56,8 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property value (base name: "value")', function () {
-      // uncomment below and update the code to test the property value
+    it('should have the property precedence (base name: "precedence")', function () {
+      // uncomment below and update the code to test the property precedence
       //var instance = new NotehubJs.EnvVar();
       //expect(instance).to.be();
     });
@@ -68,8 +68,8 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property precedence (base name: "precedence")', function () {
-      // uncomment below and update the code to test the property precedence
+    it('should have the property value (base name: "value")', function () {
+      // uncomment below and update the code to test the property value
       //var instance = new NotehubJs.EnvVar();
       //expect(instance).to.be();
     });

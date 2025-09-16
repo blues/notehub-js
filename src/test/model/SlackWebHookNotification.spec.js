@@ -50,12 +50,6 @@
       //expect(instance).to.be.a(NotehubJs.SlackWebHookNotification);
     });
 
-    it('should have the property url (base name: "url")', function () {
-      // uncomment below and update the code to test the property url
-      //var instance = new NotehubJs.SlackWebHookNotification();
-      //expect(instance).to.be();
-    });
-
     it('should have the property messageType (base name: "message_type")', function () {
       // uncomment below and update the code to test the property messageType
       //var instance = new NotehubJs.SlackWebHookNotification();
@@ -64,6 +58,12 @@
 
     it('should have the property text (base name: "text")', function () {
       // uncomment below and update the code to test the property text
+      //var instance = new NotehubJs.SlackWebHookNotification();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property url (base name: "url")', function () {
+      // uncomment below and update the code to test the property url
       //var instance = new NotehubJs.SlackWebHookNotification();
       //expect(instance).to.be();
     });

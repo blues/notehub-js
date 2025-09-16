@@ -46,14 +46,8 @@ class UploadMetadata {
     if (data) {
       obj = obj || new UploadMetadata();
 
-      if (data.hasOwnProperty("name")) {
-        obj["name"] = ApiClient.convertToType(data["name"], "String");
-      }
-      if (data.hasOwnProperty("length")) {
-        obj["length"] = ApiClient.convertToType(data["length"], "Number");
-      }
-      if (data.hasOwnProperty("md5")) {
-        obj["md5"] = ApiClient.convertToType(data["md5"], "String");
+      if (data.hasOwnProperty("contains")) {
+        obj["contains"] = ApiClient.convertToType(data["contains"], "String");
       }
       if (data.hasOwnProperty("crc32")) {
         obj["crc32"] = ApiClient.convertToType(data["crc32"], "Number");
@@ -61,29 +55,35 @@ class UploadMetadata {
       if (data.hasOwnProperty("created")) {
         obj["created"] = ApiClient.convertToType(data["created"], "Number");
       }
-      if (data.hasOwnProperty("modified")) {
-        obj["modified"] = ApiClient.convertToType(data["modified"], "Number");
-      }
-      if (data.hasOwnProperty("source")) {
-        obj["source"] = ApiClient.convertToType(data["source"], "String");
-      }
-      if (data.hasOwnProperty("contains")) {
-        obj["contains"] = ApiClient.convertToType(data["contains"], "String");
+      if (data.hasOwnProperty("firmware")) {
+        obj["firmware"] = Firmware.constructFromObject(data["firmware"]);
       }
       if (data.hasOwnProperty("found")) {
         obj["found"] = ApiClient.convertToType(data["found"], "String");
       }
-      if (data.hasOwnProperty("type")) {
-        obj["type"] = ApiClient.convertToType(data["type"], "String");
+      if (data.hasOwnProperty("length")) {
+        obj["length"] = ApiClient.convertToType(data["length"], "Number");
       }
-      if (data.hasOwnProperty("tags")) {
-        obj["tags"] = ApiClient.convertToType(data["tags"], "String");
+      if (data.hasOwnProperty("md5")) {
+        obj["md5"] = ApiClient.convertToType(data["md5"], "String");
+      }
+      if (data.hasOwnProperty("modified")) {
+        obj["modified"] = ApiClient.convertToType(data["modified"], "Number");
+      }
+      if (data.hasOwnProperty("name")) {
+        obj["name"] = ApiClient.convertToType(data["name"], "String");
       }
       if (data.hasOwnProperty("notes")) {
         obj["notes"] = ApiClient.convertToType(data["notes"], "String");
       }
-      if (data.hasOwnProperty("firmware")) {
-        obj["firmware"] = Firmware.constructFromObject(data["firmware"]);
+      if (data.hasOwnProperty("source")) {
+        obj["source"] = ApiClient.convertToType(data["source"], "String");
+      }
+      if (data.hasOwnProperty("tags")) {
+        obj["tags"] = ApiClient.convertToType(data["tags"], "String");
+      }
+      if (data.hasOwnProperty("type")) {
+        obj["type"] = ApiClient.convertToType(data["type"], "String");
       }
     } else if (data === null) {
       return null;
@@ -99,12 +99,30 @@ class UploadMetadata {
   static validateJSON(data) {
     // ensure the json data is a string
     if (
-      data["name"] &&
-      !(typeof data["name"] === "string" || data["name"] instanceof String)
+      data["contains"] &&
+      !(
+        typeof data["contains"] === "string" ||
+        data["contains"] instanceof String
+      )
     ) {
       throw new Error(
-        "Expected the field `name` to be a primitive type in the JSON string but got " +
-          data["name"]
+        "Expected the field `contains` to be a primitive type in the JSON string but got " +
+          data["contains"]
+      );
+    }
+    // validate the optional field `firmware`
+    if (data["firmware"]) {
+      // data not null
+      Firmware.validateJSON(data["firmware"]);
+    }
+    // ensure the json data is a string
+    if (
+      data["found"] &&
+      !(typeof data["found"] === "string" || data["found"] instanceof String)
+    ) {
+      throw new Error(
+        "Expected the field `found` to be a primitive type in the JSON string but got " +
+          data["found"]
       );
     }
     // ensure the json data is a string
@@ -119,45 +137,32 @@ class UploadMetadata {
     }
     // ensure the json data is a string
     if (
+      data["name"] &&
+      !(typeof data["name"] === "string" || data["name"] instanceof String)
+    ) {
+      throw new Error(
+        "Expected the field `name` to be a primitive type in the JSON string but got " +
+          data["name"]
+      );
+    }
+    // ensure the json data is a string
+    if (
+      data["notes"] &&
+      !(typeof data["notes"] === "string" || data["notes"] instanceof String)
+    ) {
+      throw new Error(
+        "Expected the field `notes` to be a primitive type in the JSON string but got " +
+          data["notes"]
+      );
+    }
+    // ensure the json data is a string
+    if (
       data["source"] &&
       !(typeof data["source"] === "string" || data["source"] instanceof String)
     ) {
       throw new Error(
         "Expected the field `source` to be a primitive type in the JSON string but got " +
           data["source"]
-      );
-    }
-    // ensure the json data is a string
-    if (
-      data["contains"] &&
-      !(
-        typeof data["contains"] === "string" ||
-        data["contains"] instanceof String
-      )
-    ) {
-      throw new Error(
-        "Expected the field `contains` to be a primitive type in the JSON string but got " +
-          data["contains"]
-      );
-    }
-    // ensure the json data is a string
-    if (
-      data["found"] &&
-      !(typeof data["found"] === "string" || data["found"] instanceof String)
-    ) {
-      throw new Error(
-        "Expected the field `found` to be a primitive type in the JSON string but got " +
-          data["found"]
-      );
-    }
-    // ensure the json data is a string
-    if (
-      data["type"] &&
-      !(typeof data["type"] === "string" || data["type"] instanceof String)
-    ) {
-      throw new Error(
-        "Expected the field `type` to be a primitive type in the JSON string but got " +
-          data["type"]
       );
     }
     // ensure the json data is a string
@@ -172,18 +177,13 @@ class UploadMetadata {
     }
     // ensure the json data is a string
     if (
-      data["notes"] &&
-      !(typeof data["notes"] === "string" || data["notes"] instanceof String)
+      data["type"] &&
+      !(typeof data["type"] === "string" || data["type"] instanceof String)
     ) {
       throw new Error(
-        "Expected the field `notes` to be a primitive type in the JSON string but got " +
-          data["notes"]
+        "Expected the field `type` to be a primitive type in the JSON string but got " +
+          data["type"]
       );
-    }
-    // validate the optional field `firmware`
-    if (data["firmware"]) {
-      // data not null
-      Firmware.validateJSON(data["firmware"]);
     }
 
     return true;
@@ -191,19 +191,9 @@ class UploadMetadata {
 }
 
 /**
- * @member {String} name
+ * @member {String} contains
  */
-UploadMetadata.prototype["name"] = undefined;
-
-/**
- * @member {Number} length
- */
-UploadMetadata.prototype["length"] = undefined;
-
-/**
- * @member {String} md5
- */
-UploadMetadata.prototype["md5"] = undefined;
+UploadMetadata.prototype["contains"] = undefined;
 
 /**
  * @member {Number} crc32
@@ -216,19 +206,9 @@ UploadMetadata.prototype["crc32"] = undefined;
 UploadMetadata.prototype["created"] = undefined;
 
 /**
- * @member {Number} modified
+ * @member {module:model/Firmware} firmware
  */
-UploadMetadata.prototype["modified"] = undefined;
-
-/**
- * @member {String} source
- */
-UploadMetadata.prototype["source"] = undefined;
-
-/**
- * @member {String} contains
- */
-UploadMetadata.prototype["contains"] = undefined;
+UploadMetadata.prototype["firmware"] = undefined;
 
 /**
  * @member {String} found
@@ -236,14 +216,24 @@ UploadMetadata.prototype["contains"] = undefined;
 UploadMetadata.prototype["found"] = undefined;
 
 /**
- * @member {String} type
+ * @member {Number} length
  */
-UploadMetadata.prototype["type"] = undefined;
+UploadMetadata.prototype["length"] = undefined;
 
 /**
- * @member {String} tags
+ * @member {String} md5
  */
-UploadMetadata.prototype["tags"] = undefined;
+UploadMetadata.prototype["md5"] = undefined;
+
+/**
+ * @member {Number} modified
+ */
+UploadMetadata.prototype["modified"] = undefined;
+
+/**
+ * @member {String} name
+ */
+UploadMetadata.prototype["name"] = undefined;
 
 /**
  * @member {String} notes
@@ -251,8 +241,18 @@ UploadMetadata.prototype["tags"] = undefined;
 UploadMetadata.prototype["notes"] = undefined;
 
 /**
- * @member {module:model/Firmware} firmware
+ * @member {String} source
  */
-UploadMetadata.prototype["firmware"] = undefined;
+UploadMetadata.prototype["source"] = undefined;
+
+/**
+ * @member {String} tags
+ */
+UploadMetadata.prototype["tags"] = undefined;
+
+/**
+ * @member {String} type
+ */
+UploadMetadata.prototype["type"] = undefined;
 
 export default UploadMetadata;

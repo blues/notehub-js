@@ -22,12 +22,12 @@ class Product {
   /**
    * Constructs a new <code>Product</code>.
    * @alias module:model/Product
-   * @param uid {String}
-   * @param label {String}
    * @param disableDevicesByDefault {Boolean}
+   * @param label {String}
+   * @param uid {String}
    */
-  constructor(uid, label, disableDevicesByDefault) {
-    Product.initialize(this, uid, label, disableDevicesByDefault);
+  constructor(disableDevicesByDefault, label, uid) {
+    Product.initialize(this, disableDevicesByDefault, label, uid);
   }
 
   /**
@@ -35,10 +35,10 @@ class Product {
    * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
    * Only for internal use.
    */
-  static initialize(obj, uid, label, disableDevicesByDefault) {
-    obj["uid"] = uid;
-    obj["label"] = label;
+  static initialize(obj, disableDevicesByDefault, label, uid) {
     obj["disable_devices_by_default"] = disableDevicesByDefault;
+    obj["label"] = label;
+    obj["uid"] = uid;
   }
 
   /**
@@ -52,12 +52,6 @@ class Product {
     if (data) {
       obj = obj || new Product();
 
-      if (data.hasOwnProperty("uid")) {
-        obj["uid"] = ApiClient.convertToType(data["uid"], "String");
-      }
-      if (data.hasOwnProperty("label")) {
-        obj["label"] = ApiClient.convertToType(data["label"], "String");
-      }
       if (data.hasOwnProperty("auto_provision_fleets")) {
         obj["auto_provision_fleets"] = ApiClient.convertToType(
           data["auto_provision_fleets"],
@@ -69,6 +63,12 @@ class Product {
           data["disable_devices_by_default"],
           "Boolean"
         );
+      }
+      if (data.hasOwnProperty("label")) {
+        obj["label"] = ApiClient.convertToType(data["label"], "String");
+      }
+      if (data.hasOwnProperty("uid")) {
+        obj["uid"] = ApiClient.convertToType(data["uid"], "String");
       }
     } else if (data === null) {
       return null;
@@ -93,14 +93,11 @@ class Product {
         );
       }
     }
-    // ensure the json data is a string
-    if (
-      data["uid"] &&
-      !(typeof data["uid"] === "string" || data["uid"] instanceof String)
-    ) {
+    // ensure the json data is an array
+    if (!Array.isArray(data["auto_provision_fleets"])) {
       throw new Error(
-        "Expected the field `uid` to be a primitive type in the JSON string but got " +
-          data["uid"]
+        "Expected the field `auto_provision_fleets` to be an array in the JSON data but got " +
+          data["auto_provision_fleets"]
       );
     }
     // ensure the json data is a string
@@ -113,11 +110,14 @@ class Product {
           data["label"]
       );
     }
-    // ensure the json data is an array
-    if (!Array.isArray(data["auto_provision_fleets"])) {
+    // ensure the json data is a string
+    if (
+      data["uid"] &&
+      !(typeof data["uid"] === "string" || data["uid"] instanceof String)
+    ) {
       throw new Error(
-        "Expected the field `auto_provision_fleets` to be an array in the JSON data but got " +
-          data["auto_provision_fleets"]
+        "Expected the field `uid` to be a primitive type in the JSON string but got " +
+          data["uid"]
       );
     }
 
@@ -125,17 +125,7 @@ class Product {
   }
 }
 
-Product.RequiredProperties = ["uid", "label", "disable_devices_by_default"];
-
-/**
- * @member {String} uid
- */
-Product.prototype["uid"] = undefined;
-
-/**
- * @member {String} label
- */
-Product.prototype["label"] = undefined;
+Product.RequiredProperties = ["disable_devices_by_default", "label", "uid"];
 
 /**
  * @member {Array.<String>} auto_provision_fleets
@@ -146,5 +136,15 @@ Product.prototype["auto_provision_fleets"] = undefined;
  * @member {Boolean} disable_devices_by_default
  */
 Product.prototype["disable_devices_by_default"] = undefined;
+
+/**
+ * @member {String} label
+ */
+Product.prototype["label"] = undefined;
+
+/**
+ * @member {String} uid
+ */
+Product.prototype["uid"] = undefined;
 
 export default Product;

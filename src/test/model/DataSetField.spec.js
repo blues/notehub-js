@@ -50,12 +50,6 @@
       //expect(instance).to.be.a(NotehubJs.DataSetField);
     });
 
-    it('should have the property name (base name: "name")', function () {
-      // uncomment below and update the code to test the property name
-      //var instance = new NotehubJs.DataSetField();
-      //expect(instance).to.be();
-    });
-
     it('should have the property datatype (base name: "datatype")', function () {
       // uncomment below and update the code to test the property datatype
       //var instance = new NotehubJs.DataSetField();
@@ -64,6 +58,12 @@
 
     it('should have the property jsonata (base name: "jsonata")', function () {
       // uncomment below and update the code to test the property jsonata
+      //var instance = new NotehubJs.DataSetField();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property name (base name: "name")', function () {
+      // uncomment below and update the code to test the property name
       //var instance = new NotehubJs.DataSetField();
       //expect(instance).to.be();
     });

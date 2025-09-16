@@ -50,60 +50,6 @@
       //expect(instance).to.be.a(NotehubJs.Aws);
     });
 
-    it('should have the property fleets (base name: "fleets")', function () {
-      // uncomment below and update the code to test the property fleets
-      //var instance = new NotehubJs.Aws();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property filter (base name: "filter")', function () {
-      // uncomment below and update the code to test the property filter
-      //var instance = new NotehubJs.Aws();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property transform (base name: "transform")', function () {
-      // uncomment below and update the code to test the property transform
-      //var instance = new NotehubJs.Aws();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property throttleMs (base name: "throttle_ms")', function () {
-      // uncomment below and update the code to test the property throttleMs
-      //var instance = new NotehubJs.Aws();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property url (base name: "url")', function () {
-      // uncomment below and update the code to test the property url
-      //var instance = new NotehubJs.Aws();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property httpHeaders (base name: "http_headers")', function () {
-      // uncomment below and update the code to test the property httpHeaders
-      //var instance = new NotehubJs.Aws();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property disableHttpHeaders (base name: "disable_http_headers")', function () {
-      // uncomment below and update the code to test the property disableHttpHeaders
-      //var instance = new NotehubJs.Aws();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property timeout (base name: "timeout")', function () {
-      // uncomment below and update the code to test the property timeout
-      //var instance = new NotehubJs.Aws();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property region (base name: "region")', function () {
-      // uncomment below and update the code to test the property region
-      //var instance = new NotehubJs.Aws();
-      //expect(instance).to.be();
-    });
-
     it('should have the property accessKeyId (base name: "access_key_id")', function () {
       // uncomment below and update the code to test the property accessKeyId
       //var instance = new NotehubJs.Aws();
@@ -116,8 +62,32 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property messageGroupId (base name: "message_group_id")', function () {
-      // uncomment below and update the code to test the property messageGroupId
+    it('should have the property channel (base name: "channel")', function () {
+      // uncomment below and update the code to test the property channel
+      //var instance = new NotehubJs.Aws();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property disableHttpHeaders (base name: "disable_http_headers")', function () {
+      // uncomment below and update the code to test the property disableHttpHeaders
+      //var instance = new NotehubJs.Aws();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property filter (base name: "filter")', function () {
+      // uncomment below and update the code to test the property filter
+      //var instance = new NotehubJs.Aws();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property fleets (base name: "fleets")', function () {
+      // uncomment below and update the code to test the property fleets
+      //var instance = new NotehubJs.Aws();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property httpHeaders (base name: "http_headers")', function () {
+      // uncomment below and update the code to test the property httpHeaders
       //var instance = new NotehubJs.Aws();
       //expect(instance).to.be();
     });
@@ -128,8 +98,38 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property channel (base name: "channel")', function () {
-      // uncomment below and update the code to test the property channel
+    it('should have the property messageGroupId (base name: "message_group_id")', function () {
+      // uncomment below and update the code to test the property messageGroupId
+      //var instance = new NotehubJs.Aws();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property region (base name: "region")', function () {
+      // uncomment below and update the code to test the property region
+      //var instance = new NotehubJs.Aws();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property throttleMs (base name: "throttle_ms")', function () {
+      // uncomment below and update the code to test the property throttleMs
+      //var instance = new NotehubJs.Aws();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property timeout (base name: "timeout")', function () {
+      // uncomment below and update the code to test the property timeout
+      //var instance = new NotehubJs.Aws();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property transform (base name: "transform")', function () {
+      // uncomment below and update the code to test the property transform
+      //var instance = new NotehubJs.Aws();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property url (base name: "url")', function () {
+      // uncomment below and update the code to test the property url
       //var instance = new NotehubJs.Aws();
       //expect(instance).to.be();
     });

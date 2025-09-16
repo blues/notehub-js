@@ -46,14 +46,14 @@ class PersonalAccessTokenCreatedBy {
     if (data) {
       obj = obj || new PersonalAccessTokenCreatedBy();
 
-      if (data.hasOwnProperty("uid")) {
-        obj["uid"] = ApiClient.convertToType(data["uid"], "String");
-      }
       if (data.hasOwnProperty("email")) {
         obj["email"] = ApiClient.convertToType(data["email"], "String");
       }
       if (data.hasOwnProperty("name")) {
         obj["name"] = ApiClient.convertToType(data["name"], "String");
+      }
+      if (data.hasOwnProperty("uid")) {
+        obj["uid"] = ApiClient.convertToType(data["uid"], "String");
       }
     } else if (data === null) {
       return null;
@@ -67,16 +67,6 @@ class PersonalAccessTokenCreatedBy {
    * @return {boolean} to indicate whether the JSON data is valid with respect to <code>PersonalAccessTokenCreatedBy</code>.
    */
   static validateJSON(data) {
-    // ensure the json data is a string
-    if (
-      data["uid"] &&
-      !(typeof data["uid"] === "string" || data["uid"] instanceof String)
-    ) {
-      throw new Error(
-        "Expected the field `uid` to be a primitive type in the JSON string but got " +
-          data["uid"]
-      );
-    }
     // ensure the json data is a string
     if (
       data["email"] &&
@@ -97,15 +87,20 @@ class PersonalAccessTokenCreatedBy {
           data["name"]
       );
     }
+    // ensure the json data is a string
+    if (
+      data["uid"] &&
+      !(typeof data["uid"] === "string" || data["uid"] instanceof String)
+    ) {
+      throw new Error(
+        "Expected the field `uid` to be a primitive type in the JSON string but got " +
+          data["uid"]
+      );
+    }
 
     return true;
   }
 }
-
-/**
- * @member {String} uid
- */
-PersonalAccessTokenCreatedBy.prototype["uid"] = undefined;
 
 /**
  * @member {String} email
@@ -116,5 +111,10 @@ PersonalAccessTokenCreatedBy.prototype["email"] = undefined;
  * @member {String} name
  */
 PersonalAccessTokenCreatedBy.prototype["name"] = undefined;
+
+/**
+ * @member {String} uid
+ */
+PersonalAccessTokenCreatedBy.prototype["uid"] = undefined;
 
 export default PersonalAccessTokenCreatedBy;

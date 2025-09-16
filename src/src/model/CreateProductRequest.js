@@ -22,11 +22,11 @@ class CreateProductRequest {
   /**
    * Constructs a new <code>CreateProductRequest</code>.
    * @alias module:model/CreateProductRequest
-   * @param productUid {String} The requested uid for the Product. Will be prefixed with the user's reversed email.
    * @param label {String} The label for the Product.
+   * @param productUid {String} The requested uid for the Product. Will be prefixed with the user's reversed email.
    */
-  constructor(productUid, label) {
-    CreateProductRequest.initialize(this, productUid, label);
+  constructor(label, productUid) {
+    CreateProductRequest.initialize(this, label, productUid);
   }
 
   /**
@@ -34,9 +34,9 @@ class CreateProductRequest {
    * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
    * Only for internal use.
    */
-  static initialize(obj, productUid, label) {
-    obj["product_uid"] = productUid;
+  static initialize(obj, label, productUid) {
     obj["label"] = label;
+    obj["product_uid"] = productUid;
   }
 
   /**
@@ -50,15 +50,6 @@ class CreateProductRequest {
     if (data) {
       obj = obj || new CreateProductRequest();
 
-      if (data.hasOwnProperty("product_uid")) {
-        obj["product_uid"] = ApiClient.convertToType(
-          data["product_uid"],
-          "String"
-        );
-      }
-      if (data.hasOwnProperty("label")) {
-        obj["label"] = ApiClient.convertToType(data["label"], "String");
-      }
       if (data.hasOwnProperty("auto_provision_fleets")) {
         obj["auto_provision_fleets"] = ApiClient.convertToType(
           data["auto_provision_fleets"],
@@ -69,6 +60,15 @@ class CreateProductRequest {
         obj["disable_devices_by_default"] = ApiClient.convertToType(
           data["disable_devices_by_default"],
           "Boolean"
+        );
+      }
+      if (data.hasOwnProperty("label")) {
+        obj["label"] = ApiClient.convertToType(data["label"], "String");
+      }
+      if (data.hasOwnProperty("product_uid")) {
+        obj["product_uid"] = ApiClient.convertToType(
+          data["product_uid"],
+          "String"
         );
       }
     } else if (data === null) {
@@ -94,6 +94,23 @@ class CreateProductRequest {
         );
       }
     }
+    // ensure the json data is an array
+    if (!Array.isArray(data["auto_provision_fleets"])) {
+      throw new Error(
+        "Expected the field `auto_provision_fleets` to be an array in the JSON data but got " +
+          data["auto_provision_fleets"]
+      );
+    }
+    // ensure the json data is a string
+    if (
+      data["label"] &&
+      !(typeof data["label"] === "string" || data["label"] instanceof String)
+    ) {
+      throw new Error(
+        "Expected the field `label` to be a primitive type in the JSON string but got " +
+          data["label"]
+      );
+    }
     // ensure the json data is a string
     if (
       data["product_uid"] &&
@@ -107,41 +124,12 @@ class CreateProductRequest {
           data["product_uid"]
       );
     }
-    // ensure the json data is a string
-    if (
-      data["label"] &&
-      !(typeof data["label"] === "string" || data["label"] instanceof String)
-    ) {
-      throw new Error(
-        "Expected the field `label` to be a primitive type in the JSON string but got " +
-          data["label"]
-      );
-    }
-    // ensure the json data is an array
-    if (!Array.isArray(data["auto_provision_fleets"])) {
-      throw new Error(
-        "Expected the field `auto_provision_fleets` to be an array in the JSON data but got " +
-          data["auto_provision_fleets"]
-      );
-    }
 
     return true;
   }
 }
 
-CreateProductRequest.RequiredProperties = ["product_uid", "label"];
-
-/**
- * The requested uid for the Product. Will be prefixed with the user's reversed email.
- * @member {String} product_uid
- */
-CreateProductRequest.prototype["product_uid"] = undefined;
-
-/**
- * The label for the Product.
- * @member {String} label
- */
-CreateProductRequest.prototype["label"] = undefined;
+CreateProductRequest.RequiredProperties = ["label", "product_uid"];
 
 /**
  * @member {Array.<String>} auto_provision_fleets
@@ -153,5 +141,17 @@ CreateProductRequest.prototype["auto_provision_fleets"] = undefined;
  * @member {Boolean} disable_devices_by_default
  */
 CreateProductRequest.prototype["disable_devices_by_default"] = undefined;
+
+/**
+ * The label for the Product.
+ * @member {String} label
+ */
+CreateProductRequest.prototype["label"] = undefined;
+
+/**
+ * The requested uid for the Product. Will be prefixed with the user's reversed email.
+ * @member {String} product_uid
+ */
+CreateProductRequest.prototype["product_uid"] = undefined;
 
 export default CreateProductRequest;

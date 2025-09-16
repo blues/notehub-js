@@ -50,8 +50,8 @@
       //expect(instance).to.be.a(NotehubJs.Thingworx);
     });
 
-    it('should have the property fleets (base name: "fleets")', function () {
-      // uncomment below and update the code to test the property fleets
+    it('should have the property appKey (base name: "app_key")', function () {
+      // uncomment below and update the code to test the property appKey
       //var instance = new NotehubJs.Thingworx();
       //expect(instance).to.be();
     });
@@ -62,8 +62,8 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property transform (base name: "transform")', function () {
-      // uncomment below and update the code to test the property transform
+    it('should have the property fleets (base name: "fleets")', function () {
+      // uncomment below and update the code to test the property fleets
       //var instance = new NotehubJs.Thingworx();
       //expect(instance).to.be();
     });
@@ -74,20 +74,20 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property url (base name: "url")', function () {
-      // uncomment below and update the code to test the property url
-      //var instance = new NotehubJs.Thingworx();
-      //expect(instance).to.be();
-    });
-
     it('should have the property timeout (base name: "timeout")', function () {
       // uncomment below and update the code to test the property timeout
       //var instance = new NotehubJs.Thingworx();
       //expect(instance).to.be();
     });
 
-    it('should have the property appKey (base name: "app_key")', function () {
-      // uncomment below and update the code to test the property appKey
+    it('should have the property transform (base name: "transform")', function () {
+      // uncomment below and update the code to test the property transform
+      //var instance = new NotehubJs.Thingworx();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property url (base name: "url")', function () {
+      // uncomment below and update the code to test the property url
       //var instance = new NotehubJs.Thingworx();
       //expect(instance).to.be();
     });

@@ -4,5 +4,5 @@
 
 | Name    | Type       | Description | Notes |
 | ------- | ---------- | ----------- | ----- |
-| **uid** | **String** |             |
 | **key** | **String** |             |
+| **uid** | **String** |             |

@@ -22,16 +22,16 @@ class GetDeviceHealthLog200ResponseHealthLogInner {
   /**
    * Constructs a new <code>GetDeviceHealthLog200ResponseHealthLogInner</code>.
    * @alias module:model/GetDeviceHealthLog200ResponseHealthLogInner
-   * @param when {Date}
    * @param alert {Boolean}
    * @param text {String}
+   * @param when {Date}
    */
-  constructor(when, alert, text) {
+  constructor(alert, text, when) {
     GetDeviceHealthLog200ResponseHealthLogInner.initialize(
       this,
-      when,
       alert,
-      text
+      text,
+      when
     );
   }
 
@@ -40,10 +40,10 @@ class GetDeviceHealthLog200ResponseHealthLogInner {
    * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
    * Only for internal use.
    */
-  static initialize(obj, when, alert, text) {
-    obj["when"] = when;
+  static initialize(obj, alert, text, when) {
     obj["alert"] = alert;
     obj["text"] = text;
+    obj["when"] = when;
   }
 
   /**
@@ -57,14 +57,14 @@ class GetDeviceHealthLog200ResponseHealthLogInner {
     if (data) {
       obj = obj || new GetDeviceHealthLog200ResponseHealthLogInner();
 
-      if (data.hasOwnProperty("when")) {
-        obj["when"] = ApiClient.convertToType(data["when"], "Date");
-      }
       if (data.hasOwnProperty("alert")) {
         obj["alert"] = ApiClient.convertToType(data["alert"], "Boolean");
       }
       if (data.hasOwnProperty("text")) {
         obj["text"] = ApiClient.convertToType(data["text"], "String");
+      }
+      if (data.hasOwnProperty("when")) {
+        obj["when"] = ApiClient.convertToType(data["when"], "Date");
       }
     } else if (data === null) {
       return null;
@@ -105,15 +105,10 @@ class GetDeviceHealthLog200ResponseHealthLogInner {
 }
 
 GetDeviceHealthLog200ResponseHealthLogInner.RequiredProperties = [
-  "when",
   "alert",
   "text",
+  "when",
 ];
-
-/**
- * @member {Date} when
- */
-GetDeviceHealthLog200ResponseHealthLogInner.prototype["when"] = undefined;
 
 /**
  * @member {Boolean} alert
@@ -124,5 +119,10 @@ GetDeviceHealthLog200ResponseHealthLogInner.prototype["alert"] = undefined;
  * @member {String} text
  */
 GetDeviceHealthLog200ResponseHealthLogInner.prototype["text"] = undefined;
+
+/**
+ * @member {Date} when
+ */
+GetDeviceHealthLog200ResponseHealthLogInner.prototype["when"] = undefined;
 
 export default GetDeviceHealthLog200ResponseHealthLogInner;

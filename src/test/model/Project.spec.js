@@ -50,14 +50,8 @@
       //expect(instance).to.be.a(NotehubJs.Project);
     });
 
-    it('should have the property uid (base name: "uid")', function () {
-      // uncomment below and update the code to test the property uid
-      //var instance = new NotehubJs.Project();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property label (base name: "label")', function () {
-      // uncomment below and update the code to test the property label
+    it('should have the property administrativeContact (base name: "administrative_contact")', function () {
+      // uncomment below and update the code to test the property administrativeContact
       //var instance = new NotehubJs.Project();
       //expect(instance).to.be();
     });
@@ -68,20 +62,26 @@
       //expect(instance).to.be();
     });
 
+    it('should have the property label (base name: "label")', function () {
+      // uncomment below and update the code to test the property label
+      //var instance = new NotehubJs.Project();
+      //expect(instance).to.be();
+    });
+
     it('should have the property role (base name: "role")', function () {
       // uncomment below and update the code to test the property role
       //var instance = new NotehubJs.Project();
       //expect(instance).to.be();
     });
 
-    it('should have the property administrativeContact (base name: "administrative_contact")', function () {
-      // uncomment below and update the code to test the property administrativeContact
+    it('should have the property technicalContact (base name: "technical_contact")', function () {
+      // uncomment below and update the code to test the property technicalContact
       //var instance = new NotehubJs.Project();
       //expect(instance).to.be();
     });
 
-    it('should have the property technicalContact (base name: "technical_contact")', function () {
-      // uncomment below and update the code to test the property technicalContact
+    it('should have the property uid (base name: "uid")', function () {
+      // uncomment below and update the code to test the property uid
       //var instance = new NotehubJs.Project();
       //expect(instance).to.be();
     });

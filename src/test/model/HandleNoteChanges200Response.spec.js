@@ -50,12 +50,6 @@
       //expect(instance).to.be.a(NotehubJs.HandleNoteChanges200Response);
     });
 
-    it('should have the property total (base name: "total")', function () {
-      // uncomment below and update the code to test the property total
-      //var instance = new NotehubJs.HandleNoteChanges200Response();
-      //expect(instance).to.be();
-    });
-
     it('should have the property changes (base name: "changes")', function () {
       // uncomment below and update the code to test the property changes
       //var instance = new NotehubJs.HandleNoteChanges200Response();
@@ -64,6 +58,12 @@
 
     it('should have the property notes (base name: "notes")', function () {
       // uncomment below and update the code to test the property notes
+      //var instance = new NotehubJs.HandleNoteChanges200Response();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property total (base name: "total")', function () {
+      // uncomment below and update the code to test the property total
       //var instance = new NotehubJs.HandleNoteChanges200Response();
       //expect(instance).to.be();
     });

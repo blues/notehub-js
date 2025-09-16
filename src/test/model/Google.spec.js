@@ -50,32 +50,20 @@
       //expect(instance).to.be.a(NotehubJs.Google);
     });
 
-    it('should have the property fleets (base name: "fleets")', function () {
-      // uncomment below and update the code to test the property fleets
-      //var instance = new NotehubJs.Google();
-      //expect(instance).to.be();
-    });
-
     it('should have the property filter (base name: "filter")', function () {
       // uncomment below and update the code to test the property filter
       //var instance = new NotehubJs.Google();
       //expect(instance).to.be();
     });
 
-    it('should have the property transform (base name: "transform")', function () {
-      // uncomment below and update the code to test the property transform
+    it('should have the property fleets (base name: "fleets")', function () {
+      // uncomment below and update the code to test the property fleets
       //var instance = new NotehubJs.Google();
       //expect(instance).to.be();
     });
 
     it('should have the property throttleMs (base name: "throttle_ms")', function () {
       // uncomment below and update the code to test the property throttleMs
-      //var instance = new NotehubJs.Google();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property url (base name: "url")', function () {
-      // uncomment below and update the code to test the property url
       //var instance = new NotehubJs.Google();
       //expect(instance).to.be();
     });
@@ -88,6 +76,18 @@
 
     it('should have the property token (base name: "token")', function () {
       // uncomment below and update the code to test the property token
+      //var instance = new NotehubJs.Google();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property transform (base name: "transform")', function () {
+      // uncomment below and update the code to test the property transform
+      //var instance = new NotehubJs.Google();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property url (base name: "url")', function () {
+      // uncomment below and update the code to test the property url
       //var instance = new NotehubJs.Google();
       //expect(instance).to.be();
     });

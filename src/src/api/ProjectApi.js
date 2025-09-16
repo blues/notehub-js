@@ -27,7 +27,7 @@ import EnvironmentVariables from "../model/EnvironmentVariables";
 import Error from "../model/Error";
 import FirmwareInfo from "../model/FirmwareInfo";
 import Fleet from "../model/Fleet";
-import GetProjectFleets200Response from "../model/GetProjectFleets200Response";
+import GetDeviceFleets200Response from "../model/GetDeviceFleets200Response";
 import GetProjectMembers200Response from "../model/GetProjectMembers200Response";
 import GetProjectProducts200Response from "../model/GetProjectProducts200Response";
 import GetProjects200Response from "../model/GetProjects200Response";
@@ -300,7 +300,7 @@ export default class ProjectApi {
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
    * @param {module:model/DeleteDeviceFleetsRequest} deleteDeviceFleetsRequest The fleets to remove from the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error.
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetProjectFleets200Response} and HTTP response
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetDeviceFleets200Response} and HTTP response
    */
   deleteDeviceFleetsWithHttpInfo(
     projectOrProductUID,
@@ -341,7 +341,7 @@ export default class ProjectApi {
     let authNames = ["api_key"];
     let contentTypes = ["application/json"];
     let accepts = ["application/json"];
-    let returnType = GetProjectFleets200Response;
+    let returnType = GetDeviceFleets200Response;
     return this.apiClient.callApi(
       "/v1/projects/{projectOrProductUID}/devices/{deviceUID}/fleets",
       "DELETE",
@@ -363,7 +363,7 @@ export default class ProjectApi {
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
    * @param {module:model/DeleteDeviceFleetsRequest} deleteDeviceFleetsRequest The fleets to remove from the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error.
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetProjectFleets200Response}
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetDeviceFleets200Response}
    */
   deleteDeviceFleets(
     projectOrProductUID,
@@ -1025,7 +1025,7 @@ export default class ProjectApi {
    * Get Device Fleets
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetProjectFleets200Response} and HTTP response
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetDeviceFleets200Response} and HTTP response
    */
   getDeviceFleetsWithHttpInfo(projectOrProductUID, deviceUID) {
     let postBody = null;
@@ -1053,7 +1053,7 @@ export default class ProjectApi {
     let authNames = ["api_key"];
     let contentTypes = [];
     let accepts = ["application/json"];
-    let returnType = GetProjectFleets200Response;
+    let returnType = GetDeviceFleets200Response;
     return this.apiClient.callApi(
       "/v1/projects/{projectOrProductUID}/devices/{deviceUID}/fleets",
       "GET",
@@ -1074,7 +1074,7 @@ export default class ProjectApi {
    * Get Device Fleets
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetProjectFleets200Response}
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetDeviceFleets200Response}
    */
   getDeviceFleets(projectOrProductUID, deviceUID) {
     return this.getDeviceFleetsWithHttpInfo(
@@ -1874,7 +1874,7 @@ export default class ProjectApi {
   /**
    * Get Project Fleets
    * @param {String} projectOrProductUID
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetProjectFleets200Response} and HTTP response
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetDeviceFleets200Response} and HTTP response
    */
   getProjectFleetsWithHttpInfo(projectOrProductUID) {
     let postBody = null;
@@ -1895,7 +1895,7 @@ export default class ProjectApi {
     let authNames = ["api_key"];
     let contentTypes = [];
     let accepts = ["application/json"];
-    let returnType = GetProjectFleets200Response;
+    let returnType = GetDeviceFleets200Response;
     return this.apiClient.callApi(
       "/v1/projects/{projectOrProductUID}/fleets",
       "GET",
@@ -1915,7 +1915,7 @@ export default class ProjectApi {
   /**
    * Get Project Fleets
    * @param {String} projectOrProductUID
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetProjectFleets200Response}
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetDeviceFleets200Response}
    */
   getProjectFleets(projectOrProductUID) {
     return this.getProjectFleetsWithHttpInfo(projectOrProductUID).then(
@@ -2080,7 +2080,7 @@ export default class ProjectApi {
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
    * @param {module:model/PutDeviceFleetsRequest} putDeviceFleetsRequest The fleets to add to the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error.
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetProjectFleets200Response} and HTTP response
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetDeviceFleets200Response} and HTTP response
    */
   putDeviceFleetsWithHttpInfo(
     projectOrProductUID,
@@ -2121,7 +2121,7 @@ export default class ProjectApi {
     let authNames = ["api_key"];
     let contentTypes = ["application/json"];
     let accepts = ["application/json"];
-    let returnType = GetProjectFleets200Response;
+    let returnType = GetDeviceFleets200Response;
     return this.apiClient.callApi(
       "/v1/projects/{projectOrProductUID}/devices/{deviceUID}/fleets",
       "PUT",
@@ -2143,7 +2143,7 @@ export default class ProjectApi {
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
    * @param {module:model/PutDeviceFleetsRequest} putDeviceFleetsRequest The fleets to add to the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error.
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetProjectFleets200Response}
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetDeviceFleets200Response}
    */
   putDeviceFleets(projectOrProductUID, deviceUID, putDeviceFleetsRequest) {
     return this.putDeviceFleetsWithHttpInfo(

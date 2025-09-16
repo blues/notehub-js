@@ -22,12 +22,12 @@ class Error {
   /**
    * Constructs a new <code>Error</code>.
    * @alias module:model/Error
-   * @param err {String} Human readable error message.
    * @param code {Number} The HTTP error code associated with the error.
+   * @param err {String} Human readable error message.
    * @param status {String} Machine readable representation of the HTTP error code.
    */
-  constructor(err, code, status) {
-    Error.initialize(this, err, code, status);
+  constructor(code, err, status) {
+    Error.initialize(this, code, err, status);
   }
 
   /**
@@ -35,9 +35,9 @@ class Error {
    * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
    * Only for internal use.
    */
-  static initialize(obj, err, code, status) {
-    obj["err"] = err;
+  static initialize(obj, code, err, status) {
     obj["code"] = code;
+    obj["err"] = err;
     obj["status"] = status;
   }
 
@@ -52,23 +52,23 @@ class Error {
     if (data) {
       obj = obj || new Error();
 
-      if (data.hasOwnProperty("err")) {
-        obj["err"] = ApiClient.convertToType(data["err"], "String");
-      }
       if (data.hasOwnProperty("code")) {
         obj["code"] = ApiClient.convertToType(data["code"], "Number");
       }
-      if (data.hasOwnProperty("status")) {
-        obj["status"] = ApiClient.convertToType(data["status"], "String");
-      }
-      if (data.hasOwnProperty("request")) {
-        obj["request"] = ApiClient.convertToType(data["request"], "String");
+      if (data.hasOwnProperty("debug")) {
+        obj["debug"] = ApiClient.convertToType(data["debug"], "String");
       }
       if (data.hasOwnProperty("details")) {
         obj["details"] = ApiClient.convertToType(data["details"], Object);
       }
-      if (data.hasOwnProperty("debug")) {
-        obj["debug"] = ApiClient.convertToType(data["debug"], "String");
+      if (data.hasOwnProperty("err")) {
+        obj["err"] = ApiClient.convertToType(data["err"], "String");
+      }
+      if (data.hasOwnProperty("request")) {
+        obj["request"] = ApiClient.convertToType(data["request"], "String");
+      }
+      if (data.hasOwnProperty("status")) {
+        obj["status"] = ApiClient.convertToType(data["status"], "String");
       }
     } else if (data === null) {
       return null;
@@ -95,22 +95,22 @@ class Error {
     }
     // ensure the json data is a string
     if (
+      data["debug"] &&
+      !(typeof data["debug"] === "string" || data["debug"] instanceof String)
+    ) {
+      throw new Error(
+        "Expected the field `debug` to be a primitive type in the JSON string but got " +
+          data["debug"]
+      );
+    }
+    // ensure the json data is a string
+    if (
       data["err"] &&
       !(typeof data["err"] === "string" || data["err"] instanceof String)
     ) {
       throw new Error(
         "Expected the field `err` to be a primitive type in the JSON string but got " +
           data["err"]
-      );
-    }
-    // ensure the json data is a string
-    if (
-      data["status"] &&
-      !(typeof data["status"] === "string" || data["status"] instanceof String)
-    ) {
-      throw new Error(
-        "Expected the field `status` to be a primitive type in the JSON string but got " +
-          data["status"]
       );
     }
     // ensure the json data is a string
@@ -127,12 +127,12 @@ class Error {
     }
     // ensure the json data is a string
     if (
-      data["debug"] &&
-      !(typeof data["debug"] === "string" || data["debug"] instanceof String)
+      data["status"] &&
+      !(typeof data["status"] === "string" || data["status"] instanceof String)
     ) {
       throw new Error(
-        "Expected the field `debug` to be a primitive type in the JSON string but got " +
-          data["debug"]
+        "Expected the field `status` to be a primitive type in the JSON string but got " +
+          data["status"]
       );
     }
 
@@ -140,13 +140,7 @@ class Error {
   }
 }
 
-Error.RequiredProperties = ["err", "code", "status"];
-
-/**
- * Human readable error message.
- * @member {String} err
- */
-Error.prototype["err"] = undefined;
+Error.RequiredProperties = ["code", "err", "status"];
 
 /**
  * The HTTP error code associated with the error.
@@ -155,15 +149,9 @@ Error.prototype["err"] = undefined;
 Error.prototype["code"] = undefined;
 
 /**
- * Machine readable representation of the HTTP error code.
- * @member {String} status
+ * @member {String} debug
  */
-Error.prototype["status"] = undefined;
-
-/**
- * @member {String} request
- */
-Error.prototype["request"] = undefined;
+Error.prototype["debug"] = undefined;
 
 /**
  * @member {Object} details
@@ -171,8 +159,20 @@ Error.prototype["request"] = undefined;
 Error.prototype["details"] = undefined;
 
 /**
- * @member {String} debug
+ * Human readable error message.
+ * @member {String} err
  */
-Error.prototype["debug"] = undefined;
+Error.prototype["err"] = undefined;
+
+/**
+ * @member {String} request
+ */
+Error.prototype["request"] = undefined;
+
+/**
+ * Machine readable representation of the HTTP error code.
+ * @member {String} status
+ */
+Error.prototype["status"] = undefined;
 
 export default Error;

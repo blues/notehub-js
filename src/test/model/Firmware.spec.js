@@ -50,6 +50,24 @@
       //expect(instance).to.be.a(NotehubJs.Firmware);
     });
 
+    it('should have the property builder (base name: "builder")', function () {
+      // uncomment below and update the code to test the property builder
+      //var instance = new NotehubJs.Firmware();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property built (base name: "built")', function () {
+      // uncomment below and update the code to test the property built
+      //var instance = new NotehubJs.Firmware();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property firmware (base name: "firmware")', function () {
+      // uncomment below and update the code to test the property firmware
+      //var instance = new NotehubJs.Firmware();
+      //expect(instance).to.be();
+    });
+
     it('should have the property org (base name: "org")', function () {
       // uncomment below and update the code to test the property org
       //var instance = new NotehubJs.Firmware();
@@ -62,20 +80,14 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property firmware (base name: "firmware")', function () {
-      // uncomment below and update the code to test the property firmware
-      //var instance = new NotehubJs.Firmware();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property version (base name: "version")', function () {
-      // uncomment below and update the code to test the property version
-      //var instance = new NotehubJs.Firmware();
-      //expect(instance).to.be();
-    });
-
     it('should have the property target (base name: "target")', function () {
       // uncomment below and update the code to test the property target
+      //var instance = new NotehubJs.Firmware();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property verBuild (base name: "ver_build")', function () {
+      // uncomment below and update the code to test the property verBuild
       //var instance = new NotehubJs.Firmware();
       //expect(instance).to.be();
     });
@@ -98,20 +110,8 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property verBuild (base name: "ver_build")', function () {
-      // uncomment below and update the code to test the property verBuild
-      //var instance = new NotehubJs.Firmware();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property built (base name: "built")', function () {
-      // uncomment below and update the code to test the property built
-      //var instance = new NotehubJs.Firmware();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property builder (base name: "builder")', function () {
-      // uncomment below and update the code to test the property builder
+    it('should have the property version (base name: "version")', function () {
+      // uncomment below and update the code to test the property version
       //var instance = new NotehubJs.Firmware();
       //expect(instance).to.be();
     });

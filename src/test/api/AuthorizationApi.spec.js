@@ -54,5 +54,15 @@
         done();
       });
     });
+    describe("oAuth2ClientCredentials", function () {
+      it("should call oAuth2ClientCredentials successfully", function (done) {
+        //uncomment below and update the code to test oAuth2ClientCredentials
+        //instance.oAuth2ClientCredentials(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
   });
 });
