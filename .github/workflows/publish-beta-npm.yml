@@ -39,22 +39,14 @@ jobs:
       - name: Remove Outdated SDK Folder
         run: rm -rf src
 
-      - name: Remove deprecated query params from openapi.yaml
-        run: npm run filterOpenapi
-
       - name: Generate New SDK
-        run: npm run generateDocs
+        run: npm run prepareFreshRelease
 
       - name: Setup .npmrc file to publish to npm
         uses: actions/setup-node@v4
         with:
           node-version: "22.x"
           registry-url: "https://registry.npmjs.org"
-
-      - name: Install dependencies
-        run: |
-          cd src
-          npm install
 
       - name: Publish Beta Version to npm
         run: |
