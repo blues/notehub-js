@@ -7,7 +7,7 @@ info:
   description: |
     The OpenAPI definition for the Notehub.io API.
   title: Notehub API
-  version: 1.2.0
+  version: 1.2.1
 servers:
   - description: Production server
     url: 'https://api.notefile.net'
