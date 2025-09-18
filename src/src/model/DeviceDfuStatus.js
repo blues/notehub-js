@@ -12,8 +12,8 @@
  */
 
 import ApiClient from "../ApiClient";
+import DeviceDfuHistoryCurrent from "./DeviceDfuHistoryCurrent";
 import DeviceDfuStateMachine from "./DeviceDfuStateMachine";
-import DeviceDfuStatusCurrent from "./DeviceDfuStatusCurrent";
 
 /**
  * The DeviceDfuStatus model module.
@@ -47,6 +47,11 @@ class DeviceDfuStatus {
     if (data) {
       obj = obj || new DeviceDfuStatus();
 
+      if (data.hasOwnProperty("current")) {
+        obj["current"] = DeviceDfuHistoryCurrent.constructFromObject(
+          data["current"]
+        );
+      }
       if (data.hasOwnProperty("device_uid")) {
         obj["device_uid"] = ApiClient.convertToType(
           data["device_uid"],
@@ -57,11 +62,6 @@ class DeviceDfuStatus {
         obj["dfu_in_progress"] = ApiClient.convertToType(
           data["dfu_in_progress"],
           "Boolean"
-        );
-      }
-      if (data.hasOwnProperty("current")) {
-        obj["current"] = DeviceDfuStatusCurrent.constructFromObject(
-          data["current"]
         );
       }
       if (data.hasOwnProperty("status")) {
@@ -81,6 +81,11 @@ class DeviceDfuStatus {
    * @return {boolean} to indicate whether the JSON data is valid with respect to <code>DeviceDfuStatus</code>.
    */
   static validateJSON(data) {
+    // validate the optional field `current`
+    if (data["current"]) {
+      // data not null
+      DeviceDfuHistoryCurrent.validateJSON(data["current"]);
+    }
     // ensure the json data is a string
     if (
       data["device_uid"] &&
@@ -94,11 +99,6 @@ class DeviceDfuStatus {
           data["device_uid"]
       );
     }
-    // validate the optional field `current`
-    if (data["current"]) {
-      // data not null
-      DeviceDfuStatusCurrent.validateJSON(data["current"]);
-    }
     // validate the optional field `status`
     if (data["status"]) {
       // data not null
@@ -108,6 +108,11 @@ class DeviceDfuStatus {
     return true;
   }
 }
+
+/**
+ * @member {module:model/DeviceDfuHistoryCurrent} current
+ */
+DeviceDfuStatus.prototype["current"] = undefined;
 
 /**
  * Device UID
@@ -120,11 +125,6 @@ DeviceDfuStatus.prototype["device_uid"] = undefined;
  * @member {Boolean} dfu_in_progress
  */
 DeviceDfuStatus.prototype["dfu_in_progress"] = undefined;
-
-/**
- * @member {module:model/DeviceDfuStatusCurrent} current
- */
-DeviceDfuStatus.prototype["current"] = undefined;
 
 /**
  * @member {module:model/DeviceDfuStateMachine} status

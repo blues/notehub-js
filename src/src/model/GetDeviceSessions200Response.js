@@ -23,11 +23,11 @@ class GetDeviceSessions200Response {
   /**
    * Constructs a new <code>GetDeviceSessions200Response</code>.
    * @alias module:model/GetDeviceSessions200Response
-   * @param sessions {Array.<module:model/DeviceSession>}
    * @param hasMore {Boolean}
+   * @param sessions {Array.<module:model/DeviceSession>}
    */
-  constructor(sessions, hasMore) {
-    GetDeviceSessions200Response.initialize(this, sessions, hasMore);
+  constructor(hasMore, sessions) {
+    GetDeviceSessions200Response.initialize(this, hasMore, sessions);
   }
 
   /**
@@ -35,9 +35,9 @@ class GetDeviceSessions200Response {
    * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
    * Only for internal use.
    */
-  static initialize(obj, sessions, hasMore) {
-    obj["sessions"] = sessions;
+  static initialize(obj, hasMore, sessions) {
     obj["has_more"] = hasMore;
+    obj["sessions"] = sessions;
   }
 
   /**
@@ -51,13 +51,13 @@ class GetDeviceSessions200Response {
     if (data) {
       obj = obj || new GetDeviceSessions200Response();
 
+      if (data.hasOwnProperty("has_more")) {
+        obj["has_more"] = ApiClient.convertToType(data["has_more"], "Boolean");
+      }
       if (data.hasOwnProperty("sessions")) {
         obj["sessions"] = ApiClient.convertToType(data["sessions"], [
           DeviceSession,
         ]);
-      }
-      if (data.hasOwnProperty("has_more")) {
-        obj["has_more"] = ApiClient.convertToType(data["has_more"], "Boolean");
       }
     } else if (data === null) {
       return null;
@@ -101,16 +101,16 @@ class GetDeviceSessions200Response {
   }
 }
 
-GetDeviceSessions200Response.RequiredProperties = ["sessions", "has_more"];
-
-/**
- * @member {Array.<module:model/DeviceSession>} sessions
- */
-GetDeviceSessions200Response.prototype["sessions"] = undefined;
+GetDeviceSessions200Response.RequiredProperties = ["has_more", "sessions"];
 
 /**
  * @member {Boolean} has_more
  */
 GetDeviceSessions200Response.prototype["has_more"] = undefined;
+
+/**
+ * @member {Array.<module:model/DeviceSession>} sessions
+ */
+GetDeviceSessions200Response.prototype["sessions"] = undefined;
 
 export default GetDeviceSessions200Response;

@@ -46,11 +46,14 @@ class NotehubRoute {
     if (data) {
       obj = obj || new NotehubRoute();
 
-      if (data.hasOwnProperty("uid")) {
-        obj["uid"] = ApiClient.convertToType(data["uid"], "String");
+      if (data.hasOwnProperty("disabled")) {
+        obj["disabled"] = ApiClient.convertToType(data["disabled"], "Boolean");
       }
       if (data.hasOwnProperty("label")) {
         obj["label"] = ApiClient.convertToType(data["label"], "String");
+      }
+      if (data.hasOwnProperty("modified")) {
+        obj["modified"] = ApiClient.convertToType(data["modified"], "String");
       }
       if (data.hasOwnProperty("route_type")) {
         obj["route_type"] = ApiClient.convertToType(
@@ -58,14 +61,11 @@ class NotehubRoute {
           "String"
         );
       }
-      if (data.hasOwnProperty("modified")) {
-        obj["modified"] = ApiClient.convertToType(data["modified"], "String");
-      }
-      if (data.hasOwnProperty("disabled")) {
-        obj["disabled"] = ApiClient.convertToType(data["disabled"], "Boolean");
-      }
       if (data.hasOwnProperty("schema")) {
         obj["schema"] = NotehubRouteSchema.constructFromObject(data["schema"]);
+      }
+      if (data.hasOwnProperty("uid")) {
+        obj["uid"] = ApiClient.convertToType(data["uid"], "String");
       }
     } else if (data === null) {
       return null;
@@ -81,35 +81,12 @@ class NotehubRoute {
   static validateJSON(data) {
     // ensure the json data is a string
     if (
-      data["uid"] &&
-      !(typeof data["uid"] === "string" || data["uid"] instanceof String)
-    ) {
-      throw new Error(
-        "Expected the field `uid` to be a primitive type in the JSON string but got " +
-          data["uid"]
-      );
-    }
-    // ensure the json data is a string
-    if (
       data["label"] &&
       !(typeof data["label"] === "string" || data["label"] instanceof String)
     ) {
       throw new Error(
         "Expected the field `label` to be a primitive type in the JSON string but got " +
           data["label"]
-      );
-    }
-    // ensure the json data is a string
-    if (
-      data["route_type"] &&
-      !(
-        typeof data["route_type"] === "string" ||
-        data["route_type"] instanceof String
-      )
-    ) {
-      throw new Error(
-        "Expected the field `route_type` to be a primitive type in the JSON string but got " +
-          data["route_type"]
       );
     }
     // ensure the json data is a string
@@ -125,40 +102,38 @@ class NotehubRoute {
           data["modified"]
       );
     }
+    // ensure the json data is a string
+    if (
+      data["route_type"] &&
+      !(
+        typeof data["route_type"] === "string" ||
+        data["route_type"] instanceof String
+      )
+    ) {
+      throw new Error(
+        "Expected the field `route_type` to be a primitive type in the JSON string but got " +
+          data["route_type"]
+      );
+    }
     // validate the optional field `schema`
     if (data["schema"]) {
       // data not null
       NotehubRouteSchema.validateJSON(data["schema"]);
     }
+    // ensure the json data is a string
+    if (
+      data["uid"] &&
+      !(typeof data["uid"] === "string" || data["uid"] instanceof String)
+    ) {
+      throw new Error(
+        "Expected the field `uid` to be a primitive type in the JSON string but got " +
+          data["uid"]
+      );
+    }
 
     return true;
   }
 }
-
-/**
- * Route UID
- * @member {String} uid
- */
-NotehubRoute.prototype["uid"] = undefined;
-
-/**
- * Route Label
- * @member {String} label
- */
-NotehubRoute.prototype["label"] = undefined;
-
-/**
- * Type of route.
- * @member {module:model/NotehubRoute.RouteTypeEnum} route_type
- * @default 'http'
- */
-NotehubRoute.prototype["route_type"] = "http";
-
-/**
- * Last Modified
- * @member {String} modified
- */
-NotehubRoute.prototype["modified"] = undefined;
 
 /**
  * Is route disabled?
@@ -168,9 +143,34 @@ NotehubRoute.prototype["modified"] = undefined;
 NotehubRoute.prototype["disabled"] = false;
 
 /**
+ * Route Label
+ * @member {String} label
+ */
+NotehubRoute.prototype["label"] = undefined;
+
+/**
+ * Last Modified
+ * @member {String} modified
+ */
+NotehubRoute.prototype["modified"] = undefined;
+
+/**
+ * Type of route.
+ * @member {module:model/NotehubRoute.RouteTypeEnum} route_type
+ * @default 'http'
+ */
+NotehubRoute.prototype["route_type"] = "http";
+
+/**
  * @member {module:model/NotehubRouteSchema} schema
  */
 NotehubRoute.prototype["schema"] = undefined;
+
+/**
+ * Route UID
+ * @member {String} uid
+ */
+NotehubRoute.prototype["uid"] = undefined;
 
 /**
  * Allowed values for the <code>route_type</code> property.

@@ -50,8 +50,20 @@
       //expect(instance).to.be.a(NotehubJs.Slack);
     });
 
-    it('should have the property fleets (base name: "fleets")', function () {
-      // uncomment below and update the code to test the property fleets
+    it('should have the property bearer (base name: "bearer")', function () {
+      // uncomment below and update the code to test the property bearer
+      //var instance = new NotehubJs.Slack();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property blocks (base name: "blocks")', function () {
+      // uncomment below and update the code to test the property blocks
+      //var instance = new NotehubJs.Slack();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property channel (base name: "channel")', function () {
+      // uncomment below and update the code to test the property channel
       //var instance = new NotehubJs.Slack();
       //expect(instance).to.be();
     });
@@ -62,8 +74,20 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property transform (base name: "transform")', function () {
-      // uncomment below and update the code to test the property transform
+    it('should have the property fleets (base name: "fleets")', function () {
+      // uncomment below and update the code to test the property fleets
+      //var instance = new NotehubJs.Slack();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property slackType (base name: "slack_type")', function () {
+      // uncomment below and update the code to test the property slackType
+      //var instance = new NotehubJs.Slack();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property text (base name: "text")', function () {
+      // uncomment below and update the code to test the property text
       //var instance = new NotehubJs.Slack();
       //expect(instance).to.be();
     });
@@ -80,38 +104,14 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property slackType (base name: "slack_type")', function () {
-      // uncomment below and update the code to test the property slackType
-      //var instance = new NotehubJs.Slack();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property bearer (base name: "bearer")', function () {
-      // uncomment below and update the code to test the property bearer
-      //var instance = new NotehubJs.Slack();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property channel (base name: "channel")', function () {
-      // uncomment below and update the code to test the property channel
+    it('should have the property transform (base name: "transform")', function () {
+      // uncomment below and update the code to test the property transform
       //var instance = new NotehubJs.Slack();
       //expect(instance).to.be();
     });
 
     it('should have the property webhookUrl (base name: "webhook_url")', function () {
       // uncomment below and update the code to test the property webhookUrl
-      //var instance = new NotehubJs.Slack();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property text (base name: "text")', function () {
-      // uncomment below and update the code to test the property text
-      //var instance = new NotehubJs.Slack();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property blocks (base name: "blocks")', function () {
-      // uncomment below and update the code to test the property blocks
       //var instance = new NotehubJs.Slack();
       //expect(instance).to.be();
     });

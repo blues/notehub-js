@@ -22,22 +22,22 @@ class Location {
   /**
    * Constructs a new <code>Location</code>.
    * @alias module:model/Location
-   * @param when {String}
-   * @param name {String}
    * @param country {String}
-   * @param timezone {String}
    * @param latitude {Number}
    * @param longitude {Number}
+   * @param name {String}
+   * @param timezone {String}
+   * @param when {String}
    */
-  constructor(when, name, country, timezone, latitude, longitude) {
+  constructor(country, latitude, longitude, name, timezone, when) {
     Location.initialize(
       this,
-      when,
-      name,
       country,
-      timezone,
       latitude,
-      longitude
+      longitude,
+      name,
+      timezone,
+      when
     );
   }
 
@@ -46,13 +46,13 @@ class Location {
    * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
    * Only for internal use.
    */
-  static initialize(obj, when, name, country, timezone, latitude, longitude) {
-    obj["when"] = when;
-    obj["name"] = name;
+  static initialize(obj, country, latitude, longitude, name, timezone, when) {
     obj["country"] = country;
-    obj["timezone"] = timezone;
     obj["latitude"] = latitude;
     obj["longitude"] = longitude;
+    obj["name"] = name;
+    obj["timezone"] = timezone;
+    obj["when"] = when;
   }
 
   /**
@@ -66,23 +66,23 @@ class Location {
     if (data) {
       obj = obj || new Location();
 
-      if (data.hasOwnProperty("when")) {
-        obj["when"] = ApiClient.convertToType(data["when"], "String");
-      }
-      if (data.hasOwnProperty("name")) {
-        obj["name"] = ApiClient.convertToType(data["name"], "String");
-      }
       if (data.hasOwnProperty("country")) {
         obj["country"] = ApiClient.convertToType(data["country"], "String");
-      }
-      if (data.hasOwnProperty("timezone")) {
-        obj["timezone"] = ApiClient.convertToType(data["timezone"], "String");
       }
       if (data.hasOwnProperty("latitude")) {
         obj["latitude"] = ApiClient.convertToType(data["latitude"], "Number");
       }
       if (data.hasOwnProperty("longitude")) {
         obj["longitude"] = ApiClient.convertToType(data["longitude"], "Number");
+      }
+      if (data.hasOwnProperty("name")) {
+        obj["name"] = ApiClient.convertToType(data["name"], "String");
+      }
+      if (data.hasOwnProperty("timezone")) {
+        obj["timezone"] = ApiClient.convertToType(data["timezone"], "String");
+      }
+      if (data.hasOwnProperty("when")) {
+        obj["when"] = ApiClient.convertToType(data["when"], "String");
       }
     } else if (data === null) {
       return null;
@@ -109,12 +109,14 @@ class Location {
     }
     // ensure the json data is a string
     if (
-      data["when"] &&
-      !(typeof data["when"] === "string" || data["when"] instanceof String)
+      data["country"] &&
+      !(
+        typeof data["country"] === "string" || data["country"] instanceof String
+      )
     ) {
       throw new Error(
-        "Expected the field `when` to be a primitive type in the JSON string but got " +
-          data["when"]
+        "Expected the field `country` to be a primitive type in the JSON string but got " +
+          data["country"]
       );
     }
     // ensure the json data is a string
@@ -125,18 +127,6 @@ class Location {
       throw new Error(
         "Expected the field `name` to be a primitive type in the JSON string but got " +
           data["name"]
-      );
-    }
-    // ensure the json data is a string
-    if (
-      data["country"] &&
-      !(
-        typeof data["country"] === "string" || data["country"] instanceof String
-      )
-    ) {
-      throw new Error(
-        "Expected the field `country` to be a primitive type in the JSON string but got " +
-          data["country"]
       );
     }
     // ensure the json data is a string
@@ -152,39 +142,34 @@ class Location {
           data["timezone"]
       );
     }
+    // ensure the json data is a string
+    if (
+      data["when"] &&
+      !(typeof data["when"] === "string" || data["when"] instanceof String)
+    ) {
+      throw new Error(
+        "Expected the field `when` to be a primitive type in the JSON string but got " +
+          data["when"]
+      );
+    }
 
     return true;
   }
 }
 
 Location.RequiredProperties = [
-  "when",
-  "name",
   "country",
-  "timezone",
   "latitude",
   "longitude",
+  "name",
+  "timezone",
+  "when",
 ];
-
-/**
- * @member {String} when
- */
-Location.prototype["when"] = undefined;
-
-/**
- * @member {String} name
- */
-Location.prototype["name"] = undefined;
 
 /**
  * @member {String} country
  */
 Location.prototype["country"] = undefined;
-
-/**
- * @member {String} timezone
- */
-Location.prototype["timezone"] = undefined;
 
 /**
  * @member {Number} latitude
@@ -195,5 +180,20 @@ Location.prototype["latitude"] = undefined;
  * @member {Number} longitude
  */
 Location.prototype["longitude"] = undefined;
+
+/**
+ * @member {String} name
+ */
+Location.prototype["name"] = undefined;
+
+/**
+ * @member {String} timezone
+ */
+Location.prototype["timezone"] = undefined;
+
+/**
+ * @member {String} when
+ */
+Location.prototype["when"] = undefined;
 
 export default Location;

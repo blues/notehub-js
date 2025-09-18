@@ -12,8 +12,8 @@
  */
 
 import ApiClient from "../ApiClient";
-import HttpFilter from "./HttpFilter";
-import HttpTransform from "./HttpTransform";
+import AwsFilter from "./AwsFilter";
+import AwsTransform from "./AwsTransform";
 
 /**
  * The Google model module.
@@ -48,14 +48,11 @@ class Google {
     if (data) {
       obj = obj || new Google();
 
+      if (data.hasOwnProperty("filter")) {
+        obj["filter"] = AwsFilter.constructFromObject(data["filter"]);
+      }
       if (data.hasOwnProperty("fleets")) {
         obj["fleets"] = ApiClient.convertToType(data["fleets"], ["String"]);
-      }
-      if (data.hasOwnProperty("filter")) {
-        obj["filter"] = HttpFilter.constructFromObject(data["filter"]);
-      }
-      if (data.hasOwnProperty("transform")) {
-        obj["transform"] = HttpTransform.constructFromObject(data["transform"]);
       }
       if (data.hasOwnProperty("throttle_ms")) {
         obj["throttle_ms"] = ApiClient.convertToType(
@@ -63,14 +60,17 @@ class Google {
           "Number"
         );
       }
-      if (data.hasOwnProperty("url")) {
-        obj["url"] = ApiClient.convertToType(data["url"], "String");
-      }
       if (data.hasOwnProperty("timeout")) {
         obj["timeout"] = ApiClient.convertToType(data["timeout"], "Number");
       }
       if (data.hasOwnProperty("token")) {
         obj["token"] = ApiClient.convertToType(data["token"], "String");
+      }
+      if (data.hasOwnProperty("transform")) {
+        obj["transform"] = AwsTransform.constructFromObject(data["transform"]);
+      }
+      if (data.hasOwnProperty("url")) {
+        obj["url"] = ApiClient.convertToType(data["url"], "String");
       }
     } else if (data === null) {
       return null;
@@ -84,31 +84,16 @@ class Google {
    * @return {boolean} to indicate whether the JSON data is valid with respect to <code>Google</code>.
    */
   static validateJSON(data) {
+    // validate the optional field `filter`
+    if (data["filter"]) {
+      // data not null
+      AwsFilter.validateJSON(data["filter"]);
+    }
     // ensure the json data is an array
     if (!Array.isArray(data["fleets"])) {
       throw new Error(
         "Expected the field `fleets` to be an array in the JSON data but got " +
           data["fleets"]
-      );
-    }
-    // validate the optional field `filter`
-    if (data["filter"]) {
-      // data not null
-      HttpFilter.validateJSON(data["filter"]);
-    }
-    // validate the optional field `transform`
-    if (data["transform"]) {
-      // data not null
-      HttpTransform.validateJSON(data["transform"]);
-    }
-    // ensure the json data is a string
-    if (
-      data["url"] &&
-      !(typeof data["url"] === "string" || data["url"] instanceof String)
-    ) {
-      throw new Error(
-        "Expected the field `url` to be a primitive type in the JSON string but got " +
-          data["url"]
       );
     }
     // ensure the json data is a string
@@ -121,10 +106,30 @@ class Google {
           data["token"]
       );
     }
+    // validate the optional field `transform`
+    if (data["transform"]) {
+      // data not null
+      AwsTransform.validateJSON(data["transform"]);
+    }
+    // ensure the json data is a string
+    if (
+      data["url"] &&
+      !(typeof data["url"] === "string" || data["url"] instanceof String)
+    ) {
+      throw new Error(
+        "Expected the field `url` to be a primitive type in the JSON string but got " +
+          data["url"]
+      );
+    }
 
     return true;
   }
 }
+
+/**
+ * @member {module:model/AwsFilter} filter
+ */
+Google.prototype["filter"] = undefined;
 
 /**
  * list of Fleet UIDs to apply route to, if any.  If empty, applies to all Fleets
@@ -133,24 +138,9 @@ class Google {
 Google.prototype["fleets"] = undefined;
 
 /**
- * @member {module:model/HttpFilter} filter
- */
-Google.prototype["filter"] = undefined;
-
-/**
- * @member {module:model/HttpTransform} transform
- */
-Google.prototype["transform"] = undefined;
-
-/**
  * @member {Number} throttle_ms
  */
 Google.prototype["throttle_ms"] = undefined;
-
-/**
- * @member {String} url
- */
-Google.prototype["url"] = undefined;
 
 /**
  * Timeout in seconds for each request
@@ -164,5 +154,15 @@ Google.prototype["timeout"] = 15;
  * @member {String} token
  */
 Google.prototype["token"] = undefined;
+
+/**
+ * @member {module:model/AwsTransform} transform
+ */
+Google.prototype["transform"] = undefined;
+
+/**
+ * @member {String} url
+ */
+Google.prototype["url"] = undefined;
 
 export default Google;

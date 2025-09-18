@@ -50,12 +50,6 @@
       //expect(instance).to.be.a(NotehubJs.BillingAccount);
     });
 
-    it('should have the property uid (base name: "uid")', function () {
-      // uncomment below and update the code to test the property uid
-      //var instance = new NotehubJs.BillingAccount();
-      //expect(instance).to.be();
-    });
-
     it('should have the property name (base name: "name")', function () {
       // uncomment below and update the code to test the property name
       //var instance = new NotehubJs.BillingAccount();
@@ -64,6 +58,12 @@
 
     it('should have the property role (base name: "role")', function () {
       // uncomment below and update the code to test the property role
+      //var instance = new NotehubJs.BillingAccount();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property uid (base name: "uid")', function () {
+      // uncomment below and update the code to test the property uid
       //var instance = new NotehubJs.BillingAccount();
       //expect(instance).to.be();
     });

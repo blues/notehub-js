@@ -50,12 +50,6 @@
       //expect(instance).to.be.a(NotehubJs.GetDeviceHealthLog200ResponseHealthLogInner);
     });
 
-    it('should have the property when (base name: "when")', function () {
-      // uncomment below and update the code to test the property when
-      //var instance = new NotehubJs.GetDeviceHealthLog200ResponseHealthLogInner();
-      //expect(instance).to.be();
-    });
-
     it('should have the property alert (base name: "alert")', function () {
       // uncomment below and update the code to test the property alert
       //var instance = new NotehubJs.GetDeviceHealthLog200ResponseHealthLogInner();
@@ -64,6 +58,12 @@
 
     it('should have the property text (base name: "text")', function () {
       // uncomment below and update the code to test the property text
+      //var instance = new NotehubJs.GetDeviceHealthLog200ResponseHealthLogInner();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property when (base name: "when")', function () {
+      // uncomment below and update the code to test the property when
       //var instance = new NotehubJs.GetDeviceHealthLog200ResponseHealthLogInner();
       //expect(instance).to.be();
     });

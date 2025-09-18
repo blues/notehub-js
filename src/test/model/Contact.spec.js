@@ -50,26 +50,26 @@
       //expect(instance).to.be.a(NotehubJs.Contact);
     });
 
-    it('should have the property name (base name: "name")', function () {
-      // uncomment below and update the code to test the property name
-      //var instance = new NotehubJs.Contact();
-      //expect(instance).to.be();
-    });
-
     it('should have the property email (base name: "email")', function () {
       // uncomment below and update the code to test the property email
       //var instance = new NotehubJs.Contact();
       //expect(instance).to.be();
     });
 
-    it('should have the property role (base name: "role")', function () {
-      // uncomment below and update the code to test the property role
+    it('should have the property name (base name: "name")', function () {
+      // uncomment below and update the code to test the property name
       //var instance = new NotehubJs.Contact();
       //expect(instance).to.be();
     });
 
     it('should have the property organization (base name: "organization")', function () {
       // uncomment below and update the code to test the property organization
+      //var instance = new NotehubJs.Contact();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property role (base name: "role")', function () {
+      // uncomment below and update the code to test the property role
       //var instance = new NotehubJs.Contact();
       //expect(instance).to.be();
     });

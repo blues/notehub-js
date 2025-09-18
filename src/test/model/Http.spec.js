@@ -50,8 +50,8 @@
       //expect(instance).to.be.a(NotehubJs.Http);
     });
 
-    it('should have the property fleets (base name: "fleets")', function () {
-      // uncomment below and update the code to test the property fleets
+    it('should have the property disableHttpHeaders (base name: "disable_http_headers")', function () {
+      // uncomment below and update the code to test the property disableHttpHeaders
       //var instance = new NotehubJs.Http();
       //expect(instance).to.be();
     });
@@ -62,20 +62,8 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property transform (base name: "transform")', function () {
-      // uncomment below and update the code to test the property transform
-      //var instance = new NotehubJs.Http();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property throttleMs (base name: "throttle_ms")', function () {
-      // uncomment below and update the code to test the property throttleMs
-      //var instance = new NotehubJs.Http();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property url (base name: "url")', function () {
-      // uncomment below and update the code to test the property url
+    it('should have the property fleets (base name: "fleets")', function () {
+      // uncomment below and update the code to test the property fleets
       //var instance = new NotehubJs.Http();
       //expect(instance).to.be();
     });
@@ -86,14 +74,26 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property disableHttpHeaders (base name: "disable_http_headers")', function () {
-      // uncomment below and update the code to test the property disableHttpHeaders
+    it('should have the property throttleMs (base name: "throttle_ms")', function () {
+      // uncomment below and update the code to test the property throttleMs
       //var instance = new NotehubJs.Http();
       //expect(instance).to.be();
     });
 
     it('should have the property timeout (base name: "timeout")', function () {
       // uncomment below and update the code to test the property timeout
+      //var instance = new NotehubJs.Http();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property transform (base name: "transform")', function () {
+      // uncomment below and update the code to test the property transform
+      //var instance = new NotehubJs.Http();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property url (base name: "url")', function () {
+      // uncomment below and update the code to test the property url
       //var instance = new NotehubJs.Http();
       //expect(instance).to.be();
     });

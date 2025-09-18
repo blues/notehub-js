@@ -50,14 +50,14 @@
       //expect(instance).to.be.a(NotehubJs.Radresponder);
     });
 
-    it('should have the property fleets (base name: "fleets")', function () {
-      // uncomment below and update the code to test the property fleets
+    it('should have the property clientId (base name: "client_id")', function () {
+      // uncomment below and update the code to test the property clientId
       //var instance = new NotehubJs.Radresponder();
       //expect(instance).to.be();
     });
 
-    it('should have the property testApi (base name: "test_api")', function () {
-      // uncomment below and update the code to test the property testApi
+    it('should have the property clientSecret (base name: "client_secret")', function () {
+      // uncomment below and update the code to test the property clientSecret
       //var instance = new NotehubJs.Radresponder();
       //expect(instance).to.be();
     });
@@ -68,14 +68,14 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property clientId (base name: "client_id")', function () {
-      // uncomment below and update the code to test the property clientId
+    it('should have the property fleets (base name: "fleets")', function () {
+      // uncomment below and update the code to test the property fleets
       //var instance = new NotehubJs.Radresponder();
       //expect(instance).to.be();
     });
 
-    it('should have the property clientSecret (base name: "client_secret")', function () {
-      // uncomment below and update the code to test the property clientSecret
+    it('should have the property testApi (base name: "test_api")', function () {
+      // uncomment below and update the code to test the property testApi
       //var instance = new NotehubJs.Radresponder();
       //expect(instance).to.be();
     });

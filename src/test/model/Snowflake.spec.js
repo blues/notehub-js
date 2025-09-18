@@ -50,8 +50,8 @@
       //expect(instance).to.be.a(NotehubJs.Snowflake);
     });
 
-    it('should have the property fleets (base name: "fleets")', function () {
-      // uncomment below and update the code to test the property fleets
+    it('should have the property accountName (base name: "account_name")', function () {
+      // uncomment below and update the code to test the property accountName
       //var instance = new NotehubJs.Snowflake();
       //expect(instance).to.be();
     });
@@ -62,14 +62,8 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property transform (base name: "transform")', function () {
-      // uncomment below and update the code to test the property transform
-      //var instance = new NotehubJs.Snowflake();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property timeout (base name: "timeout")', function () {
-      // uncomment below and update the code to test the property timeout
+    it('should have the property fleets (base name: "fleets")', function () {
+      // uncomment below and update the code to test the property fleets
       //var instance = new NotehubJs.Snowflake();
       //expect(instance).to.be();
     });
@@ -80,14 +74,8 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property accountName (base name: "account_name")', function () {
-      // uncomment below and update the code to test the property accountName
-      //var instance = new NotehubJs.Snowflake();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property userName (base name: "user_name")', function () {
-      // uncomment below and update the code to test the property userName
+    it('should have the property pem (base name: "pem")', function () {
+      // uncomment below and update the code to test the property pem
       //var instance = new NotehubJs.Snowflake();
       //expect(instance).to.be();
     });
@@ -98,8 +86,20 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property pem (base name: "pem")', function () {
-      // uncomment below and update the code to test the property pem
+    it('should have the property timeout (base name: "timeout")', function () {
+      // uncomment below and update the code to test the property timeout
+      //var instance = new NotehubJs.Snowflake();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property transform (base name: "transform")', function () {
+      // uncomment below and update the code to test the property transform
+      //var instance = new NotehubJs.Snowflake();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property userName (base name: "user_name")', function () {
+      // uncomment below and update the code to test the property userName
       //var instance = new NotehubJs.Snowflake();
       //expect(instance).to.be();
     });

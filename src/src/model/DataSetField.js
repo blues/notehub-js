@@ -45,14 +45,14 @@ class DataSetField {
     if (data) {
       obj = obj || new DataSetField();
 
-      if (data.hasOwnProperty("name")) {
-        obj["name"] = ApiClient.convertToType(data["name"], "String");
-      }
       if (data.hasOwnProperty("datatype")) {
         obj["datatype"] = ApiClient.convertToType(data["datatype"], "Number");
       }
       if (data.hasOwnProperty("jsonata")) {
         obj["jsonata"] = ApiClient.convertToType(data["jsonata"], "String");
+      }
+      if (data.hasOwnProperty("name")) {
+        obj["name"] = ApiClient.convertToType(data["name"], "String");
       }
     } else if (data === null) {
       return null;
@@ -68,16 +68,6 @@ class DataSetField {
   static validateJSON(data) {
     // ensure the json data is a string
     if (
-      data["name"] &&
-      !(typeof data["name"] === "string" || data["name"] instanceof String)
-    ) {
-      throw new Error(
-        "Expected the field `name` to be a primitive type in the JSON string but got " +
-          data["name"]
-      );
-    }
-    // ensure the json data is a string
-    if (
       data["jsonata"] &&
       !(
         typeof data["jsonata"] === "string" || data["jsonata"] instanceof String
@@ -88,16 +78,20 @@ class DataSetField {
           data["jsonata"]
       );
     }
+    // ensure the json data is a string
+    if (
+      data["name"] &&
+      !(typeof data["name"] === "string" || data["name"] instanceof String)
+    ) {
+      throw new Error(
+        "Expected the field `name` to be a primitive type in the JSON string but got " +
+          data["name"]
+      );
+    }
 
     return true;
   }
 }
-
-/**
- * The name of the field
- * @member {String} name
- */
-DataSetField.prototype["name"] = undefined;
 
 /**
  * The datatype of the field
@@ -110,6 +104,12 @@ DataSetField.prototype["datatype"] = undefined;
  * @member {String} jsonata
  */
 DataSetField.prototype["jsonata"] = undefined;
+
+/**
+ * The name of the field
+ * @member {String} name
+ */
+DataSetField.prototype["name"] = undefined;
 
 /**
  * Allowed values for the <code>datatype</code> property.

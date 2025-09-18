@@ -50,26 +50,8 @@
       //expect(instance).to.be.a(NotehubJs.Location);
     });
 
-    it('should have the property when (base name: "when")', function () {
-      // uncomment below and update the code to test the property when
-      //var instance = new NotehubJs.Location();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property name (base name: "name")', function () {
-      // uncomment below and update the code to test the property name
-      //var instance = new NotehubJs.Location();
-      //expect(instance).to.be();
-    });
-
     it('should have the property country (base name: "country")', function () {
       // uncomment below and update the code to test the property country
-      //var instance = new NotehubJs.Location();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property timezone (base name: "timezone")', function () {
-      // uncomment below and update the code to test the property timezone
       //var instance = new NotehubJs.Location();
       //expect(instance).to.be();
     });
@@ -82,6 +64,24 @@
 
     it('should have the property longitude (base name: "longitude")', function () {
       // uncomment below and update the code to test the property longitude
+      //var instance = new NotehubJs.Location();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property name (base name: "name")', function () {
+      // uncomment below and update the code to test the property name
+      //var instance = new NotehubJs.Location();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property timezone (base name: "timezone")', function () {
+      // uncomment below and update the code to test the property timezone
+      //var instance = new NotehubJs.Location();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property when (base name: "when")', function () {
+      // uncomment below and update the code to test the property when
       //var instance = new NotehubJs.Location();
       //expect(instance).to.be();
     });

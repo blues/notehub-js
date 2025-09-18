@@ -60,14 +60,14 @@ class AlertDataInner {
           "String"
         );
       }
-      if (data.hasOwnProperty("value")) {
-        obj["value"] = ApiClient.convertToType(data["value"], "Number");
-      }
       if (data.hasOwnProperty("source_uid")) {
         obj["source_uid"] = ApiClient.convertToType(
           data["source_uid"],
           "String"
         );
+      }
+      if (data.hasOwnProperty("value")) {
+        obj["value"] = ApiClient.convertToType(data["value"], "Number");
       }
       if (data.hasOwnProperty("when")) {
         obj["when"] = ApiClient.convertToType(data["when"], "String");
@@ -167,16 +167,16 @@ AlertDataInner.prototype["source"] = undefined;
 AlertDataInner.prototype["source_type"] = undefined;
 
 /**
- * The value that triggered the alert
- * @member {Number} value
- */
-AlertDataInner.prototype["value"] = undefined;
-
-/**
  * The UID of the source of the alert
  * @member {String} source_uid
  */
 AlertDataInner.prototype["source_uid"] = undefined;
+
+/**
+ * The value that triggered the alert
+ * @member {Number} value
+ */
+AlertDataInner.prototype["value"] = undefined;
 
 /**
  * The time the alert was created

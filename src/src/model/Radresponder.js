@@ -46,18 +46,6 @@ class Radresponder {
     if (data) {
       obj = obj || new Radresponder();
 
-      if (data.hasOwnProperty("fleets")) {
-        obj["fleets"] = ApiClient.convertToType(data["fleets"], ["String"]);
-      }
-      if (data.hasOwnProperty("test_api")) {
-        obj["test_api"] = ApiClient.convertToType(data["test_api"], "Boolean");
-      }
-      if (data.hasOwnProperty("data_feed_key")) {
-        obj["data_feed_key"] = ApiClient.convertToType(
-          data["data_feed_key"],
-          "String"
-        );
-      }
       if (data.hasOwnProperty("client_id")) {
         obj["client_id"] = ApiClient.convertToType(data["client_id"], "String");
       }
@@ -66,6 +54,18 @@ class Radresponder {
           data["client_secret"],
           "String"
         );
+      }
+      if (data.hasOwnProperty("data_feed_key")) {
+        obj["data_feed_key"] = ApiClient.convertToType(
+          data["data_feed_key"],
+          "String"
+        );
+      }
+      if (data.hasOwnProperty("fleets")) {
+        obj["fleets"] = ApiClient.convertToType(data["fleets"], ["String"]);
+      }
+      if (data.hasOwnProperty("test_api")) {
+        obj["test_api"] = ApiClient.convertToType(data["test_api"], "Boolean");
       }
     } else if (data === null) {
       return null;
@@ -79,26 +79,6 @@ class Radresponder {
    * @return {boolean} to indicate whether the JSON data is valid with respect to <code>Radresponder</code>.
    */
   static validateJSON(data) {
-    // ensure the json data is an array
-    if (!Array.isArray(data["fleets"])) {
-      throw new Error(
-        "Expected the field `fleets` to be an array in the JSON data but got " +
-          data["fleets"]
-      );
-    }
-    // ensure the json data is a string
-    if (
-      data["data_feed_key"] &&
-      !(
-        typeof data["data_feed_key"] === "string" ||
-        data["data_feed_key"] instanceof String
-      )
-    ) {
-      throw new Error(
-        "Expected the field `data_feed_key` to be a primitive type in the JSON string but got " +
-          data["data_feed_key"]
-      );
-    }
     // ensure the json data is a string
     if (
       data["client_id"] &&
@@ -125,10 +105,46 @@ class Radresponder {
           data["client_secret"]
       );
     }
+    // ensure the json data is a string
+    if (
+      data["data_feed_key"] &&
+      !(
+        typeof data["data_feed_key"] === "string" ||
+        data["data_feed_key"] instanceof String
+      )
+    ) {
+      throw new Error(
+        "Expected the field `data_feed_key` to be a primitive type in the JSON string but got " +
+          data["data_feed_key"]
+      );
+    }
+    // ensure the json data is an array
+    if (!Array.isArray(data["fleets"])) {
+      throw new Error(
+        "Expected the field `fleets` to be an array in the JSON data but got " +
+          data["fleets"]
+      );
+    }
 
     return true;
   }
 }
+
+/**
+ * @member {String} client_id
+ */
+Radresponder.prototype["client_id"] = undefined;
+
+/**
+ * This value is input-only and will be omitted from the response and replaced with a placeholder
+ * @member {String} client_secret
+ */
+Radresponder.prototype["client_secret"] = undefined;
+
+/**
+ * @member {String} data_feed_key
+ */
+Radresponder.prototype["data_feed_key"] = undefined;
 
 /**
  * list of Fleet UIDs to apply route to, if any.  If empty, applies to all Fleets
@@ -141,21 +157,5 @@ Radresponder.prototype["fleets"] = undefined;
  * @default false
  */
 Radresponder.prototype["test_api"] = false;
-
-/**
- * @member {String} data_feed_key
- */
-Radresponder.prototype["data_feed_key"] = undefined;
-
-/**
- * @member {String} client_id
- */
-Radresponder.prototype["client_id"] = undefined;
-
-/**
- * This value is input-only and will be omitted from the response and replaced with a placeholder
- * @member {String} client_secret
- */
-Radresponder.prototype["client_secret"] = undefined;
 
 export default Radresponder;

@@ -45,11 +45,11 @@ class PersonalAccessTokenSecret {
     if (data) {
       obj = obj || new PersonalAccessTokenSecret();
 
-      if (data.hasOwnProperty("uid")) {
-        obj["uid"] = ApiClient.convertToType(data["uid"], "String");
-      }
       if (data.hasOwnProperty("secret")) {
         obj["secret"] = ApiClient.convertToType(data["secret"], "String");
+      }
+      if (data.hasOwnProperty("uid")) {
+        obj["uid"] = ApiClient.convertToType(data["uid"], "String");
       }
     } else if (data === null) {
       return null;
@@ -65,16 +65,6 @@ class PersonalAccessTokenSecret {
   static validateJSON(data) {
     // ensure the json data is a string
     if (
-      data["uid"] &&
-      !(typeof data["uid"] === "string" || data["uid"] instanceof String)
-    ) {
-      throw new Error(
-        "Expected the field `uid` to be a primitive type in the JSON string but got " +
-          data["uid"]
-      );
-    }
-    // ensure the json data is a string
-    if (
       data["secret"] &&
       !(typeof data["secret"] === "string" || data["secret"] instanceof String)
     ) {
@@ -83,21 +73,31 @@ class PersonalAccessTokenSecret {
           data["secret"]
       );
     }
+    // ensure the json data is a string
+    if (
+      data["uid"] &&
+      !(typeof data["uid"] === "string" || data["uid"] instanceof String)
+    ) {
+      throw new Error(
+        "Expected the field `uid` to be a primitive type in the JSON string but got " +
+          data["uid"]
+      );
+    }
 
     return true;
   }
 }
 
 /**
- * Unique and public identifier
- * @member {String} uid
- */
-PersonalAccessTokenSecret.prototype["uid"] = undefined;
-
-/**
  * The secret
  * @member {String} secret
  */
 PersonalAccessTokenSecret.prototype["secret"] = undefined;
+
+/**
+ * Unique and public identifier
+ * @member {String} uid
+ */
+PersonalAccessTokenSecret.prototype["uid"] = undefined;
 
 export default PersonalAccessTokenSecret;

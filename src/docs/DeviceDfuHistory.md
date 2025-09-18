@@ -2,8 +2,8 @@
 
 ## Properties
 
-| Name          | Type                                                    | Description | Notes      |
-| ------------- | ------------------------------------------------------- | ----------- | ---------- |
-| **deviceUid** | **String**                                              | Device UID  | [optional] |
-| **current**   | [**DeviceDfuStatusCurrent**](DeviceDfuStatusCurrent.md) |             | [optional] |
-| **history**   | [**[DeviceDfuStateMachine]**](DeviceDfuStateMachine.md) |             | [optional] |
+| Name          | Type                                                      | Description | Notes      |
+| ------------- | --------------------------------------------------------- | ----------- | ---------- |
+| **current**   | [**DeviceDfuHistoryCurrent**](DeviceDfuHistoryCurrent.md) |             | [optional] |
+| **deviceUid** | **String**                                                | Device UID  | [optional] |
+| **history**   | [**[DeviceDfuStateMachine]**](DeviceDfuStateMachine.md)   |             | [optional] |

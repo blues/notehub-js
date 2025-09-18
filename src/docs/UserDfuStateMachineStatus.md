@@ -4,7 +4,7 @@
 
 | Name                 | Type       | Description | Notes      |
 | -------------------- | ---------- | ----------- | ---------- |
+| **date**             | **Date**   |             | [optional] |
 | **phase**            | **String** |             | [optional] |
 | **phaseDescription** | **String** |             | [optional] |
-| **date**             | **Date**   |             | [optional] |
 | **status**           | **String** |             | [optional] |

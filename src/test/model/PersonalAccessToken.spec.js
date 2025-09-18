@@ -50,20 +50,8 @@
       //expect(instance).to.be.a(NotehubJs.PersonalAccessToken);
     });
 
-    it('should have the property uid (base name: "uid")', function () {
-      // uncomment below and update the code to test the property uid
-      //var instance = new NotehubJs.PersonalAccessToken();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property name (base name: "name")', function () {
-      // uncomment below and update the code to test the property name
-      //var instance = new NotehubJs.PersonalAccessToken();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property description (base name: "description")', function () {
-      // uncomment below and update the code to test the property description
+    it('should have the property createdAt (base name: "created_at")', function () {
+      // uncomment below and update the code to test the property createdAt
       //var instance = new NotehubJs.PersonalAccessToken();
       //expect(instance).to.be();
     });
@@ -74,14 +62,14 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property expiresAt (base name: "expires_at")', function () {
-      // uncomment below and update the code to test the property expiresAt
+    it('should have the property description (base name: "description")', function () {
+      // uncomment below and update the code to test the property description
       //var instance = new NotehubJs.PersonalAccessToken();
       //expect(instance).to.be();
     });
 
-    it('should have the property createdAt (base name: "created_at")', function () {
-      // uncomment below and update the code to test the property createdAt
+    it('should have the property expiresAt (base name: "expires_at")', function () {
+      // uncomment below and update the code to test the property expiresAt
       //var instance = new NotehubJs.PersonalAccessToken();
       //expect(instance).to.be();
     });
@@ -92,8 +80,20 @@
       //expect(instance).to.be();
     });
 
+    it('should have the property name (base name: "name")', function () {
+      // uncomment below and update the code to test the property name
+      //var instance = new NotehubJs.PersonalAccessToken();
+      //expect(instance).to.be();
+    });
+
     it('should have the property suspended (base name: "suspended")', function () {
       // uncomment below and update the code to test the property suspended
+      //var instance = new NotehubJs.PersonalAccessToken();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property uid (base name: "uid")', function () {
+      // uncomment below and update the code to test the property uid
       //var instance = new NotehubJs.PersonalAccessToken();
       //expect(instance).to.be();
     });

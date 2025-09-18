@@ -56,14 +56,14 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property status (base name: "status")', function () {
-      // uncomment below and update the code to test the property status
+    it('should have the property recipients (base name: "recipients")', function () {
+      // uncomment below and update the code to test the property recipients
       //var instance = new NotehubJs.AlertNotificationsInner();
       //expect(instance).to.be();
     });
 
-    it('should have the property recipients (base name: "recipients")', function () {
-      // uncomment below and update the code to test the property recipients
+    it('should have the property status (base name: "status")', function () {
+      // uncomment below and update the code to test the property status
       //var instance = new NotehubJs.AlertNotificationsInner();
       //expect(instance).to.be();
     });

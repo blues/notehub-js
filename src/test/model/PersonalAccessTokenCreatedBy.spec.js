@@ -50,12 +50,6 @@
       //expect(instance).to.be.a(NotehubJs.PersonalAccessTokenCreatedBy);
     });
 
-    it('should have the property uid (base name: "uid")', function () {
-      // uncomment below and update the code to test the property uid
-      //var instance = new NotehubJs.PersonalAccessTokenCreatedBy();
-      //expect(instance).to.be();
-    });
-
     it('should have the property email (base name: "email")', function () {
       // uncomment below and update the code to test the property email
       //var instance = new NotehubJs.PersonalAccessTokenCreatedBy();
@@ -64,6 +58,12 @@
 
     it('should have the property name (base name: "name")', function () {
       // uncomment below and update the code to test the property name
+      //var instance = new NotehubJs.PersonalAccessTokenCreatedBy();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property uid (base name: "uid")', function () {
+      // uncomment below and update the code to test the property uid
       //var instance = new NotehubJs.PersonalAccessTokenCreatedBy();
       //expect(instance).to.be();
     });

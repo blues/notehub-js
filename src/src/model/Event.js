@@ -45,56 +45,29 @@ class Event {
     if (data) {
       obj = obj || new Event();
 
-      if (data.hasOwnProperty("event")) {
-        obj["event"] = ApiClient.convertToType(data["event"], "String");
+      if (data.hasOwnProperty("app")) {
+        obj["app"] = ApiClient.convertToType(data["app"], "String");
       }
-      if (data.hasOwnProperty("session")) {
-        obj["session"] = ApiClient.convertToType(data["session"], "String");
+      if (data.hasOwnProperty("bars")) {
+        obj["bars"] = ApiClient.convertToType(data["bars"], "Number");
       }
-      if (data.hasOwnProperty("tls")) {
-        obj["tls"] = ApiClient.convertToType(data["tls"], "Boolean");
-      }
-      if (data.hasOwnProperty("transport")) {
-        obj["transport"] = ApiClient.convertToType(data["transport"], "String");
+      if (data.hasOwnProperty("best_country")) {
+        obj["best_country"] = ApiClient.convertToType(
+          data["best_country"],
+          "String"
+        );
       }
       if (data.hasOwnProperty("best_id")) {
         obj["best_id"] = ApiClient.convertToType(data["best_id"], "String");
       }
-      if (data.hasOwnProperty("device")) {
-        obj["device"] = ApiClient.convertToType(data["device"], "String");
+      if (data.hasOwnProperty("best_lat")) {
+        obj["best_lat"] = ApiClient.convertToType(data["best_lat"], "Number");
       }
-      if (data.hasOwnProperty("sn")) {
-        obj["sn"] = ApiClient.convertToType(data["sn"], "String");
-      }
-      if (data.hasOwnProperty("product")) {
-        obj["product"] = ApiClient.convertToType(data["product"], "String");
-      }
-      if (data.hasOwnProperty("app")) {
-        obj["app"] = ApiClient.convertToType(data["app"], "String");
-      }
-      if (data.hasOwnProperty("received")) {
-        obj["received"] = ApiClient.convertToType(data["received"], "Number");
-      }
-      if (data.hasOwnProperty("req")) {
-        obj["req"] = ApiClient.convertToType(data["req"], "String");
-      }
-      if (data.hasOwnProperty("when")) {
-        obj["when"] = ApiClient.convertToType(data["when"], "Number");
-      }
-      if (data.hasOwnProperty("file")) {
-        obj["file"] = ApiClient.convertToType(data["file"], "String");
-      }
-      if (data.hasOwnProperty("note")) {
-        obj["note"] = ApiClient.convertToType(data["note"], "String");
-      }
-      if (data.hasOwnProperty("updates")) {
-        obj["updates"] = ApiClient.convertToType(data["updates"], "Number");
-      }
-      if (data.hasOwnProperty("body")) {
-        obj["body"] = ApiClient.convertToType(data["body"], Object);
-      }
-      if (data.hasOwnProperty("payload")) {
-        obj["payload"] = ApiClient.convertToType(data["payload"], "String");
+      if (data.hasOwnProperty("best_location")) {
+        obj["best_location"] = ApiClient.convertToType(
+          data["best_location"],
+          "String"
+        );
       }
       if (data.hasOwnProperty("best_location_type")) {
         obj["best_location_type"] = ApiClient.convertToType(
@@ -108,23 +81,8 @@ class Event {
           "Number"
         );
       }
-      if (data.hasOwnProperty("best_lat")) {
-        obj["best_lat"] = ApiClient.convertToType(data["best_lat"], "Number");
-      }
       if (data.hasOwnProperty("best_lon")) {
         obj["best_lon"] = ApiClient.convertToType(data["best_lon"], "Number");
-      }
-      if (data.hasOwnProperty("best_location")) {
-        obj["best_location"] = ApiClient.convertToType(
-          data["best_location"],
-          "String"
-        );
-      }
-      if (data.hasOwnProperty("best_country")) {
-        obj["best_country"] = ApiClient.convertToType(
-          data["best_country"],
-          "String"
-        );
       }
       if (data.hasOwnProperty("best_timezone")) {
         obj["best_timezone"] = ApiClient.convertToType(
@@ -132,36 +90,114 @@ class Event {
           "String"
         );
       }
-      if (data.hasOwnProperty("where_olc")) {
-        obj["where_olc"] = ApiClient.convertToType(data["where_olc"], "String");
+      if (data.hasOwnProperty("body")) {
+        obj["body"] = ApiClient.convertToType(data["body"], Object);
       }
-      if (data.hasOwnProperty("where_when")) {
-        obj["where_when"] = ApiClient.convertToType(
-          data["where_when"],
-          "Number"
+      if (data.hasOwnProperty("bssid")) {
+        obj["bssid"] = ApiClient.convertToType(data["bssid"], "String");
+      }
+      if (data.hasOwnProperty("device")) {
+        obj["device"] = ApiClient.convertToType(data["device"], "String");
+      }
+      if (data.hasOwnProperty("environment")) {
+        obj["environment"] = ApiClient.convertToType(
+          data["environment"],
+          Object
         );
       }
-      if (data.hasOwnProperty("where_lat")) {
-        obj["where_lat"] = ApiClient.convertToType(data["where_lat"], "Number");
+      if (data.hasOwnProperty("event")) {
+        obj["event"] = ApiClient.convertToType(data["event"], "String");
       }
-      if (data.hasOwnProperty("where_lon")) {
-        obj["where_lon"] = ApiClient.convertToType(data["where_lon"], "Number");
+      if (data.hasOwnProperty("file")) {
+        obj["file"] = ApiClient.convertToType(data["file"], "String");
       }
-      if (data.hasOwnProperty("where_location")) {
-        obj["where_location"] = ApiClient.convertToType(
-          data["where_location"],
+      if (data.hasOwnProperty("moved")) {
+        obj["moved"] = ApiClient.convertToType(data["moved"], "Number");
+      }
+      if (data.hasOwnProperty("note")) {
+        obj["note"] = ApiClient.convertToType(data["note"], "String");
+      }
+      if (data.hasOwnProperty("ordering_code")) {
+        obj["ordering_code"] = ApiClient.convertToType(
+          data["ordering_code"],
           "String"
         );
       }
-      if (data.hasOwnProperty("where_country")) {
-        obj["where_country"] = ApiClient.convertToType(
-          data["where_country"],
+      if (data.hasOwnProperty("orientation")) {
+        obj["orientation"] = ApiClient.convertToType(
+          data["orientation"],
           "String"
         );
       }
-      if (data.hasOwnProperty("where_timezone")) {
-        obj["where_timezone"] = ApiClient.convertToType(
-          data["where_timezone"],
+      if (data.hasOwnProperty("payload")) {
+        obj["payload"] = ApiClient.convertToType(data["payload"], "String");
+      }
+      if (data.hasOwnProperty("product")) {
+        obj["product"] = ApiClient.convertToType(data["product"], "String");
+      }
+      if (data.hasOwnProperty("rat")) {
+        obj["rat"] = ApiClient.convertToType(data["rat"], "String");
+      }
+      if (data.hasOwnProperty("received")) {
+        obj["received"] = ApiClient.convertToType(data["received"], "Number");
+      }
+      if (data.hasOwnProperty("req")) {
+        obj["req"] = ApiClient.convertToType(data["req"], "String");
+      }
+      if (data.hasOwnProperty("rsrp")) {
+        obj["rsrp"] = ApiClient.convertToType(data["rsrp"], "Number");
+      }
+      if (data.hasOwnProperty("rsrq")) {
+        obj["rsrq"] = ApiClient.convertToType(data["rsrq"], "Number");
+      }
+      if (data.hasOwnProperty("rssi")) {
+        obj["rssi"] = ApiClient.convertToType(data["rssi"], "Number");
+      }
+      if (data.hasOwnProperty("session")) {
+        obj["session"] = ApiClient.convertToType(data["session"], "String");
+      }
+      if (data.hasOwnProperty("sinr")) {
+        obj["sinr"] = ApiClient.convertToType(data["sinr"], "Number");
+      }
+      if (data.hasOwnProperty("sku")) {
+        obj["sku"] = ApiClient.convertToType(data["sku"], "String");
+      }
+      if (data.hasOwnProperty("sn")) {
+        obj["sn"] = ApiClient.convertToType(data["sn"], "String");
+      }
+      if (data.hasOwnProperty("ssid")) {
+        obj["ssid"] = ApiClient.convertToType(data["ssid"], "String");
+      }
+      if (data.hasOwnProperty("temp")) {
+        obj["temp"] = ApiClient.convertToType(data["temp"], "Number");
+      }
+      if (data.hasOwnProperty("tls")) {
+        obj["tls"] = ApiClient.convertToType(data["tls"], "Boolean");
+      }
+      if (data.hasOwnProperty("tower_country")) {
+        obj["tower_country"] = ApiClient.convertToType(
+          data["tower_country"],
+          "String"
+        );
+      }
+      if (data.hasOwnProperty("tower_id")) {
+        obj["tower_id"] = ApiClient.convertToType(data["tower_id"], "String");
+      }
+      if (data.hasOwnProperty("tower_lat")) {
+        obj["tower_lat"] = ApiClient.convertToType(data["tower_lat"], "Number");
+      }
+      if (data.hasOwnProperty("tower_location")) {
+        obj["tower_location"] = ApiClient.convertToType(
+          data["tower_location"],
+          "String"
+        );
+      }
+      if (data.hasOwnProperty("tower_lon")) {
+        obj["tower_lon"] = ApiClient.convertToType(data["tower_lon"], "Number");
+      }
+      if (data.hasOwnProperty("tower_timezone")) {
+        obj["tower_timezone"] = ApiClient.convertToType(
+          data["tower_timezone"],
           "String"
         );
       }
@@ -171,41 +207,17 @@ class Event {
           "Number"
         );
       }
-      if (data.hasOwnProperty("tower_lat")) {
-        obj["tower_lat"] = ApiClient.convertToType(data["tower_lat"], "Number");
+      if (data.hasOwnProperty("transport")) {
+        obj["transport"] = ApiClient.convertToType(data["transport"], "String");
       }
-      if (data.hasOwnProperty("tower_lon")) {
-        obj["tower_lon"] = ApiClient.convertToType(data["tower_lon"], "Number");
-      }
-      if (data.hasOwnProperty("tower_country")) {
-        obj["tower_country"] = ApiClient.convertToType(
-          data["tower_country"],
+      if (data.hasOwnProperty("tri_country")) {
+        obj["tri_country"] = ApiClient.convertToType(
+          data["tri_country"],
           "String"
         );
-      }
-      if (data.hasOwnProperty("tower_location")) {
-        obj["tower_location"] = ApiClient.convertToType(
-          data["tower_location"],
-          "String"
-        );
-      }
-      if (data.hasOwnProperty("tower_timezone")) {
-        obj["tower_timezone"] = ApiClient.convertToType(
-          data["tower_timezone"],
-          "String"
-        );
-      }
-      if (data.hasOwnProperty("tower_id")) {
-        obj["tower_id"] = ApiClient.convertToType(data["tower_id"], "String");
-      }
-      if (data.hasOwnProperty("tri_when")) {
-        obj["tri_when"] = ApiClient.convertToType(data["tri_when"], "Number");
       }
       if (data.hasOwnProperty("tri_lat")) {
         obj["tri_lat"] = ApiClient.convertToType(data["tri_lat"], "Number");
-      }
-      if (data.hasOwnProperty("tri_lon")) {
-        obj["tri_lon"] = ApiClient.convertToType(data["tri_lon"], "Number");
       }
       if (data.hasOwnProperty("tri_location")) {
         obj["tri_location"] = ApiClient.convertToType(
@@ -213,10 +225,13 @@ class Event {
           "String"
         );
       }
-      if (data.hasOwnProperty("tri_country")) {
-        obj["tri_country"] = ApiClient.convertToType(
-          data["tri_country"],
-          "String"
+      if (data.hasOwnProperty("tri_lon")) {
+        obj["tri_lon"] = ApiClient.convertToType(data["tri_lon"], "Number");
+      }
+      if (data.hasOwnProperty("tri_points")) {
+        obj["tri_points"] = ApiClient.convertToType(
+          data["tri_points"],
+          "Number"
         );
       }
       if (data.hasOwnProperty("tri_timezone")) {
@@ -225,65 +240,50 @@ class Event {
           "String"
         );
       }
-      if (data.hasOwnProperty("tri_points")) {
-        obj["tri_points"] = ApiClient.convertToType(
-          data["tri_points"],
-          "Number"
-        );
+      if (data.hasOwnProperty("tri_when")) {
+        obj["tri_when"] = ApiClient.convertToType(data["tri_when"], "Number");
       }
-      if (data.hasOwnProperty("moved")) {
-        obj["moved"] = ApiClient.convertToType(data["moved"], "Number");
-      }
-      if (data.hasOwnProperty("orientation")) {
-        obj["orientation"] = ApiClient.convertToType(
-          data["orientation"],
-          "String"
-        );
-      }
-      if (data.hasOwnProperty("rssi")) {
-        obj["rssi"] = ApiClient.convertToType(data["rssi"], "Number");
-      }
-      if (data.hasOwnProperty("sinr")) {
-        obj["sinr"] = ApiClient.convertToType(data["sinr"], "Number");
-      }
-      if (data.hasOwnProperty("rsrp")) {
-        obj["rsrp"] = ApiClient.convertToType(data["rsrp"], "Number");
-      }
-      if (data.hasOwnProperty("rsrq")) {
-        obj["rsrq"] = ApiClient.convertToType(data["rsrq"], "Number");
-      }
-      if (data.hasOwnProperty("rat")) {
-        obj["rat"] = ApiClient.convertToType(data["rat"], "String");
-      }
-      if (data.hasOwnProperty("bars")) {
-        obj["bars"] = ApiClient.convertToType(data["bars"], "Number");
+      if (data.hasOwnProperty("updates")) {
+        obj["updates"] = ApiClient.convertToType(data["updates"], "Number");
       }
       if (data.hasOwnProperty("voltage")) {
         obj["voltage"] = ApiClient.convertToType(data["voltage"], "Number");
       }
-      if (data.hasOwnProperty("temp")) {
-        obj["temp"] = ApiClient.convertToType(data["temp"], "Number");
+      if (data.hasOwnProperty("when")) {
+        obj["when"] = ApiClient.convertToType(data["when"], "Number");
       }
-      if (data.hasOwnProperty("environment")) {
-        obj["environment"] = ApiClient.convertToType(
-          data["environment"],
-          Object
-        );
-      }
-      if (data.hasOwnProperty("sku")) {
-        obj["sku"] = ApiClient.convertToType(data["sku"], "String");
-      }
-      if (data.hasOwnProperty("ordering_code")) {
-        obj["ordering_code"] = ApiClient.convertToType(
-          data["ordering_code"],
+      if (data.hasOwnProperty("where_country")) {
+        obj["where_country"] = ApiClient.convertToType(
+          data["where_country"],
           "String"
         );
       }
-      if (data.hasOwnProperty("ssid")) {
-        obj["ssid"] = ApiClient.convertToType(data["ssid"], "String");
+      if (data.hasOwnProperty("where_lat")) {
+        obj["where_lat"] = ApiClient.convertToType(data["where_lat"], "Number");
       }
-      if (data.hasOwnProperty("bssid")) {
-        obj["bssid"] = ApiClient.convertToType(data["bssid"], "String");
+      if (data.hasOwnProperty("where_location")) {
+        obj["where_location"] = ApiClient.convertToType(
+          data["where_location"],
+          "String"
+        );
+      }
+      if (data.hasOwnProperty("where_lon")) {
+        obj["where_lon"] = ApiClient.convertToType(data["where_lon"], "Number");
+      }
+      if (data.hasOwnProperty("where_olc")) {
+        obj["where_olc"] = ApiClient.convertToType(data["where_olc"], "String");
+      }
+      if (data.hasOwnProperty("where_timezone")) {
+        obj["where_timezone"] = ApiClient.convertToType(
+          data["where_timezone"],
+          "String"
+        );
+      }
+      if (data.hasOwnProperty("where_when")) {
+        obj["where_when"] = ApiClient.convertToType(
+          data["where_when"],
+          "Number"
+        );
       }
     } else if (data === null) {
       return null;
@@ -299,37 +299,25 @@ class Event {
   static validateJSON(data) {
     // ensure the json data is a string
     if (
-      data["event"] &&
-      !(typeof data["event"] === "string" || data["event"] instanceof String)
+      data["app"] &&
+      !(typeof data["app"] === "string" || data["app"] instanceof String)
     ) {
       throw new Error(
-        "Expected the field `event` to be a primitive type in the JSON string but got " +
-          data["event"]
+        "Expected the field `app` to be a primitive type in the JSON string but got " +
+          data["app"]
       );
     }
     // ensure the json data is a string
     if (
-      data["session"] &&
+      data["best_country"] &&
       !(
-        typeof data["session"] === "string" || data["session"] instanceof String
+        typeof data["best_country"] === "string" ||
+        data["best_country"] instanceof String
       )
     ) {
       throw new Error(
-        "Expected the field `session` to be a primitive type in the JSON string but got " +
-          data["session"]
-      );
-    }
-    // ensure the json data is a string
-    if (
-      data["transport"] &&
-      !(
-        typeof data["transport"] === "string" ||
-        data["transport"] instanceof String
-      )
-    ) {
-      throw new Error(
-        "Expected the field `transport` to be a primitive type in the JSON string but got " +
-          data["transport"]
+        "Expected the field `best_country` to be a primitive type in the JSON string but got " +
+          data["best_country"]
       );
     }
     // ensure the json data is a string
@@ -346,6 +334,55 @@ class Event {
     }
     // ensure the json data is a string
     if (
+      data["best_location"] &&
+      !(
+        typeof data["best_location"] === "string" ||
+        data["best_location"] instanceof String
+      )
+    ) {
+      throw new Error(
+        "Expected the field `best_location` to be a primitive type in the JSON string but got " +
+          data["best_location"]
+      );
+    }
+    // ensure the json data is a string
+    if (
+      data["best_location_type"] &&
+      !(
+        typeof data["best_location_type"] === "string" ||
+        data["best_location_type"] instanceof String
+      )
+    ) {
+      throw new Error(
+        "Expected the field `best_location_type` to be a primitive type in the JSON string but got " +
+          data["best_location_type"]
+      );
+    }
+    // ensure the json data is a string
+    if (
+      data["best_timezone"] &&
+      !(
+        typeof data["best_timezone"] === "string" ||
+        data["best_timezone"] instanceof String
+      )
+    ) {
+      throw new Error(
+        "Expected the field `best_timezone` to be a primitive type in the JSON string but got " +
+          data["best_timezone"]
+      );
+    }
+    // ensure the json data is a string
+    if (
+      data["bssid"] &&
+      !(typeof data["bssid"] === "string" || data["bssid"] instanceof String)
+    ) {
+      throw new Error(
+        "Expected the field `bssid` to be a primitive type in the JSON string but got " +
+          data["bssid"]
+      );
+    }
+    // ensure the json data is a string
+    if (
       data["device"] &&
       !(typeof data["device"] === "string" || data["device"] instanceof String)
     ) {
@@ -356,44 +393,12 @@ class Event {
     }
     // ensure the json data is a string
     if (
-      data["sn"] &&
-      !(typeof data["sn"] === "string" || data["sn"] instanceof String)
+      data["event"] &&
+      !(typeof data["event"] === "string" || data["event"] instanceof String)
     ) {
       throw new Error(
-        "Expected the field `sn` to be a primitive type in the JSON string but got " +
-          data["sn"]
-      );
-    }
-    // ensure the json data is a string
-    if (
-      data["product"] &&
-      !(
-        typeof data["product"] === "string" || data["product"] instanceof String
-      )
-    ) {
-      throw new Error(
-        "Expected the field `product` to be a primitive type in the JSON string but got " +
-          data["product"]
-      );
-    }
-    // ensure the json data is a string
-    if (
-      data["app"] &&
-      !(typeof data["app"] === "string" || data["app"] instanceof String)
-    ) {
-      throw new Error(
-        "Expected the field `app` to be a primitive type in the JSON string but got " +
-          data["app"]
-      );
-    }
-    // ensure the json data is a string
-    if (
-      data["req"] &&
-      !(typeof data["req"] === "string" || data["req"] instanceof String)
-    ) {
-      throw new Error(
-        "Expected the field `req` to be a primitive type in the JSON string but got " +
-          data["req"]
+        "Expected the field `event` to be a primitive type in the JSON string but got " +
+          data["event"]
       );
     }
     // ensure the json data is a string
@@ -418,6 +423,32 @@ class Event {
     }
     // ensure the json data is a string
     if (
+      data["ordering_code"] &&
+      !(
+        typeof data["ordering_code"] === "string" ||
+        data["ordering_code"] instanceof String
+      )
+    ) {
+      throw new Error(
+        "Expected the field `ordering_code` to be a primitive type in the JSON string but got " +
+          data["ordering_code"]
+      );
+    }
+    // ensure the json data is a string
+    if (
+      data["orientation"] &&
+      !(
+        typeof data["orientation"] === "string" ||
+        data["orientation"] instanceof String
+      )
+    ) {
+      throw new Error(
+        "Expected the field `orientation` to be a primitive type in the JSON string but got " +
+          data["orientation"]
+      );
+    }
+    // ensure the json data is a string
+    if (
       data["payload"] &&
       !(
         typeof data["payload"] === "string" || data["payload"] instanceof String
@@ -430,106 +461,76 @@ class Event {
     }
     // ensure the json data is a string
     if (
-      data["best_location_type"] &&
+      data["product"] &&
       !(
-        typeof data["best_location_type"] === "string" ||
-        data["best_location_type"] instanceof String
+        typeof data["product"] === "string" || data["product"] instanceof String
       )
     ) {
       throw new Error(
-        "Expected the field `best_location_type` to be a primitive type in the JSON string but got " +
-          data["best_location_type"]
+        "Expected the field `product` to be a primitive type in the JSON string but got " +
+          data["product"]
       );
     }
     // ensure the json data is a string
     if (
-      data["best_location"] &&
-      !(
-        typeof data["best_location"] === "string" ||
-        data["best_location"] instanceof String
-      )
+      data["rat"] &&
+      !(typeof data["rat"] === "string" || data["rat"] instanceof String)
     ) {
       throw new Error(
-        "Expected the field `best_location` to be a primitive type in the JSON string but got " +
-          data["best_location"]
+        "Expected the field `rat` to be a primitive type in the JSON string but got " +
+          data["rat"]
       );
     }
     // ensure the json data is a string
     if (
-      data["best_country"] &&
-      !(
-        typeof data["best_country"] === "string" ||
-        data["best_country"] instanceof String
-      )
+      data["req"] &&
+      !(typeof data["req"] === "string" || data["req"] instanceof String)
     ) {
       throw new Error(
-        "Expected the field `best_country` to be a primitive type in the JSON string but got " +
-          data["best_country"]
+        "Expected the field `req` to be a primitive type in the JSON string but got " +
+          data["req"]
       );
     }
     // ensure the json data is a string
     if (
-      data["best_timezone"] &&
+      data["session"] &&
       !(
-        typeof data["best_timezone"] === "string" ||
-        data["best_timezone"] instanceof String
+        typeof data["session"] === "string" || data["session"] instanceof String
       )
     ) {
       throw new Error(
-        "Expected the field `best_timezone` to be a primitive type in the JSON string but got " +
-          data["best_timezone"]
+        "Expected the field `session` to be a primitive type in the JSON string but got " +
+          data["session"]
       );
     }
     // ensure the json data is a string
     if (
-      data["where_olc"] &&
-      !(
-        typeof data["where_olc"] === "string" ||
-        data["where_olc"] instanceof String
-      )
+      data["sku"] &&
+      !(typeof data["sku"] === "string" || data["sku"] instanceof String)
     ) {
       throw new Error(
-        "Expected the field `where_olc` to be a primitive type in the JSON string but got " +
-          data["where_olc"]
+        "Expected the field `sku` to be a primitive type in the JSON string but got " +
+          data["sku"]
       );
     }
     // ensure the json data is a string
     if (
-      data["where_location"] &&
-      !(
-        typeof data["where_location"] === "string" ||
-        data["where_location"] instanceof String
-      )
+      data["sn"] &&
+      !(typeof data["sn"] === "string" || data["sn"] instanceof String)
     ) {
       throw new Error(
-        "Expected the field `where_location` to be a primitive type in the JSON string but got " +
-          data["where_location"]
+        "Expected the field `sn` to be a primitive type in the JSON string but got " +
+          data["sn"]
       );
     }
     // ensure the json data is a string
     if (
-      data["where_country"] &&
-      !(
-        typeof data["where_country"] === "string" ||
-        data["where_country"] instanceof String
-      )
+      data["ssid"] &&
+      !(typeof data["ssid"] === "string" || data["ssid"] instanceof String)
     ) {
       throw new Error(
-        "Expected the field `where_country` to be a primitive type in the JSON string but got " +
-          data["where_country"]
-      );
-    }
-    // ensure the json data is a string
-    if (
-      data["where_timezone"] &&
-      !(
-        typeof data["where_timezone"] === "string" ||
-        data["where_timezone"] instanceof String
-      )
-    ) {
-      throw new Error(
-        "Expected the field `where_timezone` to be a primitive type in the JSON string but got " +
-          data["where_timezone"]
+        "Expected the field `ssid` to be a primitive type in the JSON string but got " +
+          data["ssid"]
       );
     }
     // ensure the json data is a string
@@ -543,6 +544,19 @@ class Event {
       throw new Error(
         "Expected the field `tower_country` to be a primitive type in the JSON string but got " +
           data["tower_country"]
+      );
+    }
+    // ensure the json data is a string
+    if (
+      data["tower_id"] &&
+      !(
+        typeof data["tower_id"] === "string" ||
+        data["tower_id"] instanceof String
+      )
+    ) {
+      throw new Error(
+        "Expected the field `tower_id` to be a primitive type in the JSON string but got " +
+          data["tower_id"]
       );
     }
     // ensure the json data is a string
@@ -573,28 +587,15 @@ class Event {
     }
     // ensure the json data is a string
     if (
-      data["tower_id"] &&
+      data["transport"] &&
       !(
-        typeof data["tower_id"] === "string" ||
-        data["tower_id"] instanceof String
+        typeof data["transport"] === "string" ||
+        data["transport"] instanceof String
       )
     ) {
       throw new Error(
-        "Expected the field `tower_id` to be a primitive type in the JSON string but got " +
-          data["tower_id"]
-      );
-    }
-    // ensure the json data is a string
-    if (
-      data["tri_location"] &&
-      !(
-        typeof data["tri_location"] === "string" ||
-        data["tri_location"] instanceof String
-      )
-    ) {
-      throw new Error(
-        "Expected the field `tri_location` to be a primitive type in the JSON string but got " +
-          data["tri_location"]
+        "Expected the field `transport` to be a primitive type in the JSON string but got " +
+          data["transport"]
       );
     }
     // ensure the json data is a string
@@ -612,6 +613,19 @@ class Event {
     }
     // ensure the json data is a string
     if (
+      data["tri_location"] &&
+      !(
+        typeof data["tri_location"] === "string" ||
+        data["tri_location"] instanceof String
+      )
+    ) {
+      throw new Error(
+        "Expected the field `tri_location` to be a primitive type in the JSON string but got " +
+          data["tri_location"]
+      );
+    }
+    // ensure the json data is a string
+    if (
       data["tri_timezone"] &&
       !(
         typeof data["tri_timezone"] === "string" ||
@@ -625,68 +639,54 @@ class Event {
     }
     // ensure the json data is a string
     if (
-      data["orientation"] &&
+      data["where_country"] &&
       !(
-        typeof data["orientation"] === "string" ||
-        data["orientation"] instanceof String
+        typeof data["where_country"] === "string" ||
+        data["where_country"] instanceof String
       )
     ) {
       throw new Error(
-        "Expected the field `orientation` to be a primitive type in the JSON string but got " +
-          data["orientation"]
+        "Expected the field `where_country` to be a primitive type in the JSON string but got " +
+          data["where_country"]
       );
     }
     // ensure the json data is a string
     if (
-      data["rat"] &&
-      !(typeof data["rat"] === "string" || data["rat"] instanceof String)
-    ) {
-      throw new Error(
-        "Expected the field `rat` to be a primitive type in the JSON string but got " +
-          data["rat"]
-      );
-    }
-    // ensure the json data is a string
-    if (
-      data["sku"] &&
-      !(typeof data["sku"] === "string" || data["sku"] instanceof String)
-    ) {
-      throw new Error(
-        "Expected the field `sku` to be a primitive type in the JSON string but got " +
-          data["sku"]
-      );
-    }
-    // ensure the json data is a string
-    if (
-      data["ordering_code"] &&
+      data["where_location"] &&
       !(
-        typeof data["ordering_code"] === "string" ||
-        data["ordering_code"] instanceof String
+        typeof data["where_location"] === "string" ||
+        data["where_location"] instanceof String
       )
     ) {
       throw new Error(
-        "Expected the field `ordering_code` to be a primitive type in the JSON string but got " +
-          data["ordering_code"]
+        "Expected the field `where_location` to be a primitive type in the JSON string but got " +
+          data["where_location"]
       );
     }
     // ensure the json data is a string
     if (
-      data["ssid"] &&
-      !(typeof data["ssid"] === "string" || data["ssid"] instanceof String)
+      data["where_olc"] &&
+      !(
+        typeof data["where_olc"] === "string" ||
+        data["where_olc"] instanceof String
+      )
     ) {
       throw new Error(
-        "Expected the field `ssid` to be a primitive type in the JSON string but got " +
-          data["ssid"]
+        "Expected the field `where_olc` to be a primitive type in the JSON string but got " +
+          data["where_olc"]
       );
     }
     // ensure the json data is a string
     if (
-      data["bssid"] &&
-      !(typeof data["bssid"] === "string" || data["bssid"] instanceof String)
+      data["where_timezone"] &&
+      !(
+        typeof data["where_timezone"] === "string" ||
+        data["where_timezone"] instanceof String
+      )
     ) {
       throw new Error(
-        "Expected the field `bssid` to be a primitive type in the JSON string but got " +
-          data["bssid"]
+        "Expected the field `where_timezone` to be a primitive type in the JSON string but got " +
+          data["where_timezone"]
       );
     }
 
@@ -695,28 +695,22 @@ class Event {
 }
 
 /**
- * Event UID (globally unique)
- * @member {String} event
+ * App UID (globally unique)
+ * @member {String} app
  */
-Event.prototype["event"] = undefined;
+Event.prototype["app"] = undefined;
 
 /**
- * Session UID (globally unique)
- * @member {String} session
+ * Bars. Only available on _session.qo events.
+ * @member {Number} bars
  */
-Event.prototype["session"] = undefined;
+Event.prototype["bars"] = undefined;
 
 /**
- * Whether TLS was used on the connection between the device and notehub. Only available on _session.qo events.
- * @member {Boolean} tls
+ * Country
+ * @member {String} best_country
  */
-Event.prototype["tls"] = undefined;
-
-/**
- * The transport used for this event, e.g., \"cellular\", \"wifi\", \", etc.
- * @member {String} transport
- */
-Event.prototype["transport"] = undefined;
+Event.prototype["best_country"] = undefined;
 
 /**
  * The device serial number, or the DeviceUID if the serial number is not set
@@ -725,75 +719,16 @@ Event.prototype["transport"] = undefined;
 Event.prototype["best_id"] = undefined;
 
 /**
- * Device UID (globally unique)
- * @member {String} device
+ * Latitude
+ * @member {Number} best_lat
  */
-Event.prototype["device"] = undefined;
+Event.prototype["best_lat"] = undefined;
 
 /**
- * The device serial number
- * @member {String} sn
+ * Location
+ * @member {String} best_location
  */
-Event.prototype["sn"] = undefined;
-
-/**
- * Product UID (globally unique)
- * @member {String} product
- */
-Event.prototype["product"] = undefined;
-
-/**
- * App UID (globally unique)
- * @member {String} app
- */
-Event.prototype["app"] = undefined;
-
-/**
- * The unix timestamp when the event was received
- * @member {Number} received
- */
-Event.prototype["received"] = undefined;
-
-/**
- * The notecard request
- * @member {String} req
- */
-Event.prototype["req"] = undefined;
-
-/**
- * When the event was captured on the device
- * @member {Number} when
- */
-Event.prototype["when"] = undefined;
-
-/**
- * The notefile associated with this event
- * @member {String} file
- */
-Event.prototype["file"] = undefined;
-
-/**
- * The note ID in the notefile
- * @member {String} note
- */
-Event.prototype["note"] = undefined;
-
-/**
- * @member {Number} updates
- */
-Event.prototype["updates"] = undefined;
-
-/**
- * A JSON object containing event details
- * @member {Object} body
- */
-Event.prototype["body"] = undefined;
-
-/**
- * A base64-encoded binary payload
- * @member {String} payload
- */
-Event.prototype["payload"] = undefined;
+Event.prototype["best_location"] = undefined;
 
 /**
  * One of \"gps\", \"triangulated\", or \"tower\"
@@ -808,28 +743,10 @@ Event.prototype["best_location_type"] = undefined;
 Event.prototype["best_location_when"] = undefined;
 
 /**
- * Latitude
- * @member {Number} best_lat
- */
-Event.prototype["best_lat"] = undefined;
-
-/**
  * Longitude
  * @member {Number} best_lon
  */
 Event.prototype["best_lon"] = undefined;
-
-/**
- * Location
- * @member {String} best_location
- */
-Event.prototype["best_location"] = undefined;
-
-/**
- * Country
- * @member {String} best_country
- */
-Event.prototype["best_country"] = undefined;
 
 /**
  * Timezone
@@ -838,130 +755,40 @@ Event.prototype["best_country"] = undefined;
 Event.prototype["best_timezone"] = undefined;
 
 /**
- * Open Location Code
- * @member {String} where_olc
+ * A JSON object containing event details
+ * @member {Object} body
  */
-Event.prototype["where_olc"] = undefined;
+Event.prototype["body"] = undefined;
 
 /**
- * Unix timestamp
- * @member {Number} where_when
+ * BSSID. Only available on _session.qo events.
+ * @member {String} bssid
  */
-Event.prototype["where_when"] = undefined;
+Event.prototype["bssid"] = undefined;
 
 /**
- * Latitude
- * @member {Number} where_lat
+ * Device UID (globally unique)
+ * @member {String} device
  */
-Event.prototype["where_lat"] = undefined;
+Event.prototype["device"] = undefined;
 
 /**
- * Longitude
- * @member {Number} where_lon
+ * Routed environment variables beginning with \"$\". Only available on _session.qo events.
+ * @member {Object} environment
  */
-Event.prototype["where_lon"] = undefined;
+Event.prototype["environment"] = undefined;
 
 /**
- * Location
- * @member {String} where_location
+ * Event UID (globally unique)
+ * @member {String} event
  */
-Event.prototype["where_location"] = undefined;
+Event.prototype["event"] = undefined;
 
 /**
- * Country
- * @member {String} where_country
+ * The notefile associated with this event
+ * @member {String} file
  */
-Event.prototype["where_country"] = undefined;
-
-/**
- * Timezone
- * @member {String} where_timezone
- */
-Event.prototype["where_timezone"] = undefined;
-
-/**
- * Unix timestamp
- * @member {Number} tower_when
- */
-Event.prototype["tower_when"] = undefined;
-
-/**
- * Latitude
- * @member {Number} tower_lat
- */
-Event.prototype["tower_lat"] = undefined;
-
-/**
- * Longitude
- * @member {Number} tower_lon
- */
-Event.prototype["tower_lon"] = undefined;
-
-/**
- * Country
- * @member {String} tower_country
- */
-Event.prototype["tower_country"] = undefined;
-
-/**
- * Location
- * @member {String} tower_location
- */
-Event.prototype["tower_location"] = undefined;
-
-/**
- * Timezone
- * @member {String} tower_timezone
- */
-Event.prototype["tower_timezone"] = undefined;
-
-/**
- * Tower ID
- * @member {String} tower_id
- */
-Event.prototype["tower_id"] = undefined;
-
-/**
- * Unix timestamp
- * @member {Number} tri_when
- */
-Event.prototype["tri_when"] = undefined;
-
-/**
- * Latitude
- * @member {Number} tri_lat
- */
-Event.prototype["tri_lat"] = undefined;
-
-/**
- * Longitude
- * @member {Number} tri_lon
- */
-Event.prototype["tri_lon"] = undefined;
-
-/**
- * Location
- * @member {String} tri_location
- */
-Event.prototype["tri_location"] = undefined;
-
-/**
- * Country
- * @member {String} tri_country
- */
-Event.prototype["tri_country"] = undefined;
-
-/**
- * Timezone
- * @member {String} tri_timezone
- */
-Event.prototype["tri_timezone"] = undefined;
-
-/**
- * Triangulation points
- * @member {Number} tri_points
- */
-Event.prototype["tri_points"] = undefined;
+Event.prototype["file"] = undefined;
 
 /**
  * The number of times the device was sensed to have moved between the last session and this session. Only available on _session.qo events.
@@ -970,22 +797,52 @@ Event.prototype["tri_points"] = undefined;
 Event.prototype["moved"] = undefined;
 
 /**
+ * The note ID in the notefile
+ * @member {String} note
+ */
+Event.prototype["note"] = undefined;
+
+/**
+ * Ordering code. Only available on _session.qo events.
+ * @member {String} ordering_code
+ */
+Event.prototype["ordering_code"] = undefined;
+
+/**
  * The orientation of the device. Only available on _session.qo events.
  * @member {String} orientation
  */
 Event.prototype["orientation"] = undefined;
 
 /**
- * Received Signal Strength Indicator (RSSI) is an estimated measurement of how well a device can receive signals. Only available on _session.qo events.
- * @member {Number} rssi
+ * A base64-encoded binary payload
+ * @member {String} payload
  */
-Event.prototype["rssi"] = undefined;
+Event.prototype["payload"] = undefined;
 
 /**
- * SINR. Only available on _session.qo events.
- * @member {Number} sinr
+ * Product UID (globally unique)
+ * @member {String} product
  */
-Event.prototype["sinr"] = undefined;
+Event.prototype["product"] = undefined;
+
+/**
+ * Rat. Only available on _session.qo events.
+ * @member {String} rat
+ */
+Event.prototype["rat"] = undefined;
+
+/**
+ * The unix timestamp when the event was received
+ * @member {Number} received
+ */
+Event.prototype["received"] = undefined;
+
+/**
+ * The notecard request
+ * @member {String} req
+ */
+Event.prototype["req"] = undefined;
 
 /**
  * RSRP. Only available on _session.qo events.
@@ -1000,34 +857,22 @@ Event.prototype["rsrp"] = undefined;
 Event.prototype["rsrq"] = undefined;
 
 /**
- * Rat. Only available on _session.qo events.
- * @member {String} rat
+ * Received Signal Strength Indicator (RSSI) is an estimated measurement of how well a device can receive signals. Only available on _session.qo events.
+ * @member {Number} rssi
  */
-Event.prototype["rat"] = undefined;
+Event.prototype["rssi"] = undefined;
 
 /**
- * Bars. Only available on _session.qo events.
- * @member {Number} bars
+ * Session UID (globally unique)
+ * @member {String} session
  */
-Event.prototype["bars"] = undefined;
+Event.prototype["session"] = undefined;
 
 /**
- * Device voltage. Only available on _session.qo events.
- * @member {Number} voltage
+ * SINR. Only available on _session.qo events.
+ * @member {Number} sinr
  */
-Event.prototype["voltage"] = undefined;
-
-/**
- * Device temperature. Only available on _session.qo events.
- * @member {Number} temp
- */
-Event.prototype["temp"] = undefined;
-
-/**
- * Routed environment variables beginning with \"$\". Only available on _session.qo events.
- * @member {Object} environment
- */
-Event.prototype["environment"] = undefined;
+Event.prototype["sinr"] = undefined;
 
 /**
  * SKU. Only available on _session.qo events.
@@ -1036,10 +881,10 @@ Event.prototype["environment"] = undefined;
 Event.prototype["sku"] = undefined;
 
 /**
- * Ordering code. Only available on _session.qo events.
- * @member {String} ordering_code
+ * The device serial number
+ * @member {String} sn
  */
-Event.prototype["ordering_code"] = undefined;
+Event.prototype["sn"] = undefined;
 
 /**
  * SSID. Only available on _session.qo events.
@@ -1048,9 +893,164 @@ Event.prototype["ordering_code"] = undefined;
 Event.prototype["ssid"] = undefined;
 
 /**
- * BSSID. Only available on _session.qo events.
- * @member {String} bssid
+ * Device temperature. Only available on _session.qo events.
+ * @member {Number} temp
  */
-Event.prototype["bssid"] = undefined;
+Event.prototype["temp"] = undefined;
+
+/**
+ * Whether TLS was used on the connection between the device and notehub. Only available on _session.qo events.
+ * @member {Boolean} tls
+ */
+Event.prototype["tls"] = undefined;
+
+/**
+ * Country
+ * @member {String} tower_country
+ */
+Event.prototype["tower_country"] = undefined;
+
+/**
+ * Tower ID
+ * @member {String} tower_id
+ */
+Event.prototype["tower_id"] = undefined;
+
+/**
+ * Latitude
+ * @member {Number} tower_lat
+ */
+Event.prototype["tower_lat"] = undefined;
+
+/**
+ * Location
+ * @member {String} tower_location
+ */
+Event.prototype["tower_location"] = undefined;
+
+/**
+ * Longitude
+ * @member {Number} tower_lon
+ */
+Event.prototype["tower_lon"] = undefined;
+
+/**
+ * Timezone
+ * @member {String} tower_timezone
+ */
+Event.prototype["tower_timezone"] = undefined;
+
+/**
+ * Unix timestamp
+ * @member {Number} tower_when
+ */
+Event.prototype["tower_when"] = undefined;
+
+/**
+ * The transport used for this event, e.g., \"cellular\", \"wifi\", \", etc.
+ * @member {String} transport
+ */
+Event.prototype["transport"] = undefined;
+
+/**
+ * Country
+ * @member {String} tri_country
+ */
+Event.prototype["tri_country"] = undefined;
+
+/**
+ * Latitude
+ * @member {Number} tri_lat
+ */
+Event.prototype["tri_lat"] = undefined;
+
+/**
+ * Location
+ * @member {String} tri_location
+ */
+Event.prototype["tri_location"] = undefined;
+
+/**
+ * Longitude
+ * @member {Number} tri_lon
+ */
+Event.prototype["tri_lon"] = undefined;
+
+/**
+ * Triangulation points
+ * @member {Number} tri_points
+ */
+Event.prototype["tri_points"] = undefined;
+
+/**
+ * Timezone
+ * @member {String} tri_timezone
+ */
+Event.prototype["tri_timezone"] = undefined;
+
+/**
+ * Unix timestamp
+ * @member {Number} tri_when
+ */
+Event.prototype["tri_when"] = undefined;
+
+/**
+ * @member {Number} updates
+ */
+Event.prototype["updates"] = undefined;
+
+/**
+ * Device voltage. Only available on _session.qo events.
+ * @member {Number} voltage
+ */
+Event.prototype["voltage"] = undefined;
+
+/**
+ * When the event was captured on the device
+ * @member {Number} when
+ */
+Event.prototype["when"] = undefined;
+
+/**
+ * Country
+ * @member {String} where_country
+ */
+Event.prototype["where_country"] = undefined;
+
+/**
+ * Latitude
+ * @member {Number} where_lat
+ */
+Event.prototype["where_lat"] = undefined;
+
+/**
+ * Location
+ * @member {String} where_location
+ */
+Event.prototype["where_location"] = undefined;
+
+/**
+ * Longitude
+ * @member {Number} where_lon
+ */
+Event.prototype["where_lon"] = undefined;
+
+/**
+ * Open Location Code
+ * @member {String} where_olc
+ */
+Event.prototype["where_olc"] = undefined;
+
+/**
+ * Timezone
+ * @member {String} where_timezone
+ */
+Event.prototype["where_timezone"] = undefined;
+
+/**
+ * Unix timestamp
+ * @member {Number} where_when
+ */
+Event.prototype["where_when"] = undefined;
 
 export default Event;

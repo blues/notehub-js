@@ -50,26 +50,14 @@
       //expect(instance).to.be.a(NotehubJs.Error);
     });
 
-    it('should have the property err (base name: "err")', function () {
-      // uncomment below and update the code to test the property err
-      //var instance = new NotehubJs.Error();
-      //expect(instance).to.be();
-    });
-
     it('should have the property code (base name: "code")', function () {
       // uncomment below and update the code to test the property code
       //var instance = new NotehubJs.Error();
       //expect(instance).to.be();
     });
 
-    it('should have the property status (base name: "status")', function () {
-      // uncomment below and update the code to test the property status
-      //var instance = new NotehubJs.Error();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property request (base name: "request")', function () {
-      // uncomment below and update the code to test the property request
+    it('should have the property debug (base name: "debug")', function () {
+      // uncomment below and update the code to test the property debug
       //var instance = new NotehubJs.Error();
       //expect(instance).to.be();
     });
@@ -80,8 +68,20 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property debug (base name: "debug")', function () {
-      // uncomment below and update the code to test the property debug
+    it('should have the property err (base name: "err")', function () {
+      // uncomment below and update the code to test the property err
+      //var instance = new NotehubJs.Error();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property request (base name: "request")', function () {
+      // uncomment below and update the code to test the property request
+      //var instance = new NotehubJs.Error();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property status (base name: "status")', function () {
+      // uncomment below and update the code to test the property status
       //var instance = new NotehubJs.Error();
       //expect(instance).to.be();
     });

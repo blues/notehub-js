@@ -50,8 +50,8 @@
       //expect(instance).to.be.a(NotehubJs.UserDbRoute);
     });
 
-    it('should have the property uid (base name: "uid")', function () {
-      // uncomment below and update the code to test the property uid
+    it('should have the property disabled (base name: "disabled")', function () {
+      // uncomment below and update the code to test the property disabled
       //var instance = new NotehubJs.UserDbRoute();
       //expect(instance).to.be();
     });
@@ -62,20 +62,20 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property type (base name: "type")', function () {
-      // uncomment below and update the code to test the property type
-      //var instance = new NotehubJs.UserDbRoute();
-      //expect(instance).to.be();
-    });
-
     it('should have the property modified (base name: "modified")', function () {
       // uncomment below and update the code to test the property modified
       //var instance = new NotehubJs.UserDbRoute();
       //expect(instance).to.be();
     });
 
-    it('should have the property disabled (base name: "disabled")', function () {
-      // uncomment below and update the code to test the property disabled
+    it('should have the property type (base name: "type")', function () {
+      // uncomment below and update the code to test the property type
+      //var instance = new NotehubJs.UserDbRoute();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property uid (base name: "uid")', function () {
+      // uncomment below and update the code to test the property uid
       //var instance = new NotehubJs.UserDbRoute();
       //expect(instance).to.be();
     });

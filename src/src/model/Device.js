@@ -27,22 +27,22 @@ class Device {
   /**
    * Constructs a new <code>Device</code>.
    * @alias module:model/Device
-   * @param uid {String}
-   * @param provisioned {Date}
-   * @param productUid {String}
    * @param fleetUids {Array.<String>}
-   * @param voltage {Number}
+   * @param productUid {String}
+   * @param provisioned {Date}
    * @param temperature {Number}
+   * @param uid {String}
+   * @param voltage {Number}
    */
-  constructor(uid, provisioned, productUid, fleetUids, voltage, temperature) {
+  constructor(fleetUids, productUid, provisioned, temperature, uid, voltage) {
     Device.initialize(
       this,
-      uid,
-      provisioned,
-      productUid,
       fleetUids,
-      voltage,
-      temperature
+      productUid,
+      provisioned,
+      temperature,
+      uid,
+      voltage
     );
   }
 
@@ -53,19 +53,19 @@ class Device {
    */
   static initialize(
     obj,
-    uid,
-    provisioned,
-    productUid,
     fleetUids,
-    voltage,
-    temperature
+    productUid,
+    provisioned,
+    temperature,
+    uid,
+    voltage
   ) {
-    obj["uid"] = uid;
-    obj["provisioned"] = provisioned;
-    obj["product_uid"] = productUid;
     obj["fleet_uids"] = fleetUids;
-    obj["voltage"] = voltage;
+    obj["product_uid"] = productUid;
+    obj["provisioned"] = provisioned;
     obj["temperature"] = temperature;
+    obj["uid"] = uid;
+    obj["voltage"] = voltage;
   }
 
   /**
@@ -79,72 +79,20 @@ class Device {
     if (data) {
       obj = obj || new Device();
 
-      if (data.hasOwnProperty("uid")) {
-        obj["uid"] = ApiClient.convertToType(data["uid"], "String");
-      }
-      if (data.hasOwnProperty("serial_number")) {
-        obj["serial_number"] = ApiClient.convertToType(
-          data["serial_number"],
-          "String"
-        );
-      }
-      if (data.hasOwnProperty("provisioned")) {
-        obj["provisioned"] = ApiClient.convertToType(
-          data["provisioned"],
-          "Date"
-        );
-      }
-      if (data.hasOwnProperty("last_activity")) {
-        obj["last_activity"] = ApiClient.convertToType(
-          data["last_activity"],
-          "Date"
+      if (data.hasOwnProperty("cellular_usage")) {
+        obj["cellular_usage"] = ApiClient.convertToType(
+          data["cellular_usage"],
+          [SimUsage]
         );
       }
       if (data.hasOwnProperty("contact")) {
         obj["contact"] = Contact.constructFromObject(data["contact"]);
       }
-      if (data.hasOwnProperty("product_uid")) {
-        obj["product_uid"] = ApiClient.convertToType(
-          data["product_uid"],
-          "String"
-        );
-      }
-      if (data.hasOwnProperty("fleet_uids")) {
-        obj["fleet_uids"] = ApiClient.convertToType(data["fleet_uids"], [
-          "String",
-        ]);
-      }
-      if (data.hasOwnProperty("tower_info")) {
-        obj["tower_info"] = DeviceTowerInfo.constructFromObject(
-          data["tower_info"]
-        );
-      }
-      if (data.hasOwnProperty("tower_location")) {
-        obj["tower_location"] = Location.constructFromObject(
-          data["tower_location"]
-        );
-      }
-      if (data.hasOwnProperty("gps_location")) {
-        obj["gps_location"] = Location.constructFromObject(
-          data["gps_location"]
-        );
-      }
-      if (data.hasOwnProperty("triangulated_location")) {
-        obj["triangulated_location"] = Location.constructFromObject(
-          data["triangulated_location"]
-        );
-      }
-      if (data.hasOwnProperty("voltage")) {
-        obj["voltage"] = ApiClient.convertToType(data["voltage"], "Number");
-      }
-      if (data.hasOwnProperty("temperature")) {
-        obj["temperature"] = ApiClient.convertToType(
-          data["temperature"],
-          "Number"
-        );
-      }
       if (data.hasOwnProperty("dfu")) {
         obj["dfu"] = DFUEnv.constructFromObject(data["dfu"]);
+      }
+      if (data.hasOwnProperty("disabled")) {
+        obj["disabled"] = ApiClient.convertToType(data["disabled"], "Boolean");
       }
       if (data.hasOwnProperty("firmware_host")) {
         obj["firmware_host"] = ApiClient.convertToType(
@@ -158,17 +106,69 @@ class Device {
           "String"
         );
       }
+      if (data.hasOwnProperty("fleet_uids")) {
+        obj["fleet_uids"] = ApiClient.convertToType(data["fleet_uids"], [
+          "String",
+        ]);
+      }
+      if (data.hasOwnProperty("gps_location")) {
+        obj["gps_location"] = Location.constructFromObject(
+          data["gps_location"]
+        );
+      }
+      if (data.hasOwnProperty("last_activity")) {
+        obj["last_activity"] = ApiClient.convertToType(
+          data["last_activity"],
+          "Date"
+        );
+      }
+      if (data.hasOwnProperty("product_uid")) {
+        obj["product_uid"] = ApiClient.convertToType(
+          data["product_uid"],
+          "String"
+        );
+      }
+      if (data.hasOwnProperty("provisioned")) {
+        obj["provisioned"] = ApiClient.convertToType(
+          data["provisioned"],
+          "Date"
+        );
+      }
+      if (data.hasOwnProperty("serial_number")) {
+        obj["serial_number"] = ApiClient.convertToType(
+          data["serial_number"],
+          "String"
+        );
+      }
       if (data.hasOwnProperty("sku")) {
         obj["sku"] = ApiClient.convertToType(data["sku"], "String");
       }
-      if (data.hasOwnProperty("disabled")) {
-        obj["disabled"] = ApiClient.convertToType(data["disabled"], "Boolean");
-      }
-      if (data.hasOwnProperty("cellular_usage")) {
-        obj["cellular_usage"] = ApiClient.convertToType(
-          data["cellular_usage"],
-          [SimUsage]
+      if (data.hasOwnProperty("temperature")) {
+        obj["temperature"] = ApiClient.convertToType(
+          data["temperature"],
+          "Number"
         );
+      }
+      if (data.hasOwnProperty("tower_info")) {
+        obj["tower_info"] = DeviceTowerInfo.constructFromObject(
+          data["tower_info"]
+        );
+      }
+      if (data.hasOwnProperty("tower_location")) {
+        obj["tower_location"] = Location.constructFromObject(
+          data["tower_location"]
+        );
+      }
+      if (data.hasOwnProperty("triangulated_location")) {
+        obj["triangulated_location"] = Location.constructFromObject(
+          data["triangulated_location"]
+        );
+      }
+      if (data.hasOwnProperty("uid")) {
+        obj["uid"] = ApiClient.convertToType(data["uid"], "String");
+      }
+      if (data.hasOwnProperty("voltage")) {
+        obj["voltage"] = ApiClient.convertToType(data["voltage"], "Number");
       }
     } else if (data === null) {
       return null;
@@ -193,73 +193,24 @@ class Device {
         );
       }
     }
-    // ensure the json data is a string
-    if (
-      data["uid"] &&
-      !(typeof data["uid"] === "string" || data["uid"] instanceof String)
-    ) {
-      throw new Error(
-        "Expected the field `uid` to be a primitive type in the JSON string but got " +
-          data["uid"]
-      );
-    }
-    // ensure the json data is a string
-    if (
-      data["serial_number"] &&
-      !(
-        typeof data["serial_number"] === "string" ||
-        data["serial_number"] instanceof String
-      )
-    ) {
-      throw new Error(
-        "Expected the field `serial_number` to be a primitive type in the JSON string but got " +
-          data["serial_number"]
-      );
+    if (data["cellular_usage"]) {
+      // data not null
+      // ensure the json data is an array
+      if (!Array.isArray(data["cellular_usage"])) {
+        throw new Error(
+          "Expected the field `cellular_usage` to be an array in the JSON data but got " +
+            data["cellular_usage"]
+        );
+      }
+      // validate the optional field `cellular_usage` (array)
+      for (const item of data["cellular_usage"]) {
+        SimUsage.validateJsonObject(item);
+      }
     }
     // validate the optional field `contact`
     if (data["contact"]) {
       // data not null
       Contact.validateJSON(data["contact"]);
-    }
-    // ensure the json data is a string
-    if (
-      data["product_uid"] &&
-      !(
-        typeof data["product_uid"] === "string" ||
-        data["product_uid"] instanceof String
-      )
-    ) {
-      throw new Error(
-        "Expected the field `product_uid` to be a primitive type in the JSON string but got " +
-          data["product_uid"]
-      );
-    }
-    // ensure the json data is an array
-    if (!Array.isArray(data["fleet_uids"])) {
-      throw new Error(
-        "Expected the field `fleet_uids` to be an array in the JSON data but got " +
-          data["fleet_uids"]
-      );
-    }
-    // validate the optional field `tower_info`
-    if (data["tower_info"]) {
-      // data not null
-      DeviceTowerInfo.validateJSON(data["tower_info"]);
-    }
-    // validate the optional field `tower_location`
-    if (data["tower_location"]) {
-      // data not null
-      Location.validateJSON(data["tower_location"]);
-    }
-    // validate the optional field `gps_location`
-    if (data["gps_location"]) {
-      // data not null
-      Location.validateJSON(data["gps_location"]);
-    }
-    // validate the optional field `triangulated_location`
-    if (data["triangulated_location"]) {
-      // data not null
-      Location.validateJSON(data["triangulated_location"]);
     }
     // validate the optional field `dfu`
     if (data["dfu"]) {
@@ -292,6 +243,44 @@ class Device {
           data["firmware_notecard"]
       );
     }
+    // ensure the json data is an array
+    if (!Array.isArray(data["fleet_uids"])) {
+      throw new Error(
+        "Expected the field `fleet_uids` to be an array in the JSON data but got " +
+          data["fleet_uids"]
+      );
+    }
+    // validate the optional field `gps_location`
+    if (data["gps_location"]) {
+      // data not null
+      Location.validateJSON(data["gps_location"]);
+    }
+    // ensure the json data is a string
+    if (
+      data["product_uid"] &&
+      !(
+        typeof data["product_uid"] === "string" ||
+        data["product_uid"] instanceof String
+      )
+    ) {
+      throw new Error(
+        "Expected the field `product_uid` to be a primitive type in the JSON string but got " +
+          data["product_uid"]
+      );
+    }
+    // ensure the json data is a string
+    if (
+      data["serial_number"] &&
+      !(
+        typeof data["serial_number"] === "string" ||
+        data["serial_number"] instanceof String
+      )
+    ) {
+      throw new Error(
+        "Expected the field `serial_number` to be a primitive type in the JSON string but got " +
+          data["serial_number"]
+      );
+    }
     // ensure the json data is a string
     if (
       data["sku"] &&
@@ -302,19 +291,30 @@ class Device {
           data["sku"]
       );
     }
-    if (data["cellular_usage"]) {
+    // validate the optional field `tower_info`
+    if (data["tower_info"]) {
       // data not null
-      // ensure the json data is an array
-      if (!Array.isArray(data["cellular_usage"])) {
-        throw new Error(
-          "Expected the field `cellular_usage` to be an array in the JSON data but got " +
-            data["cellular_usage"]
-        );
-      }
-      // validate the optional field `cellular_usage` (array)
-      for (const item of data["cellular_usage"]) {
-        SimUsage.validateJsonObject(item);
-      }
+      DeviceTowerInfo.validateJSON(data["tower_info"]);
+    }
+    // validate the optional field `tower_location`
+    if (data["tower_location"]) {
+      // data not null
+      Location.validateJSON(data["tower_location"]);
+    }
+    // validate the optional field `triangulated_location`
+    if (data["triangulated_location"]) {
+      // data not null
+      Location.validateJSON(data["triangulated_location"]);
+    }
+    // ensure the json data is a string
+    if (
+      data["uid"] &&
+      !(typeof data["uid"] === "string" || data["uid"] instanceof String)
+    ) {
+      throw new Error(
+        "Expected the field `uid` to be a primitive type in the JSON string but got " +
+          data["uid"]
+      );
     }
 
     return true;
@@ -322,33 +322,18 @@ class Device {
 }
 
 Device.RequiredProperties = [
-  "uid",
-  "provisioned",
-  "product_uid",
   "fleet_uids",
-  "voltage",
+  "product_uid",
+  "provisioned",
   "temperature",
+  "uid",
+  "voltage",
 ];
 
 /**
- * @member {String} uid
+ * @member {Array.<module:model/SimUsage>} cellular_usage
  */
-Device.prototype["uid"] = undefined;
-
-/**
- * @member {String} serial_number
- */
-Device.prototype["serial_number"] = undefined;
-
-/**
- * @member {Date} provisioned
- */
-Device.prototype["provisioned"] = undefined;
-
-/**
- * @member {Date} last_activity
- */
-Device.prototype["last_activity"] = undefined;
+Device.prototype["cellular_usage"] = undefined;
 
 /**
  * @member {module:model/Contact} contact
@@ -356,49 +341,14 @@ Device.prototype["last_activity"] = undefined;
 Device.prototype["contact"] = undefined;
 
 /**
- * @member {String} product_uid
- */
-Device.prototype["product_uid"] = undefined;
-
-/**
- * @member {Array.<String>} fleet_uids
- */
-Device.prototype["fleet_uids"] = undefined;
-
-/**
- * @member {module:model/DeviceTowerInfo} tower_info
- */
-Device.prototype["tower_info"] = undefined;
-
-/**
- * @member {module:model/Location} tower_location
- */
-Device.prototype["tower_location"] = undefined;
-
-/**
- * @member {module:model/Location} gps_location
- */
-Device.prototype["gps_location"] = undefined;
-
-/**
- * @member {module:model/Location} triangulated_location
- */
-Device.prototype["triangulated_location"] = undefined;
-
-/**
- * @member {Number} voltage
- */
-Device.prototype["voltage"] = undefined;
-
-/**
- * @member {Number} temperature
- */
-Device.prototype["temperature"] = undefined;
-
-/**
  * @member {module:model/DFUEnv} dfu
  */
 Device.prototype["dfu"] = undefined;
+
+/**
+ * @member {Boolean} disabled
+ */
+Device.prototype["disabled"] = undefined;
 
 /**
  * @member {String} firmware_host
@@ -411,18 +361,68 @@ Device.prototype["firmware_host"] = undefined;
 Device.prototype["firmware_notecard"] = undefined;
 
 /**
+ * @member {Array.<String>} fleet_uids
+ */
+Device.prototype["fleet_uids"] = undefined;
+
+/**
+ * @member {module:model/Location} gps_location
+ */
+Device.prototype["gps_location"] = undefined;
+
+/**
+ * @member {Date} last_activity
+ */
+Device.prototype["last_activity"] = undefined;
+
+/**
+ * @member {String} product_uid
+ */
+Device.prototype["product_uid"] = undefined;
+
+/**
+ * @member {Date} provisioned
+ */
+Device.prototype["provisioned"] = undefined;
+
+/**
+ * @member {String} serial_number
+ */
+Device.prototype["serial_number"] = undefined;
+
+/**
  * @member {String} sku
  */
 Device.prototype["sku"] = undefined;
 
 /**
- * @member {Boolean} disabled
+ * @member {Number} temperature
  */
-Device.prototype["disabled"] = undefined;
+Device.prototype["temperature"] = undefined;
 
 /**
- * @member {Array.<module:model/SimUsage>} cellular_usage
+ * @member {module:model/DeviceTowerInfo} tower_info
  */
-Device.prototype["cellular_usage"] = undefined;
+Device.prototype["tower_info"] = undefined;
+
+/**
+ * @member {module:model/Location} tower_location
+ */
+Device.prototype["tower_location"] = undefined;
+
+/**
+ * @member {module:model/Location} triangulated_location
+ */
+Device.prototype["triangulated_location"] = undefined;
+
+/**
+ * @member {String} uid
+ */
+Device.prototype["uid"] = undefined;
+
+/**
+ * @member {Number} voltage
+ */
+Device.prototype["voltage"] = undefined;
 
 export default Device;

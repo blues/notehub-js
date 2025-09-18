@@ -50,8 +50,8 @@
       //expect(instance).to.be.a(NotehubJs.Repository);
     });
 
-    it('should have the property uid (base name: "uid")', function () {
-      // uncomment below and update the code to test the property uid
+    it('should have the property fleetUids (base name: "fleet_uids")', function () {
+      // uncomment below and update the code to test the property fleetUids
       //var instance = new NotehubJs.Repository();
       //expect(instance).to.be();
     });
@@ -62,14 +62,14 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property fleetUIDs (base name: "fleetUIDs")', function () {
-      // uncomment below and update the code to test the property fleetUIDs
+    it('should have the property projectUids (base name: "project_uids")', function () {
+      // uncomment below and update the code to test the property projectUids
       //var instance = new NotehubJs.Repository();
       //expect(instance).to.be();
     });
 
-    it('should have the property projectUIDs (base name: "projectUIDs")', function () {
-      // uncomment below and update the code to test the property projectUIDs
+    it('should have the property uid (base name: "uid")', function () {
+      // uncomment below and update the code to test the property uid
       //var instance = new NotehubJs.Repository();
       //expect(instance).to.be();
     });

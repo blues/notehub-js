@@ -46,11 +46,11 @@ class CurrentFirmware {
     if (data) {
       obj = obj || new CurrentFirmware();
 
-      if (data.hasOwnProperty("version")) {
-        obj["version"] = ApiClient.convertToType(data["version"], "String");
-      }
       if (data.hasOwnProperty("metadata")) {
         obj["metadata"] = Firmware.constructFromObject(data["metadata"]);
+      }
+      if (data.hasOwnProperty("version")) {
+        obj["version"] = ApiClient.convertToType(data["version"], "String");
       }
     } else if (data === null) {
       return null;
@@ -64,6 +64,11 @@ class CurrentFirmware {
    * @return {boolean} to indicate whether the JSON data is valid with respect to <code>CurrentFirmware</code>.
    */
   static validateJSON(data) {
+    // validate the optional field `metadata`
+    if (data["metadata"]) {
+      // data not null
+      Firmware.validateJSON(data["metadata"]);
+    }
     // ensure the json data is a string
     if (
       data["version"] &&
@@ -76,24 +81,19 @@ class CurrentFirmware {
           data["version"]
       );
     }
-    // validate the optional field `metadata`
-    if (data["metadata"]) {
-      // data not null
-      Firmware.validateJSON(data["metadata"]);
-    }
 
     return true;
   }
 }
 
 /**
- * @member {String} version
- */
-CurrentFirmware.prototype["version"] = undefined;
-
-/**
  * @member {module:model/Firmware} metadata
  */
 CurrentFirmware.prototype["metadata"] = undefined;
+
+/**
+ * @member {String} version
+ */
+CurrentFirmware.prototype["version"] = undefined;
 
 export default CurrentFirmware;

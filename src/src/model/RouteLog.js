@@ -45,17 +45,20 @@ class RouteLog {
     if (data) {
       obj = obj || new RouteLog();
 
+      if (data.hasOwnProperty("attn")) {
+        obj["attn"] = ApiClient.convertToType(data["attn"], "Boolean");
+      }
       if (data.hasOwnProperty("date")) {
         obj["date"] = ApiClient.convertToType(data["date"], "String");
       }
-      if (data.hasOwnProperty("routeUID")) {
-        obj["routeUID"] = ApiClient.convertToType(data["routeUID"], "String");
+      if (data.hasOwnProperty("duration")) {
+        obj["duration"] = ApiClient.convertToType(data["duration"], "Number");
       }
-      if (data.hasOwnProperty("eventUID")) {
-        obj["eventUID"] = ApiClient.convertToType(data["eventUID"], "String");
+      if (data.hasOwnProperty("event_uid")) {
+        obj["event_uid"] = ApiClient.convertToType(data["event_uid"], "String");
       }
-      if (data.hasOwnProperty("attn")) {
-        obj["attn"] = ApiClient.convertToType(data["attn"], "Boolean");
+      if (data.hasOwnProperty("route_uid")) {
+        obj["route_uid"] = ApiClient.convertToType(data["route_uid"], "String");
       }
       if (data.hasOwnProperty("status")) {
         obj["status"] = ApiClient.convertToType(data["status"], "String");
@@ -65,9 +68,6 @@ class RouteLog {
       }
       if (data.hasOwnProperty("url")) {
         obj["url"] = ApiClient.convertToType(data["url"], "String");
-      }
-      if (data.hasOwnProperty("duration")) {
-        obj["duration"] = ApiClient.convertToType(data["duration"], "Number");
       }
     } else if (data === null) {
       return null;
@@ -93,28 +93,28 @@ class RouteLog {
     }
     // ensure the json data is a string
     if (
-      data["routeUID"] &&
+      data["event_uid"] &&
       !(
-        typeof data["routeUID"] === "string" ||
-        data["routeUID"] instanceof String
+        typeof data["event_uid"] === "string" ||
+        data["event_uid"] instanceof String
       )
     ) {
       throw new Error(
-        "Expected the field `routeUID` to be a primitive type in the JSON string but got " +
-          data["routeUID"]
+        "Expected the field `event_uid` to be a primitive type in the JSON string but got " +
+          data["event_uid"]
       );
     }
     // ensure the json data is a string
     if (
-      data["eventUID"] &&
+      data["route_uid"] &&
       !(
-        typeof data["eventUID"] === "string" ||
-        data["eventUID"] instanceof String
+        typeof data["route_uid"] === "string" ||
+        data["route_uid"] instanceof String
       )
     ) {
       throw new Error(
-        "Expected the field `eventUID` to be a primitive type in the JSON string but got " +
-          data["eventUID"]
+        "Expected the field `route_uid` to be a primitive type in the JSON string but got " +
+          data["route_uid"]
       );
     }
     // ensure the json data is a string
@@ -153,28 +153,34 @@ class RouteLog {
 }
 
 /**
+ * If true, an error was returned when routing
+ * @member {Boolean} attn
+ */
+RouteLog.prototype["attn"] = undefined;
+
+/**
  * The date of the logs.
  * @member {String} date
  */
 RouteLog.prototype["date"] = undefined;
 
 /**
- * The route UID.
- * @member {String} routeUID
+ * The duration of the route in milliseconds
+ * @member {Number} duration
  */
-RouteLog.prototype["routeUID"] = undefined;
+RouteLog.prototype["duration"] = undefined;
 
 /**
  * The event UID.
- * @member {String} eventUID
+ * @member {String} event_uid
  */
-RouteLog.prototype["eventUID"] = undefined;
+RouteLog.prototype["event_uid"] = undefined;
 
 /**
- * If true, an error was returned when routing
- * @member {Boolean} attn
+ * The route UID.
+ * @member {String} route_uid
  */
-RouteLog.prototype["attn"] = undefined;
+RouteLog.prototype["route_uid"] = undefined;
 
 /**
  * The status of the event.
@@ -193,11 +199,5 @@ RouteLog.prototype["text"] = undefined;
  * @member {String} url
  */
 RouteLog.prototype["url"] = undefined;
-
-/**
- * The duration of the route in milliseconds
- * @member {Number} duration
- */
-RouteLog.prototype["duration"] = undefined;
 
 export default RouteLog;

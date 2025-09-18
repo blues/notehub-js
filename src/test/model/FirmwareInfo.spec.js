@@ -50,56 +50,8 @@
       //expect(instance).to.be.a(NotehubJs.FirmwareInfo);
     });
 
-    it('should have the property filename (base name: "filename")', function () {
-      // uncomment below and update the code to test the property filename
-      //var instance = new NotehubJs.FirmwareInfo();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property version (base name: "version")', function () {
-      // uncomment below and update the code to test the property version
-      //var instance = new NotehubJs.FirmwareInfo();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property mD5 (base name: "MD5")', function () {
-      // uncomment below and update the code to test the property mD5
-      //var instance = new NotehubJs.FirmwareInfo();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property organization (base name: "organization")', function () {
-      // uncomment below and update the code to test the property organization
-      //var instance = new NotehubJs.FirmwareInfo();
-      //expect(instance).to.be();
-    });
-
     it('should have the property built (base name: "built")', function () {
       // uncomment below and update the code to test the property built
-      //var instance = new NotehubJs.FirmwareInfo();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property product (base name: "product")', function () {
-      // uncomment below and update the code to test the property product
-      //var instance = new NotehubJs.FirmwareInfo();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property description (base name: "description")', function () {
-      // uncomment below and update the code to test the property description
-      //var instance = new NotehubJs.FirmwareInfo();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property tags (base name: "tags")', function () {
-      // uncomment below and update the code to test the property tags
-      //var instance = new NotehubJs.FirmwareInfo();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property type (base name: "type")', function () {
-      // uncomment below and update the code to test the property type
       //var instance = new NotehubJs.FirmwareInfo();
       //expect(instance).to.be();
     });
@@ -110,14 +62,62 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property target (base name: "target")', function () {
-      // uncomment below and update the code to test the property target
+    it('should have the property description (base name: "description")', function () {
+      // uncomment below and update the code to test the property description
+      //var instance = new NotehubJs.FirmwareInfo();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property filename (base name: "filename")', function () {
+      // uncomment below and update the code to test the property filename
+      //var instance = new NotehubJs.FirmwareInfo();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property md5 (base name: "md5")', function () {
+      // uncomment below and update the code to test the property md5
+      //var instance = new NotehubJs.FirmwareInfo();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property organization (base name: "organization")', function () {
+      // uncomment below and update the code to test the property organization
+      //var instance = new NotehubJs.FirmwareInfo();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property product (base name: "product")', function () {
+      // uncomment below and update the code to test the property product
       //var instance = new NotehubJs.FirmwareInfo();
       //expect(instance).to.be();
     });
 
     it('should have the property published (base name: "published")', function () {
       // uncomment below and update the code to test the property published
+      //var instance = new NotehubJs.FirmwareInfo();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property tags (base name: "tags")', function () {
+      // uncomment below and update the code to test the property tags
+      //var instance = new NotehubJs.FirmwareInfo();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property target (base name: "target")', function () {
+      // uncomment below and update the code to test the property target
+      //var instance = new NotehubJs.FirmwareInfo();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property type (base name: "type")', function () {
+      // uncomment below and update the code to test the property type
+      //var instance = new NotehubJs.FirmwareInfo();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property version (base name: "version")', function () {
+      // uncomment below and update the code to test the property version
       //var instance = new NotehubJs.FirmwareInfo();
       //expect(instance).to.be();
     });

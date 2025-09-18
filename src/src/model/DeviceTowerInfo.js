@@ -45,17 +45,17 @@ class DeviceTowerInfo {
     if (data) {
       obj = obj || new DeviceTowerInfo();
 
+      if (data.hasOwnProperty("cell_id")) {
+        obj["cell_id"] = ApiClient.convertToType(data["cell_id"], "Number");
+      }
+      if (data.hasOwnProperty("lac")) {
+        obj["lac"] = ApiClient.convertToType(data["lac"], "Number");
+      }
       if (data.hasOwnProperty("mcc")) {
         obj["mcc"] = ApiClient.convertToType(data["mcc"], "Number");
       }
       if (data.hasOwnProperty("mnc")) {
         obj["mnc"] = ApiClient.convertToType(data["mnc"], "Number");
-      }
-      if (data.hasOwnProperty("lac")) {
-        obj["lac"] = ApiClient.convertToType(data["lac"], "Number");
-      }
-      if (data.hasOwnProperty("cell_id")) {
-        obj["cell_id"] = ApiClient.convertToType(data["cell_id"], "Number");
       }
     } else if (data === null) {
       return null;
@@ -74,6 +74,16 @@ class DeviceTowerInfo {
 }
 
 /**
+ * @member {Number} cell_id
+ */
+DeviceTowerInfo.prototype["cell_id"] = undefined;
+
+/**
+ * @member {Number} lac
+ */
+DeviceTowerInfo.prototype["lac"] = undefined;
+
+/**
  * @member {Number} mcc
  */
 DeviceTowerInfo.prototype["mcc"] = undefined;
@@ -82,15 +92,5 @@ DeviceTowerInfo.prototype["mcc"] = undefined;
  * @member {Number} mnc
  */
 DeviceTowerInfo.prototype["mnc"] = undefined;
-
-/**
- * @member {Number} lac
- */
-DeviceTowerInfo.prototype["lac"] = undefined;
-
-/**
- * @member {Number} cell_id
- */
-DeviceTowerInfo.prototype["cell_id"] = undefined;
 
 export default DeviceTowerInfo;

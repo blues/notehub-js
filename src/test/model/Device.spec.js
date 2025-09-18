@@ -50,26 +50,8 @@
       //expect(instance).to.be.a(NotehubJs.Device);
     });
 
-    it('should have the property uid (base name: "uid")', function () {
-      // uncomment below and update the code to test the property uid
-      //var instance = new NotehubJs.Device();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property serialNumber (base name: "serial_number")', function () {
-      // uncomment below and update the code to test the property serialNumber
-      //var instance = new NotehubJs.Device();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property provisioned (base name: "provisioned")', function () {
-      // uncomment below and update the code to test the property provisioned
-      //var instance = new NotehubJs.Device();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property lastActivity (base name: "last_activity")', function () {
-      // uncomment below and update the code to test the property lastActivity
+    it('should have the property cellularUsage (base name: "cellular_usage")', function () {
+      // uncomment below and update the code to test the property cellularUsage
       //var instance = new NotehubJs.Device();
       //expect(instance).to.be();
     });
@@ -80,56 +62,14 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property productUid (base name: "product_uid")', function () {
-      // uncomment below and update the code to test the property productUid
-      //var instance = new NotehubJs.Device();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property fleetUids (base name: "fleet_uids")', function () {
-      // uncomment below and update the code to test the property fleetUids
-      //var instance = new NotehubJs.Device();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property towerInfo (base name: "tower_info")', function () {
-      // uncomment below and update the code to test the property towerInfo
-      //var instance = new NotehubJs.Device();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property towerLocation (base name: "tower_location")', function () {
-      // uncomment below and update the code to test the property towerLocation
-      //var instance = new NotehubJs.Device();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property gpsLocation (base name: "gps_location")', function () {
-      // uncomment below and update the code to test the property gpsLocation
-      //var instance = new NotehubJs.Device();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property triangulatedLocation (base name: "triangulated_location")', function () {
-      // uncomment below and update the code to test the property triangulatedLocation
-      //var instance = new NotehubJs.Device();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property voltage (base name: "voltage")', function () {
-      // uncomment below and update the code to test the property voltage
-      //var instance = new NotehubJs.Device();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property temperature (base name: "temperature")', function () {
-      // uncomment below and update the code to test the property temperature
-      //var instance = new NotehubJs.Device();
-      //expect(instance).to.be();
-    });
-
     it('should have the property dfu (base name: "dfu")', function () {
       // uncomment below and update the code to test the property dfu
+      //var instance = new NotehubJs.Device();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property disabled (base name: "disabled")', function () {
+      // uncomment below and update the code to test the property disabled
       //var instance = new NotehubJs.Device();
       //expect(instance).to.be();
     });
@@ -146,20 +86,80 @@
       //expect(instance).to.be();
     });
 
+    it('should have the property fleetUids (base name: "fleet_uids")', function () {
+      // uncomment below and update the code to test the property fleetUids
+      //var instance = new NotehubJs.Device();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property gpsLocation (base name: "gps_location")', function () {
+      // uncomment below and update the code to test the property gpsLocation
+      //var instance = new NotehubJs.Device();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property lastActivity (base name: "last_activity")', function () {
+      // uncomment below and update the code to test the property lastActivity
+      //var instance = new NotehubJs.Device();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property productUid (base name: "product_uid")', function () {
+      // uncomment below and update the code to test the property productUid
+      //var instance = new NotehubJs.Device();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property provisioned (base name: "provisioned")', function () {
+      // uncomment below and update the code to test the property provisioned
+      //var instance = new NotehubJs.Device();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property serialNumber (base name: "serial_number")', function () {
+      // uncomment below and update the code to test the property serialNumber
+      //var instance = new NotehubJs.Device();
+      //expect(instance).to.be();
+    });
+
     it('should have the property sku (base name: "sku")', function () {
       // uncomment below and update the code to test the property sku
       //var instance = new NotehubJs.Device();
       //expect(instance).to.be();
     });
 
-    it('should have the property disabled (base name: "disabled")', function () {
-      // uncomment below and update the code to test the property disabled
+    it('should have the property temperature (base name: "temperature")', function () {
+      // uncomment below and update the code to test the property temperature
       //var instance = new NotehubJs.Device();
       //expect(instance).to.be();
     });
 
-    it('should have the property cellularUsage (base name: "cellular_usage")', function () {
-      // uncomment below and update the code to test the property cellularUsage
+    it('should have the property towerInfo (base name: "tower_info")', function () {
+      // uncomment below and update the code to test the property towerInfo
+      //var instance = new NotehubJs.Device();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property towerLocation (base name: "tower_location")', function () {
+      // uncomment below and update the code to test the property towerLocation
+      //var instance = new NotehubJs.Device();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property triangulatedLocation (base name: "triangulated_location")', function () {
+      // uncomment below and update the code to test the property triangulatedLocation
+      //var instance = new NotehubJs.Device();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property uid (base name: "uid")', function () {
+      // uncomment below and update the code to test the property uid
+      //var instance = new NotehubJs.Device();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property voltage (base name: "voltage")', function () {
+      // uncomment below and update the code to test the property voltage
       //var instance = new NotehubJs.Device();
       //expect(instance).to.be();
     });

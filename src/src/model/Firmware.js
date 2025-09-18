@@ -45,20 +45,26 @@ class Firmware {
     if (data) {
       obj = obj || new Firmware();
 
+      if (data.hasOwnProperty("builder")) {
+        obj["builder"] = ApiClient.convertToType(data["builder"], "String");
+      }
+      if (data.hasOwnProperty("built")) {
+        obj["built"] = ApiClient.convertToType(data["built"], "String");
+      }
+      if (data.hasOwnProperty("firmware")) {
+        obj["firmware"] = ApiClient.convertToType(data["firmware"], "String");
+      }
       if (data.hasOwnProperty("org")) {
         obj["org"] = ApiClient.convertToType(data["org"], "String");
       }
       if (data.hasOwnProperty("product")) {
         obj["product"] = ApiClient.convertToType(data["product"], "String");
       }
-      if (data.hasOwnProperty("firmware")) {
-        obj["firmware"] = ApiClient.convertToType(data["firmware"], "String");
-      }
-      if (data.hasOwnProperty("version")) {
-        obj["version"] = ApiClient.convertToType(data["version"], "String");
-      }
       if (data.hasOwnProperty("target")) {
         obj["target"] = ApiClient.convertToType(data["target"], "String");
+      }
+      if (data.hasOwnProperty("ver_build")) {
+        obj["ver_build"] = ApiClient.convertToType(data["ver_build"], "Number");
       }
       if (data.hasOwnProperty("ver_major")) {
         obj["ver_major"] = ApiClient.convertToType(data["ver_major"], "Number");
@@ -69,14 +75,8 @@ class Firmware {
       if (data.hasOwnProperty("ver_patch")) {
         obj["ver_patch"] = ApiClient.convertToType(data["ver_patch"], "Number");
       }
-      if (data.hasOwnProperty("ver_build")) {
-        obj["ver_build"] = ApiClient.convertToType(data["ver_build"], "Number");
-      }
-      if (data.hasOwnProperty("built")) {
-        obj["built"] = ApiClient.convertToType(data["built"], "String");
-      }
-      if (data.hasOwnProperty("builder")) {
-        obj["builder"] = ApiClient.convertToType(data["builder"], "String");
+      if (data.hasOwnProperty("version")) {
+        obj["version"] = ApiClient.convertToType(data["version"], "String");
       }
     } else if (data === null) {
       return null;
@@ -90,6 +90,41 @@ class Firmware {
    * @return {boolean} to indicate whether the JSON data is valid with respect to <code>Firmware</code>.
    */
   static validateJSON(data) {
+    // ensure the json data is a string
+    if (
+      data["builder"] &&
+      !(
+        typeof data["builder"] === "string" || data["builder"] instanceof String
+      )
+    ) {
+      throw new Error(
+        "Expected the field `builder` to be a primitive type in the JSON string but got " +
+          data["builder"]
+      );
+    }
+    // ensure the json data is a string
+    if (
+      data["built"] &&
+      !(typeof data["built"] === "string" || data["built"] instanceof String)
+    ) {
+      throw new Error(
+        "Expected the field `built` to be a primitive type in the JSON string but got " +
+          data["built"]
+      );
+    }
+    // ensure the json data is a string
+    if (
+      data["firmware"] &&
+      !(
+        typeof data["firmware"] === "string" ||
+        data["firmware"] instanceof String
+      )
+    ) {
+      throw new Error(
+        "Expected the field `firmware` to be a primitive type in the JSON string but got " +
+          data["firmware"]
+      );
+    }
     // ensure the json data is a string
     if (
       data["org"] &&
@@ -114,15 +149,12 @@ class Firmware {
     }
     // ensure the json data is a string
     if (
-      data["firmware"] &&
-      !(
-        typeof data["firmware"] === "string" ||
-        data["firmware"] instanceof String
-      )
+      data["target"] &&
+      !(typeof data["target"] === "string" || data["target"] instanceof String)
     ) {
       throw new Error(
-        "Expected the field `firmware` to be a primitive type in the JSON string but got " +
-          data["firmware"]
+        "Expected the field `target` to be a primitive type in the JSON string but got " +
+          data["target"]
       );
     }
     // ensure the json data is a string
@@ -137,42 +169,25 @@ class Firmware {
           data["version"]
       );
     }
-    // ensure the json data is a string
-    if (
-      data["target"] &&
-      !(typeof data["target"] === "string" || data["target"] instanceof String)
-    ) {
-      throw new Error(
-        "Expected the field `target` to be a primitive type in the JSON string but got " +
-          data["target"]
-      );
-    }
-    // ensure the json data is a string
-    if (
-      data["built"] &&
-      !(typeof data["built"] === "string" || data["built"] instanceof String)
-    ) {
-      throw new Error(
-        "Expected the field `built` to be a primitive type in the JSON string but got " +
-          data["built"]
-      );
-    }
-    // ensure the json data is a string
-    if (
-      data["builder"] &&
-      !(
-        typeof data["builder"] === "string" || data["builder"] instanceof String
-      )
-    ) {
-      throw new Error(
-        "Expected the field `builder` to be a primitive type in the JSON string but got " +
-          data["builder"]
-      );
-    }
 
     return true;
   }
 }
+
+/**
+ * @member {String} builder
+ */
+Firmware.prototype["builder"] = undefined;
+
+/**
+ * @member {String} built
+ */
+Firmware.prototype["built"] = undefined;
+
+/**
+ * @member {String} firmware
+ */
+Firmware.prototype["firmware"] = undefined;
 
 /**
  * @member {String} org
@@ -185,19 +200,14 @@ Firmware.prototype["org"] = undefined;
 Firmware.prototype["product"] = undefined;
 
 /**
- * @member {String} firmware
- */
-Firmware.prototype["firmware"] = undefined;
-
-/**
- * @member {String} version
- */
-Firmware.prototype["version"] = undefined;
-
-/**
  * @member {String} target
  */
 Firmware.prototype["target"] = undefined;
+
+/**
+ * @member {Number} ver_build
+ */
+Firmware.prototype["ver_build"] = undefined;
 
 /**
  * @member {Number} ver_major
@@ -215,18 +225,8 @@ Firmware.prototype["ver_minor"] = undefined;
 Firmware.prototype["ver_patch"] = undefined;
 
 /**
- * @member {Number} ver_build
+ * @member {String} version
  */
-Firmware.prototype["ver_build"] = undefined;
-
-/**
- * @member {String} built
- */
-Firmware.prototype["built"] = undefined;
-
-/**
- * @member {String} builder
- */
-Firmware.prototype["builder"] = undefined;
+Firmware.prototype["version"] = undefined;
 
 export default Firmware;

@@ -46,14 +46,11 @@ class Proxy {
     if (data) {
       obj = obj || new Proxy();
 
-      if (data.hasOwnProperty("fleets")) {
-        obj["fleets"] = ApiClient.convertToType(data["fleets"], ["String"]);
-      }
-      if (data.hasOwnProperty("url")) {
-        obj["url"] = ApiClient.convertToType(data["url"], "String");
-      }
       if (data.hasOwnProperty("alias")) {
         obj["alias"] = ApiClient.convertToType(data["alias"], "String");
+      }
+      if (data.hasOwnProperty("fleets")) {
+        obj["fleets"] = ApiClient.convertToType(data["fleets"], ["String"]);
       }
       if (data.hasOwnProperty("http_headers")) {
         obj["http_headers"] = ApiClient.convertToType(data["http_headers"], {
@@ -62,6 +59,9 @@ class Proxy {
       }
       if (data.hasOwnProperty("timeout")) {
         obj["timeout"] = ApiClient.convertToType(data["timeout"], "Number");
+      }
+      if (data.hasOwnProperty("url")) {
+        obj["url"] = ApiClient.convertToType(data["url"], "String");
       }
     } else if (data === null) {
       return null;
@@ -75,6 +75,16 @@ class Proxy {
    * @return {boolean} to indicate whether the JSON data is valid with respect to <code>Proxy</code>.
    */
   static validateJSON(data) {
+    // ensure the json data is a string
+    if (
+      data["alias"] &&
+      !(typeof data["alias"] === "string" || data["alias"] instanceof String)
+    ) {
+      throw new Error(
+        "Expected the field `alias` to be a primitive type in the JSON string but got " +
+          data["alias"]
+      );
+    }
     // ensure the json data is an array
     if (!Array.isArray(data["fleets"])) {
       throw new Error(
@@ -92,36 +102,21 @@ class Proxy {
           data["url"]
       );
     }
-    // ensure the json data is a string
-    if (
-      data["alias"] &&
-      !(typeof data["alias"] === "string" || data["alias"] instanceof String)
-    ) {
-      throw new Error(
-        "Expected the field `alias` to be a primitive type in the JSON string but got " +
-          data["alias"]
-      );
-    }
 
     return true;
   }
 }
 
 /**
+ * @member {String} alias
+ */
+Proxy.prototype["alias"] = undefined;
+
+/**
  * list of Fleet UIDs to apply route to, if any.  If empty, applies to all Fleets
  * @member {Array.<String>} fleets
  */
 Proxy.prototype["fleets"] = undefined;
-
-/**
- * @member {String} url
- */
-Proxy.prototype["url"] = undefined;
-
-/**
- * @member {String} alias
- */
-Proxy.prototype["alias"] = undefined;
 
 /**
  * @member {Object.<String, String>} http_headers
@@ -134,5 +129,10 @@ Proxy.prototype["http_headers"] = undefined;
  * @default 15
  */
 Proxy.prototype["timeout"] = 15;
+
+/**
+ * @member {String} url
+ */
+Proxy.prototype["url"] = undefined;
 
 export default Proxy;

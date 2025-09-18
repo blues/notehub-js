@@ -22,12 +22,12 @@ class Fleet {
   /**
    * Constructs a new <code>Fleet</code>.
    * @alias module:model/Fleet
-   * @param uid {String} Fleet UID
-   * @param label {String} Fleet label
    * @param created {Date} RFC3339 timestamp in UTC
+   * @param label {String} Fleet label
+   * @param uid {String} Fleet UID
    */
-  constructor(uid, label, created) {
-    Fleet.initialize(this, uid, label, created);
+  constructor(created, label, uid) {
+    Fleet.initialize(this, created, label, uid);
   }
 
   /**
@@ -35,10 +35,10 @@ class Fleet {
    * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
    * Only for internal use.
    */
-  static initialize(obj, uid, label, created) {
-    obj["uid"] = uid;
-    obj["label"] = label;
+  static initialize(obj, created, label, uid) {
     obj["created"] = created;
+    obj["label"] = label;
+    obj["uid"] = uid;
   }
 
   /**
@@ -52,12 +52,6 @@ class Fleet {
     if (data) {
       obj = obj || new Fleet();
 
-      if (data.hasOwnProperty("uid")) {
-        obj["uid"] = ApiClient.convertToType(data["uid"], "String");
-      }
-      if (data.hasOwnProperty("label")) {
-        obj["label"] = ApiClient.convertToType(data["label"], "String");
-      }
       if (data.hasOwnProperty("created")) {
         obj["created"] = ApiClient.convertToType(data["created"], "Date");
       }
@@ -67,11 +61,17 @@ class Fleet {
           { String: "String" }
         );
       }
+      if (data.hasOwnProperty("label")) {
+        obj["label"] = ApiClient.convertToType(data["label"], "String");
+      }
       if (data.hasOwnProperty("smart_rule")) {
         obj["smart_rule"] = ApiClient.convertToType(
           data["smart_rule"],
           "String"
         );
+      }
+      if (data.hasOwnProperty("uid")) {
+        obj["uid"] = ApiClient.convertToType(data["uid"], "String");
       }
       if (data.hasOwnProperty("watchdog_mins")) {
         obj["watchdog_mins"] = ApiClient.convertToType(
@@ -104,16 +104,6 @@ class Fleet {
     }
     // ensure the json data is a string
     if (
-      data["uid"] &&
-      !(typeof data["uid"] === "string" || data["uid"] instanceof String)
-    ) {
-      throw new Error(
-        "Expected the field `uid` to be a primitive type in the JSON string but got " +
-          data["uid"]
-      );
-    }
-    // ensure the json data is a string
-    if (
       data["label"] &&
       !(typeof data["label"] === "string" || data["label"] instanceof String)
     ) {
@@ -135,24 +125,22 @@ class Fleet {
           data["smart_rule"]
       );
     }
+    // ensure the json data is a string
+    if (
+      data["uid"] &&
+      !(typeof data["uid"] === "string" || data["uid"] instanceof String)
+    ) {
+      throw new Error(
+        "Expected the field `uid` to be a primitive type in the JSON string but got " +
+          data["uid"]
+      );
+    }
 
     return true;
   }
 }
 
-Fleet.RequiredProperties = ["uid", "label", "created"];
-
-/**
- * Fleet UID
- * @member {String} uid
- */
-Fleet.prototype["uid"] = undefined;
-
-/**
- * Fleet label
- * @member {String} label
- */
-Fleet.prototype["label"] = undefined;
+Fleet.RequiredProperties = ["created", "label", "uid"];
 
 /**
  * RFC3339 timestamp in UTC
@@ -167,10 +155,22 @@ Fleet.prototype["created"] = undefined;
 Fleet.prototype["environment_variables"] = undefined;
 
 /**
+ * Fleet label
+ * @member {String} label
+ */
+Fleet.prototype["label"] = undefined;
+
+/**
  * JSONata expression that will be evaluated to determine device membership into this fleet, if the expression evaluates to a 1, the device will be included, if it evaluates to -1 it will be removed, and if it evaluates to 0 or errors it will be left unchanged.
  * @member {String} smart_rule
  */
 Fleet.prototype["smart_rule"] = undefined;
+
+/**
+ * Fleet UID
+ * @member {String} uid
+ */
+Fleet.prototype["uid"] = undefined;
 
 /**
  * A watchdog timer is used to generate an event every N minutes of inactivity. 0 means no watchdog

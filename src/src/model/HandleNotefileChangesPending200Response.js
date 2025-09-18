@@ -45,17 +45,17 @@ class HandleNotefileChangesPending200Response {
     if (data) {
       obj = obj || new HandleNotefileChangesPending200Response();
 
-      if (data.hasOwnProperty("total")) {
-        obj["total"] = ApiClient.convertToType(data["total"], "Number");
-      }
       if (data.hasOwnProperty("changes")) {
         obj["changes"] = ApiClient.convertToType(data["changes"], "Number");
+      }
+      if (data.hasOwnProperty("info")) {
+        obj["info"] = ApiClient.convertToType(data["info"], Object);
       }
       if (data.hasOwnProperty("pending")) {
         obj["pending"] = ApiClient.convertToType(data["pending"], "Boolean");
       }
-      if (data.hasOwnProperty("info")) {
-        obj["info"] = ApiClient.convertToType(data["info"], Object);
+      if (data.hasOwnProperty("total")) {
+        obj["total"] = ApiClient.convertToType(data["total"], "Number");
       }
     } else if (data === null) {
       return null;
@@ -74,16 +74,16 @@ class HandleNotefileChangesPending200Response {
 }
 
 /**
- * The total number of files.
- * @member {Number} total
- */
-HandleNotefileChangesPending200Response.prototype["total"] = undefined;
-
-/**
  * The number of pending changes in the Notefile.
  * @member {Number} changes
  */
 HandleNotefileChangesPending200Response.prototype["changes"] = undefined;
+
+/**
+ * An object with a key for each Notefile that matched the request parameters, and value object with the changes and total for each file.
+ * @member {Object} info
+ */
+HandleNotefileChangesPending200Response.prototype["info"] = undefined;
 
 /**
  * Whether there are pending changes.
@@ -92,9 +92,9 @@ HandleNotefileChangesPending200Response.prototype["changes"] = undefined;
 HandleNotefileChangesPending200Response.prototype["pending"] = undefined;
 
 /**
- * An object with a key for each Notefile that matched the request parameters, and value object with the changes and total for each file.
- * @member {Object} info
+ * The total number of files.
+ * @member {Number} total
  */
-HandleNotefileChangesPending200Response.prototype["info"] = undefined;
+HandleNotefileChangesPending200Response.prototype["total"] = undefined;
 
 export default HandleNotefileChangesPending200Response;

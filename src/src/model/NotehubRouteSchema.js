@@ -13,16 +13,16 @@
 
 import ApiClient from "../ApiClient";
 import Aws from "./Aws";
+import AwsFilter from "./AwsFilter";
 import Azure from "./Azure";
 import Google from "./Google";
 import Http from "./Http";
-import HttpFilter from "./HttpFilter";
 import Mqtt from "./Mqtt";
 import Proxy from "./Proxy";
 import Radresponder from "./Radresponder";
 import Slack from "./Slack";
+import SlackTransform from "./SlackTransform";
 import Snowflake from "./Snowflake";
-import SnowflakeTransform from "./SnowflakeTransform";
 import Thingworx from "./Thingworx";
 
 /**
@@ -267,20 +267,26 @@ class NotehubRouteSchema {
 }
 
 /**
+ * @member {Boolean} disable_http_headers
+ * @default false
+ */
+NotehubRouteSchema.prototype["disable_http_headers"] = false;
+
+/**
+ * @member {module:model/AwsFilter} filter
+ */
+NotehubRouteSchema.prototype["filter"] = undefined;
+
+/**
  * list of Fleet UIDs to apply route to, if any.  If empty, applies to all Fleets
  * @member {Array.<String>} fleets
  */
 NotehubRouteSchema.prototype["fleets"] = undefined;
 
 /**
- * @member {module:model/HttpFilter} filter
+ * @member {Object.<String, String>} http_headers
  */
-NotehubRouteSchema.prototype["filter"] = undefined;
-
-/**
- * @member {module:model/SnowflakeTransform} transform
- */
-NotehubRouteSchema.prototype["transform"] = undefined;
+NotehubRouteSchema.prototype["http_headers"] = undefined;
 
 /**
  * Minimum time between requests in Miliseconds
@@ -289,27 +295,21 @@ NotehubRouteSchema.prototype["transform"] = undefined;
 NotehubRouteSchema.prototype["throttle_ms"] = undefined;
 
 /**
- * @member {String} url
- */
-NotehubRouteSchema.prototype["url"] = undefined;
-
-/**
- * @member {Object.<String, String>} http_headers
- */
-NotehubRouteSchema.prototype["http_headers"] = undefined;
-
-/**
- * @member {Boolean} disable_http_headers
- * @default false
- */
-NotehubRouteSchema.prototype["disable_http_headers"] = false;
-
-/**
  * Timeout in seconds for each request
  * @member {Number} timeout
  * @default 15
  */
 NotehubRouteSchema.prototype["timeout"] = 15;
+
+/**
+ * @member {module:model/SlackTransform} transform
+ */
+NotehubRouteSchema.prototype["transform"] = undefined;
+
+/**
+ * @member {String} url
+ */
+NotehubRouteSchema.prototype["url"] = undefined;
 
 /**
  * Optional authentication token
@@ -326,27 +326,6 @@ NotehubRouteSchema.prototype["alias"] = undefined;
  * @member {String} broker
  */
 NotehubRouteSchema.prototype["broker"] = undefined;
-
-/**
- * @member {Number} port
- */
-NotehubRouteSchema.prototype["port"] = undefined;
-
-/**
- * @member {String} username
- */
-NotehubRouteSchema.prototype["username"] = undefined;
-
-/**
- * This value is input-only and will be omitted from the response and replaced with a placeholder
- * @member {String} password
- */
-NotehubRouteSchema.prototype["password"] = undefined;
-
-/**
- * @member {String} topic
- */
-NotehubRouteSchema.prototype["topic"] = undefined;
 
 /**
  * Certificate with \\n newlines.  This value is input-only and will be omitted from the response and replaced with a placeholder
@@ -367,6 +346,17 @@ NotehubRouteSchema.prototype["certificate_name"] = undefined;
 NotehubRouteSchema.prototype["key"] = undefined;
 
 /**
+ * This value is input-only and will be omitted from the response and replaced with a placeholder
+ * @member {String} password
+ */
+NotehubRouteSchema.prototype["password"] = undefined;
+
+/**
+ * @member {Number} port
+ */
+NotehubRouteSchema.prototype["port"] = undefined;
+
+/**
  * Name of PEM key.  If omitted, defaults to \"present\"
  * @member {String} private_key_name
  * @default 'present'
@@ -374,9 +364,14 @@ NotehubRouteSchema.prototype["key"] = undefined;
 NotehubRouteSchema.prototype["private_key_name"] = "present";
 
 /**
- * @member {String} region
+ * @member {String} topic
  */
-NotehubRouteSchema.prototype["region"] = undefined;
+NotehubRouteSchema.prototype["topic"] = undefined;
+
+/**
+ * @member {String} username
+ */
+NotehubRouteSchema.prototype["username"] = undefined;
 
 /**
  * @member {String} access_key_id
@@ -390,9 +385,10 @@ NotehubRouteSchema.prototype["access_key_id"] = undefined;
 NotehubRouteSchema.prototype["access_key_secret"] = undefined;
 
 /**
- * @member {String} message_group_id
+ * The Channel ID for Bearer Token method, if the \"slack-bearer\" type is selected
+ * @member {String} channel
  */
-NotehubRouteSchema.prototype["message_group_id"] = undefined;
+NotehubRouteSchema.prototype["channel"] = undefined;
 
 /**
  * @member {String} message_deduplication_id
@@ -400,21 +396,14 @@ NotehubRouteSchema.prototype["message_group_id"] = undefined;
 NotehubRouteSchema.prototype["message_deduplication_id"] = undefined;
 
 /**
- * The Channel ID for Bearer Token method, if the \"slack-bearer\" type is selected
- * @member {String} channel
+ * @member {String} message_group_id
  */
-NotehubRouteSchema.prototype["channel"] = undefined;
+NotehubRouteSchema.prototype["message_group_id"] = undefined;
 
 /**
- * @member {Boolean} test_api
- * @default false
+ * @member {String} region
  */
-NotehubRouteSchema.prototype["test_api"] = false;
-
-/**
- * @member {String} data_feed_key
- */
-NotehubRouteSchema.prototype["data_feed_key"] = undefined;
+NotehubRouteSchema.prototype["region"] = undefined;
 
 /**
  * @member {String} client_id
@@ -428,15 +417,21 @@ NotehubRouteSchema.prototype["client_id"] = undefined;
 NotehubRouteSchema.prototype["client_secret"] = undefined;
 
 /**
+ * @member {String} data_feed_key
+ */
+NotehubRouteSchema.prototype["data_feed_key"] = undefined;
+
+/**
+ * @member {Boolean} test_api
+ * @default false
+ */
+NotehubRouteSchema.prototype["test_api"] = false;
+
+/**
  * This value is input-only and will be omitted from the response and replaced with a placeholder
  * @member {String} functions_key_secret
  */
 NotehubRouteSchema.prototype["functions_key_secret"] = undefined;
-
-/**
- * @member {String} sas_policy_name
- */
-NotehubRouteSchema.prototype["sas_policy_name"] = undefined;
 
 /**
  * This value is input-only and will be omitted from the response and replaced with a placeholder
@@ -445,15 +440,15 @@ NotehubRouteSchema.prototype["sas_policy_name"] = undefined;
 NotehubRouteSchema.prototype["sas_policy_key"] = undefined;
 
 /**
+ * @member {String} sas_policy_name
+ */
+NotehubRouteSchema.prototype["sas_policy_name"] = undefined;
+
+/**
  * This value is input-only and will be omitted from the response and replaced with a placeholder
  * @member {String} app_key
  */
 NotehubRouteSchema.prototype["app_key"] = undefined;
-
-/**
- * @member {String} organization_name
- */
-NotehubRouteSchema.prototype["organization_name"] = undefined;
 
 /**
  * @member {String} account_name
@@ -461,9 +456,9 @@ NotehubRouteSchema.prototype["organization_name"] = undefined;
 NotehubRouteSchema.prototype["account_name"] = undefined;
 
 /**
- * @member {String} user_name
+ * @member {String} organization_name
  */
-NotehubRouteSchema.prototype["user_name"] = undefined;
+NotehubRouteSchema.prototype["organization_name"] = undefined;
 
 /**
  * PEM key with \\n newlines. This value is input-only and will be omitted from the response and replaced with a placeholder
@@ -472,10 +467,9 @@ NotehubRouteSchema.prototype["user_name"] = undefined;
 NotehubRouteSchema.prototype["pem"] = undefined;
 
 /**
- * The type of Slack message.  Must be one of \"slack-bearer\" for Bearer Token or \"slack-webhook\" for Webhook messages
- * @member {String} slack_type
+ * @member {String} user_name
  */
-NotehubRouteSchema.prototype["slack_type"] = undefined;
+NotehubRouteSchema.prototype["user_name"] = undefined;
 
 /**
  * The Bearer Token for Slack messaging, if the \"slack-bearer\" type is selected
@@ -484,10 +478,16 @@ NotehubRouteSchema.prototype["slack_type"] = undefined;
 NotehubRouteSchema.prototype["bearer"] = undefined;
 
 /**
- * The Webhook URL for Slack Messaging if the \"slack-webhook\" type is selected
- * @member {String} webhook_url
+ * The Blocks message to be sent.  If populated, this field overrides the text field within the Slack Messaging API.  Placeholders are available for this field.
+ * @member {String} blocks
  */
-NotehubRouteSchema.prototype["webhook_url"] = undefined;
+NotehubRouteSchema.prototype["blocks"] = undefined;
+
+/**
+ * The type of Slack message.  Must be one of \"slack-bearer\" for Bearer Token or \"slack-webhook\" for Webhook messages
+ * @member {String} slack_type
+ */
+NotehubRouteSchema.prototype["slack_type"] = undefined;
 
 /**
  * The simple text message to be sent, if the blocks message field is not in use.  Placeholders are available for this field.
@@ -496,10 +496,10 @@ NotehubRouteSchema.prototype["webhook_url"] = undefined;
 NotehubRouteSchema.prototype["text"] = undefined;
 
 /**
- * The Blocks message to be sent.  If populated, this field overrides the text field within the Slack Messaging API.  Placeholders are available for this field.
- * @member {String} blocks
+ * The Webhook URL for Slack Messaging if the \"slack-webhook\" type is selected
+ * @member {String} webhook_url
  */
-NotehubRouteSchema.prototype["blocks"] = undefined;
+NotehubRouteSchema.prototype["webhook_url"] = undefined;
 
 NotehubRouteSchema.OneOf = [
   "Aws",

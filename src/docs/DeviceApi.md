@@ -409,7 +409,7 @@ apiInstance.getDeviceEnvironmentHierarchy(projectOrProductUID, deviceUID).then((
 
 ## getDeviceEnvironmentVariables
 
-> GetDeviceEnvironmentVariables200Response getDeviceEnvironmentVariables(projectOrProductUID, deviceUID)
+> GetDeviceEnvironmentVariablesByPin200Response getDeviceEnvironmentVariables(projectOrProductUID, deviceUID)
 
 Get environment variables of a device
 
@@ -442,7 +442,7 @@ apiInstance.getDeviceEnvironmentVariables(projectOrProductUID, deviceUID).then((
 
 ### Return type
 
-[**GetDeviceEnvironmentVariables200Response**](GetDeviceEnvironmentVariables200Response.md)
+[**GetDeviceEnvironmentVariablesByPin200Response**](GetDeviceEnvironmentVariablesByPin200Response.md)
 
 ### Authorization
 
@@ -455,7 +455,7 @@ apiInstance.getDeviceEnvironmentVariables(projectOrProductUID, deviceUID).then((
 
 ## getDeviceEnvironmentVariablesByPin
 
-> GetDeviceEnvironmentVariables200Response getDeviceEnvironmentVariablesByPin(productUID, deviceUID)
+> GetDeviceEnvironmentVariablesByPin200Response getDeviceEnvironmentVariablesByPin(productUID, deviceUID)
 
 Get environment variables of a device with device pin authorization
 
@@ -488,7 +488,7 @@ apiInstance.getDeviceEnvironmentVariablesByPin(productUID, deviceUID).then((data
 
 ### Return type
 
-[**GetDeviceEnvironmentVariables200Response**](GetDeviceEnvironmentVariables200Response.md)
+[**GetDeviceEnvironmentVariablesByPin200Response**](GetDeviceEnvironmentVariablesByPin200Response.md)
 
 ### Authorization
 

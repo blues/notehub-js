@@ -50,20 +50,8 @@
       //expect(instance).to.be.a(NotehubJs.UploadMetadata);
     });
 
-    it('should have the property name (base name: "name")', function () {
-      // uncomment below and update the code to test the property name
-      //var instance = new NotehubJs.UploadMetadata();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property length (base name: "length")', function () {
-      // uncomment below and update the code to test the property length
-      //var instance = new NotehubJs.UploadMetadata();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property md5 (base name: "md5")', function () {
-      // uncomment below and update the code to test the property md5
+    it('should have the property contains (base name: "contains")', function () {
+      // uncomment below and update the code to test the property contains
       //var instance = new NotehubJs.UploadMetadata();
       //expect(instance).to.be();
     });
@@ -80,20 +68,8 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property modified (base name: "modified")', function () {
-      // uncomment below and update the code to test the property modified
-      //var instance = new NotehubJs.UploadMetadata();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property source (base name: "source")', function () {
-      // uncomment below and update the code to test the property source
-      //var instance = new NotehubJs.UploadMetadata();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property contains (base name: "contains")', function () {
-      // uncomment below and update the code to test the property contains
+    it('should have the property firmware (base name: "firmware")', function () {
+      // uncomment below and update the code to test the property firmware
       //var instance = new NotehubJs.UploadMetadata();
       //expect(instance).to.be();
     });
@@ -104,14 +80,26 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property type (base name: "type")', function () {
-      // uncomment below and update the code to test the property type
+    it('should have the property length (base name: "length")', function () {
+      // uncomment below and update the code to test the property length
       //var instance = new NotehubJs.UploadMetadata();
       //expect(instance).to.be();
     });
 
-    it('should have the property tags (base name: "tags")', function () {
-      // uncomment below and update the code to test the property tags
+    it('should have the property md5 (base name: "md5")', function () {
+      // uncomment below and update the code to test the property md5
+      //var instance = new NotehubJs.UploadMetadata();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property modified (base name: "modified")', function () {
+      // uncomment below and update the code to test the property modified
+      //var instance = new NotehubJs.UploadMetadata();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property name (base name: "name")', function () {
+      // uncomment below and update the code to test the property name
       //var instance = new NotehubJs.UploadMetadata();
       //expect(instance).to.be();
     });
@@ -122,8 +110,20 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property firmware (base name: "firmware")', function () {
-      // uncomment below and update the code to test the property firmware
+    it('should have the property source (base name: "source")', function () {
+      // uncomment below and update the code to test the property source
+      //var instance = new NotehubJs.UploadMetadata();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property tags (base name: "tags")', function () {
+      // uncomment below and update the code to test the property tags
+      //var instance = new NotehubJs.UploadMetadata();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property type (base name: "type")', function () {
+      // uncomment below and update the code to test the property type
       //var instance = new NotehubJs.UploadMetadata();
       //expect(instance).to.be();
     });

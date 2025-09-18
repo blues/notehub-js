@@ -56,8 +56,14 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property used (base name: "used")', function () {
-      // uncomment below and update the code to test the property used
+    it('should have the property lastUpdated (base name: "last_updated")', function () {
+      // uncomment below and update the code to test the property lastUpdated
+      //var instance = new NotehubJs.SimUsage();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property lifetimeUsed (base name: "lifetime_used")', function () {
+      // uncomment below and update the code to test the property lifetimeUsed
       //var instance = new NotehubJs.SimUsage();
       //expect(instance).to.be();
     });
@@ -68,14 +74,8 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property lifetimeUsed (base name: "lifetimeUsed")', function () {
-      // uncomment below and update the code to test the property lifetimeUsed
-      //var instance = new NotehubJs.SimUsage();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property lastUpdated (base name: "lastUpdated")', function () {
-      // uncomment below and update the code to test the property lastUpdated
+    it('should have the property used (base name: "used")', function () {
+      // uncomment below and update the code to test the property used
       //var instance = new NotehubJs.SimUsage();
       //expect(instance).to.be();
     });

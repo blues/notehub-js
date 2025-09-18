@@ -50,26 +50,20 @@
       //expect(instance).to.be.a(NotehubJs.Event);
     });
 
-    it('should have the property event (base name: "event")', function () {
-      // uncomment below and update the code to test the property event
+    it('should have the property app (base name: "app")', function () {
+      // uncomment below and update the code to test the property app
       //var instance = new NotehubJs.Event();
       //expect(instance).to.be();
     });
 
-    it('should have the property session (base name: "session")', function () {
-      // uncomment below and update the code to test the property session
+    it('should have the property bars (base name: "bars")', function () {
+      // uncomment below and update the code to test the property bars
       //var instance = new NotehubJs.Event();
       //expect(instance).to.be();
     });
 
-    it('should have the property tls (base name: "tls")', function () {
-      // uncomment below and update the code to test the property tls
-      //var instance = new NotehubJs.Event();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property transport (base name: "transport")', function () {
-      // uncomment below and update the code to test the property transport
+    it('should have the property bestCountry (base name: "best_country")', function () {
+      // uncomment below and update the code to test the property bestCountry
       //var instance = new NotehubJs.Event();
       //expect(instance).to.be();
     });
@@ -80,74 +74,14 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property device (base name: "device")', function () {
-      // uncomment below and update the code to test the property device
+    it('should have the property bestLat (base name: "best_lat")', function () {
+      // uncomment below and update the code to test the property bestLat
       //var instance = new NotehubJs.Event();
       //expect(instance).to.be();
     });
 
-    it('should have the property sn (base name: "sn")', function () {
-      // uncomment below and update the code to test the property sn
-      //var instance = new NotehubJs.Event();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property product (base name: "product")', function () {
-      // uncomment below and update the code to test the property product
-      //var instance = new NotehubJs.Event();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property app (base name: "app")', function () {
-      // uncomment below and update the code to test the property app
-      //var instance = new NotehubJs.Event();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property received (base name: "received")', function () {
-      // uncomment below and update the code to test the property received
-      //var instance = new NotehubJs.Event();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property req (base name: "req")', function () {
-      // uncomment below and update the code to test the property req
-      //var instance = new NotehubJs.Event();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property when (base name: "when")', function () {
-      // uncomment below and update the code to test the property when
-      //var instance = new NotehubJs.Event();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property file (base name: "file")', function () {
-      // uncomment below and update the code to test the property file
-      //var instance = new NotehubJs.Event();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property note (base name: "note")', function () {
-      // uncomment below and update the code to test the property note
-      //var instance = new NotehubJs.Event();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property updates (base name: "updates")', function () {
-      // uncomment below and update the code to test the property updates
-      //var instance = new NotehubJs.Event();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property body (base name: "body")', function () {
-      // uncomment below and update the code to test the property body
-      //var instance = new NotehubJs.Event();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property payload (base name: "payload")', function () {
-      // uncomment below and update the code to test the property payload
+    it('should have the property bestLocation (base name: "best_location")', function () {
+      // uncomment below and update the code to test the property bestLocation
       //var instance = new NotehubJs.Event();
       //expect(instance).to.be();
     });
@@ -164,26 +98,8 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property bestLat (base name: "best_lat")', function () {
-      // uncomment below and update the code to test the property bestLat
-      //var instance = new NotehubJs.Event();
-      //expect(instance).to.be();
-    });
-
     it('should have the property bestLon (base name: "best_lon")', function () {
       // uncomment below and update the code to test the property bestLon
-      //var instance = new NotehubJs.Event();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property bestLocation (base name: "best_location")', function () {
-      // uncomment below and update the code to test the property bestLocation
-      //var instance = new NotehubJs.Event();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property bestCountry (base name: "best_country")', function () {
-      // uncomment below and update the code to test the property bestCountry
       //var instance = new NotehubJs.Event();
       //expect(instance).to.be();
     });
@@ -194,128 +110,38 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property whereOlc (base name: "where_olc")', function () {
-      // uncomment below and update the code to test the property whereOlc
+    it('should have the property body (base name: "body")', function () {
+      // uncomment below and update the code to test the property body
       //var instance = new NotehubJs.Event();
       //expect(instance).to.be();
     });
 
-    it('should have the property whereWhen (base name: "where_when")', function () {
-      // uncomment below and update the code to test the property whereWhen
+    it('should have the property bssid (base name: "bssid")', function () {
+      // uncomment below and update the code to test the property bssid
       //var instance = new NotehubJs.Event();
       //expect(instance).to.be();
     });
 
-    it('should have the property whereLat (base name: "where_lat")', function () {
-      // uncomment below and update the code to test the property whereLat
+    it('should have the property device (base name: "device")', function () {
+      // uncomment below and update the code to test the property device
       //var instance = new NotehubJs.Event();
       //expect(instance).to.be();
     });
 
-    it('should have the property whereLon (base name: "where_lon")', function () {
-      // uncomment below and update the code to test the property whereLon
+    it('should have the property environment (base name: "environment")', function () {
+      // uncomment below and update the code to test the property environment
       //var instance = new NotehubJs.Event();
       //expect(instance).to.be();
     });
 
-    it('should have the property whereLocation (base name: "where_location")', function () {
-      // uncomment below and update the code to test the property whereLocation
+    it('should have the property event (base name: "event")', function () {
+      // uncomment below and update the code to test the property event
       //var instance = new NotehubJs.Event();
       //expect(instance).to.be();
     });
 
-    it('should have the property whereCountry (base name: "where_country")', function () {
-      // uncomment below and update the code to test the property whereCountry
-      //var instance = new NotehubJs.Event();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property whereTimezone (base name: "where_timezone")', function () {
-      // uncomment below and update the code to test the property whereTimezone
-      //var instance = new NotehubJs.Event();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property towerWhen (base name: "tower_when")', function () {
-      // uncomment below and update the code to test the property towerWhen
-      //var instance = new NotehubJs.Event();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property towerLat (base name: "tower_lat")', function () {
-      // uncomment below and update the code to test the property towerLat
-      //var instance = new NotehubJs.Event();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property towerLon (base name: "tower_lon")', function () {
-      // uncomment below and update the code to test the property towerLon
-      //var instance = new NotehubJs.Event();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property towerCountry (base name: "tower_country")', function () {
-      // uncomment below and update the code to test the property towerCountry
-      //var instance = new NotehubJs.Event();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property towerLocation (base name: "tower_location")', function () {
-      // uncomment below and update the code to test the property towerLocation
-      //var instance = new NotehubJs.Event();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property towerTimezone (base name: "tower_timezone")', function () {
-      // uncomment below and update the code to test the property towerTimezone
-      //var instance = new NotehubJs.Event();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property towerId (base name: "tower_id")', function () {
-      // uncomment below and update the code to test the property towerId
-      //var instance = new NotehubJs.Event();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property triWhen (base name: "tri_when")', function () {
-      // uncomment below and update the code to test the property triWhen
-      //var instance = new NotehubJs.Event();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property triLat (base name: "tri_lat")', function () {
-      // uncomment below and update the code to test the property triLat
-      //var instance = new NotehubJs.Event();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property triLon (base name: "tri_lon")', function () {
-      // uncomment below and update the code to test the property triLon
-      //var instance = new NotehubJs.Event();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property triLocation (base name: "tri_location")', function () {
-      // uncomment below and update the code to test the property triLocation
-      //var instance = new NotehubJs.Event();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property triCountry (base name: "tri_country")', function () {
-      // uncomment below and update the code to test the property triCountry
-      //var instance = new NotehubJs.Event();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property triTimezone (base name: "tri_timezone")', function () {
-      // uncomment below and update the code to test the property triTimezone
-      //var instance = new NotehubJs.Event();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property triPoints (base name: "tri_points")', function () {
-      // uncomment below and update the code to test the property triPoints
+    it('should have the property file (base name: "file")', function () {
+      // uncomment below and update the code to test the property file
       //var instance = new NotehubJs.Event();
       //expect(instance).to.be();
     });
@@ -326,20 +152,50 @@
       //expect(instance).to.be();
     });
 
+    it('should have the property note (base name: "note")', function () {
+      // uncomment below and update the code to test the property note
+      //var instance = new NotehubJs.Event();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property orderingCode (base name: "ordering_code")', function () {
+      // uncomment below and update the code to test the property orderingCode
+      //var instance = new NotehubJs.Event();
+      //expect(instance).to.be();
+    });
+
     it('should have the property orientation (base name: "orientation")', function () {
       // uncomment below and update the code to test the property orientation
       //var instance = new NotehubJs.Event();
       //expect(instance).to.be();
     });
 
-    it('should have the property rssi (base name: "rssi")', function () {
-      // uncomment below and update the code to test the property rssi
+    it('should have the property payload (base name: "payload")', function () {
+      // uncomment below and update the code to test the property payload
       //var instance = new NotehubJs.Event();
       //expect(instance).to.be();
     });
 
-    it('should have the property sinr (base name: "sinr")', function () {
-      // uncomment below and update the code to test the property sinr
+    it('should have the property product (base name: "product")', function () {
+      // uncomment below and update the code to test the property product
+      //var instance = new NotehubJs.Event();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property rat (base name: "rat")', function () {
+      // uncomment below and update the code to test the property rat
+      //var instance = new NotehubJs.Event();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property received (base name: "received")', function () {
+      // uncomment below and update the code to test the property received
+      //var instance = new NotehubJs.Event();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property req (base name: "req")', function () {
+      // uncomment below and update the code to test the property req
       //var instance = new NotehubJs.Event();
       //expect(instance).to.be();
     });
@@ -356,32 +212,20 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property rat (base name: "rat")', function () {
-      // uncomment below and update the code to test the property rat
+    it('should have the property rssi (base name: "rssi")', function () {
+      // uncomment below and update the code to test the property rssi
       //var instance = new NotehubJs.Event();
       //expect(instance).to.be();
     });
 
-    it('should have the property bars (base name: "bars")', function () {
-      // uncomment below and update the code to test the property bars
+    it('should have the property session (base name: "session")', function () {
+      // uncomment below and update the code to test the property session
       //var instance = new NotehubJs.Event();
       //expect(instance).to.be();
     });
 
-    it('should have the property voltage (base name: "voltage")', function () {
-      // uncomment below and update the code to test the property voltage
-      //var instance = new NotehubJs.Event();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property temp (base name: "temp")', function () {
-      // uncomment below and update the code to test the property temp
-      //var instance = new NotehubJs.Event();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property environment (base name: "environment")', function () {
-      // uncomment below and update the code to test the property environment
+    it('should have the property sinr (base name: "sinr")', function () {
+      // uncomment below and update the code to test the property sinr
       //var instance = new NotehubJs.Event();
       //expect(instance).to.be();
     });
@@ -392,8 +236,8 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property orderingCode (base name: "ordering_code")', function () {
-      // uncomment below and update the code to test the property orderingCode
+    it('should have the property sn (base name: "sn")', function () {
+      // uncomment below and update the code to test the property sn
       //var instance = new NotehubJs.Event();
       //expect(instance).to.be();
     });
@@ -404,8 +248,164 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property bssid (base name: "bssid")', function () {
-      // uncomment below and update the code to test the property bssid
+    it('should have the property temp (base name: "temp")', function () {
+      // uncomment below and update the code to test the property temp
+      //var instance = new NotehubJs.Event();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property tls (base name: "tls")', function () {
+      // uncomment below and update the code to test the property tls
+      //var instance = new NotehubJs.Event();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property towerCountry (base name: "tower_country")', function () {
+      // uncomment below and update the code to test the property towerCountry
+      //var instance = new NotehubJs.Event();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property towerId (base name: "tower_id")', function () {
+      // uncomment below and update the code to test the property towerId
+      //var instance = new NotehubJs.Event();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property towerLat (base name: "tower_lat")', function () {
+      // uncomment below and update the code to test the property towerLat
+      //var instance = new NotehubJs.Event();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property towerLocation (base name: "tower_location")', function () {
+      // uncomment below and update the code to test the property towerLocation
+      //var instance = new NotehubJs.Event();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property towerLon (base name: "tower_lon")', function () {
+      // uncomment below and update the code to test the property towerLon
+      //var instance = new NotehubJs.Event();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property towerTimezone (base name: "tower_timezone")', function () {
+      // uncomment below and update the code to test the property towerTimezone
+      //var instance = new NotehubJs.Event();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property towerWhen (base name: "tower_when")', function () {
+      // uncomment below and update the code to test the property towerWhen
+      //var instance = new NotehubJs.Event();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property transport (base name: "transport")', function () {
+      // uncomment below and update the code to test the property transport
+      //var instance = new NotehubJs.Event();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property triCountry (base name: "tri_country")', function () {
+      // uncomment below and update the code to test the property triCountry
+      //var instance = new NotehubJs.Event();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property triLat (base name: "tri_lat")', function () {
+      // uncomment below and update the code to test the property triLat
+      //var instance = new NotehubJs.Event();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property triLocation (base name: "tri_location")', function () {
+      // uncomment below and update the code to test the property triLocation
+      //var instance = new NotehubJs.Event();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property triLon (base name: "tri_lon")', function () {
+      // uncomment below and update the code to test the property triLon
+      //var instance = new NotehubJs.Event();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property triPoints (base name: "tri_points")', function () {
+      // uncomment below and update the code to test the property triPoints
+      //var instance = new NotehubJs.Event();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property triTimezone (base name: "tri_timezone")', function () {
+      // uncomment below and update the code to test the property triTimezone
+      //var instance = new NotehubJs.Event();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property triWhen (base name: "tri_when")', function () {
+      // uncomment below and update the code to test the property triWhen
+      //var instance = new NotehubJs.Event();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property updates (base name: "updates")', function () {
+      // uncomment below and update the code to test the property updates
+      //var instance = new NotehubJs.Event();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property voltage (base name: "voltage")', function () {
+      // uncomment below and update the code to test the property voltage
+      //var instance = new NotehubJs.Event();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property when (base name: "when")', function () {
+      // uncomment below and update the code to test the property when
+      //var instance = new NotehubJs.Event();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property whereCountry (base name: "where_country")', function () {
+      // uncomment below and update the code to test the property whereCountry
+      //var instance = new NotehubJs.Event();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property whereLat (base name: "where_lat")', function () {
+      // uncomment below and update the code to test the property whereLat
+      //var instance = new NotehubJs.Event();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property whereLocation (base name: "where_location")', function () {
+      // uncomment below and update the code to test the property whereLocation
+      //var instance = new NotehubJs.Event();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property whereLon (base name: "where_lon")', function () {
+      // uncomment below and update the code to test the property whereLon
+      //var instance = new NotehubJs.Event();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property whereOlc (base name: "where_olc")', function () {
+      // uncomment below and update the code to test the property whereOlc
+      //var instance = new NotehubJs.Event();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property whereTimezone (base name: "where_timezone")', function () {
+      // uncomment below and update the code to test the property whereTimezone
+      //var instance = new NotehubJs.Event();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property whereWhen (base name: "where_when")', function () {
+      // uncomment below and update the code to test the property whereWhen
       //var instance = new NotehubJs.Event();
       //expect(instance).to.be();
     });

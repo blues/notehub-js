@@ -22,11 +22,11 @@ class CreateProjectRequest {
   /**
    * Constructs a new <code>CreateProjectRequest</code>.
    * @alias module:model/CreateProjectRequest
-   * @param label {String} The label for the project.
    * @param billingAccountUid {String} The billing account UID for the project. The caller of the API must be able to create projects within the billing account, otherwise an error will be returned.
+   * @param label {String} The label for the project.
    */
-  constructor(label, billingAccountUid) {
-    CreateProjectRequest.initialize(this, label, billingAccountUid);
+  constructor(billingAccountUid, label) {
+    CreateProjectRequest.initialize(this, billingAccountUid, label);
   }
 
   /**
@@ -34,9 +34,9 @@ class CreateProjectRequest {
    * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
    * Only for internal use.
    */
-  static initialize(obj, label, billingAccountUid) {
-    obj["label"] = label;
+  static initialize(obj, billingAccountUid, label) {
     obj["billing_account_uid"] = billingAccountUid;
+    obj["label"] = label;
   }
 
   /**
@@ -50,14 +50,14 @@ class CreateProjectRequest {
     if (data) {
       obj = obj || new CreateProjectRequest();
 
-      if (data.hasOwnProperty("label")) {
-        obj["label"] = ApiClient.convertToType(data["label"], "String");
-      }
       if (data.hasOwnProperty("billing_account_uid")) {
         obj["billing_account_uid"] = ApiClient.convertToType(
           data["billing_account_uid"],
           "String"
         );
+      }
+      if (data.hasOwnProperty("label")) {
+        obj["label"] = ApiClient.convertToType(data["label"], "String");
       }
     } else if (data === null) {
       return null;
@@ -84,16 +84,6 @@ class CreateProjectRequest {
     }
     // ensure the json data is a string
     if (
-      data["label"] &&
-      !(typeof data["label"] === "string" || data["label"] instanceof String)
-    ) {
-      throw new Error(
-        "Expected the field `label` to be a primitive type in the JSON string but got " +
-          data["label"]
-      );
-    }
-    // ensure the json data is a string
-    if (
       data["billing_account_uid"] &&
       !(
         typeof data["billing_account_uid"] === "string" ||
@@ -105,23 +95,33 @@ class CreateProjectRequest {
           data["billing_account_uid"]
       );
     }
+    // ensure the json data is a string
+    if (
+      data["label"] &&
+      !(typeof data["label"] === "string" || data["label"] instanceof String)
+    ) {
+      throw new Error(
+        "Expected the field `label` to be a primitive type in the JSON string but got " +
+          data["label"]
+      );
+    }
 
     return true;
   }
 }
 
-CreateProjectRequest.RequiredProperties = ["label", "billing_account_uid"];
-
-/**
- * The label for the project.
- * @member {String} label
- */
-CreateProjectRequest.prototype["label"] = undefined;
+CreateProjectRequest.RequiredProperties = ["billing_account_uid", "label"];
 
 /**
  * The billing account UID for the project. The caller of the API must be able to create projects within the billing account, otherwise an error will be returned.
  * @member {String} billing_account_uid
  */
 CreateProjectRequest.prototype["billing_account_uid"] = undefined;
+
+/**
+ * The label for the project.
+ * @member {String} label
+ */
+CreateProjectRequest.prototype["label"] = undefined;
 
 export default CreateProjectRequest;

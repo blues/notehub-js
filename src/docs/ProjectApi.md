@@ -229,7 +229,7 @@ apiInstance.createProject(createProjectRequest).then(
 
 ## deleteDeviceFleets
 
-> GetProjectFleets200Response deleteDeviceFleets(projectOrProductUID, deviceUID, deleteDeviceFleetsRequest)
+> GetDeviceFleets200Response deleteDeviceFleets(projectOrProductUID, deviceUID, deleteDeviceFleetsRequest)
 
 Remove Device from Fleets
 
@@ -264,7 +264,7 @@ apiInstance.deleteDeviceFleets(projectOrProductUID, deviceUID, deleteDeviceFleet
 
 ### Return type
 
-[**GetProjectFleets200Response**](GetProjectFleets200Response.md)
+[**GetDeviceFleets200Response**](GetDeviceFleets200Response.md)
 
 ### Authorization
 
@@ -715,7 +715,7 @@ apiInstance.getDeviceDfuStatus(projectOrProductUID, deviceUID, firmwareType).the
 
 ## getDeviceFleets
 
-> GetProjectFleets200Response getDeviceFleets(projectOrProductUID, deviceUID)
+> GetDeviceFleets200Response getDeviceFleets(projectOrProductUID, deviceUID)
 
 Get Device Fleets
 
@@ -748,7 +748,7 @@ apiInstance.getDeviceFleets(projectOrProductUID, deviceUID).then((data) => {
 
 ### Return type
 
-[**GetProjectFleets200Response**](GetProjectFleets200Response.md)
+[**GetDeviceFleets200Response**](GetDeviceFleets200Response.md)
 
 ### Authorization
 
@@ -1327,7 +1327,7 @@ apiInstance.getProjectEnvironmentVariables(projectOrProductUID).then((data) => {
 
 ## getProjectFleets
 
-> GetProjectFleets200Response getProjectFleets(projectOrProductUID)
+> GetDeviceFleets200Response getProjectFleets(projectOrProductUID)
 
 Get Project Fleets
 
@@ -1358,7 +1358,7 @@ apiInstance.getProjectFleets(projectOrProductUID).then((data) => {
 
 ### Return type
 
-[**GetProjectFleets200Response**](GetProjectFleets200Response.md)
+[**GetDeviceFleets200Response**](GetDeviceFleets200Response.md)
 
 ### Authorization
 
@@ -1504,7 +1504,7 @@ This endpoint does not need any parameter.
 
 ## putDeviceFleets
 
-> GetProjectFleets200Response putDeviceFleets(projectOrProductUID, deviceUID, putDeviceFleetsRequest)
+> GetDeviceFleets200Response putDeviceFleets(projectOrProductUID, deviceUID, putDeviceFleetsRequest)
 
 Add Device to Fleets
 
@@ -1539,7 +1539,7 @@ apiInstance.putDeviceFleets(projectOrProductUID, deviceUID, putDeviceFleetsReque
 
 ### Return type
 
-[**GetProjectFleets200Response**](GetProjectFleets200Response.md)
+[**GetDeviceFleets200Response**](GetDeviceFleets200Response.md)
 
 ### Authorization
 

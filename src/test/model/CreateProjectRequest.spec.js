@@ -50,14 +50,14 @@
       //expect(instance).to.be.a(NotehubJs.CreateProjectRequest);
     });
 
-    it('should have the property label (base name: "label")', function () {
-      // uncomment below and update the code to test the property label
+    it('should have the property billingAccountUid (base name: "billing_account_uid")', function () {
+      // uncomment below and update the code to test the property billingAccountUid
       //var instance = new NotehubJs.CreateProjectRequest();
       //expect(instance).to.be();
     });
 
-    it('should have the property billingAccountUid (base name: "billing_account_uid")', function () {
-      // uncomment below and update the code to test the property billingAccountUid
+    it('should have the property label (base name: "label")', function () {
+      // uncomment below and update the code to test the property label
       //var instance = new NotehubJs.CreateProjectRequest();
       //expect(instance).to.be();
     });

@@ -12,8 +12,8 @@
  */
 
 import ApiClient from "../ApiClient";
-import HttpFilter from "./HttpFilter";
-import HttpTransform from "./HttpTransform";
+import AwsFilter from "./AwsFilter";
+import AwsTransform from "./AwsTransform";
 
 /**
  * The Http model module.
@@ -48,14 +48,22 @@ class Http {
     if (data) {
       obj = obj || new Http();
 
+      if (data.hasOwnProperty("disable_http_headers")) {
+        obj["disable_http_headers"] = ApiClient.convertToType(
+          data["disable_http_headers"],
+          "Boolean"
+        );
+      }
+      if (data.hasOwnProperty("filter")) {
+        obj["filter"] = AwsFilter.constructFromObject(data["filter"]);
+      }
       if (data.hasOwnProperty("fleets")) {
         obj["fleets"] = ApiClient.convertToType(data["fleets"], ["String"]);
       }
-      if (data.hasOwnProperty("filter")) {
-        obj["filter"] = HttpFilter.constructFromObject(data["filter"]);
-      }
-      if (data.hasOwnProperty("transform")) {
-        obj["transform"] = HttpTransform.constructFromObject(data["transform"]);
+      if (data.hasOwnProperty("http_headers")) {
+        obj["http_headers"] = ApiClient.convertToType(data["http_headers"], {
+          String: "String",
+        });
       }
       if (data.hasOwnProperty("throttle_ms")) {
         obj["throttle_ms"] = ApiClient.convertToType(
@@ -63,22 +71,14 @@ class Http {
           "Number"
         );
       }
-      if (data.hasOwnProperty("url")) {
-        obj["url"] = ApiClient.convertToType(data["url"], "String");
-      }
-      if (data.hasOwnProperty("http_headers")) {
-        obj["http_headers"] = ApiClient.convertToType(data["http_headers"], {
-          String: "String",
-        });
-      }
-      if (data.hasOwnProperty("disable_http_headers")) {
-        obj["disable_http_headers"] = ApiClient.convertToType(
-          data["disable_http_headers"],
-          "Boolean"
-        );
-      }
       if (data.hasOwnProperty("timeout")) {
         obj["timeout"] = ApiClient.convertToType(data["timeout"], "Number");
+      }
+      if (data.hasOwnProperty("transform")) {
+        obj["transform"] = AwsTransform.constructFromObject(data["transform"]);
+      }
+      if (data.hasOwnProperty("url")) {
+        obj["url"] = ApiClient.convertToType(data["url"], "String");
       }
     } else if (data === null) {
       return null;
@@ -92,6 +92,11 @@ class Http {
    * @return {boolean} to indicate whether the JSON data is valid with respect to <code>Http</code>.
    */
   static validateJSON(data) {
+    // validate the optional field `filter`
+    if (data["filter"]) {
+      // data not null
+      AwsFilter.validateJSON(data["filter"]);
+    }
     // ensure the json data is an array
     if (!Array.isArray(data["fleets"])) {
       throw new Error(
@@ -99,15 +104,10 @@ class Http {
           data["fleets"]
       );
     }
-    // validate the optional field `filter`
-    if (data["filter"]) {
-      // data not null
-      HttpFilter.validateJSON(data["filter"]);
-    }
     // validate the optional field `transform`
     if (data["transform"]) {
       // data not null
-      HttpTransform.validateJSON(data["transform"]);
+      AwsTransform.validateJSON(data["transform"]);
     }
     // ensure the json data is a string
     if (
@@ -125,20 +125,26 @@ class Http {
 }
 
 /**
+ * @member {Boolean} disable_http_headers
+ * @default false
+ */
+Http.prototype["disable_http_headers"] = false;
+
+/**
+ * @member {module:model/AwsFilter} filter
+ */
+Http.prototype["filter"] = undefined;
+
+/**
  * list of Fleet UIDs to apply route to, if any.  If empty, applies to all Fleets
  * @member {Array.<String>} fleets
  */
 Http.prototype["fleets"] = undefined;
 
 /**
- * @member {module:model/HttpFilter} filter
+ * @member {Object.<String, String>} http_headers
  */
-Http.prototype["filter"] = undefined;
-
-/**
- * @member {module:model/HttpTransform} transform
- */
-Http.prototype["transform"] = undefined;
+Http.prototype["http_headers"] = undefined;
 
 /**
  * Minimum time between requests in Miliseconds
@@ -147,27 +153,21 @@ Http.prototype["transform"] = undefined;
 Http.prototype["throttle_ms"] = undefined;
 
 /**
- * Route URL
- * @member {String} url
- */
-Http.prototype["url"] = undefined;
-
-/**
- * @member {Object.<String, String>} http_headers
- */
-Http.prototype["http_headers"] = undefined;
-
-/**
- * @member {Boolean} disable_http_headers
- * @default false
- */
-Http.prototype["disable_http_headers"] = false;
-
-/**
  * Timeout in seconds for each request
  * @member {Number} timeout
  * @default 15
  */
 Http.prototype["timeout"] = 15;
+
+/**
+ * @member {module:model/AwsTransform} transform
+ */
+Http.prototype["transform"] = undefined;
+
+/**
+ * Route URL
+ * @member {String} url
+ */
+Http.prototype["url"] = undefined;
 
 export default Http;

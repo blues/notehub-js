@@ -50,18 +50,6 @@
       //expect(instance).to.be.a(NotehubJs.Fleet);
     });
 
-    it('should have the property uid (base name: "uid")', function () {
-      // uncomment below and update the code to test the property uid
-      //var instance = new NotehubJs.Fleet();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property label (base name: "label")', function () {
-      // uncomment below and update the code to test the property label
-      //var instance = new NotehubJs.Fleet();
-      //expect(instance).to.be();
-    });
-
     it('should have the property created (base name: "created")', function () {
       // uncomment below and update the code to test the property created
       //var instance = new NotehubJs.Fleet();
@@ -74,8 +62,20 @@
       //expect(instance).to.be();
     });
 
+    it('should have the property label (base name: "label")', function () {
+      // uncomment below and update the code to test the property label
+      //var instance = new NotehubJs.Fleet();
+      //expect(instance).to.be();
+    });
+
     it('should have the property smartRule (base name: "smart_rule")', function () {
       // uncomment below and update the code to test the property smartRule
+      //var instance = new NotehubJs.Fleet();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property uid (base name: "uid")', function () {
+      // uncomment below and update the code to test the property uid
       //var instance = new NotehubJs.Fleet();
       //expect(instance).to.be();
     });

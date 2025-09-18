@@ -50,12 +50,6 @@
       //expect(instance).to.be.a(NotehubJs.PersonalAccessTokenInfo);
     });
 
-    it('should have the property name (base name: "name")', function () {
-      // uncomment below and update the code to test the property name
-      //var instance = new NotehubJs.PersonalAccessTokenInfo();
-      //expect(instance).to.be();
-    });
-
     it('should have the property description (base name: "description")', function () {
       // uncomment below and update the code to test the property description
       //var instance = new NotehubJs.PersonalAccessTokenInfo();
@@ -64,6 +58,12 @@
 
     it('should have the property expiresAt (base name: "expires_at")', function () {
       // uncomment below and update the code to test the property expiresAt
+      //var instance = new NotehubJs.PersonalAccessTokenInfo();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property name (base name: "name")', function () {
+      // uncomment below and update the code to test the property name
       //var instance = new NotehubJs.PersonalAccessTokenInfo();
       //expect(instance).to.be();
     });

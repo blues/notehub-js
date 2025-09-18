@@ -50,12 +50,6 @@
       //expect(instance).to.be.a(NotehubJs.DeviceDfuStateMachine);
     });
 
-    it('should have the property requestedVersion (base name: "requested_version")', function () {
-      // uncomment below and update the code to test the property requestedVersion
-      //var instance = new NotehubJs.DeviceDfuStateMachine();
-      //expect(instance).to.be();
-    });
-
     it('should have the property currentVersion (base name: "current_version")', function () {
       // uncomment below and update the code to test the property currentVersion
       //var instance = new NotehubJs.DeviceDfuStateMachine();
@@ -64,6 +58,12 @@
 
     it('should have the property initiated (base name: "initiated")', function () {
       // uncomment below and update the code to test the property initiated
+      //var instance = new NotehubJs.DeviceDfuStateMachine();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property requestedVersion (base name: "requested_version")', function () {
+      // uncomment below and update the code to test the property requestedVersion
       //var instance = new NotehubJs.DeviceDfuStateMachine();
       //expect(instance).to.be();
     });

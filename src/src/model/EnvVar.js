@@ -48,17 +48,17 @@ class EnvVar {
       if (data.hasOwnProperty("key")) {
         obj["key"] = ApiClient.convertToType(data["key"], "String");
       }
-      if (data.hasOwnProperty("value")) {
-        obj["value"] = ApiClient.convertToType(data["value"], "String");
-      }
-      if (data.hasOwnProperty("used")) {
-        obj["used"] = ApiClient.convertToType(data["used"], "Boolean");
-      }
       if (data.hasOwnProperty("precedence")) {
         obj["precedence"] = ApiClient.convertToType(
           data["precedence"],
           "Number"
         );
+      }
+      if (data.hasOwnProperty("used")) {
+        obj["used"] = ApiClient.convertToType(data["used"], "Boolean");
+      }
+      if (data.hasOwnProperty("value")) {
+        obj["value"] = ApiClient.convertToType(data["value"], "String");
       }
     } else if (data === null) {
       return null;
@@ -103,9 +103,9 @@ class EnvVar {
 EnvVar.prototype["key"] = undefined;
 
 /**
- * @member {String} value
+ * @member {Number} precedence
  */
-EnvVar.prototype["value"] = undefined;
+EnvVar.prototype["precedence"] = undefined;
 
 /**
  * @member {Boolean} used
@@ -113,8 +113,8 @@ EnvVar.prototype["value"] = undefined;
 EnvVar.prototype["used"] = undefined;
 
 /**
- * @member {Number} precedence
+ * @member {String} value
  */
-EnvVar.prototype["precedence"] = undefined;
+EnvVar.prototype["value"] = undefined;
 
 export default EnvVar;

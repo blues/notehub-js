@@ -45,35 +45,8 @@ class TowerLocation {
     if (data) {
       obj = obj || new TowerLocation();
 
-      if (data.hasOwnProperty("source")) {
-        obj["source"] = ApiClient.convertToType(data["source"], "String");
-      }
-      if (data.hasOwnProperty("time")) {
-        obj["time"] = ApiClient.convertToType(data["time"], "Number");
-      }
-      if (data.hasOwnProperty("n")) {
-        obj["n"] = ApiClient.convertToType(data["n"], "String");
-      }
       if (data.hasOwnProperty("c")) {
         obj["c"] = ApiClient.convertToType(data["c"], "String");
-      }
-      if (data.hasOwnProperty("lat")) {
-        obj["lat"] = ApiClient.convertToType(data["lat"], "Number");
-      }
-      if (data.hasOwnProperty("lon")) {
-        obj["lon"] = ApiClient.convertToType(data["lon"], "Number");
-      }
-      if (data.hasOwnProperty("zone")) {
-        obj["zone"] = ApiClient.convertToType(data["zone"], "String");
-      }
-      if (data.hasOwnProperty("mcc")) {
-        obj["mcc"] = ApiClient.convertToType(data["mcc"], "Number");
-      }
-      if (data.hasOwnProperty("mnc")) {
-        obj["mnc"] = ApiClient.convertToType(data["mnc"], "Number");
-      }
-      if (data.hasOwnProperty("lac")) {
-        obj["lac"] = ApiClient.convertToType(data["lac"], "Number");
       }
       if (data.hasOwnProperty("cid")) {
         obj["cid"] = ApiClient.convertToType(data["cid"], "Number");
@@ -81,11 +54,38 @@ class TowerLocation {
       if (data.hasOwnProperty("l")) {
         obj["l"] = ApiClient.convertToType(data["l"], "String");
       }
-      if (data.hasOwnProperty("z")) {
-        obj["z"] = ApiClient.convertToType(data["z"], "Number");
+      if (data.hasOwnProperty("lac")) {
+        obj["lac"] = ApiClient.convertToType(data["lac"], "Number");
+      }
+      if (data.hasOwnProperty("lat")) {
+        obj["lat"] = ApiClient.convertToType(data["lat"], "Number");
+      }
+      if (data.hasOwnProperty("lon")) {
+        obj["lon"] = ApiClient.convertToType(data["lon"], "Number");
+      }
+      if (data.hasOwnProperty("mcc")) {
+        obj["mcc"] = ApiClient.convertToType(data["mcc"], "Number");
+      }
+      if (data.hasOwnProperty("mnc")) {
+        obj["mnc"] = ApiClient.convertToType(data["mnc"], "Number");
+      }
+      if (data.hasOwnProperty("n")) {
+        obj["n"] = ApiClient.convertToType(data["n"], "String");
+      }
+      if (data.hasOwnProperty("source")) {
+        obj["source"] = ApiClient.convertToType(data["source"], "String");
+      }
+      if (data.hasOwnProperty("time")) {
+        obj["time"] = ApiClient.convertToType(data["time"], "Number");
       }
       if (data.hasOwnProperty("towers")) {
         obj["towers"] = ApiClient.convertToType(data["towers"], "Number");
+      }
+      if (data.hasOwnProperty("z")) {
+        obj["z"] = ApiClient.convertToType(data["z"], "Number");
+      }
+      if (data.hasOwnProperty("zone")) {
+        obj["zone"] = ApiClient.convertToType(data["zone"], "String");
       }
     } else if (data === null) {
       return null;
@@ -101,12 +101,22 @@ class TowerLocation {
   static validateJSON(data) {
     // ensure the json data is a string
     if (
-      data["source"] &&
-      !(typeof data["source"] === "string" || data["source"] instanceof String)
+      data["c"] &&
+      !(typeof data["c"] === "string" || data["c"] instanceof String)
     ) {
       throw new Error(
-        "Expected the field `source` to be a primitive type in the JSON string but got " +
-          data["source"]
+        "Expected the field `c` to be a primitive type in the JSON string but got " +
+          data["c"]
+      );
+    }
+    // ensure the json data is a string
+    if (
+      data["l"] &&
+      !(typeof data["l"] === "string" || data["l"] instanceof String)
+    ) {
+      throw new Error(
+        "Expected the field `l` to be a primitive type in the JSON string but got " +
+          data["l"]
       );
     }
     // ensure the json data is a string
@@ -121,12 +131,12 @@ class TowerLocation {
     }
     // ensure the json data is a string
     if (
-      data["c"] &&
-      !(typeof data["c"] === "string" || data["c"] instanceof String)
+      data["source"] &&
+      !(typeof data["source"] === "string" || data["source"] instanceof String)
     ) {
       throw new Error(
-        "Expected the field `c` to be a primitive type in the JSON string but got " +
-          data["c"]
+        "Expected the field `source` to be a primitive type in the JSON string but got " +
+          data["source"]
       );
     }
     // ensure the json data is a string
@@ -139,80 +149,16 @@ class TowerLocation {
           data["zone"]
       );
     }
-    // ensure the json data is a string
-    if (
-      data["l"] &&
-      !(typeof data["l"] === "string" || data["l"] instanceof String)
-    ) {
-      throw new Error(
-        "Expected the field `l` to be a primitive type in the JSON string but got " +
-          data["l"]
-      );
-    }
 
     return true;
   }
 }
 
 /**
- * The source of this location
- * @member {String} source
- */
-TowerLocation.prototype["source"] = undefined;
-
-/**
- * Unix timestamp when this location was ascertained
- * @member {Number} time
- */
-TowerLocation.prototype["time"] = undefined;
-
-/**
- * Name of the location
- * @member {String} n
- */
-TowerLocation.prototype["n"] = undefined;
-
-/**
  * Country code
  * @member {String} c
  */
 TowerLocation.prototype["c"] = undefined;
-
-/**
- * Latitude
- * @member {Number} lat
- */
-TowerLocation.prototype["lat"] = undefined;
-
-/**
- * Longitude
- * @member {Number} lon
- */
-TowerLocation.prototype["lon"] = undefined;
-
-/**
- * Timezone name
- * @member {String} zone
- */
-TowerLocation.prototype["zone"] = undefined;
-
-/**
- * Mobile Country Code
- * @member {Number} mcc
- */
-TowerLocation.prototype["mcc"] = undefined;
-
-/**
- * Mobile Network Code
- * @member {Number} mnc
- */
-TowerLocation.prototype["mnc"] = undefined;
-
-/**
- * Location Area Code
- * @member {Number} lac
- */
-TowerLocation.prototype["lac"] = undefined;
 
 /**
  * Cell ID
@@ -227,15 +173,69 @@ TowerLocation.prototype["cid"] = undefined;
 TowerLocation.prototype["l"] = undefined;
 
 /**
- * Timezone ID
- * @member {Number} z
+ * Location Area Code
+ * @member {Number} lac
  */
-TowerLocation.prototype["z"] = undefined;
+TowerLocation.prototype["lac"] = undefined;
+
+/**
+ * Latitude
+ * @member {Number} lat
+ */
+TowerLocation.prototype["lat"] = undefined;
+
+/**
+ * Longitude
+ * @member {Number} lon
+ */
+TowerLocation.prototype["lon"] = undefined;
+
+/**
+ * Mobile Country Code
+ * @member {Number} mcc
+ */
+TowerLocation.prototype["mcc"] = undefined;
+
+/**
+ * Mobile Network Code
+ * @member {Number} mnc
+ */
+TowerLocation.prototype["mnc"] = undefined;
+
+/**
+ * Name of the location
+ * @member {String} n
+ */
+TowerLocation.prototype["n"] = undefined;
+
+/**
+ * The source of this location
+ * @member {String} source
+ */
+TowerLocation.prototype["source"] = undefined;
+
+/**
+ * Unix timestamp when this location was ascertained
+ * @member {Number} time
+ */
+TowerLocation.prototype["time"] = undefined;
 
 /**
  * Number of triangulation points
  * @member {Number} towers
  */
 TowerLocation.prototype["towers"] = undefined;
+
+/**
+ * Timezone ID
+ * @member {Number} z
+ */
+TowerLocation.prototype["z"] = undefined;
+
+/**
+ * Timezone name
+ * @member {String} zone
+ */
+TowerLocation.prototype["zone"] = undefined;
 
 export default TowerLocation;

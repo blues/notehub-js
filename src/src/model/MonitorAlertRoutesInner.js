@@ -150,12 +150,6 @@ class MonitorAlertRoutesInner {
 }
 
 /**
- * The URL of the Slack webhook.
- * @member {String} url
- */
-MonitorAlertRoutesInner.prototype["url"] = undefined;
-
-/**
  * text or blocks
  * @member {module:model/MonitorAlertRoutesInner.MessageTypeEnum} message_type
  */
@@ -168,16 +162,22 @@ MonitorAlertRoutesInner.prototype["message_type"] = undefined;
 MonitorAlertRoutesInner.prototype["text"] = undefined;
 
 /**
- * The bearer token for the Slack app.
- * @member {String} token
+ * The URL of the Slack webhook.
+ * @member {String} url
  */
-MonitorAlertRoutesInner.prototype["token"] = undefined;
+MonitorAlertRoutesInner.prototype["url"] = undefined;
 
 /**
  * The channel to send the message to.
  * @member {String} channel
  */
 MonitorAlertRoutesInner.prototype["channel"] = undefined;
+
+/**
+ * The bearer token for the Slack app.
+ * @member {String} token
+ */
+MonitorAlertRoutesInner.prototype["token"] = undefined;
 
 /**
  * Email Address

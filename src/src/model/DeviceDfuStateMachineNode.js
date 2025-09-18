@@ -46,12 +46,6 @@ class DeviceDfuStateMachineNode {
     if (data) {
       obj = obj || new DeviceDfuStateMachineNode();
 
-      if (data.hasOwnProperty("status")) {
-        obj["status"] = ApiClient.convertToType(data["status"], "String");
-      }
-      if (data.hasOwnProperty("phase")) {
-        obj["phase"] = ApiClient.convertToType(data["phase"], "String");
-      }
       if (data.hasOwnProperty("datetime")) {
         obj["datetime"] = ApiClient.convertToType(data["datetime"], "String");
       }
@@ -60,6 +54,12 @@ class DeviceDfuStateMachineNode {
           data["description"],
           "String"
         );
+      }
+      if (data.hasOwnProperty("phase")) {
+        obj["phase"] = ApiClient.convertToType(data["phase"], "String");
+      }
+      if (data.hasOwnProperty("status")) {
+        obj["status"] = ApiClient.convertToType(data["status"], "String");
       }
     } else if (data === null) {
       return null;
@@ -73,26 +73,6 @@ class DeviceDfuStateMachineNode {
    * @return {boolean} to indicate whether the JSON data is valid with respect to <code>DeviceDfuStateMachineNode</code>.
    */
   static validateJSON(data) {
-    // ensure the json data is a string
-    if (
-      data["status"] &&
-      !(typeof data["status"] === "string" || data["status"] instanceof String)
-    ) {
-      throw new Error(
-        "Expected the field `status` to be a primitive type in the JSON string but got " +
-          data["status"]
-      );
-    }
-    // ensure the json data is a string
-    if (
-      data["phase"] &&
-      !(typeof data["phase"] === "string" || data["phase"] instanceof String)
-    ) {
-      throw new Error(
-        "Expected the field `phase` to be a primitive type in the JSON string but got " +
-          data["phase"]
-      );
-    }
     // ensure the json data is a string
     if (
       data["datetime"] &&
@@ -119,22 +99,30 @@ class DeviceDfuStateMachineNode {
           data["description"]
       );
     }
+    // ensure the json data is a string
+    if (
+      data["phase"] &&
+      !(typeof data["phase"] === "string" || data["phase"] instanceof String)
+    ) {
+      throw new Error(
+        "Expected the field `phase` to be a primitive type in the JSON string but got " +
+          data["phase"]
+      );
+    }
+    // ensure the json data is a string
+    if (
+      data["status"] &&
+      !(typeof data["status"] === "string" || data["status"] instanceof String)
+    ) {
+      throw new Error(
+        "Expected the field `status` to be a primitive type in the JSON string but got " +
+          data["status"]
+      );
+    }
 
     return true;
   }
 }
-
-/**
- * Status for this step in the firmware update process
- * @member {String} status
- */
-DeviceDfuStateMachineNode.prototype["status"] = undefined;
-
-/**
- * Phase for this step in the firmware update process
- * @member {String} phase
- */
-DeviceDfuStateMachineNode.prototype["phase"] = undefined;
 
 /**
  * RFC3339 compatible datetime of when this status update happened
@@ -147,5 +135,17 @@ DeviceDfuStateMachineNode.prototype["datetime"] = undefined;
  * @member {String} description
  */
 DeviceDfuStateMachineNode.prototype["description"] = undefined;
+
+/**
+ * Phase for this step in the firmware update process
+ * @member {String} phase
+ */
+DeviceDfuStateMachineNode.prototype["phase"] = undefined;
+
+/**
+ * Status for this step in the firmware update process
+ * @member {String} status
+ */
+DeviceDfuStateMachineNode.prototype["status"] = undefined;
 
 export default DeviceDfuStateMachineNode;

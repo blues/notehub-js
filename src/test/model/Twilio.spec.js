@@ -50,24 +50,6 @@
       //expect(instance).to.be.a(NotehubJs.Twilio);
     });
 
-    it('should have the property fleets (base name: "fleets")', function () {
-      // uncomment below and update the code to test the property fleets
-      //var instance = new NotehubJs.Twilio();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property filter (base name: "filter")', function () {
-      // uncomment below and update the code to test the property filter
-      //var instance = new NotehubJs.Twilio();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property timeout (base name: "timeout")', function () {
-      // uncomment below and update the code to test the property timeout
-      //var instance = new NotehubJs.Twilio();
-      //expect(instance).to.be();
-    });
-
     it('should have the property accountSid (base name: "account_sid")', function () {
       // uncomment below and update the code to test the property accountSid
       //var instance = new NotehubJs.Twilio();
@@ -80,8 +62,14 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property to (base name: "to")', function () {
-      // uncomment below and update the code to test the property to
+    it('should have the property filter (base name: "filter")', function () {
+      // uncomment below and update the code to test the property filter
+      //var instance = new NotehubJs.Twilio();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property fleets (base name: "fleets")', function () {
+      // uncomment below and update the code to test the property fleets
       //var instance = new NotehubJs.Twilio();
       //expect(instance).to.be();
     });
@@ -100,6 +88,18 @@
 
     it('should have the property throttleMs (base name: "throttle_ms")', function () {
       // uncomment below and update the code to test the property throttleMs
+      //var instance = new NotehubJs.Twilio();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property timeout (base name: "timeout")', function () {
+      // uncomment below and update the code to test the property timeout
+      //var instance = new NotehubJs.Twilio();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property to (base name: "to")', function () {
+      // uncomment below and update the code to test the property to
       //var instance = new NotehubJs.Twilio();
       //expect(instance).to.be();
     });

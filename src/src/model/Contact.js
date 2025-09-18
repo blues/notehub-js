@@ -45,20 +45,20 @@ class Contact {
     if (data) {
       obj = obj || new Contact();
 
-      if (data.hasOwnProperty("name")) {
-        obj["name"] = ApiClient.convertToType(data["name"], "String");
-      }
       if (data.hasOwnProperty("email")) {
         obj["email"] = ApiClient.convertToType(data["email"], "String");
       }
-      if (data.hasOwnProperty("role")) {
-        obj["role"] = ApiClient.convertToType(data["role"], "String");
+      if (data.hasOwnProperty("name")) {
+        obj["name"] = ApiClient.convertToType(data["name"], "String");
       }
       if (data.hasOwnProperty("organization")) {
         obj["organization"] = ApiClient.convertToType(
           data["organization"],
           "String"
         );
+      }
+      if (data.hasOwnProperty("role")) {
+        obj["role"] = ApiClient.convertToType(data["role"], "String");
       }
     } else if (data === null) {
       return null;
@@ -74,16 +74,6 @@ class Contact {
   static validateJSON(data) {
     // ensure the json data is a string
     if (
-      data["name"] &&
-      !(typeof data["name"] === "string" || data["name"] instanceof String)
-    ) {
-      throw new Error(
-        "Expected the field `name` to be a primitive type in the JSON string but got " +
-          data["name"]
-      );
-    }
-    // ensure the json data is a string
-    if (
       data["email"] &&
       !(typeof data["email"] === "string" || data["email"] instanceof String)
     ) {
@@ -94,12 +84,12 @@ class Contact {
     }
     // ensure the json data is a string
     if (
-      data["role"] &&
-      !(typeof data["role"] === "string" || data["role"] instanceof String)
+      data["name"] &&
+      !(typeof data["name"] === "string" || data["name"] instanceof String)
     ) {
       throw new Error(
-        "Expected the field `role` to be a primitive type in the JSON string but got " +
-          data["role"]
+        "Expected the field `name` to be a primitive type in the JSON string but got " +
+          data["name"]
       );
     }
     // ensure the json data is a string
@@ -115,15 +105,20 @@ class Contact {
           data["organization"]
       );
     }
+    // ensure the json data is a string
+    if (
+      data["role"] &&
+      !(typeof data["role"] === "string" || data["role"] instanceof String)
+    ) {
+      throw new Error(
+        "Expected the field `role` to be a primitive type in the JSON string but got " +
+          data["role"]
+      );
+    }
 
     return true;
   }
 }
-
-/**
- * @member {String} name
- */
-Contact.prototype["name"] = undefined;
 
 /**
  * @member {String} email
@@ -131,13 +126,18 @@ Contact.prototype["name"] = undefined;
 Contact.prototype["email"] = undefined;
 
 /**
- * @member {String} role
+ * @member {String} name
  */
-Contact.prototype["role"] = undefined;
+Contact.prototype["name"] = undefined;
 
 /**
  * @member {String} organization
  */
 Contact.prototype["organization"] = undefined;
+
+/**
+ * @member {String} role
+ */
+Contact.prototype["role"] = undefined;
 
 export default Contact;

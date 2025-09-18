@@ -45,14 +45,14 @@ class HandleNotefileChanges200Response {
     if (data) {
       obj = obj || new HandleNotefileChanges200Response();
 
-      if (data.hasOwnProperty("total")) {
-        obj["total"] = ApiClient.convertToType(data["total"], "Number");
-      }
       if (data.hasOwnProperty("changes")) {
         obj["changes"] = ApiClient.convertToType(data["changes"], "Number");
       }
       if (data.hasOwnProperty("info")) {
         obj["info"] = ApiClient.convertToType(data["info"], Object);
+      }
+      if (data.hasOwnProperty("total")) {
+        obj["total"] = ApiClient.convertToType(data["total"], "Number");
       }
     } else if (data === null) {
       return null;
@@ -71,12 +71,6 @@ class HandleNotefileChanges200Response {
 }
 
 /**
- * The total number of files.
- * @member {Number} total
- */
-HandleNotefileChanges200Response.prototype["total"] = undefined;
-
-/**
  * The number of pending changes in the Notefile.
  * @member {Number} changes
  */
@@ -87,5 +81,11 @@ HandleNotefileChanges200Response.prototype["changes"] = undefined;
  * @member {Object} info
  */
 HandleNotefileChanges200Response.prototype["info"] = undefined;
+
+/**
+ * The total number of files.
+ * @member {Number} total
+ */
+HandleNotefileChanges200Response.prototype["total"] = undefined;
 
 export default HandleNotefileChanges200Response;

@@ -45,21 +45,21 @@ class Repository {
     if (data) {
       obj = obj || new Repository();
 
-      if (data.hasOwnProperty("uid")) {
-        obj["uid"] = ApiClient.convertToType(data["uid"], "String");
+      if (data.hasOwnProperty("fleet_uids")) {
+        obj["fleet_uids"] = ApiClient.convertToType(data["fleet_uids"], [
+          "String",
+        ]);
       }
       if (data.hasOwnProperty("name")) {
         obj["name"] = ApiClient.convertToType(data["name"], "String");
       }
-      if (data.hasOwnProperty("fleetUIDs")) {
-        obj["fleetUIDs"] = ApiClient.convertToType(data["fleetUIDs"], [
+      if (data.hasOwnProperty("project_uids")) {
+        obj["project_uids"] = ApiClient.convertToType(data["project_uids"], [
           "String",
         ]);
       }
-      if (data.hasOwnProperty("projectUIDs")) {
-        obj["projectUIDs"] = ApiClient.convertToType(data["projectUIDs"], [
-          "String",
-        ]);
+      if (data.hasOwnProperty("uid")) {
+        obj["uid"] = ApiClient.convertToType(data["uid"], "String");
       }
     } else if (data === null) {
       return null;
@@ -73,14 +73,11 @@ class Repository {
    * @return {boolean} to indicate whether the JSON data is valid with respect to <code>Repository</code>.
    */
   static validateJSON(data) {
-    // ensure the json data is a string
-    if (
-      data["uid"] &&
-      !(typeof data["uid"] === "string" || data["uid"] instanceof String)
-    ) {
+    // ensure the json data is an array
+    if (!Array.isArray(data["fleet_uids"])) {
       throw new Error(
-        "Expected the field `uid` to be a primitive type in the JSON string but got " +
-          data["uid"]
+        "Expected the field `fleet_uids` to be an array in the JSON data but got " +
+          data["fleet_uids"]
       );
     }
     // ensure the json data is a string
@@ -94,17 +91,20 @@ class Repository {
       );
     }
     // ensure the json data is an array
-    if (!Array.isArray(data["fleetUIDs"])) {
+    if (!Array.isArray(data["project_uids"])) {
       throw new Error(
-        "Expected the field `fleetUIDs` to be an array in the JSON data but got " +
-          data["fleetUIDs"]
+        "Expected the field `project_uids` to be an array in the JSON data but got " +
+          data["project_uids"]
       );
     }
-    // ensure the json data is an array
-    if (!Array.isArray(data["projectUIDs"])) {
+    // ensure the json data is a string
+    if (
+      data["uid"] &&
+      !(typeof data["uid"] === "string" || data["uid"] instanceof String)
+    ) {
       throw new Error(
-        "Expected the field `projectUIDs` to be an array in the JSON data but got " +
-          data["projectUIDs"]
+        "Expected the field `uid` to be a primitive type in the JSON string but got " +
+          data["uid"]
       );
     }
 
@@ -113,10 +113,9 @@ class Repository {
 }
 
 /**
- * The unique identifier for the data repository
- * @member {String} uid
+ * @member {Array.<String>} fleet_uids
  */
-Repository.prototype["uid"] = undefined;
+Repository.prototype["fleet_uids"] = undefined;
 
 /**
  * repository name
@@ -125,13 +124,14 @@ Repository.prototype["uid"] = undefined;
 Repository.prototype["name"] = undefined;
 
 /**
- * @member {Array.<String>} fleetUIDs
+ * @member {Array.<String>} project_uids
  */
-Repository.prototype["fleetUIDs"] = undefined;
+Repository.prototype["project_uids"] = undefined;
 
 /**
- * @member {Array.<String>} projectUIDs
+ * The unique identifier for the data repository
+ * @member {String} uid
  */
-Repository.prototype["projectUIDs"] = undefined;
+Repository.prototype["uid"] = undefined;
 
 export default Repository;

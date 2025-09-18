@@ -45,9 +45,6 @@ class SlackBearerNotification {
     if (data) {
       obj = obj || new SlackBearerNotification();
 
-      if (data.hasOwnProperty("token")) {
-        obj["token"] = ApiClient.convertToType(data["token"], "String");
-      }
       if (data.hasOwnProperty("channel")) {
         obj["channel"] = ApiClient.convertToType(data["channel"], "String");
       }
@@ -59,6 +56,9 @@ class SlackBearerNotification {
       }
       if (data.hasOwnProperty("text")) {
         obj["text"] = ApiClient.convertToType(data["text"], "String");
+      }
+      if (data.hasOwnProperty("token")) {
+        obj["token"] = ApiClient.convertToType(data["token"], "String");
       }
     } else if (data === null) {
       return null;
@@ -72,16 +72,6 @@ class SlackBearerNotification {
    * @return {boolean} to indicate whether the JSON data is valid with respect to <code>SlackBearerNotification</code>.
    */
   static validateJSON(data) {
-    // ensure the json data is a string
-    if (
-      data["token"] &&
-      !(typeof data["token"] === "string" || data["token"] instanceof String)
-    ) {
-      throw new Error(
-        "Expected the field `token` to be a primitive type in the JSON string but got " +
-          data["token"]
-      );
-    }
     // ensure the json data is a string
     if (
       data["channel"] &&
@@ -117,16 +107,20 @@ class SlackBearerNotification {
           data["text"]
       );
     }
+    // ensure the json data is a string
+    if (
+      data["token"] &&
+      !(typeof data["token"] === "string" || data["token"] instanceof String)
+    ) {
+      throw new Error(
+        "Expected the field `token` to be a primitive type in the JSON string but got " +
+          data["token"]
+      );
+    }
 
     return true;
   }
 }
-
-/**
- * The bearer token for the Slack app.
- * @member {String} token
- */
-SlackBearerNotification.prototype["token"] = undefined;
 
 /**
  * The channel to send the message to.
@@ -145,6 +139,12 @@ SlackBearerNotification.prototype["message_type"] = undefined;
  * @member {String} text
  */
 SlackBearerNotification.prototype["text"] = undefined;
+
+/**
+ * The bearer token for the Slack app.
+ * @member {String} token
+ */
+SlackBearerNotification.prototype["token"] = undefined;
 
 /**
  * Allowed values for the <code>message_type</code> property.

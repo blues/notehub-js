@@ -50,20 +50,14 @@
       //expect(instance).to.be.a(NotehubJs.Proxy);
     });
 
-    it('should have the property fleets (base name: "fleets")', function () {
-      // uncomment below and update the code to test the property fleets
-      //var instance = new NotehubJs.Proxy();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property url (base name: "url")', function () {
-      // uncomment below and update the code to test the property url
-      //var instance = new NotehubJs.Proxy();
-      //expect(instance).to.be();
-    });
-
     it('should have the property alias (base name: "alias")', function () {
       // uncomment below and update the code to test the property alias
+      //var instance = new NotehubJs.Proxy();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property fleets (base name: "fleets")', function () {
+      // uncomment below and update the code to test the property fleets
       //var instance = new NotehubJs.Proxy();
       //expect(instance).to.be();
     });
@@ -76,6 +70,12 @@
 
     it('should have the property timeout (base name: "timeout")', function () {
       // uncomment below and update the code to test the property timeout
+      //var instance = new NotehubJs.Proxy();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property url (base name: "url")', function () {
+      // uncomment below and update the code to test the property url
       //var instance = new NotehubJs.Proxy();
       //expect(instance).to.be();
     });

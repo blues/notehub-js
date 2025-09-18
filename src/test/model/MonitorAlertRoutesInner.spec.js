@@ -50,12 +50,6 @@
       //expect(instance).to.be.a(NotehubJs.MonitorAlertRoutesInner);
     });
 
-    it('should have the property url (base name: "url")', function () {
-      // uncomment below and update the code to test the property url
-      //var instance = new NotehubJs.MonitorAlertRoutesInner();
-      //expect(instance).to.be();
-    });
-
     it('should have the property messageType (base name: "message_type")', function () {
       // uncomment below and update the code to test the property messageType
       //var instance = new NotehubJs.MonitorAlertRoutesInner();
@@ -68,14 +62,20 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property token (base name: "token")', function () {
-      // uncomment below and update the code to test the property token
+    it('should have the property url (base name: "url")', function () {
+      // uncomment below and update the code to test the property url
       //var instance = new NotehubJs.MonitorAlertRoutesInner();
       //expect(instance).to.be();
     });
 
     it('should have the property channel (base name: "channel")', function () {
       // uncomment below and update the code to test the property channel
+      //var instance = new NotehubJs.MonitorAlertRoutesInner();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property token (base name: "token")', function () {
+      // uncomment below and update the code to test the property token
       //var instance = new NotehubJs.MonitorAlertRoutesInner();
       //expect(instance).to.be();
     });

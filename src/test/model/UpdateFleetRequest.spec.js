@@ -50,14 +50,14 @@
       //expect(instance).to.be.a(NotehubJs.UpdateFleetRequest);
     });
 
-    it('should have the property label (base name: "label")', function () {
-      // uncomment below and update the code to test the property label
+    it('should have the property addDevices (base name: "addDevices")', function () {
+      // uncomment below and update the code to test the property addDevices
       //var instance = new NotehubJs.UpdateFleetRequest();
       //expect(instance).to.be();
     });
 
-    it('should have the property addDevices (base name: "addDevices")', function () {
-      // uncomment below and update the code to test the property addDevices
+    it('should have the property label (base name: "label")', function () {
+      // uncomment below and update the code to test the property label
       //var instance = new NotehubJs.UpdateFleetRequest();
       //expect(instance).to.be();
     });

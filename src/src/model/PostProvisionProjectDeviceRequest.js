@@ -48,12 +48,6 @@ class PostProvisionProjectDeviceRequest {
     if (data) {
       obj = obj || new PostProvisionProjectDeviceRequest();
 
-      if (data.hasOwnProperty("product_uid")) {
-        obj["product_uid"] = ApiClient.convertToType(
-          data["product_uid"],
-          "String"
-        );
-      }
       if (data.hasOwnProperty("device_sn")) {
         obj["device_sn"] = ApiClient.convertToType(data["device_sn"], "String");
       }
@@ -61,6 +55,12 @@ class PostProvisionProjectDeviceRequest {
         obj["fleet_uids"] = ApiClient.convertToType(data["fleet_uids"], [
           "String",
         ]);
+      }
+      if (data.hasOwnProperty("product_uid")) {
+        obj["product_uid"] = ApiClient.convertToType(
+          data["product_uid"],
+          "String"
+        );
       }
     } else if (data === null) {
       return null;
@@ -87,19 +87,6 @@ class PostProvisionProjectDeviceRequest {
     }
     // ensure the json data is a string
     if (
-      data["product_uid"] &&
-      !(
-        typeof data["product_uid"] === "string" ||
-        data["product_uid"] instanceof String
-      )
-    ) {
-      throw new Error(
-        "Expected the field `product_uid` to be a primitive type in the JSON string but got " +
-          data["product_uid"]
-      );
-    }
-    // ensure the json data is a string
-    if (
       data["device_sn"] &&
       !(
         typeof data["device_sn"] === "string" ||
@@ -118,18 +105,25 @@ class PostProvisionProjectDeviceRequest {
           data["fleet_uids"]
       );
     }
+    // ensure the json data is a string
+    if (
+      data["product_uid"] &&
+      !(
+        typeof data["product_uid"] === "string" ||
+        data["product_uid"] instanceof String
+      )
+    ) {
+      throw new Error(
+        "Expected the field `product_uid` to be a primitive type in the JSON string but got " +
+          data["product_uid"]
+      );
+    }
 
     return true;
   }
 }
 
 PostProvisionProjectDeviceRequest.RequiredProperties = ["product_uid"];
-
-/**
- * The ProductUID that the device should use.
- * @member {String} product_uid
- */
-PostProvisionProjectDeviceRequest.prototype["product_uid"] = undefined;
 
 /**
  * The serial number to assign to the device.
@@ -142,5 +136,11 @@ PostProvisionProjectDeviceRequest.prototype["device_sn"] = undefined;
  * @member {Array.<String>} fleet_uids
  */
 PostProvisionProjectDeviceRequest.prototype["fleet_uids"] = undefined;
+
+/**
+ * The ProductUID that the device should use.
+ * @member {String} product_uid
+ */
+PostProvisionProjectDeviceRequest.prototype["product_uid"] = undefined;
 
 export default PostProvisionProjectDeviceRequest;

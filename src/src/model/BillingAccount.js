@@ -23,12 +23,12 @@ class BillingAccount {
   /**
    * Constructs a new <code>BillingAccount</code>.
    * @alias module:model/BillingAccount
-   * @param uid {String}
    * @param name {String}
    * @param role {module:model/BillingAccountRole}
+   * @param uid {String}
    */
-  constructor(uid, name, role) {
-    BillingAccount.initialize(this, uid, name, role);
+  constructor(name, role, uid) {
+    BillingAccount.initialize(this, name, role, uid);
   }
 
   /**
@@ -36,10 +36,10 @@ class BillingAccount {
    * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
    * Only for internal use.
    */
-  static initialize(obj, uid, name, role) {
-    obj["uid"] = uid;
+  static initialize(obj, name, role, uid) {
     obj["name"] = name;
     obj["role"] = role;
+    obj["uid"] = uid;
   }
 
   /**
@@ -53,14 +53,14 @@ class BillingAccount {
     if (data) {
       obj = obj || new BillingAccount();
 
-      if (data.hasOwnProperty("uid")) {
-        obj["uid"] = ApiClient.convertToType(data["uid"], "String");
-      }
       if (data.hasOwnProperty("name")) {
         obj["name"] = ApiClient.convertToType(data["name"], "String");
       }
       if (data.hasOwnProperty("role")) {
         obj["role"] = BillingAccountRole.constructFromObject(data["role"]);
+      }
+      if (data.hasOwnProperty("uid")) {
+        obj["uid"] = ApiClient.convertToType(data["uid"], "String");
       }
     } else if (data === null) {
       return null;
@@ -87,16 +87,6 @@ class BillingAccount {
     }
     // ensure the json data is a string
     if (
-      data["uid"] &&
-      !(typeof data["uid"] === "string" || data["uid"] instanceof String)
-    ) {
-      throw new Error(
-        "Expected the field `uid` to be a primitive type in the JSON string but got " +
-          data["uid"]
-      );
-    }
-    // ensure the json data is a string
-    if (
       data["name"] &&
       !(typeof data["name"] === "string" || data["name"] instanceof String)
     ) {
@@ -105,17 +95,22 @@ class BillingAccount {
           data["name"]
       );
     }
+    // ensure the json data is a string
+    if (
+      data["uid"] &&
+      !(typeof data["uid"] === "string" || data["uid"] instanceof String)
+    ) {
+      throw new Error(
+        "Expected the field `uid` to be a primitive type in the JSON string but got " +
+          data["uid"]
+      );
+    }
 
     return true;
   }
 }
 
-BillingAccount.RequiredProperties = ["uid", "name", "role"];
-
-/**
- * @member {String} uid
- */
-BillingAccount.prototype["uid"] = undefined;
+BillingAccount.RequiredProperties = ["name", "role", "uid"];
 
 /**
  * @member {String} name
@@ -126,5 +121,10 @@ BillingAccount.prototype["name"] = undefined;
  * @member {module:model/BillingAccountRole} role
  */
 BillingAccount.prototype["role"] = undefined;
+
+/**
+ * @member {String} uid
+ */
+BillingAccount.prototype["uid"] = undefined;
 
 export default BillingAccount;

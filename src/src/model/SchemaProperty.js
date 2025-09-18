@@ -23,10 +23,9 @@ class SchemaProperty {
    * Constructs a new <code>SchemaProperty</code>.
    * @alias module:model/SchemaProperty
    * @param type {module:model/SchemaProperty.TypeEnum}
-   * @param updatedAt {Date}
    */
-  constructor(type, updatedAt) {
-    SchemaProperty.initialize(this, type, updatedAt);
+  constructor(type) {
+    SchemaProperty.initialize(this, type);
   }
 
   /**
@@ -34,9 +33,8 @@ class SchemaProperty {
    * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
    * Only for internal use.
    */
-  static initialize(obj, type, updatedAt) {
+  static initialize(obj, type) {
     obj["type"] = type;
-    obj["updatedAt"] = updatedAt;
   }
 
   /**
@@ -50,22 +48,22 @@ class SchemaProperty {
     if (data) {
       obj = obj || new SchemaProperty();
 
-      if (data.hasOwnProperty("name")) {
-        obj["name"] = ApiClient.convertToType(data["name"], "String");
-      }
-      if (data.hasOwnProperty("type")) {
-        obj["type"] = ApiClient.convertToType(data["type"], "String");
-      }
-      if (data.hasOwnProperty("updatedAt")) {
-        obj["updatedAt"] = ApiClient.convertToType(data["updatedAt"], "Date");
-      }
       if (data.hasOwnProperty("items")) {
         obj["items"] = ApiClient.convertToType(data["items"], [SchemaProperty]);
+      }
+      if (data.hasOwnProperty("name")) {
+        obj["name"] = ApiClient.convertToType(data["name"], "String");
       }
       if (data.hasOwnProperty("properties")) {
         obj["properties"] = ApiClient.convertToType(data["properties"], [
           SchemaProperty,
         ]);
+      }
+      if (data.hasOwnProperty("type")) {
+        obj["type"] = ApiClient.convertToType(data["type"], "String");
+      }
+      if (data.hasOwnProperty("updated_at")) {
+        obj["updated_at"] = ApiClient.convertToType(data["updated_at"], "Date");
       }
     } else if (data === null) {
       return null;
@@ -90,26 +88,6 @@ class SchemaProperty {
         );
       }
     }
-    // ensure the json data is a string
-    if (
-      data["name"] &&
-      !(typeof data["name"] === "string" || data["name"] instanceof String)
-    ) {
-      throw new Error(
-        "Expected the field `name` to be a primitive type in the JSON string but got " +
-          data["name"]
-      );
-    }
-    // ensure the json data is a string
-    if (
-      data["type"] &&
-      !(typeof data["type"] === "string" || data["type"] instanceof String)
-    ) {
-      throw new Error(
-        "Expected the field `type` to be a primitive type in the JSON string but got " +
-          data["type"]
-      );
-    }
     if (data["items"]) {
       // data not null
       // ensure the json data is an array
@@ -123,6 +101,16 @@ class SchemaProperty {
       for (const item of data["items"]) {
         SchemaProperty.validateJsonObject(item);
       }
+    }
+    // ensure the json data is a string
+    if (
+      data["name"] &&
+      !(typeof data["name"] === "string" || data["name"] instanceof String)
+    ) {
+      throw new Error(
+        "Expected the field `name` to be a primitive type in the JSON string but got " +
+          data["name"]
+      );
     }
     if (data["properties"]) {
       // data not null
@@ -138,28 +126,22 @@ class SchemaProperty {
         SchemaProperty.validateJsonObject(item);
       }
     }
+    // ensure the json data is a string
+    if (
+      data["type"] &&
+      !(typeof data["type"] === "string" || data["type"] instanceof String)
+    ) {
+      throw new Error(
+        "Expected the field `type` to be a primitive type in the JSON string but got " +
+          data["type"]
+      );
+    }
 
     return true;
   }
 }
 
-SchemaProperty.RequiredProperties = ["type", "updatedAt"];
-
-/**
- * Name of the field (optional for array/object children)
- * @member {String} name
- */
-SchemaProperty.prototype["name"] = undefined;
-
-/**
- * @member {module:model/SchemaProperty.TypeEnum} type
- */
-SchemaProperty.prototype["type"] = undefined;
-
-/**
- * @member {Date} updatedAt
- */
-SchemaProperty.prototype["updatedAt"] = undefined;
+SchemaProperty.RequiredProperties = ["type"];
 
 /**
  * Used if type is array
@@ -168,10 +150,26 @@ SchemaProperty.prototype["updatedAt"] = undefined;
 SchemaProperty.prototype["items"] = undefined;
 
 /**
+ * Name of the field (optional for array/object children)
+ * @member {String} name
+ */
+SchemaProperty.prototype["name"] = undefined;
+
+/**
  * Used if type is object
  * @member {Array.<module:model/SchemaProperty>} properties
  */
 SchemaProperty.prototype["properties"] = undefined;
+
+/**
+ * @member {module:model/SchemaProperty.TypeEnum} type
+ */
+SchemaProperty.prototype["type"] = undefined;
+
+/**
+ * @member {Date} updated_at
+ */
+SchemaProperty.prototype["updated_at"] = undefined;
 
 /**
  * Allowed values for the <code>type</code> property.

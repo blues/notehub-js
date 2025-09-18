@@ -50,14 +50,14 @@
       //expect(instance).to.be.a(NotehubJs.PersonalAccessTokenSecret);
     });
 
-    it('should have the property uid (base name: "uid")', function () {
-      // uncomment below and update the code to test the property uid
+    it('should have the property secret (base name: "secret")', function () {
+      // uncomment below and update the code to test the property secret
       //var instance = new NotehubJs.PersonalAccessTokenSecret();
       //expect(instance).to.be();
     });
 
-    it('should have the property secret (base name: "secret")', function () {
-      // uncomment below and update the code to test the property secret
+    it('should have the property uid (base name: "uid")', function () {
+      // uncomment below and update the code to test the property uid
       //var instance = new NotehubJs.PersonalAccessTokenSecret();
       //expect(instance).to.be();
     });

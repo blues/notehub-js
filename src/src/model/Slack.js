@@ -12,8 +12,8 @@
  */
 
 import ApiClient from "../ApiClient";
-import HttpFilter from "./HttpFilter";
-import SnowflakeTransform from "./SnowflakeTransform";
+import AwsFilter from "./AwsFilter";
+import SlackTransform from "./SlackTransform";
 
 /**
  * The Slack model module.
@@ -48,16 +48,29 @@ class Slack {
     if (data) {
       obj = obj || new Slack();
 
+      if (data.hasOwnProperty("bearer")) {
+        obj["bearer"] = ApiClient.convertToType(data["bearer"], "String");
+      }
+      if (data.hasOwnProperty("blocks")) {
+        obj["blocks"] = ApiClient.convertToType(data["blocks"], "String");
+      }
+      if (data.hasOwnProperty("channel")) {
+        obj["channel"] = ApiClient.convertToType(data["channel"], "String");
+      }
+      if (data.hasOwnProperty("filter")) {
+        obj["filter"] = AwsFilter.constructFromObject(data["filter"]);
+      }
       if (data.hasOwnProperty("fleets")) {
         obj["fleets"] = ApiClient.convertToType(data["fleets"], ["String"]);
       }
-      if (data.hasOwnProperty("filter")) {
-        obj["filter"] = HttpFilter.constructFromObject(data["filter"]);
-      }
-      if (data.hasOwnProperty("transform")) {
-        obj["transform"] = SnowflakeTransform.constructFromObject(
-          data["transform"]
+      if (data.hasOwnProperty("slack_type")) {
+        obj["slack_type"] = ApiClient.convertToType(
+          data["slack_type"],
+          "String"
         );
+      }
+      if (data.hasOwnProperty("text")) {
+        obj["text"] = ApiClient.convertToType(data["text"], "String");
       }
       if (data.hasOwnProperty("throttle_ms")) {
         obj["throttle_ms"] = ApiClient.convertToType(
@@ -68,29 +81,16 @@ class Slack {
       if (data.hasOwnProperty("timeout")) {
         obj["timeout"] = ApiClient.convertToType(data["timeout"], "Number");
       }
-      if (data.hasOwnProperty("slack_type")) {
-        obj["slack_type"] = ApiClient.convertToType(
-          data["slack_type"],
-          "String"
+      if (data.hasOwnProperty("transform")) {
+        obj["transform"] = SlackTransform.constructFromObject(
+          data["transform"]
         );
-      }
-      if (data.hasOwnProperty("bearer")) {
-        obj["bearer"] = ApiClient.convertToType(data["bearer"], "String");
-      }
-      if (data.hasOwnProperty("channel")) {
-        obj["channel"] = ApiClient.convertToType(data["channel"], "String");
       }
       if (data.hasOwnProperty("webhook_url")) {
         obj["webhook_url"] = ApiClient.convertToType(
           data["webhook_url"],
           "String"
         );
-      }
-      if (data.hasOwnProperty("text")) {
-        obj["text"] = ApiClient.convertToType(data["text"], "String");
-      }
-      if (data.hasOwnProperty("blocks")) {
-        obj["blocks"] = ApiClient.convertToType(data["blocks"], "String");
       }
     } else if (data === null) {
       return null;
@@ -104,22 +104,49 @@ class Slack {
    * @return {boolean} to indicate whether the JSON data is valid with respect to <code>Slack</code>.
    */
   static validateJSON(data) {
+    // ensure the json data is a string
+    if (
+      data["bearer"] &&
+      !(typeof data["bearer"] === "string" || data["bearer"] instanceof String)
+    ) {
+      throw new Error(
+        "Expected the field `bearer` to be a primitive type in the JSON string but got " +
+          data["bearer"]
+      );
+    }
+    // ensure the json data is a string
+    if (
+      data["blocks"] &&
+      !(typeof data["blocks"] === "string" || data["blocks"] instanceof String)
+    ) {
+      throw new Error(
+        "Expected the field `blocks` to be a primitive type in the JSON string but got " +
+          data["blocks"]
+      );
+    }
+    // ensure the json data is a string
+    if (
+      data["channel"] &&
+      !(
+        typeof data["channel"] === "string" || data["channel"] instanceof String
+      )
+    ) {
+      throw new Error(
+        "Expected the field `channel` to be a primitive type in the JSON string but got " +
+          data["channel"]
+      );
+    }
+    // validate the optional field `filter`
+    if (data["filter"]) {
+      // data not null
+      AwsFilter.validateJSON(data["filter"]);
+    }
     // ensure the json data is an array
     if (!Array.isArray(data["fleets"])) {
       throw new Error(
         "Expected the field `fleets` to be an array in the JSON data but got " +
           data["fleets"]
       );
-    }
-    // validate the optional field `filter`
-    if (data["filter"]) {
-      // data not null
-      HttpFilter.validateJSON(data["filter"]);
-    }
-    // validate the optional field `transform`
-    if (data["transform"]) {
-      // data not null
-      SnowflakeTransform.validateJSON(data["transform"]);
     }
     // ensure the json data is a string
     if (
@@ -136,25 +163,18 @@ class Slack {
     }
     // ensure the json data is a string
     if (
-      data["bearer"] &&
-      !(typeof data["bearer"] === "string" || data["bearer"] instanceof String)
+      data["text"] &&
+      !(typeof data["text"] === "string" || data["text"] instanceof String)
     ) {
       throw new Error(
-        "Expected the field `bearer` to be a primitive type in the JSON string but got " +
-          data["bearer"]
+        "Expected the field `text` to be a primitive type in the JSON string but got " +
+          data["text"]
       );
     }
-    // ensure the json data is a string
-    if (
-      data["channel"] &&
-      !(
-        typeof data["channel"] === "string" || data["channel"] instanceof String
-      )
-    ) {
-      throw new Error(
-        "Expected the field `channel` to be a primitive type in the JSON string but got " +
-          data["channel"]
-      );
+    // validate the optional field `transform`
+    if (data["transform"]) {
+      // data not null
+      SlackTransform.validateJSON(data["transform"]);
     }
     // ensure the json data is a string
     if (
@@ -169,30 +189,33 @@ class Slack {
           data["webhook_url"]
       );
     }
-    // ensure the json data is a string
-    if (
-      data["text"] &&
-      !(typeof data["text"] === "string" || data["text"] instanceof String)
-    ) {
-      throw new Error(
-        "Expected the field `text` to be a primitive type in the JSON string but got " +
-          data["text"]
-      );
-    }
-    // ensure the json data is a string
-    if (
-      data["blocks"] &&
-      !(typeof data["blocks"] === "string" || data["blocks"] instanceof String)
-    ) {
-      throw new Error(
-        "Expected the field `blocks` to be a primitive type in the JSON string but got " +
-          data["blocks"]
-      );
-    }
 
     return true;
   }
 }
+
+/**
+ * The Bearer Token for Slack messaging, if the \"slack-bearer\" type is selected
+ * @member {String} bearer
+ */
+Slack.prototype["bearer"] = undefined;
+
+/**
+ * The Blocks message to be sent.  If populated, this field overrides the text field within the Slack Messaging API.  Placeholders are available for this field.
+ * @member {String} blocks
+ */
+Slack.prototype["blocks"] = undefined;
+
+/**
+ * The Channel ID for Bearer Token method, if the \"slack-bearer\" type is selected
+ * @member {String} channel
+ */
+Slack.prototype["channel"] = undefined;
+
+/**
+ * @member {module:model/AwsFilter} filter
+ */
+Slack.prototype["filter"] = undefined;
 
 /**
  * list of Fleet UIDs to apply route to, if any.  If empty, applies to all Fleets
@@ -201,14 +224,16 @@ class Slack {
 Slack.prototype["fleets"] = undefined;
 
 /**
- * @member {module:model/HttpFilter} filter
+ * The type of Slack message.  Must be one of \"slack-bearer\" for Bearer Token or \"slack-webhook\" for Webhook messages
+ * @member {String} slack_type
  */
-Slack.prototype["filter"] = undefined;
+Slack.prototype["slack_type"] = undefined;
 
 /**
- * @member {module:model/SnowflakeTransform} transform
+ * The simple text message to be sent, if the blocks message field is not in use.  Placeholders are available for this field.
+ * @member {String} text
  */
-Slack.prototype["transform"] = undefined;
+Slack.prototype["text"] = undefined;
 
 /**
  * Minimum time between requests in Miliseconds
@@ -224,39 +249,14 @@ Slack.prototype["throttle_ms"] = undefined;
 Slack.prototype["timeout"] = 15;
 
 /**
- * The type of Slack message.  Must be one of \"slack-bearer\" for Bearer Token or \"slack-webhook\" for Webhook messages
- * @member {String} slack_type
+ * @member {module:model/SlackTransform} transform
  */
-Slack.prototype["slack_type"] = undefined;
-
-/**
- * The Bearer Token for Slack messaging, if the \"slack-bearer\" type is selected
- * @member {String} bearer
- */
-Slack.prototype["bearer"] = undefined;
-
-/**
- * The Channel ID for Bearer Token method, if the \"slack-bearer\" type is selected
- * @member {String} channel
- */
-Slack.prototype["channel"] = undefined;
+Slack.prototype["transform"] = undefined;
 
 /**
  * The Webhook URL for Slack Messaging if the \"slack-webhook\" type is selected
  * @member {String} webhook_url
  */
 Slack.prototype["webhook_url"] = undefined;
-
-/**
- * The simple text message to be sent, if the blocks message field is not in use.  Placeholders are available for this field.
- * @member {String} text
- */
-Slack.prototype["text"] = undefined;
-
-/**
- * The Blocks message to be sent.  If populated, this field overrides the text field within the Slack Messaging API.  Placeholders are available for this field.
- * @member {String} blocks
- */
-Slack.prototype["blocks"] = undefined;
 
 export default Slack;

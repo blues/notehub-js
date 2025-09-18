@@ -22,11 +22,11 @@ class GetDevicePublicKey200Response {
   /**
    * Constructs a new <code>GetDevicePublicKey200Response</code>.
    * @alias module:model/GetDevicePublicKey200Response
-   * @param uid {String}
    * @param key {String}
+   * @param uid {String}
    */
-  constructor(uid, key) {
-    GetDevicePublicKey200Response.initialize(this, uid, key);
+  constructor(key, uid) {
+    GetDevicePublicKey200Response.initialize(this, key, uid);
   }
 
   /**
@@ -34,9 +34,9 @@ class GetDevicePublicKey200Response {
    * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
    * Only for internal use.
    */
-  static initialize(obj, uid, key) {
-    obj["uid"] = uid;
+  static initialize(obj, key, uid) {
     obj["key"] = key;
+    obj["uid"] = uid;
   }
 
   /**
@@ -50,11 +50,11 @@ class GetDevicePublicKey200Response {
     if (data) {
       obj = obj || new GetDevicePublicKey200Response();
 
-      if (data.hasOwnProperty("uid")) {
-        obj["uid"] = ApiClient.convertToType(data["uid"], "String");
-      }
       if (data.hasOwnProperty("key")) {
         obj["key"] = ApiClient.convertToType(data["key"], "String");
+      }
+      if (data.hasOwnProperty("uid")) {
+        obj["uid"] = ApiClient.convertToType(data["uid"], "String");
       }
     } else if (data === null) {
       return null;
@@ -81,16 +81,6 @@ class GetDevicePublicKey200Response {
     }
     // ensure the json data is a string
     if (
-      data["uid"] &&
-      !(typeof data["uid"] === "string" || data["uid"] instanceof String)
-    ) {
-      throw new Error(
-        "Expected the field `uid` to be a primitive type in the JSON string but got " +
-          data["uid"]
-      );
-    }
-    // ensure the json data is a string
-    if (
       data["key"] &&
       !(typeof data["key"] === "string" || data["key"] instanceof String)
     ) {
@@ -99,21 +89,31 @@ class GetDevicePublicKey200Response {
           data["key"]
       );
     }
+    // ensure the json data is a string
+    if (
+      data["uid"] &&
+      !(typeof data["uid"] === "string" || data["uid"] instanceof String)
+    ) {
+      throw new Error(
+        "Expected the field `uid` to be a primitive type in the JSON string but got " +
+          data["uid"]
+      );
+    }
 
     return true;
   }
 }
 
-GetDevicePublicKey200Response.RequiredProperties = ["uid", "key"];
-
-/**
- * @member {String} uid
- */
-GetDevicePublicKey200Response.prototype["uid"] = undefined;
+GetDevicePublicKey200Response.RequiredProperties = ["key", "uid"];
 
 /**
  * @member {String} key
  */
 GetDevicePublicKey200Response.prototype["key"] = undefined;
+
+/**
+ * @member {String} uid
+ */
+GetDevicePublicKey200Response.prototype["uid"] = undefined;
 
 export default GetDevicePublicKey200Response;

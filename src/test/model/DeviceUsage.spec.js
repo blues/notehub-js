@@ -50,26 +50,8 @@
       //expect(instance).to.be.a(NotehubJs.DeviceUsage);
     });
 
-    it('should have the property since (base name: "since")', function () {
-      // uncomment below and update the code to test the property since
-      //var instance = new NotehubJs.DeviceUsage();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property duration (base name: "duration")', function () {
-      // uncomment below and update the code to test the property duration
-      //var instance = new NotehubJs.DeviceUsage();
-      //expect(instance).to.be();
-    });
-
     it('should have the property bytesRcvd (base name: "bytes_rcvd")', function () {
       // uncomment below and update the code to test the property bytesRcvd
-      //var instance = new NotehubJs.DeviceUsage();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property bytesSent (base name: "bytes_sent")', function () {
-      // uncomment below and update the code to test the property bytesSent
       //var instance = new NotehubJs.DeviceUsage();
       //expect(instance).to.be();
     });
@@ -80,8 +62,32 @@
       //expect(instance).to.be();
     });
 
+    it('should have the property bytesSent (base name: "bytes_sent")', function () {
+      // uncomment below and update the code to test the property bytesSent
+      //var instance = new NotehubJs.DeviceUsage();
+      //expect(instance).to.be();
+    });
+
     it('should have the property bytesSentSecondary (base name: "bytes_sent_secondary")', function () {
       // uncomment below and update the code to test the property bytesSentSecondary
+      //var instance = new NotehubJs.DeviceUsage();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property duration (base name: "duration")', function () {
+      // uncomment below and update the code to test the property duration
+      //var instance = new NotehubJs.DeviceUsage();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property notesRcvd (base name: "notes_rcvd")', function () {
+      // uncomment below and update the code to test the property notesRcvd
+      //var instance = new NotehubJs.DeviceUsage();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property notesSent (base name: "notes_sent")', function () {
+      // uncomment below and update the code to test the property notesSent
       //var instance = new NotehubJs.DeviceUsage();
       //expect(instance).to.be();
     });
@@ -98,14 +104,8 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property notesRcvd (base name: "notes_rcvd")', function () {
-      // uncomment below and update the code to test the property notesRcvd
-      //var instance = new NotehubJs.DeviceUsage();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property notesSent (base name: "notes_sent")', function () {
-      // uncomment below and update the code to test the property notesSent
+    it('should have the property since (base name: "since")', function () {
+      // uncomment below and update the code to test the property since
       //var instance = new NotehubJs.DeviceUsage();
       //expect(instance).to.be();
     });

@@ -50,14 +50,14 @@
       //expect(instance).to.be.a(NotehubJs.DeviceDfuHistory);
     });
 
-    it('should have the property deviceUid (base name: "device_uid")', function () {
-      // uncomment below and update the code to test the property deviceUid
+    it('should have the property current (base name: "current")', function () {
+      // uncomment below and update the code to test the property current
       //var instance = new NotehubJs.DeviceDfuHistory();
       //expect(instance).to.be();
     });
 
-    it('should have the property current (base name: "current")', function () {
-      // uncomment below and update the code to test the property current
+    it('should have the property deviceUid (base name: "device_uid")', function () {
+      // uncomment below and update the code to test the property deviceUid
       //var instance = new NotehubJs.DeviceDfuHistory();
       //expect(instance).to.be();
     });

@@ -47,11 +47,6 @@ class UserDfuStateMachine {
     if (data) {
       obj = obj || new UserDfuStateMachine();
 
-      if (data.hasOwnProperty("status")) {
-        obj["status"] = UserDfuStateMachineStatus.constructFromObject(
-          data["status"]
-        );
-      }
       if (data.hasOwnProperty("created")) {
         obj["created"] = ApiClient.convertToType(data["created"], "Date");
       }
@@ -63,6 +58,11 @@ class UserDfuStateMachine {
       }
       if (data.hasOwnProperty("metadata")) {
         obj["metadata"] = UploadMetadata.constructFromObject(data["metadata"]);
+      }
+      if (data.hasOwnProperty("status")) {
+        obj["status"] = UserDfuStateMachineStatus.constructFromObject(
+          data["status"]
+        );
       }
     } else if (data === null) {
       return null;
@@ -76,11 +76,6 @@ class UserDfuStateMachine {
    * @return {boolean} to indicate whether the JSON data is valid with respect to <code>UserDfuStateMachine</code>.
    */
   static validateJSON(data) {
-    // validate the optional field `status`
-    if (data["status"]) {
-      // data not null
-      UserDfuStateMachineStatus.validateJSON(data["status"]);
-    }
     // ensure the json data is a string
     if (
       data["from_version"] &&
@@ -99,15 +94,15 @@ class UserDfuStateMachine {
       // data not null
       UploadMetadata.validateJSON(data["metadata"]);
     }
+    // validate the optional field `status`
+    if (data["status"]) {
+      // data not null
+      UserDfuStateMachineStatus.validateJSON(data["status"]);
+    }
 
     return true;
   }
 }
-
-/**
- * @member {module:model/UserDfuStateMachineStatus} status
- */
-UserDfuStateMachine.prototype["status"] = undefined;
 
 /**
  * @member {Date} created
@@ -123,5 +118,10 @@ UserDfuStateMachine.prototype["from_version"] = undefined;
  * @member {module:model/UploadMetadata} metadata
  */
 UserDfuStateMachine.prototype["metadata"] = undefined;
+
+/**
+ * @member {module:model/UserDfuStateMachineStatus} status
+ */
+UserDfuStateMachine.prototype["status"] = undefined;
 
 export default UserDfuStateMachine;

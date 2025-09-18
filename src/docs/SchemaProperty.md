@@ -4,11 +4,11 @@
 
 | Name           | Type                                      | Description                                            | Notes      |
 | -------------- | ----------------------------------------- | ------------------------------------------------------ | ---------- |
-| **name**       | **String**                                | Name of the field (optional for array/object children) | [optional] |
-| **type**       | **String**                                |                                                        |
-| **updatedAt**  | **Date**                                  |                                                        |
 | **items**      | [**[SchemaProperty]**](SchemaProperty.md) | Used if type is array                                  | [optional] |
+| **name**       | **String**                                | Name of the field (optional for array/object children) | [optional] |
 | **properties** | [**[SchemaProperty]**](SchemaProperty.md) | Used if type is object                                 | [optional] |
+| **type**       | **String**                                |                                                        |
+| **updatedAt**  | **Date**                                  |                                                        | [optional] |
 
 ## Enum: TypeEnum
 

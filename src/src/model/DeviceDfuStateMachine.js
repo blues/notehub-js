@@ -47,12 +47,6 @@ class DeviceDfuStateMachine {
     if (data) {
       obj = obj || new DeviceDfuStateMachine();
 
-      if (data.hasOwnProperty("requested_version")) {
-        obj["requested_version"] = ApiClient.convertToType(
-          data["requested_version"],
-          "String"
-        );
-      }
       if (data.hasOwnProperty("current_version")) {
         obj["current_version"] = ApiClient.convertToType(
           data["current_version"],
@@ -61,6 +55,12 @@ class DeviceDfuStateMachine {
       }
       if (data.hasOwnProperty("initiated")) {
         obj["initiated"] = ApiClient.convertToType(data["initiated"], "String");
+      }
+      if (data.hasOwnProperty("requested_version")) {
+        obj["requested_version"] = ApiClient.convertToType(
+          data["requested_version"],
+          "String"
+        );
       }
       if (data.hasOwnProperty("updates")) {
         obj["updates"] = ApiClient.convertToType(data["updates"], [
@@ -79,19 +79,6 @@ class DeviceDfuStateMachine {
    * @return {boolean} to indicate whether the JSON data is valid with respect to <code>DeviceDfuStateMachine</code>.
    */
   static validateJSON(data) {
-    // ensure the json data is a string
-    if (
-      data["requested_version"] &&
-      !(
-        typeof data["requested_version"] === "string" ||
-        data["requested_version"] instanceof String
-      )
-    ) {
-      throw new Error(
-        "Expected the field `requested_version` to be a primitive type in the JSON string but got " +
-          data["requested_version"]
-      );
-    }
     // ensure the json data is a string
     if (
       data["current_version"] &&
@@ -118,6 +105,19 @@ class DeviceDfuStateMachine {
           data["initiated"]
       );
     }
+    // ensure the json data is a string
+    if (
+      data["requested_version"] &&
+      !(
+        typeof data["requested_version"] === "string" ||
+        data["requested_version"] instanceof String
+      )
+    ) {
+      throw new Error(
+        "Expected the field `requested_version` to be a primitive type in the JSON string but got " +
+          data["requested_version"]
+      );
+    }
     if (data["updates"]) {
       // data not null
       // ensure the json data is an array
@@ -138,12 +138,6 @@ class DeviceDfuStateMachine {
 }
 
 /**
- * Version of the firmware that was requested to be installed
- * @member {String} requested_version
- */
-DeviceDfuStateMachine.prototype["requested_version"] = undefined;
-
-/**
  * Version of the firmware that was installed prior to this request
  * @member {String} current_version
  */
@@ -154,6 +148,12 @@ DeviceDfuStateMachine.prototype["current_version"] = undefined;
  * @member {String} initiated
  */
 DeviceDfuStateMachine.prototype["initiated"] = undefined;
+
+/**
+ * Version of the firmware that was requested to be installed
+ * @member {String} requested_version
+ */
+DeviceDfuStateMachine.prototype["requested_version"] = undefined;
 
 /**
  * @member {Array.<module:model/DeviceDfuStateMachineNode>} updates

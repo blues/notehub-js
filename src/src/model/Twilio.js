@@ -12,7 +12,7 @@
  */
 
 import ApiClient from "../ApiClient";
-import HttpFilter from "./HttpFilter";
+import AwsFilter from "./AwsFilter";
 
 /**
  * The Twilio model module.
@@ -47,15 +47,6 @@ class Twilio {
     if (data) {
       obj = obj || new Twilio();
 
-      if (data.hasOwnProperty("fleets")) {
-        obj["fleets"] = ApiClient.convertToType(data["fleets"], ["String"]);
-      }
-      if (data.hasOwnProperty("filter")) {
-        obj["filter"] = HttpFilter.constructFromObject(data["filter"]);
-      }
-      if (data.hasOwnProperty("timeout")) {
-        obj["timeout"] = ApiClient.convertToType(data["timeout"], "Number");
-      }
       if (data.hasOwnProperty("account_sid")) {
         obj["account_sid"] = ApiClient.convertToType(
           data["account_sid"],
@@ -68,8 +59,11 @@ class Twilio {
           "String"
         );
       }
-      if (data.hasOwnProperty("to")) {
-        obj["to"] = ApiClient.convertToType(data["to"], "String");
+      if (data.hasOwnProperty("filter")) {
+        obj["filter"] = AwsFilter.constructFromObject(data["filter"]);
+      }
+      if (data.hasOwnProperty("fleets")) {
+        obj["fleets"] = ApiClient.convertToType(data["fleets"], ["String"]);
       }
       if (data.hasOwnProperty("from")) {
         obj["from"] = ApiClient.convertToType(data["from"], "String");
@@ -83,6 +77,12 @@ class Twilio {
           "Number"
         );
       }
+      if (data.hasOwnProperty("timeout")) {
+        obj["timeout"] = ApiClient.convertToType(data["timeout"], "Number");
+      }
+      if (data.hasOwnProperty("to")) {
+        obj["to"] = ApiClient.convertToType(data["to"], "String");
+      }
     } else if (data === null) {
       return null;
     }
@@ -95,18 +95,6 @@ class Twilio {
    * @return {boolean} to indicate whether the JSON data is valid with respect to <code>Twilio</code>.
    */
   static validateJSON(data) {
-    // ensure the json data is an array
-    if (!Array.isArray(data["fleets"])) {
-      throw new Error(
-        "Expected the field `fleets` to be an array in the JSON data but got " +
-          data["fleets"]
-      );
-    }
-    // validate the optional field `filter`
-    if (data["filter"]) {
-      // data not null
-      HttpFilter.validateJSON(data["filter"]);
-    }
     // ensure the json data is a string
     if (
       data["account_sid"] &&
@@ -133,14 +121,16 @@ class Twilio {
           data["auth_token"]
       );
     }
-    // ensure the json data is a string
-    if (
-      data["to"] &&
-      !(typeof data["to"] === "string" || data["to"] instanceof String)
-    ) {
+    // validate the optional field `filter`
+    if (data["filter"]) {
+      // data not null
+      AwsFilter.validateJSON(data["filter"]);
+    }
+    // ensure the json data is an array
+    if (!Array.isArray(data["fleets"])) {
       throw new Error(
-        "Expected the field `to` to be a primitive type in the JSON string but got " +
-          data["to"]
+        "Expected the field `fleets` to be an array in the JSON data but got " +
+          data["fleets"]
       );
     }
     // ensure the json data is a string
@@ -165,28 +155,20 @@ class Twilio {
           data["message"]
       );
     }
+    // ensure the json data is a string
+    if (
+      data["to"] &&
+      !(typeof data["to"] === "string" || data["to"] instanceof String)
+    ) {
+      throw new Error(
+        "Expected the field `to` to be a primitive type in the JSON string but got " +
+          data["to"]
+      );
+    }
 
     return true;
   }
 }
-
-/**
- * list of Fleet UIDs to apply route to, if any.  If empty, applies to all Fleets
- * @member {Array.<String>} fleets
- */
-Twilio.prototype["fleets"] = undefined;
-
-/**
- * @member {module:model/HttpFilter} filter
- */
-Twilio.prototype["filter"] = undefined;
-
-/**
- * Timeout in seconds for each request
- * @member {Number} timeout
- * @default 15
- */
-Twilio.prototype["timeout"] = 15;
 
 /**
  * Twilio Account SID
@@ -201,10 +183,15 @@ Twilio.prototype["account_sid"] = undefined;
 Twilio.prototype["auth_token"] = undefined;
 
 /**
- * Phone number to send SMS to, leave blank to use notefile, must use E.164 format
- * @member {String} to
+ * @member {module:model/AwsFilter} filter
  */
-Twilio.prototype["to"] = undefined;
+Twilio.prototype["filter"] = undefined;
+
+/**
+ * list of Fleet UIDs to apply route to, if any.  If empty, applies to all Fleets
+ * @member {Array.<String>} fleets
+ */
+Twilio.prototype["fleets"] = undefined;
 
 /**
  * Phone number to send SMS from, leave blank to use notefile, must use E.164 format
@@ -222,5 +209,18 @@ Twilio.prototype["message"] = undefined;
  * @member {Number} throttle_ms
  */
 Twilio.prototype["throttle_ms"] = undefined;
+
+/**
+ * Timeout in seconds for each request
+ * @member {Number} timeout
+ * @default 15
+ */
+Twilio.prototype["timeout"] = 15;
+
+/**
+ * Phone number to send SMS to, leave blank to use notefile, must use E.164 format
+ * @member {String} to
+ */
+Twilio.prototype["to"] = undefined;
 
 export default Twilio;

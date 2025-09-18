@@ -50,96 +50,6 @@
       //expect(instance).to.be.a(NotehubJs.CreateMonitor);
     });
 
-    it('should have the property uid (base name: "uid")', function () {
-      // uncomment below and update the code to test the property uid
-      //var instance = new NotehubJs.CreateMonitor();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property name (base name: "name")', function () {
-      // uncomment below and update the code to test the property name
-      //var instance = new NotehubJs.CreateMonitor();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property description (base name: "description")', function () {
-      // uncomment below and update the code to test the property description
-      //var instance = new NotehubJs.CreateMonitor();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property sourceType (base name: "source_type")', function () {
-      // uncomment below and update the code to test the property sourceType
-      //var instance = new NotehubJs.CreateMonitor();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property disabled (base name: "disabled")', function () {
-      // uncomment below and update the code to test the property disabled
-      //var instance = new NotehubJs.CreateMonitor();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property alert (base name: "alert")', function () {
-      // uncomment below and update the code to test the property alert
-      //var instance = new NotehubJs.CreateMonitor();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property notefileFilter (base name: "notefile_filter")', function () {
-      // uncomment below and update the code to test the property notefileFilter
-      //var instance = new NotehubJs.CreateMonitor();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property fleetFilter (base name: "fleet_filter")', function () {
-      // uncomment below and update the code to test the property fleetFilter
-      //var instance = new NotehubJs.CreateMonitor();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property sourceSelector (base name: "source_selector")', function () {
-      // uncomment below and update the code to test the property sourceSelector
-      //var instance = new NotehubJs.CreateMonitor();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property conditionType (base name: "condition_type")', function () {
-      // uncomment below and update the code to test the property conditionType
-      //var instance = new NotehubJs.CreateMonitor();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property threshold (base name: "threshold")', function () {
-      // uncomment below and update the code to test the property threshold
-      //var instance = new NotehubJs.CreateMonitor();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property alertRoutes (base name: "alert_routes")', function () {
-      // uncomment below and update the code to test the property alertRoutes
-      //var instance = new NotehubJs.CreateMonitor();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property lastRoutedAt (base name: "last_routed_at")', function () {
-      // uncomment below and update the code to test the property lastRoutedAt
-      //var instance = new NotehubJs.CreateMonitor();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property silenced (base name: "silenced")', function () {
-      // uncomment below and update the code to test the property silenced
-      //var instance = new NotehubJs.CreateMonitor();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property routingCooldownPeriod (base name: "routing_cooldown_period")', function () {
-      // uncomment below and update the code to test the property routingCooldownPeriod
-      //var instance = new NotehubJs.CreateMonitor();
-      //expect(instance).to.be();
-    });
-
     it('should have the property aggregateFunction (base name: "aggregate_function")', function () {
       // uncomment below and update the code to test the property aggregateFunction
       //var instance = new NotehubJs.CreateMonitor();
@@ -152,8 +62,98 @@
       //expect(instance).to.be();
     });
 
+    it('should have the property alert (base name: "alert")', function () {
+      // uncomment below and update the code to test the property alert
+      //var instance = new NotehubJs.CreateMonitor();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property alertRoutes (base name: "alert_routes")', function () {
+      // uncomment below and update the code to test the property alertRoutes
+      //var instance = new NotehubJs.CreateMonitor();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property conditionType (base name: "condition_type")', function () {
+      // uncomment below and update the code to test the property conditionType
+      //var instance = new NotehubJs.CreateMonitor();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property description (base name: "description")', function () {
+      // uncomment below and update the code to test the property description
+      //var instance = new NotehubJs.CreateMonitor();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property disabled (base name: "disabled")', function () {
+      // uncomment below and update the code to test the property disabled
+      //var instance = new NotehubJs.CreateMonitor();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property fleetFilter (base name: "fleet_filter")', function () {
+      // uncomment below and update the code to test the property fleetFilter
+      //var instance = new NotehubJs.CreateMonitor();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property lastRoutedAt (base name: "last_routed_at")', function () {
+      // uncomment below and update the code to test the property lastRoutedAt
+      //var instance = new NotehubJs.CreateMonitor();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property name (base name: "name")', function () {
+      // uncomment below and update the code to test the property name
+      //var instance = new NotehubJs.CreateMonitor();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property notefileFilter (base name: "notefile_filter")', function () {
+      // uncomment below and update the code to test the property notefileFilter
+      //var instance = new NotehubJs.CreateMonitor();
+      //expect(instance).to.be();
+    });
+
     it('should have the property perDevice (base name: "per_device")', function () {
       // uncomment below and update the code to test the property perDevice
+      //var instance = new NotehubJs.CreateMonitor();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property routingCooldownPeriod (base name: "routing_cooldown_period")', function () {
+      // uncomment below and update the code to test the property routingCooldownPeriod
+      //var instance = new NotehubJs.CreateMonitor();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property silenced (base name: "silenced")', function () {
+      // uncomment below and update the code to test the property silenced
+      //var instance = new NotehubJs.CreateMonitor();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property sourceSelector (base name: "source_selector")', function () {
+      // uncomment below and update the code to test the property sourceSelector
+      //var instance = new NotehubJs.CreateMonitor();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property sourceType (base name: "source_type")', function () {
+      // uncomment below and update the code to test the property sourceType
+      //var instance = new NotehubJs.CreateMonitor();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property threshold (base name: "threshold")', function () {
+      // uncomment below and update the code to test the property threshold
+      //var instance = new NotehubJs.CreateMonitor();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property uid (base name: "uid")', function () {
+      // uncomment below and update the code to test the property uid
       //var instance = new NotehubJs.CreateMonitor();
       //expect(instance).to.be();
     });

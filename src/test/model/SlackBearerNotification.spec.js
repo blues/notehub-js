@@ -50,12 +50,6 @@
       //expect(instance).to.be.a(NotehubJs.SlackBearerNotification);
     });
 
-    it('should have the property token (base name: "token")', function () {
-      // uncomment below and update the code to test the property token
-      //var instance = new NotehubJs.SlackBearerNotification();
-      //expect(instance).to.be();
-    });
-
     it('should have the property channel (base name: "channel")', function () {
       // uncomment below and update the code to test the property channel
       //var instance = new NotehubJs.SlackBearerNotification();
@@ -70,6 +64,12 @@
 
     it('should have the property text (base name: "text")', function () {
       // uncomment below and update the code to test the property text
+      //var instance = new NotehubJs.SlackBearerNotification();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property token (base name: "token")', function () {
+      // uncomment below and update the code to test the property token
       //var instance = new NotehubJs.SlackBearerNotification();
       //expect(instance).to.be();
     });
