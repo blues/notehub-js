@@ -1531,6 +1531,18 @@ paths:
           required: true
           schema:
             type: string
+        - name: version
+          in: query
+          description: 'Firmware version (optional). If not provided, the version will be extracted from firmware binary if available, otherwise left empty'
+          required: false
+          schema:
+            type: string
+        - name: notes
+          in: query
+          description: Optional notes describing what's different about this firmware version
+          required: false
+          schema:
+            type: string
       requestBody:
         description: contents of the firmware binary
         required: true
@@ -4783,6 +4795,9 @@ components:
         tags:
           type: string
         type:
+          type: string
+        version:
+          description: User-specified version string provided at time of upload
           type: string
     UsageData:
       type: object
