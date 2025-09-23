@@ -18,7 +18,7 @@ import UserDfuStateMachineStatus from "./UserDfuStateMachineStatus";
 /**
  * The UserDfuStateMachine model module.
  * @module model/UserDfuStateMachine
- * @version 1.0.37
+ * @version 1.0.38
  */
 class UserDfuStateMachine {
   /**

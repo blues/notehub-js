@@ -18,7 +18,7 @@ import DeviceDfuStateMachine from "./DeviceDfuStateMachine";
 /**
  * The DeviceDfuHistory model module.
  * @module model/DeviceDfuHistory
- * @version 1.0.37
+ * @version 1.0.38
  */
 class DeviceDfuHistory {
   /**

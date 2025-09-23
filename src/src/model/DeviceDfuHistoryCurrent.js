@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The DeviceDfuHistoryCurrent model module.
  * @module model/DeviceDfuHistoryCurrent
- * @version 1.0.37
+ * @version 1.0.38
  */
 class DeviceDfuHistoryCurrent {
   /**

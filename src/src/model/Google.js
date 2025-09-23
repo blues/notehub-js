@@ -18,7 +18,7 @@ import AwsTransform from "./AwsTransform";
 /**
  * The Google model module.
  * @module model/Google
- * @version 1.0.37
+ * @version 1.0.38
  */
 class Google {
   /**
