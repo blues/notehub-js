@@ -50,26 +50,14 @@
       //expect(instance).to.be.a(NotehubJs.EnvTreeJsonNode);
     });
 
-    it('should have the property varCount (base name: "var_count")', function () {
-      // uncomment below and update the code to test the property varCount
+    it('should have the property appLabel (base name: "app_label")', function () {
+      // uncomment below and update the code to test the property appLabel
       //var instance = new NotehubJs.EnvTreeJsonNode();
       //expect(instance).to.be();
     });
 
-    it('should have the property inheritedVarCount (base name: "inherited_var_count")', function () {
-      // uncomment below and update the code to test the property inheritedVarCount
-      //var instance = new NotehubJs.EnvTreeJsonNode();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property type (base name: "type")', function () {
-      // uncomment below and update the code to test the property type
-      //var instance = new NotehubJs.EnvTreeJsonNode();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property variables (base name: "variables")', function () {
-      // uncomment below and update the code to test the property variables
+    it('should have the property appUid (base name: "app_uid")', function () {
+      // uncomment below and update the code to test the property appUid
       //var instance = new NotehubJs.EnvTreeJsonNode();
       //expect(instance).to.be();
     });
@@ -98,20 +86,32 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property appUid (base name: "app_uid")', function () {
-      // uncomment below and update the code to test the property appUid
+    it('should have the property inheritedVarCount (base name: "inherited_var_count")', function () {
+      // uncomment below and update the code to test the property inheritedVarCount
       //var instance = new NotehubJs.EnvTreeJsonNode();
       //expect(instance).to.be();
     });
 
-    it('should have the property appLabel (base name: "app_label")', function () {
-      // uncomment below and update the code to test the property appLabel
+    it('should have the property type (base name: "type")', function () {
+      // uncomment below and update the code to test the property type
       //var instance = new NotehubJs.EnvTreeJsonNode();
       //expect(instance).to.be();
     });
 
     it('should have the property url (base name: "url")', function () {
       // uncomment below and update the code to test the property url
+      //var instance = new NotehubJs.EnvTreeJsonNode();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property varCount (base name: "var_count")', function () {
+      // uncomment below and update the code to test the property varCount
+      //var instance = new NotehubJs.EnvTreeJsonNode();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property variables (base name: "variables")', function () {
+      // uncomment below and update the code to test the property variables
       //var instance = new NotehubJs.EnvTreeJsonNode();
       //expect(instance).to.be();
     });

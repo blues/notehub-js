@@ -45,26 +45,11 @@ class FirmwareInfo {
     if (data) {
       obj = obj || new FirmwareInfo();
 
-      if (data.hasOwnProperty("filename")) {
-        obj["filename"] = ApiClient.convertToType(data["filename"], "String");
-      }
-      if (data.hasOwnProperty("version")) {
-        obj["version"] = ApiClient.convertToType(data["version"], "String");
-      }
-      if (data.hasOwnProperty("MD5")) {
-        obj["MD5"] = ApiClient.convertToType(data["MD5"], "String");
-      }
-      if (data.hasOwnProperty("organization")) {
-        obj["organization"] = ApiClient.convertToType(
-          data["organization"],
-          "String"
-        );
-      }
       if (data.hasOwnProperty("built")) {
         obj["built"] = ApiClient.convertToType(data["built"], "String");
       }
-      if (data.hasOwnProperty("product")) {
-        obj["product"] = ApiClient.convertToType(data["product"], "String");
+      if (data.hasOwnProperty("created")) {
+        obj["created"] = ApiClient.convertToType(data["created"], "String");
       }
       if (data.hasOwnProperty("description")) {
         obj["description"] = ApiClient.convertToType(
@@ -72,23 +57,38 @@ class FirmwareInfo {
           "String"
         );
       }
-      if (data.hasOwnProperty("tags")) {
-        obj["tags"] = ApiClient.convertToType(data["tags"], "String");
+      if (data.hasOwnProperty("filename")) {
+        obj["filename"] = ApiClient.convertToType(data["filename"], "String");
       }
-      if (data.hasOwnProperty("type")) {
-        obj["type"] = ApiClient.convertToType(data["type"], "String");
+      if (data.hasOwnProperty("md5")) {
+        obj["md5"] = ApiClient.convertToType(data["md5"], "String");
       }
-      if (data.hasOwnProperty("created")) {
-        obj["created"] = ApiClient.convertToType(data["created"], "String");
+      if (data.hasOwnProperty("organization")) {
+        obj["organization"] = ApiClient.convertToType(
+          data["organization"],
+          "String"
+        );
       }
-      if (data.hasOwnProperty("target")) {
-        obj["target"] = ApiClient.convertToType(data["target"], "String");
+      if (data.hasOwnProperty("product")) {
+        obj["product"] = ApiClient.convertToType(data["product"], "String");
       }
       if (data.hasOwnProperty("published")) {
         obj["published"] = ApiClient.convertToType(
           data["published"],
           "Boolean"
         );
+      }
+      if (data.hasOwnProperty("tags")) {
+        obj["tags"] = ApiClient.convertToType(data["tags"], "String");
+      }
+      if (data.hasOwnProperty("target")) {
+        obj["target"] = ApiClient.convertToType(data["target"], "String");
+      }
+      if (data.hasOwnProperty("type")) {
+        obj["type"] = ApiClient.convertToType(data["type"], "String");
+      }
+      if (data.hasOwnProperty("version")) {
+        obj["version"] = ApiClient.convertToType(data["version"], "String");
       }
     } else if (data === null) {
       return null;
@@ -104,54 +104,6 @@ class FirmwareInfo {
   static validateJSON(data) {
     // ensure the json data is a string
     if (
-      data["filename"] &&
-      !(
-        typeof data["filename"] === "string" ||
-        data["filename"] instanceof String
-      )
-    ) {
-      throw new Error(
-        "Expected the field `filename` to be a primitive type in the JSON string but got " +
-          data["filename"]
-      );
-    }
-    // ensure the json data is a string
-    if (
-      data["version"] &&
-      !(
-        typeof data["version"] === "string" || data["version"] instanceof String
-      )
-    ) {
-      throw new Error(
-        "Expected the field `version` to be a primitive type in the JSON string but got " +
-          data["version"]
-      );
-    }
-    // ensure the json data is a string
-    if (
-      data["MD5"] &&
-      !(typeof data["MD5"] === "string" || data["MD5"] instanceof String)
-    ) {
-      throw new Error(
-        "Expected the field `MD5` to be a primitive type in the JSON string but got " +
-          data["MD5"]
-      );
-    }
-    // ensure the json data is a string
-    if (
-      data["organization"] &&
-      !(
-        typeof data["organization"] === "string" ||
-        data["organization"] instanceof String
-      )
-    ) {
-      throw new Error(
-        "Expected the field `organization` to be a primitive type in the JSON string but got " +
-          data["organization"]
-      );
-    }
-    // ensure the json data is a string
-    if (
       data["built"] &&
       !(typeof data["built"] === "string" || data["built"] instanceof String)
     ) {
@@ -162,14 +114,14 @@ class FirmwareInfo {
     }
     // ensure the json data is a string
     if (
-      data["product"] &&
+      data["created"] &&
       !(
-        typeof data["product"] === "string" || data["product"] instanceof String
+        typeof data["created"] === "string" || data["created"] instanceof String
       )
     ) {
       throw new Error(
-        "Expected the field `product` to be a primitive type in the JSON string but got " +
-          data["product"]
+        "Expected the field `created` to be a primitive type in the JSON string but got " +
+          data["created"]
       );
     }
     // ensure the json data is a string
@@ -187,12 +139,70 @@ class FirmwareInfo {
     }
     // ensure the json data is a string
     if (
+      data["filename"] &&
+      !(
+        typeof data["filename"] === "string" ||
+        data["filename"] instanceof String
+      )
+    ) {
+      throw new Error(
+        "Expected the field `filename` to be a primitive type in the JSON string but got " +
+          data["filename"]
+      );
+    }
+    // ensure the json data is a string
+    if (
+      data["md5"] &&
+      !(typeof data["md5"] === "string" || data["md5"] instanceof String)
+    ) {
+      throw new Error(
+        "Expected the field `md5` to be a primitive type in the JSON string but got " +
+          data["md5"]
+      );
+    }
+    // ensure the json data is a string
+    if (
+      data["organization"] &&
+      !(
+        typeof data["organization"] === "string" ||
+        data["organization"] instanceof String
+      )
+    ) {
+      throw new Error(
+        "Expected the field `organization` to be a primitive type in the JSON string but got " +
+          data["organization"]
+      );
+    }
+    // ensure the json data is a string
+    if (
+      data["product"] &&
+      !(
+        typeof data["product"] === "string" || data["product"] instanceof String
+      )
+    ) {
+      throw new Error(
+        "Expected the field `product` to be a primitive type in the JSON string but got " +
+          data["product"]
+      );
+    }
+    // ensure the json data is a string
+    if (
       data["tags"] &&
       !(typeof data["tags"] === "string" || data["tags"] instanceof String)
     ) {
       throw new Error(
         "Expected the field `tags` to be a primitive type in the JSON string but got " +
           data["tags"]
+      );
+    }
+    // ensure the json data is a string
+    if (
+      data["target"] &&
+      !(typeof data["target"] === "string" || data["target"] instanceof String)
+    ) {
+      throw new Error(
+        "Expected the field `target` to be a primitive type in the JSON string but got " +
+          data["target"]
       );
     }
     // ensure the json data is a string
@@ -207,24 +217,14 @@ class FirmwareInfo {
     }
     // ensure the json data is a string
     if (
-      data["created"] &&
+      data["version"] &&
       !(
-        typeof data["created"] === "string" || data["created"] instanceof String
+        typeof data["version"] === "string" || data["version"] instanceof String
       )
     ) {
       throw new Error(
-        "Expected the field `created` to be a primitive type in the JSON string but got " +
-          data["created"]
-      );
-    }
-    // ensure the json data is a string
-    if (
-      data["target"] &&
-      !(typeof data["target"] === "string" || data["target"] instanceof String)
-    ) {
-      throw new Error(
-        "Expected the field `target` to be a primitive type in the JSON string but got " +
-          data["target"]
+        "Expected the field `version` to be a primitive type in the JSON string but got " +
+          data["version"]
       );
     }
 
@@ -233,58 +233,10 @@ class FirmwareInfo {
 }
 
 /**
- * The name of the firmware file.
- * @member {String} filename
- */
-FirmwareInfo.prototype["filename"] = undefined;
-
-/**
- * The version of the firmware.
- * @member {String} version
- */
-FirmwareInfo.prototype["version"] = undefined;
-
-/**
- * The MD5 hash of the firmware file.
- * @member {String} MD5
- */
-FirmwareInfo.prototype["MD5"] = undefined;
-
-/**
- * The organization that owns the firmware.
- * @member {String} organization
- */
-FirmwareInfo.prototype["organization"] = undefined;
-
-/**
  * The date the firmware was built.
  * @member {String} built
  */
 FirmwareInfo.prototype["built"] = undefined;
-
-/**
- * The product that the firmware is for.
- * @member {String} product
- */
-FirmwareInfo.prototype["product"] = undefined;
-
-/**
- * A description of the firmware.
- * @member {String} description
- */
-FirmwareInfo.prototype["description"] = undefined;
-
-/**
- * A list of tags associated with the firmware.
- * @member {String} tags
- */
-FirmwareInfo.prototype["tags"] = undefined;
-
-/**
- * The type of firmware.
- * @member {String} type
- */
-FirmwareInfo.prototype["type"] = undefined;
 
 /**
  * The date the firmware was created.
@@ -293,15 +245,63 @@ FirmwareInfo.prototype["type"] = undefined;
 FirmwareInfo.prototype["created"] = undefined;
 
 /**
- * The target device for the firmware.
- * @member {String} target
+ * A description of the firmware.
+ * @member {String} description
  */
-FirmwareInfo.prototype["target"] = undefined;
+FirmwareInfo.prototype["description"] = undefined;
+
+/**
+ * The name of the firmware file.
+ * @member {String} filename
+ */
+FirmwareInfo.prototype["filename"] = undefined;
+
+/**
+ * The MD5 hash of the firmware file.
+ * @member {String} md5
+ */
+FirmwareInfo.prototype["md5"] = undefined;
+
+/**
+ * The organization that owns the firmware.
+ * @member {String} organization
+ */
+FirmwareInfo.prototype["organization"] = undefined;
+
+/**
+ * The product that the firmware is for.
+ * @member {String} product
+ */
+FirmwareInfo.prototype["product"] = undefined;
 
 /**
  * True if the firmware is published.
  * @member {Boolean} published
  */
 FirmwareInfo.prototype["published"] = undefined;
+
+/**
+ * A list of tags associated with the firmware.
+ * @member {String} tags
+ */
+FirmwareInfo.prototype["tags"] = undefined;
+
+/**
+ * The target device for the firmware.
+ * @member {String} target
+ */
+FirmwareInfo.prototype["target"] = undefined;
+
+/**
+ * The type of firmware.
+ * @member {String} type
+ */
+FirmwareInfo.prototype["type"] = undefined;
+
+/**
+ * The version of the firmware.
+ * @member {String} version
+ */
+FirmwareInfo.prototype["version"] = undefined;
 
 export default FirmwareInfo;

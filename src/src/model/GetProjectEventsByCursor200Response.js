@@ -24,15 +24,15 @@ class GetProjectEventsByCursor200Response {
    * Constructs a new <code>GetProjectEventsByCursor200Response</code>.
    * @alias module:model/GetProjectEventsByCursor200Response
    * @param events {Array.<module:model/Event>}
-   * @param nextCursor {String} The cursor value of the next result, which is intended to be used as the \"cursor\" parameter value of the next call to this method. An empty string is returned if there are no more results after this results set.
    * @param hasMore {Boolean} True if there are more events
+   * @param nextCursor {String} The cursor value of the next result, which is intended to be used as the \"cursor\" parameter value of the next call to this method. An empty string is returned if there are no more results after this results set.
    */
-  constructor(events, nextCursor, hasMore) {
+  constructor(events, hasMore, nextCursor) {
     GetProjectEventsByCursor200Response.initialize(
       this,
       events,
-      nextCursor,
-      hasMore
+      hasMore,
+      nextCursor
     );
   }
 
@@ -41,10 +41,10 @@ class GetProjectEventsByCursor200Response {
    * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
    * Only for internal use.
    */
-  static initialize(obj, events, nextCursor, hasMore) {
+  static initialize(obj, events, hasMore, nextCursor) {
     obj["events"] = events;
-    obj["next_cursor"] = nextCursor;
     obj["has_more"] = hasMore;
+    obj["next_cursor"] = nextCursor;
   }
 
   /**
@@ -61,14 +61,14 @@ class GetProjectEventsByCursor200Response {
       if (data.hasOwnProperty("events")) {
         obj["events"] = ApiClient.convertToType(data["events"], [Event]);
       }
+      if (data.hasOwnProperty("has_more")) {
+        obj["has_more"] = ApiClient.convertToType(data["has_more"], "Boolean");
+      }
       if (data.hasOwnProperty("next_cursor")) {
         obj["next_cursor"] = ApiClient.convertToType(
           data["next_cursor"],
           "String"
         );
-      }
-      if (data.hasOwnProperty("has_more")) {
-        obj["has_more"] = ApiClient.convertToType(data["has_more"], "Boolean");
       }
     } else if (data === null) {
       return null;
@@ -127,8 +127,8 @@ class GetProjectEventsByCursor200Response {
 
 GetProjectEventsByCursor200Response.RequiredProperties = [
   "events",
-  "next_cursor",
   "has_more",
+  "next_cursor",
 ];
 
 /**
@@ -137,15 +137,15 @@ GetProjectEventsByCursor200Response.RequiredProperties = [
 GetProjectEventsByCursor200Response.prototype["events"] = undefined;
 
 /**
- * The cursor value of the next result, which is intended to be used as the \"cursor\" parameter value of the next call to this method. An empty string is returned if there are no more results after this results set.
- * @member {String} next_cursor
- */
-GetProjectEventsByCursor200Response.prototype["next_cursor"] = undefined;
-
-/**
  * True if there are more events
  * @member {Boolean} has_more
  */
 GetProjectEventsByCursor200Response.prototype["has_more"] = undefined;
+
+/**
+ * The cursor value of the next result, which is intended to be used as the \"cursor\" parameter value of the next call to this method. An empty string is returned if there are no more results after this results set.
+ * @member {String} next_cursor
+ */
+GetProjectEventsByCursor200Response.prototype["next_cursor"] = undefined;
 
 export default GetProjectEventsByCursor200Response;

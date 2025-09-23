@@ -50,8 +50,20 @@
       //expect(instance).to.be.a(NotehubJs.DFUState);
     });
 
-    it('should have the property type (base name: "type")', function () {
-      // uncomment below and update the code to test the property type
+    it('should have the property began (base name: "began")', function () {
+      // uncomment below and update the code to test the property began
+      //var instance = new NotehubJs.DFUState();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property crc32 (base name: "crc32")', function () {
+      // uncomment below and update the code to test the property crc32
+      //var instance = new NotehubJs.DFUState();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property errors (base name: "errors")', function () {
+      // uncomment below and update the code to test the property errors
       //var instance = new NotehubJs.DFUState();
       //expect(instance).to.be();
     });
@@ -68,12 +80,6 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property crc32 (base name: "crc32")', function () {
-      // uncomment below and update the code to test the property crc32
-      //var instance = new NotehubJs.DFUState();
-      //expect(instance).to.be();
-    });
-
     it('should have the property md5 (base name: "md5")', function () {
       // uncomment below and update the code to test the property md5
       //var instance = new NotehubJs.DFUState();
@@ -86,14 +92,8 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property status (base name: "status")', function () {
-      // uncomment below and update the code to test the property status
-      //var instance = new NotehubJs.DFUState();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property began (base name: "began")', function () {
-      // uncomment below and update the code to test the property began
+    it('should have the property read (base name: "read")', function () {
+      // uncomment below and update the code to test the property read
       //var instance = new NotehubJs.DFUState();
       //expect(instance).to.be();
     });
@@ -104,14 +104,14 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property errors (base name: "errors")', function () {
-      // uncomment below and update the code to test the property errors
+    it('should have the property status (base name: "status")', function () {
+      // uncomment below and update the code to test the property status
       //var instance = new NotehubJs.DFUState();
       //expect(instance).to.be();
     });
 
-    it('should have the property read (base name: "read")', function () {
-      // uncomment below and update the code to test the property read
+    it('should have the property type (base name: "type")', function () {
+      // uncomment below and update the code to test the property type
       //var instance = new NotehubJs.DFUState();
       //expect(instance).to.be();
     });

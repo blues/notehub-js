@@ -46,11 +46,11 @@ class GetProjectDevicePublicKeys200ResponseDevicePublicKeysInner {
       obj =
         obj || new GetProjectDevicePublicKeys200ResponseDevicePublicKeysInner();
 
-      if (data.hasOwnProperty("uid")) {
-        obj["uid"] = ApiClient.convertToType(data["uid"], "String");
-      }
       if (data.hasOwnProperty("key")) {
         obj["key"] = ApiClient.convertToType(data["key"], "String");
+      }
+      if (data.hasOwnProperty("uid")) {
+        obj["uid"] = ApiClient.convertToType(data["uid"], "String");
       }
     } else if (data === null) {
       return null;
@@ -66,16 +66,6 @@ class GetProjectDevicePublicKeys200ResponseDevicePublicKeysInner {
   static validateJSON(data) {
     // ensure the json data is a string
     if (
-      data["uid"] &&
-      !(typeof data["uid"] === "string" || data["uid"] instanceof String)
-    ) {
-      throw new Error(
-        "Expected the field `uid` to be a primitive type in the JSON string but got " +
-          data["uid"]
-      );
-    }
-    // ensure the json data is a string
-    if (
       data["key"] &&
       !(typeof data["key"] === "string" || data["key"] instanceof String)
     ) {
@@ -84,21 +74,31 @@ class GetProjectDevicePublicKeys200ResponseDevicePublicKeysInner {
           data["key"]
       );
     }
+    // ensure the json data is a string
+    if (
+      data["uid"] &&
+      !(typeof data["uid"] === "string" || data["uid"] instanceof String)
+    ) {
+      throw new Error(
+        "Expected the field `uid` to be a primitive type in the JSON string but got " +
+          data["uid"]
+      );
+    }
 
     return true;
   }
 }
 
 /**
- * @member {String} uid
- */
-GetProjectDevicePublicKeys200ResponseDevicePublicKeysInner.prototype["uid"] =
-  undefined;
-
-/**
  * @member {String} key
  */
 GetProjectDevicePublicKeys200ResponseDevicePublicKeysInner.prototype["key"] =
+  undefined;
+
+/**
+ * @member {String} uid
+ */
+GetProjectDevicePublicKeys200ResponseDevicePublicKeysInner.prototype["uid"] =
   undefined;
 
 export default GetProjectDevicePublicKeys200ResponseDevicePublicKeysInner;

@@ -50,6 +50,12 @@
       //expect(instance).to.be.a(NotehubJs.DeviceDfuStatus);
     });
 
+    it('should have the property current (base name: "current")', function () {
+      // uncomment below and update the code to test the property current
+      //var instance = new NotehubJs.DeviceDfuStatus();
+      //expect(instance).to.be();
+    });
+
     it('should have the property deviceUid (base name: "device_uid")', function () {
       // uncomment below and update the code to test the property deviceUid
       //var instance = new NotehubJs.DeviceDfuStatus();
@@ -58,12 +64,6 @@
 
     it('should have the property dfuInProgress (base name: "dfu_in_progress")', function () {
       // uncomment below and update the code to test the property dfuInProgress
-      //var instance = new NotehubJs.DeviceDfuStatus();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property current (base name: "current")', function () {
-      // uncomment below and update the code to test the property current
       //var instance = new NotehubJs.DeviceDfuStatus();
       //expect(instance).to.be();
     });

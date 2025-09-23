@@ -12,8 +12,8 @@
  */
 
 import ApiClient from "../ApiClient";
-import HttpFilter from "./HttpFilter";
-import HttpTransform from "./HttpTransform";
+import AwsFilter from "./AwsFilter";
+import AwsTransform from "./AwsTransform";
 
 /**
  * The Aws model module.
@@ -48,41 +48,6 @@ class Aws {
     if (data) {
       obj = obj || new Aws();
 
-      if (data.hasOwnProperty("fleets")) {
-        obj["fleets"] = ApiClient.convertToType(data["fleets"], ["String"]);
-      }
-      if (data.hasOwnProperty("filter")) {
-        obj["filter"] = HttpFilter.constructFromObject(data["filter"]);
-      }
-      if (data.hasOwnProperty("transform")) {
-        obj["transform"] = HttpTransform.constructFromObject(data["transform"]);
-      }
-      if (data.hasOwnProperty("throttle_ms")) {
-        obj["throttle_ms"] = ApiClient.convertToType(
-          data["throttle_ms"],
-          "Number"
-        );
-      }
-      if (data.hasOwnProperty("url")) {
-        obj["url"] = ApiClient.convertToType(data["url"], "String");
-      }
-      if (data.hasOwnProperty("http_headers")) {
-        obj["http_headers"] = ApiClient.convertToType(data["http_headers"], {
-          String: "String",
-        });
-      }
-      if (data.hasOwnProperty("disable_http_headers")) {
-        obj["disable_http_headers"] = ApiClient.convertToType(
-          data["disable_http_headers"],
-          "Boolean"
-        );
-      }
-      if (data.hasOwnProperty("timeout")) {
-        obj["timeout"] = ApiClient.convertToType(data["timeout"], "Number");
-      }
-      if (data.hasOwnProperty("region")) {
-        obj["region"] = ApiClient.convertToType(data["region"], "String");
-      }
       if (data.hasOwnProperty("access_key_id")) {
         obj["access_key_id"] = ApiClient.convertToType(
           data["access_key_id"],
@@ -95,11 +60,25 @@ class Aws {
           "String"
         );
       }
-      if (data.hasOwnProperty("message_group_id")) {
-        obj["message_group_id"] = ApiClient.convertToType(
-          data["message_group_id"],
-          "String"
+      if (data.hasOwnProperty("channel")) {
+        obj["channel"] = ApiClient.convertToType(data["channel"], "String");
+      }
+      if (data.hasOwnProperty("disable_http_headers")) {
+        obj["disable_http_headers"] = ApiClient.convertToType(
+          data["disable_http_headers"],
+          "Boolean"
         );
+      }
+      if (data.hasOwnProperty("filter")) {
+        obj["filter"] = AwsFilter.constructFromObject(data["filter"]);
+      }
+      if (data.hasOwnProperty("fleets")) {
+        obj["fleets"] = ApiClient.convertToType(data["fleets"], ["String"]);
+      }
+      if (data.hasOwnProperty("http_headers")) {
+        obj["http_headers"] = ApiClient.convertToType(data["http_headers"], {
+          String: "String",
+        });
       }
       if (data.hasOwnProperty("message_deduplication_id")) {
         obj["message_deduplication_id"] = ApiClient.convertToType(
@@ -107,8 +86,29 @@ class Aws {
           "String"
         );
       }
-      if (data.hasOwnProperty("channel")) {
-        obj["channel"] = ApiClient.convertToType(data["channel"], "String");
+      if (data.hasOwnProperty("message_group_id")) {
+        obj["message_group_id"] = ApiClient.convertToType(
+          data["message_group_id"],
+          "String"
+        );
+      }
+      if (data.hasOwnProperty("region")) {
+        obj["region"] = ApiClient.convertToType(data["region"], "String");
+      }
+      if (data.hasOwnProperty("throttle_ms")) {
+        obj["throttle_ms"] = ApiClient.convertToType(
+          data["throttle_ms"],
+          "Number"
+        );
+      }
+      if (data.hasOwnProperty("timeout")) {
+        obj["timeout"] = ApiClient.convertToType(data["timeout"], "Number");
+      }
+      if (data.hasOwnProperty("transform")) {
+        obj["transform"] = AwsTransform.constructFromObject(data["transform"]);
+      }
+      if (data.hasOwnProperty("url")) {
+        obj["url"] = ApiClient.convertToType(data["url"], "String");
       }
     } else if (data === null) {
       return null;
@@ -122,43 +122,6 @@ class Aws {
    * @return {boolean} to indicate whether the JSON data is valid with respect to <code>Aws</code>.
    */
   static validateJSON(data) {
-    // ensure the json data is an array
-    if (!Array.isArray(data["fleets"])) {
-      throw new Error(
-        "Expected the field `fleets` to be an array in the JSON data but got " +
-          data["fleets"]
-      );
-    }
-    // validate the optional field `filter`
-    if (data["filter"]) {
-      // data not null
-      HttpFilter.validateJSON(data["filter"]);
-    }
-    // validate the optional field `transform`
-    if (data["transform"]) {
-      // data not null
-      HttpTransform.validateJSON(data["transform"]);
-    }
-    // ensure the json data is a string
-    if (
-      data["url"] &&
-      !(typeof data["url"] === "string" || data["url"] instanceof String)
-    ) {
-      throw new Error(
-        "Expected the field `url` to be a primitive type in the JSON string but got " +
-          data["url"]
-      );
-    }
-    // ensure the json data is a string
-    if (
-      data["region"] &&
-      !(typeof data["region"] === "string" || data["region"] instanceof String)
-    ) {
-      throw new Error(
-        "Expected the field `region` to be a primitive type in the JSON string but got " +
-          data["region"]
-      );
-    }
     // ensure the json data is a string
     if (
       data["access_key_id"] &&
@@ -187,15 +150,26 @@ class Aws {
     }
     // ensure the json data is a string
     if (
-      data["message_group_id"] &&
+      data["channel"] &&
       !(
-        typeof data["message_group_id"] === "string" ||
-        data["message_group_id"] instanceof String
+        typeof data["channel"] === "string" || data["channel"] instanceof String
       )
     ) {
       throw new Error(
-        "Expected the field `message_group_id` to be a primitive type in the JSON string but got " +
-          data["message_group_id"]
+        "Expected the field `channel` to be a primitive type in the JSON string but got " +
+          data["channel"]
+      );
+    }
+    // validate the optional field `filter`
+    if (data["filter"]) {
+      // data not null
+      AwsFilter.validateJSON(data["filter"]);
+    }
+    // ensure the json data is an array
+    if (!Array.isArray(data["fleets"])) {
+      throw new Error(
+        "Expected the field `fleets` to be an array in the JSON data but got " +
+          data["fleets"]
       );
     }
     // ensure the json data is a string
@@ -213,69 +187,46 @@ class Aws {
     }
     // ensure the json data is a string
     if (
-      data["channel"] &&
+      data["message_group_id"] &&
       !(
-        typeof data["channel"] === "string" || data["channel"] instanceof String
+        typeof data["message_group_id"] === "string" ||
+        data["message_group_id"] instanceof String
       )
     ) {
       throw new Error(
-        "Expected the field `channel` to be a primitive type in the JSON string but got " +
-          data["channel"]
+        "Expected the field `message_group_id` to be a primitive type in the JSON string but got " +
+          data["message_group_id"]
+      );
+    }
+    // ensure the json data is a string
+    if (
+      data["region"] &&
+      !(typeof data["region"] === "string" || data["region"] instanceof String)
+    ) {
+      throw new Error(
+        "Expected the field `region` to be a primitive type in the JSON string but got " +
+          data["region"]
+      );
+    }
+    // validate the optional field `transform`
+    if (data["transform"]) {
+      // data not null
+      AwsTransform.validateJSON(data["transform"]);
+    }
+    // ensure the json data is a string
+    if (
+      data["url"] &&
+      !(typeof data["url"] === "string" || data["url"] instanceof String)
+    ) {
+      throw new Error(
+        "Expected the field `url` to be a primitive type in the JSON string but got " +
+          data["url"]
       );
     }
 
     return true;
   }
 }
-
-/**
- * list of Fleet UIDs to apply route to, if any.  If empty, applies to all Fleets
- * @member {Array.<String>} fleets
- */
-Aws.prototype["fleets"] = undefined;
-
-/**
- * @member {module:model/HttpFilter} filter
- */
-Aws.prototype["filter"] = undefined;
-
-/**
- * @member {module:model/HttpTransform} transform
- */
-Aws.prototype["transform"] = undefined;
-
-/**
- * @member {Number} throttle_ms
- */
-Aws.prototype["throttle_ms"] = undefined;
-
-/**
- * @member {String} url
- */
-Aws.prototype["url"] = undefined;
-
-/**
- * @member {Object.<String, String>} http_headers
- */
-Aws.prototype["http_headers"] = undefined;
-
-/**
- * @member {Boolean} disable_http_headers
- * @default false
- */
-Aws.prototype["disable_http_headers"] = false;
-
-/**
- * Timeout in seconds for each request
- * @member {Number} timeout
- * @default 15
- */
-Aws.prototype["timeout"] = 15;
-
-/**
- * @member {String} region
- */
-Aws.prototype["region"] = undefined;
 
 /**
  * @member {String} access_key_id
@@ -289,9 +240,31 @@ Aws.prototype["access_key_id"] = undefined;
 Aws.prototype["access_key_secret"] = undefined;
 
 /**
- * @member {String} message_group_id
+ * @member {String} channel
  */
-Aws.prototype["message_group_id"] = undefined;
+Aws.prototype["channel"] = undefined;
+
+/**
+ * @member {Boolean} disable_http_headers
+ * @default false
+ */
+Aws.prototype["disable_http_headers"] = false;
+
+/**
+ * @member {module:model/AwsFilter} filter
+ */
+Aws.prototype["filter"] = undefined;
+
+/**
+ * list of Fleet UIDs to apply route to, if any.  If empty, applies to all Fleets
+ * @member {Array.<String>} fleets
+ */
+Aws.prototype["fleets"] = undefined;
+
+/**
+ * @member {Object.<String, String>} http_headers
+ */
+Aws.prototype["http_headers"] = undefined;
 
 /**
  * @member {String} message_deduplication_id
@@ -299,8 +272,35 @@ Aws.prototype["message_group_id"] = undefined;
 Aws.prototype["message_deduplication_id"] = undefined;
 
 /**
- * @member {String} channel
+ * @member {String} message_group_id
  */
-Aws.prototype["channel"] = undefined;
+Aws.prototype["message_group_id"] = undefined;
+
+/**
+ * @member {String} region
+ */
+Aws.prototype["region"] = undefined;
+
+/**
+ * @member {Number} throttle_ms
+ */
+Aws.prototype["throttle_ms"] = undefined;
+
+/**
+ * Timeout in seconds for each request
+ * @member {Number} timeout
+ * @default 15
+ */
+Aws.prototype["timeout"] = 15;
+
+/**
+ * @member {module:model/AwsTransform} transform
+ */
+Aws.prototype["transform"] = undefined;
+
+/**
+ * @member {String} url
+ */
+Aws.prototype["url"] = undefined;
 
 export default Aws;

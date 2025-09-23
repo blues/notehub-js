@@ -45,8 +45,14 @@ class DFUState {
     if (data) {
       obj = obj || new DFUState();
 
-      if (data.hasOwnProperty("type")) {
-        obj["type"] = ApiClient.convertToType(data["type"], "String");
+      if (data.hasOwnProperty("began")) {
+        obj["began"] = ApiClient.convertToType(data["began"], "Number");
+      }
+      if (data.hasOwnProperty("crc32")) {
+        obj["crc32"] = ApiClient.convertToType(data["crc32"], "Number");
+      }
+      if (data.hasOwnProperty("errors")) {
+        obj["errors"] = ApiClient.convertToType(data["errors"], "Number");
       }
       if (data.hasOwnProperty("file")) {
         obj["file"] = ApiClient.convertToType(data["file"], "String");
@@ -54,29 +60,23 @@ class DFUState {
       if (data.hasOwnProperty("length")) {
         obj["length"] = ApiClient.convertToType(data["length"], "Number");
       }
-      if (data.hasOwnProperty("crc32")) {
-        obj["crc32"] = ApiClient.convertToType(data["crc32"], "Number");
-      }
       if (data.hasOwnProperty("md5")) {
         obj["md5"] = ApiClient.convertToType(data["md5"], "String");
       }
       if (data.hasOwnProperty("mode")) {
         obj["mode"] = ApiClient.convertToType(data["mode"], "String");
       }
-      if (data.hasOwnProperty("status")) {
-        obj["status"] = ApiClient.convertToType(data["status"], "String");
-      }
-      if (data.hasOwnProperty("began")) {
-        obj["began"] = ApiClient.convertToType(data["began"], "Number");
+      if (data.hasOwnProperty("read")) {
+        obj["read"] = ApiClient.convertToType(data["read"], "Number");
       }
       if (data.hasOwnProperty("retry")) {
         obj["retry"] = ApiClient.convertToType(data["retry"], "Number");
       }
-      if (data.hasOwnProperty("errors")) {
-        obj["errors"] = ApiClient.convertToType(data["errors"], "Number");
+      if (data.hasOwnProperty("status")) {
+        obj["status"] = ApiClient.convertToType(data["status"], "String");
       }
-      if (data.hasOwnProperty("read")) {
-        obj["read"] = ApiClient.convertToType(data["read"], "Number");
+      if (data.hasOwnProperty("type")) {
+        obj["type"] = ApiClient.convertToType(data["type"], "String");
       }
       if (data.hasOwnProperty("updated")) {
         obj["updated"] = ApiClient.convertToType(data["updated"], "Number");
@@ -96,16 +96,6 @@ class DFUState {
    * @return {boolean} to indicate whether the JSON data is valid with respect to <code>DFUState</code>.
    */
   static validateJSON(data) {
-    // ensure the json data is a string
-    if (
-      data["type"] &&
-      !(typeof data["type"] === "string" || data["type"] instanceof String)
-    ) {
-      throw new Error(
-        "Expected the field `type` to be a primitive type in the JSON string but got " +
-          data["type"]
-      );
-    }
     // ensure the json data is a string
     if (
       data["file"] &&
@@ -148,6 +138,16 @@ class DFUState {
     }
     // ensure the json data is a string
     if (
+      data["type"] &&
+      !(typeof data["type"] === "string" || data["type"] instanceof String)
+    ) {
+      throw new Error(
+        "Expected the field `type` to be a primitive type in the JSON string but got " +
+          data["type"]
+      );
+    }
+    // ensure the json data is a string
+    if (
       data["version"] &&
       !(
         typeof data["version"] === "string" || data["version"] instanceof String
@@ -164,9 +164,22 @@ class DFUState {
 }
 
 /**
- * @member {module:model/DFUState.TypeEnum} type
+ * The time when the DFU began
+ * @member {Number} began
  */
-DFUState.prototype["type"] = undefined;
+DFUState.prototype["began"] = undefined;
+
+/**
+ * Used for image verification
+ * @member {Number} crc32
+ */
+DFUState.prototype["crc32"] = undefined;
+
+/**
+ * The number of consecutive errors the DFU process has encountered
+ * @member {Number} errors
+ */
+DFUState.prototype["errors"] = undefined;
 
 /**
  * Firmware filename
@@ -182,12 +195,6 @@ DFUState.prototype["length"] = undefined;
 
 /**
  * Used for image verification
- * @member {Number} crc32
- */
-DFUState.prototype["crc32"] = undefined;
-
-/**
- * Used for image verification
  * @member {String} md5
  */
 DFUState.prototype["md5"] = undefined;
@@ -199,16 +206,10 @@ DFUState.prototype["md5"] = undefined;
 DFUState.prototype["mode"] = undefined;
 
 /**
- * Status message
- * @member {String} status
+ * The amount the notecard has read of the image from notehub
+ * @member {Number} read
  */
-DFUState.prototype["status"] = undefined;
-
-/**
- * The time when the DFU began
- * @member {Number} began
- */
-DFUState.prototype["began"] = undefined;
+DFUState.prototype["read"] = undefined;
 
 /**
  * Value of _fw_retry environment var at time of DFU initialization
@@ -217,16 +218,15 @@ DFUState.prototype["began"] = undefined;
 DFUState.prototype["retry"] = undefined;
 
 /**
- * The number of consecutive errors the DFU process has encountered
- * @member {Number} errors
+ * Status message
+ * @member {String} status
  */
-DFUState.prototype["errors"] = undefined;
+DFUState.prototype["status"] = undefined;
 
 /**
- * The amount the notecard has read of the image from notehub
- * @member {Number} read
+ * @member {module:model/DFUState.TypeEnum} type
  */
-DFUState.prototype["read"] = undefined;
+DFUState.prototype["type"] = undefined;
 
 /**
  * Last updated timestamp
@@ -239,25 +239,6 @@ DFUState.prototype["updated"] = undefined;
  * @member {String} version
  */
 DFUState.prototype["version"] = undefined;
-
-/**
- * Allowed values for the <code>type</code> property.
- * @enum {String}
- * @readonly
- */
-DFUState["TypeEnum"] = {
-  /**
-   * value: "card"
-   * @const
-   */
-  card: "card",
-
-  /**
-   * value: "user"
-   * @const
-   */
-  user: "user",
-};
 
 /**
  * Allowed values for the <code>mode</code> property.
@@ -312,6 +293,25 @@ DFUState["ModeEnum"] = {
    * @const
    */
   completed: "completed",
+};
+
+/**
+ * Allowed values for the <code>type</code> property.
+ * @enum {String}
+ * @readonly
+ */
+DFUState["TypeEnum"] = {
+  /**
+   * value: "card"
+   * @const
+   */
+  card: "card",
+
+  /**
+   * value: "user"
+   * @const
+   */
+  user: "user",
 };
 
 export default DFUState;

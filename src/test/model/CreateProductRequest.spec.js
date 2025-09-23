@@ -50,8 +50,14 @@
       //expect(instance).to.be.a(NotehubJs.CreateProductRequest);
     });
 
-    it('should have the property productUid (base name: "product_uid")', function () {
-      // uncomment below and update the code to test the property productUid
+    it('should have the property autoProvisionFleets (base name: "auto_provision_fleets")', function () {
+      // uncomment below and update the code to test the property autoProvisionFleets
+      //var instance = new NotehubJs.CreateProductRequest();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property disableDevicesByDefault (base name: "disable_devices_by_default")', function () {
+      // uncomment below and update the code to test the property disableDevicesByDefault
       //var instance = new NotehubJs.CreateProductRequest();
       //expect(instance).to.be();
     });
@@ -62,14 +68,8 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property autoProvisionFleets (base name: "auto_provision_fleets")', function () {
-      // uncomment below and update the code to test the property autoProvisionFleets
-      //var instance = new NotehubJs.CreateProductRequest();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property disableDevicesByDefault (base name: "disable_devices_by_default")', function () {
-      // uncomment below and update the code to test the property disableDevicesByDefault
+    it('should have the property productUid (base name: "product_uid")', function () {
+      // uncomment below and update the code to test the property productUid
       //var instance = new NotehubJs.CreateProductRequest();
       //expect(instance).to.be();
     });

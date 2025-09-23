@@ -4,5 +4,5 @@
 
 | Name         | Type       | Description | Notes      |
 | ------------ | ---------- | ----------- | ---------- |
-| **username** | **String** |             | [optional] |
 | **password** | **String** |             | [optional] |
+| **username** | **String** |             | [optional] |

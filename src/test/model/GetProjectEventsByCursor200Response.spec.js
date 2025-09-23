@@ -56,14 +56,14 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property nextCursor (base name: "next_cursor")', function () {
-      // uncomment below and update the code to test the property nextCursor
+    it('should have the property hasMore (base name: "has_more")', function () {
+      // uncomment below and update the code to test the property hasMore
       //var instance = new NotehubJs.GetProjectEventsByCursor200Response();
       //expect(instance).to.be();
     });
 
-    it('should have the property hasMore (base name: "has_more")', function () {
-      // uncomment below and update the code to test the property hasMore
+    it('should have the property nextCursor (base name: "next_cursor")', function () {
+      // uncomment below and update the code to test the property nextCursor
       //var instance = new NotehubJs.GetProjectEventsByCursor200Response();
       //expect(instance).to.be();
     });

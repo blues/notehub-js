@@ -47,149 +47,20 @@ class DeviceSession {
     if (data) {
       obj = obj || new DeviceSession();
 
-      if (data.hasOwnProperty("session")) {
-        obj["session"] = ApiClient.convertToType(data["session"], "String");
-      }
-      if (data.hasOwnProperty("session_began")) {
-        obj["session_began"] = ApiClient.convertToType(
-          data["session_began"],
-          "Number"
-        );
-      }
-      if (data.hasOwnProperty("why_session_opened")) {
-        obj["why_session_opened"] = ApiClient.convertToType(
-          data["why_session_opened"],
-          "String"
-        );
-      }
-      if (data.hasOwnProperty("session_ended")) {
-        obj["session_ended"] = ApiClient.convertToType(
-          data["session_ended"],
-          "Number"
-        );
-      }
-      if (data.hasOwnProperty("why_session_closed")) {
-        obj["why_session_closed"] = ApiClient.convertToType(
-          data["why_session_closed"],
-          "String"
-        );
-      }
-      if (data.hasOwnProperty("device")) {
-        obj["device"] = ApiClient.convertToType(data["device"], "String");
-      }
-      if (data.hasOwnProperty("sn")) {
-        obj["sn"] = ApiClient.convertToType(data["sn"], "String");
-      }
-      if (data.hasOwnProperty("product")) {
-        obj["product"] = ApiClient.convertToType(data["product"], "String");
-      }
-      if (data.hasOwnProperty("fleets")) {
-        obj["fleets"] = ApiClient.convertToType(data["fleets"], ["String"]);
-      }
-      if (data.hasOwnProperty("cell")) {
-        obj["cell"] = ApiClient.convertToType(data["cell"], "String");
-      }
-      if (data.hasOwnProperty("scan")) {
-        obj["scan"] = ApiClient.convertToType(data["scan"], "Blob");
-      }
-      if (data.hasOwnProperty("triangulate")) {
-        obj["triangulate"] = ApiClient.convertToType(
-          data["triangulate"],
-          Object
-        );
-      }
-      if (data.hasOwnProperty("rssi")) {
-        obj["rssi"] = ApiClient.convertToType(data["rssi"], "Number");
-      }
-      if (data.hasOwnProperty("sinr")) {
-        obj["sinr"] = ApiClient.convertToType(data["sinr"], "Number");
-      }
-      if (data.hasOwnProperty("rsrp")) {
-        obj["rsrp"] = ApiClient.convertToType(data["rsrp"], "Number");
-      }
-      if (data.hasOwnProperty("rsrq")) {
-        obj["rsrq"] = ApiClient.convertToType(data["rsrq"], "Number");
+      if (data.hasOwnProperty("apn")) {
+        obj["apn"] = ApiClient.convertToType(data["apn"], "String");
       }
       if (data.hasOwnProperty("bars")) {
         obj["bars"] = ApiClient.convertToType(data["bars"], "Number");
       }
-      if (data.hasOwnProperty("rat")) {
-        obj["rat"] = ApiClient.convertToType(data["rat"], "String");
-      }
       if (data.hasOwnProperty("bearer")) {
         obj["bearer"] = ApiClient.convertToType(data["bearer"], "String");
-      }
-      if (data.hasOwnProperty("ip")) {
-        obj["ip"] = ApiClient.convertToType(data["ip"], "String");
       }
       if (data.hasOwnProperty("bssid")) {
         obj["bssid"] = ApiClient.convertToType(data["bssid"], "String");
       }
-      if (data.hasOwnProperty("ssid")) {
-        obj["ssid"] = ApiClient.convertToType(data["ssid"], "String");
-      }
-      if (data.hasOwnProperty("iccid")) {
-        obj["iccid"] = ApiClient.convertToType(data["iccid"], "String");
-      }
-      if (data.hasOwnProperty("apn")) {
-        obj["apn"] = ApiClient.convertToType(data["apn"], "String");
-      }
-      if (data.hasOwnProperty("transport")) {
-        obj["transport"] = ApiClient.convertToType(data["transport"], "String");
-      }
-      if (data.hasOwnProperty("tower")) {
-        obj["tower"] = TowerLocation.constructFromObject(data["tower"]);
-      }
-      if (data.hasOwnProperty("tri")) {
-        obj["tri"] = TowerLocation.constructFromObject(data["tri"]);
-      }
-      if (data.hasOwnProperty("when")) {
-        obj["when"] = ApiClient.convertToType(data["when"], "Number");
-      }
-      if (data.hasOwnProperty("where_when")) {
-        obj["where_when"] = ApiClient.convertToType(
-          data["where_when"],
-          "Number"
-        );
-      }
-      if (data.hasOwnProperty("where")) {
-        obj["where"] = ApiClient.convertToType(data["where"], "String");
-      }
-      if (data.hasOwnProperty("where_lat")) {
-        obj["where_lat"] = ApiClient.convertToType(data["where_lat"], "Number");
-      }
-      if (data.hasOwnProperty("where_lon")) {
-        obj["where_lon"] = ApiClient.convertToType(data["where_lon"], "Number");
-      }
-      if (data.hasOwnProperty("where_location")) {
-        obj["where_location"] = ApiClient.convertToType(
-          data["where_location"],
-          "String"
-        );
-      }
-      if (data.hasOwnProperty("where_country")) {
-        obj["where_country"] = ApiClient.convertToType(
-          data["where_country"],
-          "String"
-        );
-      }
-      if (data.hasOwnProperty("where_timezone")) {
-        obj["where_timezone"] = ApiClient.convertToType(
-          data["where_timezone"],
-          "String"
-        );
-      }
-      if (data.hasOwnProperty("usage_actual")) {
-        obj["usage_actual"] = ApiClient.convertToType(
-          data["usage_actual"],
-          "Boolean"
-        );
-      }
-      if (data.hasOwnProperty("voltage")) {
-        obj["voltage"] = ApiClient.convertToType(data["voltage"], "Number");
-      }
-      if (data.hasOwnProperty("temp")) {
-        obj["temp"] = ApiClient.convertToType(data["temp"], "Number");
+      if (data.hasOwnProperty("cell")) {
+        obj["cell"] = ApiClient.convertToType(data["cell"], "String");
       }
       if (data.hasOwnProperty("continuous")) {
         obj["continuous"] = ApiClient.convertToType(
@@ -197,27 +68,36 @@ class DeviceSession {
           "Boolean"
         );
       }
-      if (data.hasOwnProperty("tls")) {
-        obj["tls"] = ApiClient.convertToType(data["tls"], "Boolean");
-      }
-      if (data.hasOwnProperty("work")) {
-        obj["work"] = ApiClient.convertToType(data["work"], "Number");
+      if (data.hasOwnProperty("device")) {
+        obj["device"] = ApiClient.convertToType(data["device"], "String");
       }
       if (data.hasOwnProperty("events")) {
         obj["events"] = ApiClient.convertToType(data["events"], "Number");
       }
-      if (data.hasOwnProperty("moved")) {
-        obj["moved"] = ApiClient.convertToType(data["moved"], "Number");
-      }
-      if (data.hasOwnProperty("orientation")) {
-        obj["orientation"] = ApiClient.convertToType(
-          data["orientation"],
-          "String"
+      if (data.hasOwnProperty("failed_connects")) {
+        obj["failed_connects"] = ApiClient.convertToType(
+          data["failed_connects"],
+          "Number"
         );
       }
-      if (data.hasOwnProperty("hp_secs_total")) {
-        obj["hp_secs_total"] = ApiClient.convertToType(
-          data["hp_secs_total"],
+      if (data.hasOwnProperty("fleets")) {
+        obj["fleets"] = ApiClient.convertToType(data["fleets"], ["String"]);
+      }
+      if (data.hasOwnProperty("hp_cycles_data")) {
+        obj["hp_cycles_data"] = ApiClient.convertToType(
+          data["hp_cycles_data"],
+          "Number"
+        );
+      }
+      if (data.hasOwnProperty("hp_cycles_gps")) {
+        obj["hp_cycles_gps"] = ApiClient.convertToType(
+          data["hp_cycles_gps"],
+          "Number"
+        );
+      }
+      if (data.hasOwnProperty("hp_cycles_total")) {
+        obj["hp_cycles_total"] = ApiClient.convertToType(
+          data["hp_cycles_total"],
           "Number"
         );
       }
@@ -233,21 +113,30 @@ class DeviceSession {
           "Number"
         );
       }
-      if (data.hasOwnProperty("hp_cycles_total")) {
-        obj["hp_cycles_total"] = ApiClient.convertToType(
-          data["hp_cycles_total"],
+      if (data.hasOwnProperty("hp_secs_total")) {
+        obj["hp_secs_total"] = ApiClient.convertToType(
+          data["hp_secs_total"],
           "Number"
         );
       }
-      if (data.hasOwnProperty("hp_cycles_data")) {
-        obj["hp_cycles_data"] = ApiClient.convertToType(
-          data["hp_cycles_data"],
-          "Number"
+      if (data.hasOwnProperty("iccid")) {
+        obj["iccid"] = ApiClient.convertToType(data["iccid"], "String");
+      }
+      if (data.hasOwnProperty("ip")) {
+        obj["ip"] = ApiClient.convertToType(data["ip"], "String");
+      }
+      if (data.hasOwnProperty("moved")) {
+        obj["moved"] = ApiClient.convertToType(data["moved"], "Number");
+      }
+      if (data.hasOwnProperty("orientation")) {
+        obj["orientation"] = ApiClient.convertToType(
+          data["orientation"],
+          "String"
         );
       }
-      if (data.hasOwnProperty("hp_cycles_gps")) {
-        obj["hp_cycles_gps"] = ApiClient.convertToType(
-          data["hp_cycles_gps"],
+      if (data.hasOwnProperty("penalty_secs")) {
+        obj["penalty_secs"] = ApiClient.convertToType(
+          data["penalty_secs"],
           "Number"
         );
       }
@@ -260,11 +149,8 @@ class DeviceSession {
           "Boolean"
         );
       }
-      if (data.hasOwnProperty("power_usb")) {
-        obj["power_usb"] = ApiClient.convertToType(
-          data["power_usb"],
-          "Boolean"
-        );
+      if (data.hasOwnProperty("power_mah")) {
+        obj["power_mah"] = ApiClient.convertToType(data["power_mah"], "Number");
       }
       if (data.hasOwnProperty("power_primary")) {
         obj["power_primary"] = ApiClient.convertToType(
@@ -272,20 +158,134 @@ class DeviceSession {
           "Boolean"
         );
       }
-      if (data.hasOwnProperty("power_mah")) {
-        obj["power_mah"] = ApiClient.convertToType(data["power_mah"], "Number");
+      if (data.hasOwnProperty("power_usb")) {
+        obj["power_usb"] = ApiClient.convertToType(
+          data["power_usb"],
+          "Boolean"
+        );
       }
-      if (data.hasOwnProperty("penalty_secs")) {
-        obj["penalty_secs"] = ApiClient.convertToType(
-          data["penalty_secs"],
+      if (data.hasOwnProperty("product")) {
+        obj["product"] = ApiClient.convertToType(data["product"], "String");
+      }
+      if (data.hasOwnProperty("rat")) {
+        obj["rat"] = ApiClient.convertToType(data["rat"], "String");
+      }
+      if (data.hasOwnProperty("rsrp")) {
+        obj["rsrp"] = ApiClient.convertToType(data["rsrp"], "Number");
+      }
+      if (data.hasOwnProperty("rsrq")) {
+        obj["rsrq"] = ApiClient.convertToType(data["rsrq"], "Number");
+      }
+      if (data.hasOwnProperty("rssi")) {
+        obj["rssi"] = ApiClient.convertToType(data["rssi"], "Number");
+      }
+      if (data.hasOwnProperty("scan")) {
+        obj["scan"] = ApiClient.convertToType(data["scan"], "Blob");
+      }
+      if (data.hasOwnProperty("session")) {
+        obj["session"] = ApiClient.convertToType(data["session"], "String");
+      }
+      if (data.hasOwnProperty("session_began")) {
+        obj["session_began"] = ApiClient.convertToType(
+          data["session_began"],
           "Number"
         );
       }
-      if (data.hasOwnProperty("failed_connects")) {
-        obj["failed_connects"] = ApiClient.convertToType(
-          data["failed_connects"],
+      if (data.hasOwnProperty("session_ended")) {
+        obj["session_ended"] = ApiClient.convertToType(
+          data["session_ended"],
           "Number"
         );
+      }
+      if (data.hasOwnProperty("sinr")) {
+        obj["sinr"] = ApiClient.convertToType(data["sinr"], "Number");
+      }
+      if (data.hasOwnProperty("sn")) {
+        obj["sn"] = ApiClient.convertToType(data["sn"], "String");
+      }
+      if (data.hasOwnProperty("ssid")) {
+        obj["ssid"] = ApiClient.convertToType(data["ssid"], "String");
+      }
+      if (data.hasOwnProperty("temp")) {
+        obj["temp"] = ApiClient.convertToType(data["temp"], "Number");
+      }
+      if (data.hasOwnProperty("tls")) {
+        obj["tls"] = ApiClient.convertToType(data["tls"], "Boolean");
+      }
+      if (data.hasOwnProperty("tower")) {
+        obj["tower"] = TowerLocation.constructFromObject(data["tower"]);
+      }
+      if (data.hasOwnProperty("transport")) {
+        obj["transport"] = ApiClient.convertToType(data["transport"], "String");
+      }
+      if (data.hasOwnProperty("tri")) {
+        obj["tri"] = TowerLocation.constructFromObject(data["tri"]);
+      }
+      if (data.hasOwnProperty("triangulate")) {
+        obj["triangulate"] = ApiClient.convertToType(
+          data["triangulate"],
+          Object
+        );
+      }
+      if (data.hasOwnProperty("usage_actual")) {
+        obj["usage_actual"] = ApiClient.convertToType(
+          data["usage_actual"],
+          "Boolean"
+        );
+      }
+      if (data.hasOwnProperty("voltage")) {
+        obj["voltage"] = ApiClient.convertToType(data["voltage"], "Number");
+      }
+      if (data.hasOwnProperty("when")) {
+        obj["when"] = ApiClient.convertToType(data["when"], "Number");
+      }
+      if (data.hasOwnProperty("where")) {
+        obj["where"] = ApiClient.convertToType(data["where"], "String");
+      }
+      if (data.hasOwnProperty("where_country")) {
+        obj["where_country"] = ApiClient.convertToType(
+          data["where_country"],
+          "String"
+        );
+      }
+      if (data.hasOwnProperty("where_lat")) {
+        obj["where_lat"] = ApiClient.convertToType(data["where_lat"], "Number");
+      }
+      if (data.hasOwnProperty("where_location")) {
+        obj["where_location"] = ApiClient.convertToType(
+          data["where_location"],
+          "String"
+        );
+      }
+      if (data.hasOwnProperty("where_lon")) {
+        obj["where_lon"] = ApiClient.convertToType(data["where_lon"], "Number");
+      }
+      if (data.hasOwnProperty("where_timezone")) {
+        obj["where_timezone"] = ApiClient.convertToType(
+          data["where_timezone"],
+          "String"
+        );
+      }
+      if (data.hasOwnProperty("where_when")) {
+        obj["where_when"] = ApiClient.convertToType(
+          data["where_when"],
+          "Number"
+        );
+      }
+      if (data.hasOwnProperty("why_session_closed")) {
+        obj["why_session_closed"] = ApiClient.convertToType(
+          data["why_session_closed"],
+          "String"
+        );
+      }
+      if (data.hasOwnProperty("why_session_opened")) {
+        obj["why_session_opened"] = ApiClient.convertToType(
+          data["why_session_opened"],
+          "String"
+        );
+      }
+      if (data.hasOwnProperty("work")) {
+        obj["work"] = ApiClient.convertToType(data["work"], "Number");
       }
     } else if (data === null) {
       return null;
@@ -301,99 +301,12 @@ class DeviceSession {
   static validateJSON(data) {
     // ensure the json data is a string
     if (
-      data["session"] &&
-      !(
-        typeof data["session"] === "string" || data["session"] instanceof String
-      )
+      data["apn"] &&
+      !(typeof data["apn"] === "string" || data["apn"] instanceof String)
     ) {
       throw new Error(
-        "Expected the field `session` to be a primitive type in the JSON string but got " +
-          data["session"]
-      );
-    }
-    // ensure the json data is a string
-    if (
-      data["why_session_opened"] &&
-      !(
-        typeof data["why_session_opened"] === "string" ||
-        data["why_session_opened"] instanceof String
-      )
-    ) {
-      throw new Error(
-        "Expected the field `why_session_opened` to be a primitive type in the JSON string but got " +
-          data["why_session_opened"]
-      );
-    }
-    // ensure the json data is a string
-    if (
-      data["why_session_closed"] &&
-      !(
-        typeof data["why_session_closed"] === "string" ||
-        data["why_session_closed"] instanceof String
-      )
-    ) {
-      throw new Error(
-        "Expected the field `why_session_closed` to be a primitive type in the JSON string but got " +
-          data["why_session_closed"]
-      );
-    }
-    // ensure the json data is a string
-    if (
-      data["device"] &&
-      !(typeof data["device"] === "string" || data["device"] instanceof String)
-    ) {
-      throw new Error(
-        "Expected the field `device` to be a primitive type in the JSON string but got " +
-          data["device"]
-      );
-    }
-    // ensure the json data is a string
-    if (
-      data["sn"] &&
-      !(typeof data["sn"] === "string" || data["sn"] instanceof String)
-    ) {
-      throw new Error(
-        "Expected the field `sn` to be a primitive type in the JSON string but got " +
-          data["sn"]
-      );
-    }
-    // ensure the json data is a string
-    if (
-      data["product"] &&
-      !(
-        typeof data["product"] === "string" || data["product"] instanceof String
-      )
-    ) {
-      throw new Error(
-        "Expected the field `product` to be a primitive type in the JSON string but got " +
-          data["product"]
-      );
-    }
-    // ensure the json data is an array
-    if (!Array.isArray(data["fleets"])) {
-      throw new Error(
-        "Expected the field `fleets` to be an array in the JSON data but got " +
-          data["fleets"]
-      );
-    }
-    // ensure the json data is a string
-    if (
-      data["cell"] &&
-      !(typeof data["cell"] === "string" || data["cell"] instanceof String)
-    ) {
-      throw new Error(
-        "Expected the field `cell` to be a primitive type in the JSON string but got " +
-          data["cell"]
-      );
-    }
-    // ensure the json data is a string
-    if (
-      data["rat"] &&
-      !(typeof data["rat"] === "string" || data["rat"] instanceof String)
-    ) {
-      throw new Error(
-        "Expected the field `rat` to be a primitive type in the JSON string but got " +
-          data["rat"]
+        "Expected the field `apn` to be a primitive type in the JSON string but got " +
+          data["apn"]
       );
     }
     // ensure the json data is a string
@@ -408,16 +321,6 @@ class DeviceSession {
     }
     // ensure the json data is a string
     if (
-      data["ip"] &&
-      !(typeof data["ip"] === "string" || data["ip"] instanceof String)
-    ) {
-      throw new Error(
-        "Expected the field `ip` to be a primitive type in the JSON string but got " +
-          data["ip"]
-      );
-    }
-    // ensure the json data is a string
-    if (
       data["bssid"] &&
       !(typeof data["bssid"] === "string" || data["bssid"] instanceof String)
     ) {
@@ -428,12 +331,29 @@ class DeviceSession {
     }
     // ensure the json data is a string
     if (
-      data["ssid"] &&
-      !(typeof data["ssid"] === "string" || data["ssid"] instanceof String)
+      data["cell"] &&
+      !(typeof data["cell"] === "string" || data["cell"] instanceof String)
     ) {
       throw new Error(
-        "Expected the field `ssid` to be a primitive type in the JSON string but got " +
-          data["ssid"]
+        "Expected the field `cell` to be a primitive type in the JSON string but got " +
+          data["cell"]
+      );
+    }
+    // ensure the json data is a string
+    if (
+      data["device"] &&
+      !(typeof data["device"] === "string" || data["device"] instanceof String)
+    ) {
+      throw new Error(
+        "Expected the field `device` to be a primitive type in the JSON string but got " +
+          data["device"]
+      );
+    }
+    // ensure the json data is an array
+    if (!Array.isArray(data["fleets"])) {
+      throw new Error(
+        "Expected the field `fleets` to be an array in the JSON data but got " +
+          data["fleets"]
       );
     }
     // ensure the json data is a string
@@ -448,84 +368,12 @@ class DeviceSession {
     }
     // ensure the json data is a string
     if (
-      data["apn"] &&
-      !(typeof data["apn"] === "string" || data["apn"] instanceof String)
+      data["ip"] &&
+      !(typeof data["ip"] === "string" || data["ip"] instanceof String)
     ) {
       throw new Error(
-        "Expected the field `apn` to be a primitive type in the JSON string but got " +
-          data["apn"]
-      );
-    }
-    // ensure the json data is a string
-    if (
-      data["transport"] &&
-      !(
-        typeof data["transport"] === "string" ||
-        data["transport"] instanceof String
-      )
-    ) {
-      throw new Error(
-        "Expected the field `transport` to be a primitive type in the JSON string but got " +
-          data["transport"]
-      );
-    }
-    // validate the optional field `tower`
-    if (data["tower"]) {
-      // data not null
-      TowerLocation.validateJSON(data["tower"]);
-    }
-    // validate the optional field `tri`
-    if (data["tri"]) {
-      // data not null
-      TowerLocation.validateJSON(data["tri"]);
-    }
-    // ensure the json data is a string
-    if (
-      data["where"] &&
-      !(typeof data["where"] === "string" || data["where"] instanceof String)
-    ) {
-      throw new Error(
-        "Expected the field `where` to be a primitive type in the JSON string but got " +
-          data["where"]
-      );
-    }
-    // ensure the json data is a string
-    if (
-      data["where_location"] &&
-      !(
-        typeof data["where_location"] === "string" ||
-        data["where_location"] instanceof String
-      )
-    ) {
-      throw new Error(
-        "Expected the field `where_location` to be a primitive type in the JSON string but got " +
-          data["where_location"]
-      );
-    }
-    // ensure the json data is a string
-    if (
-      data["where_country"] &&
-      !(
-        typeof data["where_country"] === "string" ||
-        data["where_country"] instanceof String
-      )
-    ) {
-      throw new Error(
-        "Expected the field `where_country` to be a primitive type in the JSON string but got " +
-          data["where_country"]
-      );
-    }
-    // ensure the json data is a string
-    if (
-      data["where_timezone"] &&
-      !(
-        typeof data["where_timezone"] === "string" ||
-        data["where_timezone"] instanceof String
-      )
-    ) {
-      throw new Error(
-        "Expected the field `where_timezone` to be a primitive type in the JSON string but got " +
-          data["where_timezone"]
+        "Expected the field `ip` to be a primitive type in the JSON string but got " +
+          data["ip"]
       );
     }
     // ensure the json data is a string
@@ -546,10 +394,331 @@ class DeviceSession {
       // data not null
       DeviceUsage.validateJSON(data["period"]);
     }
+    // ensure the json data is a string
+    if (
+      data["product"] &&
+      !(
+        typeof data["product"] === "string" || data["product"] instanceof String
+      )
+    ) {
+      throw new Error(
+        "Expected the field `product` to be a primitive type in the JSON string but got " +
+          data["product"]
+      );
+    }
+    // ensure the json data is a string
+    if (
+      data["rat"] &&
+      !(typeof data["rat"] === "string" || data["rat"] instanceof String)
+    ) {
+      throw new Error(
+        "Expected the field `rat` to be a primitive type in the JSON string but got " +
+          data["rat"]
+      );
+    }
+    // ensure the json data is a string
+    if (
+      data["session"] &&
+      !(
+        typeof data["session"] === "string" || data["session"] instanceof String
+      )
+    ) {
+      throw new Error(
+        "Expected the field `session` to be a primitive type in the JSON string but got " +
+          data["session"]
+      );
+    }
+    // ensure the json data is a string
+    if (
+      data["sn"] &&
+      !(typeof data["sn"] === "string" || data["sn"] instanceof String)
+    ) {
+      throw new Error(
+        "Expected the field `sn` to be a primitive type in the JSON string but got " +
+          data["sn"]
+      );
+    }
+    // ensure the json data is a string
+    if (
+      data["ssid"] &&
+      !(typeof data["ssid"] === "string" || data["ssid"] instanceof String)
+    ) {
+      throw new Error(
+        "Expected the field `ssid` to be a primitive type in the JSON string but got " +
+          data["ssid"]
+      );
+    }
+    // validate the optional field `tower`
+    if (data["tower"]) {
+      // data not null
+      TowerLocation.validateJSON(data["tower"]);
+    }
+    // ensure the json data is a string
+    if (
+      data["transport"] &&
+      !(
+        typeof data["transport"] === "string" ||
+        data["transport"] instanceof String
+      )
+    ) {
+      throw new Error(
+        "Expected the field `transport` to be a primitive type in the JSON string but got " +
+          data["transport"]
+      );
+    }
+    // validate the optional field `tri`
+    if (data["tri"]) {
+      // data not null
+      TowerLocation.validateJSON(data["tri"]);
+    }
+    // ensure the json data is a string
+    if (
+      data["where"] &&
+      !(typeof data["where"] === "string" || data["where"] instanceof String)
+    ) {
+      throw new Error(
+        "Expected the field `where` to be a primitive type in the JSON string but got " +
+          data["where"]
+      );
+    }
+    // ensure the json data is a string
+    if (
+      data["where_country"] &&
+      !(
+        typeof data["where_country"] === "string" ||
+        data["where_country"] instanceof String
+      )
+    ) {
+      throw new Error(
+        "Expected the field `where_country` to be a primitive type in the JSON string but got " +
+          data["where_country"]
+      );
+    }
+    // ensure the json data is a string
+    if (
+      data["where_location"] &&
+      !(
+        typeof data["where_location"] === "string" ||
+        data["where_location"] instanceof String
+      )
+    ) {
+      throw new Error(
+        "Expected the field `where_location` to be a primitive type in the JSON string but got " +
+          data["where_location"]
+      );
+    }
+    // ensure the json data is a string
+    if (
+      data["where_timezone"] &&
+      !(
+        typeof data["where_timezone"] === "string" ||
+        data["where_timezone"] instanceof String
+      )
+    ) {
+      throw new Error(
+        "Expected the field `where_timezone` to be a primitive type in the JSON string but got " +
+          data["where_timezone"]
+      );
+    }
+    // ensure the json data is a string
+    if (
+      data["why_session_closed"] &&
+      !(
+        typeof data["why_session_closed"] === "string" ||
+        data["why_session_closed"] instanceof String
+      )
+    ) {
+      throw new Error(
+        "Expected the field `why_session_closed` to be a primitive type in the JSON string but got " +
+          data["why_session_closed"]
+      );
+    }
+    // ensure the json data is a string
+    if (
+      data["why_session_opened"] &&
+      !(
+        typeof data["why_session_opened"] === "string" ||
+        data["why_session_opened"] instanceof String
+      )
+    ) {
+      throw new Error(
+        "Expected the field `why_session_opened` to be a primitive type in the JSON string but got " +
+          data["why_session_opened"]
+      );
+    }
 
     return true;
   }
 }
+
+/**
+ * @member {String} apn
+ */
+DeviceSession.prototype["apn"] = undefined;
+
+/**
+ * @member {Number} bars
+ */
+DeviceSession.prototype["bars"] = undefined;
+
+/**
+ * @member {String} bearer
+ */
+DeviceSession.prototype["bearer"] = undefined;
+
+/**
+ * @member {String} bssid
+ */
+DeviceSession.prototype["bssid"] = undefined;
+
+/**
+ * Cell ID where the session originated and quality (\"mcc,mnc,lac,cellid\")
+ * @member {String} cell
+ */
+DeviceSession.prototype["cell"] = undefined;
+
+/**
+ * Was this a continuous connection?
+ * @member {Boolean} continuous
+ */
+DeviceSession.prototype["continuous"] = undefined;
+
+/**
+ * Device UID
+ * @member {String} device
+ */
+DeviceSession.prototype["device"] = undefined;
+
+/**
+ * Number of events routed
+ * @member {Number} events
+ */
+DeviceSession.prototype["events"] = undefined;
+
+/**
+ * Number of failed connection attempts in the prior session
+ * @member {Number} failed_connects
+ */
+DeviceSession.prototype["failed_connects"] = undefined;
+
+/**
+ * Array of Fleet UIDs
+ * @member {Array.<String>} fleets
+ */
+DeviceSession.prototype["fleets"] = undefined;
+
+/**
+ * @member {Number} hp_cycles_data
+ */
+DeviceSession.prototype["hp_cycles_data"] = undefined;
+
+/**
+ * @member {Number} hp_cycles_gps
+ */
+DeviceSession.prototype["hp_cycles_gps"] = undefined;
+
+/**
+ * @member {Number} hp_cycles_total
+ */
+DeviceSession.prototype["hp_cycles_total"] = undefined;
+
+/**
+ * @member {Number} hp_secs_data
+ */
+DeviceSession.prototype["hp_secs_data"] = undefined;
+
+/**
+ * @member {Number} hp_secs_gps
+ */
+DeviceSession.prototype["hp_secs_gps"] = undefined;
+
+/**
+ * Total number of seconds in high power mode
+ * @member {Number} hp_secs_total
+ */
+DeviceSession.prototype["hp_secs_total"] = undefined;
+
+/**
+ * @member {String} iccid
+ */
+DeviceSession.prototype["iccid"] = undefined;
+
+/**
+ * @member {String} ip
+ */
+DeviceSession.prototype["ip"] = undefined;
+
+/**
+ * @member {Number} moved
+ */
+DeviceSession.prototype["moved"] = undefined;
+
+/**
+ * @member {String} orientation
+ */
+DeviceSession.prototype["orientation"] = undefined;
+
+/**
+ * Number of seconds in penalty in the prior session
+ * @member {Number} penalty_secs
+ */
+DeviceSession.prototype["penalty_secs"] = undefined;
+
+/**
+ * @member {module:model/DeviceUsage} period
+ */
+DeviceSession.prototype["period"] = undefined;
+
+/**
+ * @member {Boolean} power_charging
+ */
+DeviceSession.prototype["power_charging"] = undefined;
+
+/**
+ * @member {Number} power_mah
+ */
+DeviceSession.prototype["power_mah"] = undefined;
+
+/**
+ * @member {Boolean} power_primary
+ */
+DeviceSession.prototype["power_primary"] = undefined;
+
+/**
+ * @member {Boolean} power_usb
+ */
+DeviceSession.prototype["power_usb"] = undefined;
+
+/**
+ * Product UID
+ * @member {String} product
+ */
+DeviceSession.prototype["product"] = undefined;
+
+/**
+ * @member {String} rat
+ */
+DeviceSession.prototype["rat"] = undefined;
+
+/**
+ * @member {Number} rsrp
+ */
+DeviceSession.prototype["rsrp"] = undefined;
+
+/**
+ * @member {Number} rsrq
+ */
+DeviceSession.prototype["rsrq"] = undefined;
+
+/**
+ * @member {Number} rssi
+ */
+DeviceSession.prototype["rssi"] = undefined;
+
+/**
+ * @member {Blob} scan
+ */
+DeviceSession.prototype["scan"] = undefined;
 
 /**
  * Session UID
@@ -564,28 +733,15 @@ DeviceSession.prototype["session"] = undefined;
 DeviceSession.prototype["session_began"] = undefined;
 
 /**
- * Reason for session opening
- * @member {String} why_session_opened
- */
-DeviceSession.prototype["why_session_opened"] = undefined;
-
-/**
  * UNIX timestamp of session end
  * @member {Number} session_ended
  */
 DeviceSession.prototype["session_ended"] = undefined;
 
 /**
- * Reason for session closing
- * @member {String} why_session_closed
+ * @member {Number} sinr
  */
-DeviceSession.prototype["why_session_closed"] = undefined;
-
-/**
- * Device UID
- * @member {String} device
- */
-DeviceSession.prototype["device"] = undefined;
+DeviceSession.prototype["sinr"] = undefined;
 
 /**
  * Device Serial Number
@@ -594,92 +750,25 @@ DeviceSession.prototype["device"] = undefined;
 DeviceSession.prototype["sn"] = undefined;
 
 /**
- * Product UID
- * @member {String} product
- */
-DeviceSession.prototype["product"] = undefined;
-
-/**
- * Array of Fleet UIDs
- * @member {Array.<String>} fleets
- */
-DeviceSession.prototype["fleets"] = undefined;
-
-/**
- * Cell ID where the session originated and quality (\"mcc,mnc,lac,cellid\")
- * @member {String} cell
- */
-DeviceSession.prototype["cell"] = undefined;
-
-/**
- * @member {Blob} scan
- */
-DeviceSession.prototype["scan"] = undefined;
-
-/**
- * @member {Object} triangulate
- */
-DeviceSession.prototype["triangulate"] = undefined;
-
-/**
- * @member {Number} rssi
- */
-DeviceSession.prototype["rssi"] = undefined;
-
-/**
- * @member {Number} sinr
- */
-DeviceSession.prototype["sinr"] = undefined;
-
-/**
- * @member {Number} rsrp
- */
-DeviceSession.prototype["rsrp"] = undefined;
-
-/**
- * @member {Number} rsrq
- */
-DeviceSession.prototype["rsrq"] = undefined;
-
-/**
- * @member {Number} bars
- */
-DeviceSession.prototype["bars"] = undefined;
-
-/**
- * @member {String} rat
- */
-DeviceSession.prototype["rat"] = undefined;
-
-/**
- * @member {String} bearer
- */
-DeviceSession.prototype["bearer"] = undefined;
-
-/**
- * @member {String} ip
- */
-DeviceSession.prototype["ip"] = undefined;
-
-/**
- * @member {String} bssid
- */
-DeviceSession.prototype["bssid"] = undefined;
-
-/**
  * @member {String} ssid
  */
 DeviceSession.prototype["ssid"] = undefined;
 
 /**
- * @member {String} iccid
+ * @member {Number} temp
  */
-DeviceSession.prototype["iccid"] = undefined;
+DeviceSession.prototype["temp"] = undefined;
 
 /**
- * @member {String} apn
+ * Was TLS used?
+ * @member {Boolean} tls
  */
-DeviceSession.prototype["apn"] = undefined;
+DeviceSession.prototype["tls"] = undefined;
+
+/**
+ * @member {module:model/TowerLocation} tower
+ */
+DeviceSession.prototype["tower"] = undefined;
 
 /**
  * Type of network transport
@@ -688,57 +777,14 @@ DeviceSession.prototype["apn"] = undefined;
 DeviceSession.prototype["transport"] = undefined;
 
 /**
- * @member {module:model/TowerLocation} tower
- */
-DeviceSession.prototype["tower"] = undefined;
-
-/**
  * @member {module:model/TowerLocation} tri
  */
 DeviceSession.prototype["tri"] = undefined;
 
 /**
- * Last known capture time of a note routed through this session in Unix timestamp
- * @member {Number} when
+ * @member {Object} triangulate
  */
-DeviceSession.prototype["when"] = undefined;
-
-/**
- * Unix timestamp of last GPS location
- * @member {Number} where_when
- */
-DeviceSession.prototype["where_when"] = undefined;
-
-/**
- * Open Location Code from last GPS location
- * @member {String} where
- */
-DeviceSession.prototype["where"] = undefined;
-
-/**
- * @member {Number} where_lat
- */
-DeviceSession.prototype["where_lat"] = undefined;
-
-/**
- * @member {Number} where_lon
- */
-DeviceSession.prototype["where_lon"] = undefined;
-
-/**
- * @member {String} where_location
- */
-DeviceSession.prototype["where_location"] = undefined;
-
-/**
- * @member {String} where_country
- */
-DeviceSession.prototype["where_country"] = undefined;
-
-/**
- * @member {String} where_timezone
- */
-DeviceSession.prototype["where_timezone"] = undefined;
+DeviceSession.prototype["triangulate"] = undefined;
 
 /**
  * @member {Boolean} usage_actual
@@ -751,110 +797,64 @@ DeviceSession.prototype["usage_actual"] = undefined;
 DeviceSession.prototype["voltage"] = undefined;
 
 /**
- * @member {Number} temp
+ * Last known capture time of a note routed through this session in Unix timestamp
+ * @member {Number} when
  */
-DeviceSession.prototype["temp"] = undefined;
+DeviceSession.prototype["when"] = undefined;
 
 /**
- * Was this a continuous connection?
- * @member {Boolean} continuous
+ * Open Location Code from last GPS location
+ * @member {String} where
  */
-DeviceSession.prototype["continuous"] = undefined;
+DeviceSession.prototype["where"] = undefined;
 
 /**
- * Was TLS used?
- * @member {Boolean} tls
+ * @member {String} where_country
  */
-DeviceSession.prototype["tls"] = undefined;
+DeviceSession.prototype["where_country"] = undefined;
+
+/**
+ * @member {Number} where_lat
+ */
+DeviceSession.prototype["where_lat"] = undefined;
+
+/**
+ * @member {String} where_location
+ */
+DeviceSession.prototype["where_location"] = undefined;
+
+/**
+ * @member {Number} where_lon
+ */
+DeviceSession.prototype["where_lon"] = undefined;
+
+/**
+ * @member {String} where_timezone
+ */
+DeviceSession.prototype["where_timezone"] = undefined;
+
+/**
+ * Unix timestamp of last GPS location
+ * @member {Number} where_when
+ */
+DeviceSession.prototype["where_when"] = undefined;
+
+/**
+ * Reason for session closing
+ * @member {String} why_session_closed
+ */
+DeviceSession.prototype["why_session_closed"] = undefined;
+
+/**
+ * Reason for session opening
+ * @member {String} why_session_opened
+ */
+DeviceSession.prototype["why_session_opened"] = undefined;
 
 /**
  * Unix timestamp of the last time work was done for this session
  * @member {Number} work
  */
 DeviceSession.prototype["work"] = undefined;
-
-/**
- * Number of events routed
- * @member {Number} events
- */
-DeviceSession.prototype["events"] = undefined;
-
-/**
- * @member {Number} moved
- */
-DeviceSession.prototype["moved"] = undefined;
-
-/**
- * @member {String} orientation
- */
-DeviceSession.prototype["orientation"] = undefined;
-
-/**
- * Total number of seconds in high power mode
- * @member {Number} hp_secs_total
- */
-DeviceSession.prototype["hp_secs_total"] = undefined;
-
-/**
- * @member {Number} hp_secs_data
- */
-DeviceSession.prototype["hp_secs_data"] = undefined;
-
-/**
- * @member {Number} hp_secs_gps
- */
-DeviceSession.prototype["hp_secs_gps"] = undefined;
-
-/**
- * @member {Number} hp_cycles_total
- */
-DeviceSession.prototype["hp_cycles_total"] = undefined;
-
-/**
- * @member {Number} hp_cycles_data
- */
-DeviceSession.prototype["hp_cycles_data"] = undefined;
-
-/**
- * @member {Number} hp_cycles_gps
- */
-DeviceSession.prototype["hp_cycles_gps"] = undefined;
-
-/**
- * @member {module:model/DeviceUsage} period
- */
-DeviceSession.prototype["period"] = undefined;
-
-/**
- * @member {Boolean} power_charging
- */
-DeviceSession.prototype["power_charging"] = undefined;
-
-/**
- * @member {Boolean} power_usb
- */
-DeviceSession.prototype["power_usb"] = undefined;
-
-/**
- * @member {Boolean} power_primary
- */
-DeviceSession.prototype["power_primary"] = undefined;
-
-/**
- * @member {Number} power_mah
- */
-DeviceSession.prototype["power_mah"] = undefined;
-
-/**
- * Number of seconds in penalty in the prior session
- * @member {Number} penalty_secs
- */
-DeviceSession.prototype["penalty_secs"] = undefined;
-
-/**
- * Number of failed connection attempts in the prior session
- * @member {Number} failed_connects
- */
-DeviceSession.prototype["failed_connects"] = undefined;
 
 export default DeviceSession;

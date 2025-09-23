@@ -51,14 +51,14 @@
       //expect(instance).to.be.a(NotehubJs.GetProjectDevicePublicKeys200ResponseDevicePublicKeysInner);
     });
 
-    it('should have the property uid (base name: "uid")', function () {
-      // uncomment below and update the code to test the property uid
+    it('should have the property key (base name: "key")', function () {
+      // uncomment below and update the code to test the property key
       //var instance = new NotehubJs.GetProjectDevicePublicKeys200ResponseDevicePublicKeysInner();
       //expect(instance).to.be();
     });
 
-    it('should have the property key (base name: "key")', function () {
-      // uncomment below and update the code to test the property key
+    it('should have the property uid (base name: "uid")', function () {
+      // uncomment below and update the code to test the property uid
       //var instance = new NotehubJs.GetProjectDevicePublicKeys200ResponseDevicePublicKeysInner();
       //expect(instance).to.be();
     });

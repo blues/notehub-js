@@ -12,8 +12,8 @@
  */
 
 import ApiClient from "../ApiClient";
-import HttpFilter from "./HttpFilter";
-import HttpTransform from "./HttpTransform";
+import AwsFilter from "./AwsFilter";
+import AwsTransform from "./AwsTransform";
 
 /**
  * The Thingworx model module.
@@ -48,14 +48,14 @@ class Thingworx {
     if (data) {
       obj = obj || new Thingworx();
 
-      if (data.hasOwnProperty("fleets")) {
-        obj["fleets"] = ApiClient.convertToType(data["fleets"], ["String"]);
+      if (data.hasOwnProperty("app_key")) {
+        obj["app_key"] = ApiClient.convertToType(data["app_key"], "String");
       }
       if (data.hasOwnProperty("filter")) {
-        obj["filter"] = HttpFilter.constructFromObject(data["filter"]);
+        obj["filter"] = AwsFilter.constructFromObject(data["filter"]);
       }
-      if (data.hasOwnProperty("transform")) {
-        obj["transform"] = HttpTransform.constructFromObject(data["transform"]);
+      if (data.hasOwnProperty("fleets")) {
+        obj["fleets"] = ApiClient.convertToType(data["fleets"], ["String"]);
       }
       if (data.hasOwnProperty("throttle_ms")) {
         obj["throttle_ms"] = ApiClient.convertToType(
@@ -63,14 +63,14 @@ class Thingworx {
           "Number"
         );
       }
-      if (data.hasOwnProperty("url")) {
-        obj["url"] = ApiClient.convertToType(data["url"], "String");
-      }
       if (data.hasOwnProperty("timeout")) {
         obj["timeout"] = ApiClient.convertToType(data["timeout"], "Number");
       }
-      if (data.hasOwnProperty("app_key")) {
-        obj["app_key"] = ApiClient.convertToType(data["app_key"], "String");
+      if (data.hasOwnProperty("transform")) {
+        obj["transform"] = AwsTransform.constructFromObject(data["transform"]);
+      }
+      if (data.hasOwnProperty("url")) {
+        obj["url"] = ApiClient.convertToType(data["url"], "String");
       }
     } else if (data === null) {
       return null;
@@ -84,33 +84,6 @@ class Thingworx {
    * @return {boolean} to indicate whether the JSON data is valid with respect to <code>Thingworx</code>.
    */
   static validateJSON(data) {
-    // ensure the json data is an array
-    if (!Array.isArray(data["fleets"])) {
-      throw new Error(
-        "Expected the field `fleets` to be an array in the JSON data but got " +
-          data["fleets"]
-      );
-    }
-    // validate the optional field `filter`
-    if (data["filter"]) {
-      // data not null
-      HttpFilter.validateJSON(data["filter"]);
-    }
-    // validate the optional field `transform`
-    if (data["transform"]) {
-      // data not null
-      HttpTransform.validateJSON(data["transform"]);
-    }
-    // ensure the json data is a string
-    if (
-      data["url"] &&
-      !(typeof data["url"] === "string" || data["url"] instanceof String)
-    ) {
-      throw new Error(
-        "Expected the field `url` to be a primitive type in the JSON string but got " +
-          data["url"]
-      );
-    }
     // ensure the json data is a string
     if (
       data["app_key"] &&
@@ -123,10 +96,48 @@ class Thingworx {
           data["app_key"]
       );
     }
+    // validate the optional field `filter`
+    if (data["filter"]) {
+      // data not null
+      AwsFilter.validateJSON(data["filter"]);
+    }
+    // ensure the json data is an array
+    if (!Array.isArray(data["fleets"])) {
+      throw new Error(
+        "Expected the field `fleets` to be an array in the JSON data but got " +
+          data["fleets"]
+      );
+    }
+    // validate the optional field `transform`
+    if (data["transform"]) {
+      // data not null
+      AwsTransform.validateJSON(data["transform"]);
+    }
+    // ensure the json data is a string
+    if (
+      data["url"] &&
+      !(typeof data["url"] === "string" || data["url"] instanceof String)
+    ) {
+      throw new Error(
+        "Expected the field `url` to be a primitive type in the JSON string but got " +
+          data["url"]
+      );
+    }
 
     return true;
   }
 }
+
+/**
+ * This value is input-only and will be omitted from the response and replaced with a placeholder
+ * @member {String} app_key
+ */
+Thingworx.prototype["app_key"] = undefined;
+
+/**
+ * @member {module:model/AwsFilter} filter
+ */
+Thingworx.prototype["filter"] = undefined;
 
 /**
  * list of Fleet UIDs to apply route to, if any.  If empty, applies to all Fleets
@@ -135,24 +146,9 @@ class Thingworx {
 Thingworx.prototype["fleets"] = undefined;
 
 /**
- * @member {module:model/HttpFilter} filter
- */
-Thingworx.prototype["filter"] = undefined;
-
-/**
- * @member {module:model/HttpTransform} transform
- */
-Thingworx.prototype["transform"] = undefined;
-
-/**
  * @member {Number} throttle_ms
  */
 Thingworx.prototype["throttle_ms"] = undefined;
-
-/**
- * @member {String} url
- */
-Thingworx.prototype["url"] = undefined;
 
 /**
  * Timeout in seconds for each request
@@ -162,9 +158,13 @@ Thingworx.prototype["url"] = undefined;
 Thingworx.prototype["timeout"] = 15;
 
 /**
- * This value is input-only and will be omitted from the response and replaced with a placeholder
- * @member {String} app_key
+ * @member {module:model/AwsTransform} transform
  */
-Thingworx.prototype["app_key"] = undefined;
+Thingworx.prototype["transform"] = undefined;
+
+/**
+ * @member {String} url
+ */
+Thingworx.prototype["url"] = undefined;
 
 export default Thingworx;

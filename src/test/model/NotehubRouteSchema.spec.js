@@ -50,8 +50,8 @@
       //expect(instance).to.be.a(NotehubJs.NotehubRouteSchema);
     });
 
-    it('should have the property fleets (base name: "fleets")', function () {
-      // uncomment below and update the code to test the property fleets
+    it('should have the property disableHttpHeaders (base name: "disable_http_headers")', function () {
+      // uncomment below and update the code to test the property disableHttpHeaders
       //var instance = new NotehubJs.NotehubRouteSchema();
       //expect(instance).to.be();
     });
@@ -62,20 +62,8 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property transform (base name: "transform")', function () {
-      // uncomment below and update the code to test the property transform
-      //var instance = new NotehubJs.NotehubRouteSchema();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property throttleMs (base name: "throttle_ms")', function () {
-      // uncomment below and update the code to test the property throttleMs
-      //var instance = new NotehubJs.NotehubRouteSchema();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property url (base name: "url")', function () {
-      // uncomment below and update the code to test the property url
+    it('should have the property fleets (base name: "fleets")', function () {
+      // uncomment below and update the code to test the property fleets
       //var instance = new NotehubJs.NotehubRouteSchema();
       //expect(instance).to.be();
     });
@@ -86,14 +74,26 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property disableHttpHeaders (base name: "disable_http_headers")', function () {
-      // uncomment below and update the code to test the property disableHttpHeaders
+    it('should have the property throttleMs (base name: "throttle_ms")', function () {
+      // uncomment below and update the code to test the property throttleMs
       //var instance = new NotehubJs.NotehubRouteSchema();
       //expect(instance).to.be();
     });
 
     it('should have the property timeout (base name: "timeout")', function () {
       // uncomment below and update the code to test the property timeout
+      //var instance = new NotehubJs.NotehubRouteSchema();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property transform (base name: "transform")', function () {
+      // uncomment below and update the code to test the property transform
+      //var instance = new NotehubJs.NotehubRouteSchema();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property url (base name: "url")', function () {
+      // uncomment below and update the code to test the property url
       //var instance = new NotehubJs.NotehubRouteSchema();
       //expect(instance).to.be();
     });
@@ -116,30 +116,6 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property port (base name: "port")', function () {
-      // uncomment below and update the code to test the property port
-      //var instance = new NotehubJs.NotehubRouteSchema();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property username (base name: "username")', function () {
-      // uncomment below and update the code to test the property username
-      //var instance = new NotehubJs.NotehubRouteSchema();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property password (base name: "password")', function () {
-      // uncomment below and update the code to test the property password
-      //var instance = new NotehubJs.NotehubRouteSchema();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property topic (base name: "topic")', function () {
-      // uncomment below and update the code to test the property topic
-      //var instance = new NotehubJs.NotehubRouteSchema();
-      //expect(instance).to.be();
-    });
-
     it('should have the property certificate (base name: "certificate")', function () {
       // uncomment below and update the code to test the property certificate
       //var instance = new NotehubJs.NotehubRouteSchema();
@@ -158,14 +134,32 @@
       //expect(instance).to.be();
     });
 
+    it('should have the property password (base name: "password")', function () {
+      // uncomment below and update the code to test the property password
+      //var instance = new NotehubJs.NotehubRouteSchema();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property port (base name: "port")', function () {
+      // uncomment below and update the code to test the property port
+      //var instance = new NotehubJs.NotehubRouteSchema();
+      //expect(instance).to.be();
+    });
+
     it('should have the property privateKeyName (base name: "private_key_name")', function () {
       // uncomment below and update the code to test the property privateKeyName
       //var instance = new NotehubJs.NotehubRouteSchema();
       //expect(instance).to.be();
     });
 
-    it('should have the property region (base name: "region")', function () {
-      // uncomment below and update the code to test the property region
+    it('should have the property topic (base name: "topic")', function () {
+      // uncomment below and update the code to test the property topic
+      //var instance = new NotehubJs.NotehubRouteSchema();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property username (base name: "username")', function () {
+      // uncomment below and update the code to test the property username
       //var instance = new NotehubJs.NotehubRouteSchema();
       //expect(instance).to.be();
     });
@@ -182,8 +176,8 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property messageGroupId (base name: "message_group_id")', function () {
-      // uncomment below and update the code to test the property messageGroupId
+    it('should have the property channel (base name: "channel")', function () {
+      // uncomment below and update the code to test the property channel
       //var instance = new NotehubJs.NotehubRouteSchema();
       //expect(instance).to.be();
     });
@@ -194,20 +188,14 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property channel (base name: "channel")', function () {
-      // uncomment below and update the code to test the property channel
+    it('should have the property messageGroupId (base name: "message_group_id")', function () {
+      // uncomment below and update the code to test the property messageGroupId
       //var instance = new NotehubJs.NotehubRouteSchema();
       //expect(instance).to.be();
     });
 
-    it('should have the property testApi (base name: "test_api")', function () {
-      // uncomment below and update the code to test the property testApi
-      //var instance = new NotehubJs.NotehubRouteSchema();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property dataFeedKey (base name: "data_feed_key")', function () {
-      // uncomment below and update the code to test the property dataFeedKey
+    it('should have the property region (base name: "region")', function () {
+      // uncomment below and update the code to test the property region
       //var instance = new NotehubJs.NotehubRouteSchema();
       //expect(instance).to.be();
     });
@@ -224,14 +212,20 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property functionsKeySecret (base name: "functions_key_secret")', function () {
-      // uncomment below and update the code to test the property functionsKeySecret
+    it('should have the property dataFeedKey (base name: "data_feed_key")', function () {
+      // uncomment below and update the code to test the property dataFeedKey
       //var instance = new NotehubJs.NotehubRouteSchema();
       //expect(instance).to.be();
     });
 
-    it('should have the property sasPolicyName (base name: "sas_policy_name")', function () {
-      // uncomment below and update the code to test the property sasPolicyName
+    it('should have the property testApi (base name: "test_api")', function () {
+      // uncomment below and update the code to test the property testApi
+      //var instance = new NotehubJs.NotehubRouteSchema();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property functionsKeySecret (base name: "functions_key_secret")', function () {
+      // uncomment below and update the code to test the property functionsKeySecret
       //var instance = new NotehubJs.NotehubRouteSchema();
       //expect(instance).to.be();
     });
@@ -242,14 +236,14 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property appKey (base name: "app_key")', function () {
-      // uncomment below and update the code to test the property appKey
+    it('should have the property sasPolicyName (base name: "sas_policy_name")', function () {
+      // uncomment below and update the code to test the property sasPolicyName
       //var instance = new NotehubJs.NotehubRouteSchema();
       //expect(instance).to.be();
     });
 
-    it('should have the property organizationName (base name: "organization_name")', function () {
-      // uncomment below and update the code to test the property organizationName
+    it('should have the property appKey (base name: "app_key")', function () {
+      // uncomment below and update the code to test the property appKey
       //var instance = new NotehubJs.NotehubRouteSchema();
       //expect(instance).to.be();
     });
@@ -260,8 +254,8 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property userName (base name: "user_name")', function () {
-      // uncomment below and update the code to test the property userName
+    it('should have the property organizationName (base name: "organization_name")', function () {
+      // uncomment below and update the code to test the property organizationName
       //var instance = new NotehubJs.NotehubRouteSchema();
       //expect(instance).to.be();
     });
@@ -272,8 +266,8 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property slackType (base name: "slack_type")', function () {
-      // uncomment below and update the code to test the property slackType
+    it('should have the property userName (base name: "user_name")', function () {
+      // uncomment below and update the code to test the property userName
       //var instance = new NotehubJs.NotehubRouteSchema();
       //expect(instance).to.be();
     });
@@ -284,8 +278,14 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property webhookUrl (base name: "webhook_url")', function () {
-      // uncomment below and update the code to test the property webhookUrl
+    it('should have the property blocks (base name: "blocks")', function () {
+      // uncomment below and update the code to test the property blocks
+      //var instance = new NotehubJs.NotehubRouteSchema();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property slackType (base name: "slack_type")', function () {
+      // uncomment below and update the code to test the property slackType
       //var instance = new NotehubJs.NotehubRouteSchema();
       //expect(instance).to.be();
     });
@@ -296,8 +296,8 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property blocks (base name: "blocks")', function () {
-      // uncomment below and update the code to test the property blocks
+    it('should have the property webhookUrl (base name: "webhook_url")', function () {
+      // uncomment below and update the code to test the property webhookUrl
       //var instance = new NotehubJs.NotehubRouteSchema();
       //expect(instance).to.be();
     });

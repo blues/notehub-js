@@ -23,12 +23,12 @@ class ProjectMember {
   /**
    * Constructs a new <code>ProjectMember</code>.
    * @alias module:model/ProjectMember
-   * @param name {String}
    * @param email {String} The email address of the project member. This property will only be populated if the viewer is an owner of the project.
+   * @param name {String}
    * @param role {module:model/Role}
    */
-  constructor(name, email, role) {
-    ProjectMember.initialize(this, name, email, role);
+  constructor(email, name, role) {
+    ProjectMember.initialize(this, email, name, role);
   }
 
   /**
@@ -36,9 +36,9 @@ class ProjectMember {
    * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
    * Only for internal use.
    */
-  static initialize(obj, name, email, role) {
-    obj["name"] = name;
+  static initialize(obj, email, name, role) {
     obj["email"] = email;
+    obj["name"] = name;
     obj["role"] = role;
   }
 
@@ -53,11 +53,11 @@ class ProjectMember {
     if (data) {
       obj = obj || new ProjectMember();
 
-      if (data.hasOwnProperty("name")) {
-        obj["name"] = ApiClient.convertToType(data["name"], "String");
-      }
       if (data.hasOwnProperty("email")) {
         obj["email"] = ApiClient.convertToType(data["email"], "String");
+      }
+      if (data.hasOwnProperty("name")) {
+        obj["name"] = ApiClient.convertToType(data["name"], "String");
       }
       if (data.hasOwnProperty("role")) {
         obj["role"] = Role.constructFromObject(data["role"]);
@@ -87,16 +87,6 @@ class ProjectMember {
     }
     // ensure the json data is a string
     if (
-      data["name"] &&
-      !(typeof data["name"] === "string" || data["name"] instanceof String)
-    ) {
-      throw new Error(
-        "Expected the field `name` to be a primitive type in the JSON string but got " +
-          data["name"]
-      );
-    }
-    // ensure the json data is a string
-    if (
       data["email"] &&
       !(typeof data["email"] === "string" || data["email"] instanceof String)
     ) {
@@ -105,23 +95,33 @@ class ProjectMember {
           data["email"]
       );
     }
+    // ensure the json data is a string
+    if (
+      data["name"] &&
+      !(typeof data["name"] === "string" || data["name"] instanceof String)
+    ) {
+      throw new Error(
+        "Expected the field `name` to be a primitive type in the JSON string but got " +
+          data["name"]
+      );
+    }
 
     return true;
   }
 }
 
-ProjectMember.RequiredProperties = ["name", "email", "role"];
-
-/**
- * @member {String} name
- */
-ProjectMember.prototype["name"] = undefined;
+ProjectMember.RequiredProperties = ["email", "name", "role"];
 
 /**
  * The email address of the project member. This property will only be populated if the viewer is an owner of the project.
  * @member {String} email
  */
 ProjectMember.prototype["email"] = undefined;
+
+/**
+ * @member {String} name
+ */
+ProjectMember.prototype["name"] = undefined;
 
 /**
  * @member {module:model/Role} role

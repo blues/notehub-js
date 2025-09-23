@@ -24,12 +24,12 @@ class Project {
   /**
    * Constructs a new <code>Project</code>.
    * @alias module:model/Project
-   * @param uid {String}
-   * @param label {String}
    * @param created {Date}
+   * @param label {String}
+   * @param uid {String}
    */
-  constructor(uid, label, created) {
-    Project.initialize(this, uid, label, created);
+  constructor(created, label, uid) {
+    Project.initialize(this, created, label, uid);
   }
 
   /**
@@ -37,10 +37,10 @@ class Project {
    * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
    * Only for internal use.
    */
-  static initialize(obj, uid, label, created) {
-    obj["uid"] = uid;
-    obj["label"] = label;
+  static initialize(obj, created, label, uid) {
     obj["created"] = created;
+    obj["label"] = label;
+    obj["uid"] = uid;
   }
 
   /**
@@ -54,27 +54,27 @@ class Project {
     if (data) {
       obj = obj || new Project();
 
-      if (data.hasOwnProperty("uid")) {
-        obj["uid"] = ApiClient.convertToType(data["uid"], "String");
-      }
-      if (data.hasOwnProperty("label")) {
-        obj["label"] = ApiClient.convertToType(data["label"], "String");
-      }
-      if (data.hasOwnProperty("created")) {
-        obj["created"] = ApiClient.convertToType(data["created"], "Date");
-      }
-      if (data.hasOwnProperty("role")) {
-        obj["role"] = Role.constructFromObject(data["role"]);
-      }
       if (data.hasOwnProperty("administrative_contact")) {
         obj["administrative_contact"] = Contact.constructFromObject(
           data["administrative_contact"]
         );
       }
+      if (data.hasOwnProperty("created")) {
+        obj["created"] = ApiClient.convertToType(data["created"], "Date");
+      }
+      if (data.hasOwnProperty("label")) {
+        obj["label"] = ApiClient.convertToType(data["label"], "String");
+      }
+      if (data.hasOwnProperty("role")) {
+        obj["role"] = Role.constructFromObject(data["role"]);
+      }
       if (data.hasOwnProperty("technical_contact")) {
         obj["technical_contact"] = Contact.constructFromObject(
           data["technical_contact"]
         );
+      }
+      if (data.hasOwnProperty("uid")) {
+        obj["uid"] = ApiClient.convertToType(data["uid"], "String");
       }
     } else if (data === null) {
       return null;
@@ -99,15 +99,10 @@ class Project {
         );
       }
     }
-    // ensure the json data is a string
-    if (
-      data["uid"] &&
-      !(typeof data["uid"] === "string" || data["uid"] instanceof String)
-    ) {
-      throw new Error(
-        "Expected the field `uid` to be a primitive type in the JSON string but got " +
-          data["uid"]
-      );
+    // validate the optional field `administrative_contact`
+    if (data["administrative_contact"]) {
+      // data not null
+      Contact.validateJSON(data["administrative_contact"]);
     }
     // ensure the json data is a string
     if (
@@ -119,42 +114,27 @@ class Project {
           data["label"]
       );
     }
-    // validate the optional field `administrative_contact`
-    if (data["administrative_contact"]) {
-      // data not null
-      Contact.validateJSON(data["administrative_contact"]);
-    }
     // validate the optional field `technical_contact`
     if (data["technical_contact"]) {
       // data not null
       Contact.validateJSON(data["technical_contact"]);
+    }
+    // ensure the json data is a string
+    if (
+      data["uid"] &&
+      !(typeof data["uid"] === "string" || data["uid"] instanceof String)
+    ) {
+      throw new Error(
+        "Expected the field `uid` to be a primitive type in the JSON string but got " +
+          data["uid"]
+      );
     }
 
     return true;
   }
 }
 
-Project.RequiredProperties = ["uid", "label", "created"];
-
-/**
- * @member {String} uid
- */
-Project.prototype["uid"] = undefined;
-
-/**
- * @member {String} label
- */
-Project.prototype["label"] = undefined;
-
-/**
- * @member {Date} created
- */
-Project.prototype["created"] = undefined;
-
-/**
- * @member {module:model/Role} role
- */
-Project.prototype["role"] = undefined;
+Project.RequiredProperties = ["created", "label", "uid"];
 
 /**
  * @member {module:model/Contact} administrative_contact
@@ -162,8 +142,28 @@ Project.prototype["role"] = undefined;
 Project.prototype["administrative_contact"] = undefined;
 
 /**
+ * @member {Date} created
+ */
+Project.prototype["created"] = undefined;
+
+/**
+ * @member {String} label
+ */
+Project.prototype["label"] = undefined;
+
+/**
+ * @member {module:model/Role} role
+ */
+Project.prototype["role"] = undefined;
+
+/**
  * @member {module:model/Contact} technical_contact
  */
 Project.prototype["technical_contact"] = undefined;
+
+/**
+ * @member {String} uid
+ */
+Project.prototype["uid"] = undefined;
 
 export default Project;

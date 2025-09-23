@@ -50,26 +50,32 @@
       //expect(instance).to.be.a(NotehubJs.RouteLog);
     });
 
+    it('should have the property attn (base name: "attn")', function () {
+      // uncomment below and update the code to test the property attn
+      //var instance = new NotehubJs.RouteLog();
+      //expect(instance).to.be();
+    });
+
     it('should have the property date (base name: "date")', function () {
       // uncomment below and update the code to test the property date
       //var instance = new NotehubJs.RouteLog();
       //expect(instance).to.be();
     });
 
-    it('should have the property routeUID (base name: "routeUID")', function () {
-      // uncomment below and update the code to test the property routeUID
+    it('should have the property duration (base name: "duration")', function () {
+      // uncomment below and update the code to test the property duration
       //var instance = new NotehubJs.RouteLog();
       //expect(instance).to.be();
     });
 
-    it('should have the property eventUID (base name: "eventUID")', function () {
-      // uncomment below and update the code to test the property eventUID
+    it('should have the property eventUid (base name: "event_uid")', function () {
+      // uncomment below and update the code to test the property eventUid
       //var instance = new NotehubJs.RouteLog();
       //expect(instance).to.be();
     });
 
-    it('should have the property attn (base name: "attn")', function () {
-      // uncomment below and update the code to test the property attn
+    it('should have the property routeUid (base name: "route_uid")', function () {
+      // uncomment below and update the code to test the property routeUid
       //var instance = new NotehubJs.RouteLog();
       //expect(instance).to.be();
     });
@@ -88,12 +94,6 @@
 
     it('should have the property url (base name: "url")', function () {
       // uncomment below and update the code to test the property url
-      //var instance = new NotehubJs.RouteLog();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property duration (base name: "duration")', function () {
-      // uncomment below and update the code to test the property duration
       //var instance = new NotehubJs.RouteLog();
       //expect(instance).to.be();
     });

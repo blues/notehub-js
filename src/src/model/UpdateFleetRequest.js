@@ -45,13 +45,13 @@ class UpdateFleetRequest {
     if (data) {
       obj = obj || new UpdateFleetRequest();
 
-      if (data.hasOwnProperty("label")) {
-        obj["label"] = ApiClient.convertToType(data["label"], "String");
-      }
       if (data.hasOwnProperty("addDevices")) {
         obj["addDevices"] = ApiClient.convertToType(data["addDevices"], [
           "String",
         ]);
+      }
+      if (data.hasOwnProperty("label")) {
+        obj["label"] = ApiClient.convertToType(data["label"], "String");
       }
       if (data.hasOwnProperty("removeDevices")) {
         obj["removeDevices"] = ApiClient.convertToType(data["removeDevices"], [
@@ -82,6 +82,13 @@ class UpdateFleetRequest {
    * @return {boolean} to indicate whether the JSON data is valid with respect to <code>UpdateFleetRequest</code>.
    */
   static validateJSON(data) {
+    // ensure the json data is an array
+    if (!Array.isArray(data["addDevices"])) {
+      throw new Error(
+        "Expected the field `addDevices` to be an array in the JSON data but got " +
+          data["addDevices"]
+      );
+    }
     // ensure the json data is a string
     if (
       data["label"] &&
@@ -90,13 +97,6 @@ class UpdateFleetRequest {
       throw new Error(
         "Expected the field `label` to be a primitive type in the JSON string but got " +
           data["label"]
-      );
-    }
-    // ensure the json data is an array
-    if (!Array.isArray(data["addDevices"])) {
-      throw new Error(
-        "Expected the field `addDevices` to be an array in the JSON data but got " +
-          data["addDevices"]
       );
     }
     // ensure the json data is an array
@@ -125,16 +125,16 @@ class UpdateFleetRequest {
 }
 
 /**
- * The label for the Fleet.
- * @member {String} label
- */
-UpdateFleetRequest.prototype["label"] = undefined;
-
-/**
  * List of DeviceUIDs to add to fleet
  * @member {Array.<String>} addDevices
  */
 UpdateFleetRequest.prototype["addDevices"] = undefined;
+
+/**
+ * The label for the Fleet.
+ * @member {String} label
+ */
+UpdateFleetRequest.prototype["label"] = undefined;
 
 /**
  * List of DeviceUIDs to remove from fleet

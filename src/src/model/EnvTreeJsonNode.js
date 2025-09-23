@@ -23,20 +23,20 @@ class EnvTreeJsonNode {
   /**
    * Constructs a new <code>EnvTreeJsonNode</code>.
    * @alias module:model/EnvTreeJsonNode
-   * @param varCount {Number}
+   * @param children {Array.<module:model/EnvTreeJsonNode>}
    * @param inheritedVarCount {Number}
    * @param type {String}
+   * @param varCount {Number}
    * @param variables {Array.<module:model/EnvVar>}
-   * @param children {Array.<module:model/EnvTreeJsonNode>}
    */
-  constructor(varCount, inheritedVarCount, type, variables, children) {
+  constructor(children, inheritedVarCount, type, varCount, variables) {
     EnvTreeJsonNode.initialize(
       this,
-      varCount,
+      children,
       inheritedVarCount,
       type,
-      variables,
-      children
+      varCount,
+      variables
     );
   }
 
@@ -47,17 +47,17 @@ class EnvTreeJsonNode {
    */
   static initialize(
     obj,
-    varCount,
+    children,
     inheritedVarCount,
     type,
-    variables,
-    children
+    varCount,
+    variables
   ) {
-    obj["var_count"] = varCount;
+    obj["children"] = children;
     obj["inherited_var_count"] = inheritedVarCount;
     obj["type"] = type;
+    obj["var_count"] = varCount;
     obj["variables"] = variables;
-    obj["children"] = children;
   }
 
   /**
@@ -71,20 +71,11 @@ class EnvTreeJsonNode {
     if (data) {
       obj = obj || new EnvTreeJsonNode();
 
-      if (data.hasOwnProperty("var_count")) {
-        obj["var_count"] = ApiClient.convertToType(data["var_count"], "Number");
+      if (data.hasOwnProperty("app_label")) {
+        obj["app_label"] = ApiClient.convertToType(data["app_label"], "String");
       }
-      if (data.hasOwnProperty("inherited_var_count")) {
-        obj["inherited_var_count"] = ApiClient.convertToType(
-          data["inherited_var_count"],
-          "Number"
-        );
-      }
-      if (data.hasOwnProperty("type")) {
-        obj["type"] = ApiClient.convertToType(data["type"], "String");
-      }
-      if (data.hasOwnProperty("variables")) {
-        obj["variables"] = ApiClient.convertToType(data["variables"], [EnvVar]);
+      if (data.hasOwnProperty("app_uid")) {
+        obj["app_uid"] = ApiClient.convertToType(data["app_uid"], "String");
       }
       if (data.hasOwnProperty("children")) {
         obj["children"] = ApiClient.convertToType(data["children"], [
@@ -106,14 +97,23 @@ class EnvTreeJsonNode {
       if (data.hasOwnProperty("fleet_uid")) {
         obj["fleet_uid"] = ApiClient.convertToType(data["fleet_uid"], "String");
       }
-      if (data.hasOwnProperty("app_uid")) {
-        obj["app_uid"] = ApiClient.convertToType(data["app_uid"], "String");
+      if (data.hasOwnProperty("inherited_var_count")) {
+        obj["inherited_var_count"] = ApiClient.convertToType(
+          data["inherited_var_count"],
+          "Number"
+        );
       }
-      if (data.hasOwnProperty("app_label")) {
-        obj["app_label"] = ApiClient.convertToType(data["app_label"], "String");
+      if (data.hasOwnProperty("type")) {
+        obj["type"] = ApiClient.convertToType(data["type"], "String");
       }
       if (data.hasOwnProperty("url")) {
         obj["url"] = ApiClient.convertToType(data["url"], "String");
+      }
+      if (data.hasOwnProperty("var_count")) {
+        obj["var_count"] = ApiClient.convertToType(data["var_count"], "Number");
+      }
+      if (data.hasOwnProperty("variables")) {
+        obj["variables"] = ApiClient.convertToType(data["variables"], [EnvVar]);
       }
     } else if (data === null) {
       return null;
@@ -140,27 +140,28 @@ class EnvTreeJsonNode {
     }
     // ensure the json data is a string
     if (
-      data["type"] &&
-      !(typeof data["type"] === "string" || data["type"] instanceof String)
+      data["app_label"] &&
+      !(
+        typeof data["app_label"] === "string" ||
+        data["app_label"] instanceof String
+      )
     ) {
       throw new Error(
-        "Expected the field `type` to be a primitive type in the JSON string but got " +
-          data["type"]
+        "Expected the field `app_label` to be a primitive type in the JSON string but got " +
+          data["app_label"]
       );
     }
-    if (data["variables"]) {
-      // data not null
-      // ensure the json data is an array
-      if (!Array.isArray(data["variables"])) {
-        throw new Error(
-          "Expected the field `variables` to be an array in the JSON data but got " +
-            data["variables"]
-        );
-      }
-      // validate the optional field `variables` (array)
-      for (const item of data["variables"]) {
-        EnvVar.validateJsonObject(item);
-      }
+    // ensure the json data is a string
+    if (
+      data["app_uid"] &&
+      !(
+        typeof data["app_uid"] === "string" || data["app_uid"] instanceof String
+      )
+    ) {
+      throw new Error(
+        "Expected the field `app_uid` to be a primitive type in the JSON string but got " +
+          data["app_uid"]
+      );
     }
     if (data["children"]) {
       // data not null
@@ -217,27 +218,12 @@ class EnvTreeJsonNode {
     }
     // ensure the json data is a string
     if (
-      data["app_uid"] &&
-      !(
-        typeof data["app_uid"] === "string" || data["app_uid"] instanceof String
-      )
+      data["type"] &&
+      !(typeof data["type"] === "string" || data["type"] instanceof String)
     ) {
       throw new Error(
-        "Expected the field `app_uid` to be a primitive type in the JSON string but got " +
-          data["app_uid"]
-      );
-    }
-    // ensure the json data is a string
-    if (
-      data["app_label"] &&
-      !(
-        typeof data["app_label"] === "string" ||
-        data["app_label"] instanceof String
-      )
-    ) {
-      throw new Error(
-        "Expected the field `app_label` to be a primitive type in the JSON string but got " +
-          data["app_label"]
+        "Expected the field `type` to be a primitive type in the JSON string but got " +
+          data["type"]
       );
     }
     // ensure the json data is a string
@@ -250,38 +236,42 @@ class EnvTreeJsonNode {
           data["url"]
       );
     }
+    if (data["variables"]) {
+      // data not null
+      // ensure the json data is an array
+      if (!Array.isArray(data["variables"])) {
+        throw new Error(
+          "Expected the field `variables` to be an array in the JSON data but got " +
+            data["variables"]
+        );
+      }
+      // validate the optional field `variables` (array)
+      for (const item of data["variables"]) {
+        EnvVar.validateJsonObject(item);
+      }
+    }
 
     return true;
   }
 }
 
 EnvTreeJsonNode.RequiredProperties = [
-  "var_count",
+  "children",
   "inherited_var_count",
   "type",
+  "var_count",
   "variables",
-  "children",
 ];
 
 /**
- * @member {Number} var_count
+ * @member {String} app_label
  */
-EnvTreeJsonNode.prototype["var_count"] = undefined;
+EnvTreeJsonNode.prototype["app_label"] = undefined;
 
 /**
- * @member {Number} inherited_var_count
+ * @member {String} app_uid
  */
-EnvTreeJsonNode.prototype["inherited_var_count"] = undefined;
-
-/**
- * @member {String} type
- */
-EnvTreeJsonNode.prototype["type"] = undefined;
-
-/**
- * @member {Array.<module:model/EnvVar>} variables
- */
-EnvTreeJsonNode.prototype["variables"] = undefined;
+EnvTreeJsonNode.prototype["app_uid"] = undefined;
 
 /**
  * @member {Array.<module:model/EnvTreeJsonNode>} children
@@ -304,18 +294,28 @@ EnvTreeJsonNode.prototype["fleet_label"] = undefined;
 EnvTreeJsonNode.prototype["fleet_uid"] = undefined;
 
 /**
- * @member {String} app_uid
+ * @member {Number} inherited_var_count
  */
-EnvTreeJsonNode.prototype["app_uid"] = undefined;
+EnvTreeJsonNode.prototype["inherited_var_count"] = undefined;
 
 /**
- * @member {String} app_label
+ * @member {String} type
  */
-EnvTreeJsonNode.prototype["app_label"] = undefined;
+EnvTreeJsonNode.prototype["type"] = undefined;
 
 /**
  * @member {String} url
  */
 EnvTreeJsonNode.prototype["url"] = undefined;
+
+/**
+ * @member {Number} var_count
+ */
+EnvTreeJsonNode.prototype["var_count"] = undefined;
+
+/**
+ * @member {Array.<module:model/EnvVar>} variables
+ */
+EnvTreeJsonNode.prototype["variables"] = undefined;
 
 export default EnvTreeJsonNode;

@@ -4,12 +4,12 @@
 
 | Name          | Type                                            | Description        | Notes                                  |
 | ------------- | ----------------------------------------------- | ------------------ | -------------------------------------- |
-| **uid**       | **String**                                      | Route UID          | [optional]                             |
-| **label**     | **String**                                      | Route Label        | [optional]                             |
-| **routeType** | **String**                                      | Type of route.     | [optional] [default to &#39;http&#39;] |
-| **modified**  | **String**                                      | Last Modified      | [optional]                             |
 | **disabled**  | **Boolean**                                     | Is route disabled? | [optional] [default to false]          |
+| **label**     | **String**                                      | Route Label        | [optional]                             |
+| **modified**  | **String**                                      | Last Modified      | [optional]                             |
+| **routeType** | **String**                                      | Type of route.     | [optional] [default to &#39;http&#39;] |
 | **schema**    | [**NotehubRouteSchema**](NotehubRouteSchema.md) |                    | [optional]                             |
+| **uid**       | **String**                                      | Route UID          | [optional]                             |
 
 ## Enum: RouteTypeEnum
 

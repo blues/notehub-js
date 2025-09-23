@@ -50,12 +50,6 @@
       //expect(instance).to.be.a(NotehubJs.UserDfuStateMachine);
     });
 
-    it('should have the property status (base name: "status")', function () {
-      // uncomment below and update the code to test the property status
-      //var instance = new NotehubJs.UserDfuStateMachine();
-      //expect(instance).to.be();
-    });
-
     it('should have the property created (base name: "created")', function () {
       // uncomment below and update the code to test the property created
       //var instance = new NotehubJs.UserDfuStateMachine();
@@ -70,6 +64,12 @@
 
     it('should have the property metadata (base name: "metadata")', function () {
       // uncomment below and update the code to test the property metadata
+      //var instance = new NotehubJs.UserDfuStateMachine();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property status (base name: "status")', function () {
+      // uncomment below and update the code to test the property status
       //var instance = new NotehubJs.UserDfuStateMachine();
       //expect(instance).to.be();
     });

@@ -45,21 +45,9 @@ class DeviceUsage {
     if (data) {
       obj = obj || new DeviceUsage();
 
-      if (data.hasOwnProperty("since")) {
-        obj["since"] = ApiClient.convertToType(data["since"], "Number");
-      }
-      if (data.hasOwnProperty("duration")) {
-        obj["duration"] = ApiClient.convertToType(data["duration"], "Number");
-      }
       if (data.hasOwnProperty("bytes_rcvd")) {
         obj["bytes_rcvd"] = ApiClient.convertToType(
           data["bytes_rcvd"],
-          "Number"
-        );
-      }
-      if (data.hasOwnProperty("bytes_sent")) {
-        obj["bytes_sent"] = ApiClient.convertToType(
-          data["bytes_sent"],
           "Number"
         );
       }
@@ -69,9 +57,30 @@ class DeviceUsage {
           "Number"
         );
       }
+      if (data.hasOwnProperty("bytes_sent")) {
+        obj["bytes_sent"] = ApiClient.convertToType(
+          data["bytes_sent"],
+          "Number"
+        );
+      }
       if (data.hasOwnProperty("bytes_sent_secondary")) {
         obj["bytes_sent_secondary"] = ApiClient.convertToType(
           data["bytes_sent_secondary"],
+          "Number"
+        );
+      }
+      if (data.hasOwnProperty("duration")) {
+        obj["duration"] = ApiClient.convertToType(data["duration"], "Number");
+      }
+      if (data.hasOwnProperty("notes_rcvd")) {
+        obj["notes_rcvd"] = ApiClient.convertToType(
+          data["notes_rcvd"],
+          "Number"
+        );
+      }
+      if (data.hasOwnProperty("notes_sent")) {
+        obj["notes_sent"] = ApiClient.convertToType(
+          data["notes_sent"],
           "Number"
         );
       }
@@ -87,17 +96,8 @@ class DeviceUsage {
           "Number"
         );
       }
-      if (data.hasOwnProperty("notes_rcvd")) {
-        obj["notes_rcvd"] = ApiClient.convertToType(
-          data["notes_rcvd"],
-          "Number"
-        );
-      }
-      if (data.hasOwnProperty("notes_sent")) {
-        obj["notes_sent"] = ApiClient.convertToType(
-          data["notes_sent"],
-          "Number"
-        );
+      if (data.hasOwnProperty("since")) {
+        obj["since"] = ApiClient.convertToType(data["since"], "Number");
       }
     } else if (data === null) {
       return null;
@@ -116,10 +116,24 @@ class DeviceUsage {
 }
 
 /**
- * Unix timestamp
- * @member {Number} since
+ * @member {Number} bytes_rcvd
  */
-DeviceUsage.prototype["since"] = undefined;
+DeviceUsage.prototype["bytes_rcvd"] = undefined;
+
+/**
+ * @member {Number} bytes_rcvd_secondary
+ */
+DeviceUsage.prototype["bytes_rcvd_secondary"] = undefined;
+
+/**
+ * @member {Number} bytes_sent
+ */
+DeviceUsage.prototype["bytes_sent"] = undefined;
+
+/**
+ * @member {Number} bytes_sent_secondary
+ */
+DeviceUsage.prototype["bytes_sent_secondary"] = undefined;
 
 /**
  * Duration in seconds
@@ -128,24 +142,14 @@ DeviceUsage.prototype["since"] = undefined;
 DeviceUsage.prototype["duration"] = undefined;
 
 /**
- * @member {Number} bytes_rcvd
+ * @member {Number} notes_rcvd
  */
-DeviceUsage.prototype["bytes_rcvd"] = undefined;
+DeviceUsage.prototype["notes_rcvd"] = undefined;
 
 /**
- * @member {Number} bytes_sent
+ * @member {Number} notes_sent
  */
-DeviceUsage.prototype["bytes_sent"] = undefined;
-
-/**
- * @member {Number} bytes_rcvd_secondary
- */
-DeviceUsage.prototype["bytes_rcvd_secondary"] = undefined;
-
-/**
- * @member {Number} bytes_sent_secondary
- */
-DeviceUsage.prototype["bytes_sent_secondary"] = undefined;
+DeviceUsage.prototype["notes_sent"] = undefined;
 
 /**
  * @member {Number} sessions_tcp
@@ -158,13 +162,9 @@ DeviceUsage.prototype["sessions_tcp"] = undefined;
 DeviceUsage.prototype["sessions_tls"] = undefined;
 
 /**
- * @member {Number} notes_rcvd
+ * Unix timestamp
+ * @member {Number} since
  */
-DeviceUsage.prototype["notes_rcvd"] = undefined;
-
-/**
- * @member {Number} notes_sent
- */
-DeviceUsage.prototype["notes_sent"] = undefined;
+DeviceUsage.prototype["since"] = undefined;
 
 export default DeviceUsage;

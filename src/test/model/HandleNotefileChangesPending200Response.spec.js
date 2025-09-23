@@ -50,14 +50,14 @@
       //expect(instance).to.be.a(NotehubJs.HandleNotefileChangesPending200Response);
     });
 
-    it('should have the property total (base name: "total")', function () {
-      // uncomment below and update the code to test the property total
+    it('should have the property changes (base name: "changes")', function () {
+      // uncomment below and update the code to test the property changes
       //var instance = new NotehubJs.HandleNotefileChangesPending200Response();
       //expect(instance).to.be();
     });
 
-    it('should have the property changes (base name: "changes")', function () {
-      // uncomment below and update the code to test the property changes
+    it('should have the property info (base name: "info")', function () {
+      // uncomment below and update the code to test the property info
       //var instance = new NotehubJs.HandleNotefileChangesPending200Response();
       //expect(instance).to.be();
     });
@@ -68,8 +68,8 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property info (base name: "info")', function () {
-      // uncomment below and update the code to test the property info
+    it('should have the property total (base name: "total")', function () {
+      // uncomment below and update the code to test the property total
       //var instance = new NotehubJs.HandleNotefileChangesPending200Response();
       //expect(instance).to.be();
     });

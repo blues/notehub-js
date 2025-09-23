@@ -50,6 +50,12 @@
       //expect(instance).to.be.a(NotehubJs.UserDfuStateMachineStatus);
     });
 
+    it('should have the property date (base name: "date")', function () {
+      // uncomment below and update the code to test the property date
+      //var instance = new NotehubJs.UserDfuStateMachineStatus();
+      //expect(instance).to.be();
+    });
+
     it('should have the property phase (base name: "phase")', function () {
       // uncomment below and update the code to test the property phase
       //var instance = new NotehubJs.UserDfuStateMachineStatus();
@@ -58,12 +64,6 @@
 
     it('should have the property phaseDescription (base name: "phase_description")', function () {
       // uncomment below and update the code to test the property phaseDescription
-      //var instance = new NotehubJs.UserDfuStateMachineStatus();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property date (base name: "date")', function () {
-      // uncomment below and update the code to test the property date
       //var instance = new NotehubJs.UserDfuStateMachineStatus();
       //expect(instance).to.be();
     });

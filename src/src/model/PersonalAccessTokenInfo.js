@@ -45,9 +45,6 @@ class PersonalAccessTokenInfo {
     if (data) {
       obj = obj || new PersonalAccessTokenInfo();
 
-      if (data.hasOwnProperty("name")) {
-        obj["name"] = ApiClient.convertToType(data["name"], "String");
-      }
       if (data.hasOwnProperty("description")) {
         obj["description"] = ApiClient.convertToType(
           data["description"],
@@ -56,6 +53,9 @@ class PersonalAccessTokenInfo {
       }
       if (data.hasOwnProperty("expires_at")) {
         obj["expires_at"] = ApiClient.convertToType(data["expires_at"], "Date");
+      }
+      if (data.hasOwnProperty("name")) {
+        obj["name"] = ApiClient.convertToType(data["name"], "String");
       }
       if (data.hasOwnProperty("suspended")) {
         obj["suspended"] = ApiClient.convertToType(
@@ -77,16 +77,6 @@ class PersonalAccessTokenInfo {
   static validateJSON(data) {
     // ensure the json data is a string
     if (
-      data["name"] &&
-      !(typeof data["name"] === "string" || data["name"] instanceof String)
-    ) {
-      throw new Error(
-        "Expected the field `name` to be a primitive type in the JSON string but got " +
-          data["name"]
-      );
-    }
-    // ensure the json data is a string
-    if (
       data["description"] &&
       !(
         typeof data["description"] === "string" ||
@@ -98,15 +88,20 @@ class PersonalAccessTokenInfo {
           data["description"]
       );
     }
+    // ensure the json data is a string
+    if (
+      data["name"] &&
+      !(typeof data["name"] === "string" || data["name"] instanceof String)
+    ) {
+      throw new Error(
+        "Expected the field `name` to be a primitive type in the JSON string but got " +
+          data["name"]
+      );
+    }
 
     return true;
   }
 }
-
-/**
- * @member {String} name
- */
-PersonalAccessTokenInfo.prototype["name"] = undefined;
 
 /**
  * @member {String} description
@@ -118,6 +113,11 @@ PersonalAccessTokenInfo.prototype["description"] = undefined;
  * @member {Date} expires_at
  */
 PersonalAccessTokenInfo.prototype["expires_at"] = undefined;
+
+/**
+ * @member {String} name
+ */
+PersonalAccessTokenInfo.prototype["name"] = undefined;
 
 /**
  * if true, the token is temporarily suspended

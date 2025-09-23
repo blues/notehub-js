@@ -45,6 +45,9 @@ class UserDfuStateMachineStatus {
     if (data) {
       obj = obj || new UserDfuStateMachineStatus();
 
+      if (data.hasOwnProperty("date")) {
+        obj["date"] = ApiClient.convertToType(data["date"], "Date");
+      }
       if (data.hasOwnProperty("phase")) {
         obj["phase"] = ApiClient.convertToType(data["phase"], "String");
       }
@@ -53,9 +56,6 @@ class UserDfuStateMachineStatus {
           data["phase_description"],
           "String"
         );
-      }
-      if (data.hasOwnProperty("date")) {
-        obj["date"] = ApiClient.convertToType(data["date"], "Date");
       }
       if (data.hasOwnProperty("status")) {
         obj["status"] = ApiClient.convertToType(data["status"], "String");
@@ -111,6 +111,11 @@ class UserDfuStateMachineStatus {
 }
 
 /**
+ * @member {Date} date
+ */
+UserDfuStateMachineStatus.prototype["date"] = undefined;
+
+/**
  * @member {String} phase
  */
 UserDfuStateMachineStatus.prototype["phase"] = undefined;
@@ -119,11 +124,6 @@ UserDfuStateMachineStatus.prototype["phase"] = undefined;
  * @member {String} phase_description
  */
 UserDfuStateMachineStatus.prototype["phase_description"] = undefined;
-
-/**
- * @member {Date} date
- */
-UserDfuStateMachineStatus.prototype["date"] = undefined;
 
 /**
  * @member {String} status

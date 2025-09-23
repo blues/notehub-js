@@ -50,12 +50,6 @@
       //expect(instance).to.be.a(NotehubJs.PostProvisionProjectDeviceRequest);
     });
 
-    it('should have the property productUid (base name: "product_uid")', function () {
-      // uncomment below and update the code to test the property productUid
-      //var instance = new NotehubJs.PostProvisionProjectDeviceRequest();
-      //expect(instance).to.be();
-    });
-
     it('should have the property deviceSn (base name: "device_sn")', function () {
       // uncomment below and update the code to test the property deviceSn
       //var instance = new NotehubJs.PostProvisionProjectDeviceRequest();
@@ -64,6 +58,12 @@
 
     it('should have the property fleetUids (base name: "fleet_uids")', function () {
       // uncomment below and update the code to test the property fleetUids
+      //var instance = new NotehubJs.PostProvisionProjectDeviceRequest();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property productUid (base name: "product_uid")', function () {
+      // uncomment below and update the code to test the property productUid
       //var instance = new NotehubJs.PostProvisionProjectDeviceRequest();
       //expect(instance).to.be();
     });

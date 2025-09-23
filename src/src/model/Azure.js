@@ -12,8 +12,8 @@
  */
 
 import ApiClient from "../ApiClient";
-import HttpFilter from "./HttpFilter";
-import HttpTransform from "./HttpTransform";
+import AwsFilter from "./AwsFilter";
+import AwsTransform from "./AwsTransform";
 
 /**
  * The Azure model module.
@@ -48,30 +48,21 @@ class Azure {
     if (data) {
       obj = obj || new Azure();
 
+      if (data.hasOwnProperty("filter")) {
+        obj["filter"] = AwsFilter.constructFromObject(data["filter"]);
+      }
       if (data.hasOwnProperty("fleets")) {
         obj["fleets"] = ApiClient.convertToType(data["fleets"], ["String"]);
-      }
-      if (data.hasOwnProperty("filter")) {
-        obj["filter"] = HttpFilter.constructFromObject(data["filter"]);
-      }
-      if (data.hasOwnProperty("transform")) {
-        obj["transform"] = HttpTransform.constructFromObject(data["transform"]);
-      }
-      if (data.hasOwnProperty("throttle_ms")) {
-        obj["throttle_ms"] = ApiClient.convertToType(
-          data["throttle_ms"],
-          "Number"
-        );
-      }
-      if (data.hasOwnProperty("url")) {
-        obj["url"] = ApiClient.convertToType(data["url"], "String");
-      }
-      if (data.hasOwnProperty("timeout")) {
-        obj["timeout"] = ApiClient.convertToType(data["timeout"], "Number");
       }
       if (data.hasOwnProperty("functions_key_secret")) {
         obj["functions_key_secret"] = ApiClient.convertToType(
           data["functions_key_secret"],
+          "String"
+        );
+      }
+      if (data.hasOwnProperty("sas_policy_key")) {
+        obj["sas_policy_key"] = ApiClient.convertToType(
+          data["sas_policy_key"],
           "String"
         );
       }
@@ -81,11 +72,20 @@ class Azure {
           "String"
         );
       }
-      if (data.hasOwnProperty("sas_policy_key")) {
-        obj["sas_policy_key"] = ApiClient.convertToType(
-          data["sas_policy_key"],
-          "String"
+      if (data.hasOwnProperty("throttle_ms")) {
+        obj["throttle_ms"] = ApiClient.convertToType(
+          data["throttle_ms"],
+          "Number"
         );
+      }
+      if (data.hasOwnProperty("timeout")) {
+        obj["timeout"] = ApiClient.convertToType(data["timeout"], "Number");
+      }
+      if (data.hasOwnProperty("transform")) {
+        obj["transform"] = AwsTransform.constructFromObject(data["transform"]);
+      }
+      if (data.hasOwnProperty("url")) {
+        obj["url"] = ApiClient.convertToType(data["url"], "String");
       }
     } else if (data === null) {
       return null;
@@ -99,31 +99,16 @@ class Azure {
    * @return {boolean} to indicate whether the JSON data is valid with respect to <code>Azure</code>.
    */
   static validateJSON(data) {
+    // validate the optional field `filter`
+    if (data["filter"]) {
+      // data not null
+      AwsFilter.validateJSON(data["filter"]);
+    }
     // ensure the json data is an array
     if (!Array.isArray(data["fleets"])) {
       throw new Error(
         "Expected the field `fleets` to be an array in the JSON data but got " +
           data["fleets"]
-      );
-    }
-    // validate the optional field `filter`
-    if (data["filter"]) {
-      // data not null
-      HttpFilter.validateJSON(data["filter"]);
-    }
-    // validate the optional field `transform`
-    if (data["transform"]) {
-      // data not null
-      HttpTransform.validateJSON(data["transform"]);
-    }
-    // ensure the json data is a string
-    if (
-      data["url"] &&
-      !(typeof data["url"] === "string" || data["url"] instanceof String)
-    ) {
-      throw new Error(
-        "Expected the field `url` to be a primitive type in the JSON string but got " +
-          data["url"]
       );
     }
     // ensure the json data is a string
@@ -141,19 +126,6 @@ class Azure {
     }
     // ensure the json data is a string
     if (
-      data["sas_policy_name"] &&
-      !(
-        typeof data["sas_policy_name"] === "string" ||
-        data["sas_policy_name"] instanceof String
-      )
-    ) {
-      throw new Error(
-        "Expected the field `sas_policy_name` to be a primitive type in the JSON string but got " +
-          data["sas_policy_name"]
-      );
-    }
-    // ensure the json data is a string
-    if (
       data["sas_policy_key"] &&
       !(
         typeof data["sas_policy_key"] === "string" ||
@@ -165,10 +137,43 @@ class Azure {
           data["sas_policy_key"]
       );
     }
+    // ensure the json data is a string
+    if (
+      data["sas_policy_name"] &&
+      !(
+        typeof data["sas_policy_name"] === "string" ||
+        data["sas_policy_name"] instanceof String
+      )
+    ) {
+      throw new Error(
+        "Expected the field `sas_policy_name` to be a primitive type in the JSON string but got " +
+          data["sas_policy_name"]
+      );
+    }
+    // validate the optional field `transform`
+    if (data["transform"]) {
+      // data not null
+      AwsTransform.validateJSON(data["transform"]);
+    }
+    // ensure the json data is a string
+    if (
+      data["url"] &&
+      !(typeof data["url"] === "string" || data["url"] instanceof String)
+    ) {
+      throw new Error(
+        "Expected the field `url` to be a primitive type in the JSON string but got " +
+          data["url"]
+      );
+    }
 
     return true;
   }
 }
+
+/**
+ * @member {module:model/AwsFilter} filter
+ */
+Azure.prototype["filter"] = undefined;
 
 /**
  * list of Fleet UIDs to apply route to, if any.  If empty, applies to all Fleets
@@ -177,24 +182,26 @@ class Azure {
 Azure.prototype["fleets"] = undefined;
 
 /**
- * @member {module:model/HttpFilter} filter
+ * This value is input-only and will be omitted from the response and replaced with a placeholder
+ * @member {String} functions_key_secret
  */
-Azure.prototype["filter"] = undefined;
+Azure.prototype["functions_key_secret"] = undefined;
 
 /**
- * @member {module:model/HttpTransform} transform
+ * This value is input-only and will be omitted from the response and replaced with a placeholder
+ * @member {String} sas_policy_key
  */
-Azure.prototype["transform"] = undefined;
+Azure.prototype["sas_policy_key"] = undefined;
+
+/**
+ * @member {String} sas_policy_name
+ */
+Azure.prototype["sas_policy_name"] = undefined;
 
 /**
  * @member {Number} throttle_ms
  */
 Azure.prototype["throttle_ms"] = undefined;
-
-/**
- * @member {String} url
- */
-Azure.prototype["url"] = undefined;
 
 /**
  * Timeout in seconds for each request
@@ -204,20 +211,13 @@ Azure.prototype["url"] = undefined;
 Azure.prototype["timeout"] = 15;
 
 /**
- * This value is input-only and will be omitted from the response and replaced with a placeholder
- * @member {String} functions_key_secret
+ * @member {module:model/AwsTransform} transform
  */
-Azure.prototype["functions_key_secret"] = undefined;
+Azure.prototype["transform"] = undefined;
 
 /**
- * @member {String} sas_policy_name
+ * @member {String} url
  */
-Azure.prototype["sas_policy_name"] = undefined;
-
-/**
- * This value is input-only and will be omitted from the response and replaced with a placeholder
- * @member {String} sas_policy_key
- */
-Azure.prototype["sas_policy_key"] = undefined;
+Azure.prototype["url"] = undefined;
 
 export default Azure;

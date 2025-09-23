@@ -12,8 +12,8 @@
  */
 
 import ApiClient from "../ApiClient";
+import DeviceDfuHistoryCurrent from "./DeviceDfuHistoryCurrent";
 import DeviceDfuStateMachine from "./DeviceDfuStateMachine";
-import DeviceDfuStatusCurrent from "./DeviceDfuStatusCurrent";
 
 /**
  * The DeviceDfuHistory model module.
@@ -47,15 +47,15 @@ class DeviceDfuHistory {
     if (data) {
       obj = obj || new DeviceDfuHistory();
 
+      if (data.hasOwnProperty("current")) {
+        obj["current"] = DeviceDfuHistoryCurrent.constructFromObject(
+          data["current"]
+        );
+      }
       if (data.hasOwnProperty("device_uid")) {
         obj["device_uid"] = ApiClient.convertToType(
           data["device_uid"],
           "String"
-        );
-      }
-      if (data.hasOwnProperty("current")) {
-        obj["current"] = DeviceDfuStatusCurrent.constructFromObject(
-          data["current"]
         );
       }
       if (data.hasOwnProperty("history")) {
@@ -75,6 +75,11 @@ class DeviceDfuHistory {
    * @return {boolean} to indicate whether the JSON data is valid with respect to <code>DeviceDfuHistory</code>.
    */
   static validateJSON(data) {
+    // validate the optional field `current`
+    if (data["current"]) {
+      // data not null
+      DeviceDfuHistoryCurrent.validateJSON(data["current"]);
+    }
     // ensure the json data is a string
     if (
       data["device_uid"] &&
@@ -87,11 +92,6 @@ class DeviceDfuHistory {
         "Expected the field `device_uid` to be a primitive type in the JSON string but got " +
           data["device_uid"]
       );
-    }
-    // validate the optional field `current`
-    if (data["current"]) {
-      // data not null
-      DeviceDfuStatusCurrent.validateJSON(data["current"]);
     }
     if (data["history"]) {
       // data not null
@@ -113,15 +113,15 @@ class DeviceDfuHistory {
 }
 
 /**
+ * @member {module:model/DeviceDfuHistoryCurrent} current
+ */
+DeviceDfuHistory.prototype["current"] = undefined;
+
+/**
  * Device UID
  * @member {String} device_uid
  */
 DeviceDfuHistory.prototype["device_uid"] = undefined;
-
-/**
- * @member {module:model/DeviceDfuStatusCurrent} current
- */
-DeviceDfuHistory.prototype["current"] = undefined;
 
 /**
  * @member {Array.<module:model/DeviceDfuStateMachine>} history

@@ -12,8 +12,8 @@
  */
 
 import ApiClient from "../ApiClient";
-import HttpFilter from "./HttpFilter";
-import HttpTransform from "./HttpTransform";
+import AwsFilter from "./AwsFilter";
+import AwsTransform from "./AwsTransform";
 
 /**
  * The Mqtt model module.
@@ -48,38 +48,8 @@ class Mqtt {
     if (data) {
       obj = obj || new Mqtt();
 
-      if (data.hasOwnProperty("fleets")) {
-        obj["fleets"] = ApiClient.convertToType(data["fleets"], ["String"]);
-      }
-      if (data.hasOwnProperty("filter")) {
-        obj["filter"] = HttpFilter.constructFromObject(data["filter"]);
-      }
-      if (data.hasOwnProperty("transform")) {
-        obj["transform"] = HttpTransform.constructFromObject(data["transform"]);
-      }
-      if (data.hasOwnProperty("throttle_ms")) {
-        obj["throttle_ms"] = ApiClient.convertToType(
-          data["throttle_ms"],
-          "Number"
-        );
-      }
-      if (data.hasOwnProperty("timeout")) {
-        obj["timeout"] = ApiClient.convertToType(data["timeout"], "Number");
-      }
       if (data.hasOwnProperty("broker")) {
         obj["broker"] = ApiClient.convertToType(data["broker"], "String");
-      }
-      if (data.hasOwnProperty("port")) {
-        obj["port"] = ApiClient.convertToType(data["port"], "Number");
-      }
-      if (data.hasOwnProperty("username")) {
-        obj["username"] = ApiClient.convertToType(data["username"], "String");
-      }
-      if (data.hasOwnProperty("password")) {
-        obj["password"] = ApiClient.convertToType(data["password"], "String");
-      }
-      if (data.hasOwnProperty("topic")) {
-        obj["topic"] = ApiClient.convertToType(data["topic"], "String");
       }
       if (data.hasOwnProperty("certificate")) {
         obj["certificate"] = ApiClient.convertToType(
@@ -93,14 +63,44 @@ class Mqtt {
           "String"
         );
       }
+      if (data.hasOwnProperty("filter")) {
+        obj["filter"] = AwsFilter.constructFromObject(data["filter"]);
+      }
+      if (data.hasOwnProperty("fleets")) {
+        obj["fleets"] = ApiClient.convertToType(data["fleets"], ["String"]);
+      }
       if (data.hasOwnProperty("key")) {
         obj["key"] = ApiClient.convertToType(data["key"], "String");
+      }
+      if (data.hasOwnProperty("password")) {
+        obj["password"] = ApiClient.convertToType(data["password"], "String");
+      }
+      if (data.hasOwnProperty("port")) {
+        obj["port"] = ApiClient.convertToType(data["port"], "Number");
       }
       if (data.hasOwnProperty("private_key_name")) {
         obj["private_key_name"] = ApiClient.convertToType(
           data["private_key_name"],
           "String"
         );
+      }
+      if (data.hasOwnProperty("throttle_ms")) {
+        obj["throttle_ms"] = ApiClient.convertToType(
+          data["throttle_ms"],
+          "Number"
+        );
+      }
+      if (data.hasOwnProperty("timeout")) {
+        obj["timeout"] = ApiClient.convertToType(data["timeout"], "Number");
+      }
+      if (data.hasOwnProperty("topic")) {
+        obj["topic"] = ApiClient.convertToType(data["topic"], "String");
+      }
+      if (data.hasOwnProperty("transform")) {
+        obj["transform"] = AwsTransform.constructFromObject(data["transform"]);
+      }
+      if (data.hasOwnProperty("username")) {
+        obj["username"] = ApiClient.convertToType(data["username"], "String");
       }
     } else if (data === null) {
       return null;
@@ -114,23 +114,6 @@ class Mqtt {
    * @return {boolean} to indicate whether the JSON data is valid with respect to <code>Mqtt</code>.
    */
   static validateJSON(data) {
-    // ensure the json data is an array
-    if (!Array.isArray(data["fleets"])) {
-      throw new Error(
-        "Expected the field `fleets` to be an array in the JSON data but got " +
-          data["fleets"]
-      );
-    }
-    // validate the optional field `filter`
-    if (data["filter"]) {
-      // data not null
-      HttpFilter.validateJSON(data["filter"]);
-    }
-    // validate the optional field `transform`
-    if (data["transform"]) {
-      // data not null
-      HttpTransform.validateJSON(data["transform"]);
-    }
     // ensure the json data is a string
     if (
       data["broker"] &&
@@ -139,42 +122,6 @@ class Mqtt {
       throw new Error(
         "Expected the field `broker` to be a primitive type in the JSON string but got " +
           data["broker"]
-      );
-    }
-    // ensure the json data is a string
-    if (
-      data["username"] &&
-      !(
-        typeof data["username"] === "string" ||
-        data["username"] instanceof String
-      )
-    ) {
-      throw new Error(
-        "Expected the field `username` to be a primitive type in the JSON string but got " +
-          data["username"]
-      );
-    }
-    // ensure the json data is a string
-    if (
-      data["password"] &&
-      !(
-        typeof data["password"] === "string" ||
-        data["password"] instanceof String
-      )
-    ) {
-      throw new Error(
-        "Expected the field `password` to be a primitive type in the JSON string but got " +
-          data["password"]
-      );
-    }
-    // ensure the json data is a string
-    if (
-      data["topic"] &&
-      !(typeof data["topic"] === "string" || data["topic"] instanceof String)
-    ) {
-      throw new Error(
-        "Expected the field `topic` to be a primitive type in the JSON string but got " +
-          data["topic"]
       );
     }
     // ensure the json data is a string
@@ -203,6 +150,18 @@ class Mqtt {
           data["certificate_name"]
       );
     }
+    // validate the optional field `filter`
+    if (data["filter"]) {
+      // data not null
+      AwsFilter.validateJSON(data["filter"]);
+    }
+    // ensure the json data is an array
+    if (!Array.isArray(data["fleets"])) {
+      throw new Error(
+        "Expected the field `fleets` to be an array in the JSON data but got " +
+          data["fleets"]
+      );
+    }
     // ensure the json data is a string
     if (
       data["key"] &&
@@ -211,6 +170,19 @@ class Mqtt {
       throw new Error(
         "Expected the field `key` to be a primitive type in the JSON string but got " +
           data["key"]
+      );
+    }
+    // ensure the json data is a string
+    if (
+      data["password"] &&
+      !(
+        typeof data["password"] === "string" ||
+        data["password"] instanceof String
+      )
+    ) {
+      throw new Error(
+        "Expected the field `password` to be a primitive type in the JSON string but got " +
+          data["password"]
       );
     }
     // ensure the json data is a string
@@ -226,64 +198,43 @@ class Mqtt {
           data["private_key_name"]
       );
     }
+    // ensure the json data is a string
+    if (
+      data["topic"] &&
+      !(typeof data["topic"] === "string" || data["topic"] instanceof String)
+    ) {
+      throw new Error(
+        "Expected the field `topic` to be a primitive type in the JSON string but got " +
+          data["topic"]
+      );
+    }
+    // validate the optional field `transform`
+    if (data["transform"]) {
+      // data not null
+      AwsTransform.validateJSON(data["transform"]);
+    }
+    // ensure the json data is a string
+    if (
+      data["username"] &&
+      !(
+        typeof data["username"] === "string" ||
+        data["username"] instanceof String
+      )
+    ) {
+      throw new Error(
+        "Expected the field `username` to be a primitive type in the JSON string but got " +
+          data["username"]
+      );
+    }
 
     return true;
   }
 }
 
 /**
- * list of Fleet UIDs to apply route to, if any.  If empty, applies to all Fleets
- * @member {Array.<String>} fleets
- */
-Mqtt.prototype["fleets"] = undefined;
-
-/**
- * @member {module:model/HttpFilter} filter
- */
-Mqtt.prototype["filter"] = undefined;
-
-/**
- * @member {module:model/HttpTransform} transform
- */
-Mqtt.prototype["transform"] = undefined;
-
-/**
- * @member {Number} throttle_ms
- */
-Mqtt.prototype["throttle_ms"] = undefined;
-
-/**
- * Timeout in seconds for each request
- * @member {Number} timeout
- * @default 15
- */
-Mqtt.prototype["timeout"] = 15;
-
-/**
  * @member {String} broker
  */
 Mqtt.prototype["broker"] = undefined;
-
-/**
- * @member {Number} port
- */
-Mqtt.prototype["port"] = undefined;
-
-/**
- * @member {String} username
- */
-Mqtt.prototype["username"] = undefined;
-
-/**
- * This value is input-only and will be omitted from the response and replaced with a placeholder
- * @member {String} password
- */
-Mqtt.prototype["password"] = undefined;
-
-/**
- * @member {String} topic
- */
-Mqtt.prototype["topic"] = undefined;
 
 /**
  * Certificate with \\n newlines.  This value is input-only and will be omitted from the response and replaced with a placeholder
@@ -298,15 +249,64 @@ Mqtt.prototype["certificate"] = undefined;
 Mqtt.prototype["certificate_name"] = undefined;
 
 /**
+ * @member {module:model/AwsFilter} filter
+ */
+Mqtt.prototype["filter"] = undefined;
+
+/**
+ * list of Fleet UIDs to apply route to, if any.  If empty, applies to all Fleets
+ * @member {Array.<String>} fleets
+ */
+Mqtt.prototype["fleets"] = undefined;
+
+/**
  * Key with \\n newlines.  This value is input-only and will be omitted from the response and replaced with a placeholder
  * @member {String} key
  */
 Mqtt.prototype["key"] = undefined;
 
 /**
+ * This value is input-only and will be omitted from the response and replaced with a placeholder
+ * @member {String} password
+ */
+Mqtt.prototype["password"] = undefined;
+
+/**
+ * @member {Number} port
+ */
+Mqtt.prototype["port"] = undefined;
+
+/**
  * Name of key
  * @member {String} private_key_name
  */
 Mqtt.prototype["private_key_name"] = undefined;
+
+/**
+ * @member {Number} throttle_ms
+ */
+Mqtt.prototype["throttle_ms"] = undefined;
+
+/**
+ * Timeout in seconds for each request
+ * @member {Number} timeout
+ * @default 15
+ */
+Mqtt.prototype["timeout"] = 15;
+
+/**
+ * @member {String} topic
+ */
+Mqtt.prototype["topic"] = undefined;
+
+/**
+ * @member {module:model/AwsTransform} transform
+ */
+Mqtt.prototype["transform"] = undefined;
+
+/**
+ * @member {String} username
+ */
+Mqtt.prototype["username"] = undefined;
 
 export default Mqtt;

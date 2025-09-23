@@ -4,5 +4,5 @@
 
 | Name         | Type                                    | Description | Notes |
 | ------------ | --------------------------------------- | ----------- | ----- |
-| **sessions** | [**[DeviceSession]**](DeviceSession.md) |             |
 | **hasMore**  | **Boolean**                             |             |
+| **sessions** | [**[DeviceSession]**](DeviceSession.md) |             |

@@ -45,20 +45,20 @@ class UserDbRoute {
     if (data) {
       obj = obj || new UserDbRoute();
 
-      if (data.hasOwnProperty("uid")) {
-        obj["uid"] = ApiClient.convertToType(data["uid"], "String");
+      if (data.hasOwnProperty("disabled")) {
+        obj["disabled"] = ApiClient.convertToType(data["disabled"], "Boolean");
       }
       if (data.hasOwnProperty("label")) {
         obj["label"] = ApiClient.convertToType(data["label"], "String");
       }
-      if (data.hasOwnProperty("type")) {
-        obj["type"] = ApiClient.convertToType(data["type"], "String");
-      }
       if (data.hasOwnProperty("modified")) {
         obj["modified"] = ApiClient.convertToType(data["modified"], "String");
       }
-      if (data.hasOwnProperty("disabled")) {
-        obj["disabled"] = ApiClient.convertToType(data["disabled"], "Boolean");
+      if (data.hasOwnProperty("type")) {
+        obj["type"] = ApiClient.convertToType(data["type"], "String");
+      }
+      if (data.hasOwnProperty("uid")) {
+        obj["uid"] = ApiClient.convertToType(data["uid"], "String");
       }
     } else if (data === null) {
       return null;
@@ -74,32 +74,12 @@ class UserDbRoute {
   static validateJSON(data) {
     // ensure the json data is a string
     if (
-      data["uid"] &&
-      !(typeof data["uid"] === "string" || data["uid"] instanceof String)
-    ) {
-      throw new Error(
-        "Expected the field `uid` to be a primitive type in the JSON string but got " +
-          data["uid"]
-      );
-    }
-    // ensure the json data is a string
-    if (
       data["label"] &&
       !(typeof data["label"] === "string" || data["label"] instanceof String)
     ) {
       throw new Error(
         "Expected the field `label` to be a primitive type in the JSON string but got " +
           data["label"]
-      );
-    }
-    // ensure the json data is a string
-    if (
-      data["type"] &&
-      !(typeof data["type"] === "string" || data["type"] instanceof String)
-    ) {
-      throw new Error(
-        "Expected the field `type` to be a primitive type in the JSON string but got " +
-          data["type"]
       );
     }
     // ensure the json data is a string
@@ -115,16 +95,36 @@ class UserDbRoute {
           data["modified"]
       );
     }
+    // ensure the json data is a string
+    if (
+      data["type"] &&
+      !(typeof data["type"] === "string" || data["type"] instanceof String)
+    ) {
+      throw new Error(
+        "Expected the field `type` to be a primitive type in the JSON string but got " +
+          data["type"]
+      );
+    }
+    // ensure the json data is a string
+    if (
+      data["uid"] &&
+      !(typeof data["uid"] === "string" || data["uid"] instanceof String)
+    ) {
+      throw new Error(
+        "Expected the field `uid` to be a primitive type in the JSON string but got " +
+          data["uid"]
+      );
+    }
 
     return true;
   }
 }
 
 /**
- * @member {String} uid
- * @default 'route:8d65a087d5d290ce5bdf03aeff2becc0'
+ * @member {Boolean} disabled
+ * @default false
  */
-UserDbRoute.prototype["uid"] = "route:8d65a087d5d290ce5bdf03aeff2becc0";
+UserDbRoute.prototype["disabled"] = false;
 
 /**
  * @member {String} label
@@ -133,21 +133,21 @@ UserDbRoute.prototype["uid"] = "route:8d65a087d5d290ce5bdf03aeff2becc0";
 UserDbRoute.prototype["label"] = "success route";
 
 /**
- * @member {String} type
- * @default 'http'
- */
-UserDbRoute.prototype["type"] = "http";
-
-/**
  * @member {String} modified
  * @default '2020-03-09T17:58:37Z'
  */
 UserDbRoute.prototype["modified"] = "2020-03-09T17:58:37Z";
 
 /**
- * @member {Boolean} disabled
- * @default false
+ * @member {String} type
+ * @default 'http'
  */
-UserDbRoute.prototype["disabled"] = false;
+UserDbRoute.prototype["type"] = "http";
+
+/**
+ * @member {String} uid
+ * @default 'route:8d65a087d5d290ce5bdf03aeff2becc0'
+ */
+UserDbRoute.prototype["uid"] = "route:8d65a087d5d290ce5bdf03aeff2becc0";
 
 export default UserDbRoute;

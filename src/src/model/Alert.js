@@ -47,24 +47,9 @@ class Alert {
     if (data) {
       obj = obj || new Alert();
 
-      if (data.hasOwnProperty("uid")) {
-        obj["uid"] = ApiClient.convertToType(data["uid"], "String");
-      }
-      if (data.hasOwnProperty("monitor_uid")) {
-        obj["monitor_uid"] = ApiClient.convertToType(
-          data["monitor_uid"],
-          "String"
-        );
-      }
-      if (data.hasOwnProperty("monitor_name")) {
-        obj["monitor_name"] = ApiClient.convertToType(
-          data["monitor_name"],
-          "String"
-        );
-      }
-      if (data.hasOwnProperty("device_uid")) {
-        obj["device_uid"] = ApiClient.convertToType(
-          data["device_uid"],
+      if (data.hasOwnProperty("alert_source")) {
+        obj["alert_source"] = ApiClient.convertToType(
+          data["alert_source"],
           "String"
         );
       }
@@ -74,27 +59,12 @@ class Alert {
           "Number"
         );
       }
-      if (data.hasOwnProperty("value")) {
-        obj["value"] = ApiClient.convertToType(data["value"], "Number");
+      if (data.hasOwnProperty("data")) {
+        obj["data"] = ApiClient.convertToType(data["data"], [AlertDataInner]);
       }
-      if (data.hasOwnProperty("resolved")) {
-        obj["resolved"] = ApiClient.convertToType(data["resolved"], "Boolean");
-      }
-      if (data.hasOwnProperty("version")) {
-        obj["version"] = ApiClient.convertToType(data["version"], "Number");
-      }
-      if (data.hasOwnProperty("alert_source")) {
-        obj["alert_source"] = ApiClient.convertToType(
-          data["alert_source"],
-          "String"
-        );
-      }
-      if (data.hasOwnProperty("source")) {
-        obj["source"] = ApiClient.convertToType(data["source"], "String");
-      }
-      if (data.hasOwnProperty("monitor_type")) {
-        obj["monitor_type"] = ApiClient.convertToType(
-          data["monitor_type"],
+      if (data.hasOwnProperty("device_uid")) {
+        obj["device_uid"] = ApiClient.convertToType(
+          data["device_uid"],
           "String"
         );
       }
@@ -104,13 +74,43 @@ class Alert {
           "String"
         );
       }
-      if (data.hasOwnProperty("data")) {
-        obj["data"] = ApiClient.convertToType(data["data"], [AlertDataInner]);
+      if (data.hasOwnProperty("monitor_name")) {
+        obj["monitor_name"] = ApiClient.convertToType(
+          data["monitor_name"],
+          "String"
+        );
+      }
+      if (data.hasOwnProperty("monitor_type")) {
+        obj["monitor_type"] = ApiClient.convertToType(
+          data["monitor_type"],
+          "String"
+        );
+      }
+      if (data.hasOwnProperty("monitor_uid")) {
+        obj["monitor_uid"] = ApiClient.convertToType(
+          data["monitor_uid"],
+          "String"
+        );
       }
       if (data.hasOwnProperty("notifications")) {
         obj["notifications"] = ApiClient.convertToType(data["notifications"], [
           AlertNotificationsInner,
         ]);
+      }
+      if (data.hasOwnProperty("resolved")) {
+        obj["resolved"] = ApiClient.convertToType(data["resolved"], "Boolean");
+      }
+      if (data.hasOwnProperty("source")) {
+        obj["source"] = ApiClient.convertToType(data["source"], "String");
+      }
+      if (data.hasOwnProperty("uid")) {
+        obj["uid"] = ApiClient.convertToType(data["uid"], "String");
+      }
+      if (data.hasOwnProperty("value")) {
+        obj["value"] = ApiClient.convertToType(data["value"], "Number");
+      }
+      if (data.hasOwnProperty("version")) {
+        obj["version"] = ApiClient.convertToType(data["version"], "Number");
       }
     } else if (data === null) {
       return null;
@@ -126,25 +126,55 @@ class Alert {
   static validateJSON(data) {
     // ensure the json data is a string
     if (
-      data["uid"] &&
-      !(typeof data["uid"] === "string" || data["uid"] instanceof String)
+      data["alert_source"] &&
+      !(
+        typeof data["alert_source"] === "string" ||
+        data["alert_source"] instanceof String
+      )
     ) {
       throw new Error(
-        "Expected the field `uid` to be a primitive type in the JSON string but got " +
-          data["uid"]
+        "Expected the field `alert_source` to be a primitive type in the JSON string but got " +
+          data["alert_source"]
+      );
+    }
+    if (data["data"]) {
+      // data not null
+      // ensure the json data is an array
+      if (!Array.isArray(data["data"])) {
+        throw new Error(
+          "Expected the field `data` to be an array in the JSON data but got " +
+            data["data"]
+        );
+      }
+      // validate the optional field `data` (array)
+      for (const item of data["data"]) {
+        AlertDataInner.validateJsonObject(item);
+      }
+    }
+    // ensure the json data is a string
+    if (
+      data["device_uid"] &&
+      !(
+        typeof data["device_uid"] === "string" ||
+        data["device_uid"] instanceof String
+      )
+    ) {
+      throw new Error(
+        "Expected the field `device_uid` to be a primitive type in the JSON string but got " +
+          data["device_uid"]
       );
     }
     // ensure the json data is a string
     if (
-      data["monitor_uid"] &&
+      data["field_name"] &&
       !(
-        typeof data["monitor_uid"] === "string" ||
-        data["monitor_uid"] instanceof String
+        typeof data["field_name"] === "string" ||
+        data["field_name"] instanceof String
       )
     ) {
       throw new Error(
-        "Expected the field `monitor_uid` to be a primitive type in the JSON string but got " +
-          data["monitor_uid"]
+        "Expected the field `field_name` to be a primitive type in the JSON string but got " +
+          data["field_name"]
       );
     }
     // ensure the json data is a string
@@ -162,42 +192,6 @@ class Alert {
     }
     // ensure the json data is a string
     if (
-      data["device_uid"] &&
-      !(
-        typeof data["device_uid"] === "string" ||
-        data["device_uid"] instanceof String
-      )
-    ) {
-      throw new Error(
-        "Expected the field `device_uid` to be a primitive type in the JSON string but got " +
-          data["device_uid"]
-      );
-    }
-    // ensure the json data is a string
-    if (
-      data["alert_source"] &&
-      !(
-        typeof data["alert_source"] === "string" ||
-        data["alert_source"] instanceof String
-      )
-    ) {
-      throw new Error(
-        "Expected the field `alert_source` to be a primitive type in the JSON string but got " +
-          data["alert_source"]
-      );
-    }
-    // ensure the json data is a string
-    if (
-      data["source"] &&
-      !(typeof data["source"] === "string" || data["source"] instanceof String)
-    ) {
-      throw new Error(
-        "Expected the field `source` to be a primitive type in the JSON string but got " +
-          data["source"]
-      );
-    }
-    // ensure the json data is a string
-    if (
       data["monitor_type"] &&
       !(
         typeof data["monitor_type"] === "string" ||
@@ -211,30 +205,16 @@ class Alert {
     }
     // ensure the json data is a string
     if (
-      data["field_name"] &&
+      data["monitor_uid"] &&
       !(
-        typeof data["field_name"] === "string" ||
-        data["field_name"] instanceof String
+        typeof data["monitor_uid"] === "string" ||
+        data["monitor_uid"] instanceof String
       )
     ) {
       throw new Error(
-        "Expected the field `field_name` to be a primitive type in the JSON string but got " +
-          data["field_name"]
+        "Expected the field `monitor_uid` to be a primitive type in the JSON string but got " +
+          data["monitor_uid"]
       );
-    }
-    if (data["data"]) {
-      // data not null
-      // ensure the json data is an array
-      if (!Array.isArray(data["data"])) {
-        throw new Error(
-          "Expected the field `data` to be an array in the JSON data but got " +
-            data["data"]
-        );
-      }
-      // validate the optional field `data` (array)
-      for (const item of data["data"]) {
-        AlertDataInner.validateJsonObject(item);
-      }
     }
     if (data["notifications"]) {
       // data not null
@@ -250,58 +230,30 @@ class Alert {
         AlertNotificationsInner.validateJsonObject(item);
       }
     }
+    // ensure the json data is a string
+    if (
+      data["source"] &&
+      !(typeof data["source"] === "string" || data["source"] instanceof String)
+    ) {
+      throw new Error(
+        "Expected the field `source` to be a primitive type in the JSON string but got " +
+          data["source"]
+      );
+    }
+    // ensure the json data is a string
+    if (
+      data["uid"] &&
+      !(typeof data["uid"] === "string" || data["uid"] instanceof String)
+    ) {
+      throw new Error(
+        "Expected the field `uid` to be a primitive type in the JSON string but got " +
+          data["uid"]
+      );
+    }
 
     return true;
   }
 }
-
-/**
- * Alert UID
- * @member {String} uid
- */
-Alert.prototype["uid"] = undefined;
-
-/**
- * Monitor UID
- * @member {String} monitor_uid
- */
-Alert.prototype["monitor_uid"] = undefined;
-
-/**
- * Monitor Name
- * @member {String} monitor_name
- */
-Alert.prototype["monitor_name"] = undefined;
-
-/**
- * Device UID
- * @member {String} device_uid
- */
-Alert.prototype["device_uid"] = undefined;
-
-/**
- * The time the alert was created
- * @member {Number} created_at
- */
-Alert.prototype["created_at"] = undefined;
-
-/**
- * The value that triggered the alert
- * @member {Number} value
- */
-Alert.prototype["value"] = undefined;
-
-/**
- * If true, the alert has been resolved
- * @member {Boolean} resolved
- */
-Alert.prototype["resolved"] = undefined;
-
-/**
- * The version of the alert
- * @member {Number} version
- */
-Alert.prototype["version"] = undefined;
 
 /**
  * The source of the alert
@@ -310,16 +262,21 @@ Alert.prototype["version"] = undefined;
 Alert.prototype["alert_source"] = undefined;
 
 /**
- * The UID of the source of the alert
- * @member {String} source
+ * The time the alert was created
+ * @member {Number} created_at
  */
-Alert.prototype["source"] = undefined;
+Alert.prototype["created_at"] = undefined;
 
 /**
- * The type of monitor that triggered the alert
- * @member {module:model/Alert.MonitorTypeEnum} monitor_type
+ * @member {Array.<module:model/AlertDataInner>} data
  */
-Alert.prototype["monitor_type"] = undefined;
+Alert.prototype["data"] = undefined;
+
+/**
+ * Device UID
+ * @member {String} device_uid
+ */
+Alert.prototype["device_uid"] = undefined;
 
 /**
  * The field name that triggered the alert
@@ -328,14 +285,57 @@ Alert.prototype["monitor_type"] = undefined;
 Alert.prototype["field_name"] = undefined;
 
 /**
- * @member {Array.<module:model/AlertDataInner>} data
+ * Monitor Name
+ * @member {String} monitor_name
  */
-Alert.prototype["data"] = undefined;
+Alert.prototype["monitor_name"] = undefined;
+
+/**
+ * The type of monitor that triggered the alert
+ * @member {module:model/Alert.MonitorTypeEnum} monitor_type
+ */
+Alert.prototype["monitor_type"] = undefined;
+
+/**
+ * Monitor UID
+ * @member {String} monitor_uid
+ */
+Alert.prototype["monitor_uid"] = undefined;
 
 /**
  * @member {Array.<module:model/AlertNotificationsInner>} notifications
  */
 Alert.prototype["notifications"] = undefined;
+
+/**
+ * If true, the alert has been resolved
+ * @member {Boolean} resolved
+ */
+Alert.prototype["resolved"] = undefined;
+
+/**
+ * The UID of the source of the alert
+ * @member {String} source
+ */
+Alert.prototype["source"] = undefined;
+
+/**
+ * Alert UID
+ * @member {String} uid
+ */
+Alert.prototype["uid"] = undefined;
+
+/**
+ * The value that triggered the alert
+ * @member {Number} value
+ */
+Alert.prototype["value"] = undefined;
+
+/**
+ * The version of the alert
+ * @member {Number} version
+ */
+Alert.prototype["version"] = undefined;
 
 /**
  * Allowed values for the <code>alert_source</code> property.

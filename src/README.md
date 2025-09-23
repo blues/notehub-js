@@ -127,10 +127,11 @@ api.getAlerts(projectOrProductUID, opts).then(function(data) {
 
 All URIs are relative to *https://api.notefile.net*
 
-| Class                          | Method                                                                                         | HTTP request                                                                                   | Description                                     |
-| ------------------------------ | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ----------------------------------------------- |
+| Class                          | Method                                                                                         | HTTP request                                                                                   | Description                                          |
+| ------------------------------ | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
 | _NotehubJs.AlertApi_           | [**getAlerts**](docs/AlertApi.md#getAlerts)                                                    | **GET** /v1/projects/{projectOrProductUID}/alerts                                              |
 | _NotehubJs.AuthorizationApi_   | [**login**](docs/AuthorizationApi.md#login)                                                    | **POST** /auth/login                                                                           |
+| _NotehubJs.AuthorizationApi_   | [**oAuth2ClientCredentials**](docs/AuthorizationApi.md#oAuth2ClientCredentials)                | **POST** /oauth2/token                                                                         | Issue an OAuth 2.0 access token (Client Credentials) |
 | _NotehubJs.BillingAccountApi_  | [**getBillingAccounts**](docs/BillingAccountApi.md#getBillingAccounts)                         | **GET** /v1/billing-accounts                                                                   |
 | _NotehubJs.DeviceApi_          | [**deleteDeviceEnvironmentVariable**](docs/DeviceApi.md#deleteDeviceEnvironmentVariable)       | **DELETE** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_variables/{key}  |
 | _NotehubJs.DeviceApi_          | [**deleteProjectDevice**](docs/DeviceApi.md#deleteProjectDevice)                               | **DELETE** /v1/projects/{projectOrProductUID}/devices/{deviceUID}                              |
@@ -139,7 +140,7 @@ All URIs are relative to *https://api.notefile.net*
 | _NotehubJs.DeviceApi_          | [**enableDevice**](docs/DeviceApi.md#enableDevice)                                             | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/enable                         |
 | _NotehubJs.DeviceApi_          | [**enableDeviceConnectivityAssurance**](docs/DeviceApi.md#enableDeviceConnectivityAssurance)   | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/enable-connectivity-assurance  |
 | _NotehubJs.DeviceApi_          | [**getDevice**](docs/DeviceApi.md#getDevice)                                                   | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}                                 |
-| _NotehubJs.DeviceApi_          | [**getDeviceEnvironmentHierarchy**](docs/DeviceApi.md#getDeviceEnvironmentHierarchy)           | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_hierarchy           | Get environment variable hierarchy for a device |
+| _NotehubJs.DeviceApi_          | [**getDeviceEnvironmentHierarchy**](docs/DeviceApi.md#getDeviceEnvironmentHierarchy)           | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_hierarchy           | Get environment variable hierarchy for a device      |
 | _NotehubJs.DeviceApi_          | [**getDeviceEnvironmentVariables**](docs/DeviceApi.md#getDeviceEnvironmentVariables)           | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_variables           |
 | _NotehubJs.DeviceApi_          | [**getDeviceEnvironmentVariablesByPin**](docs/DeviceApi.md#getDeviceEnvironmentVariablesByPin) | **GET** /v1/products/{productUID}/devices/{deviceUID}/environment_variables_with_pin           |
 | _NotehubJs.DeviceApi_          | [**getDeviceHealthLog**](docs/DeviceApi.md#getDeviceHealthLog)                                 | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/health-log                      |
@@ -194,12 +195,12 @@ All URIs are relative to *https://api.notefile.net*
 | _NotehubJs.ProjectApi_         | [**getDevicesDfuStatus**](docs/ProjectApi.md#getDevicesDfuStatus)                              | **GET** /v1/projects/{projectOrProductUID}/dfu/{firmwareType}/status                           |
 | _NotehubJs.ProjectApi_         | [**getFirmwareInfo**](docs/ProjectApi.md#getFirmwareInfo)                                      | **GET** /v1/projects/{projectOrProductUID}/firmware                                            |
 | _NotehubJs.ProjectApi_         | [**getFleet**](docs/ProjectApi.md#getFleet)                                                    | **GET** /v1/projects/{projectOrProductUID}/fleets/{fleetUID}                                   |
-| _NotehubJs.ProjectApi_         | [**getFleetEnvironmentHierarchy**](docs/ProjectApi.md#getFleetEnvironmentHierarchy)            | **GET** /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/environment_hierarchy             | Get environment variable hierarchy for a device |
+| _NotehubJs.ProjectApi_         | [**getFleetEnvironmentHierarchy**](docs/ProjectApi.md#getFleetEnvironmentHierarchy)            | **GET** /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/environment_hierarchy             | Get environment variable hierarchy for a device      |
 | _NotehubJs.ProjectApi_         | [**getFleetEnvironmentVariables**](docs/ProjectApi.md#getFleetEnvironmentVariables)            | **GET** /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/environment_variables             |
-| _NotehubJs.ProjectApi_         | [**getNotefileSchemas**](docs/ProjectApi.md#getNotefileSchemas)                                | **GET** /v1/projects/{projectOrProductUID}/schemas                                             | Get variable format for a notefile              |
+| _NotehubJs.ProjectApi_         | [**getNotefileSchemas**](docs/ProjectApi.md#getNotefileSchemas)                                | **GET** /v1/projects/{projectOrProductUID}/schemas                                             | Get variable format for a notefile                   |
 | _NotehubJs.ProjectApi_         | [**getProject**](docs/ProjectApi.md#getProject)                                                | **GET** /v1/projects/{projectUID}                                                              |
 | _NotehubJs.ProjectApi_         | [**getProjectByProduct**](docs/ProjectApi.md#getProjectByProduct)                              | **GET** /v1/products/{productUID}/project                                                      |
-| _NotehubJs.ProjectApi_         | [**getProjectEnvironmentHierarchy**](docs/ProjectApi.md#getProjectEnvironmentHierarchy)        | **GET** /v1/projects/{projectOrProductUID}/environment_hierarchy                               | Get environment variable hierarchy for a device |
+| _NotehubJs.ProjectApi_         | [**getProjectEnvironmentHierarchy**](docs/ProjectApi.md#getProjectEnvironmentHierarchy)        | **GET** /v1/projects/{projectOrProductUID}/environment_hierarchy                               | Get environment variable hierarchy for a device      |
 | _NotehubJs.ProjectApi_         | [**getProjectEnvironmentVariables**](docs/ProjectApi.md#getProjectEnvironmentVariables)        | **GET** /v1/projects/{projectOrProductUID}/environment_variables                               |
 | _NotehubJs.ProjectApi_         | [**getProjectFleets**](docs/ProjectApi.md#getProjectFleets)                                    | **GET** /v1/projects/{projectOrProductUID}/fleets                                              |
 | _NotehubJs.ProjectApi_         | [**getProjectMembers**](docs/ProjectApi.md#getProjectMembers)                                  | **GET** /v1/projects/{projectOrProductUID}/members                                             |
@@ -217,6 +218,10 @@ All URIs are relative to *https://api.notefile.net*
 | _NotehubJs.RouteApi_           | [**getRouteLogsByRoute**](docs/RouteApi.md#getRouteLogsByRoute)                                | **GET** /v1/projects/{projectOrProductUID}/routes/{routeUID}/route-logs                        |
 | _NotehubJs.RouteApi_           | [**getRoutes**](docs/RouteApi.md#getRoutes)                                                    | **GET** /v1/projects/{projectOrProductUID}/routes                                              |
 | _NotehubJs.RouteApi_           | [**updateRoute**](docs/RouteApi.md#updateRoute)                                                | **PUT** /v1/projects/{projectOrProductUID}/routes/{routeUID}                                   |
+| _NotehubJs.UsageApi_           | [**getProjectDataUsage**](docs/UsageApi.md#getProjectDataUsage)                                | **GET** /v1/projects/{projectOrProductUID}/usage/data                                          |
+| _NotehubJs.UsageApi_           | [**getProjectEventsUsage**](docs/UsageApi.md#getProjectEventsUsage)                            | **GET** /v1/projects/{projectOrProductUID}/usage/events                                        |
+| _NotehubJs.UsageApi_           | [**getRouteLogsUsage**](docs/UsageApi.md#getRouteLogsUsage)                                    | **GET** /v1/projects/{projectOrProductUID}/usage/route-logs                                    |
+| _NotehubJs.UsageApi_           | [**getSessionsUsage**](docs/UsageApi.md#getSessionsUsage)                                      | **GET** /v1/projects/{projectOrProductUID}/usage/sessions                                      |
 | _NotehubJs.WebhookApi_         | [**createWebhook**](docs/WebhookApi.md#createWebhook)                                          | **POST** /v1/projects/{projectOrProductUID}/webhooks/{webhookUID}                              |
 | _NotehubJs.WebhookApi_         | [**deleteWebhook**](docs/WebhookApi.md#deleteWebhook)                                          | **DELETE** /v1/projects/{projectOrProductUID}/webhooks/{webhookUID}                            |
 | _NotehubJs.WebhookApi_         | [**getWebhook**](docs/WebhookApi.md#getWebhook)                                                | **GET** /v1/projects/{projectOrProductUID}/webhooks/{webhookUID}                               |
@@ -228,13 +233,9 @@ All URIs are relative to *https://api.notefile.net*
 - [NotehubJs.Alert](docs/Alert.md)
 - [NotehubJs.AlertDataInner](docs/AlertDataInner.md)
 - [NotehubJs.AlertNotificationsInner](docs/AlertNotificationsInner.md)
-- [NotehubJs.AnalyticsEventsData](docs/AnalyticsEventsData.md)
-- [NotehubJs.AnalyticsEventsResponse](docs/AnalyticsEventsResponse.md)
-- [NotehubJs.AnalyticsRouteLogsData](docs/AnalyticsRouteLogsData.md)
-- [NotehubJs.AnalyticsRouteLogsResponse](docs/AnalyticsRouteLogsResponse.md)
-- [NotehubJs.AnalyticsSessionsData](docs/AnalyticsSessionsData.md)
-- [NotehubJs.AnalyticsSessionsResponse](docs/AnalyticsSessionsResponse.md)
 - [NotehubJs.Aws](docs/Aws.md)
+- [NotehubJs.AwsFilter](docs/AwsFilter.md)
+- [NotehubJs.AwsTransform](docs/AwsTransform.md)
 - [NotehubJs.Azure](docs/Azure.md)
 - [NotehubJs.BillingAccount](docs/BillingAccount.md)
 - [NotehubJs.BillingAccountRole](docs/BillingAccountRole.md)
@@ -250,16 +251,15 @@ All URIs are relative to *https://api.notefile.net*
 - [NotehubJs.DFUEnv](docs/DFUEnv.md)
 - [NotehubJs.DFUState](docs/DFUState.md)
 - [NotehubJs.DataField](docs/DataField.md)
-- [NotehubJs.DataSet](docs/DataSet.md)
 - [NotehubJs.DataSetField](docs/DataSetField.md)
 - [NotehubJs.DeleteDeviceFleetsRequest](docs/DeleteDeviceFleetsRequest.md)
 - [NotehubJs.Device](docs/Device.md)
 - [NotehubJs.DeviceDfuHistory](docs/DeviceDfuHistory.md)
+- [NotehubJs.DeviceDfuHistoryCurrent](docs/DeviceDfuHistoryCurrent.md)
 - [NotehubJs.DeviceDfuHistoryPage](docs/DeviceDfuHistoryPage.md)
 - [NotehubJs.DeviceDfuStateMachine](docs/DeviceDfuStateMachine.md)
 - [NotehubJs.DeviceDfuStateMachineNode](docs/DeviceDfuStateMachineNode.md)
 - [NotehubJs.DeviceDfuStatus](docs/DeviceDfuStatus.md)
-- [NotehubJs.DeviceDfuStatusCurrent](docs/DeviceDfuStatusCurrent.md)
 - [NotehubJs.DeviceDfuStatusPage](docs/DeviceDfuStatusPage.md)
 - [NotehubJs.DeviceSession](docs/DeviceSession.md)
 - [NotehubJs.DeviceTowerInfo](docs/DeviceTowerInfo.md)
@@ -276,7 +276,8 @@ All URIs are relative to *https://api.notefile.net*
 - [NotehubJs.Fleet](docs/Fleet.md)
 - [NotehubJs.GetAlerts200Response](docs/GetAlerts200Response.md)
 - [NotehubJs.GetBillingAccounts200Response](docs/GetBillingAccounts200Response.md)
-- [NotehubJs.GetDeviceEnvironmentVariables200Response](docs/GetDeviceEnvironmentVariables200Response.md)
+- [NotehubJs.GetDeviceEnvironmentVariablesByPin200Response](docs/GetDeviceEnvironmentVariablesByPin200Response.md)
+- [NotehubJs.GetDeviceFleets200Response](docs/GetDeviceFleets200Response.md)
 - [NotehubJs.GetDeviceHealthLog200Response](docs/GetDeviceHealthLog200Response.md)
 - [NotehubJs.GetDeviceHealthLog200ResponseHealthLogInner](docs/GetDeviceHealthLog200ResponseHealthLogInner.md)
 - [NotehubJs.GetDeviceLatest200Response](docs/GetDeviceLatest200Response.md)
@@ -287,7 +288,6 @@ All URIs are relative to *https://api.notefile.net*
 - [NotehubJs.GetProjectDevices200Response](docs/GetProjectDevices200Response.md)
 - [NotehubJs.GetProjectEvents200Response](docs/GetProjectEvents200Response.md)
 - [NotehubJs.GetProjectEventsByCursor200Response](docs/GetProjectEventsByCursor200Response.md)
-- [NotehubJs.GetProjectFleets200Response](docs/GetProjectFleets200Response.md)
 - [NotehubJs.GetProjectMembers200Response](docs/GetProjectMembers200Response.md)
 - [NotehubJs.GetProjectProducts200Response](docs/GetProjectProducts200Response.md)
 - [NotehubJs.GetProjects200Response](docs/GetProjects200Response.md)
@@ -300,8 +300,6 @@ All URIs are relative to *https://api.notefile.net*
 - [NotehubJs.HandleNotefileChangesPending200Response](docs/HandleNotefileChangesPending200Response.md)
 - [NotehubJs.HandleNotefileDeleteRequest](docs/HandleNotefileDeleteRequest.md)
 - [NotehubJs.Http](docs/Http.md)
-- [NotehubJs.HttpFilter](docs/HttpFilter.md)
-- [NotehubJs.HttpTransform](docs/HttpTransform.md)
 - [NotehubJs.Location](docs/Location.md)
 - [NotehubJs.Login200Response](docs/Login200Response.md)
 - [NotehubJs.LoginRequest](docs/LoginRequest.md)
@@ -312,6 +310,8 @@ All URIs are relative to *https://api.notefile.net*
 - [NotehubJs.NotefileSchema](docs/NotefileSchema.md)
 - [NotehubJs.NotehubRoute](docs/NotehubRoute.md)
 - [NotehubJs.NotehubRouteSchema](docs/NotehubRouteSchema.md)
+- [NotehubJs.OAuth2Error](docs/OAuth2Error.md)
+- [NotehubJs.OAuth2TokenResponse](docs/OAuth2TokenResponse.md)
 - [NotehubJs.PersonalAccessToken](docs/PersonalAccessToken.md)
 - [NotehubJs.PersonalAccessTokenCreatedBy](docs/PersonalAccessTokenCreatedBy.md)
 - [NotehubJs.PersonalAccessTokenInfo](docs/PersonalAccessTokenInfo.md)
@@ -322,8 +322,6 @@ All URIs are relative to *https://api.notefile.net*
 - [NotehubJs.ProjectMember](docs/ProjectMember.md)
 - [NotehubJs.Proxy](docs/Proxy.md)
 - [NotehubJs.PutDeviceFleetsRequest](docs/PutDeviceFleetsRequest.md)
-- [NotehubJs.QuestionDataResponseLineChart](docs/QuestionDataResponseLineChart.md)
-- [NotehubJs.QuestionDataResponseMap](docs/QuestionDataResponseMap.md)
 - [NotehubJs.Radresponder](docs/Radresponder.md)
 - [NotehubJs.Repository](docs/Repository.md)
 - [NotehubJs.Role](docs/Role.md)
@@ -332,14 +330,21 @@ All URIs are relative to *https://api.notefile.net*
 - [NotehubJs.SimUsage](docs/SimUsage.md)
 - [NotehubJs.Slack](docs/Slack.md)
 - [NotehubJs.SlackBearerNotification](docs/SlackBearerNotification.md)
+- [NotehubJs.SlackTransform](docs/SlackTransform.md)
 - [NotehubJs.SlackWebHookNotification](docs/SlackWebHookNotification.md)
 - [NotehubJs.Snowflake](docs/Snowflake.md)
-- [NotehubJs.SnowflakeTransform](docs/SnowflakeTransform.md)
 - [NotehubJs.Thingworx](docs/Thingworx.md)
 - [NotehubJs.TowerLocation](docs/TowerLocation.md)
 - [NotehubJs.Twilio](docs/Twilio.md)
 - [NotehubJs.UpdateFleetRequest](docs/UpdateFleetRequest.md)
 - [NotehubJs.UploadMetadata](docs/UploadMetadata.md)
+- [NotehubJs.UsageData](docs/UsageData.md)
+- [NotehubJs.UsageEventsData](docs/UsageEventsData.md)
+- [NotehubJs.UsageEventsResponse](docs/UsageEventsResponse.md)
+- [NotehubJs.UsageRouteLogsData](docs/UsageRouteLogsData.md)
+- [NotehubJs.UsageRouteLogsResponse](docs/UsageRouteLogsResponse.md)
+- [NotehubJs.UsageSessionsData](docs/UsageSessionsData.md)
+- [NotehubJs.UsageSessionsResponse](docs/UsageSessionsResponse.md)
 - [NotehubJs.UserDbRoute](docs/UserDbRoute.md)
 - [NotehubJs.UserDfuStateMachine](docs/UserDfuStateMachine.md)
 - [NotehubJs.UserDfuStateMachineStatus](docs/UserDfuStateMachineStatus.md)

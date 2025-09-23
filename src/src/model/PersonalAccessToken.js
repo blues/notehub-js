@@ -46,11 +46,13 @@ class PersonalAccessToken {
     if (data) {
       obj = obj || new PersonalAccessToken();
 
-      if (data.hasOwnProperty("uid")) {
-        obj["uid"] = ApiClient.convertToType(data["uid"], "String");
+      if (data.hasOwnProperty("created_at")) {
+        obj["created_at"] = ApiClient.convertToType(data["created_at"], "Date");
       }
-      if (data.hasOwnProperty("name")) {
-        obj["name"] = ApiClient.convertToType(data["name"], "String");
+      if (data.hasOwnProperty("created_by")) {
+        obj["created_by"] = PersonalAccessTokenCreatedBy.constructFromObject(
+          data["created_by"]
+        );
       }
       if (data.hasOwnProperty("description")) {
         obj["description"] = ApiClient.convertToType(
@@ -58,25 +60,23 @@ class PersonalAccessToken {
           "String"
         );
       }
-      if (data.hasOwnProperty("created_by")) {
-        obj["created_by"] = PersonalAccessTokenCreatedBy.constructFromObject(
-          data["created_by"]
-        );
-      }
       if (data.hasOwnProperty("expires_at")) {
         obj["expires_at"] = ApiClient.convertToType(data["expires_at"], "Date");
       }
-      if (data.hasOwnProperty("created_at")) {
-        obj["created_at"] = ApiClient.convertToType(data["created_at"], "Date");
-      }
       if (data.hasOwnProperty("last_used")) {
         obj["last_used"] = ApiClient.convertToType(data["last_used"], "Date");
+      }
+      if (data.hasOwnProperty("name")) {
+        obj["name"] = ApiClient.convertToType(data["name"], "String");
       }
       if (data.hasOwnProperty("suspended")) {
         obj["suspended"] = ApiClient.convertToType(
           data["suspended"],
           "Boolean"
         );
+      }
+      if (data.hasOwnProperty("uid")) {
+        obj["uid"] = ApiClient.convertToType(data["uid"], "String");
       }
     } else if (data === null) {
       return null;
@@ -90,25 +90,10 @@ class PersonalAccessToken {
    * @return {boolean} to indicate whether the JSON data is valid with respect to <code>PersonalAccessToken</code>.
    */
   static validateJSON(data) {
-    // ensure the json data is a string
-    if (
-      data["uid"] &&
-      !(typeof data["uid"] === "string" || data["uid"] instanceof String)
-    ) {
-      throw new Error(
-        "Expected the field `uid` to be a primitive type in the JSON string but got " +
-          data["uid"]
-      );
-    }
-    // ensure the json data is a string
-    if (
-      data["name"] &&
-      !(typeof data["name"] === "string" || data["name"] instanceof String)
-    ) {
-      throw new Error(
-        "Expected the field `name` to be a primitive type in the JSON string but got " +
-          data["name"]
-      );
+    // validate the optional field `created_by`
+    if (data["created_by"]) {
+      // data not null
+      PersonalAccessTokenCreatedBy.validateJSON(data["created_by"]);
     }
     // ensure the json data is a string
     if (
@@ -123,44 +108,30 @@ class PersonalAccessToken {
           data["description"]
       );
     }
-    // validate the optional field `created_by`
-    if (data["created_by"]) {
-      // data not null
-      PersonalAccessTokenCreatedBy.validateJSON(data["created_by"]);
+    // ensure the json data is a string
+    if (
+      data["name"] &&
+      !(typeof data["name"] === "string" || data["name"] instanceof String)
+    ) {
+      throw new Error(
+        "Expected the field `name` to be a primitive type in the JSON string but got " +
+          data["name"]
+      );
+    }
+    // ensure the json data is a string
+    if (
+      data["uid"] &&
+      !(typeof data["uid"] === "string" || data["uid"] instanceof String)
+    ) {
+      throw new Error(
+        "Expected the field `uid` to be a primitive type in the JSON string but got " +
+          data["uid"]
+      );
     }
 
     return true;
   }
 }
-
-/**
- * Unique and public identifier
- * @member {String} uid
- */
-PersonalAccessToken.prototype["uid"] = undefined;
-
-/**
- * Name for this API Key
- * @member {String} name
- */
-PersonalAccessToken.prototype["name"] = undefined;
-
-/**
- * Optional description for this API Key
- * @member {String} description
- */
-PersonalAccessToken.prototype["description"] = undefined;
-
-/**
- * @member {module:model/PersonalAccessTokenCreatedBy} created_by
- */
-PersonalAccessToken.prototype["created_by"] = undefined;
-
-/**
- * When the key expires
- * @member {Date} expires_at
- */
-PersonalAccessToken.prototype["expires_at"] = undefined;
 
 /**
  * When the key was created
@@ -169,15 +140,44 @@ PersonalAccessToken.prototype["expires_at"] = undefined;
 PersonalAccessToken.prototype["created_at"] = undefined;
 
 /**
+ * @member {module:model/PersonalAccessTokenCreatedBy} created_by
+ */
+PersonalAccessToken.prototype["created_by"] = undefined;
+
+/**
+ * Optional description for this API Key
+ * @member {String} description
+ */
+PersonalAccessToken.prototype["description"] = undefined;
+
+/**
+ * When the key expires
+ * @member {Date} expires_at
+ */
+PersonalAccessToken.prototype["expires_at"] = undefined;
+
+/**
  * When it was last used, if ever
  * @member {Date} last_used
  */
 PersonalAccessToken.prototype["last_used"] = undefined;
 
 /**
+ * Name for this API Key
+ * @member {String} name
+ */
+PersonalAccessToken.prototype["name"] = undefined;
+
+/**
  * if true, this token cannot be used
  * @member {Boolean} suspended
  */
 PersonalAccessToken.prototype["suspended"] = undefined;
+
+/**
+ * Unique and public identifier
+ * @member {String} uid
+ */
+PersonalAccessToken.prototype["uid"] = undefined;
 
 export default PersonalAccessToken;

@@ -50,8 +50,20 @@
       //expect(instance).to.be.a(NotehubJs.SchemaProperty);
     });
 
+    it('should have the property items (base name: "items")', function () {
+      // uncomment below and update the code to test the property items
+      //var instance = new NotehubJs.SchemaProperty();
+      //expect(instance).to.be();
+    });
+
     it('should have the property name (base name: "name")', function () {
       // uncomment below and update the code to test the property name
+      //var instance = new NotehubJs.SchemaProperty();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property properties (base name: "properties")', function () {
+      // uncomment below and update the code to test the property properties
       //var instance = new NotehubJs.SchemaProperty();
       //expect(instance).to.be();
     });
@@ -62,20 +74,8 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property updatedAt (base name: "updatedAt")', function () {
+    it('should have the property updatedAt (base name: "updated_at")', function () {
       // uncomment below and update the code to test the property updatedAt
-      //var instance = new NotehubJs.SchemaProperty();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property items (base name: "items")', function () {
-      // uncomment below and update the code to test the property items
-      //var instance = new NotehubJs.SchemaProperty();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property properties (base name: "properties")', function () {
-      // uncomment below and update the code to test the property properties
       //var instance = new NotehubJs.SchemaProperty();
       //expect(instance).to.be();
     });

@@ -45,11 +45,11 @@ class LoginRequest {
     if (data) {
       obj = obj || new LoginRequest();
 
-      if (data.hasOwnProperty("username")) {
-        obj["username"] = ApiClient.convertToType(data["username"], "String");
-      }
       if (data.hasOwnProperty("password")) {
         obj["password"] = ApiClient.convertToType(data["password"], "String");
+      }
+      if (data.hasOwnProperty("username")) {
+        obj["username"] = ApiClient.convertToType(data["username"], "String");
       }
     } else if (data === null) {
       return null;
@@ -65,19 +65,6 @@ class LoginRequest {
   static validateJSON(data) {
     // ensure the json data is a string
     if (
-      data["username"] &&
-      !(
-        typeof data["username"] === "string" ||
-        data["username"] instanceof String
-      )
-    ) {
-      throw new Error(
-        "Expected the field `username` to be a primitive type in the JSON string but got " +
-          data["username"]
-      );
-    }
-    // ensure the json data is a string
-    if (
       data["password"] &&
       !(
         typeof data["password"] === "string" ||
@@ -89,19 +76,32 @@ class LoginRequest {
           data["password"]
       );
     }
+    // ensure the json data is a string
+    if (
+      data["username"] &&
+      !(
+        typeof data["username"] === "string" ||
+        data["username"] instanceof String
+      )
+    ) {
+      throw new Error(
+        "Expected the field `username` to be a primitive type in the JSON string but got " +
+          data["username"]
+      );
+    }
 
     return true;
   }
 }
 
 /**
- * @member {String} username
- */
-LoginRequest.prototype["username"] = undefined;
-
-/**
  * @member {String} password
  */
 LoginRequest.prototype["password"] = undefined;
+
+/**
+ * @member {String} username
+ */
+LoginRequest.prototype["username"] = undefined;
 
 export default LoginRequest;

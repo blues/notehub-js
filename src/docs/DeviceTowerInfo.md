@@ -4,7 +4,7 @@
 
 | Name       | Type       | Description | Notes      |
 | ---------- | ---------- | ----------- | ---------- |
+| **cellId** | **Number** |             | [optional] |
+| **lac**    | **Number** |             | [optional] |
 | **mcc**    | **Number** |             | [optional] |
 | **mnc**    | **Number** |             | [optional] |
-| **lac**    | **Number** |             | [optional] |
-| **cellId** | **Number** |             | [optional] |
