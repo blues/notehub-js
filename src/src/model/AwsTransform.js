@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The AwsTransform model module.
  * @module model/AwsTransform
- * @version 1.0.37
+ * @version 1.0.38
  */
 class AwsTransform {
   /**

@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The AwsFilter model module.
  * @module model/AwsFilter
- * @version 1.0.37
+ * @version 1.0.38
  */
 class AwsFilter {
   /**

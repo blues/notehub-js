@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The SlackWebHookNotification model module.
  * @module model/SlackWebHookNotification
- * @version 1.0.37
+ * @version 1.0.38
  */
 class SlackWebHookNotification {
   /**

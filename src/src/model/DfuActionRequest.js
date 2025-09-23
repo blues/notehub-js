@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The DfuActionRequest model module.
  * @module model/DfuActionRequest
- * @version 1.0.37
+ * @version 1.0.38
  */
 class DfuActionRequest {
   /**

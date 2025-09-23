@@ -17,7 +17,7 @@ import MonitorAlertRoutesInner from "./MonitorAlertRoutesInner";
 /**
  * The Monitor model module.
  * @module model/Monitor
- * @version 1.0.37
+ * @version 1.0.38
  */
 class Monitor {
   /**

@@ -17,7 +17,7 @@ import BillingAccountRole from "./BillingAccountRole";
 /**
  * The BillingAccount model module.
  * @module model/BillingAccount
- * @version 1.0.37
+ * @version 1.0.38
  */
 class BillingAccount {
   /**

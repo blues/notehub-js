@@ -17,7 +17,7 @@ import UsageSessionsData from "./UsageSessionsData";
 /**
  * The UsageSessionsResponse model module.
  * @module model/UsageSessionsResponse
- * @version 1.0.37
+ * @version 1.0.38
  */
 class UsageSessionsResponse {
   /**
