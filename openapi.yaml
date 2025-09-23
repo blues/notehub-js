@@ -327,6 +327,39 @@ paths:
         - api_key: []
       tags:
         - project
+  '/v1/projects/{projectOrProductUID}':
+    delete:
+      operationId: deleteProject
+      description: Delete a Project by ProjectUID
+      parameters:
+        - $ref: '#/components/parameters/projectOrProductUIDParam'
+      responses:
+        '200':
+          description: Successful operation
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - api_key: []
+      tags:
+        - project
+    get:
+      operationId: getProject
+      description: Get a Project by ProjectUID
+      parameters:
+        - $ref: '#/components/parameters/projectOrProductUIDParam'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - api_key: []
+      tags:
+        - project
   '/v1/projects/{projectOrProductUID}/alerts':
     get:
       operationId: getAlerts
@@ -2602,39 +2635,6 @@ paths:
         - api_key: []
       tags:
         - webhook
-  '/v1/projects/{projectUID}':
-    delete:
-      operationId: deleteProject
-      description: Delete a Project by ProjectUID
-      parameters:
-        - $ref: '#/components/parameters/projectOrProductUIDParam'
-      responses:
-        '200':
-          description: Successful operation
-        default:
-          $ref: '#/components/responses/ErrorResponse'
-      security:
-        - api_key: []
-      tags:
-        - project
-    get:
-      operationId: getProject
-      description: Get a Project by ProjectUID
-      parameters:
-        - $ref: '#/components/parameters/projectOrProductUIDParam'
-      responses:
-        '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Project'
-        default:
-          $ref: '#/components/responses/ErrorResponse'
-      security:
-        - api_key: []
-      tags:
-        - project
 components:
   parameters:
     cursorParam:
@@ -3309,6 +3309,21 @@ components:
       items:
         $ref: '#/components/schemas/SimUsage'
       properties: {}
+    ConnectivityAssurance:
+      type: object
+      properties:
+        disabled_at:
+          description: 'Specifies the level at which Connectivity Assurance is disabled at, if disabled'
+          type: string
+          enum:
+            - billing_account
+            - project
+        enabled:
+          description: If Connectivity Assurance is disabled at any level
+          type: bool
+      nullable: false
+      required:
+        - enabled
     Contact:
       type: object
       properties:
@@ -4541,6 +4556,8 @@ components:
       properties:
         administrative_contact:
           $ref: '#/components/schemas/Contact'
+        connectivity_assurance:
+          $ref: '#/components/schemas/ConnectivityAssurance'
         created:
           type: string
           format: date-time
@@ -4593,6 +4610,8 @@ components:
         - developer
         - viewer
         - support
+        - public
+        - machineapi
         - null
       nullable: true
     RouteLog:
