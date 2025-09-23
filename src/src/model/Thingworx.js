@@ -18,7 +18,7 @@ import AwsTransform from "./AwsTransform";
 /**
  * The Thingworx model module.
  * @module model/Thingworx
- * @version 1.0.37
+ * @version 1.0.38
  */
 class Thingworx {
   /**

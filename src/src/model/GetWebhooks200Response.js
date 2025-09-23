@@ -17,7 +17,7 @@ import WebhookSettings from "./WebhookSettings";
 /**
  * The GetWebhooks200Response model module.
  * @module model/GetWebhooks200Response
- * @version 1.0.37
+ * @version 1.0.38
  */
 class GetWebhooks200Response {
   /**

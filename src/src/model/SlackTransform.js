@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The SlackTransform model module.
  * @module model/SlackTransform
- * @version 1.0.37
+ * @version 1.0.38
  */
 class SlackTransform {
   /**

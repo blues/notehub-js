@@ -18,7 +18,7 @@ import AwsTransform from "./AwsTransform";
 /**
  * The Azure model module.
  * @module model/Azure
- * @version 1.0.37
+ * @version 1.0.38
  */
 class Azure {
   /**

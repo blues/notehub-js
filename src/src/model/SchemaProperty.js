@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The SchemaProperty model module.
  * @module model/SchemaProperty
- * @version 1.0.37
+ * @version 1.0.38
  */
 class SchemaProperty {
   /**
