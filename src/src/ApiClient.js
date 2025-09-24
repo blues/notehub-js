@@ -16,7 +16,7 @@ import querystring from "querystring";
 
 /**
  * @module ApiClient
- * @version 1.0.38
+ * @version 2.0.0
  */
 
 /**
@@ -45,7 +45,7 @@ class ApiClient {
      * @type {Array.<String>}
      */
     this.authentications = {
-      api_key: { type: "apiKey", in: "header", name: "X-Session-Token" },
+      personalAccessToken: { type: "bearer" },
       pin: { type: "apiKey", in: "header", name: "X-Auth-Token" },
     };
 
@@ -56,7 +56,7 @@ class ApiClient {
      */
     this.defaultHeaders = {};
     if (typeof window === "undefined") {
-      this.defaultHeaders["User-Agent"] = "OpenAPI-Generator/1.0.38/Javascript";
+      this.defaultHeaders["User-Agent"] = "OpenAPI-Generator/2.0.0/Javascript";
     }
 
     /**

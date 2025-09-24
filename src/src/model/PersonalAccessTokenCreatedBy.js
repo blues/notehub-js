@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The PersonalAccessTokenCreatedBy model module.
  * @module model/PersonalAccessTokenCreatedBy
- * @version 1.0.38
+ * @version 2.0.0
  */
 class PersonalAccessTokenCreatedBy {
   /**

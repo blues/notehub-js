@@ -17,9 +17,9 @@ Get Billing Accounts accessible by the api_key
 ```javascript
 import * as NotehubJs from "@blues-inc/notehub-js";
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure API key authorization: api_key
-let api_key = defaultClient.authentications["api_key"];
-api_key.apiKey = "YOUR API KEY";
+// Configure Bearer access token for authorization: personalAccessToken
+let personalAccessToken = defaultClient.authentications["personalAccessToken"];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
 
 let apiInstance = new NotehubJs.BillingAccountApi();
 apiInstance.getBillingAccounts().then(
@@ -44,7 +44,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-[api_key](../README.md#api_key)
+[personalAccessToken](../README.md#personalAccessToken)
 
 ### HTTP request headers
 

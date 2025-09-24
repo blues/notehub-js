@@ -18,7 +18,7 @@ import AwsTransform from "./AwsTransform";
 /**
  * The Mqtt model module.
  * @module model/Mqtt
- * @version 1.0.38
+ * @version 2.0.0
  */
 class Mqtt {
   /**

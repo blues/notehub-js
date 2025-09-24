@@ -21,7 +21,7 @@ import SimUsage from "./SimUsage";
 /**
  * The Device model module.
  * @module model/Device
- * @version 1.0.38
+ * @version 2.0.0
  */
 class Device {
   /**

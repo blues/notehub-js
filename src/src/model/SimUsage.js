@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The SimUsage model module.
  * @module model/SimUsage
- * @version 1.0.38
+ * @version 2.0.0
  */
 class SimUsage {
   /**

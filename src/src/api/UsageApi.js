@@ -21,7 +21,7 @@ import UsageSessionsResponse from "../model/UsageSessionsResponse";
 /**
  * Usage service.
  * @module api/UsageApi
- * @version 1.0.38
+ * @version 2.0.0
  */
 export default class UsageApi {
   /**
@@ -76,7 +76,7 @@ export default class UsageApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["api_key"];
+    let authNames = [];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = [Object];
@@ -157,7 +157,7 @@ export default class UsageApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["api_key"];
+    let authNames = ["personalAccessToken"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = UsageEventsResponse;
@@ -238,7 +238,7 @@ export default class UsageApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["api_key"];
+    let authNames = ["personalAccessToken"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = UsageRouteLogsResponse;
@@ -319,7 +319,7 @@ export default class UsageApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["api_key"];
+    let authNames = ["personalAccessToken"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = UsageSessionsResponse;

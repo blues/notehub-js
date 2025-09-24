@@ -20,7 +20,7 @@ import RouteLog from "../model/RouteLog";
 /**
  * Event service.
  * @module api/EventApi
- * @version 1.0.38
+ * @version 2.0.0
  */
 export default class EventApi {
   /**
@@ -105,7 +105,7 @@ export default class EventApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["api_key"];
+    let authNames = ["personalAccessToken"];
     let contentTypes = [];
     let accepts = ["application/json", "text/csv"];
     let returnType = GetProjectEvents200Response;
@@ -208,7 +208,7 @@ export default class EventApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["api_key"];
+    let authNames = ["personalAccessToken"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = GetProjectEventsByCursor200Response;
@@ -318,7 +318,7 @@ export default class EventApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["api_key"];
+    let authNames = ["personalAccessToken"];
     let contentTypes = [];
     let accepts = ["application/json", "text/csv"];
     let returnType = GetProjectEvents200Response;
@@ -409,7 +409,7 @@ export default class EventApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["api_key"];
+    let authNames = ["personalAccessToken"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = GetProjectEventsByCursor200Response;
@@ -480,7 +480,7 @@ export default class EventApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["api_key"];
+    let authNames = ["personalAccessToken"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = [RouteLog];
