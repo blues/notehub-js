@@ -140,7 +140,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - billing_account
   '/v1/products/{productUID}/devices/{deviceUID}/environment_variables_with_pin':
@@ -198,7 +198,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - external devices
   '/v1/products/{productUID}/ext-devices/{deviceUID}/session/close':
@@ -221,7 +221,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - external devices
   '/v1/products/{productUID}/ext-devices/{deviceUID}/session/open':
@@ -244,7 +244,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - external devices
   '/v1/products/{productUID}/project':
@@ -268,7 +268,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - project
   /v1/projects:
@@ -290,7 +290,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - project
     post:
@@ -324,7 +324,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - project
   '/v1/projects/{projectOrProductUID}/alerts':
@@ -342,7 +342,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - alert
   '/v1/projects/{projectOrProductUID}/clone':
@@ -384,7 +384,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - project
   '/v1/projects/{projectOrProductUID}/devices':
@@ -410,7 +410,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - device
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}':
@@ -430,7 +430,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - device
     get:
@@ -446,7 +446,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - device
     parameters:
@@ -470,7 +470,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - project
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/dfu/{firmwareType}/status':
@@ -491,7 +491,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - project
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/disable':
@@ -507,7 +507,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - device
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/disable-connectivity-assurance':
@@ -523,7 +523,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - device
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/enable':
@@ -539,7 +539,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - device
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/enable-connectivity-assurance':
@@ -555,7 +555,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - device
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_hierarchy':
@@ -577,7 +577,7 @@ paths:
         '500':
           description: Server error
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - device
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_variables':
@@ -590,7 +590,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - device
     parameters:
@@ -612,7 +612,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - device
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_variables/{key}':
@@ -634,7 +634,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - device
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/files':
@@ -662,7 +662,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - device
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/files/changes':
@@ -706,7 +706,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - device
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/files/changes/pending':
@@ -739,7 +739,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - device
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/fleets':
@@ -768,7 +768,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - project
     get:
@@ -780,7 +780,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - project
     parameters:
@@ -811,7 +811,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - project
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/health-log':
@@ -821,6 +821,19 @@ paths:
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
+        - $ref: '#/components/parameters/startDateParam'
+        - $ref: '#/components/parameters/endDateParam'
+        - name: log_type
+          in: query
+          description: Return only specified log types
+          required: false
+          schema:
+            type: array
+            items:
+              enum:
+                - boot
+                - dfu_completed
+              type: string
       responses:
         '200':
           description: Successful operation
@@ -850,7 +863,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - device
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/latest':
@@ -866,7 +879,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - device
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}':
@@ -890,7 +903,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - device
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}':
@@ -908,7 +921,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - device
     get:
@@ -951,7 +964,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - device
     post:
@@ -975,7 +988,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - device
     put:
@@ -999,7 +1012,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - device
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/changes':
@@ -1066,9 +1079,25 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
+        - personalAccessToken: []
+      tags:
+        - device
+  '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/plans':
+    get:
+      operationId: getDevicePlans
+      description: 'Get Data Plans associated with the device, this include the primary sim, any external sim, as well as any satellite connections.'
+      responses:
+        '200':
+          $ref: '#/components/responses/DevicePlansResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
         - api_key: []
       tags:
         - device
+    parameters:
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
+      - $ref: '#/components/parameters/deviceUIDParam'
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/provision':
     post:
       operationId: postProvisionProjectDevice
@@ -1109,7 +1138,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - device
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/public-key':
@@ -1137,7 +1166,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - device
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/sessions':
@@ -1157,7 +1186,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - device
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/signal':
@@ -1188,7 +1217,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - device
   '/v1/projects/{projectOrProductUID}/devices/public-keys':
@@ -1224,7 +1253,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - device
   '/v1/projects/{projectOrProductUID}/dfu/{firmwareType}/{action}':
@@ -1257,7 +1286,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - project
   '/v1/projects/{projectOrProductUID}/dfu/{firmwareType}/history':
@@ -1290,7 +1319,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - project
   '/v1/projects/{projectOrProductUID}/dfu/{firmwareType}/status':
@@ -1323,7 +1352,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - project
   '/v1/projects/{projectOrProductUID}/environment_hierarchy':
@@ -1344,7 +1373,7 @@ paths:
         '500':
           description: Server error
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - project
   '/v1/projects/{projectOrProductUID}/environment_variables':
@@ -1357,7 +1386,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - project
     parameters:
@@ -1376,7 +1405,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - project
   '/v1/projects/{projectOrProductUID}/environment_variables/{key}':
@@ -1397,7 +1426,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - project
   '/v1/projects/{projectOrProductUID}/events':
@@ -1444,7 +1473,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - event
   '/v1/projects/{projectOrProductUID}/events-cursor':
@@ -1466,7 +1495,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - event
   '/v1/projects/{projectOrProductUID}/events/{eventUID}/route-logs':
@@ -1488,7 +1517,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - event
   '/v1/projects/{projectOrProductUID}/firmware':
@@ -1516,7 +1545,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - project
   '/v1/projects/{projectOrProductUID}/firmware/{firmwareType}/{filename}':
@@ -1529,6 +1558,18 @@ paths:
         - name: filename
           in: path
           required: true
+          schema:
+            type: string
+        - name: version
+          in: query
+          description: 'Firmware version (optional). If not provided, the version will be extracted from firmware binary if available, otherwise left empty'
+          required: false
+          schema:
+            type: string
+        - name: notes
+          in: query
+          description: Optional notes describing what's different about this firmware version
+          required: false
           schema:
             type: string
       requestBody:
@@ -1549,7 +1590,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - project
   '/v1/projects/{projectOrProductUID}/fleets':
@@ -1562,7 +1603,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - project
     parameters:
@@ -1593,7 +1634,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - project
   '/v1/projects/{projectOrProductUID}/fleets/{fleetUID}':
@@ -1606,7 +1647,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - project
     get:
@@ -1620,7 +1661,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Fleet'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - project
     parameters:
@@ -1666,7 +1707,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - project
   '/v1/projects/{projectOrProductUID}/fleets/{fleetUID}/devices':
@@ -1692,7 +1733,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - device
   '/v1/projects/{projectOrProductUID}/fleets/{fleetUID}/environment_hierarchy':
@@ -1714,7 +1755,7 @@ paths:
         '500':
           description: Server error
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - project
   '/v1/projects/{projectOrProductUID}/fleets/{fleetUID}/environment_variables':
@@ -1727,7 +1768,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - project
     parameters:
@@ -1749,7 +1790,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - project
   '/v1/projects/{projectOrProductUID}/fleets/{fleetUID}/environment_variables/{key}':
@@ -1771,7 +1812,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - project
   '/v1/projects/{projectOrProductUID}/fleets/{fleetUID}/events':
@@ -1818,7 +1859,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - event
   '/v1/projects/{projectOrProductUID}/fleets/{fleetUID}/events-cursor':
@@ -1842,7 +1883,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - event
   '/v1/projects/{projectOrProductUID}/global-transformation':
@@ -1864,7 +1905,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - project
   '/v1/projects/{projectOrProductUID}/global-transformation/disable':
@@ -1879,7 +1920,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - project
   '/v1/projects/{projectOrProductUID}/global-transformation/enable':
@@ -1894,7 +1935,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - project
   '/v1/projects/{projectOrProductUID}/members':
@@ -1918,7 +1959,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - project
     parameters:
@@ -1935,7 +1976,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - monitor
     post:
@@ -1960,7 +2001,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - monitor
   '/v1/projects/{projectOrProductUID}/monitors/{monitorUID}':
@@ -1980,7 +2021,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - monitor
     get:
@@ -1999,7 +2040,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - monitor
     put:
@@ -2025,7 +2066,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - monitor
   '/v1/projects/{projectOrProductUID}/products':
@@ -2047,7 +2088,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - project
     parameters:
@@ -2089,7 +2130,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - project
   '/v1/projects/{projectOrProductUID}/routes':
@@ -2142,7 +2183,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - route
     post:
@@ -2195,7 +2236,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - route
   '/v1/projects/{projectOrProductUID}/routes/{routeUID}':
@@ -2216,7 +2257,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - route
     get:
@@ -2253,7 +2294,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - route
     put:
@@ -2313,7 +2354,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - route
   '/v1/projects/{projectOrProductUID}/routes/{routeUID}/route-logs':
@@ -2345,7 +2386,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - route
   '/v1/projects/{projectOrProductUID}/schemas':
@@ -2426,7 +2467,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - usage
   '/v1/projects/{projectOrProductUID}/usage/route-logs':
@@ -2458,7 +2499,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - usage
   '/v1/projects/{projectOrProductUID}/usage/sessions':
@@ -2490,7 +2531,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - usage
   '/v1/projects/{projectOrProductUID}/webhooks':
@@ -2514,7 +2555,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - webhook
   '/v1/projects/{projectOrProductUID}/webhooks/{webhookUID}':
@@ -2530,7 +2571,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - webhook
     get:
@@ -2549,7 +2590,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - webhook
     post:
@@ -2575,7 +2616,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - webhook
     put:
@@ -2599,7 +2640,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - webhook
   '/v1/projects/{projectUID}':
@@ -2614,7 +2655,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - project
     get:
@@ -2632,7 +2673,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - project
 components:
@@ -3304,6 +3345,28 @@ components:
       properties:
         body:
           type: object
+    CellularPlan:
+      type: object
+      properties:
+        data_usage:
+          $ref: '#/components/schemas/DataUsage'
+        iccid:
+          description: The Integrated Circuit Card Identifier of the SIM card
+          type: string
+          example: '345678432765434567890765746354465786'
+        imsi:
+          description: IMSI of the SIM card
+          type: string
+          example: '310170830688975'
+        last_updated:
+          description: Time this plan information was last updated
+          type: integer
+          format: int64
+          example: 1656010061
+        plan_type:
+          description: 'Description of the SIM plan type including data allowance, region, and validity period'
+          type: string
+          example: '500MB, North America, 10-year lifetime'
     CellularUsage:
       type: array
       items:
@@ -3458,6 +3521,28 @@ components:
         name:
           description: The name of the field
           type: string
+    DataUsage:
+      type: object
+      properties:
+        kb_remaining:
+          description: Kilobytes remaining in the plan
+          type: number
+          format: double
+          example: 372.55
+        kb_total:
+          description: Total Kilobytes included in the plan
+          type: number
+          format: double
+          example: 500
+        kb_used:
+          description: Kilobytes used to date
+          type: number
+          format: double
+          example: 127.45
+      required:
+        - kb_total
+        - kb_used
+        - kb_remaining
     Device:
       type: object
       properties:
@@ -4622,6 +4707,35 @@ components:
         url:
           description: The URL of the route.
           type: string
+    SatellitePlan:
+      type: object
+      properties:
+        activated:
+          description: Activation date of the satellite plan as Unix timestamp
+          type: integer
+          format: int64
+          example: 1609459200
+        billable_bytes:
+          $ref: '#/components/schemas/DataUsage'
+        last_updated:
+          description: Time this plan information was last updated
+          type: integer
+          format: int64
+          example: 1656010061
+        ntn_provider:
+          description: Non-Terrestrial Network provider name
+          type: string
+          example: Skylo
+        psid:
+          description: Provider-specific identifier for the satellite subscription
+          type: string
+          example: 'skylo:5746354465786'
+      nullable: true
+      required:
+        - ntn_provider
+        - psid
+        - activated
+        - cumulative_billable_bytes
     SchemaProperty:
       type: object
       properties:
@@ -4783,6 +4897,9 @@ components:
         tags:
           type: string
         type:
+          type: string
+        version:
+          description: User-specified version string provided at time of upload
           type: string
     UsageData:
       type: object
@@ -5634,6 +5751,18 @@ components:
             required:
               - alerts
               - has_more
+    DevicePlansResponse:
+      description: Response body for /plans
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              cellular_plans:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CellularPlan'
+                nullable: true
     DevicesResponse:
       description: List of Devices
       content:
@@ -6001,13 +6130,11 @@ components:
                 when: 1667251044
                 work: 1667251046
   securitySchemes:
-    api_key:
+    personalAccessToken:
       description: |
-        For accessing most endpoints.
-        To retrieve the key, see the /auth/login endpoint.
-      in: header
-      name: X-Session-Token
-      type: apiKey
+        Use a personal access token from notehub.io/api-access
+      scheme: bearer
+      type: http
     pin:
       description: |
         For accessing endpoints by Device pin.
