@@ -21,9 +21,9 @@ Get Events of a Fleet
 ```javascript
 import * as NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure API key authorization: api_key
-let api_key = defaultClient.authentications['api_key'];
-api_key.apiKey = 'YOUR API KEY';
+// Configure Bearer access token for authorization: personalAccessToken
+let personalAccessToken = defaultClient.authentications['personalAccessToken'];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
 
 let apiInstance = new NotehubJs.EventApi();
 let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
@@ -81,7 +81,7 @@ apiInstance.getFleetEvents(projectOrProductUID, fleetUID, opts).then((data) => {
 
 ### Authorization
 
-[api_key](../README.md#api_key)
+[personalAccessToken](../README.md#personalAccessToken)
 
 ### HTTP request headers
 
@@ -99,9 +99,9 @@ Get Events of a Fleet by cursor
 ```javascript
 import * as NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure API key authorization: api_key
-let api_key = defaultClient.authentications['api_key'];
-api_key.apiKey = 'YOUR API KEY';
+// Configure Bearer access token for authorization: personalAccessToken
+let personalAccessToken = defaultClient.authentications['personalAccessToken'];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
 
 let apiInstance = new NotehubJs.EventApi();
 let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
@@ -145,7 +145,7 @@ apiInstance.getFleetEventsByCursor(projectOrProductUID, fleetUID, opts).then((da
 
 ### Authorization
 
-[api_key](../README.md#api_key)
+[personalAccessToken](../README.md#personalAccessToken)
 
 ### HTTP request headers
 
@@ -163,9 +163,9 @@ Get Events of a Project
 ```javascript
 import * as NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure API key authorization: api_key
-let api_key = defaultClient.authentications['api_key'];
-api_key.apiKey = 'YOUR API KEY';
+// Configure Bearer access token for authorization: personalAccessToken
+let personalAccessToken = defaultClient.authentications['personalAccessToken'];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
 
 let apiInstance = new NotehubJs.EventApi();
 let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
@@ -223,7 +223,7 @@ apiInstance.getProjectEvents(projectOrProductUID, opts).then((data) => {
 
 ### Authorization
 
-[api_key](../README.md#api_key)
+[personalAccessToken](../README.md#personalAccessToken)
 
 ### HTTP request headers
 
@@ -241,9 +241,9 @@ Get Events of a Project by cursor
 ```javascript
 import * as NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure API key authorization: api_key
-let api_key = defaultClient.authentications['api_key'];
-api_key.apiKey = 'YOUR API KEY';
+// Configure Bearer access token for authorization: personalAccessToken
+let personalAccessToken = defaultClient.authentications['personalAccessToken'];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
 
 let apiInstance = new NotehubJs.EventApi();
 let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
@@ -283,7 +283,7 @@ apiInstance.getProjectEventsByCursor(projectOrProductUID, opts).then((data) => {
 
 ### Authorization
 
-[api_key](../README.md#api_key)
+[personalAccessToken](../README.md#personalAccessToken)
 
 ### HTTP request headers
 
@@ -301,9 +301,9 @@ Get Route Logs by Event UID
 ```javascript
 import * as NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure API key authorization: api_key
-let api_key = defaultClient.authentications['api_key'];
-api_key.apiKey = 'YOUR API KEY';
+// Configure Bearer access token for authorization: personalAccessToken
+let personalAccessToken = defaultClient.authentications['personalAccessToken'];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
 
 let apiInstance = new NotehubJs.EventApi();
 let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
@@ -329,7 +329,7 @@ apiInstance.getRouteLogsByEvent(projectOrProductUID, eventUID).then((data) => {
 
 ### Authorization
 
-[api_key](../README.md#api_key)
+[personalAccessToken](../README.md#personalAccessToken)
 
 ### HTTP request headers
 

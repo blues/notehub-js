@@ -45,7 +45,7 @@ class ApiClient {
      * @type {Array.<String>}
      */
     this.authentications = {
-      api_key: { type: "apiKey", in: "header", name: "X-Session-Token" },
+      personalAccessToken: { type: "bearer" },
       pin: { type: "apiKey", in: "header", name: "X-Auth-Token" },
     };
 

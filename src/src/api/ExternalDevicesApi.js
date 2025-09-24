@@ -69,7 +69,7 @@ export default class ExternalDevicesApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["api_key"];
+    let authNames = ["personalAccessToken"];
     let contentTypes = ["application/json"];
     let accepts = ["application/json"];
     let returnType = null;
@@ -142,7 +142,7 @@ export default class ExternalDevicesApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["api_key"];
+    let authNames = ["personalAccessToken"];
     let contentTypes = ["application/json"];
     let accepts = ["application/json"];
     let returnType = null;
@@ -215,7 +215,7 @@ export default class ExternalDevicesApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["api_key"];
+    let authNames = ["personalAccessToken"];
     let contentTypes = ["application/json"];
     let accepts = ["application/json"];
     let returnType = null;

@@ -85,6 +85,9 @@ class UploadMetadata {
       if (data.hasOwnProperty("type")) {
         obj["type"] = ApiClient.convertToType(data["type"], "String");
       }
+      if (data.hasOwnProperty("version")) {
+        obj["version"] = ApiClient.convertToType(data["version"], "String");
+      }
     } else if (data === null) {
       return null;
     }
@@ -185,6 +188,18 @@ class UploadMetadata {
           data["type"]
       );
     }
+    // ensure the json data is a string
+    if (
+      data["version"] &&
+      !(
+        typeof data["version"] === "string" || data["version"] instanceof String
+      )
+    ) {
+      throw new Error(
+        "Expected the field `version` to be a primitive type in the JSON string but got " +
+          data["version"]
+      );
+    }
 
     return true;
   }
@@ -254,5 +269,11 @@ UploadMetadata.prototype["tags"] = undefined;
  * @member {String} type
  */
 UploadMetadata.prototype["type"] = undefined;
+
+/**
+ * User-specified version string provided at time of upload
+ * @member {String} version
+ */
+UploadMetadata.prototype["version"] = undefined;
 
 export default UploadMetadata;

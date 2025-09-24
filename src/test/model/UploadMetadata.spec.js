@@ -127,5 +127,11 @@
       //var instance = new NotehubJs.UploadMetadata();
       //expect(instance).to.be();
     });
+
+    it('should have the property version (base name: "version")', function () {
+      // uncomment below and update the code to test the property version
+      //var instance = new NotehubJs.UploadMetadata();
+      //expect(instance).to.be();
+    });
   });
 });

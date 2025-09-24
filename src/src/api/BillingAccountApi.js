@@ -44,7 +44,7 @@ export default class BillingAccountApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["api_key"];
+    let authNames = ["personalAccessToken"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = GetBillingAccounts200Response;

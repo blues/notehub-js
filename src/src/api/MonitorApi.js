@@ -61,7 +61,7 @@ export default class MonitorApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["api_key"];
+    let authNames = ["personalAccessToken"];
     let contentTypes = ["application/json"];
     let accepts = ["application/json"];
     let returnType = Monitor;
@@ -124,7 +124,7 @@ export default class MonitorApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["api_key"];
+    let authNames = ["personalAccessToken"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = Monitor;
@@ -187,7 +187,7 @@ export default class MonitorApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["api_key"];
+    let authNames = ["personalAccessToken"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = Monitor;
@@ -242,7 +242,7 @@ export default class MonitorApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["api_key"];
+    let authNames = ["personalAccessToken"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = [Monitor];
@@ -311,7 +311,7 @@ export default class MonitorApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["api_key"];
+    let authNames = ["personalAccessToken"];
     let contentTypes = ["application/json"];
     let accepts = ["application/json"];
     let returnType = Monitor;

@@ -82,7 +82,7 @@ export default class ProjectApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["api_key"];
+    let authNames = ["personalAccessToken"];
     let contentTypes = ["application/json"];
     let accepts = ["application/json"];
     let returnType = Project;
@@ -145,7 +145,7 @@ export default class ProjectApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["api_key"];
+    let authNames = ["personalAccessToken"];
     let contentTypes = ["application/json"];
     let accepts = ["application/json"];
     let returnType = Fleet;
@@ -208,7 +208,7 @@ export default class ProjectApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["api_key"];
+    let authNames = ["personalAccessToken"];
     let contentTypes = ["application/json"];
     let accepts = ["application/json"];
     let returnType = Product;
@@ -262,7 +262,7 @@ export default class ProjectApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["api_key"];
+    let authNames = ["personalAccessToken"];
     let contentTypes = ["application/json"];
     let accepts = ["application/json"];
     let returnType = Project;
@@ -338,7 +338,7 @@ export default class ProjectApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["api_key"];
+    let authNames = ["personalAccessToken"];
     let contentTypes = ["application/json"];
     let accepts = ["application/json"];
     let returnType = GetDeviceFleets200Response;
@@ -408,7 +408,7 @@ export default class ProjectApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["api_key"];
+    let authNames = ["personalAccessToken"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = null;
@@ -483,7 +483,7 @@ export default class ProjectApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["api_key"];
+    let authNames = ["personalAccessToken"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = EnvironmentVariables;
@@ -541,7 +541,7 @@ export default class ProjectApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["api_key"];
+    let authNames = ["personalAccessToken"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = null;
@@ -603,7 +603,7 @@ export default class ProjectApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["api_key"];
+    let authNames = ["personalAccessToken"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = EnvironmentVariables;
@@ -712,7 +712,7 @@ export default class ProjectApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["api_key"];
+    let authNames = ["personalAccessToken"];
     let contentTypes = ["application/json"];
     let accepts = ["application/json"];
     let returnType = null;
@@ -782,7 +782,7 @@ export default class ProjectApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["api_key"];
+    let authNames = ["personalAccessToken"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = null;
@@ -836,7 +836,7 @@ export default class ProjectApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["api_key"];
+    let authNames = ["personalAccessToken"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = null;
@@ -910,7 +910,7 @@ export default class ProjectApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["api_key"];
+    let authNames = ["personalAccessToken"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = DeviceDfuHistory;
@@ -984,7 +984,7 @@ export default class ProjectApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["api_key"];
+    let authNames = ["personalAccessToken"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = DeviceDfuStatus;
@@ -1050,7 +1050,7 @@ export default class ProjectApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["api_key"];
+    let authNames = ["personalAccessToken"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = GetDeviceFleets200Response;
@@ -1158,7 +1158,7 @@ export default class ProjectApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["api_key"];
+    let authNames = ["personalAccessToken"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = DeviceDfuHistoryPage;
@@ -1281,7 +1281,7 @@ export default class ProjectApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["api_key"];
+    let authNames = ["personalAccessToken"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = DeviceDfuStatusPage;
@@ -1369,7 +1369,7 @@ export default class ProjectApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["api_key"];
+    let authNames = ["personalAccessToken"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = [FirmwareInfo];
@@ -1439,7 +1439,7 @@ export default class ProjectApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["api_key"];
+    let authNames = ["personalAccessToken"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = Fleet;
@@ -1502,7 +1502,7 @@ export default class ProjectApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["api_key"];
+    let authNames = ["personalAccessToken"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = EnvTreeJsonNode;
@@ -1566,7 +1566,7 @@ export default class ProjectApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["api_key"];
+    let authNames = ["personalAccessToken"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = EnvironmentVariables;
@@ -1676,7 +1676,7 @@ export default class ProjectApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["api_key"];
+    let authNames = ["personalAccessToken"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = Project;
@@ -1730,7 +1730,7 @@ export default class ProjectApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["api_key"];
+    let authNames = ["personalAccessToken"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = Project;
@@ -1784,7 +1784,7 @@ export default class ProjectApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["api_key"];
+    let authNames = ["personalAccessToken"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = EnvTreeJsonNode;
@@ -1838,7 +1838,7 @@ export default class ProjectApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["api_key"];
+    let authNames = ["personalAccessToken"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = EnvironmentVariables;
@@ -1892,7 +1892,7 @@ export default class ProjectApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["api_key"];
+    let authNames = ["personalAccessToken"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = GetDeviceFleets200Response;
@@ -1946,7 +1946,7 @@ export default class ProjectApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["api_key"];
+    let authNames = ["personalAccessToken"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = GetProjectMembers200Response;
@@ -2000,7 +2000,7 @@ export default class ProjectApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["api_key"];
+    let authNames = ["personalAccessToken"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = GetProjectProducts200Response;
@@ -2045,7 +2045,7 @@ export default class ProjectApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["api_key"];
+    let authNames = ["personalAccessToken"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = GetProjects200Response;
@@ -2118,7 +2118,7 @@ export default class ProjectApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["api_key"];
+    let authNames = ["personalAccessToken"];
     let contentTypes = ["application/json"];
     let accepts = ["application/json"];
     let returnType = GetDeviceFleets200Response;
@@ -2195,7 +2195,7 @@ export default class ProjectApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["api_key"];
+    let authNames = ["personalAccessToken"];
     let contentTypes = ["application/json"];
     let accepts = ["application/json"];
     let returnType = EnvironmentVariables;
@@ -2260,7 +2260,7 @@ export default class ProjectApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["api_key"];
+    let authNames = ["personalAccessToken"];
     let contentTypes = ["application/json"];
     let accepts = ["application/json"];
     let returnType = EnvironmentVariables;
@@ -2324,7 +2324,7 @@ export default class ProjectApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["api_key"];
+    let authNames = ["personalAccessToken"];
     let contentTypes = ["application/json"];
     let accepts = ["application/json"];
     let returnType = null;
@@ -2395,7 +2395,7 @@ export default class ProjectApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["api_key"];
+    let authNames = ["personalAccessToken"];
     let contentTypes = ["application/json"];
     let accepts = ["application/json"];
     let returnType = Fleet;
@@ -2438,14 +2438,19 @@ export default class ProjectApi {
    * @param {module:model/String} firmwareType
    * @param {String} filename
    * @param {File} body contents of the firmware binary
+   * @param {Object} opts Optional parameters
+   * @param {String} opts.version Firmware version (optional). If not provided, the version will be extracted from firmware binary if available, otherwise left empty
+   * @param {String} opts.notes Optional notes describing what's different about this firmware version
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/FirmwareInfo} and HTTP response
    */
   uploadFirmwareWithHttpInfo(
     projectOrProductUID,
     firmwareType,
     filename,
-    body
+    body,
+    opts
   ) {
+    opts = opts || {};
     let postBody = body;
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
@@ -2477,11 +2482,14 @@ export default class ProjectApi {
       firmwareType: firmwareType,
       filename: filename,
     };
-    let queryParams = {};
+    let queryParams = {
+      version: opts["version"],
+      notes: opts["notes"],
+    };
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["api_key"];
+    let authNames = ["personalAccessToken"];
     let contentTypes = ["application/octet-stream"];
     let accepts = ["application/json"];
     let returnType = FirmwareInfo;
@@ -2507,14 +2515,18 @@ export default class ProjectApi {
    * @param {module:model/String} firmwareType
    * @param {String} filename
    * @param {File} body contents of the firmware binary
+   * @param {Object} opts Optional parameters
+   * @param {String} opts.version Firmware version (optional). If not provided, the version will be extracted from firmware binary if available, otherwise left empty
+   * @param {String} opts.notes Optional notes describing what's different about this firmware version
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/FirmwareInfo}
    */
-  uploadFirmware(projectOrProductUID, firmwareType, filename, body) {
+  uploadFirmware(projectOrProductUID, firmwareType, filename, body, opts) {
     return this.uploadFirmwareWithHttpInfo(
       projectOrProductUID,
       firmwareType,
       filename,
-      body
+      body,
+      opts
     ).then(function (response_and_data) {
       return response_and_data.data;
     });

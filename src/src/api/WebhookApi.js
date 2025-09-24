@@ -69,7 +69,7 @@ export default class WebhookApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["api_key"];
+    let authNames = ["personalAccessToken"];
     let contentTypes = ["application/json"];
     let accepts = ["application/json"];
     let returnType = null;
@@ -135,7 +135,7 @@ export default class WebhookApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["api_key"];
+    let authNames = ["personalAccessToken"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = null;
@@ -198,7 +198,7 @@ export default class WebhookApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["api_key"];
+    let authNames = ["personalAccessToken"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = WebhookSettings;
@@ -253,7 +253,7 @@ export default class WebhookApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["api_key"];
+    let authNames = ["personalAccessToken"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = GetWebhooks200Response;
@@ -322,7 +322,7 @@ export default class WebhookApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = ["api_key"];
+    let authNames = ["personalAccessToken"];
     let contentTypes = ["application/json"];
     let accepts = ["application/json"];
     let returnType = null;

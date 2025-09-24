@@ -103,9 +103,9 @@ Please follow the [installation](#installation) instruction and execute the foll
 var NotehubJs = require('@blues-inc/notehub-js');
 
 var defaultClient = NotehubJs.ApiClient.instance;
-// Configure API key authorization: api_key
-var api_key = defaultClient.authentications['api_key'];
-api_key.apiKey = "YOUR API KEY"
+// Configure Bearer access token for authorization: personalAccessToken
+var personalAccessToken = defaultClient.authentications['personalAccessToken'];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
 
 var api = new NotehubJs.AlertApi()
 var projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // {String}
@@ -353,11 +353,9 @@ All URIs are relative to *https://api.notefile.net*
 
 ## Documentation for Authorization
 
-### api_key
+### personalAccessToken
 
-- **Type**: API key
-- **API key parameter name**: X-Session-Token
-- **Location**: HTTP header
+- **Type**: Bearer authentication
 
 ### pin
 
