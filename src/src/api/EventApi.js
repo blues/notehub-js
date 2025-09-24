@@ -20,7 +20,7 @@ import RouteLog from "../model/RouteLog";
 /**
  * Event service.
  * @module api/EventApi
- * @version 1.0.38
+ * @version 2.0.0
  */
 export default class EventApi {
   /**

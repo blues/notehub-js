@@ -21,7 +21,7 @@ import UsageSessionsResponse from "../model/UsageSessionsResponse";
 /**
  * Usage service.
  * @module api/UsageApi
- * @version 1.0.38
+ * @version 2.0.0
  */
 export default class UsageApi {
   /**

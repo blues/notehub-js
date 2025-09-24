@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The DFUState model module.
  * @module model/DFUState
- * @version 1.0.38
+ * @version 2.0.0
  */
 class DFUState {
   /**

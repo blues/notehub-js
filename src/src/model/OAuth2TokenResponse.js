@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The OAuth2TokenResponse model module.
  * @module model/OAuth2TokenResponse
- * @version 1.0.38
+ * @version 2.0.0
  */
 class OAuth2TokenResponse {
   /**

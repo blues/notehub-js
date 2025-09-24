@@ -1,12 +1,12 @@
 {
   "name": "@blues-inc/notehub-js",
-  "version": "1.0.38",
+  "version": "2.0.0",
   "lockfileVersion": 3,
   "requires": true,
   "packages": {
     "": {
       "name": "@blues-inc/notehub-js",
-      "version": "1.0.38",
+      "version": "2.0.0",
       "license": "MIT",
       "dependencies": {
         "@babel/cli": "7.28.3",
