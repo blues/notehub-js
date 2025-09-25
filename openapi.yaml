@@ -821,6 +821,19 @@ paths:
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
+        - $ref: '#/components/parameters/startDateParam'
+        - $ref: '#/components/parameters/endDateParam'
+        - name: log_type
+          in: query
+          description: Return only specified log types
+          required: false
+          schema:
+            type: array
+            items:
+              enum:
+                - boot
+                - dfu_completed
+              type: string
       responses:
         '200':
           description: Successful operation
@@ -1069,6 +1082,22 @@ paths:
         - personalAccessToken: []
       tags:
         - device
+  '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/plans':
+    get:
+      operationId: getDevicePlans
+      description: 'Get Data Plans associated with the device, this include the primary sim, any external sim, as well as any satellite connections.'
+      responses:
+        '200':
+          $ref: '#/components/responses/DevicePlansResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - api_key: []
+      tags:
+        - device
+    parameters:
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
+      - $ref: '#/components/parameters/deviceUIDParam'
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/provision':
     post:
       operationId: postProvisionProjectDevice
@@ -3316,6 +3345,37 @@ components:
       properties:
         body:
           type: object
+    CellularPlan:
+      type: object
+      properties:
+        activated:
+          description: Unix timestamp of when the SIM was activated
+          type: integer
+          format: int64
+          example: 1656010061
+        data_usage:
+          $ref: '#/components/schemas/DataUsage'
+        iccid:
+          description: The Integrated Circuit Card Identifier of the SIM card
+          type: string
+          example: '345678432765434567890765746354465786'
+        imsi:
+          description: IMSI of the SIM card
+          type: string
+          example: '310170830688975'
+        last_updated:
+          description: Time this plan information was last updated
+          type: integer
+          format: int64
+          example: 1656010061
+        lifetime_used:
+          description: Total bytes used by this SIM
+          type: integer
+          format: int64
+        plan_type:
+          description: 'Description of the SIM plan type including data allowance, region, and validity period'
+          type: string
+          example: '500MB, North America, 10-year lifetime'
     CellularUsage:
       type: array
       items:
@@ -3470,6 +3530,28 @@ components:
         name:
           description: The name of the field
           type: string
+    DataUsage:
+      type: object
+      properties:
+        kb_remaining:
+          description: Kilobytes remaining in the plan
+          type: number
+          format: double
+          example: 372.55
+        kb_total:
+          description: Total Kilobytes included in the plan
+          type: number
+          format: double
+          example: 500
+        kb_used:
+          description: Kilobytes used to date
+          type: number
+          format: double
+          example: 127.45
+      required:
+        - kb_total
+        - kb_used
+        - kb_remaining
     Device:
       type: object
       properties:
@@ -4634,6 +4716,35 @@ components:
         url:
           description: The URL of the route.
           type: string
+    SatellitePlan:
+      type: object
+      properties:
+        activated:
+          description: Activation date of the satellite plan as Unix timestamp
+          type: integer
+          format: int64
+          example: 1609459200
+        billable_bytes:
+          $ref: '#/components/schemas/DataUsage'
+        last_updated:
+          description: Time this plan information was last updated
+          type: integer
+          format: int64
+          example: 1656010061
+        ntn_provider:
+          description: Non-Terrestrial Network provider name
+          type: string
+          example: Skylo
+        psid:
+          description: Provider-specific identifier for the satellite subscription
+          type: string
+          example: 'skylo:5746354465786'
+      nullable: true
+      required:
+        - ntn_provider
+        - psid
+        - activated
+        - cumulative_billable_bytes
     SchemaProperty:
       type: object
       properties:
@@ -5649,6 +5760,18 @@ components:
             required:
               - alerts
               - has_more
+    DevicePlansResponse:
+      description: Response body for /plans
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              cellular_plans:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CellularPlan'
+                nullable: true
     DevicesResponse:
       description: List of Devices
       content:
