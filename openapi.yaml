@@ -3355,6 +3355,9 @@ components:
           example: 1656010061
         data_usage:
           $ref: '#/components/schemas/DataUsage'
+        expires_at:
+          type: integer
+          format: int64
         iccid:
           description: The Integrated Circuit Card Identifier of the SIM card
           type: string
