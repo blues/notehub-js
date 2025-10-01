@@ -3334,7 +3334,7 @@ components:
           type: string
       nullable: true
     CreateMonitor:
-      type: ''
+      type: 
       properties: {}
       allOf:
         - $ref: '#/components/schemas/Monitor'
