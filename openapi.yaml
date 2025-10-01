@@ -2190,6 +2190,7 @@ paths:
                   disable_http_headers: false
                   filter:
                     system_notefiles: false
+                    type: ''
                   fleets:
                     - 'fleet:1042ddc5-3b2c-4cec-b1fb-d3040538094d'
                   http_headers: null
@@ -2247,6 +2248,7 @@ paths:
                   disable_http_headers: false
                   filter:
                     system_notefiles: false
+                    type: ''
                   fleets:
                     - 'fleet:1042ddc5-3b2c-4cec-b1fb-d3040538094d'
                   http_headers: null
@@ -3332,7 +3334,8 @@ components:
           type: string
       nullable: true
     CreateMonitor:
-      type: object
+      type: 
+      properties: {}
       allOf:
         - $ref: '#/components/schemas/Monitor'
         - required:
@@ -3433,7 +3436,7 @@ components:
           description: The name of the field
           type: string
     DataSet:
-      type: object
+      type: ''
       properties:
         fields:
           type: array
@@ -5667,12 +5670,16 @@ components:
       content:
         application/json:
           schema:
+            type: ''
+            properties: {}
             $ref: '#/components/schemas/EnvironmentVariables'
     ErrorResponse:
       description: The response body in case of an API error.
       content:
         application/json:
           schema:
+            type: ''
+            properties: {}
             $ref: '#/components/schemas/Error'
     EventsByCursorResponse:
       description: The response body from a GET events by cursor request.
