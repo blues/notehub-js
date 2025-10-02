@@ -2119,12 +2119,7 @@ paths:
         - project
     parameters:
       - $ref: '#/components/parameters/projectOrProductUIDParam'
-      - name: productUID
-        in: path
-        required: true
-        schema:
-          type: string
-        example: 'com.company:product'
+      - $ref: '#/components/parameters/productUIDParam'
   '/v1/projects/{projectOrProductUID}/routes':
     get:
       operationId: getRoutes
