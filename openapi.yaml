@@ -2412,7 +2412,7 @@ paths:
   '/v1/projects/{projectOrProductUID}/usage/events':
     get:
       operationId: getProjectEventsUsage
-      description: Get events usage for a project with time range and period aggregation
+      description: 'Get events usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied'
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/startDateParam'
@@ -2444,7 +2444,7 @@ paths:
   '/v1/projects/{projectOrProductUID}/usage/route-logs':
     get:
       operationId: getRouteLogsUsage
-      description: Get route logs usage for a project with time range and period aggregation
+      description: 'Get route logs usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied'
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/startDateParam'
@@ -2476,7 +2476,7 @@ paths:
   '/v1/projects/{projectOrProductUID}/usage/sessions':
     get:
       operationId: getSessionsUsage
-      description: Get sessions usage for a project with time range and period aggregation
+      description: 'Get sessions usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied'
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/startDateParam'
