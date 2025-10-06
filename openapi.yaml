@@ -327,6 +327,39 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+  '/v1/projects/{projectOrProductUID}':
+    delete:
+      operationId: deleteProject
+      description: Delete a Project by ProjectUID
+      parameters:
+        - $ref: '#/components/parameters/projectOrProductUIDParam'
+      responses:
+        '200':
+          description: Successful operation
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - project
+    get:
+      operationId: getProject
+      description: Get a Project by ProjectUID
+      parameters:
+        - $ref: '#/components/parameters/projectOrProductUIDParam'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - project
   '/v1/projects/{projectOrProductUID}/alerts':
     get:
       operationId: getAlerts
@@ -1590,6 +1623,8 @@ paths:
             schema:
               type: object
               properties:
+                connectivity_assurance:
+                  $ref: '#/components/schemas/FleetConnectivityAssurance'
                 label:
                   description: 'The label, or name,  for the Fleet.'
                   type: string
@@ -1654,6 +1689,8 @@ paths:
                   type: array
                   items:
                     type: string
+                connectivity_assurance:
+                  $ref: '#/components/schemas/FleetConnectivityAssurance'
                 label:
                   description: The label for the Fleet.
                   type: string
@@ -2042,7 +2079,7 @@ paths:
         - monitor
   '/v1/projects/{projectOrProductUID}/products':
     get:
-      operationId: getProjectProducts
+      operationId: getProducts
       description: Get Products within a Project
       responses:
         '200':
@@ -2104,6 +2141,22 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+  '/v1/projects/{projectOrProductUID}/products/{productUID}':
+    delete:
+      operationId: deleteProduct
+      description: Delete a product
+      responses:
+        '204':
+          description: Successful operation
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - project
+    parameters:
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
+      - $ref: '#/components/parameters/productUIDParam'
   '/v1/projects/{projectOrProductUID}/routes':
     get:
       operationId: getRoutes
@@ -2614,39 +2667,6 @@ paths:
         - personalAccessToken: []
       tags:
         - webhook
-  '/v1/projects/{projectUID}':
-    delete:
-      operationId: deleteProject
-      description: Delete a Project by ProjectUID
-      parameters:
-        - $ref: '#/components/parameters/projectOrProductUIDParam'
-      responses:
-        '200':
-          description: Successful operation
-        default:
-          $ref: '#/components/responses/ErrorResponse'
-      security:
-        - personalAccessToken: []
-      tags:
-        - project
-    get:
-      operationId: getProject
-      description: Get a Project by ProjectUID
-      parameters:
-        - $ref: '#/components/parameters/projectOrProductUIDParam'
-      responses:
-        '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Project'
-        default:
-          $ref: '#/components/responses/ErrorResponse'
-      security:
-        - personalAccessToken: []
-      tags:
-        - project
 components:
   parameters:
     cursorParam:
@@ -4211,6 +4231,8 @@ components:
     Fleet:
       type: object
       properties:
+        connectivity_assurance:
+          $ref: '#/components/schemas/FleetConnectivityAssurance'
         created:
           description: RFC3339 timestamp in UTC
           type: string
@@ -4236,6 +4258,17 @@ components:
         - uid
         - label
         - created
+    FleetConnectivityAssurance:
+      type: object
+      properties:
+        enabled:
+          description: Whether Connectivity Assurance is enabled for this fleet
+          type: boolean
+      example:
+        enabled: true
+      nullable: true
+      required:
+        - enabled
     FleetRule:
       description: 'JSONata expression that will be evaluated to determine device membership into this fleet, if the expression evaluates to a 1, the device will be included, if it evaluates to -1 it will be removed, and if it evaluates to 0 or errors it will be left unchanged.'
       type: string
