@@ -327,6 +327,39 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+  '/v1/projects/{projectOrProductUID}':
+    delete:
+      operationId: deleteProject
+      description: Delete a Project by ProjectUID
+      parameters:
+        - $ref: '#/components/parameters/projectOrProductUIDParam'
+      responses:
+        '200':
+          description: Successful operation
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - project
+    get:
+      operationId: getProject
+      description: Get a Project by ProjectUID
+      parameters:
+        - $ref: '#/components/parameters/projectOrProductUIDParam'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - project
   '/v1/projects/{projectOrProductUID}/alerts':
     get:
       operationId: getAlerts
@@ -2614,39 +2647,6 @@ paths:
         - personalAccessToken: []
       tags:
         - webhook
-  '/v1/projects/{projectUID}':
-    delete:
-      operationId: deleteProject
-      description: Delete a Project by ProjectUID
-      parameters:
-        - $ref: '#/components/parameters/projectOrProductUIDParam'
-      responses:
-        '200':
-          description: Successful operation
-        default:
-          $ref: '#/components/responses/ErrorResponse'
-      security:
-        - personalAccessToken: []
-      tags:
-        - project
-    get:
-      operationId: getProject
-      description: Get a Project by ProjectUID
-      parameters:
-        - $ref: '#/components/parameters/projectOrProductUIDParam'
-      responses:
-        '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Project'
-        default:
-          $ref: '#/components/responses/ErrorResponse'
-      security:
-        - personalAccessToken: []
-      tags:
-        - project
 components:
   parameters:
     cursorParam:
