@@ -2075,7 +2075,7 @@ paths:
         - monitor
   '/v1/projects/{projectOrProductUID}/products':
     get:
-      operationId: getProjectProducts
+      operationId: getProducts
       description: Get Products within a Project
       responses:
         '200':
@@ -2137,6 +2137,22 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+  '/v1/projects/{projectOrProductUID}/products/{productUID}':
+    delete:
+      operationId: deleteProduct
+      description: Delete a product
+      responses:
+        '204':
+          description: Successful operation
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - project
+    parameters:
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
+      - $ref: '#/components/parameters/productUIDParam'
   '/v1/projects/{projectOrProductUID}/routes':
     get:
       operationId: getRoutes
