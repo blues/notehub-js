@@ -3364,6 +3364,11 @@ components:
     CellularPlan:
       type: object
       properties:
+        activated:
+          description: Unix timestamp of when the SIM was activated
+          type: integer
+          format: int64
+          example: 1656010061
         data_usage:
           $ref: '#/components/schemas/DataUsage'
         expires_at:
