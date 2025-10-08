@@ -20,6 +20,7 @@ import Error from "../model/Error";
 import GetDeviceEnvironmentVariablesByPin200Response from "../model/GetDeviceEnvironmentVariablesByPin200Response";
 import GetDeviceHealthLog200Response from "../model/GetDeviceHealthLog200Response";
 import GetDeviceLatest200Response from "../model/GetDeviceLatest200Response";
+import GetDevicePlans200Response from "../model/GetDevicePlans200Response";
 import GetDevicePublicKey200Response from "../model/GetDevicePublicKey200Response";
 import GetDeviceSessions200Response from "../model/GetDeviceSessions200Response";
 import GetProjectDevicePublicKeys200Response from "../model/GetProjectDevicePublicKeys200Response";
@@ -722,9 +723,14 @@ export default class DeviceApi {
    * Get Device Health Log
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
+   * @param {Object} opts Optional parameters
+   * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
+   * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
+   * @param {Array.<module:model/String>} opts.logType Return only specified log types
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetDeviceHealthLog200Response} and HTTP response
    */
-  getDeviceHealthLogWithHttpInfo(projectOrProductUID, deviceUID) {
+  getDeviceHealthLogWithHttpInfo(projectOrProductUID, deviceUID, opts) {
+    opts = opts || {};
     let postBody = null;
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
@@ -743,7 +749,11 @@ export default class DeviceApi {
       projectOrProductUID: projectOrProductUID,
       deviceUID: deviceUID,
     };
-    let queryParams = {};
+    let queryParams = {
+      startDate: opts["startDate"],
+      endDate: opts["endDate"],
+      log_type: this.apiClient.buildCollectionParam(opts["logType"], "multi"),
+    };
     let headerParams = {};
     let formParams = {};
 
@@ -771,12 +781,17 @@ export default class DeviceApi {
    * Get Device Health Log
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
+   * @param {Object} opts Optional parameters
+   * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
+   * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
+   * @param {Array.<module:model/String>} opts.logType Return only specified log types
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetDeviceHealthLog200Response}
    */
-  getDeviceHealthLog(projectOrProductUID, deviceUID) {
+  getDeviceHealthLog(projectOrProductUID, deviceUID, opts) {
     return this.getDeviceHealthLogWithHttpInfo(
       projectOrProductUID,
-      deviceUID
+      deviceUID,
+      opts
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -844,6 +859,69 @@ export default class DeviceApi {
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
+  }
+
+  /**
+   * Get Data Plans associated with the device, this include the primary sim, any external sim, as well as any satellite connections.
+   * @param {String} projectOrProductUID
+   * @param {String} deviceUID
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetDevicePlans200Response} and HTTP response
+   */
+  getDevicePlansWithHttpInfo(projectOrProductUID, deviceUID) {
+    let postBody = null;
+    // verify the required parameter 'projectOrProductUID' is set
+    if (projectOrProductUID === undefined || projectOrProductUID === null) {
+      throw new Error(
+        "Missing the required parameter 'projectOrProductUID' when calling getDevicePlans"
+      );
+    }
+    // verify the required parameter 'deviceUID' is set
+    if (deviceUID === undefined || deviceUID === null) {
+      throw new Error(
+        "Missing the required parameter 'deviceUID' when calling getDevicePlans"
+      );
+    }
+
+    let pathParams = {
+      projectOrProductUID: projectOrProductUID,
+      deviceUID: deviceUID,
+    };
+    let queryParams = {};
+    let headerParams = {};
+    let formParams = {};
+
+    let authNames = [];
+    let contentTypes = [];
+    let accepts = ["application/json"];
+    let returnType = GetDevicePlans200Response;
+    return this.apiClient.callApi(
+      "/v1/projects/{projectOrProductUID}/devices/{deviceUID}/plans",
+      "GET",
+      pathParams,
+      queryParams,
+      headerParams,
+      formParams,
+      postBody,
+      authNames,
+      contentTypes,
+      accepts,
+      returnType,
+      null
+    );
+  }
+
+  /**
+   * Get Data Plans associated with the device, this include the primary sim, any external sim, as well as any satellite connections.
+   * @param {String} projectOrProductUID
+   * @param {String} deviceUID
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetDevicePlans200Response}
+   */
+  getDevicePlans(projectOrProductUID, deviceUID) {
+    return this.getDevicePlansWithHttpInfo(projectOrProductUID, deviceUID).then(
+      function (response_and_data) {
+        return response_and_data.data;
+      }
+    );
   }
 
   /**

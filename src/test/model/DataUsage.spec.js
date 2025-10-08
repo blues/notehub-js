@@ -28,7 +28,7 @@
   var instance;
 
   beforeEach(function () {
-    instance = new NotehubJs.GetProjectProducts200Response();
+    instance = new NotehubJs.DataUsage();
   });
 
   var getProperty = function (object, getter, property) {
@@ -43,16 +43,28 @@
     else object[property] = value;
   };
 
-  describe("GetProjectProducts200Response", function () {
-    it("should create an instance of GetProjectProducts200Response", function () {
-      // uncomment below and update the code to test GetProjectProducts200Response
-      //var instance = new NotehubJs.GetProjectProducts200Response();
-      //expect(instance).to.be.a(NotehubJs.GetProjectProducts200Response);
+  describe("DataUsage", function () {
+    it("should create an instance of DataUsage", function () {
+      // uncomment below and update the code to test DataUsage
+      //var instance = new NotehubJs.DataUsage();
+      //expect(instance).to.be.a(NotehubJs.DataUsage);
     });
 
-    it('should have the property products (base name: "products")', function () {
-      // uncomment below and update the code to test the property products
-      //var instance = new NotehubJs.GetProjectProducts200Response();
+    it('should have the property kbRemaining (base name: "kb_remaining")', function () {
+      // uncomment below and update the code to test the property kbRemaining
+      //var instance = new NotehubJs.DataUsage();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property kbTotal (base name: "kb_total")', function () {
+      // uncomment below and update the code to test the property kbTotal
+      //var instance = new NotehubJs.DataUsage();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property kbUsed (base name: "kb_used")', function () {
+      // uncomment below and update the code to test the property kbUsed
+      //var instance = new NotehubJs.DataUsage();
       //expect(instance).to.be();
     });
   });

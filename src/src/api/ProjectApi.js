@@ -28,8 +28,8 @@ import Error from "../model/Error";
 import FirmwareInfo from "../model/FirmwareInfo";
 import Fleet from "../model/Fleet";
 import GetDeviceFleets200Response from "../model/GetDeviceFleets200Response";
+import GetProducts200Response from "../model/GetProducts200Response";
 import GetProjectMembers200Response from "../model/GetProjectMembers200Response";
-import GetProjectProducts200Response from "../model/GetProjectProducts200Response";
 import GetProjects200Response from "../model/GetProjects200Response";
 import NotefileSchema from "../model/NotefileSchema";
 import Product from "../model/Product";
@@ -521,6 +521,69 @@ export default class ProjectApi {
   }
 
   /**
+   * Delete a product
+   * @param {String} projectOrProductUID
+   * @param {String} productUID
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
+   */
+  deleteProductWithHttpInfo(projectOrProductUID, productUID) {
+    let postBody = null;
+    // verify the required parameter 'projectOrProductUID' is set
+    if (projectOrProductUID === undefined || projectOrProductUID === null) {
+      throw new Error(
+        "Missing the required parameter 'projectOrProductUID' when calling deleteProduct"
+      );
+    }
+    // verify the required parameter 'productUID' is set
+    if (productUID === undefined || productUID === null) {
+      throw new Error(
+        "Missing the required parameter 'productUID' when calling deleteProduct"
+      );
+    }
+
+    let pathParams = {
+      projectOrProductUID: projectOrProductUID,
+      productUID: productUID,
+    };
+    let queryParams = {};
+    let headerParams = {};
+    let formParams = {};
+
+    let authNames = ["personalAccessToken"];
+    let contentTypes = [];
+    let accepts = ["application/json"];
+    let returnType = null;
+    return this.apiClient.callApi(
+      "/v1/projects/{projectOrProductUID}/products/{productUID}",
+      "DELETE",
+      pathParams,
+      queryParams,
+      headerParams,
+      formParams,
+      postBody,
+      authNames,
+      contentTypes,
+      accepts,
+      returnType,
+      null
+    );
+  }
+
+  /**
+   * Delete a product
+   * @param {String} projectOrProductUID
+   * @param {String} productUID
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}
+   */
+  deleteProduct(projectOrProductUID, productUID) {
+    return this.deleteProductWithHttpInfo(projectOrProductUID, productUID).then(
+      function (response_and_data) {
+        return response_and_data.data;
+      }
+    );
+  }
+
+  /**
    * Delete a Project by ProjectUID
    * @param {String} projectOrProductUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
@@ -546,7 +609,7 @@ export default class ProjectApi {
     let accepts = ["application/json"];
     let returnType = null;
     return this.apiClient.callApi(
-      "/v1/projects/{projectUID}",
+      "/v1/projects/{projectOrProductUID}",
       "DELETE",
       pathParams,
       queryParams,
@@ -1656,6 +1719,60 @@ export default class ProjectApi {
   }
 
   /**
+   * Get Products within a Project
+   * @param {String} projectOrProductUID
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetProducts200Response} and HTTP response
+   */
+  getProductsWithHttpInfo(projectOrProductUID) {
+    let postBody = null;
+    // verify the required parameter 'projectOrProductUID' is set
+    if (projectOrProductUID === undefined || projectOrProductUID === null) {
+      throw new Error(
+        "Missing the required parameter 'projectOrProductUID' when calling getProducts"
+      );
+    }
+
+    let pathParams = {
+      projectOrProductUID: projectOrProductUID,
+    };
+    let queryParams = {};
+    let headerParams = {};
+    let formParams = {};
+
+    let authNames = ["personalAccessToken"];
+    let contentTypes = [];
+    let accepts = ["application/json"];
+    let returnType = GetProducts200Response;
+    return this.apiClient.callApi(
+      "/v1/projects/{projectOrProductUID}/products",
+      "GET",
+      pathParams,
+      queryParams,
+      headerParams,
+      formParams,
+      postBody,
+      authNames,
+      contentTypes,
+      accepts,
+      returnType,
+      null
+    );
+  }
+
+  /**
+   * Get Products within a Project
+   * @param {String} projectOrProductUID
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetProducts200Response}
+   */
+  getProducts(projectOrProductUID) {
+    return this.getProductsWithHttpInfo(projectOrProductUID).then(function (
+      response_and_data
+    ) {
+      return response_and_data.data;
+    });
+  }
+
+  /**
    * Get a Project by ProjectUID
    * @param {String} projectOrProductUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Project} and HTTP response
@@ -1681,7 +1798,7 @@ export default class ProjectApi {
     let accepts = ["application/json"];
     let returnType = Project;
     return this.apiClient.callApi(
-      "/v1/projects/{projectUID}",
+      "/v1/projects/{projectOrProductUID}",
       "GET",
       pathParams,
       queryParams,
@@ -1973,60 +2090,6 @@ export default class ProjectApi {
    */
   getProjectMembers(projectOrProductUID) {
     return this.getProjectMembersWithHttpInfo(projectOrProductUID).then(
-      function (response_and_data) {
-        return response_and_data.data;
-      }
-    );
-  }
-
-  /**
-   * Get Products within a Project
-   * @param {String} projectOrProductUID
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetProjectProducts200Response} and HTTP response
-   */
-  getProjectProductsWithHttpInfo(projectOrProductUID) {
-    let postBody = null;
-    // verify the required parameter 'projectOrProductUID' is set
-    if (projectOrProductUID === undefined || projectOrProductUID === null) {
-      throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling getProjectProducts"
-      );
-    }
-
-    let pathParams = {
-      projectOrProductUID: projectOrProductUID,
-    };
-    let queryParams = {};
-    let headerParams = {};
-    let formParams = {};
-
-    let authNames = ["personalAccessToken"];
-    let contentTypes = [];
-    let accepts = ["application/json"];
-    let returnType = GetProjectProducts200Response;
-    return this.apiClient.callApi(
-      "/v1/projects/{projectOrProductUID}/products",
-      "GET",
-      pathParams,
-      queryParams,
-      headerParams,
-      formParams,
-      postBody,
-      authNames,
-      contentTypes,
-      accepts,
-      returnType,
-      null
-    );
-  }
-
-  /**
-   * Get Products within a Project
-   * @param {String} projectOrProductUID
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetProjectProducts200Response}
-   */
-  getProjectProducts(projectOrProductUID) {
-    return this.getProjectProductsWithHttpInfo(projectOrProductUID).then(
       function (response_and_data) {
         return response_and_data.data;
       }

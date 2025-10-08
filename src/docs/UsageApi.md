@@ -63,7 +63,7 @@ No authorization required
 
 > UsageEventsResponse getProjectEventsUsage(projectOrProductUID, period, opts)
 
-Get events usage for a project with time range and period aggregation
+Get events usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied
 
 ### Example
 
@@ -117,7 +117,7 @@ apiInstance.getProjectEventsUsage(projectOrProductUID, period, opts).then((data)
 
 > UsageRouteLogsResponse getRouteLogsUsage(projectOrProductUID, period, opts)
 
-Get route logs usage for a project with time range and period aggregation
+Get route logs usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied
 
 ### Example
 
@@ -171,7 +171,7 @@ apiInstance.getRouteLogsUsage(projectOrProductUID, period, opts).then((data) => 
 
 > UsageSessionsResponse getSessionsUsage(projectOrProductUID, period, opts)
 
-Get sessions usage for a project with time range and period aggregation
+Get sessions usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied
 
 ### Example
 

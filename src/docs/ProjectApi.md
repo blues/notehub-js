@@ -11,7 +11,8 @@ All URIs are relative to *https://api.notefile.net*
 | [**deleteDeviceFleets**](ProjectApi.md#deleteDeviceFleets)                             | **DELETE** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/fleets                    |
 | [**deleteFleet**](ProjectApi.md#deleteFleet)                                           | **DELETE** /v1/projects/{projectOrProductUID}/fleets/{fleetUID}                             |
 | [**deleteFleetEnvironmentVariable**](ProjectApi.md#deleteFleetEnvironmentVariable)     | **DELETE** /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/environment_variables/{key} |
-| [**deleteProject**](ProjectApi.md#deleteProject)                                       | **DELETE** /v1/projects/{projectUID}                                                        |
+| [**deleteProduct**](ProjectApi.md#deleteProduct)                                       | **DELETE** /v1/projects/{projectOrProductUID}/products/{productUID}                         |
+| [**deleteProject**](ProjectApi.md#deleteProject)                                       | **DELETE** /v1/projects/{projectOrProductUID}                                               |
 | [**deleteProjectEnvironmentVariable**](ProjectApi.md#deleteProjectEnvironmentVariable) | **DELETE** /v1/projects/{projectOrProductUID}/environment_variables/{key}                   |
 | [**dfuAction**](ProjectApi.md#dfuAction)                                               | **POST** /v1/projects/{projectOrProductUID}/dfu/{firmwareType}/{action}                     |
 | [**disableGlobalTransformation**](ProjectApi.md#disableGlobalTransformation)           | **POST** /v1/projects/{projectOrProductUID}/global-transformation/disable                   |
@@ -26,13 +27,13 @@ All URIs are relative to *https://api.notefile.net*
 | [**getFleetEnvironmentHierarchy**](ProjectApi.md#getFleetEnvironmentHierarchy)         | **GET** /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/environment_hierarchy          | Get environment variable hierarchy for a device |
 | [**getFleetEnvironmentVariables**](ProjectApi.md#getFleetEnvironmentVariables)         | **GET** /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/environment_variables          |
 | [**getNotefileSchemas**](ProjectApi.md#getNotefileSchemas)                             | **GET** /v1/projects/{projectOrProductUID}/schemas                                          | Get variable format for a notefile              |
-| [**getProject**](ProjectApi.md#getProject)                                             | **GET** /v1/projects/{projectUID}                                                           |
+| [**getProducts**](ProjectApi.md#getProducts)                                           | **GET** /v1/projects/{projectOrProductUID}/products                                         |
+| [**getProject**](ProjectApi.md#getProject)                                             | **GET** /v1/projects/{projectOrProductUID}                                                  |
 | [**getProjectByProduct**](ProjectApi.md#getProjectByProduct)                           | **GET** /v1/products/{productUID}/project                                                   |
 | [**getProjectEnvironmentHierarchy**](ProjectApi.md#getProjectEnvironmentHierarchy)     | **GET** /v1/projects/{projectOrProductUID}/environment_hierarchy                            | Get environment variable hierarchy for a device |
 | [**getProjectEnvironmentVariables**](ProjectApi.md#getProjectEnvironmentVariables)     | **GET** /v1/projects/{projectOrProductUID}/environment_variables                            |
 | [**getProjectFleets**](ProjectApi.md#getProjectFleets)                                 | **GET** /v1/projects/{projectOrProductUID}/fleets                                           |
 | [**getProjectMembers**](ProjectApi.md#getProjectMembers)                               | **GET** /v1/projects/{projectOrProductUID}/members                                          |
-| [**getProjectProducts**](ProjectApi.md#getProjectProducts)                             | **GET** /v1/projects/{projectOrProductUID}/products                                         |
 | [**getProjects**](ProjectApi.md#getProjects)                                           | **GET** /v1/projects                                                                        |
 | [**putDeviceFleets**](ProjectApi.md#putDeviceFleets)                                   | **PUT** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/fleets                       |
 | [**putFleetEnvironmentVariables**](ProjectApi.md#putFleetEnvironmentVariables)         | **PUT** /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/environment_variables          |
@@ -359,6 +360,52 @@ apiInstance.deleteFleetEnvironmentVariable(projectOrProductUID, fleetUID, key).t
 ### Return type
 
 [**EnvironmentVariables**](EnvironmentVariables.md)
+
+### Authorization
+
+[personalAccessToken](../README.md#personalAccessToken)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+## deleteProduct
+
+> deleteProduct(projectOrProductUID, productUID)
+
+Delete a product
+
+### Example
+
+```javascript
+import * as NotehubJs from '@blues-inc/notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
+// Configure Bearer access token for authorization: personalAccessToken
+let personalAccessToken = defaultClient.authentications['personalAccessToken'];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
+
+let apiInstance = new NotehubJs.ProjectApi();
+let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let productUID = com.blues.bridge:sensors; // String |
+apiInstance.deleteProduct(projectOrProductUID, productUID).then(() => {
+  console.log('API called successfully.');
+}, (error) => {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+| Name                    | Type       | Description | Notes |
+| ----------------------- | ---------- | ----------- | ----- |
+| **projectOrProductUID** | **String** |             |
+| **productUID**          | **String** |             |
+
+### Return type
+
+null (empty response body)
 
 ### Authorization
 
@@ -1145,6 +1192,50 @@ No authorization required
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
+## getProducts
+
+> GetProducts200Response getProducts(projectOrProductUID)
+
+Get Products within a Project
+
+### Example
+
+```javascript
+import * as NotehubJs from '@blues-inc/notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
+// Configure Bearer access token for authorization: personalAccessToken
+let personalAccessToken = defaultClient.authentications['personalAccessToken'];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
+
+let apiInstance = new NotehubJs.ProjectApi();
+let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+apiInstance.getProducts(projectOrProductUID).then((data) => {
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
+}, (error) => {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+| Name                    | Type       | Description | Notes |
+| ----------------------- | ---------- | ----------- | ----- |
+| **projectOrProductUID** | **String** |             |
+
+### Return type
+
+[**GetProducts200Response**](GetProducts200Response.md)
+
+### Authorization
+
+[personalAccessToken](../README.md#personalAccessToken)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
 ## getProject
 
 > Project getProject(projectOrProductUID)
@@ -1403,50 +1494,6 @@ apiInstance.getProjectMembers(projectOrProductUID).then((data) => {
 ### Return type
 
 [**GetProjectMembers200Response**](GetProjectMembers200Response.md)
-
-### Authorization
-
-[personalAccessToken](../README.md#personalAccessToken)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-## getProjectProducts
-
-> GetProjectProducts200Response getProjectProducts(projectOrProductUID)
-
-Get Products within a Project
-
-### Example
-
-```javascript
-import * as NotehubJs from '@blues-inc/notehub-js';
-let defaultClient = NotehubJs.ApiClient.instance;
-// Configure Bearer access token for authorization: personalAccessToken
-let personalAccessToken = defaultClient.authentications['personalAccessToken'];
-personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
-
-let apiInstance = new NotehubJs.ProjectApi();
-let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
-apiInstance.getProjectProducts(projectOrProductUID).then((data) => {
-  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
-}, (error) => {
-  console.error(error);
-});
-
-```
-
-### Parameters
-
-| Name                    | Type       | Description | Notes |
-| ----------------------- | ---------- | ----------- | ----- |
-| **projectOrProductUID** | **String** |             |
-
-### Return type
-
-[**GetProjectProducts200Response**](GetProjectProducts200Response.md)
 
 ### Authorization
 

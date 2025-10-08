@@ -117,7 +117,7 @@ export default class UsageApi {
   }
 
   /**
-   * Get events usage for a project with time range and period aggregation
+   * Get events usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied
    * @param {String} projectOrProductUID
    * @param {module:model/String} period Period type for aggregation
    * @param {Object} opts Optional parameters
@@ -178,7 +178,7 @@ export default class UsageApi {
   }
 
   /**
-   * Get events usage for a project with time range and period aggregation
+   * Get events usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied
    * @param {String} projectOrProductUID
    * @param {module:model/String} period Period type for aggregation
    * @param {Object} opts Optional parameters
@@ -198,7 +198,7 @@ export default class UsageApi {
   }
 
   /**
-   * Get route logs usage for a project with time range and period aggregation
+   * Get route logs usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied
    * @param {String} projectOrProductUID
    * @param {module:model/String} period Period type for aggregation
    * @param {Object} opts Optional parameters
@@ -259,7 +259,7 @@ export default class UsageApi {
   }
 
   /**
-   * Get route logs usage for a project with time range and period aggregation
+   * Get route logs usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied
    * @param {String} projectOrProductUID
    * @param {module:model/String} period Period type for aggregation
    * @param {Object} opts Optional parameters
@@ -279,7 +279,7 @@ export default class UsageApi {
   }
 
   /**
-   * Get sessions usage for a project with time range and period aggregation
+   * Get sessions usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied
    * @param {String} projectOrProductUID
    * @param {module:model/String} period Period type for aggregation
    * @param {Object} opts Optional parameters
@@ -340,7 +340,7 @@ export default class UsageApi {
   }
 
   /**
-   * Get sessions usage for a project with time range and period aggregation
+   * Get sessions usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied
    * @param {String} projectOrProductUID
    * @param {module:model/String} period Period type for aggregation
    * @param {Object} opts Optional parameters

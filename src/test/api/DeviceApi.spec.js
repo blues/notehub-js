@@ -164,6 +164,16 @@
         done();
       });
     });
+    describe("getDevicePlans", function () {
+      it("should call getDevicePlans successfully", function (done) {
+        //uncomment below and update the code to test getDevicePlans
+        //instance.getDevicePlans(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
     describe("getDevicePublicKey", function () {
       it("should call getDevicePublicKey successfully", function (done) {
         //uncomment below and update the code to test getDevicePublicKey
