@@ -17,7 +17,7 @@ import GetProjectDevicePublicKeys200ResponseDevicePublicKeysInner from "./GetPro
 /**
  * The GetProjectDevicePublicKeys200Response model module.
  * @module model/GetProjectDevicePublicKeys200Response
- * @version 2.0.0
+ * @version 2.1.0
  */
 class GetProjectDevicePublicKeys200Response {
   /**

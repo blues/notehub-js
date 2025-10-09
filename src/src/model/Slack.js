@@ -18,7 +18,7 @@ import SlackTransform from "./SlackTransform";
 /**
  * The Slack model module.
  * @module model/Slack
- * @version 2.0.0
+ * @version 2.1.0
  */
 class Slack {
   /**
