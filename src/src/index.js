@@ -22,6 +22,7 @@ import Azure from "./model/Azure";
 import BillingAccount from "./model/BillingAccount";
 import BillingAccountRole from "./model/BillingAccountRole";
 import Body from "./model/Body";
+import CellularPlan from "./model/CellularPlan";
 import CloneProjectRequest from "./model/CloneProjectRequest";
 import Contact from "./model/Contact";
 import CreateFleetRequest from "./model/CreateFleetRequest";
@@ -34,6 +35,7 @@ import DFUEnv from "./model/DFUEnv";
 import DFUState from "./model/DFUState";
 import DataField from "./model/DataField";
 import DataSetField from "./model/DataSetField";
+import DataUsage from "./model/DataUsage";
 import DeleteDeviceFleetsRequest from "./model/DeleteDeviceFleetsRequest";
 import Device from "./model/Device";
 import DeviceDfuHistory from "./model/DeviceDfuHistory";
@@ -63,15 +65,16 @@ import GetDeviceFleets200Response from "./model/GetDeviceFleets200Response";
 import GetDeviceHealthLog200Response from "./model/GetDeviceHealthLog200Response";
 import GetDeviceHealthLog200ResponseHealthLogInner from "./model/GetDeviceHealthLog200ResponseHealthLogInner";
 import GetDeviceLatest200Response from "./model/GetDeviceLatest200Response";
+import GetDevicePlans200Response from "./model/GetDevicePlans200Response";
 import GetDevicePublicKey200Response from "./model/GetDevicePublicKey200Response";
 import GetDeviceSessions200Response from "./model/GetDeviceSessions200Response";
+import GetProducts200Response from "./model/GetProducts200Response";
 import GetProjectDevicePublicKeys200Response from "./model/GetProjectDevicePublicKeys200Response";
 import GetProjectDevicePublicKeys200ResponseDevicePublicKeysInner from "./model/GetProjectDevicePublicKeys200ResponseDevicePublicKeysInner";
 import GetProjectDevices200Response from "./model/GetProjectDevices200Response";
 import GetProjectEvents200Response from "./model/GetProjectEvents200Response";
 import GetProjectEventsByCursor200Response from "./model/GetProjectEventsByCursor200Response";
 import GetProjectMembers200Response from "./model/GetProjectMembers200Response";
-import GetProjectProducts200Response from "./model/GetProjectProducts200Response";
 import GetProjects200Response from "./model/GetProjects200Response";
 import GetWebhooks200Response from "./model/GetWebhooks200Response";
 import Google from "./model/Google";
@@ -108,6 +111,7 @@ import Radresponder from "./model/Radresponder";
 import Repository from "./model/Repository";
 import Role from "./model/Role";
 import RouteLog from "./model/RouteLog";
+import SatellitePlan from "./model/SatellitePlan";
 import SchemaProperty from "./model/SchemaProperty";
 import SimUsage from "./model/SimUsage";
 import Slack from "./model/Slack";
@@ -173,7 +177,7 @@ import WebhookApi from "./api/WebhookApi";
  * </pre>
  * </p>
  * @module index
- * @version 2.0.0
+ * @version 2.1.0
  */
 export {
   /**
@@ -241,6 +245,12 @@ export {
    * @property {module:model/Body}
    */
   Body,
+
+  /**
+   * The CellularPlan model constructor.
+   * @property {module:model/CellularPlan}
+   */
+  CellularPlan,
 
   /**
    * The CloneProjectRequest model constructor.
@@ -313,6 +323,12 @@ export {
    * @property {module:model/DataSetField}
    */
   DataSetField,
+
+  /**
+   * The DataUsage model constructor.
+   * @property {module:model/DataUsage}
+   */
+  DataUsage,
 
   /**
    * The DeleteDeviceFleetsRequest model constructor.
@@ -489,6 +505,12 @@ export {
   GetDeviceLatest200Response,
 
   /**
+   * The GetDevicePlans200Response model constructor.
+   * @property {module:model/GetDevicePlans200Response}
+   */
+  GetDevicePlans200Response,
+
+  /**
    * The GetDevicePublicKey200Response model constructor.
    * @property {module:model/GetDevicePublicKey200Response}
    */
@@ -499,6 +521,12 @@ export {
    * @property {module:model/GetDeviceSessions200Response}
    */
   GetDeviceSessions200Response,
+
+  /**
+   * The GetProducts200Response model constructor.
+   * @property {module:model/GetProducts200Response}
+   */
+  GetProducts200Response,
 
   /**
    * The GetProjectDevicePublicKeys200Response model constructor.
@@ -535,12 +563,6 @@ export {
    * @property {module:model/GetProjectMembers200Response}
    */
   GetProjectMembers200Response,
-
-  /**
-   * The GetProjectProducts200Response model constructor.
-   * @property {module:model/GetProjectProducts200Response}
-   */
-  GetProjectProducts200Response,
 
   /**
    * The GetProjects200Response model constructor.
@@ -757,6 +779,12 @@ export {
    * @property {module:model/RouteLog}
    */
   RouteLog,
+
+  /**
+   * The SatellitePlan model constructor.
+   * @property {module:model/SatellitePlan}
+   */
+  SatellitePlan,
 
   /**
    * The SchemaProperty model constructor.

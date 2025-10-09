@@ -16,6 +16,7 @@ All URIs are relative to *https://api.notefile.net*
 | [**getDeviceEnvironmentVariablesByPin**](DeviceApi.md#getDeviceEnvironmentVariablesByPin) | **GET** /v1/products/{productUID}/devices/{deviceUID}/environment_variables_with_pin           |
 | [**getDeviceHealthLog**](DeviceApi.md#getDeviceHealthLog)                                 | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/health-log                      |
 | [**getDeviceLatest**](DeviceApi.md#getDeviceLatest)                                       | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/latest                          |
+| [**getDevicePlans**](DeviceApi.md#getDevicePlans)                                         | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/plans                           |
 | [**getDevicePublicKey**](DeviceApi.md#getDevicePublicKey)                                 | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/public-key                      |
 | [**getDeviceSessions**](DeviceApi.md#getDeviceSessions)                                   | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/sessions                        |
 | [**getProjectDevicePublicKeys**](DeviceApi.md#getProjectDevicePublicKeys)                 | **GET** /v1/projects/{projectOrProductUID}/devices/public-keys                                 |
@@ -501,7 +502,7 @@ apiInstance.getDeviceEnvironmentVariablesByPin(productUID, deviceUID).then((data
 
 ## getDeviceHealthLog
 
-> GetDeviceHealthLog200Response getDeviceHealthLog(projectOrProductUID, deviceUID)
+> GetDeviceHealthLog200Response getDeviceHealthLog(projectOrProductUID, deviceUID, opts)
 
 Get Device Health Log
 
@@ -517,7 +518,12 @@ personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
 let apiInstance = new NotehubJs.DeviceApi();
 let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
 let deviceUID = dev:000000000000000; // String |
-apiInstance.getDeviceHealthLog(projectOrProductUID, deviceUID).then((data) => {
+let opts = {
+  'startDate': 1628631763, // Number | Start date for filtering results, specified as a Unix timestamp
+  'endDate': 1657894210, // Number | End date for filtering results, specified as a Unix timestamp
+  'logType': ["null"] // [String] | Return only specified log types
+};
+apiInstance.getDeviceHealthLog(projectOrProductUID, deviceUID, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
@@ -527,10 +533,13 @@ apiInstance.getDeviceHealthLog(projectOrProductUID, deviceUID).then((data) => {
 
 ### Parameters
 
-| Name                    | Type       | Description | Notes |
-| ----------------------- | ---------- | ----------- | ----- |
-| **projectOrProductUID** | **String** |             |
-| **deviceUID**           | **String** |             |
+| Name                    | Type                      | Description                                                     | Notes      |
+| ----------------------- | ------------------------- | --------------------------------------------------------------- | ---------- |
+| **projectOrProductUID** | **String**                |                                                                 |
+| **deviceUID**           | **String**                |                                                                 |
+| **startDate**           | **Number**                | Start date for filtering results, specified as a Unix timestamp | [optional] |
+| **endDate**             | **Number**                | End date for filtering results, specified as a Unix timestamp   | [optional] |
+| **logType**             | [**[String]**](String.md) | Return only specified log types                                 | [optional] |
 
 ### Return type
 
@@ -585,6 +594,48 @@ apiInstance.getDeviceLatest(projectOrProductUID, deviceUID).then((data) => {
 ### Authorization
 
 [personalAccessToken](../README.md#personalAccessToken)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+## getDevicePlans
+
+> GetDevicePlans200Response getDevicePlans(projectOrProductUID, deviceUID)
+
+Get Data Plans associated with the device, this include the primary sim, any external sim, as well as any satellite connections.
+
+### Example
+
+```javascript
+import * as NotehubJs from '@blues-inc/notehub-js';
+
+let apiInstance = new NotehubJs.DeviceApi();
+let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let deviceUID = dev:000000000000000; // String |
+apiInstance.getDevicePlans(projectOrProductUID, deviceUID).then((data) => {
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
+}, (error) => {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+| Name                    | Type       | Description | Notes |
+| ----------------------- | ---------- | ----------- | ----- |
+| **projectOrProductUID** | **String** |             |
+| **deviceUID**           | **String** |             |
+
+### Return type
+
+[**GetDevicePlans200Response**](GetDevicePlans200Response.md)
+
+### Authorization
+
+No authorization required
 
 ### HTTP request headers
 

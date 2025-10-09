@@ -16,6 +16,7 @@ docs/BillingAccount.md
 docs/BillingAccountApi.md
 docs/BillingAccountRole.md
 docs/Body.md
+docs/CellularPlan.md
 docs/CloneProjectRequest.md
 docs/Contact.md
 docs/CreateFleetRequest.md
@@ -28,6 +29,7 @@ docs/DFUEnv.md
 docs/DFUState.md
 docs/DataField.md
 docs/DataSetField.md
+docs/DataUsage.md
 docs/DeleteDeviceFleetsRequest.md
 docs/Device.md
 docs/DeviceApi.md
@@ -60,15 +62,16 @@ docs/GetDeviceFleets200Response.md
 docs/GetDeviceHealthLog200Response.md
 docs/GetDeviceHealthLog200ResponseHealthLogInner.md
 docs/GetDeviceLatest200Response.md
+docs/GetDevicePlans200Response.md
 docs/GetDevicePublicKey200Response.md
 docs/GetDeviceSessions200Response.md
+docs/GetProducts200Response.md
 docs/GetProjectDevicePublicKeys200Response.md
 docs/GetProjectDevicePublicKeys200ResponseDevicePublicKeysInner.md
 docs/GetProjectDevices200Response.md
 docs/GetProjectEvents200Response.md
 docs/GetProjectEventsByCursor200Response.md
 docs/GetProjectMembers200Response.md
-docs/GetProjectProducts200Response.md
 docs/GetProjects200Response.md
 docs/GetWebhooks200Response.md
 docs/Google.md
@@ -108,6 +111,7 @@ docs/Repository.md
 docs/Role.md
 docs/RouteApi.md
 docs/RouteLog.md
+docs/SatellitePlan.md
 docs/SchemaProperty.md
 docs/SimUsage.md
 docs/Slack.md
@@ -160,6 +164,7 @@ src/model/Azure.js
 src/model/BillingAccount.js
 src/model/BillingAccountRole.js
 src/model/Body.js
+src/model/CellularPlan.js
 src/model/CloneProjectRequest.js
 src/model/Contact.js
 src/model/CreateFleetRequest.js
@@ -172,6 +177,7 @@ src/model/DFUEnv.js
 src/model/DFUState.js
 src/model/DataField.js
 src/model/DataSetField.js
+src/model/DataUsage.js
 src/model/DeleteDeviceFleetsRequest.js
 src/model/Device.js
 src/model/DeviceDfuHistory.js
@@ -201,15 +207,16 @@ src/model/GetDeviceFleets200Response.js
 src/model/GetDeviceHealthLog200Response.js
 src/model/GetDeviceHealthLog200ResponseHealthLogInner.js
 src/model/GetDeviceLatest200Response.js
+src/model/GetDevicePlans200Response.js
 src/model/GetDevicePublicKey200Response.js
 src/model/GetDeviceSessions200Response.js
+src/model/GetProducts200Response.js
 src/model/GetProjectDevicePublicKeys200Response.js
 src/model/GetProjectDevicePublicKeys200ResponseDevicePublicKeysInner.js
 src/model/GetProjectDevices200Response.js
 src/model/GetProjectEvents200Response.js
 src/model/GetProjectEventsByCursor200Response.js
 src/model/GetProjectMembers200Response.js
-src/model/GetProjectProducts200Response.js
 src/model/GetProjects200Response.js
 src/model/GetWebhooks200Response.js
 src/model/Google.js
@@ -246,6 +253,7 @@ src/model/Radresponder.js
 src/model/Repository.js
 src/model/Role.js
 src/model/RouteLog.js
+src/model/SatellitePlan.js
 src/model/SchemaProperty.js
 src/model/SimUsage.js
 src/model/Slack.js
@@ -291,6 +299,7 @@ test/model/Azure.spec.js
 test/model/BillingAccount.spec.js
 test/model/BillingAccountRole.spec.js
 test/model/Body.spec.js
+test/model/CellularPlan.spec.js
 test/model/CloneProjectRequest.spec.js
 test/model/Contact.spec.js
 test/model/CreateFleetRequest.spec.js
@@ -303,6 +312,7 @@ test/model/DFUEnv.spec.js
 test/model/DFUState.spec.js
 test/model/DataField.spec.js
 test/model/DataSetField.spec.js
+test/model/DataUsage.spec.js
 test/model/DeleteDeviceFleetsRequest.spec.js
 test/model/Device.spec.js
 test/model/DeviceDfuHistory.spec.js
@@ -332,15 +342,16 @@ test/model/GetDeviceFleets200Response.spec.js
 test/model/GetDeviceHealthLog200Response.spec.js
 test/model/GetDeviceHealthLog200ResponseHealthLogInner.spec.js
 test/model/GetDeviceLatest200Response.spec.js
+test/model/GetDevicePlans200Response.spec.js
 test/model/GetDevicePublicKey200Response.spec.js
 test/model/GetDeviceSessions200Response.spec.js
+test/model/GetProducts200Response.spec.js
 test/model/GetProjectDevicePublicKeys200Response.spec.js
 test/model/GetProjectDevicePublicKeys200ResponseDevicePublicKeysInner.spec.js
 test/model/GetProjectDevices200Response.spec.js
 test/model/GetProjectEvents200Response.spec.js
 test/model/GetProjectEventsByCursor200Response.spec.js
 test/model/GetProjectMembers200Response.spec.js
-test/model/GetProjectProducts200Response.spec.js
 test/model/GetProjects200Response.spec.js
 test/model/GetWebhooks200Response.spec.js
 test/model/Google.spec.js
@@ -377,6 +388,7 @@ test/model/Radresponder.spec.js
 test/model/Repository.spec.js
 test/model/Role.spec.js
 test/model/RouteLog.spec.js
+test/model/SatellitePlan.spec.js
 test/model/SchemaProperty.spec.js
 test/model/SimUsage.spec.js
 test/model/Slack.spec.js

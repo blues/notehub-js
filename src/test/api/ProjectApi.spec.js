@@ -114,6 +114,16 @@
         done();
       });
     });
+    describe("deleteProduct", function () {
+      it("should call deleteProduct successfully", function (done) {
+        //uncomment below and update the code to test deleteProduct
+        //instance.deleteProduct(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
     describe("deleteProject", function () {
       it("should call deleteProject successfully", function (done) {
         //uncomment below and update the code to test deleteProject
@@ -264,6 +274,16 @@
         done();
       });
     });
+    describe("getProducts", function () {
+      it("should call getProducts successfully", function (done) {
+        //uncomment below and update the code to test getProducts
+        //instance.getProducts(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
     describe("getProject", function () {
       it("should call getProject successfully", function (done) {
         //uncomment below and update the code to test getProject
@@ -318,16 +338,6 @@
       it("should call getProjectMembers successfully", function (done) {
         //uncomment below and update the code to test getProjectMembers
         //instance.getProjectMembers(function(error) {
-        //  if (error) throw error;
-        //expect().to.be();
-        //});
-        done();
-      });
-    });
-    describe("getProjectProducts", function () {
-      it("should call getProjectProducts successfully", function (done) {
-        //uncomment below and update the code to test getProjectProducts
-        //instance.getProjectProducts(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});

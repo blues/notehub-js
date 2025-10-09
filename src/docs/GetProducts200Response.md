@@ -1,4 +1,4 @@
-# NotehubJs.GetProjectProducts200Response
+# NotehubJs.GetProducts200Response
 
 ## Properties
 
