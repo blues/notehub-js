@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The UsageEventsData model module.
  * @module model/UsageEventsData
- * @version 2.1.0
+ * @version 2.2.0
  */
 class UsageEventsData {
   /**

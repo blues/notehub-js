@@ -17,7 +17,7 @@ import NotehubRouteSchema from "./NotehubRouteSchema";
 /**
  * The NotehubRoute model module.
  * @module model/NotehubRoute
- * @version 2.1.0
+ * @version 2.2.0
  */
 class NotehubRoute {
   /**

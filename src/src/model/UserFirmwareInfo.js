@@ -18,7 +18,7 @@ import UserDfuStateMachine from "./UserDfuStateMachine";
 /**
  * The UserFirmwareInfo model module.
  * @module model/UserFirmwareInfo
- * @version 2.1.0
+ * @version 2.2.0
  */
 class UserFirmwareInfo {
   /**

@@ -17,7 +17,7 @@ import SchemaProperty from "./SchemaProperty";
 /**
  * The NotefileSchema model module.
  * @module model/NotefileSchema
- * @version 2.1.0
+ * @version 2.2.0
  */
 class NotefileSchema {
   /**

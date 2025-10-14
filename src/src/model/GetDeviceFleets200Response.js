@@ -17,7 +17,7 @@ import Fleet from "./Fleet";
 /**
  * The GetDeviceFleets200Response model module.
  * @module model/GetDeviceFleets200Response
- * @version 2.1.0
+ * @version 2.2.0
  */
 class GetDeviceFleets200Response {
   /**
