@@ -220,6 +220,9 @@ All URIs are relative to *https://api.notefile.net*
 | _NotehubJs.RouteApi_           | [**getRouteLogsByRoute**](docs/RouteApi.md#getRouteLogsByRoute)                                | **GET** /v1/projects/{projectOrProductUID}/routes/{routeUID}/route-logs                        |
 | _NotehubJs.RouteApi_           | [**getRoutes**](docs/RouteApi.md#getRoutes)                                                    | **GET** /v1/projects/{projectOrProductUID}/routes                                              |
 | _NotehubJs.RouteApi_           | [**updateRoute**](docs/RouteApi.md#updateRoute)                                                | **PUT** /v1/projects/{projectOrProductUID}/routes/{routeUID}                                   |
+| _NotehubJs.UsageApi_           | [**getDataUsage**](docs/UsageApi.md#getDataUsage)                                              | **GET** /v1/projects/{projectOrProductUID}/usage/data                                          |
+| _NotehubJs.UsageApi_           | [**getProjectEventsUsage**](docs/UsageApi.md#getProjectEventsUsage)                            | **GET** /v1/projects/{projectOrProductUID}/usage/events                                        |
+| _NotehubJs.UsageApi_           | [**getSessionsUsage**](docs/UsageApi.md#getSessionsUsage)                                      | **GET** /v1/projects/{projectOrProductUID}/usage/sessions                                      |
 | _NotehubJs.WebhookApi_         | [**createWebhook**](docs/WebhookApi.md#createWebhook)                                          | **POST** /v1/projects/{projectOrProductUID}/webhooks/{webhookUID}                              |
 | _NotehubJs.WebhookApi_         | [**deleteWebhook**](docs/WebhookApi.md#deleteWebhook)                                          | **DELETE** /v1/projects/{projectOrProductUID}/webhooks/{webhookUID}                            |
 | _NotehubJs.WebhookApi_         | [**getWebhook**](docs/WebhookApi.md#getWebhook)                                                | **GET** /v1/projects/{projectOrProductUID}/webhooks/{webhookUID}                               |
@@ -276,6 +279,8 @@ All URIs are relative to *https://api.notefile.net*
 - [NotehubJs.Fleet](docs/Fleet.md)
 - [NotehubJs.GetAlerts200Response](docs/GetAlerts200Response.md)
 - [NotehubJs.GetBillingAccounts200Response](docs/GetBillingAccounts200Response.md)
+- [NotehubJs.GetDataUsage200Response](docs/GetDataUsage200Response.md)
+- [NotehubJs.GetDataUsage200ResponseDataInner](docs/GetDataUsage200ResponseDataInner.md)
 - [NotehubJs.GetDeviceEnvironmentVariablesByPin200Response](docs/GetDeviceEnvironmentVariablesByPin200Response.md)
 - [NotehubJs.GetDeviceFleets200Response](docs/GetDeviceFleets200Response.md)
 - [NotehubJs.GetDeviceHealthLog200Response](docs/GetDeviceHealthLog200Response.md)
@@ -292,6 +297,7 @@ All URIs are relative to *https://api.notefile.net*
 - [NotehubJs.GetProjectEventsByCursor200Response](docs/GetProjectEventsByCursor200Response.md)
 - [NotehubJs.GetProjectMembers200Response](docs/GetProjectMembers200Response.md)
 - [NotehubJs.GetProjects200Response](docs/GetProjects200Response.md)
+- [NotehubJs.GetSessionsUsage200Response](docs/GetSessionsUsage200Response.md)
 - [NotehubJs.GetWebhooks200Response](docs/GetWebhooks200Response.md)
 - [NotehubJs.Google](docs/Google.md)
 - [NotehubJs.HandleNoteChanges200Response](docs/HandleNoteChanges200Response.md)

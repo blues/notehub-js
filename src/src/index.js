@@ -60,6 +60,8 @@ import FirmwareInfo from "./model/FirmwareInfo";
 import Fleet from "./model/Fleet";
 import GetAlerts200Response from "./model/GetAlerts200Response";
 import GetBillingAccounts200Response from "./model/GetBillingAccounts200Response";
+import GetDataUsage200Response from "./model/GetDataUsage200Response";
+import GetDataUsage200ResponseDataInner from "./model/GetDataUsage200ResponseDataInner";
 import GetDeviceEnvironmentVariablesByPin200Response from "./model/GetDeviceEnvironmentVariablesByPin200Response";
 import GetDeviceFleets200Response from "./model/GetDeviceFleets200Response";
 import GetDeviceHealthLog200Response from "./model/GetDeviceHealthLog200Response";
@@ -76,6 +78,7 @@ import GetProjectEvents200Response from "./model/GetProjectEvents200Response";
 import GetProjectEventsByCursor200Response from "./model/GetProjectEventsByCursor200Response";
 import GetProjectMembers200Response from "./model/GetProjectMembers200Response";
 import GetProjects200Response from "./model/GetProjects200Response";
+import GetSessionsUsage200Response from "./model/GetSessionsUsage200Response";
 import GetWebhooks200Response from "./model/GetWebhooks200Response";
 import Google from "./model/Google";
 import HandleNoteChanges200Response from "./model/HandleNoteChanges200Response";
@@ -143,6 +146,7 @@ import ExternalDevicesApi from "./api/ExternalDevicesApi";
 import MonitorApi from "./api/MonitorApi";
 import ProjectApi from "./api/ProjectApi";
 import RouteApi from "./api/RouteApi";
+import UsageApi from "./api/UsageApi";
 import WebhookApi from "./api/WebhookApi";
 
 /**
@@ -472,6 +476,18 @@ export {
   GetBillingAccounts200Response,
 
   /**
+   * The GetDataUsage200Response model constructor.
+   * @property {module:model/GetDataUsage200Response}
+   */
+  GetDataUsage200Response,
+
+  /**
+   * The GetDataUsage200ResponseDataInner model constructor.
+   * @property {module:model/GetDataUsage200ResponseDataInner}
+   */
+  GetDataUsage200ResponseDataInner,
+
+  /**
    * The GetDeviceEnvironmentVariablesByPin200Response model constructor.
    * @property {module:model/GetDeviceEnvironmentVariablesByPin200Response}
    */
@@ -566,6 +582,12 @@ export {
    * @property {module:model/GetProjects200Response}
    */
   GetProjects200Response,
+
+  /**
+   * The GetSessionsUsage200Response model constructor.
+   * @property {module:model/GetSessionsUsage200Response}
+   */
+  GetSessionsUsage200Response,
 
   /**
    * The GetWebhooks200Response model constructor.
@@ -968,6 +990,12 @@ export {
    * @property {module:api/RouteApi}
    */
   RouteApi,
+
+  /**
+   * The UsageApi service constructor.
+   * @property {module:api/UsageApi}
+   */
+  UsageApi,
 
   /**
    * The WebhookApi service constructor.
