@@ -220,10 +220,6 @@ All URIs are relative to *https://api.notefile.net*
 | _NotehubJs.RouteApi_           | [**getRouteLogsByRoute**](docs/RouteApi.md#getRouteLogsByRoute)                                | **GET** /v1/projects/{projectOrProductUID}/routes/{routeUID}/route-logs                        |
 | _NotehubJs.RouteApi_           | [**getRoutes**](docs/RouteApi.md#getRoutes)                                                    | **GET** /v1/projects/{projectOrProductUID}/routes                                              |
 | _NotehubJs.RouteApi_           | [**updateRoute**](docs/RouteApi.md#updateRoute)                                                | **PUT** /v1/projects/{projectOrProductUID}/routes/{routeUID}                                   |
-| _NotehubJs.UsageApi_           | [**getProjectDataUsage**](docs/UsageApi.md#getProjectDataUsage)                                | **GET** /v1/projects/{projectOrProductUID}/usage/data                                          |
-| _NotehubJs.UsageApi_           | [**getProjectEventsUsage**](docs/UsageApi.md#getProjectEventsUsage)                            | **GET** /v1/projects/{projectOrProductUID}/usage/events                                        |
-| _NotehubJs.UsageApi_           | [**getRouteLogsUsage**](docs/UsageApi.md#getRouteLogsUsage)                                    | **GET** /v1/projects/{projectOrProductUID}/usage/route-logs                                    |
-| _NotehubJs.UsageApi_           | [**getSessionsUsage**](docs/UsageApi.md#getSessionsUsage)                                      | **GET** /v1/projects/{projectOrProductUID}/usage/sessions                                      |
 | _NotehubJs.WebhookApi_         | [**createWebhook**](docs/WebhookApi.md#createWebhook)                                          | **POST** /v1/projects/{projectOrProductUID}/webhooks/{webhookUID}                              |
 | _NotehubJs.WebhookApi_         | [**deleteWebhook**](docs/WebhookApi.md#deleteWebhook)                                          | **DELETE** /v1/projects/{projectOrProductUID}/webhooks/{webhookUID}                            |
 | _NotehubJs.WebhookApi_         | [**getWebhook**](docs/WebhookApi.md#getWebhook)                                                | **GET** /v1/projects/{projectOrProductUID}/webhooks/{webhookUID}                               |
@@ -348,9 +344,7 @@ All URIs are relative to *https://api.notefile.net*
 - [NotehubJs.UsageEventsData](docs/UsageEventsData.md)
 - [NotehubJs.UsageEventsResponse](docs/UsageEventsResponse.md)
 - [NotehubJs.UsageRouteLogsData](docs/UsageRouteLogsData.md)
-- [NotehubJs.UsageRouteLogsResponse](docs/UsageRouteLogsResponse.md)
 - [NotehubJs.UsageSessionsData](docs/UsageSessionsData.md)
-- [NotehubJs.UsageSessionsResponse](docs/UsageSessionsResponse.md)
 - [NotehubJs.UserDbRoute](docs/UserDbRoute.md)
 - [NotehubJs.UserDfuStateMachine](docs/UserDfuStateMachine.md)
 - [NotehubJs.UserDfuStateMachineStatus](docs/UserDfuStateMachineStatus.md)

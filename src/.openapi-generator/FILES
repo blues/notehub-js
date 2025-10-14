@@ -124,14 +124,11 @@ docs/TowerLocation.md
 docs/Twilio.md
 docs/UpdateFleetRequest.md
 docs/UploadMetadata.md
-docs/UsageApi.md
 docs/UsageData.md
 docs/UsageEventsData.md
 docs/UsageEventsResponse.md
 docs/UsageRouteLogsData.md
-docs/UsageRouteLogsResponse.md
 docs/UsageSessionsData.md
-docs/UsageSessionsResponse.md
 docs/UserDbRoute.md
 docs/UserDfuStateMachine.md
 docs/UserDfuStateMachineStatus.md
@@ -151,7 +148,6 @@ src/api/ExternalDevicesApi.js
 src/api/MonitorApi.js
 src/api/ProjectApi.js
 src/api/RouteApi.js
-src/api/UsageApi.js
 src/api/WebhookApi.js
 src/index.js
 src/model/Alert.js
@@ -270,9 +266,7 @@ src/model/UsageData.js
 src/model/UsageEventsData.js
 src/model/UsageEventsResponse.js
 src/model/UsageRouteLogsData.js
-src/model/UsageRouteLogsResponse.js
 src/model/UsageSessionsData.js
-src/model/UsageSessionsResponse.js
 src/model/UserDbRoute.js
 src/model/UserDfuStateMachine.js
 src/model/UserDfuStateMachineStatus.js
@@ -287,7 +281,6 @@ test/api/ExternalDevicesApi.spec.js
 test/api/MonitorApi.spec.js
 test/api/ProjectApi.spec.js
 test/api/RouteApi.spec.js
-test/api/UsageApi.spec.js
 test/api/WebhookApi.spec.js
 test/model/Alert.spec.js
 test/model/AlertDataInner.spec.js
@@ -405,9 +398,7 @@ test/model/UsageData.spec.js
 test/model/UsageEventsData.spec.js
 test/model/UsageEventsResponse.spec.js
 test/model/UsageRouteLogsData.spec.js
-test/model/UsageRouteLogsResponse.spec.js
 test/model/UsageSessionsData.spec.js
-test/model/UsageSessionsResponse.spec.js
 test/model/UserDbRoute.spec.js
 test/model/UserDfuStateMachine.spec.js
 test/model/UserDfuStateMachineStatus.spec.js

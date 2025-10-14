@@ -128,9 +128,7 @@ import UsageData from "./model/UsageData";
 import UsageEventsData from "./model/UsageEventsData";
 import UsageEventsResponse from "./model/UsageEventsResponse";
 import UsageRouteLogsData from "./model/UsageRouteLogsData";
-import UsageRouteLogsResponse from "./model/UsageRouteLogsResponse";
 import UsageSessionsData from "./model/UsageSessionsData";
-import UsageSessionsResponse from "./model/UsageSessionsResponse";
 import UserDbRoute from "./model/UserDbRoute";
 import UserDfuStateMachine from "./model/UserDfuStateMachine";
 import UserDfuStateMachineStatus from "./model/UserDfuStateMachineStatus";
@@ -145,7 +143,6 @@ import ExternalDevicesApi from "./api/ExternalDevicesApi";
 import MonitorApi from "./api/MonitorApi";
 import ProjectApi from "./api/ProjectApi";
 import RouteApi from "./api/RouteApi";
-import UsageApi from "./api/UsageApi";
 import WebhookApi from "./api/WebhookApi";
 
 /**
@@ -883,22 +880,10 @@ export {
   UsageRouteLogsData,
 
   /**
-   * The UsageRouteLogsResponse model constructor.
-   * @property {module:model/UsageRouteLogsResponse}
-   */
-  UsageRouteLogsResponse,
-
-  /**
    * The UsageSessionsData model constructor.
    * @property {module:model/UsageSessionsData}
    */
   UsageSessionsData,
-
-  /**
-   * The UsageSessionsResponse model constructor.
-   * @property {module:model/UsageSessionsResponse}
-   */
-  UsageSessionsResponse,
 
   /**
    * The UserDbRoute model constructor.
@@ -983,12 +968,6 @@ export {
    * @property {module:api/RouteApi}
    */
   RouteApi,
-
-  /**
-   * The UsageApi service constructor.
-   * @property {module:api/UsageApi}
-   */
-  UsageApi,
 
   /**
    * The WebhookApi service constructor.
