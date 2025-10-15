@@ -50,12 +50,6 @@
       //expect(instance).to.be.a(NotehubJs.UsageRouteLogsData);
     });
 
-    it('should have the property device (base name: "device")', function () {
-      // uncomment below and update the code to test the property device
-      //var instance = new NotehubJs.UsageRouteLogsData();
-      //expect(instance).to.be();
-    });
-
     it('should have the property failedRoutes (base name: "failed_routes")', function () {
       // uncomment below and update the code to test the property failedRoutes
       //var instance = new NotehubJs.UsageRouteLogsData();
@@ -64,6 +58,12 @@
 
     it('should have the property period (base name: "period")', function () {
       // uncomment below and update the code to test the property period
+      //var instance = new NotehubJs.UsageRouteLogsData();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property route (base name: "route")', function () {
+      // uncomment below and update the code to test the property route
       //var instance = new NotehubJs.UsageRouteLogsData();
       //expect(instance).to.be();
     });

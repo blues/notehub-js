@@ -37,7 +37,7 @@ import PostProvisionProjectDeviceRequest from "../model/PostProvisionProjectDevi
 /**
  * Device service.
  * @module api/DeviceApi
- * @version 2.1.0
+ * @version 2.2.0
  */
 export default class DeviceApi {
   /**
@@ -890,7 +890,7 @@ export default class DeviceApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = [];
+    let authNames = ["personalAccessToken"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = GetDevicePlans200Response;

@@ -28,7 +28,7 @@
   var instance;
 
   beforeEach(function () {
-    instance = new NotehubJs.UsageSessionsResponse();
+    instance = new NotehubJs.GetSessionsUsage200Response();
   });
 
   var getProperty = function (object, getter, property) {
@@ -43,16 +43,16 @@
     else object[property] = value;
   };
 
-  describe("UsageSessionsResponse", function () {
-    it("should create an instance of UsageSessionsResponse", function () {
-      // uncomment below and update the code to test UsageSessionsResponse
-      //var instance = new NotehubJs.UsageSessionsResponse();
-      //expect(instance).to.be.a(NotehubJs.UsageSessionsResponse);
+  describe("GetSessionsUsage200Response", function () {
+    it("should create an instance of GetSessionsUsage200Response", function () {
+      // uncomment below and update the code to test GetSessionsUsage200Response
+      //var instance = new NotehubJs.GetSessionsUsage200Response();
+      //expect(instance).to.be.a(NotehubJs.GetSessionsUsage200Response);
     });
 
-    it('should have the property data (base name: "data")', function () {
-      // uncomment below and update the code to test the property data
-      //var instance = new NotehubJs.UsageSessionsResponse();
+    it('should have the property sessions (base name: "sessions")', function () {
+      // uncomment below and update the code to test the property sessions
+      //var instance = new NotehubJs.GetSessionsUsage200Response();
       //expect(instance).to.be();
     });
   });

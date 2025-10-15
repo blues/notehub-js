@@ -16,19 +16,18 @@ import ApiClient from "../ApiClient";
 /**
  * The UsageSessionsData model module.
  * @module model/UsageSessionsData
- * @version 2.1.0
+ * @version 2.2.0
  */
 class UsageSessionsData {
   /**
    * Constructs a new <code>UsageSessionsData</code>.
    * @alias module:model/UsageSessionsData
-   * @param device {String}
    * @param period {Date}
    * @param sessions {Number}
    * @param totalBytes {Number}
    */
-  constructor(device, period, sessions, totalBytes) {
-    UsageSessionsData.initialize(this, device, period, sessions, totalBytes);
+  constructor(period, sessions, totalBytes) {
+    UsageSessionsData.initialize(this, period, sessions, totalBytes);
   }
 
   /**
@@ -36,8 +35,7 @@ class UsageSessionsData {
    * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
    * Only for internal use.
    */
-  static initialize(obj, device, period, sessions, totalBytes) {
-    obj["device"] = device;
+  static initialize(obj, period, sessions, totalBytes) {
     obj["period"] = period;
     obj["sessions"] = sessions;
     obj["total_bytes"] = totalBytes;
@@ -56,6 +54,9 @@ class UsageSessionsData {
 
       if (data.hasOwnProperty("device")) {
         obj["device"] = ApiClient.convertToType(data["device"], "String");
+      }
+      if (data.hasOwnProperty("fleet")) {
+        obj["fleet"] = ApiClient.convertToType(data["fleet"], "String");
       }
       if (data.hasOwnProperty("period")) {
         obj["period"] = ApiClient.convertToType(data["period"], "Date");
@@ -102,22 +103,32 @@ class UsageSessionsData {
           data["device"]
       );
     }
+    // ensure the json data is a string
+    if (
+      data["fleet"] &&
+      !(typeof data["fleet"] === "string" || data["fleet"] instanceof String)
+    ) {
+      throw new Error(
+        "Expected the field `fleet` to be a primitive type in the JSON string but got " +
+          data["fleet"]
+      );
+    }
 
     return true;
   }
 }
 
-UsageSessionsData.RequiredProperties = [
-  "device",
-  "period",
-  "sessions",
-  "total_bytes",
-];
+UsageSessionsData.RequiredProperties = ["period", "sessions", "total_bytes"];
 
 /**
  * @member {String} device
  */
 UsageSessionsData.prototype["device"] = undefined;
+
+/**
+ * @member {String} fleet
+ */
+UsageSessionsData.prototype["fleet"] = undefined;
 
 /**
  * @member {Date} period

@@ -610,6 +610,10 @@ Get Data Plans associated with the device, this include the primary sim, any ext
 
 ```javascript
 import * as NotehubJs from '@blues-inc/notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
+// Configure Bearer access token for authorization: personalAccessToken
+let personalAccessToken = defaultClient.authentications['personalAccessToken'];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
 
 let apiInstance = new NotehubJs.DeviceApi();
 let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
@@ -635,7 +639,7 @@ apiInstance.getDevicePlans(projectOrProductUID, deviceUID).then((data) => {
 
 ### Authorization
 
-No authorization required
+[personalAccessToken](../README.md#personalAccessToken)
 
 ### HTTP request headers
 

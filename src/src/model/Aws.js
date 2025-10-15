@@ -18,7 +18,7 @@ import AwsTransform from "./AwsTransform";
 /**
  * The Aws model module.
  * @module model/Aws
- * @version 2.1.0
+ * @version 2.2.0
  */
 class Aws {
   /**

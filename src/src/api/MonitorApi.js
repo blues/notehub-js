@@ -19,7 +19,7 @@ import Monitor from "../model/Monitor";
 /**
  * Monitor service.
  * @module api/MonitorApi
- * @version 2.1.0
+ * @version 2.2.0
  */
 export default class MonitorApi {
   /**

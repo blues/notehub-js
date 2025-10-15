@@ -44,10 +44,10 @@
   };
 
   describe("UsageApi", function () {
-    describe("getProjectDataUsage", function () {
-      it("should call getProjectDataUsage successfully", function (done) {
-        //uncomment below and update the code to test getProjectDataUsage
-        //instance.getProjectDataUsage(function(error) {
+    describe("getDataUsage", function () {
+      it("should call getDataUsage successfully", function (done) {
+        //uncomment below and update the code to test getDataUsage
+        //instance.getDataUsage(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});
@@ -58,16 +58,6 @@
       it("should call getProjectEventsUsage successfully", function (done) {
         //uncomment below and update the code to test getProjectEventsUsage
         //instance.getProjectEventsUsage(function(error) {
-        //  if (error) throw error;
-        //expect().to.be();
-        //});
-        done();
-      });
-    });
-    describe("getRouteLogsUsage", function () {
-      it("should call getRouteLogsUsage successfully", function (done) {
-        //uncomment below and update the code to test getRouteLogsUsage
-        //instance.getRouteLogsUsage(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});

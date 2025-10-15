@@ -1125,7 +1125,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - device
     parameters:
@@ -2457,7 +2457,7 @@ paths:
         - project
   '/v1/projects/{projectOrProductUID}/usage/data':
     get:
-      operationId: getProjectDataUsage
+      operationId: getDataUsage
       description: Get data usage in bytes for a project with time range and period aggregation
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
@@ -2474,17 +2474,24 @@ paths:
               - day
               - week
               - month
+        - name: aggregate
+          in: query
+          description: Aggregation level for results
+          required: false
+          schema:
+            type: string
+            default: device
+            enum:
+              - device
+              - fleet
+              - project
       responses:
         '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UsageDataResponse'
+          $ref: '#/components/responses/UsageDataResponse'
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - usage
   '/v1/projects/{projectOrProductUID}/usage/events':
@@ -2506,6 +2513,17 @@ paths:
               - day
               - week
               - month
+        - name: aggregate
+          in: query
+          description: Aggregation level for results
+          required: false
+          schema:
+            type: string
+            default: device
+            enum:
+              - device
+              - fleet
+              - project
       responses:
         '200':
           description: Successful operation
@@ -2513,38 +2531,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UsageEventsResponse'
-        default:
-          $ref: '#/components/responses/ErrorResponse'
-      security:
-        - personalAccessToken: []
-      tags:
-        - usage
-  '/v1/projects/{projectOrProductUID}/usage/route-logs':
-    get:
-      operationId: getRouteLogsUsage
-      description: 'Get route logs usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied'
-      parameters:
-        - $ref: '#/components/parameters/projectOrProductUIDParam'
-        - $ref: '#/components/parameters/startDateParam'
-        - $ref: '#/components/parameters/endDateParam'
-        - $ref: '#/components/parameters/deviceUIDParamQuery'
-        - name: period
-          in: query
-          description: Period type for aggregation
-          required: true
-          schema:
-            type: string
-            enum:
-              - day
-              - week
-              - month
-      responses:
-        '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UsageRouteLogsResponse'
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
@@ -2570,13 +2556,20 @@ paths:
               - day
               - week
               - month
+        - name: aggregate
+          in: query
+          description: Aggregation level for results
+          required: false
+          schema:
+            type: string
+            default: device
+            enum:
+              - device
+              - fleet
+              - project
       responses:
         '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UsageSessionsResponse'
+          $ref: '#/components/responses/UsageSessionsResponse'
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
@@ -3989,14 +3982,14 @@ components:
         fleet_uid:
           type: string
         inherited_var_count:
-          type: int
+          type: integer
         type:
           type: string
         url:
           type: string
           format: uri
         var_count:
-          type: int
+          type: integer
         variables:
           type: array
           items:
@@ -4013,7 +4006,7 @@ components:
         key:
           type: string
         precedence:
-          type: int
+          type: integer
         used:
           type: boolean
         value:
@@ -4948,43 +4941,15 @@ components:
       required:
         - period
         - total_bytes
-    UsageDataResponse:
-      type: array
-      items:
-        properties:
-          data:
-            type: array
-            items:
-              $ref: '#/components/schemas/UsageData'
-          device:
-            description: The device UID this usage data belongs to
-            type: string
-            example: 'dev:123456789012345'
-          iccid:
-            description: The ICCID of the cellular SIM card (only present when type is 'cellular')
-            type: string
-            example: '12345678901234567890'
-          imsi:
-            description: The IMSI of the satellite device (only present when type is 'satellite')
-            type: string
-            example: '123456789012345'
-          type:
-            description: The type of connectivity
-            type: string
-            enum:
-              - cellular
-              - satellite
-        required:
-          - device
-          - type
-          - data
-        type: object
-      properties: {}
     UsageEventsData:
       type: object
       properties:
         device:
           type: string
+          example: 'dev:123456789012345'
+        fleet:
+          type: string
+          example: 'fleet:1042ddc5-3b2c-4cec-b1fb-d3040538094d'
         period:
           type: string
           format: date-time
@@ -4999,7 +4964,6 @@ components:
         - period
         - total_events
         - platform_events
-        - device
     UsageEventsResponse:
       type: object
       properties:
@@ -5012,8 +4976,6 @@ components:
     UsageRouteLogsData:
       type: object
       properties:
-        device:
-          type: string
         failed_routes:
           type: integer
           example: 4
@@ -5021,6 +4983,9 @@ components:
           type: string
           format: date-time
           example: '2025-07-23T00:00:00Z'
+        route:
+          description: The route serial number (only present when aggregate is 'route')
+          type: string
         successful_routes:
           type: integer
           example: 38
@@ -5032,21 +4997,15 @@ components:
         - successful_routes
         - failed_routes
         - total_routes
-        - device
-    UsageRouteLogsResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/UsageRouteLogsData'
-      required:
-        - data
     UsageSessionsData:
       type: object
       properties:
         device:
           type: string
+          example: 'dev:123456789012345'
+        fleet:
+          type: string
+          example: 'fleet:1042ddc5-3b2c-4cec-b1fb-d3040538094d'
         period:
           type: string
           format: date-time
@@ -5061,16 +5020,6 @@ components:
         - period
         - sessions
         - total_bytes
-        - device
-    UsageSessionsResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/UsageSessionsData'
-      required:
-        - data
     UserDbRoute:
       type: object
       properties:
@@ -6157,6 +6106,73 @@ components:
                 voltage: 4.174
                 when: 1667251044
                 work: 1667251046
+    UsageDataResponse:
+      description: Response body for Data Usage
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/UsageData'
+                    device:
+                      description: The device UID this usage data belongs to (only present when aggregate is 'device')
+                      type: string
+                      example: 'dev:123456789012345'
+                    fleet:
+                      description: The fleet UID this usage data belongs to (only present when aggregate is 'fleet')
+                      type: string
+                      example: 'fleet:1042ddc5-3b2c-4cec-b1fb-d3040538094d'
+                    iccid:
+                      description: The ICCID of the cellular SIM card (only present when type is 'cellular')
+                      type: string
+                      example: '12345678901234567890'
+                    imsi:
+                      description: The IMSI of the satellite device (only present when type is 'satellite')
+                      type: string
+                      example: '123456789012345'
+                    type:
+                      description: The type of connectivity
+                      type: string
+                      enum:
+                        - cellular
+                        - satellite
+                  required:
+                    - type
+                    - data
+                  type: object
+    UsageRouteLogsResponse:
+      description: Response body for Route Log Usage
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              route_logs:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UsageRouteLogsData'
+            required:
+              - route_logs
+    UsageSessionsResponse:
+      description: Response body for Session Usage
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              sessions:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UsageSessionsData'
+            required:
+              - sessions
   securitySchemes:
     personalAccessToken:
       description: |

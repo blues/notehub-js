@@ -60,6 +60,8 @@ import FirmwareInfo from "./model/FirmwareInfo";
 import Fleet from "./model/Fleet";
 import GetAlerts200Response from "./model/GetAlerts200Response";
 import GetBillingAccounts200Response from "./model/GetBillingAccounts200Response";
+import GetDataUsage200Response from "./model/GetDataUsage200Response";
+import GetDataUsage200ResponseDataInner from "./model/GetDataUsage200ResponseDataInner";
 import GetDeviceEnvironmentVariablesByPin200Response from "./model/GetDeviceEnvironmentVariablesByPin200Response";
 import GetDeviceFleets200Response from "./model/GetDeviceFleets200Response";
 import GetDeviceHealthLog200Response from "./model/GetDeviceHealthLog200Response";
@@ -76,6 +78,7 @@ import GetProjectEvents200Response from "./model/GetProjectEvents200Response";
 import GetProjectEventsByCursor200Response from "./model/GetProjectEventsByCursor200Response";
 import GetProjectMembers200Response from "./model/GetProjectMembers200Response";
 import GetProjects200Response from "./model/GetProjects200Response";
+import GetSessionsUsage200Response from "./model/GetSessionsUsage200Response";
 import GetWebhooks200Response from "./model/GetWebhooks200Response";
 import Google from "./model/Google";
 import HandleNoteChanges200Response from "./model/HandleNoteChanges200Response";
@@ -128,9 +131,7 @@ import UsageData from "./model/UsageData";
 import UsageEventsData from "./model/UsageEventsData";
 import UsageEventsResponse from "./model/UsageEventsResponse";
 import UsageRouteLogsData from "./model/UsageRouteLogsData";
-import UsageRouteLogsResponse from "./model/UsageRouteLogsResponse";
 import UsageSessionsData from "./model/UsageSessionsData";
-import UsageSessionsResponse from "./model/UsageSessionsResponse";
 import UserDbRoute from "./model/UserDbRoute";
 import UserDfuStateMachine from "./model/UserDfuStateMachine";
 import UserDfuStateMachineStatus from "./model/UserDfuStateMachineStatus";
@@ -177,7 +178,7 @@ import WebhookApi from "./api/WebhookApi";
  * </pre>
  * </p>
  * @module index
- * @version 2.1.0
+ * @version 2.2.0
  */
 export {
   /**
@@ -475,6 +476,18 @@ export {
   GetBillingAccounts200Response,
 
   /**
+   * The GetDataUsage200Response model constructor.
+   * @property {module:model/GetDataUsage200Response}
+   */
+  GetDataUsage200Response,
+
+  /**
+   * The GetDataUsage200ResponseDataInner model constructor.
+   * @property {module:model/GetDataUsage200ResponseDataInner}
+   */
+  GetDataUsage200ResponseDataInner,
+
+  /**
    * The GetDeviceEnvironmentVariablesByPin200Response model constructor.
    * @property {module:model/GetDeviceEnvironmentVariablesByPin200Response}
    */
@@ -569,6 +582,12 @@ export {
    * @property {module:model/GetProjects200Response}
    */
   GetProjects200Response,
+
+  /**
+   * The GetSessionsUsage200Response model constructor.
+   * @property {module:model/GetSessionsUsage200Response}
+   */
+  GetSessionsUsage200Response,
 
   /**
    * The GetWebhooks200Response model constructor.
@@ -883,22 +902,10 @@ export {
   UsageRouteLogsData,
 
   /**
-   * The UsageRouteLogsResponse model constructor.
-   * @property {module:model/UsageRouteLogsResponse}
-   */
-  UsageRouteLogsResponse,
-
-  /**
    * The UsageSessionsData model constructor.
    * @property {module:model/UsageSessionsData}
    */
   UsageSessionsData,
-
-  /**
-   * The UsageSessionsResponse model constructor.
-   * @property {module:model/UsageSessionsResponse}
-   */
-  UsageSessionsResponse,
 
   /**
    * The UserDbRoute model constructor.

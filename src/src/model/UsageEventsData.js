@@ -16,25 +16,18 @@ import ApiClient from "../ApiClient";
 /**
  * The UsageEventsData model module.
  * @module model/UsageEventsData
- * @version 2.1.0
+ * @version 2.2.0
  */
 class UsageEventsData {
   /**
    * Constructs a new <code>UsageEventsData</code>.
    * @alias module:model/UsageEventsData
-   * @param device {String}
    * @param period {Date}
    * @param platformEvents {Number}
    * @param totalEvents {Number}
    */
-  constructor(device, period, platformEvents, totalEvents) {
-    UsageEventsData.initialize(
-      this,
-      device,
-      period,
-      platformEvents,
-      totalEvents
-    );
+  constructor(period, platformEvents, totalEvents) {
+    UsageEventsData.initialize(this, period, platformEvents, totalEvents);
   }
 
   /**
@@ -42,8 +35,7 @@ class UsageEventsData {
    * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
    * Only for internal use.
    */
-  static initialize(obj, device, period, platformEvents, totalEvents) {
-    obj["device"] = device;
+  static initialize(obj, period, platformEvents, totalEvents) {
     obj["period"] = period;
     obj["platform_events"] = platformEvents;
     obj["total_events"] = totalEvents;
@@ -62,6 +54,9 @@ class UsageEventsData {
 
       if (data.hasOwnProperty("device")) {
         obj["device"] = ApiClient.convertToType(data["device"], "String");
+      }
+      if (data.hasOwnProperty("fleet")) {
+        obj["fleet"] = ApiClient.convertToType(data["fleet"], "String");
       }
       if (data.hasOwnProperty("period")) {
         obj["period"] = ApiClient.convertToType(data["period"], "Date");
@@ -111,13 +106,22 @@ class UsageEventsData {
           data["device"]
       );
     }
+    // ensure the json data is a string
+    if (
+      data["fleet"] &&
+      !(typeof data["fleet"] === "string" || data["fleet"] instanceof String)
+    ) {
+      throw new Error(
+        "Expected the field `fleet` to be a primitive type in the JSON string but got " +
+          data["fleet"]
+      );
+    }
 
     return true;
   }
 }
 
 UsageEventsData.RequiredProperties = [
-  "device",
   "period",
   "platform_events",
   "total_events",
@@ -127,6 +131,11 @@ UsageEventsData.RequiredProperties = [
  * @member {String} device
  */
 UsageEventsData.prototype["device"] = undefined;
+
+/**
+ * @member {String} fleet
+ */
+UsageEventsData.prototype["fleet"] = undefined;
 
 /**
  * @member {Date} period

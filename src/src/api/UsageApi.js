@@ -13,15 +13,14 @@
 
 import ApiClient from "../ApiClient";
 import Error from "../model/Error";
-import UsageData from "../model/UsageData";
+import GetDataUsage200Response from "../model/GetDataUsage200Response";
+import GetSessionsUsage200Response from "../model/GetSessionsUsage200Response";
 import UsageEventsResponse from "../model/UsageEventsResponse";
-import UsageRouteLogsResponse from "../model/UsageRouteLogsResponse";
-import UsageSessionsResponse from "../model/UsageSessionsResponse";
 
 /**
  * Usage service.
  * @module api/UsageApi
- * @version 2.1.0
+ * @version 2.2.0
  */
 export default class UsageApi {
   /**
@@ -43,21 +42,22 @@ export default class UsageApi {
    * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
    * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
    * @param {Array.<String>} opts.deviceUID A Device UID.
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link Array.<Object>} and HTTP response
+   * @param {module:model/String} opts.aggregate Aggregation level for results (default to 'device')
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetDataUsage200Response} and HTTP response
    */
-  getProjectDataUsageWithHttpInfo(projectOrProductUID, period, opts) {
+  getDataUsageWithHttpInfo(projectOrProductUID, period, opts) {
     opts = opts || {};
     let postBody = null;
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling getProjectDataUsage"
+        "Missing the required parameter 'projectOrProductUID' when calling getDataUsage"
       );
     }
     // verify the required parameter 'period' is set
     if (period === undefined || period === null) {
       throw new Error(
-        "Missing the required parameter 'period' when calling getProjectDataUsage"
+        "Missing the required parameter 'period' when calling getDataUsage"
       );
     }
 
@@ -72,14 +72,15 @@ export default class UsageApi {
         "multi"
       ),
       period: period,
+      aggregate: opts["aggregate"],
     };
     let headerParams = {};
     let formParams = {};
 
-    let authNames = [];
+    let authNames = ["personalAccessToken"];
     let contentTypes = [];
     let accepts = ["application/json"];
-    let returnType = [Object];
+    let returnType = GetDataUsage200Response;
     return this.apiClient.callApi(
       "/v1/projects/{projectOrProductUID}/usage/data",
       "GET",
@@ -104,10 +105,11 @@ export default class UsageApi {
    * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
    * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
    * @param {Array.<String>} opts.deviceUID A Device UID.
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link Array.<Object>}
+   * @param {module:model/String} opts.aggregate Aggregation level for results (default to 'device')
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetDataUsage200Response}
    */
-  getProjectDataUsage(projectOrProductUID, period, opts) {
-    return this.getProjectDataUsageWithHttpInfo(
+  getDataUsage(projectOrProductUID, period, opts) {
+    return this.getDataUsageWithHttpInfo(
       projectOrProductUID,
       period,
       opts
@@ -124,6 +126,7 @@ export default class UsageApi {
    * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
    * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
    * @param {Array.<String>} opts.deviceUID A Device UID.
+   * @param {module:model/String} opts.aggregate Aggregation level for results (default to 'device')
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/UsageEventsResponse} and HTTP response
    */
   getProjectEventsUsageWithHttpInfo(projectOrProductUID, period, opts) {
@@ -153,6 +156,7 @@ export default class UsageApi {
         "multi"
       ),
       period: period,
+      aggregate: opts["aggregate"],
     };
     let headerParams = {};
     let formParams = {};
@@ -185,91 +189,11 @@ export default class UsageApi {
    * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
    * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
    * @param {Array.<String>} opts.deviceUID A Device UID.
+   * @param {module:model/String} opts.aggregate Aggregation level for results (default to 'device')
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/UsageEventsResponse}
    */
   getProjectEventsUsage(projectOrProductUID, period, opts) {
     return this.getProjectEventsUsageWithHttpInfo(
-      projectOrProductUID,
-      period,
-      opts
-    ).then(function (response_and_data) {
-      return response_and_data.data;
-    });
-  }
-
-  /**
-   * Get route logs usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied
-   * @param {String} projectOrProductUID
-   * @param {module:model/String} period Period type for aggregation
-   * @param {Object} opts Optional parameters
-   * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
-   * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
-   * @param {Array.<String>} opts.deviceUID A Device UID.
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/UsageRouteLogsResponse} and HTTP response
-   */
-  getRouteLogsUsageWithHttpInfo(projectOrProductUID, period, opts) {
-    opts = opts || {};
-    let postBody = null;
-    // verify the required parameter 'projectOrProductUID' is set
-    if (projectOrProductUID === undefined || projectOrProductUID === null) {
-      throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling getRouteLogsUsage"
-      );
-    }
-    // verify the required parameter 'period' is set
-    if (period === undefined || period === null) {
-      throw new Error(
-        "Missing the required parameter 'period' when calling getRouteLogsUsage"
-      );
-    }
-
-    let pathParams = {
-      projectOrProductUID: projectOrProductUID,
-    };
-    let queryParams = {
-      startDate: opts["startDate"],
-      endDate: opts["endDate"],
-      deviceUID: this.apiClient.buildCollectionParam(
-        opts["deviceUID"],
-        "multi"
-      ),
-      period: period,
-    };
-    let headerParams = {};
-    let formParams = {};
-
-    let authNames = ["personalAccessToken"];
-    let contentTypes = [];
-    let accepts = ["application/json"];
-    let returnType = UsageRouteLogsResponse;
-    return this.apiClient.callApi(
-      "/v1/projects/{projectOrProductUID}/usage/route-logs",
-      "GET",
-      pathParams,
-      queryParams,
-      headerParams,
-      formParams,
-      postBody,
-      authNames,
-      contentTypes,
-      accepts,
-      returnType,
-      null
-    );
-  }
-
-  /**
-   * Get route logs usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied
-   * @param {String} projectOrProductUID
-   * @param {module:model/String} period Period type for aggregation
-   * @param {Object} opts Optional parameters
-   * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
-   * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
-   * @param {Array.<String>} opts.deviceUID A Device UID.
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/UsageRouteLogsResponse}
-   */
-  getRouteLogsUsage(projectOrProductUID, period, opts) {
-    return this.getRouteLogsUsageWithHttpInfo(
       projectOrProductUID,
       period,
       opts
@@ -286,7 +210,8 @@ export default class UsageApi {
    * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
    * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
    * @param {Array.<String>} opts.deviceUID A Device UID.
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/UsageSessionsResponse} and HTTP response
+   * @param {module:model/String} opts.aggregate Aggregation level for results (default to 'device')
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetSessionsUsage200Response} and HTTP response
    */
   getSessionsUsageWithHttpInfo(projectOrProductUID, period, opts) {
     opts = opts || {};
@@ -315,6 +240,7 @@ export default class UsageApi {
         "multi"
       ),
       period: period,
+      aggregate: opts["aggregate"],
     };
     let headerParams = {};
     let formParams = {};
@@ -322,7 +248,7 @@ export default class UsageApi {
     let authNames = ["personalAccessToken"];
     let contentTypes = [];
     let accepts = ["application/json"];
-    let returnType = UsageSessionsResponse;
+    let returnType = GetSessionsUsage200Response;
     return this.apiClient.callApi(
       "/v1/projects/{projectOrProductUID}/usage/sessions",
       "GET",
@@ -347,7 +273,8 @@ export default class UsageApi {
    * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
    * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
    * @param {Array.<String>} opts.deviceUID A Device UID.
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/UsageSessionsResponse}
+   * @param {module:model/String} opts.aggregate Aggregation level for results (default to 'device')
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetSessionsUsage200Response}
    */
   getSessionsUsage(projectOrProductUID, period, opts) {
     return this.getSessionsUsageWithHttpInfo(
