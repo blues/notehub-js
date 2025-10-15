@@ -50,8 +50,44 @@
       //expect(instance).to.be.a(NotehubJs.NotehubRoute);
     });
 
+    it('should have the property aws (base name: "aws")', function () {
+      // uncomment below and update the code to test the property aws
+      //var instance = new NotehubJs.NotehubRoute();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property azure (base name: "azure")', function () {
+      // uncomment below and update the code to test the property azure
+      //var instance = new NotehubJs.NotehubRoute();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property blynk (base name: "blynk")', function () {
+      // uncomment below and update the code to test the property blynk
+      //var instance = new NotehubJs.NotehubRoute();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property datacake (base name: "datacake")', function () {
+      // uncomment below and update the code to test the property datacake
+      //var instance = new NotehubJs.NotehubRoute();
+      //expect(instance).to.be();
+    });
+
     it('should have the property disabled (base name: "disabled")', function () {
       // uncomment below and update the code to test the property disabled
+      //var instance = new NotehubJs.NotehubRoute();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property google (base name: "google")', function () {
+      // uncomment below and update the code to test the property google
+      //var instance = new NotehubJs.NotehubRoute();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property http (base name: "http")', function () {
+      // uncomment below and update the code to test the property http
       //var instance = new NotehubJs.NotehubRoute();
       //expect(instance).to.be();
     });
@@ -68,14 +104,62 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property routeType (base name: "route_type")', function () {
-      // uncomment below and update the code to test the property routeType
+    it('should have the property mqtt (base name: "mqtt")', function () {
+      // uncomment below and update the code to test the property mqtt
       //var instance = new NotehubJs.NotehubRoute();
       //expect(instance).to.be();
     });
 
-    it('should have the property schema (base name: "schema")', function () {
-      // uncomment below and update the code to test the property schema
+    it('should have the property proxy (base name: "proxy")', function () {
+      // uncomment below and update the code to test the property proxy
+      //var instance = new NotehubJs.NotehubRoute();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property qubitro (base name: "qubitro")', function () {
+      // uncomment below and update the code to test the property qubitro
+      //var instance = new NotehubJs.NotehubRoute();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property radnote (base name: "radnote")', function () {
+      // uncomment below and update the code to test the property radnote
+      //var instance = new NotehubJs.NotehubRoute();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property s3archive (base name: "s3archive")', function () {
+      // uncomment below and update the code to test the property s3archive
+      //var instance = new NotehubJs.NotehubRoute();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property slack (base name: "slack")', function () {
+      // uncomment below and update the code to test the property slack
+      //var instance = new NotehubJs.NotehubRoute();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property snowflake (base name: "snowflake")', function () {
+      // uncomment below and update the code to test the property snowflake
+      //var instance = new NotehubJs.NotehubRoute();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property thingworx (base name: "thingworx")', function () {
+      // uncomment below and update the code to test the property thingworx
+      //var instance = new NotehubJs.NotehubRoute();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property twilio (base name: "twilio")', function () {
+      // uncomment below and update the code to test the property twilio
+      //var instance = new NotehubJs.NotehubRoute();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property type (base name: "type")', function () {
+      // uncomment below and update the code to test the property type
       //var instance = new NotehubJs.NotehubRoute();
       //expect(instance).to.be();
     });

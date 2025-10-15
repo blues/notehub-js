@@ -12,7 +12,21 @@
  */
 
 import ApiClient from "../ApiClient";
-import NotehubRouteSchema from "./NotehubRouteSchema";
+import AwsRoute from "./AwsRoute";
+import AzureRoute from "./AzureRoute";
+import BlynkRoute from "./BlynkRoute";
+import DatacakeRoute from "./DatacakeRoute";
+import GoogleRoute from "./GoogleRoute";
+import HttpRoute from "./HttpRoute";
+import MqttRoute from "./MqttRoute";
+import ProxyRoute from "./ProxyRoute";
+import QubitroRoute from "./QubitroRoute";
+import RadRoute from "./RadRoute";
+import S3ArchiveRoute from "./S3ArchiveRoute";
+import SlackRoute from "./SlackRoute";
+import SnowflakeRoute from "./SnowflakeRoute";
+import ThingworxRoute from "./ThingworxRoute";
+import TwilioRoute from "./TwilioRoute";
 
 /**
  * The NotehubRoute model module.
@@ -22,6 +36,7 @@ import NotehubRouteSchema from "./NotehubRouteSchema";
 class NotehubRoute {
   /**
    * Constructs a new <code>NotehubRoute</code>.
+   * Route resource as stored/returned by the server.
    * @alias module:model/NotehubRoute
    */
   constructor() {
@@ -46,23 +61,68 @@ class NotehubRoute {
     if (data) {
       obj = obj || new NotehubRoute();
 
+      if (data.hasOwnProperty("aws")) {
+        obj["aws"] = AwsRoute.constructFromObject(data["aws"]);
+      }
+      if (data.hasOwnProperty("azure")) {
+        obj["azure"] = AzureRoute.constructFromObject(data["azure"]);
+      }
+      if (data.hasOwnProperty("blynk")) {
+        obj["blynk"] = BlynkRoute.constructFromObject(data["blynk"]);
+      }
+      if (data.hasOwnProperty("datacake")) {
+        obj["datacake"] = DatacakeRoute.constructFromObject(data["datacake"]);
+      }
       if (data.hasOwnProperty("disabled")) {
         obj["disabled"] = ApiClient.convertToType(data["disabled"], "Boolean");
+      }
+      if (data.hasOwnProperty("google")) {
+        obj["google"] = GoogleRoute.constructFromObject(data["google"]);
+      }
+      if (data.hasOwnProperty("http")) {
+        obj["http"] = HttpRoute.constructFromObject(data["http"]);
       }
       if (data.hasOwnProperty("label")) {
         obj["label"] = ApiClient.convertToType(data["label"], "String");
       }
       if (data.hasOwnProperty("modified")) {
-        obj["modified"] = ApiClient.convertToType(data["modified"], "String");
+        obj["modified"] = ApiClient.convertToType(data["modified"], "Date");
       }
-      if (data.hasOwnProperty("route_type")) {
-        obj["route_type"] = ApiClient.convertToType(
-          data["route_type"],
-          "String"
+      if (data.hasOwnProperty("mqtt")) {
+        obj["mqtt"] = MqttRoute.constructFromObject(data["mqtt"]);
+      }
+      if (data.hasOwnProperty("proxy")) {
+        obj["proxy"] = ProxyRoute.constructFromObject(data["proxy"]);
+      }
+      if (data.hasOwnProperty("qubitro")) {
+        obj["qubitro"] = QubitroRoute.constructFromObject(data["qubitro"]);
+      }
+      if (data.hasOwnProperty("radnote")) {
+        obj["radnote"] = RadRoute.constructFromObject(data["radnote"]);
+      }
+      if (data.hasOwnProperty("s3archive")) {
+        obj["s3archive"] = S3ArchiveRoute.constructFromObject(
+          data["s3archive"]
         );
       }
-      if (data.hasOwnProperty("schema")) {
-        obj["schema"] = NotehubRouteSchema.constructFromObject(data["schema"]);
+      if (data.hasOwnProperty("slack")) {
+        obj["slack"] = SlackRoute.constructFromObject(data["slack"]);
+      }
+      if (data.hasOwnProperty("snowflake")) {
+        obj["snowflake"] = SnowflakeRoute.constructFromObject(
+          data["snowflake"]
+        );
+      }
+      if (data.hasOwnProperty("thingworx")) {
+        obj["thingworx"] = ThingworxRoute.constructFromObject(
+          data["thingworx"]
+        );
+      }
+      if (data.hasOwnProperty("twilio")) {
+        obj["twilio"] = TwilioRoute.constructFromObject(data["twilio"]);
+      }
+      if (data.hasOwnProperty("type")) {
+        obj["type"] = ApiClient.convertToType(data["type"], "String");
       }
       if (data.hasOwnProperty("uid")) {
         obj["uid"] = ApiClient.convertToType(data["uid"], "String");
@@ -79,6 +139,36 @@ class NotehubRoute {
    * @return {boolean} to indicate whether the JSON data is valid with respect to <code>NotehubRoute</code>.
    */
   static validateJSON(data) {
+    // validate the optional field `aws`
+    if (data["aws"]) {
+      // data not null
+      AwsRoute.validateJSON(data["aws"]);
+    }
+    // validate the optional field `azure`
+    if (data["azure"]) {
+      // data not null
+      AzureRoute.validateJSON(data["azure"]);
+    }
+    // validate the optional field `blynk`
+    if (data["blynk"]) {
+      // data not null
+      BlynkRoute.validateJSON(data["blynk"]);
+    }
+    // validate the optional field `datacake`
+    if (data["datacake"]) {
+      // data not null
+      DatacakeRoute.validateJSON(data["datacake"]);
+    }
+    // validate the optional field `google`
+    if (data["google"]) {
+      // data not null
+      GoogleRoute.validateJSON(data["google"]);
+    }
+    // validate the optional field `http`
+    if (data["http"]) {
+      // data not null
+      HttpRoute.validateJSON(data["http"]);
+    }
     // ensure the json data is a string
     if (
       data["label"] &&
@@ -89,36 +179,60 @@ class NotehubRoute {
           data["label"]
       );
     }
-    // ensure the json data is a string
-    if (
-      data["modified"] &&
-      !(
-        typeof data["modified"] === "string" ||
-        data["modified"] instanceof String
-      )
-    ) {
-      throw new Error(
-        "Expected the field `modified` to be a primitive type in the JSON string but got " +
-          data["modified"]
-      );
-    }
-    // ensure the json data is a string
-    if (
-      data["route_type"] &&
-      !(
-        typeof data["route_type"] === "string" ||
-        data["route_type"] instanceof String
-      )
-    ) {
-      throw new Error(
-        "Expected the field `route_type` to be a primitive type in the JSON string but got " +
-          data["route_type"]
-      );
-    }
-    // validate the optional field `schema`
-    if (data["schema"]) {
+    // validate the optional field `mqtt`
+    if (data["mqtt"]) {
       // data not null
-      NotehubRouteSchema.validateJSON(data["schema"]);
+      MqttRoute.validateJSON(data["mqtt"]);
+    }
+    // validate the optional field `proxy`
+    if (data["proxy"]) {
+      // data not null
+      ProxyRoute.validateJSON(data["proxy"]);
+    }
+    // validate the optional field `qubitro`
+    if (data["qubitro"]) {
+      // data not null
+      QubitroRoute.validateJSON(data["qubitro"]);
+    }
+    // validate the optional field `radnote`
+    if (data["radnote"]) {
+      // data not null
+      RadRoute.validateJSON(data["radnote"]);
+    }
+    // validate the optional field `s3archive`
+    if (data["s3archive"]) {
+      // data not null
+      S3ArchiveRoute.validateJSON(data["s3archive"]);
+    }
+    // validate the optional field `slack`
+    if (data["slack"]) {
+      // data not null
+      SlackRoute.validateJSON(data["slack"]);
+    }
+    // validate the optional field `snowflake`
+    if (data["snowflake"]) {
+      // data not null
+      SnowflakeRoute.validateJSON(data["snowflake"]);
+    }
+    // validate the optional field `thingworx`
+    if (data["thingworx"]) {
+      // data not null
+      ThingworxRoute.validateJSON(data["thingworx"]);
+    }
+    // validate the optional field `twilio`
+    if (data["twilio"]) {
+      // data not null
+      TwilioRoute.validateJSON(data["twilio"]);
+    }
+    // ensure the json data is a string
+    if (
+      data["type"] &&
+      !(typeof data["type"] === "string" || data["type"] instanceof String)
+    ) {
+      throw new Error(
+        "Expected the field `type` to be a primitive type in the JSON string but got " +
+          data["type"]
+      );
     }
     // ensure the json data is a string
     if (
@@ -136,167 +250,105 @@ class NotehubRoute {
 }
 
 /**
- * Is route disabled?
+ * @member {module:model/AwsRoute} aws
+ */
+NotehubRoute.prototype["aws"] = undefined;
+
+/**
+ * @member {module:model/AzureRoute} azure
+ */
+NotehubRoute.prototype["azure"] = undefined;
+
+/**
+ * @member {module:model/BlynkRoute} blynk
+ */
+NotehubRoute.prototype["blynk"] = undefined;
+
+/**
+ * @member {module:model/DatacakeRoute} datacake
+ */
+NotehubRoute.prototype["datacake"] = undefined;
+
+/**
  * @member {Boolean} disabled
  * @default false
  */
 NotehubRoute.prototype["disabled"] = false;
 
 /**
- * Route Label
+ * @member {module:model/GoogleRoute} google
+ */
+NotehubRoute.prototype["google"] = undefined;
+
+/**
+ * @member {module:model/HttpRoute} http
+ */
+NotehubRoute.prototype["http"] = undefined;
+
+/**
  * @member {String} label
  */
 NotehubRoute.prototype["label"] = undefined;
 
 /**
- * Last Modified
- * @member {String} modified
+ * @member {Date} modified
  */
 NotehubRoute.prototype["modified"] = undefined;
 
 /**
- * Type of route.
- * @member {module:model/NotehubRoute.RouteTypeEnum} route_type
- * @default 'http'
+ * @member {module:model/MqttRoute} mqtt
  */
-NotehubRoute.prototype["route_type"] = "http";
+NotehubRoute.prototype["mqtt"] = undefined;
 
 /**
- * @member {module:model/NotehubRouteSchema} schema
+ * @member {module:model/ProxyRoute} proxy
  */
-NotehubRoute.prototype["schema"] = undefined;
+NotehubRoute.prototype["proxy"] = undefined;
 
 /**
- * Route UID
+ * @member {module:model/QubitroRoute} qubitro
+ */
+NotehubRoute.prototype["qubitro"] = undefined;
+
+/**
+ * @member {module:model/RadRoute} radnote
+ */
+NotehubRoute.prototype["radnote"] = undefined;
+
+/**
+ * @member {module:model/S3ArchiveRoute} s3archive
+ */
+NotehubRoute.prototype["s3archive"] = undefined;
+
+/**
+ * @member {module:model/SlackRoute} slack
+ */
+NotehubRoute.prototype["slack"] = undefined;
+
+/**
+ * @member {module:model/SnowflakeRoute} snowflake
+ */
+NotehubRoute.prototype["snowflake"] = undefined;
+
+/**
+ * @member {module:model/ThingworxRoute} thingworx
+ */
+NotehubRoute.prototype["thingworx"] = undefined;
+
+/**
+ * @member {module:model/TwilioRoute} twilio
+ */
+NotehubRoute.prototype["twilio"] = undefined;
+
+/**
+ * Mirrors hublib.RouteType.
+ * @member {String} type
+ */
+NotehubRoute.prototype["type"] = undefined;
+
+/**
  * @member {String} uid
  */
 NotehubRoute.prototype["uid"] = undefined;
-
-/**
- * Allowed values for the <code>route_type</code> property.
- * @enum {String}
- * @readonly
- */
-NotehubRoute["RouteTypeEnum"] = {
-  /**
-   * value: "http"
-   * @const
-   */
-  http: "http",
-
-  /**
-   * value: "proxy"
-   * @const
-   */
-  proxy: "proxy",
-
-  /**
-   * value: "google-function"
-   * @const
-   */
-  "google-function": "google-function",
-
-  /**
-   * value: "mqtt"
-   * @const
-   */
-  mqtt: "mqtt",
-
-  /**
-   * value: "aws-lambda"
-   * @const
-   */
-  "aws-lambda": "aws-lambda",
-
-  /**
-   * value: "aws-lambda-with-access-key"
-   * @const
-   */
-  "aws-lambda-with-access-key": "aws-lambda-with-access-key",
-
-  /**
-   * value: "aws-sqs"
-   * @const
-   */
-  "aws-sqs": "aws-sqs",
-
-  /**
-   * value: "aws-sqs-with-access-key"
-   * @const
-   */
-  "aws-sqs-with-access-key": "aws-sqs-with-access-key",
-
-  /**
-   * value: "aws-sqs-fifo"
-   * @const
-   */
-  "aws-sqs-fifo": "aws-sqs-fifo",
-
-  /**
-   * value: "aws-sqs-fifo-with-access-key"
-   * @const
-   */
-  "aws-sqs-fifo-with-access-key": "aws-sqs-fifo-with-access-key",
-
-  /**
-   * value: "aws-iot-analytics"
-   * @const
-   */
-  "aws-iot-analytics": "aws-iot-analytics",
-
-  /**
-   * value: "radnote-radresp-fixed-survey"
-   * @const
-   */
-  "radnote-radresp-fixed-survey": "radnote-radresp-fixed-survey",
-
-  /**
-   * value: "radnote-radresp-mobile-survey"
-   * @const
-   */
-  "radnote-radresp-mobile-survey": "radnote-radresp-mobile-survey",
-
-  /**
-   * value: "azure-function"
-   * @const
-   */
-  "azure-function": "azure-function",
-
-  /**
-   * value: "azure-function-with-key"
-   * @const
-   */
-  "azure-function-with-key": "azure-function-with-key",
-
-  /**
-   * value: "azure-service-bus-with-sas-token"
-   * @const
-   */
-  "azure-service-bus-with-sas-token": "azure-service-bus-with-sas-token",
-
-  /**
-   * value: "thingworx"
-   * @const
-   */
-  thingworx: "thingworx",
-
-  /**
-   * value: "snowflake"
-   * @const
-   */
-  snowflake: "snowflake",
-
-  /**
-   * value: "slack-bearer"
-   * @const
-   */
-  "slack-bearer": "slack-bearer",
-
-  /**
-   * value: "slack-webhook"
-   * @const
-   */
-  "slack-webhook": "slack-webhook",
-};
 
 export default NotehubRoute;
