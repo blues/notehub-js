@@ -1125,7 +1125,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - personalAccessToken: []
+        - api_key: []
       tags:
         - device
     parameters:
@@ -2227,7 +2227,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/UserDbRoute'
+                  $ref: '#/components/schemas/NotehubRouteSummary'
                 minItems: 0
         default:
           $ref: '#/components/responses/ErrorResponse'
@@ -2241,25 +2241,31 @@ paths:
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
       requestBody:
-        description: Route to be Created
+        description: Route to be created
         required: true
         content:
           application/json:
-            example: |
-              {
-                "label": "Route Label",
-                "type":"http",
-                "http": {
-                  "fleets": ["fleet:1042ddc5-3b2c-4cec-b1fb-d3040538094d"],
-                  "throttle_ms": 100,
-                  "url": "http://route.url"
-                }
-              }
+            examples:
+              http:
+                summary: HTTP route
+                value:
+                  http:
+                    disable_http_headers: false
+                    filter: {}
+                    fleets:
+                      - 'fleet:1042ddc5-3b2c-4cec-b1fb-d3040538094d'
+                    http_headers:
+                      X-My-Header: value
+                    throttle_ms: 100
+                    timeout: 5000
+                    transform: {}
+                    url: 'https://example.com/ingest'
+                  label: Route Label
             schema:
               $ref: '#/components/schemas/NotehubRoute'
       responses:
-        '200':
-          description: Successful operation
+        '201':
+          description: Created
           content:
             application/json:
               example:
@@ -2296,13 +2302,8 @@ paths:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/routeUIDParam'
       responses:
-        '200':
+        '204':
           description: Successful operation
-          content:
-            application/json:
-              schema:
-                type: object
-                default: {}
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
@@ -2455,127 +2456,6 @@ paths:
                   $ref: '#/components/schemas/NotefileSchema'
       tags:
         - project
-  '/v1/projects/{projectOrProductUID}/usage/data':
-    get:
-      operationId: getDataUsage
-      description: Get data usage in bytes for a project with time range and period aggregation
-      parameters:
-        - $ref: '#/components/parameters/projectOrProductUIDParam'
-        - $ref: '#/components/parameters/startDateParam'
-        - $ref: '#/components/parameters/endDateParam'
-        - $ref: '#/components/parameters/deviceUIDParamQuery'
-        - name: period
-          in: query
-          description: Period type for aggregation
-          required: true
-          schema:
-            type: string
-            enum:
-              - day
-              - week
-              - month
-        - name: aggregate
-          in: query
-          description: Aggregation level for results
-          required: false
-          schema:
-            type: string
-            default: device
-            enum:
-              - device
-              - fleet
-              - project
-      responses:
-        '200':
-          $ref: '#/components/responses/UsageDataResponse'
-        default:
-          $ref: '#/components/responses/ErrorResponse'
-      security:
-        - personalAccessToken: []
-      tags:
-        - usage
-  '/v1/projects/{projectOrProductUID}/usage/events':
-    get:
-      operationId: getProjectEventsUsage
-      description: 'Get events usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied'
-      parameters:
-        - $ref: '#/components/parameters/projectOrProductUIDParam'
-        - $ref: '#/components/parameters/startDateParam'
-        - $ref: '#/components/parameters/endDateParam'
-        - $ref: '#/components/parameters/deviceUIDParamQuery'
-        - name: period
-          in: query
-          description: Period type for aggregation
-          required: true
-          schema:
-            type: string
-            enum:
-              - day
-              - week
-              - month
-        - name: aggregate
-          in: query
-          description: Aggregation level for results
-          required: false
-          schema:
-            type: string
-            default: device
-            enum:
-              - device
-              - fleet
-              - project
-      responses:
-        '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UsageEventsResponse'
-        default:
-          $ref: '#/components/responses/ErrorResponse'
-      security:
-        - personalAccessToken: []
-      tags:
-        - usage
-  '/v1/projects/{projectOrProductUID}/usage/sessions':
-    get:
-      operationId: getSessionsUsage
-      description: 'Get sessions usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied'
-      parameters:
-        - $ref: '#/components/parameters/projectOrProductUIDParam'
-        - $ref: '#/components/parameters/startDateParam'
-        - $ref: '#/components/parameters/endDateParam'
-        - $ref: '#/components/parameters/deviceUIDParamQuery'
-        - name: period
-          in: query
-          description: Period type for aggregation
-          required: true
-          schema:
-            type: string
-            enum:
-              - day
-              - week
-              - month
-        - name: aggregate
-          in: query
-          description: Aggregation level for results
-          required: false
-          schema:
-            type: string
-            default: device
-            enum:
-              - device
-              - fleet
-              - project
-      responses:
-        '200':
-          $ref: '#/components/responses/UsageSessionsResponse'
-        default:
-          $ref: '#/components/responses/ErrorResponse'
-      security:
-        - personalAccessToken: []
-      tags:
-        - usage
   '/v1/projects/{projectOrProductUID}/webhooks':
     get:
       operationId: GetWebhooks
@@ -3329,6 +3209,68 @@ components:
       items:
         type: string
       properties: {}
+    AwsRoute:
+      type: object
+      properties:
+        access_key_id:
+          type: string
+        access_key_secret:
+          type: string
+        channel:
+          type: string
+        disable_http_headers:
+          type: boolean
+        filter:
+          $ref: '#/components/schemas/Filter'
+        fleets:
+          type: array
+          items:
+            type: string
+        http_headers:
+          type: object
+          additionalProperties:
+            type: string
+        message_deduplication_id:
+          type: string
+        message_group_id:
+          type: string
+        region:
+          type: string
+        throttle_ms:
+          type: integer
+        timeout:
+          type: integer
+        transform:
+          $ref: '#/components/schemas/RouteTransformSettings'
+        url:
+          type: string
+          format: uri
+      additionalProperties: false
+    AzureRoute:
+      type: object
+      properties:
+        filter:
+          $ref: '#/components/schemas/Filter'
+        fleets:
+          type: array
+          items:
+            type: string
+        functions_key_secret:
+          type: string
+        sas_policy_key:
+          type: string
+        sas_policy_name:
+          type: string
+        throttle_ms:
+          type: integer
+        timeout:
+          type: integer
+        transform:
+          $ref: '#/components/schemas/RouteTransformSettings'
+        url:
+          type: string
+          format: uri
+      additionalProperties: false
     BillingAccount:
       type: object
       properties:
@@ -3349,6 +3291,24 @@ components:
         - billing_admin
         - billing_manager
         - project_creator
+    BlynkRoute:
+      type: object
+      properties:
+        filter:
+          $ref: '#/components/schemas/Filter'
+        fleets:
+          type: array
+          items:
+            type: string
+        region:
+          type: string
+        throttle_ms:
+          type: integer
+        timeout:
+          type: integer
+        transform:
+          $ref: '#/components/schemas/RouteTransformSettings'
+      additionalProperties: false
     Body:
       type: object
       properties:
@@ -3564,6 +3524,31 @@ components:
         - kb_total
         - kb_used
         - kb_remaining
+    DatacakeRoute:
+      type: object
+      properties:
+        disable_http_headers:
+          type: boolean
+        filter:
+          $ref: '#/components/schemas/Filter'
+        fleets:
+          type: array
+          items:
+            type: string
+        http_headers:
+          type: object
+          additionalProperties:
+            type: string
+        throttle_ms:
+          type: integer
+        timeout:
+          type: integer
+        transform:
+          $ref: '#/components/schemas/RouteTransformSettings'
+        url:
+          type: string
+          format: uri
+      additionalProperties: false
     Device:
       type: object
       properties:
@@ -3982,14 +3967,14 @@ components:
         fleet_uid:
           type: string
         inherited_var_count:
-          type: integer
+          type: int
         type:
           type: string
         url:
           type: string
           format: uri
         var_count:
-          type: integer
+          type: int
         variables:
           type: array
           items:
@@ -4006,7 +3991,7 @@ components:
         key:
           type: string
         precedence:
-          type: integer
+          type: int
         used:
           type: boolean
         value:
@@ -4237,6 +4222,27 @@ components:
         where_when:
           description: Unix timestamp
           type: number
+    Filter:
+      description: |
+        Filter applied to route data. Controls which notefiles are sent through the route.
+      type: object
+      properties:
+        files:
+          description: List of notefile names or patterns to filter on.
+          type: array
+          items:
+            type: string
+          example:
+            - env.qo
+            - motion.qo
+        system_notefiles:
+          description: Whether system notefiles should be included.
+          type: boolean
+          example: false
+        type:
+          description: Type of filter to apply (corresponds to `hublib.NotefileFilterType`).
+          type: string
+          example: inclusion
     Firmware:
       type: object
       properties:
@@ -4339,6 +4345,53 @@ components:
       items:
         type: string
       properties: {}
+    GoogleRoute:
+      type: object
+      properties:
+        filter:
+          $ref: '#/components/schemas/Filter'
+        fleets:
+          type: array
+          items:
+            type: string
+        throttle_ms:
+          type: integer
+        timeout:
+          type: integer
+        token:
+          type: string
+        transform:
+          $ref: '#/components/schemas/RouteTransformSettings'
+        url:
+          type: string
+          format: uri
+      additionalProperties: false
+    HttpRoute:
+      type: object
+      properties:
+        disable_http_headers:
+          type: boolean
+        filter:
+          $ref: '#/components/schemas/Filter'
+        fleets:
+          description: 'If non-empty, applies only to the listed fleets.'
+          type: array
+          items:
+            type: string
+        http_headers:
+          type: object
+          additionalProperties:
+            type: string
+        throttle_ms:
+          type: integer
+        timeout:
+          type: integer
+        transform:
+          $ref: '#/components/schemas/RouteTransformSettings'
+        url:
+          type: string
+          format: uri
+      additionalProperties: false
     JSONata:
       type: object
       properties: {}
@@ -4447,6 +4500,41 @@ components:
           type: integer
         uid:
           type: string
+    MqttRoute:
+      type: object
+      properties:
+        broker:
+          type: string
+        certificate:
+          type: string
+        certificate_name:
+          type: string
+        filter:
+          $ref: '#/components/schemas/Filter'
+        fleets:
+          type: array
+          items:
+            type: string
+        key:
+          type: string
+        password:
+          type: string
+          format: password
+        port:
+          type: string
+        private_key_name:
+          type: string
+        throttle_ms:
+          type: integer
+        timeout:
+          type: integer
+        topic:
+          type: string
+        transform:
+          $ref: '#/components/schemas/RouteTransformSettings'
+        username:
+          type: string
+      additionalProperties: false
     Note:
       type: object
       properties:
@@ -4467,58 +4555,74 @@ components:
         - notefile
         - properties
     NotehubRoute:
+      description: Route resource as stored/returned by the server.
+      type: object
+      properties:
+        aws:
+          $ref: '#/components/schemas/AwsRoute'
+        azure:
+          $ref: '#/components/schemas/AzureRoute'
+        blynk:
+          $ref: '#/components/schemas/BlynkRoute'
+        datacake:
+          $ref: '#/components/schemas/DatacakeRoute'
+        disabled:
+          type: boolean
+          default: false
+        google:
+          $ref: '#/components/schemas/GoogleRoute'
+        http:
+          $ref: '#/components/schemas/HttpRoute'
+        label:
+          type: string
+        modified:
+          type: string
+          format: date-time
+          readOnly: true
+        mqtt:
+          $ref: '#/components/schemas/MqttRoute'
+        proxy:
+          $ref: '#/components/schemas/ProxyRoute'
+        qubitro:
+          $ref: '#/components/schemas/QubitroRoute'
+        radnote:
+          $ref: '#/components/schemas/RadRoute'
+        s3archive:
+          $ref: '#/components/schemas/S3ArchiveRoute'
+        slack:
+          $ref: '#/components/schemas/SlackRoute'
+        snowflake:
+          $ref: '#/components/schemas/SnowflakeRoute'
+        thingworx:
+          $ref: '#/components/schemas/ThingworxRoute'
+        twilio:
+          $ref: '#/components/schemas/TwilioRoute'
+        type:
+          description: Mirrors hublib.RouteType.
+          type: string
+        uid:
+          type: string
+          readOnly: true
+      additionalProperties: false
+    NotehubRouteSummary:
       type: object
       properties:
         disabled:
-          description: Is route disabled?
           type: boolean
           default: false
         label:
-          description: Route Label
           type: string
+          default: success route
         modified:
-          description: Last Modified
           type: string
-        route_type:
-          description: Type of route.
+          format: date-time
+          readOnly: true
+        type:
           type: string
           default: http
-          enum:
-            - http
-            - proxy
-            - google-function
-            - mqtt
-            - aws-lambda
-            - aws-lambda-with-access-key
-            - aws-sqs
-            - aws-sqs-with-access-key
-            - aws-sqs-fifo
-            - aws-sqs-fifo-with-access-key
-            - aws-iot-analytics
-            - radnote-radresp-fixed-survey
-            - radnote-radresp-mobile-survey
-            - azure-function
-            - azure-function-with-key
-            - azure-service-bus-with-sas-token
-            - thingworx
-            - snowflake
-            - slack-bearer
-            - slack-webhook
-        schema:
-          oneOf:
-            - $ref: '#/components/schemas/http'
-            - $ref: '#/components/schemas/google'
-            - $ref: '#/components/schemas/proxy'
-            - $ref: '#/components/schemas/mqtt'
-            - $ref: '#/components/schemas/aws'
-            - $ref: '#/components/schemas/radresponder'
-            - $ref: '#/components/schemas/azure'
-            - $ref: '#/components/schemas/thingworx'
-            - $ref: '#/components/schemas/snowflake'
-            - $ref: '#/components/schemas/slack'
         uid:
-          description: Route UID
           type: string
+          default: 'route:8d65a087d5d290ce5bdf03aeff2becc0'
     OAuth2Error:
       type: object
       properties:
@@ -4678,6 +4782,66 @@ components:
         - name
         - email
         - role
+    ProxyRoute:
+      type: object
+      properties:
+        alias:
+          type: string
+        fleets:
+          type: array
+          items:
+            type: string
+        http_headers:
+          type: object
+          additionalProperties:
+            type: string
+        timeout:
+          type: integer
+        url:
+          type: string
+          format: uri
+      additionalProperties: false
+    QubitroRoute:
+      type: object
+      properties:
+        filter:
+          $ref: '#/components/schemas/Filter'
+        fleets:
+          type: array
+          items:
+            type: string
+        project_id:
+          type: string
+        throttle_ms:
+          type: integer
+        timeout:
+          type: integer
+        transform:
+          $ref: '#/components/schemas/RouteTransformSettings'
+        webhook_signing_key:
+          type: string
+      additionalProperties: false
+    RadRoute:
+      type: object
+      properties:
+        client_id:
+          type: string
+        client_secret:
+          type: string
+          format: password
+        data_feed_key:
+          type: string
+        event_id:
+          type: integer
+        fleets:
+          type: array
+          items:
+            type: string
+        test_api:
+          type: boolean
+        throttle_ms:
+          type: integer
+      additionalProperties: false
     Repository:
       type: object
       properties:
@@ -4728,6 +4892,61 @@ components:
         url:
           description: The URL of the route.
           type: string
+    RouteTransformSettings:
+      description: |
+        Settings for transforming route payloads before delivery. Supports format
+        selection and JSONata-based transformations.
+      type: object
+      properties:
+        format:
+          description: 'Output format for transformed data (e.g., "json", "xml", "text").'
+          type: string
+          example: json
+        jsonata:
+          description: JSONata expression used to transform the data payload.
+          type: string
+          example: $.body.data
+    S3ArchiveRoute:
+      type: object
+      properties:
+        archive_count_exceeds:
+          type: integer
+        archive_every_mins:
+          type: integer
+        archive_id:
+          type: string
+        bucket_endpoint:
+          type: string
+        bucket_name:
+          type: string
+        bucket_region:
+          type: string
+        file_access:
+          type: string
+        file_folder:
+          type: string
+        file_format:
+          type: string
+        filter:
+          $ref: '#/components/schemas/Filter'
+        fleets:
+          type: array
+          items:
+            type: string
+        key_id:
+          type: string
+        key_secret:
+          type: string
+        throttle_ms:
+          type: integer
+        timeout:
+          type: integer
+        transform:
+          $ref: '#/components/schemas/RouteTransformSettings'
+        url:
+          type: string
+          format: uri
+      additionalProperties: false
     SatellitePlan:
       type: object
       properties:
@@ -4827,6 +5046,33 @@ components:
         token:
           description: The bearer token for the Slack app.
           type: string
+    SlackRoute:
+      type: object
+      properties:
+        bearer:
+          type: string
+        blocks:
+          type: string
+        channel:
+          type: string
+        filter:
+          $ref: '#/components/schemas/Filter'
+        fleets:
+          type: array
+          items:
+            type: string
+        text:
+          type: string
+        throttle_ms:
+          type: integer
+        timeout:
+          type: integer
+        transform:
+          $ref: '#/components/schemas/RouteTransformSettings'
+        webhook_url:
+          type: string
+          format: uri
+      additionalProperties: false
     SlackWebHookNotification:
       type: object
       properties:
@@ -4842,6 +5088,51 @@ components:
         url:
           description: The URL of the Slack webhook.
           type: string
+    SnowflakeRoute:
+      type: object
+      properties:
+        account_name:
+          type: string
+        filter:
+          $ref: '#/components/schemas/Filter'
+        fleets:
+          type: array
+          items:
+            type: string
+        organization_name:
+          type: string
+        pem:
+          type: string
+        private_key_name:
+          type: string
+        timeout:
+          type: integer
+        transform:
+          $ref: '#/components/schemas/RouteTransformSettings'
+        user_name:
+          type: string
+      additionalProperties: false
+    ThingworxRoute:
+      type: object
+      properties:
+        app_key:
+          type: string
+        filter:
+          $ref: '#/components/schemas/Filter'
+        fleets:
+          type: array
+          items:
+            type: string
+        throttle_ms:
+          type: integer
+        timeout:
+          type: integer
+        transform:
+          $ref: '#/components/schemas/RouteTransformSettings'
+        url:
+          type: string
+          format: uri
+      additionalProperties: false
     TowerLocation:
       type: object
       properties:
@@ -4890,6 +5181,31 @@ components:
         zone:
           description: Timezone name
           type: string
+    TwilioRoute:
+      type: object
+      properties:
+        account_sid:
+          type: string
+        auth_token:
+          type: string
+          format: password
+        filter:
+          $ref: '#/components/schemas/Filter'
+        fleets:
+          type: array
+          items:
+            type: string
+        from:
+          type: string
+        message:
+          type: string
+        throttle_ms:
+          type: integer
+        timeout:
+          type: integer
+        to:
+          type: string
+      additionalProperties: false
     UploadMetadata:
       type: object
       properties:
@@ -4946,10 +5262,6 @@ components:
       properties:
         device:
           type: string
-          example: 'dev:123456789012345'
-        fleet:
-          type: string
-          example: 'fleet:1042ddc5-3b2c-4cec-b1fb-d3040538094d'
         period:
           type: string
           format: date-time
@@ -4964,6 +5276,7 @@ components:
         - period
         - total_events
         - platform_events
+        - device
     UsageEventsResponse:
       type: object
       properties:
@@ -4976,6 +5289,8 @@ components:
     UsageRouteLogsData:
       type: object
       properties:
+        device:
+          type: string
         failed_routes:
           type: integer
           example: 4
@@ -4983,9 +5298,6 @@ components:
           type: string
           format: date-time
           example: '2025-07-23T00:00:00Z'
-        route:
-          description: The route serial number (only present when aggregate is 'route')
-          type: string
         successful_routes:
           type: integer
           example: 38
@@ -4997,15 +5309,12 @@ components:
         - successful_routes
         - failed_routes
         - total_routes
+        - device
     UsageSessionsData:
       type: object
       properties:
         device:
           type: string
-          example: 'dev:123456789012345'
-        fleet:
-          type: string
-          example: 'fleet:1042ddc5-3b2c-4cec-b1fb-d3040538094d'
         period:
           type: string
           format: date-time
@@ -5020,24 +5329,7 @@ components:
         - period
         - sessions
         - total_bytes
-    UserDbRoute:
-      type: object
-      properties:
-        disabled:
-          type: boolean
-          default: false
-        label:
-          type: string
-          default: success route
-        modified:
-          type: string
-          default: '2020-03-09T17:58:37Z'
-        type:
-          type: string
-          default: http
-        uid:
-          type: string
-          default: 'route:8d65a087d5d290ce5bdf03aeff2becc0'
+        - device
     UserDfuStateMachine:
       type: object
       properties:
@@ -5083,631 +5375,6 @@ components:
           type: string
         transform:
           description: Transformation to be applied to the event
-          type: string
-    aws:
-      description: Route settings specific to AWS routes.
-      type: object
-      properties:
-        access_key_id:
-          type: string
-        access_key_secret:
-          description: This value is input-only and will be omitted from the response and replaced with a placeholder
-          type: string
-        channel:
-          type: string
-        disable_http_headers:
-          type: boolean
-          default: false
-        filter:
-          description: Route filtering settings
-          type: object
-          properties:
-            files:
-              type: array
-              items:
-                description: 'list of notefiles to filter.  For instance, if ''type'' is set to "include", will only affect files listed here'
-                type: string
-              minItems: 0
-            system_notefiles:
-              description: Whether system notefiles should be affected by this route
-              type: boolean
-            type:
-              description: What notefiles this route applies to.
-              type: string
-              enum:
-                - all
-                - include
-                - exclude
-        fleets:
-          description: 'list of Fleet UIDs to apply route to, if any.  If empty, applies to all Fleets'
-          type: array
-          items:
-            type: string
-          minItems: 0
-        http_headers:
-          type: object
-          example:
-            headerName1: headerValue1
-            headerName2: headerValue2
-          additionalProperties:
-            type: string
-        message_deduplication_id:
-          type: string
-        message_group_id:
-          type: string
-        region:
-          type: string
-        throttle_ms:
-          type: integer
-        timeout:
-          description: Timeout in seconds for each request
-          type: integer
-          default: 15
-        transform:
-          type: object
-          properties:
-            format:
-              description: 'Data transformation to apply.  Options of "" for none, "bridge" for Azure IoT, "jsonata" for JSONata expression, or "flatten", "simple", "body" or "payload"'
-              type: string
-              enum:
-                - ''
-                - bridge
-                - jsonata
-                - flatten
-                - simple
-                - body
-                - payload
-            jsonata:
-              description: 'JSONata transformation, if JSONata'
-              type: string
-        url:
-          type: string
-    azure:
-      description: Route settings specific to Azure routes.  Only used for Azure route types
-      type: object
-      properties:
-        filter:
-          description: Route filtering settings
-          type: object
-          properties:
-            files:
-              type: array
-              items:
-                description: 'list of notefiles to filter.  For instance, if ''type'' is set to "include", will only affect files listed here'
-                type: string
-              minItems: 0
-            system_notefiles:
-              description: Whether system notefiles should be affected by this route
-              type: boolean
-            type:
-              description: What notefiles this route applies to.
-              type: string
-              enum:
-                - all
-                - include
-                - exclude
-        fleets:
-          description: 'list of Fleet UIDs to apply route to, if any.  If empty, applies to all Fleets'
-          type: array
-          items:
-            type: string
-          minItems: 0
-        functions_key_secret:
-          description: This value is input-only and will be omitted from the response and replaced with a placeholder
-          type: string
-        sas_policy_key:
-          description: This value is input-only and will be omitted from the response and replaced with a placeholder
-          type: string
-        sas_policy_name:
-          type: string
-        throttle_ms:
-          type: integer
-        timeout:
-          description: Timeout in seconds for each request
-          type: integer
-          default: 15
-        transform:
-          type: object
-          properties:
-            format:
-              description: 'Data transformation to apply.  Options of "" for none, "bridge" for Azure IoT, "jsonata" for JSONata expression, or "flatten", "simple", "body" or "payload"'
-              type: string
-              enum:
-                - ''
-                - bridge
-                - jsonata
-                - flatten
-                - simple
-                - body
-                - payload
-            jsonata:
-              description: 'JSONata transformation, if JSONata'
-              type: string
-        url:
-          type: string
-    google:
-      description: Route settings specific to Google routes.
-      type: object
-      properties:
-        filter:
-          description: Route filtering settings
-          type: object
-          properties:
-            files:
-              type: array
-              items:
-                description: 'list of notefiles to filter.  For instance, if ''type'' is set to "include", will only affect files listed here'
-                type: string
-              minItems: 0
-            system_notefiles:
-              description: Whether system notefiles should be affected by this route
-              type: boolean
-            type:
-              description: What notefiles this route applies to.
-              type: string
-              enum:
-                - all
-                - include
-                - exclude
-        fleets:
-          description: 'list of Fleet UIDs to apply route to, if any.  If empty, applies to all Fleets'
-          type: array
-          items:
-            type: string
-          minItems: 0
-        throttle_ms:
-          type: integer
-        timeout:
-          description: Timeout in seconds for each request
-          type: integer
-          default: 15
-        token:
-          description: Optional authentication token
-          type: string
-        transform:
-          type: object
-          properties:
-            format:
-              description: 'Data transformation to apply.  Options of "" for none, "bridge" for Azure IoT, "jsonata" for JSONata expression, or "flatten", "simple", "body" or "payload"'
-              type: string
-              enum:
-                - ''
-                - bridge
-                - jsonata
-                - flatten
-                - simple
-                - body
-                - payload
-            jsonata:
-              description: 'JSONata transformation, if JSONata'
-              type: string
-        url:
-          type: string
-    http:
-      description: Route settings specific to HTTP routes.
-      type: object
-      properties:
-        disable_http_headers:
-          type: boolean
-          default: false
-        filter:
-          description: Route filtering settings
-          type: object
-          properties:
-            files:
-              type: array
-              items:
-                description: 'list of notefiles to filter.  For instance, if ''type'' is set to "include", will only affect files listed here'
-                type: string
-              minItems: 0
-            system_notefiles:
-              description: Whether system notefiles should be affected by this route
-              type: boolean
-            type:
-              description: What notefiles this route applies to.
-              type: string
-              enum:
-                - all
-                - include
-                - exclude
-        fleets:
-          description: 'list of Fleet UIDs to apply route to, if any.  If empty, applies to all Fleets'
-          type: array
-          items:
-            type: string
-          minItems: 0
-        http_headers:
-          type: object
-          example:
-            headerName1: headerValue1
-            headerName2: headerValue2
-          additionalProperties:
-            type: string
-        throttle_ms:
-          description: Minimum time between requests in Miliseconds
-          type: integer
-        timeout:
-          description: Timeout in seconds for each request
-          type: integer
-          default: 15
-        transform:
-          type: object
-          properties:
-            format:
-              description: 'Data transformation to apply.  Options of "" for none, "bridge" for Azure IoT, "jsonata" for JSONata expression, or "flatten", "simple", "body" or "payload"'
-              type: string
-              enum:
-                - ''
-                - bridge
-                - jsonata
-                - flatten
-                - simple
-                - body
-                - payload
-            jsonata:
-              description: 'JSONata transformation, if JSONata'
-              type: string
-        url:
-          description: Route URL
-          type: string
-    mqtt:
-      description: Route settings specific to MQTT routes.  Only used for MQTT route types
-      type: object
-      properties:
-        broker:
-          type: string
-        certificate:
-          description: Certificate with \n newlines.  This value is input-only and will be omitted from the response and replaced with a placeholder
-          type: string
-          example: '-----BEGIN CERTIFICATE-----\nMIIBpTCCA...JgVLttUY=\n-----END CERTIFICATE-----'
-        certificate_name:
-          description: Name of certificate.
-          type: string
-        filter:
-          description: Route filtering settings
-          type: object
-          properties:
-            files:
-              type: array
-              items:
-                description: 'list of notefiles to filter.  For instance, if ''type'' is set to "include", will only affect files listed here'
-                type: string
-              minItems: 0
-            system_notefiles:
-              description: Whether system notefiles should be affected by this route
-              type: boolean
-            type:
-              description: What notefiles this route applies to.
-              type: string
-              enum:
-                - all
-                - include
-                - exclude
-        fleets:
-          description: 'list of Fleet UIDs to apply route to, if any.  If empty, applies to all Fleets'
-          type: array
-          items:
-            type: string
-          minItems: 0
-        key:
-          description: Key with \n newlines.  This value is input-only and will be omitted from the response and replaced with a placeholder
-          type: string
-          example: '-----BEGIN PRIVATE KEY-----\nMIIEvwIBA...SleBlvA==\n-----END PRIVATE KEY-----'
-        password:
-          description: This value is input-only and will be omitted from the response and replaced with a placeholder
-          type: string
-        port:
-          type: integer
-        private_key_name:
-          description: Name of key
-          type: string
-        throttle_ms:
-          type: integer
-        timeout:
-          description: Timeout in seconds for each request
-          type: integer
-          default: 15
-        topic:
-          type: string
-        transform:
-          type: object
-          properties:
-            format:
-              description: 'Data transformation to apply.  Options of "" for none, "bridge" for Azure IoT, "jsonata" for JSONata expression, or "flatten", "simple", "body" or "payload"'
-              type: string
-              enum:
-                - ''
-                - bridge
-                - jsonata
-                - flatten
-                - simple
-                - body
-                - payload
-            jsonata:
-              description: 'JSONata transformation, if JSONata'
-              type: string
-        username:
-          type: string
-    proxy:
-      description: Route settings specific to Proxy routes.
-      type: object
-      properties:
-        alias:
-          type: string
-        fleets:
-          description: 'list of Fleet UIDs to apply route to, if any.  If empty, applies to all Fleets'
-          type: array
-          items:
-            type: string
-          minItems: 0
-        http_headers:
-          type: object
-          example:
-            headerName1: headerValue1
-            headerName2: headerValue2
-          additionalProperties:
-            type: string
-        timeout:
-          description: Timeout in seconds for each request
-          type: integer
-          default: 15
-        url:
-          type: string
-    radresponder:
-      description: Route settings specific to RadResponder routes.  Only used for RadResponder route types
-      type: object
-      properties:
-        client_id:
-          type: string
-        client_secret:
-          description: This value is input-only and will be omitted from the response and replaced with a placeholder
-          type: string
-        data_feed_key:
-          type: string
-        fleets:
-          description: 'list of Fleet UIDs to apply route to, if any.  If empty, applies to all Fleets'
-          type: array
-          items:
-            type: string
-          minItems: 0
-        test_api:
-          type: boolean
-          default: false
-    slack:
-      description: Route settings specific to Slack routes.  Only used for Slack route types
-      type: object
-      properties:
-        bearer:
-          description: 'The Bearer Token for Slack messaging, if the "slack-bearer" type is selected'
-          type: string
-          example: xoxb-1234-56789abcdefghijklmnop
-        blocks:
-          description: 'The Blocks message to be sent.  If populated, this field overrides the text field within the Slack Messaging API.  Placeholders are available for this field.'
-          type: string
-        channel:
-          description: 'The Channel ID for Bearer Token method, if the "slack-bearer" type is selected'
-          type: string
-          example: C8675309
-        filter:
-          description: Route filtering settings
-          type: object
-          properties:
-            files:
-              type: array
-              items:
-                description: 'list of notefiles to filter.  For instance, if ''type'' is set to "include", will only affect files listed here'
-                type: string
-              minItems: 0
-            system_notefiles:
-              description: Whether system notefiles should be affected by this route
-              type: boolean
-            type:
-              description: What notefiles this route applies to.
-              type: string
-              enum:
-                - all
-                - include
-                - exclude
-        fleets:
-          description: 'list of Fleet UIDs to apply route to, if any.  If empty, applies to all Fleets'
-          type: array
-          items:
-            type: string
-          minItems: 0
-        slack_type:
-          description: The type of Slack message.  Must be one of "slack-bearer" for Bearer Token or "slack-webhook" for Webhook messages
-          type: string
-        text:
-          description: 'The simple text message to be sent, if the blocks message field is not in use.  Placeholders are available for this field.'
-          type: string
-          example: '[.device] reported temp(s) of [.body.temp] at [.body.location]'
-        throttle_ms:
-          description: Minimum time between requests in Miliseconds
-          type: integer
-        timeout:
-          description: Timeout in seconds for each request
-          type: integer
-          default: 15
-        transform:
-          type: object
-          properties:
-            format:
-              description: Data transformation to apply.  Only "jsonata" is valid for Snowflake routes
-              type: string
-              default: jsonata
-            jsonata:
-              description: JSONata transformation
-              type: string
-        webhook_url:
-          description: The Webhook URL for Slack Messaging if the "slack-webhook" type is selected
-          type: string
-          example: 'https://hooks.slack.com/services/FOO4BAR/THIS4THAT/123xYzaBC456'
-    snowflake:
-      description: Route settings specific to Snowflake routes.  Only used for Snowflake route types
-      type: object
-      properties:
-        account_name:
-          type: string
-        filter:
-          description: Route filtering settings
-          type: object
-          properties:
-            files:
-              type: array
-              items:
-                description: 'list of notefiles to filter.  For instance, if ''type'' is set to "include", will only affect files listed here'
-                type: string
-              minItems: 0
-            system_notefiles:
-              description: Whether system notefiles should be affected by this route
-              type: boolean
-            type:
-              description: What notefiles this route applies to.
-              type: string
-              enum:
-                - all
-                - include
-                - exclude
-        fleets:
-          description: 'list of Fleet UIDs to apply route to, if any.  If empty, applies to all Fleets'
-          type: array
-          items:
-            type: string
-          minItems: 0
-        organization_name:
-          type: string
-        pem:
-          description: PEM key with \n newlines. This value is input-only and will be omitted from the response and replaced with a placeholder
-          type: string
-          example: '-----BEGIN PRIVATE KEY-----\nMIIEvwIBA...SleBlvA==\n-----END PRIVATE KEY-----'
-        private_key_name:
-          description: 'Name of PEM key.  If omitted, defaults to "present"'
-          type: string
-          default: present
-        timeout:
-          description: Timeout in seconds for each request
-          type: integer
-          default: 15
-        transform:
-          type: object
-          properties:
-            format:
-              description: Data transformation to apply.  Only "jsonata" is valid for Snowflake routes
-              type: string
-              default: jsonata
-            jsonata:
-              description: JSONata transformation
-              type: string
-        user_name:
-          type: string
-    thingworx:
-      description: Route settings specific to ThingWorx routes.  Only used for ThingWorx route types
-      type: object
-      properties:
-        app_key:
-          description: This value is input-only and will be omitted from the response and replaced with a placeholder
-          type: string
-        filter:
-          description: Route filtering settings
-          type: object
-          properties:
-            files:
-              type: array
-              items:
-                description: 'list of notefiles to filter.  For instance, if ''type'' is set to "include", will only affect files listed here'
-                type: string
-              minItems: 0
-            system_notefiles:
-              description: Whether system notefiles should be affected by this route
-              type: boolean
-            type:
-              description: What notefiles this route applies to.
-              type: string
-              enum:
-                - all
-                - include
-                - exclude
-        fleets:
-          description: 'list of Fleet UIDs to apply route to, if any.  If empty, applies to all Fleets'
-          type: array
-          items:
-            type: string
-          minItems: 0
-        throttle_ms:
-          type: integer
-        timeout:
-          description: Timeout in seconds for each request
-          type: integer
-          default: 15
-        transform:
-          type: object
-          properties:
-            format:
-              description: 'Data transformation to apply.  Options of "" for none, "bridge" for Azure IoT, "jsonata" for JSONata expression, or "flatten", "simple", "body" or "payload"'
-              type: string
-              enum:
-                - ''
-                - bridge
-                - jsonata
-                - flatten
-                - simple
-                - body
-                - payload
-            jsonata:
-              description: 'JSONata transformation, if JSONata'
-              type: string
-        url:
-          type: string
-    twilio:
-      description: Route settings specific to Twilio routes.  Only used for Twilio route types
-      type: object
-      properties:
-        account_sid:
-          description: Twilio Account SID
-          type: string
-        auth_token:
-          description: Twilio Auth Token.  This value will be omitted from the response and replaced with a placeholder.
-          type: string
-        filter:
-          description: Route filtering settings
-          type: object
-          properties:
-            files:
-              type: array
-              items:
-                description: 'list of notefiles to filter.  For instance, if ''type'' is set to "include", will only affect files listed here'
-                type: string
-              minItems: 0
-            system_notefiles:
-              description: Whether system notefiles should be affected by this route
-              type: boolean
-            type:
-              description: What notefiles this route applies to.
-              type: string
-              enum:
-                - all
-                - include
-                - exclude
-        fleets:
-          description: 'list of Fleet UIDs to apply route to, if any.  If empty, applies to all Fleets'
-          type: array
-          items:
-            type: string
-          minItems: 0
-        from:
-          description: 'Phone number to send SMS from, leave blank to use notefile, must use E.164 format'
-          type: string
-        message:
-          description: 'Message to send, leave blank to use notefile.'
-          type: string
-        throttle_ms:
-          type: integer
-        timeout:
-          description: Timeout in seconds for each request
-          type: integer
-          default: 15
-        to:
-          description: 'Phone number to send SMS to, leave blank to use notefile, must use E.164 format'
           type: string
   responses:
     AlertsResponse:
@@ -6122,13 +5789,9 @@ components:
                       items:
                         $ref: '#/components/schemas/UsageData'
                     device:
-                      description: The device UID this usage data belongs to (only present when aggregate is 'device')
+                      description: The device UID this usage data belongs to
                       type: string
                       example: 'dev:123456789012345'
-                    fleet:
-                      description: The fleet UID this usage data belongs to (only present when aggregate is 'fleet')
-                      type: string
-                      example: 'fleet:1042ddc5-3b2c-4cec-b1fb-d3040538094d'
                     iccid:
                       description: The ICCID of the cellular SIM card (only present when type is 'cellular')
                       type: string
@@ -6144,6 +5807,7 @@ components:
                         - cellular
                         - satellite
                   required:
+                    - device
                     - type
                     - data
                   type: object
