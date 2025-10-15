@@ -1125,7 +1125,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - personalAccessToken: []
+        - api_key: []
       tags:
         - device
     parameters:
@@ -2491,7 +2491,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
-        - personalAccessToken: []
+        - api_key: []
       tags:
         - usage
   '/v1/projects/{projectOrProductUID}/usage/events':
@@ -3103,6 +3103,17 @@ components:
       required: true
       schema:
         type: string
+    routeUIDParamQuery:
+      description: A Route UID.
+      explode: true
+      in: query
+      name: routeUID
+      required: false
+      schema:
+        type: array
+        items:
+          type: string
+      style: form
     selectFieldsParam:
       description: 'Comma-separated list of fields to select from JSON payload (e.g., "field1,field2.subfield,field3"), this will reflect the columns in the CSV output.'
       in: query
@@ -3982,14 +3993,14 @@ components:
         fleet_uid:
           type: string
         inherited_var_count:
-          type: integer
+          type: int
         type:
           type: string
         url:
           type: string
           format: uri
         var_count:
-          type: integer
+          type: int
         variables:
           type: array
           items:
@@ -4006,7 +4017,7 @@ components:
         key:
           type: string
         precedence:
-          type: integer
+          type: int
         used:
           type: boolean
         value:
@@ -4984,8 +4995,9 @@ components:
           format: date-time
           example: '2025-07-23T00:00:00Z'
         route:
-          description: The route serial number (only present when aggregate is 'route')
+          description: The route UID (only present when aggregate is 'route')
           type: string
+          example: 'route:cbd20093cba58392c9f9bbdd0cdeb1a0'
         successful_routes:
           type: integer
           example: 38
