@@ -890,7 +890,7 @@ export default class DeviceApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = [];
+    let authNames = ["personalAccessToken"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = GetDevicePlans200Response;

@@ -24,11 +24,10 @@ class GetDataUsage200ResponseDataInner {
    * Constructs a new <code>GetDataUsage200ResponseDataInner</code>.
    * @alias module:model/GetDataUsage200ResponseDataInner
    * @param data {Array.<module:model/UsageData>}
-   * @param device {String} The device UID this usage data belongs to
    * @param type {module:model/GetDataUsage200ResponseDataInner.TypeEnum} The type of connectivity
    */
-  constructor(data, device, type) {
-    GetDataUsage200ResponseDataInner.initialize(this, data, device, type);
+  constructor(data, type) {
+    GetDataUsage200ResponseDataInner.initialize(this, data, type);
   }
 
   /**
@@ -36,9 +35,8 @@ class GetDataUsage200ResponseDataInner {
    * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
    * Only for internal use.
    */
-  static initialize(obj, data, device, type) {
+  static initialize(obj, data, type) {
     obj["data"] = data;
-    obj["device"] = device;
     obj["type"] = type;
   }
 
@@ -58,6 +56,9 @@ class GetDataUsage200ResponseDataInner {
       }
       if (data.hasOwnProperty("device")) {
         obj["device"] = ApiClient.convertToType(data["device"], "String");
+      }
+      if (data.hasOwnProperty("fleet")) {
+        obj["fleet"] = ApiClient.convertToType(data["fleet"], "String");
       }
       if (data.hasOwnProperty("iccid")) {
         obj["iccid"] = ApiClient.convertToType(data["iccid"], "String");
@@ -117,6 +118,16 @@ class GetDataUsage200ResponseDataInner {
     }
     // ensure the json data is a string
     if (
+      data["fleet"] &&
+      !(typeof data["fleet"] === "string" || data["fleet"] instanceof String)
+    ) {
+      throw new Error(
+        "Expected the field `fleet` to be a primitive type in the JSON string but got " +
+          data["fleet"]
+      );
+    }
+    // ensure the json data is a string
+    if (
       data["iccid"] &&
       !(typeof data["iccid"] === "string" || data["iccid"] instanceof String)
     ) {
@@ -150,11 +161,7 @@ class GetDataUsage200ResponseDataInner {
   }
 }
 
-GetDataUsage200ResponseDataInner.RequiredProperties = [
-  "data",
-  "device",
-  "type",
-];
+GetDataUsage200ResponseDataInner.RequiredProperties = ["data", "type"];
 
 /**
  * @member {Array.<module:model/UsageData>} data
@@ -162,10 +169,16 @@ GetDataUsage200ResponseDataInner.RequiredProperties = [
 GetDataUsage200ResponseDataInner.prototype["data"] = undefined;
 
 /**
- * The device UID this usage data belongs to
+ * The device UID this usage data belongs to (only present when aggregate is 'device')
  * @member {String} device
  */
 GetDataUsage200ResponseDataInner.prototype["device"] = undefined;
+
+/**
+ * The fleet UID this usage data belongs to (only present when aggregate is 'fleet')
+ * @member {String} fleet
+ */
+GetDataUsage200ResponseDataInner.prototype["fleet"] = undefined;
 
 /**
  * The ICCID of the cellular SIM card (only present when type is 'cellular')

@@ -1158,7 +1158,7 @@ paths:
         default:
           $ref: "#/components/responses/ErrorResponse"
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - device
     parameters:
@@ -2493,13 +2493,24 @@ paths:
               - day
               - week
               - month
+        - name: aggregate
+          in: query
+          description: Aggregation level for results
+          required: false
+          schema:
+            type: string
+            default: device
+            enum:
+              - device
+              - fleet
+              - project
       responses:
         "200":
           $ref: "#/components/responses/UsageDataResponse"
         default:
           $ref: "#/components/responses/ErrorResponse"
       security:
-        - api_key: []
+        - personalAccessToken: []
       tags:
         - usage
   /v1/projects/{projectOrProductUID}/usage/events:
@@ -2523,6 +2534,17 @@ paths:
               - day
               - week
               - month
+        - name: aggregate
+          in: query
+          description: Aggregation level for results
+          required: false
+          schema:
+            type: string
+            default: device
+            enum:
+              - device
+              - fleet
+              - project
       responses:
         "200":
           description: Successful operation
@@ -2557,6 +2579,17 @@ paths:
               - day
               - week
               - month
+        - name: aggregate
+          in: query
+          description: Aggregation level for results
+          required: false
+          schema:
+            type: string
+            default: device
+            enum:
+              - device
+              - fleet
+              - project
       responses:
         "200":
           $ref: "#/components/responses/UsageSessionsResponse"
@@ -4013,14 +4046,14 @@ components:
         fleet_uid:
           type: string
         inherited_var_count:
-          type: int
+          type: integer
         type:
           type: string
         url:
           type: string
           format: uri
         var_count:
-          type: int
+          type: integer
         variables:
           type: array
           items:
@@ -4037,7 +4070,7 @@ components:
         key:
           type: string
         precedence:
-          type: int
+          type: integer
         used:
           type: boolean
         value:
@@ -5015,6 +5048,10 @@ components:
       properties:
         device:
           type: string
+          example: dev:123456789012345
+        fleet:
+          type: string
+          example: fleet:1042ddc5-3b2c-4cec-b1fb-d3040538094d
         period:
           type: string
           format: date-time
@@ -5029,7 +5066,6 @@ components:
         - period
         - total_events
         - platform_events
-        - device
     UsageEventsResponse:
       type: object
       properties:
@@ -5042,8 +5078,6 @@ components:
     UsageRouteLogsData:
       type: object
       properties:
-        device:
-          type: string
         failed_routes:
           type: integer
           example: 4
@@ -5051,6 +5085,9 @@ components:
           type: string
           format: date-time
           example: 2025-07-23T00:00:00Z
+        route:
+          description: The route serial number (only present when aggregate is 'route')
+          type: string
         successful_routes:
           type: integer
           example: 38
@@ -5062,12 +5099,15 @@ components:
         - successful_routes
         - failed_routes
         - total_routes
-        - device
     UsageSessionsData:
       type: object
       properties:
         device:
           type: string
+          example: dev:123456789012345
+        fleet:
+          type: string
+          example: fleet:1042ddc5-3b2c-4cec-b1fb-d3040538094d
         period:
           type: string
           format: date-time
@@ -5082,7 +5122,6 @@ components:
         - period
         - sessions
         - total_bytes
-        - device
     UserDbRoute:
       type: object
       properties:
@@ -6306,9 +6345,17 @@ components:
                       items:
                         $ref: "#/components/schemas/UsageData"
                     device:
-                      description: The device UID this usage data belongs to
+                      description:
+                        The device UID this usage data belongs to (only present when
+                        aggregate is 'device')
                       type: string
                       example: dev:123456789012345
+                    fleet:
+                      description:
+                        The fleet UID this usage data belongs to (only present when
+                        aggregate is 'fleet')
+                      type: string
+                      example: fleet:1042ddc5-3b2c-4cec-b1fb-d3040538094d
                     iccid:
                       description:
                         The ICCID of the cellular SIM card (only present when type is
@@ -6328,7 +6375,6 @@ components:
                         - cellular
                         - satellite
                   required:
-                    - device
                     - type
                     - data
                   type: object

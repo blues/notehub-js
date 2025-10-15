@@ -18,6 +18,10 @@ Get data usage in bytes for a project with time range and period aggregation
 
 ```javascript
 import * as NotehubJs from '@blues-inc/notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
+// Configure Bearer access token for authorization: personalAccessToken
+let personalAccessToken = defaultClient.authentications['personalAccessToken'];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
 
 let apiInstance = new NotehubJs.UsageApi();
 let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
@@ -25,7 +29,8 @@ let period = "period_example"; // String | Period type for aggregation
 let opts = {
   'startDate': 1628631763, // Number | Start date for filtering results, specified as a Unix timestamp
   'endDate': 1657894210, // Number | End date for filtering results, specified as a Unix timestamp
-  'deviceUID': ["null"] // [String] | A Device UID.
+  'deviceUID': ["null"], // [String] | A Device UID.
+  'aggregate': "'device'" // String | Aggregation level for results
 };
 apiInstance.getDataUsage(projectOrProductUID, period, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
@@ -37,13 +42,14 @@ apiInstance.getDataUsage(projectOrProductUID, period, opts).then((data) => {
 
 ### Parameters
 
-| Name                    | Type                      | Description                                                     | Notes      |
-| ----------------------- | ------------------------- | --------------------------------------------------------------- | ---------- |
+| Name                    | Type                      | Description                                                     | Notes                                    |
+| ----------------------- | ------------------------- | --------------------------------------------------------------- | ---------------------------------------- |
 | **projectOrProductUID** | **String**                |                                                                 |
 | **period**              | **String**                | Period type for aggregation                                     |
-| **startDate**           | **Number**                | Start date for filtering results, specified as a Unix timestamp | [optional] |
-| **endDate**             | **Number**                | End date for filtering results, specified as a Unix timestamp   | [optional] |
-| **deviceUID**           | [**[String]**](String.md) | A Device UID.                                                   | [optional] |
+| **startDate**           | **Number**                | Start date for filtering results, specified as a Unix timestamp | [optional]                               |
+| **endDate**             | **Number**                | End date for filtering results, specified as a Unix timestamp   | [optional]                               |
+| **deviceUID**           | [**[String]**](String.md) | A Device UID.                                                   | [optional]                               |
+| **aggregate**           | **String**                | Aggregation level for results                                   | [optional] [default to &#39;device&#39;] |
 
 ### Return type
 
@@ -51,7 +57,7 @@ apiInstance.getDataUsage(projectOrProductUID, period, opts).then((data) => {
 
 ### Authorization
 
-No authorization required
+[personalAccessToken](../README.md#personalAccessToken)
 
 ### HTTP request headers
 
@@ -79,7 +85,8 @@ let period = "period_example"; // String | Period type for aggregation
 let opts = {
   'startDate': 1628631763, // Number | Start date for filtering results, specified as a Unix timestamp
   'endDate': 1657894210, // Number | End date for filtering results, specified as a Unix timestamp
-  'deviceUID': ["null"] // [String] | A Device UID.
+  'deviceUID': ["null"], // [String] | A Device UID.
+  'aggregate': "'device'" // String | Aggregation level for results
 };
 apiInstance.getProjectEventsUsage(projectOrProductUID, period, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
@@ -91,13 +98,14 @@ apiInstance.getProjectEventsUsage(projectOrProductUID, period, opts).then((data)
 
 ### Parameters
 
-| Name                    | Type                      | Description                                                     | Notes      |
-| ----------------------- | ------------------------- | --------------------------------------------------------------- | ---------- |
+| Name                    | Type                      | Description                                                     | Notes                                    |
+| ----------------------- | ------------------------- | --------------------------------------------------------------- | ---------------------------------------- |
 | **projectOrProductUID** | **String**                |                                                                 |
 | **period**              | **String**                | Period type for aggregation                                     |
-| **startDate**           | **Number**                | Start date for filtering results, specified as a Unix timestamp | [optional] |
-| **endDate**             | **Number**                | End date for filtering results, specified as a Unix timestamp   | [optional] |
-| **deviceUID**           | [**[String]**](String.md) | A Device UID.                                                   | [optional] |
+| **startDate**           | **Number**                | Start date for filtering results, specified as a Unix timestamp | [optional]                               |
+| **endDate**             | **Number**                | End date for filtering results, specified as a Unix timestamp   | [optional]                               |
+| **deviceUID**           | [**[String]**](String.md) | A Device UID.                                                   | [optional]                               |
+| **aggregate**           | **String**                | Aggregation level for results                                   | [optional] [default to &#39;device&#39;] |
 
 ### Return type
 
@@ -133,7 +141,8 @@ let period = "period_example"; // String | Period type for aggregation
 let opts = {
   'startDate': 1628631763, // Number | Start date for filtering results, specified as a Unix timestamp
   'endDate': 1657894210, // Number | End date for filtering results, specified as a Unix timestamp
-  'deviceUID': ["null"] // [String] | A Device UID.
+  'deviceUID': ["null"], // [String] | A Device UID.
+  'aggregate': "'device'" // String | Aggregation level for results
 };
 apiInstance.getSessionsUsage(projectOrProductUID, period, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
@@ -145,13 +154,14 @@ apiInstance.getSessionsUsage(projectOrProductUID, period, opts).then((data) => {
 
 ### Parameters
 
-| Name                    | Type                      | Description                                                     | Notes      |
-| ----------------------- | ------------------------- | --------------------------------------------------------------- | ---------- |
+| Name                    | Type                      | Description                                                     | Notes                                    |
+| ----------------------- | ------------------------- | --------------------------------------------------------------- | ---------------------------------------- |
 | **projectOrProductUID** | **String**                |                                                                 |
 | **period**              | **String**                | Period type for aggregation                                     |
-| **startDate**           | **Number**                | Start date for filtering results, specified as a Unix timestamp | [optional] |
-| **endDate**             | **Number**                | End date for filtering results, specified as a Unix timestamp   | [optional] |
-| **deviceUID**           | [**[String]**](String.md) | A Device UID.                                                   | [optional] |
+| **startDate**           | **Number**                | Start date for filtering results, specified as a Unix timestamp | [optional]                               |
+| **endDate**             | **Number**                | End date for filtering results, specified as a Unix timestamp   | [optional]                               |
+| **deviceUID**           | [**[String]**](String.md) | A Device UID.                                                   | [optional]                               |
+| **aggregate**           | **String**                | Aggregation level for results                                   | [optional] [default to &#39;device&#39;] |
 
 ### Return type
 

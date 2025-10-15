@@ -62,6 +62,12 @@
       //expect(instance).to.be();
     });
 
+    it('should have the property fleet (base name: "fleet")', function () {
+      // uncomment below and update the code to test the property fleet
+      //var instance = new NotehubJs.GetDataUsage200ResponseDataInner();
+      //expect(instance).to.be();
+    });
+
     it('should have the property iccid (base name: "iccid")', function () {
       // uncomment below and update the code to test the property iccid
       //var instance = new NotehubJs.GetDataUsage200ResponseDataInner();

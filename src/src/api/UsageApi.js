@@ -42,6 +42,7 @@ export default class UsageApi {
    * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
    * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
    * @param {Array.<String>} opts.deviceUID A Device UID.
+   * @param {module:model/String} opts.aggregate Aggregation level for results (default to 'device')
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetDataUsage200Response} and HTTP response
    */
   getDataUsageWithHttpInfo(projectOrProductUID, period, opts) {
@@ -71,11 +72,12 @@ export default class UsageApi {
         "multi"
       ),
       period: period,
+      aggregate: opts["aggregate"],
     };
     let headerParams = {};
     let formParams = {};
 
-    let authNames = [];
+    let authNames = ["personalAccessToken"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = GetDataUsage200Response;
@@ -103,6 +105,7 @@ export default class UsageApi {
    * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
    * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
    * @param {Array.<String>} opts.deviceUID A Device UID.
+   * @param {module:model/String} opts.aggregate Aggregation level for results (default to 'device')
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetDataUsage200Response}
    */
   getDataUsage(projectOrProductUID, period, opts) {
@@ -123,6 +126,7 @@ export default class UsageApi {
    * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
    * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
    * @param {Array.<String>} opts.deviceUID A Device UID.
+   * @param {module:model/String} opts.aggregate Aggregation level for results (default to 'device')
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/UsageEventsResponse} and HTTP response
    */
   getProjectEventsUsageWithHttpInfo(projectOrProductUID, period, opts) {
@@ -152,6 +156,7 @@ export default class UsageApi {
         "multi"
       ),
       period: period,
+      aggregate: opts["aggregate"],
     };
     let headerParams = {};
     let formParams = {};
@@ -184,6 +189,7 @@ export default class UsageApi {
    * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
    * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
    * @param {Array.<String>} opts.deviceUID A Device UID.
+   * @param {module:model/String} opts.aggregate Aggregation level for results (default to 'device')
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/UsageEventsResponse}
    */
   getProjectEventsUsage(projectOrProductUID, period, opts) {
@@ -204,6 +210,7 @@ export default class UsageApi {
    * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
    * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
    * @param {Array.<String>} opts.deviceUID A Device UID.
+   * @param {module:model/String} opts.aggregate Aggregation level for results (default to 'device')
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetSessionsUsage200Response} and HTTP response
    */
   getSessionsUsageWithHttpInfo(projectOrProductUID, period, opts) {
@@ -233,6 +240,7 @@ export default class UsageApi {
         "multi"
       ),
       period: period,
+      aggregate: opts["aggregate"],
     };
     let headerParams = {};
     let formParams = {};
@@ -265,6 +273,7 @@ export default class UsageApi {
    * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
    * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
    * @param {Array.<String>} opts.deviceUID A Device UID.
+   * @param {module:model/String} opts.aggregate Aggregation level for results (default to 'device')
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetSessionsUsage200Response}
    */
   getSessionsUsage(projectOrProductUID, period, opts) {

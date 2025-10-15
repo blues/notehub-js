@@ -22,16 +22,14 @@ class UsageRouteLogsData {
   /**
    * Constructs a new <code>UsageRouteLogsData</code>.
    * @alias module:model/UsageRouteLogsData
-   * @param device {String}
    * @param failedRoutes {Number}
    * @param period {Date}
    * @param successfulRoutes {Number}
    * @param totalRoutes {Number}
    */
-  constructor(device, failedRoutes, period, successfulRoutes, totalRoutes) {
+  constructor(failedRoutes, period, successfulRoutes, totalRoutes) {
     UsageRouteLogsData.initialize(
       this,
-      device,
       failedRoutes,
       period,
       successfulRoutes,
@@ -44,15 +42,7 @@ class UsageRouteLogsData {
    * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
    * Only for internal use.
    */
-  static initialize(
-    obj,
-    device,
-    failedRoutes,
-    period,
-    successfulRoutes,
-    totalRoutes
-  ) {
-    obj["device"] = device;
+  static initialize(obj, failedRoutes, period, successfulRoutes, totalRoutes) {
     obj["failed_routes"] = failedRoutes;
     obj["period"] = period;
     obj["successful_routes"] = successfulRoutes;
@@ -70,9 +60,6 @@ class UsageRouteLogsData {
     if (data) {
       obj = obj || new UsageRouteLogsData();
 
-      if (data.hasOwnProperty("device")) {
-        obj["device"] = ApiClient.convertToType(data["device"], "String");
-      }
       if (data.hasOwnProperty("failed_routes")) {
         obj["failed_routes"] = ApiClient.convertToType(
           data["failed_routes"],
@@ -81,6 +68,9 @@ class UsageRouteLogsData {
       }
       if (data.hasOwnProperty("period")) {
         obj["period"] = ApiClient.convertToType(data["period"], "Date");
+      }
+      if (data.hasOwnProperty("route")) {
+        obj["route"] = ApiClient.convertToType(data["route"], "String");
       }
       if (data.hasOwnProperty("successful_routes")) {
         obj["successful_routes"] = ApiClient.convertToType(
@@ -119,12 +109,12 @@ class UsageRouteLogsData {
     }
     // ensure the json data is a string
     if (
-      data["device"] &&
-      !(typeof data["device"] === "string" || data["device"] instanceof String)
+      data["route"] &&
+      !(typeof data["route"] === "string" || data["route"] instanceof String)
     ) {
       throw new Error(
-        "Expected the field `device` to be a primitive type in the JSON string but got " +
-          data["device"]
+        "Expected the field `route` to be a primitive type in the JSON string but got " +
+          data["route"]
       );
     }
 
@@ -133,17 +123,11 @@ class UsageRouteLogsData {
 }
 
 UsageRouteLogsData.RequiredProperties = [
-  "device",
   "failed_routes",
   "period",
   "successful_routes",
   "total_routes",
 ];
-
-/**
- * @member {String} device
- */
-UsageRouteLogsData.prototype["device"] = undefined;
 
 /**
  * @member {Number} failed_routes
@@ -154,6 +138,12 @@ UsageRouteLogsData.prototype["failed_routes"] = undefined;
  * @member {Date} period
  */
 UsageRouteLogsData.prototype["period"] = undefined;
+
+/**
+ * The route serial number (only present when aggregate is 'route')
+ * @member {String} route
+ */
+UsageRouteLogsData.prototype["route"] = undefined;
 
 /**
  * @member {Number} successful_routes
