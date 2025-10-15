@@ -4946,8 +4946,10 @@ components:
       properties:
         device:
           type: string
+          example: 'dev:123456789012345'
         fleet:
           type: string
+          example: 'fleet:1042ddc5-3b2c-4cec-b1fb-d3040538094d'
         period:
           type: string
           format: date-time
@@ -5000,8 +5002,10 @@ components:
       properties:
         device:
           type: string
+          example: 'dev:123456789012345'
         fleet:
           type: string
+          example: 'fleet:1042ddc5-3b2c-4cec-b1fb-d3040538094d'
         period:
           type: string
           format: date-time
@@ -6124,6 +6128,7 @@ components:
                     fleet:
                       description: The fleet UID this usage data belongs to (only present when aggregate is 'fleet')
                       type: string
+                      example: 'fleet:1042ddc5-3b2c-4cec-b1fb-d3040538094d'
                     iccid:
                       description: The ICCID of the cellular SIM card (only present when type is 'cellular')
                       type: string
