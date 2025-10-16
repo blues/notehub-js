@@ -20,7 +20,7 @@ import RouteLog from "../model/RouteLog";
 /**
  * Route service.
  * @module api/RouteApi
- * @version 2.2.0
+ * @version 2.2.1
  */
 export default class RouteApi {
   /**

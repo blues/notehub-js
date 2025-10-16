@@ -18,7 +18,7 @@ import RouteTransformSettings from "./RouteTransformSettings";
 /**
  * The S3ArchiveRoute model module.
  * @module model/S3ArchiveRoute
- * @version 2.2.0
+ * @version 2.2.1
  */
 class S3ArchiveRoute {
   /**

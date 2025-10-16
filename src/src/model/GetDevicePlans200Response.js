@@ -17,7 +17,7 @@ import CellularPlan from "./CellularPlan";
 /**
  * The GetDevicePlans200Response model module.
  * @module model/GetDevicePlans200Response
- * @version 2.2.0
+ * @version 2.2.1
  */
 class GetDevicePlans200Response {
   /**

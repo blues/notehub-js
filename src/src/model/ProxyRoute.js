@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The ProxyRoute model module.
  * @module model/ProxyRoute
- * @version 2.2.0
+ * @version 2.2.1
  */
 class ProxyRoute {
   /**

@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The DataUsage model module.
  * @module model/DataUsage
- * @version 2.2.0
+ * @version 2.2.1
  */
 class DataUsage {
   /**

@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The Filter model module.
  * @module model/Filter
- * @version 2.2.0
+ * @version 2.2.1
  */
 class Filter {
   /**
