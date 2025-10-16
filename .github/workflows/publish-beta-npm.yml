@@ -40,11 +40,14 @@ jobs:
       - name: Setup .npmrc file to publish to npm
         uses: actions/setup-node@v4
         with:
-          node-version: "22.x"
+          node-version: "24.x"
           registry-url: "https://registry.npmjs.org"
 
       - name: Update npm
         run: sudo npm install -g npm@latest
+
+      - name: Verify npm version
+        run: npm --version
 
       - name: Install Dependencies
         run: npm install
@@ -59,7 +62,9 @@ jobs:
         run: |
           echo "Publishing beta version to npm... $new_version"
           cd src
-          npm publish --tag beta --provenance --access public
+          npm publish --tag beta
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Commit Updated config.json
         run: |
