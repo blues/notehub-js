@@ -1652,6 +1652,8 @@ paths:
             schema:
               type: object
               properties:
+                connectivity_assurance:
+                  $ref: '#/components/schemas/FleetConnectivityAssurance'
                 label:
                   description: 'The label, or name,  for the Fleet.'
                   type: string
@@ -1716,6 +1718,8 @@ paths:
                   type: array
                   items:
                     type: string
+                connectivity_assurance:
+                  $ref: '#/components/schemas/FleetConnectivityAssurance'
                 label:
                   description: The label for the Fleet.
                   type: string
@@ -4432,6 +4436,8 @@ components:
     Fleet:
       type: object
       properties:
+        connectivity_assurance:
+          $ref: '#/components/schemas/FleetConnectivityAssurance'
         created:
           description: RFC3339 timestamp in UTC
           type: string
@@ -4457,6 +4463,17 @@ components:
         - uid
         - label
         - created
+    FleetConnectivityAssurance:
+      type: object
+      properties:
+        enabled:
+          description: Whether Connectivity Assurance is enabled for this fleet
+          type: boolean
+      example:
+        enabled: true
+      nullable: true
+      required:
+        - enabled
     FleetRule:
       description: 'JSONata expression that will be evaluated to determine device membership into this fleet, if the expression evaluates to a 1, the device will be included, if it evaluates to -1 it will be removed, and if it evaluates to 0 or errors it will be left unchanged.'
       type: string
