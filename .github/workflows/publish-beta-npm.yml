@@ -7,6 +7,10 @@ on:
     paths:
       - "openapi.yaml"
 
+permissions:
+  id-token: write # Required for OIDC
+  contents: read
+
 jobs:
   publish-beta:
     runs-on: ubuntu-latest
@@ -33,6 +37,9 @@ jobs:
 
           echo "Updated project version to: $new_version"
 
+      - name: Update npm
+        run: npm install -g npm@latest
+
       - name: Install Dependencies
         run: npm install
 
@@ -52,7 +59,7 @@ jobs:
         run: |
           echo "Publishing beta version to npm... $new_version"
           cd src
-          npm publish --tag beta --access public
+          npm publish --tag beta
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
