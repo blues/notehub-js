@@ -13,9 +13,63 @@ permissions:
 
 jobs:
   publish-beta:
-    uses: ./.github/workflows/publish-npm-reusable.yml
-    with:
-      is_beta: true
-    permissions:
-      id-token: write
-      contents: write
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Get current version from config.json
+        id: get_version
+        run: |
+          CURRENT_VERSION=$(jq -r .projectVersion config.json)
+          echo "Current project version: $CURRENT_VERSION"
+          echo "CURRENT_VERSION=$CURRENT_VERSION" >> $GITHUB_ENV
+
+      - name: Get existing beta versions from npm
+        id: get_existing_versions
+        run: bash ./.github/scripts/get-existing-beta-versions.sh $CURRENT_VERSION
+
+      - name: Update version to beta
+        run: |
+          # Update config.json with the new beta version
+          jq --arg new_version "$new_version" '.projectVersion = $new_version' config.json > config.tmp.json && mv config.tmp.json config.json
+
+          echo "Updated project version to: $new_version"
+
+      - name: Setup .npmrc file to publish to npm
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24.x"
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Update npm
+        run: sudo npm install -g npm@latest
+
+      - name: Verify npm version
+        run: npm --version
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Remove Outdated SDK Folder
+        run: rm -rf src
+
+      - name: Generate New SDK
+        run: npm run prepareFreshRelease
+
+      - name: Publish Beta Version to npm
+        run: |
+          echo "Publishing beta version to npm... $new_version"
+          cd src
+          npm publish --tag beta
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Commit Updated config.json
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add config.json
+          git commit -m "Update project version to $new_version [skip ci]"
+          git push
