@@ -1,20 +1,14 @@
-name: Publish beta version of notehub-js to npm
+name: Publish beta to npm
 
 on:
-  push:
-    branches:
-      - "test-release-**"
-    paths:
-      - "openapi.yaml"
-
-permissions:
-  id-token: write # Required for OIDC
-  contents: write # Required to push version updates
+  workflow_call:
 
 jobs:
-  publish-beta:
+  publish:
     runs-on: ubuntu-latest
-
+    permissions:
+      id-token: write
+      contents: write
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -62,9 +56,7 @@ jobs:
         run: |
           echo "Publishing beta version to npm... $new_version"
           cd src
-          npm publish --tag beta
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          npm publish --tag beta --provenance --access public
 
       - name: Commit Updated config.json
         run: |

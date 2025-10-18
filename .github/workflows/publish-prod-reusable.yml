@@ -1,19 +1,17 @@
-name: Publish notehub-js to npm
+name: Publish production to npm
 
 on:
-  release:
-    types: [created]
-
-permissions:
-  id-token: write # Required for OIDC
-  contents: read
+  workflow_call:
 
 jobs:
-  npm:
+  publish:
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: ./src
+    permissions:
+      id-token: write
+      contents: read
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
