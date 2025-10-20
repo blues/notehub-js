@@ -12,6 +12,7 @@
  */
 
 import ApiClient from "../ApiClient";
+import FleetConnectivityAssurance from "./FleetConnectivityAssurance";
 
 /**
  * The UpdateFleetRequest model module.
@@ -49,6 +50,12 @@ class UpdateFleetRequest {
         obj["addDevices"] = ApiClient.convertToType(data["addDevices"], [
           "String",
         ]);
+      }
+      if (data.hasOwnProperty("connectivity_assurance")) {
+        obj["connectivity_assurance"] =
+          FleetConnectivityAssurance.constructFromObject(
+            data["connectivity_assurance"]
+          );
       }
       if (data.hasOwnProperty("label")) {
         obj["label"] = ApiClient.convertToType(data["label"], "String");
@@ -88,6 +95,11 @@ class UpdateFleetRequest {
         "Expected the field `addDevices` to be an array in the JSON data but got " +
           data["addDevices"]
       );
+    }
+    // validate the optional field `connectivity_assurance`
+    if (data["connectivity_assurance"]) {
+      // data not null
+      FleetConnectivityAssurance.validateJSON(data["connectivity_assurance"]);
     }
     // ensure the json data is a string
     if (
@@ -129,6 +141,11 @@ class UpdateFleetRequest {
  * @member {Array.<String>} addDevices
  */
 UpdateFleetRequest.prototype["addDevices"] = undefined;
+
+/**
+ * @member {module:model/FleetConnectivityAssurance} connectivity_assurance
+ */
+UpdateFleetRequest.prototype["connectivity_assurance"] = undefined;
 
 /**
  * The label for the Fleet.

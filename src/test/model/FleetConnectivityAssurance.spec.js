@@ -28,7 +28,7 @@
   var instance;
 
   beforeEach(function () {
-    instance = new NotehubJs.CreateFleetRequest();
+    instance = new NotehubJs.FleetConnectivityAssurance();
   });
 
   var getProperty = function (object, getter, property) {
@@ -43,28 +43,16 @@
     else object[property] = value;
   };
 
-  describe("CreateFleetRequest", function () {
-    it("should create an instance of CreateFleetRequest", function () {
-      // uncomment below and update the code to test CreateFleetRequest
-      //var instance = new NotehubJs.CreateFleetRequest();
-      //expect(instance).to.be.a(NotehubJs.CreateFleetRequest);
+  describe("FleetConnectivityAssurance", function () {
+    it("should create an instance of FleetConnectivityAssurance", function () {
+      // uncomment below and update the code to test FleetConnectivityAssurance
+      //var instance = new NotehubJs.FleetConnectivityAssurance();
+      //expect(instance).to.be.a(NotehubJs.FleetConnectivityAssurance);
     });
 
-    it('should have the property connectivityAssurance (base name: "connectivity_assurance")', function () {
-      // uncomment below and update the code to test the property connectivityAssurance
-      //var instance = new NotehubJs.CreateFleetRequest();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property label (base name: "label")', function () {
-      // uncomment below and update the code to test the property label
-      //var instance = new NotehubJs.CreateFleetRequest();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property smartRule (base name: "smart_rule")', function () {
-      // uncomment below and update the code to test the property smartRule
-      //var instance = new NotehubJs.CreateFleetRequest();
+    it('should have the property enabled (base name: "enabled")', function () {
+      // uncomment below and update the code to test the property enabled
+      //var instance = new NotehubJs.FleetConnectivityAssurance();
       //expect(instance).to.be();
     });
   });

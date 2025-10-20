@@ -140,7 +140,7 @@ UsageRouteLogsData.prototype["failed_routes"] = undefined;
 UsageRouteLogsData.prototype["period"] = undefined;
 
 /**
- * The route serial number (only present when aggregate is 'route')
+ * The route UID (only present when aggregate is 'route')
  * @member {String} route
  */
 UsageRouteLogsData.prototype["route"] = undefined;

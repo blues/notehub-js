@@ -278,6 +278,7 @@ All URIs are relative to *https://api.notefile.net*
 - [NotehubJs.Firmware](docs/Firmware.md)
 - [NotehubJs.FirmwareInfo](docs/FirmwareInfo.md)
 - [NotehubJs.Fleet](docs/Fleet.md)
+- [NotehubJs.FleetConnectivityAssurance](docs/FleetConnectivityAssurance.md)
 - [NotehubJs.GetAlerts200Response](docs/GetAlerts200Response.md)
 - [NotehubJs.GetBillingAccounts200Response](docs/GetBillingAccounts200Response.md)
 - [NotehubJs.GetDataUsage200Response](docs/GetDataUsage200Response.md)

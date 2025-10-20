@@ -1677,6 +1677,8 @@ paths:
             schema:
               type: object
               properties:
+                connectivity_assurance:
+                  $ref: "#/components/schemas/FleetConnectivityAssurance"
                 label:
                   description: The label, or name,  for the Fleet.
                   type: string
@@ -1741,6 +1743,8 @@ paths:
                   type: array
                   items:
                     type: string
+                connectivity_assurance:
+                  $ref: "#/components/schemas/FleetConnectivityAssurance"
                 label:
                   description: The label for the Fleet.
                   type: string
@@ -3150,6 +3154,17 @@ components:
       required: true
       schema:
         type: string
+    routeUIDParamQuery:
+      description: A Route UID.
+      explode: true
+      in: query
+      name: routeUID
+      required: false
+      schema:
+        type: array
+        items:
+          type: string
+      style: form
     selectFieldsParam:
       description:
         Comma-separated list of fields to select from JSON payload (e.g.,
@@ -4507,6 +4522,8 @@ components:
     Fleet:
       type: object
       properties:
+        connectivity_assurance:
+          $ref: "#/components/schemas/FleetConnectivityAssurance"
         created:
           description: RFC3339 timestamp in UTC
           type: string
@@ -4536,6 +4553,17 @@ components:
         - uid
         - label
         - created
+    FleetConnectivityAssurance:
+      type: object
+      properties:
+        enabled:
+          description: Whether Connectivity Assurance is enabled for this fleet
+          type: boolean
+      example:
+        enabled: true
+      nullable: true
+      required:
+        - enabled
     FleetRule:
       description: JSONata expression that will be evaluated to determine device
         membership into this fleet, if the expression evaluates to a 1, the
@@ -5526,8 +5554,9 @@ components:
           format: date-time
           example: 2025-07-23T00:00:00Z
         route:
-          description: The route serial number (only present when aggregate is 'route')
+          description: The route UID (only present when aggregate is 'route')
           type: string
+          example: route:cbd20093cba58392c9f9bbdd0cdeb1a0
         successful_routes:
           type: integer
           example: 38

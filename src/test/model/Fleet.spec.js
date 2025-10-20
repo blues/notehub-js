@@ -50,6 +50,12 @@
       //expect(instance).to.be.a(NotehubJs.Fleet);
     });
 
+    it('should have the property connectivityAssurance (base name: "connectivity_assurance")', function () {
+      // uncomment below and update the code to test the property connectivityAssurance
+      //var instance = new NotehubJs.Fleet();
+      //expect(instance).to.be();
+    });
+
     it('should have the property created (base name: "created")', function () {
       // uncomment below and update the code to test the property created
       //var instance = new NotehubJs.Fleet();

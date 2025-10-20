@@ -56,6 +56,12 @@
       //expect(instance).to.be();
     });
 
+    it('should have the property connectivityAssurance (base name: "connectivity_assurance")', function () {
+      // uncomment below and update the code to test the property connectivityAssurance
+      //var instance = new NotehubJs.UpdateFleetRequest();
+      //expect(instance).to.be();
+    });
+
     it('should have the property label (base name: "label")', function () {
       // uncomment below and update the code to test the property label
       //var instance = new NotehubJs.UpdateFleetRequest();

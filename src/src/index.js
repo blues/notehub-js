@@ -59,6 +59,7 @@ import Filter from "./model/Filter";
 import Firmware from "./model/Firmware";
 import FirmwareInfo from "./model/FirmwareInfo";
 import Fleet from "./model/Fleet";
+import FleetConnectivityAssurance from "./model/FleetConnectivityAssurance";
 import GetAlerts200Response from "./model/GetAlerts200Response";
 import GetBillingAccounts200Response from "./model/GetBillingAccounts200Response";
 import GetDataUsage200Response from "./model/GetDataUsage200Response";
@@ -470,6 +471,12 @@ export {
    * @property {module:model/Fleet}
    */
   Fleet,
+
+  /**
+   * The FleetConnectivityAssurance model constructor.
+   * @property {module:model/FleetConnectivityAssurance}
+   */
+  FleetConnectivityAssurance,
 
   /**
    * The GetAlerts200Response model constructor.

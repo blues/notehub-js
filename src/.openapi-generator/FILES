@@ -56,6 +56,7 @@ docs/Filter.md
 docs/Firmware.md
 docs/FirmwareInfo.md
 docs/Fleet.md
+docs/FleetConnectivityAssurance.md
 docs/GetAlerts200Response.md
 docs/GetBillingAccounts200Response.md
 docs/GetDataUsage200Response.md
@@ -204,6 +205,7 @@ src/model/Filter.js
 src/model/Firmware.js
 src/model/FirmwareInfo.js
 src/model/Fleet.js
+src/model/FleetConnectivityAssurance.js
 src/model/GetAlerts200Response.js
 src/model/GetBillingAccounts200Response.js
 src/model/GetDataUsage200Response.js
@@ -342,6 +344,7 @@ test/model/Filter.spec.js
 test/model/Firmware.spec.js
 test/model/FirmwareInfo.spec.js
 test/model/Fleet.spec.js
+test/model/FleetConnectivityAssurance.spec.js
 test/model/GetAlerts200Response.spec.js
 test/model/GetBillingAccounts200Response.spec.js
 test/model/GetDataUsage200Response.spec.js
