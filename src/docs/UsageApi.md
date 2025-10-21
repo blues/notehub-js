@@ -2,11 +2,11 @@
 
 All URIs are relative to *https://api.notefile.net*
 
-| Method                                                         | HTTP request                                              | Description |
-| -------------------------------------------------------------- | --------------------------------------------------------- | ----------- |
-| [**getDataUsage**](UsageApi.md#getDataUsage)                   | **GET** /v1/projects/{projectOrProductUID}/usage/data     |
-| [**getProjectEventsUsage**](UsageApi.md#getProjectEventsUsage) | **GET** /v1/projects/{projectOrProductUID}/usage/events   |
-| [**getSessionsUsage**](UsageApi.md#getSessionsUsage)           | **GET** /v1/projects/{projectOrProductUID}/usage/sessions |
+| Method                                               | HTTP request                                              | Description |
+| ---------------------------------------------------- | --------------------------------------------------------- | ----------- |
+| [**getDataUsage**](UsageApi.md#getDataUsage)         | **GET** /v1/projects/{projectOrProductUID}/usage/data     |
+| [**getEventsUsage**](UsageApi.md#getEventsUsage)     | **GET** /v1/projects/{projectOrProductUID}/usage/events   |
+| [**getSessionsUsage**](UsageApi.md#getSessionsUsage) | **GET** /v1/projects/{projectOrProductUID}/usage/sessions |
 
 ## getDataUsage
 
@@ -64,9 +64,9 @@ apiInstance.getDataUsage(projectOrProductUID, period, opts).then((data) => {
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-## getProjectEventsUsage
+## getEventsUsage
 
-> UsageEventsResponse getProjectEventsUsage(projectOrProductUID, period, opts)
+> UsageEventsResponse getEventsUsage(projectOrProductUID, period, opts)
 
 Get events usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied
 
@@ -88,7 +88,7 @@ let opts = {
   'deviceUID': ["null"], // [String] | A Device UID.
   'aggregate': "'device'" // String | Aggregation level for results
 };
-apiInstance.getProjectEventsUsage(projectOrProductUID, period, opts).then((data) => {
+apiInstance.getEventsUsage(projectOrProductUID, period, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);

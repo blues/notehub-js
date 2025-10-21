@@ -79,5 +79,11 @@
       //var instance = new NotehubJs.UsageEventsData();
       //expect(instance).to.be();
     });
+
+    it('should have the property watchdogEvents (base name: "watchdog_events")', function () {
+      // uncomment below and update the code to test the property watchdogEvents
+      //var instance = new NotehubJs.UsageEventsData();
+      //expect(instance).to.be();
+    });
   });
 });

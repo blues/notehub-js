@@ -54,10 +54,10 @@
         done();
       });
     });
-    describe("getProjectEventsUsage", function () {
-      it("should call getProjectEventsUsage successfully", function (done) {
-        //uncomment below and update the code to test getProjectEventsUsage
-        //instance.getProjectEventsUsage(function(error) {
+    describe("getEventsUsage", function () {
+      it("should call getEventsUsage successfully", function (done) {
+        //uncomment below and update the code to test getEventsUsage
+        //instance.getEventsUsage(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});
