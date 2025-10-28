@@ -1,0 +1,29 @@
+name: Publish switch
+
+on:
+  release:
+    types: [created]
+  push:
+    branches:
+      - "test-release-**"
+    paths:
+      - "openapi.yaml"
+
+permissions:
+  id-token: write # Required for OIDC
+  contents: write # Required for beta version updates
+
+jobs:
+  publish-prod:
+    if: github.event_name == 'release'
+    uses: ./.github/workflows/publish-prod-npm.yml
+    permissions:
+      id-token: write
+      contents: read
+
+  publish-beta:
+    if: github.event_name == 'push'
+    uses: ./.github/workflows/publish-beta-npm.yml
+    permissions:
+      id-token: write
+      contents: write

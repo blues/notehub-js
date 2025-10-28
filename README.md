@@ -24,6 +24,7 @@ to [npm](https://www.npmjs.com/package/@blues-inc/notehub-js) for ease of use in
     - [Updating the Auto-Generated notehub-js Library](#updating-the-auto-generated-notehub-js-library)
     - [Testing the Library Locally](#testing-the-library-locally)
   - [Deploying notehub-js to npm](#deploying-notehub-js-to-npm)
+    - [Publishing Architecture](#publishing-architecture)
     - [Steps to Publish an Updated npm Version of Repo](#steps-to-publish-an-updated-npm-version-of-repo)
     - [Steps to Publish a Beta Version of Repo to npm](#steps-to-publish-a-beta-version-of-repo-to-npm)
   - [Contributing](#contributing)
@@ -69,23 +70,21 @@ const defaultClient = NotehubJs.ApiClient.instance;
 
 Here is an example of how to fetch all devices associated with a particular [Notehub project](https://dev.blues.io/reference/glossary/#project).
 
-The `api-key` variable declared below is an `X-SESSION-TOKEN` authentication token required for all Notehub API requests.
+The `personalAccessToken` variable declared below is a Personal Access Token (PAT) required for all Notehub API requests.
 
-It can be obtained in two ways:
+**Creating a Personal Access Token**
 
-**Manually cURL the token from the command line**
+To create a PAT:
 
-Using the command line, a user can request a new token from the
-[Notehub API `/auth/login` endpoint](https://dev.blues.io/reference/notehub-api/api-introduction/#authentication-with-session-tokens-deprecated)
-using a Notehub username and password in the body of the request.
+1. Sign into [Notehub](https://notehub.io)
+2. Select "API Access" from the user menu
+3. Click "Create New Token"
+4. Name the token and set an expiration date
+5. Copy the generated token immediately (it won't be shown again)
 
-**Use NotehubJs.AuthorizationApi login**
+Personal Access Tokens have the same permissions as your Notehub user account and should be stored securely like passwords. For more details, see the [Notehub API documentation on Personal Access Tokens](https://dev.blues.io/api-reference/notehub-api/api-introduction/#authentication-with-personal-access-tokens).
 
-Using this library, a user can programmatically call the Notehub API's `/auth/login` endpoint
-via the [NotehubJs.AuthorizationApi's `login()`](/src/docs/AuthorizationApi.md#login) method while supplying a Notehub username and
-password in the `loginRequest` object.
-
-Then supply the newly generated authentication token to whatever method the library needs, by setting it equal to: `api_key.apiKey = "YOUR API KEY";` in the code.
+Once you have your PAT, supply it to the library by setting it equal to: `personalAccessToken.accessToken = "YOUR_ACCESS_TOKEN";` in the code.
 
 > **NOTE**: Be aware that all Notehub API calls made using the Notehub JS library utilize your account's [Consumption Credits](https://dev.blues.io/reference/glossary#consumption-credit) (CCs). For > more information, please consult our [pricing page](https://blues.io/pricing/).
 
@@ -94,9 +93,9 @@ import * as NotehubJs from "@blues-inc/notehub-js";
 
 let defaultClient = NotehubJs.ApiClient.instance;
 
-// Configure API key authorization: api_key
-let api_key = defaultClient.authentications["api_key"];
-api_key.apiKey = "YOUR API KEY";
+// Configure Bearer access token for authorization: personalAccessToken
+let personalAccessToken = defaultClient.authentications["personalAccessToken"];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
 
 let apiInstance = new NotehubJs.ProjectApi();
 let projectUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8;"; // String |
@@ -155,8 +154,12 @@ As this project is partially generated via the OpenAPI Generator tool, it has a 
 ├── .github/
 │   └── scripts/
 │       └── filter-deprecated-params.js
+│       └── get-existing-beta-versions.sh
 │   └── workflows/
-│       └── GH Action files
+│       └── publish-switch.yml
+│       └── publish-prod-npm.yml
+│       └── publish-beta-npm.yml
+│       └── other GH Action files
 ├── .husky/
 │   └── pre-commit files
 ├── libTemplate/
@@ -182,7 +185,13 @@ As this project is partially generated via the OpenAPI Generator tool, it has a 
 
 Files and folders to be aware of in the root of the project.
 
-- The [`.github/`](.github/) folder holds the helper scripts and GitHub Actions workflows that automate common tasks in the repo. See the [Modifying the Project](#modifying-the-project) section for further information.
+- The [`.github/`](.github/) folder holds the helper scripts and GitHub Actions workflows that automate common tasks in the repo. Key workflows include:
+
+  - `publish-switch.yml` - Single entry point for both production and beta npm publishing via trusted publishing
+  - `publish-prod-npm.yml` - Production release workflow (called by publish-switch)
+  - `publish-beta-npm.yml` - Beta release workflow (called by publish-switch)
+
+  See the [Deploying notehub-js to npm](#deploying-notehub-js-to-npm) section for further information about the publishing architecture.
 
 - The [`openapi.yaml`](openapi.yaml) is a key player for this project: it provides the documentation of all the Notehub API endpoints that the OpenAPI Generator tool uses to build the library - without this file, the project doesn't exist.
 
@@ -248,7 +257,7 @@ Most of the files stored at the root of this project should require little to no
 
 The [`lib/template`](libTemplate/) folder holds the JavaScript generator template files the OpenAPI Generator tool relies upon to build its library in the `src/` folder.
 
-The [`.github/`](.github/) folder holds helper scripts and a set of GitHub Actions workflows that automate common tasks like [creating PRs](.github/workflows/create-pr.yml) out of new branches, running automated tests, and publishing new releases to npm.
+The [`.github/`](.github/) folder holds helper scripts and GitHub Actions workflows that automate common tasks like creating PRs out of new branches, running automated tests, and publishing new releases to npm. The repository uses a single-entry-point workflow pattern (`publish-switch.yml`) for npm publishing, which calls separate reusable workflows for production and beta releases. All npm publishes use trusted publishing with OIDC for enhanced security.
 
 The [`openapi.yaml`](openapi.yaml) file is a copy of the one in the Notehub repo (a private Blues repository). Anytime a new version of [Notehub.io][notehub] is deployed and the `openapi.yaml` file there is updated, a fresh copy of that file is added to this project in a new branch via a GitHub Actions workflow.
 
@@ -332,13 +341,24 @@ npm install
 
 All of these directions are also available in the auto-generated [`README.md`](src/README.md) in the `src/` folder as well, for reference.
 
-> **NOTE:** Even testing locally, you will need an `X-SESSION-TOKEN` (this is the 'api-key' referenced in the code examples). See [these directions](https://dev.blues.io/reference/notehub-api/api-introduction/#authentication-with-session-tokens-deprecated) on the Blues Developer Experience site to generate one.
+> **NOTE:** Even testing locally, you will need a Personal Access Token (this is the 'personalAccessToken' referenced in the code examples). See [these directions](https://dev.blues.io/api-reference/notehub-api/api-introduction/#authentication-with-personal-access-tokens) on the Blues Developer Experience site to generate one.
 
 ## Deploying notehub-js to npm
 
 Although many of the processes around this repository are automated with GitHub Actions, publishing an updated version of the repo requires some human intervention as well.
 
 Below are the necessary steps to take a new version of the `openapi.yaml` file and make it ready to deploy to npm.
+
+### Publishing Architecture
+
+This repository uses **npm trusted publishing with OIDC** for secure, tokenless deployments. A single GitHub Actions workflow (`publish-switch.yml`) serves as the entry point for both production and beta releases:
+
+- **Production releases**: Triggered when a new GitHub release is created
+- **Beta releases**: Triggered when changes to `openapi.yaml` are pushed to branches matching `test-release-**`
+
+Both release types use npm's trusted publisher feature with provenance statements for supply chain security.
+
+> **NOTE:** The trusted publisher must be configured on npmjs.com to reference the `publish-switch.yml` workflow file. This configuration allows both production and beta releases to authenticate via OIDC without requiring npm access tokens.
 
 ### Steps to Publish an Updated npm Version of Repo
 
@@ -348,8 +368,7 @@ Below are the necessary steps to take a new version of the `openapi.yaml` file a
 4. Commit and push the changes to a new branch in GitHub and open a new pull request when the branch is ready for review. See the [contribution documentation](CONTRIBUTING.md) for further details around a good PR and commit messages.
 5. Get the PR approved and merged to `main`.
 6. Create a new release with a tag following the [semantic versioning](https://semver.org/) style of [vX.X.X] and publish the release. For example: a new release with a tag named v1.0.2.
-7. After the GitHub Actions workflow `publish-npm.yml` has successfully deployed the latest version of notehub-js to npm, copy the changelog notes from the GitHub Action step `Generate release changelog`.
-8. Paste those notes into the appropriate release tag in the repo.
+7. The `publish-switch.yml` GitHub Actions workflow will automatically detect the release event and trigger the production publish workflow, which will deploy the latest version of notehub-js to npm with provenance attestation.
 
 ![Copy generated release notes from GitHub Actions workflow](images/generate-release-changelog.png)
 _Copy the formatted changelog notes from the GH Action workflow run._
@@ -362,7 +381,11 @@ _Paste the notes into the newest release tag._
 During the course of the development cycle, it may make sense to have beta versions of a repo available on npm for testing purposes. These versions of the notehub-js repo are considered unstable and should not be used long term in production apps, they are meant for internal testing of new features before they're ready for public consumption. Here are the steps to deploy a beta version of the SDK to npm:
 
 1. Create a new feature branch with the name `test-release-BRANCH-NAME-OF-CHOICE`, and modify the `openapi.yaml` file. Commit that new branch back to the Notehub JS repo.
-2. Once committed, two GitHub Action workflows will detect the branch name contains `test-release-*` and one will create a new PR to document that a new beta release of the Notehub JS SDK is happening, and the other will actually perform the release automatically (update the project version with a `beta.XX` tag, regenerate the SDK with the new `openapi.yaml` file, publish it as a beta version to npm, commit the newly update project version back to the PR, etc.)
+2. Once committed, the `publish-switch.yml` GitHub Actions workflow will automatically detect the branch name pattern and trigger the beta publish workflow, which will:
+   - Increment the project version with a `beta.XX` tag
+   - Regenerate the SDK with the new `openapi.yaml` file
+   - Publish it as a beta version to npm with the `beta` tag and provenance attestation
+   - Commit the updated project version back to the branch
 
 Now, anyone can download the beta version of the Notehub JS with the following command:
 
