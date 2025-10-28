@@ -1,16 +1,14 @@
-name: Publish beta version of notehub-js to npm
+name: Publish beta to npm
 
 on:
-  push:
-    branches:
-      - "test-release-**"
-    paths:
-      - "openapi.yaml"
+  workflow_call:
 
 jobs:
-  publish-beta:
+  publish:
     runs-on: ubuntu-latest
-
+    permissions:
+      id-token: write
+      contents: write
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -33,6 +31,18 @@ jobs:
 
           echo "Updated project version to: $new_version"
 
+      - name: Setup .npmrc file to publish to npm
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24.x"
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Update npm
+        run: sudo npm install -g npm@latest
+
+      - name: Verify npm version
+        run: npm --version
+
       - name: Install Dependencies
         run: npm install
 
@@ -42,24 +52,16 @@ jobs:
       - name: Generate New SDK
         run: npm run prepareFreshRelease
 
-      - name: Setup .npmrc file to publish to npm
-        uses: actions/setup-node@v4
-        with:
-          node-version: "22.x"
-          registry-url: "https://registry.npmjs.org"
-
       - name: Publish Beta Version to npm
         run: |
           echo "Publishing beta version to npm... $new_version"
           cd src
-          npm publish --tag beta --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          npm publish --tag beta --provenance --access public
 
       - name: Commit Updated config.json
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add config.json
-          git commit -m "Update project version to ${{ steps.update_version.outputs.new_version }} [skip ci]"
+          git commit -m "Update project version to $new_version [skip ci]"
           git push
