@@ -5,7 +5,7 @@ info:
     name: Blues Engineering
     url: "https://dev.blues.io/support/"
   description: |
-    The OpenAPI definition for the Notehub.io API. Test reusable workflows one more time.
+    The OpenAPI definition for the Notehub.io API.
   title: Notehub API
   version: 1.2.0
 servers:
