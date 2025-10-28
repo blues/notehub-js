@@ -16,14 +16,14 @@ permissions:
 jobs:
   publish-prod:
     if: github.event_name == 'release'
-    uses: ./.github/workflows/publish-prod-reusable.yml
+    uses: ./.github/workflows/publish-prod-npm.yml
     permissions:
       id-token: write
       contents: read
 
   publish-beta:
     if: github.event_name == 'push'
-    uses: ./.github/workflows/publish-beta-reusable.yml
+    uses: ./.github/workflows/publish-beta-npm.yml
     permissions:
       id-token: write
       contents: write

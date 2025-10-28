@@ -157,8 +157,8 @@ As this project is partially generated via the OpenAPI Generator tool, it has a 
 │       └── get-existing-beta-versions.sh
 │   └── workflows/
 │       └── publish-switch.yml
-│       └── publish-prod-reusable.yml
-│       └── publish-beta-reusable.yml
+│       └── publish-prod-npm.yml
+│       └── publish-beta-npm.yml
 │       └── other GH Action files
 ├── .husky/
 │   └── pre-commit files
@@ -188,8 +188,8 @@ Files and folders to be aware of in the root of the project.
 - The [`.github/`](.github/) folder holds the helper scripts and GitHub Actions workflows that automate common tasks in the repo. Key workflows include:
 
   - `publish-switch.yml` - Single entry point for both production and beta npm publishing via trusted publishing
-  - `publish-prod-reusable.yml` - Production release workflow (called by publish-switch)
-  - `publish-beta-reusable.yml` - Beta release workflow (called by publish-switch)
+  - `publish-prod-npm.yml` - Production release workflow (called by publish-switch)
+  - `publish-beta-npm.yml` - Beta release workflow (called by publish-switch)
 
   See the [Deploying notehub-js to npm](#deploying-notehub-js-to-npm) section for further information about the publishing architecture.
 
