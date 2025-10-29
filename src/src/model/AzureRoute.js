@@ -18,7 +18,7 @@ import RouteTransformSettings from "./RouteTransformSettings";
 /**
  * The AzureRoute model module.
  * @module model/AzureRoute
- * @version 2.2.1
+ * @version 2.3.0
  */
 class AzureRoute {
   /**

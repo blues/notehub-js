@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The CreateProjectRequest model module.
  * @module model/CreateProjectRequest
- * @version 2.2.1
+ * @version 2.3.0
  */
 class CreateProjectRequest {
   /**

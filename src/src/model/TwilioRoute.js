@@ -17,7 +17,7 @@ import Filter from "./Filter";
 /**
  * The TwilioRoute model module.
  * @module model/TwilioRoute
- * @version 2.2.1
+ * @version 2.3.0
  */
 class TwilioRoute {
   /**

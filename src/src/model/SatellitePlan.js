@@ -17,7 +17,7 @@ import DataUsage from "./DataUsage";
 /**
  * The SatellitePlan model module.
  * @module model/SatellitePlan
- * @version 2.2.1
+ * @version 2.3.0
  */
 class SatellitePlan {
   /**

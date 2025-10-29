@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The HandleNoteChanges200Response model module.
  * @module model/HandleNoteChanges200Response
- * @version 2.2.1
+ * @version 2.3.0
  */
 class HandleNoteChanges200Response {
   /**
