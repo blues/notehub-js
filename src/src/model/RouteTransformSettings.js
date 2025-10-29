@@ -52,6 +52,12 @@ class RouteTransformSettings {
       if (data.hasOwnProperty("jsonata")) {
         obj["jsonata"] = ApiClient.convertToType(data["jsonata"], "String");
       }
+      if (data.hasOwnProperty("jsonata_in")) {
+        obj["jsonata_in"] = ApiClient.convertToType(
+          data["jsonata_in"],
+          "String"
+        );
+      }
     } else if (data === null) {
       return null;
     }
@@ -86,6 +92,19 @@ class RouteTransformSettings {
           data["jsonata"]
       );
     }
+    // ensure the json data is a string
+    if (
+      data["jsonata_in"] &&
+      !(
+        typeof data["jsonata_in"] === "string" ||
+        data["jsonata_in"] instanceof String
+      )
+    ) {
+      throw new Error(
+        "Expected the field `jsonata_in` to be a primitive type in the JSON string but got " +
+          data["jsonata_in"]
+      );
+    }
 
     return true;
   }
@@ -98,9 +117,15 @@ class RouteTransformSettings {
 RouteTransformSettings.prototype["format"] = undefined;
 
 /**
- * JSONata expression used to transform the data payload.
+ * JSONata expression used to transform the data payload (outgoing).
  * @member {String} jsonata
  */
 RouteTransformSettings.prototype["jsonata"] = undefined;
+
+/**
+ * JSONata expression used to transform the data payload (incoming).
+ * @member {String} jsonata_in
+ */
+RouteTransformSettings.prototype["jsonata_in"] = undefined;
 
 export default RouteTransformSettings;

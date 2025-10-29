@@ -5025,6 +5025,8 @@ components:
             type: string
         timeout:
           type: integer
+        transform:
+          $ref: "#/components/schemas/RouteTransformSettings"
         url:
           type: string
           format: uri
@@ -5133,7 +5135,11 @@ components:
           type: string
           example: json
         jsonata:
-          description: JSONata expression used to transform the data payload.
+          description: JSONata expression used to transform the data payload (outgoing).
+          type: string
+          example: $.body.data
+        jsonata_in:
+          description: JSONata expression used to transform the data payload (incoming).
           type: string
           example: $.body.data
     S3ArchiveRoute:

@@ -61,5 +61,11 @@
       //var instance = new NotehubJs.RouteTransformSettings();
       //expect(instance).to.be();
     });
+
+    it('should have the property jsonataIn (base name: "jsonata_in")', function () {
+      // uncomment below and update the code to test the property jsonataIn
+      //var instance = new NotehubJs.RouteTransformSettings();
+      //expect(instance).to.be();
+    });
   });
 });
