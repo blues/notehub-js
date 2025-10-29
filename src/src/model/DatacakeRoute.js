@@ -18,7 +18,7 @@ import RouteTransformSettings from "./RouteTransformSettings";
 /**
  * The DatacakeRoute model module.
  * @module model/DatacakeRoute
- * @version 2.2.1
+ * @version 2.3.0
  */
 class DatacakeRoute {
   /**

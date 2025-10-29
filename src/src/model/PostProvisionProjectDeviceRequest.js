@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The PostProvisionProjectDeviceRequest model module.
  * @module model/PostProvisionProjectDeviceRequest
- * @version 2.2.1
+ * @version 2.3.0
  */
 class PostProvisionProjectDeviceRequest {
   /**

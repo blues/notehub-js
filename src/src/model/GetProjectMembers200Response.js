@@ -17,7 +17,7 @@ import ProjectMember from "./ProjectMember";
 /**
  * The GetProjectMembers200Response model module.
  * @module model/GetProjectMembers200Response
- * @version 2.2.1
+ * @version 2.3.0
  */
 class GetProjectMembers200Response {
   /**

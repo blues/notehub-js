@@ -12,11 +12,12 @@
  */
 
 import ApiClient from "../ApiClient";
+import RouteTransformSettings from "./RouteTransformSettings";
 
 /**
  * The ProxyRoute model module.
  * @module model/ProxyRoute
- * @version 2.2.1
+ * @version 2.3.0
  */
 class ProxyRoute {
   /**
@@ -59,6 +60,11 @@ class ProxyRoute {
       if (data.hasOwnProperty("timeout")) {
         obj["timeout"] = ApiClient.convertToType(data["timeout"], "Number");
       }
+      if (data.hasOwnProperty("transform")) {
+        obj["transform"] = RouteTransformSettings.constructFromObject(
+          data["transform"]
+        );
+      }
       if (data.hasOwnProperty("url")) {
         obj["url"] = ApiClient.convertToType(data["url"], "String");
       }
@@ -90,6 +96,11 @@ class ProxyRoute {
         "Expected the field `fleets` to be an array in the JSON data but got " +
           data["fleets"]
       );
+    }
+    // validate the optional field `transform`
+    if (data["transform"]) {
+      // data not null
+      RouteTransformSettings.validateJSON(data["transform"]);
     }
     // ensure the json data is a string
     if (
@@ -125,6 +136,11 @@ ProxyRoute.prototype["http_headers"] = undefined;
  * @member {Number} timeout
  */
 ProxyRoute.prototype["timeout"] = undefined;
+
+/**
+ * @member {module:model/RouteTransformSettings} transform
+ */
+ProxyRoute.prototype["transform"] = undefined;
 
 /**
  * @member {String} url
