@@ -1004,10 +1004,7 @@ let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
 let deviceUID = dev:000000000000000; // String |
 let notefileID = "notefileID_example"; // String |
 let opts = {
-  'tracker': "tracker_example", // String | The change tracker ID.
   'max': 56, // Number | The maximum number of Notes to return in the request.
-  'start': true, // Boolean | true to reset the tracker to the beginning.
-  'stop': true, // Boolean | true to delete the tracker.
   'deleted': true, // Boolean | true to return deleted notes.
   '_delete': true // Boolean | true to delete the notes returned by the request.
 };
@@ -1026,10 +1023,7 @@ apiInstance.handleNoteChanges(projectOrProductUID, deviceUID, notefileID, opts).
 | **projectOrProductUID** | **String**  |                                                       |
 | **deviceUID**           | **String**  |                                                       |
 | **notefileID**          | **String**  |                                                       |
-| **tracker**             | **String**  | The change tracker ID.                                | [optional] |
 | **max**                 | **Number**  | The maximum number of Notes to return in the request. | [optional] |
-| **start**               | **Boolean** | true to reset the tracker to the beginning.           | [optional] |
-| **stop**                | **Boolean** | true to delete the tracker.                           | [optional] |
 | **deleted**             | **Boolean** | true to return deleted notes.                         | [optional] |
 | **\_delete**            | **Boolean** | true to delete the notes returned by the request.     | [optional] |
 
@@ -1323,7 +1317,6 @@ let apiInstance = new NotehubJs.DeviceApi();
 let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
 let deviceUID = dev:000000000000000; // String |
 let opts = {
-  'tracker': "tracker_example", // String | The change tracker ID.
   'files': ["null"] // [String] | One or more files to obtain change information from.
 };
 apiInstance.handleNotefileChanges(projectOrProductUID, deviceUID, opts).then((data) => {
@@ -1340,7 +1333,6 @@ apiInstance.handleNotefileChanges(projectOrProductUID, deviceUID, opts).then((da
 | ----------------------- | ------------------------- | ---------------------------------------------------- | ---------- |
 | **projectOrProductUID** | **String**                |                                                      |
 | **deviceUID**           | **String**                |                                                      |
-| **tracker**             | **String**                | The change tracker ID.                               | [optional] |
 | **files**               | [**[String]**](String.md) | One or more files to obtain change information from. | [optional] |
 
 ### Return type

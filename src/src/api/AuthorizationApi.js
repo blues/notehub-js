@@ -20,7 +20,7 @@ import OAuth2TokenResponse from "../model/OAuth2TokenResponse";
 /**
  * Authorization service.
  * @module api/AuthorizationApi
- * @version 2.2.0
+ * @version 2.2.1
  */
 export default class AuthorizationApi {
   /**

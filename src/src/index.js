@@ -15,12 +15,11 @@ import ApiClient from "./ApiClient";
 import Alert from "./model/Alert";
 import AlertDataInner from "./model/AlertDataInner";
 import AlertNotificationsInner from "./model/AlertNotificationsInner";
-import Aws from "./model/Aws";
-import AwsFilter from "./model/AwsFilter";
-import AwsTransform from "./model/AwsTransform";
-import Azure from "./model/Azure";
+import AwsRoute from "./model/AwsRoute";
+import AzureRoute from "./model/AzureRoute";
 import BillingAccount from "./model/BillingAccount";
 import BillingAccountRole from "./model/BillingAccountRole";
+import BlynkRoute from "./model/BlynkRoute";
 import Body from "./model/Body";
 import CellularPlan from "./model/CellularPlan";
 import CloneProjectRequest from "./model/CloneProjectRequest";
@@ -36,6 +35,7 @@ import DFUState from "./model/DFUState";
 import DataField from "./model/DataField";
 import DataSetField from "./model/DataSetField";
 import DataUsage from "./model/DataUsage";
+import DatacakeRoute from "./model/DatacakeRoute";
 import DeleteDeviceFleetsRequest from "./model/DeleteDeviceFleetsRequest";
 import Device from "./model/Device";
 import DeviceDfuHistory from "./model/DeviceDfuHistory";
@@ -55,9 +55,11 @@ import EnvVar from "./model/EnvVar";
 import EnvironmentVariables from "./model/EnvironmentVariables";
 import Error from "./model/Error";
 import Event from "./model/Event";
+import Filter from "./model/Filter";
 import Firmware from "./model/Firmware";
 import FirmwareInfo from "./model/FirmwareInfo";
 import Fleet from "./model/Fleet";
+import FleetConnectivityAssurance from "./model/FleetConnectivityAssurance";
 import GetAlerts200Response from "./model/GetAlerts200Response";
 import GetBillingAccounts200Response from "./model/GetBillingAccounts200Response";
 import GetDataUsage200Response from "./model/GetDataUsage200Response";
@@ -80,24 +82,24 @@ import GetProjectMembers200Response from "./model/GetProjectMembers200Response";
 import GetProjects200Response from "./model/GetProjects200Response";
 import GetSessionsUsage200Response from "./model/GetSessionsUsage200Response";
 import GetWebhooks200Response from "./model/GetWebhooks200Response";
-import Google from "./model/Google";
+import GoogleRoute from "./model/GoogleRoute";
 import HandleNoteChanges200Response from "./model/HandleNoteChanges200Response";
 import HandleNoteGet200Response from "./model/HandleNoteGet200Response";
 import HandleNoteSignal200Response from "./model/HandleNoteSignal200Response";
 import HandleNotefileChanges200Response from "./model/HandleNotefileChanges200Response";
 import HandleNotefileChangesPending200Response from "./model/HandleNotefileChangesPending200Response";
 import HandleNotefileDeleteRequest from "./model/HandleNotefileDeleteRequest";
-import Http from "./model/Http";
+import HttpRoute from "./model/HttpRoute";
 import Location from "./model/Location";
 import Login200Response from "./model/Login200Response";
 import LoginRequest from "./model/LoginRequest";
 import Monitor from "./model/Monitor";
 import MonitorAlertRoutesInner from "./model/MonitorAlertRoutesInner";
-import Mqtt from "./model/Mqtt";
+import MqttRoute from "./model/MqttRoute";
 import Note from "./model/Note";
 import NotefileSchema from "./model/NotefileSchema";
 import NotehubRoute from "./model/NotehubRoute";
-import NotehubRouteSchema from "./model/NotehubRouteSchema";
+import NotehubRouteSummary from "./model/NotehubRouteSummary";
 import OAuth2Error from "./model/OAuth2Error";
 import OAuth2TokenResponse from "./model/OAuth2TokenResponse";
 import PersonalAccessToken from "./model/PersonalAccessToken";
@@ -108,23 +110,25 @@ import PostProvisionProjectDeviceRequest from "./model/PostProvisionProjectDevic
 import Product from "./model/Product";
 import Project from "./model/Project";
 import ProjectMember from "./model/ProjectMember";
-import Proxy from "./model/Proxy";
+import ProxyRoute from "./model/ProxyRoute";
 import PutDeviceFleetsRequest from "./model/PutDeviceFleetsRequest";
-import Radresponder from "./model/Radresponder";
+import QubitroRoute from "./model/QubitroRoute";
+import RadRoute from "./model/RadRoute";
 import Repository from "./model/Repository";
 import Role from "./model/Role";
 import RouteLog from "./model/RouteLog";
+import RouteTransformSettings from "./model/RouteTransformSettings";
+import S3ArchiveRoute from "./model/S3ArchiveRoute";
 import SatellitePlan from "./model/SatellitePlan";
 import SchemaProperty from "./model/SchemaProperty";
 import SimUsage from "./model/SimUsage";
-import Slack from "./model/Slack";
 import SlackBearerNotification from "./model/SlackBearerNotification";
-import SlackTransform from "./model/SlackTransform";
+import SlackRoute from "./model/SlackRoute";
 import SlackWebHookNotification from "./model/SlackWebHookNotification";
-import Snowflake from "./model/Snowflake";
-import Thingworx from "./model/Thingworx";
+import SnowflakeRoute from "./model/SnowflakeRoute";
+import ThingworxRoute from "./model/ThingworxRoute";
 import TowerLocation from "./model/TowerLocation";
-import Twilio from "./model/Twilio";
+import TwilioRoute from "./model/TwilioRoute";
 import UpdateFleetRequest from "./model/UpdateFleetRequest";
 import UploadMetadata from "./model/UploadMetadata";
 import UsageData from "./model/UsageData";
@@ -132,7 +136,6 @@ import UsageEventsData from "./model/UsageEventsData";
 import UsageEventsResponse from "./model/UsageEventsResponse";
 import UsageRouteLogsData from "./model/UsageRouteLogsData";
 import UsageSessionsData from "./model/UsageSessionsData";
-import UserDbRoute from "./model/UserDbRoute";
 import UserDfuStateMachine from "./model/UserDfuStateMachine";
 import UserDfuStateMachineStatus from "./model/UserDfuStateMachineStatus";
 import UserFirmwareInfo from "./model/UserFirmwareInfo";
@@ -178,7 +181,7 @@ import WebhookApi from "./api/WebhookApi";
  * </pre>
  * </p>
  * @module index
- * @version 2.2.0
+ * @version 2.2.1
  */
 export {
   /**
@@ -206,28 +209,16 @@ export {
   AlertNotificationsInner,
 
   /**
-   * The Aws model constructor.
-   * @property {module:model/Aws}
+   * The AwsRoute model constructor.
+   * @property {module:model/AwsRoute}
    */
-  Aws,
+  AwsRoute,
 
   /**
-   * The AwsFilter model constructor.
-   * @property {module:model/AwsFilter}
+   * The AzureRoute model constructor.
+   * @property {module:model/AzureRoute}
    */
-  AwsFilter,
-
-  /**
-   * The AwsTransform model constructor.
-   * @property {module:model/AwsTransform}
-   */
-  AwsTransform,
-
-  /**
-   * The Azure model constructor.
-   * @property {module:model/Azure}
-   */
-  Azure,
+  AzureRoute,
 
   /**
    * The BillingAccount model constructor.
@@ -240,6 +231,12 @@ export {
    * @property {module:model/BillingAccountRole}
    */
   BillingAccountRole,
+
+  /**
+   * The BlynkRoute model constructor.
+   * @property {module:model/BlynkRoute}
+   */
+  BlynkRoute,
 
   /**
    * The Body model constructor.
@@ -330,6 +327,12 @@ export {
    * @property {module:model/DataUsage}
    */
   DataUsage,
+
+  /**
+   * The DatacakeRoute model constructor.
+   * @property {module:model/DatacakeRoute}
+   */
+  DatacakeRoute,
 
   /**
    * The DeleteDeviceFleetsRequest model constructor.
@@ -446,6 +449,12 @@ export {
   Event,
 
   /**
+   * The Filter model constructor.
+   * @property {module:model/Filter}
+   */
+  Filter,
+
+  /**
    * The Firmware model constructor.
    * @property {module:model/Firmware}
    */
@@ -462,6 +471,12 @@ export {
    * @property {module:model/Fleet}
    */
   Fleet,
+
+  /**
+   * The FleetConnectivityAssurance model constructor.
+   * @property {module:model/FleetConnectivityAssurance}
+   */
+  FleetConnectivityAssurance,
 
   /**
    * The GetAlerts200Response model constructor.
@@ -596,10 +611,10 @@ export {
   GetWebhooks200Response,
 
   /**
-   * The Google model constructor.
-   * @property {module:model/Google}
+   * The GoogleRoute model constructor.
+   * @property {module:model/GoogleRoute}
    */
-  Google,
+  GoogleRoute,
 
   /**
    * The HandleNoteChanges200Response model constructor.
@@ -638,10 +653,10 @@ export {
   HandleNotefileDeleteRequest,
 
   /**
-   * The Http model constructor.
-   * @property {module:model/Http}
+   * The HttpRoute model constructor.
+   * @property {module:model/HttpRoute}
    */
-  Http,
+  HttpRoute,
 
   /**
    * The Location model constructor.
@@ -674,10 +689,10 @@ export {
   MonitorAlertRoutesInner,
 
   /**
-   * The Mqtt model constructor.
-   * @property {module:model/Mqtt}
+   * The MqttRoute model constructor.
+   * @property {module:model/MqttRoute}
    */
-  Mqtt,
+  MqttRoute,
 
   /**
    * The Note model constructor.
@@ -698,10 +713,10 @@ export {
   NotehubRoute,
 
   /**
-   * The NotehubRouteSchema model constructor.
-   * @property {module:model/NotehubRouteSchema}
+   * The NotehubRouteSummary model constructor.
+   * @property {module:model/NotehubRouteSummary}
    */
-  NotehubRouteSchema,
+  NotehubRouteSummary,
 
   /**
    * The OAuth2Error model constructor.
@@ -764,10 +779,10 @@ export {
   ProjectMember,
 
   /**
-   * The Proxy model constructor.
-   * @property {module:model/Proxy}
+   * The ProxyRoute model constructor.
+   * @property {module:model/ProxyRoute}
    */
-  Proxy,
+  ProxyRoute,
 
   /**
    * The PutDeviceFleetsRequest model constructor.
@@ -776,10 +791,16 @@ export {
   PutDeviceFleetsRequest,
 
   /**
-   * The Radresponder model constructor.
-   * @property {module:model/Radresponder}
+   * The QubitroRoute model constructor.
+   * @property {module:model/QubitroRoute}
    */
-  Radresponder,
+  QubitroRoute,
+
+  /**
+   * The RadRoute model constructor.
+   * @property {module:model/RadRoute}
+   */
+  RadRoute,
 
   /**
    * The Repository model constructor.
@@ -800,6 +821,18 @@ export {
   RouteLog,
 
   /**
+   * The RouteTransformSettings model constructor.
+   * @property {module:model/RouteTransformSettings}
+   */
+  RouteTransformSettings,
+
+  /**
+   * The S3ArchiveRoute model constructor.
+   * @property {module:model/S3ArchiveRoute}
+   */
+  S3ArchiveRoute,
+
+  /**
    * The SatellitePlan model constructor.
    * @property {module:model/SatellitePlan}
    */
@@ -818,22 +851,16 @@ export {
   SimUsage,
 
   /**
-   * The Slack model constructor.
-   * @property {module:model/Slack}
-   */
-  Slack,
-
-  /**
    * The SlackBearerNotification model constructor.
    * @property {module:model/SlackBearerNotification}
    */
   SlackBearerNotification,
 
   /**
-   * The SlackTransform model constructor.
-   * @property {module:model/SlackTransform}
+   * The SlackRoute model constructor.
+   * @property {module:model/SlackRoute}
    */
-  SlackTransform,
+  SlackRoute,
 
   /**
    * The SlackWebHookNotification model constructor.
@@ -842,16 +869,16 @@ export {
   SlackWebHookNotification,
 
   /**
-   * The Snowflake model constructor.
-   * @property {module:model/Snowflake}
+   * The SnowflakeRoute model constructor.
+   * @property {module:model/SnowflakeRoute}
    */
-  Snowflake,
+  SnowflakeRoute,
 
   /**
-   * The Thingworx model constructor.
-   * @property {module:model/Thingworx}
+   * The ThingworxRoute model constructor.
+   * @property {module:model/ThingworxRoute}
    */
-  Thingworx,
+  ThingworxRoute,
 
   /**
    * The TowerLocation model constructor.
@@ -860,10 +887,10 @@ export {
   TowerLocation,
 
   /**
-   * The Twilio model constructor.
-   * @property {module:model/Twilio}
+   * The TwilioRoute model constructor.
+   * @property {module:model/TwilioRoute}
    */
-  Twilio,
+  TwilioRoute,
 
   /**
    * The UpdateFleetRequest model constructor.
@@ -906,12 +933,6 @@ export {
    * @property {module:model/UsageSessionsData}
    */
   UsageSessionsData,
-
-  /**
-   * The UserDbRoute model constructor.
-   * @property {module:model/UserDbRoute}
-   */
-  UserDbRoute,
 
   /**
    * The UserDfuStateMachine model constructor.

@@ -28,16 +28,7 @@ personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
 
 let apiInstance = new NotehubJs.RouteApi();
 let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
-let notehubRoute = {
-  "label": "Route Label",
-  "type":"http",
-  "http": {
-    "fleets": ["fleet:1042ddc5-3b2c-4cec-b1fb-d3040538094d"],
-    "throttle_ms": 100,
-    "url": "http://route.url"
-  }
-}
-; // NotehubRoute | Route to be Created
+let notehubRoute = {"http":{"disable_http_headers":false,"filter":{},"fleets":["fleet:1042ddc5-3b2c-4cec-b1fb-d3040538094d"],"http_headers":{"X-My-Header":"value"},"throttle_ms":100,"timeout":5000,"transform":{},"url":"https://example.com/ingest"},"label":"Route Label"}; // NotehubRoute | Route to be created
 apiInstance.createRoute(projectOrProductUID, notehubRoute).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
@@ -51,7 +42,7 @@ apiInstance.createRoute(projectOrProductUID, notehubRoute).then((data) => {
 | Name                    | Type                                | Description         | Notes |
 | ----------------------- | ----------------------------------- | ------------------- | ----- |
 | **projectOrProductUID** | **String**                          |                     |
-| **notehubRoute**        | [**NotehubRoute**](NotehubRoute.md) | Route to be Created |
+| **notehubRoute**        | [**NotehubRoute**](NotehubRoute.md) | Route to be created |
 
 ### Return type
 
@@ -68,7 +59,7 @@ apiInstance.createRoute(projectOrProductUID, notehubRoute).then((data) => {
 
 ## deleteRoute
 
-> Object deleteRoute(projectOrProductUID, routeUID)
+> deleteRoute(projectOrProductUID, routeUID)
 
 Delete single route within a project
 
@@ -84,8 +75,8 @@ personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
 let apiInstance = new NotehubJs.RouteApi();
 let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
 let routeUID = route:cbd20093cba58392c9f9bbdd0cdeb1a0; // String |
-apiInstance.deleteRoute(projectOrProductUID, routeUID).then((data) => {
-  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
+apiInstance.deleteRoute(projectOrProductUID, routeUID).then(() => {
+  console.log('API called successfully.');
 }, (error) => {
   console.error(error);
 });
@@ -101,7 +92,7 @@ apiInstance.deleteRoute(projectOrProductUID, routeUID).then((data) => {
 
 ### Return type
 
-**Object**
+null (empty response body)
 
 ### Authorization
 
@@ -228,7 +219,7 @@ apiInstance.getRouteLogsByRoute(projectOrProductUID, routeUID, opts).then((data)
 
 ## getRoutes
 
-> [UserDbRoute] getRoutes(projectOrProductUID)
+> [NotehubRouteSummary] getRoutes(projectOrProductUID)
 
 Get all Routes within a Project
 
@@ -259,7 +250,7 @@ apiInstance.getRoutes(projectOrProductUID).then((data) => {
 
 ### Return type
 
-[**[UserDbRoute]**](UserDbRoute.md)
+[**[NotehubRouteSummary]**](NotehubRouteSummary.md)
 
 ### Authorization
 

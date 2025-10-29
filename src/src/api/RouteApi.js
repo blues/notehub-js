@@ -14,13 +14,13 @@
 import ApiClient from "../ApiClient";
 import Error from "../model/Error";
 import NotehubRoute from "../model/NotehubRoute";
+import NotehubRouteSummary from "../model/NotehubRouteSummary";
 import RouteLog from "../model/RouteLog";
-import UserDbRoute from "../model/UserDbRoute";
 
 /**
  * Route service.
  * @module api/RouteApi
- * @version 2.2.0
+ * @version 2.2.1
  */
 export default class RouteApi {
   /**
@@ -37,7 +37,7 @@ export default class RouteApi {
   /**
    * Create Route within a Project
    * @param {String} projectOrProductUID
-   * @param {module:model/NotehubRoute} notehubRoute Route to be Created
+   * @param {module:model/NotehubRoute} notehubRoute Route to be created
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/NotehubRoute} and HTTP response
    */
   createRouteWithHttpInfo(projectOrProductUID, notehubRoute) {
@@ -85,7 +85,7 @@ export default class RouteApi {
   /**
    * Create Route within a Project
    * @param {String} projectOrProductUID
-   * @param {module:model/NotehubRoute} notehubRoute Route to be Created
+   * @param {module:model/NotehubRoute} notehubRoute Route to be created
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/NotehubRoute}
    */
   createRoute(projectOrProductUID, notehubRoute) {
@@ -100,7 +100,7 @@ export default class RouteApi {
    * Delete single route within a project
    * @param {String} projectOrProductUID
    * @param {String} routeUID
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link Object} and HTTP response
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
    */
   deleteRouteWithHttpInfo(projectOrProductUID, routeUID) {
     let postBody = null;
@@ -128,7 +128,7 @@ export default class RouteApi {
     let authNames = ["personalAccessToken"];
     let contentTypes = [];
     let accepts = ["application/json"];
-    let returnType = Object;
+    let returnType = null;
     return this.apiClient.callApi(
       "/v1/projects/{projectOrProductUID}/routes/{routeUID}",
       "DELETE",
@@ -149,7 +149,7 @@ export default class RouteApi {
    * Delete single route within a project
    * @param {String} projectOrProductUID
    * @param {String} routeUID
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link Object}
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}
    */
   deleteRoute(projectOrProductUID, routeUID) {
     return this.deleteRouteWithHttpInfo(projectOrProductUID, routeUID).then(
@@ -327,7 +327,7 @@ export default class RouteApi {
   /**
    * Get all Routes within a Project
    * @param {String} projectOrProductUID
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link Array.<module:model/UserDbRoute>} and HTTP response
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link Array.<module:model/NotehubRouteSummary>} and HTTP response
    */
   getRoutesWithHttpInfo(projectOrProductUID) {
     let postBody = null;
@@ -348,7 +348,7 @@ export default class RouteApi {
     let authNames = ["personalAccessToken"];
     let contentTypes = [];
     let accepts = ["application/json"];
-    let returnType = [UserDbRoute];
+    let returnType = [NotehubRouteSummary];
     return this.apiClient.callApi(
       "/v1/projects/{projectOrProductUID}/routes",
       "GET",
@@ -368,7 +368,7 @@ export default class RouteApi {
   /**
    * Get all Routes within a Project
    * @param {String} projectOrProductUID
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link Array.<module:model/UserDbRoute>}
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link Array.<module:model/NotehubRouteSummary>}
    */
   getRoutes(projectOrProductUID) {
     return this.getRoutesWithHttpInfo(projectOrProductUID).then(function (

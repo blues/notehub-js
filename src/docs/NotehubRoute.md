@@ -2,53 +2,25 @@
 
 ## Properties
 
-| Name          | Type                                            | Description        | Notes                                  |
-| ------------- | ----------------------------------------------- | ------------------ | -------------------------------------- |
-| **disabled**  | **Boolean**                                     | Is route disabled? | [optional] [default to false]          |
-| **label**     | **String**                                      | Route Label        | [optional]                             |
-| **modified**  | **String**                                      | Last Modified      | [optional]                             |
-| **routeType** | **String**                                      | Type of route.     | [optional] [default to &#39;http&#39;] |
-| **schema**    | [**NotehubRouteSchema**](NotehubRouteSchema.md) |                    | [optional]                             |
-| **uid**       | **String**                                      | Route UID          | [optional]                             |
-
-## Enum: RouteTypeEnum
-
-- `http` (value: `"http"`)
-
-- `proxy` (value: `"proxy"`)
-
-- `google-function` (value: `"google-function"`)
-
-- `mqtt` (value: `"mqtt"`)
-
-- `aws-lambda` (value: `"aws-lambda"`)
-
-- `aws-lambda-with-access-key` (value: `"aws-lambda-with-access-key"`)
-
-- `aws-sqs` (value: `"aws-sqs"`)
-
-- `aws-sqs-with-access-key` (value: `"aws-sqs-with-access-key"`)
-
-- `aws-sqs-fifo` (value: `"aws-sqs-fifo"`)
-
-- `aws-sqs-fifo-with-access-key` (value: `"aws-sqs-fifo-with-access-key"`)
-
-- `aws-iot-analytics` (value: `"aws-iot-analytics"`)
-
-- `radnote-radresp-fixed-survey` (value: `"radnote-radresp-fixed-survey"`)
-
-- `radnote-radresp-mobile-survey` (value: `"radnote-radresp-mobile-survey"`)
-
-- `azure-function` (value: `"azure-function"`)
-
-- `azure-function-with-key` (value: `"azure-function-with-key"`)
-
-- `azure-service-bus-with-sas-token` (value: `"azure-service-bus-with-sas-token"`)
-
-- `thingworx` (value: `"thingworx"`)
-
-- `snowflake` (value: `"snowflake"`)
-
-- `slack-bearer` (value: `"slack-bearer"`)
-
-- `slack-webhook` (value: `"slack-webhook"`)
+| Name          | Type                                    | Description               | Notes                         |
+| ------------- | --------------------------------------- | ------------------------- | ----------------------------- |
+| **aws**       | [**AwsRoute**](AwsRoute.md)             |                           | [optional]                    |
+| **azure**     | [**AzureRoute**](AzureRoute.md)         |                           | [optional]                    |
+| **blynk**     | [**BlynkRoute**](BlynkRoute.md)         |                           | [optional]                    |
+| **datacake**  | [**DatacakeRoute**](DatacakeRoute.md)   |                           | [optional]                    |
+| **disabled**  | **Boolean**                             |                           | [optional] [default to false] |
+| **google**    | [**GoogleRoute**](GoogleRoute.md)       |                           | [optional]                    |
+| **http**      | [**HttpRoute**](HttpRoute.md)           |                           | [optional]                    |
+| **label**     | **String**                              |                           | [optional]                    |
+| **modified**  | **Date**                                |                           | [optional] [readonly]         |
+| **mqtt**      | [**MqttRoute**](MqttRoute.md)           |                           | [optional]                    |
+| **proxy**     | [**ProxyRoute**](ProxyRoute.md)         |                           | [optional]                    |
+| **qubitro**   | [**QubitroRoute**](QubitroRoute.md)     |                           | [optional]                    |
+| **radnote**   | [**RadRoute**](RadRoute.md)             |                           | [optional]                    |
+| **s3archive** | [**S3ArchiveRoute**](S3ArchiveRoute.md) |                           | [optional]                    |
+| **slack**     | [**SlackRoute**](SlackRoute.md)         |                           | [optional]                    |
+| **snowflake** | [**SnowflakeRoute**](SnowflakeRoute.md) |                           | [optional]                    |
+| **thingworx** | [**ThingworxRoute**](ThingworxRoute.md) |                           | [optional]                    |
+| **twilio**    | [**TwilioRoute**](TwilioRoute.md)       |                           | [optional]                    |
+| **type**      | **String**                              | Mirrors hublib.RouteType. | [optional]                    |
+| **uid**       | **String**                              |                           | [optional] [readonly]         |

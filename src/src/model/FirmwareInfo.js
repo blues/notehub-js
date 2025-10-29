@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The FirmwareInfo model module.
  * @module model/FirmwareInfo
- * @version 2.2.0
+ * @version 2.2.1
  */
 class FirmwareInfo {
   /**

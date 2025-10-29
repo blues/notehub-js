@@ -12,11 +12,12 @@
  */
 
 import ApiClient from "../ApiClient";
+import FleetConnectivityAssurance from "./FleetConnectivityAssurance";
 
 /**
  * The CreateFleetRequest model module.
  * @module model/CreateFleetRequest
- * @version 2.2.0
+ * @version 2.2.1
  */
 class CreateFleetRequest {
   /**
@@ -45,6 +46,12 @@ class CreateFleetRequest {
     if (data) {
       obj = obj || new CreateFleetRequest();
 
+      if (data.hasOwnProperty("connectivity_assurance")) {
+        obj["connectivity_assurance"] =
+          FleetConnectivityAssurance.constructFromObject(
+            data["connectivity_assurance"]
+          );
+      }
       if (data.hasOwnProperty("label")) {
         obj["label"] = ApiClient.convertToType(data["label"], "String");
       }
@@ -66,6 +73,11 @@ class CreateFleetRequest {
    * @return {boolean} to indicate whether the JSON data is valid with respect to <code>CreateFleetRequest</code>.
    */
   static validateJSON(data) {
+    // validate the optional field `connectivity_assurance`
+    if (data["connectivity_assurance"]) {
+      // data not null
+      FleetConnectivityAssurance.validateJSON(data["connectivity_assurance"]);
+    }
     // ensure the json data is a string
     if (
       data["label"] &&
@@ -93,6 +105,11 @@ class CreateFleetRequest {
     return true;
   }
 }
+
+/**
+ * @member {module:model/FleetConnectivityAssurance} connectivity_assurance
+ */
+CreateFleetRequest.prototype["connectivity_assurance"] = undefined;
 
 /**
  * The label, or name,  for the Fleet.

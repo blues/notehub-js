@@ -17,7 +17,7 @@ import UsageSessionsData from "./UsageSessionsData";
 /**
  * The GetSessionsUsage200Response model module.
  * @module model/GetSessionsUsage200Response
- * @version 2.2.0
+ * @version 2.2.1
  */
 class GetSessionsUsage200Response {
   /**

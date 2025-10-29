@@ -17,7 +17,7 @@ import Event from "./Event";
 /**
  * The GetProjectEventsByCursor200Response model module.
  * @module model/GetProjectEventsByCursor200Response
- * @version 2.2.0
+ * @version 2.2.1
  */
 class GetProjectEventsByCursor200Response {
   /**

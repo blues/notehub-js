@@ -20,7 +20,7 @@ import UsageEventsResponse from "../model/UsageEventsResponse";
 /**
  * Usage service.
  * @module api/UsageApi
- * @version 2.2.0
+ * @version 2.2.1
  */
 export default class UsageApi {
   /**
@@ -129,19 +129,19 @@ export default class UsageApi {
    * @param {module:model/String} opts.aggregate Aggregation level for results (default to 'device')
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/UsageEventsResponse} and HTTP response
    */
-  getProjectEventsUsageWithHttpInfo(projectOrProductUID, period, opts) {
+  getEventsUsageWithHttpInfo(projectOrProductUID, period, opts) {
     opts = opts || {};
     let postBody = null;
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling getProjectEventsUsage"
+        "Missing the required parameter 'projectOrProductUID' when calling getEventsUsage"
       );
     }
     // verify the required parameter 'period' is set
     if (period === undefined || period === null) {
       throw new Error(
-        "Missing the required parameter 'period' when calling getProjectEventsUsage"
+        "Missing the required parameter 'period' when calling getEventsUsage"
       );
     }
 
@@ -192,8 +192,8 @@ export default class UsageApi {
    * @param {module:model/String} opts.aggregate Aggregation level for results (default to 'device')
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/UsageEventsResponse}
    */
-  getProjectEventsUsage(projectOrProductUID, period, opts) {
-    return this.getProjectEventsUsageWithHttpInfo(
+  getEventsUsage(projectOrProductUID, period, opts) {
+    return this.getEventsUsageWithHttpInfo(
       projectOrProductUID,
       period,
       opts

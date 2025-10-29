@@ -37,7 +37,7 @@ import PostProvisionProjectDeviceRequest from "../model/PostProvisionProjectDevi
 /**
  * Device service.
  * @module api/DeviceApi
- * @version 2.2.0
+ * @version 2.2.1
  */
 export default class DeviceApi {
   /**
@@ -1443,10 +1443,7 @@ export default class DeviceApi {
    * @param {String} deviceUID
    * @param {String} notefileID
    * @param {Object} opts Optional parameters
-   * @param {String} opts.tracker The change tracker ID.
    * @param {Number} opts.max The maximum number of Notes to return in the request.
-   * @param {Boolean} opts.start true to reset the tracker to the beginning.
-   * @param {Boolean} opts.stop true to delete the tracker.
    * @param {Boolean} opts.deleted true to return deleted notes.
    * @param {Boolean} opts._delete true to delete the notes returned by the request.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/HandleNoteChanges200Response} and HTTP response
@@ -1484,10 +1481,7 @@ export default class DeviceApi {
       notefileID: notefileID,
     };
     let queryParams = {
-      tracker: opts["tracker"],
       max: opts["max"],
-      start: opts["start"],
-      stop: opts["stop"],
       deleted: opts["deleted"],
       delete: opts["_delete"],
     };
@@ -1520,10 +1514,7 @@ export default class DeviceApi {
    * @param {String} deviceUID
    * @param {String} notefileID
    * @param {Object} opts Optional parameters
-   * @param {String} opts.tracker The change tracker ID.
    * @param {Number} opts.max The maximum number of Notes to return in the request.
-   * @param {Boolean} opts.start true to reset the tracker to the beginning.
-   * @param {Boolean} opts.stop true to delete the tracker.
    * @param {Boolean} opts.deleted true to return deleted notes.
    * @param {Boolean} opts._delete true to delete the notes returned by the request.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/HandleNoteChanges200Response}
@@ -2011,7 +2002,6 @@ export default class DeviceApi {
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
    * @param {Object} opts Optional parameters
-   * @param {String} opts.tracker The change tracker ID.
    * @param {Array.<String>} opts.files One or more files to obtain change information from.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/HandleNotefileChanges200Response} and HTTP response
    */
@@ -2036,7 +2026,6 @@ export default class DeviceApi {
       deviceUID: deviceUID,
     };
     let queryParams = {
-      tracker: opts["tracker"],
       files: this.apiClient.buildCollectionParam(opts["files"], "multi"),
     };
     let headerParams = {};
@@ -2067,7 +2056,6 @@ export default class DeviceApi {
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
    * @param {Object} opts Optional parameters
-   * @param {String} opts.tracker The change tracker ID.
    * @param {Array.<String>} opts.files One or more files to obtain change information from.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/HandleNotefileChanges200Response}
    */

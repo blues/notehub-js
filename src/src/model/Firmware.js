@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The Firmware model module.
  * @module model/Firmware
- * @version 2.2.0
+ * @version 2.2.1
  */
 class Firmware {
   /**

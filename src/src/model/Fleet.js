@@ -12,11 +12,12 @@
  */
 
 import ApiClient from "../ApiClient";
+import FleetConnectivityAssurance from "./FleetConnectivityAssurance";
 
 /**
  * The Fleet model module.
  * @module model/Fleet
- * @version 2.2.0
+ * @version 2.2.1
  */
 class Fleet {
   /**
@@ -52,6 +53,12 @@ class Fleet {
     if (data) {
       obj = obj || new Fleet();
 
+      if (data.hasOwnProperty("connectivity_assurance")) {
+        obj["connectivity_assurance"] =
+          FleetConnectivityAssurance.constructFromObject(
+            data["connectivity_assurance"]
+          );
+      }
       if (data.hasOwnProperty("created")) {
         obj["created"] = ApiClient.convertToType(data["created"], "Date");
       }
@@ -102,6 +109,11 @@ class Fleet {
         );
       }
     }
+    // validate the optional field `connectivity_assurance`
+    if (data["connectivity_assurance"]) {
+      // data not null
+      FleetConnectivityAssurance.validateJSON(data["connectivity_assurance"]);
+    }
     // ensure the json data is a string
     if (
       data["label"] &&
@@ -141,6 +153,11 @@ class Fleet {
 }
 
 Fleet.RequiredProperties = ["created", "label", "uid"];
+
+/**
+ * @member {module:model/FleetConnectivityAssurance} connectivity_assurance
+ */
+Fleet.prototype["connectivity_assurance"] = undefined;
 
 /**
  * RFC3339 timestamp in UTC
