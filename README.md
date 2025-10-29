@@ -367,14 +367,8 @@ Both release types use npm's trusted publisher feature with provenance statement
 3. Run `npm run generateDocs` to generate new docs from the `openapi.filtered.yaml` file.
 4. Commit and push the changes to a new branch in GitHub and open a new pull request when the branch is ready for review. See the [contribution documentation](CONTRIBUTING.md) for further details around a good PR and commit messages.
 5. Get the PR approved and merged to `main`.
-6. Create a new release with a tag following the [semantic versioning](https://semver.org/) style of [vX.X.X] and publish the release. For example: a new release with a tag named v1.0.2.
+6. Create a new release with a tag following the [semantic versioning](https://semver.org/) style of [vX.X.X], click the "Generate release notes" button to log the changes in the release, and publish it. For example: a new release with a tag named v1.0.2.
 7. The `publish-switch.yml` GitHub Actions workflow will automatically detect the release event and trigger the production publish workflow, which will deploy the latest version of notehub-js to npm with provenance attestation.
-
-![Copy generated release notes from GitHub Actions workflow](images/generate-release-changelog.png)
-_Copy the formatted changelog notes from the GH Action workflow run._
-
-![Paste changelog notes into release tag in GH](images/update-changelog-github.png)
-_Paste the notes into the newest release tag._
 
 ### Steps to Publish a Beta Version of Repo to npm
 
