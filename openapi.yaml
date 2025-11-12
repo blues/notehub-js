@@ -543,42 +543,10 @@ paths:
         - personalAccessToken: []
       tags:
         - device
-  '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/disable-connectivity-assurance':
-    post:
-      operationId: disableDeviceConnectivityAssurance
-      description: Disable Connectivity Assurance
-      parameters:
-        - $ref: '#/components/parameters/projectOrProductUIDParam'
-        - $ref: '#/components/parameters/deviceUIDParam'
-      responses:
-        '200':
-          description: Successful operation
-        default:
-          $ref: '#/components/responses/ErrorResponse'
-      security:
-        - personalAccessToken: []
-      tags:
-        - device
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/enable':
     post:
       operationId: enableDevice
       description: Enable Device
-      parameters:
-        - $ref: '#/components/parameters/projectOrProductUIDParam'
-        - $ref: '#/components/parameters/deviceUIDParam'
-      responses:
-        '200':
-          description: Successful operation
-        default:
-          $ref: '#/components/responses/ErrorResponse'
-      security:
-        - personalAccessToken: []
-      tags:
-        - device
-  '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/enable-connectivity-assurance':
-    post:
-      operationId: enableDeviceConnectivityAssurance
-      description: Enable Connectivity Assurance
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
