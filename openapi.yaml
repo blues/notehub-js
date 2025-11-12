@@ -2445,6 +2445,7 @@ paths:
         - $ref: '#/components/parameters/startDateParam'
         - $ref: '#/components/parameters/endDateParam'
         - $ref: '#/components/parameters/deviceUIDParamQuery'
+        - $ref: '#/components/parameters/fleetUIDFilterQueryParam'
         - name: period
           in: query
           description: Period type for aggregation
@@ -2484,6 +2485,7 @@ paths:
         - $ref: '#/components/parameters/startDateParam'
         - $ref: '#/components/parameters/endDateParam'
         - $ref: '#/components/parameters/deviceUIDParamQuery'
+        - $ref: '#/components/parameters/fleetUIDFilterQueryParam'
         - name: period
           in: query
           description: Period type for aggregation
@@ -2527,6 +2529,7 @@ paths:
         - $ref: '#/components/parameters/startDateParam'
         - $ref: '#/components/parameters/endDateParam'
         - $ref: '#/components/parameters/deviceUIDParamQuery'
+        - $ref: '#/components/parameters/fleetUIDFilterQueryParam'
         - name: period
           in: query
           description: Period type for aggregation
