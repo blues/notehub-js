@@ -126,6 +126,7 @@ docs/SlackBearerNotification.md
 docs/SlackRoute.md
 docs/SlackWebHookNotification.md
 docs/SnowflakeRoute.md
+docs/SnowpipeStreamingRoute.md
 docs/ThingworxRoute.md
 docs/TowerLocation.md
 docs/TwilioRoute.md
@@ -272,6 +273,7 @@ src/model/SlackBearerNotification.js
 src/model/SlackRoute.js
 src/model/SlackWebHookNotification.js
 src/model/SnowflakeRoute.js
+src/model/SnowpipeStreamingRoute.js
 src/model/ThingworxRoute.js
 src/model/TowerLocation.js
 src/model/TwilioRoute.js
@@ -411,6 +413,7 @@ test/model/SlackBearerNotification.spec.js
 test/model/SlackRoute.spec.js
 test/model/SlackWebHookNotification.spec.js
 test/model/SnowflakeRoute.spec.js
+test/model/SnowpipeStreamingRoute.spec.js
 test/model/ThingworxRoute.spec.js
 test/model/TowerLocation.spec.js
 test/model/TwilioRoute.spec.js

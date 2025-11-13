@@ -126,6 +126,7 @@ import SlackBearerNotification from "./model/SlackBearerNotification";
 import SlackRoute from "./model/SlackRoute";
 import SlackWebHookNotification from "./model/SlackWebHookNotification";
 import SnowflakeRoute from "./model/SnowflakeRoute";
+import SnowpipeStreamingRoute from "./model/SnowpipeStreamingRoute";
 import ThingworxRoute from "./model/ThingworxRoute";
 import TowerLocation from "./model/TowerLocation";
 import TwilioRoute from "./model/TwilioRoute";
@@ -873,6 +874,12 @@ export {
    * @property {module:model/SnowflakeRoute}
    */
   SnowflakeRoute,
+
+  /**
+   * The SnowpipeStreamingRoute model constructor.
+   * @property {module:model/SnowpipeStreamingRoute}
+   */
+  SnowpipeStreamingRoute,
 
   /**
    * The ThingworxRoute model constructor.

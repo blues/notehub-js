@@ -345,6 +345,7 @@ All URIs are relative to *https://api.notefile.net*
 - [NotehubJs.SlackRoute](docs/SlackRoute.md)
 - [NotehubJs.SlackWebHookNotification](docs/SlackWebHookNotification.md)
 - [NotehubJs.SnowflakeRoute](docs/SnowflakeRoute.md)
+- [NotehubJs.SnowpipeStreamingRoute](docs/SnowpipeStreamingRoute.md)
 - [NotehubJs.ThingworxRoute](docs/ThingworxRoute.md)
 - [NotehubJs.TowerLocation](docs/TowerLocation.md)
 - [NotehubJs.TwilioRoute](docs/TwilioRoute.md)

@@ -2464,6 +2464,7 @@ paths:
         - $ref: "#/components/parameters/startDateParam"
         - $ref: "#/components/parameters/endDateParam"
         - $ref: "#/components/parameters/deviceUIDParamQuery"
+        - $ref: "#/components/parameters/fleetUIDFilterQueryParam"
         - name: period
           in: query
           description: Period type for aggregation
@@ -2505,6 +2506,7 @@ paths:
         - $ref: "#/components/parameters/startDateParam"
         - $ref: "#/components/parameters/endDateParam"
         - $ref: "#/components/parameters/deviceUIDParamQuery"
+        - $ref: "#/components/parameters/fleetUIDFilterQueryParam"
         - name: period
           in: query
           description: Period type for aggregation
@@ -2550,6 +2552,7 @@ paths:
         - $ref: "#/components/parameters/startDateParam"
         - $ref: "#/components/parameters/endDateParam"
         - $ref: "#/components/parameters/deviceUIDParamQuery"
+        - $ref: "#/components/parameters/fleetUIDFilterQueryParam"
         - name: period
           in: query
           description: Period type for aggregation
@@ -4819,6 +4822,8 @@ components:
           $ref: "#/components/schemas/SlackRoute"
         snowflake:
           $ref: "#/components/schemas/SnowflakeRoute"
+        snowpipe_streaming:
+          $ref: "#/components/schemas/SnowpipeStreamingRoute"
         thingworx:
           $ref: "#/components/schemas/ThingworxRoute"
         twilio:
@@ -5340,6 +5345,36 @@ components:
         pem:
           type: string
         private_key_name:
+          type: string
+        timeout:
+          type: integer
+        transform:
+          $ref: "#/components/schemas/RouteTransformSettings"
+        user_name:
+          type: string
+      additionalProperties: false
+    SnowpipeStreamingRoute:
+      type: object
+      properties:
+        account_name:
+          type: string
+        database_name:
+          type: string
+        filter:
+          $ref: "#/components/schemas/Filter"
+        fleets:
+          type: array
+          items:
+            type: string
+        organization_name:
+          type: string
+        pem:
+          type: string
+        pipe_name:
+          type: string
+        private_key_name:
+          type: string
+        schema_name:
           type: string
         timeout:
           type: integer
