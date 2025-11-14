@@ -44,6 +44,26 @@
   };
 
   describe("EventApi", function () {
+    describe("getEvents", function () {
+      it("should call getEvents successfully", function (done) {
+        //uncomment below and update the code to test getEvents
+        //instance.getEvents(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
+    describe("getEventsByCursor", function () {
+      it("should call getEventsByCursor successfully", function (done) {
+        //uncomment below and update the code to test getEventsByCursor
+        //instance.getEventsByCursor(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
     describe("getFleetEvents", function () {
       it("should call getFleetEvents successfully", function (done) {
         //uncomment below and update the code to test getFleetEvents
@@ -58,26 +78,6 @@
       it("should call getFleetEventsByCursor successfully", function (done) {
         //uncomment below and update the code to test getFleetEventsByCursor
         //instance.getFleetEventsByCursor(function(error) {
-        //  if (error) throw error;
-        //expect().to.be();
-        //});
-        done();
-      });
-    });
-    describe("getProjectEvents", function () {
-      it("should call getProjectEvents successfully", function (done) {
-        //uncomment below and update the code to test getProjectEvents
-        //instance.getProjectEvents(function(error) {
-        //  if (error) throw error;
-        //expect().to.be();
-        //});
-        done();
-      });
-    });
-    describe("getProjectEventsByCursor", function () {
-      it("should call getProjectEventsByCursor successfully", function (done) {
-        //uncomment below and update the code to test getProjectEventsByCursor
-        //instance.getProjectEventsByCursor(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});

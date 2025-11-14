@@ -13,8 +13,8 @@
 
 import ApiClient from "../ApiClient";
 import Error from "../model/Error";
-import GetProjectEvents200Response from "../model/GetProjectEvents200Response";
-import GetProjectEventsByCursor200Response from "../model/GetProjectEventsByCursor200Response";
+import GetEvents200Response from "../model/GetEvents200Response";
+import GetEventsByCursor200Response from "../model/GetEventsByCursor200Response";
 import RouteLog from "../model/RouteLog";
 
 /**
@@ -32,6 +32,203 @@ export default class EventApi {
    */
   constructor(apiClient) {
     this.apiClient = apiClient || ApiClient.instance;
+  }
+
+  /**
+   * Get Events of a Project
+   * @param {String} projectOrProductUID
+   * @param {Object} opts Optional parameters
+   * @param {Number} opts.pageSize  (default to 50)
+   * @param {Number} opts.pageNum  (default to 1)
+   * @param {Array.<String>} opts.deviceUID A Device UID.
+   * @param {module:model/String} opts.sortBy  (default to 'captured')
+   * @param {module:model/String} opts.sortOrder  (default to 'asc')
+   * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
+   * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
+   * @param {module:model/String} opts.dateType Which date to filter on, either 'captured' or 'uploaded'.  This will apply to the startDate and endDate parameters (default to 'captured')
+   * @param {Boolean} opts.systemFilesOnly
+   * @param {String} opts.files
+   * @param {module:model/String} opts.format Response format (JSON or CSV) (default to 'json')
+   * @param {Array.<String>} opts.serialNumber Filter by Serial Number
+   * @param {Array.<String>} opts.fleetUID Filter by Fleet UID
+   * @param {Array.<String>} opts.sessionUID Filter by Session UID
+   * @param {Array.<String>} opts.eventUID Filter by Event UID
+   * @param {String} opts.selectFields Comma-separated list of fields to select from JSON payload (e.g., \"field1,field2.subfield,field3\"), this will reflect the columns in the CSV output.
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetEvents200Response} and HTTP response
+   */
+  getEventsWithHttpInfo(projectOrProductUID, opts) {
+    opts = opts || {};
+    let postBody = null;
+    // verify the required parameter 'projectOrProductUID' is set
+    if (projectOrProductUID === undefined || projectOrProductUID === null) {
+      throw new Error(
+        "Missing the required parameter 'projectOrProductUID' when calling getEvents"
+      );
+    }
+
+    let pathParams = {
+      projectOrProductUID: projectOrProductUID,
+    };
+    let queryParams = {
+      pageSize: opts["pageSize"],
+      pageNum: opts["pageNum"],
+      deviceUID: this.apiClient.buildCollectionParam(
+        opts["deviceUID"],
+        "multi"
+      ),
+      sortBy: opts["sortBy"],
+      sortOrder: opts["sortOrder"],
+      startDate: opts["startDate"],
+      endDate: opts["endDate"],
+      dateType: opts["dateType"],
+      systemFilesOnly: opts["systemFilesOnly"],
+      files: opts["files"],
+      format: opts["format"],
+      serialNumber: this.apiClient.buildCollectionParam(
+        opts["serialNumber"],
+        "multi"
+      ),
+      fleetUID: this.apiClient.buildCollectionParam(opts["fleetUID"], "multi"),
+      sessionUID: this.apiClient.buildCollectionParam(
+        opts["sessionUID"],
+        "multi"
+      ),
+      eventUID: this.apiClient.buildCollectionParam(opts["eventUID"], "multi"),
+      selectFields: opts["selectFields"],
+    };
+    let headerParams = {};
+    let formParams = {};
+
+    let authNames = ["personalAccessToken"];
+    let contentTypes = [];
+    let accepts = ["application/json", "text/csv"];
+    let returnType = GetEvents200Response;
+    return this.apiClient.callApi(
+      "/v1/projects/{projectOrProductUID}/events",
+      "GET",
+      pathParams,
+      queryParams,
+      headerParams,
+      formParams,
+      postBody,
+      authNames,
+      contentTypes,
+      accepts,
+      returnType,
+      null
+    );
+  }
+
+  /**
+   * Get Events of a Project
+   * @param {String} projectOrProductUID
+   * @param {Object} opts Optional parameters
+   * @param {Number} opts.pageSize  (default to 50)
+   * @param {Number} opts.pageNum  (default to 1)
+   * @param {Array.<String>} opts.deviceUID A Device UID.
+   * @param {module:model/String} opts.sortBy  (default to 'captured')
+   * @param {module:model/String} opts.sortOrder  (default to 'asc')
+   * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
+   * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
+   * @param {module:model/String} opts.dateType Which date to filter on, either 'captured' or 'uploaded'.  This will apply to the startDate and endDate parameters (default to 'captured')
+   * @param {Boolean} opts.systemFilesOnly
+   * @param {String} opts.files
+   * @param {module:model/String} opts.format Response format (JSON or CSV) (default to 'json')
+   * @param {Array.<String>} opts.serialNumber Filter by Serial Number
+   * @param {Array.<String>} opts.fleetUID Filter by Fleet UID
+   * @param {Array.<String>} opts.sessionUID Filter by Session UID
+   * @param {Array.<String>} opts.eventUID Filter by Event UID
+   * @param {String} opts.selectFields Comma-separated list of fields to select from JSON payload (e.g., \"field1,field2.subfield,field3\"), this will reflect the columns in the CSV output.
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetEvents200Response}
+   */
+  getEvents(projectOrProductUID, opts) {
+    return this.getEventsWithHttpInfo(projectOrProductUID, opts).then(function (
+      response_and_data
+    ) {
+      return response_and_data.data;
+    });
+  }
+
+  /**
+   * Get Events of a Project by cursor
+   * @param {String} projectOrProductUID
+   * @param {Object} opts Optional parameters
+   * @param {Number} opts.limit  (default to 50)
+   * @param {String} opts.cursor A cursor, which can be obtained from the `next_cursor` value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included.
+   * @param {module:model/String} opts.sortOrder  (default to 'asc')
+   * @param {Boolean} opts.systemFilesOnly
+   * @param {String} opts.files
+   * @param {String} opts.fleetUID
+   * @param {Array.<String>} opts.deviceUID A Device UID.
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetEventsByCursor200Response} and HTTP response
+   */
+  getEventsByCursorWithHttpInfo(projectOrProductUID, opts) {
+    opts = opts || {};
+    let postBody = null;
+    // verify the required parameter 'projectOrProductUID' is set
+    if (projectOrProductUID === undefined || projectOrProductUID === null) {
+      throw new Error(
+        "Missing the required parameter 'projectOrProductUID' when calling getEventsByCursor"
+      );
+    }
+
+    let pathParams = {
+      projectOrProductUID: projectOrProductUID,
+    };
+    let queryParams = {
+      limit: opts["limit"],
+      cursor: opts["cursor"],
+      sortOrder: opts["sortOrder"],
+      systemFilesOnly: opts["systemFilesOnly"],
+      files: opts["files"],
+      fleetUID: opts["fleetUID"],
+      deviceUID: this.apiClient.buildCollectionParam(
+        opts["deviceUID"],
+        "multi"
+      ),
+    };
+    let headerParams = {};
+    let formParams = {};
+
+    let authNames = ["personalAccessToken"];
+    let contentTypes = [];
+    let accepts = ["application/json"];
+    let returnType = GetEventsByCursor200Response;
+    return this.apiClient.callApi(
+      "/v1/projects/{projectOrProductUID}/events-cursor",
+      "GET",
+      pathParams,
+      queryParams,
+      headerParams,
+      formParams,
+      postBody,
+      authNames,
+      contentTypes,
+      accepts,
+      returnType,
+      null
+    );
+  }
+
+  /**
+   * Get Events of a Project by cursor
+   * @param {String} projectOrProductUID
+   * @param {Object} opts Optional parameters
+   * @param {Number} opts.limit  (default to 50)
+   * @param {String} opts.cursor A cursor, which can be obtained from the `next_cursor` value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included.
+   * @param {module:model/String} opts.sortOrder  (default to 'asc')
+   * @param {Boolean} opts.systemFilesOnly
+   * @param {String} opts.files
+   * @param {String} opts.fleetUID
+   * @param {Array.<String>} opts.deviceUID A Device UID.
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetEventsByCursor200Response}
+   */
+  getEventsByCursor(projectOrProductUID, opts) {
+    return this.getEventsByCursorWithHttpInfo(projectOrProductUID, opts).then(
+      function (response_and_data) {
+        return response_and_data.data;
+      }
+    );
   }
 
   /**
@@ -54,7 +251,7 @@ export default class EventApi {
    * @param {Array.<String>} opts.sessionUID Filter by Session UID
    * @param {Array.<String>} opts.eventUID Filter by Event UID
    * @param {String} opts.selectFields Comma-separated list of fields to select from JSON payload (e.g., \"field1,field2.subfield,field3\"), this will reflect the columns in the CSV output.
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetProjectEvents200Response} and HTTP response
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetEvents200Response} and HTTP response
    */
   getFleetEventsWithHttpInfo(projectOrProductUID, fleetUID, opts) {
     opts = opts || {};
@@ -108,7 +305,7 @@ export default class EventApi {
     let authNames = ["personalAccessToken"];
     let contentTypes = [];
     let accepts = ["application/json", "text/csv"];
-    let returnType = GetProjectEvents200Response;
+    let returnType = GetEvents200Response;
     return this.apiClient.callApi(
       "/v1/projects/{projectOrProductUID}/fleets/{fleetUID}/events",
       "GET",
@@ -145,7 +342,7 @@ export default class EventApi {
    * @param {Array.<String>} opts.sessionUID Filter by Session UID
    * @param {Array.<String>} opts.eventUID Filter by Event UID
    * @param {String} opts.selectFields Comma-separated list of fields to select from JSON payload (e.g., \"field1,field2.subfield,field3\"), this will reflect the columns in the CSV output.
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetProjectEvents200Response}
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetEvents200Response}
    */
   getFleetEvents(projectOrProductUID, fleetUID, opts) {
     return this.getFleetEventsWithHttpInfo(
@@ -170,7 +367,7 @@ export default class EventApi {
    * @param {Array.<String>} opts.deviceUID A Device UID.
    * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
    * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetProjectEventsByCursor200Response} and HTTP response
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetEventsByCursor200Response} and HTTP response
    */
   getFleetEventsByCursorWithHttpInfo(projectOrProductUID, fleetUID, opts) {
     opts = opts || {};
@@ -211,7 +408,7 @@ export default class EventApi {
     let authNames = ["personalAccessToken"];
     let contentTypes = [];
     let accepts = ["application/json"];
-    let returnType = GetProjectEventsByCursor200Response;
+    let returnType = GetEventsByCursor200Response;
     return this.apiClient.callApi(
       "/v1/projects/{projectOrProductUID}/fleets/{fleetUID}/events-cursor",
       "GET",
@@ -241,210 +438,12 @@ export default class EventApi {
    * @param {Array.<String>} opts.deviceUID A Device UID.
    * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
    * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetProjectEventsByCursor200Response}
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetEventsByCursor200Response}
    */
   getFleetEventsByCursor(projectOrProductUID, fleetUID, opts) {
     return this.getFleetEventsByCursorWithHttpInfo(
       projectOrProductUID,
       fleetUID,
-      opts
-    ).then(function (response_and_data) {
-      return response_and_data.data;
-    });
-  }
-
-  /**
-   * Get Events of a Project
-   * @param {String} projectOrProductUID
-   * @param {Object} opts Optional parameters
-   * @param {Number} opts.pageSize  (default to 50)
-   * @param {Number} opts.pageNum  (default to 1)
-   * @param {Array.<String>} opts.deviceUID A Device UID.
-   * @param {module:model/String} opts.sortBy  (default to 'captured')
-   * @param {module:model/String} opts.sortOrder  (default to 'asc')
-   * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
-   * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
-   * @param {module:model/String} opts.dateType Which date to filter on, either 'captured' or 'uploaded'.  This will apply to the startDate and endDate parameters (default to 'captured')
-   * @param {Boolean} opts.systemFilesOnly
-   * @param {String} opts.files
-   * @param {module:model/String} opts.format Response format (JSON or CSV) (default to 'json')
-   * @param {Array.<String>} opts.serialNumber Filter by Serial Number
-   * @param {Array.<String>} opts.fleetUID Filter by Fleet UID
-   * @param {Array.<String>} opts.sessionUID Filter by Session UID
-   * @param {Array.<String>} opts.eventUID Filter by Event UID
-   * @param {String} opts.selectFields Comma-separated list of fields to select from JSON payload (e.g., \"field1,field2.subfield,field3\"), this will reflect the columns in the CSV output.
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetProjectEvents200Response} and HTTP response
-   */
-  getProjectEventsWithHttpInfo(projectOrProductUID, opts) {
-    opts = opts || {};
-    let postBody = null;
-    // verify the required parameter 'projectOrProductUID' is set
-    if (projectOrProductUID === undefined || projectOrProductUID === null) {
-      throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling getProjectEvents"
-      );
-    }
-
-    let pathParams = {
-      projectOrProductUID: projectOrProductUID,
-    };
-    let queryParams = {
-      pageSize: opts["pageSize"],
-      pageNum: opts["pageNum"],
-      deviceUID: this.apiClient.buildCollectionParam(
-        opts["deviceUID"],
-        "multi"
-      ),
-      sortBy: opts["sortBy"],
-      sortOrder: opts["sortOrder"],
-      startDate: opts["startDate"],
-      endDate: opts["endDate"],
-      dateType: opts["dateType"],
-      systemFilesOnly: opts["systemFilesOnly"],
-      files: opts["files"],
-      format: opts["format"],
-      serialNumber: this.apiClient.buildCollectionParam(
-        opts["serialNumber"],
-        "multi"
-      ),
-      fleetUID: this.apiClient.buildCollectionParam(opts["fleetUID"], "multi"),
-      sessionUID: this.apiClient.buildCollectionParam(
-        opts["sessionUID"],
-        "multi"
-      ),
-      eventUID: this.apiClient.buildCollectionParam(opts["eventUID"], "multi"),
-      selectFields: opts["selectFields"],
-    };
-    let headerParams = {};
-    let formParams = {};
-
-    let authNames = ["personalAccessToken"];
-    let contentTypes = [];
-    let accepts = ["application/json", "text/csv"];
-    let returnType = GetProjectEvents200Response;
-    return this.apiClient.callApi(
-      "/v1/projects/{projectOrProductUID}/events",
-      "GET",
-      pathParams,
-      queryParams,
-      headerParams,
-      formParams,
-      postBody,
-      authNames,
-      contentTypes,
-      accepts,
-      returnType,
-      null
-    );
-  }
-
-  /**
-   * Get Events of a Project
-   * @param {String} projectOrProductUID
-   * @param {Object} opts Optional parameters
-   * @param {Number} opts.pageSize  (default to 50)
-   * @param {Number} opts.pageNum  (default to 1)
-   * @param {Array.<String>} opts.deviceUID A Device UID.
-   * @param {module:model/String} opts.sortBy  (default to 'captured')
-   * @param {module:model/String} opts.sortOrder  (default to 'asc')
-   * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
-   * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
-   * @param {module:model/String} opts.dateType Which date to filter on, either 'captured' or 'uploaded'.  This will apply to the startDate and endDate parameters (default to 'captured')
-   * @param {Boolean} opts.systemFilesOnly
-   * @param {String} opts.files
-   * @param {module:model/String} opts.format Response format (JSON or CSV) (default to 'json')
-   * @param {Array.<String>} opts.serialNumber Filter by Serial Number
-   * @param {Array.<String>} opts.fleetUID Filter by Fleet UID
-   * @param {Array.<String>} opts.sessionUID Filter by Session UID
-   * @param {Array.<String>} opts.eventUID Filter by Event UID
-   * @param {String} opts.selectFields Comma-separated list of fields to select from JSON payload (e.g., \"field1,field2.subfield,field3\"), this will reflect the columns in the CSV output.
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetProjectEvents200Response}
-   */
-  getProjectEvents(projectOrProductUID, opts) {
-    return this.getProjectEventsWithHttpInfo(projectOrProductUID, opts).then(
-      function (response_and_data) {
-        return response_and_data.data;
-      }
-    );
-  }
-
-  /**
-   * Get Events of a Project by cursor
-   * @param {String} projectOrProductUID
-   * @param {Object} opts Optional parameters
-   * @param {Number} opts.limit  (default to 50)
-   * @param {String} opts.cursor A cursor, which can be obtained from the `next_cursor` value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included.
-   * @param {module:model/String} opts.sortOrder  (default to 'asc')
-   * @param {Boolean} opts.systemFilesOnly
-   * @param {String} opts.files
-   * @param {String} opts.fleetUID
-   * @param {Array.<String>} opts.deviceUID A Device UID.
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetProjectEventsByCursor200Response} and HTTP response
-   */
-  getProjectEventsByCursorWithHttpInfo(projectOrProductUID, opts) {
-    opts = opts || {};
-    let postBody = null;
-    // verify the required parameter 'projectOrProductUID' is set
-    if (projectOrProductUID === undefined || projectOrProductUID === null) {
-      throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling getProjectEventsByCursor"
-      );
-    }
-
-    let pathParams = {
-      projectOrProductUID: projectOrProductUID,
-    };
-    let queryParams = {
-      limit: opts["limit"],
-      cursor: opts["cursor"],
-      sortOrder: opts["sortOrder"],
-      systemFilesOnly: opts["systemFilesOnly"],
-      files: opts["files"],
-      fleetUID: opts["fleetUID"],
-      deviceUID: this.apiClient.buildCollectionParam(
-        opts["deviceUID"],
-        "multi"
-      ),
-    };
-    let headerParams = {};
-    let formParams = {};
-
-    let authNames = ["personalAccessToken"];
-    let contentTypes = [];
-    let accepts = ["application/json"];
-    let returnType = GetProjectEventsByCursor200Response;
-    return this.apiClient.callApi(
-      "/v1/projects/{projectOrProductUID}/events-cursor",
-      "GET",
-      pathParams,
-      queryParams,
-      headerParams,
-      formParams,
-      postBody,
-      authNames,
-      contentTypes,
-      accepts,
-      returnType,
-      null
-    );
-  }
-
-  /**
-   * Get Events of a Project by cursor
-   * @param {String} projectOrProductUID
-   * @param {Object} opts Optional parameters
-   * @param {Number} opts.limit  (default to 50)
-   * @param {String} opts.cursor A cursor, which can be obtained from the `next_cursor` value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included.
-   * @param {module:model/String} opts.sortOrder  (default to 'asc')
-   * @param {Boolean} opts.systemFilesOnly
-   * @param {String} opts.files
-   * @param {String} opts.fleetUID
-   * @param {Array.<String>} opts.deviceUID A Device UID.
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetProjectEventsByCursor200Response}
-   */
-  getProjectEventsByCursor(projectOrProductUID, opts) {
-    return this.getProjectEventsByCursorWithHttpInfo(
-      projectOrProductUID,
       opts
     ).then(function (response_and_data) {
       return response_and_data.data;
