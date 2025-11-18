@@ -2525,12 +2525,26 @@ paths:
           description: Aggregation level for results
           required: false
           schema:
-            type: string
-            default: device
-            enum:
-              - device
-              - fleet
-              - project
+            type: array
+            items:
+              enum:
+                - device
+                - fleet
+                - project
+                - notefile
+              type: string
+          explode: true
+          style: form
+        - name: notefile
+          in: query
+          description: Filter to specific notefiles
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          explode: true
+          style: form
       responses:
         '200':
           description: Successful operation
@@ -5456,6 +5470,15 @@ components:
         fleet:
           type: string
           example: 'fleet:1042ddc5-3b2c-4cec-b1fb-d3040538094d'
+        notefiles:
+          description: Count of events per notefile. Only present when aggregate=notefile is specified.
+          type: object
+          example:
+            _log.qo: 20
+            customer1.qo: 1
+            session.qo: 50
+          additionalProperties:
+            type: integer
         period:
           type: string
           format: date-time
