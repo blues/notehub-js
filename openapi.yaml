@@ -758,26 +758,6 @@ paths:
         - personalAccessToken: []
       tags:
         - device
-  '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/files/templates':
-    get:
-      operationId: GetNotefileTemplates
-      description: Get Notefile Templates
-      parameters:
-        - $ref: '#/components/parameters/projectOrProductUIDParam'
-        - $ref: '#/components/parameters/deviceUIDParam'
-      responses:
-        '200':
-          description: A list of notefile configuration entries
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/NotefileTemplateList'
-        default:
-          $ref: '#/components/responses/ErrorResponse'
-      security:
-        - personalAccessToken: []
-      tags:
-        - device
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/fleets':
     delete:
       operationId: DeleteDeviceFromFleets
@@ -992,7 +972,7 @@ paths:
         - device
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}':
     delete:
-      operationId: DeleteDbNote
+      operationId: DeleteNote
       description: Delete a note from a .db or .qi notefile
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
@@ -4713,6 +4693,8 @@ components:
           items:
             $ref: '#/components/schemas/Note'
           minItems: 0
+        template:
+          type: string
       required:
         - id
         - notes
@@ -4734,26 +4716,6 @@ components:
       required:
         - notefile
         - properties
-    NotefileTemplate:
-      type: object
-      properties:
-        body_template:
-          description: |
-            A JSON-encoded string template for the body of a note. The value itself is a string containing serialized JSON.
-          type: string
-          example: '{"text":"1","alert":true,"voltage":12.1}'
-        file:
-          description: |
-            The notefile name (e.g. "_env.dbs", "_health.qo", "_track.qo", "test.db", "test.qi").
-          type: string
-      additionalProperties: false
-      required:
-        - file
-    NotefileTemplateList:
-      type: array
-      items:
-        $ref: '#/components/schemas/NotefileTemplate'
-      properties: {}
     NotehubRoute:
       description: Route resource as stored/returned by the server.
       type: object
