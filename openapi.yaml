@@ -14,7 +14,7 @@ servers:
 paths:
   /auth/login:
     post:
-      operationId: login
+      operationId: Login
       description: Gets an API key from username and password
       requestBody:
         required: true
@@ -123,7 +123,7 @@ paths:
         - authorization
   /v1/billing-accounts:
     get:
-      operationId: getBillingAccounts
+      operationId: GetBillingAccounts
       description: Get Billing Accounts accessible by the api_key
       responses:
         '200':
@@ -145,7 +145,7 @@ paths:
         - billing_account
   '/v1/products/{productUID}/devices/{deviceUID}/environment_variables_with_pin':
     get:
-      operationId: getDeviceEnvironmentVariablesByPin
+      operationId: GetDeviceEnvironmentVariablesByPin
       description: Get environment variables of a device with device pin authorization
       responses:
         '200':
@@ -160,8 +160,8 @@ paths:
       - $ref: '#/components/parameters/productUIDParam'
       - $ref: '#/components/parameters/deviceUIDParam'
     put:
-      operationId: putDeviceEnvironmentVariablesByPin
-      description: Put environment variables of a device with device pin authorization
+      operationId: AddDeviceEnvironmentVariablesByPin
+      description: Add environment variables of a device with device pin authorization
       requestBody:
         description: Environment variables to be added to the device
         required: true
@@ -249,7 +249,7 @@ paths:
         - external devices
   '/v1/products/{productUID}/project':
     get:
-      operationId: getProjectByProduct
+      operationId: GetProjectByProduct
       description: Get a Project by ProductUID
       parameters:
         - name: productUID
@@ -273,7 +273,7 @@ paths:
         - project
   /v1/projects:
     get:
-      operationId: getProjects
+      operationId: GetProjects
       description: Get Projects accessible by the api_key
       responses:
         '200':
@@ -294,7 +294,7 @@ paths:
       tags:
         - project
     post:
-      operationId: createProject
+      operationId: CreateProject
       description: Create a Project
       requestBody:
         description: Project to be created
@@ -329,7 +329,7 @@ paths:
         - project
   '/v1/projects/{projectOrProductUID}':
     delete:
-      operationId: deleteProject
+      operationId: DeleteProject
       description: Delete a Project by ProjectUID
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
@@ -343,7 +343,7 @@ paths:
       tags:
         - project
     get:
-      operationId: getProject
+      operationId: GetProject
       description: Get a Project by ProjectUID
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
@@ -362,7 +362,7 @@ paths:
         - project
   '/v1/projects/{projectOrProductUID}/alerts':
     get:
-      operationId: getAlerts
+      operationId: GetAlerts
       description: Get list of defined Alerts
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
@@ -380,7 +380,7 @@ paths:
         - alert
   '/v1/projects/{projectOrProductUID}/clone':
     post:
-      operationId: cloneProject
+      operationId: CloneProject
       description: Clone a Project
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
@@ -422,7 +422,7 @@ paths:
         - project
   '/v1/projects/{projectOrProductUID}/devices':
     get:
-      operationId: getProjectDevices
+      operationId: GetDevices
       description: Get Devices of a Project
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
@@ -448,7 +448,7 @@ paths:
         - device
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}':
     delete:
-      operationId: deleteProjectDevice
+      operationId: DeleteDevice
       description: Delete Device
       parameters:
         - name: purge
@@ -467,7 +467,7 @@ paths:
       tags:
         - device
     get:
-      operationId: getDevice
+      operationId: GetDevice
       description: Get Device
       responses:
         '200':
@@ -487,7 +487,7 @@ paths:
       - $ref: '#/components/parameters/deviceUIDParam'
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/dfu/{firmwareType}/history':
     get:
-      operationId: getDeviceDfuHistory
+      operationId: GetDeviceDfuHistory
       description: Get device DFU history for host or Notecard firmware
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
@@ -508,7 +508,7 @@ paths:
         - project
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/dfu/{firmwareType}/status':
     get:
-      operationId: getDeviceDfuStatus
+      operationId: GetDeviceDfuStatus
       description: Get device DFU history for host or Notecard firmware
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
@@ -529,7 +529,7 @@ paths:
         - project
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/disable':
     post:
-      operationId: disableDevice
+      operationId: DisableDevice
       description: Disable Device
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
@@ -545,7 +545,7 @@ paths:
         - device
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/disable-connectivity-assurance':
     post:
-      operationId: disableDeviceConnectivityAssurance
+      operationId: DisableDeviceConnectivityAssurance
       description: Disable Connectivity Assurance
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
@@ -561,7 +561,7 @@ paths:
         - device
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/enable':
     post:
-      operationId: enableDevice
+      operationId: EnableDevice
       description: Enable Device
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
@@ -577,7 +577,7 @@ paths:
         - device
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/enable-connectivity-assurance':
     post:
-      operationId: enableDeviceConnectivityAssurance
+      operationId: EnableDeviceConnectivityAssurance
       description: Enable Connectivity Assurance
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
@@ -593,7 +593,7 @@ paths:
         - device
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_hierarchy':
     get:
-      operationId: getDeviceEnvironmentHierarchy
+      operationId: GetDeviceEnvironmentHierarchy
       summary: Get environment variable hierarchy for a device
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
@@ -615,7 +615,7 @@ paths:
         - device
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_variables':
     get:
-      operationId: getDeviceEnvironmentVariables
+      operationId: GetDeviceEnvironmentVariables
       description: Get environment variables of a device
       responses:
         '200':
@@ -630,8 +630,8 @@ paths:
       - $ref: '#/components/parameters/projectOrProductUIDParam'
       - $ref: '#/components/parameters/deviceUIDParam'
     put:
-      operationId: putDeviceEnvironmentVariables
-      description: Put environment variables of a device
+      operationId: AddDeviceEnvironmentVariables
+      description: Add environment variables of a device
       requestBody:
         description: Environment variables to be added to the device
         required: true
@@ -650,7 +650,7 @@ paths:
         - device
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_variables/{key}':
     delete:
-      operationId: deleteDeviceEnvironmentVariable
+      operationId: DeleteDeviceEnvironmentVariable
       description: Delete environment variable of a device
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
@@ -672,7 +672,7 @@ paths:
         - device
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/files':
     delete:
-      operationId: HandleNotefileDelete
+      operationId: DeleteNotefiles
       description: Deletes Notefiles and the Notes they contain.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
@@ -685,7 +685,7 @@ paths:
               type: object
               properties:
                 files:
-                  description: One or more files to obtain change information from.
+                  description: Name of notefiles to delete
                   type: array
                   items:
                     type: string
@@ -700,11 +700,17 @@ paths:
         - device
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/files/changes':
     get:
-      operationId: HandleNotefileChanges
-      description: Used to perform queries on a single or multiple files to determine if new Notes are available to read
+      operationId: ListNotefiles
+      description: Lists .qi and .db files for the device
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
+        - name: tracker
+          in: query
+          description: The change tracker ID.
+          required: false
+          schema:
+            type: string
         - name: files
           in: query
           description: One or more files to obtain change information from.
@@ -738,8 +744,8 @@ paths:
         - device
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/files/changes/pending':
     get:
-      operationId: HandleNotefileChangesPending
-      description: Returns info about file changes that are pending upload to Notehub or download to the Notecard.
+      operationId: ListPendingNotefiles
+      description: Lists .qi and .db files that are pending sync to the Notecard
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
@@ -771,7 +777,7 @@ paths:
         - device
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/fleets':
     delete:
-      operationId: deleteDeviceFleets
+      operationId: DeleteDeviceFromFleets
       description: Remove Device from Fleets
       requestBody:
         description: |
@@ -799,7 +805,7 @@ paths:
       tags:
         - project
     get:
-      operationId: getDeviceFleets
+      operationId: GetDeviceFleets
       description: Get Device Fleets
       responses:
         '200':
@@ -814,7 +820,7 @@ paths:
       - $ref: '#/components/parameters/projectOrProductUIDParam'
       - $ref: '#/components/parameters/deviceUIDParam'
     put:
-      operationId: putDeviceFleets
+      operationId: AddDeviceToFleets
       description: Add Device to Fleets
       requestBody:
         description: |
@@ -843,7 +849,7 @@ paths:
         - project
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/health-log':
     get:
-      operationId: getDeviceHealthLog
+      operationId: GetDeviceHealthLog
       description: Get Device Health Log
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
@@ -895,7 +901,7 @@ paths:
         - device
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/latest':
     get:
-      operationId: getDeviceLatest
+      operationId: GetDeviceLatestEvents
       description: Get Device Latest Events
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
@@ -911,7 +917,7 @@ paths:
         - device
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}':
     post:
-      operationId: HandleNoteAdd
+      operationId: AddQiNote
       description: 'Adds a Note to a Notefile, creating the Notefile if it doesn''t yet exist.'
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
@@ -935,8 +941,8 @@ paths:
         - device
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}':
     delete:
-      operationId: HandleNoteDelete
-      description: Delete a note from a DB notefile
+      operationId: DeleteDbNote
+      description: Delete a note from a .db notefile
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
@@ -952,8 +958,8 @@ paths:
       tags:
         - device
     get:
-      operationId: HandleNoteGet
-      description: Get a note from a DB notefile
+      operationId: GetDbNote
+      description: Get a note from a .db notefile
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
@@ -995,8 +1001,8 @@ paths:
       tags:
         - device
     post:
-      operationId: HandleNoteCreateAdd
-      description: 'Adds a Note to a Notefile, creating the Notefile if it doesn''t yet exist.'
+      operationId: AddDbNote
+      description: Add a Note to a .db notefile
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
@@ -1019,8 +1025,8 @@ paths:
       tags:
         - device
     put:
-      operationId: HandleNoteUpdate
-      description: Update a note in a DB notefile
+      operationId: UpdateDbNote
+      description: Update a note in a .db notefile
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
@@ -1044,18 +1050,36 @@ paths:
         - device
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/changes':
     get:
-      operationId: HandleNoteChanges
-      description: Incrementally retrieve changes within a specific Notefile.
+      operationId: GetNotefile
+      description: 'For .qi files, returns the queued up notes.  For .db files, returns all notes in the notefile'
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
         - $ref: '#/components/parameters/notefileIDParam'
+        - name: tracker
+          in: query
+          description: The change tracker ID.
+          required: false
+          schema:
+            type: string
         - name: max
           in: query
           description: The maximum number of Notes to return in the request.
           required: false
           schema:
             type: integer
+        - name: start
+          in: query
+          description: true to reset the tracker to the beginning.
+          required: false
+          schema:
+            type: boolean
+        - name: stop
+          in: query
+          description: true to delete the tracker.
+          required: false
+          schema:
+            type: boolean
         - name: deleted
           in: query
           description: true to return deleted notes.
@@ -1093,7 +1117,7 @@ paths:
         - device
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/plans':
     get:
-      operationId: getDevicePlans
+      operationId: GetDevicePlans
       description: 'Get Data Plans associated with the device, this include the primary sim, any external sim, as well as any satellite connections.'
       responses:
         '200':
@@ -1109,7 +1133,7 @@ paths:
       - $ref: '#/components/parameters/deviceUIDParam'
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/provision':
     post:
-      operationId: postProvisionProjectDevice
+      operationId: ProvisionDevice
       description: Provision Device for a Project
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
@@ -1152,7 +1176,7 @@ paths:
         - device
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/public-key':
     get:
-      operationId: getDevicePublicKey
+      operationId: GetDevicePublicKey
       description: Get Device Public Key
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
@@ -1180,7 +1204,7 @@ paths:
         - device
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/sessions':
     get:
-      operationId: getDeviceSessions
+      operationId: GetDeviceSessions
       description: Get Device Sessions
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
@@ -1200,13 +1224,13 @@ paths:
         - device
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/signal':
     post:
-      operationId: HandleNoteSignal
+      operationId: SignalDevice
       description: Send a signal from Notehub to a Notecard.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
       requestBody:
-        description: Body or payload of singnal to be sent to the device
+        description: Body or payload of signal to be sent to the device
         required: true
         content:
           application/json:
@@ -1231,7 +1255,7 @@ paths:
         - device
   '/v1/projects/{projectOrProductUID}/devices/public-keys':
     get:
-      operationId: getProjectDevicePublicKeys
+      operationId: GetDevicePublicKeys
       description: Get Device Public Keys of a Project
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
@@ -1267,7 +1291,7 @@ paths:
         - device
   '/v1/projects/{projectOrProductUID}/dfu/{firmwareType}/{action}':
     post:
-      operationId: dfuAction
+      operationId: PerformDfuAction
       description: Update/cancel host or notecard firmware updates
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
@@ -1300,7 +1324,7 @@ paths:
         - project
   '/v1/projects/{projectOrProductUID}/dfu/{firmwareType}/history':
     get:
-      operationId: getDevicesDfuHistory
+      operationId: GetDevicesDfuHistory
       description: Get host or Notecard DFU history for all devices that match the filter criteria
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
@@ -1333,7 +1357,7 @@ paths:
         - project
   '/v1/projects/{projectOrProductUID}/dfu/{firmwareType}/status':
     get:
-      operationId: getDevicesDfuStatus
+      operationId: GetDevicesDfuStatus
       description: Get host or Notecard DFU history for all devices that match the filter criteria
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
@@ -1366,7 +1390,7 @@ paths:
         - project
   '/v1/projects/{projectOrProductUID}/environment_hierarchy':
     get:
-      operationId: getProjectEnvironmentHierarchy
+      operationId: GetProjectEnvironmentHierarchy
       summary: Get environment variable hierarchy for a device
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
@@ -1387,7 +1411,7 @@ paths:
         - project
   '/v1/projects/{projectOrProductUID}/environment_variables':
     get:
-      operationId: getProjectEnvironmentVariables
+      operationId: GetProjectEnvironmentVariables
       description: Get environment variables of a project
       responses:
         '200':
@@ -1401,8 +1425,8 @@ paths:
     parameters:
       - $ref: '#/components/parameters/projectOrProductUIDParam'
     put:
-      operationId: putProjectEnvironmentVariables
-      description: Put environment variables of a project
+      operationId: AddProjectEnvironmentVariables
+      description: Add environment variables of a project
       requestBody:
         content:
           application/json:
@@ -1419,7 +1443,7 @@ paths:
         - project
   '/v1/projects/{projectOrProductUID}/environment_variables/{key}':
     delete:
-      operationId: deleteProjectEnvironmentVariable
+      operationId: DeleteProjectEnvironmentVariable
       description: Delete an environment variable of a project by key
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
@@ -1440,7 +1464,7 @@ paths:
         - project
   '/v1/projects/{projectOrProductUID}/events':
     get:
-      operationId: getProjectEvents
+      operationId: GetEvents
       description: Get Events of a Project
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
@@ -1487,7 +1511,7 @@ paths:
         - event
   '/v1/projects/{projectOrProductUID}/events-cursor':
     get:
-      operationId: getProjectEventsByCursor
+      operationId: GetEventsByCursor
       description: Get Events of a Project by cursor
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
@@ -1509,7 +1533,7 @@ paths:
         - event
   '/v1/projects/{projectOrProductUID}/events/{eventUID}/route-logs':
     get:
-      operationId: getRouteLogsByEvent
+      operationId: GetRouteLogsByEvent
       description: Get Route Logs by Event UID
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
@@ -1531,7 +1555,7 @@ paths:
         - event
   '/v1/projects/{projectOrProductUID}/firmware':
     get:
-      operationId: getFirmwareInfo
+      operationId: GetFirmwareInfo
       description: Get Available Firmware Information
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
@@ -1559,7 +1583,7 @@ paths:
         - project
   '/v1/projects/{projectOrProductUID}/firmware/{firmwareType}/{filename}':
     put:
-      operationId: uploadFirmware
+      operationId: UploadFirmware
       description: Upload firmware binary
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
@@ -1604,7 +1628,7 @@ paths:
         - project
   '/v1/projects/{projectOrProductUID}/fleets':
     get:
-      operationId: getProjectFleets
+      operationId: GetFleets
       description: Get Project Fleets
       responses:
         '200':
@@ -1618,7 +1642,7 @@ paths:
     parameters:
       - $ref: '#/components/parameters/projectOrProductUIDParam'
     post:
-      operationId: createFleet
+      operationId: CreateFleet
       description: Create Fleet
       requestBody:
         description: Fleet to be added
@@ -1650,7 +1674,7 @@ paths:
         - project
   '/v1/projects/{projectOrProductUID}/fleets/{fleetUID}':
     delete:
-      operationId: deleteFleet
+      operationId: DeleteFleet
       description: Delete Fleet
       responses:
         '204':
@@ -1662,7 +1686,7 @@ paths:
       tags:
         - project
     get:
-      operationId: getFleet
+      operationId: GetFleet
       description: Get Fleet
       responses:
         '200':
@@ -1679,7 +1703,7 @@ paths:
       - $ref: '#/components/parameters/projectOrProductUIDParam'
       - $ref: '#/components/parameters/fleetUIDParam'
     put:
-      operationId: updateFleet
+      operationId: UpdateFleet
       description: Update Fleet
       requestBody:
         description: Fleet details to update
@@ -1725,7 +1749,7 @@ paths:
         - project
   '/v1/projects/{projectOrProductUID}/fleets/{fleetUID}/devices':
     get:
-      operationId: getProjectFleetDevices
+      operationId: GetFleetDevices
       description: Get Devices of a Fleet within a Project
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
@@ -1751,7 +1775,7 @@ paths:
         - device
   '/v1/projects/{projectOrProductUID}/fleets/{fleetUID}/environment_hierarchy':
     get:
-      operationId: getFleetEnvironmentHierarchy
+      operationId: GetFleetEnvironmentHierarchy
       summary: Get environment variable hierarchy for a device
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
@@ -1773,7 +1797,7 @@ paths:
         - project
   '/v1/projects/{projectOrProductUID}/fleets/{fleetUID}/environment_variables':
     get:
-      operationId: getFleetEnvironmentVariables
+      operationId: GetFleetEnvironmentVariables
       description: Get environment variables of a fleet
       responses:
         '200':
@@ -1788,8 +1812,8 @@ paths:
       - $ref: '#/components/parameters/projectOrProductUIDParam'
       - $ref: '#/components/parameters/fleetUIDParam'
     put:
-      operationId: putFleetEnvironmentVariables
-      description: Put environment variables of a fleet
+      operationId: AddFleetEnvironmentVariables
+      description: Add environment variables of a fleet
       requestBody:
         description: Environment variables to be added to the fleet
         required: true
@@ -1808,7 +1832,7 @@ paths:
         - project
   '/v1/projects/{projectOrProductUID}/fleets/{fleetUID}/environment_variables/{key}':
     delete:
-      operationId: deleteFleetEnvironmentVariable
+      operationId: DeleteFleetEnvironmentVariable
       description: Delete environment variables of a fleet
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
@@ -1830,7 +1854,7 @@ paths:
         - project
   '/v1/projects/{projectOrProductUID}/fleets/{fleetUID}/events':
     get:
-      operationId: getFleetEvents
+      operationId: GetFleetEvents
       description: Get Events of a Fleet
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
@@ -1877,7 +1901,7 @@ paths:
         - event
   '/v1/projects/{projectOrProductUID}/fleets/{fleetUID}/events-cursor':
     get:
-      operationId: getFleetEventsByCursor
+      operationId: GetFleetEventsByCursor
       description: Get Events of a Fleet by cursor
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
@@ -1901,7 +1925,7 @@ paths:
         - event
   '/v1/projects/{projectOrProductUID}/global-transformation':
     post:
-      operationId: setGlobalTransformation
+      operationId: SetGlobalEventTransformation
       description: Set the project-level event JSONata transformation
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
@@ -1923,7 +1947,7 @@ paths:
         - project
   '/v1/projects/{projectOrProductUID}/global-transformation/disable':
     post:
-      operationId: disableGlobalTransformation
+      operationId: DisableGlobalEventTransformation
       description: Disable the project-level event JSONata transformation
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
@@ -1938,7 +1962,7 @@ paths:
         - project
   '/v1/projects/{projectOrProductUID}/global-transformation/enable':
     post:
-      operationId: enableGlobalTransformation
+      operationId: EnableGlobalEventTransformation
       description: Enable the project-level event JSONata transformation
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
@@ -1953,7 +1977,7 @@ paths:
         - project
   '/v1/projects/{projectOrProductUID}/members':
     get:
-      operationId: getProjectMembers
+      operationId: GetProjectMembers
       description: Get Project Members
       responses:
         '200':
@@ -1979,7 +2003,7 @@ paths:
       - $ref: '#/components/parameters/projectOrProductUIDParam'
   '/v1/projects/{projectOrProductUID}/monitors':
     get:
-      operationId: getMonitors
+      operationId: GetMonitors
       description: Get list of defined Monitors
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
@@ -1993,7 +2017,7 @@ paths:
       tags:
         - monitor
     post:
-      operationId: createMonitor
+      operationId: CreateMonitor
       description: Create a new Monitor
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
@@ -2019,7 +2043,7 @@ paths:
         - monitor
   '/v1/projects/{projectOrProductUID}/monitors/{monitorUID}':
     delete:
-      operationId: deleteMonitor
+      operationId: DeleteMonitor
       description: Delete Monitor
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
@@ -2038,7 +2062,7 @@ paths:
       tags:
         - monitor
     get:
-      operationId: getMonitor
+      operationId: GetMonitor
       description: Get Monitor
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
@@ -2057,7 +2081,7 @@ paths:
       tags:
         - monitor
     put:
-      operationId: updateMonitor
+      operationId: UpdateMonitor
       description: Update Monitor
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
@@ -2084,7 +2108,7 @@ paths:
         - monitor
   '/v1/projects/{projectOrProductUID}/products':
     get:
-      operationId: getProducts
+      operationId: GetProducts
       description: Get Products within a Project
       responses:
         '200':
@@ -2107,7 +2131,7 @@ paths:
     parameters:
       - $ref: '#/components/parameters/projectOrProductUIDParam'
     post:
-      operationId: createProduct
+      operationId: CreateProduct
       description: Create Product within a Project
       requestBody:
         description: Product to be created
@@ -2148,7 +2172,7 @@ paths:
         - project
   '/v1/projects/{projectOrProductUID}/products/{productUID}':
     delete:
-      operationId: deleteProduct
+      operationId: DeleteProduct
       description: Delete a product
       responses:
         '204':
@@ -2164,7 +2188,7 @@ paths:
       - $ref: '#/components/parameters/productUIDParam'
   '/v1/projects/{projectOrProductUID}/routes':
     get:
-      operationId: getRoutes
+      operationId: GetRoutes
       description: Get all Routes within a Project
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
@@ -2216,7 +2240,7 @@ paths:
       tags:
         - route
     post:
-      operationId: createRoute
+      operationId: CreateRoute
       description: Create Route within a Project
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
@@ -2276,7 +2300,7 @@ paths:
         - route
   '/v1/projects/{projectOrProductUID}/routes/{routeUID}':
     delete:
-      operationId: deleteRoute
+      operationId: DeleteRoute
       description: Delete single route within a project
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
@@ -2291,7 +2315,7 @@ paths:
       tags:
         - route
     get:
-      operationId: getRoute
+      operationId: GetRoute
       description: Get single route within a project
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
@@ -2328,7 +2352,7 @@ paths:
       tags:
         - route
     put:
-      operationId: updateRoute
+      operationId: UpdateRoute
       description: Update route by UID
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
@@ -2389,7 +2413,7 @@ paths:
         - route
   '/v1/projects/{projectOrProductUID}/routes/{routeUID}/route-logs':
     get:
-      operationId: getRouteLogsByRoute
+      operationId: GetRouteLogsByRoute
       description: Get Route Logs by Route UID
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
@@ -2421,7 +2445,7 @@ paths:
         - route
   '/v1/projects/{projectOrProductUID}/schemas':
     get:
-      operationId: getNotefileSchemas
+      operationId: GetNotefileSchemas
       summary: Get variable format for a notefile
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
@@ -2438,7 +2462,7 @@ paths:
         - project
   '/v1/projects/{projectOrProductUID}/usage/data':
     get:
-      operationId: getDataUsage
+      operationId: GetDataUsage
       description: Get data usage in bytes for a project with time range and period aggregation
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
@@ -2478,7 +2502,7 @@ paths:
         - usage
   '/v1/projects/{projectOrProductUID}/usage/events':
     get:
-      operationId: getEventsUsage
+      operationId: GetEventsUsage
       description: 'Get events usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied'
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
@@ -2522,7 +2546,7 @@ paths:
         - usage
   '/v1/projects/{projectOrProductUID}/usage/sessions':
     get:
-      operationId: getSessionsUsage
+      operationId: GetSessionsUsage
       description: 'Get sessions usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied'
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
