@@ -2533,8 +2533,6 @@ paths:
                 - project
                 - notefile
               type: string
-            default:
-              - device
           explode: true
           style: form
         - name: notefile
