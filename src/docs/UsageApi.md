@@ -89,7 +89,8 @@ let opts = {
   'endDate': 1657894210, // Number | End date for filtering results, specified as a Unix timestamp
   'deviceUID': ["null"], // [String] | A Device UID.
   'fleetUID': ["null"], // [String] | Filter by Fleet UID
-  'aggregate': "'device'" // String | Aggregation level for results
+  'aggregate': ["null"], // [String] | Aggregation level for results
+  'notefile': ["null"] // [String] | Filter to specific notefiles
 };
 apiInstance.getEventsUsage(projectOrProductUID, period, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
@@ -101,15 +102,16 @@ apiInstance.getEventsUsage(projectOrProductUID, period, opts).then((data) => {
 
 ### Parameters
 
-| Name                    | Type                      | Description                                                     | Notes                                    |
-| ----------------------- | ------------------------- | --------------------------------------------------------------- | ---------------------------------------- |
+| Name                    | Type                      | Description                                                     | Notes      |
+| ----------------------- | ------------------------- | --------------------------------------------------------------- | ---------- |
 | **projectOrProductUID** | **String**                |                                                                 |
 | **period**              | **String**                | Period type for aggregation                                     |
-| **startDate**           | **Number**                | Start date for filtering results, specified as a Unix timestamp | [optional]                               |
-| **endDate**             | **Number**                | End date for filtering results, specified as a Unix timestamp   | [optional]                               |
-| **deviceUID**           | [**[String]**](String.md) | A Device UID.                                                   | [optional]                               |
-| **fleetUID**            | [**[String]**](String.md) | Filter by Fleet UID                                             | [optional]                               |
-| **aggregate**           | **String**                | Aggregation level for results                                   | [optional] [default to &#39;device&#39;] |
+| **startDate**           | **Number**                | Start date for filtering results, specified as a Unix timestamp | [optional] |
+| **endDate**             | **Number**                | End date for filtering results, specified as a Unix timestamp   | [optional] |
+| **deviceUID**           | [**[String]**](String.md) | A Device UID.                                                   | [optional] |
+| **fleetUID**            | [**[String]**](String.md) | Filter by Fleet UID                                             | [optional] |
+| **aggregate**           | [**[String]**](String.md) | Aggregation level for results                                   | [optional] |
+| **notefile**            | [**[String]**](String.md) | Filter to specific notefiles                                    | [optional] |
 
 ### Return type
 

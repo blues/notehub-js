@@ -130,7 +130,8 @@ export default class UsageApi {
    * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
    * @param {Array.<String>} opts.deviceUID A Device UID.
    * @param {Array.<String>} opts.fleetUID Filter by Fleet UID
-   * @param {module:model/String} opts.aggregate Aggregation level for results (default to 'device')
+   * @param {Array.<module:model/String>} opts.aggregate Aggregation level for results
+   * @param {Array.<String>} opts.notefile Filter to specific notefiles
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/UsageEventsResponse} and HTTP response
    */
   getEventsUsageWithHttpInfo(projectOrProductUID, period, opts) {
@@ -161,7 +162,11 @@ export default class UsageApi {
       ),
       fleetUID: this.apiClient.buildCollectionParam(opts["fleetUID"], "multi"),
       period: period,
-      aggregate: opts["aggregate"],
+      aggregate: this.apiClient.buildCollectionParam(
+        opts["aggregate"],
+        "multi"
+      ),
+      notefile: this.apiClient.buildCollectionParam(opts["notefile"], "multi"),
     };
     let headerParams = {};
     let formParams = {};
@@ -195,7 +200,8 @@ export default class UsageApi {
    * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
    * @param {Array.<String>} opts.deviceUID A Device UID.
    * @param {Array.<String>} opts.fleetUID Filter by Fleet UID
-   * @param {module:model/String} opts.aggregate Aggregation level for results (default to 'device')
+   * @param {Array.<module:model/String>} opts.aggregate Aggregation level for results
+   * @param {Array.<String>} opts.notefile Filter to specific notefiles
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/UsageEventsResponse}
    */
   getEventsUsage(projectOrProductUID, period, opts) {
