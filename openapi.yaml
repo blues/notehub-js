@@ -712,6 +712,12 @@ paths:
             type: array
             items:
               type: string
+        - name: pending
+          in: query
+          description: show only files that are pending sync to the Notecard
+          required: false
+          schema:
+            type: boolean
       responses:
         '200':
           description: All notefiles and their notes
@@ -719,39 +725,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/NotefileList'
-        default:
-          $ref: '#/components/responses/ErrorResponse'
-      security:
-        - personalAccessToken: []
-      tags:
-        - device
-  '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/files/changes/pending':
-    get:
-      operationId: ListPendingNotefiles
-      description: Lists .qi and .db files that are pending sync to the Notecard
-      parameters:
-        - $ref: '#/components/parameters/projectOrProductUIDParam'
-        - $ref: '#/components/parameters/deviceUIDParam'
-      responses:
-        '200':
-          description: The notefile pending changes object
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  changes:
-                    description: The number of pending changes in the Notefile.
-                    type: integer
-                  info:
-                    description: 'An object with a key for each Notefile that matched the request parameters, and value object with the changes and total for each file.'
-                    type: object
-                  pending:
-                    description: Whether there are pending changes.
-                    type: boolean
-                  total:
-                    description: The total number of files.
-                    type: integer
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
@@ -960,7 +933,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Note'
+              $ref: '#/components/schemas/NoteInput'
       responses:
         '200':
           description: An empty object means success
@@ -1045,7 +1018,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Note'
+              $ref: '#/components/schemas/NoteInput'
       responses:
         '200':
           description: An empty object means success
@@ -1069,7 +1042,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Note'
+              $ref: '#/components/schemas/NoteInput'
       responses:
         '200':
           description: An empty object means success
@@ -2489,12 +2462,26 @@ paths:
           description: Aggregation level for results
           required: false
           schema:
-            type: string
-            default: device
-            enum:
-              - device
-              - fleet
-              - project
+            type: array
+            items:
+              enum:
+                - device
+                - fleet
+                - project
+                - notefile
+              type: string
+          explode: true
+          style: form
+        - name: notefile
+          in: query
+          description: Filter to specific notefiles
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          explode: true
+          style: form
       responses:
         '200':
           description: Successful operation
@@ -4682,6 +4669,17 @@ components:
         - id
         - body
         - time
+    NoteInput:
+      type: object
+      properties:
+        body:
+          description: Arbitrary user-defined JSON for the note.
+          type: object
+          additionalProperties: true
+        payload:
+          description: Optional base64-encoded payload.
+          type: string
+          format: byte
     Notefile:
       type: object
       properties:
@@ -5466,6 +5464,15 @@ components:
         fleet:
           type: string
           example: 'fleet:1042ddc5-3b2c-4cec-b1fb-d3040538094d'
+        notefiles:
+          description: Count of events per notefile. Only present when aggregate=notefile is specified.
+          type: object
+          example:
+            _log.qo: 20
+            customer1.qo: 1
+            session.qo: 50
+          additionalProperties:
+            type: integer
         period:
           type: string
           format: date-time
