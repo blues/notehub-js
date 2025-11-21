@@ -161,8 +161,8 @@ paths:
       - $ref: "#/components/parameters/productUIDParam"
       - $ref: "#/components/parameters/deviceUIDParam"
     put:
-      operationId: AddDeviceEnvironmentVariablesByPin
-      description: Add environment variables of a device with device pin authorization
+      operationId: SetDeviceEnvironmentVariablesByPin
+      description: Set environment variables of a device with device pin authorization
       requestBody:
         description: Environment variables to be added to the device
         required: true
@@ -641,8 +641,8 @@ paths:
       - $ref: "#/components/parameters/projectOrProductUIDParam"
       - $ref: "#/components/parameters/deviceUIDParam"
     put:
-      operationId: AddDeviceEnvironmentVariables
-      description: Add environment variables of a device
+      operationId: SetDeviceEnvironmentVariables
+      description: Set environment variables of a device
       requestBody:
         description: Environment variables to be added to the device
         required: true
@@ -1460,8 +1460,8 @@ paths:
     parameters:
       - $ref: "#/components/parameters/projectOrProductUIDParam"
     put:
-      operationId: AddProjectEnvironmentVariables
-      description: Add environment variables of a project
+      operationId: SetProjectEnvironmentVariables
+      description: Set environment variables of a project
       requestBody:
         content:
           application/json:
@@ -1837,8 +1837,8 @@ paths:
       - $ref: "#/components/parameters/projectOrProductUIDParam"
       - $ref: "#/components/parameters/fleetUIDParam"
     put:
-      operationId: AddFleetEnvironmentVariables
-      description: Add environment variables of a fleet
+      operationId: SetFleetEnvironmentVariables
+      description: Set environment variables of a fleet
       requestBody:
         description: Environment variables to be added to the fleet
         required: true

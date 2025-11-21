@@ -54,26 +54,6 @@
         done();
       });
     });
-    describe("addFleetEnvironmentVariables", function () {
-      it("should call addFleetEnvironmentVariables successfully", function (done) {
-        //uncomment below and update the code to test addFleetEnvironmentVariables
-        //instance.addFleetEnvironmentVariables(function(error) {
-        //  if (error) throw error;
-        //expect().to.be();
-        //});
-        done();
-      });
-    });
-    describe("addProjectEnvironmentVariables", function () {
-      it("should call addProjectEnvironmentVariables successfully", function (done) {
-        //uncomment below and update the code to test addProjectEnvironmentVariables
-        //instance.addProjectEnvironmentVariables(function(error) {
-        //  if (error) throw error;
-        //expect().to.be();
-        //});
-        done();
-      });
-    });
     describe("cloneProject", function () {
       it("should call cloneProject successfully", function (done) {
         //uncomment below and update the code to test cloneProject
@@ -384,10 +364,30 @@
         done();
       });
     });
+    describe("setFleetEnvironmentVariables", function () {
+      it("should call setFleetEnvironmentVariables successfully", function (done) {
+        //uncomment below and update the code to test setFleetEnvironmentVariables
+        //instance.setFleetEnvironmentVariables(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
     describe("setGlobalEventTransformation", function () {
       it("should call setGlobalEventTransformation successfully", function (done) {
         //uncomment below and update the code to test setGlobalEventTransformation
         //instance.setGlobalEventTransformation(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
+    describe("setProjectEnvironmentVariables", function () {
+      it("should call setProjectEnvironmentVariables successfully", function (done) {
+        //uncomment below and update the code to test setProjectEnvironmentVariables
+        //instance.setProjectEnvironmentVariables(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});

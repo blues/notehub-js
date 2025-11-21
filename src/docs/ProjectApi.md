@@ -5,8 +5,6 @@ All URIs are relative to *https://api.notefile.net*
 | Method                                                                                 | HTTP request                                                                                | Description                                     |
 | -------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ----------------------------------------------- |
 | [**addDeviceToFleets**](ProjectApi.md#addDeviceToFleets)                               | **PUT** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/fleets                       |
-| [**addFleetEnvironmentVariables**](ProjectApi.md#addFleetEnvironmentVariables)         | **PUT** /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/environment_variables          |
-| [**addProjectEnvironmentVariables**](ProjectApi.md#addProjectEnvironmentVariables)     | **PUT** /v1/projects/{projectOrProductUID}/environment_variables                            |
 | [**cloneProject**](ProjectApi.md#cloneProject)                                         | **POST** /v1/projects/{projectOrProductUID}/clone                                           |
 | [**createFleet**](ProjectApi.md#createFleet)                                           | **POST** /v1/projects/{projectOrProductUID}/fleets                                          |
 | [**createProduct**](ProjectApi.md#createProduct)                                       | **POST** /v1/projects/{projectOrProductUID}/products                                        |
@@ -38,7 +36,9 @@ All URIs are relative to *https://api.notefile.net*
 | [**getProjectMembers**](ProjectApi.md#getProjectMembers)                               | **GET** /v1/projects/{projectOrProductUID}/members                                          |
 | [**getProjects**](ProjectApi.md#getProjects)                                           | **GET** /v1/projects                                                                        |
 | [**performDfuAction**](ProjectApi.md#performDfuAction)                                 | **POST** /v1/projects/{projectOrProductUID}/dfu/{firmwareType}/{action}                     |
+| [**setFleetEnvironmentVariables**](ProjectApi.md#setFleetEnvironmentVariables)         | **PUT** /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/environment_variables          |
 | [**setGlobalEventTransformation**](ProjectApi.md#setGlobalEventTransformation)         | **POST** /v1/projects/{projectOrProductUID}/global-transformation                           |
+| [**setProjectEnvironmentVariables**](ProjectApi.md#setProjectEnvironmentVariables)     | **PUT** /v1/projects/{projectOrProductUID}/environment_variables                            |
 | [**updateFleet**](ProjectApi.md#updateFleet)                                           | **PUT** /v1/projects/{projectOrProductUID}/fleets/{fleetUID}                                |
 | [**uploadFirmware**](ProjectApi.md#uploadFirmware)                                     | **PUT** /v1/projects/{projectOrProductUID}/firmware/{firmwareType}/{filename}               |
 
@@ -80,102 +80,6 @@ apiInstance.addDeviceToFleets(projectOrProductUID, deviceUID, addDeviceToFleetsR
 ### Return type
 
 [**GetDeviceFleets200Response**](GetDeviceFleets200Response.md)
-
-### Authorization
-
-[personalAccessToken](../README.md#personalAccessToken)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-## addFleetEnvironmentVariables
-
-> EnvironmentVariables addFleetEnvironmentVariables(projectOrProductUID, fleetUID, environmentVariables)
-
-Add environment variables of a fleet
-
-### Example
-
-```javascript
-import * as NotehubJs from '@blues-inc/notehub-js';
-let defaultClient = NotehubJs.ApiClient.instance;
-// Configure Bearer access token for authorization: personalAccessToken
-let personalAccessToken = defaultClient.authentications['personalAccessToken'];
-personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
-
-let apiInstance = new NotehubJs.ProjectApi();
-let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
-let fleetUID = "fleetUID_example"; // String |
-let environmentVariables = new NotehubJs.EnvironmentVariables(); // EnvironmentVariables | Environment variables to be added to the fleet
-apiInstance.addFleetEnvironmentVariables(projectOrProductUID, fleetUID, environmentVariables).then((data) => {
-  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
-}, (error) => {
-  console.error(error);
-});
-
-```
-
-### Parameters
-
-| Name                     | Type                                                | Description                                    | Notes |
-| ------------------------ | --------------------------------------------------- | ---------------------------------------------- | ----- |
-| **projectOrProductUID**  | **String**                                          |                                                |
-| **fleetUID**             | **String**                                          |                                                |
-| **environmentVariables** | [**EnvironmentVariables**](EnvironmentVariables.md) | Environment variables to be added to the fleet |
-
-### Return type
-
-[**EnvironmentVariables**](EnvironmentVariables.md)
-
-### Authorization
-
-[personalAccessToken](../README.md#personalAccessToken)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-## addProjectEnvironmentVariables
-
-> EnvironmentVariables addProjectEnvironmentVariables(projectOrProductUID, opts)
-
-Add environment variables of a project
-
-### Example
-
-```javascript
-import * as NotehubJs from '@blues-inc/notehub-js';
-let defaultClient = NotehubJs.ApiClient.instance;
-// Configure Bearer access token for authorization: personalAccessToken
-let personalAccessToken = defaultClient.authentications['personalAccessToken'];
-personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
-
-let apiInstance = new NotehubJs.ProjectApi();
-let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
-let opts = {
-  'environmentVariables': new NotehubJs.EnvironmentVariables() // EnvironmentVariables |
-};
-apiInstance.addProjectEnvironmentVariables(projectOrProductUID, opts).then((data) => {
-  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
-}, (error) => {
-  console.error(error);
-});
-
-```
-
-### Parameters
-
-| Name                     | Type                                                | Description | Notes      |
-| ------------------------ | --------------------------------------------------- | ----------- | ---------- |
-| **projectOrProductUID**  | **String**                                          |             |
-| **environmentVariables** | [**EnvironmentVariables**](EnvironmentVariables.md) |             | [optional] |
-
-### Return type
-
-[**EnvironmentVariables**](EnvironmentVariables.md)
 
 ### Authorization
 
@@ -1693,6 +1597,54 @@ null (empty response body)
 - **Content-Type**: application/json
 - **Accept**: application/json
 
+## setFleetEnvironmentVariables
+
+> EnvironmentVariables setFleetEnvironmentVariables(projectOrProductUID, fleetUID, environmentVariables)
+
+Set environment variables of a fleet
+
+### Example
+
+```javascript
+import * as NotehubJs from '@blues-inc/notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
+// Configure Bearer access token for authorization: personalAccessToken
+let personalAccessToken = defaultClient.authentications['personalAccessToken'];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
+
+let apiInstance = new NotehubJs.ProjectApi();
+let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let fleetUID = "fleetUID_example"; // String |
+let environmentVariables = new NotehubJs.EnvironmentVariables(); // EnvironmentVariables | Environment variables to be added to the fleet
+apiInstance.setFleetEnvironmentVariables(projectOrProductUID, fleetUID, environmentVariables).then((data) => {
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
+}, (error) => {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+| Name                     | Type                                                | Description                                    | Notes |
+| ------------------------ | --------------------------------------------------- | ---------------------------------------------- | ----- |
+| **projectOrProductUID**  | **String**                                          |                                                |
+| **fleetUID**             | **String**                                          |                                                |
+| **environmentVariables** | [**EnvironmentVariables**](EnvironmentVariables.md) | Environment variables to be added to the fleet |
+
+### Return type
+
+[**EnvironmentVariables**](EnvironmentVariables.md)
+
+### Authorization
+
+[personalAccessToken](../README.md#personalAccessToken)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
 ## setGlobalEventTransformation
 
 > setGlobalEventTransformation(projectOrProductUID, body)
@@ -1729,6 +1681,54 @@ apiInstance.setGlobalEventTransformation(projectOrProductUID, body).then(() => {
 ### Return type
 
 null (empty response body)
+
+### Authorization
+
+[personalAccessToken](../README.md#personalAccessToken)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+## setProjectEnvironmentVariables
+
+> EnvironmentVariables setProjectEnvironmentVariables(projectOrProductUID, opts)
+
+Set environment variables of a project
+
+### Example
+
+```javascript
+import * as NotehubJs from '@blues-inc/notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
+// Configure Bearer access token for authorization: personalAccessToken
+let personalAccessToken = defaultClient.authentications['personalAccessToken'];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
+
+let apiInstance = new NotehubJs.ProjectApi();
+let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let opts = {
+  'environmentVariables': new NotehubJs.EnvironmentVariables() // EnvironmentVariables |
+};
+apiInstance.setProjectEnvironmentVariables(projectOrProductUID, opts).then((data) => {
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
+}, (error) => {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+| Name                     | Type                                                | Description | Notes      |
+| ------------------------ | --------------------------------------------------- | ----------- | ---------- |
+| **projectOrProductUID**  | **String**                                          |             |
+| **environmentVariables** | [**EnvironmentVariables**](EnvironmentVariables.md) |             | [optional] |
+
+### Return type
+
+[**EnvironmentVariables**](EnvironmentVariables.md)
 
 ### Authorization
 

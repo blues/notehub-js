@@ -151,168 +151,6 @@ export default class DeviceApi {
   }
 
   /**
-   * Add environment variables of a device
-   * @param {String} projectOrProductUID
-   * @param {String} deviceUID
-   * @param {module:model/EnvironmentVariables} environmentVariables Environment variables to be added to the device
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/EnvironmentVariables} and HTTP response
-   */
-  addDeviceEnvironmentVariablesWithHttpInfo(
-    projectOrProductUID,
-    deviceUID,
-    environmentVariables
-  ) {
-    let postBody = environmentVariables;
-    // verify the required parameter 'projectOrProductUID' is set
-    if (projectOrProductUID === undefined || projectOrProductUID === null) {
-      throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling addDeviceEnvironmentVariables"
-      );
-    }
-    // verify the required parameter 'deviceUID' is set
-    if (deviceUID === undefined || deviceUID === null) {
-      throw new Error(
-        "Missing the required parameter 'deviceUID' when calling addDeviceEnvironmentVariables"
-      );
-    }
-    // verify the required parameter 'environmentVariables' is set
-    if (environmentVariables === undefined || environmentVariables === null) {
-      throw new Error(
-        "Missing the required parameter 'environmentVariables' when calling addDeviceEnvironmentVariables"
-      );
-    }
-
-    let pathParams = {
-      projectOrProductUID: projectOrProductUID,
-      deviceUID: deviceUID,
-    };
-    let queryParams = {};
-    let headerParams = {};
-    let formParams = {};
-
-    let authNames = ["personalAccessToken"];
-    let contentTypes = ["application/json"];
-    let accepts = ["application/json"];
-    let returnType = EnvironmentVariables;
-    return this.apiClient.callApi(
-      "/v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_variables",
-      "PUT",
-      pathParams,
-      queryParams,
-      headerParams,
-      formParams,
-      postBody,
-      authNames,
-      contentTypes,
-      accepts,
-      returnType,
-      null
-    );
-  }
-
-  /**
-   * Add environment variables of a device
-   * @param {String} projectOrProductUID
-   * @param {String} deviceUID
-   * @param {module:model/EnvironmentVariables} environmentVariables Environment variables to be added to the device
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/EnvironmentVariables}
-   */
-  addDeviceEnvironmentVariables(
-    projectOrProductUID,
-    deviceUID,
-    environmentVariables
-  ) {
-    return this.addDeviceEnvironmentVariablesWithHttpInfo(
-      projectOrProductUID,
-      deviceUID,
-      environmentVariables
-    ).then(function (response_and_data) {
-      return response_and_data.data;
-    });
-  }
-
-  /**
-   * Add environment variables of a device with device pin authorization
-   * @param {String} productUID
-   * @param {String} deviceUID
-   * @param {module:model/EnvironmentVariables} environmentVariables Environment variables to be added to the device
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/EnvironmentVariables} and HTTP response
-   */
-  addDeviceEnvironmentVariablesByPinWithHttpInfo(
-    productUID,
-    deviceUID,
-    environmentVariables
-  ) {
-    let postBody = environmentVariables;
-    // verify the required parameter 'productUID' is set
-    if (productUID === undefined || productUID === null) {
-      throw new Error(
-        "Missing the required parameter 'productUID' when calling addDeviceEnvironmentVariablesByPin"
-      );
-    }
-    // verify the required parameter 'deviceUID' is set
-    if (deviceUID === undefined || deviceUID === null) {
-      throw new Error(
-        "Missing the required parameter 'deviceUID' when calling addDeviceEnvironmentVariablesByPin"
-      );
-    }
-    // verify the required parameter 'environmentVariables' is set
-    if (environmentVariables === undefined || environmentVariables === null) {
-      throw new Error(
-        "Missing the required parameter 'environmentVariables' when calling addDeviceEnvironmentVariablesByPin"
-      );
-    }
-
-    let pathParams = {
-      productUID: productUID,
-      deviceUID: deviceUID,
-    };
-    let queryParams = {};
-    let headerParams = {};
-    let formParams = {};
-
-    let authNames = ["pin"];
-    let contentTypes = ["application/json"];
-    let accepts = ["application/json"];
-    let returnType = EnvironmentVariables;
-    return this.apiClient.callApi(
-      "/v1/products/{productUID}/devices/{deviceUID}/environment_variables_with_pin",
-      "PUT",
-      pathParams,
-      queryParams,
-      headerParams,
-      formParams,
-      postBody,
-      authNames,
-      contentTypes,
-      accepts,
-      returnType,
-      null
-    );
-  }
-
-  /**
-   * Add environment variables of a device with device pin authorization
-   * @param {String} productUID
-   * @param {String} deviceUID
-   * @param {module:model/EnvironmentVariables} environmentVariables Environment variables to be added to the device
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/EnvironmentVariables}
-   */
-  addDeviceEnvironmentVariablesByPin(
-    productUID,
-    deviceUID,
-    environmentVariables
-  ) {
-    return this.addDeviceEnvironmentVariablesByPinWithHttpInfo(
-      productUID,
-      deviceUID,
-      environmentVariables
-    ).then(function (response_and_data) {
-      return response_and_data.data;
-    });
-  }
-
-  /**
    * Adds a Note to a Notefile, creating the Notefile if it doesn't yet exist.
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
@@ -2273,6 +2111,168 @@ export default class DeviceApi {
       projectOrProductUID,
       deviceUID,
       provisionDeviceRequest
+    ).then(function (response_and_data) {
+      return response_and_data.data;
+    });
+  }
+
+  /**
+   * Set environment variables of a device
+   * @param {String} projectOrProductUID
+   * @param {String} deviceUID
+   * @param {module:model/EnvironmentVariables} environmentVariables Environment variables to be added to the device
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/EnvironmentVariables} and HTTP response
+   */
+  setDeviceEnvironmentVariablesWithHttpInfo(
+    projectOrProductUID,
+    deviceUID,
+    environmentVariables
+  ) {
+    let postBody = environmentVariables;
+    // verify the required parameter 'projectOrProductUID' is set
+    if (projectOrProductUID === undefined || projectOrProductUID === null) {
+      throw new Error(
+        "Missing the required parameter 'projectOrProductUID' when calling setDeviceEnvironmentVariables"
+      );
+    }
+    // verify the required parameter 'deviceUID' is set
+    if (deviceUID === undefined || deviceUID === null) {
+      throw new Error(
+        "Missing the required parameter 'deviceUID' when calling setDeviceEnvironmentVariables"
+      );
+    }
+    // verify the required parameter 'environmentVariables' is set
+    if (environmentVariables === undefined || environmentVariables === null) {
+      throw new Error(
+        "Missing the required parameter 'environmentVariables' when calling setDeviceEnvironmentVariables"
+      );
+    }
+
+    let pathParams = {
+      projectOrProductUID: projectOrProductUID,
+      deviceUID: deviceUID,
+    };
+    let queryParams = {};
+    let headerParams = {};
+    let formParams = {};
+
+    let authNames = ["personalAccessToken"];
+    let contentTypes = ["application/json"];
+    let accepts = ["application/json"];
+    let returnType = EnvironmentVariables;
+    return this.apiClient.callApi(
+      "/v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_variables",
+      "PUT",
+      pathParams,
+      queryParams,
+      headerParams,
+      formParams,
+      postBody,
+      authNames,
+      contentTypes,
+      accepts,
+      returnType,
+      null
+    );
+  }
+
+  /**
+   * Set environment variables of a device
+   * @param {String} projectOrProductUID
+   * @param {String} deviceUID
+   * @param {module:model/EnvironmentVariables} environmentVariables Environment variables to be added to the device
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/EnvironmentVariables}
+   */
+  setDeviceEnvironmentVariables(
+    projectOrProductUID,
+    deviceUID,
+    environmentVariables
+  ) {
+    return this.setDeviceEnvironmentVariablesWithHttpInfo(
+      projectOrProductUID,
+      deviceUID,
+      environmentVariables
+    ).then(function (response_and_data) {
+      return response_and_data.data;
+    });
+  }
+
+  /**
+   * Set environment variables of a device with device pin authorization
+   * @param {String} productUID
+   * @param {String} deviceUID
+   * @param {module:model/EnvironmentVariables} environmentVariables Environment variables to be added to the device
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/EnvironmentVariables} and HTTP response
+   */
+  setDeviceEnvironmentVariablesByPinWithHttpInfo(
+    productUID,
+    deviceUID,
+    environmentVariables
+  ) {
+    let postBody = environmentVariables;
+    // verify the required parameter 'productUID' is set
+    if (productUID === undefined || productUID === null) {
+      throw new Error(
+        "Missing the required parameter 'productUID' when calling setDeviceEnvironmentVariablesByPin"
+      );
+    }
+    // verify the required parameter 'deviceUID' is set
+    if (deviceUID === undefined || deviceUID === null) {
+      throw new Error(
+        "Missing the required parameter 'deviceUID' when calling setDeviceEnvironmentVariablesByPin"
+      );
+    }
+    // verify the required parameter 'environmentVariables' is set
+    if (environmentVariables === undefined || environmentVariables === null) {
+      throw new Error(
+        "Missing the required parameter 'environmentVariables' when calling setDeviceEnvironmentVariablesByPin"
+      );
+    }
+
+    let pathParams = {
+      productUID: productUID,
+      deviceUID: deviceUID,
+    };
+    let queryParams = {};
+    let headerParams = {};
+    let formParams = {};
+
+    let authNames = ["pin"];
+    let contentTypes = ["application/json"];
+    let accepts = ["application/json"];
+    let returnType = EnvironmentVariables;
+    return this.apiClient.callApi(
+      "/v1/products/{productUID}/devices/{deviceUID}/environment_variables_with_pin",
+      "PUT",
+      pathParams,
+      queryParams,
+      headerParams,
+      formParams,
+      postBody,
+      authNames,
+      contentTypes,
+      accepts,
+      returnType,
+      null
+    );
+  }
+
+  /**
+   * Set environment variables of a device with device pin authorization
+   * @param {String} productUID
+   * @param {String} deviceUID
+   * @param {module:model/EnvironmentVariables} environmentVariables Environment variables to be added to the device
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/EnvironmentVariables}
+   */
+  setDeviceEnvironmentVariablesByPin(
+    productUID,
+    deviceUID,
+    environmentVariables
+  ) {
+    return this.setDeviceEnvironmentVariablesByPinWithHttpInfo(
+      productUID,
+      deviceUID,
+      environmentVariables
     ).then(function (response_and_data) {
       return response_and_data.data;
     });

@@ -5,8 +5,6 @@ All URIs are relative to *https://api.notefile.net*
 | Method                                                                                    | HTTP request                                                                                   | Description                                     |
 | ----------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ----------------------------------------------- |
 | [**addDbNote**](DeviceApi.md#addDbNote)                                                   | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}    |
-| [**addDeviceEnvironmentVariables**](DeviceApi.md#addDeviceEnvironmentVariables)           | **PUT** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_variables           |
-| [**addDeviceEnvironmentVariablesByPin**](DeviceApi.md#addDeviceEnvironmentVariablesByPin) | **PUT** /v1/products/{productUID}/devices/{deviceUID}/environment_variables_with_pin           |
 | [**addQiNote**](DeviceApi.md#addQiNote)                                                   | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}             |
 | [**deleteDbNote**](DeviceApi.md#deleteDbNote)                                             | **DELETE** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}  |
 | [**deleteDevice**](DeviceApi.md#deleteDevice)                                             | **DELETE** /v1/projects/{projectOrProductUID}/devices/{deviceUID}                              |
@@ -33,6 +31,8 @@ All URIs are relative to *https://api.notefile.net*
 | [**listNotefiles**](DeviceApi.md#listNotefiles)                                           | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/files/changes                   |
 | [**listPendingNotefiles**](DeviceApi.md#listPendingNotefiles)                             | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/files/changes/pending           |
 | [**provisionDevice**](DeviceApi.md#provisionDevice)                                       | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/provision                      |
+| [**setDeviceEnvironmentVariables**](DeviceApi.md#setDeviceEnvironmentVariables)           | **PUT** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_variables           |
+| [**setDeviceEnvironmentVariablesByPin**](DeviceApi.md#setDeviceEnvironmentVariablesByPin) | **PUT** /v1/products/{productUID}/devices/{deviceUID}/environment_variables_with_pin           |
 | [**signalDevice**](DeviceApi.md#signalDevice)                                             | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/signal                         |
 | [**updateDbNote**](DeviceApi.md#updateDbNote)                                             | **PUT** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}     |
 
@@ -82,102 +82,6 @@ null (empty response body)
 ### Authorization
 
 [personalAccessToken](../README.md#personalAccessToken)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-## addDeviceEnvironmentVariables
-
-> EnvironmentVariables addDeviceEnvironmentVariables(projectOrProductUID, deviceUID, environmentVariables)
-
-Add environment variables of a device
-
-### Example
-
-```javascript
-import * as NotehubJs from '@blues-inc/notehub-js';
-let defaultClient = NotehubJs.ApiClient.instance;
-// Configure Bearer access token for authorization: personalAccessToken
-let personalAccessToken = defaultClient.authentications['personalAccessToken'];
-personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
-
-let apiInstance = new NotehubJs.DeviceApi();
-let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
-let deviceUID = dev:000000000000000; // String |
-let environmentVariables = new NotehubJs.EnvironmentVariables(); // EnvironmentVariables | Environment variables to be added to the device
-apiInstance.addDeviceEnvironmentVariables(projectOrProductUID, deviceUID, environmentVariables).then((data) => {
-  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
-}, (error) => {
-  console.error(error);
-});
-
-```
-
-### Parameters
-
-| Name                     | Type                                                | Description                                     | Notes |
-| ------------------------ | --------------------------------------------------- | ----------------------------------------------- | ----- |
-| **projectOrProductUID**  | **String**                                          |                                                 |
-| **deviceUID**            | **String**                                          |                                                 |
-| **environmentVariables** | [**EnvironmentVariables**](EnvironmentVariables.md) | Environment variables to be added to the device |
-
-### Return type
-
-[**EnvironmentVariables**](EnvironmentVariables.md)
-
-### Authorization
-
-[personalAccessToken](../README.md#personalAccessToken)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-## addDeviceEnvironmentVariablesByPin
-
-> EnvironmentVariables addDeviceEnvironmentVariablesByPin(productUID, deviceUID, environmentVariables)
-
-Add environment variables of a device with device pin authorization
-
-### Example
-
-```javascript
-import * as NotehubJs from '@blues-inc/notehub-js';
-let defaultClient = NotehubJs.ApiClient.instance;
-// Configure API key authorization: pin
-let pin = defaultClient.authentications['pin'];
-pin.apiKey = 'YOUR API KEY';
-
-let apiInstance = new NotehubJs.DeviceApi();
-let productUID = com.blues.bridge:sensors; // String |
-let deviceUID = dev:000000000000000; // String |
-let environmentVariables = new NotehubJs.EnvironmentVariables(); // EnvironmentVariables | Environment variables to be added to the device
-apiInstance.addDeviceEnvironmentVariablesByPin(productUID, deviceUID, environmentVariables).then((data) => {
-  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
-}, (error) => {
-  console.error(error);
-});
-
-```
-
-### Parameters
-
-| Name                     | Type                                                | Description                                     | Notes |
-| ------------------------ | --------------------------------------------------- | ----------------------------------------------- | ----- |
-| **productUID**           | **String**                                          |                                                 |
-| **deviceUID**            | **String**                                          |                                                 |
-| **environmentVariables** | [**EnvironmentVariables**](EnvironmentVariables.md) | Environment variables to be added to the device |
-
-### Return type
-
-[**EnvironmentVariables**](EnvironmentVariables.md)
-
-### Authorization
-
-[pin](../README.md#pin)
 
 ### HTTP request headers
 
@@ -1488,6 +1392,102 @@ apiInstance.provisionDevice(projectOrProductUID, deviceUID, provisionDeviceReque
 ### Authorization
 
 [personalAccessToken](../README.md#personalAccessToken)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+## setDeviceEnvironmentVariables
+
+> EnvironmentVariables setDeviceEnvironmentVariables(projectOrProductUID, deviceUID, environmentVariables)
+
+Set environment variables of a device
+
+### Example
+
+```javascript
+import * as NotehubJs from '@blues-inc/notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
+// Configure Bearer access token for authorization: personalAccessToken
+let personalAccessToken = defaultClient.authentications['personalAccessToken'];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
+
+let apiInstance = new NotehubJs.DeviceApi();
+let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let deviceUID = dev:000000000000000; // String |
+let environmentVariables = new NotehubJs.EnvironmentVariables(); // EnvironmentVariables | Environment variables to be added to the device
+apiInstance.setDeviceEnvironmentVariables(projectOrProductUID, deviceUID, environmentVariables).then((data) => {
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
+}, (error) => {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+| Name                     | Type                                                | Description                                     | Notes |
+| ------------------------ | --------------------------------------------------- | ----------------------------------------------- | ----- |
+| **projectOrProductUID**  | **String**                                          |                                                 |
+| **deviceUID**            | **String**                                          |                                                 |
+| **environmentVariables** | [**EnvironmentVariables**](EnvironmentVariables.md) | Environment variables to be added to the device |
+
+### Return type
+
+[**EnvironmentVariables**](EnvironmentVariables.md)
+
+### Authorization
+
+[personalAccessToken](../README.md#personalAccessToken)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+## setDeviceEnvironmentVariablesByPin
+
+> EnvironmentVariables setDeviceEnvironmentVariablesByPin(productUID, deviceUID, environmentVariables)
+
+Set environment variables of a device with device pin authorization
+
+### Example
+
+```javascript
+import * as NotehubJs from '@blues-inc/notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
+// Configure API key authorization: pin
+let pin = defaultClient.authentications['pin'];
+pin.apiKey = 'YOUR API KEY';
+
+let apiInstance = new NotehubJs.DeviceApi();
+let productUID = com.blues.bridge:sensors; // String |
+let deviceUID = dev:000000000000000; // String |
+let environmentVariables = new NotehubJs.EnvironmentVariables(); // EnvironmentVariables | Environment variables to be added to the device
+apiInstance.setDeviceEnvironmentVariablesByPin(productUID, deviceUID, environmentVariables).then((data) => {
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
+}, (error) => {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+| Name                     | Type                                                | Description                                     | Notes |
+| ------------------------ | --------------------------------------------------- | ----------------------------------------------- | ----- |
+| **productUID**           | **String**                                          |                                                 |
+| **deviceUID**            | **String**                                          |                                                 |
+| **environmentVariables** | [**EnvironmentVariables**](EnvironmentVariables.md) | Environment variables to be added to the device |
+
+### Return type
+
+[**EnvironmentVariables**](EnvironmentVariables.md)
+
+### Authorization
+
+[pin](../README.md#pin)
 
 ### HTTP request headers
 

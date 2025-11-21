@@ -54,26 +54,6 @@
         done();
       });
     });
-    describe("addDeviceEnvironmentVariables", function () {
-      it("should call addDeviceEnvironmentVariables successfully", function (done) {
-        //uncomment below and update the code to test addDeviceEnvironmentVariables
-        //instance.addDeviceEnvironmentVariables(function(error) {
-        //  if (error) throw error;
-        //expect().to.be();
-        //});
-        done();
-      });
-    });
-    describe("addDeviceEnvironmentVariablesByPin", function () {
-      it("should call addDeviceEnvironmentVariablesByPin successfully", function (done) {
-        //uncomment below and update the code to test addDeviceEnvironmentVariablesByPin
-        //instance.addDeviceEnvironmentVariablesByPin(function(error) {
-        //  if (error) throw error;
-        //expect().to.be();
-        //});
-        done();
-      });
-    });
     describe("addQiNote", function () {
       it("should call addQiNote successfully", function (done) {
         //uncomment below and update the code to test addQiNote
@@ -328,6 +308,26 @@
       it("should call provisionDevice successfully", function (done) {
         //uncomment below and update the code to test provisionDevice
         //instance.provisionDevice(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
+    describe("setDeviceEnvironmentVariables", function () {
+      it("should call setDeviceEnvironmentVariables successfully", function (done) {
+        //uncomment below and update the code to test setDeviceEnvironmentVariables
+        //instance.setDeviceEnvironmentVariables(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
+    describe("setDeviceEnvironmentVariablesByPin", function () {
+      it("should call setDeviceEnvironmentVariablesByPin successfully", function (done) {
+        //uncomment below and update the code to test setDeviceEnvironmentVariablesByPin
+        //instance.setDeviceEnvironmentVariablesByPin(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});

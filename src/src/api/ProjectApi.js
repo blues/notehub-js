@@ -135,147 +135,6 @@ export default class ProjectApi {
   }
 
   /**
-   * Add environment variables of a fleet
-   * @param {String} projectOrProductUID
-   * @param {String} fleetUID
-   * @param {module:model/EnvironmentVariables} environmentVariables Environment variables to be added to the fleet
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/EnvironmentVariables} and HTTP response
-   */
-  addFleetEnvironmentVariablesWithHttpInfo(
-    projectOrProductUID,
-    fleetUID,
-    environmentVariables
-  ) {
-    let postBody = environmentVariables;
-    // verify the required parameter 'projectOrProductUID' is set
-    if (projectOrProductUID === undefined || projectOrProductUID === null) {
-      throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling addFleetEnvironmentVariables"
-      );
-    }
-    // verify the required parameter 'fleetUID' is set
-    if (fleetUID === undefined || fleetUID === null) {
-      throw new Error(
-        "Missing the required parameter 'fleetUID' when calling addFleetEnvironmentVariables"
-      );
-    }
-    // verify the required parameter 'environmentVariables' is set
-    if (environmentVariables === undefined || environmentVariables === null) {
-      throw new Error(
-        "Missing the required parameter 'environmentVariables' when calling addFleetEnvironmentVariables"
-      );
-    }
-
-    let pathParams = {
-      projectOrProductUID: projectOrProductUID,
-      fleetUID: fleetUID,
-    };
-    let queryParams = {};
-    let headerParams = {};
-    let formParams = {};
-
-    let authNames = ["personalAccessToken"];
-    let contentTypes = ["application/json"];
-    let accepts = ["application/json"];
-    let returnType = EnvironmentVariables;
-    return this.apiClient.callApi(
-      "/v1/projects/{projectOrProductUID}/fleets/{fleetUID}/environment_variables",
-      "PUT",
-      pathParams,
-      queryParams,
-      headerParams,
-      formParams,
-      postBody,
-      authNames,
-      contentTypes,
-      accepts,
-      returnType,
-      null
-    );
-  }
-
-  /**
-   * Add environment variables of a fleet
-   * @param {String} projectOrProductUID
-   * @param {String} fleetUID
-   * @param {module:model/EnvironmentVariables} environmentVariables Environment variables to be added to the fleet
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/EnvironmentVariables}
-   */
-  addFleetEnvironmentVariables(
-    projectOrProductUID,
-    fleetUID,
-    environmentVariables
-  ) {
-    return this.addFleetEnvironmentVariablesWithHttpInfo(
-      projectOrProductUID,
-      fleetUID,
-      environmentVariables
-    ).then(function (response_and_data) {
-      return response_and_data.data;
-    });
-  }
-
-  /**
-   * Add environment variables of a project
-   * @param {String} projectOrProductUID
-   * @param {Object} opts Optional parameters
-   * @param {module:model/EnvironmentVariables} opts.environmentVariables
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/EnvironmentVariables} and HTTP response
-   */
-  addProjectEnvironmentVariablesWithHttpInfo(projectOrProductUID, opts) {
-    opts = opts || {};
-    let postBody = opts["environmentVariables"];
-    // verify the required parameter 'projectOrProductUID' is set
-    if (projectOrProductUID === undefined || projectOrProductUID === null) {
-      throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling addProjectEnvironmentVariables"
-      );
-    }
-
-    let pathParams = {
-      projectOrProductUID: projectOrProductUID,
-    };
-    let queryParams = {};
-    let headerParams = {};
-    let formParams = {};
-
-    let authNames = ["personalAccessToken"];
-    let contentTypes = ["application/json"];
-    let accepts = ["application/json"];
-    let returnType = EnvironmentVariables;
-    return this.apiClient.callApi(
-      "/v1/projects/{projectOrProductUID}/environment_variables",
-      "PUT",
-      pathParams,
-      queryParams,
-      headerParams,
-      formParams,
-      postBody,
-      authNames,
-      contentTypes,
-      accepts,
-      returnType,
-      null
-    );
-  }
-
-  /**
-   * Add environment variables of a project
-   * @param {String} projectOrProductUID
-   * @param {Object} opts Optional parameters
-   * @param {module:model/EnvironmentVariables} opts.environmentVariables
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/EnvironmentVariables}
-   */
-  addProjectEnvironmentVariables(projectOrProductUID, opts) {
-    return this.addProjectEnvironmentVariablesWithHttpInfo(
-      projectOrProductUID,
-      opts
-    ).then(function (response_and_data) {
-      return response_and_data.data;
-    });
-  }
-
-  /**
    * Clone a Project
    * @param {String} projectOrProductUID
    * @param {module:model/CloneProjectRequest} cloneProjectRequest Project to be cloned
@@ -2365,6 +2224,87 @@ export default class ProjectApi {
   }
 
   /**
+   * Set environment variables of a fleet
+   * @param {String} projectOrProductUID
+   * @param {String} fleetUID
+   * @param {module:model/EnvironmentVariables} environmentVariables Environment variables to be added to the fleet
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/EnvironmentVariables} and HTTP response
+   */
+  setFleetEnvironmentVariablesWithHttpInfo(
+    projectOrProductUID,
+    fleetUID,
+    environmentVariables
+  ) {
+    let postBody = environmentVariables;
+    // verify the required parameter 'projectOrProductUID' is set
+    if (projectOrProductUID === undefined || projectOrProductUID === null) {
+      throw new Error(
+        "Missing the required parameter 'projectOrProductUID' when calling setFleetEnvironmentVariables"
+      );
+    }
+    // verify the required parameter 'fleetUID' is set
+    if (fleetUID === undefined || fleetUID === null) {
+      throw new Error(
+        "Missing the required parameter 'fleetUID' when calling setFleetEnvironmentVariables"
+      );
+    }
+    // verify the required parameter 'environmentVariables' is set
+    if (environmentVariables === undefined || environmentVariables === null) {
+      throw new Error(
+        "Missing the required parameter 'environmentVariables' when calling setFleetEnvironmentVariables"
+      );
+    }
+
+    let pathParams = {
+      projectOrProductUID: projectOrProductUID,
+      fleetUID: fleetUID,
+    };
+    let queryParams = {};
+    let headerParams = {};
+    let formParams = {};
+
+    let authNames = ["personalAccessToken"];
+    let contentTypes = ["application/json"];
+    let accepts = ["application/json"];
+    let returnType = EnvironmentVariables;
+    return this.apiClient.callApi(
+      "/v1/projects/{projectOrProductUID}/fleets/{fleetUID}/environment_variables",
+      "PUT",
+      pathParams,
+      queryParams,
+      headerParams,
+      formParams,
+      postBody,
+      authNames,
+      contentTypes,
+      accepts,
+      returnType,
+      null
+    );
+  }
+
+  /**
+   * Set environment variables of a fleet
+   * @param {String} projectOrProductUID
+   * @param {String} fleetUID
+   * @param {module:model/EnvironmentVariables} environmentVariables Environment variables to be added to the fleet
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/EnvironmentVariables}
+   */
+  setFleetEnvironmentVariables(
+    projectOrProductUID,
+    fleetUID,
+    environmentVariables
+  ) {
+    return this.setFleetEnvironmentVariablesWithHttpInfo(
+      projectOrProductUID,
+      fleetUID,
+      environmentVariables
+    ).then(function (response_and_data) {
+      return response_and_data.data;
+    });
+  }
+
+  /**
    * Set the project-level event JSONata transformation
    * @param {String} projectOrProductUID
    * @param {Object.<String, Object>} body JSONata expression which will be applied to each event before it is persisted and routed
@@ -2422,6 +2362,66 @@ export default class ProjectApi {
     return this.setGlobalEventTransformationWithHttpInfo(
       projectOrProductUID,
       body
+    ).then(function (response_and_data) {
+      return response_and_data.data;
+    });
+  }
+
+  /**
+   * Set environment variables of a project
+   * @param {String} projectOrProductUID
+   * @param {Object} opts Optional parameters
+   * @param {module:model/EnvironmentVariables} opts.environmentVariables
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/EnvironmentVariables} and HTTP response
+   */
+  setProjectEnvironmentVariablesWithHttpInfo(projectOrProductUID, opts) {
+    opts = opts || {};
+    let postBody = opts["environmentVariables"];
+    // verify the required parameter 'projectOrProductUID' is set
+    if (projectOrProductUID === undefined || projectOrProductUID === null) {
+      throw new Error(
+        "Missing the required parameter 'projectOrProductUID' when calling setProjectEnvironmentVariables"
+      );
+    }
+
+    let pathParams = {
+      projectOrProductUID: projectOrProductUID,
+    };
+    let queryParams = {};
+    let headerParams = {};
+    let formParams = {};
+
+    let authNames = ["personalAccessToken"];
+    let contentTypes = ["application/json"];
+    let accepts = ["application/json"];
+    let returnType = EnvironmentVariables;
+    return this.apiClient.callApi(
+      "/v1/projects/{projectOrProductUID}/environment_variables",
+      "PUT",
+      pathParams,
+      queryParams,
+      headerParams,
+      formParams,
+      postBody,
+      authNames,
+      contentTypes,
+      accepts,
+      returnType,
+      null
+    );
+  }
+
+  /**
+   * Set environment variables of a project
+   * @param {String} projectOrProductUID
+   * @param {Object} opts Optional parameters
+   * @param {module:model/EnvironmentVariables} opts.environmentVariables
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/EnvironmentVariables}
+   */
+  setProjectEnvironmentVariables(projectOrProductUID, opts) {
+    return this.setProjectEnvironmentVariablesWithHttpInfo(
+      projectOrProductUID,
+      opts
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
