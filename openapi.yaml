@@ -4662,7 +4662,7 @@ components:
           type: string
           example: body.temperature
         source_type:
-          description: The type of source to monitor. Currently only "event" is supported.
+          description: The type of source to monitor. Supported values are "event" and "device".
           type: string
           enum:
             - event
