@@ -132,6 +132,7 @@ export default class UsageApi {
    * @param {Array.<String>} opts.fleetUID Filter by Fleet UID
    * @param {Array.<module:model/String>} opts.aggregate Aggregation level for results
    * @param {Array.<String>} opts.notefile Filter to specific notefiles
+   * @param {Boolean} opts.skipRecentData When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects. (default to false)
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/UsageEventsResponse} and HTTP response
    */
   getEventsUsageWithHttpInfo(projectOrProductUID, period, opts) {
@@ -167,6 +168,7 @@ export default class UsageApi {
         "multi"
       ),
       notefile: this.apiClient.buildCollectionParam(opts["notefile"], "multi"),
+      skipRecentData: opts["skipRecentData"],
     };
     let headerParams = {};
     let formParams = {};
@@ -202,6 +204,7 @@ export default class UsageApi {
    * @param {Array.<String>} opts.fleetUID Filter by Fleet UID
    * @param {Array.<module:model/String>} opts.aggregate Aggregation level for results
    * @param {Array.<String>} opts.notefile Filter to specific notefiles
+   * @param {Boolean} opts.skipRecentData When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects. (default to false)
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/UsageEventsResponse}
    */
   getEventsUsage(projectOrProductUID, period, opts) {
@@ -224,6 +227,7 @@ export default class UsageApi {
    * @param {Array.<String>} opts.deviceUID A Device UID.
    * @param {Array.<String>} opts.fleetUID Filter by Fleet UID
    * @param {module:model/String} opts.aggregate Aggregation level for results (default to 'device')
+   * @param {Boolean} opts.skipRecentData When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects. (default to false)
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetSessionsUsage200Response} and HTTP response
    */
   getSessionsUsageWithHttpInfo(projectOrProductUID, period, opts) {
@@ -255,6 +259,7 @@ export default class UsageApi {
       fleetUID: this.apiClient.buildCollectionParam(opts["fleetUID"], "multi"),
       period: period,
       aggregate: opts["aggregate"],
+      skipRecentData: opts["skipRecentData"],
     };
     let headerParams = {};
     let formParams = {};
@@ -289,6 +294,7 @@ export default class UsageApi {
    * @param {Array.<String>} opts.deviceUID A Device UID.
    * @param {Array.<String>} opts.fleetUID Filter by Fleet UID
    * @param {module:model/String} opts.aggregate Aggregation level for results (default to 'device')
+   * @param {Boolean} opts.skipRecentData When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects. (default to false)
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetSessionsUsage200Response}
    */
   getSessionsUsage(projectOrProductUID, period, opts) {

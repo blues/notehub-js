@@ -2564,6 +2564,16 @@ paths:
               type: string
           explode: true
           style: form
+        - name: skipRecentData
+          in: query
+          description:
+            When true, skips fetching recent data from raw event tables and
+            only returns data from summary tables. Use this for better
+            performance on large projects.
+          required: false
+          schema:
+            type: boolean
+            default: false
       responses:
         "200":
           description: Successful operation
@@ -2610,6 +2620,16 @@ paths:
               - device
               - fleet
               - project
+        - name: skipRecentData
+          in: query
+          description:
+            When true, skips fetching recent data from raw event tables and
+            only returns data from summary tables. Use this for better
+            performance on large projects.
+          required: false
+          schema:
+            type: boolean
+            default: false
       responses:
         "200":
           $ref: "#/components/responses/UsageSessionsResponse"
