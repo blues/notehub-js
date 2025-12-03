@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The RouteTransformSettings model module.
  * @module model/RouteTransformSettings
- * @version 3.0.0
+ * @version 2.3.0
  */
 class RouteTransformSettings {
   /**

@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The PersonalAccessTokenSecret model module.
  * @module model/PersonalAccessTokenSecret
- * @version 3.0.0
+ * @version 2.3.0
  */
 class PersonalAccessTokenSecret {
   /**

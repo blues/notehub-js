@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The UserDfuStateMachineStatus model module.
  * @module model/UserDfuStateMachineStatus
- * @version 3.0.0
+ * @version 2.3.0
  */
 class UserDfuStateMachineStatus {
   /**

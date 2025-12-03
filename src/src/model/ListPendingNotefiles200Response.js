@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The ListPendingNotefiles200Response model module.
  * @module model/ListPendingNotefiles200Response
- * @version 3.0.0
+ * @version 2.3.0
  */
 class ListPendingNotefiles200Response {
   /**

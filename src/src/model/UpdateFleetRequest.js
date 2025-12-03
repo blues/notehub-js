@@ -17,7 +17,7 @@ import FleetConnectivityAssurance from "./FleetConnectivityAssurance";
 /**
  * The UpdateFleetRequest model module.
  * @module model/UpdateFleetRequest
- * @version 3.0.0
+ * @version 2.3.0
  */
 class UpdateFleetRequest {
   /**

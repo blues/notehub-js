@@ -17,7 +17,7 @@ import FleetConnectivityAssurance from "./FleetConnectivityAssurance";
 /**
  * The Fleet model module.
  * @module model/Fleet
- * @version 3.0.0
+ * @version 2.3.0
  */
 class Fleet {
   /**

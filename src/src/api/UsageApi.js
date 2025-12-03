@@ -20,7 +20,7 @@ import UsageEventsResponse from "../model/UsageEventsResponse";
 /**
  * Usage service.
  * @module api/UsageApi
- * @version 3.0.0
+ * @version 2.3.0
  */
 export default class UsageApi {
   /**
@@ -130,9 +130,10 @@ export default class UsageApi {
    * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
    * @param {Array.<String>} opts.deviceUID A Device UID.
    * @param {Array.<String>} opts.fleetUID Filter by Fleet UID
-   * @param {Array.<module:model/String>} opts.aggregate Aggregation level for results
+   * @param {module:model/String} opts.aggregate Aggregation level for results (default to 'device')
    * @param {Array.<String>} opts.notefile Filter to specific notefiles
    * @param {Boolean} opts.skipRecentData When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects. (default to false)
+   * @param {Boolean} opts.includeNotefiles Include per-notefile event counts in the response (default to false)
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/UsageEventsResponse} and HTTP response
    */
   getEventsUsageWithHttpInfo(projectOrProductUID, period, opts) {
@@ -163,12 +164,10 @@ export default class UsageApi {
       ),
       fleetUID: this.apiClient.buildCollectionParam(opts["fleetUID"], "multi"),
       period: period,
-      aggregate: this.apiClient.buildCollectionParam(
-        opts["aggregate"],
-        "multi"
-      ),
+      aggregate: opts["aggregate"],
       notefile: this.apiClient.buildCollectionParam(opts["notefile"], "multi"),
       skipRecentData: opts["skipRecentData"],
+      includeNotefiles: opts["includeNotefiles"],
     };
     let headerParams = {};
     let formParams = {};
@@ -202,9 +201,10 @@ export default class UsageApi {
    * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
    * @param {Array.<String>} opts.deviceUID A Device UID.
    * @param {Array.<String>} opts.fleetUID Filter by Fleet UID
-   * @param {Array.<module:model/String>} opts.aggregate Aggregation level for results
+   * @param {module:model/String} opts.aggregate Aggregation level for results (default to 'device')
    * @param {Array.<String>} opts.notefile Filter to specific notefiles
    * @param {Boolean} opts.skipRecentData When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects. (default to false)
+   * @param {Boolean} opts.includeNotefiles Include per-notefile event counts in the response (default to false)
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/UsageEventsResponse}
    */
   getEventsUsage(projectOrProductUID, period, opts) {
