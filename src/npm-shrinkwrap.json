@@ -1,12 +1,12 @@
 {
   "name": "@blues-inc/notehub-js",
-  "version": "2.3.0",
+  "version": "3.0.0",
   "lockfileVersion": 3,
   "requires": true,
   "packages": {
     "": {
       "name": "@blues-inc/notehub-js",
-      "version": "2.3.0",
+      "version": "3.0.0",
       "license": "MIT",
       "dependencies": {
         "@babel/cli": "7.28.3",
@@ -2443,9 +2443,9 @@
       }
     },
     "node_modules/caniuse-lite": {
-      "version": "1.0.30001757",
-      "resolved": "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001757.tgz",
-      "integrity": "sha512-r0nnL/I28Zi/yjk1el6ilj27tKcdjLsNqAOZr0yVjWPrSQyHgKI2INaEWw21bAQSv2LXRt1XuCS/GomNpWOxsQ==",
+      "version": "1.0.30001759",
+      "resolved": "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001759.tgz",
+      "integrity": "sha512-Pzfx9fOKoKvevQf8oCXoyNRQ5QyxJj+3O0Rqx2V5oxT61KGx8+n6hV/IUyJeifUci2clnmmKVpvtiqRzgiWjSw==",
       "funding": [
         {
           "type": "opencollective",

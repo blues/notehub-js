@@ -18,7 +18,7 @@ import RouteTransformSettings from "./RouteTransformSettings";
 /**
  * The MqttRoute model module.
  * @module model/MqttRoute
- * @version 2.3.0
+ * @version 3.0.0
  */
 class MqttRoute {
   /**
