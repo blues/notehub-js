@@ -2525,16 +2525,12 @@ paths:
           description: Aggregation level for results
           required: false
           schema:
-            type: array
-            items:
-              enum:
-                - device
-                - fleet
-                - project
-                - notefile
-              type: string
-          explode: true
-          style: form
+            type: string
+            default: device
+            enum:
+              - device
+              - fleet
+              - project
         - name: notefile
           in: query
           description: Filter to specific notefiles
@@ -2548,6 +2544,13 @@ paths:
         - name: skipRecentData
           in: query
           description: 'When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects.'
+          required: false
+          schema:
+            type: boolean
+            default: false
+        - name: includeNotefiles
+          in: query
+          description: Include per-notefile event counts in the response
           required: false
           schema:
             type: boolean
@@ -5488,7 +5491,7 @@ components:
           type: string
           example: 'fleet:1042ddc5-3b2c-4cec-b1fb-d3040538094d'
         notefiles:
-          description: Count of events per notefile. Only present when aggregate=notefile is specified.
+          description: Count of events per notefile. Only present when includeNotefiles=true is specified.
           type: object
           example:
             _log.qo: 20
