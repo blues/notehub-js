@@ -25,13 +25,14 @@ import RadRoute from "./RadRoute";
 import S3ArchiveRoute from "./S3ArchiveRoute";
 import SlackRoute from "./SlackRoute";
 import SnowflakeRoute from "./SnowflakeRoute";
+import SnowpipeStreamingRoute from "./SnowpipeStreamingRoute";
 import ThingworxRoute from "./ThingworxRoute";
 import TwilioRoute from "./TwilioRoute";
 
 /**
  * The NotehubRoute model module.
  * @module model/NotehubRoute
- * @version 2.3.0
+ * @version 3.0.0
  */
 class NotehubRoute {
   /**
@@ -111,6 +112,11 @@ class NotehubRoute {
       if (data.hasOwnProperty("snowflake")) {
         obj["snowflake"] = SnowflakeRoute.constructFromObject(
           data["snowflake"]
+        );
+      }
+      if (data.hasOwnProperty("snowpipe_streaming")) {
+        obj["snowpipe_streaming"] = SnowpipeStreamingRoute.constructFromObject(
+          data["snowpipe_streaming"]
         );
       }
       if (data.hasOwnProperty("thingworx")) {
@@ -213,6 +219,11 @@ class NotehubRoute {
     if (data["snowflake"]) {
       // data not null
       SnowflakeRoute.validateJSON(data["snowflake"]);
+    }
+    // validate the optional field `snowpipe_streaming`
+    if (data["snowpipe_streaming"]) {
+      // data not null
+      SnowpipeStreamingRoute.validateJSON(data["snowpipe_streaming"]);
     }
     // validate the optional field `thingworx`
     if (data["thingworx"]) {
@@ -329,6 +340,11 @@ NotehubRoute.prototype["slack"] = undefined;
  * @member {module:model/SnowflakeRoute} snowflake
  */
 NotehubRoute.prototype["snowflake"] = undefined;
+
+/**
+ * @member {module:model/SnowpipeStreamingRoute} snowpipe_streaming
+ */
+NotehubRoute.prototype["snowpipe_streaming"] = undefined;
 
 /**
  * @member {module:model/ThingworxRoute} thingworx

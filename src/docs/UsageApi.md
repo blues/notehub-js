@@ -30,6 +30,7 @@ let opts = {
   'startDate': 1628631763, // Number | Start date for filtering results, specified as a Unix timestamp
   'endDate': 1657894210, // Number | End date for filtering results, specified as a Unix timestamp
   'deviceUID': ["null"], // [String] | A Device UID.
+  'fleetUID': ["null"], // [String] | Filter by Fleet UID
   'aggregate': "'device'" // String | Aggregation level for results
 };
 apiInstance.getDataUsage(projectOrProductUID, period, opts).then((data) => {
@@ -49,6 +50,7 @@ apiInstance.getDataUsage(projectOrProductUID, period, opts).then((data) => {
 | **startDate**           | **Number**                | Start date for filtering results, specified as a Unix timestamp | [optional]                               |
 | **endDate**             | **Number**                | End date for filtering results, specified as a Unix timestamp   | [optional]                               |
 | **deviceUID**           | [**[String]**](String.md) | A Device UID.                                                   | [optional]                               |
+| **fleetUID**            | [**[String]**](String.md) | Filter by Fleet UID                                             | [optional]                               |
 | **aggregate**           | **String**                | Aggregation level for results                                   | [optional] [default to &#39;device&#39;] |
 
 ### Return type
@@ -86,7 +88,11 @@ let opts = {
   'startDate': 1628631763, // Number | Start date for filtering results, specified as a Unix timestamp
   'endDate': 1657894210, // Number | End date for filtering results, specified as a Unix timestamp
   'deviceUID': ["null"], // [String] | A Device UID.
-  'aggregate': "'device'" // String | Aggregation level for results
+  'fleetUID': ["null"], // [String] | Filter by Fleet UID
+  'aggregate': "'device'", // String | Aggregation level for results
+  'notefile': ["null"], // [String] | Filter to specific notefiles
+  'skipRecentData': false, // Boolean | When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects.
+  'includeNotefiles': false // Boolean | Include per-notefile event counts in the response
 };
 apiInstance.getEventsUsage(projectOrProductUID, period, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
@@ -98,14 +104,18 @@ apiInstance.getEventsUsage(projectOrProductUID, period, opts).then((data) => {
 
 ### Parameters
 
-| Name                    | Type                      | Description                                                     | Notes                                    |
-| ----------------------- | ------------------------- | --------------------------------------------------------------- | ---------------------------------------- |
-| **projectOrProductUID** | **String**                |                                                                 |
-| **period**              | **String**                | Period type for aggregation                                     |
-| **startDate**           | **Number**                | Start date for filtering results, specified as a Unix timestamp | [optional]                               |
-| **endDate**             | **Number**                | End date for filtering results, specified as a Unix timestamp   | [optional]                               |
-| **deviceUID**           | [**[String]**](String.md) | A Device UID.                                                   | [optional]                               |
-| **aggregate**           | **String**                | Aggregation level for results                                   | [optional] [default to &#39;device&#39;] |
+| Name                    | Type                      | Description                                                                                                                                               | Notes                                    |
+| ----------------------- | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
+| **projectOrProductUID** | **String**                |                                                                                                                                                           |
+| **period**              | **String**                | Period type for aggregation                                                                                                                               |
+| **startDate**           | **Number**                | Start date for filtering results, specified as a Unix timestamp                                                                                           | [optional]                               |
+| **endDate**             | **Number**                | End date for filtering results, specified as a Unix timestamp                                                                                             | [optional]                               |
+| **deviceUID**           | [**[String]**](String.md) | A Device UID.                                                                                                                                             | [optional]                               |
+| **fleetUID**            | [**[String]**](String.md) | Filter by Fleet UID                                                                                                                                       | [optional]                               |
+| **aggregate**           | **String**                | Aggregation level for results                                                                                                                             | [optional] [default to &#39;device&#39;] |
+| **notefile**            | [**[String]**](String.md) | Filter to specific notefiles                                                                                                                              | [optional]                               |
+| **skipRecentData**      | **Boolean**               | When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects. | [optional] [default to false]            |
+| **includeNotefiles**    | **Boolean**               | Include per-notefile event counts in the response                                                                                                         | [optional] [default to false]            |
 
 ### Return type
 
@@ -142,7 +152,9 @@ let opts = {
   'startDate': 1628631763, // Number | Start date for filtering results, specified as a Unix timestamp
   'endDate': 1657894210, // Number | End date for filtering results, specified as a Unix timestamp
   'deviceUID': ["null"], // [String] | A Device UID.
-  'aggregate': "'device'" // String | Aggregation level for results
+  'fleetUID': ["null"], // [String] | Filter by Fleet UID
+  'aggregate': "'device'", // String | Aggregation level for results
+  'skipRecentData': false // Boolean | When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects.
 };
 apiInstance.getSessionsUsage(projectOrProductUID, period, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
@@ -154,14 +166,16 @@ apiInstance.getSessionsUsage(projectOrProductUID, period, opts).then((data) => {
 
 ### Parameters
 
-| Name                    | Type                      | Description                                                     | Notes                                    |
-| ----------------------- | ------------------------- | --------------------------------------------------------------- | ---------------------------------------- |
-| **projectOrProductUID** | **String**                |                                                                 |
-| **period**              | **String**                | Period type for aggregation                                     |
-| **startDate**           | **Number**                | Start date for filtering results, specified as a Unix timestamp | [optional]                               |
-| **endDate**             | **Number**                | End date for filtering results, specified as a Unix timestamp   | [optional]                               |
-| **deviceUID**           | [**[String]**](String.md) | A Device UID.                                                   | [optional]                               |
-| **aggregate**           | **String**                | Aggregation level for results                                   | [optional] [default to &#39;device&#39;] |
+| Name                    | Type                      | Description                                                                                                                                               | Notes                                    |
+| ----------------------- | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
+| **projectOrProductUID** | **String**                |                                                                                                                                                           |
+| **period**              | **String**                | Period type for aggregation                                                                                                                               |
+| **startDate**           | **Number**                | Start date for filtering results, specified as a Unix timestamp                                                                                           | [optional]                               |
+| **endDate**             | **Number**                | End date for filtering results, specified as a Unix timestamp                                                                                             | [optional]                               |
+| **deviceUID**           | [**[String]**](String.md) | A Device UID.                                                                                                                                             | [optional]                               |
+| **fleetUID**            | [**[String]**](String.md) | Filter by Fleet UID                                                                                                                                       | [optional]                               |
+| **aggregate**           | **String**                | Aggregation level for results                                                                                                                             | [optional] [default to &#39;device&#39;] |
+| **skipRecentData**      | **Boolean**               | When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects. | [optional] [default to false]            |
 
 ### Return type
 

@@ -17,7 +17,7 @@ import PersonalAccessTokenCreatedBy from "./PersonalAccessTokenCreatedBy";
 /**
  * The PersonalAccessToken model module.
  * @module model/PersonalAccessToken
- * @version 2.3.0
+ * @version 3.0.0
  */
 class PersonalAccessToken {
   /**

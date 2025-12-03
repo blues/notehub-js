@@ -146,6 +146,12 @@
       //expect(instance).to.be();
     });
 
+    it('should have the property snowpipeStreaming (base name: "snowpipe_streaming")', function () {
+      // uncomment below and update the code to test the property snowpipeStreaming
+      //var instance = new NotehubJs.NotehubRoute();
+      //expect(instance).to.be();
+    });
+
     it('should have the property thingworx (base name: "thingworx")', function () {
       // uncomment below and update the code to test the property thingworx
       //var instance = new NotehubJs.NotehubRoute();

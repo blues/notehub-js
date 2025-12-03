@@ -44,6 +44,46 @@
   };
 
   describe("DeviceApi", function () {
+    describe("addDbNote", function () {
+      it("should call addDbNote successfully", function (done) {
+        //uncomment below and update the code to test addDbNote
+        //instance.addDbNote(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
+    describe("addQiNote", function () {
+      it("should call addQiNote successfully", function (done) {
+        //uncomment below and update the code to test addQiNote
+        //instance.addQiNote(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
+    describe("deleteDbNote", function () {
+      it("should call deleteDbNote successfully", function (done) {
+        //uncomment below and update the code to test deleteDbNote
+        //instance.deleteDbNote(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
+    describe("deleteDevice", function () {
+      it("should call deleteDevice successfully", function (done) {
+        //uncomment below and update the code to test deleteDevice
+        //instance.deleteDevice(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
     describe("deleteDeviceEnvironmentVariable", function () {
       it("should call deleteDeviceEnvironmentVariable successfully", function (done) {
         //uncomment below and update the code to test deleteDeviceEnvironmentVariable
@@ -54,10 +94,10 @@
         done();
       });
     });
-    describe("deleteProjectDevice", function () {
-      it("should call deleteProjectDevice successfully", function (done) {
-        //uncomment below and update the code to test deleteProjectDevice
-        //instance.deleteProjectDevice(function(error) {
+    describe("deleteNotefiles", function () {
+      it("should call deleteNotefiles successfully", function (done) {
+        //uncomment below and update the code to test deleteNotefiles
+        //instance.deleteNotefiles(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});
@@ -98,6 +138,16 @@
       it("should call enableDeviceConnectivityAssurance successfully", function (done) {
         //uncomment below and update the code to test enableDeviceConnectivityAssurance
         //instance.enableDeviceConnectivityAssurance(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
+    describe("getDbNote", function () {
+      it("should call getDbNote successfully", function (done) {
+        //uncomment below and update the code to test getDbNote
+        //instance.getDbNote(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});
@@ -154,10 +204,10 @@
         done();
       });
     });
-    describe("getDeviceLatest", function () {
-      it("should call getDeviceLatest successfully", function (done) {
-        //uncomment below and update the code to test getDeviceLatest
-        //instance.getDeviceLatest(function(error) {
+    describe("getDeviceLatestEvents", function () {
+      it("should call getDeviceLatestEvents successfully", function (done) {
+        //uncomment below and update the code to test getDeviceLatestEvents
+        //instance.getDeviceLatestEvents(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});
@@ -184,6 +234,16 @@
         done();
       });
     });
+    describe("getDevicePublicKeys", function () {
+      it("should call getDevicePublicKeys successfully", function (done) {
+        //uncomment below and update the code to test getDevicePublicKeys
+        //instance.getDevicePublicKeys(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
     describe("getDeviceSessions", function () {
       it("should call getDeviceSessions successfully", function (done) {
         //uncomment below and update the code to test getDeviceSessions
@@ -194,160 +254,100 @@
         done();
       });
     });
-    describe("getProjectDevicePublicKeys", function () {
-      it("should call getProjectDevicePublicKeys successfully", function (done) {
-        //uncomment below and update the code to test getProjectDevicePublicKeys
-        //instance.getProjectDevicePublicKeys(function(error) {
+    describe("getDevices", function () {
+      it("should call getDevices successfully", function (done) {
+        //uncomment below and update the code to test getDevices
+        //instance.getDevices(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});
         done();
       });
     });
-    describe("getProjectDevices", function () {
-      it("should call getProjectDevices successfully", function (done) {
-        //uncomment below and update the code to test getProjectDevices
-        //instance.getProjectDevices(function(error) {
+    describe("getFleetDevices", function () {
+      it("should call getFleetDevices successfully", function (done) {
+        //uncomment below and update the code to test getFleetDevices
+        //instance.getFleetDevices(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});
         done();
       });
     });
-    describe("getProjectFleetDevices", function () {
-      it("should call getProjectFleetDevices successfully", function (done) {
-        //uncomment below and update the code to test getProjectFleetDevices
-        //instance.getProjectFleetDevices(function(error) {
+    describe("getNotefile", function () {
+      it("should call getNotefile successfully", function (done) {
+        //uncomment below and update the code to test getNotefile
+        //instance.getNotefile(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});
         done();
       });
     });
-    describe("handleNoteAdd", function () {
-      it("should call handleNoteAdd successfully", function (done) {
-        //uncomment below and update the code to test handleNoteAdd
-        //instance.handleNoteAdd(function(error) {
+    describe("listNotefiles", function () {
+      it("should call listNotefiles successfully", function (done) {
+        //uncomment below and update the code to test listNotefiles
+        //instance.listNotefiles(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});
         done();
       });
     });
-    describe("handleNoteChanges", function () {
-      it("should call handleNoteChanges successfully", function (done) {
-        //uncomment below and update the code to test handleNoteChanges
-        //instance.handleNoteChanges(function(error) {
+    describe("listPendingNotefiles", function () {
+      it("should call listPendingNotefiles successfully", function (done) {
+        //uncomment below and update the code to test listPendingNotefiles
+        //instance.listPendingNotefiles(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});
         done();
       });
     });
-    describe("handleNoteCreateAdd", function () {
-      it("should call handleNoteCreateAdd successfully", function (done) {
-        //uncomment below and update the code to test handleNoteCreateAdd
-        //instance.handleNoteCreateAdd(function(error) {
+    describe("provisionDevice", function () {
+      it("should call provisionDevice successfully", function (done) {
+        //uncomment below and update the code to test provisionDevice
+        //instance.provisionDevice(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});
         done();
       });
     });
-    describe("handleNoteDelete", function () {
-      it("should call handleNoteDelete successfully", function (done) {
-        //uncomment below and update the code to test handleNoteDelete
-        //instance.handleNoteDelete(function(error) {
+    describe("setDeviceEnvironmentVariables", function () {
+      it("should call setDeviceEnvironmentVariables successfully", function (done) {
+        //uncomment below and update the code to test setDeviceEnvironmentVariables
+        //instance.setDeviceEnvironmentVariables(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});
         done();
       });
     });
-    describe("handleNoteGet", function () {
-      it("should call handleNoteGet successfully", function (done) {
-        //uncomment below and update the code to test handleNoteGet
-        //instance.handleNoteGet(function(error) {
+    describe("setDeviceEnvironmentVariablesByPin", function () {
+      it("should call setDeviceEnvironmentVariablesByPin successfully", function (done) {
+        //uncomment below and update the code to test setDeviceEnvironmentVariablesByPin
+        //instance.setDeviceEnvironmentVariablesByPin(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});
         done();
       });
     });
-    describe("handleNoteSignal", function () {
-      it("should call handleNoteSignal successfully", function (done) {
-        //uncomment below and update the code to test handleNoteSignal
-        //instance.handleNoteSignal(function(error) {
+    describe("signalDevice", function () {
+      it("should call signalDevice successfully", function (done) {
+        //uncomment below and update the code to test signalDevice
+        //instance.signalDevice(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});
         done();
       });
     });
-    describe("handleNoteUpdate", function () {
-      it("should call handleNoteUpdate successfully", function (done) {
-        //uncomment below and update the code to test handleNoteUpdate
-        //instance.handleNoteUpdate(function(error) {
-        //  if (error) throw error;
-        //expect().to.be();
-        //});
-        done();
-      });
-    });
-    describe("handleNotefileChanges", function () {
-      it("should call handleNotefileChanges successfully", function (done) {
-        //uncomment below and update the code to test handleNotefileChanges
-        //instance.handleNotefileChanges(function(error) {
-        //  if (error) throw error;
-        //expect().to.be();
-        //});
-        done();
-      });
-    });
-    describe("handleNotefileChangesPending", function () {
-      it("should call handleNotefileChangesPending successfully", function (done) {
-        //uncomment below and update the code to test handleNotefileChangesPending
-        //instance.handleNotefileChangesPending(function(error) {
-        //  if (error) throw error;
-        //expect().to.be();
-        //});
-        done();
-      });
-    });
-    describe("handleNotefileDelete", function () {
-      it("should call handleNotefileDelete successfully", function (done) {
-        //uncomment below and update the code to test handleNotefileDelete
-        //instance.handleNotefileDelete(function(error) {
-        //  if (error) throw error;
-        //expect().to.be();
-        //});
-        done();
-      });
-    });
-    describe("postProvisionProjectDevice", function () {
-      it("should call postProvisionProjectDevice successfully", function (done) {
-        //uncomment below and update the code to test postProvisionProjectDevice
-        //instance.postProvisionProjectDevice(function(error) {
-        //  if (error) throw error;
-        //expect().to.be();
-        //});
-        done();
-      });
-    });
-    describe("putDeviceEnvironmentVariables", function () {
-      it("should call putDeviceEnvironmentVariables successfully", function (done) {
-        //uncomment below and update the code to test putDeviceEnvironmentVariables
-        //instance.putDeviceEnvironmentVariables(function(error) {
-        //  if (error) throw error;
-        //expect().to.be();
-        //});
-        done();
-      });
-    });
-    describe("putDeviceEnvironmentVariablesByPin", function () {
-      it("should call putDeviceEnvironmentVariablesByPin successfully", function (done) {
-        //uncomment below and update the code to test putDeviceEnvironmentVariablesByPin
-        //instance.putDeviceEnvironmentVariablesByPin(function(error) {
+    describe("updateDbNote", function () {
+      it("should call updateDbNote successfully", function (done) {
+        //uncomment below and update the code to test updateDbNote
+        //instance.updateDbNote(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});

@@ -62,6 +62,12 @@
       //expect(instance).to.be();
     });
 
+    it('should have the property notefiles (base name: "notefiles")', function () {
+      // uncomment below and update the code to test the property notefiles
+      //var instance = new NotehubJs.UsageEventsData();
+      //expect(instance).to.be();
+    });
+
     it('should have the property period (base name: "period")', function () {
       // uncomment below and update the code to test the property period
       //var instance = new NotehubJs.UsageEventsData();

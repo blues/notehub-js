@@ -44,6 +44,16 @@
   };
 
   describe("ProjectApi", function () {
+    describe("addDeviceToFleets", function () {
+      it("should call addDeviceToFleets successfully", function (done) {
+        //uncomment below and update the code to test addDeviceToFleets
+        //instance.addDeviceToFleets(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
     describe("cloneProject", function () {
       it("should call cloneProject successfully", function (done) {
         //uncomment below and update the code to test cloneProject
@@ -84,10 +94,10 @@
         done();
       });
     });
-    describe("deleteDeviceFleets", function () {
-      it("should call deleteDeviceFleets successfully", function (done) {
-        //uncomment below and update the code to test deleteDeviceFleets
-        //instance.deleteDeviceFleets(function(error) {
+    describe("deleteDeviceFromFleets", function () {
+      it("should call deleteDeviceFromFleets successfully", function (done) {
+        //uncomment below and update the code to test deleteDeviceFromFleets
+        //instance.deleteDeviceFromFleets(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});
@@ -144,30 +154,20 @@
         done();
       });
     });
-    describe("dfuAction", function () {
-      it("should call dfuAction successfully", function (done) {
-        //uncomment below and update the code to test dfuAction
-        //instance.dfuAction(function(error) {
+    describe("disableGlobalEventTransformation", function () {
+      it("should call disableGlobalEventTransformation successfully", function (done) {
+        //uncomment below and update the code to test disableGlobalEventTransformation
+        //instance.disableGlobalEventTransformation(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});
         done();
       });
     });
-    describe("disableGlobalTransformation", function () {
-      it("should call disableGlobalTransformation successfully", function (done) {
-        //uncomment below and update the code to test disableGlobalTransformation
-        //instance.disableGlobalTransformation(function(error) {
-        //  if (error) throw error;
-        //expect().to.be();
-        //});
-        done();
-      });
-    });
-    describe("enableGlobalTransformation", function () {
-      it("should call enableGlobalTransformation successfully", function (done) {
-        //uncomment below and update the code to test enableGlobalTransformation
-        //instance.enableGlobalTransformation(function(error) {
+    describe("enableGlobalEventTransformation", function () {
+      it("should call enableGlobalEventTransformation successfully", function (done) {
+        //uncomment below and update the code to test enableGlobalEventTransformation
+        //instance.enableGlobalEventTransformation(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});
@@ -264,6 +264,16 @@
         done();
       });
     });
+    describe("getFleets", function () {
+      it("should call getFleets successfully", function (done) {
+        //uncomment below and update the code to test getFleets
+        //instance.getFleets(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
     describe("getNotefileSchemas", function () {
       it("should call getNotefileSchemas successfully", function (done) {
         //uncomment below and update the code to test getNotefileSchemas
@@ -324,16 +334,6 @@
         done();
       });
     });
-    describe("getProjectFleets", function () {
-      it("should call getProjectFleets successfully", function (done) {
-        //uncomment below and update the code to test getProjectFleets
-        //instance.getProjectFleets(function(error) {
-        //  if (error) throw error;
-        //expect().to.be();
-        //});
-        done();
-      });
-    });
     describe("getProjectMembers", function () {
       it("should call getProjectMembers successfully", function (done) {
         //uncomment below and update the code to test getProjectMembers
@@ -354,40 +354,40 @@
         done();
       });
     });
-    describe("putDeviceFleets", function () {
-      it("should call putDeviceFleets successfully", function (done) {
-        //uncomment below and update the code to test putDeviceFleets
-        //instance.putDeviceFleets(function(error) {
+    describe("performDfuAction", function () {
+      it("should call performDfuAction successfully", function (done) {
+        //uncomment below and update the code to test performDfuAction
+        //instance.performDfuAction(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});
         done();
       });
     });
-    describe("putFleetEnvironmentVariables", function () {
-      it("should call putFleetEnvironmentVariables successfully", function (done) {
-        //uncomment below and update the code to test putFleetEnvironmentVariables
-        //instance.putFleetEnvironmentVariables(function(error) {
+    describe("setFleetEnvironmentVariables", function () {
+      it("should call setFleetEnvironmentVariables successfully", function (done) {
+        //uncomment below and update the code to test setFleetEnvironmentVariables
+        //instance.setFleetEnvironmentVariables(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});
         done();
       });
     });
-    describe("putProjectEnvironmentVariables", function () {
-      it("should call putProjectEnvironmentVariables successfully", function (done) {
-        //uncomment below and update the code to test putProjectEnvironmentVariables
-        //instance.putProjectEnvironmentVariables(function(error) {
+    describe("setGlobalEventTransformation", function () {
+      it("should call setGlobalEventTransformation successfully", function (done) {
+        //uncomment below and update the code to test setGlobalEventTransformation
+        //instance.setGlobalEventTransformation(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});
         done();
       });
     });
-    describe("setGlobalTransformation", function () {
-      it("should call setGlobalTransformation successfully", function (done) {
-        //uncomment below and update the code to test setGlobalTransformation
-        //instance.setGlobalTransformation(function(error) {
+    describe("setProjectEnvironmentVariables", function () {
+      it("should call setProjectEnvironmentVariables successfully", function (done) {
+        //uncomment below and update the code to test setProjectEnvironmentVariables
+        //instance.setProjectEnvironmentVariables(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});

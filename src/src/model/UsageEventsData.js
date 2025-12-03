@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The UsageEventsData model module.
  * @module model/UsageEventsData
- * @version 2.3.0
+ * @version 3.0.0
  */
 class UsageEventsData {
   /**
@@ -65,6 +65,11 @@ class UsageEventsData {
       }
       if (data.hasOwnProperty("fleet")) {
         obj["fleet"] = ApiClient.convertToType(data["fleet"], "String");
+      }
+      if (data.hasOwnProperty("notefiles")) {
+        obj["notefiles"] = ApiClient.convertToType(data["notefiles"], {
+          String: "Number",
+        });
       }
       if (data.hasOwnProperty("period")) {
         obj["period"] = ApiClient.convertToType(data["period"], "Date");
@@ -151,6 +156,12 @@ UsageEventsData.prototype["device"] = undefined;
  * @member {String} fleet
  */
 UsageEventsData.prototype["fleet"] = undefined;
+
+/**
+ * Count of events per notefile. Only present when includeNotefiles=true is specified.
+ * @member {Object.<String, Number>} notefiles
+ */
+UsageEventsData.prototype["notefiles"] = undefined;
 
 /**
  * @member {Date} period

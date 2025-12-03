@@ -12,6 +12,7 @@
  */
 
 import ApiClient from "./ApiClient";
+import AddDeviceToFleetsRequest from "./model/AddDeviceToFleetsRequest";
 import Alert from "./model/Alert";
 import AlertDataInner from "./model/AlertDataInner";
 import AlertNotificationsInner from "./model/AlertNotificationsInner";
@@ -36,7 +37,8 @@ import DataField from "./model/DataField";
 import DataSetField from "./model/DataSetField";
 import DataUsage from "./model/DataUsage";
 import DatacakeRoute from "./model/DatacakeRoute";
-import DeleteDeviceFleetsRequest from "./model/DeleteDeviceFleetsRequest";
+import DeleteDeviceFromFleetsRequest from "./model/DeleteDeviceFromFleetsRequest";
+import DeleteNotefilesRequest from "./model/DeleteNotefilesRequest";
 import Device from "./model/Device";
 import DeviceDfuHistory from "./model/DeviceDfuHistory";
 import DeviceDfuHistoryCurrent from "./model/DeviceDfuHistoryCurrent";
@@ -64,32 +66,30 @@ import GetAlerts200Response from "./model/GetAlerts200Response";
 import GetBillingAccounts200Response from "./model/GetBillingAccounts200Response";
 import GetDataUsage200Response from "./model/GetDataUsage200Response";
 import GetDataUsage200ResponseDataInner from "./model/GetDataUsage200ResponseDataInner";
+import GetDbNote200Response from "./model/GetDbNote200Response";
 import GetDeviceEnvironmentVariablesByPin200Response from "./model/GetDeviceEnvironmentVariablesByPin200Response";
 import GetDeviceFleets200Response from "./model/GetDeviceFleets200Response";
 import GetDeviceHealthLog200Response from "./model/GetDeviceHealthLog200Response";
 import GetDeviceHealthLog200ResponseHealthLogInner from "./model/GetDeviceHealthLog200ResponseHealthLogInner";
-import GetDeviceLatest200Response from "./model/GetDeviceLatest200Response";
+import GetDeviceLatestEvents200Response from "./model/GetDeviceLatestEvents200Response";
 import GetDevicePlans200Response from "./model/GetDevicePlans200Response";
 import GetDevicePublicKey200Response from "./model/GetDevicePublicKey200Response";
+import GetDevicePublicKeys200Response from "./model/GetDevicePublicKeys200Response";
+import GetDevicePublicKeys200ResponseDevicePublicKeysInner from "./model/GetDevicePublicKeys200ResponseDevicePublicKeysInner";
 import GetDeviceSessions200Response from "./model/GetDeviceSessions200Response";
+import GetDevices200Response from "./model/GetDevices200Response";
+import GetEvents200Response from "./model/GetEvents200Response";
+import GetEventsByCursor200Response from "./model/GetEventsByCursor200Response";
+import GetNotefile200Response from "./model/GetNotefile200Response";
 import GetProducts200Response from "./model/GetProducts200Response";
-import GetProjectDevicePublicKeys200Response from "./model/GetProjectDevicePublicKeys200Response";
-import GetProjectDevicePublicKeys200ResponseDevicePublicKeysInner from "./model/GetProjectDevicePublicKeys200ResponseDevicePublicKeysInner";
-import GetProjectDevices200Response from "./model/GetProjectDevices200Response";
-import GetProjectEvents200Response from "./model/GetProjectEvents200Response";
-import GetProjectEventsByCursor200Response from "./model/GetProjectEventsByCursor200Response";
 import GetProjectMembers200Response from "./model/GetProjectMembers200Response";
 import GetProjects200Response from "./model/GetProjects200Response";
 import GetSessionsUsage200Response from "./model/GetSessionsUsage200Response";
 import GetWebhooks200Response from "./model/GetWebhooks200Response";
 import GoogleRoute from "./model/GoogleRoute";
-import HandleNoteChanges200Response from "./model/HandleNoteChanges200Response";
-import HandleNoteGet200Response from "./model/HandleNoteGet200Response";
-import HandleNoteSignal200Response from "./model/HandleNoteSignal200Response";
-import HandleNotefileChanges200Response from "./model/HandleNotefileChanges200Response";
-import HandleNotefileChangesPending200Response from "./model/HandleNotefileChangesPending200Response";
-import HandleNotefileDeleteRequest from "./model/HandleNotefileDeleteRequest";
 import HttpRoute from "./model/HttpRoute";
+import ListNotefiles200Response from "./model/ListNotefiles200Response";
+import ListPendingNotefiles200Response from "./model/ListPendingNotefiles200Response";
 import Location from "./model/Location";
 import Login200Response from "./model/Login200Response";
 import LoginRequest from "./model/LoginRequest";
@@ -106,12 +106,11 @@ import PersonalAccessToken from "./model/PersonalAccessToken";
 import PersonalAccessTokenCreatedBy from "./model/PersonalAccessTokenCreatedBy";
 import PersonalAccessTokenInfo from "./model/PersonalAccessTokenInfo";
 import PersonalAccessTokenSecret from "./model/PersonalAccessTokenSecret";
-import PostProvisionProjectDeviceRequest from "./model/PostProvisionProjectDeviceRequest";
 import Product from "./model/Product";
 import Project from "./model/Project";
 import ProjectMember from "./model/ProjectMember";
+import ProvisionDeviceRequest from "./model/ProvisionDeviceRequest";
 import ProxyRoute from "./model/ProxyRoute";
-import PutDeviceFleetsRequest from "./model/PutDeviceFleetsRequest";
 import QubitroRoute from "./model/QubitroRoute";
 import RadRoute from "./model/RadRoute";
 import Repository from "./model/Repository";
@@ -121,11 +120,13 @@ import RouteTransformSettings from "./model/RouteTransformSettings";
 import S3ArchiveRoute from "./model/S3ArchiveRoute";
 import SatellitePlan from "./model/SatellitePlan";
 import SchemaProperty from "./model/SchemaProperty";
+import SignalDevice200Response from "./model/SignalDevice200Response";
 import SimUsage from "./model/SimUsage";
 import SlackBearerNotification from "./model/SlackBearerNotification";
 import SlackRoute from "./model/SlackRoute";
 import SlackWebHookNotification from "./model/SlackWebHookNotification";
 import SnowflakeRoute from "./model/SnowflakeRoute";
+import SnowpipeStreamingRoute from "./model/SnowpipeStreamingRoute";
 import ThingworxRoute from "./model/ThingworxRoute";
 import TowerLocation from "./model/TowerLocation";
 import TwilioRoute from "./model/TwilioRoute";
@@ -181,7 +182,7 @@ import WebhookApi from "./api/WebhookApi";
  * </pre>
  * </p>
  * @module index
- * @version 2.3.0
+ * @version 3.0.0
  */
 export {
   /**
@@ -189,6 +190,12 @@ export {
    * @property {module:ApiClient}
    */
   ApiClient,
+
+  /**
+   * The AddDeviceToFleetsRequest model constructor.
+   * @property {module:model/AddDeviceToFleetsRequest}
+   */
+  AddDeviceToFleetsRequest,
 
   /**
    * The Alert model constructor.
@@ -335,10 +342,16 @@ export {
   DatacakeRoute,
 
   /**
-   * The DeleteDeviceFleetsRequest model constructor.
-   * @property {module:model/DeleteDeviceFleetsRequest}
+   * The DeleteDeviceFromFleetsRequest model constructor.
+   * @property {module:model/DeleteDeviceFromFleetsRequest}
    */
-  DeleteDeviceFleetsRequest,
+  DeleteDeviceFromFleetsRequest,
+
+  /**
+   * The DeleteNotefilesRequest model constructor.
+   * @property {module:model/DeleteNotefilesRequest}
+   */
+  DeleteNotefilesRequest,
 
   /**
    * The Device model constructor.
@@ -503,6 +516,12 @@ export {
   GetDataUsage200ResponseDataInner,
 
   /**
+   * The GetDbNote200Response model constructor.
+   * @property {module:model/GetDbNote200Response}
+   */
+  GetDbNote200Response,
+
+  /**
    * The GetDeviceEnvironmentVariablesByPin200Response model constructor.
    * @property {module:model/GetDeviceEnvironmentVariablesByPin200Response}
    */
@@ -527,10 +546,10 @@ export {
   GetDeviceHealthLog200ResponseHealthLogInner,
 
   /**
-   * The GetDeviceLatest200Response model constructor.
-   * @property {module:model/GetDeviceLatest200Response}
+   * The GetDeviceLatestEvents200Response model constructor.
+   * @property {module:model/GetDeviceLatestEvents200Response}
    */
-  GetDeviceLatest200Response,
+  GetDeviceLatestEvents200Response,
 
   /**
    * The GetDevicePlans200Response model constructor.
@@ -545,46 +564,52 @@ export {
   GetDevicePublicKey200Response,
 
   /**
+   * The GetDevicePublicKeys200Response model constructor.
+   * @property {module:model/GetDevicePublicKeys200Response}
+   */
+  GetDevicePublicKeys200Response,
+
+  /**
+   * The GetDevicePublicKeys200ResponseDevicePublicKeysInner model constructor.
+   * @property {module:model/GetDevicePublicKeys200ResponseDevicePublicKeysInner}
+   */
+  GetDevicePublicKeys200ResponseDevicePublicKeysInner,
+
+  /**
    * The GetDeviceSessions200Response model constructor.
    * @property {module:model/GetDeviceSessions200Response}
    */
   GetDeviceSessions200Response,
 
   /**
+   * The GetDevices200Response model constructor.
+   * @property {module:model/GetDevices200Response}
+   */
+  GetDevices200Response,
+
+  /**
+   * The GetEvents200Response model constructor.
+   * @property {module:model/GetEvents200Response}
+   */
+  GetEvents200Response,
+
+  /**
+   * The GetEventsByCursor200Response model constructor.
+   * @property {module:model/GetEventsByCursor200Response}
+   */
+  GetEventsByCursor200Response,
+
+  /**
+   * The GetNotefile200Response model constructor.
+   * @property {module:model/GetNotefile200Response}
+   */
+  GetNotefile200Response,
+
+  /**
    * The GetProducts200Response model constructor.
    * @property {module:model/GetProducts200Response}
    */
   GetProducts200Response,
-
-  /**
-   * The GetProjectDevicePublicKeys200Response model constructor.
-   * @property {module:model/GetProjectDevicePublicKeys200Response}
-   */
-  GetProjectDevicePublicKeys200Response,
-
-  /**
-   * The GetProjectDevicePublicKeys200ResponseDevicePublicKeysInner model constructor.
-   * @property {module:model/GetProjectDevicePublicKeys200ResponseDevicePublicKeysInner}
-   */
-  GetProjectDevicePublicKeys200ResponseDevicePublicKeysInner,
-
-  /**
-   * The GetProjectDevices200Response model constructor.
-   * @property {module:model/GetProjectDevices200Response}
-   */
-  GetProjectDevices200Response,
-
-  /**
-   * The GetProjectEvents200Response model constructor.
-   * @property {module:model/GetProjectEvents200Response}
-   */
-  GetProjectEvents200Response,
-
-  /**
-   * The GetProjectEventsByCursor200Response model constructor.
-   * @property {module:model/GetProjectEventsByCursor200Response}
-   */
-  GetProjectEventsByCursor200Response,
 
   /**
    * The GetProjectMembers200Response model constructor.
@@ -617,46 +642,22 @@ export {
   GoogleRoute,
 
   /**
-   * The HandleNoteChanges200Response model constructor.
-   * @property {module:model/HandleNoteChanges200Response}
-   */
-  HandleNoteChanges200Response,
-
-  /**
-   * The HandleNoteGet200Response model constructor.
-   * @property {module:model/HandleNoteGet200Response}
-   */
-  HandleNoteGet200Response,
-
-  /**
-   * The HandleNoteSignal200Response model constructor.
-   * @property {module:model/HandleNoteSignal200Response}
-   */
-  HandleNoteSignal200Response,
-
-  /**
-   * The HandleNotefileChanges200Response model constructor.
-   * @property {module:model/HandleNotefileChanges200Response}
-   */
-  HandleNotefileChanges200Response,
-
-  /**
-   * The HandleNotefileChangesPending200Response model constructor.
-   * @property {module:model/HandleNotefileChangesPending200Response}
-   */
-  HandleNotefileChangesPending200Response,
-
-  /**
-   * The HandleNotefileDeleteRequest model constructor.
-   * @property {module:model/HandleNotefileDeleteRequest}
-   */
-  HandleNotefileDeleteRequest,
-
-  /**
    * The HttpRoute model constructor.
    * @property {module:model/HttpRoute}
    */
   HttpRoute,
+
+  /**
+   * The ListNotefiles200Response model constructor.
+   * @property {module:model/ListNotefiles200Response}
+   */
+  ListNotefiles200Response,
+
+  /**
+   * The ListPendingNotefiles200Response model constructor.
+   * @property {module:model/ListPendingNotefiles200Response}
+   */
+  ListPendingNotefiles200Response,
 
   /**
    * The Location model constructor.
@@ -755,12 +756,6 @@ export {
   PersonalAccessTokenSecret,
 
   /**
-   * The PostProvisionProjectDeviceRequest model constructor.
-   * @property {module:model/PostProvisionProjectDeviceRequest}
-   */
-  PostProvisionProjectDeviceRequest,
-
-  /**
    * The Product model constructor.
    * @property {module:model/Product}
    */
@@ -779,16 +774,16 @@ export {
   ProjectMember,
 
   /**
+   * The ProvisionDeviceRequest model constructor.
+   * @property {module:model/ProvisionDeviceRequest}
+   */
+  ProvisionDeviceRequest,
+
+  /**
    * The ProxyRoute model constructor.
    * @property {module:model/ProxyRoute}
    */
   ProxyRoute,
-
-  /**
-   * The PutDeviceFleetsRequest model constructor.
-   * @property {module:model/PutDeviceFleetsRequest}
-   */
-  PutDeviceFleetsRequest,
 
   /**
    * The QubitroRoute model constructor.
@@ -845,6 +840,12 @@ export {
   SchemaProperty,
 
   /**
+   * The SignalDevice200Response model constructor.
+   * @property {module:model/SignalDevice200Response}
+   */
+  SignalDevice200Response,
+
+  /**
    * The SimUsage model constructor.
    * @property {module:model/SimUsage}
    */
@@ -873,6 +874,12 @@ export {
    * @property {module:model/SnowflakeRoute}
    */
   SnowflakeRoute,
+
+  /**
+   * The SnowpipeStreamingRoute model constructor.
+   * @property {module:model/SnowpipeStreamingRoute}
+   */
+  SnowpipeStreamingRoute,
 
   /**
    * The ThingworxRoute model constructor.
