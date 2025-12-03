@@ -32,7 +32,7 @@ import TwilioRoute from "./TwilioRoute";
 /**
  * The NotehubRoute model module.
  * @module model/NotehubRoute
- * @version 2.3.0
+ * @version 3.0.0
  */
 class NotehubRoute {
   /**
