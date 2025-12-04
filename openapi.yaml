@@ -3722,6 +3722,8 @@ components:
     Device:
       type: object
       properties:
+        best_location:
+          $ref: '#/components/schemas/Location'
         cellular_usage:
           $ref: '#/components/schemas/CellularUsage'
         contact:
