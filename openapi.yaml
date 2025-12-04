@@ -4514,11 +4514,10 @@ components:
         enabled:
           description: Whether Connectivity Assurance is enabled for this fleet
           type: boolean
+          nullable: true
       example:
         enabled: true
       nullable: true
-      required:
-        - enabled
     FleetRule:
       description: 'JSONata expression that will be evaluated to determine device membership into this fleet, if the expression evaluates to a 1, the device will be included, if it evaluates to -1 it will be removed, and if it evaluates to 0 or errors it will be left unchanged.'
       type: string
@@ -5509,6 +5508,10 @@ components:
           type: integer
           format: int64
           example: 15
+        total_devices:
+          description: Total devices represented in this count
+          type: integer
+          format: int64
         total_events:
           description: 'Total events the device sent to notehub, including associated notehub generated events'
           type: integer
@@ -5524,6 +5527,7 @@ components:
         - total_events
         - platform_events
         - watchdog_events
+        - total_devices
     UsageEventsResponse:
       type: object
       properties:
@@ -5582,10 +5586,15 @@ components:
           type: integer
           format: int64
           example: 1048576
+        total_devices:
+          type: integer
+          format: int64
+          example: 1
       required:
         - period
         - sessions
         - total_bytes
+        - total_devices
     UserDfuStateMachine:
       type: object
       properties:
