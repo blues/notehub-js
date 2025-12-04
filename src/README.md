@@ -135,9 +135,9 @@ All URIs are relative to *https://api.notefile.net*
 | _NotehubJs.BillingAccountApi_  | [**getBillingAccounts**](docs/BillingAccountApi.md#getBillingAccounts)                         | **GET** /v1/billing-accounts                                                                   |
 | _NotehubJs.DeviceApi_          | [**addDbNote**](docs/DeviceApi.md#addDbNote)                                                   | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}    |
 | _NotehubJs.DeviceApi_          | [**addQiNote**](docs/DeviceApi.md#addQiNote)                                                   | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}             |
-| _NotehubJs.DeviceApi_          | [**deleteDbNote**](docs/DeviceApi.md#deleteDbNote)                                             | **DELETE** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}  |
 | _NotehubJs.DeviceApi_          | [**deleteDevice**](docs/DeviceApi.md#deleteDevice)                                             | **DELETE** /v1/projects/{projectOrProductUID}/devices/{deviceUID}                              |
 | _NotehubJs.DeviceApi_          | [**deleteDeviceEnvironmentVariable**](docs/DeviceApi.md#deleteDeviceEnvironmentVariable)       | **DELETE** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_variables/{key}  |
+| _NotehubJs.DeviceApi_          | [**deleteNote**](docs/DeviceApi.md#deleteNote)                                                 | **DELETE** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}  |
 | _NotehubJs.DeviceApi_          | [**deleteNotefiles**](docs/DeviceApi.md#deleteNotefiles)                                       | **DELETE** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/files                        |
 | _NotehubJs.DeviceApi_          | [**disableDevice**](docs/DeviceApi.md#disableDevice)                                           | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/disable                        |
 | _NotehubJs.DeviceApi_          | [**disableDeviceConnectivityAssurance**](docs/DeviceApi.md#disableDeviceConnectivityAssurance) | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/disable-connectivity-assurance |
@@ -156,9 +156,8 @@ All URIs are relative to *https://api.notefile.net*
 | _NotehubJs.DeviceApi_          | [**getDeviceSessions**](docs/DeviceApi.md#getDeviceSessions)                                   | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/sessions                        |
 | _NotehubJs.DeviceApi_          | [**getDevices**](docs/DeviceApi.md#getDevices)                                                 | **GET** /v1/projects/{projectOrProductUID}/devices                                             |
 | _NotehubJs.DeviceApi_          | [**getFleetDevices**](docs/DeviceApi.md#getFleetDevices)                                       | **GET** /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/devices                           |
-| _NotehubJs.DeviceApi_          | [**getNotefile**](docs/DeviceApi.md#getNotefile)                                               | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/changes      |
-| _NotehubJs.DeviceApi_          | [**listNotefiles**](docs/DeviceApi.md#listNotefiles)                                           | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/files/changes                   |
-| _NotehubJs.DeviceApi_          | [**listPendingNotefiles**](docs/DeviceApi.md#listPendingNotefiles)                             | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/files/changes/pending           |
+| _NotehubJs.DeviceApi_          | [**getNotefile**](docs/DeviceApi.md#getNotefile)                                               | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}              |
+| _NotehubJs.DeviceApi_          | [**listNotefiles**](docs/DeviceApi.md#listNotefiles)                                           | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/files                           |
 | _NotehubJs.DeviceApi_          | [**provisionDevice**](docs/DeviceApi.md#provisionDevice)                                       | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/provision                      |
 | _NotehubJs.DeviceApi_          | [**setDeviceEnvironmentVariables**](docs/DeviceApi.md#setDeviceEnvironmentVariables)           | **PUT** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_variables           |
 | _NotehubJs.DeviceApi_          | [**setDeviceEnvironmentVariablesByPin**](docs/DeviceApi.md#setDeviceEnvironmentVariablesByPin) | **PUT** /v1/products/{productUID}/devices/{deviceUID}/environment_variables_with_pin           |
@@ -307,8 +306,6 @@ All URIs are relative to *https://api.notefile.net*
 - [NotehubJs.GetWebhooks200Response](docs/GetWebhooks200Response.md)
 - [NotehubJs.GoogleRoute](docs/GoogleRoute.md)
 - [NotehubJs.HttpRoute](docs/HttpRoute.md)
-- [NotehubJs.ListNotefiles200Response](docs/ListNotefiles200Response.md)
-- [NotehubJs.ListPendingNotefiles200Response](docs/ListPendingNotefiles200Response.md)
 - [NotehubJs.Location](docs/Location.md)
 - [NotehubJs.Login200Response](docs/Login200Response.md)
 - [NotehubJs.LoginRequest](docs/LoginRequest.md)
@@ -316,6 +313,8 @@ All URIs are relative to *https://api.notefile.net*
 - [NotehubJs.MonitorAlertRoutesInner](docs/MonitorAlertRoutesInner.md)
 - [NotehubJs.MqttRoute](docs/MqttRoute.md)
 - [NotehubJs.Note](docs/Note.md)
+- [NotehubJs.NoteInput](docs/NoteInput.md)
+- [NotehubJs.Notefile](docs/Notefile.md)
 - [NotehubJs.NotefileSchema](docs/NotefileSchema.md)
 - [NotehubJs.NotehubRoute](docs/NotehubRoute.md)
 - [NotehubJs.NotehubRouteSummary](docs/NotehubRouteSummary.md)

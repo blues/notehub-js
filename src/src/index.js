@@ -88,8 +88,6 @@ import GetSessionsUsage200Response from "./model/GetSessionsUsage200Response";
 import GetWebhooks200Response from "./model/GetWebhooks200Response";
 import GoogleRoute from "./model/GoogleRoute";
 import HttpRoute from "./model/HttpRoute";
-import ListNotefiles200Response from "./model/ListNotefiles200Response";
-import ListPendingNotefiles200Response from "./model/ListPendingNotefiles200Response";
 import Location from "./model/Location";
 import Login200Response from "./model/Login200Response";
 import LoginRequest from "./model/LoginRequest";
@@ -97,6 +95,8 @@ import Monitor from "./model/Monitor";
 import MonitorAlertRoutesInner from "./model/MonitorAlertRoutesInner";
 import MqttRoute from "./model/MqttRoute";
 import Note from "./model/Note";
+import NoteInput from "./model/NoteInput";
+import Notefile from "./model/Notefile";
 import NotefileSchema from "./model/NotefileSchema";
 import NotehubRoute from "./model/NotehubRoute";
 import NotehubRouteSummary from "./model/NotehubRouteSummary";
@@ -648,18 +648,6 @@ export {
   HttpRoute,
 
   /**
-   * The ListNotefiles200Response model constructor.
-   * @property {module:model/ListNotefiles200Response}
-   */
-  ListNotefiles200Response,
-
-  /**
-   * The ListPendingNotefiles200Response model constructor.
-   * @property {module:model/ListPendingNotefiles200Response}
-   */
-  ListPendingNotefiles200Response,
-
-  /**
    * The Location model constructor.
    * @property {module:model/Location}
    */
@@ -700,6 +688,18 @@ export {
    * @property {module:model/Note}
    */
   Note,
+
+  /**
+   * The NoteInput model constructor.
+   * @property {module:model/NoteInput}
+   */
+  NoteInput,
+
+  /**
+   * The Notefile model constructor.
+   * @property {module:model/Notefile}
+   */
+  Notefile,
 
   /**
    * The NotefileSchema model constructor.

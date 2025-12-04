@@ -56,8 +56,38 @@
       //expect(instance).to.be();
     });
 
+    it('should have the property edge (base name: "edge")', function () {
+      // uncomment below and update the code to test the property edge
+      //var instance = new NotehubJs.Note();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property id (base name: "id")', function () {
+      // uncomment below and update the code to test the property id
+      //var instance = new NotehubJs.Note();
+      //expect(instance).to.be();
+    });
+
     it('should have the property payload (base name: "payload")', function () {
       // uncomment below and update the code to test the property payload
+      //var instance = new NotehubJs.Note();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property pending (base name: "pending")', function () {
+      // uncomment below and update the code to test the property pending
+      //var instance = new NotehubJs.Note();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property time (base name: "time")', function () {
+      // uncomment below and update the code to test the property time
+      //var instance = new NotehubJs.Note();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property where (base name: "where")', function () {
+      // uncomment below and update the code to test the property where
       //var instance = new NotehubJs.Note();
       //expect(instance).to.be();
     });

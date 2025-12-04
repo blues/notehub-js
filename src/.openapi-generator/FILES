@@ -85,8 +85,6 @@ docs/GetSessionsUsage200Response.md
 docs/GetWebhooks200Response.md
 docs/GoogleRoute.md
 docs/HttpRoute.md
-docs/ListNotefiles200Response.md
-docs/ListPendingNotefiles200Response.md
 docs/Location.md
 docs/Login200Response.md
 docs/LoginRequest.md
@@ -95,6 +93,8 @@ docs/MonitorAlertRoutesInner.md
 docs/MonitorApi.md
 docs/MqttRoute.md
 docs/Note.md
+docs/NoteInput.md
+docs/Notefile.md
 docs/NotefileSchema.md
 docs/NotehubRoute.md
 docs/NotehubRouteSummary.md
@@ -235,8 +235,6 @@ src/model/GetSessionsUsage200Response.js
 src/model/GetWebhooks200Response.js
 src/model/GoogleRoute.js
 src/model/HttpRoute.js
-src/model/ListNotefiles200Response.js
-src/model/ListPendingNotefiles200Response.js
 src/model/Location.js
 src/model/Login200Response.js
 src/model/LoginRequest.js
@@ -244,6 +242,8 @@ src/model/Monitor.js
 src/model/MonitorAlertRoutesInner.js
 src/model/MqttRoute.js
 src/model/Note.js
+src/model/NoteInput.js
+src/model/Notefile.js
 src/model/NotefileSchema.js
 src/model/NotehubRoute.js
 src/model/NotehubRouteSummary.js
@@ -375,8 +375,6 @@ test/model/GetSessionsUsage200Response.spec.js
 test/model/GetWebhooks200Response.spec.js
 test/model/GoogleRoute.spec.js
 test/model/HttpRoute.spec.js
-test/model/ListNotefiles200Response.spec.js
-test/model/ListPendingNotefiles200Response.spec.js
 test/model/Location.spec.js
 test/model/Login200Response.spec.js
 test/model/LoginRequest.spec.js
@@ -384,6 +382,8 @@ test/model/Monitor.spec.js
 test/model/MonitorAlertRoutesInner.spec.js
 test/model/MqttRoute.spec.js
 test/model/Note.spec.js
+test/model/NoteInput.spec.js
+test/model/Notefile.spec.js
 test/model/NotefileSchema.spec.js
 test/model/NotehubRoute.spec.js
 test/model/NotehubRouteSummary.spec.js

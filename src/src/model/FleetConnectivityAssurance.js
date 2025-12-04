@@ -22,10 +22,9 @@ class FleetConnectivityAssurance {
   /**
    * Constructs a new <code>FleetConnectivityAssurance</code>.
    * @alias module:model/FleetConnectivityAssurance
-   * @param enabled {Boolean} Whether Connectivity Assurance is enabled for this fleet
    */
-  constructor(enabled) {
-    FleetConnectivityAssurance.initialize(this, enabled);
+  constructor() {
+    FleetConnectivityAssurance.initialize(this);
   }
 
   /**
@@ -33,9 +32,7 @@ class FleetConnectivityAssurance {
    * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
    * Only for internal use.
    */
-  static initialize(obj, enabled) {
-    obj["enabled"] = enabled;
-  }
+  static initialize(obj) {}
 
   /**
    * Constructs a <code>FleetConnectivityAssurance</code> from a plain JavaScript object, optionally creating a new instance.
@@ -63,23 +60,9 @@ class FleetConnectivityAssurance {
    * @return {boolean} to indicate whether the JSON data is valid with respect to <code>FleetConnectivityAssurance</code>.
    */
   static validateJSON(data) {
-    // check to make sure all required properties are present in the JSON string
-    for (const property of FleetConnectivityAssurance.RequiredProperties) {
-      if (!data[property]) {
-        throw new Error(
-          "The required field `" +
-            property +
-            "` is not found in the JSON data: " +
-            JSON.stringify(data)
-        );
-      }
-    }
-
     return true;
   }
 }
-
-FleetConnectivityAssurance.RequiredProperties = ["enabled"];
 
 /**
  * Whether Connectivity Assurance is enabled for this fleet

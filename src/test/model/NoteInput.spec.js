@@ -28,7 +28,7 @@
   var instance;
 
   beforeEach(function () {
-    instance = new NotehubJs.ListPendingNotefiles200Response();
+    instance = new NotehubJs.NoteInput();
   });
 
   var getProperty = function (object, getter, property) {
@@ -43,34 +43,22 @@
     else object[property] = value;
   };
 
-  describe("ListPendingNotefiles200Response", function () {
-    it("should create an instance of ListPendingNotefiles200Response", function () {
-      // uncomment below and update the code to test ListPendingNotefiles200Response
-      //var instance = new NotehubJs.ListPendingNotefiles200Response();
-      //expect(instance).to.be.a(NotehubJs.ListPendingNotefiles200Response);
+  describe("NoteInput", function () {
+    it("should create an instance of NoteInput", function () {
+      // uncomment below and update the code to test NoteInput
+      //var instance = new NotehubJs.NoteInput();
+      //expect(instance).to.be.a(NotehubJs.NoteInput);
     });
 
-    it('should have the property changes (base name: "changes")', function () {
-      // uncomment below and update the code to test the property changes
-      //var instance = new NotehubJs.ListPendingNotefiles200Response();
+    it('should have the property body (base name: "body")', function () {
+      // uncomment below and update the code to test the property body
+      //var instance = new NotehubJs.NoteInput();
       //expect(instance).to.be();
     });
 
-    it('should have the property info (base name: "info")', function () {
-      // uncomment below and update the code to test the property info
-      //var instance = new NotehubJs.ListPendingNotefiles200Response();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property pending (base name: "pending")', function () {
-      // uncomment below and update the code to test the property pending
-      //var instance = new NotehubJs.ListPendingNotefiles200Response();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property total (base name: "total")', function () {
-      // uncomment below and update the code to test the property total
-      //var instance = new NotehubJs.ListPendingNotefiles200Response();
+    it('should have the property payload (base name: "payload")', function () {
+      // uncomment below and update the code to test the property payload
+      //var instance = new NotehubJs.NoteInput();
       //expect(instance).to.be();
     });
   });
