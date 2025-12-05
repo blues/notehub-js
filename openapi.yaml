@@ -3722,6 +3722,8 @@ components:
     Device:
       type: object
       properties:
+        best_location:
+          $ref: '#/components/schemas/Location'
         cellular_usage:
           $ref: '#/components/schemas/CellularUsage'
         contact:
@@ -4514,11 +4516,10 @@ components:
         enabled:
           description: Whether Connectivity Assurance is enabled for this fleet
           type: boolean
+          nullable: true
       example:
         enabled: true
       nullable: true
-      required:
-        - enabled
     FleetRule:
       description: 'JSONata expression that will be evaluated to determine device membership into this fleet, if the expression evaluates to a 1, the device will be included, if it evaluates to -1 it will be removed, and if it evaluates to 0 or errors it will be left unchanged.'
       type: string
