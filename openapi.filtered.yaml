@@ -5613,6 +5613,10 @@ components:
           type: integer
           format: int64
           example: 15
+        total_devices:
+          description: Total devices represented in this count
+          type: integer
+          format: int64
         total_events:
           description:
             Total events the device sent to notehub, including associated
@@ -5634,6 +5638,7 @@ components:
         - total_events
         - platform_events
         - watchdog_events
+        - total_devices
     UsageEventsResponse:
       type: object
       properties:
@@ -5692,10 +5697,15 @@ components:
           type: integer
           format: int64
           example: 1048576
+        total_devices:
+          type: integer
+          format: int64
+          example: 1
       required:
         - period
         - sessions
         - total_bytes
+        - total_devices
     UserDfuStateMachine:
       type: object
       properties:

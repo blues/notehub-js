@@ -79,5 +79,11 @@
       //var instance = new NotehubJs.UsageSessionsData();
       //expect(instance).to.be();
     });
+
+    it('should have the property totalDevices (base name: "total_devices")', function () {
+      // uncomment below and update the code to test the property totalDevices
+      //var instance = new NotehubJs.UsageSessionsData();
+      //expect(instance).to.be();
+    });
   });
 });

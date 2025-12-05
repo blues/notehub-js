@@ -25,9 +25,16 @@ class UsageSessionsData {
    * @param period {Date}
    * @param sessions {Number}
    * @param totalBytes {Number}
+   * @param totalDevices {Number}
    */
-  constructor(period, sessions, totalBytes) {
-    UsageSessionsData.initialize(this, period, sessions, totalBytes);
+  constructor(period, sessions, totalBytes, totalDevices) {
+    UsageSessionsData.initialize(
+      this,
+      period,
+      sessions,
+      totalBytes,
+      totalDevices
+    );
   }
 
   /**
@@ -35,10 +42,11 @@ class UsageSessionsData {
    * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
    * Only for internal use.
    */
-  static initialize(obj, period, sessions, totalBytes) {
+  static initialize(obj, period, sessions, totalBytes, totalDevices) {
     obj["period"] = period;
     obj["sessions"] = sessions;
     obj["total_bytes"] = totalBytes;
+    obj["total_devices"] = totalDevices;
   }
 
   /**
@@ -67,6 +75,12 @@ class UsageSessionsData {
       if (data.hasOwnProperty("total_bytes")) {
         obj["total_bytes"] = ApiClient.convertToType(
           data["total_bytes"],
+          "Number"
+        );
+      }
+      if (data.hasOwnProperty("total_devices")) {
+        obj["total_devices"] = ApiClient.convertToType(
+          data["total_devices"],
           "Number"
         );
       }
@@ -118,7 +132,12 @@ class UsageSessionsData {
   }
 }
 
-UsageSessionsData.RequiredProperties = ["period", "sessions", "total_bytes"];
+UsageSessionsData.RequiredProperties = [
+  "period",
+  "sessions",
+  "total_bytes",
+  "total_devices",
+];
 
 /**
  * @member {String} device
@@ -144,5 +163,10 @@ UsageSessionsData.prototype["sessions"] = undefined;
  * @member {Number} total_bytes
  */
 UsageSessionsData.prototype["total_bytes"] = undefined;
+
+/**
+ * @member {Number} total_devices
+ */
+UsageSessionsData.prototype["total_devices"] = undefined;
 
 export default UsageSessionsData;
