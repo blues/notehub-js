@@ -28,7 +28,7 @@
   var instance;
 
   beforeEach(function () {
-    instance = new NotehubJs.CreateFleetRequest();
+    instance = new NotehubJs.GetRouteLogsUsage200Response();
   });
 
   var getProperty = function (object, getter, property) {
@@ -43,34 +43,16 @@
     else object[property] = value;
   };
 
-  describe("CreateFleetRequest", function () {
-    it("should create an instance of CreateFleetRequest", function () {
-      // uncomment below and update the code to test CreateFleetRequest
-      //var instance = new NotehubJs.CreateFleetRequest();
-      //expect(instance).to.be.a(NotehubJs.CreateFleetRequest);
+  describe("GetRouteLogsUsage200Response", function () {
+    it("should create an instance of GetRouteLogsUsage200Response", function () {
+      // uncomment below and update the code to test GetRouteLogsUsage200Response
+      //var instance = new NotehubJs.GetRouteLogsUsage200Response();
+      //expect(instance).to.be.a(NotehubJs.GetRouteLogsUsage200Response);
     });
 
-    it('should have the property connectivityAssurance (base name: "connectivity_assurance")', function () {
-      // uncomment below and update the code to test the property connectivityAssurance
-      //var instance = new NotehubJs.CreateFleetRequest();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property label (base name: "label")', function () {
-      // uncomment below and update the code to test the property label
-      //var instance = new NotehubJs.CreateFleetRequest();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property smartRule (base name: "smart_rule")', function () {
-      // uncomment below and update the code to test the property smartRule
-      //var instance = new NotehubJs.CreateFleetRequest();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property smartRuleEnabled (base name: "smart_rule_enabled")', function () {
-      // uncomment below and update the code to test the property smartRuleEnabled
-      //var instance = new NotehubJs.CreateFleetRequest();
+    it('should have the property routeLogs (base name: "route_logs")', function () {
+      // uncomment below and update the code to test the property routeLogs
+      //var instance = new NotehubJs.GetRouteLogsUsage200Response();
       //expect(instance).to.be();
     });
   });

@@ -14,6 +14,7 @@
 import ApiClient from "../ApiClient";
 import Error from "../model/Error";
 import GetDataUsage200Response from "../model/GetDataUsage200Response";
+import GetRouteLogsUsage200Response from "../model/GetRouteLogsUsage200Response";
 import GetSessionsUsage200Response from "../model/GetSessionsUsage200Response";
 import UsageEventsResponse from "../model/UsageEventsResponse";
 
@@ -130,10 +131,8 @@ export default class UsageApi {
    * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
    * @param {Array.<String>} opts.deviceUID A Device UID.
    * @param {Array.<String>} opts.fleetUID Filter by Fleet UID
-   * @param {module:model/String} opts.aggregate Aggregation level for results (default to 'device')
+   * @param {Array.<module:model/String>} opts.aggregate Aggregation level for results
    * @param {Array.<String>} opts.notefile Filter to specific notefiles
-   * @param {Boolean} opts.skipRecentData When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects. (default to false)
-   * @param {Boolean} opts.includeNotefiles Include per-notefile event counts in the response (default to false)
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/UsageEventsResponse} and HTTP response
    */
   getEventsUsageWithHttpInfo(projectOrProductUID, period, opts) {
@@ -164,10 +163,11 @@ export default class UsageApi {
       ),
       fleetUID: this.apiClient.buildCollectionParam(opts["fleetUID"], "multi"),
       period: period,
-      aggregate: opts["aggregate"],
+      aggregate: this.apiClient.buildCollectionParam(
+        opts["aggregate"],
+        "multi"
+      ),
       notefile: this.apiClient.buildCollectionParam(opts["notefile"], "multi"),
-      skipRecentData: opts["skipRecentData"],
-      includeNotefiles: opts["includeNotefiles"],
     };
     let headerParams = {};
     let formParams = {};
@@ -201,14 +201,93 @@ export default class UsageApi {
    * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
    * @param {Array.<String>} opts.deviceUID A Device UID.
    * @param {Array.<String>} opts.fleetUID Filter by Fleet UID
-   * @param {module:model/String} opts.aggregate Aggregation level for results (default to 'device')
+   * @param {Array.<module:model/String>} opts.aggregate Aggregation level for results
    * @param {Array.<String>} opts.notefile Filter to specific notefiles
-   * @param {Boolean} opts.skipRecentData When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects. (default to false)
-   * @param {Boolean} opts.includeNotefiles Include per-notefile event counts in the response (default to false)
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/UsageEventsResponse}
    */
   getEventsUsage(projectOrProductUID, period, opts) {
     return this.getEventsUsageWithHttpInfo(
+      projectOrProductUID,
+      period,
+      opts
+    ).then(function (response_and_data) {
+      return response_and_data.data;
+    });
+  }
+
+  /**
+   * Get route logs usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied
+   * @param {String} projectOrProductUID
+   * @param {module:model/String} period Period type for aggregation
+   * @param {Object} opts Optional parameters
+   * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
+   * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
+   * @param {Array.<String>} opts.routeUID A Route UID.
+   * @param {module:model/String} opts.aggregate Aggregation level for results (default to 'route')
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetRouteLogsUsage200Response} and HTTP response
+   */
+  getRouteLogsUsageWithHttpInfo(projectOrProductUID, period, opts) {
+    opts = opts || {};
+    let postBody = null;
+    // verify the required parameter 'projectOrProductUID' is set
+    if (projectOrProductUID === undefined || projectOrProductUID === null) {
+      throw new Error(
+        "Missing the required parameter 'projectOrProductUID' when calling getRouteLogsUsage"
+      );
+    }
+    // verify the required parameter 'period' is set
+    if (period === undefined || period === null) {
+      throw new Error(
+        "Missing the required parameter 'period' when calling getRouteLogsUsage"
+      );
+    }
+
+    let pathParams = {
+      projectOrProductUID: projectOrProductUID,
+    };
+    let queryParams = {
+      startDate: opts["startDate"],
+      endDate: opts["endDate"],
+      routeUID: this.apiClient.buildCollectionParam(opts["routeUID"], "multi"),
+      period: period,
+      aggregate: opts["aggregate"],
+    };
+    let headerParams = {};
+    let formParams = {};
+
+    let authNames = ["personalAccessToken"];
+    let contentTypes = [];
+    let accepts = ["application/json"];
+    let returnType = GetRouteLogsUsage200Response;
+    return this.apiClient.callApi(
+      "/v1/projects/{projectOrProductUID}/usage/route-logs",
+      "GET",
+      pathParams,
+      queryParams,
+      headerParams,
+      formParams,
+      postBody,
+      authNames,
+      contentTypes,
+      accepts,
+      returnType,
+      null
+    );
+  }
+
+  /**
+   * Get route logs usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied
+   * @param {String} projectOrProductUID
+   * @param {module:model/String} period Period type for aggregation
+   * @param {Object} opts Optional parameters
+   * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
+   * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
+   * @param {Array.<String>} opts.routeUID A Route UID.
+   * @param {module:model/String} opts.aggregate Aggregation level for results (default to 'route')
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetRouteLogsUsage200Response}
+   */
+  getRouteLogsUsage(projectOrProductUID, period, opts) {
+    return this.getRouteLogsUsageWithHttpInfo(
       projectOrProductUID,
       period,
       opts
@@ -227,7 +306,6 @@ export default class UsageApi {
    * @param {Array.<String>} opts.deviceUID A Device UID.
    * @param {Array.<String>} opts.fleetUID Filter by Fleet UID
    * @param {module:model/String} opts.aggregate Aggregation level for results (default to 'device')
-   * @param {Boolean} opts.skipRecentData When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects. (default to false)
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetSessionsUsage200Response} and HTTP response
    */
   getSessionsUsageWithHttpInfo(projectOrProductUID, period, opts) {
@@ -259,7 +337,6 @@ export default class UsageApi {
       fleetUID: this.apiClient.buildCollectionParam(opts["fleetUID"], "multi"),
       period: period,
       aggregate: opts["aggregate"],
-      skipRecentData: opts["skipRecentData"],
     };
     let headerParams = {};
     let formParams = {};
@@ -294,7 +371,6 @@ export default class UsageApi {
    * @param {Array.<String>} opts.deviceUID A Device UID.
    * @param {Array.<String>} opts.fleetUID Filter by Fleet UID
    * @param {module:model/String} opts.aggregate Aggregation level for results (default to 'device')
-   * @param {Boolean} opts.skipRecentData When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects. (default to false)
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetSessionsUsage200Response}
    */
   getSessionsUsage(projectOrProductUID, period, opts) {

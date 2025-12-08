@@ -158,7 +158,7 @@ UsageEventsData.prototype["device"] = undefined;
 UsageEventsData.prototype["fleet"] = undefined;
 
 /**
- * Count of events per notefile. Only present when includeNotefiles=true is specified.
+ * Count of events per notefile. Only present when aggregate=notefile is specified.
  * @member {Object.<String, Number>} notefiles
  */
 UsageEventsData.prototype["notefiles"] = undefined;

@@ -1682,6 +1682,8 @@ paths:
                   type: string
                 smart_rule:
                   $ref: "#/components/schemas/FleetRule"
+                smart_rule_enabled:
+                  type: boolean
       responses:
         "201":
           description: Successful operation
@@ -1753,6 +1755,8 @@ paths:
                     type: string
                 smart_rule:
                   $ref: "#/components/schemas/FleetRule"
+                smart_rule_enabled:
+                  type: boolean
                 watchdog_mins:
                   description:
                     A watchdog timer is used to generate an event every N minutes of
@@ -2544,12 +2548,16 @@ paths:
           description: Aggregation level for results
           required: false
           schema:
-            type: string
-            default: device
-            enum:
-              - device
-              - fleet
-              - project
+            type: array
+            items:
+              enum:
+                - device
+                - fleet
+                - project
+                - notefile
+              type: string
+          explode: true
+          style: form
         - name: notefile
           in: query
           description: Filter to specific notefiles
@@ -2560,23 +2568,6 @@ paths:
               type: string
           explode: true
           style: form
-        - name: skipRecentData
-          in: query
-          description:
-            When true, skips fetching recent data from raw event tables and
-            only returns data from summary tables. Use this for better
-            performance on large projects.
-          required: false
-          schema:
-            type: boolean
-            default: false
-        - name: includeNotefiles
-          in: query
-          description: Include per-notefile event counts in the response
-          required: false
-          schema:
-            type: boolean
-            default: false
       responses:
         "200":
           description: Successful operation
@@ -2584,6 +2575,46 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/UsageEventsResponse"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      security:
+        - personalAccessToken: []
+      tags:
+        - usage
+  /v1/projects/{projectOrProductUID}/usage/route-logs:
+    get:
+      operationId: GetRouteLogsUsage
+      description: Get route logs usage for a project with time range and period
+        aggregation, when endDate is 0 or unspecified the current time is
+        implied
+      parameters:
+        - $ref: "#/components/parameters/projectOrProductUIDParam"
+        - $ref: "#/components/parameters/startDateParam"
+        - $ref: "#/components/parameters/endDateParam"
+        - $ref: "#/components/parameters/routeUIDParamQuery"
+        - name: period
+          in: query
+          description: Period type for aggregation
+          required: true
+          schema:
+            type: string
+            enum:
+              - day
+              - week
+              - month
+        - name: aggregate
+          in: query
+          description: Aggregation level for results
+          required: false
+          schema:
+            type: string
+            default: route
+            enum:
+              - route
+              - project
+      responses:
+        "200":
+          $ref: "#/components/responses/UsageRouteLogsResponse"
         default:
           $ref: "#/components/responses/ErrorResponse"
       security:
@@ -2623,16 +2654,6 @@ paths:
               - device
               - fleet
               - project
-        - name: skipRecentData
-          in: query
-          description:
-            When true, skips fetching recent data from raw event tables and
-            only returns data from summary tables. Use this for better
-            performance on large projects.
-          required: false
-          schema:
-            type: boolean
-            default: false
       responses:
         "200":
           $ref: "#/components/responses/UsageSessionsResponse"
@@ -4578,6 +4599,8 @@ components:
           type: string
         smart_rule:
           $ref: "#/components/schemas/FleetRule"
+        smart_rule_enabled:
+          type: boolean
         uid:
           description: Fleet UID
           type: string
@@ -5573,11 +5596,9 @@ components:
       properties:
         bytes_received:
           type: integer
-          format: int64
           example: 524288
         bytes_sent:
           type: integer
-          format: int64
           example: 524288
         period:
           type: string
@@ -5585,7 +5606,6 @@ components:
           example: 2025-07-23T00:00:00Z
         total_bytes:
           type: integer
-          format: int64
           example: 1048576
       required:
         - period
@@ -5600,15 +5620,15 @@ components:
           type: string
           example: fleet:1042ddc5-3b2c-4cec-b1fb-d3040538094d
         notefiles:
-          description: Count of events per notefile. Only present when
-            includeNotefiles=true is specified.
+          description:
+            Count of events per notefile. Only present when aggregate=notefile
+            is specified.
           type: object
           example:
             _log.qo: 20
             customer1.qo: 1
             session.qo: 50
           additionalProperties:
-            format: int64
             type: integer
         period:
           type: string
@@ -5620,14 +5640,12 @@ components:
             and _geolocate events some of which are send from the device, some
             generated by notehub. These events are not billed.
           type: integer
-          format: int64
           example: 15
         total_events:
           description:
             Total events the device sent to notehub, including associated
             notehub generated events
           type: integer
-          format: int64
           example: 42
         watchdog_events:
           description:
@@ -5636,7 +5654,6 @@ components:
             for a period of time. These events are billed but should not be used
             to indicate a device is active, or connected, at this time.
           type: integer
-          format: int64
           example: 10
       required:
         - period
@@ -5657,7 +5674,6 @@ components:
       properties:
         failed_routes:
           type: integer
-          format: int64
           example: 4
         period:
           type: string
@@ -5669,11 +5685,9 @@ components:
           example: route:cbd20093cba58392c9f9bbdd0cdeb1a0
         successful_routes:
           type: integer
-          format: int64
           example: 38
         total_routes:
           type: integer
-          format: int64
           example: 42
       required:
         - period
@@ -5695,11 +5709,9 @@ components:
           example: 2025-07-23T00:00:00Z
         sessions:
           type: integer
-          format: int64
           example: 12
         total_bytes:
           type: integer
-          format: int64
           example: 1048576
       required:
         - period

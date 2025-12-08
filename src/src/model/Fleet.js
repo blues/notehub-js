@@ -77,6 +77,12 @@ class Fleet {
           "String"
         );
       }
+      if (data.hasOwnProperty("smart_rule_enabled")) {
+        obj["smart_rule_enabled"] = ApiClient.convertToType(
+          data["smart_rule_enabled"],
+          "Boolean"
+        );
+      }
       if (data.hasOwnProperty("uid")) {
         obj["uid"] = ApiClient.convertToType(data["uid"], "String");
       }
@@ -182,6 +188,11 @@ Fleet.prototype["label"] = undefined;
  * @member {String} smart_rule
  */
 Fleet.prototype["smart_rule"] = undefined;
+
+/**
+ * @member {Boolean} smart_rule_enabled
+ */
+Fleet.prototype["smart_rule_enabled"] = undefined;
 
 /**
  * Fleet UID

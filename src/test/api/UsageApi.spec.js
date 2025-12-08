@@ -64,6 +64,16 @@
         done();
       });
     });
+    describe("getRouteLogsUsage", function () {
+      it("should call getRouteLogsUsage successfully", function (done) {
+        //uncomment below and update the code to test getRouteLogsUsage
+        //instance.getRouteLogsUsage(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
     describe("getSessionsUsage", function () {
       it("should call getSessionsUsage successfully", function (done) {
         //uncomment below and update the code to test getSessionsUsage

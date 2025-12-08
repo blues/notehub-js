@@ -81,6 +81,7 @@ docs/GetNotefile200Response.md
 docs/GetProducts200Response.md
 docs/GetProjectMembers200Response.md
 docs/GetProjects200Response.md
+docs/GetRouteLogsUsage200Response.md
 docs/GetSessionsUsage200Response.md
 docs/GetWebhooks200Response.md
 docs/GoogleRoute.md
@@ -231,6 +232,7 @@ src/model/GetNotefile200Response.js
 src/model/GetProducts200Response.js
 src/model/GetProjectMembers200Response.js
 src/model/GetProjects200Response.js
+src/model/GetRouteLogsUsage200Response.js
 src/model/GetSessionsUsage200Response.js
 src/model/GetWebhooks200Response.js
 src/model/GoogleRoute.js
@@ -371,6 +373,7 @@ test/model/GetNotefile200Response.spec.js
 test/model/GetProducts200Response.spec.js
 test/model/GetProjectMembers200Response.spec.js
 test/model/GetProjects200Response.spec.js
+test/model/GetRouteLogsUsage200Response.spec.js
 test/model/GetSessionsUsage200Response.spec.js
 test/model/GetWebhooks200Response.spec.js
 test/model/GoogleRoute.spec.js

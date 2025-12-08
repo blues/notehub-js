@@ -84,6 +84,7 @@ import GetNotefile200Response from "./model/GetNotefile200Response";
 import GetProducts200Response from "./model/GetProducts200Response";
 import GetProjectMembers200Response from "./model/GetProjectMembers200Response";
 import GetProjects200Response from "./model/GetProjects200Response";
+import GetRouteLogsUsage200Response from "./model/GetRouteLogsUsage200Response";
 import GetSessionsUsage200Response from "./model/GetSessionsUsage200Response";
 import GetWebhooks200Response from "./model/GetWebhooks200Response";
 import GoogleRoute from "./model/GoogleRoute";
@@ -622,6 +623,12 @@ export {
    * @property {module:model/GetProjects200Response}
    */
   GetProjects200Response,
+
+  /**
+   * The GetRouteLogsUsage200Response model constructor.
+   * @property {module:model/GetRouteLogsUsage200Response}
+   */
+  GetRouteLogsUsage200Response,
 
   /**
    * The GetSessionsUsage200Response model constructor.

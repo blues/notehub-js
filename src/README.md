@@ -222,6 +222,7 @@ All URIs are relative to *https://api.notefile.net*
 | _NotehubJs.RouteApi_           | [**updateRoute**](docs/RouteApi.md#updateRoute)                                                | **PUT** /v1/projects/{projectOrProductUID}/routes/{routeUID}                                   |
 | _NotehubJs.UsageApi_           | [**getDataUsage**](docs/UsageApi.md#getDataUsage)                                              | **GET** /v1/projects/{projectOrProductUID}/usage/data                                          |
 | _NotehubJs.UsageApi_           | [**getEventsUsage**](docs/UsageApi.md#getEventsUsage)                                          | **GET** /v1/projects/{projectOrProductUID}/usage/events                                        |
+| _NotehubJs.UsageApi_           | [**getRouteLogsUsage**](docs/UsageApi.md#getRouteLogsUsage)                                    | **GET** /v1/projects/{projectOrProductUID}/usage/route-logs                                    |
 | _NotehubJs.UsageApi_           | [**getSessionsUsage**](docs/UsageApi.md#getSessionsUsage)                                      | **GET** /v1/projects/{projectOrProductUID}/usage/sessions                                      |
 | _NotehubJs.WebhookApi_         | [**createWebhook**](docs/WebhookApi.md#createWebhook)                                          | **POST** /v1/projects/{projectOrProductUID}/webhooks/{webhookUID}                              |
 | _NotehubJs.WebhookApi_         | [**deleteWebhook**](docs/WebhookApi.md#deleteWebhook)                                          | **DELETE** /v1/projects/{projectOrProductUID}/webhooks/{webhookUID}                            |
@@ -303,6 +304,7 @@ All URIs are relative to *https://api.notefile.net*
 - [NotehubJs.GetProducts200Response](docs/GetProducts200Response.md)
 - [NotehubJs.GetProjectMembers200Response](docs/GetProjectMembers200Response.md)
 - [NotehubJs.GetProjects200Response](docs/GetProjects200Response.md)
+- [NotehubJs.GetRouteLogsUsage200Response](docs/GetRouteLogsUsage200Response.md)
 - [NotehubJs.GetSessionsUsage200Response](docs/GetSessionsUsage200Response.md)
 - [NotehubJs.GetWebhooks200Response](docs/GetWebhooks200Response.md)
 - [NotehubJs.GoogleRoute](docs/GoogleRoute.md)
