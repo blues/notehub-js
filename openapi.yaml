@@ -698,19 +698,12 @@ paths:
         - personalAccessToken: []
       tags:
         - device
-  '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/files/changes':
     get:
       operationId: ListNotefiles
       description: Lists .qi and .db files for the device
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
-        - name: tracker
-          in: query
-          description: The change tracker ID.
-          required: false
-          schema:
-            type: string
         - name: files
           in: query
           description: One or more files to obtain change information from.
@@ -719,56 +712,19 @@ paths:
             type: array
             items:
               type: string
+        - name: pending
+          in: query
+          description: show only files that are pending sync to the Notecard
+          required: false
+          schema:
+            type: boolean
       responses:
         '200':
-          description: The notefile changes object
+          description: All notefiles and their notes
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  changes:
-                    description: The number of pending changes in the Notefile.
-                    type: integer
-                  info:
-                    description: 'An object with a key for each Notefile that matched the request parameters, and value object with the changes and total for each file.'
-                    type: object
-                  total:
-                    description: The total number of files.
-                    type: integer
-        default:
-          $ref: '#/components/responses/ErrorResponse'
-      security:
-        - personalAccessToken: []
-      tags:
-        - device
-  '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/files/changes/pending':
-    get:
-      operationId: ListPendingNotefiles
-      description: Lists .qi and .db files that are pending sync to the Notecard
-      parameters:
-        - $ref: '#/components/parameters/projectOrProductUIDParam'
-        - $ref: '#/components/parameters/deviceUIDParam'
-      responses:
-        '200':
-          description: The notefile pending changes object
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  changes:
-                    description: The number of pending changes in the Notefile.
-                    type: integer
-                  info:
-                    description: 'An object with a key for each Notefile that matched the request parameters, and value object with the changes and total for each file.'
-                    type: object
-                  pending:
-                    description: Whether there are pending changes.
-                    type: boolean
-                  total:
-                    description: The total number of files.
-                    type: integer
+                $ref: '#/components/schemas/NotefileList'
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
@@ -916,6 +872,54 @@ paths:
       tags:
         - device
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}':
+    get:
+      operationId: GetNotefile
+      description: 'For .qi files, returns the queued up notes.  For .db files, returns all notes in the notefile'
+      parameters:
+        - $ref: '#/components/parameters/projectOrProductUIDParam'
+        - $ref: '#/components/parameters/deviceUIDParam'
+        - $ref: '#/components/parameters/notefileIDParam'
+        - name: max
+          in: query
+          description: The maximum number of Notes to return in the request.
+          required: false
+          schema:
+            type: integer
+        - name: deleted
+          in: query
+          description: true to return deleted notes.
+          required: false
+          schema:
+            type: boolean
+        - name: delete
+          in: query
+          description: true to delete the notes returned by the request.
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: The note changes object
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  changes:
+                    description: The number of pending changes in the Notefile.
+                    type: integer
+                  notes:
+                    description: An object with a key for each note and a value object with the body of each Note and the time the Note was added.
+                    type: object
+                  total:
+                    description: The total number of notes.
+                    type: integer
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - device
     post:
       operationId: AddQiNote
       description: 'Adds a Note to a Notefile, creating the Notefile if it doesn''t yet exist.'
@@ -929,7 +933,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Note'
+              $ref: '#/components/schemas/NoteInput'
       responses:
         '200':
           description: An empty object means success
@@ -941,8 +945,8 @@ paths:
         - device
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}':
     delete:
-      operationId: DeleteDbNote
-      description: Delete a note from a .db notefile
+      operationId: DeleteNote
+      description: Delete a note from a .db or .qi notefile
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
@@ -959,7 +963,7 @@ paths:
         - device
     get:
       operationId: GetDbNote
-      description: Get a note from a .db notefile
+      description: Get a note from a .db or .qi notefile
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
@@ -1002,7 +1006,7 @@ paths:
         - device
     post:
       operationId: AddDbNote
-      description: Add a Note to a .db notefile
+      description: Add a Note to a .db notefile.  if noteID is '-' then payload is ignored and empty notefile is created
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
@@ -1014,7 +1018,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Note'
+              $ref: '#/components/schemas/NoteInput'
       responses:
         '200':
           description: An empty object means success
@@ -1026,7 +1030,7 @@ paths:
         - device
     put:
       operationId: UpdateDbNote
-      description: Update a note in a .db notefile
+      description: Update a note in a .db or .qi notefile
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
@@ -1038,77 +1042,10 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Note'
+              $ref: '#/components/schemas/NoteInput'
       responses:
         '200':
           description: An empty object means success
-        default:
-          $ref: '#/components/responses/ErrorResponse'
-      security:
-        - personalAccessToken: []
-      tags:
-        - device
-  '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/changes':
-    get:
-      operationId: GetNotefile
-      description: 'For .qi files, returns the queued up notes.  For .db files, returns all notes in the notefile'
-      parameters:
-        - $ref: '#/components/parameters/projectOrProductUIDParam'
-        - $ref: '#/components/parameters/deviceUIDParam'
-        - $ref: '#/components/parameters/notefileIDParam'
-        - name: tracker
-          in: query
-          description: The change tracker ID.
-          required: false
-          schema:
-            type: string
-        - name: max
-          in: query
-          description: The maximum number of Notes to return in the request.
-          required: false
-          schema:
-            type: integer
-        - name: start
-          in: query
-          description: true to reset the tracker to the beginning.
-          required: false
-          schema:
-            type: boolean
-        - name: stop
-          in: query
-          description: true to delete the tracker.
-          required: false
-          schema:
-            type: boolean
-        - name: deleted
-          in: query
-          description: true to return deleted notes.
-          required: false
-          schema:
-            type: boolean
-        - name: delete
-          in: query
-          description: true to delete the notes returned by the request.
-          required: false
-          schema:
-            type: boolean
-      responses:
-        '200':
-          description: The note changes object
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  changes:
-                    description: The number of pending changes in the Notefile.
-                    type: integer
-                  notes:
-                    description: An object with a key for each note and a value object with the body of each Note and the time the Note was added.
-                    type: object
-                  total:
-                    description: The total number of notes.
-                    type: integer
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
@@ -1659,6 +1596,8 @@ paths:
                   type: string
                 smart_rule:
                   $ref: '#/components/schemas/FleetRule'
+                smart_rule_enabled:
+                  type: boolean
       responses:
         '201':
           description: Successful operation
@@ -1730,6 +1669,8 @@ paths:
                     type: string
                 smart_rule:
                   $ref: '#/components/schemas/FleetRule'
+                smart_rule_enabled:
+                  type: boolean
                 watchdog_mins:
                   description: A watchdog timer is used to generate an event every N minutes of inactivity. 0 means no watchdog
                   type: integer
@@ -2562,6 +2503,44 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UsageEventsResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - usage
+  '/v1/projects/{projectOrProductUID}/usage/route-logs':
+    get:
+      operationId: GetRouteLogsUsage
+      description: 'Get route logs usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied'
+      parameters:
+        - $ref: '#/components/parameters/projectOrProductUIDParam'
+        - $ref: '#/components/parameters/startDateParam'
+        - $ref: '#/components/parameters/endDateParam'
+        - $ref: '#/components/parameters/routeUIDParamQuery'
+        - name: period
+          in: query
+          description: Period type for aggregation
+          required: true
+          schema:
+            type: string
+            enum:
+              - day
+              - week
+              - month
+        - name: aggregate
+          in: query
+          description: Aggregation level for results
+          required: false
+          schema:
+            type: string
+            default: route
+            enum:
+              - route
+              - project
+      responses:
+        '200':
+          $ref: '#/components/responses/UsageRouteLogsResponse'
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
@@ -3722,6 +3701,8 @@ components:
     Device:
       type: object
       properties:
+        best_location:
+          $ref: '#/components/schemas/Location'
         cellular_usage:
           $ref: '#/components/schemas/CellularUsage'
         contact:
@@ -4497,6 +4478,8 @@ components:
           type: string
         smart_rule:
           $ref: '#/components/schemas/FleetRule'
+        smart_rule_enabled:
+          type: boolean
         uid:
           description: Fleet UID
           type: string
@@ -4514,11 +4497,10 @@ components:
         enabled:
           description: Whether Connectivity Assurance is enabled for this fleet
           type: boolean
+          nullable: true
       example:
         enabled: true
       nullable: true
-      required:
-        - enabled
     FleetRule:
       description: 'JSONata expression that will be evaluated to determine device membership into this fleet, if the expression evaluates to a 1, the device will be included, if it evaluates to -1 it will be removed, and if it evaluates to 0 or errors it will be left unchanged.'
       type: string
@@ -4722,9 +4704,66 @@ components:
       type: object
       properties:
         body:
+          description: Arbitrary user-defined JSON for the note.
           type: object
-        payload:
+          additionalProperties: true
+        edge:
+          description: True if originated from an edge source.
+          type: boolean
+        id:
+          description: 'Note name/identifier (e.g., "1:435", "my_note").'
           type: string
+        payload:
+          description: Optional base64-encoded payload.
+          type: string
+          format: byte
+        pending:
+          description: True if the note is pending delivery or processing.
+          type: boolean
+        time:
+          description: Unix epoch seconds.
+          type: integer
+          format: int64
+        where:
+          description: Optional location/metadata string.
+          type: string
+      required:
+        - id
+        - body
+        - time
+    NoteInput:
+      type: object
+      properties:
+        body:
+          description: Arbitrary user-defined JSON for the note.
+          type: object
+          additionalProperties: true
+        payload:
+          description: Optional base64-encoded payload.
+          type: string
+          format: byte
+    Notefile:
+      type: object
+      properties:
+        id:
+          description: 'Notefile id (e.g., "test.qi", "config.db").'
+          type: string
+        notes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Note'
+          minItems: 0
+        template:
+          type: string
+      required:
+        - id
+        - notes
+    NotefileList:
+      description: 'Array of notefiles, each containing its notes.'
+      type: array
+      items:
+        $ref: '#/components/schemas/Notefile'
+      properties: {}
     NotefileSchema:
       type: object
       properties:
@@ -5509,6 +5548,10 @@ components:
           type: integer
           format: int64
           example: 15
+        total_devices:
+          description: Total devices represented in this count
+          type: integer
+          format: int64
         total_events:
           description: 'Total events the device sent to notehub, including associated notehub generated events'
           type: integer
@@ -5524,6 +5567,7 @@ components:
         - total_events
         - platform_events
         - watchdog_events
+        - total_devices
     UsageEventsResponse:
       type: object
       properties:
@@ -5582,10 +5626,15 @@ components:
           type: integer
           format: int64
           example: 1048576
+        total_devices:
+          type: integer
+          format: int64
+          example: 1
       required:
         - period
         - sessions
         - total_bytes
+        - total_devices
     UserDfuStateMachine:
       type: object
       properties:
