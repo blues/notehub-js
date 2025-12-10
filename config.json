@@ -3,7 +3,7 @@
   "licenseName": "MIT",
   "moduleName": "NotehubJs",
   "npmRepository": "https://registry.npmjs.org",
-  "projectVersion": "3.0.0",
+  "projectVersion": "3.0.0-beta.18",
   "sourceFolder": "src",
   "usePromises": true
 }
