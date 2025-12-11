@@ -61,6 +61,12 @@ class CreateFleetRequest {
           "String"
         );
       }
+      if (data.hasOwnProperty("smart_rule_enabled")) {
+        obj["smart_rule_enabled"] = ApiClient.convertToType(
+          data["smart_rule_enabled"],
+          "Boolean"
+        );
+      }
     } else if (data === null) {
       return null;
     }
@@ -122,5 +128,10 @@ CreateFleetRequest.prototype["label"] = undefined;
  * @member {String} smart_rule
  */
 CreateFleetRequest.prototype["smart_rule"] = undefined;
+
+/**
+ * @member {Boolean} smart_rule_enabled
+ */
+CreateFleetRequest.prototype["smart_rule_enabled"] = undefined;
 
 export default CreateFleetRequest;

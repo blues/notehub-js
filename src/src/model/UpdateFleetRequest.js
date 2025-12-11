@@ -71,6 +71,12 @@ class UpdateFleetRequest {
           "String"
         );
       }
+      if (data.hasOwnProperty("smart_rule_enabled")) {
+        obj["smart_rule_enabled"] = ApiClient.convertToType(
+          data["smart_rule_enabled"],
+          "Boolean"
+        );
+      }
       if (data.hasOwnProperty("watchdog_mins")) {
         obj["watchdog_mins"] = ApiClient.convertToType(
           data["watchdog_mins"],
@@ -164,6 +170,11 @@ UpdateFleetRequest.prototype["removeDevices"] = undefined;
  * @member {String} smart_rule
  */
 UpdateFleetRequest.prototype["smart_rule"] = undefined;
+
+/**
+ * @member {Boolean} smart_rule_enabled
+ */
+UpdateFleetRequest.prototype["smart_rule_enabled"] = undefined;
 
 /**
  * A watchdog timer is used to generate an event every N minutes of inactivity. 0 means no watchdog
