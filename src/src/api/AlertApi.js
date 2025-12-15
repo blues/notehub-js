@@ -18,7 +18,7 @@ import GetAlerts200Response from "../model/GetAlerts200Response";
 /**
  * Alert service.
  * @module api/AlertApi
- * @version 3.0.0
+ * @version 4.0.0
  */
 export default class AlertApi {
   /**

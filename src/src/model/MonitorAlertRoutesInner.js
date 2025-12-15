@@ -19,7 +19,7 @@ import SlackWebHookNotification from "./SlackWebHookNotification";
 /**
  * The MonitorAlertRoutesInner model module.
  * @module model/MonitorAlertRoutesInner
- * @version 3.0.0
+ * @version 4.0.0
  */
 class MonitorAlertRoutesInner {
   /**

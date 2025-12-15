@@ -289,4 +289,3 @@ src/model/UserDfuStateMachine.js
 src/model/UserDfuStateMachineStatus.js
 src/model/UserFirmwareInfo.js
 src/model/WebhookSettings.js
-test/model/GetRouteLogsUsage200Response.spec.js

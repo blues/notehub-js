@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The FleetConnectivityAssurance model module.
  * @module model/FleetConnectivityAssurance
- * @version 3.0.0
+ * @version 4.0.0
  */
 class FleetConnectivityAssurance {
   /**
