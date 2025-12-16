@@ -64,16 +64,6 @@
         done();
       });
     });
-    describe("deleteDbNote", function () {
-      it("should call deleteDbNote successfully", function (done) {
-        //uncomment below and update the code to test deleteDbNote
-        //instance.deleteDbNote(function(error) {
-        //  if (error) throw error;
-        //expect().to.be();
-        //});
-        done();
-      });
-    });
     describe("deleteDevice", function () {
       it("should call deleteDevice successfully", function (done) {
         //uncomment below and update the code to test deleteDevice
@@ -88,6 +78,16 @@
       it("should call deleteDeviceEnvironmentVariable successfully", function (done) {
         //uncomment below and update the code to test deleteDeviceEnvironmentVariable
         //instance.deleteDeviceEnvironmentVariable(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
+    describe("deleteNote", function () {
+      it("should call deleteNote successfully", function (done) {
+        //uncomment below and update the code to test deleteNote
+        //instance.deleteNote(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});
@@ -288,16 +288,6 @@
       it("should call listNotefiles successfully", function (done) {
         //uncomment below and update the code to test listNotefiles
         //instance.listNotefiles(function(error) {
-        //  if (error) throw error;
-        //expect().to.be();
-        //});
-        done();
-      });
-    });
-    describe("listPendingNotefiles", function () {
-      it("should call listPendingNotefiles successfully", function (done) {
-        //uncomment below and update the code to test listPendingNotefiles
-        //instance.listPendingNotefiles(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});

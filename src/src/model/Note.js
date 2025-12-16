@@ -16,15 +16,18 @@ import ApiClient from "../ApiClient";
 /**
  * The Note model module.
  * @module model/Note
- * @version 3.0.0
+ * @version 4.0.0
  */
 class Note {
   /**
    * Constructs a new <code>Note</code>.
    * @alias module:model/Note
+   * @param body {Object.<String, Object>} Arbitrary user-defined JSON for the note.
+   * @param id {String} Note name/identifier (e.g., \"1:435\", \"my_note\").
+   * @param time {Number} Unix epoch seconds.
    */
-  constructor() {
-    Note.initialize(this);
+  constructor(body, id, time) {
+    Note.initialize(this, body, id, time);
   }
 
   /**
@@ -32,7 +35,11 @@ class Note {
    * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
    * Only for internal use.
    */
-  static initialize(obj) {}
+  static initialize(obj, body, id, time) {
+    obj["body"] = body;
+    obj["id"] = id;
+    obj["time"] = time;
+  }
 
   /**
    * Constructs a <code>Note</code> from a plain JavaScript object, optionally creating a new instance.
@@ -46,10 +53,25 @@ class Note {
       obj = obj || new Note();
 
       if (data.hasOwnProperty("body")) {
-        obj["body"] = ApiClient.convertToType(data["body"], Object);
+        obj["body"] = ApiClient.convertToType(data["body"], { String: Object });
+      }
+      if (data.hasOwnProperty("edge")) {
+        obj["edge"] = ApiClient.convertToType(data["edge"], "Boolean");
+      }
+      if (data.hasOwnProperty("id")) {
+        obj["id"] = ApiClient.convertToType(data["id"], "String");
       }
       if (data.hasOwnProperty("payload")) {
-        obj["payload"] = ApiClient.convertToType(data["payload"], "String");
+        obj["payload"] = ApiClient.convertToType(data["payload"], "Blob");
+      }
+      if (data.hasOwnProperty("pending")) {
+        obj["pending"] = ApiClient.convertToType(data["pending"], "Boolean");
+      }
+      if (data.hasOwnProperty("time")) {
+        obj["time"] = ApiClient.convertToType(data["time"], "Number");
+      }
+      if (data.hasOwnProperty("where")) {
+        obj["where"] = ApiClient.convertToType(data["where"], "String");
       }
     } else if (data === null) {
       return null;
@@ -63,16 +85,35 @@ class Note {
    * @return {boolean} to indicate whether the JSON data is valid with respect to <code>Note</code>.
    */
   static validateJSON(data) {
+    // check to make sure all required properties are present in the JSON string
+    for (const property of Note.RequiredProperties) {
+      if (!data[property]) {
+        throw new Error(
+          "The required field `" +
+            property +
+            "` is not found in the JSON data: " +
+            JSON.stringify(data)
+        );
+      }
+    }
     // ensure the json data is a string
     if (
-      data["payload"] &&
-      !(
-        typeof data["payload"] === "string" || data["payload"] instanceof String
-      )
+      data["id"] &&
+      !(typeof data["id"] === "string" || data["id"] instanceof String)
     ) {
       throw new Error(
-        "Expected the field `payload` to be a primitive type in the JSON string but got " +
-          data["payload"]
+        "Expected the field `id` to be a primitive type in the JSON string but got " +
+          data["id"]
+      );
+    }
+    // ensure the json data is a string
+    if (
+      data["where"] &&
+      !(typeof data["where"] === "string" || data["where"] instanceof String)
+    ) {
+      throw new Error(
+        "Expected the field `where` to be a primitive type in the JSON string but got " +
+          data["where"]
       );
     }
 
@@ -80,14 +121,48 @@ class Note {
   }
 }
 
+Note.RequiredProperties = ["body", "id", "time"];
+
 /**
- * @member {Object} body
+ * Arbitrary user-defined JSON for the note.
+ * @member {Object.<String, Object>} body
  */
 Note.prototype["body"] = undefined;
 
 /**
- * @member {String} payload
+ * True if originated from an edge source.
+ * @member {Boolean} edge
+ */
+Note.prototype["edge"] = undefined;
+
+/**
+ * Note name/identifier (e.g., \"1:435\", \"my_note\").
+ * @member {String} id
+ */
+Note.prototype["id"] = undefined;
+
+/**
+ * Optional base64-encoded payload.
+ * @member {Blob} payload
  */
 Note.prototype["payload"] = undefined;
+
+/**
+ * True if the note is pending delivery or processing.
+ * @member {Boolean} pending
+ */
+Note.prototype["pending"] = undefined;
+
+/**
+ * Unix epoch seconds.
+ * @member {Number} time
+ */
+Note.prototype["time"] = undefined;
+
+/**
+ * Optional location/metadata string.
+ * @member {String} where
+ */
+Note.prototype["where"] = undefined;
 
 export default Note;

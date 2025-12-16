@@ -17,7 +17,7 @@ import FleetConnectivityAssurance from "./FleetConnectivityAssurance";
 /**
  * The Fleet model module.
  * @module model/Fleet
- * @version 3.0.0
+ * @version 4.0.0
  */
 class Fleet {
   /**
@@ -75,6 +75,12 @@ class Fleet {
         obj["smart_rule"] = ApiClient.convertToType(
           data["smart_rule"],
           "String"
+        );
+      }
+      if (data.hasOwnProperty("smart_rule_enabled")) {
+        obj["smart_rule_enabled"] = ApiClient.convertToType(
+          data["smart_rule_enabled"],
+          "Boolean"
         );
       }
       if (data.hasOwnProperty("uid")) {
@@ -182,6 +188,11 @@ Fleet.prototype["label"] = undefined;
  * @member {String} smart_rule
  */
 Fleet.prototype["smart_rule"] = undefined;
+
+/**
+ * @member {Boolean} smart_rule_enabled
+ */
+Fleet.prototype["smart_rule_enabled"] = undefined;
 
 /**
  * Fleet UID

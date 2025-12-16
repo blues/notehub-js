@@ -80,6 +80,12 @@
       //expect(instance).to.be();
     });
 
+    it('should have the property totalDevices (base name: "total_devices")', function () {
+      // uncomment below and update the code to test the property totalDevices
+      //var instance = new NotehubJs.UsageEventsData();
+      //expect(instance).to.be();
+    });
+
     it('should have the property totalEvents (base name: "total_events")', function () {
       // uncomment below and update the code to test the property totalEvents
       //var instance = new NotehubJs.UsageEventsData();

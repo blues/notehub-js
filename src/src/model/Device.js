@@ -21,7 +21,7 @@ import SimUsage from "./SimUsage";
 /**
  * The Device model module.
  * @module model/Device
- * @version 3.0.0
+ * @version 4.0.0
  */
 class Device {
   /**
@@ -79,6 +79,11 @@ class Device {
     if (data) {
       obj = obj || new Device();
 
+      if (data.hasOwnProperty("best_location")) {
+        obj["best_location"] = Location.constructFromObject(
+          data["best_location"]
+        );
+      }
       if (data.hasOwnProperty("cellular_usage")) {
         obj["cellular_usage"] = ApiClient.convertToType(
           data["cellular_usage"],
@@ -192,6 +197,11 @@ class Device {
             JSON.stringify(data)
         );
       }
+    }
+    // validate the optional field `best_location`
+    if (data["best_location"]) {
+      // data not null
+      Location.validateJSON(data["best_location"]);
     }
     if (data["cellular_usage"]) {
       // data not null
@@ -329,6 +339,11 @@ Device.RequiredProperties = [
   "uid",
   "voltage",
 ];
+
+/**
+ * @member {module:model/Location} best_location
+ */
+Device.prototype["best_location"] = undefined;
 
 /**
  * @member {Array.<module:model/SimUsage>} cellular_usage

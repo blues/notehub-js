@@ -28,16 +28,15 @@ import GetDevicePublicKeys200Response from "../model/GetDevicePublicKeys200Respo
 import GetDeviceSessions200Response from "../model/GetDeviceSessions200Response";
 import GetDevices200Response from "../model/GetDevices200Response";
 import GetNotefile200Response from "../model/GetNotefile200Response";
-import ListNotefiles200Response from "../model/ListNotefiles200Response";
-import ListPendingNotefiles200Response from "../model/ListPendingNotefiles200Response";
-import Note from "../model/Note";
+import NoteInput from "../model/NoteInput";
+import Notefile from "../model/Notefile";
 import ProvisionDeviceRequest from "../model/ProvisionDeviceRequest";
 import SignalDevice200Response from "../model/SignalDevice200Response";
 
 /**
  * Device service.
  * @module api/DeviceApi
- * @version 3.0.0
+ * @version 4.0.0
  */
 export default class DeviceApi {
   /**
@@ -52,12 +51,12 @@ export default class DeviceApi {
   }
 
   /**
-   * Add a Note to a .db notefile
+   * Add a Note to a .db notefile.  if noteID is '-' then payload is ignored and empty notefile is created
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
    * @param {String} notefileID
    * @param {String} noteID
-   * @param {module:model/Note} note Body or payload of note to be added to the device
+   * @param {module:model/NoteInput} noteInput Body or payload of note to be added to the device
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
    */
   addDbNoteWithHttpInfo(
@@ -65,9 +64,9 @@ export default class DeviceApi {
     deviceUID,
     notefileID,
     noteID,
-    note
+    noteInput
   ) {
-    let postBody = note;
+    let postBody = noteInput;
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
@@ -92,10 +91,10 @@ export default class DeviceApi {
         "Missing the required parameter 'noteID' when calling addDbNote"
       );
     }
-    // verify the required parameter 'note' is set
-    if (note === undefined || note === null) {
+    // verify the required parameter 'noteInput' is set
+    if (noteInput === undefined || noteInput === null) {
       throw new Error(
-        "Missing the required parameter 'note' when calling addDbNote"
+        "Missing the required parameter 'noteInput' when calling addDbNote"
       );
     }
 
@@ -130,21 +129,21 @@ export default class DeviceApi {
   }
 
   /**
-   * Add a Note to a .db notefile
+   * Add a Note to a .db notefile.  if noteID is '-' then payload is ignored and empty notefile is created
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
    * @param {String} notefileID
    * @param {String} noteID
-   * @param {module:model/Note} note Body or payload of note to be added to the device
+   * @param {module:model/NoteInput} noteInput Body or payload of note to be added to the device
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}
    */
-  addDbNote(projectOrProductUID, deviceUID, notefileID, noteID, note) {
+  addDbNote(projectOrProductUID, deviceUID, notefileID, noteID, noteInput) {
     return this.addDbNoteWithHttpInfo(
       projectOrProductUID,
       deviceUID,
       notefileID,
       noteID,
-      note
+      noteInput
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -155,11 +154,11 @@ export default class DeviceApi {
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
    * @param {String} notefileID
-   * @param {module:model/Note} note Body or payload of note to be added to the device
+   * @param {module:model/NoteInput} noteInput Body or payload of note to be added to the device
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
    */
-  addQiNoteWithHttpInfo(projectOrProductUID, deviceUID, notefileID, note) {
-    let postBody = note;
+  addQiNoteWithHttpInfo(projectOrProductUID, deviceUID, notefileID, noteInput) {
+    let postBody = noteInput;
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
@@ -178,10 +177,10 @@ export default class DeviceApi {
         "Missing the required parameter 'notefileID' when calling addQiNote"
       );
     }
-    // verify the required parameter 'note' is set
-    if (note === undefined || note === null) {
+    // verify the required parameter 'noteInput' is set
+    if (noteInput === undefined || noteInput === null) {
       throw new Error(
-        "Missing the required parameter 'note' when calling addQiNote"
+        "Missing the required parameter 'noteInput' when calling addQiNote"
       );
     }
 
@@ -219,99 +218,15 @@ export default class DeviceApi {
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
    * @param {String} notefileID
-   * @param {module:model/Note} note Body or payload of note to be added to the device
+   * @param {module:model/NoteInput} noteInput Body or payload of note to be added to the device
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}
    */
-  addQiNote(projectOrProductUID, deviceUID, notefileID, note) {
+  addQiNote(projectOrProductUID, deviceUID, notefileID, noteInput) {
     return this.addQiNoteWithHttpInfo(
       projectOrProductUID,
       deviceUID,
       notefileID,
-      note
-    ).then(function (response_and_data) {
-      return response_and_data.data;
-    });
-  }
-
-  /**
-   * Delete a note from a .db notefile
-   * @param {String} projectOrProductUID
-   * @param {String} deviceUID
-   * @param {String} notefileID
-   * @param {String} noteID
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
-   */
-  deleteDbNoteWithHttpInfo(projectOrProductUID, deviceUID, notefileID, noteID) {
-    let postBody = null;
-    // verify the required parameter 'projectOrProductUID' is set
-    if (projectOrProductUID === undefined || projectOrProductUID === null) {
-      throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling deleteDbNote"
-      );
-    }
-    // verify the required parameter 'deviceUID' is set
-    if (deviceUID === undefined || deviceUID === null) {
-      throw new Error(
-        "Missing the required parameter 'deviceUID' when calling deleteDbNote"
-      );
-    }
-    // verify the required parameter 'notefileID' is set
-    if (notefileID === undefined || notefileID === null) {
-      throw new Error(
-        "Missing the required parameter 'notefileID' when calling deleteDbNote"
-      );
-    }
-    // verify the required parameter 'noteID' is set
-    if (noteID === undefined || noteID === null) {
-      throw new Error(
-        "Missing the required parameter 'noteID' when calling deleteDbNote"
-      );
-    }
-
-    let pathParams = {
-      projectOrProductUID: projectOrProductUID,
-      deviceUID: deviceUID,
-      notefileID: notefileID,
-      noteID: noteID,
-    };
-    let queryParams = {};
-    let headerParams = {};
-    let formParams = {};
-
-    let authNames = ["personalAccessToken"];
-    let contentTypes = [];
-    let accepts = ["application/json"];
-    let returnType = null;
-    return this.apiClient.callApi(
-      "/v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}",
-      "DELETE",
-      pathParams,
-      queryParams,
-      headerParams,
-      formParams,
-      postBody,
-      authNames,
-      contentTypes,
-      accepts,
-      returnType,
-      null
-    );
-  }
-
-  /**
-   * Delete a note from a .db notefile
-   * @param {String} projectOrProductUID
-   * @param {String} deviceUID
-   * @param {String} notefileID
-   * @param {String} noteID
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}
-   */
-  deleteDbNote(projectOrProductUID, deviceUID, notefileID, noteID) {
-    return this.deleteDbNoteWithHttpInfo(
-      projectOrProductUID,
-      deviceUID,
-      notefileID,
-      noteID
+      noteInput
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -465,6 +380,90 @@ export default class DeviceApi {
       projectOrProductUID,
       deviceUID,
       key
+    ).then(function (response_and_data) {
+      return response_and_data.data;
+    });
+  }
+
+  /**
+   * Delete a note from a .db or .qi notefile
+   * @param {String} projectOrProductUID
+   * @param {String} deviceUID
+   * @param {String} notefileID
+   * @param {String} noteID
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
+   */
+  deleteNoteWithHttpInfo(projectOrProductUID, deviceUID, notefileID, noteID) {
+    let postBody = null;
+    // verify the required parameter 'projectOrProductUID' is set
+    if (projectOrProductUID === undefined || projectOrProductUID === null) {
+      throw new Error(
+        "Missing the required parameter 'projectOrProductUID' when calling deleteNote"
+      );
+    }
+    // verify the required parameter 'deviceUID' is set
+    if (deviceUID === undefined || deviceUID === null) {
+      throw new Error(
+        "Missing the required parameter 'deviceUID' when calling deleteNote"
+      );
+    }
+    // verify the required parameter 'notefileID' is set
+    if (notefileID === undefined || notefileID === null) {
+      throw new Error(
+        "Missing the required parameter 'notefileID' when calling deleteNote"
+      );
+    }
+    // verify the required parameter 'noteID' is set
+    if (noteID === undefined || noteID === null) {
+      throw new Error(
+        "Missing the required parameter 'noteID' when calling deleteNote"
+      );
+    }
+
+    let pathParams = {
+      projectOrProductUID: projectOrProductUID,
+      deviceUID: deviceUID,
+      notefileID: notefileID,
+      noteID: noteID,
+    };
+    let queryParams = {};
+    let headerParams = {};
+    let formParams = {};
+
+    let authNames = ["personalAccessToken"];
+    let contentTypes = [];
+    let accepts = ["application/json"];
+    let returnType = null;
+    return this.apiClient.callApi(
+      "/v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}",
+      "DELETE",
+      pathParams,
+      queryParams,
+      headerParams,
+      formParams,
+      postBody,
+      authNames,
+      contentTypes,
+      accepts,
+      returnType,
+      null
+    );
+  }
+
+  /**
+   * Delete a note from a .db or .qi notefile
+   * @param {String} projectOrProductUID
+   * @param {String} deviceUID
+   * @param {String} notefileID
+   * @param {String} noteID
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}
+   */
+  deleteNote(projectOrProductUID, deviceUID, notefileID, noteID) {
+    return this.deleteNoteWithHttpInfo(
+      projectOrProductUID,
+      deviceUID,
+      notefileID,
+      noteID
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -811,7 +810,7 @@ export default class DeviceApi {
   }
 
   /**
-   * Get a note from a .db notefile
+   * Get a note from a .db or .qi notefile
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
    * @param {String} notefileID
@@ -889,7 +888,7 @@ export default class DeviceApi {
   }
 
   /**
-   * Get a note from a .db notefile
+   * Get a note from a .db or .qi notefile
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
    * @param {String} notefileID
@@ -1806,10 +1805,7 @@ export default class DeviceApi {
    * @param {String} deviceUID
    * @param {String} notefileID
    * @param {Object} opts Optional parameters
-   * @param {String} opts.tracker The change tracker ID.
    * @param {Number} opts.max The maximum number of Notes to return in the request.
-   * @param {Boolean} opts.start true to reset the tracker to the beginning.
-   * @param {Boolean} opts.stop true to delete the tracker.
    * @param {Boolean} opts.deleted true to return deleted notes.
    * @param {Boolean} opts._delete true to delete the notes returned by the request.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetNotefile200Response} and HTTP response
@@ -1842,10 +1838,7 @@ export default class DeviceApi {
       notefileID: notefileID,
     };
     let queryParams = {
-      tracker: opts["tracker"],
       max: opts["max"],
-      start: opts["start"],
-      stop: opts["stop"],
       deleted: opts["deleted"],
       delete: opts["_delete"],
     };
@@ -1857,7 +1850,7 @@ export default class DeviceApi {
     let accepts = ["application/json"];
     let returnType = GetNotefile200Response;
     return this.apiClient.callApi(
-      "/v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/changes",
+      "/v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}",
       "GET",
       pathParams,
       queryParams,
@@ -1878,10 +1871,7 @@ export default class DeviceApi {
    * @param {String} deviceUID
    * @param {String} notefileID
    * @param {Object} opts Optional parameters
-   * @param {String} opts.tracker The change tracker ID.
    * @param {Number} opts.max The maximum number of Notes to return in the request.
-   * @param {Boolean} opts.start true to reset the tracker to the beginning.
-   * @param {Boolean} opts.stop true to delete the tracker.
    * @param {Boolean} opts.deleted true to return deleted notes.
    * @param {Boolean} opts._delete true to delete the notes returned by the request.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetNotefile200Response}
@@ -1902,9 +1892,9 @@ export default class DeviceApi {
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
    * @param {Object} opts Optional parameters
-   * @param {String} opts.tracker The change tracker ID.
    * @param {Array.<String>} opts.files One or more files to obtain change information from.
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/ListNotefiles200Response} and HTTP response
+   * @param {Boolean} opts.pending show only files that are pending sync to the Notecard
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link Array.<module:model/Notefile>} and HTTP response
    */
   listNotefilesWithHttpInfo(projectOrProductUID, deviceUID, opts) {
     opts = opts || {};
@@ -1927,8 +1917,8 @@ export default class DeviceApi {
       deviceUID: deviceUID,
     };
     let queryParams = {
-      tracker: opts["tracker"],
       files: this.apiClient.buildCollectionParam(opts["files"], "multi"),
+      pending: opts["pending"],
     };
     let headerParams = {};
     let formParams = {};
@@ -1936,9 +1926,9 @@ export default class DeviceApi {
     let authNames = ["personalAccessToken"];
     let contentTypes = [];
     let accepts = ["application/json"];
-    let returnType = ListNotefiles200Response;
+    let returnType = [Notefile];
     return this.apiClient.callApi(
-      "/v1/projects/{projectOrProductUID}/devices/{deviceUID}/files/changes",
+      "/v1/projects/{projectOrProductUID}/devices/{deviceUID}/files",
       "GET",
       pathParams,
       queryParams,
@@ -1958,79 +1948,15 @@ export default class DeviceApi {
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
    * @param {Object} opts Optional parameters
-   * @param {String} opts.tracker The change tracker ID.
    * @param {Array.<String>} opts.files One or more files to obtain change information from.
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/ListNotefiles200Response}
+   * @param {Boolean} opts.pending show only files that are pending sync to the Notecard
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link Array.<module:model/Notefile>}
    */
   listNotefiles(projectOrProductUID, deviceUID, opts) {
     return this.listNotefilesWithHttpInfo(
       projectOrProductUID,
       deviceUID,
       opts
-    ).then(function (response_and_data) {
-      return response_and_data.data;
-    });
-  }
-
-  /**
-   * Lists .qi and .db files that are pending sync to the Notecard
-   * @param {String} projectOrProductUID
-   * @param {String} deviceUID
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/ListPendingNotefiles200Response} and HTTP response
-   */
-  listPendingNotefilesWithHttpInfo(projectOrProductUID, deviceUID) {
-    let postBody = null;
-    // verify the required parameter 'projectOrProductUID' is set
-    if (projectOrProductUID === undefined || projectOrProductUID === null) {
-      throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling listPendingNotefiles"
-      );
-    }
-    // verify the required parameter 'deviceUID' is set
-    if (deviceUID === undefined || deviceUID === null) {
-      throw new Error(
-        "Missing the required parameter 'deviceUID' when calling listPendingNotefiles"
-      );
-    }
-
-    let pathParams = {
-      projectOrProductUID: projectOrProductUID,
-      deviceUID: deviceUID,
-    };
-    let queryParams = {};
-    let headerParams = {};
-    let formParams = {};
-
-    let authNames = ["personalAccessToken"];
-    let contentTypes = [];
-    let accepts = ["application/json"];
-    let returnType = ListPendingNotefiles200Response;
-    return this.apiClient.callApi(
-      "/v1/projects/{projectOrProductUID}/devices/{deviceUID}/files/changes/pending",
-      "GET",
-      pathParams,
-      queryParams,
-      headerParams,
-      formParams,
-      postBody,
-      authNames,
-      contentTypes,
-      accepts,
-      returnType,
-      null
-    );
-  }
-
-  /**
-   * Lists .qi and .db files that are pending sync to the Notecard
-   * @param {String} projectOrProductUID
-   * @param {String} deviceUID
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/ListPendingNotefiles200Response}
-   */
-  listPendingNotefiles(projectOrProductUID, deviceUID) {
-    return this.listPendingNotefilesWithHttpInfo(
-      projectOrProductUID,
-      deviceUID
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -2352,12 +2278,12 @@ export default class DeviceApi {
   }
 
   /**
-   * Update a note in a .db notefile
+   * Update a note in a .db or .qi notefile
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
    * @param {String} notefileID
    * @param {String} noteID
-   * @param {module:model/Note} note Body or payload of note to be added to the device
+   * @param {module:model/NoteInput} noteInput Body or payload of note to be added to the device
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
    */
   updateDbNoteWithHttpInfo(
@@ -2365,9 +2291,9 @@ export default class DeviceApi {
     deviceUID,
     notefileID,
     noteID,
-    note
+    noteInput
   ) {
-    let postBody = note;
+    let postBody = noteInput;
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
@@ -2392,10 +2318,10 @@ export default class DeviceApi {
         "Missing the required parameter 'noteID' when calling updateDbNote"
       );
     }
-    // verify the required parameter 'note' is set
-    if (note === undefined || note === null) {
+    // verify the required parameter 'noteInput' is set
+    if (noteInput === undefined || noteInput === null) {
       throw new Error(
-        "Missing the required parameter 'note' when calling updateDbNote"
+        "Missing the required parameter 'noteInput' when calling updateDbNote"
       );
     }
 
@@ -2430,21 +2356,21 @@ export default class DeviceApi {
   }
 
   /**
-   * Update a note in a .db notefile
+   * Update a note in a .db or .qi notefile
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
    * @param {String} notefileID
    * @param {String} noteID
-   * @param {module:model/Note} note Body or payload of note to be added to the device
+   * @param {module:model/NoteInput} noteInput Body or payload of note to be added to the device
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}
    */
-  updateDbNote(projectOrProductUID, deviceUID, notefileID, noteID, note) {
+  updateDbNote(projectOrProductUID, deviceUID, notefileID, noteID, noteInput) {
     return this.updateDbNoteWithHttpInfo(
       projectOrProductUID,
       deviceUID,
       notefileID,
       noteID,
-      note
+      noteInput
     ).then(function (response_and_data) {
       return response_and_data.data;
     });

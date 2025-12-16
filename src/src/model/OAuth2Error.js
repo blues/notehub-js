@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The OAuth2Error model module.
  * @module model/OAuth2Error
- * @version 3.0.0
+ * @version 4.0.0
  */
 class OAuth2Error {
   /**

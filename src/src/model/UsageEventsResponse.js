@@ -17,7 +17,7 @@ import UsageEventsData from "./UsageEventsData";
 /**
  * The UsageEventsResponse model module.
  * @module model/UsageEventsResponse
- * @version 3.0.0
+ * @version 4.0.0
  */
 class UsageEventsResponse {
   /**

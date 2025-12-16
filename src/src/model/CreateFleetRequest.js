@@ -17,7 +17,7 @@ import FleetConnectivityAssurance from "./FleetConnectivityAssurance";
 /**
  * The CreateFleetRequest model module.
  * @module model/CreateFleetRequest
- * @version 3.0.0
+ * @version 4.0.0
  */
 class CreateFleetRequest {
   /**
@@ -59,6 +59,12 @@ class CreateFleetRequest {
         obj["smart_rule"] = ApiClient.convertToType(
           data["smart_rule"],
           "String"
+        );
+      }
+      if (data.hasOwnProperty("smart_rule_enabled")) {
+        obj["smart_rule_enabled"] = ApiClient.convertToType(
+          data["smart_rule_enabled"],
+          "Boolean"
         );
       }
     } else if (data === null) {
@@ -122,5 +128,10 @@ CreateFleetRequest.prototype["label"] = undefined;
  * @member {String} smart_rule
  */
 CreateFleetRequest.prototype["smart_rule"] = undefined;
+
+/**
+ * @member {Boolean} smart_rule_enabled
+ */
+CreateFleetRequest.prototype["smart_rule_enabled"] = undefined;
 
 export default CreateFleetRequest;

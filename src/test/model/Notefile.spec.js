@@ -28,7 +28,7 @@
   var instance;
 
   beforeEach(function () {
-    instance = new NotehubJs.ListNotefiles200Response();
+    instance = new NotehubJs.Notefile();
   });
 
   var getProperty = function (object, getter, property) {
@@ -43,28 +43,28 @@
     else object[property] = value;
   };
 
-  describe("ListNotefiles200Response", function () {
-    it("should create an instance of ListNotefiles200Response", function () {
-      // uncomment below and update the code to test ListNotefiles200Response
-      //var instance = new NotehubJs.ListNotefiles200Response();
-      //expect(instance).to.be.a(NotehubJs.ListNotefiles200Response);
+  describe("Notefile", function () {
+    it("should create an instance of Notefile", function () {
+      // uncomment below and update the code to test Notefile
+      //var instance = new NotehubJs.Notefile();
+      //expect(instance).to.be.a(NotehubJs.Notefile);
     });
 
-    it('should have the property changes (base name: "changes")', function () {
-      // uncomment below and update the code to test the property changes
-      //var instance = new NotehubJs.ListNotefiles200Response();
+    it('should have the property id (base name: "id")', function () {
+      // uncomment below and update the code to test the property id
+      //var instance = new NotehubJs.Notefile();
       //expect(instance).to.be();
     });
 
-    it('should have the property info (base name: "info")', function () {
-      // uncomment below and update the code to test the property info
-      //var instance = new NotehubJs.ListNotefiles200Response();
+    it('should have the property notes (base name: "notes")', function () {
+      // uncomment below and update the code to test the property notes
+      //var instance = new NotehubJs.Notefile();
       //expect(instance).to.be();
     });
 
-    it('should have the property total (base name: "total")', function () {
-      // uncomment below and update the code to test the property total
-      //var instance = new NotehubJs.ListNotefiles200Response();
+    it('should have the property template (base name: "template")', function () {
+      // uncomment below and update the code to test the property template
+      //var instance = new NotehubJs.Notefile();
       //expect(instance).to.be();
     });
   });

@@ -4,6 +4,7 @@
 
 | Name                     | Type                                      | Description | Notes      |
 | ------------------------ | ----------------------------------------- | ----------- | ---------- |
+| **bestLocation**         | [**Location**](Location.md)               |             | [optional] |
 | **cellularUsage**        | [**[SimUsage]**](SimUsage.md)             |             | [optional] |
 | **contact**              | [**Contact**](Contact.md)                 |             | [optional] |
 | **dfu**                  | [**DFUEnv**](DFUEnv.md)                   |             | [optional] |

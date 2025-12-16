@@ -6,9 +6,9 @@ All URIs are relative to *https://api.notefile.net*
 | ----------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ----------------------------------------------- |
 | [**addDbNote**](DeviceApi.md#addDbNote)                                                   | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}    |
 | [**addQiNote**](DeviceApi.md#addQiNote)                                                   | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}             |
-| [**deleteDbNote**](DeviceApi.md#deleteDbNote)                                             | **DELETE** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}  |
 | [**deleteDevice**](DeviceApi.md#deleteDevice)                                             | **DELETE** /v1/projects/{projectOrProductUID}/devices/{deviceUID}                              |
 | [**deleteDeviceEnvironmentVariable**](DeviceApi.md#deleteDeviceEnvironmentVariable)       | **DELETE** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_variables/{key}  |
+| [**deleteNote**](DeviceApi.md#deleteNote)                                                 | **DELETE** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}  |
 | [**deleteNotefiles**](DeviceApi.md#deleteNotefiles)                                       | **DELETE** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/files                        |
 | [**disableDevice**](DeviceApi.md#disableDevice)                                           | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/disable                        |
 | [**disableDeviceConnectivityAssurance**](DeviceApi.md#disableDeviceConnectivityAssurance) | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/disable-connectivity-assurance |
@@ -27,9 +27,8 @@ All URIs are relative to *https://api.notefile.net*
 | [**getDeviceSessions**](DeviceApi.md#getDeviceSessions)                                   | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/sessions                        |
 | [**getDevices**](DeviceApi.md#getDevices)                                                 | **GET** /v1/projects/{projectOrProductUID}/devices                                             |
 | [**getFleetDevices**](DeviceApi.md#getFleetDevices)                                       | **GET** /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/devices                           |
-| [**getNotefile**](DeviceApi.md#getNotefile)                                               | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/changes      |
-| [**listNotefiles**](DeviceApi.md#listNotefiles)                                           | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/files/changes                   |
-| [**listPendingNotefiles**](DeviceApi.md#listPendingNotefiles)                             | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/files/changes/pending           |
+| [**getNotefile**](DeviceApi.md#getNotefile)                                               | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}              |
+| [**listNotefiles**](DeviceApi.md#listNotefiles)                                           | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/files                           |
 | [**provisionDevice**](DeviceApi.md#provisionDevice)                                       | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/provision                      |
 | [**setDeviceEnvironmentVariables**](DeviceApi.md#setDeviceEnvironmentVariables)           | **PUT** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_variables           |
 | [**setDeviceEnvironmentVariablesByPin**](DeviceApi.md#setDeviceEnvironmentVariablesByPin) | **PUT** /v1/products/{productUID}/devices/{deviceUID}/environment_variables_with_pin           |
@@ -38,9 +37,9 @@ All URIs are relative to *https://api.notefile.net*
 
 ## addDbNote
 
-> addDbNote(projectOrProductUID, deviceUID, notefileID, noteID, note)
+> addDbNote(projectOrProductUID, deviceUID, notefileID, noteID, noteInput)
 
-Add a Note to a .db notefile
+Add a Note to a .db notefile. if noteID is &#39;-&#39; then payload is ignored and empty notefile is created
 
 ### Example
 
@@ -56,8 +55,8 @@ let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
 let deviceUID = dev:000000000000000; // String |
 let notefileID = "notefileID_example"; // String |
 let noteID = "noteID_example"; // String |
-let note = new NotehubJs.Note(); // Note | Body or payload of note to be added to the device
-apiInstance.addDbNote(projectOrProductUID, deviceUID, notefileID, noteID, note).then(() => {
+let noteInput = new NotehubJs.NoteInput(); // NoteInput | Body or payload of note to be added to the device
+apiInstance.addDbNote(projectOrProductUID, deviceUID, notefileID, noteID, noteInput).then(() => {
   console.log('API called successfully.');
 }, (error) => {
   console.error(error);
@@ -67,13 +66,13 @@ apiInstance.addDbNote(projectOrProductUID, deviceUID, notefileID, noteID, note).
 
 ### Parameters
 
-| Name                    | Type                | Description                                       | Notes |
-| ----------------------- | ------------------- | ------------------------------------------------- | ----- |
-| **projectOrProductUID** | **String**          |                                                   |
-| **deviceUID**           | **String**          |                                                   |
-| **notefileID**          | **String**          |                                                   |
-| **noteID**              | **String**          |                                                   |
-| **note**                | [**Note**](Note.md) | Body or payload of note to be added to the device |
+| Name                    | Type                          | Description                                       | Notes |
+| ----------------------- | ----------------------------- | ------------------------------------------------- | ----- |
+| **projectOrProductUID** | **String**                    |                                                   |
+| **deviceUID**           | **String**                    |                                                   |
+| **notefileID**          | **String**                    |                                                   |
+| **noteID**              | **String**                    |                                                   |
+| **noteInput**           | [**NoteInput**](NoteInput.md) | Body or payload of note to be added to the device |
 
 ### Return type
 
@@ -90,7 +89,7 @@ null (empty response body)
 
 ## addQiNote
 
-> addQiNote(projectOrProductUID, deviceUID, notefileID, note)
+> addQiNote(projectOrProductUID, deviceUID, notefileID, noteInput)
 
 Adds a Note to a Notefile, creating the Notefile if it doesn&#39;t yet exist.
 
@@ -107,8 +106,8 @@ let apiInstance = new NotehubJs.DeviceApi();
 let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
 let deviceUID = dev:000000000000000; // String |
 let notefileID = "notefileID_example"; // String |
-let note = new NotehubJs.Note(); // Note | Body or payload of note to be added to the device
-apiInstance.addQiNote(projectOrProductUID, deviceUID, notefileID, note).then(() => {
+let noteInput = new NotehubJs.NoteInput(); // NoteInput | Body or payload of note to be added to the device
+apiInstance.addQiNote(projectOrProductUID, deviceUID, notefileID, noteInput).then(() => {
   console.log('API called successfully.');
 }, (error) => {
   console.error(error);
@@ -118,12 +117,12 @@ apiInstance.addQiNote(projectOrProductUID, deviceUID, notefileID, note).then(() 
 
 ### Parameters
 
-| Name                    | Type                | Description                                       | Notes |
-| ----------------------- | ------------------- | ------------------------------------------------- | ----- |
-| **projectOrProductUID** | **String**          |                                                   |
-| **deviceUID**           | **String**          |                                                   |
-| **notefileID**          | **String**          |                                                   |
-| **note**                | [**Note**](Note.md) | Body or payload of note to be added to the device |
+| Name                    | Type                          | Description                                       | Notes |
+| ----------------------- | ----------------------------- | ------------------------------------------------- | ----- |
+| **projectOrProductUID** | **String**                    |                                                   |
+| **deviceUID**           | **String**                    |                                                   |
+| **notefileID**          | **String**                    |                                                   |
+| **noteInput**           | [**NoteInput**](NoteInput.md) | Body or payload of note to be added to the device |
 
 ### Return type
 
@@ -136,56 +135,6 @@ null (empty response body)
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: application/json
-
-## deleteDbNote
-
-> deleteDbNote(projectOrProductUID, deviceUID, notefileID, noteID)
-
-Delete a note from a .db notefile
-
-### Example
-
-```javascript
-import * as NotehubJs from '@blues-inc/notehub-js';
-let defaultClient = NotehubJs.ApiClient.instance;
-// Configure Bearer access token for authorization: personalAccessToken
-let personalAccessToken = defaultClient.authentications['personalAccessToken'];
-personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
-
-let apiInstance = new NotehubJs.DeviceApi();
-let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
-let deviceUID = dev:000000000000000; // String |
-let notefileID = "notefileID_example"; // String |
-let noteID = "noteID_example"; // String |
-apiInstance.deleteDbNote(projectOrProductUID, deviceUID, notefileID, noteID).then(() => {
-  console.log('API called successfully.');
-}, (error) => {
-  console.error(error);
-});
-
-```
-
-### Parameters
-
-| Name                    | Type       | Description | Notes |
-| ----------------------- | ---------- | ----------- | ----- |
-| **projectOrProductUID** | **String** |             |
-| **deviceUID**           | **String** |             |
-| **notefileID**          | **String** |             |
-| **noteID**              | **String** |             |
-
-### Return type
-
-null (empty response body)
-
-### Authorization
-
-[personalAccessToken](../README.md#personalAccessToken)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
 - **Accept**: application/json
 
 ## deleteDevice
@@ -274,6 +223,56 @@ apiInstance.deleteDeviceEnvironmentVariable(projectOrProductUID, deviceUID, key)
 ### Return type
 
 [**EnvironmentVariables**](EnvironmentVariables.md)
+
+### Authorization
+
+[personalAccessToken](../README.md#personalAccessToken)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+## deleteNote
+
+> deleteNote(projectOrProductUID, deviceUID, notefileID, noteID)
+
+Delete a note from a .db or .qi notefile
+
+### Example
+
+```javascript
+import * as NotehubJs from '@blues-inc/notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
+// Configure Bearer access token for authorization: personalAccessToken
+let personalAccessToken = defaultClient.authentications['personalAccessToken'];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
+
+let apiInstance = new NotehubJs.DeviceApi();
+let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let deviceUID = dev:000000000000000; // String |
+let notefileID = "notefileID_example"; // String |
+let noteID = "noteID_example"; // String |
+apiInstance.deleteNote(projectOrProductUID, deviceUID, notefileID, noteID).then(() => {
+  console.log('API called successfully.');
+}, (error) => {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+| Name                    | Type       | Description | Notes |
+| ----------------------- | ---------- | ----------- | ----- |
+| **projectOrProductUID** | **String** |             |
+| **deviceUID**           | **String** |             |
+| **notefileID**          | **String** |             |
+| **noteID**              | **String** |             |
+
+### Return type
+
+null (empty response body)
 
 ### Authorization
 
@@ -520,7 +519,7 @@ null (empty response body)
 
 > GetDbNote200Response getDbNote(projectOrProductUID, deviceUID, notefileID, noteID, opts)
 
-Get a note from a .db notefile
+Get a note from a .db or .qi notefile
 
 ### Example
 
@@ -1210,10 +1209,7 @@ let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
 let deviceUID = dev:000000000000000; // String |
 let notefileID = "notefileID_example"; // String |
 let opts = {
-  'tracker': "tracker_example", // String | The change tracker ID.
   'max': 56, // Number | The maximum number of Notes to return in the request.
-  'start': true, // Boolean | true to reset the tracker to the beginning.
-  'stop': true, // Boolean | true to delete the tracker.
   'deleted': true, // Boolean | true to return deleted notes.
   '_delete': true // Boolean | true to delete the notes returned by the request.
 };
@@ -1232,10 +1228,7 @@ apiInstance.getNotefile(projectOrProductUID, deviceUID, notefileID, opts).then((
 | **projectOrProductUID** | **String**  |                                                       |
 | **deviceUID**           | **String**  |                                                       |
 | **notefileID**          | **String**  |                                                       |
-| **tracker**             | **String**  | The change tracker ID.                                | [optional] |
 | **max**                 | **Number**  | The maximum number of Notes to return in the request. | [optional] |
-| **start**               | **Boolean** | true to reset the tracker to the beginning.           | [optional] |
-| **stop**                | **Boolean** | true to delete the tracker.                           | [optional] |
 | **deleted**             | **Boolean** | true to return deleted notes.                         | [optional] |
 | **\_delete**            | **Boolean** | true to delete the notes returned by the request.     | [optional] |
 
@@ -1254,7 +1247,7 @@ apiInstance.getNotefile(projectOrProductUID, deviceUID, notefileID, opts).then((
 
 ## listNotefiles
 
-> ListNotefiles200Response listNotefiles(projectOrProductUID, deviceUID, opts)
+> [Notefile] listNotefiles(projectOrProductUID, deviceUID, opts)
 
 Lists .qi and .db files for the device
 
@@ -1271,8 +1264,8 @@ let apiInstance = new NotehubJs.DeviceApi();
 let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
 let deviceUID = dev:000000000000000; // String |
 let opts = {
-  'tracker': "tracker_example", // String | The change tracker ID.
-  'files': ["null"] // [String] | One or more files to obtain change information from.
+  'files': ["null"], // [String] | One or more files to obtain change information from.
+  'pending': true // Boolean | show only files that are pending sync to the Notecard
 };
 apiInstance.listNotefiles(projectOrProductUID, deviceUID, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
@@ -1284,62 +1277,16 @@ apiInstance.listNotefiles(projectOrProductUID, deviceUID, opts).then((data) => {
 
 ### Parameters
 
-| Name                    | Type                      | Description                                          | Notes      |
-| ----------------------- | ------------------------- | ---------------------------------------------------- | ---------- |
-| **projectOrProductUID** | **String**                |                                                      |
-| **deviceUID**           | **String**                |                                                      |
-| **tracker**             | **String**                | The change tracker ID.                               | [optional] |
-| **files**               | [**[String]**](String.md) | One or more files to obtain change information from. | [optional] |
+| Name                    | Type                      | Description                                           | Notes      |
+| ----------------------- | ------------------------- | ----------------------------------------------------- | ---------- |
+| **projectOrProductUID** | **String**                |                                                       |
+| **deviceUID**           | **String**                |                                                       |
+| **files**               | [**[String]**](String.md) | One or more files to obtain change information from.  | [optional] |
+| **pending**             | **Boolean**               | show only files that are pending sync to the Notecard | [optional] |
 
 ### Return type
 
-[**ListNotefiles200Response**](ListNotefiles200Response.md)
-
-### Authorization
-
-[personalAccessToken](../README.md#personalAccessToken)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-## listPendingNotefiles
-
-> ListPendingNotefiles200Response listPendingNotefiles(projectOrProductUID, deviceUID)
-
-Lists .qi and .db files that are pending sync to the Notecard
-
-### Example
-
-```javascript
-import * as NotehubJs from '@blues-inc/notehub-js';
-let defaultClient = NotehubJs.ApiClient.instance;
-// Configure Bearer access token for authorization: personalAccessToken
-let personalAccessToken = defaultClient.authentications['personalAccessToken'];
-personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
-
-let apiInstance = new NotehubJs.DeviceApi();
-let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
-let deviceUID = dev:000000000000000; // String |
-apiInstance.listPendingNotefiles(projectOrProductUID, deviceUID).then((data) => {
-  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
-}, (error) => {
-  console.error(error);
-});
-
-```
-
-### Parameters
-
-| Name                    | Type       | Description | Notes |
-| ----------------------- | ---------- | ----------- | ----- |
-| **projectOrProductUID** | **String** |             |
-| **deviceUID**           | **String** |             |
-
-### Return type
-
-[**ListPendingNotefiles200Response**](ListPendingNotefiles200Response.md)
+[**[Notefile]**](Notefile.md)
 
 ### Authorization
 
@@ -1544,9 +1491,9 @@ apiInstance.signalDevice(projectOrProductUID, deviceUID, body).then((data) => {
 
 ## updateDbNote
 
-> updateDbNote(projectOrProductUID, deviceUID, notefileID, noteID, note)
+> updateDbNote(projectOrProductUID, deviceUID, notefileID, noteID, noteInput)
 
-Update a note in a .db notefile
+Update a note in a .db or .qi notefile
 
 ### Example
 
@@ -1562,8 +1509,8 @@ let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
 let deviceUID = dev:000000000000000; // String |
 let notefileID = "notefileID_example"; // String |
 let noteID = "noteID_example"; // String |
-let note = new NotehubJs.Note(); // Note | Body or payload of note to be added to the device
-apiInstance.updateDbNote(projectOrProductUID, deviceUID, notefileID, noteID, note).then(() => {
+let noteInput = new NotehubJs.NoteInput(); // NoteInput | Body or payload of note to be added to the device
+apiInstance.updateDbNote(projectOrProductUID, deviceUID, notefileID, noteID, noteInput).then(() => {
   console.log('API called successfully.');
 }, (error) => {
   console.error(error);
@@ -1573,13 +1520,13 @@ apiInstance.updateDbNote(projectOrProductUID, deviceUID, notefileID, noteID, not
 
 ### Parameters
 
-| Name                    | Type                | Description                                       | Notes |
-| ----------------------- | ------------------- | ------------------------------------------------- | ----- |
-| **projectOrProductUID** | **String**          |                                                   |
-| **deviceUID**           | **String**          |                                                   |
-| **notefileID**          | **String**          |                                                   |
-| **noteID**              | **String**          |                                                   |
-| **note**                | [**Note**](Note.md) | Body or payload of note to be added to the device |
+| Name                    | Type                          | Description                                       | Notes |
+| ----------------------- | ----------------------------- | ------------------------------------------------- | ----- |
+| **projectOrProductUID** | **String**                    |                                                   |
+| **deviceUID**           | **String**                    |                                                   |
+| **notefileID**          | **String**                    |                                                   |
+| **noteID**              | **String**                    |                                                   |
+| **noteInput**           | [**NoteInput**](NoteInput.md) | Body or payload of note to be added to the device |
 
 ### Return type
 

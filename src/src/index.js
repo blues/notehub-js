@@ -84,12 +84,11 @@ import GetNotefile200Response from "./model/GetNotefile200Response";
 import GetProducts200Response from "./model/GetProducts200Response";
 import GetProjectMembers200Response from "./model/GetProjectMembers200Response";
 import GetProjects200Response from "./model/GetProjects200Response";
+import GetRouteLogsUsage200Response from "./model/GetRouteLogsUsage200Response";
 import GetSessionsUsage200Response from "./model/GetSessionsUsage200Response";
 import GetWebhooks200Response from "./model/GetWebhooks200Response";
 import GoogleRoute from "./model/GoogleRoute";
 import HttpRoute from "./model/HttpRoute";
-import ListNotefiles200Response from "./model/ListNotefiles200Response";
-import ListPendingNotefiles200Response from "./model/ListPendingNotefiles200Response";
 import Location from "./model/Location";
 import Login200Response from "./model/Login200Response";
 import LoginRequest from "./model/LoginRequest";
@@ -97,6 +96,8 @@ import Monitor from "./model/Monitor";
 import MonitorAlertRoutesInner from "./model/MonitorAlertRoutesInner";
 import MqttRoute from "./model/MqttRoute";
 import Note from "./model/Note";
+import NoteInput from "./model/NoteInput";
+import Notefile from "./model/Notefile";
 import NotefileSchema from "./model/NotefileSchema";
 import NotehubRoute from "./model/NotehubRoute";
 import NotehubRouteSummary from "./model/NotehubRouteSummary";
@@ -182,7 +183,7 @@ import WebhookApi from "./api/WebhookApi";
  * </pre>
  * </p>
  * @module index
- * @version 3.0.0
+ * @version 4.0.0
  */
 export {
   /**
@@ -624,6 +625,12 @@ export {
   GetProjects200Response,
 
   /**
+   * The GetRouteLogsUsage200Response model constructor.
+   * @property {module:model/GetRouteLogsUsage200Response}
+   */
+  GetRouteLogsUsage200Response,
+
+  /**
    * The GetSessionsUsage200Response model constructor.
    * @property {module:model/GetSessionsUsage200Response}
    */
@@ -646,18 +653,6 @@ export {
    * @property {module:model/HttpRoute}
    */
   HttpRoute,
-
-  /**
-   * The ListNotefiles200Response model constructor.
-   * @property {module:model/ListNotefiles200Response}
-   */
-  ListNotefiles200Response,
-
-  /**
-   * The ListPendingNotefiles200Response model constructor.
-   * @property {module:model/ListPendingNotefiles200Response}
-   */
-  ListPendingNotefiles200Response,
 
   /**
    * The Location model constructor.
@@ -700,6 +695,18 @@ export {
    * @property {module:model/Note}
    */
   Note,
+
+  /**
+   * The NoteInput model constructor.
+   * @property {module:model/NoteInput}
+   */
+  NoteInput,
+
+  /**
+   * The Notefile model constructor.
+   * @property {module:model/Notefile}
+   */
+  Notefile,
 
   /**
    * The NotefileSchema model constructor.
