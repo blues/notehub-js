@@ -2538,6 +2538,13 @@ paths:
             enum:
               - route
               - project
+        - name: skipRecentData
+          in: query
+          description: 'When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects.'
+          required: false
+          schema:
+            type: boolean
+            default: false
       responses:
         '200':
           $ref: '#/components/responses/UsageRouteLogsResponse'
@@ -6097,6 +6104,9 @@ components:
                       description: The device UID this usage data belongs to (only present when aggregate is 'device')
                       type: string
                       example: 'dev:123456789012345'
+                    device_count:
+                      description: the number of devices represented by this data point
+                      type: integer
                     fleet:
                       description: The fleet UID this usage data belongs to (only present when aggregate is 'fleet')
                       type: string
