@@ -447,13 +447,6 @@ paths:
     delete:
       operationId: DeleteDevice
       description: Delete Device
-      parameters:
-        - name: purge
-          in: query
-          required: true
-          schema:
-            type: boolean
-            default: false
       responses:
         '204':
           description: Successful operation
