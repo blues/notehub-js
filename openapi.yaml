@@ -3304,6 +3304,7 @@ components:
                 type: string
                 enum:
                   - event
+                  - device
               source_uid:
                 description: The UID of the source of the alert
                 type: string
@@ -3533,8 +3534,9 @@ components:
         - required:
             - name
             - description
-            - notefile_filter
             - alert_routes
+            - source_type
+            - threshold
     CreateUpdateRepository:
       type: object
       properties:
@@ -4667,10 +4669,11 @@ components:
           type: string
           example: body.temperature
         source_type:
-          description: The type of source to monitor. Currently only "event" is supported.
+          description: The type of source to monitor. Supported values are "event" and "heartbeat".
           type: string
           enum:
             - event
+            - heartbeat
         threshold:
           description: The type of condition to apply to the value selected by the source_selector
           type: integer
