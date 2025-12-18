@@ -152,13 +152,12 @@ paths:
           $ref: '#/components/responses/GetDeviceEnvironmentVariablesResponse'
         default:
           $ref: '#/components/responses/ErrorResponse'
-      security:
-        - pin: []
       tags:
         - device
     parameters:
       - $ref: '#/components/parameters/productUIDParam'
       - $ref: '#/components/parameters/deviceUIDParam'
+      - $ref: '#/components/parameters/XAuthTokenHeader'
     put:
       operationId: SetDeviceEnvironmentVariablesByPin
       description: Set environment variables of a device with device pin authorization
@@ -174,8 +173,6 @@ paths:
           $ref: '#/components/responses/EnvironmentVariablesResponse'
         default:
           $ref: '#/components/responses/ErrorResponse'
-      security:
-        - pin: []
       tags:
         - device
   '/v1/products/{productUID}/ext-devices/{deviceUID}/event':
@@ -2538,6 +2535,13 @@ paths:
             enum:
               - route
               - project
+        - name: skipRecentData
+          in: query
+          description: 'When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects.'
+          required: false
+          schema:
+            type: boolean
+            default: false
       responses:
         '200':
           $ref: '#/components/responses/UsageRouteLogsResponse'
@@ -3262,6 +3266,13 @@ components:
       schema:
         type: string
         example: Abc_123-2646f411-dc56-44a0-9743-4130f47a74h8
+    XAuthTokenHeader:
+      description: For accessing endpoints by Device pin.
+      in: header
+      name: X-Auth-Token
+      required: true
+      schema:
+        type: string
   schemas:
     Alert:
       type: object
@@ -6151,12 +6162,6 @@ components:
         Use a personal access token from notehub.io/api-access
       scheme: bearer
       type: http
-    pin:
-      description: |
-        For accessing endpoints by Device pin.
-      in: header
-      name: X-Auth-Token
-      type: apiKey
 tags:
   - description: Authorization operations
     name: authorization
