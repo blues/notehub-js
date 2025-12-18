@@ -6104,6 +6104,9 @@ components:
                       description: The device UID this usage data belongs to (only present when aggregate is 'device')
                       type: string
                       example: 'dev:123456789012345'
+                    device_count:
+                      description: the number of devices represented by this data point
+                      type: integer
                     fleet:
                       description: The fleet UID this usage data belongs to (only present when aggregate is 'fleet')
                       type: string
