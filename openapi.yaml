@@ -152,13 +152,12 @@ paths:
           $ref: '#/components/responses/GetDeviceEnvironmentVariablesResponse'
         default:
           $ref: '#/components/responses/ErrorResponse'
-      security:
-        - pin: []
       tags:
         - device
     parameters:
       - $ref: '#/components/parameters/productUIDParam'
       - $ref: '#/components/parameters/deviceUIDParam'
+      - $ref: '#/components/parameters/XAuthTokenHeader'
     put:
       operationId: SetDeviceEnvironmentVariablesByPin
       description: Set environment variables of a device with device pin authorization
@@ -174,8 +173,6 @@ paths:
           $ref: '#/components/responses/EnvironmentVariablesResponse'
         default:
           $ref: '#/components/responses/ErrorResponse'
-      security:
-        - pin: []
       tags:
         - device
   '/v1/products/{productUID}/ext-devices/{deviceUID}/event':
@@ -450,13 +447,6 @@ paths:
     delete:
       operationId: DeleteDevice
       description: Delete Device
-      parameters:
-        - name: purge
-          in: query
-          required: true
-          schema:
-            type: boolean
-            default: false
       responses:
         '204':
           description: Successful operation
@@ -2369,6 +2359,8 @@ paths:
         - $ref: '#/components/parameters/systemFilesOnlyParam'
         - $ref: '#/components/parameters/mostRecentOnlyParam'
         - $ref: '#/components/parameters/filesQueryParam'
+        - $ref: '#/components/parameters/routingStatusParam'
+        - $ref: '#/components/parameters/responseStatusParam'
       responses:
         '200':
           description: Successful operation
@@ -2538,6 +2530,13 @@ paths:
             enum:
               - route
               - project
+        - name: skipRecentData
+          in: query
+          description: 'When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects.'
+          required: false
+          schema:
+            type: boolean
+            default: false
       responses:
         '200':
           $ref: '#/components/responses/UsageRouteLogsResponse'
@@ -3094,6 +3093,15 @@ components:
       schema:
         type: string
         example: 'rid:2606f411-dea6-44a0-9743-1130f57d77d8'
+    responseStatusParam:
+      example: 500
+      in: query
+      name: responseStatus
+      required: false
+      schema:
+        type: array
+        items:
+          type: string
     routeLogsSortByParam:
       in: query
       name: sortBy
@@ -3132,6 +3140,18 @@ components:
         items:
           type: string
       style: form
+    routingStatusParam:
+      example: failure
+      in: query
+      name: routingStatus
+      required: false
+      schema:
+        type: array
+        items:
+          enum:
+            - success
+            - failure
+          type: string
     selectFieldsParam:
       description: 'Comma-separated list of fields to select from JSON payload (e.g., "field1,field2.subfield,field3"), this will reflect the columns in the CSV output.'
       in: query
@@ -3262,6 +3282,13 @@ components:
       schema:
         type: string
         example: Abc_123-2646f411-dc56-44a0-9743-4130f47a74h8
+    XAuthTokenHeader:
+      description: For accessing endpoints by Device pin.
+      in: header
+      name: X-Auth-Token
+      required: true
+      schema:
+        type: string
   schemas:
     Alert:
       type: object
@@ -3293,6 +3320,7 @@ components:
                 type: string
                 enum:
                   - event
+                  - device
               source_uid:
                 description: The UID of the source of the alert
                 type: string
@@ -3522,8 +3550,9 @@ components:
         - required:
             - name
             - description
-            - notefile_filter
             - alert_routes
+            - source_type
+            - threshold
     CreateUpdateRepository:
       type: object
       properties:
@@ -4656,10 +4685,11 @@ components:
           type: string
           example: body.temperature
         source_type:
-          description: The type of source to monitor. Currently only "event" is supported.
+          description: The type of source to monitor. Supported values are "event" and "heartbeat".
           type: string
           enum:
             - event
+            - heartbeat
         threshold:
           description: The type of condition to apply to the value selected by the source_selector
           type: integer
@@ -6097,6 +6127,9 @@ components:
                       description: The device UID this usage data belongs to (only present when aggregate is 'device')
                       type: string
                       example: 'dev:123456789012345'
+                    device_count:
+                      description: the number of devices represented by this data point
+                      type: integer
                     fleet:
                       description: The fleet UID this usage data belongs to (only present when aggregate is 'fleet')
                       type: string
@@ -6151,12 +6184,6 @@ components:
         Use a personal access token from notehub.io/api-access
       scheme: bearer
       type: http
-    pin:
-      description: |
-        For accessing endpoints by Device pin.
-      in: header
-      name: X-Auth-Token
-      type: apiKey
 tags:
   - description: Authorization operations
     name: authorization
