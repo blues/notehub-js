@@ -5192,13 +5192,18 @@ components:
           type: integer
           format: int64
           example: 1609459200
-        billable_bytes:
+        data_usage:
           $ref: '#/components/schemas/DataUsage'
         last_updated:
           description: Time this plan information was last updated
           type: integer
           format: int64
           example: 1656010061
+        minimum_billable_bytes:
+          description: Minimum billable bytes
+          type: integer
+          format: int64
+          example: 50
         ntn_provider:
           description: Non-Terrestrial Network provider name
           type: string
