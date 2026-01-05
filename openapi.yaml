@@ -5184,6 +5184,34 @@ components:
           type: string
           format: uri
       additionalProperties: false
+    SatelliteDataUsage:
+      type: object
+      properties:
+        bytes_remaining:
+          description: Bytes remaining in the plan
+          type: integer
+          format: int64
+          example: 18600
+        bytes_total:
+          description: Total bytes included in the plan
+          type: integer
+          format: int64
+          example: 18650
+        bytes_used:
+          description: Bytes used to date
+          type: integer
+          format: int64
+          example: 49
+        bytes_used_billable:
+          description: Billable bytes used to date
+          type: integer
+          format: int64
+          example: 50
+      required:
+        - bytes_total
+        - bytes_used
+        - bytes_used_billable
+        - bytes_remaining
     SatellitePlan:
       type: object
       properties:
@@ -5192,8 +5220,6 @@ components:
           type: integer
           format: int64
           example: 1609459200
-        data_usage:
-          $ref: '#/components/schemas/DataUsage'
         last_updated:
           description: Time this plan information was last updated
           type: integer
@@ -5212,6 +5238,8 @@ components:
           description: Provider-specific identifier for the satellite subscription
           type: string
           example: 'skylo:5746354465786'
+        satellite_data_usage:
+          $ref: '#/components/schemas/SatelliteDataUsage'
       nullable: true
       required:
         - ntn_provider
