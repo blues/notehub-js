@@ -5220,11 +5220,11 @@ components:
           type: integer
           format: int64
           example: 1609459200
-        last_updated:
-          description: Time this plan information was last updated
+        last_session_at:
+          description: When this Starnote last had a session
           type: integer
           format: int64
-          example: 1656010061
+          example: 1808675309
         minimum_billable_bytes:
           description: Minimum billable bytes
           type: integer
@@ -5772,11 +5772,6 @@ components:
                 items:
                   $ref: '#/components/schemas/CellularPlan'
                 nullable: true
-              satellite_plans:
-                type: array
-                items:
-                  $ref: '#/components/schemas/SatellitePlan'
-                nullable: true
     DevicesResponse:
       description: List of Devices
       content:
@@ -6173,10 +6168,6 @@ components:
                       description: The ICCID of the cellular SIM card (only present when type is 'cellular')
                       type: string
                       example: '12345678901234567890'
-                    imsi:
-                      description: The IMSI of the satellite device (only present when type is 'satellite')
-                      type: string
-                      example: '123456789012345'
                     psid:
                       description: The PSID (Packet Service ID) of the satellite (or other packet-based device)
                       type: string
