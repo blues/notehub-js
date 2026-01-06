@@ -152,13 +152,12 @@ paths:
           $ref: '#/components/responses/GetDeviceEnvironmentVariablesResponse'
         default:
           $ref: '#/components/responses/ErrorResponse'
-      security:
-        - pin: []
       tags:
         - device
     parameters:
       - $ref: '#/components/parameters/productUIDParam'
       - $ref: '#/components/parameters/deviceUIDParam'
+      - $ref: '#/components/parameters/XAuthTokenHeader'
     put:
       operationId: SetDeviceEnvironmentVariablesByPin
       description: Set environment variables of a device with device pin authorization
@@ -174,8 +173,6 @@ paths:
           $ref: '#/components/responses/EnvironmentVariablesResponse'
         default:
           $ref: '#/components/responses/ErrorResponse'
-      security:
-        - pin: []
       tags:
         - device
   '/v1/products/{productUID}/ext-devices/{deviceUID}/event':
@@ -450,13 +447,6 @@ paths:
     delete:
       operationId: DeleteDevice
       description: Delete Device
-      parameters:
-        - name: purge
-          in: query
-          required: true
-          schema:
-            type: boolean
-            default: false
       responses:
         '204':
           description: Successful operation
@@ -2538,6 +2528,13 @@ paths:
             enum:
               - route
               - project
+        - name: skipRecentData
+          in: query
+          description: 'When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects.'
+          required: false
+          schema:
+            type: boolean
+            default: false
       responses:
         '200':
           $ref: '#/components/responses/UsageRouteLogsResponse'
@@ -3262,6 +3259,13 @@ components:
       schema:
         type: string
         example: Abc_123-2646f411-dc56-44a0-9743-4130f47a74h8
+    XAuthTokenHeader:
+      description: For accessing endpoints by Device pin.
+      in: header
+      name: X-Auth-Token
+      required: true
+      schema:
+        type: string
   schemas:
     Alert:
       type: object
@@ -3293,6 +3297,7 @@ components:
                 type: string
                 enum:
                   - event
+                  - device
               source_uid:
                 description: The UID of the source of the alert
                 type: string
@@ -3522,8 +3527,9 @@ components:
         - required:
             - name
             - description
-            - notefile_filter
             - alert_routes
+            - source_type
+            - threshold
     CreateUpdateRepository:
       type: object
       properties:
@@ -4656,10 +4662,11 @@ components:
           type: string
           example: body.temperature
         source_type:
-          description: The type of source to monitor. Currently only "event" is supported.
+          description: The type of source to monitor. Supported values are "event" and "heartbeat".
           type: string
           enum:
             - event
+            - heartbeat
         threshold:
           description: The type of condition to apply to the value selected by the source_selector
           type: integer
@@ -5177,6 +5184,34 @@ components:
           type: string
           format: uri
       additionalProperties: false
+    SatelliteDataUsage:
+      type: object
+      properties:
+        bytes_remaining:
+          description: Bytes remaining in the plan
+          type: integer
+          format: int64
+          example: 18600
+        bytes_total:
+          description: Total bytes included in the plan
+          type: integer
+          format: int64
+          example: 18650
+        bytes_used:
+          description: Bytes used to date
+          type: integer
+          format: int64
+          example: 49
+        bytes_used_billable:
+          description: Billable bytes used to date
+          type: integer
+          format: int64
+          example: 50
+      required:
+        - bytes_total
+        - bytes_used
+        - bytes_used_billable
+        - bytes_remaining
     SatellitePlan:
       type: object
       properties:
@@ -5185,13 +5220,16 @@ components:
           type: integer
           format: int64
           example: 1609459200
-        billable_bytes:
-          $ref: '#/components/schemas/DataUsage'
         last_updated:
           description: Time this plan information was last updated
           type: integer
           format: int64
           example: 1656010061
+        minimum_billable_bytes:
+          description: Minimum billable bytes
+          type: integer
+          format: int64
+          example: 50
         ntn_provider:
           description: Non-Terrestrial Network provider name
           type: string
@@ -5200,6 +5238,8 @@ components:
           description: Provider-specific identifier for the satellite subscription
           type: string
           example: 'skylo:5746354465786'
+        satellite_data_usage:
+          $ref: '#/components/schemas/SatelliteDataUsage'
       nullable: true
       required:
         - ntn_provider
@@ -5501,6 +5541,18 @@ components:
     UsageData:
       type: object
       properties:
+        billable_bytes_received:
+          description: Billable bytes received (only for packet-based protocols)
+          type: integer
+          format: int64
+        billable_bytes_sent:
+          description: Billable bytes sent (only for packet-based protocols)
+          type: integer
+          format: int64
+        billable_bytes_total:
+          description: Total billable bytes (only for packet-based protocols)
+          type: integer
+          format: int64
         bytes_received:
           type: integer
           format: int64
@@ -5509,6 +5561,14 @@ components:
           type: integer
           format: int64
           example: 524288
+        packets_received:
+          description: Packets received (only for packet-based protocols)
+          type: integer
+          format: int64
+        packets_sent:
+          description: Packets sent (only for packet-based protocols)
+          type: integer
+          format: int64
         period:
           type: string
           format: date-time
@@ -5711,6 +5771,11 @@ components:
                 type: array
                 items:
                   $ref: '#/components/schemas/CellularPlan'
+                nullable: true
+              satellite_plans:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SatellitePlan'
                 nullable: true
     DevicesResponse:
       description: List of Devices
@@ -6097,6 +6162,9 @@ components:
                       description: The device UID this usage data belongs to (only present when aggregate is 'device')
                       type: string
                       example: 'dev:123456789012345'
+                    device_count:
+                      description: the number of devices represented by this data point
+                      type: integer
                     fleet:
                       description: The fleet UID this usage data belongs to (only present when aggregate is 'fleet')
                       type: string
@@ -6109,6 +6177,10 @@ components:
                       description: The IMSI of the satellite device (only present when type is 'satellite')
                       type: string
                       example: '123456789012345'
+                    psid:
+                      description: The PSID (Packet Service ID) of the satellite (or other packet-based device)
+                      type: string
+                      example: 'skylo:5746354465786'
                     type:
                       description: The type of connectivity
                       type: string
@@ -6151,12 +6223,6 @@ components:
         Use a personal access token from notehub.io/api-access
       scheme: bearer
       type: http
-    pin:
-      description: |
-        For accessing endpoints by Device pin.
-      in: header
-      name: X-Auth-Token
-      type: apiKey
 tags:
   - description: Authorization operations
     name: authorization
