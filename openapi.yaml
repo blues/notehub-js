@@ -1493,6 +1493,8 @@ paths:
         - $ref: '#/components/parameters/filenameQueryParam'
         - $ref: '#/components/parameters/md5QueryParam'
         - $ref: '#/components/parameters/unpublishedQueryParam'
+        - $ref: '#/components/parameters/firmwareSortByParam'
+        - $ref: '#/components/parameters/firmwareSortOrderParam'
       responses:
         '200':
           description: Success
@@ -2885,6 +2887,30 @@ components:
       required: false
       schema:
         type: string
+    firmwareSortByParam:
+      description: Field to sort by
+      in: query
+      name: sortBy
+      required: false
+      schema:
+        type: string
+        default: created
+        enum:
+          - created
+          - name
+          - version
+          - length
+    firmwareSortOrderParam:
+      description: 'Sort order (asc for ascending, desc for descending)'
+      in: query
+      name: sortOrder
+      required: false
+      schema:
+        type: string
+        default: desc
+        enum:
+          - asc
+          - desc
     firmwareTypeParam:
       in: path
       name: firmwareType
