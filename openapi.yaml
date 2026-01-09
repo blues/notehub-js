@@ -5210,6 +5210,34 @@ components:
           type: string
           format: uri
       additionalProperties: false
+    SatelliteDataUsage:
+      type: object
+      properties:
+        bytes_remaining:
+          description: Bytes remaining in the plan
+          type: integer
+          format: int64
+          example: 18600
+        bytes_total:
+          description: Total bytes included in the plan
+          type: integer
+          format: int64
+          example: 18650
+        bytes_used:
+          description: Bytes used to date
+          type: integer
+          format: int64
+          example: 49
+        bytes_used_billable:
+          description: Billable bytes used to date
+          type: integer
+          format: int64
+          example: 50
+      required:
+        - bytes_total
+        - bytes_used
+        - bytes_used_billable
+        - bytes_remaining
     SatellitePlan:
       type: object
       properties:
@@ -5218,13 +5246,16 @@ components:
           type: integer
           format: int64
           example: 1609459200
-        billable_bytes:
-          $ref: '#/components/schemas/DataUsage'
-        last_updated:
-          description: Time this plan information was last updated
+        last_session_at:
+          description: When this Starnote last had a session
           type: integer
           format: int64
-          example: 1656010061
+          example: 1808675309
+        minimum_billable_bytes:
+          description: Minimum billable bytes
+          type: integer
+          format: int64
+          example: 50
         ntn_provider:
           description: Non-Terrestrial Network provider name
           type: string
@@ -5233,6 +5264,8 @@ components:
           description: Provider-specific identifier for the satellite subscription
           type: string
           example: 'skylo:5746354465786'
+        satellite_data_usage:
+          $ref: '#/components/schemas/SatelliteDataUsage'
       nullable: true
       required:
         - ntn_provider
@@ -5534,6 +5567,18 @@ components:
     UsageData:
       type: object
       properties:
+        billable_bytes_received:
+          description: Billable bytes received (only for packet-based protocols)
+          type: integer
+          format: int64
+        billable_bytes_sent:
+          description: Billable bytes sent (only for packet-based protocols)
+          type: integer
+          format: int64
+        billable_bytes_total:
+          description: Total billable bytes (only for packet-based protocols)
+          type: integer
+          format: int64
         bytes_received:
           type: integer
           format: int64
@@ -5542,6 +5587,14 @@ components:
           type: integer
           format: int64
           example: 524288
+        packets_received:
+          description: Packets received (only for packet-based protocols)
+          type: integer
+          format: int64
+        packets_sent:
+          description: Packets sent (only for packet-based protocols)
+          type: integer
+          format: int64
         period:
           type: string
           format: date-time
@@ -6141,10 +6194,10 @@ components:
                       description: The ICCID of the cellular SIM card (only present when type is 'cellular')
                       type: string
                       example: '12345678901234567890'
-                    imsi:
-                      description: The IMSI of the satellite device (only present when type is 'satellite')
+                    psid:
+                      description: The PSID (Packet Service ID) of the satellite (or other packet-based device)
                       type: string
-                      example: '123456789012345'
+                      example: 'skylo:5746354465786'
                     type:
                       description: The type of connectivity
                       type: string
