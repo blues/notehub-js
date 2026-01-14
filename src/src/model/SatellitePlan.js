@@ -12,7 +12,7 @@
  */
 
 import ApiClient from "../ApiClient";
-import DataUsage from "./DataUsage";
+import SatelliteDataUsage from "./SatelliteDataUsage";
 
 /**
  * The SatellitePlan model module.
@@ -56,14 +56,15 @@ class SatellitePlan {
       if (data.hasOwnProperty("activated")) {
         obj["activated"] = ApiClient.convertToType(data["activated"], "Number");
       }
-      if (data.hasOwnProperty("billable_bytes")) {
-        obj["billable_bytes"] = DataUsage.constructFromObject(
-          data["billable_bytes"]
+      if (data.hasOwnProperty("last_session_at")) {
+        obj["last_session_at"] = ApiClient.convertToType(
+          data["last_session_at"],
+          "Number"
         );
       }
-      if (data.hasOwnProperty("last_updated")) {
-        obj["last_updated"] = ApiClient.convertToType(
-          data["last_updated"],
+      if (data.hasOwnProperty("minimum_billable_bytes")) {
+        obj["minimum_billable_bytes"] = ApiClient.convertToType(
+          data["minimum_billable_bytes"],
           "Number"
         );
       }
@@ -75,6 +76,11 @@ class SatellitePlan {
       }
       if (data.hasOwnProperty("psid")) {
         obj["psid"] = ApiClient.convertToType(data["psid"], "String");
+      }
+      if (data.hasOwnProperty("satellite_data_usage")) {
+        obj["satellite_data_usage"] = SatelliteDataUsage.constructFromObject(
+          data["satellite_data_usage"]
+        );
       }
     } else if (data === null) {
       return null;
@@ -99,11 +105,6 @@ class SatellitePlan {
         );
       }
     }
-    // validate the optional field `billable_bytes`
-    if (data["billable_bytes"]) {
-      // data not null
-      DataUsage.validateJSON(data["billable_bytes"]);
-    }
     // ensure the json data is a string
     if (
       data["ntn_provider"] &&
@@ -127,6 +128,11 @@ class SatellitePlan {
           data["psid"]
       );
     }
+    // validate the optional field `satellite_data_usage`
+    if (data["satellite_data_usage"]) {
+      // data not null
+      SatelliteDataUsage.validateJSON(data["satellite_data_usage"]);
+    }
 
     return true;
   }
@@ -141,15 +147,16 @@ SatellitePlan.RequiredProperties = ["activated", "ntn_provider", "psid"];
 SatellitePlan.prototype["activated"] = undefined;
 
 /**
- * @member {module:model/DataUsage} billable_bytes
+ * When this Starnote last had a session
+ * @member {Number} last_session_at
  */
-SatellitePlan.prototype["billable_bytes"] = undefined;
+SatellitePlan.prototype["last_session_at"] = undefined;
 
 /**
- * Time this plan information was last updated
- * @member {Number} last_updated
+ * Minimum billable bytes
+ * @member {Number} minimum_billable_bytes
  */
-SatellitePlan.prototype["last_updated"] = undefined;
+SatellitePlan.prototype["minimum_billable_bytes"] = undefined;
 
 /**
  * Non-Terrestrial Network provider name
@@ -162,5 +169,10 @@ SatellitePlan.prototype["ntn_provider"] = undefined;
  * @member {String} psid
  */
 SatellitePlan.prototype["psid"] = undefined;
+
+/**
+ * @member {module:model/SatelliteDataUsage} satellite_data_usage
+ */
+SatellitePlan.prototype["satellite_data_usage"] = undefined;
 
 export default SatellitePlan;

@@ -236,10 +236,9 @@ export default class DeviceApi {
    * Delete Device
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
-   * @param {Boolean} purge
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
    */
-  deleteDeviceWithHttpInfo(projectOrProductUID, deviceUID, purge) {
+  deleteDeviceWithHttpInfo(projectOrProductUID, deviceUID) {
     let postBody = null;
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
@@ -253,20 +252,12 @@ export default class DeviceApi {
         "Missing the required parameter 'deviceUID' when calling deleteDevice"
       );
     }
-    // verify the required parameter 'purge' is set
-    if (purge === undefined || purge === null) {
-      throw new Error(
-        "Missing the required parameter 'purge' when calling deleteDevice"
-      );
-    }
 
     let pathParams = {
       projectOrProductUID: projectOrProductUID,
       deviceUID: deviceUID,
     };
-    let queryParams = {
-      purge: purge,
-    };
+    let queryParams = {};
     let headerParams = {};
     let formParams = {};
 
@@ -294,17 +285,14 @@ export default class DeviceApi {
    * Delete Device
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
-   * @param {Boolean} purge
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}
    */
-  deleteDevice(projectOrProductUID, deviceUID, purge) {
-    return this.deleteDeviceWithHttpInfo(
-      projectOrProductUID,
-      deviceUID,
-      purge
-    ).then(function (response_and_data) {
-      return response_and_data.data;
-    });
+  deleteDevice(projectOrProductUID, deviceUID) {
+    return this.deleteDeviceWithHttpInfo(projectOrProductUID, deviceUID).then(
+      function (response_and_data) {
+        return response_and_data.data;
+      }
+    );
   }
 
   /**
@@ -1105,9 +1093,14 @@ export default class DeviceApi {
    * Get environment variables of a device with device pin authorization
    * @param {String} productUID
    * @param {String} deviceUID
+   * @param {String} xAuthToken For accessing endpoints by Device pin.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetDeviceEnvironmentVariablesByPin200Response} and HTTP response
    */
-  getDeviceEnvironmentVariablesByPinWithHttpInfo(productUID, deviceUID) {
+  getDeviceEnvironmentVariablesByPinWithHttpInfo(
+    productUID,
+    deviceUID,
+    xAuthToken
+  ) {
     let postBody = null;
     // verify the required parameter 'productUID' is set
     if (productUID === undefined || productUID === null) {
@@ -1121,16 +1114,24 @@ export default class DeviceApi {
         "Missing the required parameter 'deviceUID' when calling getDeviceEnvironmentVariablesByPin"
       );
     }
+    // verify the required parameter 'xAuthToken' is set
+    if (xAuthToken === undefined || xAuthToken === null) {
+      throw new Error(
+        "Missing the required parameter 'xAuthToken' when calling getDeviceEnvironmentVariablesByPin"
+      );
+    }
 
     let pathParams = {
       productUID: productUID,
       deviceUID: deviceUID,
     };
     let queryParams = {};
-    let headerParams = {};
+    let headerParams = {
+      "X-Auth-Token": xAuthToken,
+    };
     let formParams = {};
 
-    let authNames = ["pin"];
+    let authNames = [];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = GetDeviceEnvironmentVariablesByPin200Response;
@@ -1154,12 +1155,14 @@ export default class DeviceApi {
    * Get environment variables of a device with device pin authorization
    * @param {String} productUID
    * @param {String} deviceUID
+   * @param {String} xAuthToken For accessing endpoints by Device pin.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetDeviceEnvironmentVariablesByPin200Response}
    */
-  getDeviceEnvironmentVariablesByPin(productUID, deviceUID) {
+  getDeviceEnvironmentVariablesByPin(productUID, deviceUID, xAuthToken) {
     return this.getDeviceEnvironmentVariablesByPinWithHttpInfo(
       productUID,
-      deviceUID
+      deviceUID,
+      xAuthToken
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -2127,12 +2130,14 @@ export default class DeviceApi {
    * Set environment variables of a device with device pin authorization
    * @param {String} productUID
    * @param {String} deviceUID
+   * @param {String} xAuthToken For accessing endpoints by Device pin.
    * @param {module:model/EnvironmentVariables} environmentVariables Environment variables to be added to the device
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/EnvironmentVariables} and HTTP response
    */
   setDeviceEnvironmentVariablesByPinWithHttpInfo(
     productUID,
     deviceUID,
+    xAuthToken,
     environmentVariables
   ) {
     let postBody = environmentVariables;
@@ -2148,6 +2153,12 @@ export default class DeviceApi {
         "Missing the required parameter 'deviceUID' when calling setDeviceEnvironmentVariablesByPin"
       );
     }
+    // verify the required parameter 'xAuthToken' is set
+    if (xAuthToken === undefined || xAuthToken === null) {
+      throw new Error(
+        "Missing the required parameter 'xAuthToken' when calling setDeviceEnvironmentVariablesByPin"
+      );
+    }
     // verify the required parameter 'environmentVariables' is set
     if (environmentVariables === undefined || environmentVariables === null) {
       throw new Error(
@@ -2160,10 +2171,12 @@ export default class DeviceApi {
       deviceUID: deviceUID,
     };
     let queryParams = {};
-    let headerParams = {};
+    let headerParams = {
+      "X-Auth-Token": xAuthToken,
+    };
     let formParams = {};
 
-    let authNames = ["pin"];
+    let authNames = [];
     let contentTypes = ["application/json"];
     let accepts = ["application/json"];
     let returnType = EnvironmentVariables;
@@ -2187,17 +2200,20 @@ export default class DeviceApi {
    * Set environment variables of a device with device pin authorization
    * @param {String} productUID
    * @param {String} deviceUID
+   * @param {String} xAuthToken For accessing endpoints by Device pin.
    * @param {module:model/EnvironmentVariables} environmentVariables Environment variables to be added to the device
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/EnvironmentVariables}
    */
   setDeviceEnvironmentVariablesByPin(
     productUID,
     deviceUID,
+    xAuthToken,
     environmentVariables
   ) {
     return this.setDeviceEnvironmentVariablesByPinWithHttpInfo(
       productUID,
       deviceUID,
+      xAuthToken,
       environmentVariables
     ).then(function (response_and_data) {
       return response_and_data.data;

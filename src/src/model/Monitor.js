@@ -389,7 +389,7 @@ Monitor.prototype["silenced"] = undefined;
 Monitor.prototype["source_selector"] = undefined;
 
 /**
- * The type of source to monitor. Currently only \"event\" is supported.
+ * The type of source to monitor. Supported values are \"event\" and \"heartbeat\".
  * @member {module:model/Monitor.SourceTypeEnum} source_type
  */
 Monitor.prototype["source_type"] = undefined;
@@ -496,6 +496,12 @@ Monitor["SourceTypeEnum"] = {
    * @const
    */
   event: "event",
+
+  /**
+   * value: "heartbeat"
+   * @const
+   */
+  heartbeat: "heartbeat",
 };
 
 export default Monitor;

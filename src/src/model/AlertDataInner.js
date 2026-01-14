@@ -214,6 +214,12 @@ AlertDataInner["SourceTypeEnum"] = {
    * @const
    */
   event: "event",
+
+  /**
+   * value: "device"
+   * @const
+   */
+  device: "device",
 };
 
 export default AlertDataInner;

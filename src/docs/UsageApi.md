@@ -153,7 +153,8 @@ let opts = {
   'startDate': 1628631763, // Number | Start date for filtering results, specified as a Unix timestamp
   'endDate': 1657894210, // Number | End date for filtering results, specified as a Unix timestamp
   'routeUID': ["null"], // [String] | A Route UID.
-  'aggregate': "'route'" // String | Aggregation level for results
+  'aggregate': "'route'", // String | Aggregation level for results
+  'skipRecentData': false // Boolean | When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects.
 };
 apiInstance.getRouteLogsUsage(projectOrProductUID, period, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
@@ -165,14 +166,15 @@ apiInstance.getRouteLogsUsage(projectOrProductUID, period, opts).then((data) => 
 
 ### Parameters
 
-| Name                    | Type                      | Description                                                     | Notes                                   |
-| ----------------------- | ------------------------- | --------------------------------------------------------------- | --------------------------------------- |
-| **projectOrProductUID** | **String**                |                                                                 |
-| **period**              | **String**                | Period type for aggregation                                     |
-| **startDate**           | **Number**                | Start date for filtering results, specified as a Unix timestamp | [optional]                              |
-| **endDate**             | **Number**                | End date for filtering results, specified as a Unix timestamp   | [optional]                              |
-| **routeUID**            | [**[String]**](String.md) | A Route UID.                                                    | [optional]                              |
-| **aggregate**           | **String**                | Aggregation level for results                                   | [optional] [default to &#39;route&#39;] |
+| Name                    | Type                      | Description                                                                                                                                               | Notes                                   |
+| ----------------------- | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------- |
+| **projectOrProductUID** | **String**                |                                                                                                                                                           |
+| **period**              | **String**                | Period type for aggregation                                                                                                                               |
+| **startDate**           | **Number**                | Start date for filtering results, specified as a Unix timestamp                                                                                           | [optional]                              |
+| **endDate**             | **Number**                | End date for filtering results, specified as a Unix timestamp                                                                                             | [optional]                              |
+| **routeUID**            | [**[String]**](String.md) | A Route UID.                                                                                                                                              | [optional]                              |
+| **aggregate**           | **String**                | Aggregation level for results                                                                                                                             | [optional] [default to &#39;route&#39;] |
+| **skipRecentData**      | **Boolean**               | When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects. | [optional] [default to false]           |
 
 ### Return type
 

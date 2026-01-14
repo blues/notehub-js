@@ -119,6 +119,7 @@ import Role from "./model/Role";
 import RouteLog from "./model/RouteLog";
 import RouteTransformSettings from "./model/RouteTransformSettings";
 import S3ArchiveRoute from "./model/S3ArchiveRoute";
+import SatelliteDataUsage from "./model/SatelliteDataUsage";
 import SatellitePlan from "./model/SatellitePlan";
 import SchemaProperty from "./model/SchemaProperty";
 import SignalDevice200Response from "./model/SignalDevice200Response";
@@ -833,6 +834,12 @@ export {
    * @property {module:model/S3ArchiveRoute}
    */
   S3ArchiveRoute,
+
+  /**
+   * The SatelliteDataUsage model constructor.
+   * @property {module:model/SatelliteDataUsage}
+   */
+  SatelliteDataUsage,
 
   /**
    * The SatellitePlan model constructor.
