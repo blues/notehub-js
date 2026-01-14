@@ -2361,6 +2361,8 @@ paths:
         - $ref: '#/components/parameters/systemFilesOnlyParam'
         - $ref: '#/components/parameters/mostRecentOnlyParam'
         - $ref: '#/components/parameters/filesQueryParam'
+        - $ref: '#/components/parameters/routingStatusParam'
+        - $ref: '#/components/parameters/responseStatusParam'
       responses:
         '200':
           description: Successful operation
@@ -3117,6 +3119,15 @@ components:
       schema:
         type: string
         example: 'rid:2606f411-dea6-44a0-9743-1130f57d77d8'
+    responseStatusParam:
+      example: 500
+      in: query
+      name: responseStatus
+      required: false
+      schema:
+        type: array
+        items:
+          type: string
     routeLogsSortByParam:
       in: query
       name: sortBy
@@ -3155,6 +3166,18 @@ components:
         items:
           type: string
       style: form
+    routingStatusParam:
+      example: failure
+      in: query
+      name: routingStatus
+      required: false
+      schema:
+        type: array
+        items:
+          enum:
+            - success
+            - failure
+          type: string
     selectFieldsParam:
       description: 'Comma-separated list of fields to select from JSON payload (e.g., "field1,field2.subfield,field3"), this will reflect the columns in the CSV output.'
       in: query
