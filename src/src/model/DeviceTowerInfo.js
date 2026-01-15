@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The DeviceTowerInfo model module.
  * @module model/DeviceTowerInfo
- * @version 4.0.0
+ * @version 5.0.0
  */
 class DeviceTowerInfo {
   /**

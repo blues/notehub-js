@@ -17,7 +17,7 @@ import Role from "./Role";
 /**
  * The ProjectMember model module.
  * @module model/ProjectMember
- * @version 4.0.0
+ * @version 5.0.0
  */
 class ProjectMember {
   /**

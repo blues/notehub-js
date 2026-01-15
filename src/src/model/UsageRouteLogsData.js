@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The UsageRouteLogsData model module.
  * @module model/UsageRouteLogsData
- * @version 4.0.0
+ * @version 5.0.0
  */
 class UsageRouteLogsData {
   /**

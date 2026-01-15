@@ -18,7 +18,7 @@ import RouteTransformSettings from "./RouteTransformSettings";
 /**
  * The SnowflakeRoute model module.
  * @module model/SnowflakeRoute
- * @version 4.0.0
+ * @version 5.0.0
  */
 class SnowflakeRoute {
   /**
