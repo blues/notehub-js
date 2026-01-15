@@ -118,6 +118,7 @@ docs/RouteApi.md
 docs/RouteLog.md
 docs/RouteTransformSettings.md
 docs/S3ArchiveRoute.md
+docs/SatelliteDataUsage.md
 docs/SatellitePlan.md
 docs/SchemaProperty.md
 docs/SignalDevice200Response.md
@@ -266,6 +267,7 @@ src/model/Role.js
 src/model/RouteLog.js
 src/model/RouteTransformSettings.js
 src/model/S3ArchiveRoute.js
+src/model/SatelliteDataUsage.js
 src/model/SatellitePlan.js
 src/model/SchemaProperty.js
 src/model/SignalDevice200Response.js

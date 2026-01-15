@@ -28,16 +28,18 @@ class CreateMonitor {
    * @param alertRoutes {Array.<module:model/MonitorAlertRoutesInner>}
    * @param description {String}
    * @param name {String}
-   * @param notefileFilter {Array.<String>}
+   * @param sourceType {module:model/CreateMonitor.SourceTypeEnum} The type of source to monitor. Supported values are \"event\" and \"heartbeat\".
+   * @param threshold {Number} The type of condition to apply to the value selected by the source_selector
    */
-  constructor(alertRoutes, description, name, notefileFilter) {
+  constructor(alertRoutes, description, name, sourceType, threshold) {
     Monitor.initialize(this);
     CreateMonitor.initialize(
       this,
       alertRoutes,
       description,
       name,
-      notefileFilter
+      sourceType,
+      threshold
     );
   }
 
@@ -46,11 +48,19 @@ class CreateMonitor {
    * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
    * Only for internal use.
    */
-  static initialize(obj, alertRoutes, description, name, notefileFilter) {
+  static initialize(
+    obj,
+    alertRoutes,
+    description,
+    name,
+    sourceType,
+    threshold
+  ) {
     obj["alert_routes"] = alertRoutes;
     obj["description"] = description;
     obj["name"] = name;
-    obj["notefile_filter"] = notefileFilter;
+    obj["source_type"] = sourceType;
+    obj["threshold"] = threshold;
   }
 
   /**
@@ -337,7 +347,8 @@ CreateMonitor.RequiredProperties = [
   "alert_routes",
   "description",
   "name",
-  "notefile_filter",
+  "source_type",
+  "threshold",
 ];
 
 /**
@@ -426,7 +437,7 @@ CreateMonitor.prototype["silenced"] = undefined;
 CreateMonitor.prototype["source_selector"] = undefined;
 
 /**
- * The type of source to monitor. Currently only \"event\" is supported.
+ * The type of source to monitor. Supported values are \"event\" and \"heartbeat\".
  * @member {module:model/CreateMonitor.SourceTypeEnum} source_type
  */
 CreateMonitor.prototype["source_type"] = undefined;
@@ -514,7 +525,7 @@ Monitor.prototype["silenced"] = undefined;
  */
 Monitor.prototype["source_selector"] = undefined;
 /**
- * The type of source to monitor. Currently only \"event\" is supported.
+ * The type of source to monitor. Supported values are \"event\" and \"heartbeat\".
  * @member {module:model/Monitor.SourceTypeEnum} source_type
  */
 Monitor.prototype["source_type"] = undefined;
@@ -619,6 +630,12 @@ CreateMonitor["SourceTypeEnum"] = {
    * @const
    */
   event: "event",
+
+  /**
+   * value: "heartbeat"
+   * @const
+   */
+  heartbeat: "heartbeat",
 };
 
 export default CreateMonitor;

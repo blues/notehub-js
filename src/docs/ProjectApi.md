@@ -956,7 +956,9 @@ let opts = {
   'target': "target_example", // String |
   'filename': notecard-7.2.2.16518$20240410043100.bin, // String |
   'md5': "md5_example", // String |
-  'unpublished': true // Boolean |
+  'unpublished': true, // Boolean |
+  'sortBy': "'created'", // String | Field to sort by
+  'sortOrder': "'desc'" // String | Sort order (asc for ascending, desc for descending)
 };
 apiInstance.getFirmwareInfo(projectOrProductUID, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
@@ -968,16 +970,18 @@ apiInstance.getFirmwareInfo(projectOrProductUID, opts).then((data) => {
 
 ### Parameters
 
-| Name                    | Type        | Description | Notes      |
-| ----------------------- | ----------- | ----------- | ---------- |
-| **projectOrProductUID** | **String**  |             |
-| **product**             | **String**  |             | [optional] |
-| **firmwareType**        | **String**  |             | [optional] |
-| **version**             | **String**  |             | [optional] |
-| **target**              | **String**  |             | [optional] |
-| **filename**            | **String**  |             | [optional] |
-| **md5**                 | **String**  |             | [optional] |
-| **unpublished**         | **Boolean** |             | [optional] |
+| Name                    | Type        | Description                                         | Notes                                     |
+| ----------------------- | ----------- | --------------------------------------------------- | ----------------------------------------- |
+| **projectOrProductUID** | **String**  |                                                     |
+| **product**             | **String**  |                                                     | [optional]                                |
+| **firmwareType**        | **String**  |                                                     | [optional]                                |
+| **version**             | **String**  |                                                     | [optional]                                |
+| **target**              | **String**  |                                                     | [optional]                                |
+| **filename**            | **String**  |                                                     | [optional]                                |
+| **md5**                 | **String**  |                                                     | [optional]                                |
+| **unpublished**         | **Boolean** |                                                     | [optional]                                |
+| **sortBy**              | **String**  | Field to sort by                                    | [optional] [default to &#39;created&#39;] |
+| **sortOrder**           | **String**  | Sort order (asc for ascending, desc for descending) | [optional] [default to &#39;desc&#39;]    |
 
 ### Return type
 

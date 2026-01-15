@@ -139,7 +139,7 @@ null (empty response body)
 
 ## deleteDevice
 
-> deleteDevice(projectOrProductUID, deviceUID, purge)
+> deleteDevice(projectOrProductUID, deviceUID)
 
 Delete Device
 
@@ -155,8 +155,7 @@ personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
 let apiInstance = new NotehubJs.DeviceApi();
 let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
 let deviceUID = dev:000000000000000; // String |
-let purge = false; // Boolean |
-apiInstance.deleteDevice(projectOrProductUID, deviceUID, purge).then(() => {
+apiInstance.deleteDevice(projectOrProductUID, deviceUID).then(() => {
   console.log('API called successfully.');
 }, (error) => {
   console.error(error);
@@ -166,11 +165,10 @@ apiInstance.deleteDevice(projectOrProductUID, deviceUID, purge).then(() => {
 
 ### Parameters
 
-| Name                    | Type        | Description | Notes              |
-| ----------------------- | ----------- | ----------- | ------------------ |
-| **projectOrProductUID** | **String**  |             |
-| **deviceUID**           | **String**  |             |
-| **purge**               | **Boolean** |             | [default to false] |
+| Name                    | Type       | Description | Notes |
+| ----------------------- | ---------- | ----------- | ----- |
+| **projectOrProductUID** | **String** |             |
+| **deviceUID**           | **String** |             |
 
 ### Return type
 
@@ -711,7 +709,7 @@ apiInstance.getDeviceEnvironmentVariables(projectOrProductUID, deviceUID).then((
 
 ## getDeviceEnvironmentVariablesByPin
 
-> GetDeviceEnvironmentVariablesByPin200Response getDeviceEnvironmentVariablesByPin(productUID, deviceUID)
+> GetDeviceEnvironmentVariablesByPin200Response getDeviceEnvironmentVariablesByPin(productUID, deviceUID, xAuthToken)
 
 Get environment variables of a device with device pin authorization
 
@@ -719,15 +717,12 @@ Get environment variables of a device with device pin authorization
 
 ```javascript
 import * as NotehubJs from '@blues-inc/notehub-js';
-let defaultClient = NotehubJs.ApiClient.instance;
-// Configure API key authorization: pin
-let pin = defaultClient.authentications['pin'];
-pin.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.DeviceApi();
 let productUID = com.blues.bridge:sensors; // String |
 let deviceUID = dev:000000000000000; // String |
-apiInstance.getDeviceEnvironmentVariablesByPin(productUID, deviceUID).then((data) => {
+let xAuthToken = "xAuthToken_example"; // String | For accessing endpoints by Device pin.
+apiInstance.getDeviceEnvironmentVariablesByPin(productUID, deviceUID, xAuthToken).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
@@ -737,10 +732,11 @@ apiInstance.getDeviceEnvironmentVariablesByPin(productUID, deviceUID).then((data
 
 ### Parameters
 
-| Name           | Type       | Description | Notes |
-| -------------- | ---------- | ----------- | ----- |
-| **productUID** | **String** |             |
-| **deviceUID**  | **String** |             |
+| Name           | Type       | Description                            | Notes |
+| -------------- | ---------- | -------------------------------------- | ----- |
+| **productUID** | **String** |                                        |
+| **deviceUID**  | **String** |                                        |
+| **xAuthToken** | **String** | For accessing endpoints by Device pin. |
 
 ### Return type
 
@@ -748,7 +744,7 @@ apiInstance.getDeviceEnvironmentVariablesByPin(productUID, deviceUID).then((data
 
 ### Authorization
 
-[pin](../README.md#pin)
+No authorization required
 
 ### HTTP request headers
 
@@ -1395,7 +1391,7 @@ apiInstance.setDeviceEnvironmentVariables(projectOrProductUID, deviceUID, enviro
 
 ## setDeviceEnvironmentVariablesByPin
 
-> EnvironmentVariables setDeviceEnvironmentVariablesByPin(productUID, deviceUID, environmentVariables)
+> EnvironmentVariables setDeviceEnvironmentVariablesByPin(productUID, deviceUID, xAuthToken, environmentVariables)
 
 Set environment variables of a device with device pin authorization
 
@@ -1403,16 +1399,13 @@ Set environment variables of a device with device pin authorization
 
 ```javascript
 import * as NotehubJs from '@blues-inc/notehub-js';
-let defaultClient = NotehubJs.ApiClient.instance;
-// Configure API key authorization: pin
-let pin = defaultClient.authentications['pin'];
-pin.apiKey = 'YOUR API KEY';
 
 let apiInstance = new NotehubJs.DeviceApi();
 let productUID = com.blues.bridge:sensors; // String |
 let deviceUID = dev:000000000000000; // String |
+let xAuthToken = "xAuthToken_example"; // String | For accessing endpoints by Device pin.
 let environmentVariables = new NotehubJs.EnvironmentVariables(); // EnvironmentVariables | Environment variables to be added to the device
-apiInstance.setDeviceEnvironmentVariablesByPin(productUID, deviceUID, environmentVariables).then((data) => {
+apiInstance.setDeviceEnvironmentVariablesByPin(productUID, deviceUID, xAuthToken, environmentVariables).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
 }, (error) => {
   console.error(error);
@@ -1426,6 +1419,7 @@ apiInstance.setDeviceEnvironmentVariablesByPin(productUID, deviceUID, environmen
 | ------------------------ | --------------------------------------------------- | ----------------------------------------------- | ----- |
 | **productUID**           | **String**                                          |                                                 |
 | **deviceUID**            | **String**                                          |                                                 |
+| **xAuthToken**           | **String**                                          | For accessing endpoints by Device pin.          |
 | **environmentVariables** | [**EnvironmentVariables**](EnvironmentVariables.md) | Environment variables to be added to the device |
 
 ### Return type
@@ -1434,7 +1428,7 @@ apiInstance.setDeviceEnvironmentVariablesByPin(productUID, deviceUID, environmen
 
 ### Authorization
 
-[pin](../README.md#pin)
+No authorization required
 
 ### HTTP request headers
 

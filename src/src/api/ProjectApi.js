@@ -1362,6 +1362,8 @@ export default class ProjectApi {
    * @param {String} opts.filename
    * @param {String} opts.md5
    * @param {Boolean} opts.unpublished
+   * @param {module:model/String} opts.sortBy Field to sort by (default to 'created')
+   * @param {module:model/String} opts.sortOrder Sort order (asc for ascending, desc for descending) (default to 'desc')
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link Array.<module:model/FirmwareInfo>} and HTTP response
    */
   getFirmwareInfoWithHttpInfo(projectOrProductUID, opts) {
@@ -1385,6 +1387,8 @@ export default class ProjectApi {
       filename: opts["filename"],
       md5: opts["md5"],
       unpublished: opts["unpublished"],
+      sortBy: opts["sortBy"],
+      sortOrder: opts["sortOrder"],
     };
     let headerParams = {};
     let formParams = {};
@@ -1420,6 +1424,8 @@ export default class ProjectApi {
    * @param {String} opts.filename
    * @param {String} opts.md5
    * @param {Boolean} opts.unpublished
+   * @param {module:model/String} opts.sortBy Field to sort by (default to 'created')
+   * @param {module:model/String} opts.sortOrder Sort order (asc for ascending, desc for descending) (default to 'desc')
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link Array.<module:model/FirmwareInfo>}
    */
   getFirmwareInfo(projectOrProductUID, opts) {

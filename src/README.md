@@ -338,6 +338,7 @@ All URIs are relative to *https://api.notefile.net*
 - [NotehubJs.RouteLog](docs/RouteLog.md)
 - [NotehubJs.RouteTransformSettings](docs/RouteTransformSettings.md)
 - [NotehubJs.S3ArchiveRoute](docs/S3ArchiveRoute.md)
+- [NotehubJs.SatelliteDataUsage](docs/SatelliteDataUsage.md)
 - [NotehubJs.SatellitePlan](docs/SatellitePlan.md)
 - [NotehubJs.SchemaProperty](docs/SchemaProperty.md)
 - [NotehubJs.SignalDevice200Response](docs/SignalDevice200Response.md)
@@ -367,9 +368,3 @@ All URIs are relative to *https://api.notefile.net*
 ### personalAccessToken
 
 - **Type**: Bearer authentication
-
-### pin
-
-- **Type**: API key
-- **API key parameter name**: X-Auth-Token
-- **Location**: HTTP header

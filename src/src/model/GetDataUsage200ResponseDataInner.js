@@ -57,14 +57,20 @@ class GetDataUsage200ResponseDataInner {
       if (data.hasOwnProperty("device")) {
         obj["device"] = ApiClient.convertToType(data["device"], "String");
       }
+      if (data.hasOwnProperty("device_count")) {
+        obj["device_count"] = ApiClient.convertToType(
+          data["device_count"],
+          "Number"
+        );
+      }
       if (data.hasOwnProperty("fleet")) {
         obj["fleet"] = ApiClient.convertToType(data["fleet"], "String");
       }
       if (data.hasOwnProperty("iccid")) {
         obj["iccid"] = ApiClient.convertToType(data["iccid"], "String");
       }
-      if (data.hasOwnProperty("imsi")) {
-        obj["imsi"] = ApiClient.convertToType(data["imsi"], "String");
+      if (data.hasOwnProperty("psid")) {
+        obj["psid"] = ApiClient.convertToType(data["psid"], "String");
       }
       if (data.hasOwnProperty("type")) {
         obj["type"] = ApiClient.convertToType(data["type"], "String");
@@ -138,12 +144,12 @@ class GetDataUsage200ResponseDataInner {
     }
     // ensure the json data is a string
     if (
-      data["imsi"] &&
-      !(typeof data["imsi"] === "string" || data["imsi"] instanceof String)
+      data["psid"] &&
+      !(typeof data["psid"] === "string" || data["psid"] instanceof String)
     ) {
       throw new Error(
-        "Expected the field `imsi` to be a primitive type in the JSON string but got " +
-          data["imsi"]
+        "Expected the field `psid` to be a primitive type in the JSON string but got " +
+          data["psid"]
       );
     }
     // ensure the json data is a string
@@ -175,6 +181,12 @@ GetDataUsage200ResponseDataInner.prototype["data"] = undefined;
 GetDataUsage200ResponseDataInner.prototype["device"] = undefined;
 
 /**
+ * the number of devices represented by this data point
+ * @member {Number} device_count
+ */
+GetDataUsage200ResponseDataInner.prototype["device_count"] = undefined;
+
+/**
  * The fleet UID this usage data belongs to (only present when aggregate is 'fleet')
  * @member {String} fleet
  */
@@ -187,10 +199,10 @@ GetDataUsage200ResponseDataInner.prototype["fleet"] = undefined;
 GetDataUsage200ResponseDataInner.prototype["iccid"] = undefined;
 
 /**
- * The IMSI of the satellite device (only present when type is 'satellite')
- * @member {String} imsi
+ * The PSID (Packet Service ID) of the satellite (or other packet-based device)
+ * @member {String} psid
  */
-GetDataUsage200ResponseDataInner.prototype["imsi"] = undefined;
+GetDataUsage200ResponseDataInner.prototype["psid"] = undefined;
 
 /**
  * The type of connectivity

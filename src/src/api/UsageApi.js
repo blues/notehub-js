@@ -227,6 +227,7 @@ export default class UsageApi {
    * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
    * @param {Array.<String>} opts.routeUID A Route UID.
    * @param {module:model/String} opts.aggregate Aggregation level for results (default to 'route')
+   * @param {Boolean} opts.skipRecentData When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects. (default to false)
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetRouteLogsUsage200Response} and HTTP response
    */
   getRouteLogsUsageWithHttpInfo(projectOrProductUID, period, opts) {
@@ -254,6 +255,7 @@ export default class UsageApi {
       routeUID: this.apiClient.buildCollectionParam(opts["routeUID"], "multi"),
       period: period,
       aggregate: opts["aggregate"],
+      skipRecentData: opts["skipRecentData"],
     };
     let headerParams = {};
     let formParams = {};
@@ -287,6 +289,7 @@ export default class UsageApi {
    * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
    * @param {Array.<String>} opts.routeUID A Route UID.
    * @param {module:model/String} opts.aggregate Aggregation level for results (default to 'route')
+   * @param {Boolean} opts.skipRecentData When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects. (default to false)
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetRouteLogsUsage200Response}
    */
   getRouteLogsUsage(projectOrProductUID, period, opts) {

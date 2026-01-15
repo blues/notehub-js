@@ -177,7 +177,9 @@ let opts = {
   'endDate': 1657894210, // Number | End date for filtering results, specified as a Unix timestamp
   'systemFilesOnly': true, // Boolean |
   'mostRecentOnly': true, // Boolean |
-  'files': _health.qo, data.qo // String |
+  'files': _health.qo, data.qo, // String |
+  'routingStatus': failure, // [String] |
+  'responseStatus': 500 // [String] |
 };
 apiInstance.getRouteLogsByRoute(projectOrProductUID, routeUID, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
@@ -203,6 +205,8 @@ apiInstance.getRouteLogsByRoute(projectOrProductUID, routeUID, opts).then((data)
 | **systemFilesOnly**     | **Boolean**               |                                                                 | [optional]                             |
 | **mostRecentOnly**      | **Boolean**               |                                                                 | [optional]                             |
 | **files**               | **String**                |                                                                 | [optional]                             |
+| **routingStatus**       | [**[String]**](String.md) |                                                                 | [optional]                             |
+| **responseStatus**      | [**[String]**](String.md) |                                                                 | [optional]                             |
 
 ### Return type
 

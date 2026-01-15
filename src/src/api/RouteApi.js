@@ -237,6 +237,8 @@ export default class RouteApi {
    * @param {Boolean} opts.systemFilesOnly
    * @param {Boolean} opts.mostRecentOnly
    * @param {String} opts.files
+   * @param {Array.<module:model/String>} opts.routingStatus
+   * @param {Array.<String>} opts.responseStatus
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link Array.<module:model/RouteLog>} and HTTP response
    */
   getRouteLogsByRouteWithHttpInfo(projectOrProductUID, routeUID, opts) {
@@ -273,6 +275,14 @@ export default class RouteApi {
       systemFilesOnly: opts["systemFilesOnly"],
       mostRecentOnly: opts["mostRecentOnly"],
       files: opts["files"],
+      routingStatus: this.apiClient.buildCollectionParam(
+        opts["routingStatus"],
+        "multi"
+      ),
+      responseStatus: this.apiClient.buildCollectionParam(
+        opts["responseStatus"],
+        "multi"
+      ),
     };
     let headerParams = {};
     let formParams = {};
@@ -312,6 +322,8 @@ export default class RouteApi {
    * @param {Boolean} opts.systemFilesOnly
    * @param {Boolean} opts.mostRecentOnly
    * @param {String} opts.files
+   * @param {Array.<module:model/String>} opts.routingStatus
+   * @param {Array.<String>} opts.responseStatus
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link Array.<module:model/RouteLog>}
    */
   getRouteLogsByRoute(projectOrProductUID, routeUID, opts) {

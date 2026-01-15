@@ -20,3 +20,5 @@
 ## Enum: SourceTypeEnum
 
 - `event` (value: `"event"`)
+
+- `device` (value: `"device"`)
