@@ -17,7 +17,7 @@ import RouteTransformSettings from "./RouteTransformSettings";
 /**
  * The ProxyRoute model module.
  * @module model/ProxyRoute
- * @version 4.0.0
+ * @version 5.0.0
  */
 class ProxyRoute {
   /**

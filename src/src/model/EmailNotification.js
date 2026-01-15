@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The EmailNotification model module.
  * @module model/EmailNotification
- * @version 4.0.0
+ * @version 5.0.0
  */
 class EmailNotification {
   /**
