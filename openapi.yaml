@@ -533,42 +533,10 @@ paths:
         - personalAccessToken: []
       tags:
         - device
-  '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/disable-connectivity-assurance':
-    post:
-      operationId: DisableDeviceConnectivityAssurance
-      description: Disable Connectivity Assurance
-      parameters:
-        - $ref: '#/components/parameters/projectOrProductUIDParam'
-        - $ref: '#/components/parameters/deviceUIDParam'
-      responses:
-        '200':
-          description: Successful operation
-        default:
-          $ref: '#/components/responses/ErrorResponse'
-      security:
-        - personalAccessToken: []
-      tags:
-        - device
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/enable':
     post:
       operationId: EnableDevice
       description: Enable Device
-      parameters:
-        - $ref: '#/components/parameters/projectOrProductUIDParam'
-        - $ref: '#/components/parameters/deviceUIDParam'
-      responses:
-        '200':
-          description: Successful operation
-        default:
-          $ref: '#/components/responses/ErrorResponse'
-      security:
-        - personalAccessToken: []
-      tags:
-        - device
-  '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/enable-connectivity-assurance':
-    post:
-      operationId: EnableDeviceConnectivityAssurance
-      description: Enable Connectivity Assurance
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
@@ -2405,6 +2373,7 @@ paths:
         - $ref: '#/components/parameters/endDateParam'
         - $ref: '#/components/parameters/deviceUIDParamQuery'
         - $ref: '#/components/parameters/fleetUIDFilterQueryParam'
+        - $ref: '#/components/parameters/usageLimitQueryParam'
         - name: period
           in: query
           description: Period type for aggregation
@@ -2445,6 +2414,7 @@ paths:
         - $ref: '#/components/parameters/endDateParam'
         - $ref: '#/components/parameters/deviceUIDParamQuery'
         - $ref: '#/components/parameters/fleetUIDFilterQueryParam'
+        - $ref: '#/components/parameters/usageLimitQueryParam'
         - name: period
           in: query
           description: Period type for aggregation
@@ -2512,6 +2482,7 @@ paths:
         - $ref: '#/components/parameters/startDateParam'
         - $ref: '#/components/parameters/endDateParam'
         - $ref: '#/components/parameters/routeUIDParamQuery'
+        - $ref: '#/components/parameters/usageLimitQueryParam'
         - name: period
           in: query
           description: Period type for aggregation
@@ -2558,6 +2529,7 @@ paths:
         - $ref: '#/components/parameters/endDateParam'
         - $ref: '#/components/parameters/deviceUIDParamQuery'
         - $ref: '#/components/parameters/fleetUIDFilterQueryParam'
+        - $ref: '#/components/parameters/usageLimitQueryParam'
         - name: period
           in: query
           description: Period type for aggregation
@@ -3294,6 +3266,16 @@ components:
       required: false
       schema:
         type: boolean
+    usageLimitQueryParam:
+      description: Limit the number of data points returned
+      in: query
+      name: limit
+      required: false
+      schema:
+        type: integer
+        default: 200000
+        maximum: 400000
+        minimum: 1
     versionQueryParam:
       in: query
       name: version
@@ -5684,6 +5666,8 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/UsageEventsData'
+        truncated:
+          $ref: '#/components/schemas/UsageTruncatedResponse'
       required:
         - data
     UsageRouteLogsData:
@@ -5744,6 +5728,10 @@ components:
         - sessions
         - total_bytes
         - total_devices
+    UsageTruncatedResponse:
+      description: 'If the data is truncated that means that the parameters selected resulted in a response of over | the requested limit of data points, in order to ensure'
+      type: boolean
+      properties: {}
     UserDfuStateMachine:
       type: object
       properties:
@@ -6231,6 +6219,8 @@ components:
                     - type
                     - data
                   type: object
+              truncated:
+                $ref: '#/components/schemas/UsageTruncatedResponse'
     UsageRouteLogsResponse:
       description: Response body for Route Log Usage
       content:
@@ -6242,6 +6232,8 @@ components:
                 type: array
                 items:
                   $ref: '#/components/schemas/UsageRouteLogsData'
+              truncated:
+                $ref: '#/components/schemas/UsageTruncatedResponse'
             required:
               - route_logs
     UsageSessionsResponse:
@@ -6255,6 +6247,8 @@ components:
                 type: array
                 items:
                   $ref: '#/components/schemas/UsageSessionsData'
+              truncated:
+                $ref: '#/components/schemas/UsageTruncatedResponse'
             required:
               - sessions
   securitySchemes:
