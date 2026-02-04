@@ -2373,6 +2373,7 @@ paths:
         - $ref: '#/components/parameters/endDateParam'
         - $ref: '#/components/parameters/deviceUIDParamQuery'
         - $ref: '#/components/parameters/fleetUIDFilterQueryParam'
+        - $ref: '#/components/parameters/usageLimitQueryParam'
         - name: period
           in: query
           description: Period type for aggregation
@@ -2413,6 +2414,7 @@ paths:
         - $ref: '#/components/parameters/endDateParam'
         - $ref: '#/components/parameters/deviceUIDParamQuery'
         - $ref: '#/components/parameters/fleetUIDFilterQueryParam'
+        - $ref: '#/components/parameters/usageLimitQueryParam'
         - name: period
           in: query
           description: Period type for aggregation
@@ -2480,6 +2482,7 @@ paths:
         - $ref: '#/components/parameters/startDateParam'
         - $ref: '#/components/parameters/endDateParam'
         - $ref: '#/components/parameters/routeUIDParamQuery'
+        - $ref: '#/components/parameters/usageLimitQueryParam'
         - name: period
           in: query
           description: Period type for aggregation
@@ -2526,6 +2529,7 @@ paths:
         - $ref: '#/components/parameters/endDateParam'
         - $ref: '#/components/parameters/deviceUIDParamQuery'
         - $ref: '#/components/parameters/fleetUIDFilterQueryParam'
+        - $ref: '#/components/parameters/usageLimitQueryParam'
         - name: period
           in: query
           description: Period type for aggregation
@@ -3262,6 +3266,16 @@ components:
       required: false
       schema:
         type: boolean
+    usageLimitQueryParam:
+      description: Limit the number of data points returned
+      in: query
+      name: limit
+      required: false
+      schema:
+        type: integer
+        default: 200000
+        maximum: 400000
+        minimum: 1
     versionQueryParam:
       in: query
       name: version
@@ -5600,6 +5614,11 @@ components:
     UsageEventsData:
       type: object
       properties:
+        billable_events:
+          description: 'Events that are billable, this include all events except platform events'
+          type: integer
+          format: int64
+          example: 10
         device:
           type: string
           example: 'dev:123456789012345'
@@ -5625,6 +5644,10 @@ components:
           type: integer
           format: int64
           example: 15
+        total_days_in_period:
+          description: 'The total number of days in this period. Useful for calculating daily averages for month period. Note that the current period will be the total number of days in the current period, including days in the future.'
+          type: integer
+          format: int32
         total_devices:
           description: Total devices represented in this count
           type: integer
@@ -5652,6 +5675,8 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/UsageEventsData'
+        truncated:
+          $ref: '#/components/schemas/UsageTruncatedField'
       required:
         - data
     UsageRouteLogsData:
@@ -5712,6 +5737,10 @@ components:
         - sessions
         - total_bytes
         - total_devices
+    UsageTruncatedField:
+      description: 'If the data is truncated that means that the parameters selected resulted in a response of over | the requested limit of data points, in order to ensure'
+      type: boolean
+      properties: {}
     UserDfuStateMachine:
       type: object
       properties:
@@ -6199,6 +6228,8 @@ components:
                     - type
                     - data
                   type: object
+              truncated:
+                $ref: '#/components/schemas/UsageTruncatedField'
     UsageRouteLogsResponse:
       description: Response body for Route Log Usage
       content:
@@ -6210,6 +6241,8 @@ components:
                 type: array
                 items:
                   $ref: '#/components/schemas/UsageRouteLogsData'
+              truncated:
+                $ref: '#/components/schemas/UsageTruncatedField'
             required:
               - route_logs
     UsageSessionsResponse:
@@ -6223,8 +6256,11 @@ components:
                 type: array
                 items:
                   $ref: '#/components/schemas/UsageSessionsData'
+              truncated:
+                $ref: '#/components/schemas/UsageTruncatedField'
             required:
               - sessions
+              - truncated
   securitySchemes:
     personalAccessToken:
       description: |
