@@ -533,42 +533,10 @@ paths:
         - personalAccessToken: []
       tags:
         - device
-  '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/disable-connectivity-assurance':
-    post:
-      operationId: DisableDeviceConnectivityAssurance
-      description: Disable Connectivity Assurance
-      parameters:
-        - $ref: '#/components/parameters/projectOrProductUIDParam'
-        - $ref: '#/components/parameters/deviceUIDParam'
-      responses:
-        '200':
-          description: Successful operation
-        default:
-          $ref: '#/components/responses/ErrorResponse'
-      security:
-        - personalAccessToken: []
-      tags:
-        - device
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/enable':
     post:
       operationId: EnableDevice
       description: Enable Device
-      parameters:
-        - $ref: '#/components/parameters/projectOrProductUIDParam'
-        - $ref: '#/components/parameters/deviceUIDParam'
-      responses:
-        '200':
-          description: Successful operation
-        default:
-          $ref: '#/components/responses/ErrorResponse'
-      security:
-        - personalAccessToken: []
-      tags:
-        - device
-  '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/enable-connectivity-assurance':
-    post:
-      operationId: EnableDeviceConnectivityAssurance
-      description: Enable Connectivity Assurance
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
@@ -5590,32 +5558,20 @@ components:
     UsageData:
       type: object
       properties:
-        billable_bytes_received:
-          description: Billable bytes received (only for packet-based protocols)
-          type: integer
-          format: int64
-        billable_bytes_sent:
-          description: Billable bytes sent (only for packet-based protocols)
-          type: integer
-          format: int64
         billable_bytes_total:
           description: Total billable bytes (only for packet-based protocols)
           type: integer
           format: int64
-        bytes_received:
+        downlink_bytes:
           type: integer
           format: int64
           example: 524288
-        bytes_sent:
+        downlink_bytes_billable:
+          description: Billable downlink bytes (only for packet-based protocols)
           type: integer
           format: int64
-          example: 524288
-        packets_received:
-          description: Packets received (only for packet-based protocols)
-          type: integer
-          format: int64
-        packets_sent:
-          description: Packets sent (only for packet-based protocols)
+        downlink_packets:
+          description: Downlink packets (only for packet-based protocols)
           type: integer
           format: int64
         period:
@@ -5626,6 +5582,18 @@ components:
           type: integer
           format: int64
           example: 1048576
+        uplink_bytes:
+          type: integer
+          format: int64
+          example: 524288
+        uplink_bytes_billable:
+          description: Billable uplink bytes (only for packet-based protocols)
+          type: integer
+          format: int64
+        uplink_packets:
+          description: Uplink packets (only for packet-based protocols)
+          type: integer
+          format: int64
       required:
         - period
         - total_bytes
