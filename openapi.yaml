@@ -143,39 +143,6 @@ paths:
         - personalAccessToken: []
       tags:
         - billing_account
-  '/v1/billing-accounts/{BillingAccountUID}/balance-history':
-    get:
-      operationId: GetBillingAccountBalanceHistory
-      description: 'Get Billing Account Balance history, only enterprise supported'
-      parameters:
-        - $ref: '#/components/parameters/billingAccountUIDParam'
-        - $ref: '#/components/parameters/startDateParam'
-        - $ref: '#/components/parameters/endDateParam'
-      responses:
-        '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  data:
-                    type: array
-                    items:
-                      properties:
-                        period:
-                          type: string
-                          format: date-time
-                        remaining_event_capacity:
-                          type: integer
-                          format: int64
-                      type: object
-        default:
-          $ref: '#/components/responses/ErrorResponse'
-      security:
-        - personalAccessToken: []
-      tags:
-        - billing_account
   '/v1/billing-accounts/{billingAccountUID}':
     get:
       operationId: GetBillingAccount
@@ -215,6 +182,39 @@ paths:
                     type: boolean
                   uid:
                     type: string
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - billing_account
+  '/v1/billing-accounts/{billingAccountUID}/balance-history':
+    get:
+      operationId: GetBillingAccountBalanceHistory
+      description: 'Get Billing Account Balance history, only enterprise supported'
+      parameters:
+        - $ref: '#/components/parameters/billingAccountUIDParam'
+        - $ref: '#/components/parameters/startDateParam'
+        - $ref: '#/components/parameters/endDateParam'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      properties:
+                        period:
+                          type: string
+                          format: date-time
+                        remaining_event_capacity:
+                          type: integer
+                          format: int64
+                      type: object
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
