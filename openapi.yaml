@@ -2782,7 +2782,7 @@ paths:
 components:
   parameters:
     billingAccountUIDParam:
-      example: 00000000-0000-0000-000000000000
+      example: 00000000-0000-0000-000000000001
       in: path
       name: billingAccountUID
       required: true
