@@ -375,23 +375,22 @@ paths:
         - personalAccessToken: []
       tags:
         - alert
-  '/v1/projects/{projectOrProductUID}/aws-iam-credentials':
+  '/v1/projects/{projectOrProductUID}/aws-role-config':
     get:
-      operationId: GetAWSIAMCredentials
-      summary: Get AWS IAM credentials for role-based authentication
+      operationId: GetAWSRoleConfig
+      summary: Get AWS role configuration for role-based authentication
       description: |
         Returns the AWS Account ID and External ID needed to configure an IAM role
-        for SQS routes with role-based authentication. Use these values in your IAM
-        role's trust policy before creating an aws-sqs-with-role route.
+        trust policy for role-based authentication on AWS routes.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
       responses:
         '200':
-          description: AWS IAM credentials for role setup
+          description: AWS role configuration
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AWSIAMCredentials'
+                $ref: '#/components/schemas/AWSRoleConfig'
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
@@ -3346,8 +3345,8 @@ components:
       schema:
         type: string
   schemas:
-    AWSIAMCredentials:
-      description: AWS IAM credentials needed to configure an IAM role for role-based authentication
+    AWSRoleConfig:
+      description: Configuration needed to set up an IAM role trust policy for role-based authentication on AWS routes
       type: object
       properties:
         aws_account_id:
@@ -3483,7 +3482,7 @@ components:
         region:
           type: string
         role_arn:
-          description: IAM Role ARN for STS AssumeRole authentication (used with aws-sqs-with-role type)
+          description: IAM Role ARN for role-based authentication via STS AssumeRole
           type: string
         throttle_ms:
           type: integer
