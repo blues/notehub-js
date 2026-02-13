@@ -164,6 +164,9 @@ paths:
                   plan:
                     type: object
                     properties:
+                      current_balance:
+                        type: integer
+                        format: int64
                       end_date:
                         type: string
                         format: date-time
@@ -214,6 +217,9 @@ paths:
                         remaining_event_capacity:
                           type: integer
                           format: int64
+                      required:
+                        - remaining_event_capacity
+                        - period
                       type: object
         default:
           $ref: '#/components/responses/ErrorResponse'
