@@ -32,6 +32,7 @@ let opts = {
   'endDate': 1657894210, // Number | End date for filtering results, specified as a Unix timestamp
   'deviceUID': ["null"], // [String] | A Device UID.
   'fleetUID': ["null"], // [String] | Filter by Fleet UID
+  'limit': 200000, // Number | Limit the number of data points returned
   'aggregate': "'device'" // String | Aggregation level for results
 };
 apiInstance.getDataUsage(projectOrProductUID, period, opts).then((data) => {
@@ -52,6 +53,7 @@ apiInstance.getDataUsage(projectOrProductUID, period, opts).then((data) => {
 | **endDate**             | **Number**                | End date for filtering results, specified as a Unix timestamp   | [optional]                               |
 | **deviceUID**           | [**[String]**](String.md) | A Device UID.                                                   | [optional]                               |
 | **fleetUID**            | [**[String]**](String.md) | Filter by Fleet UID                                             | [optional]                               |
+| **limit**               | **Number**                | Limit the number of data points returned                        | [optional] [default to 200000]           |
 | **aggregate**           | **String**                | Aggregation level for results                                   | [optional] [default to &#39;device&#39;] |
 
 ### Return type
@@ -90,6 +92,7 @@ let opts = {
   'endDate': 1657894210, // Number | End date for filtering results, specified as a Unix timestamp
   'deviceUID': ["null"], // [String] | A Device UID.
   'fleetUID': ["null"], // [String] | Filter by Fleet UID
+  'limit': 200000, // Number | Limit the number of data points returned
   'aggregate': "'device'", // String | Aggregation level for results
   'notefile': ["null"], // [String] | Filter to specific notefiles
   'skipRecentData': false, // Boolean | When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects.
@@ -113,6 +116,7 @@ apiInstance.getEventsUsage(projectOrProductUID, period, opts).then((data) => {
 | **endDate**             | **Number**                | End date for filtering results, specified as a Unix timestamp                                                                                             | [optional]                               |
 | **deviceUID**           | [**[String]**](String.md) | A Device UID.                                                                                                                                             | [optional]                               |
 | **fleetUID**            | [**[String]**](String.md) | Filter by Fleet UID                                                                                                                                       | [optional]                               |
+| **limit**               | **Number**                | Limit the number of data points returned                                                                                                                  | [optional] [default to 200000]           |
 | **aggregate**           | **String**                | Aggregation level for results                                                                                                                             | [optional] [default to &#39;device&#39;] |
 | **notefile**            | [**[String]**](String.md) | Filter to specific notefiles                                                                                                                              | [optional]                               |
 | **skipRecentData**      | **Boolean**               | When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects. | [optional] [default to false]            |
@@ -153,6 +157,7 @@ let opts = {
   'startDate': 1628631763, // Number | Start date for filtering results, specified as a Unix timestamp
   'endDate': 1657894210, // Number | End date for filtering results, specified as a Unix timestamp
   'routeUID': ["null"], // [String] | A Route UID.
+  'limit': 200000, // Number | Limit the number of data points returned
   'aggregate': "'route'", // String | Aggregation level for results
   'skipRecentData': false // Boolean | When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects.
 };
@@ -173,6 +178,7 @@ apiInstance.getRouteLogsUsage(projectOrProductUID, period, opts).then((data) => 
 | **startDate**           | **Number**                | Start date for filtering results, specified as a Unix timestamp                                                                                           | [optional]                              |
 | **endDate**             | **Number**                | End date for filtering results, specified as a Unix timestamp                                                                                             | [optional]                              |
 | **routeUID**            | [**[String]**](String.md) | A Route UID.                                                                                                                                              | [optional]                              |
+| **limit**               | **Number**                | Limit the number of data points returned                                                                                                                  | [optional] [default to 200000]          |
 | **aggregate**           | **String**                | Aggregation level for results                                                                                                                             | [optional] [default to &#39;route&#39;] |
 | **skipRecentData**      | **Boolean**               | When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects. | [optional] [default to false]           |
 
@@ -212,6 +218,7 @@ let opts = {
   'endDate': 1657894210, // Number | End date for filtering results, specified as a Unix timestamp
   'deviceUID': ["null"], // [String] | A Device UID.
   'fleetUID': ["null"], // [String] | Filter by Fleet UID
+  'limit': 200000, // Number | Limit the number of data points returned
   'aggregate': "'device'", // String | Aggregation level for results
   'skipRecentData': false // Boolean | When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects.
 };
@@ -233,6 +240,7 @@ apiInstance.getSessionsUsage(projectOrProductUID, period, opts).then((data) => {
 | **endDate**             | **Number**                | End date for filtering results, specified as a Unix timestamp                                                                                             | [optional]                               |
 | **deviceUID**           | [**[String]**](String.md) | A Device UID.                                                                                                                                             | [optional]                               |
 | **fleetUID**            | [**[String]**](String.md) | Filter by Fleet UID                                                                                                                                       | [optional]                               |
+| **limit**               | **Number**                | Limit the number of data points returned                                                                                                                  | [optional] [default to 200000]           |
 | **aggregate**           | **String**                | Aggregation level for results                                                                                                                             | [optional] [default to &#39;device&#39;] |
 | **skipRecentData**      | **Boolean**               | When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects. | [optional] [default to false]            |
 

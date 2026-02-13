@@ -544,42 +544,10 @@ paths:
         - personalAccessToken: []
       tags:
         - device
-  /v1/projects/{projectOrProductUID}/devices/{deviceUID}/disable-connectivity-assurance:
-    post:
-      operationId: DisableDeviceConnectivityAssurance
-      description: Disable Connectivity Assurance
-      parameters:
-        - $ref: "#/components/parameters/projectOrProductUIDParam"
-        - $ref: "#/components/parameters/deviceUIDParam"
-      responses:
-        "200":
-          description: Successful operation
-        default:
-          $ref: "#/components/responses/ErrorResponse"
-      security:
-        - personalAccessToken: []
-      tags:
-        - device
   /v1/projects/{projectOrProductUID}/devices/{deviceUID}/enable:
     post:
       operationId: EnableDevice
       description: Enable Device
-      parameters:
-        - $ref: "#/components/parameters/projectOrProductUIDParam"
-        - $ref: "#/components/parameters/deviceUIDParam"
-      responses:
-        "200":
-          description: Successful operation
-        default:
-          $ref: "#/components/responses/ErrorResponse"
-      security:
-        - personalAccessToken: []
-      tags:
-        - device
-  /v1/projects/{projectOrProductUID}/devices/{deviceUID}/enable-connectivity-assurance:
-    post:
-      operationId: EnableDeviceConnectivityAssurance
-      description: Enable Connectivity Assurance
       parameters:
         - $ref: "#/components/parameters/projectOrProductUIDParam"
         - $ref: "#/components/parameters/deviceUIDParam"
@@ -1526,6 +1494,31 @@ paths:
       tags:
         - project
   /v1/projects/{projectOrProductUID}/firmware/{firmwareType}/{filename}:
+    get:
+      operationId: DownloadFirmware
+      description: Download firmware binary
+      parameters:
+        - $ref: "#/components/parameters/projectOrProductUIDParam"
+        - $ref: "#/components/parameters/firmwareTypeParam"
+        - name: filename
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Firmware binary
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      security:
+        - personalAccessToken: []
+      tags:
+        - project
     put:
       operationId: UploadFirmware
       description: Upload firmware binary
@@ -2418,6 +2411,7 @@ paths:
         - $ref: "#/components/parameters/endDateParam"
         - $ref: "#/components/parameters/deviceUIDParamQuery"
         - $ref: "#/components/parameters/fleetUIDFilterQueryParam"
+        - $ref: "#/components/parameters/usageLimitQueryParam"
         - name: period
           in: query
           description: Period type for aggregation
@@ -2460,6 +2454,7 @@ paths:
         - $ref: "#/components/parameters/endDateParam"
         - $ref: "#/components/parameters/deviceUIDParamQuery"
         - $ref: "#/components/parameters/fleetUIDFilterQueryParam"
+        - $ref: "#/components/parameters/usageLimitQueryParam"
         - name: period
           in: query
           description: Period type for aggregation
@@ -2532,6 +2527,7 @@ paths:
         - $ref: "#/components/parameters/startDateParam"
         - $ref: "#/components/parameters/endDateParam"
         - $ref: "#/components/parameters/routeUIDParamQuery"
+        - $ref: "#/components/parameters/usageLimitQueryParam"
         - name: period
           in: query
           description: Period type for aggregation
@@ -2583,6 +2579,7 @@ paths:
         - $ref: "#/components/parameters/endDateParam"
         - $ref: "#/components/parameters/deviceUIDParamQuery"
         - $ref: "#/components/parameters/fleetUIDFilterQueryParam"
+        - $ref: "#/components/parameters/usageLimitQueryParam"
         - name: period
           in: query
           description: Period type for aggregation
@@ -3348,6 +3345,16 @@ components:
       required: false
       schema:
         type: boolean
+    usageLimitQueryParam:
+      description: Limit the number of data points returned
+      in: query
+      name: limit
+      required: false
+      schema:
+        type: integer
+        default: 200000
+        maximum: 400000
+        minimum: 1
     versionQueryParam:
       in: query
       name: version
@@ -5702,32 +5709,20 @@ components:
     UsageData:
       type: object
       properties:
-        billable_bytes_received:
-          description: Billable bytes received (only for packet-based protocols)
-          type: integer
-          format: int64
-        billable_bytes_sent:
-          description: Billable bytes sent (only for packet-based protocols)
-          type: integer
-          format: int64
         billable_bytes_total:
           description: Total billable bytes (only for packet-based protocols)
           type: integer
           format: int64
-        bytes_received:
+        downlink_bytes:
           type: integer
           format: int64
           example: 524288
-        bytes_sent:
+        downlink_bytes_billable:
+          description: Billable downlink bytes (only for packet-based protocols)
           type: integer
           format: int64
-          example: 524288
-        packets_received:
-          description: Packets received (only for packet-based protocols)
-          type: integer
-          format: int64
-        packets_sent:
-          description: Packets sent (only for packet-based protocols)
+        downlink_packets:
+          description: Downlink packets (only for packet-based protocols)
           type: integer
           format: int64
         period:
@@ -5738,12 +5733,31 @@ components:
           type: integer
           format: int64
           example: 1048576
+        uplink_bytes:
+          type: integer
+          format: int64
+          example: 524288
+        uplink_bytes_billable:
+          description: Billable uplink bytes (only for packet-based protocols)
+          type: integer
+          format: int64
+        uplink_packets:
+          description: Uplink packets (only for packet-based protocols)
+          type: integer
+          format: int64
       required:
         - period
         - total_bytes
     UsageEventsData:
       type: object
       properties:
+        billable_events:
+          description:
+            Events that are billable, this include all events except platform
+            events
+          type: integer
+          format: int64
+          example: 10
         device:
           type: string
           example: dev:123456789012345
@@ -5773,6 +5787,14 @@ components:
           type: integer
           format: int64
           example: 15
+        total_days_in_period:
+          description:
+            The total number of days in this period. Useful for calculating
+            daily averages for month period. Note that the current period will
+            be the total number of days in the current period, including days in
+            the future.
+          type: integer
+          format: int32
         total_devices:
           description: Total devices represented in this count
           type: integer
@@ -5806,6 +5828,8 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/UsageEventsData"
+        truncated:
+          $ref: "#/components/schemas/UsageTruncatedField"
       required:
         - data
     UsageRouteLogsData:
@@ -5866,6 +5890,13 @@ components:
         - sessions
         - total_bytes
         - total_devices
+    UsageTruncatedField:
+      description:
+        If the data is truncated that means that the parameters selected
+        resulted in a response of over | the requested limit of data points, in
+        order to ensure
+      type: boolean
+      properties: {}
     UserDfuStateMachine:
       type: object
       properties:
@@ -6372,6 +6403,8 @@ components:
                     - type
                     - data
                   type: object
+              truncated:
+                $ref: "#/components/schemas/UsageTruncatedField"
     UsageRouteLogsResponse:
       description: Response body for Route Log Usage
       content:
@@ -6383,6 +6416,8 @@ components:
                 type: array
                 items:
                   $ref: "#/components/schemas/UsageRouteLogsData"
+              truncated:
+                $ref: "#/components/schemas/UsageTruncatedField"
             required:
               - route_logs
     UsageSessionsResponse:
@@ -6396,8 +6431,11 @@ components:
                 type: array
                 items:
                   $ref: "#/components/schemas/UsageSessionsData"
+              truncated:
+                $ref: "#/components/schemas/UsageTruncatedField"
             required:
               - sessions
+              - truncated
   securitySchemes:
     personalAccessToken:
       description: |

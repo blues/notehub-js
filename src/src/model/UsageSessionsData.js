@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The UsageSessionsData model module.
  * @module model/UsageSessionsData
- * @version 5.0.0
+ * @version 6.0.0
  */
 class UsageSessionsData {
   /**

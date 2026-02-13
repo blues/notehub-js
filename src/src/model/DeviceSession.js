@@ -18,7 +18,7 @@ import TowerLocation from "./TowerLocation";
 /**
  * The DeviceSession model module.
  * @module model/DeviceSession
- * @version 5.0.0
+ * @version 6.0.0
  */
 class DeviceSession {
   /**

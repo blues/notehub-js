@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The UsageData model module.
  * @module model/UsageData
- * @version 5.0.0
+ * @version 6.0.0
  */
 class UsageData {
   /**
@@ -50,45 +50,27 @@ class UsageData {
     if (data) {
       obj = obj || new UsageData();
 
-      if (data.hasOwnProperty("billable_bytes_received")) {
-        obj["billable_bytes_received"] = ApiClient.convertToType(
-          data["billable_bytes_received"],
-          "Number"
-        );
-      }
-      if (data.hasOwnProperty("billable_bytes_sent")) {
-        obj["billable_bytes_sent"] = ApiClient.convertToType(
-          data["billable_bytes_sent"],
-          "Number"
-        );
-      }
       if (data.hasOwnProperty("billable_bytes_total")) {
         obj["billable_bytes_total"] = ApiClient.convertToType(
           data["billable_bytes_total"],
           "Number"
         );
       }
-      if (data.hasOwnProperty("bytes_received")) {
-        obj["bytes_received"] = ApiClient.convertToType(
-          data["bytes_received"],
+      if (data.hasOwnProperty("downlink_bytes")) {
+        obj["downlink_bytes"] = ApiClient.convertToType(
+          data["downlink_bytes"],
           "Number"
         );
       }
-      if (data.hasOwnProperty("bytes_sent")) {
-        obj["bytes_sent"] = ApiClient.convertToType(
-          data["bytes_sent"],
+      if (data.hasOwnProperty("downlink_bytes_billable")) {
+        obj["downlink_bytes_billable"] = ApiClient.convertToType(
+          data["downlink_bytes_billable"],
           "Number"
         );
       }
-      if (data.hasOwnProperty("packets_received")) {
-        obj["packets_received"] = ApiClient.convertToType(
-          data["packets_received"],
-          "Number"
-        );
-      }
-      if (data.hasOwnProperty("packets_sent")) {
-        obj["packets_sent"] = ApiClient.convertToType(
-          data["packets_sent"],
+      if (data.hasOwnProperty("downlink_packets")) {
+        obj["downlink_packets"] = ApiClient.convertToType(
+          data["downlink_packets"],
           "Number"
         );
       }
@@ -98,6 +80,24 @@ class UsageData {
       if (data.hasOwnProperty("total_bytes")) {
         obj["total_bytes"] = ApiClient.convertToType(
           data["total_bytes"],
+          "Number"
+        );
+      }
+      if (data.hasOwnProperty("uplink_bytes")) {
+        obj["uplink_bytes"] = ApiClient.convertToType(
+          data["uplink_bytes"],
+          "Number"
+        );
+      }
+      if (data.hasOwnProperty("uplink_bytes_billable")) {
+        obj["uplink_bytes_billable"] = ApiClient.convertToType(
+          data["uplink_bytes_billable"],
+          "Number"
+        );
+      }
+      if (data.hasOwnProperty("uplink_packets")) {
+        obj["uplink_packets"] = ApiClient.convertToType(
+          data["uplink_packets"],
           "Number"
         );
       }
@@ -132,44 +132,27 @@ class UsageData {
 UsageData.RequiredProperties = ["period", "total_bytes"];
 
 /**
- * Billable bytes received (only for packet-based protocols)
- * @member {Number} billable_bytes_received
- */
-UsageData.prototype["billable_bytes_received"] = undefined;
-
-/**
- * Billable bytes sent (only for packet-based protocols)
- * @member {Number} billable_bytes_sent
- */
-UsageData.prototype["billable_bytes_sent"] = undefined;
-
-/**
  * Total billable bytes (only for packet-based protocols)
  * @member {Number} billable_bytes_total
  */
 UsageData.prototype["billable_bytes_total"] = undefined;
 
 /**
- * @member {Number} bytes_received
+ * @member {Number} downlink_bytes
  */
-UsageData.prototype["bytes_received"] = undefined;
+UsageData.prototype["downlink_bytes"] = undefined;
 
 /**
- * @member {Number} bytes_sent
+ * Billable downlink bytes (only for packet-based protocols)
+ * @member {Number} downlink_bytes_billable
  */
-UsageData.prototype["bytes_sent"] = undefined;
+UsageData.prototype["downlink_bytes_billable"] = undefined;
 
 /**
- * Packets received (only for packet-based protocols)
- * @member {Number} packets_received
+ * Downlink packets (only for packet-based protocols)
+ * @member {Number} downlink_packets
  */
-UsageData.prototype["packets_received"] = undefined;
-
-/**
- * Packets sent (only for packet-based protocols)
- * @member {Number} packets_sent
- */
-UsageData.prototype["packets_sent"] = undefined;
+UsageData.prototype["downlink_packets"] = undefined;
 
 /**
  * @member {Date} period
@@ -180,5 +163,22 @@ UsageData.prototype["period"] = undefined;
  * @member {Number} total_bytes
  */
 UsageData.prototype["total_bytes"] = undefined;
+
+/**
+ * @member {Number} uplink_bytes
+ */
+UsageData.prototype["uplink_bytes"] = undefined;
+
+/**
+ * Billable uplink bytes (only for packet-based protocols)
+ * @member {Number} uplink_bytes_billable
+ */
+UsageData.prototype["uplink_bytes_billable"] = undefined;
+
+/**
+ * Uplink packets (only for packet-based protocols)
+ * @member {Number} uplink_packets
+ */
+UsageData.prototype["uplink_packets"] = undefined;
 
 export default UsageData;

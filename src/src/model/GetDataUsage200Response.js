@@ -17,7 +17,7 @@ import GetDataUsage200ResponseDataInner from "./GetDataUsage200ResponseDataInner
 /**
  * The GetDataUsage200Response model module.
  * @module model/GetDataUsage200Response
- * @version 5.0.0
+ * @version 6.0.0
  */
 class GetDataUsage200Response {
   /**
@@ -50,6 +50,12 @@ class GetDataUsage200Response {
         obj["data"] = ApiClient.convertToType(data["data"], [
           GetDataUsage200ResponseDataInner,
         ]);
+      }
+      if (data.hasOwnProperty("truncated")) {
+        obj["truncated"] = ApiClient.convertToType(
+          data["truncated"],
+          "Boolean"
+        );
       }
     } else if (data === null) {
       return null;
@@ -86,5 +92,11 @@ class GetDataUsage200Response {
  * @member {Array.<module:model/GetDataUsage200ResponseDataInner>} data
  */
 GetDataUsage200Response.prototype["data"] = undefined;
+
+/**
+ * If the data is truncated that means that the parameters selected resulted in a response of over | the requested limit of data points, in order to ensure
+ * @member {Boolean} truncated
+ */
+GetDataUsage200Response.prototype["truncated"] = undefined;
 
 export default GetDataUsage200Response;

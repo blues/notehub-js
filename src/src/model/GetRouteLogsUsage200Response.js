@@ -17,7 +17,7 @@ import UsageRouteLogsData from "./UsageRouteLogsData";
 /**
  * The GetRouteLogsUsage200Response model module.
  * @module model/GetRouteLogsUsage200Response
- * @version 5.0.0
+ * @version 6.0.0
  */
 class GetRouteLogsUsage200Response {
   /**
@@ -53,6 +53,12 @@ class GetRouteLogsUsage200Response {
         obj["route_logs"] = ApiClient.convertToType(data["route_logs"], [
           UsageRouteLogsData,
         ]);
+      }
+      if (data.hasOwnProperty("truncated")) {
+        obj["truncated"] = ApiClient.convertToType(
+          data["truncated"],
+          "Boolean"
+        );
       }
     } else if (data === null) {
       return null;
@@ -102,5 +108,11 @@ GetRouteLogsUsage200Response.RequiredProperties = ["route_logs"];
  * @member {Array.<module:model/UsageRouteLogsData>} route_logs
  */
 GetRouteLogsUsage200Response.prototype["route_logs"] = undefined;
+
+/**
+ * If the data is truncated that means that the parameters selected resulted in a response of over | the requested limit of data points, in order to ensure
+ * @member {Boolean} truncated
+ */
+GetRouteLogsUsage200Response.prototype["truncated"] = undefined;
 
 export default GetRouteLogsUsage200Response;

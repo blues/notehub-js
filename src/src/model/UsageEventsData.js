@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The UsageEventsData model module.
  * @module model/UsageEventsData
- * @version 5.0.0
+ * @version 6.0.0
  */
 class UsageEventsData {
   /**
@@ -76,6 +76,12 @@ class UsageEventsData {
     if (data) {
       obj = obj || new UsageEventsData();
 
+      if (data.hasOwnProperty("billable_events")) {
+        obj["billable_events"] = ApiClient.convertToType(
+          data["billable_events"],
+          "Number"
+        );
+      }
       if (data.hasOwnProperty("device")) {
         obj["device"] = ApiClient.convertToType(data["device"], "String");
       }
@@ -93,6 +99,12 @@ class UsageEventsData {
       if (data.hasOwnProperty("platform_events")) {
         obj["platform_events"] = ApiClient.convertToType(
           data["platform_events"],
+          "Number"
+        );
+      }
+      if (data.hasOwnProperty("total_days_in_period")) {
+        obj["total_days_in_period"] = ApiClient.convertToType(
+          data["total_days_in_period"],
           "Number"
         );
       }
@@ -171,6 +183,12 @@ UsageEventsData.RequiredProperties = [
 ];
 
 /**
+ * Events that are billable, this include all events except platform events
+ * @member {Number} billable_events
+ */
+UsageEventsData.prototype["billable_events"] = undefined;
+
+/**
  * @member {String} device
  */
 UsageEventsData.prototype["device"] = undefined;
@@ -196,6 +214,12 @@ UsageEventsData.prototype["period"] = undefined;
  * @member {Number} platform_events
  */
 UsageEventsData.prototype["platform_events"] = undefined;
+
+/**
+ * The total number of days in this period. Useful for calculating daily averages for month period. Note that the current period will be the total number of days in the current period, including days in the future.
+ * @member {Number} total_days_in_period
+ */
+UsageEventsData.prototype["total_days_in_period"] = undefined;
 
 /**
  * Total devices represented in this count

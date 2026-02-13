@@ -40,7 +40,7 @@ import UpdateFleetRequest from "../model/UpdateFleetRequest";
 /**
  * Project service.
  * @module api/ProjectApi
- * @version 5.0.0
+ * @version 6.0.0
  */
 export default class ProjectApi {
   /**
@@ -830,6 +830,80 @@ export default class ProjectApi {
   disableGlobalEventTransformation(projectOrProductUID) {
     return this.disableGlobalEventTransformationWithHttpInfo(
       projectOrProductUID
+    ).then(function (response_and_data) {
+      return response_and_data.data;
+    });
+  }
+
+  /**
+   * Download firmware binary
+   * @param {String} projectOrProductUID
+   * @param {module:model/String} firmwareType
+   * @param {String} filename
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link File} and HTTP response
+   */
+  downloadFirmwareWithHttpInfo(projectOrProductUID, firmwareType, filename) {
+    let postBody = null;
+    // verify the required parameter 'projectOrProductUID' is set
+    if (projectOrProductUID === undefined || projectOrProductUID === null) {
+      throw new Error(
+        "Missing the required parameter 'projectOrProductUID' when calling downloadFirmware"
+      );
+    }
+    // verify the required parameter 'firmwareType' is set
+    if (firmwareType === undefined || firmwareType === null) {
+      throw new Error(
+        "Missing the required parameter 'firmwareType' when calling downloadFirmware"
+      );
+    }
+    // verify the required parameter 'filename' is set
+    if (filename === undefined || filename === null) {
+      throw new Error(
+        "Missing the required parameter 'filename' when calling downloadFirmware"
+      );
+    }
+
+    let pathParams = {
+      projectOrProductUID: projectOrProductUID,
+      firmwareType: firmwareType,
+      filename: filename,
+    };
+    let queryParams = {};
+    let headerParams = {};
+    let formParams = {};
+
+    let authNames = ["personalAccessToken"];
+    let contentTypes = [];
+    let accepts = ["application/octet-stream", "application/json"];
+    let returnType = File;
+    return this.apiClient.callApi(
+      "/v1/projects/{projectOrProductUID}/firmware/{firmwareType}/{filename}",
+      "GET",
+      pathParams,
+      queryParams,
+      headerParams,
+      formParams,
+      postBody,
+      authNames,
+      contentTypes,
+      accepts,
+      returnType,
+      null
+    );
+  }
+
+  /**
+   * Download firmware binary
+   * @param {String} projectOrProductUID
+   * @param {module:model/String} firmwareType
+   * @param {String} filename
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link File}
+   */
+  downloadFirmware(projectOrProductUID, firmwareType, filename) {
+    return this.downloadFirmwareWithHttpInfo(
+      projectOrProductUID,
+      firmwareType,
+      filename
     ).then(function (response_and_data) {
       return response_and_data.data;
     });

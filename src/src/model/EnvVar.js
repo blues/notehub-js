@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The EnvVar model module.
  * @module model/EnvVar
- * @version 5.0.0
+ * @version 6.0.0
  */
 class EnvVar {
   /**

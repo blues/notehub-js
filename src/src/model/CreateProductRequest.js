@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The CreateProductRequest model module.
  * @module model/CreateProductRequest
- * @version 5.0.0
+ * @version 6.0.0
  */
 class CreateProductRequest {
   /**

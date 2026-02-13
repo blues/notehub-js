@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The SignalDevice200Response model module.
  * @module model/SignalDevice200Response
- * @version 5.0.0
+ * @version 6.0.0
  */
 class SignalDevice200Response {
   /**

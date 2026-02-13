@@ -17,7 +17,7 @@ import UsageEventsData from "./UsageEventsData";
 /**
  * The UsageEventsResponse model module.
  * @module model/UsageEventsResponse
- * @version 5.0.0
+ * @version 6.0.0
  */
 class UsageEventsResponse {
   /**
@@ -51,6 +51,12 @@ class UsageEventsResponse {
 
       if (data.hasOwnProperty("data")) {
         obj["data"] = ApiClient.convertToType(data["data"], [UsageEventsData]);
+      }
+      if (data.hasOwnProperty("truncated")) {
+        obj["truncated"] = ApiClient.convertToType(
+          data["truncated"],
+          "Boolean"
+        );
       }
     } else if (data === null) {
       return null;
@@ -100,5 +106,11 @@ UsageEventsResponse.RequiredProperties = ["data"];
  * @member {Array.<module:model/UsageEventsData>} data
  */
 UsageEventsResponse.prototype["data"] = undefined;
+
+/**
+ * If the data is truncated that means that the parameters selected resulted in a response of over | the requested limit of data points, in order to ensure
+ * @member {Boolean} truncated
+ */
+UsageEventsResponse.prototype["truncated"] = undefined;
 
 export default UsageEventsResponse;

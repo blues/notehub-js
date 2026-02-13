@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The GetNotefile200Response model module.
  * @module model/GetNotefile200Response
- * @version 5.0.0
+ * @version 6.0.0
  */
 class GetNotefile200Response {
   /**

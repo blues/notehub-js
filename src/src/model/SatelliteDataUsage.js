@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The SatelliteDataUsage model module.
  * @module model/SatelliteDataUsage
- * @version 5.0.0
+ * @version 6.0.0
  */
 class SatelliteDataUsage {
   /**

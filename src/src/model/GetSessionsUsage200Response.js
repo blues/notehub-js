@@ -17,16 +17,17 @@ import UsageSessionsData from "./UsageSessionsData";
 /**
  * The GetSessionsUsage200Response model module.
  * @module model/GetSessionsUsage200Response
- * @version 5.0.0
+ * @version 6.0.0
  */
 class GetSessionsUsage200Response {
   /**
    * Constructs a new <code>GetSessionsUsage200Response</code>.
    * @alias module:model/GetSessionsUsage200Response
    * @param sessions {Array.<module:model/UsageSessionsData>}
+   * @param truncated {Boolean} If the data is truncated that means that the parameters selected resulted in a response of over | the requested limit of data points, in order to ensure
    */
-  constructor(sessions) {
-    GetSessionsUsage200Response.initialize(this, sessions);
+  constructor(sessions, truncated) {
+    GetSessionsUsage200Response.initialize(this, sessions, truncated);
   }
 
   /**
@@ -34,8 +35,9 @@ class GetSessionsUsage200Response {
    * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
    * Only for internal use.
    */
-  static initialize(obj, sessions) {
+  static initialize(obj, sessions, truncated) {
     obj["sessions"] = sessions;
+    obj["truncated"] = truncated;
   }
 
   /**
@@ -53,6 +55,12 @@ class GetSessionsUsage200Response {
         obj["sessions"] = ApiClient.convertToType(data["sessions"], [
           UsageSessionsData,
         ]);
+      }
+      if (data.hasOwnProperty("truncated")) {
+        obj["truncated"] = ApiClient.convertToType(
+          data["truncated"],
+          "Boolean"
+        );
       }
     } else if (data === null) {
       return null;
@@ -96,11 +104,17 @@ class GetSessionsUsage200Response {
   }
 }
 
-GetSessionsUsage200Response.RequiredProperties = ["sessions"];
+GetSessionsUsage200Response.RequiredProperties = ["sessions", "truncated"];
 
 /**
  * @member {Array.<module:model/UsageSessionsData>} sessions
  */
 GetSessionsUsage200Response.prototype["sessions"] = undefined;
+
+/**
+ * If the data is truncated that means that the parameters selected resulted in a response of over | the requested limit of data points, in order to ensure
+ * @member {Boolean} truncated
+ */
+GetSessionsUsage200Response.prototype["truncated"] = undefined;
 
 export default GetSessionsUsage200Response;
