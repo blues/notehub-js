@@ -16,6 +16,7 @@ All URIs are relative to *https://api.notefile.net*
 | [**deleteProject**](ProjectApi.md#deleteProject)                                       | **DELETE** /v1/projects/{projectOrProductUID}                                               |
 | [**deleteProjectEnvironmentVariable**](ProjectApi.md#deleteProjectEnvironmentVariable) | **DELETE** /v1/projects/{projectOrProductUID}/environment_variables/{key}                   |
 | [**disableGlobalEventTransformation**](ProjectApi.md#disableGlobalEventTransformation) | **POST** /v1/projects/{projectOrProductUID}/global-transformation/disable                   |
+| [**downloadFirmware**](ProjectApi.md#downloadFirmware)                                 | **GET** /v1/projects/{projectOrProductUID}/firmware/{firmwareType}/{filename}               |
 | [**enableGlobalEventTransformation**](ProjectApi.md#enableGlobalEventTransformation)   | **POST** /v1/projects/{projectOrProductUID}/global-transformation/enable                    |
 | [**getDeviceDfuHistory**](ProjectApi.md#getDeviceDfuHistory)                           | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/dfu/{firmwareType}/history   |
 | [**getDeviceDfuStatus**](ProjectApi.md#getDeviceDfuStatus)                             | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/dfu/{firmwareType}/status    |
@@ -597,6 +598,54 @@ null (empty response body)
 
 - **Content-Type**: Not defined
 - **Accept**: application/json
+
+## downloadFirmware
+
+> File downloadFirmware(projectOrProductUID, firmwareType, filename)
+
+Download firmware binary
+
+### Example
+
+```javascript
+import * as NotehubJs from '@blues-inc/notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
+// Configure Bearer access token for authorization: personalAccessToken
+let personalAccessToken = defaultClient.authentications['personalAccessToken'];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
+
+let apiInstance = new NotehubJs.ProjectApi();
+let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let firmwareType = "firmwareType_example"; // String |
+let filename = "filename_example"; // String |
+apiInstance.downloadFirmware(projectOrProductUID, firmwareType, filename).then((data) => {
+  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
+}, (error) => {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+| Name                    | Type       | Description | Notes |
+| ----------------------- | ---------- | ----------- | ----- |
+| **projectOrProductUID** | **String** |             |
+| **firmwareType**        | **String** |             |
+| **filename**            | **String** |             |
+
+### Return type
+
+**File**
+
+### Authorization
+
+[personalAccessToken](../README.md#personalAccessToken)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/octet-stream, application/json
 
 ## enableGlobalEventTransformation
 

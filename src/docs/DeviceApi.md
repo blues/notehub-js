@@ -2,38 +2,36 @@
 
 All URIs are relative to *https://api.notefile.net*
 
-| Method                                                                                    | HTTP request                                                                                   | Description                                     |
-| ----------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ----------------------------------------------- |
-| [**addDbNote**](DeviceApi.md#addDbNote)                                                   | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}    |
-| [**addQiNote**](DeviceApi.md#addQiNote)                                                   | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}             |
-| [**deleteDevice**](DeviceApi.md#deleteDevice)                                             | **DELETE** /v1/projects/{projectOrProductUID}/devices/{deviceUID}                              |
-| [**deleteDeviceEnvironmentVariable**](DeviceApi.md#deleteDeviceEnvironmentVariable)       | **DELETE** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_variables/{key}  |
-| [**deleteNote**](DeviceApi.md#deleteNote)                                                 | **DELETE** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}  |
-| [**deleteNotefiles**](DeviceApi.md#deleteNotefiles)                                       | **DELETE** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/files                        |
-| [**disableDevice**](DeviceApi.md#disableDevice)                                           | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/disable                        |
-| [**disableDeviceConnectivityAssurance**](DeviceApi.md#disableDeviceConnectivityAssurance) | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/disable-connectivity-assurance |
-| [**enableDevice**](DeviceApi.md#enableDevice)                                             | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/enable                         |
-| [**enableDeviceConnectivityAssurance**](DeviceApi.md#enableDeviceConnectivityAssurance)   | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/enable-connectivity-assurance  |
-| [**getDbNote**](DeviceApi.md#getDbNote)                                                   | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}     |
-| [**getDevice**](DeviceApi.md#getDevice)                                                   | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}                                 |
-| [**getDeviceEnvironmentHierarchy**](DeviceApi.md#getDeviceEnvironmentHierarchy)           | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_hierarchy           | Get environment variable hierarchy for a device |
-| [**getDeviceEnvironmentVariables**](DeviceApi.md#getDeviceEnvironmentVariables)           | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_variables           |
-| [**getDeviceEnvironmentVariablesByPin**](DeviceApi.md#getDeviceEnvironmentVariablesByPin) | **GET** /v1/products/{productUID}/devices/{deviceUID}/environment_variables_with_pin           |
-| [**getDeviceHealthLog**](DeviceApi.md#getDeviceHealthLog)                                 | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/health-log                      |
-| [**getDeviceLatestEvents**](DeviceApi.md#getDeviceLatestEvents)                           | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/latest                          |
-| [**getDevicePlans**](DeviceApi.md#getDevicePlans)                                         | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/plans                           |
-| [**getDevicePublicKey**](DeviceApi.md#getDevicePublicKey)                                 | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/public-key                      |
-| [**getDevicePublicKeys**](DeviceApi.md#getDevicePublicKeys)                               | **GET** /v1/projects/{projectOrProductUID}/devices/public-keys                                 |
-| [**getDeviceSessions**](DeviceApi.md#getDeviceSessions)                                   | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/sessions                        |
-| [**getDevices**](DeviceApi.md#getDevices)                                                 | **GET** /v1/projects/{projectOrProductUID}/devices                                             |
-| [**getFleetDevices**](DeviceApi.md#getFleetDevices)                                       | **GET** /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/devices                           |
-| [**getNotefile**](DeviceApi.md#getNotefile)                                               | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}              |
-| [**listNotefiles**](DeviceApi.md#listNotefiles)                                           | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/files                           |
-| [**provisionDevice**](DeviceApi.md#provisionDevice)                                       | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/provision                      |
-| [**setDeviceEnvironmentVariables**](DeviceApi.md#setDeviceEnvironmentVariables)           | **PUT** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_variables           |
-| [**setDeviceEnvironmentVariablesByPin**](DeviceApi.md#setDeviceEnvironmentVariablesByPin) | **PUT** /v1/products/{productUID}/devices/{deviceUID}/environment_variables_with_pin           |
-| [**signalDevice**](DeviceApi.md#signalDevice)                                             | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/signal                         |
-| [**updateDbNote**](DeviceApi.md#updateDbNote)                                             | **PUT** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}     |
+| Method                                                                                    | HTTP request                                                                                  | Description                                     |
+| ----------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | ----------------------------------------------- |
+| [**addDbNote**](DeviceApi.md#addDbNote)                                                   | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}   |
+| [**addQiNote**](DeviceApi.md#addQiNote)                                                   | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}            |
+| [**deleteDevice**](DeviceApi.md#deleteDevice)                                             | **DELETE** /v1/projects/{projectOrProductUID}/devices/{deviceUID}                             |
+| [**deleteDeviceEnvironmentVariable**](DeviceApi.md#deleteDeviceEnvironmentVariable)       | **DELETE** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_variables/{key} |
+| [**deleteNote**](DeviceApi.md#deleteNote)                                                 | **DELETE** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/{noteID} |
+| [**deleteNotefiles**](DeviceApi.md#deleteNotefiles)                                       | **DELETE** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/files                       |
+| [**disableDevice**](DeviceApi.md#disableDevice)                                           | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/disable                       |
+| [**enableDevice**](DeviceApi.md#enableDevice)                                             | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/enable                        |
+| [**getDbNote**](DeviceApi.md#getDbNote)                                                   | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}    |
+| [**getDevice**](DeviceApi.md#getDevice)                                                   | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}                                |
+| [**getDeviceEnvironmentHierarchy**](DeviceApi.md#getDeviceEnvironmentHierarchy)           | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_hierarchy          | Get environment variable hierarchy for a device |
+| [**getDeviceEnvironmentVariables**](DeviceApi.md#getDeviceEnvironmentVariables)           | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_variables          |
+| [**getDeviceEnvironmentVariablesByPin**](DeviceApi.md#getDeviceEnvironmentVariablesByPin) | **GET** /v1/products/{productUID}/devices/{deviceUID}/environment_variables_with_pin          |
+| [**getDeviceHealthLog**](DeviceApi.md#getDeviceHealthLog)                                 | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/health-log                     |
+| [**getDeviceLatestEvents**](DeviceApi.md#getDeviceLatestEvents)                           | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/latest                         |
+| [**getDevicePlans**](DeviceApi.md#getDevicePlans)                                         | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/plans                          |
+| [**getDevicePublicKey**](DeviceApi.md#getDevicePublicKey)                                 | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/public-key                     |
+| [**getDevicePublicKeys**](DeviceApi.md#getDevicePublicKeys)                               | **GET** /v1/projects/{projectOrProductUID}/devices/public-keys                                |
+| [**getDeviceSessions**](DeviceApi.md#getDeviceSessions)                                   | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/sessions                       |
+| [**getDevices**](DeviceApi.md#getDevices)                                                 | **GET** /v1/projects/{projectOrProductUID}/devices                                            |
+| [**getFleetDevices**](DeviceApi.md#getFleetDevices)                                       | **GET** /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/devices                          |
+| [**getNotefile**](DeviceApi.md#getNotefile)                                               | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}             |
+| [**listNotefiles**](DeviceApi.md#listNotefiles)                                           | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/files                          |
+| [**provisionDevice**](DeviceApi.md#provisionDevice)                                       | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/provision                     |
+| [**setDeviceEnvironmentVariables**](DeviceApi.md#setDeviceEnvironmentVariables)           | **PUT** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_variables          |
+| [**setDeviceEnvironmentVariablesByPin**](DeviceApi.md#setDeviceEnvironmentVariablesByPin) | **PUT** /v1/products/{productUID}/devices/{deviceUID}/environment_variables_with_pin          |
+| [**signalDevice**](DeviceApi.md#signalDevice)                                             | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/signal                        |
+| [**updateDbNote**](DeviceApi.md#updateDbNote)                                             | **PUT** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}    |
 
 ## addDbNote
 
@@ -375,52 +373,6 @@ null (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-## disableDeviceConnectivityAssurance
-
-> disableDeviceConnectivityAssurance(projectOrProductUID, deviceUID)
-
-Disable Connectivity Assurance
-
-### Example
-
-```javascript
-import * as NotehubJs from '@blues-inc/notehub-js';
-let defaultClient = NotehubJs.ApiClient.instance;
-// Configure Bearer access token for authorization: personalAccessToken
-let personalAccessToken = defaultClient.authentications['personalAccessToken'];
-personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
-
-let apiInstance = new NotehubJs.DeviceApi();
-let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
-let deviceUID = dev:000000000000000; // String |
-apiInstance.disableDeviceConnectivityAssurance(projectOrProductUID, deviceUID).then(() => {
-  console.log('API called successfully.');
-}, (error) => {
-  console.error(error);
-});
-
-```
-
-### Parameters
-
-| Name                    | Type       | Description | Notes |
-| ----------------------- | ---------- | ----------- | ----- |
-| **projectOrProductUID** | **String** |             |
-| **deviceUID**           | **String** |             |
-
-### Return type
-
-null (empty response body)
-
-### Authorization
-
-[personalAccessToken](../README.md#personalAccessToken)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
 ## enableDevice
 
 > enableDevice(projectOrProductUID, deviceUID)
@@ -440,52 +392,6 @@ let apiInstance = new NotehubJs.DeviceApi();
 let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
 let deviceUID = dev:000000000000000; // String |
 apiInstance.enableDevice(projectOrProductUID, deviceUID).then(() => {
-  console.log('API called successfully.');
-}, (error) => {
-  console.error(error);
-});
-
-```
-
-### Parameters
-
-| Name                    | Type       | Description | Notes |
-| ----------------------- | ---------- | ----------- | ----- |
-| **projectOrProductUID** | **String** |             |
-| **deviceUID**           | **String** |             |
-
-### Return type
-
-null (empty response body)
-
-### Authorization
-
-[personalAccessToken](../README.md#personalAccessToken)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-## enableDeviceConnectivityAssurance
-
-> enableDeviceConnectivityAssurance(projectOrProductUID, deviceUID)
-
-Enable Connectivity Assurance
-
-### Example
-
-```javascript
-import * as NotehubJs from '@blues-inc/notehub-js';
-let defaultClient = NotehubJs.ApiClient.instance;
-// Configure Bearer access token for authorization: personalAccessToken
-let personalAccessToken = defaultClient.authentications['personalAccessToken'];
-personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
-
-let apiInstance = new NotehubJs.DeviceApi();
-let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
-let deviceUID = dev:000000000000000; // String |
-apiInstance.enableDeviceConnectivityAssurance(projectOrProductUID, deviceUID).then(() => {
   console.log('API called successfully.');
 }, (error) => {
   console.error(error);

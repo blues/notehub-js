@@ -36,7 +36,7 @@ import SignalDevice200Response from "../model/SignalDevice200Response";
 /**
  * Device service.
  * @module api/DeviceApi
- * @version 5.0.0
+ * @version 6.0.0
  */
 export default class DeviceApi {
   /**
@@ -601,73 +601,6 @@ export default class DeviceApi {
   }
 
   /**
-   * Disable Connectivity Assurance
-   * @param {String} projectOrProductUID
-   * @param {String} deviceUID
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
-   */
-  disableDeviceConnectivityAssuranceWithHttpInfo(
-    projectOrProductUID,
-    deviceUID
-  ) {
-    let postBody = null;
-    // verify the required parameter 'projectOrProductUID' is set
-    if (projectOrProductUID === undefined || projectOrProductUID === null) {
-      throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling disableDeviceConnectivityAssurance"
-      );
-    }
-    // verify the required parameter 'deviceUID' is set
-    if (deviceUID === undefined || deviceUID === null) {
-      throw new Error(
-        "Missing the required parameter 'deviceUID' when calling disableDeviceConnectivityAssurance"
-      );
-    }
-
-    let pathParams = {
-      projectOrProductUID: projectOrProductUID,
-      deviceUID: deviceUID,
-    };
-    let queryParams = {};
-    let headerParams = {};
-    let formParams = {};
-
-    let authNames = ["personalAccessToken"];
-    let contentTypes = [];
-    let accepts = ["application/json"];
-    let returnType = null;
-    return this.apiClient.callApi(
-      "/v1/projects/{projectOrProductUID}/devices/{deviceUID}/disable-connectivity-assurance",
-      "POST",
-      pathParams,
-      queryParams,
-      headerParams,
-      formParams,
-      postBody,
-      authNames,
-      contentTypes,
-      accepts,
-      returnType,
-      null
-    );
-  }
-
-  /**
-   * Disable Connectivity Assurance
-   * @param {String} projectOrProductUID
-   * @param {String} deviceUID
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}
-   */
-  disableDeviceConnectivityAssurance(projectOrProductUID, deviceUID) {
-    return this.disableDeviceConnectivityAssuranceWithHttpInfo(
-      projectOrProductUID,
-      deviceUID
-    ).then(function (response_and_data) {
-      return response_and_data.data;
-    });
-  }
-
-  /**
    * Enable Device
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
@@ -728,73 +661,6 @@ export default class DeviceApi {
         return response_and_data.data;
       }
     );
-  }
-
-  /**
-   * Enable Connectivity Assurance
-   * @param {String} projectOrProductUID
-   * @param {String} deviceUID
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
-   */
-  enableDeviceConnectivityAssuranceWithHttpInfo(
-    projectOrProductUID,
-    deviceUID
-  ) {
-    let postBody = null;
-    // verify the required parameter 'projectOrProductUID' is set
-    if (projectOrProductUID === undefined || projectOrProductUID === null) {
-      throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling enableDeviceConnectivityAssurance"
-      );
-    }
-    // verify the required parameter 'deviceUID' is set
-    if (deviceUID === undefined || deviceUID === null) {
-      throw new Error(
-        "Missing the required parameter 'deviceUID' when calling enableDeviceConnectivityAssurance"
-      );
-    }
-
-    let pathParams = {
-      projectOrProductUID: projectOrProductUID,
-      deviceUID: deviceUID,
-    };
-    let queryParams = {};
-    let headerParams = {};
-    let formParams = {};
-
-    let authNames = ["personalAccessToken"];
-    let contentTypes = [];
-    let accepts = ["application/json"];
-    let returnType = null;
-    return this.apiClient.callApi(
-      "/v1/projects/{projectOrProductUID}/devices/{deviceUID}/enable-connectivity-assurance",
-      "POST",
-      pathParams,
-      queryParams,
-      headerParams,
-      formParams,
-      postBody,
-      authNames,
-      contentTypes,
-      accepts,
-      returnType,
-      null
-    );
-  }
-
-  /**
-   * Enable Connectivity Assurance
-   * @param {String} projectOrProductUID
-   * @param {String} deviceUID
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}
-   */
-  enableDeviceConnectivityAssurance(projectOrProductUID, deviceUID) {
-    return this.enableDeviceConnectivityAssuranceWithHttpInfo(
-      projectOrProductUID,
-      deviceUID
-    ).then(function (response_and_data) {
-      return response_and_data.data;
-    });
   }
 
   /**

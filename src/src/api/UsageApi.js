@@ -21,7 +21,7 @@ import UsageEventsResponse from "../model/UsageEventsResponse";
 /**
  * Usage service.
  * @module api/UsageApi
- * @version 5.0.0
+ * @version 6.0.0
  */
 export default class UsageApi {
   /**
@@ -44,6 +44,7 @@ export default class UsageApi {
    * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
    * @param {Array.<String>} opts.deviceUID A Device UID.
    * @param {Array.<String>} opts.fleetUID Filter by Fleet UID
+   * @param {Number} opts.limit Limit the number of data points returned (default to 200000)
    * @param {module:model/String} opts.aggregate Aggregation level for results (default to 'device')
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetDataUsage200Response} and HTTP response
    */
@@ -74,6 +75,7 @@ export default class UsageApi {
         "multi"
       ),
       fleetUID: this.apiClient.buildCollectionParam(opts["fleetUID"], "multi"),
+      limit: opts["limit"],
       period: period,
       aggregate: opts["aggregate"],
     };
@@ -109,6 +111,7 @@ export default class UsageApi {
    * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
    * @param {Array.<String>} opts.deviceUID A Device UID.
    * @param {Array.<String>} opts.fleetUID Filter by Fleet UID
+   * @param {Number} opts.limit Limit the number of data points returned (default to 200000)
    * @param {module:model/String} opts.aggregate Aggregation level for results (default to 'device')
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetDataUsage200Response}
    */
@@ -131,6 +134,7 @@ export default class UsageApi {
    * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
    * @param {Array.<String>} opts.deviceUID A Device UID.
    * @param {Array.<String>} opts.fleetUID Filter by Fleet UID
+   * @param {Number} opts.limit Limit the number of data points returned (default to 200000)
    * @param {module:model/String} opts.aggregate Aggregation level for results (default to 'device')
    * @param {Array.<String>} opts.notefile Filter to specific notefiles
    * @param {Boolean} opts.skipRecentData When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects. (default to false)
@@ -164,6 +168,7 @@ export default class UsageApi {
         "multi"
       ),
       fleetUID: this.apiClient.buildCollectionParam(opts["fleetUID"], "multi"),
+      limit: opts["limit"],
       period: period,
       aggregate: opts["aggregate"],
       notefile: this.apiClient.buildCollectionParam(opts["notefile"], "multi"),
@@ -202,6 +207,7 @@ export default class UsageApi {
    * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
    * @param {Array.<String>} opts.deviceUID A Device UID.
    * @param {Array.<String>} opts.fleetUID Filter by Fleet UID
+   * @param {Number} opts.limit Limit the number of data points returned (default to 200000)
    * @param {module:model/String} opts.aggregate Aggregation level for results (default to 'device')
    * @param {Array.<String>} opts.notefile Filter to specific notefiles
    * @param {Boolean} opts.skipRecentData When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects. (default to false)
@@ -226,6 +232,7 @@ export default class UsageApi {
    * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
    * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
    * @param {Array.<String>} opts.routeUID A Route UID.
+   * @param {Number} opts.limit Limit the number of data points returned (default to 200000)
    * @param {module:model/String} opts.aggregate Aggregation level for results (default to 'route')
    * @param {Boolean} opts.skipRecentData When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects. (default to false)
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetRouteLogsUsage200Response} and HTTP response
@@ -253,6 +260,7 @@ export default class UsageApi {
       startDate: opts["startDate"],
       endDate: opts["endDate"],
       routeUID: this.apiClient.buildCollectionParam(opts["routeUID"], "multi"),
+      limit: opts["limit"],
       period: period,
       aggregate: opts["aggregate"],
       skipRecentData: opts["skipRecentData"],
@@ -288,6 +296,7 @@ export default class UsageApi {
    * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
    * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
    * @param {Array.<String>} opts.routeUID A Route UID.
+   * @param {Number} opts.limit Limit the number of data points returned (default to 200000)
    * @param {module:model/String} opts.aggregate Aggregation level for results (default to 'route')
    * @param {Boolean} opts.skipRecentData When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects. (default to false)
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetRouteLogsUsage200Response}
@@ -311,6 +320,7 @@ export default class UsageApi {
    * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
    * @param {Array.<String>} opts.deviceUID A Device UID.
    * @param {Array.<String>} opts.fleetUID Filter by Fleet UID
+   * @param {Number} opts.limit Limit the number of data points returned (default to 200000)
    * @param {module:model/String} opts.aggregate Aggregation level for results (default to 'device')
    * @param {Boolean} opts.skipRecentData When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects. (default to false)
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetSessionsUsage200Response} and HTTP response
@@ -342,6 +352,7 @@ export default class UsageApi {
         "multi"
       ),
       fleetUID: this.apiClient.buildCollectionParam(opts["fleetUID"], "multi"),
+      limit: opts["limit"],
       period: period,
       aggregate: opts["aggregate"],
       skipRecentData: opts["skipRecentData"],
@@ -378,6 +389,7 @@ export default class UsageApi {
    * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
    * @param {Array.<String>} opts.deviceUID A Device UID.
    * @param {Array.<String>} opts.fleetUID Filter by Fleet UID
+   * @param {Number} opts.limit Limit the number of data points returned (default to 200000)
    * @param {module:model/String} opts.aggregate Aggregation level for results (default to 'device')
    * @param {Boolean} opts.skipRecentData When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects. (default to false)
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetSessionsUsage200Response}
