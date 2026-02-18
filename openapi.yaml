@@ -3187,7 +3187,7 @@ components:
           type: string
       style: form
     projectOrProductUIDParam:
-      example: 'app:2606f411-dea6-44a0-9743-1130f57d77d8'
+      example: 'app:2606f411-dea6-44a0-9743-1130f57d77d7'
       in: path
       name: projectOrProductUID
       required: true
