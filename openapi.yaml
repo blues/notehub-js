@@ -1934,7 +1934,62 @@ paths:
         - personalAccessToken: []
       tags:
         - jobs
+    post:
+      operationId: CreateJob
+      description: Create a new batch job with an optional name
+      parameters:
+        - $ref: '#/components/parameters/projectOrProductUIDParam'
+        - name: name
+          in: query
+          description: Optional name for the job
+          required: false
+          schema:
+            type: string
+      requestBody:
+        description: The job definition as raw JSON
+        required: true
+        content:
+          application/json:
+            schema:
+              description: Job definition (structure varies by job type)
+              type: object
+      responses:
+        '201':
+          description: Job created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateJobResponse'
+        '400':
+          description: Invalid job definition
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - jobs
   '/v1/projects/{projectOrProductUID}/jobs/{jobUID}':
+    delete:
+      operationId: DeleteJob
+      description: Delete a batch job
+      parameters:
+        - $ref: '#/components/parameters/projectOrProductUIDParam'
+        - $ref: '#/components/parameters/jobUIDParam'
+      responses:
+        '200':
+          description: Job deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteJobResponse'
+        '404':
+          description: Job not found
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - jobs
     get:
       operationId: GetJob
       description: Get a specific batch job definition
@@ -3764,6 +3819,14 @@ components:
         role:
           type: string
       nullable: true
+    CreateJobResponse:
+      type: object
+      properties:
+        job_uid:
+          description: The unique identifier for the created job
+          type: string
+      required:
+        - job_uid
     CreateMonitor:
       type: ''
       properties: {}
@@ -3949,6 +4012,14 @@ components:
           type: string
           format: uri
       additionalProperties: false
+    DeleteJobResponse:
+      type: object
+      properties:
+        success:
+          description: True if deletion was successful
+          type: boolean
+      required:
+        - success
     Device:
       type: object
       properties:
