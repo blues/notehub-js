@@ -143,6 +143,90 @@ paths:
         - personalAccessToken: []
       tags:
         - billing_account
+  '/v1/billing-accounts/{billingAccountUID}':
+    get:
+      operationId: GetBillingAccount
+      description: Get Billing Account Information
+      parameters:
+        - $ref: '#/components/parameters/billingAccountUIDParam'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  owner:
+                    type: string
+                  plan:
+                    type: object
+                    properties:
+                      current_balance:
+                        type: integer
+                        format: int64
+                      end_date:
+                        type: string
+                        format: date-time
+                      event_capacity:
+                        type: integer
+                        format: int64
+                      start_date:
+                        type: string
+                        format: date-time
+                      type:
+                        type: string
+                        enum:
+                          - Enterprise
+                          - Essentials
+                  suspended:
+                    type: boolean
+                  uid:
+                    type: string
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - billing_account
+  '/v1/billing-accounts/{billingAccountUID}/balance-history':
+    get:
+      operationId: GetBillingAccountBalanceHistory
+      description: 'Get Billing Account Balance history, only enterprise supported'
+      parameters:
+        - $ref: '#/components/parameters/billingAccountUIDParam'
+        - $ref: '#/components/parameters/startDateParam'
+        - $ref: '#/components/parameters/endDateParam'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      properties:
+                        period:
+                          type: string
+                          format: date-time
+                        remaining_event_capacity:
+                          type: integer
+                          format: int64
+                      required:
+                        - remaining_event_capacity
+                        - period
+                      type: object
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - billing_account
   '/v1/products/{productUID}/devices/{deviceUID}/environment_variables_with_pin':
     get:
       operationId: GetDeviceEnvironmentVariablesByPin
@@ -2703,6 +2787,13 @@ paths:
         - webhook
 components:
   parameters:
+    billingAccountUIDParam:
+      example: 00000000-0000-0000-000000000001
+      in: path
+      name: billingAccountUID
+      required: true
+      schema:
+        type: string
     cursorParam:
       description: |
         A cursor, which can be obtained from the `next_cursor` value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included.
