@@ -1130,6 +1130,7 @@ paths:
         - $ref: '#/components/parameters/pageNumParam'
         - $ref: '#/components/parameters/startDateParam'
         - $ref: '#/components/parameters/endDateParam'
+        - $ref: '#/components/parameters/firstSyncParam'
       responses:
         '200':
           $ref: '#/components/responses/SessionResponse'
@@ -2947,6 +2948,14 @@ components:
       required: false
       schema:
         type: string
+    firstSyncParam:
+      description: 'When true, filters results to only show first sync sessions'
+      in: query
+      name: firstSync
+      required: false
+      schema:
+        type: boolean
+        default: false
     fleetUIDFilterQueryParam:
       description: Filter by Fleet UID
       explode: true
@@ -5777,6 +5786,11 @@ components:
         device:
           type: string
           example: 'dev:123456789012345'
+        first_sync_sessions:
+          description: Number of first sync sessions in this period
+          type: integer
+          format: int64
+          example: 2
         fleet:
           type: string
           example: 'fleet:1042ddc5-3b2c-4cec-b1fb-d3040538094d'
@@ -5799,6 +5813,7 @@ components:
       required:
         - period
         - sessions
+        - first_sync_sessions
         - total_bytes
         - total_devices
     UsageTruncatedField:
