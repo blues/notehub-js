@@ -1901,6 +1901,226 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+  '/v1/projects/{projectOrProductUID}/jobs':
+    get:
+      operationId: GetJobs
+      description: List all batch jobs for a project
+      parameters:
+        - $ref: '#/components/parameters/projectOrProductUIDParam'
+        - $ref: '#/components/parameters/pageSizeParam'
+        - $ref: '#/components/parameters/pageNumParam'
+        - name: status
+          in: query
+          description: Filter jobs by status
+          required: false
+          schema:
+            type: string
+        - name: dry_run
+          in: query
+          description: Filter jobs by dry run flag
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetJobsResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - jobs
+    post:
+      operationId: CreateJob
+      description: Create a new batch job with an optional name
+      parameters:
+        - $ref: '#/components/parameters/projectOrProductUIDParam'
+        - name: name
+          in: query
+          description: Optional name for the job
+          required: false
+          schema:
+            type: string
+      requestBody:
+        description: The job definition as raw JSON
+        required: true
+        content:
+          application/json:
+            schema:
+              description: Job definition (structure varies by job type)
+              type: object
+      responses:
+        '201':
+          description: Job created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateJobResponse'
+        '400':
+          description: Invalid job definition
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - jobs
+  '/v1/projects/{projectOrProductUID}/jobs/{jobUID}':
+    delete:
+      operationId: DeleteJob
+      description: Delete a batch job
+      parameters:
+        - $ref: '#/components/parameters/projectOrProductUIDParam'
+        - $ref: '#/components/parameters/jobUIDParam'
+      responses:
+        '200':
+          description: Job deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteJobResponse'
+        '404':
+          description: Job not found
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - jobs
+    get:
+      operationId: GetJob
+      description: Get a specific batch job definition
+      parameters:
+        - $ref: '#/components/parameters/projectOrProductUIDParam'
+        - $ref: '#/components/parameters/jobUIDParam'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+        '404':
+          description: Job not found
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - jobs
+  '/v1/projects/{projectOrProductUID}/jobs/{jobUID}/run':
+    post:
+      operationId: RunJob
+      description: Execute a batch job
+      parameters:
+        - $ref: '#/components/parameters/projectOrProductUIDParam'
+        - $ref: '#/components/parameters/jobUIDParam'
+        - name: dry_run
+          in: query
+          description: Run job in dry-run mode without making actual changes
+          required: false
+          schema:
+            type: boolean
+            default: false
+      responses:
+        '200':
+          description: Job execution started
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RunJobResponse'
+        '404':
+          description: Job not found
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - jobs
+  '/v1/projects/{projectOrProductUID}/jobs/{jobUID}/runs':
+    get:
+      operationId: GetJobRuns
+      description: List all runs for a specific job
+      parameters:
+        - $ref: '#/components/parameters/projectOrProductUIDParam'
+        - $ref: '#/components/parameters/jobUIDParam'
+        - $ref: '#/components/parameters/pageSizeParam'
+        - $ref: '#/components/parameters/pageNumParam'
+        - name: status
+          in: query
+          description: Filter runs by status
+          required: false
+          schema:
+            type: string
+        - name: dry_run
+          in: query
+          description: Filter runs by dry run flag
+          required: false
+          schema:
+            type: boolean
+            nullable: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetJobRunsResponse'
+        '404':
+          description: Job not found
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - jobs
+  '/v1/projects/{projectOrProductUID}/jobs/runs/{reportUID}':
+    get:
+      operationId: GetJobRun
+      description: Get the result of a job execution
+      parameters:
+        - $ref: '#/components/parameters/projectOrProductUIDParam'
+        - $ref: '#/components/parameters/reportUIDParam'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobRun'
+        '404':
+          description: Run not found
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - jobs
+  '/v1/projects/{projectOrProductUID}/jobs/runs/{reportUID}/cancel':
+    post:
+      operationId: CancelJobRun
+      description: Cancel a running job execution
+      parameters:
+        - $ref: '#/components/parameters/projectOrProductUIDParam'
+        - $ref: '#/components/parameters/reportUIDParam'
+      responses:
+        '200':
+          description: Cancel operation completed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CancelJobRunResponse'
+        '404':
+          description: Run not found
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - jobs
   '/v1/projects/{projectOrProductUID}/members':
     get:
       operationId: GetProjectMembers
@@ -2986,6 +3206,14 @@ components:
         items:
           type: string
       style: form
+    jobUIDParam:
+      description: Unique identifier for a batch job
+      example: my-reconciliation-job
+      in: path
+      name: jobUID
+      required: true
+      schema:
+        type: string
     limitParam:
       in: query
       name: limit
@@ -3099,6 +3327,14 @@ components:
       example: 'app:2606f411-dea6-44a0-9743-1130f57d77d8'
       in: path
       name: projectOrProductUID
+      required: true
+      schema:
+        type: string
+    reportUIDParam:
+      description: Unique identifier for a job run report
+      example: my-reconciliation-job-1707654321000
+      in: path
+      name: reportUID
       required: true
       schema:
         type: string
@@ -3524,6 +3760,14 @@ components:
       properties:
         body:
           type: object
+    CancelJobRunResponse:
+      type: object
+      properties:
+        successful:
+          description: True if cancellation was successful
+          type: boolean
+      required:
+        - successful
     CellularPlan:
       type: object
       properties:
@@ -3575,6 +3819,14 @@ components:
         role:
           type: string
       nullable: true
+    CreateJobResponse:
+      type: object
+      properties:
+        job_uid:
+          description: The unique identifier for the created job
+          type: string
+      required:
+        - job_uid
     CreateMonitor:
       type: ''
       properties: {}
@@ -3760,6 +4012,14 @@ components:
           type: string
           format: uri
       additionalProperties: false
+    DeleteJobResponse:
+      type: object
+      properties:
+        success:
+          description: True if deletion was successful
+          type: boolean
+      required:
+        - success
     Device:
       type: object
       properties:
@@ -4572,6 +4832,32 @@ components:
       items:
         type: string
       properties: {}
+    GetJobRunsResponse:
+      type: object
+      properties:
+        has_more:
+          description: True if more runs exist beyond this page
+          type: boolean
+        runs:
+          type: array
+          items:
+            $ref: '#/components/schemas/JobRun'
+      required:
+        - runs
+        - has_more
+    GetJobsResponse:
+      type: object
+      properties:
+        has_more:
+          description: True if more jobs exist beyond this page
+          type: boolean
+        jobs:
+          type: array
+          items:
+            $ref: '#/components/schemas/Job'
+      required:
+        - jobs
+        - has_more
     GoogleRoute:
       type: object
       properties:
@@ -4622,6 +4908,95 @@ components:
     JSONata:
       type: object
       properties: {}
+    Job:
+      type: object
+      properties:
+        comment:
+          description: Job description or comment
+          type: string
+        created:
+          description: Unix timestamp when job was created
+          type: integer
+          format: int64
+        created_by:
+          description: User who created the job
+          type: string
+        definition:
+          description: Full job definition (JSON structure varies by job type)
+          type: object
+          additionalProperties: true
+        job_uid:
+          description: Unique identifier for the job
+          type: string
+        name:
+          description: Human-readable job name
+          type: string
+        type:
+          description: 'Type of job (e.g., "reconciliation")'
+          type: string
+        version:
+          description: Job version
+          type: string
+      required:
+        - job_uid
+    JobRun:
+      type: object
+      properties:
+        cancel:
+          description: Whether cancellation was requested
+          type: boolean
+        comment:
+          description: Run comment
+          type: string
+        completed:
+          description: Unix timestamp when completed
+          type: integer
+          format: int64
+        dry_run:
+          description: Whether this was a dry run
+          type: boolean
+        job_name:
+          description: Name of the job
+          type: string
+        job_uid:
+          description: Unique identifier for the job
+          type: string
+        report_uid:
+          description: Unique identifier for this run
+          type: string
+        results:
+          description: Full results (JSON structure varies by job type)
+          type: object
+          additionalProperties: true
+        started:
+          description: Unix timestamp when started
+          type: integer
+          format: int64
+        status:
+          description: 'Current status (submitted, running, completed, cancelled, failed)'
+          type: string
+        submitted:
+          description: Unix timestamp when submitted
+          type: integer
+          format: int64
+        submitted_by:
+          description: User who submitted the run
+          type: string
+        type:
+          description: Type of job
+          type: string
+        updated:
+          description: Unix timestamp of last update
+          type: integer
+          format: int64
+        version:
+          description: Job version
+          type: string
+      required:
+        - report_uid
+        - job_uid
+        - status
+        - dry_run
     Location:
       type: object
       properties:
@@ -5199,6 +5574,14 @@ components:
           description: JSONata expression used to transform the data payload (incoming).
           type: string
           example: $.body.data
+    RunJobResponse:
+      type: object
+      properties:
+        report_uid:
+          description: Unique identifier for this job run
+          type: string
+      required:
+        - report_uid
     S3ArchiveRoute:
       type: object
       properties:
@@ -6313,6 +6696,8 @@ tags:
     name: external devices
   - description: 'Project Usage information related to events, route logs, sessions, and data usage'
     name: usage
+  - description: Batch job operations
+    name: jobs
 externalDocs:
   description: Find out more about Blues
   url: 'https://blues.io'
