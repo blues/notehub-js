@@ -5408,7 +5408,7 @@ components:
           description: Total bytes included in the plan
           type: integer
           format: int64
-          example: 18650
+          example: 10000
         bytes_used:
           description: Bytes used to date
           type: integer
