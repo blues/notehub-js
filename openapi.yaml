@@ -935,6 +935,23 @@ paths:
         - personalAccessToken: []
       tags:
         - device
+  '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/notefiles/{notefileID}':
+    post:
+      operationId: CreateNotefile
+      description: Creates an empty Notefile on the device.
+      parameters:
+        - $ref: '#/components/parameters/projectOrProductUIDParam'
+        - $ref: '#/components/parameters/deviceUIDParam'
+        - $ref: '#/components/parameters/notefileIDParam'
+      responses:
+        '200':
+          description: An empty object means success
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - device
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}':
     get:
       operationId: GetNotefile
