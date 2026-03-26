@@ -6,7 +6,6 @@ info:
     url: 'https://dev.blues.io/support/'
   description: |
     The OpenAPI definition for the Notehub.io API.
-    # test: trigger workflow
   title: Notehub API
   version: 1.2.0
 servers:
