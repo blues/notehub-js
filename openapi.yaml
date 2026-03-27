@@ -217,8 +217,12 @@ paths:
                         remaining_event_capacity:
                           type: integer
                           format: int64
+                        total_event_capacity_used:
+                          type: integer
+                          format: int64
                       required:
                         - remaining_event_capacity
+                        - total_event_capacity_used
                         - period
                       type: object
         default:
