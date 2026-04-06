@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The FirmwareInfo model module.
  * @module model/FirmwareInfo
- * @version 6.0.0
+ * @version 6.1.0
  */
 class FirmwareInfo {
   /**
@@ -60,8 +60,14 @@ class FirmwareInfo {
       if (data.hasOwnProperty("filename")) {
         obj["filename"] = ApiClient.convertToType(data["filename"], "String");
       }
+      if (data.hasOwnProperty("info")) {
+        obj["info"] = ApiClient.convertToType(data["info"], Object);
+      }
       if (data.hasOwnProperty("md5")) {
         obj["md5"] = ApiClient.convertToType(data["md5"], "String");
+      }
+      if (data.hasOwnProperty("notes")) {
+        obj["notes"] = ApiClient.convertToType(data["notes"], "String");
       }
       if (data.hasOwnProperty("organization")) {
         obj["organization"] = ApiClient.convertToType(
@@ -162,6 +168,16 @@ class FirmwareInfo {
     }
     // ensure the json data is a string
     if (
+      data["notes"] &&
+      !(typeof data["notes"] === "string" || data["notes"] instanceof String)
+    ) {
+      throw new Error(
+        "Expected the field `notes` to be a primitive type in the JSON string but got " +
+          data["notes"]
+      );
+    }
+    // ensure the json data is a string
+    if (
       data["organization"] &&
       !(
         typeof data["organization"] === "string" ||
@@ -257,10 +273,22 @@ FirmwareInfo.prototype["description"] = undefined;
 FirmwareInfo.prototype["filename"] = undefined;
 
 /**
+ * User-defined metadata
+ * @member {Object} info
+ */
+FirmwareInfo.prototype["info"] = undefined;
+
+/**
  * The MD5 hash of the firmware file.
  * @member {String} md5
  */
 FirmwareInfo.prototype["md5"] = undefined;
+
+/**
+ * User-defined notes
+ * @member {String} notes
+ */
+FirmwareInfo.prototype["notes"] = undefined;
 
 /**
  * The organization that owns the firmware.

@@ -12,6 +12,7 @@
  */
 
 import ApiClient from "./ApiClient";
+import AWSRoleConfig from "./model/AWSRoleConfig";
 import AddDeviceToFleetsRequest from "./model/AddDeviceToFleetsRequest";
 import Alert from "./model/Alert";
 import AlertDataInner from "./model/AlertDataInner";
@@ -22,10 +23,12 @@ import BillingAccount from "./model/BillingAccount";
 import BillingAccountRole from "./model/BillingAccountRole";
 import BlynkRoute from "./model/BlynkRoute";
 import Body from "./model/Body";
+import CancelJobRun200Response from "./model/CancelJobRun200Response";
 import CellularPlan from "./model/CellularPlan";
 import CloneProjectRequest from "./model/CloneProjectRequest";
 import Contact from "./model/Contact";
 import CreateFleetRequest from "./model/CreateFleetRequest";
+import CreateJob201Response from "./model/CreateJob201Response";
 import CreateMonitor from "./model/CreateMonitor";
 import CreateProductRequest from "./model/CreateProductRequest";
 import CreateProjectRequest from "./model/CreateProjectRequest";
@@ -38,6 +41,7 @@ import DataSetField from "./model/DataSetField";
 import DataUsage from "./model/DataUsage";
 import DatacakeRoute from "./model/DatacakeRoute";
 import DeleteDeviceFromFleetsRequest from "./model/DeleteDeviceFromFleetsRequest";
+import DeleteJob200Response from "./model/DeleteJob200Response";
 import DeleteNotefilesRequest from "./model/DeleteNotefilesRequest";
 import Device from "./model/Device";
 import DeviceDfuHistory from "./model/DeviceDfuHistory";
@@ -63,6 +67,10 @@ import FirmwareInfo from "./model/FirmwareInfo";
 import Fleet from "./model/Fleet";
 import FleetConnectivityAssurance from "./model/FleetConnectivityAssurance";
 import GetAlerts200Response from "./model/GetAlerts200Response";
+import GetBillingAccount200Response from "./model/GetBillingAccount200Response";
+import GetBillingAccount200ResponsePlan from "./model/GetBillingAccount200ResponsePlan";
+import GetBillingAccountBalanceHistory200Response from "./model/GetBillingAccountBalanceHistory200Response";
+import GetBillingAccountBalanceHistory200ResponseDataInner from "./model/GetBillingAccountBalanceHistory200ResponseDataInner";
 import GetBillingAccounts200Response from "./model/GetBillingAccounts200Response";
 import GetDataUsage200Response from "./model/GetDataUsage200Response";
 import GetDataUsage200ResponseDataInner from "./model/GetDataUsage200ResponseDataInner";
@@ -80,6 +88,8 @@ import GetDeviceSessions200Response from "./model/GetDeviceSessions200Response";
 import GetDevices200Response from "./model/GetDevices200Response";
 import GetEvents200Response from "./model/GetEvents200Response";
 import GetEventsByCursor200Response from "./model/GetEventsByCursor200Response";
+import GetJobRuns200Response from "./model/GetJobRuns200Response";
+import GetJobs200Response from "./model/GetJobs200Response";
 import GetNotefile200Response from "./model/GetNotefile200Response";
 import GetProducts200Response from "./model/GetProducts200Response";
 import GetProjectMembers200Response from "./model/GetProjectMembers200Response";
@@ -89,6 +99,8 @@ import GetSessionsUsage200Response from "./model/GetSessionsUsage200Response";
 import GetWebhooks200Response from "./model/GetWebhooks200Response";
 import GoogleRoute from "./model/GoogleRoute";
 import HttpRoute from "./model/HttpRoute";
+import Job from "./model/Job";
+import JobRun from "./model/JobRun";
 import Location from "./model/Location";
 import Login200Response from "./model/Login200Response";
 import LoginRequest from "./model/LoginRequest";
@@ -118,6 +130,7 @@ import Repository from "./model/Repository";
 import Role from "./model/Role";
 import RouteLog from "./model/RouteLog";
 import RouteTransformSettings from "./model/RouteTransformSettings";
+import RunJob200Response from "./model/RunJob200Response";
 import S3ArchiveRoute from "./model/S3ArchiveRoute";
 import SatelliteDataUsage from "./model/SatelliteDataUsage";
 import SatellitePlan from "./model/SatellitePlan";
@@ -149,6 +162,7 @@ import BillingAccountApi from "./api/BillingAccountApi";
 import DeviceApi from "./api/DeviceApi";
 import EventApi from "./api/EventApi";
 import ExternalDevicesApi from "./api/ExternalDevicesApi";
+import JobsApi from "./api/JobsApi";
 import MonitorApi from "./api/MonitorApi";
 import ProjectApi from "./api/ProjectApi";
 import RouteApi from "./api/RouteApi";
@@ -184,7 +198,7 @@ import WebhookApi from "./api/WebhookApi";
  * </pre>
  * </p>
  * @module index
- * @version 6.0.0
+ * @version 6.1.0
  */
 export {
   /**
@@ -192,6 +206,12 @@ export {
    * @property {module:ApiClient}
    */
   ApiClient,
+
+  /**
+   * The AWSRoleConfig model constructor.
+   * @property {module:model/AWSRoleConfig}
+   */
+  AWSRoleConfig,
 
   /**
    * The AddDeviceToFleetsRequest model constructor.
@@ -254,6 +274,12 @@ export {
   Body,
 
   /**
+   * The CancelJobRun200Response model constructor.
+   * @property {module:model/CancelJobRun200Response}
+   */
+  CancelJobRun200Response,
+
+  /**
    * The CellularPlan model constructor.
    * @property {module:model/CellularPlan}
    */
@@ -276,6 +302,12 @@ export {
    * @property {module:model/CreateFleetRequest}
    */
   CreateFleetRequest,
+
+  /**
+   * The CreateJob201Response model constructor.
+   * @property {module:model/CreateJob201Response}
+   */
+  CreateJob201Response,
 
   /**
    * The CreateMonitor model constructor.
@@ -348,6 +380,12 @@ export {
    * @property {module:model/DeleteDeviceFromFleetsRequest}
    */
   DeleteDeviceFromFleetsRequest,
+
+  /**
+   * The DeleteJob200Response model constructor.
+   * @property {module:model/DeleteJob200Response}
+   */
+  DeleteJob200Response,
 
   /**
    * The DeleteNotefilesRequest model constructor.
@@ -500,6 +538,30 @@ export {
   GetAlerts200Response,
 
   /**
+   * The GetBillingAccount200Response model constructor.
+   * @property {module:model/GetBillingAccount200Response}
+   */
+  GetBillingAccount200Response,
+
+  /**
+   * The GetBillingAccount200ResponsePlan model constructor.
+   * @property {module:model/GetBillingAccount200ResponsePlan}
+   */
+  GetBillingAccount200ResponsePlan,
+
+  /**
+   * The GetBillingAccountBalanceHistory200Response model constructor.
+   * @property {module:model/GetBillingAccountBalanceHistory200Response}
+   */
+  GetBillingAccountBalanceHistory200Response,
+
+  /**
+   * The GetBillingAccountBalanceHistory200ResponseDataInner model constructor.
+   * @property {module:model/GetBillingAccountBalanceHistory200ResponseDataInner}
+   */
+  GetBillingAccountBalanceHistory200ResponseDataInner,
+
+  /**
    * The GetBillingAccounts200Response model constructor.
    * @property {module:model/GetBillingAccounts200Response}
    */
@@ -602,6 +664,18 @@ export {
   GetEventsByCursor200Response,
 
   /**
+   * The GetJobRuns200Response model constructor.
+   * @property {module:model/GetJobRuns200Response}
+   */
+  GetJobRuns200Response,
+
+  /**
+   * The GetJobs200Response model constructor.
+   * @property {module:model/GetJobs200Response}
+   */
+  GetJobs200Response,
+
+  /**
    * The GetNotefile200Response model constructor.
    * @property {module:model/GetNotefile200Response}
    */
@@ -654,6 +728,18 @@ export {
    * @property {module:model/HttpRoute}
    */
   HttpRoute,
+
+  /**
+   * The Job model constructor.
+   * @property {module:model/Job}
+   */
+  Job,
+
+  /**
+   * The JobRun model constructor.
+   * @property {module:model/JobRun}
+   */
+  JobRun,
 
   /**
    * The Location model constructor.
@@ -828,6 +914,12 @@ export {
    * @property {module:model/RouteTransformSettings}
    */
   RouteTransformSettings,
+
+  /**
+   * The RunJob200Response model constructor.
+   * @property {module:model/RunJob200Response}
+   */
+  RunJob200Response,
 
   /**
    * The S3ArchiveRoute model constructor.
@@ -1014,6 +1106,12 @@ export {
    * @property {module:api/ExternalDevicesApi}
    */
   ExternalDevicesApi,
+
+  /**
+   * The JobsApi service constructor.
+   * @property {module:api/JobsApi}
+   */
+  JobsApi,
 
   /**
    * The MonitorApi service constructor.

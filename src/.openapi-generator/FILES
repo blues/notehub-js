@@ -2,6 +2,7 @@
 .gitignore
 .travis.yml
 README.md
+docs/AWSRoleConfig.md
 docs/AddDeviceToFleetsRequest.md
 docs/Alert.md
 docs/AlertApi.md
@@ -15,10 +16,12 @@ docs/BillingAccountApi.md
 docs/BillingAccountRole.md
 docs/BlynkRoute.md
 docs/Body.md
+docs/CancelJobRun200Response.md
 docs/CellularPlan.md
 docs/CloneProjectRequest.md
 docs/Contact.md
 docs/CreateFleetRequest.md
+docs/CreateJob201Response.md
 docs/CreateMonitor.md
 docs/CreateProductRequest.md
 docs/CreateProjectRequest.md
@@ -31,6 +34,7 @@ docs/DataSetField.md
 docs/DataUsage.md
 docs/DatacakeRoute.md
 docs/DeleteDeviceFromFleetsRequest.md
+docs/DeleteJob200Response.md
 docs/DeleteNotefilesRequest.md
 docs/Device.md
 docs/DeviceApi.md
@@ -59,6 +63,10 @@ docs/FirmwareInfo.md
 docs/Fleet.md
 docs/FleetConnectivityAssurance.md
 docs/GetAlerts200Response.md
+docs/GetBillingAccount200Response.md
+docs/GetBillingAccount200ResponsePlan.md
+docs/GetBillingAccountBalanceHistory200Response.md
+docs/GetBillingAccountBalanceHistory200ResponseDataInner.md
 docs/GetBillingAccounts200Response.md
 docs/GetDataUsage200Response.md
 docs/GetDataUsage200ResponseDataInner.md
@@ -76,6 +84,8 @@ docs/GetDeviceSessions200Response.md
 docs/GetDevices200Response.md
 docs/GetEvents200Response.md
 docs/GetEventsByCursor200Response.md
+docs/GetJobRuns200Response.md
+docs/GetJobs200Response.md
 docs/GetNotefile200Response.md
 docs/GetProducts200Response.md
 docs/GetProjectMembers200Response.md
@@ -85,6 +95,9 @@ docs/GetSessionsUsage200Response.md
 docs/GetWebhooks200Response.md
 docs/GoogleRoute.md
 docs/HttpRoute.md
+docs/Job.md
+docs/JobRun.md
+docs/JobsApi.md
 docs/Location.md
 docs/Login200Response.md
 docs/LoginRequest.md
@@ -117,6 +130,7 @@ docs/Role.md
 docs/RouteApi.md
 docs/RouteLog.md
 docs/RouteTransformSettings.md
+docs/RunJob200Response.md
 docs/S3ArchiveRoute.md
 docs/SatelliteDataUsage.md
 docs/SatellitePlan.md
@@ -154,12 +168,14 @@ src/api/BillingAccountApi.js
 src/api/DeviceApi.js
 src/api/EventApi.js
 src/api/ExternalDevicesApi.js
+src/api/JobsApi.js
 src/api/MonitorApi.js
 src/api/ProjectApi.js
 src/api/RouteApi.js
 src/api/UsageApi.js
 src/api/WebhookApi.js
 src/index.js
+src/model/AWSRoleConfig.js
 src/model/AddDeviceToFleetsRequest.js
 src/model/Alert.js
 src/model/AlertDataInner.js
@@ -170,10 +186,12 @@ src/model/BillingAccount.js
 src/model/BillingAccountRole.js
 src/model/BlynkRoute.js
 src/model/Body.js
+src/model/CancelJobRun200Response.js
 src/model/CellularPlan.js
 src/model/CloneProjectRequest.js
 src/model/Contact.js
 src/model/CreateFleetRequest.js
+src/model/CreateJob201Response.js
 src/model/CreateMonitor.js
 src/model/CreateProductRequest.js
 src/model/CreateProjectRequest.js
@@ -186,6 +204,7 @@ src/model/DataSetField.js
 src/model/DataUsage.js
 src/model/DatacakeRoute.js
 src/model/DeleteDeviceFromFleetsRequest.js
+src/model/DeleteJob200Response.js
 src/model/DeleteNotefilesRequest.js
 src/model/Device.js
 src/model/DeviceDfuHistory.js
@@ -211,6 +230,10 @@ src/model/FirmwareInfo.js
 src/model/Fleet.js
 src/model/FleetConnectivityAssurance.js
 src/model/GetAlerts200Response.js
+src/model/GetBillingAccount200Response.js
+src/model/GetBillingAccount200ResponsePlan.js
+src/model/GetBillingAccountBalanceHistory200Response.js
+src/model/GetBillingAccountBalanceHistory200ResponseDataInner.js
 src/model/GetBillingAccounts200Response.js
 src/model/GetDataUsage200Response.js
 src/model/GetDataUsage200ResponseDataInner.js
@@ -228,6 +251,8 @@ src/model/GetDeviceSessions200Response.js
 src/model/GetDevices200Response.js
 src/model/GetEvents200Response.js
 src/model/GetEventsByCursor200Response.js
+src/model/GetJobRuns200Response.js
+src/model/GetJobs200Response.js
 src/model/GetNotefile200Response.js
 src/model/GetProducts200Response.js
 src/model/GetProjectMembers200Response.js
@@ -237,6 +262,8 @@ src/model/GetSessionsUsage200Response.js
 src/model/GetWebhooks200Response.js
 src/model/GoogleRoute.js
 src/model/HttpRoute.js
+src/model/Job.js
+src/model/JobRun.js
 src/model/Location.js
 src/model/Login200Response.js
 src/model/LoginRequest.js
@@ -266,6 +293,7 @@ src/model/Repository.js
 src/model/Role.js
 src/model/RouteLog.js
 src/model/RouteTransformSettings.js
+src/model/RunJob200Response.js
 src/model/S3ArchiveRoute.js
 src/model/SatelliteDataUsage.js
 src/model/SatellitePlan.js
@@ -291,3 +319,17 @@ src/model/UserDfuStateMachine.js
 src/model/UserDfuStateMachineStatus.js
 src/model/UserFirmwareInfo.js
 src/model/WebhookSettings.js
+test/api/JobsApi.spec.js
+test/model/AWSRoleConfig.spec.js
+test/model/CancelJobRun200Response.spec.js
+test/model/CreateJob201Response.spec.js
+test/model/DeleteJob200Response.spec.js
+test/model/GetBillingAccount200Response.spec.js
+test/model/GetBillingAccount200ResponsePlan.spec.js
+test/model/GetBillingAccountBalanceHistory200Response.spec.js
+test/model/GetBillingAccountBalanceHistory200ResponseDataInner.spec.js
+test/model/GetJobRuns200Response.spec.js
+test/model/GetJobs200Response.spec.js
+test/model/Job.spec.js
+test/model/JobRun.spec.js
+test/model/RunJob200Response.spec.js

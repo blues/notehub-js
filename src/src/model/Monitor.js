@@ -17,7 +17,7 @@ import MonitorAlertRoutesInner from "./MonitorAlertRoutesInner";
 /**
  * The Monitor model module.
  * @module model/Monitor
- * @version 6.0.0
+ * @version 6.1.0
  */
 class Monitor {
   /**
@@ -483,6 +483,12 @@ Monitor["ConditionTypeEnum"] = {
    * @const
    */
   not_equal_to: "not_equal_to",
+
+  /**
+   * value: "count"
+   * @const
+   */
+  count: "count",
 };
 
 /**

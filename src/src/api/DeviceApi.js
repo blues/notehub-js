@@ -36,7 +36,7 @@ import SignalDevice200Response from "../model/SignalDevice200Response";
 /**
  * Device service.
  * @module api/DeviceApi
- * @version 6.0.0
+ * @version 6.1.0
  */
 export default class DeviceApi {
   /**
@@ -227,6 +227,80 @@ export default class DeviceApi {
       deviceUID,
       notefileID,
       noteInput
+    ).then(function (response_and_data) {
+      return response_and_data.data;
+    });
+  }
+
+  /**
+   * Creates an empty Notefile on the device.
+   * @param {String} projectOrProductUID
+   * @param {String} deviceUID
+   * @param {String} notefileID
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
+   */
+  createNotefileWithHttpInfo(projectOrProductUID, deviceUID, notefileID) {
+    let postBody = null;
+    // verify the required parameter 'projectOrProductUID' is set
+    if (projectOrProductUID === undefined || projectOrProductUID === null) {
+      throw new Error(
+        "Missing the required parameter 'projectOrProductUID' when calling createNotefile"
+      );
+    }
+    // verify the required parameter 'deviceUID' is set
+    if (deviceUID === undefined || deviceUID === null) {
+      throw new Error(
+        "Missing the required parameter 'deviceUID' when calling createNotefile"
+      );
+    }
+    // verify the required parameter 'notefileID' is set
+    if (notefileID === undefined || notefileID === null) {
+      throw new Error(
+        "Missing the required parameter 'notefileID' when calling createNotefile"
+      );
+    }
+
+    let pathParams = {
+      projectOrProductUID: projectOrProductUID,
+      deviceUID: deviceUID,
+      notefileID: notefileID,
+    };
+    let queryParams = {};
+    let headerParams = {};
+    let formParams = {};
+
+    let authNames = ["personalAccessToken"];
+    let contentTypes = [];
+    let accepts = ["application/json"];
+    let returnType = null;
+    return this.apiClient.callApi(
+      "/v1/projects/{projectOrProductUID}/devices/{deviceUID}/notefiles/{notefileID}",
+      "POST",
+      pathParams,
+      queryParams,
+      headerParams,
+      formParams,
+      postBody,
+      authNames,
+      contentTypes,
+      accepts,
+      returnType,
+      null
+    );
+  }
+
+  /**
+   * Creates an empty Notefile on the device.
+   * @param {String} projectOrProductUID
+   * @param {String} deviceUID
+   * @param {String} notefileID
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}
+   */
+  createNotefile(projectOrProductUID, deviceUID, notefileID) {
+    return this.createNotefileWithHttpInfo(
+      projectOrProductUID,
+      deviceUID,
+      notefileID
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -1376,6 +1450,7 @@ export default class DeviceApi {
    * @param {Number} opts.pageNum  (default to 1)
    * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
    * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
+   * @param {Boolean} opts.firstSync When true, filters results to only show first sync sessions (default to false)
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetDeviceSessions200Response} and HTTP response
    */
   getDeviceSessionsWithHttpInfo(projectOrProductUID, deviceUID, opts) {
@@ -1403,6 +1478,7 @@ export default class DeviceApi {
       pageNum: opts["pageNum"],
       startDate: opts["startDate"],
       endDate: opts["endDate"],
+      firstSync: opts["firstSync"],
     };
     let headerParams = {};
     let formParams = {};
@@ -1436,6 +1512,7 @@ export default class DeviceApi {
    * @param {Number} opts.pageNum  (default to 1)
    * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
    * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
+   * @param {Boolean} opts.firstSync When true, filters results to only show first sync sessions (default to false)
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetDeviceSessions200Response}
    */
   getDeviceSessions(projectOrProductUID, deviceUID, opts) {

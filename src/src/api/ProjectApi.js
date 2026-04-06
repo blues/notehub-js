@@ -12,6 +12,7 @@
  */
 
 import ApiClient from "../ApiClient";
+import AWSRoleConfig from "../model/AWSRoleConfig";
 import AddDeviceToFleetsRequest from "../model/AddDeviceToFleetsRequest";
 import CloneProjectRequest from "../model/CloneProjectRequest";
 import CreateFleetRequest from "../model/CreateFleetRequest";
@@ -40,7 +41,7 @@ import UpdateFleetRequest from "../model/UpdateFleetRequest";
 /**
  * Project service.
  * @module api/ProjectApi
- * @version 6.0.0
+ * @version 6.1.0
  */
 export default class ProjectApi {
   /**
@@ -961,6 +962,62 @@ export default class ProjectApi {
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
+  }
+
+  /**
+   * Get AWS role configuration for role-based authentication
+   * Returns the AWS Account ID and External ID needed to configure an IAM role trust policy for role-based authentication on AWS routes.
+   * @param {String} projectOrProductUID
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/AWSRoleConfig} and HTTP response
+   */
+  getAWSRoleConfigWithHttpInfo(projectOrProductUID) {
+    let postBody = null;
+    // verify the required parameter 'projectOrProductUID' is set
+    if (projectOrProductUID === undefined || projectOrProductUID === null) {
+      throw new Error(
+        "Missing the required parameter 'projectOrProductUID' when calling getAWSRoleConfig"
+      );
+    }
+
+    let pathParams = {
+      projectOrProductUID: projectOrProductUID,
+    };
+    let queryParams = {};
+    let headerParams = {};
+    let formParams = {};
+
+    let authNames = ["personalAccessToken"];
+    let contentTypes = [];
+    let accepts = ["application/json"];
+    let returnType = AWSRoleConfig;
+    return this.apiClient.callApi(
+      "/v1/projects/{projectOrProductUID}/aws-role-config",
+      "GET",
+      pathParams,
+      queryParams,
+      headerParams,
+      formParams,
+      postBody,
+      authNames,
+      contentTypes,
+      accepts,
+      returnType,
+      null
+    );
+  }
+
+  /**
+   * Get AWS role configuration for role-based authentication
+   * Returns the AWS Account ID and External ID needed to configure an IAM role trust policy for role-based authentication on AWS routes.
+   * @param {String} projectOrProductUID
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/AWSRoleConfig}
+   */
+  getAWSRoleConfig(projectOrProductUID) {
+    return this.getAWSRoleConfigWithHttpInfo(projectOrProductUID).then(
+      function (response_and_data) {
+        return response_and_data.data;
+      }
+    );
   }
 
   /**

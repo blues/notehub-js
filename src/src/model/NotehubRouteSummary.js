@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The NotehubRouteSummary model module.
  * @module model/NotehubRouteSummary
- * @version 6.0.0
+ * @version 6.1.0
  */
 class NotehubRouteSummary {
   /**

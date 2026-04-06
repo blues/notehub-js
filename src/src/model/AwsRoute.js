@@ -18,7 +18,7 @@ import RouteTransformSettings from "./RouteTransformSettings";
 /**
  * The AwsRoute model module.
  * @module model/AwsRoute
- * @version 6.0.0
+ * @version 6.1.0
  */
 class AwsRoute {
   /**
@@ -93,6 +93,9 @@ class AwsRoute {
       }
       if (data.hasOwnProperty("region")) {
         obj["region"] = ApiClient.convertToType(data["region"], "String");
+      }
+      if (data.hasOwnProperty("role_arn")) {
+        obj["role_arn"] = ApiClient.convertToType(data["role_arn"], "String");
       }
       if (data.hasOwnProperty("throttle_ms")) {
         obj["throttle_ms"] = ApiClient.convertToType(
@@ -209,6 +212,19 @@ class AwsRoute {
           data["region"]
       );
     }
+    // ensure the json data is a string
+    if (
+      data["role_arn"] &&
+      !(
+        typeof data["role_arn"] === "string" ||
+        data["role_arn"] instanceof String
+      )
+    ) {
+      throw new Error(
+        "Expected the field `role_arn` to be a primitive type in the JSON string but got " +
+          data["role_arn"]
+      );
+    }
     // validate the optional field `transform`
     if (data["transform"]) {
       // data not null
@@ -278,6 +294,12 @@ AwsRoute.prototype["message_group_id"] = undefined;
  * @member {String} region
  */
 AwsRoute.prototype["region"] = undefined;
+
+/**
+ * IAM Role ARN for role-based authentication via STS AssumeRole
+ * @member {String} role_arn
+ */
+AwsRoute.prototype["role_arn"] = undefined;
 
 /**
  * @member {Number} throttle_ms
