@@ -16,7 +16,8 @@ jobs:
       - name: Get current version from config.json
         id: get_version
         run: |
-          CURRENT_VERSION=$(jq -r .projectVersion config.json)
+          git fetch origin main
+          CURRENT_VERSION=$(git show origin/main:config.json | jq -r .projectVersion)
           echo "Current project version: $CURRENT_VERSION"
           echo "CURRENT_VERSION=$CURRENT_VERSION" >> $GITHUB_ENV
 
