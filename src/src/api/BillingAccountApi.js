@@ -13,12 +13,14 @@
 
 import ApiClient from "../ApiClient";
 import Error from "../model/Error";
+import GetBillingAccount200Response from "../model/GetBillingAccount200Response";
+import GetBillingAccountBalanceHistory200Response from "../model/GetBillingAccountBalanceHistory200Response";
 import GetBillingAccounts200Response from "../model/GetBillingAccounts200Response";
 
 /**
  * BillingAccount service.
  * @module api/BillingAccountApi
- * @version 6.0.0
+ * @version 6.1.0
  */
 export default class BillingAccountApi {
   /**
@@ -30,6 +32,125 @@ export default class BillingAccountApi {
    */
   constructor(apiClient) {
     this.apiClient = apiClient || ApiClient.instance;
+  }
+
+  /**
+   * Get Billing Account Information
+   * @param {String} billingAccountUID
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetBillingAccount200Response} and HTTP response
+   */
+  getBillingAccountWithHttpInfo(billingAccountUID) {
+    let postBody = null;
+    // verify the required parameter 'billingAccountUID' is set
+    if (billingAccountUID === undefined || billingAccountUID === null) {
+      throw new Error(
+        "Missing the required parameter 'billingAccountUID' when calling getBillingAccount"
+      );
+    }
+
+    let pathParams = {
+      billingAccountUID: billingAccountUID,
+    };
+    let queryParams = {};
+    let headerParams = {};
+    let formParams = {};
+
+    let authNames = ["personalAccessToken"];
+    let contentTypes = [];
+    let accepts = ["application/json"];
+    let returnType = GetBillingAccount200Response;
+    return this.apiClient.callApi(
+      "/v1/billing-accounts/{billingAccountUID}",
+      "GET",
+      pathParams,
+      queryParams,
+      headerParams,
+      formParams,
+      postBody,
+      authNames,
+      contentTypes,
+      accepts,
+      returnType,
+      null
+    );
+  }
+
+  /**
+   * Get Billing Account Information
+   * @param {String} billingAccountUID
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetBillingAccount200Response}
+   */
+  getBillingAccount(billingAccountUID) {
+    return this.getBillingAccountWithHttpInfo(billingAccountUID).then(function (
+      response_and_data
+    ) {
+      return response_and_data.data;
+    });
+  }
+
+  /**
+   * Get Billing Account Balance history, only enterprise supported
+   * @param {String} billingAccountUID
+   * @param {Object} opts Optional parameters
+   * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
+   * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetBillingAccountBalanceHistory200Response} and HTTP response
+   */
+  getBillingAccountBalanceHistoryWithHttpInfo(billingAccountUID, opts) {
+    opts = opts || {};
+    let postBody = null;
+    // verify the required parameter 'billingAccountUID' is set
+    if (billingAccountUID === undefined || billingAccountUID === null) {
+      throw new Error(
+        "Missing the required parameter 'billingAccountUID' when calling getBillingAccountBalanceHistory"
+      );
+    }
+
+    let pathParams = {
+      billingAccountUID: billingAccountUID,
+    };
+    let queryParams = {
+      startDate: opts["startDate"],
+      endDate: opts["endDate"],
+    };
+    let headerParams = {};
+    let formParams = {};
+
+    let authNames = ["personalAccessToken"];
+    let contentTypes = [];
+    let accepts = ["application/json"];
+    let returnType = GetBillingAccountBalanceHistory200Response;
+    return this.apiClient.callApi(
+      "/v1/billing-accounts/{billingAccountUID}/balance-history",
+      "GET",
+      pathParams,
+      queryParams,
+      headerParams,
+      formParams,
+      postBody,
+      authNames,
+      contentTypes,
+      accepts,
+      returnType,
+      null
+    );
+  }
+
+  /**
+   * Get Billing Account Balance history, only enterprise supported
+   * @param {String} billingAccountUID
+   * @param {Object} opts Optional parameters
+   * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
+   * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetBillingAccountBalanceHistory200Response}
+   */
+  getBillingAccountBalanceHistory(billingAccountUID, opts) {
+    return this.getBillingAccountBalanceHistoryWithHttpInfo(
+      billingAccountUID,
+      opts
+    ).then(function (response_and_data) {
+      return response_and_data.data;
+    });
   }
 
   /**

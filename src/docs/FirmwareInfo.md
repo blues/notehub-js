@@ -8,7 +8,9 @@
 | **created**      | **String**  | The date the firmware was created.           | [optional] |
 | **description**  | **String**  | A description of the firmware.               | [optional] |
 | **filename**     | **String**  | The name of the firmware file.               | [optional] |
+| **info**         | **Object**  | User-defined metadata                        | [optional] |
 | **md5**          | **String**  | The MD5 hash of the firmware file.           | [optional] |
+| **notes**        | **String**  | User-defined notes                           | [optional] |
 | **organization** | **String**  | The organization that owns the firmware.     | [optional] |
 | **product**      | **String**  | The product that the firmware is for.        | [optional] |
 | **published**    | **Boolean** | True if the firmware is published.           | [optional] |

@@ -17,7 +17,7 @@ import DeviceDfuHistory from "./DeviceDfuHistory";
 /**
  * The DeviceDfuHistoryPage model module.
  * @module model/DeviceDfuHistoryPage
- * @version 6.0.0
+ * @version 6.1.0
  */
 class DeviceDfuHistoryPage {
   /**

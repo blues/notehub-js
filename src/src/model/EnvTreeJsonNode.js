@@ -17,7 +17,7 @@ import EnvVar from "./EnvVar";
 /**
  * The EnvTreeJsonNode model module.
  * @module model/EnvTreeJsonNode
- * @version 6.0.0
+ * @version 6.1.0
  */
 class EnvTreeJsonNode {
   /**

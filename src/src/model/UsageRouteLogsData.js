@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The UsageRouteLogsData model module.
  * @module model/UsageRouteLogsData
- * @version 6.0.0
+ * @version 6.1.0
  */
 class UsageRouteLogsData {
   /**
@@ -60,6 +60,12 @@ class UsageRouteLogsData {
     if (data) {
       obj = obj || new UsageRouteLogsData();
 
+      if (data.hasOwnProperty("avg_latency_ms")) {
+        obj["avg_latency_ms"] = ApiClient.convertToType(
+          data["avg_latency_ms"],
+          "Number"
+        );
+      }
       if (data.hasOwnProperty("failed_routes")) {
         obj["failed_routes"] = ApiClient.convertToType(
           data["failed_routes"],
@@ -128,6 +134,12 @@ UsageRouteLogsData.RequiredProperties = [
   "successful_routes",
   "total_routes",
 ];
+
+/**
+ * Average routing latency in milliseconds for route logs with recorded duration
+ * @member {Number} avg_latency_ms
+ */
+UsageRouteLogsData.prototype["avg_latency_ms"] = undefined;
 
 /**
  * @member {Number} failed_routes

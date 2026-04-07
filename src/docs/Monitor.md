@@ -49,6 +49,8 @@
 
 - `not_equal_to` (value: `"not_equal_to"`)
 
+- `count` (value: `"count"`)
+
 ## Enum: SourceTypeEnum
 
 - `event` (value: `"event"`)

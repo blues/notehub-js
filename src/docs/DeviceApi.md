@@ -6,6 +6,7 @@ All URIs are relative to *https://api.notefile.net*
 | ----------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | ----------------------------------------------- |
 | [**addDbNote**](DeviceApi.md#addDbNote)                                                   | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}   |
 | [**addQiNote**](DeviceApi.md#addQiNote)                                                   | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}            |
+| [**createNotefile**](DeviceApi.md#createNotefile)                                         | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notefiles/{notefileID}        |
 | [**deleteDevice**](DeviceApi.md#deleteDevice)                                             | **DELETE** /v1/projects/{projectOrProductUID}/devices/{deviceUID}                             |
 | [**deleteDeviceEnvironmentVariable**](DeviceApi.md#deleteDeviceEnvironmentVariable)       | **DELETE** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_variables/{key} |
 | [**deleteNote**](DeviceApi.md#deleteNote)                                                 | **DELETE** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/{noteID} |
@@ -133,6 +134,54 @@ null (empty response body)
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+## createNotefile
+
+> createNotefile(projectOrProductUID, deviceUID, notefileID)
+
+Creates an empty Notefile on the device.
+
+### Example
+
+```javascript
+import * as NotehubJs from '@blues-inc/notehub-js';
+let defaultClient = NotehubJs.ApiClient.instance;
+// Configure Bearer access token for authorization: personalAccessToken
+let personalAccessToken = defaultClient.authentications['personalAccessToken'];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
+
+let apiInstance = new NotehubJs.DeviceApi();
+let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let deviceUID = dev:000000000000000; // String |
+let notefileID = "notefileID_example"; // String |
+apiInstance.createNotefile(projectOrProductUID, deviceUID, notefileID).then(() => {
+  console.log('API called successfully.');
+}, (error) => {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+| Name                    | Type       | Description | Notes |
+| ----------------------- | ---------- | ----------- | ----- |
+| **projectOrProductUID** | **String** |             |
+| **deviceUID**           | **String** |             |
+| **notefileID**          | **String** |             |
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[personalAccessToken](../README.md#personalAccessToken)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 ## deleteDevice
@@ -921,7 +970,8 @@ let opts = {
   'pageSize': 50, // Number |
   'pageNum': 1, // Number |
   'startDate': 1628631763, // Number | Start date for filtering results, specified as a Unix timestamp
-  'endDate': 1657894210 // Number | End date for filtering results, specified as a Unix timestamp
+  'endDate': 1657894210, // Number | End date for filtering results, specified as a Unix timestamp
+  'firstSync': false // Boolean | When true, filters results to only show first sync sessions
 };
 apiInstance.getDeviceSessions(projectOrProductUID, deviceUID, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
@@ -933,14 +983,15 @@ apiInstance.getDeviceSessions(projectOrProductUID, deviceUID, opts).then((data) 
 
 ### Parameters
 
-| Name                    | Type       | Description                                                     | Notes                      |
-| ----------------------- | ---------- | --------------------------------------------------------------- | -------------------------- |
-| **projectOrProductUID** | **String** |                                                                 |
-| **deviceUID**           | **String** |                                                                 |
-| **pageSize**            | **Number** |                                                                 | [optional] [default to 50] |
-| **pageNum**             | **Number** |                                                                 | [optional] [default to 1]  |
-| **startDate**           | **Number** | Start date for filtering results, specified as a Unix timestamp | [optional]                 |
-| **endDate**             | **Number** | End date for filtering results, specified as a Unix timestamp   | [optional]                 |
+| Name                    | Type        | Description                                                     | Notes                         |
+| ----------------------- | ----------- | --------------------------------------------------------------- | ----------------------------- |
+| **projectOrProductUID** | **String**  |                                                                 |
+| **deviceUID**           | **String**  |                                                                 |
+| **pageSize**            | **Number**  |                                                                 | [optional] [default to 50]    |
+| **pageNum**             | **Number**  |                                                                 | [optional] [default to 1]     |
+| **startDate**           | **Number**  | Start date for filtering results, specified as a Unix timestamp | [optional]                    |
+| **endDate**             | **Number**  | End date for filtering results, specified as a Unix timestamp   | [optional]                    |
+| **firstSync**           | **Boolean** | When true, filters results to only show first sync sessions     | [optional] [default to false] |
 
 ### Return type
 

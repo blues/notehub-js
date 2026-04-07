@@ -16,20 +16,22 @@ import ApiClient from "../ApiClient";
 /**
  * The UsageSessionsData model module.
  * @module model/UsageSessionsData
- * @version 6.0.0
+ * @version 6.1.0
  */
 class UsageSessionsData {
   /**
    * Constructs a new <code>UsageSessionsData</code>.
    * @alias module:model/UsageSessionsData
+   * @param firstSyncSessions {Number} Number of first sync sessions in this period
    * @param period {Date}
    * @param sessions {Number}
    * @param totalBytes {Number}
    * @param totalDevices {Number}
    */
-  constructor(period, sessions, totalBytes, totalDevices) {
+  constructor(firstSyncSessions, period, sessions, totalBytes, totalDevices) {
     UsageSessionsData.initialize(
       this,
+      firstSyncSessions,
       period,
       sessions,
       totalBytes,
@@ -42,7 +44,15 @@ class UsageSessionsData {
    * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
    * Only for internal use.
    */
-  static initialize(obj, period, sessions, totalBytes, totalDevices) {
+  static initialize(
+    obj,
+    firstSyncSessions,
+    period,
+    sessions,
+    totalBytes,
+    totalDevices
+  ) {
+    obj["first_sync_sessions"] = firstSyncSessions;
     obj["period"] = period;
     obj["sessions"] = sessions;
     obj["total_bytes"] = totalBytes;
@@ -63,6 +73,12 @@ class UsageSessionsData {
       if (data.hasOwnProperty("device")) {
         obj["device"] = ApiClient.convertToType(data["device"], "String");
       }
+      if (data.hasOwnProperty("first_sync_sessions")) {
+        obj["first_sync_sessions"] = ApiClient.convertToType(
+          data["first_sync_sessions"],
+          "Number"
+        );
+      }
       if (data.hasOwnProperty("fleet")) {
         obj["fleet"] = ApiClient.convertToType(data["fleet"], "String");
       }
@@ -71,6 +87,18 @@ class UsageSessionsData {
       }
       if (data.hasOwnProperty("sessions")) {
         obj["sessions"] = ApiClient.convertToType(data["sessions"], "Number");
+      }
+      if (data.hasOwnProperty("sessions_by_transport")) {
+        obj["sessions_by_transport"] = ApiClient.convertToType(
+          data["sessions_by_transport"],
+          { String: "Number" }
+        );
+      }
+      if (data.hasOwnProperty("tls_sessions")) {
+        obj["tls_sessions"] = ApiClient.convertToType(
+          data["tls_sessions"],
+          "Number"
+        );
       }
       if (data.hasOwnProperty("total_bytes")) {
         obj["total_bytes"] = ApiClient.convertToType(
@@ -133,6 +161,7 @@ class UsageSessionsData {
 }
 
 UsageSessionsData.RequiredProperties = [
+  "first_sync_sessions",
   "period",
   "sessions",
   "total_bytes",
@@ -143,6 +172,12 @@ UsageSessionsData.RequiredProperties = [
  * @member {String} device
  */
 UsageSessionsData.prototype["device"] = undefined;
+
+/**
+ * Number of first sync sessions in this period
+ * @member {Number} first_sync_sessions
+ */
+UsageSessionsData.prototype["first_sync_sessions"] = undefined;
 
 /**
  * @member {String} fleet
@@ -158,6 +193,18 @@ UsageSessionsData.prototype["period"] = undefined;
  * @member {Number} sessions
  */
 UsageSessionsData.prototype["sessions"] = undefined;
+
+/**
+ * Count of sessions grouped by transport type prefix (e.g. cell, wifi, ntn, lorawan)
+ * @member {Object.<String, Number>} sessions_by_transport
+ */
+UsageSessionsData.prototype["sessions_by_transport"] = undefined;
+
+/**
+ * Number of TLS sessions in this period
+ * @member {Number} tls_sessions
+ */
+UsageSessionsData.prototype["tls_sessions"] = undefined;
 
 /**
  * @member {Number} total_bytes
