@@ -3039,7 +3039,7 @@ paths:
 components:
   parameters:
     billingAccountUIDParam:
-      example: 00000000-0000-0000-000000000001
+      example: '"00000000-0000-0000-000000000001"'
       in: path
       name: billingAccountUID
       required: true
@@ -3151,7 +3151,7 @@ components:
       description:
         Which date to filter on, either 'captured' or 'uploaded'.  This
         will apply to the startDate and endDate parameters
-      example: uploaded
+      example: '"uploaded"'
       in: query
       name: dateType
       required: false
@@ -3170,7 +3170,7 @@ components:
         items:
           type: string
     deviceUIDParam:
-      example: dev:000000000000000
+      example: '"dev:000000000000000"'
       in: path
       name: deviceUID
       required: true
@@ -3226,21 +3226,21 @@ components:
           type: string
       style: form
     eventUIDParam:
-      example: 4506f411-dea6-44a0-9743-1130f57d7747
+      example: '"4506f411-dea6-44a0-9743-1130f57d7747"'
       in: path
       name: eventUID
       required: true
       schema:
         type: string
     filenameQueryParam:
-      example: notecard-7.2.2.16518$20240410043100.bin
+      example: '"notecard-7.2.2.16518$20240410043100.bin"'
       in: query
       name: filename
       required: false
       schema:
         type: string
     filesQueryParam:
-      example: _health.qo, data.qo
+      example: '"_health.qo, data.qo"'
       in: query
       name: files
       required: false
@@ -3356,7 +3356,7 @@ components:
       style: form
     jobUIDParam:
       description: Unique identifier for a batch job
-      example: my-reconciliation-job
+      example: '"my-reconciliation-job"'
       in: path
       name: jobUID
       required: true
@@ -3388,7 +3388,7 @@ components:
       schema:
         type: string
     monitorUIDParam:
-      example: monitor:8bAdf00d-000f-51c-af-01d5eaf00dbad
+      example: '"monitor:8bAdf00d-000f-51c-af-01d5eaf00dbad"'
       in: path
       name: monitorUID
       required: true
@@ -3455,7 +3455,7 @@ components:
       schema:
         type: string
     productUIDParam:
-      example: com.blues.bridge:sensors
+      example: '"com.blues.bridge:sensors"'
       in: path
       name: productUID
       required: true
@@ -3472,7 +3472,7 @@ components:
           type: string
       style: form
     projectOrProductUIDParam:
-      example: app:2606f411-dea6-44a0-9743-1130f57d77d8
+      example: '"app:2606f411-dea6-44a0-9743-1130f57d77d8"'
       in: path
       name: projectOrProductUID
       required: true
@@ -3480,7 +3480,7 @@ components:
         type: string
     reportUIDParam:
       description: Unique identifier for a job run report
-      example: my-reconciliation-job-1707654321000
+      example: '"my-reconciliation-job-1707654321000"'
       in: path
       name: reportUID
       required: true
@@ -3530,7 +3530,7 @@ components:
           - asc
           - desc
     routeUIDParam:
-      example: route:cbd20093cba58392c9f9bbdd0cdeb1a0
+      example: '"route:cbd20093cba58392c9f9bbdd0cdeb1a0"'
       in: path
       name: routeUID
       required: true

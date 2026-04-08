@@ -19,12 +19,11 @@ Get Billing Account Information
 ```javascript
 import * as NotehubJs from "@blues-inc/notehub-js";
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure Bearer access token for authorization: personalAccessToken
 let personalAccessToken = defaultClient.authentications["personalAccessToken"];
 personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
 
 let apiInstance = new NotehubJs.BillingAccountApi();
-let billingAccountUID = 00000000 - 0000 - 0000 - 000000000001; // String |
+let billingAccountUID = "00000000-0000-0000-000000000001"; // String |
 apiInstance.getBillingAccount(billingAccountUID).then(
   (data) => {
     console.log(
@@ -67,12 +66,11 @@ Get Billing Account Balance history, only enterprise supported
 ```javascript
 import * as NotehubJs from "@blues-inc/notehub-js";
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure Bearer access token for authorization: personalAccessToken
 let personalAccessToken = defaultClient.authentications["personalAccessToken"];
 personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
 
 let apiInstance = new NotehubJs.BillingAccountApi();
-let billingAccountUID = 00000000 - 0000 - 0000 - 000000000001; // String |
+let billingAccountUID = "00000000-0000-0000-000000000001"; // String |
 let opts = {
   startDate: 1628631763, // Number | Start date for filtering results, specified as a Unix timestamp
   endDate: 1657894210, // Number | End date for filtering results, specified as a Unix timestamp
@@ -121,7 +119,6 @@ Get Billing Accounts accessible by the api_key
 ```javascript
 import * as NotehubJs from "@blues-inc/notehub-js";
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure Bearer access token for authorization: personalAccessToken
 let personalAccessToken = defaultClient.authentications["personalAccessToken"];
 personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
 

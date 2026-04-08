@@ -22,6 +22,20 @@ try {
     });
   });
 
+  // Wrap string parameter examples in JS-style double quotes so the
+  // openapi-generator-cli renders them as valid JS string literals.
+  if (openapi.components?.parameters) {
+    Object.values(openapi.components.parameters).forEach((param) => {
+      if (
+        param.schema?.type === "string" &&
+        param.example !== undefined &&
+        !String(param.example).startsWith('"')
+      ) {
+        param.example = `"${param.example}"`;
+      }
+    });
+  }
+
   // Save the updated content to a new file
   fs.writeFileSync(outputFile, yaml.stringify(openapi), "utf8");
   console.log(`Filtered file written to ${outputFile}`);
