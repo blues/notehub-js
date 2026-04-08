@@ -319,17 +319,3 @@ src/model/UserDfuStateMachine.js
 src/model/UserDfuStateMachineStatus.js
 src/model/UserFirmwareInfo.js
 src/model/WebhookSettings.js
-test/api/JobsApi.spec.js
-test/model/AWSRoleConfig.spec.js
-test/model/CancelJobRun200Response.spec.js
-test/model/CreateJob201Response.spec.js
-test/model/DeleteJob200Response.spec.js
-test/model/GetBillingAccount200Response.spec.js
-test/model/GetBillingAccount200ResponsePlan.spec.js
-test/model/GetBillingAccountBalanceHistory200Response.spec.js
-test/model/GetBillingAccountBalanceHistory200ResponseDataInner.spec.js
-test/model/GetJobRuns200Response.spec.js
-test/model/GetJobs200Response.spec.js
-test/model/Job.spec.js
-test/model/JobRun.spec.js
-test/model/RunJob200Response.spec.js

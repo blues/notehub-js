@@ -21,12 +21,11 @@ Creates a webhook for the specified product with the given name. The name | must
 ```javascript
 import * as NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure Bearer access token for authorization: personalAccessToken
 let personalAccessToken = defaultClient.authentications['personalAccessToken'];
 personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
 
 let apiInstance = new NotehubJs.WebhookApi();
-let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String |
 let webhookUID = Abc_123-2646f411-dc56-44a0-9743-4130f47a74h8; // String | Webhook UID
 let webhookSettings = {"settings":{"disabled":false,"id":"Abc_123-2646f411-dc56-44a0-9743-4130f47a74h8","transform":"{\"device\":body.end_device_ids.dev_eui,\"sn\":body.end_device_ids.device_id,\"body\":body.uplink_message.decoded_payload,\"details\":body}"}}; // WebhookSettings |
 apiInstance.createWebhook(projectOrProductUID, webhookUID, webhookSettings).then(() => {
@@ -69,12 +68,11 @@ Deletes the specified webhook
 ```javascript
 import * as NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure Bearer access token for authorization: personalAccessToken
 let personalAccessToken = defaultClient.authentications['personalAccessToken'];
 personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
 
 let apiInstance = new NotehubJs.WebhookApi();
-let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String |
 let webhookUID = Abc_123-2646f411-dc56-44a0-9743-4130f47a74h8; // String | Webhook UID
 apiInstance.deleteWebhook(projectOrProductUID, webhookUID).then(() => {
   console.log('API called successfully.');
@@ -115,12 +113,11 @@ Retrieves the configuration settings for the specified webhook
 ```javascript
 import * as NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure Bearer access token for authorization: personalAccessToken
 let personalAccessToken = defaultClient.authentications['personalAccessToken'];
 personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
 
 let apiInstance = new NotehubJs.WebhookApi();
-let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String |
 let webhookUID = Abc_123-2646f411-dc56-44a0-9743-4130f47a74h8; // String | Webhook UID
 apiInstance.getWebhook(projectOrProductUID, webhookUID).then((data) => {
   console.log('API called successfully. Returned data: ' + JSON.stringify(data));
@@ -159,20 +156,23 @@ Retrieves all webhooks for the specified project
 ### Example
 
 ```javascript
-import * as NotehubJs from '@blues-inc/notehub-js';
+import * as NotehubJs from "@blues-inc/notehub-js";
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure Bearer access token for authorization: personalAccessToken
-let personalAccessToken = defaultClient.authentications['personalAccessToken'];
-personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
+let personalAccessToken = defaultClient.authentications["personalAccessToken"];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
 
 let apiInstance = new NotehubJs.WebhookApi();
-let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
-apiInstance.getWebhooks(projectOrProductUID).then((data) => {
-  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
-}, (error) => {
-  console.error(error);
-});
-
+let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String |
+apiInstance.getWebhooks(projectOrProductUID).then(
+  (data) => {
+    console.log(
+      "API called successfully. Returned data: " + JSON.stringify(data)
+    );
+  },
+  (error) => {
+    console.error(error);
+  }
+);
 ```
 
 ### Parameters
@@ -205,12 +205,11 @@ Updates the configuration settings for the specified webhook. | Webhook will be 
 ```javascript
 import * as NotehubJs from '@blues-inc/notehub-js';
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure Bearer access token for authorization: personalAccessToken
 let personalAccessToken = defaultClient.authentications['personalAccessToken'];
 personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
 
 let apiInstance = new NotehubJs.WebhookApi();
-let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String |
 let webhookUID = Abc_123-2646f411-dc56-44a0-9743-4130f47a74h8; // String | Webhook UID
 let webhookSettings = {"disabled":false,"transform":"{\"device\":body.end_device_ids.dev_eui,\"sn\":body.end_device_ids.device_id,\"body\":body.uplink_message.decoded_payload,\"details\":body}"}; // WebhookSettings |
 apiInstance.updateWebhook(projectOrProductUID, webhookUID, webhookSettings).then(() => {

@@ -17,22 +17,23 @@ Creates an event using specified webhook
 ### Example
 
 ```javascript
-import * as NotehubJs from '@blues-inc/notehub-js';
+import * as NotehubJs from "@blues-inc/notehub-js";
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure Bearer access token for authorization: personalAccessToken
-let personalAccessToken = defaultClient.authentications['personalAccessToken'];
-personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
+let personalAccessToken = defaultClient.authentications["personalAccessToken"];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
 
 let apiInstance = new NotehubJs.ExternalDevicesApi();
-let productUID = com.blues.bridge:sensors; // String |
-let deviceUID = dev:000000000000000; // String |
+let productUID = "com.blues.bridge:sensors"; // String |
+let deviceUID = "dev:000000000000000"; // String |
 let event = new NotehubJs.Event(); // Event | Event Object
-apiInstance.createEventExtDevice(productUID, deviceUID, event).then(() => {
-  console.log('API called successfully.');
-}, (error) => {
-  console.error(error);
-});
-
+apiInstance.createEventExtDevice(productUID, deviceUID, event).then(
+  () => {
+    console.log("API called successfully.");
+  },
+  (error) => {
+    console.error(error);
+  }
+);
 ```
 
 ### Parameters
@@ -65,22 +66,23 @@ Closes the session for the specified device if open
 ### Example
 
 ```javascript
-import * as NotehubJs from '@blues-inc/notehub-js';
+import * as NotehubJs from "@blues-inc/notehub-js";
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure Bearer access token for authorization: personalAccessToken
-let personalAccessToken = defaultClient.authentications['personalAccessToken'];
-personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
+let personalAccessToken = defaultClient.authentications["personalAccessToken"];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
 
 let apiInstance = new NotehubJs.ExternalDevicesApi();
-let productUID = com.blues.bridge:sensors; // String |
-let deviceUID = dev:000000000000000; // String |
+let productUID = "com.blues.bridge:sensors"; // String |
+let deviceUID = "dev:000000000000000"; // String |
 let deviceSession = new NotehubJs.DeviceSession(); // DeviceSession | Session Object
-apiInstance.extDeviceSessionClose(productUID, deviceUID, deviceSession).then(() => {
-  console.log('API called successfully.');
-}, (error) => {
-  console.error(error);
-});
-
+apiInstance.extDeviceSessionClose(productUID, deviceUID, deviceSession).then(
+  () => {
+    console.log("API called successfully.");
+  },
+  (error) => {
+    console.error(error);
+  }
+);
 ```
 
 ### Parameters
@@ -113,22 +115,23 @@ Create a Session for the specified device. | If a session is currently open it w
 ### Example
 
 ```javascript
-import * as NotehubJs from '@blues-inc/notehub-js';
+import * as NotehubJs from "@blues-inc/notehub-js";
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure Bearer access token for authorization: personalAccessToken
-let personalAccessToken = defaultClient.authentications['personalAccessToken'];
-personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
+let personalAccessToken = defaultClient.authentications["personalAccessToken"];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
 
 let apiInstance = new NotehubJs.ExternalDevicesApi();
-let productUID = com.blues.bridge:sensors; // String |
-let deviceUID = dev:000000000000000; // String |
+let productUID = "com.blues.bridge:sensors"; // String |
+let deviceUID = "dev:000000000000000"; // String |
 let deviceSession = new NotehubJs.DeviceSession(); // DeviceSession | Session Object
-apiInstance.extDeviceSessionOpen(productUID, deviceUID, deviceSession).then(() => {
-  console.log('API called successfully.');
-}, (error) => {
-  console.error(error);
-});
-
+apiInstance.extDeviceSessionOpen(productUID, deviceUID, deviceSession).then(
+  () => {
+    console.log("API called successfully.");
+  },
+  (error) => {
+    console.error(error);
+  }
+);
 ```
 
 ### Parameters

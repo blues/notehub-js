@@ -22,21 +22,24 @@ Cancel a running job execution
 ### Example
 
 ```javascript
-import * as NotehubJs from '@blues-inc/notehub-js';
+import * as NotehubJs from "@blues-inc/notehub-js";
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure Bearer access token for authorization: personalAccessToken
-let personalAccessToken = defaultClient.authentications['personalAccessToken'];
-personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
+let personalAccessToken = defaultClient.authentications["personalAccessToken"];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
 
 let apiInstance = new NotehubJs.JobsApi();
-let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
-let reportUID = my-reconciliation-job-1707654321000; // String | Unique identifier for a job run report
-apiInstance.cancelJobRun(projectOrProductUID, reportUID).then((data) => {
-  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
-}, (error) => {
-  console.error(error);
-});
-
+let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String |
+let reportUID = "my-reconciliation-job-1707654321000"; // String | Unique identifier for a job run report
+apiInstance.cancelJobRun(projectOrProductUID, reportUID).then(
+  (data) => {
+    console.log(
+      "API called successfully. Returned data: " + JSON.stringify(data)
+    );
+  },
+  (error) => {
+    console.error(error);
+  }
+);
 ```
 
 ### Parameters
@@ -68,22 +71,25 @@ Create a new batch job with an optional name
 ### Example
 
 ```javascript
-import * as NotehubJs from '@blues-inc/notehub-js';
+import * as NotehubJs from "@blues-inc/notehub-js";
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure Bearer access token for authorization: personalAccessToken
-let personalAccessToken = defaultClient.authentications['personalAccessToken'];
-personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
+let personalAccessToken = defaultClient.authentications["personalAccessToken"];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
 
 let apiInstance = new NotehubJs.JobsApi();
-let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String |
 let name = "name_example"; // String | Name for the job
-let body = {key: null}; // Object | The job definition as raw JSON
-apiInstance.createJob(projectOrProductUID, name, body).then((data) => {
-  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
-}, (error) => {
-  console.error(error);
-});
-
+let body = { key: null }; // Object | The job definition as raw JSON
+apiInstance.createJob(projectOrProductUID, name, body).then(
+  (data) => {
+    console.log(
+      "API called successfully. Returned data: " + JSON.stringify(data)
+    );
+  },
+  (error) => {
+    console.error(error);
+  }
+);
 ```
 
 ### Parameters
@@ -116,21 +122,24 @@ Delete a batch job
 ### Example
 
 ```javascript
-import * as NotehubJs from '@blues-inc/notehub-js';
+import * as NotehubJs from "@blues-inc/notehub-js";
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure Bearer access token for authorization: personalAccessToken
-let personalAccessToken = defaultClient.authentications['personalAccessToken'];
-personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
+let personalAccessToken = defaultClient.authentications["personalAccessToken"];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
 
 let apiInstance = new NotehubJs.JobsApi();
-let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
-let jobUID = my-reconciliation-job; // String | Unique identifier for a batch job
-apiInstance.deleteJob(projectOrProductUID, jobUID).then((data) => {
-  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
-}, (error) => {
-  console.error(error);
-});
-
+let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String |
+let jobUID = "my-reconciliation-job"; // String | Unique identifier for a batch job
+apiInstance.deleteJob(projectOrProductUID, jobUID).then(
+  (data) => {
+    console.log(
+      "API called successfully. Returned data: " + JSON.stringify(data)
+    );
+  },
+  (error) => {
+    console.error(error);
+  }
+);
 ```
 
 ### Parameters
@@ -162,21 +171,24 @@ Get a specific batch job definition
 ### Example
 
 ```javascript
-import * as NotehubJs from '@blues-inc/notehub-js';
+import * as NotehubJs from "@blues-inc/notehub-js";
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure Bearer access token for authorization: personalAccessToken
-let personalAccessToken = defaultClient.authentications['personalAccessToken'];
-personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
+let personalAccessToken = defaultClient.authentications["personalAccessToken"];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
 
 let apiInstance = new NotehubJs.JobsApi();
-let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
-let jobUID = my-reconciliation-job; // String | Unique identifier for a batch job
-apiInstance.getJob(projectOrProductUID, jobUID).then((data) => {
-  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
-}, (error) => {
-  console.error(error);
-});
-
+let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String |
+let jobUID = "my-reconciliation-job"; // String | Unique identifier for a batch job
+apiInstance.getJob(projectOrProductUID, jobUID).then(
+  (data) => {
+    console.log(
+      "API called successfully. Returned data: " + JSON.stringify(data)
+    );
+  },
+  (error) => {
+    console.error(error);
+  }
+);
 ```
 
 ### Parameters
@@ -208,21 +220,24 @@ Get the result of a job execution
 ### Example
 
 ```javascript
-import * as NotehubJs from '@blues-inc/notehub-js';
+import * as NotehubJs from "@blues-inc/notehub-js";
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure Bearer access token for authorization: personalAccessToken
-let personalAccessToken = defaultClient.authentications['personalAccessToken'];
-personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
+let personalAccessToken = defaultClient.authentications["personalAccessToken"];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
 
 let apiInstance = new NotehubJs.JobsApi();
-let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
-let reportUID = my-reconciliation-job-1707654321000; // String | Unique identifier for a job run report
-apiInstance.getJobRun(projectOrProductUID, reportUID).then((data) => {
-  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
-}, (error) => {
-  console.error(error);
-});
-
+let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String |
+let reportUID = "my-reconciliation-job-1707654321000"; // String | Unique identifier for a job run report
+apiInstance.getJobRun(projectOrProductUID, reportUID).then(
+  (data) => {
+    console.log(
+      "API called successfully. Returned data: " + JSON.stringify(data)
+    );
+  },
+  (error) => {
+    console.error(error);
+  }
+);
 ```
 
 ### Parameters
@@ -254,25 +269,28 @@ List all runs for a specific job
 ### Example
 
 ```javascript
-import * as NotehubJs from '@blues-inc/notehub-js';
+import * as NotehubJs from "@blues-inc/notehub-js";
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure Bearer access token for authorization: personalAccessToken
-let personalAccessToken = defaultClient.authentications['personalAccessToken'];
-personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
+let personalAccessToken = defaultClient.authentications["personalAccessToken"];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
 
 let apiInstance = new NotehubJs.JobsApi();
-let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
-let jobUID = my-reconciliation-job; // String | Unique identifier for a batch job
+let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String |
+let jobUID = "my-reconciliation-job"; // String | Unique identifier for a batch job
 let opts = {
-  'status': "status_example", // String | Filter runs by status
-  'dryRun': true // Boolean | Filter runs by dry run flag
+  status: "status_example", // String | Filter runs by status
+  dryRun: true, // Boolean | Filter runs by dry run flag
 };
-apiInstance.getJobRuns(projectOrProductUID, jobUID, opts).then((data) => {
-  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
-}, (error) => {
-  console.error(error);
-});
-
+apiInstance.getJobRuns(projectOrProductUID, jobUID, opts).then(
+  (data) => {
+    console.log(
+      "API called successfully. Returned data: " + JSON.stringify(data)
+    );
+  },
+  (error) => {
+    console.error(error);
+  }
+);
 ```
 
 ### Parameters
@@ -306,20 +324,23 @@ List all batch jobs for a project
 ### Example
 
 ```javascript
-import * as NotehubJs from '@blues-inc/notehub-js';
+import * as NotehubJs from "@blues-inc/notehub-js";
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure Bearer access token for authorization: personalAccessToken
-let personalAccessToken = defaultClient.authentications['personalAccessToken'];
-personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
+let personalAccessToken = defaultClient.authentications["personalAccessToken"];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
 
 let apiInstance = new NotehubJs.JobsApi();
-let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
-apiInstance.getJobs(projectOrProductUID).then((data) => {
-  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
-}, (error) => {
-  console.error(error);
-});
-
+let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String |
+apiInstance.getJobs(projectOrProductUID).then(
+  (data) => {
+    console.log(
+      "API called successfully. Returned data: " + JSON.stringify(data)
+    );
+  },
+  (error) => {
+    console.error(error);
+  }
+);
 ```
 
 ### Parameters
@@ -350,24 +371,27 @@ Execute a batch job
 ### Example
 
 ```javascript
-import * as NotehubJs from '@blues-inc/notehub-js';
+import * as NotehubJs from "@blues-inc/notehub-js";
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure Bearer access token for authorization: personalAccessToken
-let personalAccessToken = defaultClient.authentications['personalAccessToken'];
-personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
+let personalAccessToken = defaultClient.authentications["personalAccessToken"];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
 
 let apiInstance = new NotehubJs.JobsApi();
-let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
-let jobUID = my-reconciliation-job; // String | Unique identifier for a batch job
+let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String |
+let jobUID = "my-reconciliation-job"; // String | Unique identifier for a batch job
 let opts = {
-  'dryRun': false // Boolean | Run job in dry-run mode without making actual changes
+  dryRun: false, // Boolean | Run job in dry-run mode without making actual changes
 };
-apiInstance.runJob(projectOrProductUID, jobUID, opts).then((data) => {
-  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
-}, (error) => {
-  console.error(error);
-});
-
+apiInstance.runJob(projectOrProductUID, jobUID, opts).then(
+  (data) => {
+    console.log(
+      "API called successfully. Returned data: " + JSON.stringify(data)
+    );
+  },
+  (error) => {
+    console.error(error);
+  }
+);
 ```
 
 ### Parameters

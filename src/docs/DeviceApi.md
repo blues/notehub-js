@@ -43,24 +43,27 @@ Add a Note to a .db notefile. if noteID is &#39;-&#39; then payload is ignored a
 ### Example
 
 ```javascript
-import * as NotehubJs from '@blues-inc/notehub-js';
+import * as NotehubJs from "@blues-inc/notehub-js";
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure Bearer access token for authorization: personalAccessToken
-let personalAccessToken = defaultClient.authentications['personalAccessToken'];
-personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
+let personalAccessToken = defaultClient.authentications["personalAccessToken"];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
 
 let apiInstance = new NotehubJs.DeviceApi();
-let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
-let deviceUID = dev:000000000000000; // String |
+let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String |
+let deviceUID = "dev:000000000000000"; // String |
 let notefileID = "notefileID_example"; // String |
 let noteID = "noteID_example"; // String |
 let noteInput = new NotehubJs.NoteInput(); // NoteInput | Body or payload of note to be added to the device
-apiInstance.addDbNote(projectOrProductUID, deviceUID, notefileID, noteID, noteInput).then(() => {
-  console.log('API called successfully.');
-}, (error) => {
-  console.error(error);
-});
-
+apiInstance
+  .addDbNote(projectOrProductUID, deviceUID, notefileID, noteID, noteInput)
+  .then(
+    () => {
+      console.log("API called successfully.");
+    },
+    (error) => {
+      console.error(error);
+    }
+  );
 ```
 
 ### Parameters
@@ -95,23 +98,26 @@ Adds a Note to a Notefile, creating the Notefile if it doesn&#39;t yet exist.
 ### Example
 
 ```javascript
-import * as NotehubJs from '@blues-inc/notehub-js';
+import * as NotehubJs from "@blues-inc/notehub-js";
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure Bearer access token for authorization: personalAccessToken
-let personalAccessToken = defaultClient.authentications['personalAccessToken'];
-personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
+let personalAccessToken = defaultClient.authentications["personalAccessToken"];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
 
 let apiInstance = new NotehubJs.DeviceApi();
-let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
-let deviceUID = dev:000000000000000; // String |
+let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String |
+let deviceUID = "dev:000000000000000"; // String |
 let notefileID = "notefileID_example"; // String |
 let noteInput = new NotehubJs.NoteInput(); // NoteInput | Body or payload of note to be added to the device
-apiInstance.addQiNote(projectOrProductUID, deviceUID, notefileID, noteInput).then(() => {
-  console.log('API called successfully.');
-}, (error) => {
-  console.error(error);
-});
-
+apiInstance
+  .addQiNote(projectOrProductUID, deviceUID, notefileID, noteInput)
+  .then(
+    () => {
+      console.log("API called successfully.");
+    },
+    (error) => {
+      console.error(error);
+    }
+  );
 ```
 
 ### Parameters
@@ -145,22 +151,23 @@ Creates an empty Notefile on the device.
 ### Example
 
 ```javascript
-import * as NotehubJs from '@blues-inc/notehub-js';
+import * as NotehubJs from "@blues-inc/notehub-js";
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure Bearer access token for authorization: personalAccessToken
-let personalAccessToken = defaultClient.authentications['personalAccessToken'];
-personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
+let personalAccessToken = defaultClient.authentications["personalAccessToken"];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
 
 let apiInstance = new NotehubJs.DeviceApi();
-let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
-let deviceUID = dev:000000000000000; // String |
+let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String |
+let deviceUID = "dev:000000000000000"; // String |
 let notefileID = "notefileID_example"; // String |
-apiInstance.createNotefile(projectOrProductUID, deviceUID, notefileID).then(() => {
-  console.log('API called successfully.');
-}, (error) => {
-  console.error(error);
-});
-
+apiInstance.createNotefile(projectOrProductUID, deviceUID, notefileID).then(
+  () => {
+    console.log("API called successfully.");
+  },
+  (error) => {
+    console.error(error);
+  }
+);
 ```
 
 ### Parameters
@@ -193,21 +200,22 @@ Delete Device
 ### Example
 
 ```javascript
-import * as NotehubJs from '@blues-inc/notehub-js';
+import * as NotehubJs from "@blues-inc/notehub-js";
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure Bearer access token for authorization: personalAccessToken
-let personalAccessToken = defaultClient.authentications['personalAccessToken'];
-personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
+let personalAccessToken = defaultClient.authentications["personalAccessToken"];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
 
 let apiInstance = new NotehubJs.DeviceApi();
-let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
-let deviceUID = dev:000000000000000; // String |
-apiInstance.deleteDevice(projectOrProductUID, deviceUID).then(() => {
-  console.log('API called successfully.');
-}, (error) => {
-  console.error(error);
-});
-
+let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String |
+let deviceUID = "dev:000000000000000"; // String |
+apiInstance.deleteDevice(projectOrProductUID, deviceUID).then(
+  () => {
+    console.log("API called successfully.");
+  },
+  (error) => {
+    console.error(error);
+  }
+);
 ```
 
 ### Parameters
@@ -239,22 +247,27 @@ Delete environment variable of a device
 ### Example
 
 ```javascript
-import * as NotehubJs from '@blues-inc/notehub-js';
+import * as NotehubJs from "@blues-inc/notehub-js";
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure Bearer access token for authorization: personalAccessToken
-let personalAccessToken = defaultClient.authentications['personalAccessToken'];
-personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
+let personalAccessToken = defaultClient.authentications["personalAccessToken"];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
 
 let apiInstance = new NotehubJs.DeviceApi();
-let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
-let deviceUID = dev:000000000000000; // String |
+let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String |
+let deviceUID = "dev:000000000000000"; // String |
 let key = "key_example"; // String | The environment variable key to delete.
-apiInstance.deleteDeviceEnvironmentVariable(projectOrProductUID, deviceUID, key).then((data) => {
-  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
-}, (error) => {
-  console.error(error);
-});
-
+apiInstance
+  .deleteDeviceEnvironmentVariable(projectOrProductUID, deviceUID, key)
+  .then(
+    (data) => {
+      console.log(
+        "API called successfully. Returned data: " + JSON.stringify(data)
+      );
+    },
+    (error) => {
+      console.error(error);
+    }
+  );
 ```
 
 ### Parameters
@@ -287,23 +300,24 @@ Delete a note from a .db or .qi notefile
 ### Example
 
 ```javascript
-import * as NotehubJs from '@blues-inc/notehub-js';
+import * as NotehubJs from "@blues-inc/notehub-js";
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure Bearer access token for authorization: personalAccessToken
-let personalAccessToken = defaultClient.authentications['personalAccessToken'];
-personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
+let personalAccessToken = defaultClient.authentications["personalAccessToken"];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
 
 let apiInstance = new NotehubJs.DeviceApi();
-let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
-let deviceUID = dev:000000000000000; // String |
+let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String |
+let deviceUID = "dev:000000000000000"; // String |
 let notefileID = "notefileID_example"; // String |
 let noteID = "noteID_example"; // String |
-apiInstance.deleteNote(projectOrProductUID, deviceUID, notefileID, noteID).then(() => {
-  console.log('API called successfully.');
-}, (error) => {
-  console.error(error);
-});
-
+apiInstance.deleteNote(projectOrProductUID, deviceUID, notefileID, noteID).then(
+  () => {
+    console.log("API called successfully.");
+  },
+  (error) => {
+    console.error(error);
+  }
+);
 ```
 
 ### Parameters
@@ -337,22 +351,25 @@ Deletes Notefiles and the Notes they contain.
 ### Example
 
 ```javascript
-import * as NotehubJs from '@blues-inc/notehub-js';
+import * as NotehubJs from "@blues-inc/notehub-js";
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure Bearer access token for authorization: personalAccessToken
-let personalAccessToken = defaultClient.authentications['personalAccessToken'];
-personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
+let personalAccessToken = defaultClient.authentications["personalAccessToken"];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
 
 let apiInstance = new NotehubJs.DeviceApi();
-let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
-let deviceUID = dev:000000000000000; // String |
+let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String |
+let deviceUID = "dev:000000000000000"; // String |
 let deleteNotefilesRequest = new NotehubJs.DeleteNotefilesRequest(); // DeleteNotefilesRequest |
-apiInstance.deleteNotefiles(projectOrProductUID, deviceUID, deleteNotefilesRequest).then(() => {
-  console.log('API called successfully.');
-}, (error) => {
-  console.error(error);
-});
-
+apiInstance
+  .deleteNotefiles(projectOrProductUID, deviceUID, deleteNotefilesRequest)
+  .then(
+    () => {
+      console.log("API called successfully.");
+    },
+    (error) => {
+      console.error(error);
+    }
+  );
 ```
 
 ### Parameters
@@ -385,21 +402,22 @@ Disable Device
 ### Example
 
 ```javascript
-import * as NotehubJs from '@blues-inc/notehub-js';
+import * as NotehubJs from "@blues-inc/notehub-js";
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure Bearer access token for authorization: personalAccessToken
-let personalAccessToken = defaultClient.authentications['personalAccessToken'];
-personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
+let personalAccessToken = defaultClient.authentications["personalAccessToken"];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
 
 let apiInstance = new NotehubJs.DeviceApi();
-let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
-let deviceUID = dev:000000000000000; // String |
-apiInstance.disableDevice(projectOrProductUID, deviceUID).then(() => {
-  console.log('API called successfully.');
-}, (error) => {
-  console.error(error);
-});
-
+let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String |
+let deviceUID = "dev:000000000000000"; // String |
+apiInstance.disableDevice(projectOrProductUID, deviceUID).then(
+  () => {
+    console.log("API called successfully.");
+  },
+  (error) => {
+    console.error(error);
+  }
+);
 ```
 
 ### Parameters
@@ -431,21 +449,22 @@ Enable Device
 ### Example
 
 ```javascript
-import * as NotehubJs from '@blues-inc/notehub-js';
+import * as NotehubJs from "@blues-inc/notehub-js";
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure Bearer access token for authorization: personalAccessToken
-let personalAccessToken = defaultClient.authentications['personalAccessToken'];
-personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
+let personalAccessToken = defaultClient.authentications["personalAccessToken"];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
 
 let apiInstance = new NotehubJs.DeviceApi();
-let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
-let deviceUID = dev:000000000000000; // String |
-apiInstance.enableDevice(projectOrProductUID, deviceUID).then(() => {
-  console.log('API called successfully.');
-}, (error) => {
-  console.error(error);
-});
-
+let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String |
+let deviceUID = "dev:000000000000000"; // String |
+apiInstance.enableDevice(projectOrProductUID, deviceUID).then(
+  () => {
+    console.log("API called successfully.");
+  },
+  (error) => {
+    console.error(error);
+  }
+);
 ```
 
 ### Parameters
@@ -477,27 +496,32 @@ Get a note from a .db or .qi notefile
 ### Example
 
 ```javascript
-import * as NotehubJs from '@blues-inc/notehub-js';
+import * as NotehubJs from "@blues-inc/notehub-js";
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure Bearer access token for authorization: personalAccessToken
-let personalAccessToken = defaultClient.authentications['personalAccessToken'];
-personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
+let personalAccessToken = defaultClient.authentications["personalAccessToken"];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
 
 let apiInstance = new NotehubJs.DeviceApi();
-let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
-let deviceUID = dev:000000000000000; // String |
+let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String |
+let deviceUID = "dev:000000000000000"; // String |
 let notefileID = "notefileID_example"; // String |
 let noteID = "noteID_example"; // String |
 let opts = {
-  '_delete': true, // Boolean | Whether to delete the note from the DB notefile
-  'deleted': true // Boolean | Whether to return deleted notes
+  _delete: true, // Boolean | Whether to delete the note from the DB notefile
+  deleted: true, // Boolean | Whether to return deleted notes
 };
-apiInstance.getDbNote(projectOrProductUID, deviceUID, notefileID, noteID, opts).then((data) => {
-  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
-}, (error) => {
-  console.error(error);
-});
-
+apiInstance
+  .getDbNote(projectOrProductUID, deviceUID, notefileID, noteID, opts)
+  .then(
+    (data) => {
+      console.log(
+        "API called successfully. Returned data: " + JSON.stringify(data)
+      );
+    },
+    (error) => {
+      console.error(error);
+    }
+  );
 ```
 
 ### Parameters
@@ -533,21 +557,24 @@ Get Device
 ### Example
 
 ```javascript
-import * as NotehubJs from '@blues-inc/notehub-js';
+import * as NotehubJs from "@blues-inc/notehub-js";
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure Bearer access token for authorization: personalAccessToken
-let personalAccessToken = defaultClient.authentications['personalAccessToken'];
-personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
+let personalAccessToken = defaultClient.authentications["personalAccessToken"];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
 
 let apiInstance = new NotehubJs.DeviceApi();
-let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
-let deviceUID = dev:000000000000000; // String |
-apiInstance.getDevice(projectOrProductUID, deviceUID).then((data) => {
-  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
-}, (error) => {
-  console.error(error);
-});
-
+let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String |
+let deviceUID = "dev:000000000000000"; // String |
+apiInstance.getDevice(projectOrProductUID, deviceUID).then(
+  (data) => {
+    console.log(
+      "API called successfully. Returned data: " + JSON.stringify(data)
+    );
+  },
+  (error) => {
+    console.error(error);
+  }
+);
 ```
 
 ### Parameters
@@ -579,21 +606,24 @@ Get environment variable hierarchy for a device
 ### Example
 
 ```javascript
-import * as NotehubJs from '@blues-inc/notehub-js';
+import * as NotehubJs from "@blues-inc/notehub-js";
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure Bearer access token for authorization: personalAccessToken
-let personalAccessToken = defaultClient.authentications['personalAccessToken'];
-personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
+let personalAccessToken = defaultClient.authentications["personalAccessToken"];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
 
 let apiInstance = new NotehubJs.DeviceApi();
-let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
-let deviceUID = dev:000000000000000; // String |
-apiInstance.getDeviceEnvironmentHierarchy(projectOrProductUID, deviceUID).then((data) => {
-  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
-}, (error) => {
-  console.error(error);
-});
-
+let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String |
+let deviceUID = "dev:000000000000000"; // String |
+apiInstance.getDeviceEnvironmentHierarchy(projectOrProductUID, deviceUID).then(
+  (data) => {
+    console.log(
+      "API called successfully. Returned data: " + JSON.stringify(data)
+    );
+  },
+  (error) => {
+    console.error(error);
+  }
+);
 ```
 
 ### Parameters
@@ -625,21 +655,24 @@ Get environment variables of a device
 ### Example
 
 ```javascript
-import * as NotehubJs from '@blues-inc/notehub-js';
+import * as NotehubJs from "@blues-inc/notehub-js";
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure Bearer access token for authorization: personalAccessToken
-let personalAccessToken = defaultClient.authentications['personalAccessToken'];
-personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
+let personalAccessToken = defaultClient.authentications["personalAccessToken"];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
 
 let apiInstance = new NotehubJs.DeviceApi();
-let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
-let deviceUID = dev:000000000000000; // String |
-apiInstance.getDeviceEnvironmentVariables(projectOrProductUID, deviceUID).then((data) => {
-  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
-}, (error) => {
-  console.error(error);
-});
-
+let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String |
+let deviceUID = "dev:000000000000000"; // String |
+apiInstance.getDeviceEnvironmentVariables(projectOrProductUID, deviceUID).then(
+  (data) => {
+    console.log(
+      "API called successfully. Returned data: " + JSON.stringify(data)
+    );
+  },
+  (error) => {
+    console.error(error);
+  }
+);
 ```
 
 ### Parameters
@@ -671,18 +704,24 @@ Get environment variables of a device with device pin authorization
 ### Example
 
 ```javascript
-import * as NotehubJs from '@blues-inc/notehub-js';
+import * as NotehubJs from "@blues-inc/notehub-js";
 
 let apiInstance = new NotehubJs.DeviceApi();
-let productUID = com.blues.bridge:sensors; // String |
-let deviceUID = dev:000000000000000; // String |
+let productUID = "com.blues.bridge:sensors"; // String |
+let deviceUID = "dev:000000000000000"; // String |
 let xAuthToken = "xAuthToken_example"; // String | For accessing endpoints by Device pin.
-apiInstance.getDeviceEnvironmentVariablesByPin(productUID, deviceUID, xAuthToken).then((data) => {
-  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
-}, (error) => {
-  console.error(error);
-});
-
+apiInstance
+  .getDeviceEnvironmentVariablesByPin(productUID, deviceUID, xAuthToken)
+  .then(
+    (data) => {
+      console.log(
+        "API called successfully. Returned data: " + JSON.stringify(data)
+      );
+    },
+    (error) => {
+      console.error(error);
+    }
+  );
 ```
 
 ### Parameters
@@ -715,26 +754,29 @@ Get Device Health Log
 ### Example
 
 ```javascript
-import * as NotehubJs from '@blues-inc/notehub-js';
+import * as NotehubJs from "@blues-inc/notehub-js";
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure Bearer access token for authorization: personalAccessToken
-let personalAccessToken = defaultClient.authentications['personalAccessToken'];
-personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
+let personalAccessToken = defaultClient.authentications["personalAccessToken"];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
 
 let apiInstance = new NotehubJs.DeviceApi();
-let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
-let deviceUID = dev:000000000000000; // String |
+let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String |
+let deviceUID = "dev:000000000000000"; // String |
 let opts = {
-  'startDate': 1628631763, // Number | Start date for filtering results, specified as a Unix timestamp
-  'endDate': 1657894210, // Number | End date for filtering results, specified as a Unix timestamp
-  'logType': ["null"] // [String] | Return only specified log types
+  startDate: 1628631763, // Number | Start date for filtering results, specified as a Unix timestamp
+  endDate: 1657894210, // Number | End date for filtering results, specified as a Unix timestamp
+  logType: ["null"], // [String] | Return only specified log types
 };
-apiInstance.getDeviceHealthLog(projectOrProductUID, deviceUID, opts).then((data) => {
-  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
-}, (error) => {
-  console.error(error);
-});
-
+apiInstance.getDeviceHealthLog(projectOrProductUID, deviceUID, opts).then(
+  (data) => {
+    console.log(
+      "API called successfully. Returned data: " + JSON.stringify(data)
+    );
+  },
+  (error) => {
+    console.error(error);
+  }
+);
 ```
 
 ### Parameters
@@ -769,21 +811,24 @@ Get Device Latest Events
 ### Example
 
 ```javascript
-import * as NotehubJs from '@blues-inc/notehub-js';
+import * as NotehubJs from "@blues-inc/notehub-js";
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure Bearer access token for authorization: personalAccessToken
-let personalAccessToken = defaultClient.authentications['personalAccessToken'];
-personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
+let personalAccessToken = defaultClient.authentications["personalAccessToken"];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
 
 let apiInstance = new NotehubJs.DeviceApi();
-let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
-let deviceUID = dev:000000000000000; // String |
-apiInstance.getDeviceLatestEvents(projectOrProductUID, deviceUID).then((data) => {
-  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
-}, (error) => {
-  console.error(error);
-});
-
+let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String |
+let deviceUID = "dev:000000000000000"; // String |
+apiInstance.getDeviceLatestEvents(projectOrProductUID, deviceUID).then(
+  (data) => {
+    console.log(
+      "API called successfully. Returned data: " + JSON.stringify(data)
+    );
+  },
+  (error) => {
+    console.error(error);
+  }
+);
 ```
 
 ### Parameters
@@ -815,21 +860,24 @@ Get Data Plans associated with the device, this include the primary sim, any ext
 ### Example
 
 ```javascript
-import * as NotehubJs from '@blues-inc/notehub-js';
+import * as NotehubJs from "@blues-inc/notehub-js";
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure Bearer access token for authorization: personalAccessToken
-let personalAccessToken = defaultClient.authentications['personalAccessToken'];
-personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
+let personalAccessToken = defaultClient.authentications["personalAccessToken"];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
 
 let apiInstance = new NotehubJs.DeviceApi();
-let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
-let deviceUID = dev:000000000000000; // String |
-apiInstance.getDevicePlans(projectOrProductUID, deviceUID).then((data) => {
-  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
-}, (error) => {
-  console.error(error);
-});
-
+let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String |
+let deviceUID = "dev:000000000000000"; // String |
+apiInstance.getDevicePlans(projectOrProductUID, deviceUID).then(
+  (data) => {
+    console.log(
+      "API called successfully. Returned data: " + JSON.stringify(data)
+    );
+  },
+  (error) => {
+    console.error(error);
+  }
+);
 ```
 
 ### Parameters
@@ -861,21 +909,24 @@ Get Device Public Key
 ### Example
 
 ```javascript
-import * as NotehubJs from '@blues-inc/notehub-js';
+import * as NotehubJs from "@blues-inc/notehub-js";
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure Bearer access token for authorization: personalAccessToken
-let personalAccessToken = defaultClient.authentications['personalAccessToken'];
-personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
+let personalAccessToken = defaultClient.authentications["personalAccessToken"];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
 
 let apiInstance = new NotehubJs.DeviceApi();
-let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
-let deviceUID = dev:000000000000000; // String |
-apiInstance.getDevicePublicKey(projectOrProductUID, deviceUID).then((data) => {
-  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
-}, (error) => {
-  console.error(error);
-});
-
+let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String |
+let deviceUID = "dev:000000000000000"; // String |
+apiInstance.getDevicePublicKey(projectOrProductUID, deviceUID).then(
+  (data) => {
+    console.log(
+      "API called successfully. Returned data: " + JSON.stringify(data)
+    );
+  },
+  (error) => {
+    console.error(error);
+  }
+);
 ```
 
 ### Parameters
@@ -907,24 +958,27 @@ Get Device Public Keys of a Project
 ### Example
 
 ```javascript
-import * as NotehubJs from '@blues-inc/notehub-js';
+import * as NotehubJs from "@blues-inc/notehub-js";
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure Bearer access token for authorization: personalAccessToken
-let personalAccessToken = defaultClient.authentications['personalAccessToken'];
-personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
+let personalAccessToken = defaultClient.authentications["personalAccessToken"];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
 
 let apiInstance = new NotehubJs.DeviceApi();
-let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String |
 let opts = {
-  'pageSize': 50, // Number |
-  'pageNum': 1 // Number |
+  pageSize: 50, // Number |
+  pageNum: 1, // Number |
 };
-apiInstance.getDevicePublicKeys(projectOrProductUID, opts).then((data) => {
-  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
-}, (error) => {
-  console.error(error);
-});
-
+apiInstance.getDevicePublicKeys(projectOrProductUID, opts).then(
+  (data) => {
+    console.log(
+      "API called successfully. Returned data: " + JSON.stringify(data)
+    );
+  },
+  (error) => {
+    console.error(error);
+  }
+);
 ```
 
 ### Parameters
@@ -957,28 +1011,31 @@ Get Device Sessions
 ### Example
 
 ```javascript
-import * as NotehubJs from '@blues-inc/notehub-js';
+import * as NotehubJs from "@blues-inc/notehub-js";
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure Bearer access token for authorization: personalAccessToken
-let personalAccessToken = defaultClient.authentications['personalAccessToken'];
-personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
+let personalAccessToken = defaultClient.authentications["personalAccessToken"];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
 
 let apiInstance = new NotehubJs.DeviceApi();
-let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
-let deviceUID = dev:000000000000000; // String |
+let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String |
+let deviceUID = "dev:000000000000000"; // String |
 let opts = {
-  'pageSize': 50, // Number |
-  'pageNum': 1, // Number |
-  'startDate': 1628631763, // Number | Start date for filtering results, specified as a Unix timestamp
-  'endDate': 1657894210, // Number | End date for filtering results, specified as a Unix timestamp
-  'firstSync': false // Boolean | When true, filters results to only show first sync sessions
+  pageSize: 50, // Number |
+  pageNum: 1, // Number |
+  startDate: 1628631763, // Number | Start date for filtering results, specified as a Unix timestamp
+  endDate: 1657894210, // Number | End date for filtering results, specified as a Unix timestamp
+  firstSync: false, // Boolean | When true, filters results to only show first sync sessions
 };
-apiInstance.getDeviceSessions(projectOrProductUID, deviceUID, opts).then((data) => {
-  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
-}, (error) => {
-  console.error(error);
-});
-
+apiInstance.getDeviceSessions(projectOrProductUID, deviceUID, opts).then(
+  (data) => {
+    console.log(
+      "API called successfully. Returned data: " + JSON.stringify(data)
+    );
+  },
+  (error) => {
+    console.error(error);
+  }
+);
 ```
 
 ### Parameters
@@ -1015,33 +1072,36 @@ Get Devices of a Project
 ### Example
 
 ```javascript
-import * as NotehubJs from '@blues-inc/notehub-js';
+import * as NotehubJs from "@blues-inc/notehub-js";
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure Bearer access token for authorization: personalAccessToken
-let personalAccessToken = defaultClient.authentications['personalAccessToken'];
-personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
+let personalAccessToken = defaultClient.authentications["personalAccessToken"];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
 
 let apiInstance = new NotehubJs.DeviceApi();
-let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String |
 let opts = {
-  'pageSize': 50, // Number |
-  'pageNum': 1, // Number |
-  'deviceUID': ["null"], // [String] | A Device UID.
-  'tag': ["null"], // [String] | Tag filter
-  'serialNumber': ["null"], // [String] | Serial number filter
-  'fleetUID': ["null"], // [String] |
-  'notecardFirmware': ["null"], // [String] | Firmware version filter
-  'location': ["null"], // [String] | Location filter
-  'hostFirmware': ["null"], // [String] | Host firmware filter
-  'productUID': ["null"], // [String] |
-  'sku': ["null"] // [String] | SKU filter
+  pageSize: 50, // Number |
+  pageNum: 1, // Number |
+  deviceUID: ["null"], // [String] | A Device UID.
+  tag: ["null"], // [String] | Tag filter
+  serialNumber: ["null"], // [String] | Serial number filter
+  fleetUID: ["null"], // [String] |
+  notecardFirmware: ["null"], // [String] | Firmware version filter
+  location: ["null"], // [String] | Location filter
+  hostFirmware: ["null"], // [String] | Host firmware filter
+  productUID: ["null"], // [String] |
+  sku: ["null"], // [String] | SKU filter
 };
-apiInstance.getDevices(projectOrProductUID, opts).then((data) => {
-  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
-}, (error) => {
-  console.error(error);
-});
-
+apiInstance.getDevices(projectOrProductUID, opts).then(
+  (data) => {
+    console.log(
+      "API called successfully. Returned data: " + JSON.stringify(data)
+    );
+  },
+  (error) => {
+    console.error(error);
+  }
+);
 ```
 
 ### Parameters
@@ -1083,33 +1143,36 @@ Get Devices of a Fleet within a Project
 ### Example
 
 ```javascript
-import * as NotehubJs from '@blues-inc/notehub-js';
+import * as NotehubJs from "@blues-inc/notehub-js";
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure Bearer access token for authorization: personalAccessToken
-let personalAccessToken = defaultClient.authentications['personalAccessToken'];
-personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
+let personalAccessToken = defaultClient.authentications["personalAccessToken"];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
 
 let apiInstance = new NotehubJs.DeviceApi();
-let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String |
 let fleetUID = "fleetUID_example"; // String |
 let opts = {
-  'pageSize': 50, // Number |
-  'pageNum': 1, // Number |
-  'deviceUID': ["null"], // [String] | A Device UID.
-  'tag': ["null"], // [String] | Tag filter
-  'serialNumber': ["null"], // [String] | Serial number filter
-  'notecardFirmware': ["null"], // [String] | Firmware version filter
-  'location': ["null"], // [String] | Location filter
-  'hostFirmware': ["null"], // [String] | Host firmware filter
-  'productUID': ["null"], // [String] |
-  'sku': ["null"] // [String] | SKU filter
+  pageSize: 50, // Number |
+  pageNum: 1, // Number |
+  deviceUID: ["null"], // [String] | A Device UID.
+  tag: ["null"], // [String] | Tag filter
+  serialNumber: ["null"], // [String] | Serial number filter
+  notecardFirmware: ["null"], // [String] | Firmware version filter
+  location: ["null"], // [String] | Location filter
+  hostFirmware: ["null"], // [String] | Host firmware filter
+  productUID: ["null"], // [String] |
+  sku: ["null"], // [String] | SKU filter
 };
-apiInstance.getFleetDevices(projectOrProductUID, fleetUID, opts).then((data) => {
-  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
-}, (error) => {
-  console.error(error);
-});
-
+apiInstance.getFleetDevices(projectOrProductUID, fleetUID, opts).then(
+  (data) => {
+    console.log(
+      "API called successfully. Returned data: " + JSON.stringify(data)
+    );
+  },
+  (error) => {
+    console.error(error);
+  }
+);
 ```
 
 ### Parameters
@@ -1151,27 +1214,30 @@ For .qi files, returns the queued up notes. For .db files, returns all notes in 
 ### Example
 
 ```javascript
-import * as NotehubJs from '@blues-inc/notehub-js';
+import * as NotehubJs from "@blues-inc/notehub-js";
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure Bearer access token for authorization: personalAccessToken
-let personalAccessToken = defaultClient.authentications['personalAccessToken'];
-personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
+let personalAccessToken = defaultClient.authentications["personalAccessToken"];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
 
 let apiInstance = new NotehubJs.DeviceApi();
-let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
-let deviceUID = dev:000000000000000; // String |
+let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String |
+let deviceUID = "dev:000000000000000"; // String |
 let notefileID = "notefileID_example"; // String |
 let opts = {
-  'max': 56, // Number | The maximum number of Notes to return in the request.
-  'deleted': true, // Boolean | true to return deleted notes.
-  '_delete': true // Boolean | true to delete the notes returned by the request.
+  max: 56, // Number | The maximum number of Notes to return in the request.
+  deleted: true, // Boolean | true to return deleted notes.
+  _delete: true, // Boolean | true to delete the notes returned by the request.
 };
-apiInstance.getNotefile(projectOrProductUID, deviceUID, notefileID, opts).then((data) => {
-  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
-}, (error) => {
-  console.error(error);
-});
-
+apiInstance.getNotefile(projectOrProductUID, deviceUID, notefileID, opts).then(
+  (data) => {
+    console.log(
+      "API called successfully. Returned data: " + JSON.stringify(data)
+    );
+  },
+  (error) => {
+    console.error(error);
+  }
+);
 ```
 
 ### Parameters
@@ -1207,25 +1273,28 @@ Lists .qi and .db files for the device
 ### Example
 
 ```javascript
-import * as NotehubJs from '@blues-inc/notehub-js';
+import * as NotehubJs from "@blues-inc/notehub-js";
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure Bearer access token for authorization: personalAccessToken
-let personalAccessToken = defaultClient.authentications['personalAccessToken'];
-personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
+let personalAccessToken = defaultClient.authentications["personalAccessToken"];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
 
 let apiInstance = new NotehubJs.DeviceApi();
-let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
-let deviceUID = dev:000000000000000; // String |
+let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String |
+let deviceUID = "dev:000000000000000"; // String |
 let opts = {
-  'files': ["null"], // [String] | One or more files to obtain change information from.
-  'pending': true // Boolean | show only files that are pending sync to the Notecard
+  files: ["null"], // [String] | One or more files to obtain change information from.
+  pending: true, // Boolean | show only files that are pending sync to the Notecard
 };
-apiInstance.listNotefiles(projectOrProductUID, deviceUID, opts).then((data) => {
-  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
-}, (error) => {
-  console.error(error);
-});
-
+apiInstance.listNotefiles(projectOrProductUID, deviceUID, opts).then(
+  (data) => {
+    console.log(
+      "API called successfully. Returned data: " + JSON.stringify(data)
+    );
+  },
+  (error) => {
+    console.error(error);
+  }
+);
 ```
 
 ### Parameters
@@ -1259,22 +1328,27 @@ Provision Device for a Project
 ### Example
 
 ```javascript
-import * as NotehubJs from '@blues-inc/notehub-js';
+import * as NotehubJs from "@blues-inc/notehub-js";
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure Bearer access token for authorization: personalAccessToken
-let personalAccessToken = defaultClient.authentications['personalAccessToken'];
-personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
+let personalAccessToken = defaultClient.authentications["personalAccessToken"];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
 
 let apiInstance = new NotehubJs.DeviceApi();
-let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
-let deviceUID = dev:000000000000000; // String |
+let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String |
+let deviceUID = "dev:000000000000000"; // String |
 let provisionDeviceRequest = new NotehubJs.ProvisionDeviceRequest(); // ProvisionDeviceRequest | Provision a device to a specific ProductUID
-apiInstance.provisionDevice(projectOrProductUID, deviceUID, provisionDeviceRequest).then((data) => {
-  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
-}, (error) => {
-  console.error(error);
-});
-
+apiInstance
+  .provisionDevice(projectOrProductUID, deviceUID, provisionDeviceRequest)
+  .then(
+    (data) => {
+      console.log(
+        "API called successfully. Returned data: " + JSON.stringify(data)
+      );
+    },
+    (error) => {
+      console.error(error);
+    }
+  );
 ```
 
 ### Parameters
@@ -1307,22 +1381,31 @@ Set environment variables of a device
 ### Example
 
 ```javascript
-import * as NotehubJs from '@blues-inc/notehub-js';
+import * as NotehubJs from "@blues-inc/notehub-js";
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure Bearer access token for authorization: personalAccessToken
-let personalAccessToken = defaultClient.authentications['personalAccessToken'];
-personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
+let personalAccessToken = defaultClient.authentications["personalAccessToken"];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
 
 let apiInstance = new NotehubJs.DeviceApi();
-let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
-let deviceUID = dev:000000000000000; // String |
+let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String |
+let deviceUID = "dev:000000000000000"; // String |
 let environmentVariables = new NotehubJs.EnvironmentVariables(); // EnvironmentVariables | Environment variables to be added to the device
-apiInstance.setDeviceEnvironmentVariables(projectOrProductUID, deviceUID, environmentVariables).then((data) => {
-  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
-}, (error) => {
-  console.error(error);
-});
-
+apiInstance
+  .setDeviceEnvironmentVariables(
+    projectOrProductUID,
+    deviceUID,
+    environmentVariables
+  )
+  .then(
+    (data) => {
+      console.log(
+        "API called successfully. Returned data: " + JSON.stringify(data)
+      );
+    },
+    (error) => {
+      console.error(error);
+    }
+  );
 ```
 
 ### Parameters
@@ -1355,19 +1438,30 @@ Set environment variables of a device with device pin authorization
 ### Example
 
 ```javascript
-import * as NotehubJs from '@blues-inc/notehub-js';
+import * as NotehubJs from "@blues-inc/notehub-js";
 
 let apiInstance = new NotehubJs.DeviceApi();
-let productUID = com.blues.bridge:sensors; // String |
-let deviceUID = dev:000000000000000; // String |
+let productUID = "com.blues.bridge:sensors"; // String |
+let deviceUID = "dev:000000000000000"; // String |
 let xAuthToken = "xAuthToken_example"; // String | For accessing endpoints by Device pin.
 let environmentVariables = new NotehubJs.EnvironmentVariables(); // EnvironmentVariables | Environment variables to be added to the device
-apiInstance.setDeviceEnvironmentVariablesByPin(productUID, deviceUID, xAuthToken, environmentVariables).then((data) => {
-  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
-}, (error) => {
-  console.error(error);
-});
-
+apiInstance
+  .setDeviceEnvironmentVariablesByPin(
+    productUID,
+    deviceUID,
+    xAuthToken,
+    environmentVariables
+  )
+  .then(
+    (data) => {
+      console.log(
+        "API called successfully. Returned data: " + JSON.stringify(data)
+      );
+    },
+    (error) => {
+      console.error(error);
+    }
+  );
 ```
 
 ### Parameters
@@ -1401,22 +1495,25 @@ Send a signal from Notehub to a Notecard.
 ### Example
 
 ```javascript
-import * as NotehubJs from '@blues-inc/notehub-js';
+import * as NotehubJs from "@blues-inc/notehub-js";
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure Bearer access token for authorization: personalAccessToken
-let personalAccessToken = defaultClient.authentications['personalAccessToken'];
-personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
+let personalAccessToken = defaultClient.authentications["personalAccessToken"];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
 
 let apiInstance = new NotehubJs.DeviceApi();
-let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
-let deviceUID = dev:000000000000000; // String |
+let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String |
+let deviceUID = "dev:000000000000000"; // String |
 let body = new NotehubJs.Body(); // Body | Body or payload of signal to be sent to the device
-apiInstance.signalDevice(projectOrProductUID, deviceUID, body).then((data) => {
-  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
-}, (error) => {
-  console.error(error);
-});
-
+apiInstance.signalDevice(projectOrProductUID, deviceUID, body).then(
+  (data) => {
+    console.log(
+      "API called successfully. Returned data: " + JSON.stringify(data)
+    );
+  },
+  (error) => {
+    console.error(error);
+  }
+);
 ```
 
 ### Parameters
@@ -1449,24 +1546,27 @@ Update a note in a .db or .qi notefile
 ### Example
 
 ```javascript
-import * as NotehubJs from '@blues-inc/notehub-js';
+import * as NotehubJs from "@blues-inc/notehub-js";
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure Bearer access token for authorization: personalAccessToken
-let personalAccessToken = defaultClient.authentications['personalAccessToken'];
-personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
+let personalAccessToken = defaultClient.authentications["personalAccessToken"];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
 
 let apiInstance = new NotehubJs.DeviceApi();
-let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
-let deviceUID = dev:000000000000000; // String |
+let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String |
+let deviceUID = "dev:000000000000000"; // String |
 let notefileID = "notefileID_example"; // String |
 let noteID = "noteID_example"; // String |
 let noteInput = new NotehubJs.NoteInput(); // NoteInput | Body or payload of note to be added to the device
-apiInstance.updateDbNote(projectOrProductUID, deviceUID, notefileID, noteID, noteInput).then(() => {
-  console.log('API called successfully.');
-}, (error) => {
-  console.error(error);
-});
-
+apiInstance
+  .updateDbNote(projectOrProductUID, deviceUID, notefileID, noteID, noteInput)
+  .then(
+    () => {
+      console.log("API called successfully.");
+    },
+    (error) => {
+      console.error(error);
+    }
+  );
 ```
 
 ### Parameters

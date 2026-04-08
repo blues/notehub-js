@@ -35,7 +35,6 @@ let {{{name}}} = defaultClient.authentications['{{{name}}}'];
 {{{name}}}.password = 'YOUR PASSWORD';
 {{/isBasicBasic}}
 {{#isBasicBearer}}
-// Configure Bearer{{#bearerFormat}} ({{{.}}}){{/bearerFormat}} access token for authorization: {{{name}}}
 let {{{name}}} = defaultClient.authentications['{{{name}}}'];
 {{{name}}}.accessToken = "YOUR ACCESS TOKEN"
 {{/isBasicBearer}}
