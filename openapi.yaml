@@ -194,7 +194,7 @@ paths:
   '/v1/billing-accounts/{billingAccountUID}/balance-history':
     get:
       operationId: GetBillingAccountBalanceHistory
-      description: 'Get Billing Account Balance history, only enterprise supported'
+      description: Get Billing Account Balance history
       parameters:
         - $ref: '#/components/parameters/billingAccountUIDParam'
         - $ref: '#/components/parameters/startDateParam'
