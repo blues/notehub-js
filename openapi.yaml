@@ -1607,6 +1607,33 @@ paths:
       tags:
         - project
   '/v1/projects/{projectOrProductUID}/firmware/{firmwareType}/{filename}':
+    delete:
+      operationId: DeleteFirmware
+      description: |
+        Delete a host firmware binary. The filename must be the full stored filename including the timestamp suffix (e.g. test$20260324190911.bin) as returned by the firmware upload or list endpoints.
+      parameters:
+        - $ref: '#/components/parameters/projectOrProductUIDParam'
+        - name: firmwareType
+          in: path
+          required: true
+          schema:
+            type: string
+            enum:
+              - host
+        - name: filename
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Firmware deleted successfully
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - project
     get:
       operationId: DownloadFirmware
       description: Download firmware binary
@@ -1626,6 +1653,44 @@ paths:
               schema:
                 type: string
                 format: binary
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - project
+    post:
+      operationId: UpdateFirmware
+      description: |
+        Update the metadata of an existing host firmware entry. The filename must be the full stored filename including the timestamp suffix (e.g. test$20260324190911.bin) as returned by the firmware upload or list endpoints.
+      parameters:
+        - $ref: '#/components/parameters/projectOrProductUIDParam'
+        - name: firmwareType
+          in: path
+          required: true
+          schema:
+            type: string
+            enum:
+              - host
+        - name: filename
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Firmware metadata fields to update. All fields are optional; only provided fields will be updated.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateHostFirmwareRequest'
+      responses:
+        '200':
+          description: Update successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FirmwareInfo'
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
@@ -5994,6 +6059,21 @@ components:
         to:
           type: string
       additionalProperties: false
+    UpdateHostFirmwareRequest:
+      description: |
+        Request body for updating host firmware metadata. All fields are optional; only provided fields will be updated.
+      type: object
+      properties:
+        info:
+          description: Arbitrary JSON metadata associated with this firmware entry.
+          type: object
+          additionalProperties: true
+        notes:
+          description: Notes describing this firmware version.
+          type: string
+        version:
+          description: The firmware version string.
+          type: string
     UploadMetadata:
       type: object
       properties:
