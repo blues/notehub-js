@@ -5225,6 +5225,16 @@ components:
           type: integer
         uid:
           type: string
+        usage_scope:
+          description: 'For usage monitors: the scope of aggregation. Supported values are "device" and "fleet".'
+          type: string
+        usage_type:
+          description: 'For usage monitors: the type of data usage to monitor. Supported values are "cellular" and "satellite".'
+          type: string
+        usage_window:
+          description: 'For usage monitors: the rolling time window in days to sum usage over (e.g. 30 for 30 days).'
+          type: integer
+          format: int32
     MqttRoute:
       type: object
       properties:
