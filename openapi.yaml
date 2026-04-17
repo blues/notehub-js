@@ -1913,6 +1913,8 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        resourceBase: 'blues:resources:app:APPSERIAL:settings'
     get:
       operationId: DownloadFirmware
       description: Download firmware binary
@@ -1938,6 +1940,8 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        resourceBase: 'blues:resources:app:APPSERIAL:settings'
     post:
       operationId: UpdateFirmware
       description: |
@@ -1976,6 +1980,8 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        resourceBase: 'blues:resources:app:APPSERIAL:settings'
     put:
       operationId: UploadFirmware
       description: Upload firmware binary
