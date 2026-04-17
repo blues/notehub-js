@@ -267,6 +267,76 @@ paths:
         - personalAccessToken: []
       tags:
         - device
+  '/v1/products/{productUID}/devices/{deviceUID}/webhook-event':
+    post:
+      operationId: CreateLegacyWebhookEvent
+      description: 'Legacy endpoint for sending an event from a webhook, associated with the given device (provisioning it if necessary). The request body is a Note-shaped object containing the notefile name, body, and optional payload.'
+      parameters:
+        - $ref: '#/components/parameters/productUIDParam'
+        - $ref: '#/components/parameters/deviceUIDParam'
+      requestBody:
+        description: 'A Note-shaped event with notefile name, JSON body, and optional base64-encoded payload.'
+        required: true
+        content:
+          application/json:
+            example:
+              body:
+                key: value
+              file: data.qo
+              payload: SGVsbG8sIFdvcmxkIQ==
+            schema:
+              type: object
+              properties:
+                body:
+                  description: Arbitrary JSON event body.
+                  type: object
+                  additionalProperties: true
+                file:
+                  description: The notefile to which the event should be written.
+                  type: string
+                payload:
+                  description: Optional base64-encoded binary payload.
+                  type: string
+              additionalProperties: true
+      responses:
+        '200':
+          description: Event created successfully
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken:
+            - create
+      tags:
+        - webhook
+      x-custom-attributes:
+        resourceBase: 'blues:resources:app:APPSERIAL:notes'
+  '/v1/products/{productUID}/devices/{deviceUID}/webhook-session':
+    put:
+      operationId: UpdateLegacyWebhookSession
+      description: Legacy endpoint for opening or updating a webhook session for the given device (provisioning the device if necessary). Used by external services that need to maintain a callable session against a device behind a webhook.
+      parameters:
+        - $ref: '#/components/parameters/productUIDParam'
+        - $ref: '#/components/parameters/deviceUIDParam'
+      requestBody:
+        description: Optional session metadata.
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: Webhook session updated successfully
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken:
+            - create
+      tags:
+        - webhook
+      x-custom-attributes:
+        resourceBase: 'blues:resources:app:APPSERIAL:notes'
   '/v1/products/{productUID}/ext-devices/{deviceUID}/event':
     post:
       operationId: CreateEventExtDevice
@@ -366,6 +436,111 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        resourceBase: 'blues:resources:app:APPSERIAL:settings'
+  '/v1/products/{productUID}/webhooks/{webhookUID}/devices/{deviceUID}/event':
+    post:
+      operationId: CreateWebhookDeviceEventByProduct
+      description: 'Sends an event to be processed by the specified webhook, addressed by productUID, associated with the given device (provisioning it if necessary). The entire request body becomes the event body. The webhook''s configured JSONata transform, if any, is applied before routing.'
+      parameters:
+        - $ref: '#/components/parameters/productUIDParam'
+        - $ref: '#/components/parameters/webhookUIDParam'
+        - $ref: '#/components/parameters/deviceUIDParam'
+      requestBody:
+        description: The event body (arbitrary JSON)
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: Event created successfully
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken:
+            - create
+      tags:
+        - webhook
+      x-custom-attributes:
+        resourceBase: 'blues:resources:app:APPSERIAL:notes'
+  '/v1/products/{productUID}/webhooks/{webhookUID}/event':
+    post:
+      operationId: CreateWebhookEventByProduct
+      description: 'Sends an event to be processed by the specified webhook, addressed by productUID. The entire request body becomes the event body. The webhook''s configured JSONata transform, if any, is applied before routing. The event is not associated with a specific device.'
+      parameters:
+        - $ref: '#/components/parameters/productUIDParam'
+        - $ref: '#/components/parameters/webhookUIDParam'
+      requestBody:
+        description: The event body (arbitrary JSON)
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: Event created successfully
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken:
+            - create
+      tags:
+        - webhook
+      x-custom-attributes:
+        resourceBase: 'blues:resources:app:APPSERIAL:notes'
+  '/v1/products/{productUID}/webhooks/{webhookUID}/settings':
+    get:
+      operationId: GetWebhookSettingsByProduct
+      description: 'Retrieves the configuration settings for the specified webhook, addressed by productUID.'
+      parameters:
+        - $ref: '#/components/parameters/productUIDParam'
+        - $ref: '#/components/parameters/webhookUIDParam'
+      responses:
+        '200':
+          description: Webhook settings retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhookSettings'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken:
+            - update
+      tags:
+        - webhook
+      x-custom-attributes:
+        resourceBase: 'blues:resources:app:APPSERIAL:settings'
+    put:
+      operationId: UpdateWebhookSettingsByProduct
+      description: 'Updates the configuration settings for the specified webhook, addressed by productUID. Update body will completely replace the existing settings.'
+      parameters:
+        - $ref: '#/components/parameters/productUIDParam'
+        - $ref: '#/components/parameters/webhookUIDParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              disabled: false
+              transform: '{"device":body.end_device_ids.dev_eui,"sn":body.end_device_ids.device_id,"body":body.uplink_message.decoded_payload,"details":body}'
+            schema:
+              $ref: '#/components/schemas/WebhookSettings'
+      responses:
+        '200':
+          description: Webhook settings updated successfully
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken:
+            - update
+      tags:
+        - webhook
       x-custom-attributes:
         resourceBase: 'blues:resources:app:APPSERIAL:settings'
   /v1/projects:
@@ -3212,111 +3387,6 @@ paths:
           $ref: '#/components/responses/ErrorResponse'
       security:
         - personalAccessToken: []
-      tags:
-        - webhook
-      x-custom-attributes:
-        resourceBase: 'blues:resources:app:APPSERIAL:settings'
-  '/v1/projects/{projectOrProductUID}/webhooks/{webhookUID}/devices/{deviceUID}/event':
-    post:
-      operationId: CreateWebhookDeviceEvent
-      description: 'Sends an event to be processed by the specified webhook, associated with the given device (provisioning it if necessary). The entire request body becomes the event body. The webhook''s configured JSONata transform, if any, is applied before routing.'
-      parameters:
-        - $ref: '#/components/parameters/projectOrProductUIDParam'
-        - $ref: '#/components/parameters/webhookUIDParam'
-        - $ref: '#/components/parameters/deviceUIDParam'
-      requestBody:
-        description: The event body (arbitrary JSON)
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              additionalProperties: true
-      responses:
-        '200':
-          description: Event created successfully
-        default:
-          $ref: '#/components/responses/ErrorResponse'
-      security:
-        - personalAccessToken:
-            - create
-      tags:
-        - webhook
-      x-custom-attributes:
-        resourceBase: 'blues:resources:app:APPSERIAL:notes'
-  '/v1/projects/{projectOrProductUID}/webhooks/{webhookUID}/event':
-    post:
-      operationId: CreateWebhookEvent
-      description: 'Sends an event to be processed by the specified webhook. The entire request body becomes the event body. The webhook''s configured JSONata transform, if any, is applied before routing. The event is not associated with a specific device.'
-      parameters:
-        - $ref: '#/components/parameters/projectOrProductUIDParam'
-        - $ref: '#/components/parameters/webhookUIDParam'
-      requestBody:
-        description: The event body (arbitrary JSON)
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              additionalProperties: true
-      responses:
-        '200':
-          description: Event created successfully
-        default:
-          $ref: '#/components/responses/ErrorResponse'
-      security:
-        - personalAccessToken:
-            - create
-      tags:
-        - webhook
-      x-custom-attributes:
-        resourceBase: 'blues:resources:app:APPSERIAL:notes'
-  '/v1/projects/{projectOrProductUID}/webhooks/{webhookUID}/settings':
-    get:
-      operationId: GetWebhookSettings
-      description: Retrieves the configuration settings for the specified webhook
-      parameters:
-        - $ref: '#/components/parameters/projectOrProductUIDParam'
-        - $ref: '#/components/parameters/webhookUIDParam'
-      responses:
-        '200':
-          description: Webhook settings retrieved successfully
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/WebhookSettings'
-        default:
-          $ref: '#/components/responses/ErrorResponse'
-      security:
-        - personalAccessToken:
-            - update
-      tags:
-        - webhook
-      x-custom-attributes:
-        resourceBase: 'blues:resources:app:APPSERIAL:settings'
-    put:
-      operationId: UpdateWebhookSettings
-      description: Updates the configuration settings for the specified webhook. Update body will completely replace the existing settings.
-      parameters:
-        - $ref: '#/components/parameters/projectOrProductUIDParam'
-        - $ref: '#/components/parameters/webhookUIDParam'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            example:
-              disabled: false
-              transform: '{"device":body.end_device_ids.dev_eui,"sn":body.end_device_ids.device_id,"body":body.uplink_message.decoded_payload,"details":body}'
-            schema:
-              $ref: '#/components/schemas/WebhookSettings'
-      responses:
-        '200':
-          description: Webhook settings updated successfully
-        default:
-          $ref: '#/components/responses/ErrorResponse'
-      security:
-        - personalAccessToken:
-            - update
       tags:
         - webhook
       x-custom-attributes:
