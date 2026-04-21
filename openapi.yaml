@@ -5084,8 +5084,8 @@ components:
         job_uid:
           description: Unique identifier for the job
           type: string
-        last_run:
-          description: Unix timestamp when the job was last run
+        last_run_completed:
+          description: Unix timestamp when the most recent run completed (0 if still in progress)
           type: integer
           format: int64
           example: 1775252922
@@ -5093,6 +5093,11 @@ components:
           description: Status of the most recent job run
           type: string
           example: dry run completed successfully
+        last_run_submitted:
+          description: Unix timestamp when the most recent run was submitted
+          type: integer
+          format: int64
+          example: 1775252900
         name:
           description: Human-readable job name
           type: string
