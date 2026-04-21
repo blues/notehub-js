@@ -194,7 +194,7 @@ paths:
   '/v1/billing-accounts/{billingAccountUID}/balance-history':
     get:
       operationId: GetBillingAccountBalanceHistory
-      description: 'Get Billing Account Balance history, only enterprise supported.'
+      description: Get Billing Account Balance history
       parameters:
         - $ref: '#/components/parameters/billingAccountUIDParam'
         - $ref: '#/components/parameters/startDateParam'
@@ -1607,6 +1607,33 @@ paths:
       tags:
         - project
   '/v1/projects/{projectOrProductUID}/firmware/{firmwareType}/{filename}':
+    delete:
+      operationId: DeleteFirmware
+      description: |
+        Delete a host firmware binary. The filename must be the full stored filename including the timestamp suffix (e.g. test$20260324190911.bin) as returned by the firmware upload or list endpoints.
+      parameters:
+        - $ref: '#/components/parameters/projectOrProductUIDParam'
+        - name: firmwareType
+          in: path
+          required: true
+          schema:
+            type: string
+            enum:
+              - host
+        - name: filename
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Firmware deleted successfully
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - project
     get:
       operationId: DownloadFirmware
       description: Download firmware binary
@@ -1626,6 +1653,44 @@ paths:
               schema:
                 type: string
                 format: binary
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - project
+    post:
+      operationId: UpdateFirmware
+      description: |
+        Update the metadata of an existing host firmware entry. The filename must be the full stored filename including the timestamp suffix (e.g. test$20260324190911.bin) as returned by the firmware upload or list endpoints.
+      parameters:
+        - $ref: '#/components/parameters/projectOrProductUIDParam'
+        - name: firmwareType
+          in: path
+          required: true
+          schema:
+            type: string
+            enum:
+              - host
+        - name: filename
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Firmware metadata fields to update. All fields are optional; only provided fields will be updated.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateHostFirmwareRequest'
+      responses:
+        '200':
+          description: Update successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FirmwareInfo'
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
@@ -2166,12 +2231,39 @@ paths:
       tags:
         - jobs
   '/v1/projects/{projectOrProductUID}/jobs/runs/{reportUID}':
+    delete:
+      operationId: DeleteJobRun
+      description: Delete the results of a job run
+      parameters:
+        - $ref: '#/components/parameters/projectOrProductUIDParam'
+        - $ref: '#/components/parameters/reportUIDParam'
+      responses:
+        '200':
+          description: Job run deleted successfully
+        '404':
+          description: Run not found
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - jobs
     get:
       operationId: GetJobRun
       description: Get the result of a job execution
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/reportUIDParam'
+        - name: view
+          in: query
+          description: 'Controls the level of detail returned: ''summary'' returns metadata only, ''detail'' returns the full result payload'
+          required: false
+          schema:
+            type: string
+            default: summary
+            enum:
+              - summary
+              - detail
       responses:
         '200':
           $ref: '#/components/responses/GetJobRunResponse'
@@ -4992,6 +5084,20 @@ components:
         job_uid:
           description: Unique identifier for the job
           type: string
+        last_run_completed:
+          description: Unix timestamp when the most recent run completed (0 if still in progress)
+          type: integer
+          format: int64
+          example: 1775252922
+        last_run_status:
+          description: Status of the most recent job run
+          type: string
+          example: dry run completed successfully
+        last_run_submitted:
+          description: Unix timestamp when the most recent run was submitted
+          type: integer
+          format: int64
+          example: 1775252900
         name:
           description: Human-readable job name
           type: string
@@ -5994,6 +6100,21 @@ components:
         to:
           type: string
       additionalProperties: false
+    UpdateHostFirmwareRequest:
+      description: |
+        Request body for updating host firmware metadata. All fields are optional; only provided fields will be updated.
+      type: object
+      properties:
+        info:
+          description: Arbitrary JSON metadata associated with this firmware entry.
+          type: object
+          additionalProperties: true
+        notes:
+          description: Notes describing this firmware version.
+          type: string
+        version:
+          description: The firmware version string.
+          type: string
     UploadMetadata:
       type: object
       properties:
