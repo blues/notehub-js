@@ -17,7 +17,7 @@ import DataUsage from "./DataUsage";
 /**
  * The CellularPlan model module.
  * @module model/CellularPlan
- * @version 6.1.0
+ * @version 6.2.0
  */
 class CellularPlan {
   /**

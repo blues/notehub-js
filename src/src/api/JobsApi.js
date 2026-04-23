@@ -25,7 +25,7 @@ import RunJob200Response from "../model/RunJob200Response";
 /**
  * Jobs service.
  * @module api/JobsApi
- * @version 6.1.0
+ * @version 6.2.0
  */
 export default class JobsApi {
   /**

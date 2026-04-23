@@ -17,7 +17,7 @@ import GetBillingAccountBalanceHistory200ResponseDataInner from "./GetBillingAcc
 /**
  * The GetBillingAccountBalanceHistory200Response model module.
  * @module model/GetBillingAccountBalanceHistory200Response
- * @version 6.1.0
+ * @version 6.2.0
  */
 class GetBillingAccountBalanceHistory200Response {
   /**

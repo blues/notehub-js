@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The DeviceUsage model module.
  * @module model/DeviceUsage
- * @version 6.1.0
+ * @version 6.2.0
  */
 class DeviceUsage {
   /**

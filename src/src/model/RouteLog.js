@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The RouteLog model module.
  * @module model/RouteLog
- * @version 6.1.0
+ * @version 6.2.0
  */
 class RouteLog {
   /**

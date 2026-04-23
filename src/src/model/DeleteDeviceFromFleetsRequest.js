@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The DeleteDeviceFromFleetsRequest model module.
  * @module model/DeleteDeviceFromFleetsRequest
- * @version 6.1.0
+ * @version 6.2.0
  */
 class DeleteDeviceFromFleetsRequest {
   /**

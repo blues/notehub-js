@@ -146,6 +146,7 @@ import ThingworxRoute from "./model/ThingworxRoute";
 import TowerLocation from "./model/TowerLocation";
 import TwilioRoute from "./model/TwilioRoute";
 import UpdateFleetRequest from "./model/UpdateFleetRequest";
+import UpdateHostFirmwareRequest from "./model/UpdateHostFirmwareRequest";
 import UploadMetadata from "./model/UploadMetadata";
 import UsageData from "./model/UsageData";
 import UsageEventsData from "./model/UsageEventsData";
@@ -198,7 +199,7 @@ import WebhookApi from "./api/WebhookApi";
  * </pre>
  * </p>
  * @module index
- * @version 6.1.0
+ * @version 6.2.0
  */
 export {
   /**
@@ -1010,6 +1011,12 @@ export {
    * @property {module:model/UpdateFleetRequest}
    */
   UpdateFleetRequest,
+
+  /**
+   * The UpdateHostFirmwareRequest model constructor.
+   * @property {module:model/UpdateHostFirmwareRequest}
+   */
+  UpdateHostFirmwareRequest,
 
   /**
    * The UploadMetadata model constructor.

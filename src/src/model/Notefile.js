@@ -17,7 +17,7 @@ import Note from "./Note";
 /**
  * The Notefile model module.
  * @module model/Notefile
- * @version 6.1.0
+ * @version 6.2.0
  */
 class Notefile {
   /**
