@@ -19,38 +19,41 @@ Get Events of a Project
 ### Example
 
 ```javascript
-import * as NotehubJs from '@blues-inc/notehub-js';
+import * as NotehubJs from "@blues-inc/notehub-js";
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure Bearer access token for authorization: personalAccessToken
-let personalAccessToken = defaultClient.authentications['personalAccessToken'];
-personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
+let personalAccessToken = defaultClient.authentications["personalAccessToken"];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
 
 let apiInstance = new NotehubJs.EventApi();
-let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String |
 let opts = {
-  'pageSize': 50, // Number |
-  'pageNum': 1, // Number |
-  'deviceUID': ["null"], // [String] | A Device UID.
-  'sortBy': "'captured'", // String |
-  'sortOrder': "'asc'", // String |
-  'startDate': 1628631763, // Number | Start date for filtering results, specified as a Unix timestamp
-  'endDate': 1657894210, // Number | End date for filtering results, specified as a Unix timestamp
-  'dateType': uploaded, // String | Which date to filter on, either 'captured' or 'uploaded'.  This will apply to the startDate and endDate parameters
-  'systemFilesOnly': true, // Boolean |
-  'files': _health.qo, data.qo, // String |
-  'format': "'json'", // String | Response format (JSON or CSV)
-  'serialNumber': ["null"], // [String] | Filter by Serial Number
-  'fleetUID': ["null"], // [String] | Filter by Fleet UID
-  'sessionUID': ["null"], // [String] | Filter by Session UID
-  'eventUID': ["null"], // [String] | Filter by Event UID
-  'selectFields': "selectFields_example" // String | Comma-separated list of fields to select from JSON payload (e.g., \"field1,field2.subfield,field3\"), this will reflect the columns in the CSV output.
+  pageSize: 50, // Number |
+  pageNum: 1, // Number |
+  deviceUID: ["null"], // [String] | A Device UID.
+  sortBy: "'captured'", // String |
+  sortOrder: "'asc'", // String |
+  startDate: 1628631763, // Number | Start date for filtering results, specified as a Unix timestamp
+  endDate: 1657894210, // Number | End date for filtering results, specified as a Unix timestamp
+  dateType: "uploaded", // String | Which date to filter on, either 'captured' or 'uploaded'.  This will apply to the startDate and endDate parameters
+  systemFilesOnly: true, // Boolean |
+  files: "_health.qo, data.qo", // String |
+  format: "'json'", // String | Response format (JSON or CSV)
+  serialNumber: ["null"], // [String] | Filter by Serial Number
+  fleetUID: ["null"], // [String] | Filter by Fleet UID
+  sessionUID: ["null"], // [String] | Filter by Session UID
+  eventUID: ["null"], // [String] | Filter by Event UID
+  selectFields: "selectFields_example", // String | Comma-separated list of fields to select from JSON payload (e.g., \"field1,field2.subfield,field3\"), this will reflect the columns in the CSV output.
 };
-apiInstance.getEvents(projectOrProductUID, opts).then((data) => {
-  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
-}, (error) => {
-  console.error(error);
-});
-
+apiInstance.getEvents(projectOrProductUID, opts).then(
+  (data) => {
+    console.log(
+      "API called successfully. Returned data: " + JSON.stringify(data)
+    );
+  },
+  (error) => {
+    console.error(error);
+  }
+);
 ```
 
 ### Parameters
@@ -97,29 +100,32 @@ Get Events of a Project by cursor
 ### Example
 
 ```javascript
-import * as NotehubJs from '@blues-inc/notehub-js';
+import * as NotehubJs from "@blues-inc/notehub-js";
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure Bearer access token for authorization: personalAccessToken
-let personalAccessToken = defaultClient.authentications['personalAccessToken'];
-personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
+let personalAccessToken = defaultClient.authentications["personalAccessToken"];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
 
 let apiInstance = new NotehubJs.EventApi();
-let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String |
 let opts = {
-  'limit': 50, // Number |
-  'cursor': "cursor_example", // String | A cursor, which can be obtained from the `next_cursor` value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included.
-  'sortOrder': "'asc'", // String |
-  'systemFilesOnly': true, // Boolean |
-  'files': _health.qo, data.qo, // String |
-  'fleetUID': "fleetUID_example", // String |
-  'deviceUID': ["null"] // [String] | A Device UID.
+  limit: 50, // Number |
+  cursor: "cursor_example", // String | A cursor, which can be obtained from the `next_cursor` value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included.
+  sortOrder: "'asc'", // String |
+  systemFilesOnly: true, // Boolean |
+  files: "_health.qo, data.qo", // String |
+  fleetUID: "fleetUID_example", // String |
+  deviceUID: ["null"], // [String] | A Device UID.
 };
-apiInstance.getEventsByCursor(projectOrProductUID, opts).then((data) => {
-  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
-}, (error) => {
-  console.error(error);
-});
-
+apiInstance.getEventsByCursor(projectOrProductUID, opts).then(
+  (data) => {
+    console.log(
+      "API called successfully. Returned data: " + JSON.stringify(data)
+    );
+  },
+  (error) => {
+    console.error(error);
+  }
+);
 ```
 
 ### Parameters
@@ -157,38 +163,41 @@ Get Events of a Fleet
 ### Example
 
 ```javascript
-import * as NotehubJs from '@blues-inc/notehub-js';
+import * as NotehubJs from "@blues-inc/notehub-js";
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure Bearer access token for authorization: personalAccessToken
-let personalAccessToken = defaultClient.authentications['personalAccessToken'];
-personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
+let personalAccessToken = defaultClient.authentications["personalAccessToken"];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
 
 let apiInstance = new NotehubJs.EventApi();
-let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String |
 let fleetUID = "fleetUID_example"; // String |
 let opts = {
-  'pageSize': 50, // Number |
-  'pageNum': 1, // Number |
-  'deviceUID': ["null"], // [String] | A Device UID.
-  'sortBy': "'captured'", // String |
-  'sortOrder': "'asc'", // String |
-  'startDate': 1628631763, // Number | Start date for filtering results, specified as a Unix timestamp
-  'endDate': 1657894210, // Number | End date for filtering results, specified as a Unix timestamp
-  'dateType': uploaded, // String | Which date to filter on, either 'captured' or 'uploaded'.  This will apply to the startDate and endDate parameters
-  'systemFilesOnly': true, // Boolean |
-  'files': _health.qo, data.qo, // String |
-  'format': "'json'", // String | Response format (JSON or CSV)
-  'serialNumber': ["null"], // [String] | Filter by Serial Number
-  'sessionUID': ["null"], // [String] | Filter by Session UID
-  'eventUID': ["null"], // [String] | Filter by Event UID
-  'selectFields': "selectFields_example" // String | Comma-separated list of fields to select from JSON payload (e.g., \"field1,field2.subfield,field3\"), this will reflect the columns in the CSV output.
+  pageSize: 50, // Number |
+  pageNum: 1, // Number |
+  deviceUID: ["null"], // [String] | A Device UID.
+  sortBy: "'captured'", // String |
+  sortOrder: "'asc'", // String |
+  startDate: 1628631763, // Number | Start date for filtering results, specified as a Unix timestamp
+  endDate: 1657894210, // Number | End date for filtering results, specified as a Unix timestamp
+  dateType: "uploaded", // String | Which date to filter on, either 'captured' or 'uploaded'.  This will apply to the startDate and endDate parameters
+  systemFilesOnly: true, // Boolean |
+  files: "_health.qo, data.qo", // String |
+  format: "'json'", // String | Response format (JSON or CSV)
+  serialNumber: ["null"], // [String] | Filter by Serial Number
+  sessionUID: ["null"], // [String] | Filter by Session UID
+  eventUID: ["null"], // [String] | Filter by Event UID
+  selectFields: "selectFields_example", // String | Comma-separated list of fields to select from JSON payload (e.g., \"field1,field2.subfield,field3\"), this will reflect the columns in the CSV output.
 };
-apiInstance.getFleetEvents(projectOrProductUID, fleetUID, opts).then((data) => {
-  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
-}, (error) => {
-  console.error(error);
-});
-
+apiInstance.getFleetEvents(projectOrProductUID, fleetUID, opts).then(
+  (data) => {
+    console.log(
+      "API called successfully. Returned data: " + JSON.stringify(data)
+    );
+  },
+  (error) => {
+    console.error(error);
+  }
+);
 ```
 
 ### Parameters
@@ -235,31 +244,34 @@ Get Events of a Fleet by cursor
 ### Example
 
 ```javascript
-import * as NotehubJs from '@blues-inc/notehub-js';
+import * as NotehubJs from "@blues-inc/notehub-js";
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure Bearer access token for authorization: personalAccessToken
-let personalAccessToken = defaultClient.authentications['personalAccessToken'];
-personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
+let personalAccessToken = defaultClient.authentications["personalAccessToken"];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
 
 let apiInstance = new NotehubJs.EventApi();
-let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
+let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String |
 let fleetUID = "fleetUID_example"; // String |
 let opts = {
-  'limit': 50, // Number |
-  'cursor': "cursor_example", // String | A cursor, which can be obtained from the `next_cursor` value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included.
-  'sortOrder': "'asc'", // String |
-  'systemFilesOnly': true, // Boolean |
-  'files': _health.qo, data.qo, // String |
-  'deviceUID': ["null"], // [String] | A Device UID.
-  'startDate': 1628631763, // Number | Start date for filtering results, specified as a Unix timestamp
-  'endDate': 1657894210 // Number | End date for filtering results, specified as a Unix timestamp
+  limit: 50, // Number |
+  cursor: "cursor_example", // String | A cursor, which can be obtained from the `next_cursor` value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included.
+  sortOrder: "'asc'", // String |
+  systemFilesOnly: true, // Boolean |
+  files: "_health.qo, data.qo", // String |
+  deviceUID: ["null"], // [String] | A Device UID.
+  startDate: 1628631763, // Number | Start date for filtering results, specified as a Unix timestamp
+  endDate: 1657894210, // Number | End date for filtering results, specified as a Unix timestamp
 };
-apiInstance.getFleetEventsByCursor(projectOrProductUID, fleetUID, opts).then((data) => {
-  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
-}, (error) => {
-  console.error(error);
-});
-
+apiInstance.getFleetEventsByCursor(projectOrProductUID, fleetUID, opts).then(
+  (data) => {
+    console.log(
+      "API called successfully. Returned data: " + JSON.stringify(data)
+    );
+  },
+  (error) => {
+    console.error(error);
+  }
+);
 ```
 
 ### Parameters
@@ -299,21 +311,24 @@ Get Route Logs by Event UID
 ### Example
 
 ```javascript
-import * as NotehubJs from '@blues-inc/notehub-js';
+import * as NotehubJs from "@blues-inc/notehub-js";
 let defaultClient = NotehubJs.ApiClient.instance;
-// Configure Bearer access token for authorization: personalAccessToken
-let personalAccessToken = defaultClient.authentications['personalAccessToken'];
-personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
+let personalAccessToken = defaultClient.authentications["personalAccessToken"];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
 
 let apiInstance = new NotehubJs.EventApi();
-let projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // String |
-let eventUID = 4506f411-dea6-44a0-9743-1130f57d7747; // String |
-apiInstance.getRouteLogsByEvent(projectOrProductUID, eventUID).then((data) => {
-  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
-}, (error) => {
-  console.error(error);
-});
-
+let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String |
+let eventUID = "4506f411-dea6-44a0-9743-1130f57d7747"; // String |
+apiInstance.getRouteLogsByEvent(projectOrProductUID, eventUID).then(
+  (data) => {
+    console.log(
+      "API called successfully. Returned data: " + JSON.stringify(data)
+    );
+  },
+  (error) => {
+    console.error(error);
+  }
+);
 ```
 
 ### Parameters

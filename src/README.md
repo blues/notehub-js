@@ -100,27 +100,30 @@ module: {
 Please follow the [installation](#installation) instruction and execute the following JS code:
 
 ```javascript
-var NotehubJs = require('@blues-inc/notehub-js');
+var NotehubJs = require("@blues-inc/notehub-js");
 
 var defaultClient = NotehubJs.ApiClient.instance;
 // Configure Bearer access token for authorization: personalAccessToken
-var personalAccessToken = defaultClient.authentications['personalAccessToken'];
-personalAccessToken.accessToken = "YOUR ACCESS TOKEN"
+var personalAccessToken = defaultClient.authentications["personalAccessToken"];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
 
-var api = new NotehubJs.AlertApi()
-var projectOrProductUID = app:2606f411-dea6-44a0-9743-1130f57d77d8; // {String}
+var api = new NotehubJs.AlertApi();
+var projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // {String}
 var opts = {
-  'pageSize': 50, // {Number}
-  'pageNum': 1, // {Number}
-  'monitorUID': "monitorUID_example" // {String}
+  pageSize: 50, // {Number}
+  pageNum: 1, // {Number}
+  monitorUID: "monitorUID_example", // {String}
 };
-api.getAlerts(projectOrProductUID, opts).then(function(data) {
-  console.log('API called successfully. Returned data: ' + JSON.stringify(data));
-}, function(error) {
-  console.error(error);
-});
-
-
+api.getAlerts(projectOrProductUID, opts).then(
+  function (data) {
+    console.log(
+      "API called successfully. Returned data: " + JSON.stringify(data)
+    );
+  },
+  function (error) {
+    console.error(error);
+  }
+);
 ```
 
 ## Documentation for API Endpoints
