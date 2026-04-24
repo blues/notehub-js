@@ -18,7 +18,7 @@ import RouteTransformSettings from "./RouteTransformSettings";
 /**
  * The SlackRoute model module.
  * @module model/SlackRoute
- * @version 6.1.0
+ * @version 6.2.0
  */
 class SlackRoute {
   /**

@@ -36,7 +36,7 @@ import SignalDevice200Response from "../model/SignalDevice200Response";
 /**
  * Device service.
  * @module api/DeviceApi
- * @version 6.1.0
+ * @version 6.2.0
  */
 export default class DeviceApi {
   /**

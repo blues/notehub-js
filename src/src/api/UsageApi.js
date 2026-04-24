@@ -21,7 +21,7 @@ import UsageEventsResponse from "../model/UsageEventsResponse";
 /**
  * Usage service.
  * @module api/UsageApi
- * @version 6.1.0
+ * @version 6.2.0
  */
 export default class UsageApi {
   /**

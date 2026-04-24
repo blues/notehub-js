@@ -146,6 +146,7 @@ docs/ThingworxRoute.md
 docs/TowerLocation.md
 docs/TwilioRoute.md
 docs/UpdateFleetRequest.md
+docs/UpdateHostFirmwareRequest.md
 docs/UploadMetadata.md
 docs/UsageApi.md
 docs/UsageData.md
@@ -309,6 +310,7 @@ src/model/ThingworxRoute.js
 src/model/TowerLocation.js
 src/model/TwilioRoute.js
 src/model/UpdateFleetRequest.js
+src/model/UpdateHostFirmwareRequest.js
 src/model/UploadMetadata.js
 src/model/UsageData.js
 src/model/UsageEventsData.js
@@ -319,3 +321,4 @@ src/model/UserDfuStateMachine.js
 src/model/UserDfuStateMachineStatus.js
 src/model/UserFirmwareInfo.js
 src/model/WebhookSettings.js
+test/model/UpdateHostFirmwareRequest.spec.js

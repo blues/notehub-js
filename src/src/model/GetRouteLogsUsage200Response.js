@@ -17,7 +17,7 @@ import UsageRouteLogsData from "./UsageRouteLogsData";
 /**
  * The GetRouteLogsUsage200Response model module.
  * @module model/GetRouteLogsUsage200Response
- * @version 6.1.0
+ * @version 6.2.0
  */
 class GetRouteLogsUsage200Response {
   /**

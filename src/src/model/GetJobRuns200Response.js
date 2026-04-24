@@ -17,7 +17,7 @@ import JobRun from "./JobRun";
 /**
  * The GetJobRuns200Response model module.
  * @module model/GetJobRuns200Response
- * @version 6.1.0
+ * @version 6.2.0
  */
 class GetJobRuns200Response {
   /**

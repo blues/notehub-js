@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The NoteInput model module.
  * @module model/NoteInput
- * @version 6.1.0
+ * @version 6.2.0
  */
 class NoteInput {
   /**

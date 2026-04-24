@@ -10,6 +10,7 @@ All URIs are relative to *https://api.notefile.net*
 | [**createProduct**](ProjectApi.md#createProduct)                                       | **POST** /v1/projects/{projectOrProductUID}/products                                        |
 | [**createProject**](ProjectApi.md#createProject)                                       | **POST** /v1/projects                                                                       |
 | [**deleteDeviceFromFleets**](ProjectApi.md#deleteDeviceFromFleets)                     | **DELETE** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/fleets                    |
+| [**deleteFirmware**](ProjectApi.md#deleteFirmware)                                     | **DELETE** /v1/projects/{projectOrProductUID}/firmware/{firmwareType}/{filename}            |
 | [**deleteFleet**](ProjectApi.md#deleteFleet)                                           | **DELETE** /v1/projects/{projectOrProductUID}/fleets/{fleetUID}                             |
 | [**deleteFleetEnvironmentVariable**](ProjectApi.md#deleteFleetEnvironmentVariable)     | **DELETE** /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/environment_variables/{key} |
 | [**deleteProduct**](ProjectApi.md#deleteProduct)                                       | **DELETE** /v1/projects/{projectOrProductUID}/products/{productUID}                         |
@@ -41,6 +42,7 @@ All URIs are relative to *https://api.notefile.net*
 | [**setFleetEnvironmentVariables**](ProjectApi.md#setFleetEnvironmentVariables)         | **PUT** /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/environment_variables          |
 | [**setGlobalEventTransformation**](ProjectApi.md#setGlobalEventTransformation)         | **POST** /v1/projects/{projectOrProductUID}/global-transformation                           |
 | [**setProjectEnvironmentVariables**](ProjectApi.md#setProjectEnvironmentVariables)     | **PUT** /v1/projects/{projectOrProductUID}/environment_variables                            |
+| [**updateFirmware**](ProjectApi.md#updateFirmware)                                     | **POST** /v1/projects/{projectOrProductUID}/firmware/{firmwareType}/{filename}              |
 | [**updateFleet**](ProjectApi.md#updateFleet)                                           | **PUT** /v1/projects/{projectOrProductUID}/fleets/{fleetUID}                                |
 | [**uploadFirmware**](ProjectApi.md#uploadFirmware)                                     | **PUT** /v1/projects/{projectOrProductUID}/firmware/{firmwareType}/{filename}               |
 
@@ -347,6 +349,55 @@ apiInstance
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+## deleteFirmware
+
+> deleteFirmware(projectOrProductUID, firmwareType, filename)
+
+Delete a host firmware binary. The filename must be the full stored filename including the timestamp suffix (e.g. test$20260324190911.bin) as returned by the firmware upload or list endpoints.
+
+### Example
+
+```javascript
+import * as NotehubJs from "@blues-inc/notehub-js";
+let defaultClient = NotehubJs.ApiClient.instance;
+let personalAccessToken = defaultClient.authentications["personalAccessToken"];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
+
+let apiInstance = new NotehubJs.ProjectApi();
+let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String |
+let firmwareType = "firmwareType_example"; // String |
+let filename = "filename_example"; // String |
+apiInstance.deleteFirmware(projectOrProductUID, firmwareType, filename).then(
+  () => {
+    console.log("API called successfully.");
+  },
+  (error) => {
+    console.error(error);
+  }
+);
+```
+
+### Parameters
+
+| Name                    | Type       | Description | Notes |
+| ----------------------- | ---------- | ----------- | ----- |
+| **projectOrProductUID** | **String** |             |
+| **firmwareType**        | **String** |             |
+| **filename**            | **String** |             |
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[personalAccessToken](../README.md#personalAccessToken)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 ## deleteFleet
@@ -1938,6 +1989,66 @@ apiInstance.setProjectEnvironmentVariables(projectOrProductUID, opts).then(
 ### Return type
 
 [**EnvironmentVariables**](EnvironmentVariables.md)
+
+### Authorization
+
+[personalAccessToken](../README.md#personalAccessToken)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+## updateFirmware
+
+> FirmwareInfo updateFirmware(projectOrProductUID, firmwareType, filename, updateHostFirmwareRequest)
+
+Update the metadata of an existing host firmware entry. The filename must be the full stored filename including the timestamp suffix (e.g. test$20260324190911.bin) as returned by the firmware upload or list endpoints.
+
+### Example
+
+```javascript
+import * as NotehubJs from "@blues-inc/notehub-js";
+let defaultClient = NotehubJs.ApiClient.instance;
+let personalAccessToken = defaultClient.authentications["personalAccessToken"];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
+
+let apiInstance = new NotehubJs.ProjectApi();
+let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String |
+let firmwareType = "firmwareType_example"; // String |
+let filename = "filename_example"; // String |
+let updateHostFirmwareRequest = new NotehubJs.UpdateHostFirmwareRequest(); // UpdateHostFirmwareRequest | Firmware metadata fields to update. All fields are optional; only provided fields will be updated.
+apiInstance
+  .updateFirmware(
+    projectOrProductUID,
+    firmwareType,
+    filename,
+    updateHostFirmwareRequest
+  )
+  .then(
+    (data) => {
+      console.log(
+        "API called successfully. Returned data: " + JSON.stringify(data)
+      );
+    },
+    (error) => {
+      console.error(error);
+    }
+  );
+```
+
+### Parameters
+
+| Name                          | Type                                                          | Description                                                                                        | Notes |
+| ----------------------------- | ------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | ----- |
+| **projectOrProductUID**       | **String**                                                    |                                                                                                    |
+| **firmwareType**              | **String**                                                    |                                                                                                    |
+| **filename**                  | **String**                                                    |                                                                                                    |
+| **updateHostFirmwareRequest** | [**UpdateHostFirmwareRequest**](UpdateHostFirmwareRequest.md) | Firmware metadata fields to update. All fields are optional; only provided fields will be updated. |
+
+### Return type
+
+[**FirmwareInfo**](FirmwareInfo.md)
 
 ### Authorization
 

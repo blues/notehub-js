@@ -17,7 +17,7 @@ import Job from "./Job";
 /**
  * The GetJobs200Response model module.
  * @module model/GetJobs200Response
- * @version 6.1.0
+ * @version 6.2.0
  */
 class GetJobs200Response {
   /**

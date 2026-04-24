@@ -18,7 +18,7 @@ import RouteTransformSettings from "./RouteTransformSettings";
 /**
  * The ThingworxRoute model module.
  * @module model/ThingworxRoute
- * @version 6.1.0
+ * @version 6.2.0
  */
 class ThingworxRoute {
   /**

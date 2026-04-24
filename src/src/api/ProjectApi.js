@@ -37,11 +37,12 @@ import NotefileSchema from "../model/NotefileSchema";
 import Product from "../model/Product";
 import Project from "../model/Project";
 import UpdateFleetRequest from "../model/UpdateFleetRequest";
+import UpdateHostFirmwareRequest from "../model/UpdateHostFirmwareRequest";
 
 /**
  * Project service.
  * @module api/ProjectApi
- * @version 6.1.0
+ * @version 6.2.0
  */
 export default class ProjectApi {
   /**
@@ -455,6 +456,80 @@ export default class ProjectApi {
       projectOrProductUID,
       deviceUID,
       deleteDeviceFromFleetsRequest
+    ).then(function (response_and_data) {
+      return response_and_data.data;
+    });
+  }
+
+  /**
+   * Delete a host firmware binary. The filename must be the full stored filename including the timestamp suffix (e.g. test$20260324190911.bin) as returned by the firmware upload or list endpoints.
+   * @param {String} projectOrProductUID
+   * @param {module:model/String} firmwareType
+   * @param {String} filename
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
+   */
+  deleteFirmwareWithHttpInfo(projectOrProductUID, firmwareType, filename) {
+    let postBody = null;
+    // verify the required parameter 'projectOrProductUID' is set
+    if (projectOrProductUID === undefined || projectOrProductUID === null) {
+      throw new Error(
+        "Missing the required parameter 'projectOrProductUID' when calling deleteFirmware"
+      );
+    }
+    // verify the required parameter 'firmwareType' is set
+    if (firmwareType === undefined || firmwareType === null) {
+      throw new Error(
+        "Missing the required parameter 'firmwareType' when calling deleteFirmware"
+      );
+    }
+    // verify the required parameter 'filename' is set
+    if (filename === undefined || filename === null) {
+      throw new Error(
+        "Missing the required parameter 'filename' when calling deleteFirmware"
+      );
+    }
+
+    let pathParams = {
+      projectOrProductUID: projectOrProductUID,
+      firmwareType: firmwareType,
+      filename: filename,
+    };
+    let queryParams = {};
+    let headerParams = {};
+    let formParams = {};
+
+    let authNames = ["personalAccessToken"];
+    let contentTypes = [];
+    let accepts = ["application/json"];
+    let returnType = null;
+    return this.apiClient.callApi(
+      "/v1/projects/{projectOrProductUID}/firmware/{firmwareType}/{filename}",
+      "DELETE",
+      pathParams,
+      queryParams,
+      headerParams,
+      formParams,
+      postBody,
+      authNames,
+      contentTypes,
+      accepts,
+      returnType,
+      null
+    );
+  }
+
+  /**
+   * Delete a host firmware binary. The filename must be the full stored filename including the timestamp suffix (e.g. test$20260324190911.bin) as returned by the firmware upload or list endpoints.
+   * @param {String} projectOrProductUID
+   * @param {module:model/String} firmwareType
+   * @param {String} filename
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}
+   */
+  deleteFirmware(projectOrProductUID, firmwareType, filename) {
+    return this.deleteFirmwareWithHttpInfo(
+      projectOrProductUID,
+      firmwareType,
+      filename
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -2559,6 +2634,102 @@ export default class ProjectApi {
     return this.setProjectEnvironmentVariablesWithHttpInfo(
       projectOrProductUID,
       opts
+    ).then(function (response_and_data) {
+      return response_and_data.data;
+    });
+  }
+
+  /**
+   * Update the metadata of an existing host firmware entry. The filename must be the full stored filename including the timestamp suffix (e.g. test$20260324190911.bin) as returned by the firmware upload or list endpoints.
+   * @param {String} projectOrProductUID
+   * @param {module:model/String} firmwareType
+   * @param {String} filename
+   * @param {module:model/UpdateHostFirmwareRequest} updateHostFirmwareRequest Firmware metadata fields to update. All fields are optional; only provided fields will be updated.
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/FirmwareInfo} and HTTP response
+   */
+  updateFirmwareWithHttpInfo(
+    projectOrProductUID,
+    firmwareType,
+    filename,
+    updateHostFirmwareRequest
+  ) {
+    let postBody = updateHostFirmwareRequest;
+    // verify the required parameter 'projectOrProductUID' is set
+    if (projectOrProductUID === undefined || projectOrProductUID === null) {
+      throw new Error(
+        "Missing the required parameter 'projectOrProductUID' when calling updateFirmware"
+      );
+    }
+    // verify the required parameter 'firmwareType' is set
+    if (firmwareType === undefined || firmwareType === null) {
+      throw new Error(
+        "Missing the required parameter 'firmwareType' when calling updateFirmware"
+      );
+    }
+    // verify the required parameter 'filename' is set
+    if (filename === undefined || filename === null) {
+      throw new Error(
+        "Missing the required parameter 'filename' when calling updateFirmware"
+      );
+    }
+    // verify the required parameter 'updateHostFirmwareRequest' is set
+    if (
+      updateHostFirmwareRequest === undefined ||
+      updateHostFirmwareRequest === null
+    ) {
+      throw new Error(
+        "Missing the required parameter 'updateHostFirmwareRequest' when calling updateFirmware"
+      );
+    }
+
+    let pathParams = {
+      projectOrProductUID: projectOrProductUID,
+      firmwareType: firmwareType,
+      filename: filename,
+    };
+    let queryParams = {};
+    let headerParams = {};
+    let formParams = {};
+
+    let authNames = ["personalAccessToken"];
+    let contentTypes = ["application/json"];
+    let accepts = ["application/json"];
+    let returnType = FirmwareInfo;
+    return this.apiClient.callApi(
+      "/v1/projects/{projectOrProductUID}/firmware/{firmwareType}/{filename}",
+      "POST",
+      pathParams,
+      queryParams,
+      headerParams,
+      formParams,
+      postBody,
+      authNames,
+      contentTypes,
+      accepts,
+      returnType,
+      null
+    );
+  }
+
+  /**
+   * Update the metadata of an existing host firmware entry. The filename must be the full stored filename including the timestamp suffix (e.g. test$20260324190911.bin) as returned by the firmware upload or list endpoints.
+   * @param {String} projectOrProductUID
+   * @param {module:model/String} firmwareType
+   * @param {String} filename
+   * @param {module:model/UpdateHostFirmwareRequest} updateHostFirmwareRequest Firmware metadata fields to update. All fields are optional; only provided fields will be updated.
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/FirmwareInfo}
+   */
+  updateFirmware(
+    projectOrProductUID,
+    firmwareType,
+    filename,
+    updateHostFirmwareRequest
+  ) {
+    return this.updateFirmwareWithHttpInfo(
+      projectOrProductUID,
+      firmwareType,
+      filename,
+      updateHostFirmwareRequest
     ).then(function (response_and_data) {
       return response_and_data.data;
     });

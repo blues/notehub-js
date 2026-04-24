@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The GetBillingAccountBalanceHistory200ResponseDataInner model module.
  * @module model/GetBillingAccountBalanceHistory200ResponseDataInner
- * @version 6.1.0
+ * @version 6.2.0
  */
 class GetBillingAccountBalanceHistory200ResponseDataInner {
   /**

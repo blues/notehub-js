@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The RunJob200Response model module.
  * @module model/RunJob200Response
- * @version 6.1.0
+ * @version 6.2.0
  */
 class RunJob200Response {
   /**

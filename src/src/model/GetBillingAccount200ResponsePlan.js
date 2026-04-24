@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The GetBillingAccount200ResponsePlan model module.
  * @module model/GetBillingAccount200ResponsePlan
- * @version 6.1.0
+ * @version 6.2.0
  */
 class GetBillingAccount200ResponsePlan {
   /**

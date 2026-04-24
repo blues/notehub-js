@@ -17,7 +17,7 @@ import GetBillingAccount200ResponsePlan from "./GetBillingAccount200ResponsePlan
 /**
  * The GetBillingAccount200Response model module.
  * @module model/GetBillingAccount200Response
- * @version 6.1.0
+ * @version 6.2.0
  */
 class GetBillingAccount200Response {
   /**

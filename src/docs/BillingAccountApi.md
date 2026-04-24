@@ -59,7 +59,7 @@ apiInstance.getBillingAccount(billingAccountUID).then(
 
 > GetBillingAccountBalanceHistory200Response getBillingAccountBalanceHistory(billingAccountUID, opts)
 
-Get Billing Account Balance history, only enterprise supported
+Get Billing Account Balance history
 
 ### Example
 

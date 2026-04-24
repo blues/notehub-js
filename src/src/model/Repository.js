@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The Repository model module.
  * @module model/Repository
- * @version 6.1.0
+ * @version 6.2.0
  */
 class Repository {
   /**

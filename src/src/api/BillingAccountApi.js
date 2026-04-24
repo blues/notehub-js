@@ -20,7 +20,7 @@ import GetBillingAccounts200Response from "../model/GetBillingAccounts200Respons
 /**
  * BillingAccount service.
  * @module api/BillingAccountApi
- * @version 6.1.0
+ * @version 6.2.0
  */
 export default class BillingAccountApi {
   /**
@@ -89,7 +89,7 @@ export default class BillingAccountApi {
   }
 
   /**
-   * Get Billing Account Balance history, only enterprise supported
+   * Get Billing Account Balance history
    * @param {String} billingAccountUID
    * @param {Object} opts Optional parameters
    * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
@@ -137,7 +137,7 @@ export default class BillingAccountApi {
   }
 
   /**
-   * Get Billing Account Balance history, only enterprise supported
+   * Get Billing Account Balance history
    * @param {String} billingAccountUID
    * @param {Object} opts Optional parameters
    * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
