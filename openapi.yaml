@@ -5090,7 +5090,7 @@ components:
           format: int64
           example: 1775252922
         last_run_status:
-          description: Status of the most recent job run
+          description: 'Status of the most recent job run. Terminal values are: "submitted", "completed successfully", "dry run completed successfully", "completed with errors", "cancelled". While a job is running, intermediate per-device progress updates may appear (e.g. "dev:000000000000000 completed", "dev:000000000000000 updated: ...").'
           type: string
           example: dry run completed successfully
         last_run_submitted:
