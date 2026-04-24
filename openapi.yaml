@@ -194,7 +194,7 @@ paths:
   '/v1/billing-accounts/{billingAccountUID}/balance-history':
     get:
       operationId: GetBillingAccountBalanceHistory
-      description: 'Get Billing Account Balance history, only enterprise supported'
+      description: Get Billing Account Balance history
       parameters:
         - $ref: '#/components/parameters/billingAccountUIDParam'
         - $ref: '#/components/parameters/startDateParam'
@@ -2688,6 +2688,94 @@ paths:
                   $ref: '#/components/schemas/NotefileSchema'
       tags:
         - project
+  '/v1/projects/{projectOrProductUID}/secrets':
+    get:
+      operationId: GetProjectSecrets
+      description: 'Get all secrets for a project (metadata only, values are never returned)'
+      responses:
+        '200':
+          $ref: '#/components/responses/GetProjectSecretsResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - project
+    parameters:
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
+    post:
+      operationId: CreateProjectSecret
+      description: Create a new project secret
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateProjectSecretRequest'
+      responses:
+        '201':
+          description: Secret created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectSecret'
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        '409':
+          $ref: '#/components/responses/ErrorResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - project
+  '/v1/projects/{projectOrProductUID}/secrets/{secretName}':
+    delete:
+      operationId: DeleteProjectSecret
+      description: Delete a project secret by name
+      responses:
+        '204':
+          description: Secret deleted successfully
+        '404':
+          $ref: '#/components/responses/ErrorResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - project
+    parameters:
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
+      - name: secretName
+        in: path
+        description: The name of the secret.
+        required: true
+        schema:
+          type: string
+    put:
+      operationId: UpdateProjectSecret
+      description: Update the value of an existing project secret
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateProjectSecretRequest'
+      responses:
+        '200':
+          description: Secret updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectSecret'
+        '404':
+          $ref: '#/components/responses/ErrorResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - project
   '/v1/projects/{projectOrProductUID}/usage/data':
     get:
       operationId: GetDataUsage
@@ -3933,6 +4021,18 @@ components:
             - alert_routes
             - source_type
             - threshold
+    CreateProjectSecretRequest:
+      type: object
+      properties:
+        name:
+          description: The secret name (alphanumeric and underscores only).
+          type: string
+        value:
+          description: 'The secret value (encrypted at rest, never returned after creation).'
+          type: string
+      required:
+        - name
+        - value
     CreateUpdateRepository:
       type: object
       properties:
@@ -4925,6 +5025,15 @@ components:
       items:
         type: string
       properties: {}
+    GetProjectSecretsResponse:
+      type: object
+      properties:
+        secrets:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProjectSecret'
+      required:
+        - secrets
     GoogleRoute:
       type: object
       properties:
@@ -5501,6 +5610,31 @@ components:
         - name
         - email
         - role
+    ProjectSecret:
+      description: Metadata for a project secret. The value is never returned.
+      type: object
+      properties:
+        created:
+          description: When the secret was first created.
+          type: string
+          format: date-time
+        created_by:
+          description: The actor who created the secret.
+          type: string
+        modified:
+          description: When the secret was last updated.
+          type: string
+          format: date-time
+        modified_by:
+          description: The actor who last updated the secret.
+          type: string
+        name:
+          description: The secret name (alphanumeric and underscores only).
+          type: string
+      required:
+        - name
+        - created
+        - created_by
     ProxyRoute:
       type: object
       properties:
@@ -5994,6 +6128,14 @@ components:
         to:
           type: string
       additionalProperties: false
+    UpdateProjectSecretRequest:
+      type: object
+      properties:
+        value:
+          description: 'The new secret value (encrypted at rest, never returned).'
+          type: string
+      required:
+        - value
     UploadMetadata:
       type: object
       properties:
@@ -6591,6 +6733,14 @@ components:
                   $ref: '#/components/schemas/Job'
             required:
               - jobs
+    GetProjectSecretsResponse:
+      description: The response body from a get project secrets request.
+      content:
+        application/json:
+          schema:
+            type: ''
+            properties: {}
+            $ref: '#/components/schemas/GetProjectSecretsResponse'
     LatestResponse:
       description: The response body for a Latest Events request.
       content:
