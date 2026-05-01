@@ -923,6 +923,25 @@ paths:
         - personalAccessToken: []
       tags:
         - device
+  '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/journeys':
+    get:
+      operationId: GetDeviceJourneys
+      description: 'Get Device Journeys associated with the device, this includes events with file _track.qo and body >> journey is not null .'
+      responses:
+        '200':
+          $ref: '#/components/responses/DeviceJourneysResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - device
+    parameters:
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
+      - $ref: '#/components/parameters/deviceUIDParam'
+      - $ref: '#/components/parameters/startDateParam'
+      - $ref: '#/components/parameters/endDateParam'
+      - $ref: '#/components/parameters/limitParam'
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/latest':
     get:
       operationId: GetDeviceLatestEvents
@@ -6419,6 +6438,66 @@ components:
                 type: boolean
             required:
               - success
+    DeviceJourneysResponse:
+      description: The response body from a GET device journeys request.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              journeys:
+                description: Journeys ordered from most recent to oldest.
+                type: array
+                items:
+                  properties:
+                    events:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/Event'
+                      maxItems: 100
+                    journeyID:
+                      description: Unix timestamp identifying the journey.
+                      type: integer
+                  type: object
+                maxItems: 50
+          example:
+            journeys:
+              - events:
+                  - best_country: US
+                    best_id: My Device
+                    best_lat: 34.82476372
+                    best_location: Atlanta GA
+                    best_location_type: triangulated
+                    best_location_when: 1652709545
+                    best_lon: -83.32261614
+                    best_timezone: America/New_York
+                    body:
+                      distance: 17.503452
+                      dop: 0.8300781
+                      humidity: 40.375
+                      journey: 1728590078
+                      pressure: 97705.66
+                      seconds: 6
+                      temperature: 24.0625
+                      time: 1728590102
+                      velocity: 2.917242
+                      voltage: 2.598
+                    device: 'dev:5c0272311928'
+                    event: dfa3747d-688b-4250-935b-5dd60354313c
+                    file: _track.qo
+                    req: note.add
+                    session: b623132c-6afb-4740-bc39-e3634e38f064
+                    tower_id: '0,0,0,0'
+                    tri_country: US
+                    tri_lat: 34.82475372
+                    tri_location: Atlanta GA
+                    tri_lon: -83.32261614
+                    tri_points: 6
+                    tri_timezone: America/New_York
+                    tri_when: 1652709545
+                    updates: 1
+                    when: 1656010061
+                journeyID: 1728590078
     DevicePlansResponse:
       description: Response body for /plans
       content:
