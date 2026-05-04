@@ -5644,18 +5644,12 @@ components:
     RepositoryListResponse:
       type: object
       properties:
-        has_more:
-          description: |
-            True if more results are available beyond this page. Increment
-            `pageNum` to continue.
-          type: boolean
         repositories:
           type: array
           items:
             $ref: '#/components/schemas/Repository'
       required:
         - repositories
-        - has_more
     RepositoryTokenRequest:
       type: object
       properties:
@@ -5670,8 +5664,11 @@ components:
         ttl_seconds:
           description: |
             Requested credential lifetime in seconds. Clamped server-side to
-            [60, 3600]. Defaults to 900 (15 minutes) if omitted or zero.
+            [60, 3600]. Defaults to 900 (15 minutes) if omitted.
           type: integer
+          default: 900
+          maximum: 3600
+          minimum: 60
     RepositoryTokenResponse:
       type: object
       properties:
