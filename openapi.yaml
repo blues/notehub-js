@@ -1209,7 +1209,6 @@ paths:
         - personalAccessToken: []
       tags:
         - device
-        - events
       x-custom-attributes:
         permission: read
         resource: 'blues:resources:app:APPSERIAL:events'
