@@ -46,6 +46,8 @@ paths:
           description: Internal Server Error
       tags:
         - authorization
+      x-custom-attributes:
+        permission: create
   /oauth2/token:
     post:
       operationId: OAuth2ClientCredentials
@@ -143,6 +145,8 @@ paths:
         - personalAccessToken: []
       tags:
         - billing_account
+      x-custom-attributes:
+        permission: read
   /v1/billing-accounts/{billingAccountUID}:
     get:
       operationId: GetBillingAccount
@@ -191,6 +195,8 @@ paths:
         - personalAccessToken: []
       tags:
         - billing_account
+      x-custom-attributes:
+        permission: read
   /v1/billing-accounts/{billingAccountUID}/balance-history:
     get:
       operationId: GetBillingAccountBalanceHistory
@@ -231,6 +237,8 @@ paths:
         - personalAccessToken: []
       tags:
         - billing_account
+      x-custom-attributes:
+        permission: read
   /v1/products/{productUID}/devices/{deviceUID}/environment_variables_with_pin:
     get:
       operationId: GetDeviceEnvironmentVariablesByPin
@@ -240,8 +248,12 @@ paths:
           $ref: '#/components/responses/GetDeviceEnvironmentVariablesResponse'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
       tags:
         - device
+      x-custom-attributes:
+        permission: read
     parameters:
       - $ref: '#/components/parameters/productUIDParam'
       - $ref: '#/components/parameters/deviceUIDParam'
@@ -261,8 +273,82 @@ paths:
           $ref: '#/components/responses/EnvironmentVariablesResponse'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
       tags:
         - device
+      x-custom-attributes:
+        permission: update
+  /v1/products/{productUID}/devices/{deviceUID}/webhook-event:
+    post:
+      operationId: CreateLegacyWebhookEvent
+      description: Legacy endpoint for sending an event from a webhook, associated with the given device (provisioning it if necessary). The request body is a Note-shaped object containing the notefile name, body, and optional payload.
+      parameters:
+        - $ref: '#/components/parameters/productUIDParam'
+        - $ref: '#/components/parameters/deviceUIDParam'
+      requestBody:
+        description: A Note-shaped event with notefile name, JSON body, and optional base64-encoded payload.
+        required: true
+        content:
+          application/json:
+            example:
+              body:
+                key: value
+              file: data.qo
+              payload: SGVsbG8sIFdvcmxkIQ==
+            schema:
+              type: object
+              properties:
+                body:
+                  description: Arbitrary JSON event body.
+                  type: object
+                  additionalProperties: true
+                file:
+                  description: The notefile to which the event should be written.
+                  type: string
+                payload:
+                  description: Optional base64-encoded binary payload.
+                  type: string
+              additionalProperties: true
+      responses:
+        '200':
+          description: Event created successfully
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - webhook
+      x-custom-attributes:
+        permission: create
+        resource: blues:resources:app:APPSERIAL:notes
+  /v1/products/{productUID}/devices/{deviceUID}/webhook-session:
+    put:
+      operationId: UpdateLegacyWebhookSession
+      description: Legacy endpoint for opening or updating a webhook session for the given device (provisioning the device if necessary). Used by external services that need to maintain a callable session against a device behind a webhook.
+      parameters:
+        - $ref: '#/components/parameters/productUIDParam'
+        - $ref: '#/components/parameters/deviceUIDParam'
+      requestBody:
+        description: Optional session metadata.
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: Webhook session updated successfully
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - webhook
+      x-custom-attributes:
+        permission: create
+        resource: blues:resources:app:APPSERIAL:notes
   /v1/products/{productUID}/ext-devices/{deviceUID}/event:
     post:
       operationId: CreateEventExtDevice
@@ -286,6 +372,9 @@ paths:
         - personalAccessToken: []
       tags:
         - external devices
+      x-custom-attributes:
+        permission: create
+        resource: blues:resources:app:APPSERIAL:notes
   /v1/products/{productUID}/ext-devices/{deviceUID}/session/close:
     post:
       operationId: ExtDeviceSessionClose
@@ -309,6 +398,9 @@ paths:
         - personalAccessToken: []
       tags:
         - external devices
+      x-custom-attributes:
+        permission: create
+        resource: blues:resources:app:APPSERIAL:notes
   /v1/products/{productUID}/ext-devices/{deviceUID}/session/open:
     post:
       operationId: ExtDeviceSessionOpen
@@ -332,6 +424,9 @@ paths:
         - personalAccessToken: []
       tags:
         - external devices
+      x-custom-attributes:
+        permission: create
+        resource: blues:resources:app:APPSERIAL:notes
   /v1/products/{productUID}/project:
     get:
       operationId: GetProjectByProduct
@@ -356,6 +451,114 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: read
+        resource: blues:resources:app:APPSERIAL:settings
+  /v1/products/{productUID}/webhooks/{webhookUID}/devices/{deviceUID}/event:
+    post:
+      operationId: CreateWebhookDeviceEventByProduct
+      description: Sends an event to be processed by the specified webhook, addressed by productUID, associated with the given device (provisioning it if necessary). The entire request body becomes the event body. The webhook's configured JSONata transform, if any, is applied before routing.
+      parameters:
+        - $ref: '#/components/parameters/productUIDParam'
+        - $ref: '#/components/parameters/webhookUIDParam'
+        - $ref: '#/components/parameters/deviceUIDParam'
+      requestBody:
+        description: The event body (arbitrary JSON)
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: Event created successfully
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - webhook
+      x-custom-attributes:
+        permission: create
+        resource: blues:resources:app:APPSERIAL:notes
+  /v1/products/{productUID}/webhooks/{webhookUID}/event:
+    post:
+      operationId: CreateWebhookEventByProduct
+      description: Sends an event to be processed by the specified webhook, addressed by productUID. The entire request body becomes the event body. The webhook's configured JSONata transform, if any, is applied before routing. The event is not associated with a specific device.
+      parameters:
+        - $ref: '#/components/parameters/productUIDParam'
+        - $ref: '#/components/parameters/webhookUIDParam'
+      requestBody:
+        description: The event body (arbitrary JSON)
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: Event created successfully
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - webhook
+      x-custom-attributes:
+        permission: create
+        resource: blues:resources:app:APPSERIAL:notes
+  /v1/products/{productUID}/webhooks/{webhookUID}/settings:
+    get:
+      operationId: GetWebhookSettingsByProduct
+      description: Retrieves the configuration settings for the specified webhook, addressed by productUID.
+      parameters:
+        - $ref: '#/components/parameters/productUIDParam'
+        - $ref: '#/components/parameters/webhookUIDParam'
+      responses:
+        '200':
+          description: Webhook settings retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhookSettings'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - webhook
+      x-custom-attributes:
+        permission: update
+        resource: blues:resources:app:APPSERIAL:settings
+    put:
+      operationId: UpdateWebhookSettingsByProduct
+      description: Updates the configuration settings for the specified webhook, addressed by productUID. Update body will completely replace the existing settings.
+      parameters:
+        - $ref: '#/components/parameters/productUIDParam'
+        - $ref: '#/components/parameters/webhookUIDParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              disabled: false
+              transform: '{"device":body.end_device_ids.dev_eui,"sn":body.end_device_ids.device_id,"body":body.uplink_message.decoded_payload,"details":body}'
+            schema:
+              $ref: '#/components/schemas/WebhookSettings'
+      responses:
+        '200':
+          description: Webhook settings updated successfully
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - webhook
+      x-custom-attributes:
+        permission: update
+        resource: blues:resources:app:APPSERIAL:settings
   /v1/projects:
     get:
       operationId: GetProjects
@@ -378,6 +581,8 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: read
     post:
       operationId: CreateProject
       description: Create a Project
@@ -412,6 +617,8 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: create
   /v1/projects/{projectOrProductUID}:
     delete:
       operationId: DeleteProject
@@ -427,6 +634,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: delete
+        resource: blues:resources:app:APPSERIAL:settings
     get:
       operationId: GetProject
       description: Get a Project by ProjectUID
@@ -445,6 +655,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: read
+        resource: blues:resources:app:APPSERIAL:settings
   /v1/projects/{projectOrProductUID}/alerts:
     get:
       operationId: GetAlerts
@@ -463,6 +676,9 @@ paths:
         - personalAccessToken: []
       tags:
         - alert
+      x-custom-attributes:
+        permission: read
+        resource: blues:resources:app:APPSERIAL:devices
   /v1/projects/{projectOrProductUID}/aws-role-config:
     get:
       operationId: GetAWSRoleConfig
@@ -485,6 +701,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: read
+        resource: blues:resources:app:APPSERIAL:settings
   /v1/projects/{projectOrProductUID}/clone:
     post:
       operationId: CloneProject
@@ -527,6 +746,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: create
+        resource: blues:resources:app:APPSERIAL:settings
   /v1/projects/{projectOrProductUID}/devices:
     get:
       operationId: GetDevices
@@ -553,6 +775,9 @@ paths:
         - personalAccessToken: []
       tags:
         - device
+      x-custom-attributes:
+        permission: read
+        resource: blues:resources:app:APPSERIAL:devices
   /v1/projects/{projectOrProductUID}/devices/{deviceUID}:
     delete:
       operationId: DeleteDevice
@@ -566,6 +791,9 @@ paths:
         - personalAccessToken: []
       tags:
         - device
+      x-custom-attributes:
+        permission: delete
+        resource: blues:resources:app:APPSERIAL:devices
     get:
       operationId: GetDevice
       description: Get Device
@@ -582,6 +810,9 @@ paths:
         - personalAccessToken: []
       tags:
         - device
+      x-custom-attributes:
+        permission: read
+        resource: blues:resources:app:APPSERIAL:devices
     parameters:
       - $ref: '#/components/parameters/projectOrProductUIDParam'
       - $ref: '#/components/parameters/deviceUIDParam'
@@ -606,6 +837,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: read
+        resource: blues:resources:app:APPSERIAL:settings
   /v1/projects/{projectOrProductUID}/devices/{deviceUID}/dfu/{firmwareType}/status:
     get:
       operationId: GetDeviceDfuStatus
@@ -627,6 +861,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: read
+        resource: blues:resources:app:APPSERIAL:settings
   /v1/projects/{projectOrProductUID}/devices/{deviceUID}/disable:
     post:
       operationId: DisableDevice
@@ -643,6 +880,9 @@ paths:
         - personalAccessToken: []
       tags:
         - device
+      x-custom-attributes:
+        permission: update
+        resource: blues:resources:app:APPSERIAL:devices
   /v1/projects/{projectOrProductUID}/devices/{deviceUID}/enable:
     post:
       operationId: EnableDevice
@@ -659,6 +899,9 @@ paths:
         - personalAccessToken: []
       tags:
         - device
+      x-custom-attributes:
+        permission: update
+        resource: blues:resources:app:APPSERIAL:devices
   /v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_hierarchy:
     get:
       operationId: GetDeviceEnvironmentHierarchy
@@ -681,6 +924,9 @@ paths:
         - personalAccessToken: []
       tags:
         - device
+      x-custom-attributes:
+        permission: read
+        resource: blues:resources:app:APPSERIAL:devices
   /v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_variables:
     get:
       operationId: GetDeviceEnvironmentVariables
@@ -694,6 +940,9 @@ paths:
         - personalAccessToken: []
       tags:
         - device
+      x-custom-attributes:
+        permission: read
+        resource: blues:resources:app:APPSERIAL:devices
     parameters:
       - $ref: '#/components/parameters/projectOrProductUIDParam'
       - $ref: '#/components/parameters/deviceUIDParam'
@@ -716,6 +965,9 @@ paths:
         - personalAccessToken: []
       tags:
         - device
+      x-custom-attributes:
+        permission: update
+        resource: blues:resources:app:APPSERIAL:devices
   /v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_variables/{key}:
     delete:
       operationId: DeleteDeviceEnvironmentVariable
@@ -738,6 +990,9 @@ paths:
         - personalAccessToken: []
       tags:
         - device
+      x-custom-attributes:
+        permission: delete
+        resource: blues:resources:app:APPSERIAL:devices
   /v1/projects/{projectOrProductUID}/devices/{deviceUID}/files:
     delete:
       operationId: DeleteNotefiles
@@ -766,6 +1021,9 @@ paths:
         - personalAccessToken: []
       tags:
         - device
+      x-custom-attributes:
+        permission: delete
+        resource: blues:resources:app:APPSERIAL:notefiles
     get:
       operationId: ListNotefiles
       description: Lists .qi and .db files for the device
@@ -799,6 +1057,9 @@ paths:
         - personalAccessToken: []
       tags:
         - device
+      x-custom-attributes:
+        permission: read
+        resource: blues:resources:app:APPSERIAL:notefiles
   /v1/projects/{projectOrProductUID}/devices/{deviceUID}/fleets:
     delete:
       operationId: DeleteDeviceFromFleets
@@ -828,6 +1089,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: delete
+        resource: blues:resources:app:APPSERIAL:devices
     get:
       operationId: GetDeviceFleets
       description: Get Device Fleets
@@ -840,6 +1104,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: read
+        resource: blues:resources:app:APPSERIAL:devices
     parameters:
       - $ref: '#/components/parameters/projectOrProductUIDParam'
       - $ref: '#/components/parameters/deviceUIDParam'
@@ -871,6 +1138,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: update
+        resource: blues:resources:app:APPSERIAL:devices
   /v1/projects/{projectOrProductUID}/devices/{deviceUID}/health-log:
     get:
       operationId: GetDeviceHealthLog
@@ -923,6 +1193,9 @@ paths:
         - personalAccessToken: []
       tags:
         - device
+      x-custom-attributes:
+        permission: read
+        resource: blues:resources:app:APPSERIAL:devices
   /v1/projects/{projectOrProductUID}/devices/{deviceUID}/latest:
     get:
       operationId: GetDeviceLatestEvents
@@ -939,6 +1212,9 @@ paths:
         - personalAccessToken: []
       tags:
         - device
+      x-custom-attributes:
+        permission: read
+        resource: blues:resources:app:APPSERIAL:devices
   /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notefiles/{notefileID}:
     post:
       operationId: CreateNotefile
@@ -956,6 +1232,9 @@ paths:
         - personalAccessToken: []
       tags:
         - device
+      x-custom-attributes:
+        permission: create
+        resource: blues:resources:app:APPSERIAL:notefiles
   /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}:
     get:
       operationId: GetNotefile
@@ -1005,6 +1284,9 @@ paths:
         - personalAccessToken: []
       tags:
         - device
+      x-custom-attributes:
+        permission: read
+        resource: blues:resources:app:APPSERIAL:notefiles
     post:
       operationId: AddQiNote
       description: Adds a Note to a Notefile, creating the Notefile if it doesn't yet exist.
@@ -1028,6 +1310,9 @@ paths:
         - personalAccessToken: []
       tags:
         - device
+      x-custom-attributes:
+        permission: create
+        resource: blues:resources:app:APPSERIAL:notes
   /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}:
     delete:
       operationId: DeleteNote
@@ -1046,6 +1331,9 @@ paths:
         - personalAccessToken: []
       tags:
         - device
+      x-custom-attributes:
+        permission: delete
+        resource: blues:resources:app:APPSERIAL:notes
     get:
       operationId: GetDbNote
       description: Get a note from a .db or .qi notefile
@@ -1089,6 +1377,9 @@ paths:
         - personalAccessToken: []
       tags:
         - device
+      x-custom-attributes:
+        permission: read
+        resource: blues:resources:app:APPSERIAL:notes
     post:
       operationId: AddDbNote
       description: Add a Note to a .db notefile.  if noteID is '-' then payload is ignored and empty notefile is created
@@ -1113,6 +1404,9 @@ paths:
         - personalAccessToken: []
       tags:
         - device
+      x-custom-attributes:
+        permission: create
+        resource: blues:resources:app:APPSERIAL:notes
     put:
       operationId: UpdateDbNote
       description: Update a note in a .db or .qi notefile
@@ -1137,6 +1431,9 @@ paths:
         - personalAccessToken: []
       tags:
         - device
+      x-custom-attributes:
+        permission: update
+        resource: blues:resources:app:APPSERIAL:notes
   /v1/projects/{projectOrProductUID}/devices/{deviceUID}/plans:
     get:
       operationId: GetDevicePlans
@@ -1150,6 +1447,9 @@ paths:
         - personalAccessToken: []
       tags:
         - device
+      x-custom-attributes:
+        permission: read
+        resource: blues:resources:app:APPSERIAL:devices
     parameters:
       - $ref: '#/components/parameters/projectOrProductUIDParam'
       - $ref: '#/components/parameters/deviceUIDParam'
@@ -1196,6 +1496,9 @@ paths:
         - personalAccessToken: []
       tags:
         - device
+      x-custom-attributes:
+        permission: create
+        resource: blues:resources:app:APPSERIAL:devices
   /v1/projects/{projectOrProductUID}/devices/{deviceUID}/public-key:
     get:
       operationId: GetDevicePublicKey
@@ -1224,6 +1527,9 @@ paths:
         - personalAccessToken: []
       tags:
         - device
+      x-custom-attributes:
+        permission: read
+        resource: blues:resources:app:APPSERIAL:devices
   /v1/projects/{projectOrProductUID}/devices/{deviceUID}/sessions:
     get:
       operationId: GetDeviceSessions
@@ -1245,6 +1551,9 @@ paths:
         - personalAccessToken: []
       tags:
         - device
+      x-custom-attributes:
+        permission: read
+        resource: blues:resources:app:APPSERIAL:devices
   /v1/projects/{projectOrProductUID}/devices/{deviceUID}/signal:
     post:
       operationId: SignalDevice
@@ -1276,6 +1585,9 @@ paths:
         - personalAccessToken: []
       tags:
         - device
+      x-custom-attributes:
+        permission: create
+        resource: blues:resources:app:APPSERIAL:devices
   /v1/projects/{projectOrProductUID}/devices/public-keys:
     get:
       operationId: GetDevicePublicKeys
@@ -1312,6 +1624,9 @@ paths:
         - personalAccessToken: []
       tags:
         - device
+      x-custom-attributes:
+        permission: read
+        resource: blues:resources:app:APPSERIAL:devices
   /v1/projects/{projectOrProductUID}/dfu/{firmwareType}/{action}:
     post:
       operationId: PerformDfuAction
@@ -1345,6 +1660,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: create
+        resource: blues:resources:app:APPSERIAL:devices
   /v1/projects/{projectOrProductUID}/dfu/{firmwareType}/history:
     get:
       operationId: GetDevicesDfuHistory
@@ -1378,6 +1696,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: read
+        resource: blues:resources:app:APPSERIAL:settings
   /v1/projects/{projectOrProductUID}/dfu/{firmwareType}/status:
     get:
       operationId: GetDevicesDfuStatus
@@ -1411,6 +1732,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: read
+        resource: blues:resources:app:APPSERIAL:settings
   /v1/projects/{projectOrProductUID}/environment_hierarchy:
     get:
       operationId: GetProjectEnvironmentHierarchy
@@ -1432,6 +1756,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: read
+        resource: blues:resources:app:APPSERIAL:settings
   /v1/projects/{projectOrProductUID}/environment_variables:
     get:
       operationId: GetProjectEnvironmentVariables
@@ -1445,6 +1772,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: read
+        resource: blues:resources:app:APPSERIAL:settings
     parameters:
       - $ref: '#/components/parameters/projectOrProductUIDParam'
     put:
@@ -1464,6 +1794,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: update
+        resource: blues:resources:app:APPSERIAL:settings
   /v1/projects/{projectOrProductUID}/environment_variables/{key}:
     delete:
       operationId: DeleteProjectEnvironmentVariable
@@ -1485,6 +1818,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: delete
+        resource: blues:resources:app:APPSERIAL:settings
   /v1/projects/{projectOrProductUID}/events:
     get:
       operationId: GetEvents
@@ -1532,6 +1868,9 @@ paths:
         - personalAccessToken: []
       tags:
         - event
+      x-custom-attributes:
+        permission: read
+        resource: blues:resources:app:APPSERIAL:events
   /v1/projects/{projectOrProductUID}/events-cursor:
     get:
       operationId: GetEventsByCursor
@@ -1554,6 +1893,9 @@ paths:
         - personalAccessToken: []
       tags:
         - event
+      x-custom-attributes:
+        permission: read
+        resource: blues:resources:app:APPSERIAL:events
   /v1/projects/{projectOrProductUID}/events/{eventUID}/route-logs:
     get:
       operationId: GetRouteLogsByEvent
@@ -1576,6 +1918,9 @@ paths:
         - personalAccessToken: []
       tags:
         - event
+      x-custom-attributes:
+        permission: read
+        resource: blues:resources:app:APPSERIAL:events
   /v1/projects/{projectOrProductUID}/firmware:
     get:
       operationId: GetFirmwareInfo
@@ -1606,6 +1951,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: read
+        resource: blues:resources:app:APPSERIAL:devices
   /v1/projects/{projectOrProductUID}/firmware/{firmwareType}/{filename}:
     delete:
       operationId: DeleteFirmware
@@ -1634,6 +1982,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: delete
+        resource: blues:resources:app:APPSERIAL:settings
     get:
       operationId: DownloadFirmware
       description: Download firmware binary
@@ -1659,6 +2010,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: read
+        resource: blues:resources:app:APPSERIAL:settings
     post:
       operationId: UpdateFirmware
       description: |
@@ -1697,6 +2051,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: update
+        resource: blues:resources:app:APPSERIAL:settings
     put:
       operationId: UploadFirmware
       description: Upload firmware binary
@@ -1741,6 +2098,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: read
+        resource: blues:resources:app:APPSERIAL:settings
   /v1/projects/{projectOrProductUID}/fleets:
     get:
       operationId: GetFleets
@@ -1754,6 +2114,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: read
+        resource: blues:resources:app:APPSERIAL:fleets
     parameters:
       - $ref: '#/components/parameters/projectOrProductUIDParam'
     post:
@@ -1789,6 +2152,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: create
+        resource: blues:resources:app:APPSERIAL:fleets
   /v1/projects/{projectOrProductUID}/fleets/{fleetUID}:
     delete:
       operationId: DeleteFleet
@@ -1802,6 +2168,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: delete
+        resource: blues:resources:app:APPSERIAL:fleets
     get:
       operationId: GetFleet
       description: Get Fleet
@@ -1816,6 +2185,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: read
+        resource: blues:resources:app:APPSERIAL:fleets
     parameters:
       - $ref: '#/components/parameters/projectOrProductUIDParam'
       - $ref: '#/components/parameters/fleetUIDParam'
@@ -1866,6 +2238,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: update
+        resource: blues:resources:app:APPSERIAL:fleets
   /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/devices:
     get:
       operationId: GetFleetDevices
@@ -1892,6 +2267,9 @@ paths:
         - personalAccessToken: []
       tags:
         - device
+      x-custom-attributes:
+        permission: read
+        resource: blues:resources:app:APPSERIAL:devices
   /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/environment_hierarchy:
     get:
       operationId: GetFleetEnvironmentHierarchy
@@ -1914,6 +2292,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: read
+        resource: blues:resources:app:APPSERIAL:fleets
   /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/environment_variables:
     get:
       operationId: GetFleetEnvironmentVariables
@@ -1927,6 +2308,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: read
+        resource: blues:resources:app:APPSERIAL:fleets
     parameters:
       - $ref: '#/components/parameters/projectOrProductUIDParam'
       - $ref: '#/components/parameters/fleetUIDParam'
@@ -1949,6 +2333,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: update
+        resource: blues:resources:app:APPSERIAL:fleets
   /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/environment_variables/{key}:
     delete:
       operationId: DeleteFleetEnvironmentVariable
@@ -1971,6 +2358,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: delete
+        resource: blues:resources:app:APPSERIAL:fleets
   /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/events:
     get:
       operationId: GetFleetEvents
@@ -2018,6 +2408,9 @@ paths:
         - personalAccessToken: []
       tags:
         - event
+      x-custom-attributes:
+        permission: read
+        resource: blues:resources:app:APPSERIAL:events
   /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/events-cursor:
     get:
       operationId: GetFleetEventsByCursor
@@ -2042,6 +2435,9 @@ paths:
         - personalAccessToken: []
       tags:
         - event
+      x-custom-attributes:
+        permission: read
+        resource: blues:resources:app:APPSERIAL:events
   /v1/projects/{projectOrProductUID}/global-transformation:
     post:
       operationId: SetGlobalEventTransformation
@@ -2052,9 +2448,9 @@ paths:
         description: JSONata expression which will be applied to each event before it is persisted and routed
         required: true
         content:
-          application/json:
+          text/plain:
             schema:
-              $ref: '#/components/schemas/JSONata'
+              type: string
       responses:
         '200':
           description: Successful operation
@@ -2064,6 +2460,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: update
+        resource: blues:resources:app:APPSERIAL:settings
   /v1/projects/{projectOrProductUID}/global-transformation/disable:
     post:
       operationId: DisableGlobalEventTransformation
@@ -2079,6 +2478,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: update
+        resource: blues:resources:app:APPSERIAL:settings
   /v1/projects/{projectOrProductUID}/global-transformation/enable:
     post:
       operationId: EnableGlobalEventTransformation
@@ -2094,6 +2496,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: update
+        resource: blues:resources:app:APPSERIAL:settings
   /v1/projects/{projectOrProductUID}/jobs:
     get:
       operationId: GetJobs
@@ -2109,6 +2514,9 @@ paths:
         - personalAccessToken: []
       tags:
         - jobs
+      x-custom-attributes:
+        permission: read
+        resource: blues:resources:app:APPSERIAL:settings
     post:
       operationId: CreateJob
       description: Create a new batch job with an optional name
@@ -2139,6 +2547,9 @@ paths:
         - personalAccessToken: []
       tags:
         - jobs
+      x-custom-attributes:
+        permission: create
+        resource: blues:resources:app:APPSERIAL:settings
   /v1/projects/{projectOrProductUID}/jobs/{jobUID}:
     delete:
       operationId: DeleteJob
@@ -2157,6 +2568,9 @@ paths:
         - personalAccessToken: []
       tags:
         - jobs
+      x-custom-attributes:
+        permission: delete
+        resource: blues:resources:app:APPSERIAL:settings
     get:
       operationId: GetJob
       description: Get a specific batch job definition
@@ -2174,6 +2588,9 @@ paths:
         - personalAccessToken: []
       tags:
         - jobs
+      x-custom-attributes:
+        permission: read
+        resource: blues:resources:app:APPSERIAL:settings
   /v1/projects/{projectOrProductUID}/jobs/{jobUID}/run:
     post:
       operationId: RunJob
@@ -2199,6 +2616,9 @@ paths:
         - personalAccessToken: []
       tags:
         - jobs
+      x-custom-attributes:
+        permission: create
+        resource: blues:resources:app:APPSERIAL:settings
   /v1/projects/{projectOrProductUID}/jobs/{jobUID}/runs:
     get:
       operationId: GetJobRuns
@@ -2230,6 +2650,9 @@ paths:
         - personalAccessToken: []
       tags:
         - jobs
+      x-custom-attributes:
+        permission: read
+        resource: blues:resources:app:APPSERIAL:settings
   /v1/projects/{projectOrProductUID}/jobs/runs/{reportUID}:
     get:
       operationId: GetJobRun
@@ -2248,6 +2671,9 @@ paths:
         - personalAccessToken: []
       tags:
         - jobs
+      x-custom-attributes:
+        permission: read
+        resource: blues:resources:app:APPSERIAL:settings
   /v1/projects/{projectOrProductUID}/jobs/runs/{reportUID}/cancel:
     post:
       operationId: CancelJobRun
@@ -2266,6 +2692,9 @@ paths:
         - personalAccessToken: []
       tags:
         - jobs
+      x-custom-attributes:
+        permission: delete
+        resource: blues:resources:app:APPSERIAL:settings
   /v1/projects/{projectOrProductUID}/members:
     get:
       operationId: GetProjectMembers
@@ -2290,6 +2719,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: read
+        resource: blues:resources:app:APPSERIAL:accounts
     parameters:
       - $ref: '#/components/parameters/projectOrProductUIDParam'
   /v1/projects/{projectOrProductUID}/monitors:
@@ -2307,6 +2739,9 @@ paths:
         - personalAccessToken: []
       tags:
         - monitor
+      x-custom-attributes:
+        permission: read
+        resource: blues:resources:app:APPSERIAL:devices
     post:
       operationId: CreateMonitor
       description: Create a new Monitor
@@ -2332,6 +2767,9 @@ paths:
         - personalAccessToken: []
       tags:
         - monitor
+      x-custom-attributes:
+        permission: create
+        resource: blues:resources:app:APPSERIAL:devices
   /v1/projects/{projectOrProductUID}/monitors/{monitorUID}:
     delete:
       operationId: DeleteMonitor
@@ -2352,6 +2790,9 @@ paths:
         - personalAccessToken: []
       tags:
         - monitor
+      x-custom-attributes:
+        permission: delete
+        resource: blues:resources:app:APPSERIAL:devices
     get:
       operationId: GetMonitor
       description: Get Monitor
@@ -2371,6 +2812,9 @@ paths:
         - personalAccessToken: []
       tags:
         - monitor
+      x-custom-attributes:
+        permission: read
+        resource: blues:resources:app:APPSERIAL:devices
     put:
       operationId: UpdateMonitor
       description: Update Monitor
@@ -2397,6 +2841,9 @@ paths:
         - personalAccessToken: []
       tags:
         - monitor
+      x-custom-attributes:
+        permission: update
+        resource: blues:resources:app:APPSERIAL:devices
   /v1/projects/{projectOrProductUID}/products:
     get:
       operationId: GetProducts
@@ -2419,6 +2866,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: read
+        resource: blues:resources:app:APPSERIAL:products
     parameters:
       - $ref: '#/components/parameters/projectOrProductUIDParam'
     post:
@@ -2461,6 +2911,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: create
+        resource: blues:resources:app:APPSERIAL:settings
   /v1/projects/{projectOrProductUID}/products/{productUID}:
     delete:
       operationId: DeleteProduct
@@ -2474,6 +2927,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: delete
+        resource: blues:resources:app:APPSERIAL:settings
     parameters:
       - $ref: '#/components/parameters/projectOrProductUIDParam'
       - $ref: '#/components/parameters/productUIDParam'
@@ -2530,6 +2986,9 @@ paths:
         - personalAccessToken: []
       tags:
         - route
+      x-custom-attributes:
+        permission: read
+        resource: blues:resources:app:APPSERIAL:routes
     post:
       operationId: CreateRoute
       description: Create Route within a Project
@@ -2589,6 +3048,9 @@ paths:
         - personalAccessToken: []
       tags:
         - route
+      x-custom-attributes:
+        permission: create
+        resource: blues:resources:app:APPSERIAL:routes
   /v1/projects/{projectOrProductUID}/routes/{routeUID}:
     delete:
       operationId: DeleteRoute
@@ -2605,6 +3067,9 @@ paths:
         - personalAccessToken: []
       tags:
         - route
+      x-custom-attributes:
+        permission: delete
+        resource: blues:resources:app:APPSERIAL:routes
     get:
       operationId: GetRoute
       description: Get single route within a project
@@ -2642,6 +3107,9 @@ paths:
         - personalAccessToken: []
       tags:
         - route
+      x-custom-attributes:
+        permission: update
+        resource: blues:resources:app:APPSERIAL:routes
     put:
       operationId: UpdateRoute
       description: Update route by UID
@@ -2702,6 +3170,9 @@ paths:
         - personalAccessToken: []
       tags:
         - route
+      x-custom-attributes:
+        permission: update
+        resource: blues:resources:app:APPSERIAL:routes
   /v1/projects/{projectOrProductUID}/routes/{routeUID}/route-logs:
     get:
       operationId: GetRouteLogsByRoute
@@ -2736,6 +3207,9 @@ paths:
         - personalAccessToken: []
       tags:
         - route
+      x-custom-attributes:
+        permission: read
+        resource: blues:resources:app:APPSERIAL:routes
   /v1/projects/{projectOrProductUID}/schemas:
     get:
       operationId: GetNotefileSchemas
@@ -2751,8 +3225,13 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/NotefileSchema'
+      security:
+        - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: read
+        resource: blues:resources:app:APPSERIAL:settings
   /v1/projects/{projectOrProductUID}/usage/data:
     get:
       operationId: GetDataUsage
@@ -2794,6 +3273,9 @@ paths:
         - personalAccessToken: []
       tags:
         - usage
+      x-custom-attributes:
+        permission: read
+        resource: blues:resources:app:APPSERIAL:events
   /v1/projects/{projectOrProductUID}/usage/events:
     get:
       operationId: GetEventsUsage
@@ -2863,6 +3345,9 @@ paths:
         - personalAccessToken: []
       tags:
         - usage
+      x-custom-attributes:
+        permission: read
+        resource: blues:resources:app:APPSERIAL:events
   /v1/projects/{projectOrProductUID}/usage/route-logs:
     get:
       operationId: GetRouteLogsUsage
@@ -2909,6 +3394,9 @@ paths:
         - personalAccessToken: []
       tags:
         - usage
+      x-custom-attributes:
+        permission: read
+        resource: blues:resources:app:APPSERIAL:events
   /v1/projects/{projectOrProductUID}/usage/sessions:
     get:
       operationId: GetSessionsUsage
@@ -2957,6 +3445,9 @@ paths:
         - personalAccessToken: []
       tags:
         - usage
+      x-custom-attributes:
+        permission: read
+        resource: blues:resources:app:APPSERIAL:events
   /v1/projects/{projectOrProductUID}/webhooks:
     get:
       operationId: GetWebhooks
@@ -2981,6 +3472,9 @@ paths:
         - personalAccessToken: []
       tags:
         - webhook
+      x-custom-attributes:
+        permission: update
+        resource: blues:resources:app:APPSERIAL:settings
   /v1/projects/{projectOrProductUID}/webhooks/{webhookUID}:
     delete:
       operationId: DeleteWebhook
@@ -2997,6 +3491,9 @@ paths:
         - personalAccessToken: []
       tags:
         - webhook
+      x-custom-attributes:
+        permission: update
+        resource: blues:resources:app:APPSERIAL:settings
     get:
       operationId: GetWebhook
       description: Retrieves the configuration settings for the specified webhook
@@ -3016,6 +3513,9 @@ paths:
         - personalAccessToken: []
       tags:
         - webhook
+      x-custom-attributes:
+        permission: update
+        resource: blues:resources:app:APPSERIAL:settings
     post:
       operationId: CreateWebhook
       description: Creates a webhook for the specified product with the given name. The name | must be unique within the project.
@@ -3042,6 +3542,9 @@ paths:
         - personalAccessToken: []
       tags:
         - webhook
+      x-custom-attributes:
+        permission: update
+        resource: blues:resources:app:APPSERIAL:settings
     put:
       operationId: UpdateWebhook
       description: Updates the configuration settings for the specified webhook. | Webhook will be created if it does not exist. Update body will completely replace the existing settings.
@@ -3066,6 +3569,9 @@ paths:
         - personalAccessToken: []
       tags:
         - webhook
+      x-custom-attributes:
+        permission: update
+        resource: blues:resources:app:APPSERIAL:settings
 components:
   parameters:
     billingAccountUIDParam:
