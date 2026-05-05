@@ -1211,7 +1211,7 @@ paths:
         - device
       x-custom-attributes:
         permission: read
-        resource: 'blues:resources:app:APPSERIAL:events'
+        resource: 'blues:resources:app:APPSERIAL:devices'
     parameters:
       - $ref: '#/components/parameters/projectOrProductUIDParam'
       - $ref: '#/components/parameters/deviceUIDParam'
