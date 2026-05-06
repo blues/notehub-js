@@ -1196,6 +1196,125 @@ paths:
       x-custom-attributes:
         permission: read
         resource: 'blues:resources:app:APPSERIAL:devices'
+  '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/journeys':
+    get:
+      operationId: GetDeviceJourneys
+      description: |
+        Get the list of journeys for a device, derived from `_track.qo` events. Returns journey metadata only (no event payloads). Capped at 100 most recent journeys; `has_more` is true when the cap is hit.
+      parameters:
+        - $ref: '#/components/parameters/projectOrProductUIDParam'
+        - $ref: '#/components/parameters/deviceUIDParam'
+        - $ref: '#/components/parameters/startDateParam'
+        - $ref: '#/components/parameters/endDateParam'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  has_more:
+                    type: boolean
+                  journeys:
+                    type: array
+                    items:
+                      properties:
+                        end_date:
+                          description: Latest event time within the journey.
+                          type: string
+                          format: date-time
+                        journey_id:
+                          description: |
+                            Identifier of the journey, taken from the `journey` field on `_track.qo` events. This value is itself a Unix timestamp marking the start of the journey.
+                          type: integer
+                          format: int64
+                        start_date:
+                          description: Earliest event time within the journey.
+                          type: string
+                          format: date-time
+                      required:
+                        - journey_id
+                        - start_date
+                        - end_date
+                      type: object
+                required:
+                  - journeys
+                  - has_more
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - device
+      x-custom-attributes:
+        permission: read
+        resource: 'blues:resources:app:APPSERIAL:devices'
+  '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/journeys/{journeyID}':
+    get:
+      operationId: GetDeviceJourney
+      description: |
+        Get a single journey for a device along with its `_track.qo` events. The events array is paginated via `pageSize` / `pageNum`; use `journey.has_more` to detect additional pages.
+      parameters:
+        - $ref: '#/components/parameters/projectOrProductUIDParam'
+        - $ref: '#/components/parameters/deviceUIDParam'
+        - name: journeyID
+          in: path
+          description: |
+            Identifier of the journey, taken from the `journey` field on `_track.qo` events (a Unix timestamp marking the start of the journey).
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - $ref: '#/components/parameters/pageSizeParam'
+        - $ref: '#/components/parameters/pageNumParam'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  end_date:
+                    description: Latest event time within the journey.
+                    type: string
+                    format: date-time
+                  journey:
+                    description: Paginated `_track.qo` events for the journey.
+                    type: object
+                    properties:
+                      events:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Event'
+                      has_more:
+                        type: boolean
+                    required:
+                      - events
+                      - has_more
+                  journey_id:
+                    description: Identifier of the journey.
+                    type: integer
+                    format: int64
+                  start_date:
+                    description: Earliest event time within the journey.
+                    type: string
+                    format: date-time
+                required:
+                  - journey_id
+                  - start_date
+                  - end_date
+                  - journey
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - device
+      x-custom-attributes:
+        permission: read
+        resource: 'blues:resources:app:APPSERIAL:devices'
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/latest':
     get:
       operationId: GetDeviceLatestEvents
