@@ -1195,8 +1195,8 @@ paths:
         - device
       x-custom-attributes:
         permission: read
-        resource: 'blues:resources:app:APPSERIAL:devices'
-  '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/journeys':
+        resource: blues:resources:app:APPSERIAL:devices
+  /v1/projects/{projectOrProductUID}/devices/{deviceUID}/journeys:
     get:
       operationId: GetDeviceJourneys
       description: |
@@ -1249,8 +1249,8 @@ paths:
         - device
       x-custom-attributes:
         permission: read
-        resource: 'blues:resources:app:APPSERIAL:devices'
-  '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/journeys/{journeyID}':
+        resource: blues:resources:app:APPSERIAL:devices
+  /v1/projects/{projectOrProductUID}/devices/{deviceUID}/journeys/{journeyID}:
     get:
       operationId: GetDeviceJourney
       description: |
@@ -1314,8 +1314,8 @@ paths:
         - device
       x-custom-attributes:
         permission: read
-        resource: 'blues:resources:app:APPSERIAL:devices'
-  '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/latest':
+        resource: blues:resources:app:APPSERIAL:devices
+  /v1/projects/{projectOrProductUID}/devices/{deviceUID}/latest:
     get:
       operationId: GetDeviceLatestEvents
       description: Get Device Latest Events
@@ -4538,6 +4538,7 @@ components:
         - billing_admin
         - billing_manager
         - project_creator
+        - billing_member
     BlynkRoute:
       type: object
       properties:
