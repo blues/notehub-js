@@ -2648,13 +2648,12 @@ paths:
           schema:
             type: string
       requestBody:
-        description: The job definition as raw JSON
+        description: The batch job definition
         required: true
         content:
           application/json:
             schema:
-              description: Job definition (structure varies by job type)
-              type: object
+              $ref: '#/components/schemas/JobDefinition'
       responses:
         '201':
           $ref: '#/components/responses/CreateJobResponse'
@@ -2773,12 +2772,39 @@ paths:
         permission: read
         resource: blues:resources:app:APPSERIAL:settings
   /v1/projects/{projectOrProductUID}/jobs/runs/{reportUID}:
+    delete:
+      operationId: DeleteJobRun
+      description: Delete the results of a job run
+      parameters:
+        - $ref: '#/components/parameters/projectOrProductUIDParam'
+        - $ref: '#/components/parameters/reportUIDParam'
+      responses:
+        '200':
+          description: Job run deleted successfully
+        '404':
+          description: Run not found
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - jobs
     get:
       operationId: GetJobRun
       description: Get the result of a job execution
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/reportUIDParam'
+        - name: view
+          in: query
+          description: "Controls the level of detail returned: 'summary' returns metadata only, 'detail' returns the full result payload"
+          required: false
+          schema:
+            type: string
+            default: summary
+            enum:
+              - summary
+              - detail
       responses:
         '200':
           $ref: '#/components/responses/GetJobRunResponse'
@@ -4518,6 +4544,58 @@ components:
           type: string
           format: uri
       additionalProperties: false
+    BatchJobRequests:
+      description: Operations to apply to a device
+      type: object
+      properties:
+        comment:
+          type: string
+        connectivity_assurance_disable:
+          description: Disable connectivity assurance for the device
+          type: boolean
+        connectivity_assurance_enable:
+          description: Enable connectivity assurance for the device
+          type: boolean
+        disable:
+          description: Disable the device
+          type: boolean
+        enable:
+          description: Enable the device
+          type: boolean
+        fleets_to_default:
+          description: Fleet UIDs to assign to the device if it has no fleets
+          type: array
+          items:
+            type: string
+        fleets_to_join:
+          description: Fleet UIDs to add the device to
+          type: array
+          items:
+            type: string
+        fleets_to_leave:
+          description: Fleet UIDs to remove the device from
+          type: array
+          items:
+            type: string
+        provision_product:
+          description: Product UID to provision the device with if not already provisioned
+          type: string
+        sn_to_default:
+          description: Set the device serial number only if not already set
+          type: string
+        sn_to_set:
+          description: Set the device serial number ("-" to clear)
+          type: string
+        vars_to_default:
+          description: Environment variables to set only if not already set
+          type: object
+          additionalProperties:
+            type: string
+        vars_to_set:
+          description: Environment variables to set (use "-" as value to clear)
+          type: object
+          additionalProperties:
+            type: string
     BillingAccount:
       type: object
       properties:
@@ -5676,13 +5754,23 @@ components:
         created_by:
           description: User who created the job
           type: string
-        definition:
-          description: Full job definition (only in detail view)
-          type: object
-          additionalProperties: true
         job_uid:
           description: Unique identifier for the job
           type: string
+        last_run_completed:
+          description: Unix timestamp when the most recent run completed (0 if still in progress)
+          type: integer
+          format: int64
+          example: 1775252922
+        last_run_status:
+          description: 'Status of the most recent job run. Terminal values are: "submitted", "completed successfully", "dry run completed successfully", "completed with errors", "cancelled". While a job is running, intermediate per-device progress updates may appear (e.g. "dev:000000000000000 completed", "dev:000000000000000 updated: ...").'
+          type: string
+          example: dry run completed successfully
+        last_run_submitted:
+          description: Unix timestamp when the most recent run was submitted
+          type: integer
+          format: int64
+          example: 1775252900
         name:
           description: Human-readable job name
           type: string
@@ -5691,50 +5779,167 @@ components:
         - name
         - created
         - created_by
+    JobDefinition:
+      description: Batch job definition
+      type: object
+      properties:
+        comment:
+          description: Human-readable description of the job
+          type: string
+        default_requests:
+          $ref: '#/components/schemas/BatchJobRequests'
+        device_requests:
+          description: Device-specific request overrides, keyed by device UID
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/BatchJobRequests'
+        report_options:
+          description: Controls what data is included in the job report
+          type: object
+          properties:
+            app_fleets:
+              description: Include project fleets in the report
+              type: boolean
+            app_info:
+              description: Include project info in the report
+              type: boolean
+            app_vars:
+              description: Include project environment variables in the report
+              type: boolean
+            comment:
+              type: string
+            device_activity:
+              description: Include device activity data in the report
+              type: boolean
+            device_health:
+              description: Include device health data in the report
+              type: boolean
+            device_info:
+              description: Include device info in the report
+              type: boolean
+            device_vars:
+              description: Include device environment variables in the report
+              type: boolean
+        select:
+          description: Device selection criteria
+          type: object
+          properties:
+            all_devices:
+              description: Select all devices in the project
+              type: boolean
+            comment:
+              type: string
+            devices:
+              description: Specific device UIDs to include
+              type: array
+              items:
+                type: string
+            devices_by_sn:
+              description: Serial number patterns to match (supports glob wildcards *, ?, [...])
+              type: array
+              items:
+                type: string
+            devices_in_fleets:
+              description: Fleet UIDs whose devices should be included
+              type: array
+              items:
+                type: string
+      example:
+        comment: Set environment variables on all devices in a fleet
+        default_requests:
+          vars_to_set:
+            firmware_channel: production
+            log_level: '1'
+        select:
+          devices_in_fleets:
+            - fleet:00000000-0000-0000-0000-000000000000
+    JobDetail:
+      description: Batch job with full definition
+      type: ''
+      properties: {}
+      allOf:
+        - $ref: '#/components/schemas/Job'
+        - properties:
+            definition:
+              $ref: '#/components/schemas/JobDefinition'
+          type: object
     JobRun:
       type: object
       properties:
         cancel:
           description: Whether cancellation was requested
           type: boolean
+          example: false
         completed:
           description: Unix timestamp when completed
           type: integer
           format: int64
+          example: 1775252922
         dry_run:
           description: Whether this was a dry run
           type: boolean
+          example: false
         job_name:
           description: Name of the job
           type: string
+          example: My Fleet Update
         job_uid:
           description: Unique identifier for the job
           type: string
+          example: 6862064d-9c7a-4d5d-88e6-2dfa8b4ef6c5
         report_uid:
           description: Unique identifier for this run
           type: string
+          example: 6862064d-9c7a-4d5d-88e6-2dfa8b4ef6c5-1776780688472
         results:
           description: Full results (only in detail view)
           type: object
+          example:
+            devices:
+              dev:000000000000001:
+                status: completed
+                vars_set:
+                  firmware_channel: production
+                  log_level: '1'
+              dev:000000000000002:
+                status: completed
+                vars_set:
+                  firmware_channel: production
+                  log_level: '1'
+            job:
+              dry_run: false
+              job_name: My Fleet Update
+              job_uid: 6862064d-9c7a-4d5d-88e6-2dfa8b4ef6c5
+              status: completed successfully
+              when_completed: 1775252922
+              when_started: 1775252900
+              when_submitted: 1775252900
+              when_updated: 1775252922
+              who_submitted: user@example.com
           additionalProperties: true
         started:
           description: Unix timestamp when started
           type: integer
           format: int64
+          example: 1775252900
         status:
           description: Current status (submitted, running, completed, cancelled, failed)
           type: string
+          example: completed successfully
         submitted:
           description: Unix timestamp when submitted
           type: integer
           format: int64
+          example: 1775252900
         submitted_by:
           description: User who submitted the run
           type: string
+          example: user@example.com
         updated:
           description: Unix timestamp of last update
           type: integer
           format: int64
+          example: 1775252922
       required:
         - report_uid
         - job_uid
@@ -7333,7 +7538,7 @@ components:
           schema:
             type: ''
             properties: {}
-            $ref: '#/components/schemas/Job'
+            $ref: '#/components/schemas/JobDetail'
     GetJobRunResponse:
       description: Job run details
       content:
