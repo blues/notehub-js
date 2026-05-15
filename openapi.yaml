@@ -1233,8 +1233,13 @@ paths:
                           description: Earliest event time within the journey.
                           type: string
                           format: date-time
+                        total_events:
+                          description: The number of _track.qo events in the journey.
+                          type: integer
+                          format: int64
                       required:
                         - journey_id
+                        - total_events
                         - start_date
                         - end_date
                       type: object
