@@ -46,6 +46,8 @@ paths:
           description: Internal Server Error
       tags:
         - authorization
+      x-custom-attributes:
+        permission: create
   /oauth2/token:
     post:
       operationId: OAuth2ClientCredentials
@@ -143,6 +145,8 @@ paths:
         - personalAccessToken: []
       tags:
         - billing_account
+      x-custom-attributes:
+        permission: read
   '/v1/billing-accounts/{billingAccountUID}':
     get:
       operationId: GetBillingAccount
@@ -191,6 +195,8 @@ paths:
         - personalAccessToken: []
       tags:
         - billing_account
+      x-custom-attributes:
+        permission: read
   '/v1/billing-accounts/{billingAccountUID}/balance-history':
     get:
       operationId: GetBillingAccountBalanceHistory
@@ -231,6 +237,8 @@ paths:
         - personalAccessToken: []
       tags:
         - billing_account
+      x-custom-attributes:
+        permission: read
   '/v1/products/{productUID}/devices/{deviceUID}/environment_variables_with_pin':
     get:
       operationId: GetDeviceEnvironmentVariablesByPin
@@ -240,8 +248,12 @@ paths:
           $ref: '#/components/responses/GetDeviceEnvironmentVariablesResponse'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
       tags:
         - device
+      x-custom-attributes:
+        permission: read
     parameters:
       - $ref: '#/components/parameters/productUIDParam'
       - $ref: '#/components/parameters/deviceUIDParam'
@@ -261,8 +273,82 @@ paths:
           $ref: '#/components/responses/EnvironmentVariablesResponse'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
       tags:
         - device
+      x-custom-attributes:
+        permission: update
+  '/v1/products/{productUID}/devices/{deviceUID}/webhook-event':
+    post:
+      operationId: CreateLegacyWebhookEvent
+      description: 'Legacy endpoint for sending an event from a webhook, associated with the given device (provisioning it if necessary). The request body is a Note-shaped object containing the notefile name, body, and optional payload.'
+      parameters:
+        - $ref: '#/components/parameters/productUIDParam'
+        - $ref: '#/components/parameters/deviceUIDParam'
+      requestBody:
+        description: 'A Note-shaped event with notefile name, JSON body, and optional base64-encoded payload.'
+        required: true
+        content:
+          application/json:
+            example:
+              body:
+                key: value
+              file: data.qo
+              payload: SGVsbG8sIFdvcmxkIQ==
+            schema:
+              type: object
+              properties:
+                body:
+                  description: Arbitrary JSON event body.
+                  type: object
+                  additionalProperties: true
+                file:
+                  description: The notefile to which the event should be written.
+                  type: string
+                payload:
+                  description: Optional base64-encoded binary payload.
+                  type: string
+              additionalProperties: true
+      responses:
+        '200':
+          description: Event created successfully
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - webhook
+      x-custom-attributes:
+        permission: create
+        resource: 'blues:resources:app:APPSERIAL:notes'
+  '/v1/products/{productUID}/devices/{deviceUID}/webhook-session':
+    put:
+      operationId: UpdateLegacyWebhookSession
+      description: Legacy endpoint for opening or updating a webhook session for the given device (provisioning the device if necessary). Used by external services that need to maintain a callable session against a device behind a webhook.
+      parameters:
+        - $ref: '#/components/parameters/productUIDParam'
+        - $ref: '#/components/parameters/deviceUIDParam'
+      requestBody:
+        description: Optional session metadata.
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: Webhook session updated successfully
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - webhook
+      x-custom-attributes:
+        permission: create
+        resource: 'blues:resources:app:APPSERIAL:notes'
   '/v1/products/{productUID}/ext-devices/{deviceUID}/event':
     post:
       operationId: CreateEventExtDevice
@@ -286,6 +372,9 @@ paths:
         - personalAccessToken: []
       tags:
         - external devices
+      x-custom-attributes:
+        permission: create
+        resource: 'blues:resources:app:APPSERIAL:notes'
   '/v1/products/{productUID}/ext-devices/{deviceUID}/session/close':
     post:
       operationId: ExtDeviceSessionClose
@@ -309,6 +398,9 @@ paths:
         - personalAccessToken: []
       tags:
         - external devices
+      x-custom-attributes:
+        permission: create
+        resource: 'blues:resources:app:APPSERIAL:notes'
   '/v1/products/{productUID}/ext-devices/{deviceUID}/session/open':
     post:
       operationId: ExtDeviceSessionOpen
@@ -332,6 +424,9 @@ paths:
         - personalAccessToken: []
       tags:
         - external devices
+      x-custom-attributes:
+        permission: create
+        resource: 'blues:resources:app:APPSERIAL:notes'
   '/v1/products/{productUID}/project':
     get:
       operationId: GetProjectByProduct
@@ -356,6 +451,114 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: read
+        resource: 'blues:resources:app:APPSERIAL:settings'
+  '/v1/products/{productUID}/webhooks/{webhookUID}/devices/{deviceUID}/event':
+    post:
+      operationId: CreateWebhookDeviceEventByProduct
+      description: 'Sends an event to be processed by the specified webhook, addressed by productUID, associated with the given device (provisioning it if necessary). The entire request body becomes the event body. The webhook''s configured JSONata transform, if any, is applied before routing.'
+      parameters:
+        - $ref: '#/components/parameters/productUIDParam'
+        - $ref: '#/components/parameters/webhookUIDParam'
+        - $ref: '#/components/parameters/deviceUIDParam'
+      requestBody:
+        description: The event body (arbitrary JSON)
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: Event created successfully
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - webhook
+      x-custom-attributes:
+        permission: create
+        resource: 'blues:resources:app:APPSERIAL:notes'
+  '/v1/products/{productUID}/webhooks/{webhookUID}/event':
+    post:
+      operationId: CreateWebhookEventByProduct
+      description: 'Sends an event to be processed by the specified webhook, addressed by productUID. The entire request body becomes the event body. The webhook''s configured JSONata transform, if any, is applied before routing. The event is not associated with a specific device.'
+      parameters:
+        - $ref: '#/components/parameters/productUIDParam'
+        - $ref: '#/components/parameters/webhookUIDParam'
+      requestBody:
+        description: The event body (arbitrary JSON)
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: Event created successfully
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - webhook
+      x-custom-attributes:
+        permission: create
+        resource: 'blues:resources:app:APPSERIAL:notes'
+  '/v1/products/{productUID}/webhooks/{webhookUID}/settings':
+    get:
+      operationId: GetWebhookSettingsByProduct
+      description: 'Retrieves the configuration settings for the specified webhook, addressed by productUID.'
+      parameters:
+        - $ref: '#/components/parameters/productUIDParam'
+        - $ref: '#/components/parameters/webhookUIDParam'
+      responses:
+        '200':
+          description: Webhook settings retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhookSettings'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - webhook
+      x-custom-attributes:
+        permission: update
+        resource: 'blues:resources:app:APPSERIAL:settings'
+    put:
+      operationId: UpdateWebhookSettingsByProduct
+      description: 'Updates the configuration settings for the specified webhook, addressed by productUID. Update body will completely replace the existing settings.'
+      parameters:
+        - $ref: '#/components/parameters/productUIDParam'
+        - $ref: '#/components/parameters/webhookUIDParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              disabled: false
+              transform: '{"device":body.end_device_ids.dev_eui,"sn":body.end_device_ids.device_id,"body":body.uplink_message.decoded_payload,"details":body}'
+            schema:
+              $ref: '#/components/schemas/WebhookSettings'
+      responses:
+        '200':
+          description: Webhook settings updated successfully
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - webhook
+      x-custom-attributes:
+        permission: update
+        resource: 'blues:resources:app:APPSERIAL:settings'
   /v1/projects:
     get:
       operationId: GetProjects
@@ -378,6 +581,8 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: read
     post:
       operationId: CreateProject
       description: Create a Project
@@ -412,6 +617,8 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: create
   '/v1/projects/{projectOrProductUID}':
     delete:
       operationId: DeleteProject
@@ -427,6 +634,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: delete
+        resource: 'blues:resources:app:APPSERIAL:settings'
     get:
       operationId: GetProject
       description: Get a Project by ProjectUID
@@ -445,6 +655,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: read
+        resource: 'blues:resources:app:APPSERIAL:settings'
   '/v1/projects/{projectOrProductUID}/alerts':
     get:
       operationId: GetAlerts
@@ -463,6 +676,9 @@ paths:
         - personalAccessToken: []
       tags:
         - alert
+      x-custom-attributes:
+        permission: read
+        resource: 'blues:resources:app:APPSERIAL:devices'
   '/v1/projects/{projectOrProductUID}/aws-role-config':
     get:
       operationId: GetAWSRoleConfig
@@ -485,6 +701,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: read
+        resource: 'blues:resources:app:APPSERIAL:settings'
   '/v1/projects/{projectOrProductUID}/clone':
     post:
       operationId: CloneProject
@@ -527,6 +746,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: create
+        resource: 'blues:resources:app:APPSERIAL:settings'
   '/v1/projects/{projectOrProductUID}/devices':
     get:
       operationId: GetDevices
@@ -553,6 +775,9 @@ paths:
         - personalAccessToken: []
       tags:
         - device
+      x-custom-attributes:
+        permission: read
+        resource: 'blues:resources:app:APPSERIAL:devices'
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}':
     delete:
       operationId: DeleteDevice
@@ -566,6 +791,9 @@ paths:
         - personalAccessToken: []
       tags:
         - device
+      x-custom-attributes:
+        permission: delete
+        resource: 'blues:resources:app:APPSERIAL:devices'
     get:
       operationId: GetDevice
       description: Get Device
@@ -582,6 +810,9 @@ paths:
         - personalAccessToken: []
       tags:
         - device
+      x-custom-attributes:
+        permission: read
+        resource: 'blues:resources:app:APPSERIAL:devices'
     parameters:
       - $ref: '#/components/parameters/projectOrProductUIDParam'
       - $ref: '#/components/parameters/deviceUIDParam'
@@ -606,6 +837,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: read
+        resource: 'blues:resources:app:APPSERIAL:settings'
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/dfu/{firmwareType}/status':
     get:
       operationId: GetDeviceDfuStatus
@@ -627,6 +861,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: read
+        resource: 'blues:resources:app:APPSERIAL:settings'
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/disable':
     post:
       operationId: DisableDevice
@@ -643,6 +880,9 @@ paths:
         - personalAccessToken: []
       tags:
         - device
+      x-custom-attributes:
+        permission: update
+        resource: 'blues:resources:app:APPSERIAL:devices'
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/enable':
     post:
       operationId: EnableDevice
@@ -659,6 +899,9 @@ paths:
         - personalAccessToken: []
       tags:
         - device
+      x-custom-attributes:
+        permission: update
+        resource: 'blues:resources:app:APPSERIAL:devices'
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_hierarchy':
     get:
       operationId: GetDeviceEnvironmentHierarchy
@@ -681,6 +924,9 @@ paths:
         - personalAccessToken: []
       tags:
         - device
+      x-custom-attributes:
+        permission: read
+        resource: 'blues:resources:app:APPSERIAL:devices'
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_variables':
     get:
       operationId: GetDeviceEnvironmentVariables
@@ -694,6 +940,9 @@ paths:
         - personalAccessToken: []
       tags:
         - device
+      x-custom-attributes:
+        permission: read
+        resource: 'blues:resources:app:APPSERIAL:devices'
     parameters:
       - $ref: '#/components/parameters/projectOrProductUIDParam'
       - $ref: '#/components/parameters/deviceUIDParam'
@@ -716,6 +965,9 @@ paths:
         - personalAccessToken: []
       tags:
         - device
+      x-custom-attributes:
+        permission: update
+        resource: 'blues:resources:app:APPSERIAL:devices'
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_variables/{key}':
     delete:
       operationId: DeleteDeviceEnvironmentVariable
@@ -738,6 +990,9 @@ paths:
         - personalAccessToken: []
       tags:
         - device
+      x-custom-attributes:
+        permission: delete
+        resource: 'blues:resources:app:APPSERIAL:devices'
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/files':
     delete:
       operationId: DeleteNotefiles
@@ -766,6 +1021,9 @@ paths:
         - personalAccessToken: []
       tags:
         - device
+      x-custom-attributes:
+        permission: delete
+        resource: 'blues:resources:app:APPSERIAL:notefiles'
     get:
       operationId: ListNotefiles
       description: Lists .qi and .db files for the device
@@ -799,6 +1057,9 @@ paths:
         - personalAccessToken: []
       tags:
         - device
+      x-custom-attributes:
+        permission: read
+        resource: 'blues:resources:app:APPSERIAL:notefiles'
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/fleets':
     delete:
       operationId: DeleteDeviceFromFleets
@@ -828,6 +1089,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: delete
+        resource: 'blues:resources:app:APPSERIAL:devices'
     get:
       operationId: GetDeviceFleets
       description: Get Device Fleets
@@ -840,6 +1104,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: read
+        resource: 'blues:resources:app:APPSERIAL:devices'
     parameters:
       - $ref: '#/components/parameters/projectOrProductUIDParam'
       - $ref: '#/components/parameters/deviceUIDParam'
@@ -871,6 +1138,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: update
+        resource: 'blues:resources:app:APPSERIAL:devices'
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/health-log':
     get:
       operationId: GetDeviceHealthLog
@@ -923,6 +1193,133 @@ paths:
         - personalAccessToken: []
       tags:
         - device
+      x-custom-attributes:
+        permission: read
+        resource: 'blues:resources:app:APPSERIAL:devices'
+  '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/journeys':
+    get:
+      operationId: GetDeviceJourneys
+      description: |
+        Get the list of journeys for a device, derived from `_track.qo` events. Returns journey metadata only (no event payloads). Capped at 100 most recent journeys; `has_more` is true when the cap is hit.
+      parameters:
+        - $ref: '#/components/parameters/projectOrProductUIDParam'
+        - $ref: '#/components/parameters/deviceUIDParam'
+        - $ref: '#/components/parameters/startDateParam'
+        - $ref: '#/components/parameters/endDateParam'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  has_more:
+                    type: boolean
+                  journeys:
+                    type: array
+                    items:
+                      properties:
+                        end_date:
+                          description: Latest event time within the journey.
+                          type: string
+                          format: date-time
+                        journey_id:
+                          description: |
+                            Identifier of the journey, taken from the `journey` field on `_track.qo` events. This value is itself a Unix timestamp marking the start of the journey.
+                          type: integer
+                          format: int64
+                        start_date:
+                          description: Earliest event time within the journey.
+                          type: string
+                          format: date-time
+                        total_events:
+                          description: The number of _track.qo events in the journey.
+                          type: integer
+                          format: int64
+                      required:
+                        - journey_id
+                        - total_events
+                        - start_date
+                        - end_date
+                      type: object
+                required:
+                  - journeys
+                  - has_more
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - device
+      x-custom-attributes:
+        permission: read
+        resource: 'blues:resources:app:APPSERIAL:devices'
+  '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/journeys/{journeyID}':
+    get:
+      operationId: GetDeviceJourney
+      description: |
+        Get a single journey for a device along with its `_track.qo` events. The events array is paginated via `pageSize` / `pageNum`; use `journey.has_more` to detect additional pages.
+      parameters:
+        - $ref: '#/components/parameters/projectOrProductUIDParam'
+        - $ref: '#/components/parameters/deviceUIDParam'
+        - name: journeyID
+          in: path
+          description: |
+            Identifier of the journey, taken from the `journey` field on `_track.qo` events (a Unix timestamp marking the start of the journey).
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - $ref: '#/components/parameters/pageSizeParam'
+        - $ref: '#/components/parameters/pageNumParam'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  end_date:
+                    description: Latest event time within the journey.
+                    type: string
+                    format: date-time
+                  journey:
+                    description: Paginated `_track.qo` events for the journey.
+                    type: object
+                    properties:
+                      events:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Event'
+                      has_more:
+                        type: boolean
+                    required:
+                      - events
+                      - has_more
+                  journey_id:
+                    description: Identifier of the journey.
+                    type: integer
+                    format: int64
+                  start_date:
+                    description: Earliest event time within the journey.
+                    type: string
+                    format: date-time
+                required:
+                  - journey_id
+                  - start_date
+                  - end_date
+                  - journey
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - device
+      x-custom-attributes:
+        permission: read
+        resource: 'blues:resources:app:APPSERIAL:devices'
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/latest':
     get:
       operationId: GetDeviceLatestEvents
@@ -939,6 +1336,9 @@ paths:
         - personalAccessToken: []
       tags:
         - device
+      x-custom-attributes:
+        permission: read
+        resource: 'blues:resources:app:APPSERIAL:devices'
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/notefiles/{notefileID}':
     post:
       operationId: CreateNotefile
@@ -956,6 +1356,9 @@ paths:
         - personalAccessToken: []
       tags:
         - device
+      x-custom-attributes:
+        permission: create
+        resource: 'blues:resources:app:APPSERIAL:notefiles'
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}':
     get:
       operationId: GetNotefile
@@ -1005,6 +1408,9 @@ paths:
         - personalAccessToken: []
       tags:
         - device
+      x-custom-attributes:
+        permission: read
+        resource: 'blues:resources:app:APPSERIAL:notefiles'
     post:
       operationId: AddQiNote
       description: 'Adds a Note to a Notefile, creating the Notefile if it doesn''t yet exist.'
@@ -1028,6 +1434,9 @@ paths:
         - personalAccessToken: []
       tags:
         - device
+      x-custom-attributes:
+        permission: create
+        resource: 'blues:resources:app:APPSERIAL:notes'
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}':
     delete:
       operationId: DeleteNote
@@ -1046,6 +1455,9 @@ paths:
         - personalAccessToken: []
       tags:
         - device
+      x-custom-attributes:
+        permission: delete
+        resource: 'blues:resources:app:APPSERIAL:notes'
     get:
       operationId: GetDbNote
       description: Get a note from a .db or .qi notefile
@@ -1089,6 +1501,9 @@ paths:
         - personalAccessToken: []
       tags:
         - device
+      x-custom-attributes:
+        permission: read
+        resource: 'blues:resources:app:APPSERIAL:notes'
     post:
       operationId: AddDbNote
       description: Add a Note to a .db notefile.  if noteID is '-' then payload is ignored and empty notefile is created
@@ -1113,6 +1528,9 @@ paths:
         - personalAccessToken: []
       tags:
         - device
+      x-custom-attributes:
+        permission: create
+        resource: 'blues:resources:app:APPSERIAL:notes'
     put:
       operationId: UpdateDbNote
       description: Update a note in a .db or .qi notefile
@@ -1137,6 +1555,9 @@ paths:
         - personalAccessToken: []
       tags:
         - device
+      x-custom-attributes:
+        permission: update
+        resource: 'blues:resources:app:APPSERIAL:notes'
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/plans':
     get:
       operationId: GetDevicePlans
@@ -1150,6 +1571,9 @@ paths:
         - personalAccessToken: []
       tags:
         - device
+      x-custom-attributes:
+        permission: read
+        resource: 'blues:resources:app:APPSERIAL:devices'
     parameters:
       - $ref: '#/components/parameters/projectOrProductUIDParam'
       - $ref: '#/components/parameters/deviceUIDParam'
@@ -1196,6 +1620,9 @@ paths:
         - personalAccessToken: []
       tags:
         - device
+      x-custom-attributes:
+        permission: create
+        resource: 'blues:resources:app:APPSERIAL:devices'
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/public-key':
     get:
       operationId: GetDevicePublicKey
@@ -1224,6 +1651,9 @@ paths:
         - personalAccessToken: []
       tags:
         - device
+      x-custom-attributes:
+        permission: read
+        resource: 'blues:resources:app:APPSERIAL:devices'
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/sessions':
     get:
       operationId: GetDeviceSessions
@@ -1245,6 +1675,9 @@ paths:
         - personalAccessToken: []
       tags:
         - device
+      x-custom-attributes:
+        permission: read
+        resource: 'blues:resources:app:APPSERIAL:devices'
   '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/signal':
     post:
       operationId: SignalDevice
@@ -1276,6 +1709,9 @@ paths:
         - personalAccessToken: []
       tags:
         - device
+      x-custom-attributes:
+        permission: create
+        resource: 'blues:resources:app:APPSERIAL:devices'
   '/v1/projects/{projectOrProductUID}/devices/public-keys':
     get:
       operationId: GetDevicePublicKeys
@@ -1312,6 +1748,9 @@ paths:
         - personalAccessToken: []
       tags:
         - device
+      x-custom-attributes:
+        permission: read
+        resource: 'blues:resources:app:APPSERIAL:devices'
   '/v1/projects/{projectOrProductUID}/dfu/{firmwareType}/{action}':
     post:
       operationId: PerformDfuAction
@@ -1345,6 +1784,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: create
+        resource: 'blues:resources:app:APPSERIAL:devices'
   '/v1/projects/{projectOrProductUID}/dfu/{firmwareType}/history':
     get:
       operationId: GetDevicesDfuHistory
@@ -1378,6 +1820,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: read
+        resource: 'blues:resources:app:APPSERIAL:settings'
   '/v1/projects/{projectOrProductUID}/dfu/{firmwareType}/status':
     get:
       operationId: GetDevicesDfuStatus
@@ -1411,6 +1856,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: read
+        resource: 'blues:resources:app:APPSERIAL:settings'
   '/v1/projects/{projectOrProductUID}/environment_hierarchy':
     get:
       operationId: GetProjectEnvironmentHierarchy
@@ -1432,6 +1880,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: read
+        resource: 'blues:resources:app:APPSERIAL:settings'
   '/v1/projects/{projectOrProductUID}/environment_variables':
     get:
       operationId: GetProjectEnvironmentVariables
@@ -1445,6 +1896,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: read
+        resource: 'blues:resources:app:APPSERIAL:settings'
     parameters:
       - $ref: '#/components/parameters/projectOrProductUIDParam'
     put:
@@ -1464,6 +1918,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: update
+        resource: 'blues:resources:app:APPSERIAL:settings'
   '/v1/projects/{projectOrProductUID}/environment_variables/{key}':
     delete:
       operationId: DeleteProjectEnvironmentVariable
@@ -1485,6 +1942,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: delete
+        resource: 'blues:resources:app:APPSERIAL:settings'
   '/v1/projects/{projectOrProductUID}/events':
     get:
       operationId: GetEvents
@@ -1532,6 +1992,9 @@ paths:
         - personalAccessToken: []
       tags:
         - event
+      x-custom-attributes:
+        permission: read
+        resource: 'blues:resources:app:APPSERIAL:events'
   '/v1/projects/{projectOrProductUID}/events-cursor':
     get:
       operationId: GetEventsByCursor
@@ -1554,6 +2017,9 @@ paths:
         - personalAccessToken: []
       tags:
         - event
+      x-custom-attributes:
+        permission: read
+        resource: 'blues:resources:app:APPSERIAL:events'
   '/v1/projects/{projectOrProductUID}/events/{eventUID}/route-logs':
     get:
       operationId: GetRouteLogsByEvent
@@ -1576,6 +2042,9 @@ paths:
         - personalAccessToken: []
       tags:
         - event
+      x-custom-attributes:
+        permission: read
+        resource: 'blues:resources:app:APPSERIAL:events'
   '/v1/projects/{projectOrProductUID}/firmware':
     get:
       operationId: GetFirmwareInfo
@@ -1606,6 +2075,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: read
+        resource: 'blues:resources:app:APPSERIAL:devices'
   '/v1/projects/{projectOrProductUID}/firmware/{firmwareType}/{filename}':
     delete:
       operationId: DeleteFirmware
@@ -1634,6 +2106,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: delete
+        resource: 'blues:resources:app:APPSERIAL:settings'
     get:
       operationId: DownloadFirmware
       description: Download firmware binary
@@ -1659,6 +2134,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: read
+        resource: 'blues:resources:app:APPSERIAL:settings'
     post:
       operationId: UpdateFirmware
       description: |
@@ -1697,6 +2175,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: update
+        resource: 'blues:resources:app:APPSERIAL:settings'
     put:
       operationId: UploadFirmware
       description: Upload firmware binary
@@ -1741,6 +2222,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: read
+        resource: 'blues:resources:app:APPSERIAL:settings'
   '/v1/projects/{projectOrProductUID}/fleets':
     get:
       operationId: GetFleets
@@ -1754,6 +2238,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: read
+        resource: 'blues:resources:app:APPSERIAL:fleets'
     parameters:
       - $ref: '#/components/parameters/projectOrProductUIDParam'
     post:
@@ -1789,6 +2276,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: create
+        resource: 'blues:resources:app:APPSERIAL:fleets'
   '/v1/projects/{projectOrProductUID}/fleets/{fleetUID}':
     delete:
       operationId: DeleteFleet
@@ -1802,6 +2292,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: delete
+        resource: 'blues:resources:app:APPSERIAL:fleets'
     get:
       operationId: GetFleet
       description: Get Fleet
@@ -1816,6 +2309,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: read
+        resource: 'blues:resources:app:APPSERIAL:fleets'
     parameters:
       - $ref: '#/components/parameters/projectOrProductUIDParam'
       - $ref: '#/components/parameters/fleetUIDParam'
@@ -1866,6 +2362,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: update
+        resource: 'blues:resources:app:APPSERIAL:fleets'
   '/v1/projects/{projectOrProductUID}/fleets/{fleetUID}/devices':
     get:
       operationId: GetFleetDevices
@@ -1892,6 +2391,9 @@ paths:
         - personalAccessToken: []
       tags:
         - device
+      x-custom-attributes:
+        permission: read
+        resource: 'blues:resources:app:APPSERIAL:devices'
   '/v1/projects/{projectOrProductUID}/fleets/{fleetUID}/environment_hierarchy':
     get:
       operationId: GetFleetEnvironmentHierarchy
@@ -1914,6 +2416,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: read
+        resource: 'blues:resources:app:APPSERIAL:fleets'
   '/v1/projects/{projectOrProductUID}/fleets/{fleetUID}/environment_variables':
     get:
       operationId: GetFleetEnvironmentVariables
@@ -1927,6 +2432,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: read
+        resource: 'blues:resources:app:APPSERIAL:fleets'
     parameters:
       - $ref: '#/components/parameters/projectOrProductUIDParam'
       - $ref: '#/components/parameters/fleetUIDParam'
@@ -1949,6 +2457,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: update
+        resource: 'blues:resources:app:APPSERIAL:fleets'
   '/v1/projects/{projectOrProductUID}/fleets/{fleetUID}/environment_variables/{key}':
     delete:
       operationId: DeleteFleetEnvironmentVariable
@@ -1971,6 +2482,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: delete
+        resource: 'blues:resources:app:APPSERIAL:fleets'
   '/v1/projects/{projectOrProductUID}/fleets/{fleetUID}/events':
     get:
       operationId: GetFleetEvents
@@ -2018,6 +2532,9 @@ paths:
         - personalAccessToken: []
       tags:
         - event
+      x-custom-attributes:
+        permission: read
+        resource: 'blues:resources:app:APPSERIAL:events'
   '/v1/projects/{projectOrProductUID}/fleets/{fleetUID}/events-cursor':
     get:
       operationId: GetFleetEventsByCursor
@@ -2042,6 +2559,9 @@ paths:
         - personalAccessToken: []
       tags:
         - event
+      x-custom-attributes:
+        permission: read
+        resource: 'blues:resources:app:APPSERIAL:events'
   '/v1/projects/{projectOrProductUID}/global-transformation':
     post:
       operationId: SetGlobalEventTransformation
@@ -2052,9 +2572,9 @@ paths:
         description: JSONata expression which will be applied to each event before it is persisted and routed
         required: true
         content:
-          application/json:
+          text/plain:
             schema:
-              $ref: '#/components/schemas/JSONata'
+              type: string
       responses:
         '200':
           description: Successful operation
@@ -2064,6 +2584,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: update
+        resource: 'blues:resources:app:APPSERIAL:settings'
   '/v1/projects/{projectOrProductUID}/global-transformation/disable':
     post:
       operationId: DisableGlobalEventTransformation
@@ -2079,6 +2602,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: update
+        resource: 'blues:resources:app:APPSERIAL:settings'
   '/v1/projects/{projectOrProductUID}/global-transformation/enable':
     post:
       operationId: EnableGlobalEventTransformation
@@ -2094,6 +2620,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: update
+        resource: 'blues:resources:app:APPSERIAL:settings'
   '/v1/projects/{projectOrProductUID}/jobs':
     get:
       operationId: GetJobs
@@ -2109,6 +2638,9 @@ paths:
         - personalAccessToken: []
       tags:
         - jobs
+      x-custom-attributes:
+        permission: read
+        resource: 'blues:resources:app:APPSERIAL:settings'
     post:
       operationId: CreateJob
       description: Create a new batch job with an optional name
@@ -2121,13 +2653,12 @@ paths:
           schema:
             type: string
       requestBody:
-        description: The job definition as raw JSON
+        description: The batch job definition
         required: true
         content:
           application/json:
             schema:
-              description: Job definition (structure varies by job type)
-              type: object
+              $ref: '#/components/schemas/JobDefinition'
       responses:
         '201':
           $ref: '#/components/responses/CreateJobResponse'
@@ -2139,6 +2670,9 @@ paths:
         - personalAccessToken: []
       tags:
         - jobs
+      x-custom-attributes:
+        permission: create
+        resource: 'blues:resources:app:APPSERIAL:settings'
   '/v1/projects/{projectOrProductUID}/jobs/{jobUID}':
     delete:
       operationId: DeleteJob
@@ -2157,6 +2691,9 @@ paths:
         - personalAccessToken: []
       tags:
         - jobs
+      x-custom-attributes:
+        permission: delete
+        resource: 'blues:resources:app:APPSERIAL:settings'
     get:
       operationId: GetJob
       description: Get a specific batch job definition
@@ -2174,6 +2711,9 @@ paths:
         - personalAccessToken: []
       tags:
         - jobs
+      x-custom-attributes:
+        permission: read
+        resource: 'blues:resources:app:APPSERIAL:settings'
   '/v1/projects/{projectOrProductUID}/jobs/{jobUID}/run':
     post:
       operationId: RunJob
@@ -2199,6 +2739,9 @@ paths:
         - personalAccessToken: []
       tags:
         - jobs
+      x-custom-attributes:
+        permission: create
+        resource: 'blues:resources:app:APPSERIAL:settings'
   '/v1/projects/{projectOrProductUID}/jobs/{jobUID}/runs':
     get:
       operationId: GetJobRuns
@@ -2230,13 +2773,43 @@ paths:
         - personalAccessToken: []
       tags:
         - jobs
+      x-custom-attributes:
+        permission: read
+        resource: 'blues:resources:app:APPSERIAL:settings'
   '/v1/projects/{projectOrProductUID}/jobs/runs/{reportUID}':
+    delete:
+      operationId: DeleteJobRun
+      description: Delete the results of a job run
+      parameters:
+        - $ref: '#/components/parameters/projectOrProductUIDParam'
+        - $ref: '#/components/parameters/reportUIDParam'
+      responses:
+        '200':
+          description: Job run deleted successfully
+        '404':
+          description: Run not found
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - jobs
     get:
       operationId: GetJobRun
       description: Get the result of a job execution
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/reportUIDParam'
+        - name: view
+          in: query
+          description: 'Controls the level of detail returned: ''summary'' returns metadata only, ''detail'' returns the full result payload'
+          required: false
+          schema:
+            type: string
+            default: summary
+            enum:
+              - summary
+              - detail
       responses:
         '200':
           $ref: '#/components/responses/GetJobRunResponse'
@@ -2248,6 +2821,9 @@ paths:
         - personalAccessToken: []
       tags:
         - jobs
+      x-custom-attributes:
+        permission: read
+        resource: 'blues:resources:app:APPSERIAL:settings'
   '/v1/projects/{projectOrProductUID}/jobs/runs/{reportUID}/cancel':
     post:
       operationId: CancelJobRun
@@ -2266,6 +2842,9 @@ paths:
         - personalAccessToken: []
       tags:
         - jobs
+      x-custom-attributes:
+        permission: delete
+        resource: 'blues:resources:app:APPSERIAL:settings'
   '/v1/projects/{projectOrProductUID}/members':
     get:
       operationId: GetProjectMembers
@@ -2290,6 +2869,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: read
+        resource: 'blues:resources:app:APPSERIAL:accounts'
     parameters:
       - $ref: '#/components/parameters/projectOrProductUIDParam'
   '/v1/projects/{projectOrProductUID}/monitors':
@@ -2307,6 +2889,9 @@ paths:
         - personalAccessToken: []
       tags:
         - monitor
+      x-custom-attributes:
+        permission: read
+        resource: 'blues:resources:app:APPSERIAL:devices'
     post:
       operationId: CreateMonitor
       description: Create a new Monitor
@@ -2332,6 +2917,9 @@ paths:
         - personalAccessToken: []
       tags:
         - monitor
+      x-custom-attributes:
+        permission: create
+        resource: 'blues:resources:app:APPSERIAL:devices'
   '/v1/projects/{projectOrProductUID}/monitors/{monitorUID}':
     delete:
       operationId: DeleteMonitor
@@ -2352,6 +2940,9 @@ paths:
         - personalAccessToken: []
       tags:
         - monitor
+      x-custom-attributes:
+        permission: delete
+        resource: 'blues:resources:app:APPSERIAL:devices'
     get:
       operationId: GetMonitor
       description: Get Monitor
@@ -2371,6 +2962,9 @@ paths:
         - personalAccessToken: []
       tags:
         - monitor
+      x-custom-attributes:
+        permission: read
+        resource: 'blues:resources:app:APPSERIAL:devices'
     put:
       operationId: UpdateMonitor
       description: Update Monitor
@@ -2397,6 +2991,9 @@ paths:
         - personalAccessToken: []
       tags:
         - monitor
+      x-custom-attributes:
+        permission: update
+        resource: 'blues:resources:app:APPSERIAL:devices'
   '/v1/projects/{projectOrProductUID}/products':
     get:
       operationId: GetProducts
@@ -2419,6 +3016,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: read
+        resource: 'blues:resources:app:APPSERIAL:products'
     parameters:
       - $ref: '#/components/parameters/projectOrProductUIDParam'
     post:
@@ -2461,6 +3061,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: create
+        resource: 'blues:resources:app:APPSERIAL:settings'
   '/v1/projects/{projectOrProductUID}/products/{productUID}':
     delete:
       operationId: DeleteProduct
@@ -2474,6 +3077,9 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: delete
+        resource: 'blues:resources:app:APPSERIAL:settings'
     parameters:
       - $ref: '#/components/parameters/projectOrProductUIDParam'
       - $ref: '#/components/parameters/productUIDParam'
@@ -2530,6 +3136,9 @@ paths:
         - personalAccessToken: []
       tags:
         - route
+      x-custom-attributes:
+        permission: read
+        resource: 'blues:resources:app:APPSERIAL:routes'
     post:
       operationId: CreateRoute
       description: Create Route within a Project
@@ -2589,6 +3198,9 @@ paths:
         - personalAccessToken: []
       tags:
         - route
+      x-custom-attributes:
+        permission: create
+        resource: 'blues:resources:app:APPSERIAL:routes'
   '/v1/projects/{projectOrProductUID}/routes/{routeUID}':
     delete:
       operationId: DeleteRoute
@@ -2605,6 +3217,9 @@ paths:
         - personalAccessToken: []
       tags:
         - route
+      x-custom-attributes:
+        permission: delete
+        resource: 'blues:resources:app:APPSERIAL:routes'
     get:
       operationId: GetRoute
       description: Get single route within a project
@@ -2642,6 +3257,9 @@ paths:
         - personalAccessToken: []
       tags:
         - route
+      x-custom-attributes:
+        permission: update
+        resource: 'blues:resources:app:APPSERIAL:routes'
     put:
       operationId: UpdateRoute
       description: Update route by UID
@@ -2702,6 +3320,9 @@ paths:
         - personalAccessToken: []
       tags:
         - route
+      x-custom-attributes:
+        permission: update
+        resource: 'blues:resources:app:APPSERIAL:routes'
   '/v1/projects/{projectOrProductUID}/routes/{routeUID}/route-logs':
     get:
       operationId: GetRouteLogsByRoute
@@ -2736,6 +3357,9 @@ paths:
         - personalAccessToken: []
       tags:
         - route
+      x-custom-attributes:
+        permission: read
+        resource: 'blues:resources:app:APPSERIAL:routes'
   '/v1/projects/{projectOrProductUID}/schemas':
     get:
       operationId: GetNotefileSchemas
@@ -2751,8 +3375,113 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/NotefileSchema'
+      security:
+        - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: read
+        resource: 'blues:resources:app:APPSERIAL:settings'
+  '/v1/projects/{projectOrProductUID}/secrets':
+    get:
+      operationId: GetProjectSecrets
+      description: 'Get all secrets for a project (metadata only, values are never returned)'
+      responses:
+        '200':
+          $ref: '#/components/responses/GetProjectSecretsResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - project
+      x-custom-attributes:
+        permission: read
+        resource: 'blues:resources:app:APPSERIAL:settings'
+    parameters:
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
+    post:
+      operationId: CreateProjectSecret
+      description: Create a new project secret
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateProjectSecretRequest'
+      responses:
+        '201':
+          description: Secret created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectSecret'
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        '409':
+          $ref: '#/components/responses/ErrorResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - project
+      x-custom-attributes:
+        permission: create
+        resource: 'blues:resources:app:APPSERIAL:settings'
+  '/v1/projects/{projectOrProductUID}/secrets/{secretName}':
+    delete:
+      operationId: DeleteProjectSecret
+      description: Delete a project secret by name
+      responses:
+        '204':
+          description: Secret deleted successfully
+        '404':
+          $ref: '#/components/responses/ErrorResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - project
+      x-custom-attributes:
+        permission: delete
+        resource: 'blues:resources:app:APPSERIAL:settings'
+    parameters:
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
+      - name: secretName
+        in: path
+        description: The name of the secret.
+        required: true
+        schema:
+          type: string
+    put:
+      operationId: UpdateProjectSecret
+      description: Update the value of an existing project secret
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateProjectSecretRequest'
+      responses:
+        '200':
+          description: Secret updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectSecret'
+        '404':
+          $ref: '#/components/responses/ErrorResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - project
+      x-custom-attributes:
+        permission: update
+        resource: 'blues:resources:app:APPSERIAL:settings'
   '/v1/projects/{projectOrProductUID}/usage/data':
     get:
       operationId: GetDataUsage
@@ -2794,6 +3523,9 @@ paths:
         - personalAccessToken: []
       tags:
         - usage
+      x-custom-attributes:
+        permission: read
+        resource: 'blues:resources:app:APPSERIAL:events'
   '/v1/projects/{projectOrProductUID}/usage/events':
     get:
       operationId: GetEventsUsage
@@ -2863,6 +3595,9 @@ paths:
         - personalAccessToken: []
       tags:
         - usage
+      x-custom-attributes:
+        permission: read
+        resource: 'blues:resources:app:APPSERIAL:events'
   '/v1/projects/{projectOrProductUID}/usage/route-logs':
     get:
       operationId: GetRouteLogsUsage
@@ -2909,6 +3644,9 @@ paths:
         - personalAccessToken: []
       tags:
         - usage
+      x-custom-attributes:
+        permission: read
+        resource: 'blues:resources:app:APPSERIAL:events'
   '/v1/projects/{projectOrProductUID}/usage/sessions':
     get:
       operationId: GetSessionsUsage
@@ -2957,6 +3695,9 @@ paths:
         - personalAccessToken: []
       tags:
         - usage
+      x-custom-attributes:
+        permission: read
+        resource: 'blues:resources:app:APPSERIAL:events'
   '/v1/projects/{projectOrProductUID}/webhooks':
     get:
       operationId: GetWebhooks
@@ -2981,6 +3722,9 @@ paths:
         - personalAccessToken: []
       tags:
         - webhook
+      x-custom-attributes:
+        permission: update
+        resource: 'blues:resources:app:APPSERIAL:settings'
   '/v1/projects/{projectOrProductUID}/webhooks/{webhookUID}':
     delete:
       operationId: DeleteWebhook
@@ -2997,6 +3741,9 @@ paths:
         - personalAccessToken: []
       tags:
         - webhook
+      x-custom-attributes:
+        permission: update
+        resource: 'blues:resources:app:APPSERIAL:settings'
     get:
       operationId: GetWebhook
       description: Retrieves the configuration settings for the specified webhook
@@ -3016,6 +3763,9 @@ paths:
         - personalAccessToken: []
       tags:
         - webhook
+      x-custom-attributes:
+        permission: update
+        resource: 'blues:resources:app:APPSERIAL:settings'
     post:
       operationId: CreateWebhook
       description: Creates a webhook for the specified product with the given name. The name | must be unique within the project.
@@ -3042,6 +3792,9 @@ paths:
         - personalAccessToken: []
       tags:
         - webhook
+      x-custom-attributes:
+        permission: update
+        resource: 'blues:resources:app:APPSERIAL:settings'
     put:
       operationId: UpdateWebhook
       description: Updates the configuration settings for the specified webhook. | Webhook will be created if it does not exist. Update body will completely replace the existing settings.
@@ -3066,6 +3819,9 @@ paths:
         - personalAccessToken: []
       tags:
         - webhook
+      x-custom-attributes:
+        permission: update
+        resource: 'blues:resources:app:APPSERIAL:settings'
 components:
   parameters:
     billingAccountUIDParam:
@@ -3893,6 +4649,58 @@ components:
           type: string
           format: uri
       additionalProperties: false
+    BatchJobRequests:
+      description: Operations to apply to a device
+      type: object
+      properties:
+        comment:
+          type: string
+        connectivity_assurance_disable:
+          description: Disable connectivity assurance for the device
+          type: boolean
+        connectivity_assurance_enable:
+          description: Enable connectivity assurance for the device
+          type: boolean
+        disable:
+          description: Disable the device
+          type: boolean
+        enable:
+          description: Enable the device
+          type: boolean
+        fleets_to_default:
+          description: Fleet UIDs to assign to the device if it has no fleets
+          type: array
+          items:
+            type: string
+        fleets_to_join:
+          description: Fleet UIDs to add the device to
+          type: array
+          items:
+            type: string
+        fleets_to_leave:
+          description: Fleet UIDs to remove the device from
+          type: array
+          items:
+            type: string
+        provision_product:
+          description: Product UID to provision the device with if not already provisioned
+          type: string
+        sn_to_default:
+          description: Set the device serial number only if not already set
+          type: string
+        sn_to_set:
+          description: Set the device serial number ("-" to clear)
+          type: string
+        vars_to_default:
+          description: Environment variables to set only if not already set
+          type: object
+          additionalProperties:
+            type: string
+        vars_to_set:
+          description: Environment variables to set (use "-" as value to clear)
+          type: object
+          additionalProperties:
+            type: string
     BillingAccount:
       type: object
       properties:
@@ -3913,6 +4721,7 @@ components:
         - billing_admin
         - billing_manager
         - project_creator
+        - billing_member
     BlynkRoute:
       type: object
       properties:
@@ -3998,6 +4807,18 @@ components:
             - alert_routes
             - source_type
             - threshold
+    CreateProjectSecretRequest:
+      type: object
+      properties:
+        name:
+          description: The secret name (alphanumeric and underscores only).
+          type: string
+        value:
+          description: 'The secret value (encrypted at rest, never returned after creation).'
+          type: string
+      required:
+        - name
+        - value
     CreateUpdateRepository:
       type: object
       properties:
@@ -4990,6 +5811,15 @@ components:
       items:
         type: string
       properties: {}
+    GetProjectSecretsResponse:
+      type: object
+      properties:
+        secrets:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProjectSecret'
+      required:
+        - secrets
     GoogleRoute:
       type: object
       properties:
@@ -5050,13 +5880,23 @@ components:
         created_by:
           description: User who created the job
           type: string
-        definition:
-          description: Full job definition (only in detail view)
-          type: object
-          additionalProperties: true
         job_uid:
           description: Unique identifier for the job
           type: string
+        last_run_completed:
+          description: Unix timestamp when the most recent run completed (0 if still in progress)
+          type: integer
+          format: int64
+          example: 1775252922
+        last_run_status:
+          description: 'Status of the most recent job run. Terminal values are: "submitted", "completed successfully", "dry run completed successfully", "completed with errors", "cancelled". While a job is running, intermediate per-device progress updates may appear (e.g. "dev:000000000000000 completed", "dev:000000000000000 updated: ...").'
+          type: string
+          example: dry run completed successfully
+        last_run_submitted:
+          description: Unix timestamp when the most recent run was submitted
+          type: integer
+          format: int64
+          example: 1775252900
         name:
           description: Human-readable job name
           type: string
@@ -5065,50 +5905,167 @@ components:
         - name
         - created
         - created_by
+    JobDefinition:
+      description: Batch job definition
+      type: object
+      properties:
+        comment:
+          description: Human-readable description of the job
+          type: string
+        default_requests:
+          $ref: '#/components/schemas/BatchJobRequests'
+        device_requests:
+          description: 'Device-specific request overrides, keyed by device UID'
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/BatchJobRequests'
+        report_options:
+          description: Controls what data is included in the job report
+          type: object
+          properties:
+            app_fleets:
+              description: Include project fleets in the report
+              type: boolean
+            app_info:
+              description: Include project info in the report
+              type: boolean
+            app_vars:
+              description: Include project environment variables in the report
+              type: boolean
+            comment:
+              type: string
+            device_activity:
+              description: Include device activity data in the report
+              type: boolean
+            device_health:
+              description: Include device health data in the report
+              type: boolean
+            device_info:
+              description: Include device info in the report
+              type: boolean
+            device_vars:
+              description: Include device environment variables in the report
+              type: boolean
+        select:
+          description: Device selection criteria
+          type: object
+          properties:
+            all_devices:
+              description: Select all devices in the project
+              type: boolean
+            comment:
+              type: string
+            devices:
+              description: Specific device UIDs to include
+              type: array
+              items:
+                type: string
+            devices_by_sn:
+              description: 'Serial number patterns to match (supports glob wildcards *, ?, [...])'
+              type: array
+              items:
+                type: string
+            devices_in_fleets:
+              description: Fleet UIDs whose devices should be included
+              type: array
+              items:
+                type: string
+      example:
+        comment: Set environment variables on all devices in a fleet
+        default_requests:
+          vars_to_set:
+            firmware_channel: production
+            log_level: '1'
+        select:
+          devices_in_fleets:
+            - 'fleet:00000000-0000-0000-0000-000000000000'
+    JobDetail:
+      description: Batch job with full definition
+      type: ''
+      properties: {}
+      allOf:
+        - $ref: '#/components/schemas/Job'
+        - properties:
+            definition:
+              $ref: '#/components/schemas/JobDefinition'
+          type: object
     JobRun:
       type: object
       properties:
         cancel:
           description: Whether cancellation was requested
           type: boolean
+          example: false
         completed:
           description: Unix timestamp when completed
           type: integer
           format: int64
+          example: 1775252922
         dry_run:
           description: Whether this was a dry run
           type: boolean
+          example: false
         job_name:
           description: Name of the job
           type: string
+          example: My Fleet Update
         job_uid:
           description: Unique identifier for the job
           type: string
+          example: 6862064d-9c7a-4d5d-88e6-2dfa8b4ef6c5
         report_uid:
           description: Unique identifier for this run
           type: string
+          example: 6862064d-9c7a-4d5d-88e6-2dfa8b4ef6c5-1776780688472
         results:
           description: Full results (only in detail view)
           type: object
+          example:
+            devices:
+              'dev:000000000000001':
+                status: completed
+                vars_set:
+                  firmware_channel: production
+                  log_level: '1'
+              'dev:000000000000002':
+                status: completed
+                vars_set:
+                  firmware_channel: production
+                  log_level: '1'
+            job:
+              dry_run: false
+              job_name: My Fleet Update
+              job_uid: 6862064d-9c7a-4d5d-88e6-2dfa8b4ef6c5
+              status: completed successfully
+              when_completed: 1775252922
+              when_started: 1775252900
+              when_submitted: 1775252900
+              when_updated: 1775252922
+              who_submitted: user@example.com
           additionalProperties: true
         started:
           description: Unix timestamp when started
           type: integer
           format: int64
+          example: 1775252900
         status:
           description: 'Current status (submitted, running, completed, cancelled, failed)'
           type: string
+          example: completed successfully
         submitted:
           description: Unix timestamp when submitted
           type: integer
           format: int64
+          example: 1775252900
         submitted_by:
           description: User who submitted the run
           type: string
+          example: user@example.com
         updated:
           description: Unix timestamp of last update
           type: integer
           format: int64
+          example: 1775252922
       required:
         - report_uid
         - job_uid
@@ -5225,6 +6182,16 @@ components:
           type: integer
         uid:
           type: string
+        usage_scope:
+          description: 'For usage monitors: the scope of aggregation. Supported values are "device" and "fleet".'
+          type: string
+        usage_type:
+          description: 'For usage monitors: the type of data usage to monitor. Supported values are "cellular" and "satellite".'
+          type: string
+        usage_window:
+          description: 'For usage monitors: the rolling time window in days to sum usage over (e.g. 30 for 30 days).'
+          type: integer
+          format: int32
     MqttRoute:
       type: object
       properties:
@@ -5566,6 +6533,31 @@ components:
         - name
         - email
         - role
+    ProjectSecret:
+      description: Metadata for a project secret. The value is never returned.
+      type: object
+      properties:
+        created:
+          description: When the secret was first created.
+          type: string
+          format: date-time
+        created_by:
+          description: The actor who created the secret.
+          type: string
+        modified:
+          description: When the secret was last updated.
+          type: string
+          format: date-time
+        modified_by:
+          description: The actor who last updated the secret.
+          type: string
+        name:
+          description: The secret name (alphanumeric and underscores only).
+          type: string
+      required:
+        - name
+        - created
+        - created_by
     ProxyRoute:
       type: object
       properties:
@@ -5641,6 +6633,67 @@ components:
         uid:
           description: The unique identifier for the data repository
           type: string
+    RepositoryListResponse:
+      type: object
+      properties:
+        repositories:
+          type: array
+          items:
+            $ref: '#/components/schemas/Repository'
+      required:
+        - repositories
+    RepositoryTokenRequest:
+      type: object
+      properties:
+        intent:
+          description: |
+            Access intent for the vended credentials. Only `read` is
+            supported today; `write` and `admin` are reserved for future use.
+          type: string
+          default: read
+          enum:
+            - read
+        ttl_seconds:
+          description: |
+            Requested credential lifetime in seconds. Clamped server-side to
+            [60, 3600]. Defaults to 900 (15 minutes) if omitted.
+          type: integer
+          default: 900
+          maximum: 3600
+          minimum: 60
+    RepositoryTokenResponse:
+      type: object
+      properties:
+        database:
+          description: Storage service database name scoped to this repository
+          type: string
+        expires_at:
+          description: |
+            Absolute expiration time of the ephemeral user. The storage
+            service will reject connections and queries after this instant.
+          type: string
+          format: date-time
+        host:
+          description: Storage service hostname the caller should connect to
+          type: string
+        password:
+          description: |
+            Ephemeral password. Returned once; not stored by Notehub. Hold
+            this in memory only and discard after `expires_at`.
+          type: string
+        port:
+          description: Storage service port
+          type: integer
+        username:
+          description: Ephemeral storage service username (prefixed with `u_`)
+          type: string
+      required:
+        - host
+        - port
+        - username
+        - password
+        - database
+        - expires_at
     Role:
       type: string
       properties: {}
@@ -6074,6 +7127,14 @@ components:
         version:
           description: The firmware version string.
           type: string
+    UpdateProjectSecretRequest:
+      type: object
+      properties:
+        value:
+          description: 'The new secret value (encrypted at rest, never returned).'
+          type: string
+      required:
+        - value
     UploadMetadata:
       type: object
       properties:
@@ -6636,7 +7697,7 @@ components:
           schema:
             type: ''
             properties: {}
-            $ref: '#/components/schemas/Job'
+            $ref: '#/components/schemas/JobDetail'
     GetJobRunResponse:
       description: Job run details
       content:
@@ -6671,6 +7732,14 @@ components:
                   $ref: '#/components/schemas/Job'
             required:
               - jobs
+    GetProjectSecretsResponse:
+      description: The response body from a get project secrets request.
+      content:
+        application/json:
+          schema:
+            type: ''
+            properties: {}
+            $ref: '#/components/schemas/GetProjectSecretsResponse'
     LatestResponse:
       description: The response body for a Latest Events request.
       content:
