@@ -268,7 +268,7 @@ $ git clone git@github.com:blues/notehub-js.git
 4. At the root of the project, run the following script command from your terminal:
 
 ```shell
-$ npm run filterOpenapi
+$ pnpm run filterOpenapi
 ```
 
 This command will make a copy of the `openapi.yaml` file named `openapi.filtered.yaml` which has removed any query parameters marked as `deprecated` from the `openapi.yaml` file. Removing these now deprecated params ensures the generated SDK docs and sample code is clear,up-to-date, and free from potentially confusing artifacts to trip up users.
@@ -276,7 +276,7 @@ This command will make a copy of the `openapi.yaml` file named `openapi.filtered
 5. Still at the root of the project, run the following script command from your terminal:
 
 ```shell
-$ npm run generateDocs
+$ pnpm run generateDocs
 ```
 
 This command will kick off the OpenAPI Generator tool to generate a new copy of the library inside of the `src/` folder, which can then be merged to the `main` repo branch and released to npm.

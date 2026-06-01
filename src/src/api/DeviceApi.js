@@ -21,6 +21,8 @@ import Error from "../model/Error";
 import GetDbNote200Response from "../model/GetDbNote200Response";
 import GetDeviceEnvironmentVariablesByPin200Response from "../model/GetDeviceEnvironmentVariablesByPin200Response";
 import GetDeviceHealthLog200Response from "../model/GetDeviceHealthLog200Response";
+import GetDeviceJourney200Response from "../model/GetDeviceJourney200Response";
+import GetDeviceJourneys200Response from "../model/GetDeviceJourneys200Response";
 import GetDeviceLatestEvents200Response from "../model/GetDeviceLatestEvents200Response";
 import GetDevicePlans200Response from "../model/GetDevicePlans200Response";
 import GetDevicePublicKey200Response from "../model/GetDevicePublicKey200Response";
@@ -36,7 +38,7 @@ import SignalDevice200Response from "../model/SignalDevice200Response";
 /**
  * Device service.
  * @module api/DeviceApi
- * @version 6.2.0
+ * @version 6.3.0
  */
 export default class DeviceApi {
   /**
@@ -1071,7 +1073,7 @@ export default class DeviceApi {
     };
     let formParams = {};
 
-    let authNames = [];
+    let authNames = ["personalAccessToken"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = GetDeviceEnvironmentVariablesByPin200Response;
@@ -1178,6 +1180,171 @@ export default class DeviceApi {
    */
   getDeviceHealthLog(projectOrProductUID, deviceUID, opts) {
     return this.getDeviceHealthLogWithHttpInfo(
+      projectOrProductUID,
+      deviceUID,
+      opts
+    ).then(function (response_and_data) {
+      return response_and_data.data;
+    });
+  }
+
+  /**
+   * Get a single journey for a device along with its `_track.qo` events. The events array is paginated via `pageSize` / `pageNum`; use `journey.has_more` to detect additional pages.
+   * @param {String} projectOrProductUID
+   * @param {String} deviceUID
+   * @param {Number} journeyID Identifier of the journey, taken from the `journey` field on `_track.qo` events (a Unix timestamp marking the start of the journey).
+   * @param {Object} opts Optional parameters
+   * @param {Number} opts.pageSize  (default to 50)
+   * @param {Number} opts.pageNum  (default to 1)
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetDeviceJourney200Response} and HTTP response
+   */
+  getDeviceJourneyWithHttpInfo(
+    projectOrProductUID,
+    deviceUID,
+    journeyID,
+    opts
+  ) {
+    opts = opts || {};
+    let postBody = null;
+    // verify the required parameter 'projectOrProductUID' is set
+    if (projectOrProductUID === undefined || projectOrProductUID === null) {
+      throw new Error(
+        "Missing the required parameter 'projectOrProductUID' when calling getDeviceJourney"
+      );
+    }
+    // verify the required parameter 'deviceUID' is set
+    if (deviceUID === undefined || deviceUID === null) {
+      throw new Error(
+        "Missing the required parameter 'deviceUID' when calling getDeviceJourney"
+      );
+    }
+    // verify the required parameter 'journeyID' is set
+    if (journeyID === undefined || journeyID === null) {
+      throw new Error(
+        "Missing the required parameter 'journeyID' when calling getDeviceJourney"
+      );
+    }
+
+    let pathParams = {
+      projectOrProductUID: projectOrProductUID,
+      deviceUID: deviceUID,
+      journeyID: journeyID,
+    };
+    let queryParams = {
+      pageSize: opts["pageSize"],
+      pageNum: opts["pageNum"],
+    };
+    let headerParams = {};
+    let formParams = {};
+
+    let authNames = ["personalAccessToken"];
+    let contentTypes = [];
+    let accepts = ["application/json"];
+    let returnType = GetDeviceJourney200Response;
+    return this.apiClient.callApi(
+      "/v1/projects/{projectOrProductUID}/devices/{deviceUID}/journeys/{journeyID}",
+      "GET",
+      pathParams,
+      queryParams,
+      headerParams,
+      formParams,
+      postBody,
+      authNames,
+      contentTypes,
+      accepts,
+      returnType,
+      null
+    );
+  }
+
+  /**
+   * Get a single journey for a device along with its `_track.qo` events. The events array is paginated via `pageSize` / `pageNum`; use `journey.has_more` to detect additional pages.
+   * @param {String} projectOrProductUID
+   * @param {String} deviceUID
+   * @param {Number} journeyID Identifier of the journey, taken from the `journey` field on `_track.qo` events (a Unix timestamp marking the start of the journey).
+   * @param {Object} opts Optional parameters
+   * @param {Number} opts.pageSize  (default to 50)
+   * @param {Number} opts.pageNum  (default to 1)
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetDeviceJourney200Response}
+   */
+  getDeviceJourney(projectOrProductUID, deviceUID, journeyID, opts) {
+    return this.getDeviceJourneyWithHttpInfo(
+      projectOrProductUID,
+      deviceUID,
+      journeyID,
+      opts
+    ).then(function (response_and_data) {
+      return response_and_data.data;
+    });
+  }
+
+  /**
+   * Get the list of journeys for a device, derived from `_track.qo` events. Returns journey metadata only (no event payloads). Capped at 100 most recent journeys; `has_more` is true when the cap is hit.
+   * @param {String} projectOrProductUID
+   * @param {String} deviceUID
+   * @param {Object} opts Optional parameters
+   * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
+   * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetDeviceJourneys200Response} and HTTP response
+   */
+  getDeviceJourneysWithHttpInfo(projectOrProductUID, deviceUID, opts) {
+    opts = opts || {};
+    let postBody = null;
+    // verify the required parameter 'projectOrProductUID' is set
+    if (projectOrProductUID === undefined || projectOrProductUID === null) {
+      throw new Error(
+        "Missing the required parameter 'projectOrProductUID' when calling getDeviceJourneys"
+      );
+    }
+    // verify the required parameter 'deviceUID' is set
+    if (deviceUID === undefined || deviceUID === null) {
+      throw new Error(
+        "Missing the required parameter 'deviceUID' when calling getDeviceJourneys"
+      );
+    }
+
+    let pathParams = {
+      projectOrProductUID: projectOrProductUID,
+      deviceUID: deviceUID,
+    };
+    let queryParams = {
+      startDate: opts["startDate"],
+      endDate: opts["endDate"],
+    };
+    let headerParams = {};
+    let formParams = {};
+
+    let authNames = ["personalAccessToken"];
+    let contentTypes = [];
+    let accepts = ["application/json"];
+    let returnType = GetDeviceJourneys200Response;
+    return this.apiClient.callApi(
+      "/v1/projects/{projectOrProductUID}/devices/{deviceUID}/journeys",
+      "GET",
+      pathParams,
+      queryParams,
+      headerParams,
+      formParams,
+      postBody,
+      authNames,
+      contentTypes,
+      accepts,
+      returnType,
+      null
+    );
+  }
+
+  /**
+   * Get the list of journeys for a device, derived from `_track.qo` events. Returns journey metadata only (no event payloads). Capped at 100 most recent journeys; `has_more` is true when the cap is hit.
+   * @param {String} projectOrProductUID
+   * @param {String} deviceUID
+   * @param {Object} opts Optional parameters
+   * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
+   * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetDeviceJourneys200Response}
+   */
+  getDeviceJourneys(projectOrProductUID, deviceUID, opts) {
+    return this.getDeviceJourneysWithHttpInfo(
       projectOrProductUID,
       deviceUID,
       opts
@@ -2119,7 +2286,7 @@ export default class DeviceApi {
     };
     let formParams = {};
 
-    let authNames = [];
+    let authNames = ["personalAccessToken"];
     let contentTypes = ["application/json"];
     let accepts = ["application/json"];
     let returnType = EnvironmentVariables;

@@ -19,6 +19,8 @@ All URIs are relative to *https://api.notefile.net*
 | [**getDeviceEnvironmentVariables**](DeviceApi.md#getDeviceEnvironmentVariables)           | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_variables          |
 | [**getDeviceEnvironmentVariablesByPin**](DeviceApi.md#getDeviceEnvironmentVariablesByPin) | **GET** /v1/products/{productUID}/devices/{deviceUID}/environment_variables_with_pin          |
 | [**getDeviceHealthLog**](DeviceApi.md#getDeviceHealthLog)                                 | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/health-log                     |
+| [**getDeviceJourney**](DeviceApi.md#getDeviceJourney)                                     | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/journeys/{journeyID}           |
+| [**getDeviceJourneys**](DeviceApi.md#getDeviceJourneys)                                   | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/journeys                       |
 | [**getDeviceLatestEvents**](DeviceApi.md#getDeviceLatestEvents)                           | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/latest                         |
 | [**getDevicePlans**](DeviceApi.md#getDevicePlans)                                         | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/plans                          |
 | [**getDevicePublicKey**](DeviceApi.md#getDevicePublicKey)                                 | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/public-key                     |
@@ -705,6 +707,9 @@ Get environment variables of a device with device pin authorization
 
 ```javascript
 import * as NotehubJs from "@blues-inc/notehub-js";
+let defaultClient = NotehubJs.ApiClient.instance;
+let personalAccessToken = defaultClient.authentications["personalAccessToken"];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
 
 let apiInstance = new NotehubJs.DeviceApi();
 let productUID = "com.blues.bridge:sensors"; // String |
@@ -738,7 +743,7 @@ apiInstance
 
 ### Authorization
 
-No authorization required
+[personalAccessToken](../README.md#personalAccessToken)
 
 ### HTTP request headers
 
@@ -792,6 +797,120 @@ apiInstance.getDeviceHealthLog(projectOrProductUID, deviceUID, opts).then(
 ### Return type
 
 [**GetDeviceHealthLog200Response**](GetDeviceHealthLog200Response.md)
+
+### Authorization
+
+[personalAccessToken](../README.md#personalAccessToken)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+## getDeviceJourney
+
+> GetDeviceJourney200Response getDeviceJourney(projectOrProductUID, deviceUID, journeyID, opts)
+
+Get a single journey for a device along with its &#x60;\_track.qo&#x60; events. The events array is paginated via &#x60;pageSize&#x60; / &#x60;pageNum&#x60;; use &#x60;journey.has_more&#x60; to detect additional pages.
+
+### Example
+
+```javascript
+import * as NotehubJs from "@blues-inc/notehub-js";
+let defaultClient = NotehubJs.ApiClient.instance;
+let personalAccessToken = defaultClient.authentications["personalAccessToken"];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
+
+let apiInstance = new NotehubJs.DeviceApi();
+let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String |
+let deviceUID = "dev:000000000000000"; // String |
+let journeyID = 789; // Number | Identifier of the journey, taken from the `journey` field on `_track.qo` events (a Unix timestamp marking the start of the journey).
+let opts = {
+  pageSize: 50, // Number |
+  pageNum: 1, // Number |
+};
+apiInstance
+  .getDeviceJourney(projectOrProductUID, deviceUID, journeyID, opts)
+  .then(
+    (data) => {
+      console.log(
+        "API called successfully. Returned data: " + JSON.stringify(data)
+      );
+    },
+    (error) => {
+      console.error(error);
+    }
+  );
+```
+
+### Parameters
+
+| Name                    | Type       | Description                                                                                                                                               | Notes                      |
+| ----------------------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------- |
+| **projectOrProductUID** | **String** |                                                                                                                                                           |
+| **deviceUID**           | **String** |                                                                                                                                                           |
+| **journeyID**           | **Number** | Identifier of the journey, taken from the &#x60;journey&#x60; field on &#x60;\_track.qo&#x60; events (a Unix timestamp marking the start of the journey). |
+| **pageSize**            | **Number** |                                                                                                                                                           | [optional] [default to 50] |
+| **pageNum**             | **Number** |                                                                                                                                                           | [optional] [default to 1]  |
+
+### Return type
+
+[**GetDeviceJourney200Response**](GetDeviceJourney200Response.md)
+
+### Authorization
+
+[personalAccessToken](../README.md#personalAccessToken)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+## getDeviceJourneys
+
+> GetDeviceJourneys200Response getDeviceJourneys(projectOrProductUID, deviceUID, opts)
+
+Get the list of journeys for a device, derived from &#x60;\_track.qo&#x60; events. Returns journey metadata only (no event payloads). Capped at 100 most recent journeys; &#x60;has_more&#x60; is true when the cap is hit.
+
+### Example
+
+```javascript
+import * as NotehubJs from "@blues-inc/notehub-js";
+let defaultClient = NotehubJs.ApiClient.instance;
+let personalAccessToken = defaultClient.authentications["personalAccessToken"];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
+
+let apiInstance = new NotehubJs.DeviceApi();
+let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String |
+let deviceUID = "dev:000000000000000"; // String |
+let opts = {
+  startDate: 1628631763, // Number | Start date for filtering results, specified as a Unix timestamp
+  endDate: 1657894210, // Number | End date for filtering results, specified as a Unix timestamp
+};
+apiInstance.getDeviceJourneys(projectOrProductUID, deviceUID, opts).then(
+  (data) => {
+    console.log(
+      "API called successfully. Returned data: " + JSON.stringify(data)
+    );
+  },
+  (error) => {
+    console.error(error);
+  }
+);
+```
+
+### Parameters
+
+| Name                    | Type       | Description                                                     | Notes      |
+| ----------------------- | ---------- | --------------------------------------------------------------- | ---------- |
+| **projectOrProductUID** | **String** |                                                                 |
+| **deviceUID**           | **String** |                                                                 |
+| **startDate**           | **Number** | Start date for filtering results, specified as a Unix timestamp | [optional] |
+| **endDate**             | **Number** | End date for filtering results, specified as a Unix timestamp   | [optional] |
+
+### Return type
+
+[**GetDeviceJourneys200Response**](GetDeviceJourneys200Response.md)
 
 ### Authorization
 
@@ -1439,6 +1558,9 @@ Set environment variables of a device with device pin authorization
 
 ```javascript
 import * as NotehubJs from "@blues-inc/notehub-js";
+let defaultClient = NotehubJs.ApiClient.instance;
+let personalAccessToken = defaultClient.authentications["personalAccessToken"];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
 
 let apiInstance = new NotehubJs.DeviceApi();
 let productUID = "com.blues.bridge:sensors"; // String |
@@ -1479,7 +1601,7 @@ apiInstance
 
 ### Authorization
 
-No authorization required
+[personalAccessToken](../README.md#personalAccessToken)
 
 ### HTTP request headers
 

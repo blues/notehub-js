@@ -18,14 +18,15 @@ import DeleteJob200Response from "../model/DeleteJob200Response";
 import Error from "../model/Error";
 import GetJobRuns200Response from "../model/GetJobRuns200Response";
 import GetJobs200Response from "../model/GetJobs200Response";
-import Job from "../model/Job";
+import JobDefinition from "../model/JobDefinition";
+import JobDetail from "../model/JobDetail";
 import JobRun from "../model/JobRun";
 import RunJob200Response from "../model/RunJob200Response";
 
 /**
  * Jobs service.
  * @module api/JobsApi
- * @version 6.2.0
+ * @version 6.3.0
  */
 export default class JobsApi {
   /**
@@ -106,11 +107,11 @@ export default class JobsApi {
    * Create a new batch job with an optional name
    * @param {String} projectOrProductUID
    * @param {String} name Name for the job
-   * @param {Object.<String, Object>} body The job definition as raw JSON
+   * @param {module:model/JobDefinition} jobDefinition The batch job definition
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/CreateJob201Response} and HTTP response
    */
-  createJobWithHttpInfo(projectOrProductUID, name, body) {
-    let postBody = body;
+  createJobWithHttpInfo(projectOrProductUID, name, jobDefinition) {
+    let postBody = jobDefinition;
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
@@ -123,10 +124,10 @@ export default class JobsApi {
         "Missing the required parameter 'name' when calling createJob"
       );
     }
-    // verify the required parameter 'body' is set
-    if (body === undefined || body === null) {
+    // verify the required parameter 'jobDefinition' is set
+    if (jobDefinition === undefined || jobDefinition === null) {
       throw new Error(
-        "Missing the required parameter 'body' when calling createJob"
+        "Missing the required parameter 'jobDefinition' when calling createJob"
       );
     }
 
@@ -163,15 +164,17 @@ export default class JobsApi {
    * Create a new batch job with an optional name
    * @param {String} projectOrProductUID
    * @param {String} name Name for the job
-   * @param {Object.<String, Object>} body The job definition as raw JSON
+   * @param {module:model/JobDefinition} jobDefinition The batch job definition
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/CreateJob201Response}
    */
-  createJob(projectOrProductUID, name, body) {
-    return this.createJobWithHttpInfo(projectOrProductUID, name, body).then(
-      function (response_and_data) {
-        return response_and_data.data;
-      }
-    );
+  createJob(projectOrProductUID, name, jobDefinition) {
+    return this.createJobWithHttpInfo(
+      projectOrProductUID,
+      name,
+      jobDefinition
+    ).then(function (response_and_data) {
+      return response_and_data.data;
+    });
   }
 
   /**
@@ -238,10 +241,73 @@ export default class JobsApi {
   }
 
   /**
+   * Delete the results of a job run
+   * @param {String} projectOrProductUID
+   * @param {String} reportUID Unique identifier for a job run report
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
+   */
+  deleteJobRunWithHttpInfo(projectOrProductUID, reportUID) {
+    let postBody = null;
+    // verify the required parameter 'projectOrProductUID' is set
+    if (projectOrProductUID === undefined || projectOrProductUID === null) {
+      throw new Error(
+        "Missing the required parameter 'projectOrProductUID' when calling deleteJobRun"
+      );
+    }
+    // verify the required parameter 'reportUID' is set
+    if (reportUID === undefined || reportUID === null) {
+      throw new Error(
+        "Missing the required parameter 'reportUID' when calling deleteJobRun"
+      );
+    }
+
+    let pathParams = {
+      projectOrProductUID: projectOrProductUID,
+      reportUID: reportUID,
+    };
+    let queryParams = {};
+    let headerParams = {};
+    let formParams = {};
+
+    let authNames = ["personalAccessToken"];
+    let contentTypes = [];
+    let accepts = ["application/json"];
+    let returnType = null;
+    return this.apiClient.callApi(
+      "/v1/projects/{projectOrProductUID}/jobs/runs/{reportUID}",
+      "DELETE",
+      pathParams,
+      queryParams,
+      headerParams,
+      formParams,
+      postBody,
+      authNames,
+      contentTypes,
+      accepts,
+      returnType,
+      null
+    );
+  }
+
+  /**
+   * Delete the results of a job run
+   * @param {String} projectOrProductUID
+   * @param {String} reportUID Unique identifier for a job run report
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}
+   */
+  deleteJobRun(projectOrProductUID, reportUID) {
+    return this.deleteJobRunWithHttpInfo(projectOrProductUID, reportUID).then(
+      function (response_and_data) {
+        return response_and_data.data;
+      }
+    );
+  }
+
+  /**
    * Get a specific batch job definition
    * @param {String} projectOrProductUID
    * @param {String} jobUID Unique identifier for a batch job
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Job} and HTTP response
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/JobDetail} and HTTP response
    */
   getJobWithHttpInfo(projectOrProductUID, jobUID) {
     let postBody = null;
@@ -269,7 +335,7 @@ export default class JobsApi {
     let authNames = ["personalAccessToken"];
     let contentTypes = [];
     let accepts = ["application/json"];
-    let returnType = Job;
+    let returnType = JobDetail;
     return this.apiClient.callApi(
       "/v1/projects/{projectOrProductUID}/jobs/{jobUID}",
       "GET",
@@ -290,7 +356,7 @@ export default class JobsApi {
    * Get a specific batch job definition
    * @param {String} projectOrProductUID
    * @param {String} jobUID Unique identifier for a batch job
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Job}
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/JobDetail}
    */
   getJob(projectOrProductUID, jobUID) {
     return this.getJobWithHttpInfo(projectOrProductUID, jobUID).then(function (
@@ -304,9 +370,12 @@ export default class JobsApi {
    * Get the result of a job execution
    * @param {String} projectOrProductUID
    * @param {String} reportUID Unique identifier for a job run report
+   * @param {Object} opts Optional parameters
+   * @param {module:model/String} opts.view Controls the level of detail returned: 'summary' returns metadata only, 'detail' returns the full result payload (default to 'summary')
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/JobRun} and HTTP response
    */
-  getJobRunWithHttpInfo(projectOrProductUID, reportUID) {
+  getJobRunWithHttpInfo(projectOrProductUID, reportUID, opts) {
+    opts = opts || {};
     let postBody = null;
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
@@ -325,7 +394,9 @@ export default class JobsApi {
       projectOrProductUID: projectOrProductUID,
       reportUID: reportUID,
     };
-    let queryParams = {};
+    let queryParams = {
+      view: opts["view"],
+    };
     let headerParams = {};
     let formParams = {};
 
@@ -353,14 +424,18 @@ export default class JobsApi {
    * Get the result of a job execution
    * @param {String} projectOrProductUID
    * @param {String} reportUID Unique identifier for a job run report
+   * @param {Object} opts Optional parameters
+   * @param {module:model/String} opts.view Controls the level of detail returned: 'summary' returns metadata only, 'detail' returns the full result payload (default to 'summary')
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/JobRun}
    */
-  getJobRun(projectOrProductUID, reportUID) {
-    return this.getJobRunWithHttpInfo(projectOrProductUID, reportUID).then(
-      function (response_and_data) {
-        return response_and_data.data;
-      }
-    );
+  getJobRun(projectOrProductUID, reportUID, opts) {
+    return this.getJobRunWithHttpInfo(
+      projectOrProductUID,
+      reportUID,
+      opts
+    ).then(function (response_and_data) {
+      return response_and_data.data;
+    });
   }
 
   /**

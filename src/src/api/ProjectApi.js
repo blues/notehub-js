@@ -18,6 +18,7 @@ import CloneProjectRequest from "../model/CloneProjectRequest";
 import CreateFleetRequest from "../model/CreateFleetRequest";
 import CreateProductRequest from "../model/CreateProductRequest";
 import CreateProjectRequest from "../model/CreateProjectRequest";
+import CreateProjectSecretRequest from "../model/CreateProjectSecretRequest";
 import DeleteDeviceFromFleetsRequest from "../model/DeleteDeviceFromFleetsRequest";
 import DeviceDfuHistory from "../model/DeviceDfuHistory";
 import DeviceDfuHistoryPage from "../model/DeviceDfuHistoryPage";
@@ -32,17 +33,20 @@ import Fleet from "../model/Fleet";
 import GetDeviceFleets200Response from "../model/GetDeviceFleets200Response";
 import GetProducts200Response from "../model/GetProducts200Response";
 import GetProjectMembers200Response from "../model/GetProjectMembers200Response";
+import GetProjectSecretsResponse from "../model/GetProjectSecretsResponse";
 import GetProjects200Response from "../model/GetProjects200Response";
 import NotefileSchema from "../model/NotefileSchema";
 import Product from "../model/Product";
 import Project from "../model/Project";
+import ProjectSecret from "../model/ProjectSecret";
 import UpdateFleetRequest from "../model/UpdateFleetRequest";
 import UpdateHostFirmwareRequest from "../model/UpdateHostFirmwareRequest";
+import UpdateProjectSecretRequest from "../model/UpdateProjectSecretRequest";
 
 /**
  * Project service.
  * @module api/ProjectApi
- * @version 6.2.0
+ * @version 6.3.0
  */
 export default class ProjectApi {
   /**
@@ -373,6 +377,75 @@ export default class ProjectApi {
     return this.createProjectWithHttpInfo(createProjectRequest).then(function (
       response_and_data
     ) {
+      return response_and_data.data;
+    });
+  }
+
+  /**
+   * Create a new project secret
+   * @param {String} projectOrProductUID
+   * @param {module:model/CreateProjectSecretRequest} createProjectSecretRequest
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/ProjectSecret} and HTTP response
+   */
+  createProjectSecretWithHttpInfo(
+    projectOrProductUID,
+    createProjectSecretRequest
+  ) {
+    let postBody = createProjectSecretRequest;
+    // verify the required parameter 'projectOrProductUID' is set
+    if (projectOrProductUID === undefined || projectOrProductUID === null) {
+      throw new Error(
+        "Missing the required parameter 'projectOrProductUID' when calling createProjectSecret"
+      );
+    }
+    // verify the required parameter 'createProjectSecretRequest' is set
+    if (
+      createProjectSecretRequest === undefined ||
+      createProjectSecretRequest === null
+    ) {
+      throw new Error(
+        "Missing the required parameter 'createProjectSecretRequest' when calling createProjectSecret"
+      );
+    }
+
+    let pathParams = {
+      projectOrProductUID: projectOrProductUID,
+    };
+    let queryParams = {};
+    let headerParams = {};
+    let formParams = {};
+
+    let authNames = ["personalAccessToken"];
+    let contentTypes = ["application/json"];
+    let accepts = ["application/json"];
+    let returnType = ProjectSecret;
+    return this.apiClient.callApi(
+      "/v1/projects/{projectOrProductUID}/secrets",
+      "POST",
+      pathParams,
+      queryParams,
+      headerParams,
+      formParams,
+      postBody,
+      authNames,
+      contentTypes,
+      accepts,
+      returnType,
+      null
+    );
+  }
+
+  /**
+   * Create a new project secret
+   * @param {String} projectOrProductUID
+   * @param {module:model/CreateProjectSecretRequest} createProjectSecretRequest
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/ProjectSecret}
+   */
+  createProjectSecret(projectOrProductUID, createProjectSecretRequest) {
+    return this.createProjectSecretWithHttpInfo(
+      projectOrProductUID,
+      createProjectSecretRequest
+    ).then(function (response_and_data) {
       return response_and_data.data;
     });
   }
@@ -852,6 +925,70 @@ export default class ProjectApi {
     return this.deleteProjectEnvironmentVariableWithHttpInfo(
       projectOrProductUID,
       key
+    ).then(function (response_and_data) {
+      return response_and_data.data;
+    });
+  }
+
+  /**
+   * Delete a project secret by name
+   * @param {String} projectOrProductUID
+   * @param {String} secretName The name of the secret.
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
+   */
+  deleteProjectSecretWithHttpInfo(projectOrProductUID, secretName) {
+    let postBody = null;
+    // verify the required parameter 'projectOrProductUID' is set
+    if (projectOrProductUID === undefined || projectOrProductUID === null) {
+      throw new Error(
+        "Missing the required parameter 'projectOrProductUID' when calling deleteProjectSecret"
+      );
+    }
+    // verify the required parameter 'secretName' is set
+    if (secretName === undefined || secretName === null) {
+      throw new Error(
+        "Missing the required parameter 'secretName' when calling deleteProjectSecret"
+      );
+    }
+
+    let pathParams = {
+      projectOrProductUID: projectOrProductUID,
+      secretName: secretName,
+    };
+    let queryParams = {};
+    let headerParams = {};
+    let formParams = {};
+
+    let authNames = ["personalAccessToken"];
+    let contentTypes = [];
+    let accepts = ["application/json"];
+    let returnType = null;
+    return this.apiClient.callApi(
+      "/v1/projects/{projectOrProductUID}/secrets/{secretName}",
+      "DELETE",
+      pathParams,
+      queryParams,
+      headerParams,
+      formParams,
+      postBody,
+      authNames,
+      contentTypes,
+      accepts,
+      returnType,
+      null
+    );
+  }
+
+  /**
+   * Delete a project secret by name
+   * @param {String} projectOrProductUID
+   * @param {String} secretName The name of the secret.
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}
+   */
+  deleteProjectSecret(projectOrProductUID, secretName) {
+    return this.deleteProjectSecretWithHttpInfo(
+      projectOrProductUID,
+      secretName
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -1908,7 +2045,7 @@ export default class ProjectApi {
     let headerParams = {};
     let formParams = {};
 
-    let authNames = [];
+    let authNames = ["personalAccessToken"];
     let contentTypes = [];
     let accepts = ["application/json"];
     let returnType = [NotefileSchema];
@@ -2266,6 +2403,60 @@ export default class ProjectApi {
   }
 
   /**
+   * Get all secrets for a project (metadata only, values are never returned)
+   * @param {String} projectOrProductUID
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetProjectSecretsResponse} and HTTP response
+   */
+  getProjectSecretsWithHttpInfo(projectOrProductUID) {
+    let postBody = null;
+    // verify the required parameter 'projectOrProductUID' is set
+    if (projectOrProductUID === undefined || projectOrProductUID === null) {
+      throw new Error(
+        "Missing the required parameter 'projectOrProductUID' when calling getProjectSecrets"
+      );
+    }
+
+    let pathParams = {
+      projectOrProductUID: projectOrProductUID,
+    };
+    let queryParams = {};
+    let headerParams = {};
+    let formParams = {};
+
+    let authNames = ["personalAccessToken"];
+    let contentTypes = [];
+    let accepts = ["application/json"];
+    let returnType = GetProjectSecretsResponse;
+    return this.apiClient.callApi(
+      "/v1/projects/{projectOrProductUID}/secrets",
+      "GET",
+      pathParams,
+      queryParams,
+      headerParams,
+      formParams,
+      postBody,
+      authNames,
+      contentTypes,
+      accepts,
+      returnType,
+      null
+    );
+  }
+
+  /**
+   * Get all secrets for a project (metadata only, values are never returned)
+   * @param {String} projectOrProductUID
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetProjectSecretsResponse}
+   */
+  getProjectSecrets(projectOrProductUID) {
+    return this.getProjectSecretsWithHttpInfo(projectOrProductUID).then(
+      function (response_and_data) {
+        return response_and_data.data;
+      }
+    );
+  }
+
+  /**
    * Get Projects accessible by the api_key
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetProjects200Response} and HTTP response
    */
@@ -2519,7 +2710,7 @@ export default class ProjectApi {
   /**
    * Set the project-level event JSONata transformation
    * @param {String} projectOrProductUID
-   * @param {Object.<String, Object>} body JSONata expression which will be applied to each event before it is persisted and routed
+   * @param {String} body JSONata expression which will be applied to each event before it is persisted and routed
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
    */
   setGlobalEventTransformationWithHttpInfo(projectOrProductUID, body) {
@@ -2545,7 +2736,7 @@ export default class ProjectApi {
     let formParams = {};
 
     let authNames = ["personalAccessToken"];
-    let contentTypes = ["application/json"];
+    let contentTypes = ["text/plain"];
     let accepts = ["application/json"];
     let returnType = null;
     return this.apiClient.callApi(
@@ -2567,7 +2758,7 @@ export default class ProjectApi {
   /**
    * Set the project-level event JSONata transformation
    * @param {String} projectOrProductUID
-   * @param {Object.<String, Object>} body JSONata expression which will be applied to each event before it is persisted and routed
+   * @param {String} body JSONata expression which will be applied to each event before it is persisted and routed
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}
    */
   setGlobalEventTransformation(projectOrProductUID, body) {
@@ -2803,6 +2994,90 @@ export default class ProjectApi {
       projectOrProductUID,
       fleetUID,
       updateFleetRequest
+    ).then(function (response_and_data) {
+      return response_and_data.data;
+    });
+  }
+
+  /**
+   * Update the value of an existing project secret
+   * @param {String} projectOrProductUID
+   * @param {String} secretName The name of the secret.
+   * @param {module:model/UpdateProjectSecretRequest} updateProjectSecretRequest
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/ProjectSecret} and HTTP response
+   */
+  updateProjectSecretWithHttpInfo(
+    projectOrProductUID,
+    secretName,
+    updateProjectSecretRequest
+  ) {
+    let postBody = updateProjectSecretRequest;
+    // verify the required parameter 'projectOrProductUID' is set
+    if (projectOrProductUID === undefined || projectOrProductUID === null) {
+      throw new Error(
+        "Missing the required parameter 'projectOrProductUID' when calling updateProjectSecret"
+      );
+    }
+    // verify the required parameter 'secretName' is set
+    if (secretName === undefined || secretName === null) {
+      throw new Error(
+        "Missing the required parameter 'secretName' when calling updateProjectSecret"
+      );
+    }
+    // verify the required parameter 'updateProjectSecretRequest' is set
+    if (
+      updateProjectSecretRequest === undefined ||
+      updateProjectSecretRequest === null
+    ) {
+      throw new Error(
+        "Missing the required parameter 'updateProjectSecretRequest' when calling updateProjectSecret"
+      );
+    }
+
+    let pathParams = {
+      projectOrProductUID: projectOrProductUID,
+      secretName: secretName,
+    };
+    let queryParams = {};
+    let headerParams = {};
+    let formParams = {};
+
+    let authNames = ["personalAccessToken"];
+    let contentTypes = ["application/json"];
+    let accepts = ["application/json"];
+    let returnType = ProjectSecret;
+    return this.apiClient.callApi(
+      "/v1/projects/{projectOrProductUID}/secrets/{secretName}",
+      "PUT",
+      pathParams,
+      queryParams,
+      headerParams,
+      formParams,
+      postBody,
+      authNames,
+      contentTypes,
+      accepts,
+      returnType,
+      null
+    );
+  }
+
+  /**
+   * Update the value of an existing project secret
+   * @param {String} projectOrProductUID
+   * @param {String} secretName The name of the secret.
+   * @param {module:model/UpdateProjectSecretRequest} updateProjectSecretRequest
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/ProjectSecret}
+   */
+  updateProjectSecret(
+    projectOrProductUID,
+    secretName,
+    updateProjectSecretRequest
+  ) {
+    return this.updateProjectSecretWithHttpInfo(
+      projectOrProductUID,
+      secretName,
+      updateProjectSecretRequest
     ).then(function (response_and_data) {
       return response_and_data.data;
     });

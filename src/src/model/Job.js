@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The Job model module.
  * @module model/Job
- * @version 6.2.0
+ * @version 6.3.0
  */
 class Job {
   /**
@@ -63,13 +63,26 @@ class Job {
           "String"
         );
       }
-      if (data.hasOwnProperty("definition")) {
-        obj["definition"] = ApiClient.convertToType(data["definition"], {
-          String: Object,
-        });
-      }
       if (data.hasOwnProperty("job_uid")) {
         obj["job_uid"] = ApiClient.convertToType(data["job_uid"], "String");
+      }
+      if (data.hasOwnProperty("last_run_completed")) {
+        obj["last_run_completed"] = ApiClient.convertToType(
+          data["last_run_completed"],
+          "Number"
+        );
+      }
+      if (data.hasOwnProperty("last_run_status")) {
+        obj["last_run_status"] = ApiClient.convertToType(
+          data["last_run_status"],
+          "String"
+        );
+      }
+      if (data.hasOwnProperty("last_run_submitted")) {
+        obj["last_run_submitted"] = ApiClient.convertToType(
+          data["last_run_submitted"],
+          "Number"
+        );
       }
       if (data.hasOwnProperty("name")) {
         obj["name"] = ApiClient.convertToType(data["name"], "String");
@@ -124,6 +137,19 @@ class Job {
     }
     // ensure the json data is a string
     if (
+      data["last_run_status"] &&
+      !(
+        typeof data["last_run_status"] === "string" ||
+        data["last_run_status"] instanceof String
+      )
+    ) {
+      throw new Error(
+        "Expected the field `last_run_status` to be a primitive type in the JSON string but got " +
+          data["last_run_status"]
+      );
+    }
+    // ensure the json data is a string
+    if (
       data["name"] &&
       !(typeof data["name"] === "string" || data["name"] instanceof String)
     ) {
@@ -152,16 +178,28 @@ Job.prototype["created"] = undefined;
 Job.prototype["created_by"] = undefined;
 
 /**
- * Full job definition (only in detail view)
- * @member {Object.<String, Object>} definition
- */
-Job.prototype["definition"] = undefined;
-
-/**
  * Unique identifier for the job
  * @member {String} job_uid
  */
 Job.prototype["job_uid"] = undefined;
+
+/**
+ * Unix timestamp when the most recent run completed (0 if still in progress)
+ * @member {Number} last_run_completed
+ */
+Job.prototype["last_run_completed"] = undefined;
+
+/**
+ * Status of the most recent job run. Terminal values are: \"submitted\", \"completed successfully\", \"dry run completed successfully\", \"completed with errors\", \"cancelled\". While a job is running, intermediate per-device progress updates may appear (e.g. \"dev:000000000000000 completed\", \"dev:000000000000000 updated: ...\").
+ * @member {String} last_run_status
+ */
+Job.prototype["last_run_status"] = undefined;
+
+/**
+ * Unix timestamp when the most recent run was submitted
+ * @member {Number} last_run_submitted
+ */
+Job.prototype["last_run_submitted"] = undefined;
 
 /**
  * Human-readable job name
