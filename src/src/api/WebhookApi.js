@@ -12,6 +12,7 @@
  */
 
 import ApiClient from "../ApiClient";
+import CreateLegacyWebhookEventRequest from "../model/CreateLegacyWebhookEventRequest";
 import Error from "../model/Error";
 import GetWebhooks200Response from "../model/GetWebhooks200Response";
 import WebhookSettings from "../model/WebhookSettings";
@@ -19,7 +20,7 @@ import WebhookSettings from "../model/WebhookSettings";
 /**
  * Webhook service.
  * @module api/WebhookApi
- * @version 6.2.0
+ * @version 6.3.0
  */
 export default class WebhookApi {
   /**
@@ -31,6 +32,79 @@ export default class WebhookApi {
    */
   constructor(apiClient) {
     this.apiClient = apiClient || ApiClient.instance;
+  }
+
+  /**
+   * Legacy endpoint for sending an event from a webhook, associated with the given device (provisioning it if necessary). The request body is a Note-shaped object containing the notefile name, body, and optional payload.
+   * @param {String} productUID
+   * @param {String} deviceUID
+   * @param {Object.<String, {String: Object}>} requestBody A Note-shaped event with notefile name, JSON body, and optional base64-encoded payload.
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
+   */
+  createLegacyWebhookEventWithHttpInfo(productUID, deviceUID, requestBody) {
+    let postBody = requestBody;
+    // verify the required parameter 'productUID' is set
+    if (productUID === undefined || productUID === null) {
+      throw new Error(
+        "Missing the required parameter 'productUID' when calling createLegacyWebhookEvent"
+      );
+    }
+    // verify the required parameter 'deviceUID' is set
+    if (deviceUID === undefined || deviceUID === null) {
+      throw new Error(
+        "Missing the required parameter 'deviceUID' when calling createLegacyWebhookEvent"
+      );
+    }
+    // verify the required parameter 'requestBody' is set
+    if (requestBody === undefined || requestBody === null) {
+      throw new Error(
+        "Missing the required parameter 'requestBody' when calling createLegacyWebhookEvent"
+      );
+    }
+
+    let pathParams = {
+      productUID: productUID,
+      deviceUID: deviceUID,
+    };
+    let queryParams = {};
+    let headerParams = {};
+    let formParams = {};
+
+    let authNames = ["personalAccessToken"];
+    let contentTypes = ["application/json"];
+    let accepts = ["application/json"];
+    let returnType = null;
+    return this.apiClient.callApi(
+      "/v1/products/{productUID}/devices/{deviceUID}/webhook-event",
+      "POST",
+      pathParams,
+      queryParams,
+      headerParams,
+      formParams,
+      postBody,
+      authNames,
+      contentTypes,
+      accepts,
+      returnType,
+      null
+    );
+  }
+
+  /**
+   * Legacy endpoint for sending an event from a webhook, associated with the given device (provisioning it if necessary). The request body is a Note-shaped object containing the notefile name, body, and optional payload.
+   * @param {String} productUID
+   * @param {String} deviceUID
+   * @param {Object.<String, {String: Object}>} requestBody A Note-shaped event with notefile name, JSON body, and optional base64-encoded payload.
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}
+   */
+  createLegacyWebhookEvent(productUID, deviceUID, requestBody) {
+    return this.createLegacyWebhookEventWithHttpInfo(
+      productUID,
+      deviceUID,
+      requestBody
+    ).then(function (response_and_data) {
+      return response_and_data.data;
+    });
   }
 
   /**
@@ -101,6 +175,172 @@ export default class WebhookApi {
       projectOrProductUID,
       webhookUID,
       webhookSettings
+    ).then(function (response_and_data) {
+      return response_and_data.data;
+    });
+  }
+
+  /**
+   * Sends an event to be processed by the specified webhook, addressed by productUID, associated with the given device (provisioning it if necessary). The entire request body becomes the event body. The webhook's configured JSONata transform, if any, is applied before routing.
+   * @param {String} productUID
+   * @param {String} webhookUID Webhook UID
+   * @param {String} deviceUID
+   * @param {Object.<String, {String: Object}>} requestBody The event body (arbitrary JSON)
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
+   */
+  createWebhookDeviceEventByProductWithHttpInfo(
+    productUID,
+    webhookUID,
+    deviceUID,
+    requestBody
+  ) {
+    let postBody = requestBody;
+    // verify the required parameter 'productUID' is set
+    if (productUID === undefined || productUID === null) {
+      throw new Error(
+        "Missing the required parameter 'productUID' when calling createWebhookDeviceEventByProduct"
+      );
+    }
+    // verify the required parameter 'webhookUID' is set
+    if (webhookUID === undefined || webhookUID === null) {
+      throw new Error(
+        "Missing the required parameter 'webhookUID' when calling createWebhookDeviceEventByProduct"
+      );
+    }
+    // verify the required parameter 'deviceUID' is set
+    if (deviceUID === undefined || deviceUID === null) {
+      throw new Error(
+        "Missing the required parameter 'deviceUID' when calling createWebhookDeviceEventByProduct"
+      );
+    }
+    // verify the required parameter 'requestBody' is set
+    if (requestBody === undefined || requestBody === null) {
+      throw new Error(
+        "Missing the required parameter 'requestBody' when calling createWebhookDeviceEventByProduct"
+      );
+    }
+
+    let pathParams = {
+      productUID: productUID,
+      webhookUID: webhookUID,
+      deviceUID: deviceUID,
+    };
+    let queryParams = {};
+    let headerParams = {};
+    let formParams = {};
+
+    let authNames = ["personalAccessToken"];
+    let contentTypes = ["application/json"];
+    let accepts = ["application/json"];
+    let returnType = null;
+    return this.apiClient.callApi(
+      "/v1/products/{productUID}/webhooks/{webhookUID}/devices/{deviceUID}/event",
+      "POST",
+      pathParams,
+      queryParams,
+      headerParams,
+      formParams,
+      postBody,
+      authNames,
+      contentTypes,
+      accepts,
+      returnType,
+      null
+    );
+  }
+
+  /**
+   * Sends an event to be processed by the specified webhook, addressed by productUID, associated with the given device (provisioning it if necessary). The entire request body becomes the event body. The webhook's configured JSONata transform, if any, is applied before routing.
+   * @param {String} productUID
+   * @param {String} webhookUID Webhook UID
+   * @param {String} deviceUID
+   * @param {Object.<String, {String: Object}>} requestBody The event body (arbitrary JSON)
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}
+   */
+  createWebhookDeviceEventByProduct(
+    productUID,
+    webhookUID,
+    deviceUID,
+    requestBody
+  ) {
+    return this.createWebhookDeviceEventByProductWithHttpInfo(
+      productUID,
+      webhookUID,
+      deviceUID,
+      requestBody
+    ).then(function (response_and_data) {
+      return response_and_data.data;
+    });
+  }
+
+  /**
+   * Sends an event to be processed by the specified webhook, addressed by productUID. The entire request body becomes the event body. The webhook's configured JSONata transform, if any, is applied before routing. The event is not associated with a specific device.
+   * @param {String} productUID
+   * @param {String} webhookUID Webhook UID
+   * @param {Object.<String, {String: Object}>} requestBody The event body (arbitrary JSON)
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
+   */
+  createWebhookEventByProductWithHttpInfo(productUID, webhookUID, requestBody) {
+    let postBody = requestBody;
+    // verify the required parameter 'productUID' is set
+    if (productUID === undefined || productUID === null) {
+      throw new Error(
+        "Missing the required parameter 'productUID' when calling createWebhookEventByProduct"
+      );
+    }
+    // verify the required parameter 'webhookUID' is set
+    if (webhookUID === undefined || webhookUID === null) {
+      throw new Error(
+        "Missing the required parameter 'webhookUID' when calling createWebhookEventByProduct"
+      );
+    }
+    // verify the required parameter 'requestBody' is set
+    if (requestBody === undefined || requestBody === null) {
+      throw new Error(
+        "Missing the required parameter 'requestBody' when calling createWebhookEventByProduct"
+      );
+    }
+
+    let pathParams = {
+      productUID: productUID,
+      webhookUID: webhookUID,
+    };
+    let queryParams = {};
+    let headerParams = {};
+    let formParams = {};
+
+    let authNames = ["personalAccessToken"];
+    let contentTypes = ["application/json"];
+    let accepts = ["application/json"];
+    let returnType = null;
+    return this.apiClient.callApi(
+      "/v1/products/{productUID}/webhooks/{webhookUID}/event",
+      "POST",
+      pathParams,
+      queryParams,
+      headerParams,
+      formParams,
+      postBody,
+      authNames,
+      contentTypes,
+      accepts,
+      returnType,
+      null
+    );
+  }
+
+  /**
+   * Sends an event to be processed by the specified webhook, addressed by productUID. The entire request body becomes the event body. The webhook's configured JSONata transform, if any, is applied before routing. The event is not associated with a specific device.
+   * @param {String} productUID
+   * @param {String} webhookUID Webhook UID
+   * @param {Object.<String, {String: Object}>} requestBody The event body (arbitrary JSON)
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}
+   */
+  createWebhookEventByProduct(productUID, webhookUID, requestBody) {
+    return this.createWebhookEventByProductWithHttpInfo(
+      productUID,
+      webhookUID,
+      requestBody
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -233,6 +473,70 @@ export default class WebhookApi {
   }
 
   /**
+   * Retrieves the configuration settings for the specified webhook, addressed by productUID.
+   * @param {String} productUID
+   * @param {String} webhookUID Webhook UID
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/WebhookSettings} and HTTP response
+   */
+  getWebhookSettingsByProductWithHttpInfo(productUID, webhookUID) {
+    let postBody = null;
+    // verify the required parameter 'productUID' is set
+    if (productUID === undefined || productUID === null) {
+      throw new Error(
+        "Missing the required parameter 'productUID' when calling getWebhookSettingsByProduct"
+      );
+    }
+    // verify the required parameter 'webhookUID' is set
+    if (webhookUID === undefined || webhookUID === null) {
+      throw new Error(
+        "Missing the required parameter 'webhookUID' when calling getWebhookSettingsByProduct"
+      );
+    }
+
+    let pathParams = {
+      productUID: productUID,
+      webhookUID: webhookUID,
+    };
+    let queryParams = {};
+    let headerParams = {};
+    let formParams = {};
+
+    let authNames = ["personalAccessToken"];
+    let contentTypes = [];
+    let accepts = ["application/json"];
+    let returnType = WebhookSettings;
+    return this.apiClient.callApi(
+      "/v1/products/{productUID}/webhooks/{webhookUID}/settings",
+      "GET",
+      pathParams,
+      queryParams,
+      headerParams,
+      formParams,
+      postBody,
+      authNames,
+      contentTypes,
+      accepts,
+      returnType,
+      null
+    );
+  }
+
+  /**
+   * Retrieves the configuration settings for the specified webhook, addressed by productUID.
+   * @param {String} productUID
+   * @param {String} webhookUID Webhook UID
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/WebhookSettings}
+   */
+  getWebhookSettingsByProduct(productUID, webhookUID) {
+    return this.getWebhookSettingsByProductWithHttpInfo(
+      productUID,
+      webhookUID
+    ).then(function (response_and_data) {
+      return response_and_data.data;
+    });
+  }
+
+  /**
    * Retrieves all webhooks for the specified project
    * @param {String} projectOrProductUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetWebhooks200Response} and HTTP response
@@ -282,6 +586,76 @@ export default class WebhookApi {
     return this.getWebhooksWithHttpInfo(projectOrProductUID).then(function (
       response_and_data
     ) {
+      return response_and_data.data;
+    });
+  }
+
+  /**
+   * Legacy endpoint for opening or updating a webhook session for the given device (provisioning the device if necessary). Used by external services that need to maintain a callable session against a device behind a webhook.
+   * @param {String} productUID
+   * @param {String} deviceUID
+   * @param {Object} opts Optional parameters
+   * @param {Object.<String, {String: Object}>} opts.requestBody Optional session metadata.
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
+   */
+  updateLegacyWebhookSessionWithHttpInfo(productUID, deviceUID, opts) {
+    opts = opts || {};
+    let postBody = opts["requestBody"];
+    // verify the required parameter 'productUID' is set
+    if (productUID === undefined || productUID === null) {
+      throw new Error(
+        "Missing the required parameter 'productUID' when calling updateLegacyWebhookSession"
+      );
+    }
+    // verify the required parameter 'deviceUID' is set
+    if (deviceUID === undefined || deviceUID === null) {
+      throw new Error(
+        "Missing the required parameter 'deviceUID' when calling updateLegacyWebhookSession"
+      );
+    }
+
+    let pathParams = {
+      productUID: productUID,
+      deviceUID: deviceUID,
+    };
+    let queryParams = {};
+    let headerParams = {};
+    let formParams = {};
+
+    let authNames = ["personalAccessToken"];
+    let contentTypes = ["application/json"];
+    let accepts = ["application/json"];
+    let returnType = null;
+    return this.apiClient.callApi(
+      "/v1/products/{productUID}/devices/{deviceUID}/webhook-session",
+      "PUT",
+      pathParams,
+      queryParams,
+      headerParams,
+      formParams,
+      postBody,
+      authNames,
+      contentTypes,
+      accepts,
+      returnType,
+      null
+    );
+  }
+
+  /**
+   * Legacy endpoint for opening or updating a webhook session for the given device (provisioning the device if necessary). Used by external services that need to maintain a callable session against a device behind a webhook.
+   * @param {String} productUID
+   * @param {String} deviceUID
+   * @param {Object} opts Optional parameters
+   * @param {Object.<String, {String: Object}>} opts.requestBody Optional session metadata.
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}
+   */
+  updateLegacyWebhookSession(productUID, deviceUID, opts) {
+    return this.updateLegacyWebhookSessionWithHttpInfo(
+      productUID,
+      deviceUID,
+      opts
+    ).then(function (response_and_data) {
       return response_and_data.data;
     });
   }
@@ -352,6 +726,83 @@ export default class WebhookApi {
   updateWebhook(projectOrProductUID, webhookUID, webhookSettings) {
     return this.updateWebhookWithHttpInfo(
       projectOrProductUID,
+      webhookUID,
+      webhookSettings
+    ).then(function (response_and_data) {
+      return response_and_data.data;
+    });
+  }
+
+  /**
+   * Updates the configuration settings for the specified webhook, addressed by productUID. Update body will completely replace the existing settings.
+   * @param {String} productUID
+   * @param {String} webhookUID Webhook UID
+   * @param {module:model/WebhookSettings} webhookSettings
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
+   */
+  updateWebhookSettingsByProductWithHttpInfo(
+    productUID,
+    webhookUID,
+    webhookSettings
+  ) {
+    let postBody = webhookSettings;
+    // verify the required parameter 'productUID' is set
+    if (productUID === undefined || productUID === null) {
+      throw new Error(
+        "Missing the required parameter 'productUID' when calling updateWebhookSettingsByProduct"
+      );
+    }
+    // verify the required parameter 'webhookUID' is set
+    if (webhookUID === undefined || webhookUID === null) {
+      throw new Error(
+        "Missing the required parameter 'webhookUID' when calling updateWebhookSettingsByProduct"
+      );
+    }
+    // verify the required parameter 'webhookSettings' is set
+    if (webhookSettings === undefined || webhookSettings === null) {
+      throw new Error(
+        "Missing the required parameter 'webhookSettings' when calling updateWebhookSettingsByProduct"
+      );
+    }
+
+    let pathParams = {
+      productUID: productUID,
+      webhookUID: webhookUID,
+    };
+    let queryParams = {};
+    let headerParams = {};
+    let formParams = {};
+
+    let authNames = ["personalAccessToken"];
+    let contentTypes = ["application/json"];
+    let accepts = ["application/json"];
+    let returnType = null;
+    return this.apiClient.callApi(
+      "/v1/products/{productUID}/webhooks/{webhookUID}/settings",
+      "PUT",
+      pathParams,
+      queryParams,
+      headerParams,
+      formParams,
+      postBody,
+      authNames,
+      contentTypes,
+      accepts,
+      returnType,
+      null
+    );
+  }
+
+  /**
+   * Updates the configuration settings for the specified webhook, addressed by productUID. Update body will completely replace the existing settings.
+   * @param {String} productUID
+   * @param {String} webhookUID Webhook UID
+   * @param {module:model/WebhookSettings} webhookSettings
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}
+   */
+  updateWebhookSettingsByProduct(productUID, webhookUID, webhookSettings) {
+    return this.updateWebhookSettingsByProductWithHttpInfo(
+      productUID,
       webhookUID,
       webhookSettings
     ).then(function (response_and_data) {

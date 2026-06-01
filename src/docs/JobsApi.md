@@ -7,6 +7,7 @@ All URIs are relative to *https://api.notefile.net*
 | [**cancelJobRun**](JobsApi.md#cancelJobRun) | **POST** /v1/projects/{projectOrProductUID}/jobs/runs/{reportUID}/cancel |
 | [**createJob**](JobsApi.md#createJob)       | **POST** /v1/projects/{projectOrProductUID}/jobs                         |
 | [**deleteJob**](JobsApi.md#deleteJob)       | **DELETE** /v1/projects/{projectOrProductUID}/jobs/{jobUID}              |
+| [**deleteJobRun**](JobsApi.md#deleteJobRun) | **DELETE** /v1/projects/{projectOrProductUID}/jobs/runs/{reportUID}      |
 | [**getJob**](JobsApi.md#getJob)             | **GET** /v1/projects/{projectOrProductUID}/jobs/{jobUID}                 |
 | [**getJobRun**](JobsApi.md#getJobRun)       | **GET** /v1/projects/{projectOrProductUID}/jobs/runs/{reportUID}         |
 | [**getJobRuns**](JobsApi.md#getJobRuns)     | **GET** /v1/projects/{projectOrProductUID}/jobs/{jobUID}/runs            |
@@ -64,7 +65,7 @@ apiInstance.cancelJobRun(projectOrProductUID, reportUID).then(
 
 ## createJob
 
-> CreateJob201Response createJob(projectOrProductUID, name, body)
+> CreateJob201Response createJob(projectOrProductUID, name, jobDefinition)
 
 Create a new batch job with an optional name
 
@@ -79,8 +80,8 @@ personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
 let apiInstance = new NotehubJs.JobsApi();
 let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String |
 let name = "name_example"; // String | Name for the job
-let body = { key: null }; // Object | The job definition as raw JSON
-apiInstance.createJob(projectOrProductUID, name, body).then(
+let jobDefinition = new NotehubJs.JobDefinition(); // JobDefinition | The batch job definition
+apiInstance.createJob(projectOrProductUID, name, jobDefinition).then(
   (data) => {
     console.log(
       "API called successfully. Returned data: " + JSON.stringify(data)
@@ -94,11 +95,11 @@ apiInstance.createJob(projectOrProductUID, name, body).then(
 
 ### Parameters
 
-| Name                    | Type       | Description                    | Notes |
-| ----------------------- | ---------- | ------------------------------ | ----- |
-| **projectOrProductUID** | **String** |                                |
-| **name**                | **String** | Name for the job               |
-| **body**                | **Object** | The job definition as raw JSON |
+| Name                    | Type                                  | Description              | Notes |
+| ----------------------- | ------------------------------------- | ------------------------ | ----- |
+| **projectOrProductUID** | **String**                            |                          |
+| **name**                | **String**                            | Name for the job         |
+| **jobDefinition**       | [**JobDefinition**](JobDefinition.md) | The batch job definition |
 
 ### Return type
 
@@ -162,9 +163,56 @@ apiInstance.deleteJob(projectOrProductUID, jobUID).then(
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
+## deleteJobRun
+
+> deleteJobRun(projectOrProductUID, reportUID)
+
+Delete the results of a job run
+
+### Example
+
+```javascript
+import * as NotehubJs from "@blues-inc/notehub-js";
+let defaultClient = NotehubJs.ApiClient.instance;
+let personalAccessToken = defaultClient.authentications["personalAccessToken"];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
+
+let apiInstance = new NotehubJs.JobsApi();
+let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String |
+let reportUID = "my-reconciliation-job-1707654321000"; // String | Unique identifier for a job run report
+apiInstance.deleteJobRun(projectOrProductUID, reportUID).then(
+  () => {
+    console.log("API called successfully.");
+  },
+  (error) => {
+    console.error(error);
+  }
+);
+```
+
+### Parameters
+
+| Name                    | Type       | Description                            | Notes |
+| ----------------------- | ---------- | -------------------------------------- | ----- |
+| **projectOrProductUID** | **String** |                                        |
+| **reportUID**           | **String** | Unique identifier for a job run report |
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[personalAccessToken](../README.md#personalAccessToken)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
 ## getJob
 
-> Job getJob(projectOrProductUID, jobUID)
+> JobDetail getJob(projectOrProductUID, jobUID)
 
 Get a specific batch job definition
 
@@ -200,7 +248,7 @@ apiInstance.getJob(projectOrProductUID, jobUID).then(
 
 ### Return type
 
-[**Job**](Job.md)
+[**JobDetail**](JobDetail.md)
 
 ### Authorization
 
@@ -213,7 +261,7 @@ apiInstance.getJob(projectOrProductUID, jobUID).then(
 
 ## getJobRun
 
-> JobRun getJobRun(projectOrProductUID, reportUID)
+> JobRun getJobRun(projectOrProductUID, reportUID, opts)
 
 Get the result of a job execution
 
@@ -228,7 +276,10 @@ personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
 let apiInstance = new NotehubJs.JobsApi();
 let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String |
 let reportUID = "my-reconciliation-job-1707654321000"; // String | Unique identifier for a job run report
-apiInstance.getJobRun(projectOrProductUID, reportUID).then(
+let opts = {
+  view: "'summary'", // String | Controls the level of detail returned: 'summary' returns metadata only, 'detail' returns the full result payload
+};
+apiInstance.getJobRun(projectOrProductUID, reportUID, opts).then(
   (data) => {
     console.log(
       "API called successfully. Returned data: " + JSON.stringify(data)
@@ -242,10 +293,11 @@ apiInstance.getJobRun(projectOrProductUID, reportUID).then(
 
 ### Parameters
 
-| Name                    | Type       | Description                            | Notes |
-| ----------------------- | ---------- | -------------------------------------- | ----- |
-| **projectOrProductUID** | **String** |                                        |
-| **reportUID**           | **String** | Unique identifier for a job run report |
+| Name                    | Type       | Description                                                                                                                      | Notes                                     |
+| ----------------------- | ---------- | -------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------- |
+| **projectOrProductUID** | **String** |                                                                                                                                  |
+| **reportUID**           | **String** | Unique identifier for a job run report                                                                                           |
+| **view**                | **String** | Controls the level of detail returned: &#39;summary&#39; returns metadata only, &#39;detail&#39; returns the full result payload | [optional] [default to &#39;summary&#39;] |
 
 ### Return type
 

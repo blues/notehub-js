@@ -37,6 +37,12 @@ export default class BillingAccountRole {
   project_creator = "project_creator";
 
   /**
+   * value: "billing_member"
+   * @const
+   */
+  billing_member = "billing_member";
+
+  /**
    * Returns a <code>BillingAccountRole</code> enum value from a Javascript object name.
    * @param {Object} data The plain JavaScript object containing the name of the enum value.
    * @return {module:model/BillingAccountRole} The enum <code>BillingAccountRole</code> value.

@@ -17,7 +17,7 @@ import MonitorAlertRoutesInner from "./MonitorAlertRoutesInner";
 /**
  * The Monitor model module.
  * @module model/Monitor
- * @version 6.2.0
+ * @version 6.3.0
  */
 class Monitor {
   /**
@@ -133,6 +133,24 @@ class Monitor {
       }
       if (data.hasOwnProperty("uid")) {
         obj["uid"] = ApiClient.convertToType(data["uid"], "String");
+      }
+      if (data.hasOwnProperty("usage_scope")) {
+        obj["usage_scope"] = ApiClient.convertToType(
+          data["usage_scope"],
+          "String"
+        );
+      }
+      if (data.hasOwnProperty("usage_type")) {
+        obj["usage_type"] = ApiClient.convertToType(
+          data["usage_type"],
+          "String"
+        );
+      }
+      if (data.hasOwnProperty("usage_window")) {
+        obj["usage_window"] = ApiClient.convertToType(
+          data["usage_window"],
+          "Number"
+        );
       }
     } else if (data === null) {
       return null;
@@ -298,6 +316,32 @@ class Monitor {
           data["uid"]
       );
     }
+    // ensure the json data is a string
+    if (
+      data["usage_scope"] &&
+      !(
+        typeof data["usage_scope"] === "string" ||
+        data["usage_scope"] instanceof String
+      )
+    ) {
+      throw new Error(
+        "Expected the field `usage_scope` to be a primitive type in the JSON string but got " +
+          data["usage_scope"]
+      );
+    }
+    // ensure the json data is a string
+    if (
+      data["usage_type"] &&
+      !(
+        typeof data["usage_type"] === "string" ||
+        data["usage_type"] instanceof String
+      )
+    ) {
+      throw new Error(
+        "Expected the field `usage_type` to be a primitive type in the JSON string but got " +
+          data["usage_type"]
+      );
+    }
 
     return true;
   }
@@ -404,6 +448,24 @@ Monitor.prototype["threshold"] = undefined;
  * @member {String} uid
  */
 Monitor.prototype["uid"] = undefined;
+
+/**
+ * For usage monitors: the scope of aggregation. Supported values are \"device\" and \"fleet\".
+ * @member {String} usage_scope
+ */
+Monitor.prototype["usage_scope"] = undefined;
+
+/**
+ * For usage monitors: the type of data usage to monitor. Supported values are \"cellular\" and \"satellite\".
+ * @member {String} usage_type
+ */
+Monitor.prototype["usage_type"] = undefined;
+
+/**
+ * For usage monitors: the rolling time window in days to sum usage over (e.g. 30 for 30 days).
+ * @member {Number} usage_window
+ */
+Monitor.prototype["usage_window"] = undefined;
 
 /**
  * Allowed values for the <code>aggregate_function</code> property.

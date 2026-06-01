@@ -19,6 +19,7 @@ import AlertDataInner from "./model/AlertDataInner";
 import AlertNotificationsInner from "./model/AlertNotificationsInner";
 import AwsRoute from "./model/AwsRoute";
 import AzureRoute from "./model/AzureRoute";
+import BatchJobRequests from "./model/BatchJobRequests";
 import BillingAccount from "./model/BillingAccount";
 import BillingAccountRole from "./model/BillingAccountRole";
 import BlynkRoute from "./model/BlynkRoute";
@@ -29,9 +30,11 @@ import CloneProjectRequest from "./model/CloneProjectRequest";
 import Contact from "./model/Contact";
 import CreateFleetRequest from "./model/CreateFleetRequest";
 import CreateJob201Response from "./model/CreateJob201Response";
+import CreateLegacyWebhookEventRequest from "./model/CreateLegacyWebhookEventRequest";
 import CreateMonitor from "./model/CreateMonitor";
 import CreateProductRequest from "./model/CreateProductRequest";
 import CreateProjectRequest from "./model/CreateProjectRequest";
+import CreateProjectSecretRequest from "./model/CreateProjectSecretRequest";
 import CreateUpdateRepository from "./model/CreateUpdateRepository";
 import CurrentFirmware from "./model/CurrentFirmware";
 import DFUEnv from "./model/DFUEnv";
@@ -79,6 +82,10 @@ import GetDeviceEnvironmentVariablesByPin200Response from "./model/GetDeviceEnvi
 import GetDeviceFleets200Response from "./model/GetDeviceFleets200Response";
 import GetDeviceHealthLog200Response from "./model/GetDeviceHealthLog200Response";
 import GetDeviceHealthLog200ResponseHealthLogInner from "./model/GetDeviceHealthLog200ResponseHealthLogInner";
+import GetDeviceJourney200Response from "./model/GetDeviceJourney200Response";
+import GetDeviceJourney200ResponseJourney from "./model/GetDeviceJourney200ResponseJourney";
+import GetDeviceJourneys200Response from "./model/GetDeviceJourneys200Response";
+import GetDeviceJourneys200ResponseJourneysInner from "./model/GetDeviceJourneys200ResponseJourneysInner";
 import GetDeviceLatestEvents200Response from "./model/GetDeviceLatestEvents200Response";
 import GetDevicePlans200Response from "./model/GetDevicePlans200Response";
 import GetDevicePublicKey200Response from "./model/GetDevicePublicKey200Response";
@@ -93,6 +100,7 @@ import GetJobs200Response from "./model/GetJobs200Response";
 import GetNotefile200Response from "./model/GetNotefile200Response";
 import GetProducts200Response from "./model/GetProducts200Response";
 import GetProjectMembers200Response from "./model/GetProjectMembers200Response";
+import GetProjectSecretsResponse from "./model/GetProjectSecretsResponse";
 import GetProjects200Response from "./model/GetProjects200Response";
 import GetRouteLogsUsage200Response from "./model/GetRouteLogsUsage200Response";
 import GetSessionsUsage200Response from "./model/GetSessionsUsage200Response";
@@ -100,6 +108,11 @@ import GetWebhooks200Response from "./model/GetWebhooks200Response";
 import GoogleRoute from "./model/GoogleRoute";
 import HttpRoute from "./model/HttpRoute";
 import Job from "./model/Job";
+import JobDefinition from "./model/JobDefinition";
+import JobDefinitionReportOptions from "./model/JobDefinitionReportOptions";
+import JobDefinitionSelect from "./model/JobDefinitionSelect";
+import JobDetail from "./model/JobDetail";
+import JobDetailAllOf from "./model/JobDetailAllOf";
 import JobRun from "./model/JobRun";
 import Location from "./model/Location";
 import Login200Response from "./model/Login200Response";
@@ -122,11 +135,15 @@ import PersonalAccessTokenSecret from "./model/PersonalAccessTokenSecret";
 import Product from "./model/Product";
 import Project from "./model/Project";
 import ProjectMember from "./model/ProjectMember";
+import ProjectSecret from "./model/ProjectSecret";
 import ProvisionDeviceRequest from "./model/ProvisionDeviceRequest";
 import ProxyRoute from "./model/ProxyRoute";
 import QubitroRoute from "./model/QubitroRoute";
 import RadRoute from "./model/RadRoute";
 import Repository from "./model/Repository";
+import RepositoryListResponse from "./model/RepositoryListResponse";
+import RepositoryTokenRequest from "./model/RepositoryTokenRequest";
+import RepositoryTokenResponse from "./model/RepositoryTokenResponse";
 import Role from "./model/Role";
 import RouteLog from "./model/RouteLog";
 import RouteTransformSettings from "./model/RouteTransformSettings";
@@ -147,6 +164,7 @@ import TowerLocation from "./model/TowerLocation";
 import TwilioRoute from "./model/TwilioRoute";
 import UpdateFleetRequest from "./model/UpdateFleetRequest";
 import UpdateHostFirmwareRequest from "./model/UpdateHostFirmwareRequest";
+import UpdateProjectSecretRequest from "./model/UpdateProjectSecretRequest";
 import UploadMetadata from "./model/UploadMetadata";
 import UsageData from "./model/UsageData";
 import UsageEventsData from "./model/UsageEventsData";
@@ -199,7 +217,7 @@ import WebhookApi from "./api/WebhookApi";
  * </pre>
  * </p>
  * @module index
- * @version 6.2.0
+ * @version 6.3.0
  */
 export {
   /**
@@ -249,6 +267,12 @@ export {
    * @property {module:model/AzureRoute}
    */
   AzureRoute,
+
+  /**
+   * The BatchJobRequests model constructor.
+   * @property {module:model/BatchJobRequests}
+   */
+  BatchJobRequests,
 
   /**
    * The BillingAccount model constructor.
@@ -311,6 +335,12 @@ export {
   CreateJob201Response,
 
   /**
+   * The CreateLegacyWebhookEventRequest model constructor.
+   * @property {module:model/CreateLegacyWebhookEventRequest}
+   */
+  CreateLegacyWebhookEventRequest,
+
+  /**
    * The CreateMonitor model constructor.
    * @property {module:model/CreateMonitor}
    */
@@ -327,6 +357,12 @@ export {
    * @property {module:model/CreateProjectRequest}
    */
   CreateProjectRequest,
+
+  /**
+   * The CreateProjectSecretRequest model constructor.
+   * @property {module:model/CreateProjectSecretRequest}
+   */
+  CreateProjectSecretRequest,
 
   /**
    * The CreateUpdateRepository model constructor.
@@ -611,6 +647,30 @@ export {
   GetDeviceHealthLog200ResponseHealthLogInner,
 
   /**
+   * The GetDeviceJourney200Response model constructor.
+   * @property {module:model/GetDeviceJourney200Response}
+   */
+  GetDeviceJourney200Response,
+
+  /**
+   * The GetDeviceJourney200ResponseJourney model constructor.
+   * @property {module:model/GetDeviceJourney200ResponseJourney}
+   */
+  GetDeviceJourney200ResponseJourney,
+
+  /**
+   * The GetDeviceJourneys200Response model constructor.
+   * @property {module:model/GetDeviceJourneys200Response}
+   */
+  GetDeviceJourneys200Response,
+
+  /**
+   * The GetDeviceJourneys200ResponseJourneysInner model constructor.
+   * @property {module:model/GetDeviceJourneys200ResponseJourneysInner}
+   */
+  GetDeviceJourneys200ResponseJourneysInner,
+
+  /**
    * The GetDeviceLatestEvents200Response model constructor.
    * @property {module:model/GetDeviceLatestEvents200Response}
    */
@@ -695,6 +755,12 @@ export {
   GetProjectMembers200Response,
 
   /**
+   * The GetProjectSecretsResponse model constructor.
+   * @property {module:model/GetProjectSecretsResponse}
+   */
+  GetProjectSecretsResponse,
+
+  /**
    * The GetProjects200Response model constructor.
    * @property {module:model/GetProjects200Response}
    */
@@ -735,6 +801,36 @@ export {
    * @property {module:model/Job}
    */
   Job,
+
+  /**
+   * The JobDefinition model constructor.
+   * @property {module:model/JobDefinition}
+   */
+  JobDefinition,
+
+  /**
+   * The JobDefinitionReportOptions model constructor.
+   * @property {module:model/JobDefinitionReportOptions}
+   */
+  JobDefinitionReportOptions,
+
+  /**
+   * The JobDefinitionSelect model constructor.
+   * @property {module:model/JobDefinitionSelect}
+   */
+  JobDefinitionSelect,
+
+  /**
+   * The JobDetail model constructor.
+   * @property {module:model/JobDetail}
+   */
+  JobDetail,
+
+  /**
+   * The JobDetailAllOf model constructor.
+   * @property {module:model/JobDetailAllOf}
+   */
+  JobDetailAllOf,
 
   /**
    * The JobRun model constructor.
@@ -869,6 +965,12 @@ export {
   ProjectMember,
 
   /**
+   * The ProjectSecret model constructor.
+   * @property {module:model/ProjectSecret}
+   */
+  ProjectSecret,
+
+  /**
    * The ProvisionDeviceRequest model constructor.
    * @property {module:model/ProvisionDeviceRequest}
    */
@@ -897,6 +999,24 @@ export {
    * @property {module:model/Repository}
    */
   Repository,
+
+  /**
+   * The RepositoryListResponse model constructor.
+   * @property {module:model/RepositoryListResponse}
+   */
+  RepositoryListResponse,
+
+  /**
+   * The RepositoryTokenRequest model constructor.
+   * @property {module:model/RepositoryTokenRequest}
+   */
+  RepositoryTokenRequest,
+
+  /**
+   * The RepositoryTokenResponse model constructor.
+   * @property {module:model/RepositoryTokenResponse}
+   */
+  RepositoryTokenResponse,
 
   /**
    * The Role model constructor.
@@ -1017,6 +1137,12 @@ export {
    * @property {module:model/UpdateHostFirmwareRequest}
    */
   UpdateHostFirmwareRequest,
+
+  /**
+   * The UpdateProjectSecretRequest model constructor.
+   * @property {module:model/UpdateProjectSecretRequest}
+   */
+  UpdateProjectSecretRequest,
 
   /**
    * The UploadMetadata model constructor.

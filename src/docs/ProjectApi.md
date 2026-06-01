@@ -9,6 +9,7 @@ All URIs are relative to *https://api.notefile.net*
 | [**createFleet**](ProjectApi.md#createFleet)                                           | **POST** /v1/projects/{projectOrProductUID}/fleets                                          |
 | [**createProduct**](ProjectApi.md#createProduct)                                       | **POST** /v1/projects/{projectOrProductUID}/products                                        |
 | [**createProject**](ProjectApi.md#createProject)                                       | **POST** /v1/projects                                                                       |
+| [**createProjectSecret**](ProjectApi.md#createProjectSecret)                           | **POST** /v1/projects/{projectOrProductUID}/secrets                                         |
 | [**deleteDeviceFromFleets**](ProjectApi.md#deleteDeviceFromFleets)                     | **DELETE** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/fleets                    |
 | [**deleteFirmware**](ProjectApi.md#deleteFirmware)                                     | **DELETE** /v1/projects/{projectOrProductUID}/firmware/{firmwareType}/{filename}            |
 | [**deleteFleet**](ProjectApi.md#deleteFleet)                                           | **DELETE** /v1/projects/{projectOrProductUID}/fleets/{fleetUID}                             |
@@ -16,6 +17,7 @@ All URIs are relative to *https://api.notefile.net*
 | [**deleteProduct**](ProjectApi.md#deleteProduct)                                       | **DELETE** /v1/projects/{projectOrProductUID}/products/{productUID}                         |
 | [**deleteProject**](ProjectApi.md#deleteProject)                                       | **DELETE** /v1/projects/{projectOrProductUID}                                               |
 | [**deleteProjectEnvironmentVariable**](ProjectApi.md#deleteProjectEnvironmentVariable) | **DELETE** /v1/projects/{projectOrProductUID}/environment_variables/{key}                   |
+| [**deleteProjectSecret**](ProjectApi.md#deleteProjectSecret)                           | **DELETE** /v1/projects/{projectOrProductUID}/secrets/{secretName}                          |
 | [**disableGlobalEventTransformation**](ProjectApi.md#disableGlobalEventTransformation) | **POST** /v1/projects/{projectOrProductUID}/global-transformation/disable                   |
 | [**downloadFirmware**](ProjectApi.md#downloadFirmware)                                 | **GET** /v1/projects/{projectOrProductUID}/firmware/{firmwareType}/{filename}               |
 | [**enableGlobalEventTransformation**](ProjectApi.md#enableGlobalEventTransformation)   | **POST** /v1/projects/{projectOrProductUID}/global-transformation/enable                    |
@@ -37,6 +39,7 @@ All URIs are relative to *https://api.notefile.net*
 | [**getProjectEnvironmentHierarchy**](ProjectApi.md#getProjectEnvironmentHierarchy)     | **GET** /v1/projects/{projectOrProductUID}/environment_hierarchy                            | Get environment variable hierarchy for a device          |
 | [**getProjectEnvironmentVariables**](ProjectApi.md#getProjectEnvironmentVariables)     | **GET** /v1/projects/{projectOrProductUID}/environment_variables                            |
 | [**getProjectMembers**](ProjectApi.md#getProjectMembers)                               | **GET** /v1/projects/{projectOrProductUID}/members                                          |
+| [**getProjectSecrets**](ProjectApi.md#getProjectSecrets)                               | **GET** /v1/projects/{projectOrProductUID}/secrets                                          |
 | [**getProjects**](ProjectApi.md#getProjects)                                           | **GET** /v1/projects                                                                        |
 | [**performDfuAction**](ProjectApi.md#performDfuAction)                                 | **POST** /v1/projects/{projectOrProductUID}/dfu/{firmwareType}/{action}                     |
 | [**setFleetEnvironmentVariables**](ProjectApi.md#setFleetEnvironmentVariables)         | **PUT** /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/environment_variables          |
@@ -44,6 +47,7 @@ All URIs are relative to *https://api.notefile.net*
 | [**setProjectEnvironmentVariables**](ProjectApi.md#setProjectEnvironmentVariables)     | **PUT** /v1/projects/{projectOrProductUID}/environment_variables                            |
 | [**updateFirmware**](ProjectApi.md#updateFirmware)                                     | **POST** /v1/projects/{projectOrProductUID}/firmware/{firmwareType}/{filename}              |
 | [**updateFleet**](ProjectApi.md#updateFleet)                                           | **PUT** /v1/projects/{projectOrProductUID}/fleets/{fleetUID}                                |
+| [**updateProjectSecret**](ProjectApi.md#updateProjectSecret)                           | **PUT** /v1/projects/{projectOrProductUID}/secrets/{secretName}                             |
 | [**uploadFirmware**](ProjectApi.md#uploadFirmware)                                     | **PUT** /v1/projects/{projectOrProductUID}/firmware/{firmwareType}/{filename}               |
 
 ## addDeviceToFleets
@@ -283,6 +287,57 @@ apiInstance.createProject(createProjectRequest).then(
 ### Return type
 
 [**Project**](Project.md)
+
+### Authorization
+
+[personalAccessToken](../README.md#personalAccessToken)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+## createProjectSecret
+
+> ProjectSecret createProjectSecret(projectOrProductUID, createProjectSecretRequest)
+
+Create a new project secret
+
+### Example
+
+```javascript
+import * as NotehubJs from "@blues-inc/notehub-js";
+let defaultClient = NotehubJs.ApiClient.instance;
+let personalAccessToken = defaultClient.authentications["personalAccessToken"];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
+
+let apiInstance = new NotehubJs.ProjectApi();
+let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String |
+let createProjectSecretRequest = new NotehubJs.CreateProjectSecretRequest(); // CreateProjectSecretRequest |
+apiInstance
+  .createProjectSecret(projectOrProductUID, createProjectSecretRequest)
+  .then(
+    (data) => {
+      console.log(
+        "API called successfully. Returned data: " + JSON.stringify(data)
+      );
+    },
+    (error) => {
+      console.error(error);
+    }
+  );
+```
+
+### Parameters
+
+| Name                           | Type                                                            | Description | Notes |
+| ------------------------------ | --------------------------------------------------------------- | ----------- | ----- |
+| **projectOrProductUID**        | **String**                                                      |             |
+| **createProjectSecretRequest** | [**CreateProjectSecretRequest**](CreateProjectSecretRequest.md) |             |
+
+### Return type
+
+[**ProjectSecret**](ProjectSecret.md)
 
 ### Authorization
 
@@ -631,6 +686,53 @@ apiInstance.deleteProjectEnvironmentVariable(projectOrProductUID, key).then(
 ### Return type
 
 [**EnvironmentVariables**](EnvironmentVariables.md)
+
+### Authorization
+
+[personalAccessToken](../README.md#personalAccessToken)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+## deleteProjectSecret
+
+> deleteProjectSecret(projectOrProductUID, secretName)
+
+Delete a project secret by name
+
+### Example
+
+```javascript
+import * as NotehubJs from "@blues-inc/notehub-js";
+let defaultClient = NotehubJs.ApiClient.instance;
+let personalAccessToken = defaultClient.authentications["personalAccessToken"];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
+
+let apiInstance = new NotehubJs.ProjectApi();
+let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String |
+let secretName = "secretName_example"; // String | The name of the secret.
+apiInstance.deleteProjectSecret(projectOrProductUID, secretName).then(
+  () => {
+    console.log("API called successfully.");
+  },
+  (error) => {
+    console.error(error);
+  }
+);
+```
+
+### Parameters
+
+| Name                    | Type       | Description             | Notes |
+| ----------------------- | ---------- | ----------------------- | ----- |
+| **projectOrProductUID** | **String** |                         |
+| **secretName**          | **String** | The name of the secret. |
+
+### Return type
+
+null (empty response body)
 
 ### Authorization
 
@@ -1411,6 +1513,9 @@ Get variable format for a notefile
 
 ```javascript
 import * as NotehubJs from "@blues-inc/notehub-js";
+let defaultClient = NotehubJs.ApiClient.instance;
+let personalAccessToken = defaultClient.authentications["personalAccessToken"];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
 
 let apiInstance = new NotehubJs.ProjectApi();
 let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String |
@@ -1438,7 +1543,7 @@ apiInstance.getNotefileSchemas(projectOrProductUID).then(
 
 ### Authorization
 
-No authorization required
+[personalAccessToken](../README.md#personalAccessToken)
 
 ### HTTP request headers
 
@@ -1727,6 +1832,53 @@ apiInstance.getProjectMembers(projectOrProductUID).then(
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
+## getProjectSecrets
+
+> GetProjectSecretsResponse getProjectSecrets(projectOrProductUID)
+
+Get all secrets for a project (metadata only, values are never returned)
+
+### Example
+
+```javascript
+import * as NotehubJs from "@blues-inc/notehub-js";
+let defaultClient = NotehubJs.ApiClient.instance;
+let personalAccessToken = defaultClient.authentications["personalAccessToken"];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
+
+let apiInstance = new NotehubJs.ProjectApi();
+let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String |
+apiInstance.getProjectSecrets(projectOrProductUID).then(
+  (data) => {
+    console.log(
+      "API called successfully. Returned data: " + JSON.stringify(data)
+    );
+  },
+  (error) => {
+    console.error(error);
+  }
+);
+```
+
+### Parameters
+
+| Name                    | Type       | Description | Notes |
+| ----------------------- | ---------- | ----------- | ----- |
+| **projectOrProductUID** | **String** |             |
+
+### Return type
+
+[**GetProjectSecretsResponse**](GetProjectSecretsResponse.md)
+
+### Authorization
+
+[personalAccessToken](../README.md#personalAccessToken)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
 ## getProjects
 
 > GetProjects200Response getProjects()
@@ -1917,7 +2069,7 @@ personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
 
 let apiInstance = new NotehubJs.ProjectApi();
 let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String |
-let body = { key: null }; // Object | JSONata expression which will be applied to each event before it is persisted and routed
+let body = "body_example"; // String | JSONata expression which will be applied to each event before it is persisted and routed
 apiInstance.setGlobalEventTransformation(projectOrProductUID, body).then(
   () => {
     console.log("API called successfully.");
@@ -1933,7 +2085,7 @@ apiInstance.setGlobalEventTransformation(projectOrProductUID, body).then(
 | Name                    | Type       | Description                                                                              | Notes |
 | ----------------------- | ---------- | ---------------------------------------------------------------------------------------- | ----- |
 | **projectOrProductUID** | **String** |                                                                                          |
-| **body**                | **Object** | JSONata expression which will be applied to each event before it is persisted and routed |
+| **body**                | **String** | JSONata expression which will be applied to each event before it is persisted and routed |
 
 ### Return type
 
@@ -1945,7 +2097,7 @@ null (empty response body)
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
+- **Content-Type**: text/plain
 - **Accept**: application/json
 
 ## setProjectEnvironmentVariables
@@ -2100,6 +2252,63 @@ apiInstance.updateFleet(projectOrProductUID, fleetUID, updateFleetRequest).then(
 ### Return type
 
 [**Fleet**](Fleet.md)
+
+### Authorization
+
+[personalAccessToken](../README.md#personalAccessToken)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+## updateProjectSecret
+
+> ProjectSecret updateProjectSecret(projectOrProductUID, secretName, updateProjectSecretRequest)
+
+Update the value of an existing project secret
+
+### Example
+
+```javascript
+import * as NotehubJs from "@blues-inc/notehub-js";
+let defaultClient = NotehubJs.ApiClient.instance;
+let personalAccessToken = defaultClient.authentications["personalAccessToken"];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
+
+let apiInstance = new NotehubJs.ProjectApi();
+let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String |
+let secretName = "secretName_example"; // String | The name of the secret.
+let updateProjectSecretRequest = new NotehubJs.UpdateProjectSecretRequest(); // UpdateProjectSecretRequest |
+apiInstance
+  .updateProjectSecret(
+    projectOrProductUID,
+    secretName,
+    updateProjectSecretRequest
+  )
+  .then(
+    (data) => {
+      console.log(
+        "API called successfully. Returned data: " + JSON.stringify(data)
+      );
+    },
+    (error) => {
+      console.error(error);
+    }
+  );
+```
+
+### Parameters
+
+| Name                           | Type                                                            | Description             | Notes |
+| ------------------------------ | --------------------------------------------------------------- | ----------------------- | ----- |
+| **projectOrProductUID**        | **String**                                                      |                         |
+| **secretName**                 | **String**                                                      | The name of the secret. |
+| **updateProjectSecretRequest** | [**UpdateProjectSecretRequest**](UpdateProjectSecretRequest.md) |                         |
+
+### Return type
+
+[**ProjectSecret**](ProjectSecret.md)
 
 ### Authorization
 
