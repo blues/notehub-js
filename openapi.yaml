@@ -161,6 +161,10 @@ paths:
               schema:
                 type: object
                 properties:
+                  contact_uid:
+                    type: string
+                  email:
+                    type: string
                   name:
                     type: string
                   owner:
