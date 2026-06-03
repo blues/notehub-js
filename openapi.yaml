@@ -4836,16 +4836,16 @@ components:
         name:
           description: repository name
           type: string
-        project_uids:
-          $ref: '#/components/schemas/AppUIDList'
-        reader_password:
+        password:
           description: 'read-only password for the database, also used as X-Repository-Token header for subsequent API calls.  This value is only served once when the repository is created'
           type: string
-        reader_user:
-          description: read-only user for database
-          type: string
+        project_uids:
+          $ref: '#/components/schemas/AppUIDList'
         uid:
           description: The unique identifier for the data repository
+          type: string
+        user:
+          description: read-only user for database
           type: string
     CurrentFirmware:
       type: object
