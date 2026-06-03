@@ -141,6 +141,7 @@ paths:
                       $ref: '#/components/schemas/BillingAccount'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      deprecated: true
       security:
         - personalAccessToken: []
       tags:
@@ -191,6 +192,7 @@ paths:
                     type: string
         default:
           $ref: '#/components/responses/ErrorResponse'
+      deprecated: true
       security:
         - personalAccessToken: []
       tags:
@@ -233,10 +235,127 @@ paths:
                       type: object
         default:
           $ref: '#/components/responses/ErrorResponse'
+      deprecated: true
       security:
         - personalAccessToken: []
       tags:
         - billing_account
+      x-custom-attributes:
+        permission: read
+  /v1/organizations:
+    get:
+      operationId: GetOrganizations
+      description: Get Organizations accessible by the api_key
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  organizations:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Organization'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - organization
+      x-custom-attributes:
+        permission: read
+  /v1/organizations/{organizationUID}:
+    get:
+      operationId: GetOrganization
+      description: Get Organization Information
+      parameters:
+        - $ref: '#/components/parameters/organizationUIDParam'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  owner:
+                    type: string
+                  plan:
+                    type: object
+                    properties:
+                      current_balance:
+                        type: integer
+                        format: int64
+                      end_date:
+                        type: string
+                        format: date-time
+                      event_capacity:
+                        type: integer
+                        format: int64
+                      start_date:
+                        type: string
+                        format: date-time
+                      type:
+                        type: string
+                        enum:
+                          - Enterprise
+                          - Essentials
+                  suspended:
+                    type: boolean
+                  uid:
+                    type: string
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - organization
+      x-custom-attributes:
+        permission: read
+  /v1/organizations/{organizationUID}/balance-history:
+    get:
+      operationId: GetOrganizationBalanceHistory
+      description: Get Organization Balance history
+      parameters:
+        - $ref: '#/components/parameters/organizationUIDParam'
+        - $ref: '#/components/parameters/startDateParam'
+        - $ref: '#/components/parameters/endDateParam'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      properties:
+                        period:
+                          type: string
+                          format: date-time
+                        remaining_event_capacity:
+                          type: integer
+                          format: int64
+                        total_event_capacity_used:
+                          type: integer
+                          format: int64
+                      required:
+                        - remaining_event_capacity
+                        - total_event_capacity_used
+                        - period
+                      type: object
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - organization
       x-custom-attributes:
         permission: read
   /v1/products/{productUID}/devices/{deviceUID}/environment_variables_with_pin:
@@ -287,7 +406,7 @@ paths:
         - $ref: '#/components/parameters/productUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
       requestBody:
-        description: A Note-shaped event. Typically contains the notefile name (file), a JSON body, and an optional base64-encoded payload, but any additional Note fields (e.g. when, sn, where_lat, where_lon) are accepted and honored.
+        description: A Note-shaped event with notefile name, JSON body, and optional base64-encoded payload.
         required: true
         content:
           application/json:
@@ -298,6 +417,17 @@ paths:
               payload: SGVsbG8sIFdvcmxkIQ==
             schema:
               type: object
+              properties:
+                body:
+                  description: Arbitrary JSON event body.
+                  type: object
+                  additionalProperties: true
+                file:
+                  description: The notefile to which the event should be written.
+                  type: string
+                payload:
+                  description: Optional base64-encoded binary payload.
+                  type: string
               additionalProperties: true
       responses:
         '200':
@@ -4188,6 +4318,13 @@ components:
       required: true
       schema:
         type: string
+    organizationUIDParam:
+      example: 00000000-0000-0000-000000000001
+      in: path
+      name: organizationUID
+      required: true
+      schema:
+        type: string
     pageNumParam:
       in: query
       name: pageNum
@@ -4817,25 +4954,6 @@ components:
           type: string
         project_uids:
           $ref: '#/components/schemas/AppUIDList'
-    CreatedRepository:
-      type: object
-      properties:
-        fleet_uids:
-          $ref: '#/components/schemas/FleetsUIDList'
-        name:
-          description: repository name
-          type: string
-        password:
-          description: 'read-only password for the database, also used as X-Repository-Token header for subsequent API calls.  This value is only served once when the repository is created'
-          type: string
-        project_uids:
-          $ref: '#/components/schemas/AppUIDList'
-        uid:
-          description: The unique identifier for the data repository
-          type: string
-        user:
-          description: read-only user for database
-          type: string
     CurrentFirmware:
       type: object
       properties:
@@ -6422,6 +6540,32 @@ components:
         - access_token
         - token_type
         - expires_in
+    Organization:
+      type: object
+      properties:
+        name:
+          type: string
+        role:
+          $ref: '#/components/schemas/OrganizationRole'
+        uid:
+          type: string
+      required:
+        - uid
+        - name
+        - role
+    OrganizationRole:
+      type: string
+      properties: {}
+      enum:
+        - org_admin
+        - billing_manager
+        - project_creator
+        - org_member
+      x-enum-varnames:
+        - ORG_ROLE_ADMIN
+        - ORG_ROLE_BILLING_MANAGER
+        - ORG_ROLE_PROJECT_CREATOR
+        - ORG_ROLE_MEMBER
     PersonalAccessToken:
       type: object
       properties:
@@ -8014,6 +8158,8 @@ components:
 tags:
   - description: Authorization operations
     name: authorization
+  - description: Organization operations
+    name: organization
   - description: Project operations
     name: project
   - description: Event retrieval operations
