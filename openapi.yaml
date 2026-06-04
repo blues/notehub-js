@@ -6456,6 +6456,10 @@ components:
           readOnly: true
         mqtt:
           $ref: '#/components/schemas/MqttRoute'
+        notes:
+          description: Optional free-form text for annotating the route.
+          type: string
+          maxLength: 1024
         proxy:
           $ref: '#/components/schemas/ProxyRoute'
         qubitro:
