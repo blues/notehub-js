@@ -347,8 +347,8 @@ Both release types use npm's trusted publisher feature with provenance statement
 ### Steps to Publish an Updated npm Version of Repo
 
 1. Adjust the version number (`"projectVersion"`) in the `config.json` file. (Failure to adjust `"projectVersion"` will cause the release to npm to fail; the same version number can't be published more than once.)
-2. Run `npm run filterOpenapi` to create a fresh version of the `openapi.filtered.yaml` file that removes all deprecated query params from the original `openapi.yaml` file.
-3. Run `npm run generateDocs` to generate new docs from the `openapi.filtered.yaml` file.
+2. Run `pnpm run filterOpenapi` to create a fresh version of the `openapi.filtered.yaml` file that removes all deprecated query params from the original `openapi.yaml` file.
+3. Run `pnpm run generateDocs` to generate new docs from the `openapi.filtered.yaml` file.
 4. Commit and push the changes to a new branch in GitHub and open a new pull request when the branch is ready for review. See the [contribution documentation](CONTRIBUTING.md) for further details around a good PR and commit messages.
 5. Get the PR approved and merged to `main`.
 6. Create a new release with a tag following the [semantic versioning](https://semver.org/) style of [vX.X.X], click the "Generate release notes" button to log the changes in the release, and publish it. For example: a new release with a tag named v1.0.2.

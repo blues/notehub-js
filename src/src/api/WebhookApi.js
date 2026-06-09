@@ -12,7 +12,6 @@
  */
 
 import ApiClient from "../ApiClient";
-import CreateLegacyWebhookEventRequest from "../model/CreateLegacyWebhookEventRequest";
 import Error from "../model/Error";
 import GetWebhooks200Response from "../model/GetWebhooks200Response";
 import WebhookSettings from "../model/WebhookSettings";
@@ -20,7 +19,7 @@ import WebhookSettings from "../model/WebhookSettings";
 /**
  * Webhook service.
  * @module api/WebhookApi
- * @version 6.3.0
+ * @version 6.4.0
  */
 export default class WebhookApi {
   /**
@@ -38,7 +37,7 @@ export default class WebhookApi {
    * Legacy endpoint for sending an event from a webhook, associated with the given device (provisioning it if necessary). The request body is a Note-shaped object containing the notefile name, body, and optional payload.
    * @param {String} productUID
    * @param {String} deviceUID
-   * @param {Object.<String, {String: Object}>} requestBody A Note-shaped event with notefile name, JSON body, and optional base64-encoded payload.
+   * @param {Object.<String, {String: Object}>} requestBody A Note-shaped event. Typically contains the notefile name (file), a JSON body, and an optional base64-encoded payload, but any additional Note fields (e.g. when, sn, where_lat, where_lon) are accepted and honored.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
    */
   createLegacyWebhookEventWithHttpInfo(productUID, deviceUID, requestBody) {
@@ -94,7 +93,7 @@ export default class WebhookApi {
    * Legacy endpoint for sending an event from a webhook, associated with the given device (provisioning it if necessary). The request body is a Note-shaped object containing the notefile name, body, and optional payload.
    * @param {String} productUID
    * @param {String} deviceUID
-   * @param {Object.<String, {String: Object}>} requestBody A Note-shaped event with notefile name, JSON body, and optional base64-encoded payload.
+   * @param {Object.<String, {String: Object}>} requestBody A Note-shaped event. Typically contains the notefile name (file), a JSON body, and an optional base64-encoded payload, but any additional Note fields (e.g. when, sn, where_lat, where_lon) are accepted and honored.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}
    */
   createLegacyWebhookEvent(productUID, deviceUID, requestBody) {

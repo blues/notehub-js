@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The WebhookSettings model module.
  * @module model/WebhookSettings
- * @version 6.3.0
+ * @version 6.4.0
  */
 class WebhookSettings {
   /**

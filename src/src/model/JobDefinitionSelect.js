@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The JobDefinitionSelect model module.
  * @module model/JobDefinitionSelect
- * @version 6.3.0
+ * @version 6.4.0
  */
 class JobDefinitionSelect {
   /**

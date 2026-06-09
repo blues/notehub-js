@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The GetDbNote200Response model module.
  * @module model/GetDbNote200Response
- * @version 6.3.0
+ * @version 6.4.0
  */
 class GetDbNote200Response {
   /**

@@ -17,7 +17,7 @@ import UsageData from "./UsageData";
 /**
  * The GetDataUsage200ResponseDataInner model module.
  * @module model/GetDataUsage200ResponseDataInner
- * @version 6.3.0
+ * @version 6.4.0
  */
 class GetDataUsage200ResponseDataInner {
   /**

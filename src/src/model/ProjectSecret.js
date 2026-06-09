@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The ProjectSecret model module.
  * @module model/ProjectSecret
- * @version 6.3.0
+ * @version 6.4.0
  */
 class ProjectSecret {
   /**

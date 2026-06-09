@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The AddDeviceToFleetsRequest model module.
  * @module model/AddDeviceToFleetsRequest
- * @version 6.3.0
+ * @version 6.4.0
  */
 class AddDeviceToFleetsRequest {
   /**

@@ -28,7 +28,7 @@
   var instance;
 
   beforeEach(function () {
-    instance = new NotehubJs.CreateLegacyWebhookEventRequest();
+    instance = new NotehubJs.OrganizationApi();
   });
 
   var getProperty = function (object, getter, property) {
@@ -43,29 +43,36 @@
     else object[property] = value;
   };
 
-  describe("CreateLegacyWebhookEventRequest", function () {
-    it("should create an instance of CreateLegacyWebhookEventRequest", function () {
-      // uncomment below and update the code to test CreateLegacyWebhookEventRequest
-      //var instance = new NotehubJs.CreateLegacyWebhookEventRequest();
-      //expect(instance).to.be.a(NotehubJs.CreateLegacyWebhookEventRequest);
+  describe("OrganizationApi", function () {
+    describe("getOrganization", function () {
+      it("should call getOrganization successfully", function (done) {
+        //uncomment below and update the code to test getOrganization
+        //instance.getOrganization(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
     });
-
-    it('should have the property body (base name: "body")', function () {
-      // uncomment below and update the code to test the property body
-      //var instance = new NotehubJs.CreateLegacyWebhookEventRequest();
-      //expect(instance).to.be();
+    describe("getOrganizationBalanceHistory", function () {
+      it("should call getOrganizationBalanceHistory successfully", function (done) {
+        //uncomment below and update the code to test getOrganizationBalanceHistory
+        //instance.getOrganizationBalanceHistory(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
     });
-
-    it('should have the property file (base name: "file")', function () {
-      // uncomment below and update the code to test the property file
-      //var instance = new NotehubJs.CreateLegacyWebhookEventRequest();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property payload (base name: "payload")', function () {
-      // uncomment below and update the code to test the property payload
-      //var instance = new NotehubJs.CreateLegacyWebhookEventRequest();
-      //expect(instance).to.be();
+    describe("getOrganizations", function () {
+      it("should call getOrganizations successfully", function (done) {
+        //uncomment below and update the code to test getOrganizations
+        //instance.getOrganizations(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
     });
   });
 });

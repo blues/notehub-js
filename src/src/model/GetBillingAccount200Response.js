@@ -17,7 +17,7 @@ import GetBillingAccount200ResponsePlan from "./GetBillingAccount200ResponsePlan
 /**
  * The GetBillingAccount200Response model module.
  * @module model/GetBillingAccount200Response
- * @version 6.3.0
+ * @version 6.4.0
  */
 class GetBillingAccount200Response {
   /**
@@ -46,6 +46,15 @@ class GetBillingAccount200Response {
     if (data) {
       obj = obj || new GetBillingAccount200Response();
 
+      if (data.hasOwnProperty("contact_uid")) {
+        obj["contact_uid"] = ApiClient.convertToType(
+          data["contact_uid"],
+          "String"
+        );
+      }
+      if (data.hasOwnProperty("email")) {
+        obj["email"] = ApiClient.convertToType(data["email"], "String");
+      }
       if (data.hasOwnProperty("name")) {
         obj["name"] = ApiClient.convertToType(data["name"], "String");
       }
@@ -78,6 +87,29 @@ class GetBillingAccount200Response {
    * @return {boolean} to indicate whether the JSON data is valid with respect to <code>GetBillingAccount200Response</code>.
    */
   static validateJSON(data) {
+    // ensure the json data is a string
+    if (
+      data["contact_uid"] &&
+      !(
+        typeof data["contact_uid"] === "string" ||
+        data["contact_uid"] instanceof String
+      )
+    ) {
+      throw new Error(
+        "Expected the field `contact_uid` to be a primitive type in the JSON string but got " +
+          data["contact_uid"]
+      );
+    }
+    // ensure the json data is a string
+    if (
+      data["email"] &&
+      !(typeof data["email"] === "string" || data["email"] instanceof String)
+    ) {
+      throw new Error(
+        "Expected the field `email` to be a primitive type in the JSON string but got " +
+          data["email"]
+      );
+    }
     // ensure the json data is a string
     if (
       data["name"] &&
@@ -117,6 +149,16 @@ class GetBillingAccount200Response {
     return true;
   }
 }
+
+/**
+ * @member {String} contact_uid
+ */
+GetBillingAccount200Response.prototype["contact_uid"] = undefined;
+
+/**
+ * @member {String} email
+ */
+GetBillingAccount200Response.prototype["email"] = undefined;
 
 /**
  * @member {String} name

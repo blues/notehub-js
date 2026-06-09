@@ -17,7 +17,7 @@ import ProjectSecret from "./ProjectSecret";
 /**
  * The GetProjectSecretsResponse model module.
  * @module model/GetProjectSecretsResponse
- * @version 6.3.0
+ * @version 6.4.0
  */
 class GetProjectSecretsResponse {
   /**

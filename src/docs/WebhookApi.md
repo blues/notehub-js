@@ -37,7 +37,7 @@ let requestBody = {
   body: { key: "value" },
   file: "data.qo",
   payload: "SGVsbG8sIFdvcmxkIQ==",
-}; // {String: Object} | A Note-shaped event with notefile name, JSON body, and optional base64-encoded payload.
+}; // {String: Object} | A Note-shaped event. Typically contains the notefile name (file), a JSON body, and an optional base64-encoded payload, but any additional Note fields (e.g. when, sn, where_lat, where_lon) are accepted and honored.
 apiInstance.createLegacyWebhookEvent(productUID, deviceUID, requestBody).then(
   () => {
     console.log("API called successfully.");
@@ -50,11 +50,11 @@ apiInstance.createLegacyWebhookEvent(productUID, deviceUID, requestBody).then(
 
 ### Parameters
 
-| Name            | Type                              | Description                                                                             | Notes |
-| --------------- | --------------------------------- | --------------------------------------------------------------------------------------- | ----- |
-| **productUID**  | **String**                        |                                                                                         |
-| **deviceUID**   | **String**                        |                                                                                         |
-| **requestBody** | [**{String: Object}**](Object.md) | A Note-shaped event with notefile name, JSON body, and optional base64-encoded payload. |
+| Name            | Type                              | Description                                                                                                                                                                                                           | Notes |
+| --------------- | --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----- |
+| **productUID**  | **String**                        |                                                                                                                                                                                                                       |
+| **deviceUID**   | **String**                        |                                                                                                                                                                                                                       |
+| **requestBody** | [**{String: Object}**](Object.md) | A Note-shaped event. Typically contains the notefile name (file), a JSON body, and an optional base64-encoded payload, but any additional Note fields (e.g. when, sn, where_lat, where_lon) are accepted and honored. |
 
 ### Return type
 

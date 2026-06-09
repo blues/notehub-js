@@ -30,12 +30,12 @@ import CloneProjectRequest from "./model/CloneProjectRequest";
 import Contact from "./model/Contact";
 import CreateFleetRequest from "./model/CreateFleetRequest";
 import CreateJob201Response from "./model/CreateJob201Response";
-import CreateLegacyWebhookEventRequest from "./model/CreateLegacyWebhookEventRequest";
 import CreateMonitor from "./model/CreateMonitor";
 import CreateProductRequest from "./model/CreateProductRequest";
 import CreateProjectRequest from "./model/CreateProjectRequest";
 import CreateProjectSecretRequest from "./model/CreateProjectSecretRequest";
 import CreateUpdateRepository from "./model/CreateUpdateRepository";
+import CreatedRepository from "./model/CreatedRepository";
 import CurrentFirmware from "./model/CurrentFirmware";
 import DFUEnv from "./model/DFUEnv";
 import DFUState from "./model/DFUState";
@@ -98,6 +98,7 @@ import GetEventsByCursor200Response from "./model/GetEventsByCursor200Response";
 import GetJobRuns200Response from "./model/GetJobRuns200Response";
 import GetJobs200Response from "./model/GetJobs200Response";
 import GetNotefile200Response from "./model/GetNotefile200Response";
+import GetOrganizations200Response from "./model/GetOrganizations200Response";
 import GetProducts200Response from "./model/GetProducts200Response";
 import GetProjectMembers200Response from "./model/GetProjectMembers200Response";
 import GetProjectSecretsResponse from "./model/GetProjectSecretsResponse";
@@ -128,6 +129,8 @@ import NotehubRoute from "./model/NotehubRoute";
 import NotehubRouteSummary from "./model/NotehubRouteSummary";
 import OAuth2Error from "./model/OAuth2Error";
 import OAuth2TokenResponse from "./model/OAuth2TokenResponse";
+import Organization from "./model/Organization";
+import OrganizationRole from "./model/OrganizationRole";
 import PersonalAccessToken from "./model/PersonalAccessToken";
 import PersonalAccessTokenCreatedBy from "./model/PersonalAccessTokenCreatedBy";
 import PersonalAccessTokenInfo from "./model/PersonalAccessTokenInfo";
@@ -183,6 +186,7 @@ import EventApi from "./api/EventApi";
 import ExternalDevicesApi from "./api/ExternalDevicesApi";
 import JobsApi from "./api/JobsApi";
 import MonitorApi from "./api/MonitorApi";
+import OrganizationApi from "./api/OrganizationApi";
 import ProjectApi from "./api/ProjectApi";
 import RouteApi from "./api/RouteApi";
 import UsageApi from "./api/UsageApi";
@@ -217,7 +221,7 @@ import WebhookApi from "./api/WebhookApi";
  * </pre>
  * </p>
  * @module index
- * @version 6.3.0
+ * @version 6.4.0
  */
 export {
   /**
@@ -335,12 +339,6 @@ export {
   CreateJob201Response,
 
   /**
-   * The CreateLegacyWebhookEventRequest model constructor.
-   * @property {module:model/CreateLegacyWebhookEventRequest}
-   */
-  CreateLegacyWebhookEventRequest,
-
-  /**
    * The CreateMonitor model constructor.
    * @property {module:model/CreateMonitor}
    */
@@ -369,6 +367,12 @@ export {
    * @property {module:model/CreateUpdateRepository}
    */
   CreateUpdateRepository,
+
+  /**
+   * The CreatedRepository model constructor.
+   * @property {module:model/CreatedRepository}
+   */
+  CreatedRepository,
 
   /**
    * The CurrentFirmware model constructor.
@@ -743,6 +747,12 @@ export {
   GetNotefile200Response,
 
   /**
+   * The GetOrganizations200Response model constructor.
+   * @property {module:model/GetOrganizations200Response}
+   */
+  GetOrganizations200Response,
+
+  /**
    * The GetProducts200Response model constructor.
    * @property {module:model/GetProducts200Response}
    */
@@ -921,6 +931,18 @@ export {
    * @property {module:model/OAuth2TokenResponse}
    */
   OAuth2TokenResponse,
+
+  /**
+   * The Organization model constructor.
+   * @property {module:model/Organization}
+   */
+  Organization,
+
+  /**
+   * The OrganizationRole model constructor.
+   * @property {module:model/OrganizationRole}
+   */
+  OrganizationRole,
 
   /**
    * The PersonalAccessToken model constructor.
@@ -1251,6 +1273,12 @@ export {
    * @property {module:api/MonitorApi}
    */
   MonitorApi,
+
+  /**
+   * The OrganizationApi service constructor.
+   * @property {module:api/OrganizationApi}
+   */
+  OrganizationApi,
 
   /**
    * The ProjectApi service constructor.

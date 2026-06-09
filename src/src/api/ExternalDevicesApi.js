@@ -19,7 +19,7 @@ import Event from "../model/Event";
 /**
  * ExternalDevices service.
  * @module api/ExternalDevicesApi
- * @version 6.3.0
+ * @version 6.4.0
  */
 export default class ExternalDevicesApi {
   /**

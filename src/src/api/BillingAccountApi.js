@@ -20,7 +20,7 @@ import GetBillingAccounts200Response from "../model/GetBillingAccounts200Respons
 /**
  * BillingAccount service.
  * @module api/BillingAccountApi
- * @version 6.3.0
+ * @version 6.4.0
  */
 export default class BillingAccountApi {
   /**

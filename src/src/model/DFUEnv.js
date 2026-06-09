@@ -17,7 +17,7 @@ import DFUState from "./DFUState";
 /**
  * The DFUEnv model module.
  * @module model/DFUEnv
- * @version 6.3.0
+ * @version 6.4.0
  */
 class DFUEnv {
   /**
