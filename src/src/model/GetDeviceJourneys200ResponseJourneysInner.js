@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The GetDeviceJourneys200ResponseJourneysInner model module.
  * @module model/GetDeviceJourneys200ResponseJourneysInner
- * @version 6.3.0
+ * @version 6.4.0
  */
 class GetDeviceJourneys200ResponseJourneysInner {
   /**

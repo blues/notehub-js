@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The DeleteNotefilesRequest model module.
  * @module model/DeleteNotefilesRequest
- * @version 6.3.0
+ * @version 6.4.0
  */
 class DeleteNotefilesRequest {
   /**

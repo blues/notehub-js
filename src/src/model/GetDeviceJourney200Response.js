@@ -17,7 +17,7 @@ import GetDeviceJourney200ResponseJourney from "./GetDeviceJourney200ResponseJou
 /**
  * The GetDeviceJourney200Response model module.
  * @module model/GetDeviceJourney200Response
- * @version 6.3.0
+ * @version 6.4.0
  */
 class GetDeviceJourney200Response {
   /**

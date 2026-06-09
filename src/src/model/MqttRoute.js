@@ -18,7 +18,7 @@ import RouteTransformSettings from "./RouteTransformSettings";
 /**
  * The MqttRoute model module.
  * @module model/MqttRoute
- * @version 6.3.0
+ * @version 6.4.0
  */
 class MqttRoute {
   /**
@@ -61,6 +61,9 @@ class MqttRoute {
           data["certificate_name"],
           "String"
         );
+      }
+      if (data.hasOwnProperty("client_id")) {
+        obj["client_id"] = ApiClient.convertToType(data["client_id"], "String");
       }
       if (data.hasOwnProperty("filter")) {
         obj["filter"] = Filter.constructFromObject(data["filter"]);
@@ -149,6 +152,19 @@ class MqttRoute {
       throw new Error(
         "Expected the field `certificate_name` to be a primitive type in the JSON string but got " +
           data["certificate_name"]
+      );
+    }
+    // ensure the json data is a string
+    if (
+      data["client_id"] &&
+      !(
+        typeof data["client_id"] === "string" ||
+        data["client_id"] instanceof String
+      )
+    ) {
+      throw new Error(
+        "Expected the field `client_id` to be a primitive type in the JSON string but got " +
+          data["client_id"]
       );
     }
     // validate the optional field `filter`
@@ -256,6 +272,11 @@ MqttRoute.prototype["certificate"] = undefined;
  * @member {String} certificate_name
  */
 MqttRoute.prototype["certificate_name"] = undefined;
+
+/**
+ * @member {String} client_id
+ */
+MqttRoute.prototype["client_id"] = undefined;
 
 /**
  * @member {module:model/Filter} filter

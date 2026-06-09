@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The BatchJobRequests model module.
  * @module model/BatchJobRequests
- * @version 6.3.0
+ * @version 6.4.0
  */
 class BatchJobRequests {
   /**

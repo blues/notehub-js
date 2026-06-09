@@ -17,7 +17,7 @@ import Event from "./Event";
 /**
  * The GetDeviceJourney200ResponseJourney model module.
  * @module model/GetDeviceJourney200ResponseJourney
- * @version 6.3.0
+ * @version 6.4.0
  */
 class GetDeviceJourney200ResponseJourney {
   /**

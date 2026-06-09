@@ -32,7 +32,7 @@ import TwilioRoute from "./TwilioRoute";
 /**
  * The NotehubRoute model module.
  * @module model/NotehubRoute
- * @version 6.3.0
+ * @version 6.4.0
  */
 class NotehubRoute {
   /**
@@ -91,6 +91,9 @@ class NotehubRoute {
       }
       if (data.hasOwnProperty("mqtt")) {
         obj["mqtt"] = MqttRoute.constructFromObject(data["mqtt"]);
+      }
+      if (data.hasOwnProperty("notes")) {
+        obj["notes"] = ApiClient.convertToType(data["notes"], "String");
       }
       if (data.hasOwnProperty("proxy")) {
         obj["proxy"] = ProxyRoute.constructFromObject(data["proxy"]);
@@ -189,6 +192,16 @@ class NotehubRoute {
     if (data["mqtt"]) {
       // data not null
       MqttRoute.validateJSON(data["mqtt"]);
+    }
+    // ensure the json data is a string
+    if (
+      data["notes"] &&
+      !(typeof data["notes"] === "string" || data["notes"] instanceof String)
+    ) {
+      throw new Error(
+        "Expected the field `notes` to be a primitive type in the JSON string but got " +
+          data["notes"]
+      );
     }
     // validate the optional field `proxy`
     if (data["proxy"]) {
@@ -310,6 +323,12 @@ NotehubRoute.prototype["modified"] = undefined;
  * @member {module:model/MqttRoute} mqtt
  */
 NotehubRoute.prototype["mqtt"] = undefined;
+
+/**
+ * Optional free-form text for annotating the route.
+ * @member {String} notes
+ */
+NotehubRoute.prototype["notes"] = undefined;
 
 /**
  * @member {module:model/ProxyRoute} proxy
