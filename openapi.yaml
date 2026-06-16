@@ -141,6 +141,7 @@ paths:
                       $ref: '#/components/schemas/BillingAccount'
         default:
           $ref: '#/components/responses/ErrorResponse'
+      deprecated: true
       security:
         - personalAccessToken: []
       tags:
@@ -161,6 +162,10 @@ paths:
               schema:
                 type: object
                 properties:
+                  contact_uid:
+                    type: string
+                  email:
+                    type: string
                   name:
                     type: string
                   owner:
@@ -191,6 +196,7 @@ paths:
                     type: string
         default:
           $ref: '#/components/responses/ErrorResponse'
+      deprecated: true
       security:
         - personalAccessToken: []
       tags:
@@ -233,10 +239,131 @@ paths:
                       type: object
         default:
           $ref: '#/components/responses/ErrorResponse'
+      deprecated: true
       security:
         - personalAccessToken: []
       tags:
         - billing_account
+      x-custom-attributes:
+        permission: read
+  /v1/organizations:
+    get:
+      operationId: GetOrganizations
+      description: Get Organizations accessible by the api_key
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  organizations:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Organization'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - organization
+      x-custom-attributes:
+        permission: read
+  '/v1/organizations/{organizationUID}':
+    get:
+      operationId: GetOrganization
+      description: Get Organization Information
+      parameters:
+        - $ref: '#/components/parameters/organizationUIDParam'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  contact_uid:
+                    type: string
+                  email:
+                    type: string
+                  name:
+                    type: string
+                  owner:
+                    type: string
+                  plan:
+                    type: object
+                    properties:
+                      current_balance:
+                        type: integer
+                        format: int64
+                      end_date:
+                        type: string
+                        format: date-time
+                      event_capacity:
+                        type: integer
+                        format: int64
+                      start_date:
+                        type: string
+                        format: date-time
+                      type:
+                        type: string
+                        enum:
+                          - Enterprise
+                          - Essentials
+                  suspended:
+                    type: boolean
+                  uid:
+                    type: string
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - organization
+      x-custom-attributes:
+        permission: read
+  '/v1/organizations/{organizationUID}/balance-history':
+    get:
+      operationId: GetOrganizationBalanceHistory
+      description: Get Organization Balance history
+      parameters:
+        - $ref: '#/components/parameters/organizationUIDParam'
+        - $ref: '#/components/parameters/startDateParam'
+        - $ref: '#/components/parameters/endDateParam'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      properties:
+                        period:
+                          type: string
+                          format: date-time
+                        remaining_event_capacity:
+                          type: integer
+                          format: int64
+                        total_event_capacity_used:
+                          type: integer
+                          format: int64
+                      required:
+                        - remaining_event_capacity
+                        - total_event_capacity_used
+                        - period
+                      type: object
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - organization
       x-custom-attributes:
         permission: read
   /v1/products/{productUID}/devices/{deviceUID}/environment_variables_with_pin:
@@ -298,17 +425,6 @@ paths:
               payload: SGVsbG8sIFdvcmxkIQ==
             schema:
               type: object
-              properties:
-                body:
-                  description: Arbitrary JSON event body.
-                  type: object
-                  additionalProperties: true
-                file:
-                  description: The notefile to which the event should be written.
-                  type: string
-                payload:
-                  description: Optional base64-encoded binary payload.
-                  type: string
               additionalProperties: true
       responses:
         '200':
@@ -1200,7 +1316,7 @@ paths:
     get:
       operationId: GetDeviceJourneys
       description: |
-        Get the list of journeys for a device, derived from `_track.qo` events. Returns journey metadata only (no event payloads). Capped at 100 most recent journeys; `has_more` is true when the cap is hit.
+        Get the list of journeys for a device, derived from events whose body contains `journey` and `jcount` fields. Returns journey metadata only (no event payloads). Capped at 100 most recent journeys; `has_more` is true when the cap is hit.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
@@ -1226,7 +1342,7 @@ paths:
                           format: date-time
                         journey_id:
                           description: |
-                            Identifier of the journey, taken from the `journey` field on `_track.qo` events. This value is itself a Unix timestamp marking the start of the journey.
+                            Identifier of the journey, taken from the numeric `journey` field in the event body. This value is itself a Unix timestamp marking the start of the journey.
                           type: integer
                           format: int64
                         start_date:
@@ -1234,7 +1350,7 @@ paths:
                           type: string
                           format: date-time
                         total_events:
-                          description: The number of _track.qo events in the journey.
+                          description: The number of events in the journey.
                           type: integer
                           format: int64
                       required:
@@ -1259,14 +1375,14 @@ paths:
     get:
       operationId: GetDeviceJourney
       description: |
-        Get a single journey for a device along with its `_track.qo` events. The events array is paginated via `pageSize` / `pageNum`; use `journey.has_more` to detect additional pages.
+        Get a single journey for a device along with its events. The events array is paginated via `pageSize` / `pageNum`; use `journey.has_more` to detect additional pages.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
         - name: journeyID
           in: path
           description: |
-            Identifier of the journey, taken from the `journey` field on `_track.qo` events (a Unix timestamp marking the start of the journey).
+            Identifier of the journey, taken from the numeric `journey` field in the event body (a Unix timestamp marking the start of the journey).
           required: true
           schema:
             type: integer
@@ -1286,7 +1402,7 @@ paths:
                     type: string
                     format: date-time
                   journey:
-                    description: Paginated `_track.qo` events for the journey.
+                    description: Paginated events for the journey.
                     type: object
                     properties:
                       events:
@@ -4199,6 +4315,13 @@ components:
       required: true
       schema:
         type: string
+    organizationUIDParam:
+      example: 00000000-0000-0000-000000000001
+      in: path
+      name: organizationUID
+      required: true
+      schema:
+        type: string
     pageNumParam:
       in: query
       name: pageNum
@@ -4828,6 +4951,25 @@ components:
           type: string
         project_uids:
           $ref: '#/components/schemas/AppUIDList'
+    CreatedRepository:
+      type: object
+      properties:
+        fleet_uids:
+          $ref: '#/components/schemas/FleetsUIDList'
+        name:
+          description: repository name
+          type: string
+        password:
+          description: 'read-only password for the database, also used as X-Repository-Token header for subsequent API calls.  This value is only served once when the repository is created'
+          type: string
+        project_uids:
+          $ref: '#/components/schemas/AppUIDList'
+        uid:
+          description: The unique identifier for the data repository
+          type: string
+        user:
+          description: read-only user for database
+          type: string
     CurrentFirmware:
       type: object
       properties:
@@ -5450,7 +5592,7 @@ components:
       type: object
       properties:
         environment_variable_notes:
-          description: Optional per-variable annotations, keyed by variable name. Setting a key to an empty string removes its note. Keys that do not exist in environment_variables will result in a 400 error.
+          description: Optional per-variable annotations, keyed by variable name. Setting a key to an empty string removes its note. A 400 error is returned for any key that does not already exist as a stored variable and is not included in environment_variables in the same request.
           type: object
           additionalProperties:
             maxLength: 1024
@@ -6211,6 +6353,8 @@ components:
           type: string
         certificate_name:
           type: string
+        client_id:
+          type: string
         filter:
           $ref: '#/components/schemas/Filter'
         fleets:
@@ -6340,6 +6484,10 @@ components:
           readOnly: true
         mqtt:
           $ref: '#/components/schemas/MqttRoute'
+        notes:
+          description: Optional free-form text for annotating the route.
+          type: string
+          maxLength: 1024
         proxy:
           $ref: '#/components/schemas/ProxyRoute'
         qubitro:
@@ -6424,6 +6572,32 @@ components:
         - access_token
         - token_type
         - expires_in
+    Organization:
+      type: object
+      properties:
+        name:
+          type: string
+        role:
+          $ref: '#/components/schemas/OrganizationRole'
+        uid:
+          type: string
+      required:
+        - uid
+        - name
+        - role
+    OrganizationRole:
+      type: string
+      properties: {}
+      enum:
+        - org_admin
+        - billing_manager
+        - project_creator
+        - org_member
+      x-enum-varnames:
+        - ORG_ROLE_ADMIN
+        - ORG_ROLE_BILLING_MANAGER
+        - ORG_ROLE_PROJECT_CREATOR
+        - ORG_ROLE_MEMBER
     PersonalAccessToken:
       type: object
       properties:
@@ -8022,6 +8196,8 @@ components:
 tags:
   - description: Authorization operations
     name: authorization
+  - description: Organization operations
+    name: organization
   - description: Project operations
     name: project
   - description: Event retrieval operations
