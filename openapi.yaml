@@ -1316,7 +1316,7 @@ paths:
     get:
       operationId: GetDeviceJourneys
       description: |
-        Get the list of journeys for a device, derived from `_track.qo` events. Returns journey metadata only (no event payloads). Capped at 100 most recent journeys; `has_more` is true when the cap is hit.
+        Get the list of journeys for a device, derived from events whose body contains `journey` and `jcount` fields. Returns journey metadata only (no event payloads). Capped at 100 most recent journeys; `has_more` is true when the cap is hit.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
@@ -1342,7 +1342,7 @@ paths:
                           format: date-time
                         journey_id:
                           description: |
-                            Identifier of the journey, taken from the `journey` field on `_track.qo` events. This value is itself a Unix timestamp marking the start of the journey.
+                            Identifier of the journey, taken from the numeric `journey` field in the event body. This value is itself a Unix timestamp marking the start of the journey.
                           type: integer
                           format: int64
                         start_date:
@@ -1350,7 +1350,7 @@ paths:
                           type: string
                           format: date-time
                         total_events:
-                          description: The number of _track.qo events in the journey.
+                          description: The number of events in the journey.
                           type: integer
                           format: int64
                       required:
@@ -1375,14 +1375,14 @@ paths:
     get:
       operationId: GetDeviceJourney
       description: |
-        Get a single journey for a device along with its `_track.qo` events. The events array is paginated via `pageSize` / `pageNum`; use `journey.has_more` to detect additional pages.
+        Get a single journey for a device along with its events. The events array is paginated via `pageSize` / `pageNum`; use `journey.has_more` to detect additional pages.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
         - name: journeyID
           in: path
           description: |
-            Identifier of the journey, taken from the `journey` field on `_track.qo` events (a Unix timestamp marking the start of the journey).
+            Identifier of the journey, taken from the numeric `journey` field in the event body (a Unix timestamp marking the start of the journey).
           required: true
           schema:
             type: integer
@@ -1402,7 +1402,7 @@ paths:
                     type: string
                     format: date-time
                   journey:
-                    description: Paginated `_track.qo` events for the journey.
+                    description: Paginated events for the journey.
                     type: object
                     properties:
                       events:
