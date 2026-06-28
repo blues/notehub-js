@@ -270,7 +270,7 @@ paths:
         - organization
       x-custom-attributes:
         permission: read
-  '/v1/organizations/{organizationUID}':
+  /v1/organizations/{organizationUID}:
     get:
       operationId: GetOrganization
       description: Get Organization Information
@@ -324,7 +324,7 @@ paths:
         - organization
       x-custom-attributes:
         permission: read
-  '/v1/organizations/{organizationUID}/balance-history':
+  /v1/organizations/{organizationUID}/balance-history:
     get:
       operationId: GetOrganizationBalanceHistory
       description: Get Organization Balance history
@@ -414,7 +414,7 @@ paths:
         - $ref: '#/components/parameters/productUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
       requestBody:
-        description: A Note-shaped event with notefile name, JSON body, and optional base64-encoded payload.
+        description: A Note-shaped event. Typically contains the notefile name (file), a JSON body, and an optional base64-encoded payload, but any additional Note fields (e.g. when, sn, where_lat, where_lon) are accepted and honored.
         required: true
         content:
           application/json:
@@ -4960,7 +4960,7 @@ components:
           description: repository name
           type: string
         password:
-          description: 'read-only password for the database, also used as X-Repository-Token header for subsequent API calls.  This value is only served once when the repository is created'
+          description: read-only password for the database, also used as X-Repository-Token header for subsequent API calls.  This value is only served once when the repository is created
           type: string
         project_uids:
           $ref: '#/components/schemas/AppUIDList'
@@ -5138,6 +5138,9 @@ components:
     Device:
       type: object
       properties:
+        best_id:
+          description: The best ID for the device, preference for the serial number over device UID
+          type: string
         best_location:
           $ref: '#/components/schemas/Location'
         cellular_usage:
