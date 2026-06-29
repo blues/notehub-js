@@ -4075,17 +4075,6 @@ components:
         items:
           type: string
       style: form
-    sensorUIDParamQuery:
-      description: 'A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix.'
-      explode: true
-      in: query
-      name: sensorUID
-      required: false
-      schema:
-        type: array
-        items:
-          type: string
-      style: form
     deviceUIDsParamQuery:
       description: An array of Device UIDs.
       in: query
@@ -4472,6 +4461,17 @@ components:
       required: false
       schema:
         type: string
+    sensorUIDParamQuery:
+      description: A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix.
+      explode: true
+      in: query
+      name: sensorUID
+      required: false
+      schema:
+        type: array
+        items:
+          type: string
+      style: form
     serialNumberFilterParam:
       description: Filter by Serial Number
       explode: true
