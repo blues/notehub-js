@@ -5819,7 +5819,7 @@ components:
           description: When the event was captured on the device
           type: number
         when_ms:
-          description: When the event was captured on the device, in milliseconds
+          description: Millisecond component of when (0-999) for the captured event timestamp
           type: number
           format: double
         where_country:
