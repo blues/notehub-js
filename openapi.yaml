@@ -4378,10 +4378,10 @@ components:
       schema:
         type: string
     repositoryKey:
-      description: The secret key used to access this repository
+      description: The secret key used to access this repository. Optional - a caller authenticated with a session or personal access token may instead be authorized if their actor holds the required permission on the events of every project this repository references.
       in: header
       name: X-Repository-Key
-      required: true
+      required: false
       schema:
         type: string
     repositoryUIDParam:
