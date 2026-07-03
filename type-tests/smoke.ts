@@ -38,4 +38,29 @@ async function run() {
 // @ts-expect-error - missing required parameter `deviceUID`
 new NotehubJs.DeviceApi().getDevice("app:123");
 
+// Enum-backed model fields are literal unions, not widened to `string`. These
+// assignments fail to compile if a field regresses to `string`.
+const sourceType: "event" | "heartbeat" = new NotehubJs.CreateMonitor()
+  .source_type;
+const messageType: "text" | "blocks" | undefined =
+  new NotehubJs.MonitorAlertRoutesInner().message_type;
+
+// oneOf wrapper models expose the actual-instance runtime API (constructor takes a
+// variant; getActualInstance/setActualInstance/toJSON/fromJSON exist), not a plain model.
+function oneOf() {
+  const email = new NotehubJs.EmailNotification();
+  const route = new NotehubJs.MonitorAlertRoutesInner(email);
+  route.setActualInstance(email);
+  const variant:
+    | NotehubJs.EmailNotification
+    | NotehubJs.SlackBearerNotification
+    | NotehubJs.SlackWebHookNotification
+    | null = route.getActualInstance();
+  const parsed = NotehubJs.MonitorAlertRoutesInner.fromJSON("{}");
+  return { variant, parsed };
+}
+
 void run;
+void oneOf;
+void sourceType;
+void messageType;

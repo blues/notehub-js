@@ -5,18 +5,50 @@
  * generated JavaScript sources. Do not edit it manually.
  */
 
+import EmailNotification from "../model/EmailNotification";
+import SlackBearerNotification from "../model/SlackBearerNotification";
+import SlackWebHookNotification from "../model/SlackWebHookNotification";
+
 declare class MonitorAlertRoutesInner {
-  "message_type"?: string;
+  constructor(
+    instance?:
+      | EmailNotification
+      | SlackBearerNotification
+      | SlackWebHookNotification
+      | null,
+  );
+
+  actualInstance:
+    | EmailNotification
+    | SlackBearerNotification
+    | SlackWebHookNotification
+    | null;
+  getActualInstance():
+    | EmailNotification
+    | SlackBearerNotification
+    | SlackWebHookNotification
+    | null;
+  setActualInstance(
+    obj: EmailNotification | SlackBearerNotification | SlackWebHookNotification,
+  ): void;
+  toJSON():
+    | EmailNotification
+    | SlackBearerNotification
+    | SlackWebHookNotification
+    | null;
+  static fromJSON(jsonString: string): MonitorAlertRoutesInner;
+  static constructFromObject(
+    data: any,
+    obj?: MonitorAlertRoutesInner,
+  ): MonitorAlertRoutesInner;
+
+  // Convenience members flattened from the oneOf variants (present on the prototype):
+  "message_type"?: "text" | "blocks";
   "text"?: string;
   "url"?: string;
   "channel"?: string;
   "token"?: string;
   "email"?: string;
-
-  static constructFromObject(
-    data: any,
-    obj?: MonitorAlertRoutesInner,
-  ): MonitorAlertRoutesInner;
 }
 
 export default MonitorAlertRoutesInner;

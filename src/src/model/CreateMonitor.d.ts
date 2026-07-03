@@ -8,11 +8,18 @@
 import MonitorAlertRoutesInner from "../model/MonitorAlertRoutesInner";
 
 declare class CreateMonitor {
-  "aggregate_function"?: string;
+  "aggregate_function"?: "none" | "sum" | "average" | "max" | "min";
   "aggregate_window"?: string;
   "alert"?: boolean;
   "alert_routes": MonitorAlertRoutesInner[];
-  "condition_type"?: string;
+  "condition_type"?:
+    | "greater_than"
+    | "greater_than_or_equal_to"
+    | "less_than"
+    | "less_than_or_equal_to"
+    | "equal_to"
+    | "not_equal_to"
+    | "count";
   "description": string;
   "disabled"?: boolean;
   "fleet_filter"?: string[];
@@ -23,7 +30,7 @@ declare class CreateMonitor {
   "routing_cooldown_period"?: string;
   "silenced"?: boolean;
   "source_selector"?: string;
-  "source_type": string;
+  "source_type": "event" | "heartbeat";
   "threshold": number;
   "uid"?: string;
   "usage_scope"?: string;

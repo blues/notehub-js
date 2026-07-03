@@ -33,6 +33,7 @@ function jsdocToTs(raw, ctx) {
   const refs = (ctx && ctx.refs) || new Set();
   const selfClass = ctx && ctx.selfClass;
   const nestedEnums = (ctx && ctx.nestedEnums) || {};
+  const oneOfMembers = (ctx && ctx.oneOfMembers) || null;
 
   if (!type) return "any";
 
@@ -57,10 +58,28 @@ function jsdocToTs(raw, ctx) {
     const primitive = mapPrimitive(modelName);
     if (!enumName && primitive) return primitive;
     if (enumName) {
-      if (modelName === selfClass && nestedEnums[enumName]) {
-        return nestedEnums[enumName].map((v) => JSON.stringify(v)).join(" | ");
+      const union = (values) =>
+        values.map((v) => JSON.stringify(v)).join(" | ");
+      // 1. Same class with a local enum definition.
+      if (modelName === selfClass && nestedEnums[enumName])
+        return union(nestedEnums[enumName]);
+      // 2. The referenced class defines the enum in its own file.
+      const other = nestedEnumsOf(modelName);
+      if (other[enumName]) return union(other[enumName]);
+      // 3. oneOf: the enum is synthesized on the wrapper but really lives on the
+      //    variants — union the same-named enum across the oneOf member types.
+      if (oneOfMembers) {
+        const values = [];
+        for (const member of oneOfMembers) {
+          const memberEnums = nestedEnumsOf(member);
+          if (memberEnums[enumName]) {
+            for (const v of memberEnums[enumName])
+              if (!values.includes(v)) values.push(v);
+          }
+        }
+        if (values.length) return union(values);
       }
-      return "string"; // cross-class inline enum: keep loose but safe
+      return "string"; // unresolved inline enum: keep loose but safe
     }
     refs.add(modelName);
     return modelName;
@@ -123,7 +142,8 @@ function importBlock(refs, selfName, fromDir) {
     .filter((r) => r && r !== selfName)
     .sort()
     .forEach((r) => {
-      const rel = r === "ApiClient" ? `${fromDir}ApiClient` : `${fromDir}model/${r}`;
+      const rel =
+        r === "ApiClient" ? `${fromDir}ApiClient` : `${fromDir}model/${r}`;
       lines.push(`import ${r} from "${rel}";`);
     });
   return lines.length ? lines.join("\n") + "\n\n" : "";
@@ -135,7 +155,10 @@ function importBlock(refs, selfName, fromDir) {
 
 function isEnumClass(js) {
   // Enum classes have bare `name = "value";` const members and no `static initialize`.
-  return /^\s{2}[A-Za-z0-9_]+ = "(?:[^"\\]|\\.)*";/m.test(js) && !/static initialize/.test(js);
+  return (
+    /^\s{2}[A-Za-z0-9_]+ = "(?:[^"\\]|\\.)*";/m.test(js) &&
+    !/static initialize/.test(js)
+  );
 }
 
 function parseNestedEnums(js, className) {
@@ -143,7 +166,7 @@ function parseNestedEnums(js, className) {
   const enums = {};
   const re = new RegExp(
     `${escapeRe(className)}\\["([A-Za-z0-9_]+)"\\]\\s*=\\s*\\{([\\s\\S]*?)\\n\\};`,
-    "g"
+    "g",
   );
   let m;
   while ((m = re.exec(js))) {
@@ -152,7 +175,9 @@ function parseNestedEnums(js, className) {
     const values = [];
     // Match real entries (`  key: "value",`) only — skip JSDoc `* value: "..."` comment lines.
     for (const line of body.split("\n")) {
-      const vm = line.match(/^\s*[A-Za-z0-9_]+:\s*("(?:[^"\\]|\\.)*"|\d+(?:\.\d+)?),?\s*$/);
+      const vm = line.match(
+        /^\s*[A-Za-z0-9_]+:\s*("(?:[^"\\]|\\.)*"|\d+(?:\.\d+)?),?\s*$/,
+      );
       if (!vm) continue;
       const raw = vm[1];
       const val = raw.startsWith('"') ? JSON.parse(raw) : Number(raw);
@@ -165,6 +190,141 @@ function parseNestedEnums(js, className) {
 
 function escapeRe(s) {
   return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+// Nested enums of another model, read from its .js file (memoized). Used to resolve
+// cross-class inline enum references (e.g. `module:model/Monitor.SourceTypeEnum`).
+const _nestedEnumCache = {};
+function nestedEnumsOf(modelName) {
+  if (!(modelName in _nestedEnumCache)) {
+    const file = path.join(MODEL_DIR, `${modelName}.js`);
+    _nestedEnumCache[modelName] = fs.existsSync(file)
+      ? parseNestedEnums(fs.readFileSync(file, "utf8"), modelName)
+      : {};
+  }
+  return _nestedEnumCache[modelName];
+}
+
+// Map each property to its JSDoc @member type, binding the type to the assignment that
+// targets THIS class. Models generated from an allOf/interface (e.g. CreateMonitor) also
+// contain an "Implement <Interface> interface" block with `Interface.prototype[...]`
+// assignments; binding to the self class avoids picking up those cross-class types.
+function memberTypeMap(js, className) {
+  const map = {};
+  // @member line, then any further JSDoc lines (e.g. `@default`), then the closing `*/`
+  // and the prototype assignment it documents. Bind the type only when the assignment
+  // targets THIS class (see comment above).
+  const re =
+    /@member \{([^}]+)\}\s+[A-Za-z0-9_]+[^\n]*\n(?:\s*\*[^\n]*\n)*?\s*\*\/\s*\n\s*([A-Za-z0-9_]+)\.prototype\["([^"]+)"\]/g;
+  let m;
+  while ((m = re.exec(js))) {
+    if (m[2] === className) map[m[3]] = m[1].trim();
+  }
+  return map;
+}
+
+// Property names in declaration order, from this class's prototype assignments.
+function propList(js, className) {
+  const props = [];
+  const seen = new Set();
+  const re = new RegExp(
+    `${escapeRe(className)}\\.prototype\\["([^"]+)"\\]`,
+    "g",
+  );
+  let m;
+  while ((m = re.exec(js))) {
+    if (!seen.has(m[1])) {
+      seen.add(m[1]);
+      props.push(m[1]);
+    }
+  }
+  return props;
+}
+
+function requiredSet(js, className) {
+  const required = new Set();
+  const block = js.match(
+    new RegExp(
+      `${escapeRe(className)}\\.RequiredProperties\\s*=\\s*\\[([\\s\\S]*?)\\];`,
+    ),
+  );
+  if (block) {
+    const re = /"((?:[^"\\]|\\.)*)"/g;
+    let m;
+    while ((m = re.exec(block[1]))) required.add(m[1]);
+  }
+  return required;
+}
+
+// TS property declaration lines for a model/oneOf's flattened members.
+function propLines(js, className, ctx) {
+  const typeByName = memberTypeMap(js, className);
+  const required = requiredSet(js, className);
+  return propList(js, className).map((name) => {
+    const tsType = jsdocToTs(typeByName[name], ctx);
+    const opt = required.has(name) ? "" : "?";
+    return `  ${JSON.stringify(name)}${opt}: ${tsType};`;
+  });
+}
+
+// Static enum members (`static readonly XxxEnum: { ... }`) for a model's nested enums.
+function enumMemberLines(nestedEnums) {
+  return Object.entries(nestedEnums).map(([enumName, values]) => {
+    const shape = values.map(
+      (v) => `${JSON.stringify(String(v))}: ${JSON.stringify(v)}`,
+    );
+    return `  static readonly ${enumName}: { ${shape.join("; ")} };`;
+  });
+}
+
+// oneOf wrapper models declare `ClassName.OneOf = [...]`; return the member class names.
+function parseOneOf(js, className) {
+  const m = js.match(
+    new RegExp(`${escapeRe(className)}\\.OneOf\\s*=\\s*\\[([\\s\\S]*?)\\];`),
+  );
+  if (!m) return null;
+  const members = [];
+  const re = /"([A-Za-z0-9_]+)"/g;
+  let x;
+  while ((x = re.exec(m[1]))) members.push(x[1]);
+  return members;
+}
+
+function generateOneOf(className, js, members) {
+  const refs = new Set(members);
+  const nestedEnums = parseNestedEnums(js, className);
+  const ctx = {
+    refs,
+    selfClass: className,
+    nestedEnums,
+    oneOfMembers: members,
+  };
+  const union = members.join(" | ");
+  const lines = propLines(js, className, ctx);
+  const enumLines = enumMemberLines(nestedEnums);
+
+  let body = "";
+  body += `  constructor(instance?: ${union} | null);\n\n`;
+  body += `  actualInstance: ${union} | null;\n`;
+  body += `  getActualInstance(): ${union} | null;\n`;
+  body += `  setActualInstance(obj: ${union}): void;\n`;
+  body += `  toJSON(): ${union} | null;\n`;
+  body += `  static fromJSON(jsonString: string): ${className};\n`;
+  body += `  static constructFromObject(data: any, obj?: ${className}): ${className};\n`;
+  if (lines.length) {
+    body +=
+      `\n  // Convenience members flattened from the oneOf variants (present on the prototype):\n` +
+      lines.join("\n") +
+      "\n";
+  }
+  if (enumLines.length) body += `\n` + enumLines.join("\n") + "\n";
+
+  return (
+    HEADER +
+    importBlock(refs, className, "../") +
+    `declare class ${className} {\n${body}}\n\n` +
+    `export default ${className};\n`
+  );
 }
 
 function generateEnumClass(className, js) {
@@ -187,60 +347,21 @@ function generateEnumClass(className, js) {
 function generateModel(className, js) {
   if (isEnumClass(js)) return generateEnumClass(className, js);
 
+  const oneOf = parseOneOf(js, className);
+  if (oneOf) return generateOneOf(className, js, oneOf);
+
   const refs = new Set();
   const nestedEnums = parseNestedEnums(js, className);
   const ctx = { refs, selfClass: className, nestedEnums };
 
-  // @member {Type} name  ->  type map
-  const typeByName = {};
-  const memberRe = /@member \{([^}]+)\}\s+([^\s*]+)/g;
-  let mm;
-  while ((mm = memberRe.exec(js))) {
-    typeByName[mm[2].trim()] = mm[1].trim();
-  }
-
-  // Required properties
-  const required = new Set();
-  const reqBlock = js.match(
-    new RegExp(`${escapeRe(className)}\\.RequiredProperties\\s*=\\s*\\[([\\s\\S]*?)\\];`)
-  );
-  if (reqBlock) {
-    const pre = /"((?:[^"\\]|\\.)*)"/g;
-    let pm;
-    while ((pm = pre.exec(reqBlock[1]))) required.add(pm[1]);
-  }
-
-  // Property order from prototype assignments
-  const props = [];
-  const protoRe = new RegExp(`${escapeRe(className)}\\.prototype\\["([^"]+)"\\]`, "g");
-  let pm2;
-  const seen = new Set();
-  while ((pm2 = protoRe.exec(js))) {
-    const name = pm2[1];
-    if (seen.has(name)) continue;
-    seen.add(name);
-    props.push(name);
-  }
-
-  const lines = [];
-  for (const name of props) {
-    const tsType = jsdocToTs(typeByName[name], ctx);
-    const opt = required.has(name) ? "" : "?";
-    lines.push(`  ${JSON.stringify(name)}${opt}: ${tsType};`);
-  }
-
-  // Nested enums as static members
-  const enumLines = [];
-  for (const [enumName, values] of Object.entries(nestedEnums)) {
-    const shape = values.map((v) => `${JSON.stringify(String(v))}: ${JSON.stringify(v)}`);
-    enumLines.push(`  static readonly ${enumName}: { ${shape.join("; ")} };`);
-  }
-
+  const lines = propLines(js, className, ctx);
+  const enumLines = enumMemberLines(nestedEnums);
   const hasValidate = /static validateJSON\(/.test(js);
 
   let body = "";
   if (lines.length) body += lines.join("\n") + "\n";
-  if (enumLines.length) body += (body ? "\n" : "") + enumLines.join("\n") + "\n";
+  if (enumLines.length)
+    body += (body ? "\n" : "") + enumLines.join("\n") + "\n";
   body += `${body ? "\n" : ""}  static constructFromObject(data: any, obj?: ${className}): ${className};\n`;
   if (hasValidate) body += `  static validateJSON(data: any): boolean;\n`;
 
@@ -261,13 +382,15 @@ function generateApi(className, js) {
 
   // baseMethodName -> returnType expression, taken from the *WithHttpInfo variant.
   const returnByBase = {};
-  const rtRe = /([A-Za-z0-9_]+)WithHttpInfo\s*\([^)]*\)\s*\{[\s\S]*?let returnType = ([^;]+);/g;
+  const rtRe =
+    /([A-Za-z0-9_]+)WithHttpInfo\s*\([^)]*\)\s*\{[\s\S]*?let returnType = ([^;]+);/g;
   let rm;
   while ((rm = rtRe.exec(js))) returnByBase[rm[1]] = rm[2].trim();
 
   // Each JSDoc block immediately followed by `name(args) {`
   const methods = [];
-  const methodRe = /\/\*\*([\s\S]*?)\*\/\s*\n\s*([A-Za-z0-9_]+)\s*\(([^)]*)\)\s*\{/g;
+  const methodRe =
+    /\/\*\*([\s\S]*?)\*\/\s*\n\s*([A-Za-z0-9_]+)\s*\(([^)]*)\)\s*\{/g;
   let m;
   while ((m = methodRe.exec(js))) {
     const jsdoc = m[1];
@@ -303,7 +426,9 @@ function generateApi(className, js) {
       }
     }
 
-    const base = name.endsWith("WithHttpInfo") ? name.slice(0, -"WithHttpInfo".length) : name;
+    const base = name.endsWith("WithHttpInfo")
+      ? name.slice(0, -"WithHttpInfo".length)
+      : name;
     const rt = returnTypeToTs(returnByBase[base], refs);
     const ret = name.endsWith("WithHttpInfo")
       ? `Promise<{ data: ${rt}; response: unknown }>`
@@ -429,7 +554,7 @@ function main() {
   const indexJs = fs.readFileSync(path.join(SRC, "index.js"), "utf8");
   fs.writeFileSync(path.join(SRC, "index.d.ts"), generateIndex(indexJs));
   console.log(
-    `Generated .d.ts: ${models} models, ${apis} apis, ApiClient, index.`
+    `Generated .d.ts: ${models} models, ${apis} apis, ApiClient, index.`,
   );
 }
 
