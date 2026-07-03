@@ -60,7 +60,7 @@ class GetDataUsage200ResponseDataInner {
       if (data.hasOwnProperty("device_count")) {
         obj["device_count"] = ApiClient.convertToType(
           data["device_count"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("fleet")) {
@@ -94,7 +94,7 @@ class GetDataUsage200ResponseDataInner {
           "The required field `" +
             property +
             "` is not found in the JSON data: " +
-            JSON.stringify(data)
+            JSON.stringify(data),
         );
       }
     }
@@ -104,7 +104,7 @@ class GetDataUsage200ResponseDataInner {
       if (!Array.isArray(data["data"])) {
         throw new Error(
           "Expected the field `data` to be an array in the JSON data but got " +
-            data["data"]
+            data["data"],
         );
       }
       // validate the optional field `data` (array)
@@ -119,7 +119,7 @@ class GetDataUsage200ResponseDataInner {
     ) {
       throw new Error(
         "Expected the field `device` to be a primitive type in the JSON string but got " +
-          data["device"]
+          data["device"],
       );
     }
     // ensure the json data is a string
@@ -129,7 +129,7 @@ class GetDataUsage200ResponseDataInner {
     ) {
       throw new Error(
         "Expected the field `fleet` to be a primitive type in the JSON string but got " +
-          data["fleet"]
+          data["fleet"],
       );
     }
     // ensure the json data is a string
@@ -139,7 +139,7 @@ class GetDataUsage200ResponseDataInner {
     ) {
       throw new Error(
         "Expected the field `iccid` to be a primitive type in the JSON string but got " +
-          data["iccid"]
+          data["iccid"],
       );
     }
     // ensure the json data is a string
@@ -149,7 +149,7 @@ class GetDataUsage200ResponseDataInner {
     ) {
       throw new Error(
         "Expected the field `psid` to be a primitive type in the JSON string but got " +
-          data["psid"]
+          data["psid"],
       );
     }
     // ensure the json data is a string
@@ -159,7 +159,7 @@ class GetDataUsage200ResponseDataInner {
     ) {
       throw new Error(
         "Expected the field `type` to be a primitive type in the JSON string but got " +
-          data["type"]
+          data["type"],
       );
     }
 

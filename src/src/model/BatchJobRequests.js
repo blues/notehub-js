@@ -52,13 +52,13 @@ class BatchJobRequests {
       if (data.hasOwnProperty("connectivity_assurance_disable")) {
         obj["connectivity_assurance_disable"] = ApiClient.convertToType(
           data["connectivity_assurance_disable"],
-          "Boolean"
+          "Boolean",
         );
       }
       if (data.hasOwnProperty("connectivity_assurance_enable")) {
         obj["connectivity_assurance_enable"] = ApiClient.convertToType(
           data["connectivity_assurance_enable"],
-          "Boolean"
+          "Boolean",
         );
       }
       if (data.hasOwnProperty("disable")) {
@@ -70,31 +70,31 @@ class BatchJobRequests {
       if (data.hasOwnProperty("fleets_to_default")) {
         obj["fleets_to_default"] = ApiClient.convertToType(
           data["fleets_to_default"],
-          ["String"]
+          ["String"],
         );
       }
       if (data.hasOwnProperty("fleets_to_join")) {
         obj["fleets_to_join"] = ApiClient.convertToType(
           data["fleets_to_join"],
-          ["String"]
+          ["String"],
         );
       }
       if (data.hasOwnProperty("fleets_to_leave")) {
         obj["fleets_to_leave"] = ApiClient.convertToType(
           data["fleets_to_leave"],
-          ["String"]
+          ["String"],
         );
       }
       if (data.hasOwnProperty("provision_product")) {
         obj["provision_product"] = ApiClient.convertToType(
           data["provision_product"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("sn_to_default")) {
         obj["sn_to_default"] = ApiClient.convertToType(
           data["sn_to_default"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("sn_to_set")) {
@@ -103,7 +103,7 @@ class BatchJobRequests {
       if (data.hasOwnProperty("vars_to_default")) {
         obj["vars_to_default"] = ApiClient.convertToType(
           data["vars_to_default"],
-          { String: "String" }
+          { String: "String" },
         );
       }
       if (data.hasOwnProperty("vars_to_set")) {
@@ -132,28 +132,28 @@ class BatchJobRequests {
     ) {
       throw new Error(
         "Expected the field `comment` to be a primitive type in the JSON string but got " +
-          data["comment"]
+          data["comment"],
       );
     }
     // ensure the json data is an array
     if (!Array.isArray(data["fleets_to_default"])) {
       throw new Error(
         "Expected the field `fleets_to_default` to be an array in the JSON data but got " +
-          data["fleets_to_default"]
+          data["fleets_to_default"],
       );
     }
     // ensure the json data is an array
     if (!Array.isArray(data["fleets_to_join"])) {
       throw new Error(
         "Expected the field `fleets_to_join` to be an array in the JSON data but got " +
-          data["fleets_to_join"]
+          data["fleets_to_join"],
       );
     }
     // ensure the json data is an array
     if (!Array.isArray(data["fleets_to_leave"])) {
       throw new Error(
         "Expected the field `fleets_to_leave` to be an array in the JSON data but got " +
-          data["fleets_to_leave"]
+          data["fleets_to_leave"],
       );
     }
     // ensure the json data is a string
@@ -166,7 +166,7 @@ class BatchJobRequests {
     ) {
       throw new Error(
         "Expected the field `provision_product` to be a primitive type in the JSON string but got " +
-          data["provision_product"]
+          data["provision_product"],
       );
     }
     // ensure the json data is a string
@@ -179,7 +179,7 @@ class BatchJobRequests {
     ) {
       throw new Error(
         "Expected the field `sn_to_default` to be a primitive type in the JSON string but got " +
-          data["sn_to_default"]
+          data["sn_to_default"],
       );
     }
     // ensure the json data is a string
@@ -192,7 +192,7 @@ class BatchJobRequests {
     ) {
       throw new Error(
         "Expected the field `sn_to_set` to be a primitive type in the JSON string but got " +
-          data["sn_to_set"]
+          data["sn_to_set"],
       );
     }
 

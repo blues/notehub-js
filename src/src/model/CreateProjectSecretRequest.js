@@ -75,7 +75,7 @@ class CreateProjectSecretRequest {
           "The required field `" +
             property +
             "` is not found in the JSON data: " +
-            JSON.stringify(data)
+            JSON.stringify(data),
         );
       }
     }
@@ -86,7 +86,7 @@ class CreateProjectSecretRequest {
     ) {
       throw new Error(
         "Expected the field `name` to be a primitive type in the JSON string but got " +
-          data["name"]
+          data["name"],
       );
     }
     // ensure the json data is a string
@@ -96,7 +96,7 @@ class CreateProjectSecretRequest {
     ) {
       throw new Error(
         "Expected the field `value` to be a primitive type in the JSON string but got " +
-          data["value"]
+          data["value"],
       );
     }
 

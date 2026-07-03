@@ -44,13 +44,13 @@ export default class MonitorApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling createMonitor"
+        "Missing the required parameter 'projectOrProductUID' when calling createMonitor",
       );
     }
     // verify the required parameter 'body' is set
     if (body === undefined || body === null) {
       throw new Error(
-        "Missing the required parameter 'body' when calling createMonitor"
+        "Missing the required parameter 'body' when calling createMonitor",
       );
     }
 
@@ -77,7 +77,7 @@ export default class MonitorApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -91,7 +91,7 @@ export default class MonitorApi {
     return this.createMonitorWithHttpInfo(projectOrProductUID, body).then(
       function (response_and_data) {
         return response_and_data.data;
-      }
+      },
     );
   }
 
@@ -106,13 +106,13 @@ export default class MonitorApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling deleteMonitor"
+        "Missing the required parameter 'projectOrProductUID' when calling deleteMonitor",
       );
     }
     // verify the required parameter 'monitorUID' is set
     if (monitorUID === undefined || monitorUID === null) {
       throw new Error(
-        "Missing the required parameter 'monitorUID' when calling deleteMonitor"
+        "Missing the required parameter 'monitorUID' when calling deleteMonitor",
       );
     }
 
@@ -140,7 +140,7 @@ export default class MonitorApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -154,7 +154,7 @@ export default class MonitorApi {
     return this.deleteMonitorWithHttpInfo(projectOrProductUID, monitorUID).then(
       function (response_and_data) {
         return response_and_data.data;
-      }
+      },
     );
   }
 
@@ -169,13 +169,13 @@ export default class MonitorApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling getMonitor"
+        "Missing the required parameter 'projectOrProductUID' when calling getMonitor",
       );
     }
     // verify the required parameter 'monitorUID' is set
     if (monitorUID === undefined || monitorUID === null) {
       throw new Error(
-        "Missing the required parameter 'monitorUID' when calling getMonitor"
+        "Missing the required parameter 'monitorUID' when calling getMonitor",
       );
     }
 
@@ -203,7 +203,7 @@ export default class MonitorApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -217,7 +217,7 @@ export default class MonitorApi {
     return this.getMonitorWithHttpInfo(projectOrProductUID, monitorUID).then(
       function (response_and_data) {
         return response_and_data.data;
-      }
+      },
     );
   }
 
@@ -231,7 +231,7 @@ export default class MonitorApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling getMonitors"
+        "Missing the required parameter 'projectOrProductUID' when calling getMonitors",
       );
     }
 
@@ -258,7 +258,7 @@ export default class MonitorApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -268,11 +268,11 @@ export default class MonitorApi {
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link Array.<module:model/Monitor>}
    */
   getMonitors(projectOrProductUID) {
-    return this.getMonitorsWithHttpInfo(projectOrProductUID).then(function (
-      response_and_data
-    ) {
-      return response_and_data.data;
-    });
+    return this.getMonitorsWithHttpInfo(projectOrProductUID).then(
+      function (response_and_data) {
+        return response_and_data.data;
+      },
+    );
   }
 
   /**
@@ -287,19 +287,19 @@ export default class MonitorApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling updateMonitor"
+        "Missing the required parameter 'projectOrProductUID' when calling updateMonitor",
       );
     }
     // verify the required parameter 'monitorUID' is set
     if (monitorUID === undefined || monitorUID === null) {
       throw new Error(
-        "Missing the required parameter 'monitorUID' when calling updateMonitor"
+        "Missing the required parameter 'monitorUID' when calling updateMonitor",
       );
     }
     // verify the required parameter 'monitor' is set
     if (monitor === undefined || monitor === null) {
       throw new Error(
-        "Missing the required parameter 'monitor' when calling updateMonitor"
+        "Missing the required parameter 'monitor' when calling updateMonitor",
       );
     }
 
@@ -327,7 +327,7 @@ export default class MonitorApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -342,7 +342,7 @@ export default class MonitorApi {
     return this.updateMonitorWithHttpInfo(
       projectOrProductUID,
       monitorUID,
-      monitor
+      monitor,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });

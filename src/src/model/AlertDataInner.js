@@ -48,7 +48,7 @@ class AlertDataInner {
       if (data.hasOwnProperty("alert_source")) {
         obj["alert_source"] = ApiClient.convertToType(
           data["alert_source"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("source")) {
@@ -57,13 +57,13 @@ class AlertDataInner {
       if (data.hasOwnProperty("source_type")) {
         obj["source_type"] = ApiClient.convertToType(
           data["source_type"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("source_uid")) {
         obj["source_uid"] = ApiClient.convertToType(
           data["source_uid"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("value")) {
@@ -94,7 +94,7 @@ class AlertDataInner {
     ) {
       throw new Error(
         "Expected the field `alert_source` to be a primitive type in the JSON string but got " +
-          data["alert_source"]
+          data["alert_source"],
       );
     }
     // ensure the json data is a string
@@ -104,7 +104,7 @@ class AlertDataInner {
     ) {
       throw new Error(
         "Expected the field `source` to be a primitive type in the JSON string but got " +
-          data["source"]
+          data["source"],
       );
     }
     // ensure the json data is a string
@@ -117,7 +117,7 @@ class AlertDataInner {
     ) {
       throw new Error(
         "Expected the field `source_type` to be a primitive type in the JSON string but got " +
-          data["source_type"]
+          data["source_type"],
       );
     }
     // ensure the json data is a string
@@ -130,7 +130,7 @@ class AlertDataInner {
     ) {
       throw new Error(
         "Expected the field `source_uid` to be a primitive type in the JSON string but got " +
-          data["source_uid"]
+          data["source_uid"],
       );
     }
     // ensure the json data is a string
@@ -140,7 +140,7 @@ class AlertDataInner {
     ) {
       throw new Error(
         "Expected the field `when` to be a primitive type in the JSON string but got " +
-          data["when"]
+          data["when"],
       );
     }
 

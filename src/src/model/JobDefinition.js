@@ -54,18 +54,18 @@ class JobDefinition {
       }
       if (data.hasOwnProperty("default_requests")) {
         obj["default_requests"] = BatchJobRequests.constructFromObject(
-          data["default_requests"]
+          data["default_requests"],
         );
       }
       if (data.hasOwnProperty("device_requests")) {
         obj["device_requests"] = ApiClient.convertToType(
           data["device_requests"],
-          { String: BatchJobRequests }
+          { String: BatchJobRequests },
         );
       }
       if (data.hasOwnProperty("report_options")) {
         obj["report_options"] = JobDefinitionReportOptions.constructFromObject(
-          data["report_options"]
+          data["report_options"],
         );
       }
       if (data.hasOwnProperty("select")) {
@@ -92,7 +92,7 @@ class JobDefinition {
     ) {
       throw new Error(
         "Expected the field `comment` to be a primitive type in the JSON string but got " +
-          data["comment"]
+          data["comment"],
       );
     }
     // validate the optional field `default_requests`

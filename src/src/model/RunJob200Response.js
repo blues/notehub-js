@@ -51,7 +51,7 @@ class RunJob200Response {
       if (data.hasOwnProperty("report_uid")) {
         obj["report_uid"] = ApiClient.convertToType(
           data["report_uid"],
-          "String"
+          "String",
         );
       }
     } else if (data === null) {
@@ -73,7 +73,7 @@ class RunJob200Response {
           "The required field `" +
             property +
             "` is not found in the JSON data: " +
-            JSON.stringify(data)
+            JSON.stringify(data),
         );
       }
     }
@@ -87,7 +87,7 @@ class RunJob200Response {
     ) {
       throw new Error(
         "Expected the field `report_uid` to be a primitive type in the JSON string but got " +
-          data["report_uid"]
+          data["report_uid"],
       );
     }
 

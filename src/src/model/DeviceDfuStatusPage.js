@@ -72,7 +72,7 @@ class DeviceDfuStatusPage {
       if (!Array.isArray(data["devices"])) {
         throw new Error(
           "Expected the field `devices` to be an array in the JSON data but got " +
-            data["devices"]
+            data["devices"],
         );
       }
       // validate the optional field `devices` (array)

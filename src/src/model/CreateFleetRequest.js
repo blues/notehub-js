@@ -49,7 +49,7 @@ class CreateFleetRequest {
       if (data.hasOwnProperty("connectivity_assurance")) {
         obj["connectivity_assurance"] =
           FleetConnectivityAssurance.constructFromObject(
-            data["connectivity_assurance"]
+            data["connectivity_assurance"],
           );
       }
       if (data.hasOwnProperty("label")) {
@@ -58,13 +58,13 @@ class CreateFleetRequest {
       if (data.hasOwnProperty("smart_rule")) {
         obj["smart_rule"] = ApiClient.convertToType(
           data["smart_rule"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("smart_rule_enabled")) {
         obj["smart_rule_enabled"] = ApiClient.convertToType(
           data["smart_rule_enabled"],
-          "Boolean"
+          "Boolean",
         );
       }
     } else if (data === null) {
@@ -91,7 +91,7 @@ class CreateFleetRequest {
     ) {
       throw new Error(
         "Expected the field `label` to be a primitive type in the JSON string but got " +
-          data["label"]
+          data["label"],
       );
     }
     // ensure the json data is a string
@@ -104,7 +104,7 @@ class CreateFleetRequest {
     ) {
       throw new Error(
         "Expected the field `smart_rule` to be a primitive type in the JSON string but got " +
-          data["smart_rule"]
+          data["smart_rule"],
       );
     }
 

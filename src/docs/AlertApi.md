@@ -30,12 +30,12 @@ let opts = {
 apiInstance.getAlerts(projectOrProductUID, opts).then(
   (data) => {
     console.log(
-      "API called successfully. Returned data: " + JSON.stringify(data)
+      "API called successfully. Returned data: " + JSON.stringify(data),
     );
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 

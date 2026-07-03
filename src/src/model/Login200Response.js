@@ -48,7 +48,7 @@ class Login200Response {
       if (data.hasOwnProperty("session_token")) {
         obj["session_token"] = ApiClient.convertToType(
           data["session_token"],
-          "String"
+          "String",
         );
       }
     } else if (data === null) {
@@ -73,7 +73,7 @@ class Login200Response {
     ) {
       throw new Error(
         "Expected the field `session_token` to be a primitive type in the JSON string but got " +
-          data["session_token"]
+          data["session_token"],
       );
     }
 

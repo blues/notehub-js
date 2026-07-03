@@ -33,7 +33,7 @@ class SatelliteDataUsage {
       bytesRemaining,
       bytesTotal,
       bytesUsed,
-      bytesUsedBillable
+      bytesUsedBillable,
     );
   }
 
@@ -47,7 +47,7 @@ class SatelliteDataUsage {
     bytesRemaining,
     bytesTotal,
     bytesUsed,
-    bytesUsedBillable
+    bytesUsedBillable,
   ) {
     obj["bytes_remaining"] = bytesRemaining;
     obj["bytes_total"] = bytesTotal;
@@ -69,25 +69,25 @@ class SatelliteDataUsage {
       if (data.hasOwnProperty("bytes_remaining")) {
         obj["bytes_remaining"] = ApiClient.convertToType(
           data["bytes_remaining"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("bytes_total")) {
         obj["bytes_total"] = ApiClient.convertToType(
           data["bytes_total"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("bytes_used")) {
         obj["bytes_used"] = ApiClient.convertToType(
           data["bytes_used"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("bytes_used_billable")) {
         obj["bytes_used_billable"] = ApiClient.convertToType(
           data["bytes_used_billable"],
-          "Number"
+          "Number",
         );
       }
     } else if (data === null) {
@@ -109,7 +109,7 @@ class SatelliteDataUsage {
           "The required field `" +
             property +
             "` is not found in the JSON data: " +
-            JSON.stringify(data)
+            JSON.stringify(data),
         );
       }
     }

@@ -54,7 +54,7 @@ class Event {
       if (data.hasOwnProperty("best_country")) {
         obj["best_country"] = ApiClient.convertToType(
           data["best_country"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("best_id")) {
@@ -66,19 +66,19 @@ class Event {
       if (data.hasOwnProperty("best_location")) {
         obj["best_location"] = ApiClient.convertToType(
           data["best_location"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("best_location_type")) {
         obj["best_location_type"] = ApiClient.convertToType(
           data["best_location_type"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("best_location_when")) {
         obj["best_location_when"] = ApiClient.convertToType(
           data["best_location_when"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("best_lon")) {
@@ -87,7 +87,7 @@ class Event {
       if (data.hasOwnProperty("best_timezone")) {
         obj["best_timezone"] = ApiClient.convertToType(
           data["best_timezone"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("body")) {
@@ -102,7 +102,7 @@ class Event {
       if (data.hasOwnProperty("environment")) {
         obj["environment"] = ApiClient.convertToType(
           data["environment"],
-          Object
+          Object,
         );
       }
       if (data.hasOwnProperty("event")) {
@@ -120,13 +120,13 @@ class Event {
       if (data.hasOwnProperty("ordering_code")) {
         obj["ordering_code"] = ApiClient.convertToType(
           data["ordering_code"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("orientation")) {
         obj["orientation"] = ApiClient.convertToType(
           data["orientation"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("payload")) {
@@ -177,7 +177,7 @@ class Event {
       if (data.hasOwnProperty("tower_country")) {
         obj["tower_country"] = ApiClient.convertToType(
           data["tower_country"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("tower_id")) {
@@ -189,7 +189,7 @@ class Event {
       if (data.hasOwnProperty("tower_location")) {
         obj["tower_location"] = ApiClient.convertToType(
           data["tower_location"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("tower_lon")) {
@@ -198,13 +198,13 @@ class Event {
       if (data.hasOwnProperty("tower_timezone")) {
         obj["tower_timezone"] = ApiClient.convertToType(
           data["tower_timezone"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("tower_when")) {
         obj["tower_when"] = ApiClient.convertToType(
           data["tower_when"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("transport")) {
@@ -213,7 +213,7 @@ class Event {
       if (data.hasOwnProperty("tri_country")) {
         obj["tri_country"] = ApiClient.convertToType(
           data["tri_country"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("tri_lat")) {
@@ -222,7 +222,7 @@ class Event {
       if (data.hasOwnProperty("tri_location")) {
         obj["tri_location"] = ApiClient.convertToType(
           data["tri_location"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("tri_lon")) {
@@ -231,13 +231,13 @@ class Event {
       if (data.hasOwnProperty("tri_points")) {
         obj["tri_points"] = ApiClient.convertToType(
           data["tri_points"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("tri_timezone")) {
         obj["tri_timezone"] = ApiClient.convertToType(
           data["tri_timezone"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("tri_when")) {
@@ -255,7 +255,7 @@ class Event {
       if (data.hasOwnProperty("where_country")) {
         obj["where_country"] = ApiClient.convertToType(
           data["where_country"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("where_lat")) {
@@ -264,7 +264,7 @@ class Event {
       if (data.hasOwnProperty("where_location")) {
         obj["where_location"] = ApiClient.convertToType(
           data["where_location"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("where_lon")) {
@@ -276,13 +276,13 @@ class Event {
       if (data.hasOwnProperty("where_timezone")) {
         obj["where_timezone"] = ApiClient.convertToType(
           data["where_timezone"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("where_when")) {
         obj["where_when"] = ApiClient.convertToType(
           data["where_when"],
-          "Number"
+          "Number",
         );
       }
     } else if (data === null) {
@@ -304,7 +304,7 @@ class Event {
     ) {
       throw new Error(
         "Expected the field `app` to be a primitive type in the JSON string but got " +
-          data["app"]
+          data["app"],
       );
     }
     // ensure the json data is a string
@@ -317,7 +317,7 @@ class Event {
     ) {
       throw new Error(
         "Expected the field `best_country` to be a primitive type in the JSON string but got " +
-          data["best_country"]
+          data["best_country"],
       );
     }
     // ensure the json data is a string
@@ -329,7 +329,7 @@ class Event {
     ) {
       throw new Error(
         "Expected the field `best_id` to be a primitive type in the JSON string but got " +
-          data["best_id"]
+          data["best_id"],
       );
     }
     // ensure the json data is a string
@@ -342,7 +342,7 @@ class Event {
     ) {
       throw new Error(
         "Expected the field `best_location` to be a primitive type in the JSON string but got " +
-          data["best_location"]
+          data["best_location"],
       );
     }
     // ensure the json data is a string
@@ -355,7 +355,7 @@ class Event {
     ) {
       throw new Error(
         "Expected the field `best_location_type` to be a primitive type in the JSON string but got " +
-          data["best_location_type"]
+          data["best_location_type"],
       );
     }
     // ensure the json data is a string
@@ -368,7 +368,7 @@ class Event {
     ) {
       throw new Error(
         "Expected the field `best_timezone` to be a primitive type in the JSON string but got " +
-          data["best_timezone"]
+          data["best_timezone"],
       );
     }
     // ensure the json data is a string
@@ -378,7 +378,7 @@ class Event {
     ) {
       throw new Error(
         "Expected the field `bssid` to be a primitive type in the JSON string but got " +
-          data["bssid"]
+          data["bssid"],
       );
     }
     // ensure the json data is a string
@@ -388,7 +388,7 @@ class Event {
     ) {
       throw new Error(
         "Expected the field `device` to be a primitive type in the JSON string but got " +
-          data["device"]
+          data["device"],
       );
     }
     // ensure the json data is a string
@@ -398,7 +398,7 @@ class Event {
     ) {
       throw new Error(
         "Expected the field `event` to be a primitive type in the JSON string but got " +
-          data["event"]
+          data["event"],
       );
     }
     // ensure the json data is a string
@@ -408,7 +408,7 @@ class Event {
     ) {
       throw new Error(
         "Expected the field `file` to be a primitive type in the JSON string but got " +
-          data["file"]
+          data["file"],
       );
     }
     // ensure the json data is a string
@@ -418,7 +418,7 @@ class Event {
     ) {
       throw new Error(
         "Expected the field `note` to be a primitive type in the JSON string but got " +
-          data["note"]
+          data["note"],
       );
     }
     // ensure the json data is a string
@@ -431,7 +431,7 @@ class Event {
     ) {
       throw new Error(
         "Expected the field `ordering_code` to be a primitive type in the JSON string but got " +
-          data["ordering_code"]
+          data["ordering_code"],
       );
     }
     // ensure the json data is a string
@@ -444,7 +444,7 @@ class Event {
     ) {
       throw new Error(
         "Expected the field `orientation` to be a primitive type in the JSON string but got " +
-          data["orientation"]
+          data["orientation"],
       );
     }
     // ensure the json data is a string
@@ -456,7 +456,7 @@ class Event {
     ) {
       throw new Error(
         "Expected the field `payload` to be a primitive type in the JSON string but got " +
-          data["payload"]
+          data["payload"],
       );
     }
     // ensure the json data is a string
@@ -468,7 +468,7 @@ class Event {
     ) {
       throw new Error(
         "Expected the field `product` to be a primitive type in the JSON string but got " +
-          data["product"]
+          data["product"],
       );
     }
     // ensure the json data is a string
@@ -478,7 +478,7 @@ class Event {
     ) {
       throw new Error(
         "Expected the field `rat` to be a primitive type in the JSON string but got " +
-          data["rat"]
+          data["rat"],
       );
     }
     // ensure the json data is a string
@@ -488,7 +488,7 @@ class Event {
     ) {
       throw new Error(
         "Expected the field `req` to be a primitive type in the JSON string but got " +
-          data["req"]
+          data["req"],
       );
     }
     // ensure the json data is a string
@@ -500,7 +500,7 @@ class Event {
     ) {
       throw new Error(
         "Expected the field `session` to be a primitive type in the JSON string but got " +
-          data["session"]
+          data["session"],
       );
     }
     // ensure the json data is a string
@@ -510,7 +510,7 @@ class Event {
     ) {
       throw new Error(
         "Expected the field `sku` to be a primitive type in the JSON string but got " +
-          data["sku"]
+          data["sku"],
       );
     }
     // ensure the json data is a string
@@ -520,7 +520,7 @@ class Event {
     ) {
       throw new Error(
         "Expected the field `sn` to be a primitive type in the JSON string but got " +
-          data["sn"]
+          data["sn"],
       );
     }
     // ensure the json data is a string
@@ -530,7 +530,7 @@ class Event {
     ) {
       throw new Error(
         "Expected the field `ssid` to be a primitive type in the JSON string but got " +
-          data["ssid"]
+          data["ssid"],
       );
     }
     // ensure the json data is a string
@@ -543,7 +543,7 @@ class Event {
     ) {
       throw new Error(
         "Expected the field `tower_country` to be a primitive type in the JSON string but got " +
-          data["tower_country"]
+          data["tower_country"],
       );
     }
     // ensure the json data is a string
@@ -556,7 +556,7 @@ class Event {
     ) {
       throw new Error(
         "Expected the field `tower_id` to be a primitive type in the JSON string but got " +
-          data["tower_id"]
+          data["tower_id"],
       );
     }
     // ensure the json data is a string
@@ -569,7 +569,7 @@ class Event {
     ) {
       throw new Error(
         "Expected the field `tower_location` to be a primitive type in the JSON string but got " +
-          data["tower_location"]
+          data["tower_location"],
       );
     }
     // ensure the json data is a string
@@ -582,7 +582,7 @@ class Event {
     ) {
       throw new Error(
         "Expected the field `tower_timezone` to be a primitive type in the JSON string but got " +
-          data["tower_timezone"]
+          data["tower_timezone"],
       );
     }
     // ensure the json data is a string
@@ -595,7 +595,7 @@ class Event {
     ) {
       throw new Error(
         "Expected the field `transport` to be a primitive type in the JSON string but got " +
-          data["transport"]
+          data["transport"],
       );
     }
     // ensure the json data is a string
@@ -608,7 +608,7 @@ class Event {
     ) {
       throw new Error(
         "Expected the field `tri_country` to be a primitive type in the JSON string but got " +
-          data["tri_country"]
+          data["tri_country"],
       );
     }
     // ensure the json data is a string
@@ -621,7 +621,7 @@ class Event {
     ) {
       throw new Error(
         "Expected the field `tri_location` to be a primitive type in the JSON string but got " +
-          data["tri_location"]
+          data["tri_location"],
       );
     }
     // ensure the json data is a string
@@ -634,7 +634,7 @@ class Event {
     ) {
       throw new Error(
         "Expected the field `tri_timezone` to be a primitive type in the JSON string but got " +
-          data["tri_timezone"]
+          data["tri_timezone"],
       );
     }
     // ensure the json data is a string
@@ -647,7 +647,7 @@ class Event {
     ) {
       throw new Error(
         "Expected the field `where_country` to be a primitive type in the JSON string but got " +
-          data["where_country"]
+          data["where_country"],
       );
     }
     // ensure the json data is a string
@@ -660,7 +660,7 @@ class Event {
     ) {
       throw new Error(
         "Expected the field `where_location` to be a primitive type in the JSON string but got " +
-          data["where_location"]
+          data["where_location"],
       );
     }
     // ensure the json data is a string
@@ -673,7 +673,7 @@ class Event {
     ) {
       throw new Error(
         "Expected the field `where_olc` to be a primitive type in the JSON string but got " +
-          data["where_olc"]
+          data["where_olc"],
       );
     }
     // ensure the json data is a string
@@ -686,7 +686,7 @@ class Event {
     ) {
       throw new Error(
         "Expected the field `where_timezone` to be a primitive type in the JSON string but got " +
-          data["where_timezone"]
+          data["where_timezone"],
       );
     }
 

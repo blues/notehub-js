@@ -37,7 +37,7 @@ class RepositoryTokenResponse {
       host,
       password,
       port,
-      username
+      username,
     );
   }
 
@@ -103,7 +103,7 @@ class RepositoryTokenResponse {
           "The required field `" +
             property +
             "` is not found in the JSON data: " +
-            JSON.stringify(data)
+            JSON.stringify(data),
         );
       }
     }
@@ -117,7 +117,7 @@ class RepositoryTokenResponse {
     ) {
       throw new Error(
         "Expected the field `database` to be a primitive type in the JSON string but got " +
-          data["database"]
+          data["database"],
       );
     }
     // ensure the json data is a string
@@ -127,7 +127,7 @@ class RepositoryTokenResponse {
     ) {
       throw new Error(
         "Expected the field `host` to be a primitive type in the JSON string but got " +
-          data["host"]
+          data["host"],
       );
     }
     // ensure the json data is a string
@@ -140,7 +140,7 @@ class RepositoryTokenResponse {
     ) {
       throw new Error(
         "Expected the field `password` to be a primitive type in the JSON string but got " +
-          data["password"]
+          data["password"],
       );
     }
     // ensure the json data is a string
@@ -153,7 +153,7 @@ class RepositoryTokenResponse {
     ) {
       throw new Error(
         "Expected the field `username` to be a primitive type in the JSON string but got " +
-          data["username"]
+          data["username"],
       );
     }
 

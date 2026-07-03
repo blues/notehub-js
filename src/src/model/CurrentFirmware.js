@@ -78,7 +78,7 @@ class CurrentFirmware {
     ) {
       throw new Error(
         "Expected the field `version` to be a primitive type in the JSON string but got " +
-          data["version"]
+          data["version"],
       );
     }
 

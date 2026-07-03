@@ -33,7 +33,7 @@ class GetDeviceJourneys200ResponseJourneysInner {
       endDate,
       journeyId,
       startDate,
-      totalEvents
+      totalEvents,
     );
   }
 
@@ -66,7 +66,7 @@ class GetDeviceJourneys200ResponseJourneysInner {
       if (data.hasOwnProperty("journey_id")) {
         obj["journey_id"] = ApiClient.convertToType(
           data["journey_id"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("start_date")) {
@@ -75,7 +75,7 @@ class GetDeviceJourneys200ResponseJourneysInner {
       if (data.hasOwnProperty("total_events")) {
         obj["total_events"] = ApiClient.convertToType(
           data["total_events"],
-          "Number"
+          "Number",
         );
       }
     } else if (data === null) {
@@ -97,7 +97,7 @@ class GetDeviceJourneys200ResponseJourneysInner {
           "The required field `" +
             property +
             "` is not found in the JSON data: " +
-            JSON.stringify(data)
+            JSON.stringify(data),
         );
       }
     }

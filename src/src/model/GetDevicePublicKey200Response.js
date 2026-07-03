@@ -75,7 +75,7 @@ class GetDevicePublicKey200Response {
           "The required field `" +
             property +
             "` is not found in the JSON data: " +
-            JSON.stringify(data)
+            JSON.stringify(data),
         );
       }
     }
@@ -86,7 +86,7 @@ class GetDevicePublicKey200Response {
     ) {
       throw new Error(
         "Expected the field `key` to be a primitive type in the JSON string but got " +
-          data["key"]
+          data["key"],
       );
     }
     // ensure the json data is a string
@@ -96,7 +96,7 @@ class GetDevicePublicKey200Response {
     ) {
       throw new Error(
         "Expected the field `uid` to be a primitive type in the JSON string but got " +
-          data["uid"]
+          data["uid"],
       );
     }
 

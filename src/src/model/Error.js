@@ -89,7 +89,7 @@ class Error {
           "The required field `" +
             property +
             "` is not found in the JSON data: " +
-            JSON.stringify(data)
+            JSON.stringify(data),
         );
       }
     }
@@ -100,7 +100,7 @@ class Error {
     ) {
       throw new Error(
         "Expected the field `debug` to be a primitive type in the JSON string but got " +
-          data["debug"]
+          data["debug"],
       );
     }
     // ensure the json data is a string
@@ -110,7 +110,7 @@ class Error {
     ) {
       throw new Error(
         "Expected the field `err` to be a primitive type in the JSON string but got " +
-          data["err"]
+          data["err"],
       );
     }
     // ensure the json data is a string
@@ -122,7 +122,7 @@ class Error {
     ) {
       throw new Error(
         "Expected the field `request` to be a primitive type in the JSON string but got " +
-          data["request"]
+          data["request"],
       );
     }
     // ensure the json data is a string
@@ -132,7 +132,7 @@ class Error {
     ) {
       throw new Error(
         "Expected the field `status` to be a primitive type in the JSON string but got " +
-          data["status"]
+          data["status"],
       );
     }
 

@@ -365,8 +365,3 @@ src/model/UserDfuStateMachine.js
 src/model/UserDfuStateMachineStatus.js
 src/model/UserFirmwareInfo.js
 src/model/WebhookSettings.js
-test/api/OrganizationApi.spec.js
-test/model/CreatedRepository.spec.js
-test/model/GetOrganizations200Response.spec.js
-test/model/Organization.spec.js
-test/model/OrganizationRole.spec.js

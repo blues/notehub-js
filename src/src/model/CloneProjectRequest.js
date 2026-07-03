@@ -53,19 +53,19 @@ class CloneProjectRequest {
       if (data.hasOwnProperty("billing_account_uid")) {
         obj["billing_account_uid"] = ApiClient.convertToType(
           data["billing_account_uid"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("disable_clone_fleets")) {
         obj["disable_clone_fleets"] = ApiClient.convertToType(
           data["disable_clone_fleets"],
-          "Boolean"
+          "Boolean",
         );
       }
       if (data.hasOwnProperty("disable_clone_routes")) {
         obj["disable_clone_routes"] = ApiClient.convertToType(
           data["disable_clone_routes"],
-          "Boolean"
+          "Boolean",
         );
       }
       if (data.hasOwnProperty("label")) {
@@ -90,7 +90,7 @@ class CloneProjectRequest {
           "The required field `" +
             property +
             "` is not found in the JSON data: " +
-            JSON.stringify(data)
+            JSON.stringify(data),
         );
       }
     }
@@ -104,7 +104,7 @@ class CloneProjectRequest {
     ) {
       throw new Error(
         "Expected the field `billing_account_uid` to be a primitive type in the JSON string but got " +
-          data["billing_account_uid"]
+          data["billing_account_uid"],
       );
     }
     // ensure the json data is a string
@@ -114,7 +114,7 @@ class CloneProjectRequest {
     ) {
       throw new Error(
         "Expected the field `label` to be a primitive type in the JSON string but got " +
-          data["label"]
+          data["label"],
       );
     }
 

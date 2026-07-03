@@ -59,7 +59,7 @@ class ProvisionDeviceRequest {
       if (data.hasOwnProperty("product_uid")) {
         obj["product_uid"] = ApiClient.convertToType(
           data["product_uid"],
-          "String"
+          "String",
         );
       }
     } else if (data === null) {
@@ -81,7 +81,7 @@ class ProvisionDeviceRequest {
           "The required field `" +
             property +
             "` is not found in the JSON data: " +
-            JSON.stringify(data)
+            JSON.stringify(data),
         );
       }
     }
@@ -95,14 +95,14 @@ class ProvisionDeviceRequest {
     ) {
       throw new Error(
         "Expected the field `device_sn` to be a primitive type in the JSON string but got " +
-          data["device_sn"]
+          data["device_sn"],
       );
     }
     // ensure the json data is an array
     if (!Array.isArray(data["fleet_uids"])) {
       throw new Error(
         "Expected the field `fleet_uids` to be an array in the JSON data but got " +
-          data["fleet_uids"]
+          data["fleet_uids"],
       );
     }
     // ensure the json data is a string
@@ -115,7 +115,7 @@ class ProvisionDeviceRequest {
     ) {
       throw new Error(
         "Expected the field `product_uid` to be a primitive type in the JSON string but got " +
-          data["product_uid"]
+          data["product_uid"],
       );
     }
 

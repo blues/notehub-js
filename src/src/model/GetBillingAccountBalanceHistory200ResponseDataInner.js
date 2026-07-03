@@ -31,7 +31,7 @@ class GetBillingAccountBalanceHistory200ResponseDataInner {
       this,
       period,
       remainingEventCapacity,
-      totalEventCapacityUsed
+      totalEventCapacityUsed,
     );
   }
 
@@ -44,7 +44,7 @@ class GetBillingAccountBalanceHistory200ResponseDataInner {
     obj,
     period,
     remainingEventCapacity,
-    totalEventCapacityUsed
+    totalEventCapacityUsed,
   ) {
     obj["period"] = period;
     obj["remaining_event_capacity"] = remainingEventCapacity;
@@ -68,13 +68,13 @@ class GetBillingAccountBalanceHistory200ResponseDataInner {
       if (data.hasOwnProperty("remaining_event_capacity")) {
         obj["remaining_event_capacity"] = ApiClient.convertToType(
           data["remaining_event_capacity"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("total_event_capacity_used")) {
         obj["total_event_capacity_used"] = ApiClient.convertToType(
           data["total_event_capacity_used"],
-          "Number"
+          "Number",
         );
       }
     } else if (data === null) {
@@ -96,7 +96,7 @@ class GetBillingAccountBalanceHistory200ResponseDataInner {
           "The required field `" +
             property +
             "` is not found in the JSON data: " +
-            JSON.stringify(data)
+            JSON.stringify(data),
         );
       }
     }

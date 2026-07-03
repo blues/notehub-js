@@ -103,7 +103,7 @@ class DFUState {
     ) {
       throw new Error(
         "Expected the field `file` to be a primitive type in the JSON string but got " +
-          data["file"]
+          data["file"],
       );
     }
     // ensure the json data is a string
@@ -113,7 +113,7 @@ class DFUState {
     ) {
       throw new Error(
         "Expected the field `md5` to be a primitive type in the JSON string but got " +
-          data["md5"]
+          data["md5"],
       );
     }
     // ensure the json data is a string
@@ -123,7 +123,7 @@ class DFUState {
     ) {
       throw new Error(
         "Expected the field `mode` to be a primitive type in the JSON string but got " +
-          data["mode"]
+          data["mode"],
       );
     }
     // ensure the json data is a string
@@ -133,7 +133,7 @@ class DFUState {
     ) {
       throw new Error(
         "Expected the field `status` to be a primitive type in the JSON string but got " +
-          data["status"]
+          data["status"],
       );
     }
     // ensure the json data is a string
@@ -143,7 +143,7 @@ class DFUState {
     ) {
       throw new Error(
         "Expected the field `type` to be a primitive type in the JSON string but got " +
-          data["type"]
+          data["type"],
       );
     }
     // ensure the json data is a string
@@ -155,7 +155,7 @@ class DFUState {
     ) {
       throw new Error(
         "Expected the field `version` to be a primitive type in the JSON string but got " +
-          data["version"]
+          data["version"],
       );
     }
 

@@ -71,7 +71,7 @@ class GetDeviceFleets200Response {
           "The required field `" +
             property +
             "` is not found in the JSON data: " +
-            JSON.stringify(data)
+            JSON.stringify(data),
         );
       }
     }
@@ -81,7 +81,7 @@ class GetDeviceFleets200Response {
       if (!Array.isArray(data["fleets"])) {
         throw new Error(
           "Expected the field `fleets` to be an array in the JSON data but got " +
-            data["fleets"]
+            data["fleets"],
         );
       }
       // validate the optional field `fleets` (array)

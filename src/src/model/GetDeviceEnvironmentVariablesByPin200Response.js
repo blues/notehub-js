@@ -29,7 +29,7 @@ class GetDeviceEnvironmentVariablesByPin200Response {
     GetDeviceEnvironmentVariablesByPin200Response.initialize(
       this,
       environmentVariables,
-      environmentVariablesEnvDefault
+      environmentVariablesEnvDefault,
     );
   }
 
@@ -57,19 +57,19 @@ class GetDeviceEnvironmentVariablesByPin200Response {
       if (data.hasOwnProperty("environment_variables")) {
         obj["environment_variables"] = ApiClient.convertToType(
           data["environment_variables"],
-          { String: "String" }
+          { String: "String" },
         );
       }
       if (data.hasOwnProperty("environment_variables_effective")) {
         obj["environment_variables_effective"] = ApiClient.convertToType(
           data["environment_variables_effective"],
-          { String: "String" }
+          { String: "String" },
         );
       }
       if (data.hasOwnProperty("environment_variables_env_default")) {
         obj["environment_variables_env_default"] = ApiClient.convertToType(
           data["environment_variables_env_default"],
-          { String: "String" }
+          { String: "String" },
         );
       }
     } else if (data === null) {
@@ -91,7 +91,7 @@ class GetDeviceEnvironmentVariablesByPin200Response {
           "The required field `" +
             property +
             "` is not found in the JSON data: " +
-            JSON.stringify(data)
+            JSON.stringify(data),
         );
       }
     }

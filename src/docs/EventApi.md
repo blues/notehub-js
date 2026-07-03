@@ -47,12 +47,12 @@ let opts = {
 apiInstance.getEvents(projectOrProductUID, opts).then(
   (data) => {
     console.log(
-      "API called successfully. Returned data: " + JSON.stringify(data)
+      "API called successfully. Returned data: " + JSON.stringify(data),
     );
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -119,12 +119,12 @@ let opts = {
 apiInstance.getEventsByCursor(projectOrProductUID, opts).then(
   (data) => {
     console.log(
-      "API called successfully. Returned data: " + JSON.stringify(data)
+      "API called successfully. Returned data: " + JSON.stringify(data),
     );
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -191,12 +191,12 @@ let opts = {
 apiInstance.getFleetEvents(projectOrProductUID, fleetUID, opts).then(
   (data) => {
     console.log(
-      "API called successfully. Returned data: " + JSON.stringify(data)
+      "API called successfully. Returned data: " + JSON.stringify(data),
     );
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -265,12 +265,12 @@ let opts = {
 apiInstance.getFleetEventsByCursor(projectOrProductUID, fleetUID, opts).then(
   (data) => {
     console.log(
-      "API called successfully. Returned data: " + JSON.stringify(data)
+      "API called successfully. Returned data: " + JSON.stringify(data),
     );
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -322,12 +322,12 @@ let eventUID = "4506f411-dea6-44a0-9743-1130f57d7747"; // String |
 apiInstance.getRouteLogsByEvent(projectOrProductUID, eventUID).then(
   (data) => {
     console.log(
-      "API called successfully. Returned data: " + JSON.stringify(data)
+      "API called successfully. Returned data: " + JSON.stringify(data),
     );
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 

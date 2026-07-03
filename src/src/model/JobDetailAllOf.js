@@ -48,7 +48,7 @@ class JobDetailAllOf {
 
       if (data.hasOwnProperty("definition")) {
         obj["definition"] = JobDefinition.constructFromObject(
-          data["definition"]
+          data["definition"],
         );
       }
     } else if (data === null) {

@@ -51,7 +51,7 @@ class RepositoryTokenRequest {
       if (data.hasOwnProperty("ttl_seconds")) {
         obj["ttl_seconds"] = ApiClient.convertToType(
           data["ttl_seconds"],
-          "Number"
+          "Number",
         );
       }
     } else if (data === null) {
@@ -73,7 +73,7 @@ class RepositoryTokenRequest {
     ) {
       throw new Error(
         "Expected the field `intent` to be a primitive type in the JSON string but got " +
-          data["intent"]
+          data["intent"],
       );
     }
 

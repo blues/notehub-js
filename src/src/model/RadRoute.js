@@ -51,13 +51,13 @@ class RadRoute {
       if (data.hasOwnProperty("client_secret")) {
         obj["client_secret"] = ApiClient.convertToType(
           data["client_secret"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("data_feed_key")) {
         obj["data_feed_key"] = ApiClient.convertToType(
           data["data_feed_key"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("event_id")) {
@@ -72,7 +72,7 @@ class RadRoute {
       if (data.hasOwnProperty("throttle_ms")) {
         obj["throttle_ms"] = ApiClient.convertToType(
           data["throttle_ms"],
-          "Number"
+          "Number",
         );
       }
     } else if (data === null) {
@@ -97,7 +97,7 @@ class RadRoute {
     ) {
       throw new Error(
         "Expected the field `client_id` to be a primitive type in the JSON string but got " +
-          data["client_id"]
+          data["client_id"],
       );
     }
     // ensure the json data is a string
@@ -110,7 +110,7 @@ class RadRoute {
     ) {
       throw new Error(
         "Expected the field `client_secret` to be a primitive type in the JSON string but got " +
-          data["client_secret"]
+          data["client_secret"],
       );
     }
     // ensure the json data is a string
@@ -123,14 +123,14 @@ class RadRoute {
     ) {
       throw new Error(
         "Expected the field `data_feed_key` to be a primitive type in the JSON string but got " +
-          data["data_feed_key"]
+          data["data_feed_key"],
       );
     }
     // ensure the json data is an array
     if (!Array.isArray(data["fleets"])) {
       throw new Error(
         "Expected the field `fleets` to be an array in the JSON data but got " +
-          data["fleets"]
+          data["fleets"],
       );
     }
 

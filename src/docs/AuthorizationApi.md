@@ -23,12 +23,12 @@ let loginRequest = { password: "test-password", username: "name@example.com" }; 
 apiInstance.login(loginRequest).then(
   (data) => {
     console.log(
-      "API called successfully. Returned data: " + JSON.stringify(data)
+      "API called successfully. Returned data: " + JSON.stringify(data),
     );
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -76,12 +76,12 @@ apiInstance
   .then(
     (data) => {
       console.log(
-        "API called successfully. Returned data: " + JSON.stringify(data)
+        "API called successfully. Returned data: " + JSON.stringify(data),
       );
     },
     (error) => {
       console.error(error);
-    }
+    },
   );
 ```
 

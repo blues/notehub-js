@@ -51,13 +51,13 @@ class PersonalAccessToken {
       }
       if (data.hasOwnProperty("created_by")) {
         obj["created_by"] = PersonalAccessTokenCreatedBy.constructFromObject(
-          data["created_by"]
+          data["created_by"],
         );
       }
       if (data.hasOwnProperty("description")) {
         obj["description"] = ApiClient.convertToType(
           data["description"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("expires_at")) {
@@ -72,7 +72,7 @@ class PersonalAccessToken {
       if (data.hasOwnProperty("suspended")) {
         obj["suspended"] = ApiClient.convertToType(
           data["suspended"],
-          "Boolean"
+          "Boolean",
         );
       }
       if (data.hasOwnProperty("uid")) {
@@ -105,7 +105,7 @@ class PersonalAccessToken {
     ) {
       throw new Error(
         "Expected the field `description` to be a primitive type in the JSON string but got " +
-          data["description"]
+          data["description"],
       );
     }
     // ensure the json data is a string
@@ -115,7 +115,7 @@ class PersonalAccessToken {
     ) {
       throw new Error(
         "Expected the field `name` to be a primitive type in the JSON string but got " +
-          data["name"]
+          data["name"],
       );
     }
     // ensure the json data is a string
@@ -125,7 +125,7 @@ class PersonalAccessToken {
     ) {
       throw new Error(
         "Expected the field `uid` to be a primitive type in the JSON string but got " +
-          data["uid"]
+          data["uid"],
       );
     }
 

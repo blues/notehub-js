@@ -54,7 +54,7 @@ class Contact {
       if (data.hasOwnProperty("organization")) {
         obj["organization"] = ApiClient.convertToType(
           data["organization"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("role")) {
@@ -79,7 +79,7 @@ class Contact {
     ) {
       throw new Error(
         "Expected the field `email` to be a primitive type in the JSON string but got " +
-          data["email"]
+          data["email"],
       );
     }
     // ensure the json data is a string
@@ -89,7 +89,7 @@ class Contact {
     ) {
       throw new Error(
         "Expected the field `name` to be a primitive type in the JSON string but got " +
-          data["name"]
+          data["name"],
       );
     }
     // ensure the json data is a string
@@ -102,7 +102,7 @@ class Contact {
     ) {
       throw new Error(
         "Expected the field `organization` to be a primitive type in the JSON string but got " +
-          data["organization"]
+          data["organization"],
       );
     }
     // ensure the json data is a string
@@ -112,7 +112,7 @@ class Contact {
     ) {
       throw new Error(
         "Expected the field `role` to be a primitive type in the JSON string but got " +
-          data["role"]
+          data["role"],
       );
     }
 

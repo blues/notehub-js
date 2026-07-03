@@ -45,13 +45,13 @@ export default class RouteApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling createRoute"
+        "Missing the required parameter 'projectOrProductUID' when calling createRoute",
       );
     }
     // verify the required parameter 'notehubRoute' is set
     if (notehubRoute === undefined || notehubRoute === null) {
       throw new Error(
-        "Missing the required parameter 'notehubRoute' when calling createRoute"
+        "Missing the required parameter 'notehubRoute' when calling createRoute",
       );
     }
 
@@ -78,7 +78,7 @@ export default class RouteApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -92,7 +92,7 @@ export default class RouteApi {
     return this.createRouteWithHttpInfo(projectOrProductUID, notehubRoute).then(
       function (response_and_data) {
         return response_and_data.data;
-      }
+      },
     );
   }
 
@@ -107,13 +107,13 @@ export default class RouteApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling deleteRoute"
+        "Missing the required parameter 'projectOrProductUID' when calling deleteRoute",
       );
     }
     // verify the required parameter 'routeUID' is set
     if (routeUID === undefined || routeUID === null) {
       throw new Error(
-        "Missing the required parameter 'routeUID' when calling deleteRoute"
+        "Missing the required parameter 'routeUID' when calling deleteRoute",
       );
     }
 
@@ -141,7 +141,7 @@ export default class RouteApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -155,7 +155,7 @@ export default class RouteApi {
     return this.deleteRouteWithHttpInfo(projectOrProductUID, routeUID).then(
       function (response_and_data) {
         return response_and_data.data;
-      }
+      },
     );
   }
 
@@ -170,13 +170,13 @@ export default class RouteApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling getRoute"
+        "Missing the required parameter 'projectOrProductUID' when calling getRoute",
       );
     }
     // verify the required parameter 'routeUID' is set
     if (routeUID === undefined || routeUID === null) {
       throw new Error(
-        "Missing the required parameter 'routeUID' when calling getRoute"
+        "Missing the required parameter 'routeUID' when calling getRoute",
       );
     }
 
@@ -204,7 +204,7 @@ export default class RouteApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -218,7 +218,7 @@ export default class RouteApi {
     return this.getRouteWithHttpInfo(projectOrProductUID, routeUID).then(
       function (response_and_data) {
         return response_and_data.data;
-      }
+      },
     );
   }
 
@@ -247,13 +247,13 @@ export default class RouteApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling getRouteLogsByRoute"
+        "Missing the required parameter 'projectOrProductUID' when calling getRouteLogsByRoute",
       );
     }
     // verify the required parameter 'routeUID' is set
     if (routeUID === undefined || routeUID === null) {
       throw new Error(
-        "Missing the required parameter 'routeUID' when calling getRouteLogsByRoute"
+        "Missing the required parameter 'routeUID' when calling getRouteLogsByRoute",
       );
     }
 
@@ -266,7 +266,7 @@ export default class RouteApi {
       pageNum: opts["pageNum"],
       deviceUID: this.apiClient.buildCollectionParam(
         opts["deviceUID"],
-        "multi"
+        "multi",
       ),
       sortBy: opts["sortBy"],
       sortOrder: opts["sortOrder"],
@@ -277,11 +277,11 @@ export default class RouteApi {
       files: opts["files"],
       routingStatus: this.apiClient.buildCollectionParam(
         opts["routingStatus"],
-        "multi"
+        "multi",
       ),
       responseStatus: this.apiClient.buildCollectionParam(
         opts["responseStatus"],
-        "multi"
+        "multi",
       ),
     };
     let headerParams = {};
@@ -303,7 +303,7 @@ export default class RouteApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -330,7 +330,7 @@ export default class RouteApi {
     return this.getRouteLogsByRouteWithHttpInfo(
       projectOrProductUID,
       routeUID,
-      opts
+      opts,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -346,7 +346,7 @@ export default class RouteApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling getRoutes"
+        "Missing the required parameter 'projectOrProductUID' when calling getRoutes",
       );
     }
 
@@ -373,7 +373,7 @@ export default class RouteApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -383,11 +383,11 @@ export default class RouteApi {
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link Array.<module:model/NotehubRouteSummary>}
    */
   getRoutes(projectOrProductUID) {
-    return this.getRoutesWithHttpInfo(projectOrProductUID).then(function (
-      response_and_data
-    ) {
-      return response_and_data.data;
-    });
+    return this.getRoutesWithHttpInfo(projectOrProductUID).then(
+      function (response_and_data) {
+        return response_and_data.data;
+      },
+    );
   }
 
   /**
@@ -402,19 +402,19 @@ export default class RouteApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling updateRoute"
+        "Missing the required parameter 'projectOrProductUID' when calling updateRoute",
       );
     }
     // verify the required parameter 'routeUID' is set
     if (routeUID === undefined || routeUID === null) {
       throw new Error(
-        "Missing the required parameter 'routeUID' when calling updateRoute"
+        "Missing the required parameter 'routeUID' when calling updateRoute",
       );
     }
     // verify the required parameter 'notehubRoute' is set
     if (notehubRoute === undefined || notehubRoute === null) {
       throw new Error(
-        "Missing the required parameter 'notehubRoute' when calling updateRoute"
+        "Missing the required parameter 'notehubRoute' when calling updateRoute",
       );
     }
 
@@ -442,7 +442,7 @@ export default class RouteApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -457,7 +457,7 @@ export default class RouteApi {
     return this.updateRouteWithHttpInfo(
       projectOrProductUID,
       routeUID,
-      notehubRoute
+      notehubRoute,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });

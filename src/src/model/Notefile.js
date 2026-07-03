@@ -79,7 +79,7 @@ class Notefile {
           "The required field `" +
             property +
             "` is not found in the JSON data: " +
-            JSON.stringify(data)
+            JSON.stringify(data),
         );
       }
     }
@@ -90,7 +90,7 @@ class Notefile {
     ) {
       throw new Error(
         "Expected the field `id` to be a primitive type in the JSON string but got " +
-          data["id"]
+          data["id"],
       );
     }
     if (data["notes"]) {
@@ -99,7 +99,7 @@ class Notefile {
       if (!Array.isArray(data["notes"])) {
         throw new Error(
           "Expected the field `notes` to be an array in the JSON data but got " +
-            data["notes"]
+            data["notes"],
         );
       }
       // validate the optional field `notes` (array)
@@ -117,7 +117,7 @@ class Notefile {
     ) {
       throw new Error(
         "Expected the field `template` to be a primitive type in the JSON string but got " +
-          data["template"]
+          data["template"],
       );
     }
 

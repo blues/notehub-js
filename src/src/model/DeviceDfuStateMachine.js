@@ -50,7 +50,7 @@ class DeviceDfuStateMachine {
       if (data.hasOwnProperty("current_version")) {
         obj["current_version"] = ApiClient.convertToType(
           data["current_version"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("initiated")) {
@@ -59,7 +59,7 @@ class DeviceDfuStateMachine {
       if (data.hasOwnProperty("requested_version")) {
         obj["requested_version"] = ApiClient.convertToType(
           data["requested_version"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("updates")) {
@@ -89,7 +89,7 @@ class DeviceDfuStateMachine {
     ) {
       throw new Error(
         "Expected the field `current_version` to be a primitive type in the JSON string but got " +
-          data["current_version"]
+          data["current_version"],
       );
     }
     // ensure the json data is a string
@@ -102,7 +102,7 @@ class DeviceDfuStateMachine {
     ) {
       throw new Error(
         "Expected the field `initiated` to be a primitive type in the JSON string but got " +
-          data["initiated"]
+          data["initiated"],
       );
     }
     // ensure the json data is a string
@@ -115,7 +115,7 @@ class DeviceDfuStateMachine {
     ) {
       throw new Error(
         "Expected the field `requested_version` to be a primitive type in the JSON string but got " +
-          data["requested_version"]
+          data["requested_version"],
       );
     }
     if (data["updates"]) {
@@ -124,7 +124,7 @@ class DeviceDfuStateMachine {
       if (!Array.isArray(data["updates"])) {
         throw new Error(
           "Expected the field `updates` to be an array in the JSON data but got " +
-            data["updates"]
+            data["updates"],
         );
       }
       // validate the optional field `updates` (array)

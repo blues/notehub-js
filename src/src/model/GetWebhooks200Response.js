@@ -69,7 +69,7 @@ class GetWebhooks200Response {
       if (!Array.isArray(data["webhooks"])) {
         throw new Error(
           "Expected the field `webhooks` to be an array in the JSON data but got " +
-            data["webhooks"]
+            data["webhooks"],
         );
       }
       // validate the optional field `webhooks` (array)

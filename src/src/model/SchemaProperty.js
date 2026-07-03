@@ -84,7 +84,7 @@ class SchemaProperty {
           "The required field `" +
             property +
             "` is not found in the JSON data: " +
-            JSON.stringify(data)
+            JSON.stringify(data),
         );
       }
     }
@@ -94,7 +94,7 @@ class SchemaProperty {
       if (!Array.isArray(data["items"])) {
         throw new Error(
           "Expected the field `items` to be an array in the JSON data but got " +
-            data["items"]
+            data["items"],
         );
       }
       // validate the optional field `items` (array)
@@ -109,7 +109,7 @@ class SchemaProperty {
     ) {
       throw new Error(
         "Expected the field `name` to be a primitive type in the JSON string but got " +
-          data["name"]
+          data["name"],
       );
     }
     if (data["properties"]) {
@@ -118,7 +118,7 @@ class SchemaProperty {
       if (!Array.isArray(data["properties"])) {
         throw new Error(
           "Expected the field `properties` to be an array in the JSON data but got " +
-            data["properties"]
+            data["properties"],
         );
       }
       // validate the optional field `properties` (array)
@@ -133,7 +133,7 @@ class SchemaProperty {
     ) {
       throw new Error(
         "Expected the field `type` to be a primitive type in the JSON string but got " +
-          data["type"]
+          data["type"],
       );
     }
 

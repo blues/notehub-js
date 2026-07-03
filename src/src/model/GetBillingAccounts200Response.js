@@ -49,7 +49,7 @@ class GetBillingAccounts200Response {
       if (data.hasOwnProperty("billing_accounts")) {
         obj["billing_accounts"] = ApiClient.convertToType(
           data["billing_accounts"],
-          [BillingAccount]
+          [BillingAccount],
         );
       }
     } else if (data === null) {
@@ -70,7 +70,7 @@ class GetBillingAccounts200Response {
       if (!Array.isArray(data["billing_accounts"])) {
         throw new Error(
           "Expected the field `billing_accounts` to be an array in the JSON data but got " +
-            data["billing_accounts"]
+            data["billing_accounts"],
         );
       }
       // validate the optional field `billing_accounts` (array)

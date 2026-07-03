@@ -49,12 +49,12 @@ class UserFirmwareInfo {
 
       if (data.hasOwnProperty("current_firmware")) {
         obj["current_firmware"] = CurrentFirmware.constructFromObject(
-          data["current_firmware"]
+          data["current_firmware"],
         );
       }
       if (data.hasOwnProperty("firmware_update")) {
         obj["firmware_update"] = UserDfuStateMachine.constructFromObject(
-          data["firmware_update"]
+          data["firmware_update"],
         );
       }
     } else if (data === null) {

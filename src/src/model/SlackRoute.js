@@ -68,7 +68,7 @@ class SlackRoute {
       if (data.hasOwnProperty("throttle_ms")) {
         obj["throttle_ms"] = ApiClient.convertToType(
           data["throttle_ms"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("timeout")) {
@@ -76,13 +76,13 @@ class SlackRoute {
       }
       if (data.hasOwnProperty("transform")) {
         obj["transform"] = RouteTransformSettings.constructFromObject(
-          data["transform"]
+          data["transform"],
         );
       }
       if (data.hasOwnProperty("webhook_url")) {
         obj["webhook_url"] = ApiClient.convertToType(
           data["webhook_url"],
-          "String"
+          "String",
         );
       }
     } else if (data === null) {
@@ -104,7 +104,7 @@ class SlackRoute {
     ) {
       throw new Error(
         "Expected the field `bearer` to be a primitive type in the JSON string but got " +
-          data["bearer"]
+          data["bearer"],
       );
     }
     // ensure the json data is a string
@@ -114,7 +114,7 @@ class SlackRoute {
     ) {
       throw new Error(
         "Expected the field `blocks` to be a primitive type in the JSON string but got " +
-          data["blocks"]
+          data["blocks"],
       );
     }
     // ensure the json data is a string
@@ -126,7 +126,7 @@ class SlackRoute {
     ) {
       throw new Error(
         "Expected the field `channel` to be a primitive type in the JSON string but got " +
-          data["channel"]
+          data["channel"],
       );
     }
     // validate the optional field `filter`
@@ -138,7 +138,7 @@ class SlackRoute {
     if (!Array.isArray(data["fleets"])) {
       throw new Error(
         "Expected the field `fleets` to be an array in the JSON data but got " +
-          data["fleets"]
+          data["fleets"],
       );
     }
     // ensure the json data is a string
@@ -148,7 +148,7 @@ class SlackRoute {
     ) {
       throw new Error(
         "Expected the field `text` to be a primitive type in the JSON string but got " +
-          data["text"]
+          data["text"],
       );
     }
     // validate the optional field `transform`
@@ -166,7 +166,7 @@ class SlackRoute {
     ) {
       throw new Error(
         "Expected the field `webhook_url` to be a primitive type in the JSON string but got " +
-          data["webhook_url"]
+          data["webhook_url"],
       );
     }
 

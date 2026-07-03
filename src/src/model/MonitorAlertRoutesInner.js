@@ -49,7 +49,7 @@ class MonitorAlertRoutesInner {
     } catch (err) {
       // json data failed to deserialize into SlackWebHookNotification
       errorMessages.push(
-        "Failed to construct SlackWebHookNotification: " + err
+        "Failed to construct SlackWebHookNotification: " + err,
       );
     }
 
@@ -89,13 +89,13 @@ class MonitorAlertRoutesInner {
     if (match > 1) {
       throw new Error(
         "Multiple matches found constructing `MonitorAlertRoutesInner` with oneOf schemas EmailNotification, SlackBearerNotification, SlackWebHookNotification. Input: " +
-          JSON.stringify(instance)
+          JSON.stringify(instance),
       );
     } else if (match === 0) {
       this.actualInstance = null; // clear the actual instance in case there are multiple matches
       throw new Error(
         "No match found constructing `MonitorAlertRoutesInner` with oneOf schemas EmailNotification, SlackBearerNotification, SlackWebHookNotification. Details: " +
-          errorMessages.join(", ")
+          errorMessages.join(", "),
       );
     } else {
       // only 1 match

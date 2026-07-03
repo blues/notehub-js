@@ -54,7 +54,7 @@ class OAuth2Error {
       if (data.hasOwnProperty("error_description")) {
         obj["error_description"] = ApiClient.convertToType(
           data["error_description"],
-          "String"
+          "String",
         );
       }
     } else if (data === null) {
@@ -76,7 +76,7 @@ class OAuth2Error {
           "The required field `" +
             property +
             "` is not found in the JSON data: " +
-            JSON.stringify(data)
+            JSON.stringify(data),
         );
       }
     }
@@ -87,7 +87,7 @@ class OAuth2Error {
     ) {
       throw new Error(
         "Expected the field `error` to be a primitive type in the JSON string but got " +
-          data["error"]
+          data["error"],
       );
     }
     // ensure the json data is a string
@@ -100,7 +100,7 @@ class OAuth2Error {
     ) {
       throw new Error(
         "Expected the field `error_description` to be a primitive type in the JSON string but got " +
-          data["error_description"]
+          data["error_description"],
       );
     }
 

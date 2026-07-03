@@ -37,7 +37,7 @@ class Location {
       longitude,
       name,
       timezone,
-      when
+      when,
     );
   }
 
@@ -103,7 +103,7 @@ class Location {
           "The required field `" +
             property +
             "` is not found in the JSON data: " +
-            JSON.stringify(data)
+            JSON.stringify(data),
         );
       }
     }
@@ -116,7 +116,7 @@ class Location {
     ) {
       throw new Error(
         "Expected the field `country` to be a primitive type in the JSON string but got " +
-          data["country"]
+          data["country"],
       );
     }
     // ensure the json data is a string
@@ -126,7 +126,7 @@ class Location {
     ) {
       throw new Error(
         "Expected the field `name` to be a primitive type in the JSON string but got " +
-          data["name"]
+          data["name"],
       );
     }
     // ensure the json data is a string
@@ -139,7 +139,7 @@ class Location {
     ) {
       throw new Error(
         "Expected the field `timezone` to be a primitive type in the JSON string but got " +
-          data["timezone"]
+          data["timezone"],
       );
     }
     // ensure the json data is a string
@@ -149,7 +149,7 @@ class Location {
     ) {
       throw new Error(
         "Expected the field `when` to be a primitive type in the JSON string but got " +
-          data["when"]
+          data["when"],
       );
     }
 

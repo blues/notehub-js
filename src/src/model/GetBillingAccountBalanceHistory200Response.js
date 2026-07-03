@@ -69,13 +69,13 @@ class GetBillingAccountBalanceHistory200Response {
       if (!Array.isArray(data["data"])) {
         throw new Error(
           "Expected the field `data` to be an array in the JSON data but got " +
-            data["data"]
+            data["data"],
         );
       }
       // validate the optional field `data` (array)
       for (const item of data["data"]) {
         GetBillingAccountBalanceHistory200ResponseDataInner.validateJsonObject(
-          item
+          item,
         );
       }
     }

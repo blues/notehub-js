@@ -50,7 +50,7 @@ class SnowflakeRoute {
       if (data.hasOwnProperty("account_name")) {
         obj["account_name"] = ApiClient.convertToType(
           data["account_name"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("filter")) {
@@ -62,7 +62,7 @@ class SnowflakeRoute {
       if (data.hasOwnProperty("organization_name")) {
         obj["organization_name"] = ApiClient.convertToType(
           data["organization_name"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("pem")) {
@@ -71,7 +71,7 @@ class SnowflakeRoute {
       if (data.hasOwnProperty("private_key_name")) {
         obj["private_key_name"] = ApiClient.convertToType(
           data["private_key_name"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("timeout")) {
@@ -79,7 +79,7 @@ class SnowflakeRoute {
       }
       if (data.hasOwnProperty("transform")) {
         obj["transform"] = RouteTransformSettings.constructFromObject(
-          data["transform"]
+          data["transform"],
         );
       }
       if (data.hasOwnProperty("user_name")) {
@@ -107,7 +107,7 @@ class SnowflakeRoute {
     ) {
       throw new Error(
         "Expected the field `account_name` to be a primitive type in the JSON string but got " +
-          data["account_name"]
+          data["account_name"],
       );
     }
     // validate the optional field `filter`
@@ -119,7 +119,7 @@ class SnowflakeRoute {
     if (!Array.isArray(data["fleets"])) {
       throw new Error(
         "Expected the field `fleets` to be an array in the JSON data but got " +
-          data["fleets"]
+          data["fleets"],
       );
     }
     // ensure the json data is a string
@@ -132,7 +132,7 @@ class SnowflakeRoute {
     ) {
       throw new Error(
         "Expected the field `organization_name` to be a primitive type in the JSON string but got " +
-          data["organization_name"]
+          data["organization_name"],
       );
     }
     // ensure the json data is a string
@@ -142,7 +142,7 @@ class SnowflakeRoute {
     ) {
       throw new Error(
         "Expected the field `pem` to be a primitive type in the JSON string but got " +
-          data["pem"]
+          data["pem"],
       );
     }
     // ensure the json data is a string
@@ -155,7 +155,7 @@ class SnowflakeRoute {
     ) {
       throw new Error(
         "Expected the field `private_key_name` to be a primitive type in the JSON string but got " +
-          data["private_key_name"]
+          data["private_key_name"],
       );
     }
     // validate the optional field `transform`
@@ -173,7 +173,7 @@ class SnowflakeRoute {
     ) {
       throw new Error(
         "Expected the field `user_name` to be a primitive type in the JSON string but got " +
-          data["user_name"]
+          data["user_name"],
       );
     }
 

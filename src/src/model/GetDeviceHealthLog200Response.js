@@ -73,7 +73,7 @@ class GetDeviceHealthLog200Response {
           "The required field `" +
             property +
             "` is not found in the JSON data: " +
-            JSON.stringify(data)
+            JSON.stringify(data),
         );
       }
     }
@@ -83,7 +83,7 @@ class GetDeviceHealthLog200Response {
       if (!Array.isArray(data["health_log"])) {
         throw new Error(
           "Expected the field `health_log` to be an array in the JSON data but got " +
-            data["health_log"]
+            data["health_log"],
         );
       }
       // validate the optional field `health_log` (array)

@@ -51,13 +51,13 @@ class SimUsage {
       if (data.hasOwnProperty("last_updated")) {
         obj["last_updated"] = ApiClient.convertToType(
           data["last_updated"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("lifetime_used")) {
         obj["lifetime_used"] = ApiClient.convertToType(
           data["lifetime_used"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("limit")) {
@@ -85,7 +85,7 @@ class SimUsage {
     ) {
       throw new Error(
         "Expected the field `iccid` to be a primitive type in the JSON string but got " +
-          data["iccid"]
+          data["iccid"],
       );
     }
 

@@ -54,13 +54,13 @@ export default class UsageApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling getDataUsage"
+        "Missing the required parameter 'projectOrProductUID' when calling getDataUsage",
       );
     }
     // verify the required parameter 'period' is set
     if (period === undefined || period === null) {
       throw new Error(
-        "Missing the required parameter 'period' when calling getDataUsage"
+        "Missing the required parameter 'period' when calling getDataUsage",
       );
     }
 
@@ -72,7 +72,7 @@ export default class UsageApi {
       endDate: opts["endDate"],
       deviceUID: this.apiClient.buildCollectionParam(
         opts["deviceUID"],
-        "multi"
+        "multi",
       ),
       fleetUID: this.apiClient.buildCollectionParam(opts["fleetUID"], "multi"),
       limit: opts["limit"],
@@ -98,7 +98,7 @@ export default class UsageApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -119,7 +119,7 @@ export default class UsageApi {
     return this.getDataUsageWithHttpInfo(
       projectOrProductUID,
       period,
-      opts
+      opts,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -147,13 +147,13 @@ export default class UsageApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling getEventsUsage"
+        "Missing the required parameter 'projectOrProductUID' when calling getEventsUsage",
       );
     }
     // verify the required parameter 'period' is set
     if (period === undefined || period === null) {
       throw new Error(
-        "Missing the required parameter 'period' when calling getEventsUsage"
+        "Missing the required parameter 'period' when calling getEventsUsage",
       );
     }
 
@@ -165,7 +165,7 @@ export default class UsageApi {
       endDate: opts["endDate"],
       deviceUID: this.apiClient.buildCollectionParam(
         opts["deviceUID"],
-        "multi"
+        "multi",
       ),
       fleetUID: this.apiClient.buildCollectionParam(opts["fleetUID"], "multi"),
       limit: opts["limit"],
@@ -194,7 +194,7 @@ export default class UsageApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -218,7 +218,7 @@ export default class UsageApi {
     return this.getEventsUsageWithHttpInfo(
       projectOrProductUID,
       period,
-      opts
+      opts,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -243,13 +243,13 @@ export default class UsageApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling getRouteLogsUsage"
+        "Missing the required parameter 'projectOrProductUID' when calling getRouteLogsUsage",
       );
     }
     // verify the required parameter 'period' is set
     if (period === undefined || period === null) {
       throw new Error(
-        "Missing the required parameter 'period' when calling getRouteLogsUsage"
+        "Missing the required parameter 'period' when calling getRouteLogsUsage",
       );
     }
 
@@ -284,7 +284,7 @@ export default class UsageApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -305,7 +305,7 @@ export default class UsageApi {
     return this.getRouteLogsUsageWithHttpInfo(
       projectOrProductUID,
       period,
-      opts
+      opts,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -331,13 +331,13 @@ export default class UsageApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling getSessionsUsage"
+        "Missing the required parameter 'projectOrProductUID' when calling getSessionsUsage",
       );
     }
     // verify the required parameter 'period' is set
     if (period === undefined || period === null) {
       throw new Error(
-        "Missing the required parameter 'period' when calling getSessionsUsage"
+        "Missing the required parameter 'period' when calling getSessionsUsage",
       );
     }
 
@@ -349,7 +349,7 @@ export default class UsageApi {
       endDate: opts["endDate"],
       deviceUID: this.apiClient.buildCollectionParam(
         opts["deviceUID"],
-        "multi"
+        "multi",
       ),
       fleetUID: this.apiClient.buildCollectionParam(opts["fleetUID"], "multi"),
       limit: opts["limit"],
@@ -376,7 +376,7 @@ export default class UsageApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -398,7 +398,7 @@ export default class UsageApi {
     return this.getSessionsUsageWithHttpInfo(
       projectOrProductUID,
       period,
-      opts
+      opts,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });

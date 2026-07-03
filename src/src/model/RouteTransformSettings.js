@@ -55,7 +55,7 @@ class RouteTransformSettings {
       if (data.hasOwnProperty("jsonata_in")) {
         obj["jsonata_in"] = ApiClient.convertToType(
           data["jsonata_in"],
-          "String"
+          "String",
         );
       }
     } else if (data === null) {
@@ -77,7 +77,7 @@ class RouteTransformSettings {
     ) {
       throw new Error(
         "Expected the field `format` to be a primitive type in the JSON string but got " +
-          data["format"]
+          data["format"],
       );
     }
     // ensure the json data is a string
@@ -89,7 +89,7 @@ class RouteTransformSettings {
     ) {
       throw new Error(
         "Expected the field `jsonata` to be a primitive type in the JSON string but got " +
-          data["jsonata"]
+          data["jsonata"],
       );
     }
     // ensure the json data is a string
@@ -102,7 +102,7 @@ class RouteTransformSettings {
     ) {
       throw new Error(
         "Expected the field `jsonata_in` to be a primitive type in the JSON string but got " +
-          data["jsonata_in"]
+          data["jsonata_in"],
       );
     }
 

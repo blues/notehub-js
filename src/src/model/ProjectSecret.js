@@ -59,7 +59,7 @@ class ProjectSecret {
       if (data.hasOwnProperty("created_by")) {
         obj["created_by"] = ApiClient.convertToType(
           data["created_by"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("modified")) {
@@ -68,7 +68,7 @@ class ProjectSecret {
       if (data.hasOwnProperty("modified_by")) {
         obj["modified_by"] = ApiClient.convertToType(
           data["modified_by"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("name")) {
@@ -93,7 +93,7 @@ class ProjectSecret {
           "The required field `" +
             property +
             "` is not found in the JSON data: " +
-            JSON.stringify(data)
+            JSON.stringify(data),
         );
       }
     }
@@ -107,7 +107,7 @@ class ProjectSecret {
     ) {
       throw new Error(
         "Expected the field `created_by` to be a primitive type in the JSON string but got " +
-          data["created_by"]
+          data["created_by"],
       );
     }
     // ensure the json data is a string
@@ -120,7 +120,7 @@ class ProjectSecret {
     ) {
       throw new Error(
         "Expected the field `modified_by` to be a primitive type in the JSON string but got " +
-          data["modified_by"]
+          data["modified_by"],
       );
     }
     // ensure the json data is a string
@@ -130,7 +130,7 @@ class ProjectSecret {
     ) {
       throw new Error(
         "Expected the field `name` to be a primitive type in the JSON string but got " +
-          data["name"]
+          data["name"],
       );
     }
 

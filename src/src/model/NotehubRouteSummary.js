@@ -79,7 +79,7 @@ class NotehubRouteSummary {
     ) {
       throw new Error(
         "Expected the field `label` to be a primitive type in the JSON string but got " +
-          data["label"]
+          data["label"],
       );
     }
     // ensure the json data is a string
@@ -89,7 +89,7 @@ class NotehubRouteSummary {
     ) {
       throw new Error(
         "Expected the field `type` to be a primitive type in the JSON string but got " +
-          data["type"]
+          data["type"],
       );
     }
     // ensure the json data is a string
@@ -99,7 +99,7 @@ class NotehubRouteSummary {
     ) {
       throw new Error(
         "Expected the field `uid` to be a primitive type in the JSON string but got " +
-          data["uid"]
+          data["uid"],
       );
     }
 

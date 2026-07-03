@@ -54,7 +54,7 @@ class UserDfuStateMachineStatus {
       if (data.hasOwnProperty("phase_description")) {
         obj["phase_description"] = ApiClient.convertToType(
           data["phase_description"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("status")) {
@@ -79,7 +79,7 @@ class UserDfuStateMachineStatus {
     ) {
       throw new Error(
         "Expected the field `phase` to be a primitive type in the JSON string but got " +
-          data["phase"]
+          data["phase"],
       );
     }
     // ensure the json data is a string
@@ -92,7 +92,7 @@ class UserDfuStateMachineStatus {
     ) {
       throw new Error(
         "Expected the field `phase_description` to be a primitive type in the JSON string but got " +
-          data["phase_description"]
+          data["phase_description"],
       );
     }
     // ensure the json data is a string
@@ -102,7 +102,7 @@ class UserDfuStateMachineStatus {
     ) {
       throw new Error(
         "Expected the field `status` to be a primitive type in the JSON string but got " +
-          data["status"]
+          data["status"],
       );
     }
 

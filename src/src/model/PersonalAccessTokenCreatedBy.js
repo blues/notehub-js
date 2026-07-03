@@ -74,7 +74,7 @@ class PersonalAccessTokenCreatedBy {
     ) {
       throw new Error(
         "Expected the field `email` to be a primitive type in the JSON string but got " +
-          data["email"]
+          data["email"],
       );
     }
     // ensure the json data is a string
@@ -84,7 +84,7 @@ class PersonalAccessTokenCreatedBy {
     ) {
       throw new Error(
         "Expected the field `name` to be a primitive type in the JSON string but got " +
-          data["name"]
+          data["name"],
       );
     }
     // ensure the json data is a string
@@ -94,7 +94,7 @@ class PersonalAccessTokenCreatedBy {
     ) {
       throw new Error(
         "Expected the field `uid` to be a primitive type in the JSON string but got " +
-          data["uid"]
+          data["uid"],
       );
     }
 

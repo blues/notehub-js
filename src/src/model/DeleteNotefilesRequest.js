@@ -64,7 +64,7 @@ class DeleteNotefilesRequest {
     if (!Array.isArray(data["files"])) {
       throw new Error(
         "Expected the field `files` to be an array in the JSON data but got " +
-          data["files"]
+          data["files"],
       );
     }
 

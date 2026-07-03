@@ -45,19 +45,19 @@ export default class WebhookApi {
     // verify the required parameter 'productUID' is set
     if (productUID === undefined || productUID === null) {
       throw new Error(
-        "Missing the required parameter 'productUID' when calling createLegacyWebhookEvent"
+        "Missing the required parameter 'productUID' when calling createLegacyWebhookEvent",
       );
     }
     // verify the required parameter 'deviceUID' is set
     if (deviceUID === undefined || deviceUID === null) {
       throw new Error(
-        "Missing the required parameter 'deviceUID' when calling createLegacyWebhookEvent"
+        "Missing the required parameter 'deviceUID' when calling createLegacyWebhookEvent",
       );
     }
     // verify the required parameter 'requestBody' is set
     if (requestBody === undefined || requestBody === null) {
       throw new Error(
-        "Missing the required parameter 'requestBody' when calling createLegacyWebhookEvent"
+        "Missing the required parameter 'requestBody' when calling createLegacyWebhookEvent",
       );
     }
 
@@ -85,7 +85,7 @@ export default class WebhookApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -100,7 +100,7 @@ export default class WebhookApi {
     return this.createLegacyWebhookEventWithHttpInfo(
       productUID,
       deviceUID,
-      requestBody
+      requestBody,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -118,19 +118,19 @@ export default class WebhookApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling createWebhook"
+        "Missing the required parameter 'projectOrProductUID' when calling createWebhook",
       );
     }
     // verify the required parameter 'webhookUID' is set
     if (webhookUID === undefined || webhookUID === null) {
       throw new Error(
-        "Missing the required parameter 'webhookUID' when calling createWebhook"
+        "Missing the required parameter 'webhookUID' when calling createWebhook",
       );
     }
     // verify the required parameter 'webhookSettings' is set
     if (webhookSettings === undefined || webhookSettings === null) {
       throw new Error(
-        "Missing the required parameter 'webhookSettings' when calling createWebhook"
+        "Missing the required parameter 'webhookSettings' when calling createWebhook",
       );
     }
 
@@ -158,7 +158,7 @@ export default class WebhookApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -173,7 +173,7 @@ export default class WebhookApi {
     return this.createWebhookWithHttpInfo(
       projectOrProductUID,
       webhookUID,
-      webhookSettings
+      webhookSettings,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -191,31 +191,31 @@ export default class WebhookApi {
     productUID,
     webhookUID,
     deviceUID,
-    requestBody
+    requestBody,
   ) {
     let postBody = requestBody;
     // verify the required parameter 'productUID' is set
     if (productUID === undefined || productUID === null) {
       throw new Error(
-        "Missing the required parameter 'productUID' when calling createWebhookDeviceEventByProduct"
+        "Missing the required parameter 'productUID' when calling createWebhookDeviceEventByProduct",
       );
     }
     // verify the required parameter 'webhookUID' is set
     if (webhookUID === undefined || webhookUID === null) {
       throw new Error(
-        "Missing the required parameter 'webhookUID' when calling createWebhookDeviceEventByProduct"
+        "Missing the required parameter 'webhookUID' when calling createWebhookDeviceEventByProduct",
       );
     }
     // verify the required parameter 'deviceUID' is set
     if (deviceUID === undefined || deviceUID === null) {
       throw new Error(
-        "Missing the required parameter 'deviceUID' when calling createWebhookDeviceEventByProduct"
+        "Missing the required parameter 'deviceUID' when calling createWebhookDeviceEventByProduct",
       );
     }
     // verify the required parameter 'requestBody' is set
     if (requestBody === undefined || requestBody === null) {
       throw new Error(
-        "Missing the required parameter 'requestBody' when calling createWebhookDeviceEventByProduct"
+        "Missing the required parameter 'requestBody' when calling createWebhookDeviceEventByProduct",
       );
     }
 
@@ -244,7 +244,7 @@ export default class WebhookApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -260,13 +260,13 @@ export default class WebhookApi {
     productUID,
     webhookUID,
     deviceUID,
-    requestBody
+    requestBody,
   ) {
     return this.createWebhookDeviceEventByProductWithHttpInfo(
       productUID,
       webhookUID,
       deviceUID,
-      requestBody
+      requestBody,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -284,19 +284,19 @@ export default class WebhookApi {
     // verify the required parameter 'productUID' is set
     if (productUID === undefined || productUID === null) {
       throw new Error(
-        "Missing the required parameter 'productUID' when calling createWebhookEventByProduct"
+        "Missing the required parameter 'productUID' when calling createWebhookEventByProduct",
       );
     }
     // verify the required parameter 'webhookUID' is set
     if (webhookUID === undefined || webhookUID === null) {
       throw new Error(
-        "Missing the required parameter 'webhookUID' when calling createWebhookEventByProduct"
+        "Missing the required parameter 'webhookUID' when calling createWebhookEventByProduct",
       );
     }
     // verify the required parameter 'requestBody' is set
     if (requestBody === undefined || requestBody === null) {
       throw new Error(
-        "Missing the required parameter 'requestBody' when calling createWebhookEventByProduct"
+        "Missing the required parameter 'requestBody' when calling createWebhookEventByProduct",
       );
     }
 
@@ -324,7 +324,7 @@ export default class WebhookApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -339,7 +339,7 @@ export default class WebhookApi {
     return this.createWebhookEventByProductWithHttpInfo(
       productUID,
       webhookUID,
-      requestBody
+      requestBody,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -356,13 +356,13 @@ export default class WebhookApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling deleteWebhook"
+        "Missing the required parameter 'projectOrProductUID' when calling deleteWebhook",
       );
     }
     // verify the required parameter 'webhookUID' is set
     if (webhookUID === undefined || webhookUID === null) {
       throw new Error(
-        "Missing the required parameter 'webhookUID' when calling deleteWebhook"
+        "Missing the required parameter 'webhookUID' when calling deleteWebhook",
       );
     }
 
@@ -390,7 +390,7 @@ export default class WebhookApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -404,7 +404,7 @@ export default class WebhookApi {
     return this.deleteWebhookWithHttpInfo(projectOrProductUID, webhookUID).then(
       function (response_and_data) {
         return response_and_data.data;
-      }
+      },
     );
   }
 
@@ -419,13 +419,13 @@ export default class WebhookApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling getWebhook"
+        "Missing the required parameter 'projectOrProductUID' when calling getWebhook",
       );
     }
     // verify the required parameter 'webhookUID' is set
     if (webhookUID === undefined || webhookUID === null) {
       throw new Error(
-        "Missing the required parameter 'webhookUID' when calling getWebhook"
+        "Missing the required parameter 'webhookUID' when calling getWebhook",
       );
     }
 
@@ -453,7 +453,7 @@ export default class WebhookApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -467,7 +467,7 @@ export default class WebhookApi {
     return this.getWebhookWithHttpInfo(projectOrProductUID, webhookUID).then(
       function (response_and_data) {
         return response_and_data.data;
-      }
+      },
     );
   }
 
@@ -482,13 +482,13 @@ export default class WebhookApi {
     // verify the required parameter 'productUID' is set
     if (productUID === undefined || productUID === null) {
       throw new Error(
-        "Missing the required parameter 'productUID' when calling getWebhookSettingsByProduct"
+        "Missing the required parameter 'productUID' when calling getWebhookSettingsByProduct",
       );
     }
     // verify the required parameter 'webhookUID' is set
     if (webhookUID === undefined || webhookUID === null) {
       throw new Error(
-        "Missing the required parameter 'webhookUID' when calling getWebhookSettingsByProduct"
+        "Missing the required parameter 'webhookUID' when calling getWebhookSettingsByProduct",
       );
     }
 
@@ -516,7 +516,7 @@ export default class WebhookApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -529,7 +529,7 @@ export default class WebhookApi {
   getWebhookSettingsByProduct(productUID, webhookUID) {
     return this.getWebhookSettingsByProductWithHttpInfo(
       productUID,
-      webhookUID
+      webhookUID,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -545,7 +545,7 @@ export default class WebhookApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling getWebhooks"
+        "Missing the required parameter 'projectOrProductUID' when calling getWebhooks",
       );
     }
 
@@ -572,7 +572,7 @@ export default class WebhookApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -582,11 +582,11 @@ export default class WebhookApi {
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetWebhooks200Response}
    */
   getWebhooks(projectOrProductUID) {
-    return this.getWebhooksWithHttpInfo(projectOrProductUID).then(function (
-      response_and_data
-    ) {
-      return response_and_data.data;
-    });
+    return this.getWebhooksWithHttpInfo(projectOrProductUID).then(
+      function (response_and_data) {
+        return response_and_data.data;
+      },
+    );
   }
 
   /**
@@ -603,13 +603,13 @@ export default class WebhookApi {
     // verify the required parameter 'productUID' is set
     if (productUID === undefined || productUID === null) {
       throw new Error(
-        "Missing the required parameter 'productUID' when calling updateLegacyWebhookSession"
+        "Missing the required parameter 'productUID' when calling updateLegacyWebhookSession",
       );
     }
     // verify the required parameter 'deviceUID' is set
     if (deviceUID === undefined || deviceUID === null) {
       throw new Error(
-        "Missing the required parameter 'deviceUID' when calling updateLegacyWebhookSession"
+        "Missing the required parameter 'deviceUID' when calling updateLegacyWebhookSession",
       );
     }
 
@@ -637,7 +637,7 @@ export default class WebhookApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -653,7 +653,7 @@ export default class WebhookApi {
     return this.updateLegacyWebhookSessionWithHttpInfo(
       productUID,
       deviceUID,
-      opts
+      opts,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -671,19 +671,19 @@ export default class WebhookApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling updateWebhook"
+        "Missing the required parameter 'projectOrProductUID' when calling updateWebhook",
       );
     }
     // verify the required parameter 'webhookUID' is set
     if (webhookUID === undefined || webhookUID === null) {
       throw new Error(
-        "Missing the required parameter 'webhookUID' when calling updateWebhook"
+        "Missing the required parameter 'webhookUID' when calling updateWebhook",
       );
     }
     // verify the required parameter 'webhookSettings' is set
     if (webhookSettings === undefined || webhookSettings === null) {
       throw new Error(
-        "Missing the required parameter 'webhookSettings' when calling updateWebhook"
+        "Missing the required parameter 'webhookSettings' when calling updateWebhook",
       );
     }
 
@@ -711,7 +711,7 @@ export default class WebhookApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -726,7 +726,7 @@ export default class WebhookApi {
     return this.updateWebhookWithHttpInfo(
       projectOrProductUID,
       webhookUID,
-      webhookSettings
+      webhookSettings,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -742,25 +742,25 @@ export default class WebhookApi {
   updateWebhookSettingsByProductWithHttpInfo(
     productUID,
     webhookUID,
-    webhookSettings
+    webhookSettings,
   ) {
     let postBody = webhookSettings;
     // verify the required parameter 'productUID' is set
     if (productUID === undefined || productUID === null) {
       throw new Error(
-        "Missing the required parameter 'productUID' when calling updateWebhookSettingsByProduct"
+        "Missing the required parameter 'productUID' when calling updateWebhookSettingsByProduct",
       );
     }
     // verify the required parameter 'webhookUID' is set
     if (webhookUID === undefined || webhookUID === null) {
       throw new Error(
-        "Missing the required parameter 'webhookUID' when calling updateWebhookSettingsByProduct"
+        "Missing the required parameter 'webhookUID' when calling updateWebhookSettingsByProduct",
       );
     }
     // verify the required parameter 'webhookSettings' is set
     if (webhookSettings === undefined || webhookSettings === null) {
       throw new Error(
-        "Missing the required parameter 'webhookSettings' when calling updateWebhookSettingsByProduct"
+        "Missing the required parameter 'webhookSettings' when calling updateWebhookSettingsByProduct",
       );
     }
 
@@ -788,7 +788,7 @@ export default class WebhookApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -803,7 +803,7 @@ export default class WebhookApi {
     return this.updateWebhookSettingsByProductWithHttpInfo(
       productUID,
       webhookUID,
-      webhookSettings
+      webhookSettings,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });

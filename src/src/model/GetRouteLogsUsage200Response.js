@@ -57,7 +57,7 @@ class GetRouteLogsUsage200Response {
       if (data.hasOwnProperty("truncated")) {
         obj["truncated"] = ApiClient.convertToType(
           data["truncated"],
-          "Boolean"
+          "Boolean",
         );
       }
     } else if (data === null) {
@@ -79,7 +79,7 @@ class GetRouteLogsUsage200Response {
           "The required field `" +
             property +
             "` is not found in the JSON data: " +
-            JSON.stringify(data)
+            JSON.stringify(data),
         );
       }
     }
@@ -89,7 +89,7 @@ class GetRouteLogsUsage200Response {
       if (!Array.isArray(data["route_logs"])) {
         throw new Error(
           "Expected the field `route_logs` to be an array in the JSON data but got " +
-            data["route_logs"]
+            data["route_logs"],
         );
       }
       // validate the optional field `route_logs` (array)

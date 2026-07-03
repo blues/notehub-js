@@ -62,7 +62,7 @@ export default class EventApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling getEvents"
+        "Missing the required parameter 'projectOrProductUID' when calling getEvents",
       );
     }
 
@@ -74,7 +74,7 @@ export default class EventApi {
       pageNum: opts["pageNum"],
       deviceUID: this.apiClient.buildCollectionParam(
         opts["deviceUID"],
-        "multi"
+        "multi",
       ),
       sortBy: opts["sortBy"],
       sortOrder: opts["sortOrder"],
@@ -86,12 +86,12 @@ export default class EventApi {
       format: opts["format"],
       serialNumber: this.apiClient.buildCollectionParam(
         opts["serialNumber"],
-        "multi"
+        "multi",
       ),
       fleetUID: this.apiClient.buildCollectionParam(opts["fleetUID"], "multi"),
       sessionUID: this.apiClient.buildCollectionParam(
         opts["sessionUID"],
-        "multi"
+        "multi",
       ),
       eventUID: this.apiClient.buildCollectionParam(opts["eventUID"], "multi"),
       selectFields: opts["selectFields"],
@@ -115,7 +115,7 @@ export default class EventApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -142,11 +142,11 @@ export default class EventApi {
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetEvents200Response}
    */
   getEvents(projectOrProductUID, opts) {
-    return this.getEventsWithHttpInfo(projectOrProductUID, opts).then(function (
-      response_and_data
-    ) {
-      return response_and_data.data;
-    });
+    return this.getEventsWithHttpInfo(projectOrProductUID, opts).then(
+      function (response_and_data) {
+        return response_and_data.data;
+      },
+    );
   }
 
   /**
@@ -168,7 +168,7 @@ export default class EventApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling getEventsByCursor"
+        "Missing the required parameter 'projectOrProductUID' when calling getEventsByCursor",
       );
     }
 
@@ -184,7 +184,7 @@ export default class EventApi {
       fleetUID: opts["fleetUID"],
       deviceUID: this.apiClient.buildCollectionParam(
         opts["deviceUID"],
-        "multi"
+        "multi",
       ),
     };
     let headerParams = {};
@@ -206,7 +206,7 @@ export default class EventApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -227,7 +227,7 @@ export default class EventApi {
     return this.getEventsByCursorWithHttpInfo(projectOrProductUID, opts).then(
       function (response_and_data) {
         return response_and_data.data;
-      }
+      },
     );
   }
 
@@ -259,13 +259,13 @@ export default class EventApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling getFleetEvents"
+        "Missing the required parameter 'projectOrProductUID' when calling getFleetEvents",
       );
     }
     // verify the required parameter 'fleetUID' is set
     if (fleetUID === undefined || fleetUID === null) {
       throw new Error(
-        "Missing the required parameter 'fleetUID' when calling getFleetEvents"
+        "Missing the required parameter 'fleetUID' when calling getFleetEvents",
       );
     }
 
@@ -278,7 +278,7 @@ export default class EventApi {
       pageNum: opts["pageNum"],
       deviceUID: this.apiClient.buildCollectionParam(
         opts["deviceUID"],
-        "multi"
+        "multi",
       ),
       sortBy: opts["sortBy"],
       sortOrder: opts["sortOrder"],
@@ -290,11 +290,11 @@ export default class EventApi {
       format: opts["format"],
       serialNumber: this.apiClient.buildCollectionParam(
         opts["serialNumber"],
-        "multi"
+        "multi",
       ),
       sessionUID: this.apiClient.buildCollectionParam(
         opts["sessionUID"],
-        "multi"
+        "multi",
       ),
       eventUID: this.apiClient.buildCollectionParam(opts["eventUID"], "multi"),
       selectFields: opts["selectFields"],
@@ -318,7 +318,7 @@ export default class EventApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -348,7 +348,7 @@ export default class EventApi {
     return this.getFleetEventsWithHttpInfo(
       projectOrProductUID,
       fleetUID,
-      opts
+      opts,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -375,13 +375,13 @@ export default class EventApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling getFleetEventsByCursor"
+        "Missing the required parameter 'projectOrProductUID' when calling getFleetEventsByCursor",
       );
     }
     // verify the required parameter 'fleetUID' is set
     if (fleetUID === undefined || fleetUID === null) {
       throw new Error(
-        "Missing the required parameter 'fleetUID' when calling getFleetEventsByCursor"
+        "Missing the required parameter 'fleetUID' when calling getFleetEventsByCursor",
       );
     }
 
@@ -397,7 +397,7 @@ export default class EventApi {
       files: opts["files"],
       deviceUID: this.apiClient.buildCollectionParam(
         opts["deviceUID"],
-        "multi"
+        "multi",
       ),
       startDate: opts["startDate"],
       endDate: opts["endDate"],
@@ -421,7 +421,7 @@ export default class EventApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -444,7 +444,7 @@ export default class EventApi {
     return this.getFleetEventsByCursorWithHttpInfo(
       projectOrProductUID,
       fleetUID,
-      opts
+      opts,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -461,13 +461,13 @@ export default class EventApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling getRouteLogsByEvent"
+        "Missing the required parameter 'projectOrProductUID' when calling getRouteLogsByEvent",
       );
     }
     // verify the required parameter 'eventUID' is set
     if (eventUID === undefined || eventUID === null) {
       throw new Error(
-        "Missing the required parameter 'eventUID' when calling getRouteLogsByEvent"
+        "Missing the required parameter 'eventUID' when calling getRouteLogsByEvent",
       );
     }
 
@@ -495,7 +495,7 @@ export default class EventApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -508,7 +508,7 @@ export default class EventApi {
   getRouteLogsByEvent(projectOrProductUID, eventUID) {
     return this.getRouteLogsByEventWithHttpInfo(
       projectOrProductUID,
-      eventUID
+      eventUID,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });

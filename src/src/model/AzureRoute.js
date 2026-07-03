@@ -56,25 +56,25 @@ class AzureRoute {
       if (data.hasOwnProperty("functions_key_secret")) {
         obj["functions_key_secret"] = ApiClient.convertToType(
           data["functions_key_secret"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("sas_policy_key")) {
         obj["sas_policy_key"] = ApiClient.convertToType(
           data["sas_policy_key"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("sas_policy_name")) {
         obj["sas_policy_name"] = ApiClient.convertToType(
           data["sas_policy_name"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("throttle_ms")) {
         obj["throttle_ms"] = ApiClient.convertToType(
           data["throttle_ms"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("timeout")) {
@@ -82,7 +82,7 @@ class AzureRoute {
       }
       if (data.hasOwnProperty("transform")) {
         obj["transform"] = RouteTransformSettings.constructFromObject(
-          data["transform"]
+          data["transform"],
         );
       }
       if (data.hasOwnProperty("url")) {
@@ -109,7 +109,7 @@ class AzureRoute {
     if (!Array.isArray(data["fleets"])) {
       throw new Error(
         "Expected the field `fleets` to be an array in the JSON data but got " +
-          data["fleets"]
+          data["fleets"],
       );
     }
     // ensure the json data is a string
@@ -122,7 +122,7 @@ class AzureRoute {
     ) {
       throw new Error(
         "Expected the field `functions_key_secret` to be a primitive type in the JSON string but got " +
-          data["functions_key_secret"]
+          data["functions_key_secret"],
       );
     }
     // ensure the json data is a string
@@ -135,7 +135,7 @@ class AzureRoute {
     ) {
       throw new Error(
         "Expected the field `sas_policy_key` to be a primitive type in the JSON string but got " +
-          data["sas_policy_key"]
+          data["sas_policy_key"],
       );
     }
     // ensure the json data is a string
@@ -148,7 +148,7 @@ class AzureRoute {
     ) {
       throw new Error(
         "Expected the field `sas_policy_name` to be a primitive type in the JSON string but got " +
-          data["sas_policy_name"]
+          data["sas_policy_name"],
       );
     }
     // validate the optional field `transform`
@@ -163,7 +163,7 @@ class AzureRoute {
     ) {
       throw new Error(
         "Expected the field `url` to be a primitive type in the JSON string but got " +
-          data["url"]
+          data["url"],
       );
     }
 

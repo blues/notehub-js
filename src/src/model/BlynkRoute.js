@@ -59,7 +59,7 @@ class BlynkRoute {
       if (data.hasOwnProperty("throttle_ms")) {
         obj["throttle_ms"] = ApiClient.convertToType(
           data["throttle_ms"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("timeout")) {
@@ -67,7 +67,7 @@ class BlynkRoute {
       }
       if (data.hasOwnProperty("transform")) {
         obj["transform"] = RouteTransformSettings.constructFromObject(
-          data["transform"]
+          data["transform"],
         );
       }
     } else if (data === null) {
@@ -91,7 +91,7 @@ class BlynkRoute {
     if (!Array.isArray(data["fleets"])) {
       throw new Error(
         "Expected the field `fleets` to be an array in the JSON data but got " +
-          data["fleets"]
+          data["fleets"],
       );
     }
     // ensure the json data is a string
@@ -101,7 +101,7 @@ class BlynkRoute {
     ) {
       throw new Error(
         "Expected the field `region` to be a primitive type in the JSON string but got " +
-          data["region"]
+          data["region"],
       );
     }
     // validate the optional field `transform`

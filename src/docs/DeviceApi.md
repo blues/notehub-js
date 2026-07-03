@@ -64,7 +64,7 @@ apiInstance
     },
     (error) => {
       console.error(error);
-    }
+    },
   );
 ```
 
@@ -118,7 +118,7 @@ apiInstance
     },
     (error) => {
       console.error(error);
-    }
+    },
   );
 ```
 
@@ -168,7 +168,7 @@ apiInstance.createNotefile(projectOrProductUID, deviceUID, notefileID).then(
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -216,7 +216,7 @@ apiInstance.deleteDevice(projectOrProductUID, deviceUID).then(
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -263,12 +263,12 @@ apiInstance
   .then(
     (data) => {
       console.log(
-        "API called successfully. Returned data: " + JSON.stringify(data)
+        "API called successfully. Returned data: " + JSON.stringify(data),
       );
     },
     (error) => {
       console.error(error);
-    }
+    },
   );
 ```
 
@@ -318,7 +318,7 @@ apiInstance.deleteNote(projectOrProductUID, deviceUID, notefileID, noteID).then(
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -370,7 +370,7 @@ apiInstance
     },
     (error) => {
       console.error(error);
-    }
+    },
   );
 ```
 
@@ -418,7 +418,7 @@ apiInstance.disableDevice(projectOrProductUID, deviceUID).then(
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -465,7 +465,7 @@ apiInstance.enableDevice(projectOrProductUID, deviceUID).then(
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -517,12 +517,12 @@ apiInstance
   .then(
     (data) => {
       console.log(
-        "API called successfully. Returned data: " + JSON.stringify(data)
+        "API called successfully. Returned data: " + JSON.stringify(data),
       );
     },
     (error) => {
       console.error(error);
-    }
+    },
   );
 ```
 
@@ -570,12 +570,12 @@ let deviceUID = "dev:000000000000000"; // String |
 apiInstance.getDevice(projectOrProductUID, deviceUID).then(
   (data) => {
     console.log(
-      "API called successfully. Returned data: " + JSON.stringify(data)
+      "API called successfully. Returned data: " + JSON.stringify(data),
     );
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -619,12 +619,12 @@ let deviceUID = "dev:000000000000000"; // String |
 apiInstance.getDeviceEnvironmentHierarchy(projectOrProductUID, deviceUID).then(
   (data) => {
     console.log(
-      "API called successfully. Returned data: " + JSON.stringify(data)
+      "API called successfully. Returned data: " + JSON.stringify(data),
     );
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -668,12 +668,12 @@ let deviceUID = "dev:000000000000000"; // String |
 apiInstance.getDeviceEnvironmentVariables(projectOrProductUID, deviceUID).then(
   (data) => {
     console.log(
-      "API called successfully. Returned data: " + JSON.stringify(data)
+      "API called successfully. Returned data: " + JSON.stringify(data),
     );
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -720,12 +720,12 @@ apiInstance
   .then(
     (data) => {
       console.log(
-        "API called successfully. Returned data: " + JSON.stringify(data)
+        "API called successfully. Returned data: " + JSON.stringify(data),
       );
     },
     (error) => {
       console.error(error);
-    }
+    },
   );
 ```
 
@@ -775,12 +775,12 @@ let opts = {
 apiInstance.getDeviceHealthLog(projectOrProductUID, deviceUID, opts).then(
   (data) => {
     console.log(
-      "API called successfully. Returned data: " + JSON.stringify(data)
+      "API called successfully. Returned data: " + JSON.stringify(data),
     );
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -811,7 +811,7 @@ apiInstance.getDeviceHealthLog(projectOrProductUID, deviceUID, opts).then(
 
 > GetDeviceJourney200Response getDeviceJourney(projectOrProductUID, deviceUID, journeyID, opts)
 
-Get a single journey for a device along with its &#x60;\_track.qo&#x60; events. The events array is paginated via &#x60;pageSize&#x60; / &#x60;pageNum&#x60;; use &#x60;journey.has_more&#x60; to detect additional pages.
+Get a single journey for a device along with its &#x60;_track.qo&#x60; events. The events array is paginated via &#x60;pageSize&#x60; / &#x60;pageNum&#x60;; use &#x60;journey.has_more&#x60; to detect additional pages.
 
 ### Example
 
@@ -834,24 +834,24 @@ apiInstance
   .then(
     (data) => {
       console.log(
-        "API called successfully. Returned data: " + JSON.stringify(data)
+        "API called successfully. Returned data: " + JSON.stringify(data),
       );
     },
     (error) => {
       console.error(error);
-    }
+    },
   );
 ```
 
 ### Parameters
 
-| Name                    | Type       | Description                                                                                                                                               | Notes                      |
-| ----------------------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------- |
-| **projectOrProductUID** | **String** |                                                                                                                                                           |
-| **deviceUID**           | **String** |                                                                                                                                                           |
-| **journeyID**           | **Number** | Identifier of the journey, taken from the &#x60;journey&#x60; field on &#x60;\_track.qo&#x60; events (a Unix timestamp marking the start of the journey). |
-| **pageSize**            | **Number** |                                                                                                                                                           | [optional] [default to 50] |
-| **pageNum**             | **Number** |                                                                                                                                                           | [optional] [default to 1]  |
+| Name                    | Type       | Description                                                                                                                                              | Notes                      |
+| ----------------------- | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------- |
+| **projectOrProductUID** | **String** |                                                                                                                                                          |
+| **deviceUID**           | **String** |                                                                                                                                                          |
+| **journeyID**           | **Number** | Identifier of the journey, taken from the &#x60;journey&#x60; field on &#x60;_track.qo&#x60; events (a Unix timestamp marking the start of the journey). |
+| **pageSize**            | **Number** |                                                                                                                                                          | [optional] [default to 50] |
+| **pageNum**             | **Number** |                                                                                                                                                          | [optional] [default to 1]  |
 
 ### Return type
 
@@ -870,7 +870,7 @@ apiInstance
 
 > GetDeviceJourneys200Response getDeviceJourneys(projectOrProductUID, deviceUID, opts)
 
-Get the list of journeys for a device, derived from &#x60;\_track.qo&#x60; events. Returns journey metadata only (no event payloads). Capped at 100 most recent journeys; &#x60;has_more&#x60; is true when the cap is hit.
+Get the list of journeys for a device, derived from &#x60;_track.qo&#x60; events. Returns journey metadata only (no event payloads). Capped at 100 most recent journeys; &#x60;has_more&#x60; is true when the cap is hit.
 
 ### Example
 
@@ -890,12 +890,12 @@ let opts = {
 apiInstance.getDeviceJourneys(projectOrProductUID, deviceUID, opts).then(
   (data) => {
     console.log(
-      "API called successfully. Returned data: " + JSON.stringify(data)
+      "API called successfully. Returned data: " + JSON.stringify(data),
     );
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -941,12 +941,12 @@ let deviceUID = "dev:000000000000000"; // String |
 apiInstance.getDeviceLatestEvents(projectOrProductUID, deviceUID).then(
   (data) => {
     console.log(
-      "API called successfully. Returned data: " + JSON.stringify(data)
+      "API called successfully. Returned data: " + JSON.stringify(data),
     );
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -990,12 +990,12 @@ let deviceUID = "dev:000000000000000"; // String |
 apiInstance.getDevicePlans(projectOrProductUID, deviceUID).then(
   (data) => {
     console.log(
-      "API called successfully. Returned data: " + JSON.stringify(data)
+      "API called successfully. Returned data: " + JSON.stringify(data),
     );
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -1039,12 +1039,12 @@ let deviceUID = "dev:000000000000000"; // String |
 apiInstance.getDevicePublicKey(projectOrProductUID, deviceUID).then(
   (data) => {
     console.log(
-      "API called successfully. Returned data: " + JSON.stringify(data)
+      "API called successfully. Returned data: " + JSON.stringify(data),
     );
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -1091,12 +1091,12 @@ let opts = {
 apiInstance.getDevicePublicKeys(projectOrProductUID, opts).then(
   (data) => {
     console.log(
-      "API called successfully. Returned data: " + JSON.stringify(data)
+      "API called successfully. Returned data: " + JSON.stringify(data),
     );
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -1148,12 +1148,12 @@ let opts = {
 apiInstance.getDeviceSessions(projectOrProductUID, deviceUID, opts).then(
   (data) => {
     console.log(
-      "API called successfully. Returned data: " + JSON.stringify(data)
+      "API called successfully. Returned data: " + JSON.stringify(data),
     );
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -1214,12 +1214,12 @@ let opts = {
 apiInstance.getDevices(projectOrProductUID, opts).then(
   (data) => {
     console.log(
-      "API called successfully. Returned data: " + JSON.stringify(data)
+      "API called successfully. Returned data: " + JSON.stringify(data),
     );
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -1285,12 +1285,12 @@ let opts = {
 apiInstance.getFleetDevices(projectOrProductUID, fleetUID, opts).then(
   (data) => {
     console.log(
-      "API called successfully. Returned data: " + JSON.stringify(data)
+      "API called successfully. Returned data: " + JSON.stringify(data),
     );
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -1350,12 +1350,12 @@ let opts = {
 apiInstance.getNotefile(projectOrProductUID, deviceUID, notefileID, opts).then(
   (data) => {
     console.log(
-      "API called successfully. Returned data: " + JSON.stringify(data)
+      "API called successfully. Returned data: " + JSON.stringify(data),
     );
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -1407,12 +1407,12 @@ let opts = {
 apiInstance.listNotefiles(projectOrProductUID, deviceUID, opts).then(
   (data) => {
     console.log(
-      "API called successfully. Returned data: " + JSON.stringify(data)
+      "API called successfully. Returned data: " + JSON.stringify(data),
     );
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -1461,12 +1461,12 @@ apiInstance
   .then(
     (data) => {
       console.log(
-        "API called successfully. Returned data: " + JSON.stringify(data)
+        "API called successfully. Returned data: " + JSON.stringify(data),
       );
     },
     (error) => {
       console.error(error);
-    }
+    },
   );
 ```
 
@@ -1513,17 +1513,17 @@ apiInstance
   .setDeviceEnvironmentVariables(
     projectOrProductUID,
     deviceUID,
-    environmentVariables
+    environmentVariables,
   )
   .then(
     (data) => {
       console.log(
-        "API called successfully. Returned data: " + JSON.stringify(data)
+        "API called successfully. Returned data: " + JSON.stringify(data),
       );
     },
     (error) => {
       console.error(error);
-    }
+    },
   );
 ```
 
@@ -1572,17 +1572,17 @@ apiInstance
     productUID,
     deviceUID,
     xAuthToken,
-    environmentVariables
+    environmentVariables,
   )
   .then(
     (data) => {
       console.log(
-        "API called successfully. Returned data: " + JSON.stringify(data)
+        "API called successfully. Returned data: " + JSON.stringify(data),
       );
     },
     (error) => {
       console.error(error);
-    }
+    },
   );
 ```
 
@@ -1629,12 +1629,12 @@ let body = new NotehubJs.Body(); // Body | Body or payload of signal to be sent 
 apiInstance.signalDevice(projectOrProductUID, deviceUID, body).then(
   (data) => {
     console.log(
-      "API called successfully. Returned data: " + JSON.stringify(data)
+      "API called successfully. Returned data: " + JSON.stringify(data),
     );
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -1687,7 +1687,7 @@ apiInstance
     },
     (error) => {
       console.error(error);
-    }
+    },
   );
 ```
 

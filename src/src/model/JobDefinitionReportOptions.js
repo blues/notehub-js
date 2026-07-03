@@ -49,7 +49,7 @@ class JobDefinitionReportOptions {
       if (data.hasOwnProperty("app_fleets")) {
         obj["app_fleets"] = ApiClient.convertToType(
           data["app_fleets"],
-          "Boolean"
+          "Boolean",
         );
       }
       if (data.hasOwnProperty("app_info")) {
@@ -64,25 +64,25 @@ class JobDefinitionReportOptions {
       if (data.hasOwnProperty("device_activity")) {
         obj["device_activity"] = ApiClient.convertToType(
           data["device_activity"],
-          "Boolean"
+          "Boolean",
         );
       }
       if (data.hasOwnProperty("device_health")) {
         obj["device_health"] = ApiClient.convertToType(
           data["device_health"],
-          "Boolean"
+          "Boolean",
         );
       }
       if (data.hasOwnProperty("device_info")) {
         obj["device_info"] = ApiClient.convertToType(
           data["device_info"],
-          "Boolean"
+          "Boolean",
         );
       }
       if (data.hasOwnProperty("device_vars")) {
         obj["device_vars"] = ApiClient.convertToType(
           data["device_vars"],
-          "Boolean"
+          "Boolean",
         );
       }
     } else if (data === null) {
@@ -106,7 +106,7 @@ class JobDefinitionReportOptions {
     ) {
       throw new Error(
         "Expected the field `comment` to be a primitive type in the JSON string but got " +
-          data["comment"]
+          data["comment"],
       );
     }
 

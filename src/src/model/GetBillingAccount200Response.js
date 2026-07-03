@@ -49,7 +49,7 @@ class GetBillingAccount200Response {
       if (data.hasOwnProperty("contact_uid")) {
         obj["contact_uid"] = ApiClient.convertToType(
           data["contact_uid"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("email")) {
@@ -63,13 +63,13 @@ class GetBillingAccount200Response {
       }
       if (data.hasOwnProperty("plan")) {
         obj["plan"] = GetBillingAccount200ResponsePlan.constructFromObject(
-          data["plan"]
+          data["plan"],
         );
       }
       if (data.hasOwnProperty("suspended")) {
         obj["suspended"] = ApiClient.convertToType(
           data["suspended"],
-          "Boolean"
+          "Boolean",
         );
       }
       if (data.hasOwnProperty("uid")) {
@@ -97,7 +97,7 @@ class GetBillingAccount200Response {
     ) {
       throw new Error(
         "Expected the field `contact_uid` to be a primitive type in the JSON string but got " +
-          data["contact_uid"]
+          data["contact_uid"],
       );
     }
     // ensure the json data is a string
@@ -107,7 +107,7 @@ class GetBillingAccount200Response {
     ) {
       throw new Error(
         "Expected the field `email` to be a primitive type in the JSON string but got " +
-          data["email"]
+          data["email"],
       );
     }
     // ensure the json data is a string
@@ -117,7 +117,7 @@ class GetBillingAccount200Response {
     ) {
       throw new Error(
         "Expected the field `name` to be a primitive type in the JSON string but got " +
-          data["name"]
+          data["name"],
       );
     }
     // ensure the json data is a string
@@ -127,7 +127,7 @@ class GetBillingAccount200Response {
     ) {
       throw new Error(
         "Expected the field `owner` to be a primitive type in the JSON string but got " +
-          data["owner"]
+          data["owner"],
       );
     }
     // validate the optional field `plan`
@@ -142,7 +142,7 @@ class GetBillingAccount200Response {
     ) {
       throw new Error(
         "Expected the field `uid` to be a primitive type in the JSON string but got " +
-          data["uid"]
+          data["uid"],
       );
     }
 

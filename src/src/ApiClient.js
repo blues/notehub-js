@@ -180,7 +180,7 @@ class ApiClient {
    */
   isJsonMime(contentType) {
     return Boolean(
-      contentType != null && contentType.match(/^application\/json(;.*)?$/i)
+      contentType != null && contentType.match(/^application\/json(;.*)?$/i),
     );
   }
 
@@ -403,7 +403,7 @@ class ApiClient {
     contentTypes,
     accepts,
     returnType,
-    apiBasePath
+    apiBasePath,
   ) {
     var url = this.buildUrl(path, pathParams, apiBasePath);
     var request = superagent(httpMethod, url);
@@ -624,7 +624,7 @@ class ApiClient {
         "Invalid index " +
           index +
           " when selecting the host settings. Must be less than " +
-          servers.length
+          servers.length,
       );
     }
 
@@ -641,7 +641,7 @@ class ApiClient {
         ) {
           url = url.replace(
             "{" + variable_name + "}",
-            variables[variable_name]
+            variables[variable_name],
           );
         } else {
           throw new Error(
@@ -651,14 +651,14 @@ class ApiClient {
               variables[variable_name] +
               ". Must be " +
               server["variables"][variable_name]["enum_values"] +
-              "."
+              ".",
           );
         }
       } else {
         // use default value
         url = url.replace(
           "{" + variable_name + "}",
-          server["variables"][variable_name]["default_value"]
+          server["variables"][variable_name]["default_value"],
         );
       }
     }

@@ -50,13 +50,13 @@ class Alert {
       if (data.hasOwnProperty("alert_source")) {
         obj["alert_source"] = ApiClient.convertToType(
           data["alert_source"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("created_at")) {
         obj["created_at"] = ApiClient.convertToType(
           data["created_at"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("data")) {
@@ -65,31 +65,31 @@ class Alert {
       if (data.hasOwnProperty("device_uid")) {
         obj["device_uid"] = ApiClient.convertToType(
           data["device_uid"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("field_name")) {
         obj["field_name"] = ApiClient.convertToType(
           data["field_name"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("monitor_name")) {
         obj["monitor_name"] = ApiClient.convertToType(
           data["monitor_name"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("monitor_type")) {
         obj["monitor_type"] = ApiClient.convertToType(
           data["monitor_type"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("monitor_uid")) {
         obj["monitor_uid"] = ApiClient.convertToType(
           data["monitor_uid"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("notifications")) {
@@ -134,7 +134,7 @@ class Alert {
     ) {
       throw new Error(
         "Expected the field `alert_source` to be a primitive type in the JSON string but got " +
-          data["alert_source"]
+          data["alert_source"],
       );
     }
     if (data["data"]) {
@@ -143,7 +143,7 @@ class Alert {
       if (!Array.isArray(data["data"])) {
         throw new Error(
           "Expected the field `data` to be an array in the JSON data but got " +
-            data["data"]
+            data["data"],
         );
       }
       // validate the optional field `data` (array)
@@ -161,7 +161,7 @@ class Alert {
     ) {
       throw new Error(
         "Expected the field `device_uid` to be a primitive type in the JSON string but got " +
-          data["device_uid"]
+          data["device_uid"],
       );
     }
     // ensure the json data is a string
@@ -174,7 +174,7 @@ class Alert {
     ) {
       throw new Error(
         "Expected the field `field_name` to be a primitive type in the JSON string but got " +
-          data["field_name"]
+          data["field_name"],
       );
     }
     // ensure the json data is a string
@@ -187,7 +187,7 @@ class Alert {
     ) {
       throw new Error(
         "Expected the field `monitor_name` to be a primitive type in the JSON string but got " +
-          data["monitor_name"]
+          data["monitor_name"],
       );
     }
     // ensure the json data is a string
@@ -200,7 +200,7 @@ class Alert {
     ) {
       throw new Error(
         "Expected the field `monitor_type` to be a primitive type in the JSON string but got " +
-          data["monitor_type"]
+          data["monitor_type"],
       );
     }
     // ensure the json data is a string
@@ -213,7 +213,7 @@ class Alert {
     ) {
       throw new Error(
         "Expected the field `monitor_uid` to be a primitive type in the JSON string but got " +
-          data["monitor_uid"]
+          data["monitor_uid"],
       );
     }
     if (data["notifications"]) {
@@ -222,7 +222,7 @@ class Alert {
       if (!Array.isArray(data["notifications"])) {
         throw new Error(
           "Expected the field `notifications` to be an array in the JSON data but got " +
-            data["notifications"]
+            data["notifications"],
         );
       }
       // validate the optional field `notifications` (array)
@@ -237,7 +237,7 @@ class Alert {
     ) {
       throw new Error(
         "Expected the field `source` to be a primitive type in the JSON string but got " +
-          data["source"]
+          data["source"],
       );
     }
     // ensure the json data is a string
@@ -247,7 +247,7 @@ class Alert {
     ) {
       throw new Error(
         "Expected the field `uid` to be a primitive type in the JSON string but got " +
-          data["uid"]
+          data["uid"],
       );
     }
 

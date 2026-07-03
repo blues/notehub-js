@@ -45,19 +45,19 @@ export default class ExternalDevicesApi {
     // verify the required parameter 'productUID' is set
     if (productUID === undefined || productUID === null) {
       throw new Error(
-        "Missing the required parameter 'productUID' when calling createEventExtDevice"
+        "Missing the required parameter 'productUID' when calling createEventExtDevice",
       );
     }
     // verify the required parameter 'deviceUID' is set
     if (deviceUID === undefined || deviceUID === null) {
       throw new Error(
-        "Missing the required parameter 'deviceUID' when calling createEventExtDevice"
+        "Missing the required parameter 'deviceUID' when calling createEventExtDevice",
       );
     }
     // verify the required parameter 'event' is set
     if (event === undefined || event === null) {
       throw new Error(
-        "Missing the required parameter 'event' when calling createEventExtDevice"
+        "Missing the required parameter 'event' when calling createEventExtDevice",
       );
     }
 
@@ -85,7 +85,7 @@ export default class ExternalDevicesApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -100,7 +100,7 @@ export default class ExternalDevicesApi {
     return this.createEventExtDeviceWithHttpInfo(
       productUID,
       deviceUID,
-      event
+      event,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -118,19 +118,19 @@ export default class ExternalDevicesApi {
     // verify the required parameter 'productUID' is set
     if (productUID === undefined || productUID === null) {
       throw new Error(
-        "Missing the required parameter 'productUID' when calling extDeviceSessionClose"
+        "Missing the required parameter 'productUID' when calling extDeviceSessionClose",
       );
     }
     // verify the required parameter 'deviceUID' is set
     if (deviceUID === undefined || deviceUID === null) {
       throw new Error(
-        "Missing the required parameter 'deviceUID' when calling extDeviceSessionClose"
+        "Missing the required parameter 'deviceUID' when calling extDeviceSessionClose",
       );
     }
     // verify the required parameter 'deviceSession' is set
     if (deviceSession === undefined || deviceSession === null) {
       throw new Error(
-        "Missing the required parameter 'deviceSession' when calling extDeviceSessionClose"
+        "Missing the required parameter 'deviceSession' when calling extDeviceSessionClose",
       );
     }
 
@@ -158,7 +158,7 @@ export default class ExternalDevicesApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -173,7 +173,7 @@ export default class ExternalDevicesApi {
     return this.extDeviceSessionCloseWithHttpInfo(
       productUID,
       deviceUID,
-      deviceSession
+      deviceSession,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -191,19 +191,19 @@ export default class ExternalDevicesApi {
     // verify the required parameter 'productUID' is set
     if (productUID === undefined || productUID === null) {
       throw new Error(
-        "Missing the required parameter 'productUID' when calling extDeviceSessionOpen"
+        "Missing the required parameter 'productUID' when calling extDeviceSessionOpen",
       );
     }
     // verify the required parameter 'deviceUID' is set
     if (deviceUID === undefined || deviceUID === null) {
       throw new Error(
-        "Missing the required parameter 'deviceUID' when calling extDeviceSessionOpen"
+        "Missing the required parameter 'deviceUID' when calling extDeviceSessionOpen",
       );
     }
     // verify the required parameter 'deviceSession' is set
     if (deviceSession === undefined || deviceSession === null) {
       throw new Error(
-        "Missing the required parameter 'deviceSession' when calling extDeviceSessionOpen"
+        "Missing the required parameter 'deviceSession' when calling extDeviceSessionOpen",
       );
     }
 
@@ -231,7 +231,7 @@ export default class ExternalDevicesApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -246,7 +246,7 @@ export default class ExternalDevicesApi {
     return this.extDeviceSessionOpenWithHttpInfo(
       productUID,
       deviceUID,
-      deviceSession
+      deviceSession,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });

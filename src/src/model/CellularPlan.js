@@ -55,7 +55,7 @@ class CellularPlan {
       if (data.hasOwnProperty("expires_at")) {
         obj["expires_at"] = ApiClient.convertToType(
           data["expires_at"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("iccid")) {
@@ -67,13 +67,13 @@ class CellularPlan {
       if (data.hasOwnProperty("last_updated")) {
         obj["last_updated"] = ApiClient.convertToType(
           data["last_updated"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("lifetime_used")) {
         obj["lifetime_used"] = ApiClient.convertToType(
           data["lifetime_used"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("plan_type")) {
@@ -103,7 +103,7 @@ class CellularPlan {
     ) {
       throw new Error(
         "Expected the field `iccid` to be a primitive type in the JSON string but got " +
-          data["iccid"]
+          data["iccid"],
       );
     }
     // ensure the json data is a string
@@ -113,7 +113,7 @@ class CellularPlan {
     ) {
       throw new Error(
         "Expected the field `imsi` to be a primitive type in the JSON string but got " +
-          data["imsi"]
+          data["imsi"],
       );
     }
     // ensure the json data is a string
@@ -126,7 +126,7 @@ class CellularPlan {
     ) {
       throw new Error(
         "Expected the field `plan_type` to be a primitive type in the JSON string but got " +
-          data["plan_type"]
+          data["plan_type"],
       );
     }
 

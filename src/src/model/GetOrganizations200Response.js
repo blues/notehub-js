@@ -69,7 +69,7 @@ class GetOrganizations200Response {
       if (!Array.isArray(data["organizations"])) {
         throw new Error(
           "Expected the field `organizations` to be an array in the JSON data but got " +
-            data["organizations"]
+            data["organizations"],
         );
       }
       // validate the optional field `organizations` (array)

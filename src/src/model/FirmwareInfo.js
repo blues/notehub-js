@@ -54,7 +54,7 @@ class FirmwareInfo {
       if (data.hasOwnProperty("description")) {
         obj["description"] = ApiClient.convertToType(
           data["description"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("filename")) {
@@ -72,7 +72,7 @@ class FirmwareInfo {
       if (data.hasOwnProperty("organization")) {
         obj["organization"] = ApiClient.convertToType(
           data["organization"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("product")) {
@@ -81,7 +81,7 @@ class FirmwareInfo {
       if (data.hasOwnProperty("published")) {
         obj["published"] = ApiClient.convertToType(
           data["published"],
-          "Boolean"
+          "Boolean",
         );
       }
       if (data.hasOwnProperty("tags")) {
@@ -115,7 +115,7 @@ class FirmwareInfo {
     ) {
       throw new Error(
         "Expected the field `built` to be a primitive type in the JSON string but got " +
-          data["built"]
+          data["built"],
       );
     }
     // ensure the json data is a string
@@ -127,7 +127,7 @@ class FirmwareInfo {
     ) {
       throw new Error(
         "Expected the field `created` to be a primitive type in the JSON string but got " +
-          data["created"]
+          data["created"],
       );
     }
     // ensure the json data is a string
@@ -140,7 +140,7 @@ class FirmwareInfo {
     ) {
       throw new Error(
         "Expected the field `description` to be a primitive type in the JSON string but got " +
-          data["description"]
+          data["description"],
       );
     }
     // ensure the json data is a string
@@ -153,7 +153,7 @@ class FirmwareInfo {
     ) {
       throw new Error(
         "Expected the field `filename` to be a primitive type in the JSON string but got " +
-          data["filename"]
+          data["filename"],
       );
     }
     // ensure the json data is a string
@@ -163,7 +163,7 @@ class FirmwareInfo {
     ) {
       throw new Error(
         "Expected the field `md5` to be a primitive type in the JSON string but got " +
-          data["md5"]
+          data["md5"],
       );
     }
     // ensure the json data is a string
@@ -173,7 +173,7 @@ class FirmwareInfo {
     ) {
       throw new Error(
         "Expected the field `notes` to be a primitive type in the JSON string but got " +
-          data["notes"]
+          data["notes"],
       );
     }
     // ensure the json data is a string
@@ -186,7 +186,7 @@ class FirmwareInfo {
     ) {
       throw new Error(
         "Expected the field `organization` to be a primitive type in the JSON string but got " +
-          data["organization"]
+          data["organization"],
       );
     }
     // ensure the json data is a string
@@ -198,7 +198,7 @@ class FirmwareInfo {
     ) {
       throw new Error(
         "Expected the field `product` to be a primitive type in the JSON string but got " +
-          data["product"]
+          data["product"],
       );
     }
     // ensure the json data is a string
@@ -208,7 +208,7 @@ class FirmwareInfo {
     ) {
       throw new Error(
         "Expected the field `tags` to be a primitive type in the JSON string but got " +
-          data["tags"]
+          data["tags"],
       );
     }
     // ensure the json data is a string
@@ -218,7 +218,7 @@ class FirmwareInfo {
     ) {
       throw new Error(
         "Expected the field `target` to be a primitive type in the JSON string but got " +
-          data["target"]
+          data["target"],
       );
     }
     // ensure the json data is a string
@@ -228,7 +228,7 @@ class FirmwareInfo {
     ) {
       throw new Error(
         "Expected the field `type` to be a primitive type in the JSON string but got " +
-          data["type"]
+          data["type"],
       );
     }
     // ensure the json data is a string
@@ -240,7 +240,7 @@ class FirmwareInfo {
     ) {
       throw new Error(
         "Expected the field `version` to be a primitive type in the JSON string but got " +
-          data["version"]
+          data["version"],
       );
     }
 

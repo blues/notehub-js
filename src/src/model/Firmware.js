@@ -99,7 +99,7 @@ class Firmware {
     ) {
       throw new Error(
         "Expected the field `builder` to be a primitive type in the JSON string but got " +
-          data["builder"]
+          data["builder"],
       );
     }
     // ensure the json data is a string
@@ -109,7 +109,7 @@ class Firmware {
     ) {
       throw new Error(
         "Expected the field `built` to be a primitive type in the JSON string but got " +
-          data["built"]
+          data["built"],
       );
     }
     // ensure the json data is a string
@@ -122,7 +122,7 @@ class Firmware {
     ) {
       throw new Error(
         "Expected the field `firmware` to be a primitive type in the JSON string but got " +
-          data["firmware"]
+          data["firmware"],
       );
     }
     // ensure the json data is a string
@@ -132,7 +132,7 @@ class Firmware {
     ) {
       throw new Error(
         "Expected the field `org` to be a primitive type in the JSON string but got " +
-          data["org"]
+          data["org"],
       );
     }
     // ensure the json data is a string
@@ -144,7 +144,7 @@ class Firmware {
     ) {
       throw new Error(
         "Expected the field `product` to be a primitive type in the JSON string but got " +
-          data["product"]
+          data["product"],
       );
     }
     // ensure the json data is a string
@@ -154,7 +154,7 @@ class Firmware {
     ) {
       throw new Error(
         "Expected the field `target` to be a primitive type in the JSON string but got " +
-          data["target"]
+          data["target"],
       );
     }
     // ensure the json data is a string
@@ -166,7 +166,7 @@ class Firmware {
     ) {
       throw new Error(
         "Expected the field `version` to be a primitive type in the JSON string but got " +
-          data["version"]
+          data["version"],
       );
     }
 

@@ -72,7 +72,7 @@ class AddDeviceToFleetsRequest {
           "The required field `" +
             property +
             "` is not found in the JSON data: " +
-            JSON.stringify(data)
+            JSON.stringify(data),
         );
       }
     }
@@ -80,7 +80,7 @@ class AddDeviceToFleetsRequest {
     if (!Array.isArray(data["fleet_uids"])) {
       throw new Error(
         "Expected the field `fleet_uids` to be an array in the JSON data but got " +
-          data["fleet_uids"]
+          data["fleet_uids"],
       );
     }
 

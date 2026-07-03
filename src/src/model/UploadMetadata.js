@@ -110,7 +110,7 @@ class UploadMetadata {
     ) {
       throw new Error(
         "Expected the field `contains` to be a primitive type in the JSON string but got " +
-          data["contains"]
+          data["contains"],
       );
     }
     // validate the optional field `firmware`
@@ -125,7 +125,7 @@ class UploadMetadata {
     ) {
       throw new Error(
         "Expected the field `found` to be a primitive type in the JSON string but got " +
-          data["found"]
+          data["found"],
       );
     }
     // ensure the json data is a string
@@ -135,7 +135,7 @@ class UploadMetadata {
     ) {
       throw new Error(
         "Expected the field `md5` to be a primitive type in the JSON string but got " +
-          data["md5"]
+          data["md5"],
       );
     }
     // ensure the json data is a string
@@ -145,7 +145,7 @@ class UploadMetadata {
     ) {
       throw new Error(
         "Expected the field `name` to be a primitive type in the JSON string but got " +
-          data["name"]
+          data["name"],
       );
     }
     // ensure the json data is a string
@@ -155,7 +155,7 @@ class UploadMetadata {
     ) {
       throw new Error(
         "Expected the field `notes` to be a primitive type in the JSON string but got " +
-          data["notes"]
+          data["notes"],
       );
     }
     // ensure the json data is a string
@@ -165,7 +165,7 @@ class UploadMetadata {
     ) {
       throw new Error(
         "Expected the field `source` to be a primitive type in the JSON string but got " +
-          data["source"]
+          data["source"],
       );
     }
     // ensure the json data is a string
@@ -175,7 +175,7 @@ class UploadMetadata {
     ) {
       throw new Error(
         "Expected the field `tags` to be a primitive type in the JSON string but got " +
-          data["tags"]
+          data["tags"],
       );
     }
     // ensure the json data is a string
@@ -185,7 +185,7 @@ class UploadMetadata {
     ) {
       throw new Error(
         "Expected the field `type` to be a primitive type in the JSON string but got " +
-          data["type"]
+          data["type"],
       );
     }
     // ensure the json data is a string
@@ -197,7 +197,7 @@ class UploadMetadata {
     ) {
       throw new Error(
         "Expected the field `version` to be a primitive type in the JSON string but got " +
-          data["version"]
+          data["version"],
       );
     }
 

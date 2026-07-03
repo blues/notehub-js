@@ -47,7 +47,7 @@ export default class AlertApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling getAlerts"
+        "Missing the required parameter 'projectOrProductUID' when calling getAlerts",
       );
     }
 
@@ -78,7 +78,7 @@ export default class AlertApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -92,10 +92,10 @@ export default class AlertApi {
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetAlerts200Response}
    */
   getAlerts(projectOrProductUID, opts) {
-    return this.getAlertsWithHttpInfo(projectOrProductUID, opts).then(function (
-      response_and_data
-    ) {
-      return response_and_data.data;
-    });
+    return this.getAlertsWithHttpInfo(projectOrProductUID, opts).then(
+      function (response_and_data) {
+        return response_and_data.data;
+      },
+    );
   }
 }

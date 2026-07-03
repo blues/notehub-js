@@ -70,7 +70,7 @@ class CreateJob201Response {
           "The required field `" +
             property +
             "` is not found in the JSON data: " +
-            JSON.stringify(data)
+            JSON.stringify(data),
         );
       }
     }
@@ -83,7 +83,7 @@ class CreateJob201Response {
     ) {
       throw new Error(
         "Expected the field `job_uid` to be a primitive type in the JSON string but got " +
-          data["job_uid"]
+          data["job_uid"],
       );
     }
 

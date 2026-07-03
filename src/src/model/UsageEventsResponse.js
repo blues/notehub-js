@@ -55,7 +55,7 @@ class UsageEventsResponse {
       if (data.hasOwnProperty("truncated")) {
         obj["truncated"] = ApiClient.convertToType(
           data["truncated"],
-          "Boolean"
+          "Boolean",
         );
       }
     } else if (data === null) {
@@ -77,7 +77,7 @@ class UsageEventsResponse {
           "The required field `" +
             property +
             "` is not found in the JSON data: " +
-            JSON.stringify(data)
+            JSON.stringify(data),
         );
       }
     }
@@ -87,7 +87,7 @@ class UsageEventsResponse {
       if (!Array.isArray(data["data"])) {
         throw new Error(
           "Expected the field `data` to be an array in the JSON data but got " +
-            data["data"]
+            data["data"],
         );
       }
       // validate the optional field `data` (array)

@@ -30,12 +30,12 @@ let body = new NotehubJs.Monitor(); // Monitor | Body or payload of monitor to b
 apiInstance.createMonitor(projectOrProductUID, body).then(
   (data) => {
     console.log(
-      "API called successfully. Returned data: " + JSON.stringify(data)
+      "API called successfully. Returned data: " + JSON.stringify(data),
     );
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -79,12 +79,12 @@ let monitorUID = "monitor:8bAdf00d-000f-51c-af-01d5eaf00dbad"; // String |
 apiInstance.deleteMonitor(projectOrProductUID, monitorUID).then(
   (data) => {
     console.log(
-      "API called successfully. Returned data: " + JSON.stringify(data)
+      "API called successfully. Returned data: " + JSON.stringify(data),
     );
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -128,12 +128,12 @@ let monitorUID = "monitor:8bAdf00d-000f-51c-af-01d5eaf00dbad"; // String |
 apiInstance.getMonitor(projectOrProductUID, monitorUID).then(
   (data) => {
     console.log(
-      "API called successfully. Returned data: " + JSON.stringify(data)
+      "API called successfully. Returned data: " + JSON.stringify(data),
     );
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -176,12 +176,12 @@ let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String 
 apiInstance.getMonitors(projectOrProductUID).then(
   (data) => {
     console.log(
-      "API called successfully. Returned data: " + JSON.stringify(data)
+      "API called successfully. Returned data: " + JSON.stringify(data),
     );
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -225,12 +225,12 @@ let monitor = new NotehubJs.Monitor(); // Monitor | Body or payload of monitor t
 apiInstance.updateMonitor(projectOrProductUID, monitorUID, monitor).then(
   (data) => {
     console.log(
-      "API called successfully. Returned data: " + JSON.stringify(data)
+      "API called successfully. Returned data: " + JSON.stringify(data),
     );
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 

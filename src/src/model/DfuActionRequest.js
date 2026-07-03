@@ -70,7 +70,7 @@ class DfuActionRequest {
     ) {
       throw new Error(
         "Expected the field `filename` to be a primitive type in the JSON string but got " +
-          data["filename"]
+          data["filename"],
       );
     }
 

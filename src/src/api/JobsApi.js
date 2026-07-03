@@ -51,13 +51,13 @@ export default class JobsApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling cancelJobRun"
+        "Missing the required parameter 'projectOrProductUID' when calling cancelJobRun",
       );
     }
     // verify the required parameter 'reportUID' is set
     if (reportUID === undefined || reportUID === null) {
       throw new Error(
-        "Missing the required parameter 'reportUID' when calling cancelJobRun"
+        "Missing the required parameter 'reportUID' when calling cancelJobRun",
       );
     }
 
@@ -85,7 +85,7 @@ export default class JobsApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -99,7 +99,7 @@ export default class JobsApi {
     return this.cancelJobRunWithHttpInfo(projectOrProductUID, reportUID).then(
       function (response_and_data) {
         return response_and_data.data;
-      }
+      },
     );
   }
 
@@ -115,19 +115,19 @@ export default class JobsApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling createJob"
+        "Missing the required parameter 'projectOrProductUID' when calling createJob",
       );
     }
     // verify the required parameter 'name' is set
     if (name === undefined || name === null) {
       throw new Error(
-        "Missing the required parameter 'name' when calling createJob"
+        "Missing the required parameter 'name' when calling createJob",
       );
     }
     // verify the required parameter 'jobDefinition' is set
     if (jobDefinition === undefined || jobDefinition === null) {
       throw new Error(
-        "Missing the required parameter 'jobDefinition' when calling createJob"
+        "Missing the required parameter 'jobDefinition' when calling createJob",
       );
     }
 
@@ -156,7 +156,7 @@ export default class JobsApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -171,7 +171,7 @@ export default class JobsApi {
     return this.createJobWithHttpInfo(
       projectOrProductUID,
       name,
-      jobDefinition
+      jobDefinition,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -188,13 +188,13 @@ export default class JobsApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling deleteJob"
+        "Missing the required parameter 'projectOrProductUID' when calling deleteJob",
       );
     }
     // verify the required parameter 'jobUID' is set
     if (jobUID === undefined || jobUID === null) {
       throw new Error(
-        "Missing the required parameter 'jobUID' when calling deleteJob"
+        "Missing the required parameter 'jobUID' when calling deleteJob",
       );
     }
 
@@ -222,7 +222,7 @@ export default class JobsApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -236,7 +236,7 @@ export default class JobsApi {
     return this.deleteJobWithHttpInfo(projectOrProductUID, jobUID).then(
       function (response_and_data) {
         return response_and_data.data;
-      }
+      },
     );
   }
 
@@ -251,13 +251,13 @@ export default class JobsApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling deleteJobRun"
+        "Missing the required parameter 'projectOrProductUID' when calling deleteJobRun",
       );
     }
     // verify the required parameter 'reportUID' is set
     if (reportUID === undefined || reportUID === null) {
       throw new Error(
-        "Missing the required parameter 'reportUID' when calling deleteJobRun"
+        "Missing the required parameter 'reportUID' when calling deleteJobRun",
       );
     }
 
@@ -285,7 +285,7 @@ export default class JobsApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -299,7 +299,7 @@ export default class JobsApi {
     return this.deleteJobRunWithHttpInfo(projectOrProductUID, reportUID).then(
       function (response_and_data) {
         return response_and_data.data;
-      }
+      },
     );
   }
 
@@ -314,13 +314,13 @@ export default class JobsApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling getJob"
+        "Missing the required parameter 'projectOrProductUID' when calling getJob",
       );
     }
     // verify the required parameter 'jobUID' is set
     if (jobUID === undefined || jobUID === null) {
       throw new Error(
-        "Missing the required parameter 'jobUID' when calling getJob"
+        "Missing the required parameter 'jobUID' when calling getJob",
       );
     }
 
@@ -348,7 +348,7 @@ export default class JobsApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -359,11 +359,11 @@ export default class JobsApi {
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/JobDetail}
    */
   getJob(projectOrProductUID, jobUID) {
-    return this.getJobWithHttpInfo(projectOrProductUID, jobUID).then(function (
-      response_and_data
-    ) {
-      return response_and_data.data;
-    });
+    return this.getJobWithHttpInfo(projectOrProductUID, jobUID).then(
+      function (response_and_data) {
+        return response_and_data.data;
+      },
+    );
   }
 
   /**
@@ -380,13 +380,13 @@ export default class JobsApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling getJobRun"
+        "Missing the required parameter 'projectOrProductUID' when calling getJobRun",
       );
     }
     // verify the required parameter 'reportUID' is set
     if (reportUID === undefined || reportUID === null) {
       throw new Error(
-        "Missing the required parameter 'reportUID' when calling getJobRun"
+        "Missing the required parameter 'reportUID' when calling getJobRun",
       );
     }
 
@@ -416,7 +416,7 @@ export default class JobsApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -432,7 +432,7 @@ export default class JobsApi {
     return this.getJobRunWithHttpInfo(
       projectOrProductUID,
       reportUID,
-      opts
+      opts,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -453,13 +453,13 @@ export default class JobsApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling getJobRuns"
+        "Missing the required parameter 'projectOrProductUID' when calling getJobRuns",
       );
     }
     // verify the required parameter 'jobUID' is set
     if (jobUID === undefined || jobUID === null) {
       throw new Error(
-        "Missing the required parameter 'jobUID' when calling getJobRuns"
+        "Missing the required parameter 'jobUID' when calling getJobRuns",
       );
     }
 
@@ -490,7 +490,7 @@ export default class JobsApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -507,7 +507,7 @@ export default class JobsApi {
     return this.getJobRunsWithHttpInfo(projectOrProductUID, jobUID, opts).then(
       function (response_and_data) {
         return response_and_data.data;
-      }
+      },
     );
   }
 
@@ -521,7 +521,7 @@ export default class JobsApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling getJobs"
+        "Missing the required parameter 'projectOrProductUID' when calling getJobs",
       );
     }
 
@@ -548,7 +548,7 @@ export default class JobsApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -558,11 +558,11 @@ export default class JobsApi {
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetJobs200Response}
    */
   getJobs(projectOrProductUID) {
-    return this.getJobsWithHttpInfo(projectOrProductUID).then(function (
-      response_and_data
-    ) {
-      return response_and_data.data;
-    });
+    return this.getJobsWithHttpInfo(projectOrProductUID).then(
+      function (response_and_data) {
+        return response_and_data.data;
+      },
+    );
   }
 
   /**
@@ -579,13 +579,13 @@ export default class JobsApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling runJob"
+        "Missing the required parameter 'projectOrProductUID' when calling runJob",
       );
     }
     // verify the required parameter 'jobUID' is set
     if (jobUID === undefined || jobUID === null) {
       throw new Error(
-        "Missing the required parameter 'jobUID' when calling runJob"
+        "Missing the required parameter 'jobUID' when calling runJob",
       );
     }
 
@@ -615,7 +615,7 @@ export default class JobsApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -631,7 +631,7 @@ export default class JobsApi {
     return this.runJobWithHttpInfo(projectOrProductUID, jobUID, opts).then(
       function (response_and_data) {
         return response_and_data.data;
-      }
+      },
     );
   }
 }

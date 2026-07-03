@@ -44,7 +44,7 @@ export default class OrganizationApi {
     // verify the required parameter 'organizationUID' is set
     if (organizationUID === undefined || organizationUID === null) {
       throw new Error(
-        "Missing the required parameter 'organizationUID' when calling getOrganization"
+        "Missing the required parameter 'organizationUID' when calling getOrganization",
       );
     }
 
@@ -71,7 +71,7 @@ export default class OrganizationApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -81,11 +81,11 @@ export default class OrganizationApi {
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetBillingAccount200Response}
    */
   getOrganization(organizationUID) {
-    return this.getOrganizationWithHttpInfo(organizationUID).then(function (
-      response_and_data
-    ) {
-      return response_and_data.data;
-    });
+    return this.getOrganizationWithHttpInfo(organizationUID).then(
+      function (response_and_data) {
+        return response_and_data.data;
+      },
+    );
   }
 
   /**
@@ -102,7 +102,7 @@ export default class OrganizationApi {
     // verify the required parameter 'organizationUID' is set
     if (organizationUID === undefined || organizationUID === null) {
       throw new Error(
-        "Missing the required parameter 'organizationUID' when calling getOrganizationBalanceHistory"
+        "Missing the required parameter 'organizationUID' when calling getOrganizationBalanceHistory",
       );
     }
 
@@ -132,7 +132,7 @@ export default class OrganizationApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -147,7 +147,7 @@ export default class OrganizationApi {
   getOrganizationBalanceHistory(organizationUID, opts) {
     return this.getOrganizationBalanceHistoryWithHttpInfo(
       organizationUID,
-      opts
+      opts,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -181,7 +181,7 @@ export default class OrganizationApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -190,10 +190,10 @@ export default class OrganizationApi {
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetOrganizations200Response}
    */
   getOrganizations() {
-    return this.getOrganizationsWithHttpInfo().then(function (
-      response_and_data
-    ) {
-      return response_and_data.data;
-    });
+    return this.getOrganizationsWithHttpInfo().then(
+      function (response_and_data) {
+        return response_and_data.data;
+      },
+    );
   }
 }

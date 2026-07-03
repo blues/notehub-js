@@ -73,7 +73,7 @@ class WebhookSettings {
     ) {
       throw new Error(
         "Expected the field `id` to be a primitive type in the JSON string but got " +
-          data["id"]
+          data["id"],
       );
     }
     // ensure the json data is a string
@@ -86,7 +86,7 @@ class WebhookSettings {
     ) {
       throw new Error(
         "Expected the field `transform` to be a primitive type in the JSON string but got " +
-          data["transform"]
+          data["transform"],
       );
     }
 

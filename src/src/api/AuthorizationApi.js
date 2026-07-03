@@ -44,7 +44,7 @@ export default class AuthorizationApi {
     // verify the required parameter 'loginRequest' is set
     if (loginRequest === undefined || loginRequest === null) {
       throw new Error(
-        "Missing the required parameter 'loginRequest' when calling login"
+        "Missing the required parameter 'loginRequest' when calling login",
       );
     }
 
@@ -69,7 +69,7 @@ export default class AuthorizationApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -79,11 +79,11 @@ export default class AuthorizationApi {
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Login200Response}
    */
   login(loginRequest) {
-    return this.loginWithHttpInfo(loginRequest).then(function (
-      response_and_data
-    ) {
-      return response_and_data.data;
-    });
+    return this.loginWithHttpInfo(loginRequest).then(
+      function (response_and_data) {
+        return response_and_data.data;
+      },
+    );
   }
 
   /**
@@ -102,19 +102,19 @@ export default class AuthorizationApi {
     // verify the required parameter 'clientId' is set
     if (clientId === undefined || clientId === null) {
       throw new Error(
-        "Missing the required parameter 'clientId' when calling oAuth2ClientCredentials"
+        "Missing the required parameter 'clientId' when calling oAuth2ClientCredentials",
       );
     }
     // verify the required parameter 'clientSecret' is set
     if (clientSecret === undefined || clientSecret === null) {
       throw new Error(
-        "Missing the required parameter 'clientSecret' when calling oAuth2ClientCredentials"
+        "Missing the required parameter 'clientSecret' when calling oAuth2ClientCredentials",
       );
     }
     // verify the required parameter 'grantType' is set
     if (grantType === undefined || grantType === null) {
       throw new Error(
-        "Missing the required parameter 'grantType' when calling oAuth2ClientCredentials"
+        "Missing the required parameter 'grantType' when calling oAuth2ClientCredentials",
       );
     }
 
@@ -144,7 +144,7 @@ export default class AuthorizationApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -163,7 +163,7 @@ export default class AuthorizationApi {
       clientId,
       clientSecret,
       grantType,
-      opts
+      opts,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });

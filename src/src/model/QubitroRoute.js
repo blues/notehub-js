@@ -56,13 +56,13 @@ class QubitroRoute {
       if (data.hasOwnProperty("project_id")) {
         obj["project_id"] = ApiClient.convertToType(
           data["project_id"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("throttle_ms")) {
         obj["throttle_ms"] = ApiClient.convertToType(
           data["throttle_ms"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("timeout")) {
@@ -70,13 +70,13 @@ class QubitroRoute {
       }
       if (data.hasOwnProperty("transform")) {
         obj["transform"] = RouteTransformSettings.constructFromObject(
-          data["transform"]
+          data["transform"],
         );
       }
       if (data.hasOwnProperty("webhook_signing_key")) {
         obj["webhook_signing_key"] = ApiClient.convertToType(
           data["webhook_signing_key"],
-          "String"
+          "String",
         );
       }
     } else if (data === null) {
@@ -100,7 +100,7 @@ class QubitroRoute {
     if (!Array.isArray(data["fleets"])) {
       throw new Error(
         "Expected the field `fleets` to be an array in the JSON data but got " +
-          data["fleets"]
+          data["fleets"],
       );
     }
     // ensure the json data is a string
@@ -113,7 +113,7 @@ class QubitroRoute {
     ) {
       throw new Error(
         "Expected the field `project_id` to be a primitive type in the JSON string but got " +
-          data["project_id"]
+          data["project_id"],
       );
     }
     // validate the optional field `transform`
@@ -131,7 +131,7 @@ class QubitroRoute {
     ) {
       throw new Error(
         "Expected the field `webhook_signing_key` to be a primitive type in the JSON string but got " +
-          data["webhook_signing_key"]
+          data["webhook_signing_key"],
       );
     }
 

@@ -71,7 +71,7 @@ class GetJobRuns200Response {
           "The required field `" +
             property +
             "` is not found in the JSON data: " +
-            JSON.stringify(data)
+            JSON.stringify(data),
         );
       }
     }
@@ -81,7 +81,7 @@ class GetJobRuns200Response {
       if (!Array.isArray(data["runs"])) {
         throw new Error(
           "Expected the field `runs` to be an array in the JSON data but got " +
-            data["runs"]
+            data["runs"],
         );
       }
       // validate the optional field `runs` (array)

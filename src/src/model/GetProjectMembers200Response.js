@@ -73,7 +73,7 @@ class GetProjectMembers200Response {
           "The required field `" +
             property +
             "` is not found in the JSON data: " +
-            JSON.stringify(data)
+            JSON.stringify(data),
         );
       }
     }
@@ -83,7 +83,7 @@ class GetProjectMembers200Response {
       if (!Array.isArray(data["members"])) {
         throw new Error(
           "Expected the field `members` to be an array in the JSON data but got " +
-            data["members"]
+            data["members"],
         );
       }
       // validate the optional field `members` (array)

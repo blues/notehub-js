@@ -55,7 +55,7 @@ class DataUsage {
       if (data.hasOwnProperty("kb_remaining")) {
         obj["kb_remaining"] = ApiClient.convertToType(
           data["kb_remaining"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("kb_total")) {
@@ -83,7 +83,7 @@ class DataUsage {
           "The required field `" +
             property +
             "` is not found in the JSON data: " +
-            JSON.stringify(data)
+            JSON.stringify(data),
         );
       }
     }

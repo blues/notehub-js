@@ -42,7 +42,7 @@ class Device {
       provisioned,
       temperature,
       uid,
-      voltage
+      voltage,
     );
   }
 
@@ -58,7 +58,7 @@ class Device {
     provisioned,
     temperature,
     uid,
-    voltage
+    voltage,
   ) {
     obj["fleet_uids"] = fleetUids;
     obj["product_uid"] = productUid;
@@ -81,13 +81,13 @@ class Device {
 
       if (data.hasOwnProperty("best_location")) {
         obj["best_location"] = Location.constructFromObject(
-          data["best_location"]
+          data["best_location"],
         );
       }
       if (data.hasOwnProperty("cellular_usage")) {
         obj["cellular_usage"] = ApiClient.convertToType(
           data["cellular_usage"],
-          [SimUsage]
+          [SimUsage],
         );
       }
       if (data.hasOwnProperty("contact")) {
@@ -102,13 +102,13 @@ class Device {
       if (data.hasOwnProperty("firmware_host")) {
         obj["firmware_host"] = ApiClient.convertToType(
           data["firmware_host"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("firmware_notecard")) {
         obj["firmware_notecard"] = ApiClient.convertToType(
           data["firmware_notecard"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("fleet_uids")) {
@@ -118,31 +118,31 @@ class Device {
       }
       if (data.hasOwnProperty("gps_location")) {
         obj["gps_location"] = Location.constructFromObject(
-          data["gps_location"]
+          data["gps_location"],
         );
       }
       if (data.hasOwnProperty("last_activity")) {
         obj["last_activity"] = ApiClient.convertToType(
           data["last_activity"],
-          "Date"
+          "Date",
         );
       }
       if (data.hasOwnProperty("product_uid")) {
         obj["product_uid"] = ApiClient.convertToType(
           data["product_uid"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("provisioned")) {
         obj["provisioned"] = ApiClient.convertToType(
           data["provisioned"],
-          "Date"
+          "Date",
         );
       }
       if (data.hasOwnProperty("serial_number")) {
         obj["serial_number"] = ApiClient.convertToType(
           data["serial_number"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("sku")) {
@@ -151,22 +151,22 @@ class Device {
       if (data.hasOwnProperty("temperature")) {
         obj["temperature"] = ApiClient.convertToType(
           data["temperature"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("tower_info")) {
         obj["tower_info"] = DeviceTowerInfo.constructFromObject(
-          data["tower_info"]
+          data["tower_info"],
         );
       }
       if (data.hasOwnProperty("tower_location")) {
         obj["tower_location"] = Location.constructFromObject(
-          data["tower_location"]
+          data["tower_location"],
         );
       }
       if (data.hasOwnProperty("triangulated_location")) {
         obj["triangulated_location"] = Location.constructFromObject(
-          data["triangulated_location"]
+          data["triangulated_location"],
         );
       }
       if (data.hasOwnProperty("uid")) {
@@ -194,7 +194,7 @@ class Device {
           "The required field `" +
             property +
             "` is not found in the JSON data: " +
-            JSON.stringify(data)
+            JSON.stringify(data),
         );
       }
     }
@@ -209,7 +209,7 @@ class Device {
       if (!Array.isArray(data["cellular_usage"])) {
         throw new Error(
           "Expected the field `cellular_usage` to be an array in the JSON data but got " +
-            data["cellular_usage"]
+            data["cellular_usage"],
         );
       }
       // validate the optional field `cellular_usage` (array)
@@ -237,7 +237,7 @@ class Device {
     ) {
       throw new Error(
         "Expected the field `firmware_host` to be a primitive type in the JSON string but got " +
-          data["firmware_host"]
+          data["firmware_host"],
       );
     }
     // ensure the json data is a string
@@ -250,14 +250,14 @@ class Device {
     ) {
       throw new Error(
         "Expected the field `firmware_notecard` to be a primitive type in the JSON string but got " +
-          data["firmware_notecard"]
+          data["firmware_notecard"],
       );
     }
     // ensure the json data is an array
     if (!Array.isArray(data["fleet_uids"])) {
       throw new Error(
         "Expected the field `fleet_uids` to be an array in the JSON data but got " +
-          data["fleet_uids"]
+          data["fleet_uids"],
       );
     }
     // validate the optional field `gps_location`
@@ -275,7 +275,7 @@ class Device {
     ) {
       throw new Error(
         "Expected the field `product_uid` to be a primitive type in the JSON string but got " +
-          data["product_uid"]
+          data["product_uid"],
       );
     }
     // ensure the json data is a string
@@ -288,7 +288,7 @@ class Device {
     ) {
       throw new Error(
         "Expected the field `serial_number` to be a primitive type in the JSON string but got " +
-          data["serial_number"]
+          data["serial_number"],
       );
     }
     // ensure the json data is a string
@@ -298,7 +298,7 @@ class Device {
     ) {
       throw new Error(
         "Expected the field `sku` to be a primitive type in the JSON string but got " +
-          data["sku"]
+          data["sku"],
       );
     }
     // validate the optional field `tower_info`
@@ -323,7 +323,7 @@ class Device {
     ) {
       throw new Error(
         "Expected the field `uid` to be a primitive type in the JSON string but got " +
-          data["uid"]
+          data["uid"],
       );
     }
 

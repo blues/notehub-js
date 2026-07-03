@@ -70,7 +70,7 @@ class GetDevicePublicKeys200ResponseDevicePublicKeysInner {
     ) {
       throw new Error(
         "Expected the field `key` to be a primitive type in the JSON string but got " +
-          data["key"]
+          data["key"],
       );
     }
     // ensure the json data is a string
@@ -80,7 +80,7 @@ class GetDevicePublicKeys200ResponseDevicePublicKeysInner {
     ) {
       throw new Error(
         "Expected the field `uid` to be a primitive type in the JSON string but got " +
-          data["uid"]
+          data["uid"],
       );
     }
 

@@ -106,7 +106,7 @@ class NotehubRoute {
       }
       if (data.hasOwnProperty("s3archive")) {
         obj["s3archive"] = S3ArchiveRoute.constructFromObject(
-          data["s3archive"]
+          data["s3archive"],
         );
       }
       if (data.hasOwnProperty("slack")) {
@@ -114,17 +114,17 @@ class NotehubRoute {
       }
       if (data.hasOwnProperty("snowflake")) {
         obj["snowflake"] = SnowflakeRoute.constructFromObject(
-          data["snowflake"]
+          data["snowflake"],
         );
       }
       if (data.hasOwnProperty("snowpipe_streaming")) {
         obj["snowpipe_streaming"] = SnowpipeStreamingRoute.constructFromObject(
-          data["snowpipe_streaming"]
+          data["snowpipe_streaming"],
         );
       }
       if (data.hasOwnProperty("thingworx")) {
         obj["thingworx"] = ThingworxRoute.constructFromObject(
-          data["thingworx"]
+          data["thingworx"],
         );
       }
       if (data.hasOwnProperty("twilio")) {
@@ -185,7 +185,7 @@ class NotehubRoute {
     ) {
       throw new Error(
         "Expected the field `label` to be a primitive type in the JSON string but got " +
-          data["label"]
+          data["label"],
       );
     }
     // validate the optional field `mqtt`
@@ -200,7 +200,7 @@ class NotehubRoute {
     ) {
       throw new Error(
         "Expected the field `notes` to be a primitive type in the JSON string but got " +
-          data["notes"]
+          data["notes"],
       );
     }
     // validate the optional field `proxy`
@@ -255,7 +255,7 @@ class NotehubRoute {
     ) {
       throw new Error(
         "Expected the field `type` to be a primitive type in the JSON string but got " +
-          data["type"]
+          data["type"],
       );
     }
     // ensure the json data is a string
@@ -265,7 +265,7 @@ class NotehubRoute {
     ) {
       throw new Error(
         "Expected the field `uid` to be a primitive type in the JSON string but got " +
-          data["uid"]
+          data["uid"],
       );
     }
 

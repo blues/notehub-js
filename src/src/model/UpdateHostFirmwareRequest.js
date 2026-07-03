@@ -74,7 +74,7 @@ class UpdateHostFirmwareRequest {
     ) {
       throw new Error(
         "Expected the field `notes` to be a primitive type in the JSON string but got " +
-          data["notes"]
+          data["notes"],
       );
     }
     // ensure the json data is a string
@@ -86,7 +86,7 @@ class UpdateHostFirmwareRequest {
     ) {
       throw new Error(
         "Expected the field `version` to be a primitive type in the JSON string but got " +
-          data["version"]
+          data["version"],
       );
     }
 

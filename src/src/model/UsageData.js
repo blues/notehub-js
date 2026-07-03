@@ -53,25 +53,25 @@ class UsageData {
       if (data.hasOwnProperty("billable_bytes_total")) {
         obj["billable_bytes_total"] = ApiClient.convertToType(
           data["billable_bytes_total"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("downlink_bytes")) {
         obj["downlink_bytes"] = ApiClient.convertToType(
           data["downlink_bytes"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("downlink_bytes_billable")) {
         obj["downlink_bytes_billable"] = ApiClient.convertToType(
           data["downlink_bytes_billable"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("downlink_packets")) {
         obj["downlink_packets"] = ApiClient.convertToType(
           data["downlink_packets"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("period")) {
@@ -80,25 +80,25 @@ class UsageData {
       if (data.hasOwnProperty("total_bytes")) {
         obj["total_bytes"] = ApiClient.convertToType(
           data["total_bytes"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("uplink_bytes")) {
         obj["uplink_bytes"] = ApiClient.convertToType(
           data["uplink_bytes"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("uplink_bytes_billable")) {
         obj["uplink_bytes_billable"] = ApiClient.convertToType(
           data["uplink_bytes_billable"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("uplink_packets")) {
         obj["uplink_packets"] = ApiClient.convertToType(
           data["uplink_packets"],
-          "Number"
+          "Number",
         );
       }
     } else if (data === null) {
@@ -120,7 +120,7 @@ class UsageData {
           "The required field `" +
             property +
             "` is not found in the JSON data: " +
-            JSON.stringify(data)
+            JSON.stringify(data),
         );
       }
     }

@@ -76,7 +76,7 @@ class GetAlerts200Response {
           "The required field `" +
             property +
             "` is not found in the JSON data: " +
-            JSON.stringify(data)
+            JSON.stringify(data),
         );
       }
     }
@@ -86,7 +86,7 @@ class GetAlerts200Response {
       if (!Array.isArray(data["alerts"])) {
         throw new Error(
           "Expected the field `alerts` to be an array in the JSON data but got " +
-            data["alerts"]
+            data["alerts"],
         );
       }
       // validate the optional field `alerts` (array)

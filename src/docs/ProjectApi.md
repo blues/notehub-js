@@ -73,12 +73,12 @@ apiInstance
   .then(
     (data) => {
       console.log(
-        "API called successfully. Returned data: " + JSON.stringify(data)
+        "API called successfully. Returned data: " + JSON.stringify(data),
       );
     },
     (error) => {
       console.error(error);
-    }
+    },
   );
 ```
 
@@ -123,12 +123,12 @@ let cloneProjectRequest = new NotehubJs.CloneProjectRequest(); // CloneProjectRe
 apiInstance.cloneProject(projectOrProductUID, cloneProjectRequest).then(
   (data) => {
     console.log(
-      "API called successfully. Returned data: " + JSON.stringify(data)
+      "API called successfully. Returned data: " + JSON.stringify(data),
     );
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -172,12 +172,12 @@ let createFleetRequest = new NotehubJs.CreateFleetRequest(); // CreateFleetReque
 apiInstance.createFleet(projectOrProductUID, createFleetRequest).then(
   (data) => {
     console.log(
-      "API called successfully. Returned data: " + JSON.stringify(data)
+      "API called successfully. Returned data: " + JSON.stringify(data),
     );
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -221,12 +221,12 @@ let createProductRequest = new NotehubJs.CreateProductRequest(); // CreateProduc
 apiInstance.createProduct(projectOrProductUID, createProductRequest).then(
   (data) => {
     console.log(
-      "API called successfully. Returned data: " + JSON.stringify(data)
+      "API called successfully. Returned data: " + JSON.stringify(data),
     );
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -269,12 +269,12 @@ let createProjectRequest = new NotehubJs.CreateProjectRequest(); // CreateProjec
 apiInstance.createProject(createProjectRequest).then(
   (data) => {
     console.log(
-      "API called successfully. Returned data: " + JSON.stringify(data)
+      "API called successfully. Returned data: " + JSON.stringify(data),
     );
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -319,12 +319,12 @@ apiInstance
   .then(
     (data) => {
       console.log(
-        "API called successfully. Returned data: " + JSON.stringify(data)
+        "API called successfully. Returned data: " + JSON.stringify(data),
       );
     },
     (error) => {
       console.error(error);
-    }
+    },
   );
 ```
 
@@ -371,17 +371,17 @@ apiInstance
   .deleteDeviceFromFleets(
     projectOrProductUID,
     deviceUID,
-    deleteDeviceFromFleetsRequest
+    deleteDeviceFromFleetsRequest,
   )
   .then(
     (data) => {
       console.log(
-        "API called successfully. Returned data: " + JSON.stringify(data)
+        "API called successfully. Returned data: " + JSON.stringify(data),
       );
     },
     (error) => {
       console.error(error);
-    }
+    },
   );
 ```
 
@@ -430,7 +430,7 @@ apiInstance.deleteFirmware(projectOrProductUID, firmwareType, filename).then(
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -478,7 +478,7 @@ apiInstance.deleteFleet(projectOrProductUID, fleetUID).then(
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -525,12 +525,12 @@ apiInstance
   .then(
     (data) => {
       console.log(
-        "API called successfully. Returned data: " + JSON.stringify(data)
+        "API called successfully. Returned data: " + JSON.stringify(data),
       );
     },
     (error) => {
       console.error(error);
-    }
+    },
   );
 ```
 
@@ -578,7 +578,7 @@ apiInstance.deleteProduct(projectOrProductUID, productUID).then(
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -624,7 +624,7 @@ apiInstance.deleteProject(projectOrProductUID).then(
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -667,12 +667,12 @@ let key = "key_example"; // String | The environment variable key to delete.
 apiInstance.deleteProjectEnvironmentVariable(projectOrProductUID, key).then(
   (data) => {
     console.log(
-      "API called successfully. Returned data: " + JSON.stringify(data)
+      "API called successfully. Returned data: " + JSON.stringify(data),
     );
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -719,7 +719,7 @@ apiInstance.deleteProjectSecret(projectOrProductUID, secretName).then(
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -765,7 +765,7 @@ apiInstance.disableGlobalEventTransformation(projectOrProductUID).then(
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -809,12 +809,12 @@ let filename = "filename_example"; // String |
 apiInstance.downloadFirmware(projectOrProductUID, firmwareType, filename).then(
   (data) => {
     console.log(
-      "API called successfully. Returned data: " + JSON.stringify(data)
+      "API called successfully. Returned data: " + JSON.stringify(data),
     );
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -861,7 +861,7 @@ apiInstance.enableGlobalEventTransformation(projectOrProductUID).then(
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -905,12 +905,12 @@ let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String 
 apiInstance.getAWSRoleConfig(projectOrProductUID).then(
   (data) => {
     console.log(
-      "API called successfully. Returned data: " + JSON.stringify(data)
+      "API called successfully. Returned data: " + JSON.stringify(data),
     );
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -956,12 +956,12 @@ apiInstance
   .then(
     (data) => {
       console.log(
-        "API called successfully. Returned data: " + JSON.stringify(data)
+        "API called successfully. Returned data: " + JSON.stringify(data),
       );
     },
     (error) => {
       console.error(error);
-    }
+    },
   );
 ```
 
@@ -1009,12 +1009,12 @@ apiInstance
   .then(
     (data) => {
       console.log(
-        "API called successfully. Returned data: " + JSON.stringify(data)
+        "API called successfully. Returned data: " + JSON.stringify(data),
       );
     },
     (error) => {
       console.error(error);
-    }
+    },
   );
 ```
 
@@ -1059,12 +1059,12 @@ let deviceUID = "dev:000000000000000"; // String |
 apiInstance.getDeviceFleets(projectOrProductUID, deviceUID).then(
   (data) => {
     console.log(
-      "API called successfully. Returned data: " + JSON.stringify(data)
+      "API called successfully. Returned data: " + JSON.stringify(data),
     );
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -1123,12 +1123,12 @@ let opts = {
 apiInstance.getDevicesDfuHistory(projectOrProductUID, firmwareType, opts).then(
   (data) => {
     console.log(
-      "API called successfully. Returned data: " + JSON.stringify(data)
+      "API called successfully. Returned data: " + JSON.stringify(data),
     );
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -1200,12 +1200,12 @@ let opts = {
 apiInstance.getDevicesDfuStatus(projectOrProductUID, firmwareType, opts).then(
   (data) => {
     console.log(
-      "API called successfully. Returned data: " + JSON.stringify(data)
+      "API called successfully. Returned data: " + JSON.stringify(data),
     );
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -1272,12 +1272,12 @@ let opts = {
 apiInstance.getFirmwareInfo(projectOrProductUID, opts).then(
   (data) => {
     console.log(
-      "API called successfully. Returned data: " + JSON.stringify(data)
+      "API called successfully. Returned data: " + JSON.stringify(data),
     );
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -1329,12 +1329,12 @@ let fleetUID = "fleetUID_example"; // String |
 apiInstance.getFleet(projectOrProductUID, fleetUID).then(
   (data) => {
     console.log(
-      "API called successfully. Returned data: " + JSON.stringify(data)
+      "API called successfully. Returned data: " + JSON.stringify(data),
     );
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -1378,12 +1378,12 @@ let fleetUID = "fleetUID_example"; // String |
 apiInstance.getFleetEnvironmentHierarchy(projectOrProductUID, fleetUID).then(
   (data) => {
     console.log(
-      "API called successfully. Returned data: " + JSON.stringify(data)
+      "API called successfully. Returned data: " + JSON.stringify(data),
     );
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -1427,12 +1427,12 @@ let fleetUID = "fleetUID_example"; // String |
 apiInstance.getFleetEnvironmentVariables(projectOrProductUID, fleetUID).then(
   (data) => {
     console.log(
-      "API called successfully. Returned data: " + JSON.stringify(data)
+      "API called successfully. Returned data: " + JSON.stringify(data),
     );
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -1475,12 +1475,12 @@ let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String 
 apiInstance.getFleets(projectOrProductUID).then(
   (data) => {
     console.log(
-      "API called successfully. Returned data: " + JSON.stringify(data)
+      "API called successfully. Returned data: " + JSON.stringify(data),
     );
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -1522,12 +1522,12 @@ let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String 
 apiInstance.getNotefileSchemas(projectOrProductUID).then(
   (data) => {
     console.log(
-      "API called successfully. Returned data: " + JSON.stringify(data)
+      "API called successfully. Returned data: " + JSON.stringify(data),
     );
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -1569,12 +1569,12 @@ let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String 
 apiInstance.getProducts(projectOrProductUID).then(
   (data) => {
     console.log(
-      "API called successfully. Returned data: " + JSON.stringify(data)
+      "API called successfully. Returned data: " + JSON.stringify(data),
     );
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -1616,12 +1616,12 @@ let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String 
 apiInstance.getProject(projectOrProductUID).then(
   (data) => {
     console.log(
-      "API called successfully. Returned data: " + JSON.stringify(data)
+      "API called successfully. Returned data: " + JSON.stringify(data),
     );
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -1663,12 +1663,12 @@ let productUID = com.blues.airnote; // String |
 apiInstance.getProjectByProduct(productUID).then(
   (data) => {
     console.log(
-      "API called successfully. Returned data: " + JSON.stringify(data)
+      "API called successfully. Returned data: " + JSON.stringify(data),
     );
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -1710,12 +1710,12 @@ let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String 
 apiInstance.getProjectEnvironmentHierarchy(projectOrProductUID).then(
   (data) => {
     console.log(
-      "API called successfully. Returned data: " + JSON.stringify(data)
+      "API called successfully. Returned data: " + JSON.stringify(data),
     );
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -1757,12 +1757,12 @@ let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String 
 apiInstance.getProjectEnvironmentVariables(projectOrProductUID).then(
   (data) => {
     console.log(
-      "API called successfully. Returned data: " + JSON.stringify(data)
+      "API called successfully. Returned data: " + JSON.stringify(data),
     );
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -1804,12 +1804,12 @@ let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String 
 apiInstance.getProjectMembers(projectOrProductUID).then(
   (data) => {
     console.log(
-      "API called successfully. Returned data: " + JSON.stringify(data)
+      "API called successfully. Returned data: " + JSON.stringify(data),
     );
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -1851,12 +1851,12 @@ let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String 
 apiInstance.getProjectSecrets(projectOrProductUID).then(
   (data) => {
     console.log(
-      "API called successfully. Returned data: " + JSON.stringify(data)
+      "API called successfully. Returned data: " + JSON.stringify(data),
     );
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -1897,12 +1897,12 @@ let apiInstance = new NotehubJs.ProjectApi();
 apiInstance.getProjects().then(
   (data) => {
     console.log(
-      "API called successfully. Returned data: " + JSON.stringify(data)
+      "API called successfully. Returned data: " + JSON.stringify(data),
     );
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -1961,7 +1961,7 @@ apiInstance
     },
     (error) => {
       console.error(error);
-    }
+    },
   );
 ```
 
@@ -2018,17 +2018,17 @@ apiInstance
   .setFleetEnvironmentVariables(
     projectOrProductUID,
     fleetUID,
-    environmentVariables
+    environmentVariables,
   )
   .then(
     (data) => {
       console.log(
-        "API called successfully. Returned data: " + JSON.stringify(data)
+        "API called successfully. Returned data: " + JSON.stringify(data),
       );
     },
     (error) => {
       console.error(error);
-    }
+    },
   );
 ```
 
@@ -2076,7 +2076,7 @@ apiInstance.setGlobalEventTransformation(projectOrProductUID, body).then(
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -2122,12 +2122,12 @@ let opts = {
 apiInstance.setProjectEnvironmentVariables(projectOrProductUID, opts).then(
   (data) => {
     console.log(
-      "API called successfully. Returned data: " + JSON.stringify(data)
+      "API called successfully. Returned data: " + JSON.stringify(data),
     );
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -2175,17 +2175,17 @@ apiInstance
     projectOrProductUID,
     firmwareType,
     filename,
-    updateHostFirmwareRequest
+    updateHostFirmwareRequest,
   )
   .then(
     (data) => {
       console.log(
-        "API called successfully. Returned data: " + JSON.stringify(data)
+        "API called successfully. Returned data: " + JSON.stringify(data),
       );
     },
     (error) => {
       console.error(error);
-    }
+    },
   );
 ```
 
@@ -2232,12 +2232,12 @@ let updateFleetRequest = new NotehubJs.UpdateFleetRequest(); // UpdateFleetReque
 apiInstance.updateFleet(projectOrProductUID, fleetUID, updateFleetRequest).then(
   (data) => {
     console.log(
-      "API called successfully. Returned data: " + JSON.stringify(data)
+      "API called successfully. Returned data: " + JSON.stringify(data),
     );
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -2284,17 +2284,17 @@ apiInstance
   .updateProjectSecret(
     projectOrProductUID,
     secretName,
-    updateProjectSecretRequest
+    updateProjectSecretRequest,
   )
   .then(
     (data) => {
       console.log(
-        "API called successfully. Returned data: " + JSON.stringify(data)
+        "API called successfully. Returned data: " + JSON.stringify(data),
       );
     },
     (error) => {
       console.error(error);
-    }
+    },
   );
 ```
 
@@ -2347,12 +2347,12 @@ apiInstance
   .then(
     (data) => {
       console.log(
-        "API called successfully. Returned data: " + JSON.stringify(data)
+        "API called successfully. Returned data: " + JSON.stringify(data),
       );
     },
     (error) => {
       console.error(error);
-    }
+    },
   );
 ```
 

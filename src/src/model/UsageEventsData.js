@@ -33,7 +33,7 @@ class UsageEventsData {
     platformEvents,
     totalDevices,
     totalEvents,
-    watchdogEvents
+    watchdogEvents,
   ) {
     UsageEventsData.initialize(
       this,
@@ -41,7 +41,7 @@ class UsageEventsData {
       platformEvents,
       totalDevices,
       totalEvents,
-      watchdogEvents
+      watchdogEvents,
     );
   }
 
@@ -56,7 +56,7 @@ class UsageEventsData {
     platformEvents,
     totalDevices,
     totalEvents,
-    watchdogEvents
+    watchdogEvents,
   ) {
     obj["period"] = period;
     obj["platform_events"] = platformEvents;
@@ -79,7 +79,7 @@ class UsageEventsData {
       if (data.hasOwnProperty("billable_events")) {
         obj["billable_events"] = ApiClient.convertToType(
           data["billable_events"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("device")) {
@@ -99,43 +99,43 @@ class UsageEventsData {
       if (data.hasOwnProperty("platform_events")) {
         obj["platform_events"] = ApiClient.convertToType(
           data["platform_events"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("total_days_in_period")) {
         obj["total_days_in_period"] = ApiClient.convertToType(
           data["total_days_in_period"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("total_devices")) {
         obj["total_devices"] = ApiClient.convertToType(
           data["total_devices"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("total_events")) {
         obj["total_events"] = ApiClient.convertToType(
           data["total_events"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("total_fw_updates")) {
         obj["total_fw_updates"] = ApiClient.convertToType(
           data["total_fw_updates"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("total_reboots")) {
         obj["total_reboots"] = ApiClient.convertToType(
           data["total_reboots"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("watchdog_events")) {
         obj["watchdog_events"] = ApiClient.convertToType(
           data["watchdog_events"],
-          "Number"
+          "Number",
         );
       }
     } else if (data === null) {
@@ -157,7 +157,7 @@ class UsageEventsData {
           "The required field `" +
             property +
             "` is not found in the JSON data: " +
-            JSON.stringify(data)
+            JSON.stringify(data),
         );
       }
     }
@@ -168,7 +168,7 @@ class UsageEventsData {
     ) {
       throw new Error(
         "Expected the field `device` to be a primitive type in the JSON string but got " +
-          data["device"]
+          data["device"],
       );
     }
     // ensure the json data is a string
@@ -178,7 +178,7 @@ class UsageEventsData {
     ) {
       throw new Error(
         "Expected the field `fleet` to be a primitive type in the JSON string but got " +
-          data["fleet"]
+          data["fleet"],
       );
     }
 

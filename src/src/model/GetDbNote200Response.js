@@ -75,7 +75,7 @@ class GetDbNote200Response {
     ) {
       throw new Error(
         "Expected the field `payload` to be a primitive type in the JSON string but got " +
-          data["payload"]
+          data["payload"],
       );
     }
 

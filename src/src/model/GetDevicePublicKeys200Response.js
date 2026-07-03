@@ -54,7 +54,7 @@ class GetDevicePublicKeys200Response {
       if (data.hasOwnProperty("device_public_keys")) {
         obj["device_public_keys"] = ApiClient.convertToType(
           data["device_public_keys"],
-          [GetDevicePublicKeys200ResponseDevicePublicKeysInner]
+          [GetDevicePublicKeys200ResponseDevicePublicKeysInner],
         );
       }
       if (data.hasOwnProperty("has_more")) {
@@ -79,7 +79,7 @@ class GetDevicePublicKeys200Response {
           "The required field `" +
             property +
             "` is not found in the JSON data: " +
-            JSON.stringify(data)
+            JSON.stringify(data),
         );
       }
     }
@@ -89,13 +89,13 @@ class GetDevicePublicKeys200Response {
       if (!Array.isArray(data["device_public_keys"])) {
         throw new Error(
           "Expected the field `device_public_keys` to be an array in the JSON data but got " +
-            data["device_public_keys"]
+            data["device_public_keys"],
         );
       }
       // validate the optional field `device_public_keys` (array)
       for (const item of data["device_public_keys"]) {
         GetDevicePublicKeys200ResponseDevicePublicKeysInner.validateJsonObject(
-          item
+          item,
         );
       }
     }

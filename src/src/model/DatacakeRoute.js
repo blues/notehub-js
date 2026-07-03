@@ -50,7 +50,7 @@ class DatacakeRoute {
       if (data.hasOwnProperty("disable_http_headers")) {
         obj["disable_http_headers"] = ApiClient.convertToType(
           data["disable_http_headers"],
-          "Boolean"
+          "Boolean",
         );
       }
       if (data.hasOwnProperty("filter")) {
@@ -67,7 +67,7 @@ class DatacakeRoute {
       if (data.hasOwnProperty("throttle_ms")) {
         obj["throttle_ms"] = ApiClient.convertToType(
           data["throttle_ms"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("timeout")) {
@@ -75,7 +75,7 @@ class DatacakeRoute {
       }
       if (data.hasOwnProperty("transform")) {
         obj["transform"] = RouteTransformSettings.constructFromObject(
-          data["transform"]
+          data["transform"],
         );
       }
       if (data.hasOwnProperty("url")) {
@@ -102,7 +102,7 @@ class DatacakeRoute {
     if (!Array.isArray(data["fleets"])) {
       throw new Error(
         "Expected the field `fleets` to be an array in the JSON data but got " +
-          data["fleets"]
+          data["fleets"],
       );
     }
     // validate the optional field `transform`
@@ -117,7 +117,7 @@ class DatacakeRoute {
     ) {
       throw new Error(
         "Expected the field `url` to be a primitive type in the JSON string but got " +
-          data["url"]
+          data["url"],
       );
     }
 

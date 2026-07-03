@@ -39,7 +39,7 @@ class JobRun {
     status,
     submitted,
     submittedBy,
-    updated
+    updated,
   ) {
     JobRun.initialize(
       this,
@@ -50,7 +50,7 @@ class JobRun {
       status,
       submitted,
       submittedBy,
-      updated
+      updated,
     );
   }
 
@@ -68,7 +68,7 @@ class JobRun {
     status,
     submitted,
     submittedBy,
-    updated
+    updated,
   ) {
     obj["dry_run"] = dryRun;
     obj["job_name"] = jobName;
@@ -109,7 +109,7 @@ class JobRun {
       if (data.hasOwnProperty("report_uid")) {
         obj["report_uid"] = ApiClient.convertToType(
           data["report_uid"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("results")) {
@@ -129,7 +129,7 @@ class JobRun {
       if (data.hasOwnProperty("submitted_by")) {
         obj["submitted_by"] = ApiClient.convertToType(
           data["submitted_by"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("updated")) {
@@ -154,7 +154,7 @@ class JobRun {
           "The required field `" +
             property +
             "` is not found in the JSON data: " +
-            JSON.stringify(data)
+            JSON.stringify(data),
         );
       }
     }
@@ -168,7 +168,7 @@ class JobRun {
     ) {
       throw new Error(
         "Expected the field `job_name` to be a primitive type in the JSON string but got " +
-          data["job_name"]
+          data["job_name"],
       );
     }
     // ensure the json data is a string
@@ -180,7 +180,7 @@ class JobRun {
     ) {
       throw new Error(
         "Expected the field `job_uid` to be a primitive type in the JSON string but got " +
-          data["job_uid"]
+          data["job_uid"],
       );
     }
     // ensure the json data is a string
@@ -193,7 +193,7 @@ class JobRun {
     ) {
       throw new Error(
         "Expected the field `report_uid` to be a primitive type in the JSON string but got " +
-          data["report_uid"]
+          data["report_uid"],
       );
     }
     // ensure the json data is a string
@@ -203,7 +203,7 @@ class JobRun {
     ) {
       throw new Error(
         "Expected the field `status` to be a primitive type in the JSON string but got " +
-          data["status"]
+          data["status"],
       );
     }
     // ensure the json data is a string
@@ -216,7 +216,7 @@ class JobRun {
     ) {
       throw new Error(
         "Expected the field `submitted_by` to be a primitive type in the JSON string but got " +
-          data["submitted_by"]
+          data["submitted_by"],
       );
     }
 

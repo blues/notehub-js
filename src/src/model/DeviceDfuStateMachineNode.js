@@ -52,7 +52,7 @@ class DeviceDfuStateMachineNode {
       if (data.hasOwnProperty("description")) {
         obj["description"] = ApiClient.convertToType(
           data["description"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("phase")) {
@@ -83,7 +83,7 @@ class DeviceDfuStateMachineNode {
     ) {
       throw new Error(
         "Expected the field `datetime` to be a primitive type in the JSON string but got " +
-          data["datetime"]
+          data["datetime"],
       );
     }
     // ensure the json data is a string
@@ -96,7 +96,7 @@ class DeviceDfuStateMachineNode {
     ) {
       throw new Error(
         "Expected the field `description` to be a primitive type in the JSON string but got " +
-          data["description"]
+          data["description"],
       );
     }
     // ensure the json data is a string
@@ -106,7 +106,7 @@ class DeviceDfuStateMachineNode {
     ) {
       throw new Error(
         "Expected the field `phase` to be a primitive type in the JSON string but got " +
-          data["phase"]
+          data["phase"],
       );
     }
     // ensure the json data is a string
@@ -116,7 +116,7 @@ class DeviceDfuStateMachineNode {
     ) {
       throw new Error(
         "Expected the field `status` to be a primitive type in the JSON string but got " +
-          data["status"]
+          data["status"],
       );
     }
 

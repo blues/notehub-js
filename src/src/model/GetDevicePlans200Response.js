@@ -49,7 +49,7 @@ class GetDevicePlans200Response {
       if (data.hasOwnProperty("cellular_plans")) {
         obj["cellular_plans"] = ApiClient.convertToType(
           data["cellular_plans"],
-          [CellularPlan]
+          [CellularPlan],
         );
       }
     } else if (data === null) {
@@ -70,7 +70,7 @@ class GetDevicePlans200Response {
       if (!Array.isArray(data["cellular_plans"])) {
         throw new Error(
           "Expected the field `cellular_plans` to be an array in the JSON data but got " +
-            data["cellular_plans"]
+            data["cellular_plans"],
         );
       }
       // validate the optional field `cellular_plans` (array)

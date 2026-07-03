@@ -67,7 +67,7 @@ class GetProjects200Response {
       if (!Array.isArray(data["projects"])) {
         throw new Error(
           "Expected the field `projects` to be an array in the JSON data but got " +
-            data["projects"]
+            data["projects"],
         );
       }
       // validate the optional field `projects` (array)

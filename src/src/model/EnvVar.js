@@ -51,7 +51,7 @@ class EnvVar {
       if (data.hasOwnProperty("precedence")) {
         obj["precedence"] = ApiClient.convertToType(
           data["precedence"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("used")) {
@@ -79,7 +79,7 @@ class EnvVar {
     ) {
       throw new Error(
         "Expected the field `key` to be a primitive type in the JSON string but got " +
-          data["key"]
+          data["key"],
       );
     }
     // ensure the json data is a string
@@ -89,7 +89,7 @@ class EnvVar {
     ) {
       throw new Error(
         "Expected the field `value` to be a primitive type in the JSON string but got " +
-          data["value"]
+          data["value"],
       );
     }
 

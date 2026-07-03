@@ -92,7 +92,7 @@ class Note {
           "The required field `" +
             property +
             "` is not found in the JSON data: " +
-            JSON.stringify(data)
+            JSON.stringify(data),
         );
       }
     }
@@ -103,7 +103,7 @@ class Note {
     ) {
       throw new Error(
         "Expected the field `id` to be a primitive type in the JSON string but got " +
-          data["id"]
+          data["id"],
       );
     }
     // ensure the json data is a string
@@ -113,7 +113,7 @@ class Note {
     ) {
       throw new Error(
         "Expected the field `where` to be a primitive type in the JSON string but got " +
-          data["where"]
+          data["where"],
       );
     }
 

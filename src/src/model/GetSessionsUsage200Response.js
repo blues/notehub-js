@@ -59,7 +59,7 @@ class GetSessionsUsage200Response {
       if (data.hasOwnProperty("truncated")) {
         obj["truncated"] = ApiClient.convertToType(
           data["truncated"],
-          "Boolean"
+          "Boolean",
         );
       }
     } else if (data === null) {
@@ -81,7 +81,7 @@ class GetSessionsUsage200Response {
           "The required field `" +
             property +
             "` is not found in the JSON data: " +
-            JSON.stringify(data)
+            JSON.stringify(data),
         );
       }
     }
@@ -91,7 +91,7 @@ class GetSessionsUsage200Response {
       if (!Array.isArray(data["sessions"])) {
         throw new Error(
           "Expected the field `sessions` to be an array in the JSON data but got " +
-            data["sessions"]
+            data["sessions"],
         );
       }
       // validate the optional field `sessions` (array)

@@ -48,7 +48,7 @@ class GetBillingAccount200ResponsePlan {
       if (data.hasOwnProperty("current_balance")) {
         obj["current_balance"] = ApiClient.convertToType(
           data["current_balance"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("end_date")) {
@@ -57,7 +57,7 @@ class GetBillingAccount200ResponsePlan {
       if (data.hasOwnProperty("event_capacity")) {
         obj["event_capacity"] = ApiClient.convertToType(
           data["event_capacity"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("start_date")) {
@@ -85,7 +85,7 @@ class GetBillingAccount200ResponsePlan {
     ) {
       throw new Error(
         "Expected the field `type` to be a primitive type in the JSON string but got " +
-          data["type"]
+          data["type"],
       );
     }
 

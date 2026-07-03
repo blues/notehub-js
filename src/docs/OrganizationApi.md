@@ -27,12 +27,12 @@ let organizationUID = "00000000-0000-0000-000000000001"; // String |
 apiInstance.getOrganization(organizationUID).then(
   (data) => {
     console.log(
-      "API called successfully. Returned data: " + JSON.stringify(data)
+      "API called successfully. Returned data: " + JSON.stringify(data),
     );
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -78,12 +78,12 @@ let opts = {
 apiInstance.getOrganizationBalanceHistory(organizationUID, opts).then(
   (data) => {
     console.log(
-      "API called successfully. Returned data: " + JSON.stringify(data)
+      "API called successfully. Returned data: " + JSON.stringify(data),
     );
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -126,12 +126,12 @@ let apiInstance = new NotehubJs.OrganizationApi();
 apiInstance.getOrganizations().then(
   (data) => {
     console.log(
-      "API called successfully. Returned data: " + JSON.stringify(data)
+      "API called successfully. Returned data: " + JSON.stringify(data),
     );
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 

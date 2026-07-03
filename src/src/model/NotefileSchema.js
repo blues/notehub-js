@@ -78,7 +78,7 @@ class NotefileSchema {
           "The required field `" +
             property +
             "` is not found in the JSON data: " +
-            JSON.stringify(data)
+            JSON.stringify(data),
         );
       }
     }
@@ -92,7 +92,7 @@ class NotefileSchema {
     ) {
       throw new Error(
         "Expected the field `notefile` to be a primitive type in the JSON string but got " +
-          data["notefile"]
+          data["notefile"],
       );
     }
     if (data["properties"]) {
@@ -101,7 +101,7 @@ class NotefileSchema {
       if (!Array.isArray(data["properties"])) {
         throw new Error(
           "Expected the field `properties` to be an array in the JSON data but got " +
-            data["properties"]
+            data["properties"],
         );
       }
       // validate the optional field `properties` (array)

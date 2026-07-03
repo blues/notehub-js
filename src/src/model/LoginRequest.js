@@ -73,7 +73,7 @@ class LoginRequest {
     ) {
       throw new Error(
         "Expected the field `password` to be a primitive type in the JSON string but got " +
-          data["password"]
+          data["password"],
       );
     }
     // ensure the json data is a string
@@ -86,7 +86,7 @@ class LoginRequest {
     ) {
       throw new Error(
         "Expected the field `username` to be a primitive type in the JSON string but got " +
-          data["username"]
+          data["username"],
       );
     }
 

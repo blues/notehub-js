@@ -54,13 +54,13 @@ class AWSRoleConfig {
       if (data.hasOwnProperty("aws_account_id")) {
         obj["aws_account_id"] = ApiClient.convertToType(
           data["aws_account_id"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("external_id")) {
         obj["external_id"] = ApiClient.convertToType(
           data["external_id"],
-          "String"
+          "String",
         );
       }
     } else if (data === null) {
@@ -82,7 +82,7 @@ class AWSRoleConfig {
           "The required field `" +
             property +
             "` is not found in the JSON data: " +
-            JSON.stringify(data)
+            JSON.stringify(data),
         );
       }
     }
@@ -96,7 +96,7 @@ class AWSRoleConfig {
     ) {
       throw new Error(
         "Expected the field `aws_account_id` to be a primitive type in the JSON string but got " +
-          data["aws_account_id"]
+          data["aws_account_id"],
       );
     }
     // ensure the json data is a string
@@ -109,7 +109,7 @@ class AWSRoleConfig {
     ) {
       throw new Error(
         "Expected the field `external_id` to be a primitive type in the JSON string but got " +
-          data["external_id"]
+          data["external_id"],
       );
     }
 

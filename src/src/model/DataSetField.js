@@ -75,7 +75,7 @@ class DataSetField {
     ) {
       throw new Error(
         "Expected the field `jsonata` to be a primitive type in the JSON string but got " +
-          data["jsonata"]
+          data["jsonata"],
       );
     }
     // ensure the json data is a string
@@ -85,7 +85,7 @@ class DataSetField {
     ) {
       throw new Error(
         "Expected the field `name` to be a primitive type in the JSON string but got " +
-          data["name"]
+          data["name"],
       );
     }
 

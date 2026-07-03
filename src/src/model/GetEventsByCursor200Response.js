@@ -62,7 +62,7 @@ class GetEventsByCursor200Response {
       if (data.hasOwnProperty("next_cursor")) {
         obj["next_cursor"] = ApiClient.convertToType(
           data["next_cursor"],
-          "String"
+          "String",
         );
       }
     } else if (data === null) {
@@ -84,7 +84,7 @@ class GetEventsByCursor200Response {
           "The required field `" +
             property +
             "` is not found in the JSON data: " +
-            JSON.stringify(data)
+            JSON.stringify(data),
         );
       }
     }
@@ -94,7 +94,7 @@ class GetEventsByCursor200Response {
       if (!Array.isArray(data["events"])) {
         throw new Error(
           "Expected the field `events` to be an array in the JSON data but got " +
-            data["events"]
+            data["events"],
         );
       }
       // validate the optional field `events` (array)
@@ -112,7 +112,7 @@ class GetEventsByCursor200Response {
     ) {
       throw new Error(
         "Expected the field `next_cursor` to be a primitive type in the JSON string but got " +
-          data["next_cursor"]
+          data["next_cursor"],
       );
     }
 

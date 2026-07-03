@@ -33,7 +33,7 @@ class UsageRouteLogsData {
       failedRoutes,
       period,
       successfulRoutes,
-      totalRoutes
+      totalRoutes,
     );
   }
 
@@ -63,13 +63,13 @@ class UsageRouteLogsData {
       if (data.hasOwnProperty("avg_latency_ms")) {
         obj["avg_latency_ms"] = ApiClient.convertToType(
           data["avg_latency_ms"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("failed_routes")) {
         obj["failed_routes"] = ApiClient.convertToType(
           data["failed_routes"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("period")) {
@@ -81,13 +81,13 @@ class UsageRouteLogsData {
       if (data.hasOwnProperty("successful_routes")) {
         obj["successful_routes"] = ApiClient.convertToType(
           data["successful_routes"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("total_routes")) {
         obj["total_routes"] = ApiClient.convertToType(
           data["total_routes"],
-          "Number"
+          "Number",
         );
       }
     } else if (data === null) {
@@ -109,7 +109,7 @@ class UsageRouteLogsData {
           "The required field `" +
             property +
             "` is not found in the JSON data: " +
-            JSON.stringify(data)
+            JSON.stringify(data),
         );
       }
     }
@@ -120,7 +120,7 @@ class UsageRouteLogsData {
     ) {
       throw new Error(
         "Expected the field `route` to be a primitive type in the JSON string but got " +
-          data["route"]
+          data["route"],
       );
     }
 

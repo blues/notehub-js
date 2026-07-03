@@ -31,7 +31,7 @@ class GetDeviceHealthLog200ResponseHealthLogInner {
       this,
       alert,
       text,
-      when
+      when,
     );
   }
 
@@ -85,7 +85,7 @@ class GetDeviceHealthLog200ResponseHealthLogInner {
           "The required field `" +
             property +
             "` is not found in the JSON data: " +
-            JSON.stringify(data)
+            JSON.stringify(data),
         );
       }
     }
@@ -96,7 +96,7 @@ class GetDeviceHealthLog200ResponseHealthLogInner {
     ) {
       throw new Error(
         "Expected the field `text` to be a primitive type in the JSON string but got " +
-          data["text"]
+          data["text"],
       );
     }
 

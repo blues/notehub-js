@@ -50,55 +50,55 @@ class S3ArchiveRoute {
       if (data.hasOwnProperty("archive_count_exceeds")) {
         obj["archive_count_exceeds"] = ApiClient.convertToType(
           data["archive_count_exceeds"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("archive_every_mins")) {
         obj["archive_every_mins"] = ApiClient.convertToType(
           data["archive_every_mins"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("archive_id")) {
         obj["archive_id"] = ApiClient.convertToType(
           data["archive_id"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("bucket_endpoint")) {
         obj["bucket_endpoint"] = ApiClient.convertToType(
           data["bucket_endpoint"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("bucket_name")) {
         obj["bucket_name"] = ApiClient.convertToType(
           data["bucket_name"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("bucket_region")) {
         obj["bucket_region"] = ApiClient.convertToType(
           data["bucket_region"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("file_access")) {
         obj["file_access"] = ApiClient.convertToType(
           data["file_access"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("file_folder")) {
         obj["file_folder"] = ApiClient.convertToType(
           data["file_folder"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("file_format")) {
         obj["file_format"] = ApiClient.convertToType(
           data["file_format"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("filter")) {
@@ -113,13 +113,13 @@ class S3ArchiveRoute {
       if (data.hasOwnProperty("key_secret")) {
         obj["key_secret"] = ApiClient.convertToType(
           data["key_secret"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("throttle_ms")) {
         obj["throttle_ms"] = ApiClient.convertToType(
           data["throttle_ms"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("timeout")) {
@@ -127,7 +127,7 @@ class S3ArchiveRoute {
       }
       if (data.hasOwnProperty("transform")) {
         obj["transform"] = RouteTransformSettings.constructFromObject(
-          data["transform"]
+          data["transform"],
         );
       }
       if (data.hasOwnProperty("url")) {
@@ -155,7 +155,7 @@ class S3ArchiveRoute {
     ) {
       throw new Error(
         "Expected the field `archive_id` to be a primitive type in the JSON string but got " +
-          data["archive_id"]
+          data["archive_id"],
       );
     }
     // ensure the json data is a string
@@ -168,7 +168,7 @@ class S3ArchiveRoute {
     ) {
       throw new Error(
         "Expected the field `bucket_endpoint` to be a primitive type in the JSON string but got " +
-          data["bucket_endpoint"]
+          data["bucket_endpoint"],
       );
     }
     // ensure the json data is a string
@@ -181,7 +181,7 @@ class S3ArchiveRoute {
     ) {
       throw new Error(
         "Expected the field `bucket_name` to be a primitive type in the JSON string but got " +
-          data["bucket_name"]
+          data["bucket_name"],
       );
     }
     // ensure the json data is a string
@@ -194,7 +194,7 @@ class S3ArchiveRoute {
     ) {
       throw new Error(
         "Expected the field `bucket_region` to be a primitive type in the JSON string but got " +
-          data["bucket_region"]
+          data["bucket_region"],
       );
     }
     // ensure the json data is a string
@@ -207,7 +207,7 @@ class S3ArchiveRoute {
     ) {
       throw new Error(
         "Expected the field `file_access` to be a primitive type in the JSON string but got " +
-          data["file_access"]
+          data["file_access"],
       );
     }
     // ensure the json data is a string
@@ -220,7 +220,7 @@ class S3ArchiveRoute {
     ) {
       throw new Error(
         "Expected the field `file_folder` to be a primitive type in the JSON string but got " +
-          data["file_folder"]
+          data["file_folder"],
       );
     }
     // ensure the json data is a string
@@ -233,7 +233,7 @@ class S3ArchiveRoute {
     ) {
       throw new Error(
         "Expected the field `file_format` to be a primitive type in the JSON string but got " +
-          data["file_format"]
+          data["file_format"],
       );
     }
     // validate the optional field `filter`
@@ -245,7 +245,7 @@ class S3ArchiveRoute {
     if (!Array.isArray(data["fleets"])) {
       throw new Error(
         "Expected the field `fleets` to be an array in the JSON data but got " +
-          data["fleets"]
+          data["fleets"],
       );
     }
     // ensure the json data is a string
@@ -255,7 +255,7 @@ class S3ArchiveRoute {
     ) {
       throw new Error(
         "Expected the field `key_id` to be a primitive type in the JSON string but got " +
-          data["key_id"]
+          data["key_id"],
       );
     }
     // ensure the json data is a string
@@ -268,7 +268,7 @@ class S3ArchiveRoute {
     ) {
       throw new Error(
         "Expected the field `key_secret` to be a primitive type in the JSON string but got " +
-          data["key_secret"]
+          data["key_secret"],
       );
     }
     // validate the optional field `transform`
@@ -283,7 +283,7 @@ class S3ArchiveRoute {
     ) {
       throw new Error(
         "Expected the field `url` to be a primitive type in the JSON string but got " +
-          data["url"]
+          data["url"],
       );
     }
 

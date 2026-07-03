@@ -55,13 +55,13 @@ class DeviceDfuHistoryCurrent {
       if (data.hasOwnProperty("description")) {
         obj["description"] = ApiClient.convertToType(
           data["description"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("organization")) {
         obj["organization"] = ApiClient.convertToType(
           data["organization"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("product")) {
@@ -91,7 +91,7 @@ class DeviceDfuHistoryCurrent {
     ) {
       throw new Error(
         "Expected the field `builder` to be a primitive type in the JSON string but got " +
-          data["builder"]
+          data["builder"],
       );
     }
     // ensure the json data is a string
@@ -101,7 +101,7 @@ class DeviceDfuHistoryCurrent {
     ) {
       throw new Error(
         "Expected the field `built` to be a primitive type in the JSON string but got " +
-          data["built"]
+          data["built"],
       );
     }
     // ensure the json data is a string
@@ -114,7 +114,7 @@ class DeviceDfuHistoryCurrent {
     ) {
       throw new Error(
         "Expected the field `description` to be a primitive type in the JSON string but got " +
-          data["description"]
+          data["description"],
       );
     }
     // ensure the json data is a string
@@ -127,7 +127,7 @@ class DeviceDfuHistoryCurrent {
     ) {
       throw new Error(
         "Expected the field `organization` to be a primitive type in the JSON string but got " +
-          data["organization"]
+          data["organization"],
       );
     }
     // ensure the json data is a string
@@ -139,7 +139,7 @@ class DeviceDfuHistoryCurrent {
     ) {
       throw new Error(
         "Expected the field `product` to be a primitive type in the JSON string but got " +
-          data["product"]
+          data["product"],
       );
     }
     // ensure the json data is a string
@@ -151,7 +151,7 @@ class DeviceDfuHistoryCurrent {
     ) {
       throw new Error(
         "Expected the field `version` to be a primitive type in the JSON string but got " +
-          data["version"]
+          data["version"],
       );
     }
 

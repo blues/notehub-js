@@ -54,7 +54,7 @@ class UpdateFleetRequest {
       if (data.hasOwnProperty("connectivity_assurance")) {
         obj["connectivity_assurance"] =
           FleetConnectivityAssurance.constructFromObject(
-            data["connectivity_assurance"]
+            data["connectivity_assurance"],
           );
       }
       if (data.hasOwnProperty("label")) {
@@ -68,19 +68,19 @@ class UpdateFleetRequest {
       if (data.hasOwnProperty("smart_rule")) {
         obj["smart_rule"] = ApiClient.convertToType(
           data["smart_rule"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("smart_rule_enabled")) {
         obj["smart_rule_enabled"] = ApiClient.convertToType(
           data["smart_rule_enabled"],
-          "Boolean"
+          "Boolean",
         );
       }
       if (data.hasOwnProperty("watchdog_mins")) {
         obj["watchdog_mins"] = ApiClient.convertToType(
           data["watchdog_mins"],
-          "Number"
+          "Number",
         );
       }
     } else if (data === null) {
@@ -99,7 +99,7 @@ class UpdateFleetRequest {
     if (!Array.isArray(data["addDevices"])) {
       throw new Error(
         "Expected the field `addDevices` to be an array in the JSON data but got " +
-          data["addDevices"]
+          data["addDevices"],
       );
     }
     // validate the optional field `connectivity_assurance`
@@ -114,14 +114,14 @@ class UpdateFleetRequest {
     ) {
       throw new Error(
         "Expected the field `label` to be a primitive type in the JSON string but got " +
-          data["label"]
+          data["label"],
       );
     }
     // ensure the json data is an array
     if (!Array.isArray(data["removeDevices"])) {
       throw new Error(
         "Expected the field `removeDevices` to be an array in the JSON data but got " +
-          data["removeDevices"]
+          data["removeDevices"],
       );
     }
     // ensure the json data is a string
@@ -134,7 +134,7 @@ class UpdateFleetRequest {
     ) {
       throw new Error(
         "Expected the field `smart_rule` to be a primitive type in the JSON string but got " +
-          data["smart_rule"]
+          data["smart_rule"],
       );
     }
 

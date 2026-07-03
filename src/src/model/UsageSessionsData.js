@@ -35,7 +35,7 @@ class UsageSessionsData {
       period,
       sessions,
       totalBytes,
-      totalDevices
+      totalDevices,
     );
   }
 
@@ -50,7 +50,7 @@ class UsageSessionsData {
     period,
     sessions,
     totalBytes,
-    totalDevices
+    totalDevices,
   ) {
     obj["first_sync_sessions"] = firstSyncSessions;
     obj["period"] = period;
@@ -76,7 +76,7 @@ class UsageSessionsData {
       if (data.hasOwnProperty("first_sync_sessions")) {
         obj["first_sync_sessions"] = ApiClient.convertToType(
           data["first_sync_sessions"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("fleet")) {
@@ -91,25 +91,25 @@ class UsageSessionsData {
       if (data.hasOwnProperty("sessions_by_transport")) {
         obj["sessions_by_transport"] = ApiClient.convertToType(
           data["sessions_by_transport"],
-          { String: "Number" }
+          { String: "Number" },
         );
       }
       if (data.hasOwnProperty("tls_sessions")) {
         obj["tls_sessions"] = ApiClient.convertToType(
           data["tls_sessions"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("total_bytes")) {
         obj["total_bytes"] = ApiClient.convertToType(
           data["total_bytes"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("total_devices")) {
         obj["total_devices"] = ApiClient.convertToType(
           data["total_devices"],
-          "Number"
+          "Number",
         );
       }
     } else if (data === null) {
@@ -131,7 +131,7 @@ class UsageSessionsData {
           "The required field `" +
             property +
             "` is not found in the JSON data: " +
-            JSON.stringify(data)
+            JSON.stringify(data),
         );
       }
     }
@@ -142,7 +142,7 @@ class UsageSessionsData {
     ) {
       throw new Error(
         "Expected the field `device` to be a primitive type in the JSON string but got " +
-          data["device"]
+          data["device"],
       );
     }
     // ensure the json data is a string
@@ -152,7 +152,7 @@ class UsageSessionsData {
     ) {
       throw new Error(
         "Expected the field `fleet` to be a primitive type in the JSON string but got " +
-          data["fleet"]
+          data["fleet"],
       );
     }
 

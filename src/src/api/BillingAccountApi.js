@@ -44,7 +44,7 @@ export default class BillingAccountApi {
     // verify the required parameter 'billingAccountUID' is set
     if (billingAccountUID === undefined || billingAccountUID === null) {
       throw new Error(
-        "Missing the required parameter 'billingAccountUID' when calling getBillingAccount"
+        "Missing the required parameter 'billingAccountUID' when calling getBillingAccount",
       );
     }
 
@@ -71,7 +71,7 @@ export default class BillingAccountApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -81,11 +81,11 @@ export default class BillingAccountApi {
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetBillingAccount200Response}
    */
   getBillingAccount(billingAccountUID) {
-    return this.getBillingAccountWithHttpInfo(billingAccountUID).then(function (
-      response_and_data
-    ) {
-      return response_and_data.data;
-    });
+    return this.getBillingAccountWithHttpInfo(billingAccountUID).then(
+      function (response_and_data) {
+        return response_and_data.data;
+      },
+    );
   }
 
   /**
@@ -102,7 +102,7 @@ export default class BillingAccountApi {
     // verify the required parameter 'billingAccountUID' is set
     if (billingAccountUID === undefined || billingAccountUID === null) {
       throw new Error(
-        "Missing the required parameter 'billingAccountUID' when calling getBillingAccountBalanceHistory"
+        "Missing the required parameter 'billingAccountUID' when calling getBillingAccountBalanceHistory",
       );
     }
 
@@ -132,7 +132,7 @@ export default class BillingAccountApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -147,7 +147,7 @@ export default class BillingAccountApi {
   getBillingAccountBalanceHistory(billingAccountUID, opts) {
     return this.getBillingAccountBalanceHistoryWithHttpInfo(
       billingAccountUID,
-      opts
+      opts,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -181,7 +181,7 @@ export default class BillingAccountApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -190,10 +190,10 @@ export default class BillingAccountApi {
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetBillingAccounts200Response}
    */
   getBillingAccounts() {
-    return this.getBillingAccountsWithHttpInfo().then(function (
-      response_and_data
-    ) {
-      return response_and_data.data;
-    });
+    return this.getBillingAccountsWithHttpInfo().then(
+      function (response_and_data) {
+        return response_and_data.data;
+      },
+    );
   }
 }

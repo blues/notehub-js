@@ -70,7 +70,7 @@ class PersonalAccessTokenSecret {
     ) {
       throw new Error(
         "Expected the field `secret` to be a primitive type in the JSON string but got " +
-          data["secret"]
+          data["secret"],
       );
     }
     // ensure the json data is a string
@@ -80,7 +80,7 @@ class PersonalAccessTokenSecret {
     ) {
       throw new Error(
         "Expected the field `uid` to be a primitive type in the JSON string but got " +
-          data["uid"]
+          data["uid"],
       );
     }
 

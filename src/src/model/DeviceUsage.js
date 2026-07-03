@@ -48,25 +48,25 @@ class DeviceUsage {
       if (data.hasOwnProperty("bytes_rcvd")) {
         obj["bytes_rcvd"] = ApiClient.convertToType(
           data["bytes_rcvd"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("bytes_rcvd_secondary")) {
         obj["bytes_rcvd_secondary"] = ApiClient.convertToType(
           data["bytes_rcvd_secondary"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("bytes_sent")) {
         obj["bytes_sent"] = ApiClient.convertToType(
           data["bytes_sent"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("bytes_sent_secondary")) {
         obj["bytes_sent_secondary"] = ApiClient.convertToType(
           data["bytes_sent_secondary"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("duration")) {
@@ -75,25 +75,25 @@ class DeviceUsage {
       if (data.hasOwnProperty("notes_rcvd")) {
         obj["notes_rcvd"] = ApiClient.convertToType(
           data["notes_rcvd"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("notes_sent")) {
         obj["notes_sent"] = ApiClient.convertToType(
           data["notes_sent"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("sessions_tcp")) {
         obj["sessions_tcp"] = ApiClient.convertToType(
           data["sessions_tcp"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("sessions_tls")) {
         obj["sessions_tls"] = ApiClient.convertToType(
           data["sessions_tls"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("since")) {

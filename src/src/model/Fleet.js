@@ -56,7 +56,7 @@ class Fleet {
       if (data.hasOwnProperty("connectivity_assurance")) {
         obj["connectivity_assurance"] =
           FleetConnectivityAssurance.constructFromObject(
-            data["connectivity_assurance"]
+            data["connectivity_assurance"],
           );
       }
       if (data.hasOwnProperty("created")) {
@@ -65,7 +65,7 @@ class Fleet {
       if (data.hasOwnProperty("environment_variables")) {
         obj["environment_variables"] = ApiClient.convertToType(
           data["environment_variables"],
-          { String: "String" }
+          { String: "String" },
         );
       }
       if (data.hasOwnProperty("label")) {
@@ -74,13 +74,13 @@ class Fleet {
       if (data.hasOwnProperty("smart_rule")) {
         obj["smart_rule"] = ApiClient.convertToType(
           data["smart_rule"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("smart_rule_enabled")) {
         obj["smart_rule_enabled"] = ApiClient.convertToType(
           data["smart_rule_enabled"],
-          "Boolean"
+          "Boolean",
         );
       }
       if (data.hasOwnProperty("uid")) {
@@ -89,7 +89,7 @@ class Fleet {
       if (data.hasOwnProperty("watchdog_mins")) {
         obj["watchdog_mins"] = ApiClient.convertToType(
           data["watchdog_mins"],
-          "Number"
+          "Number",
         );
       }
     } else if (data === null) {
@@ -111,7 +111,7 @@ class Fleet {
           "The required field `" +
             property +
             "` is not found in the JSON data: " +
-            JSON.stringify(data)
+            JSON.stringify(data),
         );
       }
     }
@@ -127,7 +127,7 @@ class Fleet {
     ) {
       throw new Error(
         "Expected the field `label` to be a primitive type in the JSON string but got " +
-          data["label"]
+          data["label"],
       );
     }
     // ensure the json data is a string
@@ -140,7 +140,7 @@ class Fleet {
     ) {
       throw new Error(
         "Expected the field `smart_rule` to be a primitive type in the JSON string but got " +
-          data["smart_rule"]
+          data["smart_rule"],
       );
     }
     // ensure the json data is a string
@@ -150,7 +150,7 @@ class Fleet {
     ) {
       throw new Error(
         "Expected the field `uid` to be a primitive type in the JSON string but got " +
-          data["uid"]
+          data["uid"],
       );
     }
 

@@ -79,7 +79,7 @@ class GetEvents200Response {
           "The required field `" +
             property +
             "` is not found in the JSON data: " +
-            JSON.stringify(data)
+            JSON.stringify(data),
         );
       }
     }
@@ -89,7 +89,7 @@ class GetEvents200Response {
       if (!Array.isArray(data["events"])) {
         throw new Error(
           "Expected the field `events` to be an array in the JSON data but got " +
-            data["events"]
+            data["events"],
         );
       }
       // validate the optional field `events` (array)
@@ -106,7 +106,7 @@ class GetEvents200Response {
     ) {
       throw new Error(
         "Expected the field `through` to be a primitive type in the JSON string but got " +
-          data["through"]
+          data["through"],
       );
     }
 

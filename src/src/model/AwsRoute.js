@@ -50,13 +50,13 @@ class AwsRoute {
       if (data.hasOwnProperty("access_key_id")) {
         obj["access_key_id"] = ApiClient.convertToType(
           data["access_key_id"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("access_key_secret")) {
         obj["access_key_secret"] = ApiClient.convertToType(
           data["access_key_secret"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("channel")) {
@@ -65,7 +65,7 @@ class AwsRoute {
       if (data.hasOwnProperty("disable_http_headers")) {
         obj["disable_http_headers"] = ApiClient.convertToType(
           data["disable_http_headers"],
-          "Boolean"
+          "Boolean",
         );
       }
       if (data.hasOwnProperty("filter")) {
@@ -82,13 +82,13 @@ class AwsRoute {
       if (data.hasOwnProperty("message_deduplication_id")) {
         obj["message_deduplication_id"] = ApiClient.convertToType(
           data["message_deduplication_id"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("message_group_id")) {
         obj["message_group_id"] = ApiClient.convertToType(
           data["message_group_id"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("region")) {
@@ -100,7 +100,7 @@ class AwsRoute {
       if (data.hasOwnProperty("throttle_ms")) {
         obj["throttle_ms"] = ApiClient.convertToType(
           data["throttle_ms"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("timeout")) {
@@ -108,7 +108,7 @@ class AwsRoute {
       }
       if (data.hasOwnProperty("transform")) {
         obj["transform"] = RouteTransformSettings.constructFromObject(
-          data["transform"]
+          data["transform"],
         );
       }
       if (data.hasOwnProperty("url")) {
@@ -136,7 +136,7 @@ class AwsRoute {
     ) {
       throw new Error(
         "Expected the field `access_key_id` to be a primitive type in the JSON string but got " +
-          data["access_key_id"]
+          data["access_key_id"],
       );
     }
     // ensure the json data is a string
@@ -149,7 +149,7 @@ class AwsRoute {
     ) {
       throw new Error(
         "Expected the field `access_key_secret` to be a primitive type in the JSON string but got " +
-          data["access_key_secret"]
+          data["access_key_secret"],
       );
     }
     // ensure the json data is a string
@@ -161,7 +161,7 @@ class AwsRoute {
     ) {
       throw new Error(
         "Expected the field `channel` to be a primitive type in the JSON string but got " +
-          data["channel"]
+          data["channel"],
       );
     }
     // validate the optional field `filter`
@@ -173,7 +173,7 @@ class AwsRoute {
     if (!Array.isArray(data["fleets"])) {
       throw new Error(
         "Expected the field `fleets` to be an array in the JSON data but got " +
-          data["fleets"]
+          data["fleets"],
       );
     }
     // ensure the json data is a string
@@ -186,7 +186,7 @@ class AwsRoute {
     ) {
       throw new Error(
         "Expected the field `message_deduplication_id` to be a primitive type in the JSON string but got " +
-          data["message_deduplication_id"]
+          data["message_deduplication_id"],
       );
     }
     // ensure the json data is a string
@@ -199,7 +199,7 @@ class AwsRoute {
     ) {
       throw new Error(
         "Expected the field `message_group_id` to be a primitive type in the JSON string but got " +
-          data["message_group_id"]
+          data["message_group_id"],
       );
     }
     // ensure the json data is a string
@@ -209,7 +209,7 @@ class AwsRoute {
     ) {
       throw new Error(
         "Expected the field `region` to be a primitive type in the JSON string but got " +
-          data["region"]
+          data["region"],
       );
     }
     // ensure the json data is a string
@@ -222,7 +222,7 @@ class AwsRoute {
     ) {
       throw new Error(
         "Expected the field `role_arn` to be a primitive type in the JSON string but got " +
-          data["role_arn"]
+          data["role_arn"],
       );
     }
     // validate the optional field `transform`
@@ -237,7 +237,7 @@ class AwsRoute {
     ) {
       throw new Error(
         "Expected the field `url` to be a primitive type in the JSON string but got " +
-          data["url"]
+          data["url"],
       );
     }
 

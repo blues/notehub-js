@@ -67,7 +67,7 @@ class EmailNotification {
     ) {
       throw new Error(
         "Expected the field `email` to be a primitive type in the JSON string but got " +
-          data["email"]
+          data["email"],
       );
     }
 

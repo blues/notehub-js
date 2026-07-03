@@ -77,7 +77,7 @@ class Repository {
     if (!Array.isArray(data["fleet_uids"])) {
       throw new Error(
         "Expected the field `fleet_uids` to be an array in the JSON data but got " +
-          data["fleet_uids"]
+          data["fleet_uids"],
       );
     }
     // ensure the json data is a string
@@ -87,14 +87,14 @@ class Repository {
     ) {
       throw new Error(
         "Expected the field `name` to be a primitive type in the JSON string but got " +
-          data["name"]
+          data["name"],
       );
     }
     // ensure the json data is an array
     if (!Array.isArray(data["project_uids"])) {
       throw new Error(
         "Expected the field `project_uids` to be an array in the JSON data but got " +
-          data["project_uids"]
+          data["project_uids"],
       );
     }
     // ensure the json data is a string
@@ -104,7 +104,7 @@ class Repository {
     ) {
       throw new Error(
         "Expected the field `uid` to be a primitive type in the JSON string but got " +
-          data["uid"]
+          data["uid"],
       );
     }
 

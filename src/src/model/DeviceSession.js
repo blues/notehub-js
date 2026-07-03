@@ -65,7 +65,7 @@ class DeviceSession {
       if (data.hasOwnProperty("continuous")) {
         obj["continuous"] = ApiClient.convertToType(
           data["continuous"],
-          "Boolean"
+          "Boolean",
         );
       }
       if (data.hasOwnProperty("device")) {
@@ -77,7 +77,7 @@ class DeviceSession {
       if (data.hasOwnProperty("failed_connects")) {
         obj["failed_connects"] = ApiClient.convertToType(
           data["failed_connects"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("fleets")) {
@@ -86,37 +86,37 @@ class DeviceSession {
       if (data.hasOwnProperty("hp_cycles_data")) {
         obj["hp_cycles_data"] = ApiClient.convertToType(
           data["hp_cycles_data"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("hp_cycles_gps")) {
         obj["hp_cycles_gps"] = ApiClient.convertToType(
           data["hp_cycles_gps"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("hp_cycles_total")) {
         obj["hp_cycles_total"] = ApiClient.convertToType(
           data["hp_cycles_total"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("hp_secs_data")) {
         obj["hp_secs_data"] = ApiClient.convertToType(
           data["hp_secs_data"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("hp_secs_gps")) {
         obj["hp_secs_gps"] = ApiClient.convertToType(
           data["hp_secs_gps"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("hp_secs_total")) {
         obj["hp_secs_total"] = ApiClient.convertToType(
           data["hp_secs_total"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("iccid")) {
@@ -131,13 +131,13 @@ class DeviceSession {
       if (data.hasOwnProperty("orientation")) {
         obj["orientation"] = ApiClient.convertToType(
           data["orientation"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("penalty_secs")) {
         obj["penalty_secs"] = ApiClient.convertToType(
           data["penalty_secs"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("period")) {
@@ -146,7 +146,7 @@ class DeviceSession {
       if (data.hasOwnProperty("power_charging")) {
         obj["power_charging"] = ApiClient.convertToType(
           data["power_charging"],
-          "Boolean"
+          "Boolean",
         );
       }
       if (data.hasOwnProperty("power_mah")) {
@@ -155,13 +155,13 @@ class DeviceSession {
       if (data.hasOwnProperty("power_primary")) {
         obj["power_primary"] = ApiClient.convertToType(
           data["power_primary"],
-          "Boolean"
+          "Boolean",
         );
       }
       if (data.hasOwnProperty("power_usb")) {
         obj["power_usb"] = ApiClient.convertToType(
           data["power_usb"],
-          "Boolean"
+          "Boolean",
         );
       }
       if (data.hasOwnProperty("product")) {
@@ -188,13 +188,13 @@ class DeviceSession {
       if (data.hasOwnProperty("session_began")) {
         obj["session_began"] = ApiClient.convertToType(
           data["session_began"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("session_ended")) {
         obj["session_ended"] = ApiClient.convertToType(
           data["session_ended"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("sinr")) {
@@ -224,13 +224,13 @@ class DeviceSession {
       if (data.hasOwnProperty("triangulate")) {
         obj["triangulate"] = ApiClient.convertToType(
           data["triangulate"],
-          Object
+          Object,
         );
       }
       if (data.hasOwnProperty("usage_actual")) {
         obj["usage_actual"] = ApiClient.convertToType(
           data["usage_actual"],
-          "Boolean"
+          "Boolean",
         );
       }
       if (data.hasOwnProperty("voltage")) {
@@ -245,7 +245,7 @@ class DeviceSession {
       if (data.hasOwnProperty("where_country")) {
         obj["where_country"] = ApiClient.convertToType(
           data["where_country"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("where_lat")) {
@@ -254,7 +254,7 @@ class DeviceSession {
       if (data.hasOwnProperty("where_location")) {
         obj["where_location"] = ApiClient.convertToType(
           data["where_location"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("where_lon")) {
@@ -263,25 +263,25 @@ class DeviceSession {
       if (data.hasOwnProperty("where_timezone")) {
         obj["where_timezone"] = ApiClient.convertToType(
           data["where_timezone"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("where_when")) {
         obj["where_when"] = ApiClient.convertToType(
           data["where_when"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("why_session_closed")) {
         obj["why_session_closed"] = ApiClient.convertToType(
           data["why_session_closed"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("why_session_opened")) {
         obj["why_session_opened"] = ApiClient.convertToType(
           data["why_session_opened"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("work")) {
@@ -306,7 +306,7 @@ class DeviceSession {
     ) {
       throw new Error(
         "Expected the field `apn` to be a primitive type in the JSON string but got " +
-          data["apn"]
+          data["apn"],
       );
     }
     // ensure the json data is a string
@@ -316,7 +316,7 @@ class DeviceSession {
     ) {
       throw new Error(
         "Expected the field `bearer` to be a primitive type in the JSON string but got " +
-          data["bearer"]
+          data["bearer"],
       );
     }
     // ensure the json data is a string
@@ -326,7 +326,7 @@ class DeviceSession {
     ) {
       throw new Error(
         "Expected the field `bssid` to be a primitive type in the JSON string but got " +
-          data["bssid"]
+          data["bssid"],
       );
     }
     // ensure the json data is a string
@@ -336,7 +336,7 @@ class DeviceSession {
     ) {
       throw new Error(
         "Expected the field `cell` to be a primitive type in the JSON string but got " +
-          data["cell"]
+          data["cell"],
       );
     }
     // ensure the json data is a string
@@ -346,14 +346,14 @@ class DeviceSession {
     ) {
       throw new Error(
         "Expected the field `device` to be a primitive type in the JSON string but got " +
-          data["device"]
+          data["device"],
       );
     }
     // ensure the json data is an array
     if (!Array.isArray(data["fleets"])) {
       throw new Error(
         "Expected the field `fleets` to be an array in the JSON data but got " +
-          data["fleets"]
+          data["fleets"],
       );
     }
     // ensure the json data is a string
@@ -363,7 +363,7 @@ class DeviceSession {
     ) {
       throw new Error(
         "Expected the field `iccid` to be a primitive type in the JSON string but got " +
-          data["iccid"]
+          data["iccid"],
       );
     }
     // ensure the json data is a string
@@ -373,7 +373,7 @@ class DeviceSession {
     ) {
       throw new Error(
         "Expected the field `ip` to be a primitive type in the JSON string but got " +
-          data["ip"]
+          data["ip"],
       );
     }
     // ensure the json data is a string
@@ -386,7 +386,7 @@ class DeviceSession {
     ) {
       throw new Error(
         "Expected the field `orientation` to be a primitive type in the JSON string but got " +
-          data["orientation"]
+          data["orientation"],
       );
     }
     // validate the optional field `period`
@@ -403,7 +403,7 @@ class DeviceSession {
     ) {
       throw new Error(
         "Expected the field `product` to be a primitive type in the JSON string but got " +
-          data["product"]
+          data["product"],
       );
     }
     // ensure the json data is a string
@@ -413,7 +413,7 @@ class DeviceSession {
     ) {
       throw new Error(
         "Expected the field `rat` to be a primitive type in the JSON string but got " +
-          data["rat"]
+          data["rat"],
       );
     }
     // ensure the json data is a string
@@ -425,7 +425,7 @@ class DeviceSession {
     ) {
       throw new Error(
         "Expected the field `session` to be a primitive type in the JSON string but got " +
-          data["session"]
+          data["session"],
       );
     }
     // ensure the json data is a string
@@ -435,7 +435,7 @@ class DeviceSession {
     ) {
       throw new Error(
         "Expected the field `sn` to be a primitive type in the JSON string but got " +
-          data["sn"]
+          data["sn"],
       );
     }
     // ensure the json data is a string
@@ -445,7 +445,7 @@ class DeviceSession {
     ) {
       throw new Error(
         "Expected the field `ssid` to be a primitive type in the JSON string but got " +
-          data["ssid"]
+          data["ssid"],
       );
     }
     // validate the optional field `tower`
@@ -463,7 +463,7 @@ class DeviceSession {
     ) {
       throw new Error(
         "Expected the field `transport` to be a primitive type in the JSON string but got " +
-          data["transport"]
+          data["transport"],
       );
     }
     // validate the optional field `tri`
@@ -478,7 +478,7 @@ class DeviceSession {
     ) {
       throw new Error(
         "Expected the field `where` to be a primitive type in the JSON string but got " +
-          data["where"]
+          data["where"],
       );
     }
     // ensure the json data is a string
@@ -491,7 +491,7 @@ class DeviceSession {
     ) {
       throw new Error(
         "Expected the field `where_country` to be a primitive type in the JSON string but got " +
-          data["where_country"]
+          data["where_country"],
       );
     }
     // ensure the json data is a string
@@ -504,7 +504,7 @@ class DeviceSession {
     ) {
       throw new Error(
         "Expected the field `where_location` to be a primitive type in the JSON string but got " +
-          data["where_location"]
+          data["where_location"],
       );
     }
     // ensure the json data is a string
@@ -517,7 +517,7 @@ class DeviceSession {
     ) {
       throw new Error(
         "Expected the field `where_timezone` to be a primitive type in the JSON string but got " +
-          data["where_timezone"]
+          data["where_timezone"],
       );
     }
     // ensure the json data is a string
@@ -530,7 +530,7 @@ class DeviceSession {
     ) {
       throw new Error(
         "Expected the field `why_session_closed` to be a primitive type in the JSON string but got " +
-          data["why_session_closed"]
+          data["why_session_closed"],
       );
     }
     // ensure the json data is a string
@@ -543,7 +543,7 @@ class DeviceSession {
     ) {
       throw new Error(
         "Expected the field `why_session_opened` to be a primitive type in the JSON string but got " +
-          data["why_session_opened"]
+          data["why_session_opened"],
       );
     }
 

@@ -69,7 +69,7 @@ class GetDeviceLatestEvents200Response {
       if (!Array.isArray(data["latest_events"])) {
         throw new Error(
           "Expected the field `latest_events` to be an array in the JSON data but got " +
-            data["latest_events"]
+            data["latest_events"],
         );
       }
       // validate the optional field `latest_events` (array)

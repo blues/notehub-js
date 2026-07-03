@@ -53,13 +53,13 @@ class MqttRoute {
       if (data.hasOwnProperty("certificate")) {
         obj["certificate"] = ApiClient.convertToType(
           data["certificate"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("certificate_name")) {
         obj["certificate_name"] = ApiClient.convertToType(
           data["certificate_name"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("client_id")) {
@@ -83,13 +83,13 @@ class MqttRoute {
       if (data.hasOwnProperty("private_key_name")) {
         obj["private_key_name"] = ApiClient.convertToType(
           data["private_key_name"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("throttle_ms")) {
         obj["throttle_ms"] = ApiClient.convertToType(
           data["throttle_ms"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("timeout")) {
@@ -100,7 +100,7 @@ class MqttRoute {
       }
       if (data.hasOwnProperty("transform")) {
         obj["transform"] = RouteTransformSettings.constructFromObject(
-          data["transform"]
+          data["transform"],
         );
       }
       if (data.hasOwnProperty("username")) {
@@ -125,7 +125,7 @@ class MqttRoute {
     ) {
       throw new Error(
         "Expected the field `broker` to be a primitive type in the JSON string but got " +
-          data["broker"]
+          data["broker"],
       );
     }
     // ensure the json data is a string
@@ -138,7 +138,7 @@ class MqttRoute {
     ) {
       throw new Error(
         "Expected the field `certificate` to be a primitive type in the JSON string but got " +
-          data["certificate"]
+          data["certificate"],
       );
     }
     // ensure the json data is a string
@@ -151,7 +151,7 @@ class MqttRoute {
     ) {
       throw new Error(
         "Expected the field `certificate_name` to be a primitive type in the JSON string but got " +
-          data["certificate_name"]
+          data["certificate_name"],
       );
     }
     // ensure the json data is a string
@@ -164,7 +164,7 @@ class MqttRoute {
     ) {
       throw new Error(
         "Expected the field `client_id` to be a primitive type in the JSON string but got " +
-          data["client_id"]
+          data["client_id"],
       );
     }
     // validate the optional field `filter`
@@ -176,7 +176,7 @@ class MqttRoute {
     if (!Array.isArray(data["fleets"])) {
       throw new Error(
         "Expected the field `fleets` to be an array in the JSON data but got " +
-          data["fleets"]
+          data["fleets"],
       );
     }
     // ensure the json data is a string
@@ -186,7 +186,7 @@ class MqttRoute {
     ) {
       throw new Error(
         "Expected the field `key` to be a primitive type in the JSON string but got " +
-          data["key"]
+          data["key"],
       );
     }
     // ensure the json data is a string
@@ -199,7 +199,7 @@ class MqttRoute {
     ) {
       throw new Error(
         "Expected the field `password` to be a primitive type in the JSON string but got " +
-          data["password"]
+          data["password"],
       );
     }
     // ensure the json data is a string
@@ -209,7 +209,7 @@ class MqttRoute {
     ) {
       throw new Error(
         "Expected the field `port` to be a primitive type in the JSON string but got " +
-          data["port"]
+          data["port"],
       );
     }
     // ensure the json data is a string
@@ -222,7 +222,7 @@ class MqttRoute {
     ) {
       throw new Error(
         "Expected the field `private_key_name` to be a primitive type in the JSON string but got " +
-          data["private_key_name"]
+          data["private_key_name"],
       );
     }
     // ensure the json data is a string
@@ -232,7 +232,7 @@ class MqttRoute {
     ) {
       throw new Error(
         "Expected the field `topic` to be a primitive type in the JSON string but got " +
-          data["topic"]
+          data["topic"],
       );
     }
     // validate the optional field `transform`
@@ -250,7 +250,7 @@ class MqttRoute {
     ) {
       throw new Error(
         "Expected the field `username` to be a primitive type in the JSON string but got " +
-          data["username"]
+          data["username"],
       );
     }
 

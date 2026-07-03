@@ -49,24 +49,24 @@ class DeviceDfuStatus {
 
       if (data.hasOwnProperty("current")) {
         obj["current"] = DeviceDfuHistoryCurrent.constructFromObject(
-          data["current"]
+          data["current"],
         );
       }
       if (data.hasOwnProperty("device_uid")) {
         obj["device_uid"] = ApiClient.convertToType(
           data["device_uid"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("dfu_in_progress")) {
         obj["dfu_in_progress"] = ApiClient.convertToType(
           data["dfu_in_progress"],
-          "Boolean"
+          "Boolean",
         );
       }
       if (data.hasOwnProperty("status")) {
         obj["status"] = DeviceDfuStateMachine.constructFromObject(
-          data["status"]
+          data["status"],
         );
       }
     } else if (data === null) {
@@ -96,7 +96,7 @@ class DeviceDfuStatus {
     ) {
       throw new Error(
         "Expected the field `device_uid` to be a primitive type in the JSON string but got " +
-          data["device_uid"]
+          data["device_uid"],
       );
     }
     // validate the optional field `status`

@@ -55,13 +55,13 @@ class OAuth2TokenResponse {
       if (data.hasOwnProperty("access_token")) {
         obj["access_token"] = ApiClient.convertToType(
           data["access_token"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("expires_in")) {
         obj["expires_in"] = ApiClient.convertToType(
           data["expires_in"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("scope")) {
@@ -70,7 +70,7 @@ class OAuth2TokenResponse {
       if (data.hasOwnProperty("token_type")) {
         obj["token_type"] = ApiClient.convertToType(
           data["token_type"],
-          "String"
+          "String",
         );
       }
     } else if (data === null) {
@@ -92,7 +92,7 @@ class OAuth2TokenResponse {
           "The required field `" +
             property +
             "` is not found in the JSON data: " +
-            JSON.stringify(data)
+            JSON.stringify(data),
         );
       }
     }
@@ -106,7 +106,7 @@ class OAuth2TokenResponse {
     ) {
       throw new Error(
         "Expected the field `access_token` to be a primitive type in the JSON string but got " +
-          data["access_token"]
+          data["access_token"],
       );
     }
     // ensure the json data is a string
@@ -116,7 +116,7 @@ class OAuth2TokenResponse {
     ) {
       throw new Error(
         "Expected the field `scope` to be a primitive type in the JSON string but got " +
-          data["scope"]
+          data["scope"],
       );
     }
     // ensure the json data is a string
@@ -129,7 +129,7 @@ class OAuth2TokenResponse {
     ) {
       throw new Error(
         "Expected the field `token_type` to be a primitive type in the JSON string but got " +
-          data["token_type"]
+          data["token_type"],
       );
     }
 

@@ -53,13 +53,13 @@ class CreateProductRequest {
       if (data.hasOwnProperty("auto_provision_fleets")) {
         obj["auto_provision_fleets"] = ApiClient.convertToType(
           data["auto_provision_fleets"],
-          ["String"]
+          ["String"],
         );
       }
       if (data.hasOwnProperty("disable_devices_by_default")) {
         obj["disable_devices_by_default"] = ApiClient.convertToType(
           data["disable_devices_by_default"],
-          "Boolean"
+          "Boolean",
         );
       }
       if (data.hasOwnProperty("label")) {
@@ -68,7 +68,7 @@ class CreateProductRequest {
       if (data.hasOwnProperty("product_uid")) {
         obj["product_uid"] = ApiClient.convertToType(
           data["product_uid"],
-          "String"
+          "String",
         );
       }
     } else if (data === null) {
@@ -90,7 +90,7 @@ class CreateProductRequest {
           "The required field `" +
             property +
             "` is not found in the JSON data: " +
-            JSON.stringify(data)
+            JSON.stringify(data),
         );
       }
     }
@@ -98,7 +98,7 @@ class CreateProductRequest {
     if (!Array.isArray(data["auto_provision_fleets"])) {
       throw new Error(
         "Expected the field `auto_provision_fleets` to be an array in the JSON data but got " +
-          data["auto_provision_fleets"]
+          data["auto_provision_fleets"],
       );
     }
     // ensure the json data is a string
@@ -108,7 +108,7 @@ class CreateProductRequest {
     ) {
       throw new Error(
         "Expected the field `label` to be a primitive type in the JSON string but got " +
-          data["label"]
+          data["label"],
       );
     }
     // ensure the json data is a string
@@ -121,7 +121,7 @@ class CreateProductRequest {
     ) {
       throw new Error(
         "Expected the field `product_uid` to be a primitive type in the JSON string but got " +
-          data["product_uid"]
+          data["product_uid"],
       );
     }
 

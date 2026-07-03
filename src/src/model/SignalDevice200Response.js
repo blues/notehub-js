@@ -48,7 +48,7 @@ class SignalDevice200Response {
       if (data.hasOwnProperty("connected")) {
         obj["connected"] = ApiClient.convertToType(
           data["connected"],
-          "Boolean"
+          "Boolean",
         );
       }
     } else if (data === null) {

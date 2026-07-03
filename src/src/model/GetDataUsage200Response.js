@@ -54,7 +54,7 @@ class GetDataUsage200Response {
       if (data.hasOwnProperty("truncated")) {
         obj["truncated"] = ApiClient.convertToType(
           data["truncated"],
-          "Boolean"
+          "Boolean",
         );
       }
     } else if (data === null) {
@@ -75,7 +75,7 @@ class GetDataUsage200Response {
       if (!Array.isArray(data["data"])) {
         throw new Error(
           "Expected the field `data` to be an array in the JSON data but got " +
-            data["data"]
+            data["data"],
         );
       }
       // validate the optional field `data` (array)

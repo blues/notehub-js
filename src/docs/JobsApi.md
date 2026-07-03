@@ -34,12 +34,12 @@ let reportUID = "my-reconciliation-job-1707654321000"; // String | Unique identi
 apiInstance.cancelJobRun(projectOrProductUID, reportUID).then(
   (data) => {
     console.log(
-      "API called successfully. Returned data: " + JSON.stringify(data)
+      "API called successfully. Returned data: " + JSON.stringify(data),
     );
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -84,12 +84,12 @@ let jobDefinition = new NotehubJs.JobDefinition(); // JobDefinition | The batch 
 apiInstance.createJob(projectOrProductUID, name, jobDefinition).then(
   (data) => {
     console.log(
-      "API called successfully. Returned data: " + JSON.stringify(data)
+      "API called successfully. Returned data: " + JSON.stringify(data),
     );
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -134,12 +134,12 @@ let jobUID = "my-reconciliation-job"; // String | Unique identifier for a batch 
 apiInstance.deleteJob(projectOrProductUID, jobUID).then(
   (data) => {
     console.log(
-      "API called successfully. Returned data: " + JSON.stringify(data)
+      "API called successfully. Returned data: " + JSON.stringify(data),
     );
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -186,7 +186,7 @@ apiInstance.deleteJobRun(projectOrProductUID, reportUID).then(
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -230,12 +230,12 @@ let jobUID = "my-reconciliation-job"; // String | Unique identifier for a batch 
 apiInstance.getJob(projectOrProductUID, jobUID).then(
   (data) => {
     console.log(
-      "API called successfully. Returned data: " + JSON.stringify(data)
+      "API called successfully. Returned data: " + JSON.stringify(data),
     );
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -282,12 +282,12 @@ let opts = {
 apiInstance.getJobRun(projectOrProductUID, reportUID, opts).then(
   (data) => {
     console.log(
-      "API called successfully. Returned data: " + JSON.stringify(data)
+      "API called successfully. Returned data: " + JSON.stringify(data),
     );
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -336,12 +336,12 @@ let opts = {
 apiInstance.getJobRuns(projectOrProductUID, jobUID, opts).then(
   (data) => {
     console.log(
-      "API called successfully. Returned data: " + JSON.stringify(data)
+      "API called successfully. Returned data: " + JSON.stringify(data),
     );
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -386,12 +386,12 @@ let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String 
 apiInstance.getJobs(projectOrProductUID).then(
   (data) => {
     console.log(
-      "API called successfully. Returned data: " + JSON.stringify(data)
+      "API called successfully. Returned data: " + JSON.stringify(data),
     );
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -437,12 +437,12 @@ let opts = {
 apiInstance.runJob(projectOrProductUID, jobUID, opts).then(
   (data) => {
     console.log(
-      "API called successfully. Returned data: " + JSON.stringify(data)
+      "API called successfully. Returned data: " + JSON.stringify(data),
     );
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 

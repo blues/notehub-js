@@ -77,7 +77,7 @@ class GetDeviceJourney200ResponseJourney {
           "The required field `" +
             property +
             "` is not found in the JSON data: " +
-            JSON.stringify(data)
+            JSON.stringify(data),
         );
       }
     }
@@ -87,7 +87,7 @@ class GetDeviceJourney200ResponseJourney {
       if (!Array.isArray(data["events"])) {
         throw new Error(
           "Expected the field `events` to be an array in the JSON data but got " +
-            data["events"]
+            data["events"],
         );
       }
       // validate the optional field `events` (array)

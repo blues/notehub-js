@@ -81,7 +81,7 @@ class ProjectMember {
           "The required field `" +
             property +
             "` is not found in the JSON data: " +
-            JSON.stringify(data)
+            JSON.stringify(data),
         );
       }
     }
@@ -92,7 +92,7 @@ class ProjectMember {
     ) {
       throw new Error(
         "Expected the field `email` to be a primitive type in the JSON string but got " +
-          data["email"]
+          data["email"],
       );
     }
     // ensure the json data is a string
@@ -102,7 +102,7 @@ class ProjectMember {
     ) {
       throw new Error(
         "Expected the field `name` to be a primitive type in the JSON string but got " +
-          data["name"]
+          data["name"],
       );
     }
 

@@ -51,7 +51,7 @@ class SlackBearerNotification {
       if (data.hasOwnProperty("message_type")) {
         obj["message_type"] = ApiClient.convertToType(
           data["message_type"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("text")) {
@@ -81,7 +81,7 @@ class SlackBearerNotification {
     ) {
       throw new Error(
         "Expected the field `channel` to be a primitive type in the JSON string but got " +
-          data["channel"]
+          data["channel"],
       );
     }
     // ensure the json data is a string
@@ -94,7 +94,7 @@ class SlackBearerNotification {
     ) {
       throw new Error(
         "Expected the field `message_type` to be a primitive type in the JSON string but got " +
-          data["message_type"]
+          data["message_type"],
       );
     }
     // ensure the json data is a string
@@ -104,7 +104,7 @@ class SlackBearerNotification {
     ) {
       throw new Error(
         "Expected the field `text` to be a primitive type in the JSON string but got " +
-          data["text"]
+          data["text"],
       );
     }
     // ensure the json data is a string
@@ -114,7 +114,7 @@ class SlackBearerNotification {
     ) {
       throw new Error(
         "Expected the field `token` to be a primitive type in the JSON string but got " +
-          data["token"]
+          data["token"],
       );
     }
 

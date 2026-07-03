@@ -70,19 +70,19 @@ export default class ProjectApi {
   addDeviceToFleetsWithHttpInfo(
     projectOrProductUID,
     deviceUID,
-    addDeviceToFleetsRequest
+    addDeviceToFleetsRequest,
   ) {
     let postBody = addDeviceToFleetsRequest;
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling addDeviceToFleets"
+        "Missing the required parameter 'projectOrProductUID' when calling addDeviceToFleets",
       );
     }
     // verify the required parameter 'deviceUID' is set
     if (deviceUID === undefined || deviceUID === null) {
       throw new Error(
-        "Missing the required parameter 'deviceUID' when calling addDeviceToFleets"
+        "Missing the required parameter 'deviceUID' when calling addDeviceToFleets",
       );
     }
     // verify the required parameter 'addDeviceToFleetsRequest' is set
@@ -91,7 +91,7 @@ export default class ProjectApi {
       addDeviceToFleetsRequest === null
     ) {
       throw new Error(
-        "Missing the required parameter 'addDeviceToFleetsRequest' when calling addDeviceToFleets"
+        "Missing the required parameter 'addDeviceToFleetsRequest' when calling addDeviceToFleets",
       );
     }
 
@@ -119,7 +119,7 @@ export default class ProjectApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -134,7 +134,7 @@ export default class ProjectApi {
     return this.addDeviceToFleetsWithHttpInfo(
       projectOrProductUID,
       deviceUID,
-      addDeviceToFleetsRequest
+      addDeviceToFleetsRequest,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -151,13 +151,13 @@ export default class ProjectApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling cloneProject"
+        "Missing the required parameter 'projectOrProductUID' when calling cloneProject",
       );
     }
     // verify the required parameter 'cloneProjectRequest' is set
     if (cloneProjectRequest === undefined || cloneProjectRequest === null) {
       throw new Error(
-        "Missing the required parameter 'cloneProjectRequest' when calling cloneProject"
+        "Missing the required parameter 'cloneProjectRequest' when calling cloneProject",
       );
     }
 
@@ -184,7 +184,7 @@ export default class ProjectApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -197,7 +197,7 @@ export default class ProjectApi {
   cloneProject(projectOrProductUID, cloneProjectRequest) {
     return this.cloneProjectWithHttpInfo(
       projectOrProductUID,
-      cloneProjectRequest
+      cloneProjectRequest,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -214,13 +214,13 @@ export default class ProjectApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling createFleet"
+        "Missing the required parameter 'projectOrProductUID' when calling createFleet",
       );
     }
     // verify the required parameter 'createFleetRequest' is set
     if (createFleetRequest === undefined || createFleetRequest === null) {
       throw new Error(
-        "Missing the required parameter 'createFleetRequest' when calling createFleet"
+        "Missing the required parameter 'createFleetRequest' when calling createFleet",
       );
     }
 
@@ -247,7 +247,7 @@ export default class ProjectApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -260,7 +260,7 @@ export default class ProjectApi {
   createFleet(projectOrProductUID, createFleetRequest) {
     return this.createFleetWithHttpInfo(
       projectOrProductUID,
-      createFleetRequest
+      createFleetRequest,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -277,13 +277,13 @@ export default class ProjectApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling createProduct"
+        "Missing the required parameter 'projectOrProductUID' when calling createProduct",
       );
     }
     // verify the required parameter 'createProductRequest' is set
     if (createProductRequest === undefined || createProductRequest === null) {
       throw new Error(
-        "Missing the required parameter 'createProductRequest' when calling createProduct"
+        "Missing the required parameter 'createProductRequest' when calling createProduct",
       );
     }
 
@@ -310,7 +310,7 @@ export default class ProjectApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -323,7 +323,7 @@ export default class ProjectApi {
   createProduct(projectOrProductUID, createProductRequest) {
     return this.createProductWithHttpInfo(
       projectOrProductUID,
-      createProductRequest
+      createProductRequest,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -339,7 +339,7 @@ export default class ProjectApi {
     // verify the required parameter 'createProjectRequest' is set
     if (createProjectRequest === undefined || createProjectRequest === null) {
       throw new Error(
-        "Missing the required parameter 'createProjectRequest' when calling createProject"
+        "Missing the required parameter 'createProjectRequest' when calling createProject",
       );
     }
 
@@ -364,7 +364,7 @@ export default class ProjectApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -374,11 +374,11 @@ export default class ProjectApi {
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Project}
    */
   createProject(createProjectRequest) {
-    return this.createProjectWithHttpInfo(createProjectRequest).then(function (
-      response_and_data
-    ) {
-      return response_and_data.data;
-    });
+    return this.createProjectWithHttpInfo(createProjectRequest).then(
+      function (response_and_data) {
+        return response_and_data.data;
+      },
+    );
   }
 
   /**
@@ -389,13 +389,13 @@ export default class ProjectApi {
    */
   createProjectSecretWithHttpInfo(
     projectOrProductUID,
-    createProjectSecretRequest
+    createProjectSecretRequest,
   ) {
     let postBody = createProjectSecretRequest;
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling createProjectSecret"
+        "Missing the required parameter 'projectOrProductUID' when calling createProjectSecret",
       );
     }
     // verify the required parameter 'createProjectSecretRequest' is set
@@ -404,7 +404,7 @@ export default class ProjectApi {
       createProjectSecretRequest === null
     ) {
       throw new Error(
-        "Missing the required parameter 'createProjectSecretRequest' when calling createProjectSecret"
+        "Missing the required parameter 'createProjectSecretRequest' when calling createProjectSecret",
       );
     }
 
@@ -431,7 +431,7 @@ export default class ProjectApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -444,7 +444,7 @@ export default class ProjectApi {
   createProjectSecret(projectOrProductUID, createProjectSecretRequest) {
     return this.createProjectSecretWithHttpInfo(
       projectOrProductUID,
-      createProjectSecretRequest
+      createProjectSecretRequest,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -460,19 +460,19 @@ export default class ProjectApi {
   deleteDeviceFromFleetsWithHttpInfo(
     projectOrProductUID,
     deviceUID,
-    deleteDeviceFromFleetsRequest
+    deleteDeviceFromFleetsRequest,
   ) {
     let postBody = deleteDeviceFromFleetsRequest;
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling deleteDeviceFromFleets"
+        "Missing the required parameter 'projectOrProductUID' when calling deleteDeviceFromFleets",
       );
     }
     // verify the required parameter 'deviceUID' is set
     if (deviceUID === undefined || deviceUID === null) {
       throw new Error(
-        "Missing the required parameter 'deviceUID' when calling deleteDeviceFromFleets"
+        "Missing the required parameter 'deviceUID' when calling deleteDeviceFromFleets",
       );
     }
     // verify the required parameter 'deleteDeviceFromFleetsRequest' is set
@@ -481,7 +481,7 @@ export default class ProjectApi {
       deleteDeviceFromFleetsRequest === null
     ) {
       throw new Error(
-        "Missing the required parameter 'deleteDeviceFromFleetsRequest' when calling deleteDeviceFromFleets"
+        "Missing the required parameter 'deleteDeviceFromFleetsRequest' when calling deleteDeviceFromFleets",
       );
     }
 
@@ -509,7 +509,7 @@ export default class ProjectApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -523,12 +523,12 @@ export default class ProjectApi {
   deleteDeviceFromFleets(
     projectOrProductUID,
     deviceUID,
-    deleteDeviceFromFleetsRequest
+    deleteDeviceFromFleetsRequest,
   ) {
     return this.deleteDeviceFromFleetsWithHttpInfo(
       projectOrProductUID,
       deviceUID,
-      deleteDeviceFromFleetsRequest
+      deleteDeviceFromFleetsRequest,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -546,19 +546,19 @@ export default class ProjectApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling deleteFirmware"
+        "Missing the required parameter 'projectOrProductUID' when calling deleteFirmware",
       );
     }
     // verify the required parameter 'firmwareType' is set
     if (firmwareType === undefined || firmwareType === null) {
       throw new Error(
-        "Missing the required parameter 'firmwareType' when calling deleteFirmware"
+        "Missing the required parameter 'firmwareType' when calling deleteFirmware",
       );
     }
     // verify the required parameter 'filename' is set
     if (filename === undefined || filename === null) {
       throw new Error(
-        "Missing the required parameter 'filename' when calling deleteFirmware"
+        "Missing the required parameter 'filename' when calling deleteFirmware",
       );
     }
 
@@ -587,7 +587,7 @@ export default class ProjectApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -602,7 +602,7 @@ export default class ProjectApi {
     return this.deleteFirmwareWithHttpInfo(
       projectOrProductUID,
       firmwareType,
-      filename
+      filename,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -619,13 +619,13 @@ export default class ProjectApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling deleteFleet"
+        "Missing the required parameter 'projectOrProductUID' when calling deleteFleet",
       );
     }
     // verify the required parameter 'fleetUID' is set
     if (fleetUID === undefined || fleetUID === null) {
       throw new Error(
-        "Missing the required parameter 'fleetUID' when calling deleteFleet"
+        "Missing the required parameter 'fleetUID' when calling deleteFleet",
       );
     }
 
@@ -653,7 +653,7 @@ export default class ProjectApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -667,7 +667,7 @@ export default class ProjectApi {
     return this.deleteFleetWithHttpInfo(projectOrProductUID, fleetUID).then(
       function (response_and_data) {
         return response_and_data.data;
-      }
+      },
     );
   }
 
@@ -681,25 +681,25 @@ export default class ProjectApi {
   deleteFleetEnvironmentVariableWithHttpInfo(
     projectOrProductUID,
     fleetUID,
-    key
+    key,
   ) {
     let postBody = null;
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling deleteFleetEnvironmentVariable"
+        "Missing the required parameter 'projectOrProductUID' when calling deleteFleetEnvironmentVariable",
       );
     }
     // verify the required parameter 'fleetUID' is set
     if (fleetUID === undefined || fleetUID === null) {
       throw new Error(
-        "Missing the required parameter 'fleetUID' when calling deleteFleetEnvironmentVariable"
+        "Missing the required parameter 'fleetUID' when calling deleteFleetEnvironmentVariable",
       );
     }
     // verify the required parameter 'key' is set
     if (key === undefined || key === null) {
       throw new Error(
-        "Missing the required parameter 'key' when calling deleteFleetEnvironmentVariable"
+        "Missing the required parameter 'key' when calling deleteFleetEnvironmentVariable",
       );
     }
 
@@ -728,7 +728,7 @@ export default class ProjectApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -743,7 +743,7 @@ export default class ProjectApi {
     return this.deleteFleetEnvironmentVariableWithHttpInfo(
       projectOrProductUID,
       fleetUID,
-      key
+      key,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -760,13 +760,13 @@ export default class ProjectApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling deleteProduct"
+        "Missing the required parameter 'projectOrProductUID' when calling deleteProduct",
       );
     }
     // verify the required parameter 'productUID' is set
     if (productUID === undefined || productUID === null) {
       throw new Error(
-        "Missing the required parameter 'productUID' when calling deleteProduct"
+        "Missing the required parameter 'productUID' when calling deleteProduct",
       );
     }
 
@@ -794,7 +794,7 @@ export default class ProjectApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -808,7 +808,7 @@ export default class ProjectApi {
     return this.deleteProductWithHttpInfo(projectOrProductUID, productUID).then(
       function (response_and_data) {
         return response_and_data.data;
-      }
+      },
     );
   }
 
@@ -822,7 +822,7 @@ export default class ProjectApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling deleteProject"
+        "Missing the required parameter 'projectOrProductUID' when calling deleteProject",
       );
     }
 
@@ -849,7 +849,7 @@ export default class ProjectApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -859,11 +859,11 @@ export default class ProjectApi {
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}
    */
   deleteProject(projectOrProductUID) {
-    return this.deleteProjectWithHttpInfo(projectOrProductUID).then(function (
-      response_and_data
-    ) {
-      return response_and_data.data;
-    });
+    return this.deleteProjectWithHttpInfo(projectOrProductUID).then(
+      function (response_and_data) {
+        return response_and_data.data;
+      },
+    );
   }
 
   /**
@@ -877,13 +877,13 @@ export default class ProjectApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling deleteProjectEnvironmentVariable"
+        "Missing the required parameter 'projectOrProductUID' when calling deleteProjectEnvironmentVariable",
       );
     }
     // verify the required parameter 'key' is set
     if (key === undefined || key === null) {
       throw new Error(
-        "Missing the required parameter 'key' when calling deleteProjectEnvironmentVariable"
+        "Missing the required parameter 'key' when calling deleteProjectEnvironmentVariable",
       );
     }
 
@@ -911,7 +911,7 @@ export default class ProjectApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -924,7 +924,7 @@ export default class ProjectApi {
   deleteProjectEnvironmentVariable(projectOrProductUID, key) {
     return this.deleteProjectEnvironmentVariableWithHttpInfo(
       projectOrProductUID,
-      key
+      key,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -941,13 +941,13 @@ export default class ProjectApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling deleteProjectSecret"
+        "Missing the required parameter 'projectOrProductUID' when calling deleteProjectSecret",
       );
     }
     // verify the required parameter 'secretName' is set
     if (secretName === undefined || secretName === null) {
       throw new Error(
-        "Missing the required parameter 'secretName' when calling deleteProjectSecret"
+        "Missing the required parameter 'secretName' when calling deleteProjectSecret",
       );
     }
 
@@ -975,7 +975,7 @@ export default class ProjectApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -988,7 +988,7 @@ export default class ProjectApi {
   deleteProjectSecret(projectOrProductUID, secretName) {
     return this.deleteProjectSecretWithHttpInfo(
       projectOrProductUID,
-      secretName
+      secretName,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -1004,7 +1004,7 @@ export default class ProjectApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling disableGlobalEventTransformation"
+        "Missing the required parameter 'projectOrProductUID' when calling disableGlobalEventTransformation",
       );
     }
 
@@ -1031,7 +1031,7 @@ export default class ProjectApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -1042,7 +1042,7 @@ export default class ProjectApi {
    */
   disableGlobalEventTransformation(projectOrProductUID) {
     return this.disableGlobalEventTransformationWithHttpInfo(
-      projectOrProductUID
+      projectOrProductUID,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -1060,19 +1060,19 @@ export default class ProjectApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling downloadFirmware"
+        "Missing the required parameter 'projectOrProductUID' when calling downloadFirmware",
       );
     }
     // verify the required parameter 'firmwareType' is set
     if (firmwareType === undefined || firmwareType === null) {
       throw new Error(
-        "Missing the required parameter 'firmwareType' when calling downloadFirmware"
+        "Missing the required parameter 'firmwareType' when calling downloadFirmware",
       );
     }
     // verify the required parameter 'filename' is set
     if (filename === undefined || filename === null) {
       throw new Error(
-        "Missing the required parameter 'filename' when calling downloadFirmware"
+        "Missing the required parameter 'filename' when calling downloadFirmware",
       );
     }
 
@@ -1101,7 +1101,7 @@ export default class ProjectApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -1116,7 +1116,7 @@ export default class ProjectApi {
     return this.downloadFirmwareWithHttpInfo(
       projectOrProductUID,
       firmwareType,
-      filename
+      filename,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -1132,7 +1132,7 @@ export default class ProjectApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling enableGlobalEventTransformation"
+        "Missing the required parameter 'projectOrProductUID' when calling enableGlobalEventTransformation",
       );
     }
 
@@ -1159,7 +1159,7 @@ export default class ProjectApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -1170,7 +1170,7 @@ export default class ProjectApi {
    */
   enableGlobalEventTransformation(projectOrProductUID) {
     return this.enableGlobalEventTransformationWithHttpInfo(
-      projectOrProductUID
+      projectOrProductUID,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -1187,7 +1187,7 @@ export default class ProjectApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling getAWSRoleConfig"
+        "Missing the required parameter 'projectOrProductUID' when calling getAWSRoleConfig",
       );
     }
 
@@ -1214,7 +1214,7 @@ export default class ProjectApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -1228,7 +1228,7 @@ export default class ProjectApi {
     return this.getAWSRoleConfigWithHttpInfo(projectOrProductUID).then(
       function (response_and_data) {
         return response_and_data.data;
-      }
+      },
     );
   }
 
@@ -1242,25 +1242,25 @@ export default class ProjectApi {
   getDeviceDfuHistoryWithHttpInfo(
     projectOrProductUID,
     deviceUID,
-    firmwareType
+    firmwareType,
   ) {
     let postBody = null;
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling getDeviceDfuHistory"
+        "Missing the required parameter 'projectOrProductUID' when calling getDeviceDfuHistory",
       );
     }
     // verify the required parameter 'deviceUID' is set
     if (deviceUID === undefined || deviceUID === null) {
       throw new Error(
-        "Missing the required parameter 'deviceUID' when calling getDeviceDfuHistory"
+        "Missing the required parameter 'deviceUID' when calling getDeviceDfuHistory",
       );
     }
     // verify the required parameter 'firmwareType' is set
     if (firmwareType === undefined || firmwareType === null) {
       throw new Error(
-        "Missing the required parameter 'firmwareType' when calling getDeviceDfuHistory"
+        "Missing the required parameter 'firmwareType' when calling getDeviceDfuHistory",
       );
     }
 
@@ -1289,7 +1289,7 @@ export default class ProjectApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -1304,7 +1304,7 @@ export default class ProjectApi {
     return this.getDeviceDfuHistoryWithHttpInfo(
       projectOrProductUID,
       deviceUID,
-      firmwareType
+      firmwareType,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -1322,19 +1322,19 @@ export default class ProjectApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling getDeviceDfuStatus"
+        "Missing the required parameter 'projectOrProductUID' when calling getDeviceDfuStatus",
       );
     }
     // verify the required parameter 'deviceUID' is set
     if (deviceUID === undefined || deviceUID === null) {
       throw new Error(
-        "Missing the required parameter 'deviceUID' when calling getDeviceDfuStatus"
+        "Missing the required parameter 'deviceUID' when calling getDeviceDfuStatus",
       );
     }
     // verify the required parameter 'firmwareType' is set
     if (firmwareType === undefined || firmwareType === null) {
       throw new Error(
-        "Missing the required parameter 'firmwareType' when calling getDeviceDfuStatus"
+        "Missing the required parameter 'firmwareType' when calling getDeviceDfuStatus",
       );
     }
 
@@ -1363,7 +1363,7 @@ export default class ProjectApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -1378,7 +1378,7 @@ export default class ProjectApi {
     return this.getDeviceDfuStatusWithHttpInfo(
       projectOrProductUID,
       deviceUID,
-      firmwareType
+      firmwareType,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -1395,13 +1395,13 @@ export default class ProjectApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling getDeviceFleets"
+        "Missing the required parameter 'projectOrProductUID' when calling getDeviceFleets",
       );
     }
     // verify the required parameter 'deviceUID' is set
     if (deviceUID === undefined || deviceUID === null) {
       throw new Error(
-        "Missing the required parameter 'deviceUID' when calling getDeviceFleets"
+        "Missing the required parameter 'deviceUID' when calling getDeviceFleets",
       );
     }
 
@@ -1429,7 +1429,7 @@ export default class ProjectApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -1442,7 +1442,7 @@ export default class ProjectApi {
   getDeviceFleets(projectOrProductUID, deviceUID) {
     return this.getDeviceFleetsWithHttpInfo(
       projectOrProductUID,
-      deviceUID
+      deviceUID,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -1474,13 +1474,13 @@ export default class ProjectApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling getDevicesDfuHistory"
+        "Missing the required parameter 'projectOrProductUID' when calling getDevicesDfuHistory",
       );
     }
     // verify the required parameter 'firmwareType' is set
     if (firmwareType === undefined || firmwareType === null) {
       throw new Error(
-        "Missing the required parameter 'firmwareType' when calling getDevicesDfuHistory"
+        "Missing the required parameter 'firmwareType' when calling getDevicesDfuHistory",
       );
     }
 
@@ -1495,26 +1495,26 @@ export default class ProjectApi {
       sortOrder: opts["sortOrder"],
       deviceUID: this.apiClient.buildCollectionParam(
         opts["deviceUID"],
-        "multi"
+        "multi",
       ),
       tag: this.apiClient.buildCollectionParam(opts["tag"], "multi"),
       serialNumber: this.apiClient.buildCollectionParam(
         opts["serialNumber"],
-        "multi"
+        "multi",
       ),
       fleetUID: opts["fleetUID"],
       notecardFirmware: this.apiClient.buildCollectionParam(
         opts["notecardFirmware"],
-        "multi"
+        "multi",
       ),
       location: this.apiClient.buildCollectionParam(opts["location"], "multi"),
       hostFirmware: this.apiClient.buildCollectionParam(
         opts["hostFirmware"],
-        "multi"
+        "multi",
       ),
       productUID: this.apiClient.buildCollectionParam(
         opts["productUID"],
-        "multi"
+        "multi",
       ),
       sku: this.apiClient.buildCollectionParam(opts["sku"], "multi"),
     };
@@ -1537,7 +1537,7 @@ export default class ProjectApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -1565,7 +1565,7 @@ export default class ProjectApi {
     return this.getDevicesDfuHistoryWithHttpInfo(
       projectOrProductUID,
       firmwareType,
-      opts
+      opts,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -1597,13 +1597,13 @@ export default class ProjectApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling getDevicesDfuStatus"
+        "Missing the required parameter 'projectOrProductUID' when calling getDevicesDfuStatus",
       );
     }
     // verify the required parameter 'firmwareType' is set
     if (firmwareType === undefined || firmwareType === null) {
       throw new Error(
-        "Missing the required parameter 'firmwareType' when calling getDevicesDfuStatus"
+        "Missing the required parameter 'firmwareType' when calling getDevicesDfuStatus",
       );
     }
 
@@ -1618,26 +1618,26 @@ export default class ProjectApi {
       sortOrder: opts["sortOrder"],
       deviceUID: this.apiClient.buildCollectionParam(
         opts["deviceUID"],
-        "multi"
+        "multi",
       ),
       tag: this.apiClient.buildCollectionParam(opts["tag"], "multi"),
       serialNumber: this.apiClient.buildCollectionParam(
         opts["serialNumber"],
-        "multi"
+        "multi",
       ),
       fleetUID: opts["fleetUID"],
       notecardFirmware: this.apiClient.buildCollectionParam(
         opts["notecardFirmware"],
-        "multi"
+        "multi",
       ),
       location: this.apiClient.buildCollectionParam(opts["location"], "multi"),
       hostFirmware: this.apiClient.buildCollectionParam(
         opts["hostFirmware"],
-        "multi"
+        "multi",
       ),
       productUID: this.apiClient.buildCollectionParam(
         opts["productUID"],
-        "multi"
+        "multi",
       ),
       sku: this.apiClient.buildCollectionParam(opts["sku"], "multi"),
     };
@@ -1660,7 +1660,7 @@ export default class ProjectApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -1688,7 +1688,7 @@ export default class ProjectApi {
     return this.getDevicesDfuStatusWithHttpInfo(
       projectOrProductUID,
       firmwareType,
-      opts
+      opts,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -1715,7 +1715,7 @@ export default class ProjectApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling getFirmwareInfo"
+        "Missing the required parameter 'projectOrProductUID' when calling getFirmwareInfo",
       );
     }
 
@@ -1752,7 +1752,7 @@ export default class ProjectApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -1775,7 +1775,7 @@ export default class ProjectApi {
     return this.getFirmwareInfoWithHttpInfo(projectOrProductUID, opts).then(
       function (response_and_data) {
         return response_and_data.data;
-      }
+      },
     );
   }
 
@@ -1790,13 +1790,13 @@ export default class ProjectApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling getFleet"
+        "Missing the required parameter 'projectOrProductUID' when calling getFleet",
       );
     }
     // verify the required parameter 'fleetUID' is set
     if (fleetUID === undefined || fleetUID === null) {
       throw new Error(
-        "Missing the required parameter 'fleetUID' when calling getFleet"
+        "Missing the required parameter 'fleetUID' when calling getFleet",
       );
     }
 
@@ -1824,7 +1824,7 @@ export default class ProjectApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -1838,7 +1838,7 @@ export default class ProjectApi {
     return this.getFleetWithHttpInfo(projectOrProductUID, fleetUID).then(
       function (response_and_data) {
         return response_and_data.data;
-      }
+      },
     );
   }
 
@@ -1853,13 +1853,13 @@ export default class ProjectApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling getFleetEnvironmentHierarchy"
+        "Missing the required parameter 'projectOrProductUID' when calling getFleetEnvironmentHierarchy",
       );
     }
     // verify the required parameter 'fleetUID' is set
     if (fleetUID === undefined || fleetUID === null) {
       throw new Error(
-        "Missing the required parameter 'fleetUID' when calling getFleetEnvironmentHierarchy"
+        "Missing the required parameter 'fleetUID' when calling getFleetEnvironmentHierarchy",
       );
     }
 
@@ -1887,7 +1887,7 @@ export default class ProjectApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -1900,7 +1900,7 @@ export default class ProjectApi {
   getFleetEnvironmentHierarchy(projectOrProductUID, fleetUID) {
     return this.getFleetEnvironmentHierarchyWithHttpInfo(
       projectOrProductUID,
-      fleetUID
+      fleetUID,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -1917,13 +1917,13 @@ export default class ProjectApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling getFleetEnvironmentVariables"
+        "Missing the required parameter 'projectOrProductUID' when calling getFleetEnvironmentVariables",
       );
     }
     // verify the required parameter 'fleetUID' is set
     if (fleetUID === undefined || fleetUID === null) {
       throw new Error(
-        "Missing the required parameter 'fleetUID' when calling getFleetEnvironmentVariables"
+        "Missing the required parameter 'fleetUID' when calling getFleetEnvironmentVariables",
       );
     }
 
@@ -1951,7 +1951,7 @@ export default class ProjectApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -1964,7 +1964,7 @@ export default class ProjectApi {
   getFleetEnvironmentVariables(projectOrProductUID, fleetUID) {
     return this.getFleetEnvironmentVariablesWithHttpInfo(
       projectOrProductUID,
-      fleetUID
+      fleetUID,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -1980,7 +1980,7 @@ export default class ProjectApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling getFleets"
+        "Missing the required parameter 'projectOrProductUID' when calling getFleets",
       );
     }
 
@@ -2007,7 +2007,7 @@ export default class ProjectApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -2017,11 +2017,11 @@ export default class ProjectApi {
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetDeviceFleets200Response}
    */
   getFleets(projectOrProductUID) {
-    return this.getFleetsWithHttpInfo(projectOrProductUID).then(function (
-      response_and_data
-    ) {
-      return response_and_data.data;
-    });
+    return this.getFleetsWithHttpInfo(projectOrProductUID).then(
+      function (response_and_data) {
+        return response_and_data.data;
+      },
+    );
   }
 
   /**
@@ -2034,7 +2034,7 @@ export default class ProjectApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling getNotefileSchemas"
+        "Missing the required parameter 'projectOrProductUID' when calling getNotefileSchemas",
       );
     }
 
@@ -2061,7 +2061,7 @@ export default class ProjectApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -2074,7 +2074,7 @@ export default class ProjectApi {
     return this.getNotefileSchemasWithHttpInfo(projectOrProductUID).then(
       function (response_and_data) {
         return response_and_data.data;
-      }
+      },
     );
   }
 
@@ -2088,7 +2088,7 @@ export default class ProjectApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling getProducts"
+        "Missing the required parameter 'projectOrProductUID' when calling getProducts",
       );
     }
 
@@ -2115,7 +2115,7 @@ export default class ProjectApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -2125,11 +2125,11 @@ export default class ProjectApi {
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetProducts200Response}
    */
   getProducts(projectOrProductUID) {
-    return this.getProductsWithHttpInfo(projectOrProductUID).then(function (
-      response_and_data
-    ) {
-      return response_and_data.data;
-    });
+    return this.getProductsWithHttpInfo(projectOrProductUID).then(
+      function (response_and_data) {
+        return response_and_data.data;
+      },
+    );
   }
 
   /**
@@ -2142,7 +2142,7 @@ export default class ProjectApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling getProject"
+        "Missing the required parameter 'projectOrProductUID' when calling getProject",
       );
     }
 
@@ -2169,7 +2169,7 @@ export default class ProjectApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -2179,11 +2179,11 @@ export default class ProjectApi {
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Project}
    */
   getProject(projectOrProductUID) {
-    return this.getProjectWithHttpInfo(projectOrProductUID).then(function (
-      response_and_data
-    ) {
-      return response_and_data.data;
-    });
+    return this.getProjectWithHttpInfo(projectOrProductUID).then(
+      function (response_and_data) {
+        return response_and_data.data;
+      },
+    );
   }
 
   /**
@@ -2196,7 +2196,7 @@ export default class ProjectApi {
     // verify the required parameter 'productUID' is set
     if (productUID === undefined || productUID === null) {
       throw new Error(
-        "Missing the required parameter 'productUID' when calling getProjectByProduct"
+        "Missing the required parameter 'productUID' when calling getProjectByProduct",
       );
     }
 
@@ -2223,7 +2223,7 @@ export default class ProjectApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -2233,11 +2233,11 @@ export default class ProjectApi {
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Project}
    */
   getProjectByProduct(productUID) {
-    return this.getProjectByProductWithHttpInfo(productUID).then(function (
-      response_and_data
-    ) {
-      return response_and_data.data;
-    });
+    return this.getProjectByProductWithHttpInfo(productUID).then(
+      function (response_and_data) {
+        return response_and_data.data;
+      },
+    );
   }
 
   /**
@@ -2250,7 +2250,7 @@ export default class ProjectApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling getProjectEnvironmentHierarchy"
+        "Missing the required parameter 'projectOrProductUID' when calling getProjectEnvironmentHierarchy",
       );
     }
 
@@ -2277,7 +2277,7 @@ export default class ProjectApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -2288,7 +2288,7 @@ export default class ProjectApi {
    */
   getProjectEnvironmentHierarchy(projectOrProductUID) {
     return this.getProjectEnvironmentHierarchyWithHttpInfo(
-      projectOrProductUID
+      projectOrProductUID,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -2304,7 +2304,7 @@ export default class ProjectApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling getProjectEnvironmentVariables"
+        "Missing the required parameter 'projectOrProductUID' when calling getProjectEnvironmentVariables",
       );
     }
 
@@ -2331,7 +2331,7 @@ export default class ProjectApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -2342,7 +2342,7 @@ export default class ProjectApi {
    */
   getProjectEnvironmentVariables(projectOrProductUID) {
     return this.getProjectEnvironmentVariablesWithHttpInfo(
-      projectOrProductUID
+      projectOrProductUID,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -2358,7 +2358,7 @@ export default class ProjectApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling getProjectMembers"
+        "Missing the required parameter 'projectOrProductUID' when calling getProjectMembers",
       );
     }
 
@@ -2385,7 +2385,7 @@ export default class ProjectApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -2398,7 +2398,7 @@ export default class ProjectApi {
     return this.getProjectMembersWithHttpInfo(projectOrProductUID).then(
       function (response_and_data) {
         return response_and_data.data;
-      }
+      },
     );
   }
 
@@ -2412,7 +2412,7 @@ export default class ProjectApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling getProjectSecrets"
+        "Missing the required parameter 'projectOrProductUID' when calling getProjectSecrets",
       );
     }
 
@@ -2439,7 +2439,7 @@ export default class ProjectApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -2452,7 +2452,7 @@ export default class ProjectApi {
     return this.getProjectSecretsWithHttpInfo(projectOrProductUID).then(
       function (response_and_data) {
         return response_and_data.data;
-      }
+      },
     );
   }
 
@@ -2484,7 +2484,7 @@ export default class ProjectApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -2520,26 +2520,26 @@ export default class ProjectApi {
     projectOrProductUID,
     firmwareType,
     action,
-    opts
+    opts,
   ) {
     opts = opts || {};
     let postBody = opts["dfuActionRequest"];
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling performDfuAction"
+        "Missing the required parameter 'projectOrProductUID' when calling performDfuAction",
       );
     }
     // verify the required parameter 'firmwareType' is set
     if (firmwareType === undefined || firmwareType === null) {
       throw new Error(
-        "Missing the required parameter 'firmwareType' when calling performDfuAction"
+        "Missing the required parameter 'firmwareType' when calling performDfuAction",
       );
     }
     // verify the required parameter 'action' is set
     if (action === undefined || action === null) {
       throw new Error(
-        "Missing the required parameter 'action' when calling performDfuAction"
+        "Missing the required parameter 'action' when calling performDfuAction",
       );
     }
 
@@ -2551,26 +2551,26 @@ export default class ProjectApi {
     let queryParams = {
       deviceUID: this.apiClient.buildCollectionParam(
         opts["deviceUID"],
-        "multi"
+        "multi",
       ),
       tag: this.apiClient.buildCollectionParam(opts["tag"], "multi"),
       serialNumber: this.apiClient.buildCollectionParam(
         opts["serialNumber"],
-        "multi"
+        "multi",
       ),
       fleetUID: opts["fleetUID"],
       notecardFirmware: this.apiClient.buildCollectionParam(
         opts["notecardFirmware"],
-        "multi"
+        "multi",
       ),
       location: this.apiClient.buildCollectionParam(opts["location"], "multi"),
       hostFirmware: this.apiClient.buildCollectionParam(
         opts["hostFirmware"],
-        "multi"
+        "multi",
       ),
       productUID: this.apiClient.buildCollectionParam(
         opts["productUID"],
-        "multi"
+        "multi",
       ),
       sku: this.apiClient.buildCollectionParam(opts["sku"], "multi"),
     };
@@ -2593,7 +2593,7 @@ export default class ProjectApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -2620,7 +2620,7 @@ export default class ProjectApi {
       projectOrProductUID,
       firmwareType,
       action,
-      opts
+      opts,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -2636,25 +2636,25 @@ export default class ProjectApi {
   setFleetEnvironmentVariablesWithHttpInfo(
     projectOrProductUID,
     fleetUID,
-    environmentVariables
+    environmentVariables,
   ) {
     let postBody = environmentVariables;
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling setFleetEnvironmentVariables"
+        "Missing the required parameter 'projectOrProductUID' when calling setFleetEnvironmentVariables",
       );
     }
     // verify the required parameter 'fleetUID' is set
     if (fleetUID === undefined || fleetUID === null) {
       throw new Error(
-        "Missing the required parameter 'fleetUID' when calling setFleetEnvironmentVariables"
+        "Missing the required parameter 'fleetUID' when calling setFleetEnvironmentVariables",
       );
     }
     // verify the required parameter 'environmentVariables' is set
     if (environmentVariables === undefined || environmentVariables === null) {
       throw new Error(
-        "Missing the required parameter 'environmentVariables' when calling setFleetEnvironmentVariables"
+        "Missing the required parameter 'environmentVariables' when calling setFleetEnvironmentVariables",
       );
     }
 
@@ -2682,7 +2682,7 @@ export default class ProjectApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -2696,12 +2696,12 @@ export default class ProjectApi {
   setFleetEnvironmentVariables(
     projectOrProductUID,
     fleetUID,
-    environmentVariables
+    environmentVariables,
   ) {
     return this.setFleetEnvironmentVariablesWithHttpInfo(
       projectOrProductUID,
       fleetUID,
-      environmentVariables
+      environmentVariables,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -2718,13 +2718,13 @@ export default class ProjectApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling setGlobalEventTransformation"
+        "Missing the required parameter 'projectOrProductUID' when calling setGlobalEventTransformation",
       );
     }
     // verify the required parameter 'body' is set
     if (body === undefined || body === null) {
       throw new Error(
-        "Missing the required parameter 'body' when calling setGlobalEventTransformation"
+        "Missing the required parameter 'body' when calling setGlobalEventTransformation",
       );
     }
 
@@ -2751,7 +2751,7 @@ export default class ProjectApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -2764,7 +2764,7 @@ export default class ProjectApi {
   setGlobalEventTransformation(projectOrProductUID, body) {
     return this.setGlobalEventTransformationWithHttpInfo(
       projectOrProductUID,
-      body
+      body,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -2783,7 +2783,7 @@ export default class ProjectApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling setProjectEnvironmentVariables"
+        "Missing the required parameter 'projectOrProductUID' when calling setProjectEnvironmentVariables",
       );
     }
 
@@ -2810,7 +2810,7 @@ export default class ProjectApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -2824,7 +2824,7 @@ export default class ProjectApi {
   setProjectEnvironmentVariables(projectOrProductUID, opts) {
     return this.setProjectEnvironmentVariablesWithHttpInfo(
       projectOrProductUID,
-      opts
+      opts,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -2842,25 +2842,25 @@ export default class ProjectApi {
     projectOrProductUID,
     firmwareType,
     filename,
-    updateHostFirmwareRequest
+    updateHostFirmwareRequest,
   ) {
     let postBody = updateHostFirmwareRequest;
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling updateFirmware"
+        "Missing the required parameter 'projectOrProductUID' when calling updateFirmware",
       );
     }
     // verify the required parameter 'firmwareType' is set
     if (firmwareType === undefined || firmwareType === null) {
       throw new Error(
-        "Missing the required parameter 'firmwareType' when calling updateFirmware"
+        "Missing the required parameter 'firmwareType' when calling updateFirmware",
       );
     }
     // verify the required parameter 'filename' is set
     if (filename === undefined || filename === null) {
       throw new Error(
-        "Missing the required parameter 'filename' when calling updateFirmware"
+        "Missing the required parameter 'filename' when calling updateFirmware",
       );
     }
     // verify the required parameter 'updateHostFirmwareRequest' is set
@@ -2869,7 +2869,7 @@ export default class ProjectApi {
       updateHostFirmwareRequest === null
     ) {
       throw new Error(
-        "Missing the required parameter 'updateHostFirmwareRequest' when calling updateFirmware"
+        "Missing the required parameter 'updateHostFirmwareRequest' when calling updateFirmware",
       );
     }
 
@@ -2898,7 +2898,7 @@ export default class ProjectApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -2914,13 +2914,13 @@ export default class ProjectApi {
     projectOrProductUID,
     firmwareType,
     filename,
-    updateHostFirmwareRequest
+    updateHostFirmwareRequest,
   ) {
     return this.updateFirmwareWithHttpInfo(
       projectOrProductUID,
       firmwareType,
       filename,
-      updateHostFirmwareRequest
+      updateHostFirmwareRequest,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -2938,19 +2938,19 @@ export default class ProjectApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling updateFleet"
+        "Missing the required parameter 'projectOrProductUID' when calling updateFleet",
       );
     }
     // verify the required parameter 'fleetUID' is set
     if (fleetUID === undefined || fleetUID === null) {
       throw new Error(
-        "Missing the required parameter 'fleetUID' when calling updateFleet"
+        "Missing the required parameter 'fleetUID' when calling updateFleet",
       );
     }
     // verify the required parameter 'updateFleetRequest' is set
     if (updateFleetRequest === undefined || updateFleetRequest === null) {
       throw new Error(
-        "Missing the required parameter 'updateFleetRequest' when calling updateFleet"
+        "Missing the required parameter 'updateFleetRequest' when calling updateFleet",
       );
     }
 
@@ -2978,7 +2978,7 @@ export default class ProjectApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -2993,7 +2993,7 @@ export default class ProjectApi {
     return this.updateFleetWithHttpInfo(
       projectOrProductUID,
       fleetUID,
-      updateFleetRequest
+      updateFleetRequest,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -3009,19 +3009,19 @@ export default class ProjectApi {
   updateProjectSecretWithHttpInfo(
     projectOrProductUID,
     secretName,
-    updateProjectSecretRequest
+    updateProjectSecretRequest,
   ) {
     let postBody = updateProjectSecretRequest;
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling updateProjectSecret"
+        "Missing the required parameter 'projectOrProductUID' when calling updateProjectSecret",
       );
     }
     // verify the required parameter 'secretName' is set
     if (secretName === undefined || secretName === null) {
       throw new Error(
-        "Missing the required parameter 'secretName' when calling updateProjectSecret"
+        "Missing the required parameter 'secretName' when calling updateProjectSecret",
       );
     }
     // verify the required parameter 'updateProjectSecretRequest' is set
@@ -3030,7 +3030,7 @@ export default class ProjectApi {
       updateProjectSecretRequest === null
     ) {
       throw new Error(
-        "Missing the required parameter 'updateProjectSecretRequest' when calling updateProjectSecret"
+        "Missing the required parameter 'updateProjectSecretRequest' when calling updateProjectSecret",
       );
     }
 
@@ -3058,7 +3058,7 @@ export default class ProjectApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -3072,12 +3072,12 @@ export default class ProjectApi {
   updateProjectSecret(
     projectOrProductUID,
     secretName,
-    updateProjectSecretRequest
+    updateProjectSecretRequest,
   ) {
     return this.updateProjectSecretWithHttpInfo(
       projectOrProductUID,
       secretName,
-      updateProjectSecretRequest
+      updateProjectSecretRequest,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -3099,32 +3099,32 @@ export default class ProjectApi {
     firmwareType,
     filename,
     body,
-    opts
+    opts,
   ) {
     opts = opts || {};
     let postBody = body;
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling uploadFirmware"
+        "Missing the required parameter 'projectOrProductUID' when calling uploadFirmware",
       );
     }
     // verify the required parameter 'firmwareType' is set
     if (firmwareType === undefined || firmwareType === null) {
       throw new Error(
-        "Missing the required parameter 'firmwareType' when calling uploadFirmware"
+        "Missing the required parameter 'firmwareType' when calling uploadFirmware",
       );
     }
     // verify the required parameter 'filename' is set
     if (filename === undefined || filename === null) {
       throw new Error(
-        "Missing the required parameter 'filename' when calling uploadFirmware"
+        "Missing the required parameter 'filename' when calling uploadFirmware",
       );
     }
     // verify the required parameter 'body' is set
     if (body === undefined || body === null) {
       throw new Error(
-        "Missing the required parameter 'body' when calling uploadFirmware"
+        "Missing the required parameter 'body' when calling uploadFirmware",
       );
     }
 
@@ -3156,7 +3156,7 @@ export default class ProjectApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -3177,7 +3177,7 @@ export default class ProjectApi {
       firmwareType,
       filename,
       body,
-      opts
+      opts,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });

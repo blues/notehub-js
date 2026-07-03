@@ -43,12 +43,12 @@ let notehubRoute = {
 apiInstance.createRoute(projectOrProductUID, notehubRoute).then(
   (data) => {
     console.log(
-      "API called successfully. Returned data: " + JSON.stringify(data)
+      "API called successfully. Returned data: " + JSON.stringify(data),
     );
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -95,7 +95,7 @@ apiInstance.deleteRoute(projectOrProductUID, routeUID).then(
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -139,12 +139,12 @@ let routeUID = "route:cbd20093cba58392c9f9bbdd0cdeb1a0"; // String |
 apiInstance.getRoute(projectOrProductUID, routeUID).then(
   (data) => {
     console.log(
-      "API called successfully. Returned data: " + JSON.stringify(data)
+      "API called successfully. Returned data: " + JSON.stringify(data),
     );
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -202,12 +202,12 @@ let opts = {
 apiInstance.getRouteLogsByRoute(projectOrProductUID, routeUID, opts).then(
   (data) => {
     console.log(
-      "API called successfully. Returned data: " + JSON.stringify(data)
+      "API called successfully. Returned data: " + JSON.stringify(data),
     );
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -262,12 +262,12 @@ let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String 
 apiInstance.getRoutes(projectOrProductUID).then(
   (data) => {
     console.log(
-      "API called successfully. Returned data: " + JSON.stringify(data)
+      "API called successfully. Returned data: " + JSON.stringify(data),
     );
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 

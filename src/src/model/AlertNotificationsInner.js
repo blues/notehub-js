@@ -48,13 +48,13 @@ class AlertNotificationsInner {
       if (data.hasOwnProperty("notification_type")) {
         obj["notification_type"] = ApiClient.convertToType(
           data["notification_type"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("recipients")) {
         obj["recipients"] = ApiClient.convertToType(
           data["recipients"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("status")) {
@@ -82,7 +82,7 @@ class AlertNotificationsInner {
     ) {
       throw new Error(
         "Expected the field `notification_type` to be a primitive type in the JSON string but got " +
-          data["notification_type"]
+          data["notification_type"],
       );
     }
     // ensure the json data is a string
@@ -95,7 +95,7 @@ class AlertNotificationsInner {
     ) {
       throw new Error(
         "Expected the field `recipients` to be a primitive type in the JSON string but got " +
-          data["recipients"]
+          data["recipients"],
       );
     }
 

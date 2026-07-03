@@ -52,7 +52,7 @@ class Filter {
       if (data.hasOwnProperty("system_notefiles")) {
         obj["system_notefiles"] = ApiClient.convertToType(
           data["system_notefiles"],
-          "Boolean"
+          "Boolean",
         );
       }
       if (data.hasOwnProperty("type")) {
@@ -74,7 +74,7 @@ class Filter {
     if (!Array.isArray(data["files"])) {
       throw new Error(
         "Expected the field `files` to be an array in the JSON data but got " +
-          data["files"]
+          data["files"],
       );
     }
     // ensure the json data is a string
@@ -84,7 +84,7 @@ class Filter {
     ) {
       throw new Error(
         "Expected the field `type` to be a primitive type in the JSON string but got " +
-          data["type"]
+          data["type"],
       );
     }
 

@@ -53,7 +53,7 @@ class UserDfuStateMachine {
       if (data.hasOwnProperty("from_version")) {
         obj["from_version"] = ApiClient.convertToType(
           data["from_version"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("metadata")) {
@@ -61,7 +61,7 @@ class UserDfuStateMachine {
       }
       if (data.hasOwnProperty("status")) {
         obj["status"] = UserDfuStateMachineStatus.constructFromObject(
-          data["status"]
+          data["status"],
         );
       }
     } else if (data === null) {
@@ -86,7 +86,7 @@ class UserDfuStateMachine {
     ) {
       throw new Error(
         "Expected the field `from_version` to be a primitive type in the JSON string but got " +
-          data["from_version"]
+          data["from_version"],
       );
     }
     // validate the optional field `metadata`

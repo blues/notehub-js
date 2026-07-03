@@ -56,7 +56,7 @@ class Project {
 
       if (data.hasOwnProperty("administrative_contact")) {
         obj["administrative_contact"] = Contact.constructFromObject(
-          data["administrative_contact"]
+          data["administrative_contact"],
         );
       }
       if (data.hasOwnProperty("created")) {
@@ -70,7 +70,7 @@ class Project {
       }
       if (data.hasOwnProperty("technical_contact")) {
         obj["technical_contact"] = Contact.constructFromObject(
-          data["technical_contact"]
+          data["technical_contact"],
         );
       }
       if (data.hasOwnProperty("uid")) {
@@ -95,7 +95,7 @@ class Project {
           "The required field `" +
             property +
             "` is not found in the JSON data: " +
-            JSON.stringify(data)
+            JSON.stringify(data),
         );
       }
     }
@@ -111,7 +111,7 @@ class Project {
     ) {
       throw new Error(
         "Expected the field `label` to be a primitive type in the JSON string but got " +
-          data["label"]
+          data["label"],
       );
     }
     // validate the optional field `technical_contact`
@@ -126,7 +126,7 @@ class Project {
     ) {
       throw new Error(
         "Expected the field `uid` to be a primitive type in the JSON string but got " +
-          data["uid"]
+          data["uid"],
       );
     }
 

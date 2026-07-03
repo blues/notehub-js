@@ -66,37 +66,37 @@ export default class DeviceApi {
     deviceUID,
     notefileID,
     noteID,
-    noteInput
+    noteInput,
   ) {
     let postBody = noteInput;
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling addDbNote"
+        "Missing the required parameter 'projectOrProductUID' when calling addDbNote",
       );
     }
     // verify the required parameter 'deviceUID' is set
     if (deviceUID === undefined || deviceUID === null) {
       throw new Error(
-        "Missing the required parameter 'deviceUID' when calling addDbNote"
+        "Missing the required parameter 'deviceUID' when calling addDbNote",
       );
     }
     // verify the required parameter 'notefileID' is set
     if (notefileID === undefined || notefileID === null) {
       throw new Error(
-        "Missing the required parameter 'notefileID' when calling addDbNote"
+        "Missing the required parameter 'notefileID' when calling addDbNote",
       );
     }
     // verify the required parameter 'noteID' is set
     if (noteID === undefined || noteID === null) {
       throw new Error(
-        "Missing the required parameter 'noteID' when calling addDbNote"
+        "Missing the required parameter 'noteID' when calling addDbNote",
       );
     }
     // verify the required parameter 'noteInput' is set
     if (noteInput === undefined || noteInput === null) {
       throw new Error(
-        "Missing the required parameter 'noteInput' when calling addDbNote"
+        "Missing the required parameter 'noteInput' when calling addDbNote",
       );
     }
 
@@ -126,7 +126,7 @@ export default class DeviceApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -145,7 +145,7 @@ export default class DeviceApi {
       deviceUID,
       notefileID,
       noteID,
-      noteInput
+      noteInput,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -164,25 +164,25 @@ export default class DeviceApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling addQiNote"
+        "Missing the required parameter 'projectOrProductUID' when calling addQiNote",
       );
     }
     // verify the required parameter 'deviceUID' is set
     if (deviceUID === undefined || deviceUID === null) {
       throw new Error(
-        "Missing the required parameter 'deviceUID' when calling addQiNote"
+        "Missing the required parameter 'deviceUID' when calling addQiNote",
       );
     }
     // verify the required parameter 'notefileID' is set
     if (notefileID === undefined || notefileID === null) {
       throw new Error(
-        "Missing the required parameter 'notefileID' when calling addQiNote"
+        "Missing the required parameter 'notefileID' when calling addQiNote",
       );
     }
     // verify the required parameter 'noteInput' is set
     if (noteInput === undefined || noteInput === null) {
       throw new Error(
-        "Missing the required parameter 'noteInput' when calling addQiNote"
+        "Missing the required parameter 'noteInput' when calling addQiNote",
       );
     }
 
@@ -211,7 +211,7 @@ export default class DeviceApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -228,7 +228,7 @@ export default class DeviceApi {
       projectOrProductUID,
       deviceUID,
       notefileID,
-      noteInput
+      noteInput,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -246,19 +246,19 @@ export default class DeviceApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling createNotefile"
+        "Missing the required parameter 'projectOrProductUID' when calling createNotefile",
       );
     }
     // verify the required parameter 'deviceUID' is set
     if (deviceUID === undefined || deviceUID === null) {
       throw new Error(
-        "Missing the required parameter 'deviceUID' when calling createNotefile"
+        "Missing the required parameter 'deviceUID' when calling createNotefile",
       );
     }
     // verify the required parameter 'notefileID' is set
     if (notefileID === undefined || notefileID === null) {
       throw new Error(
-        "Missing the required parameter 'notefileID' when calling createNotefile"
+        "Missing the required parameter 'notefileID' when calling createNotefile",
       );
     }
 
@@ -287,7 +287,7 @@ export default class DeviceApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -302,7 +302,7 @@ export default class DeviceApi {
     return this.createNotefileWithHttpInfo(
       projectOrProductUID,
       deviceUID,
-      notefileID
+      notefileID,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -319,13 +319,13 @@ export default class DeviceApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling deleteDevice"
+        "Missing the required parameter 'projectOrProductUID' when calling deleteDevice",
       );
     }
     // verify the required parameter 'deviceUID' is set
     if (deviceUID === undefined || deviceUID === null) {
       throw new Error(
-        "Missing the required parameter 'deviceUID' when calling deleteDevice"
+        "Missing the required parameter 'deviceUID' when calling deleteDevice",
       );
     }
 
@@ -353,7 +353,7 @@ export default class DeviceApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -367,7 +367,7 @@ export default class DeviceApi {
     return this.deleteDeviceWithHttpInfo(projectOrProductUID, deviceUID).then(
       function (response_and_data) {
         return response_and_data.data;
-      }
+      },
     );
   }
 
@@ -381,25 +381,25 @@ export default class DeviceApi {
   deleteDeviceEnvironmentVariableWithHttpInfo(
     projectOrProductUID,
     deviceUID,
-    key
+    key,
   ) {
     let postBody = null;
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling deleteDeviceEnvironmentVariable"
+        "Missing the required parameter 'projectOrProductUID' when calling deleteDeviceEnvironmentVariable",
       );
     }
     // verify the required parameter 'deviceUID' is set
     if (deviceUID === undefined || deviceUID === null) {
       throw new Error(
-        "Missing the required parameter 'deviceUID' when calling deleteDeviceEnvironmentVariable"
+        "Missing the required parameter 'deviceUID' when calling deleteDeviceEnvironmentVariable",
       );
     }
     // verify the required parameter 'key' is set
     if (key === undefined || key === null) {
       throw new Error(
-        "Missing the required parameter 'key' when calling deleteDeviceEnvironmentVariable"
+        "Missing the required parameter 'key' when calling deleteDeviceEnvironmentVariable",
       );
     }
 
@@ -428,7 +428,7 @@ export default class DeviceApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -443,7 +443,7 @@ export default class DeviceApi {
     return this.deleteDeviceEnvironmentVariableWithHttpInfo(
       projectOrProductUID,
       deviceUID,
-      key
+      key,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -462,25 +462,25 @@ export default class DeviceApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling deleteNote"
+        "Missing the required parameter 'projectOrProductUID' when calling deleteNote",
       );
     }
     // verify the required parameter 'deviceUID' is set
     if (deviceUID === undefined || deviceUID === null) {
       throw new Error(
-        "Missing the required parameter 'deviceUID' when calling deleteNote"
+        "Missing the required parameter 'deviceUID' when calling deleteNote",
       );
     }
     // verify the required parameter 'notefileID' is set
     if (notefileID === undefined || notefileID === null) {
       throw new Error(
-        "Missing the required parameter 'notefileID' when calling deleteNote"
+        "Missing the required parameter 'notefileID' when calling deleteNote",
       );
     }
     // verify the required parameter 'noteID' is set
     if (noteID === undefined || noteID === null) {
       throw new Error(
-        "Missing the required parameter 'noteID' when calling deleteNote"
+        "Missing the required parameter 'noteID' when calling deleteNote",
       );
     }
 
@@ -510,7 +510,7 @@ export default class DeviceApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -527,7 +527,7 @@ export default class DeviceApi {
       projectOrProductUID,
       deviceUID,
       notefileID,
-      noteID
+      noteID,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -543,19 +543,19 @@ export default class DeviceApi {
   deleteNotefilesWithHttpInfo(
     projectOrProductUID,
     deviceUID,
-    deleteNotefilesRequest
+    deleteNotefilesRequest,
   ) {
     let postBody = deleteNotefilesRequest;
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling deleteNotefiles"
+        "Missing the required parameter 'projectOrProductUID' when calling deleteNotefiles",
       );
     }
     // verify the required parameter 'deviceUID' is set
     if (deviceUID === undefined || deviceUID === null) {
       throw new Error(
-        "Missing the required parameter 'deviceUID' when calling deleteNotefiles"
+        "Missing the required parameter 'deviceUID' when calling deleteNotefiles",
       );
     }
     // verify the required parameter 'deleteNotefilesRequest' is set
@@ -564,7 +564,7 @@ export default class DeviceApi {
       deleteNotefilesRequest === null
     ) {
       throw new Error(
-        "Missing the required parameter 'deleteNotefilesRequest' when calling deleteNotefiles"
+        "Missing the required parameter 'deleteNotefilesRequest' when calling deleteNotefiles",
       );
     }
 
@@ -592,7 +592,7 @@ export default class DeviceApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -607,7 +607,7 @@ export default class DeviceApi {
     return this.deleteNotefilesWithHttpInfo(
       projectOrProductUID,
       deviceUID,
-      deleteNotefilesRequest
+      deleteNotefilesRequest,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -624,13 +624,13 @@ export default class DeviceApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling disableDevice"
+        "Missing the required parameter 'projectOrProductUID' when calling disableDevice",
       );
     }
     // verify the required parameter 'deviceUID' is set
     if (deviceUID === undefined || deviceUID === null) {
       throw new Error(
-        "Missing the required parameter 'deviceUID' when calling disableDevice"
+        "Missing the required parameter 'deviceUID' when calling disableDevice",
       );
     }
 
@@ -658,7 +658,7 @@ export default class DeviceApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -672,7 +672,7 @@ export default class DeviceApi {
     return this.disableDeviceWithHttpInfo(projectOrProductUID, deviceUID).then(
       function (response_and_data) {
         return response_and_data.data;
-      }
+      },
     );
   }
 
@@ -687,13 +687,13 @@ export default class DeviceApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling enableDevice"
+        "Missing the required parameter 'projectOrProductUID' when calling enableDevice",
       );
     }
     // verify the required parameter 'deviceUID' is set
     if (deviceUID === undefined || deviceUID === null) {
       throw new Error(
-        "Missing the required parameter 'deviceUID' when calling enableDevice"
+        "Missing the required parameter 'deviceUID' when calling enableDevice",
       );
     }
 
@@ -721,7 +721,7 @@ export default class DeviceApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -735,7 +735,7 @@ export default class DeviceApi {
     return this.enableDeviceWithHttpInfo(projectOrProductUID, deviceUID).then(
       function (response_and_data) {
         return response_and_data.data;
-      }
+      },
     );
   }
 
@@ -755,32 +755,32 @@ export default class DeviceApi {
     deviceUID,
     notefileID,
     noteID,
-    opts
+    opts,
   ) {
     opts = opts || {};
     let postBody = null;
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling getDbNote"
+        "Missing the required parameter 'projectOrProductUID' when calling getDbNote",
       );
     }
     // verify the required parameter 'deviceUID' is set
     if (deviceUID === undefined || deviceUID === null) {
       throw new Error(
-        "Missing the required parameter 'deviceUID' when calling getDbNote"
+        "Missing the required parameter 'deviceUID' when calling getDbNote",
       );
     }
     // verify the required parameter 'notefileID' is set
     if (notefileID === undefined || notefileID === null) {
       throw new Error(
-        "Missing the required parameter 'notefileID' when calling getDbNote"
+        "Missing the required parameter 'notefileID' when calling getDbNote",
       );
     }
     // verify the required parameter 'noteID' is set
     if (noteID === undefined || noteID === null) {
       throw new Error(
-        "Missing the required parameter 'noteID' when calling getDbNote"
+        "Missing the required parameter 'noteID' when calling getDbNote",
       );
     }
 
@@ -813,7 +813,7 @@ export default class DeviceApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -834,7 +834,7 @@ export default class DeviceApi {
       deviceUID,
       notefileID,
       noteID,
-      opts
+      opts,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -851,13 +851,13 @@ export default class DeviceApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling getDevice"
+        "Missing the required parameter 'projectOrProductUID' when calling getDevice",
       );
     }
     // verify the required parameter 'deviceUID' is set
     if (deviceUID === undefined || deviceUID === null) {
       throw new Error(
-        "Missing the required parameter 'deviceUID' when calling getDevice"
+        "Missing the required parameter 'deviceUID' when calling getDevice",
       );
     }
 
@@ -885,7 +885,7 @@ export default class DeviceApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -899,7 +899,7 @@ export default class DeviceApi {
     return this.getDeviceWithHttpInfo(projectOrProductUID, deviceUID).then(
       function (response_and_data) {
         return response_and_data.data;
-      }
+      },
     );
   }
 
@@ -914,13 +914,13 @@ export default class DeviceApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling getDeviceEnvironmentHierarchy"
+        "Missing the required parameter 'projectOrProductUID' when calling getDeviceEnvironmentHierarchy",
       );
     }
     // verify the required parameter 'deviceUID' is set
     if (deviceUID === undefined || deviceUID === null) {
       throw new Error(
-        "Missing the required parameter 'deviceUID' when calling getDeviceEnvironmentHierarchy"
+        "Missing the required parameter 'deviceUID' when calling getDeviceEnvironmentHierarchy",
       );
     }
 
@@ -948,7 +948,7 @@ export default class DeviceApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -961,7 +961,7 @@ export default class DeviceApi {
   getDeviceEnvironmentHierarchy(projectOrProductUID, deviceUID) {
     return this.getDeviceEnvironmentHierarchyWithHttpInfo(
       projectOrProductUID,
-      deviceUID
+      deviceUID,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -978,13 +978,13 @@ export default class DeviceApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling getDeviceEnvironmentVariables"
+        "Missing the required parameter 'projectOrProductUID' when calling getDeviceEnvironmentVariables",
       );
     }
     // verify the required parameter 'deviceUID' is set
     if (deviceUID === undefined || deviceUID === null) {
       throw new Error(
-        "Missing the required parameter 'deviceUID' when calling getDeviceEnvironmentVariables"
+        "Missing the required parameter 'deviceUID' when calling getDeviceEnvironmentVariables",
       );
     }
 
@@ -1012,7 +1012,7 @@ export default class DeviceApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -1025,7 +1025,7 @@ export default class DeviceApi {
   getDeviceEnvironmentVariables(projectOrProductUID, deviceUID) {
     return this.getDeviceEnvironmentVariablesWithHttpInfo(
       projectOrProductUID,
-      deviceUID
+      deviceUID,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -1041,25 +1041,25 @@ export default class DeviceApi {
   getDeviceEnvironmentVariablesByPinWithHttpInfo(
     productUID,
     deviceUID,
-    xAuthToken
+    xAuthToken,
   ) {
     let postBody = null;
     // verify the required parameter 'productUID' is set
     if (productUID === undefined || productUID === null) {
       throw new Error(
-        "Missing the required parameter 'productUID' when calling getDeviceEnvironmentVariablesByPin"
+        "Missing the required parameter 'productUID' when calling getDeviceEnvironmentVariablesByPin",
       );
     }
     // verify the required parameter 'deviceUID' is set
     if (deviceUID === undefined || deviceUID === null) {
       throw new Error(
-        "Missing the required parameter 'deviceUID' when calling getDeviceEnvironmentVariablesByPin"
+        "Missing the required parameter 'deviceUID' when calling getDeviceEnvironmentVariablesByPin",
       );
     }
     // verify the required parameter 'xAuthToken' is set
     if (xAuthToken === undefined || xAuthToken === null) {
       throw new Error(
-        "Missing the required parameter 'xAuthToken' when calling getDeviceEnvironmentVariablesByPin"
+        "Missing the required parameter 'xAuthToken' when calling getDeviceEnvironmentVariablesByPin",
       );
     }
 
@@ -1089,7 +1089,7 @@ export default class DeviceApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -1104,7 +1104,7 @@ export default class DeviceApi {
     return this.getDeviceEnvironmentVariablesByPinWithHttpInfo(
       productUID,
       deviceUID,
-      xAuthToken
+      xAuthToken,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -1126,13 +1126,13 @@ export default class DeviceApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling getDeviceHealthLog"
+        "Missing the required parameter 'projectOrProductUID' when calling getDeviceHealthLog",
       );
     }
     // verify the required parameter 'deviceUID' is set
     if (deviceUID === undefined || deviceUID === null) {
       throw new Error(
-        "Missing the required parameter 'deviceUID' when calling getDeviceHealthLog"
+        "Missing the required parameter 'deviceUID' when calling getDeviceHealthLog",
       );
     }
 
@@ -1164,7 +1164,7 @@ export default class DeviceApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -1182,7 +1182,7 @@ export default class DeviceApi {
     return this.getDeviceHealthLogWithHttpInfo(
       projectOrProductUID,
       deviceUID,
-      opts
+      opts,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -1202,26 +1202,26 @@ export default class DeviceApi {
     projectOrProductUID,
     deviceUID,
     journeyID,
-    opts
+    opts,
   ) {
     opts = opts || {};
     let postBody = null;
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling getDeviceJourney"
+        "Missing the required parameter 'projectOrProductUID' when calling getDeviceJourney",
       );
     }
     // verify the required parameter 'deviceUID' is set
     if (deviceUID === undefined || deviceUID === null) {
       throw new Error(
-        "Missing the required parameter 'deviceUID' when calling getDeviceJourney"
+        "Missing the required parameter 'deviceUID' when calling getDeviceJourney",
       );
     }
     // verify the required parameter 'journeyID' is set
     if (journeyID === undefined || journeyID === null) {
       throw new Error(
-        "Missing the required parameter 'journeyID' when calling getDeviceJourney"
+        "Missing the required parameter 'journeyID' when calling getDeviceJourney",
       );
     }
 
@@ -1253,7 +1253,7 @@ export default class DeviceApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -1272,7 +1272,7 @@ export default class DeviceApi {
       projectOrProductUID,
       deviceUID,
       journeyID,
-      opts
+      opts,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -1293,13 +1293,13 @@ export default class DeviceApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling getDeviceJourneys"
+        "Missing the required parameter 'projectOrProductUID' when calling getDeviceJourneys",
       );
     }
     // verify the required parameter 'deviceUID' is set
     if (deviceUID === undefined || deviceUID === null) {
       throw new Error(
-        "Missing the required parameter 'deviceUID' when calling getDeviceJourneys"
+        "Missing the required parameter 'deviceUID' when calling getDeviceJourneys",
       );
     }
 
@@ -1330,7 +1330,7 @@ export default class DeviceApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -1347,7 +1347,7 @@ export default class DeviceApi {
     return this.getDeviceJourneysWithHttpInfo(
       projectOrProductUID,
       deviceUID,
-      opts
+      opts,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -1364,13 +1364,13 @@ export default class DeviceApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling getDeviceLatestEvents"
+        "Missing the required parameter 'projectOrProductUID' when calling getDeviceLatestEvents",
       );
     }
     // verify the required parameter 'deviceUID' is set
     if (deviceUID === undefined || deviceUID === null) {
       throw new Error(
-        "Missing the required parameter 'deviceUID' when calling getDeviceLatestEvents"
+        "Missing the required parameter 'deviceUID' when calling getDeviceLatestEvents",
       );
     }
 
@@ -1398,7 +1398,7 @@ export default class DeviceApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -1411,7 +1411,7 @@ export default class DeviceApi {
   getDeviceLatestEvents(projectOrProductUID, deviceUID) {
     return this.getDeviceLatestEventsWithHttpInfo(
       projectOrProductUID,
-      deviceUID
+      deviceUID,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -1428,13 +1428,13 @@ export default class DeviceApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling getDevicePlans"
+        "Missing the required parameter 'projectOrProductUID' when calling getDevicePlans",
       );
     }
     // verify the required parameter 'deviceUID' is set
     if (deviceUID === undefined || deviceUID === null) {
       throw new Error(
-        "Missing the required parameter 'deviceUID' when calling getDevicePlans"
+        "Missing the required parameter 'deviceUID' when calling getDevicePlans",
       );
     }
 
@@ -1462,7 +1462,7 @@ export default class DeviceApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -1476,7 +1476,7 @@ export default class DeviceApi {
     return this.getDevicePlansWithHttpInfo(projectOrProductUID, deviceUID).then(
       function (response_and_data) {
         return response_and_data.data;
-      }
+      },
     );
   }
 
@@ -1491,13 +1491,13 @@ export default class DeviceApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling getDevicePublicKey"
+        "Missing the required parameter 'projectOrProductUID' when calling getDevicePublicKey",
       );
     }
     // verify the required parameter 'deviceUID' is set
     if (deviceUID === undefined || deviceUID === null) {
       throw new Error(
-        "Missing the required parameter 'deviceUID' when calling getDevicePublicKey"
+        "Missing the required parameter 'deviceUID' when calling getDevicePublicKey",
       );
     }
 
@@ -1525,7 +1525,7 @@ export default class DeviceApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -1538,7 +1538,7 @@ export default class DeviceApi {
   getDevicePublicKey(projectOrProductUID, deviceUID) {
     return this.getDevicePublicKeyWithHttpInfo(
       projectOrProductUID,
-      deviceUID
+      deviceUID,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -1558,7 +1558,7 @@ export default class DeviceApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling getDevicePublicKeys"
+        "Missing the required parameter 'projectOrProductUID' when calling getDevicePublicKeys",
       );
     }
 
@@ -1588,7 +1588,7 @@ export default class DeviceApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -1604,7 +1604,7 @@ export default class DeviceApi {
     return this.getDevicePublicKeysWithHttpInfo(projectOrProductUID, opts).then(
       function (response_and_data) {
         return response_and_data.data;
-      }
+      },
     );
   }
 
@@ -1626,13 +1626,13 @@ export default class DeviceApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling getDeviceSessions"
+        "Missing the required parameter 'projectOrProductUID' when calling getDeviceSessions",
       );
     }
     // verify the required parameter 'deviceUID' is set
     if (deviceUID === undefined || deviceUID === null) {
       throw new Error(
-        "Missing the required parameter 'deviceUID' when calling getDeviceSessions"
+        "Missing the required parameter 'deviceUID' when calling getDeviceSessions",
       );
     }
 
@@ -1666,7 +1666,7 @@ export default class DeviceApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -1686,7 +1686,7 @@ export default class DeviceApi {
     return this.getDeviceSessionsWithHttpInfo(
       projectOrProductUID,
       deviceUID,
-      opts
+      opts,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -1715,7 +1715,7 @@ export default class DeviceApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling getDevices"
+        "Missing the required parameter 'projectOrProductUID' when calling getDevices",
       );
     }
 
@@ -1727,26 +1727,26 @@ export default class DeviceApi {
       pageNum: opts["pageNum"],
       deviceUID: this.apiClient.buildCollectionParam(
         opts["deviceUID"],
-        "multi"
+        "multi",
       ),
       tag: this.apiClient.buildCollectionParam(opts["tag"], "multi"),
       serialNumber: this.apiClient.buildCollectionParam(
         opts["serialNumber"],
-        "multi"
+        "multi",
       ),
       fleetUID: this.apiClient.buildCollectionParam(opts["fleetUID"], "multi"),
       notecardFirmware: this.apiClient.buildCollectionParam(
         opts["notecardFirmware"],
-        "multi"
+        "multi",
       ),
       location: this.apiClient.buildCollectionParam(opts["location"], "multi"),
       hostFirmware: this.apiClient.buildCollectionParam(
         opts["hostFirmware"],
-        "multi"
+        "multi",
       ),
       productUID: this.apiClient.buildCollectionParam(
         opts["productUID"],
-        "multi"
+        "multi",
       ),
       sku: this.apiClient.buildCollectionParam(opts["sku"], "multi"),
     };
@@ -1769,7 +1769,7 @@ export default class DeviceApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -1794,7 +1794,7 @@ export default class DeviceApi {
     return this.getDevicesWithHttpInfo(projectOrProductUID, opts).then(
       function (response_and_data) {
         return response_and_data.data;
-      }
+      },
     );
   }
 
@@ -1821,13 +1821,13 @@ export default class DeviceApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling getFleetDevices"
+        "Missing the required parameter 'projectOrProductUID' when calling getFleetDevices",
       );
     }
     // verify the required parameter 'fleetUID' is set
     if (fleetUID === undefined || fleetUID === null) {
       throw new Error(
-        "Missing the required parameter 'fleetUID' when calling getFleetDevices"
+        "Missing the required parameter 'fleetUID' when calling getFleetDevices",
       );
     }
 
@@ -1840,25 +1840,25 @@ export default class DeviceApi {
       pageNum: opts["pageNum"],
       deviceUID: this.apiClient.buildCollectionParam(
         opts["deviceUID"],
-        "multi"
+        "multi",
       ),
       tag: this.apiClient.buildCollectionParam(opts["tag"], "multi"),
       serialNumber: this.apiClient.buildCollectionParam(
         opts["serialNumber"],
-        "multi"
+        "multi",
       ),
       notecardFirmware: this.apiClient.buildCollectionParam(
         opts["notecardFirmware"],
-        "multi"
+        "multi",
       ),
       location: this.apiClient.buildCollectionParam(opts["location"], "multi"),
       hostFirmware: this.apiClient.buildCollectionParam(
         opts["hostFirmware"],
-        "multi"
+        "multi",
       ),
       productUID: this.apiClient.buildCollectionParam(
         opts["productUID"],
-        "multi"
+        "multi",
       ),
       sku: this.apiClient.buildCollectionParam(opts["sku"], "multi"),
     };
@@ -1881,7 +1881,7 @@ export default class DeviceApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -1906,7 +1906,7 @@ export default class DeviceApi {
     return this.getFleetDevicesWithHttpInfo(
       projectOrProductUID,
       fleetUID,
-      opts
+      opts,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -1929,19 +1929,19 @@ export default class DeviceApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling getNotefile"
+        "Missing the required parameter 'projectOrProductUID' when calling getNotefile",
       );
     }
     // verify the required parameter 'deviceUID' is set
     if (deviceUID === undefined || deviceUID === null) {
       throw new Error(
-        "Missing the required parameter 'deviceUID' when calling getNotefile"
+        "Missing the required parameter 'deviceUID' when calling getNotefile",
       );
     }
     // verify the required parameter 'notefileID' is set
     if (notefileID === undefined || notefileID === null) {
       throw new Error(
-        "Missing the required parameter 'notefileID' when calling getNotefile"
+        "Missing the required parameter 'notefileID' when calling getNotefile",
       );
     }
 
@@ -1974,7 +1974,7 @@ export default class DeviceApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -1994,7 +1994,7 @@ export default class DeviceApi {
       projectOrProductUID,
       deviceUID,
       notefileID,
-      opts
+      opts,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -2015,13 +2015,13 @@ export default class DeviceApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling listNotefiles"
+        "Missing the required parameter 'projectOrProductUID' when calling listNotefiles",
       );
     }
     // verify the required parameter 'deviceUID' is set
     if (deviceUID === undefined || deviceUID === null) {
       throw new Error(
-        "Missing the required parameter 'deviceUID' when calling listNotefiles"
+        "Missing the required parameter 'deviceUID' when calling listNotefiles",
       );
     }
 
@@ -2052,7 +2052,7 @@ export default class DeviceApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -2069,7 +2069,7 @@ export default class DeviceApi {
     return this.listNotefilesWithHttpInfo(
       projectOrProductUID,
       deviceUID,
-      opts
+      opts,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -2085,19 +2085,19 @@ export default class DeviceApi {
   provisionDeviceWithHttpInfo(
     projectOrProductUID,
     deviceUID,
-    provisionDeviceRequest
+    provisionDeviceRequest,
   ) {
     let postBody = provisionDeviceRequest;
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling provisionDevice"
+        "Missing the required parameter 'projectOrProductUID' when calling provisionDevice",
       );
     }
     // verify the required parameter 'deviceUID' is set
     if (deviceUID === undefined || deviceUID === null) {
       throw new Error(
-        "Missing the required parameter 'deviceUID' when calling provisionDevice"
+        "Missing the required parameter 'deviceUID' when calling provisionDevice",
       );
     }
     // verify the required parameter 'provisionDeviceRequest' is set
@@ -2106,7 +2106,7 @@ export default class DeviceApi {
       provisionDeviceRequest === null
     ) {
       throw new Error(
-        "Missing the required parameter 'provisionDeviceRequest' when calling provisionDevice"
+        "Missing the required parameter 'provisionDeviceRequest' when calling provisionDevice",
       );
     }
 
@@ -2134,7 +2134,7 @@ export default class DeviceApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -2149,7 +2149,7 @@ export default class DeviceApi {
     return this.provisionDeviceWithHttpInfo(
       projectOrProductUID,
       deviceUID,
-      provisionDeviceRequest
+      provisionDeviceRequest,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -2165,25 +2165,25 @@ export default class DeviceApi {
   setDeviceEnvironmentVariablesWithHttpInfo(
     projectOrProductUID,
     deviceUID,
-    environmentVariables
+    environmentVariables,
   ) {
     let postBody = environmentVariables;
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling setDeviceEnvironmentVariables"
+        "Missing the required parameter 'projectOrProductUID' when calling setDeviceEnvironmentVariables",
       );
     }
     // verify the required parameter 'deviceUID' is set
     if (deviceUID === undefined || deviceUID === null) {
       throw new Error(
-        "Missing the required parameter 'deviceUID' when calling setDeviceEnvironmentVariables"
+        "Missing the required parameter 'deviceUID' when calling setDeviceEnvironmentVariables",
       );
     }
     // verify the required parameter 'environmentVariables' is set
     if (environmentVariables === undefined || environmentVariables === null) {
       throw new Error(
-        "Missing the required parameter 'environmentVariables' when calling setDeviceEnvironmentVariables"
+        "Missing the required parameter 'environmentVariables' when calling setDeviceEnvironmentVariables",
       );
     }
 
@@ -2211,7 +2211,7 @@ export default class DeviceApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -2225,12 +2225,12 @@ export default class DeviceApi {
   setDeviceEnvironmentVariables(
     projectOrProductUID,
     deviceUID,
-    environmentVariables
+    environmentVariables,
   ) {
     return this.setDeviceEnvironmentVariablesWithHttpInfo(
       projectOrProductUID,
       deviceUID,
-      environmentVariables
+      environmentVariables,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -2248,31 +2248,31 @@ export default class DeviceApi {
     productUID,
     deviceUID,
     xAuthToken,
-    environmentVariables
+    environmentVariables,
   ) {
     let postBody = environmentVariables;
     // verify the required parameter 'productUID' is set
     if (productUID === undefined || productUID === null) {
       throw new Error(
-        "Missing the required parameter 'productUID' when calling setDeviceEnvironmentVariablesByPin"
+        "Missing the required parameter 'productUID' when calling setDeviceEnvironmentVariablesByPin",
       );
     }
     // verify the required parameter 'deviceUID' is set
     if (deviceUID === undefined || deviceUID === null) {
       throw new Error(
-        "Missing the required parameter 'deviceUID' when calling setDeviceEnvironmentVariablesByPin"
+        "Missing the required parameter 'deviceUID' when calling setDeviceEnvironmentVariablesByPin",
       );
     }
     // verify the required parameter 'xAuthToken' is set
     if (xAuthToken === undefined || xAuthToken === null) {
       throw new Error(
-        "Missing the required parameter 'xAuthToken' when calling setDeviceEnvironmentVariablesByPin"
+        "Missing the required parameter 'xAuthToken' when calling setDeviceEnvironmentVariablesByPin",
       );
     }
     // verify the required parameter 'environmentVariables' is set
     if (environmentVariables === undefined || environmentVariables === null) {
       throw new Error(
-        "Missing the required parameter 'environmentVariables' when calling setDeviceEnvironmentVariablesByPin"
+        "Missing the required parameter 'environmentVariables' when calling setDeviceEnvironmentVariablesByPin",
       );
     }
 
@@ -2302,7 +2302,7 @@ export default class DeviceApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -2318,13 +2318,13 @@ export default class DeviceApi {
     productUID,
     deviceUID,
     xAuthToken,
-    environmentVariables
+    environmentVariables,
   ) {
     return this.setDeviceEnvironmentVariablesByPinWithHttpInfo(
       productUID,
       deviceUID,
       xAuthToken,
-      environmentVariables
+      environmentVariables,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -2342,19 +2342,19 @@ export default class DeviceApi {
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling signalDevice"
+        "Missing the required parameter 'projectOrProductUID' when calling signalDevice",
       );
     }
     // verify the required parameter 'deviceUID' is set
     if (deviceUID === undefined || deviceUID === null) {
       throw new Error(
-        "Missing the required parameter 'deviceUID' when calling signalDevice"
+        "Missing the required parameter 'deviceUID' when calling signalDevice",
       );
     }
     // verify the required parameter 'body' is set
     if (body === undefined || body === null) {
       throw new Error(
-        "Missing the required parameter 'body' when calling signalDevice"
+        "Missing the required parameter 'body' when calling signalDevice",
       );
     }
 
@@ -2382,7 +2382,7 @@ export default class DeviceApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -2397,7 +2397,7 @@ export default class DeviceApi {
     return this.signalDeviceWithHttpInfo(
       projectOrProductUID,
       deviceUID,
-      body
+      body,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });
@@ -2417,37 +2417,37 @@ export default class DeviceApi {
     deviceUID,
     notefileID,
     noteID,
-    noteInput
+    noteInput,
   ) {
     let postBody = noteInput;
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling updateDbNote"
+        "Missing the required parameter 'projectOrProductUID' when calling updateDbNote",
       );
     }
     // verify the required parameter 'deviceUID' is set
     if (deviceUID === undefined || deviceUID === null) {
       throw new Error(
-        "Missing the required parameter 'deviceUID' when calling updateDbNote"
+        "Missing the required parameter 'deviceUID' when calling updateDbNote",
       );
     }
     // verify the required parameter 'notefileID' is set
     if (notefileID === undefined || notefileID === null) {
       throw new Error(
-        "Missing the required parameter 'notefileID' when calling updateDbNote"
+        "Missing the required parameter 'notefileID' when calling updateDbNote",
       );
     }
     // verify the required parameter 'noteID' is set
     if (noteID === undefined || noteID === null) {
       throw new Error(
-        "Missing the required parameter 'noteID' when calling updateDbNote"
+        "Missing the required parameter 'noteID' when calling updateDbNote",
       );
     }
     // verify the required parameter 'noteInput' is set
     if (noteInput === undefined || noteInput === null) {
       throw new Error(
-        "Missing the required parameter 'noteInput' when calling updateDbNote"
+        "Missing the required parameter 'noteInput' when calling updateDbNote",
       );
     }
 
@@ -2477,7 +2477,7 @@ export default class DeviceApi {
       contentTypes,
       accepts,
       returnType,
-      null
+      null,
     );
   }
 
@@ -2496,7 +2496,7 @@ export default class DeviceApi {
       deviceUID,
       notefileID,
       noteID,
-      noteInput
+      noteInput,
     ).then(function (response_and_data) {
       return response_and_data.data;
     });

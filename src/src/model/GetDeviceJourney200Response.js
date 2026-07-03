@@ -34,7 +34,7 @@ class GetDeviceJourney200Response {
       endDate,
       journey,
       journeyId,
-      startDate
+      startDate,
     );
   }
 
@@ -66,13 +66,13 @@ class GetDeviceJourney200Response {
       }
       if (data.hasOwnProperty("journey")) {
         obj["journey"] = GetDeviceJourney200ResponseJourney.constructFromObject(
-          data["journey"]
+          data["journey"],
         );
       }
       if (data.hasOwnProperty("journey_id")) {
         obj["journey_id"] = ApiClient.convertToType(
           data["journey_id"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("start_date")) {
@@ -97,7 +97,7 @@ class GetDeviceJourney200Response {
           "The required field `" +
             property +
             "` is not found in the JSON data: " +
-            JSON.stringify(data)
+            JSON.stringify(data),
         );
       }
     }

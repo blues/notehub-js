@@ -32,7 +32,7 @@ apiInstance.createEventExtDevice(productUID, deviceUID, event).then(
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -81,7 +81,7 @@ apiInstance.extDeviceSessionClose(productUID, deviceUID, deviceSession).then(
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -130,7 +130,7 @@ apiInstance.extDeviceSessionOpen(productUID, deviceUID, deviceSession).then(
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 

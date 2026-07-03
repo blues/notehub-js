@@ -49,13 +49,13 @@ class TwilioRoute {
       if (data.hasOwnProperty("account_sid")) {
         obj["account_sid"] = ApiClient.convertToType(
           data["account_sid"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("auth_token")) {
         obj["auth_token"] = ApiClient.convertToType(
           data["auth_token"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("filter")) {
@@ -73,7 +73,7 @@ class TwilioRoute {
       if (data.hasOwnProperty("throttle_ms")) {
         obj["throttle_ms"] = ApiClient.convertToType(
           data["throttle_ms"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("timeout")) {
@@ -104,7 +104,7 @@ class TwilioRoute {
     ) {
       throw new Error(
         "Expected the field `account_sid` to be a primitive type in the JSON string but got " +
-          data["account_sid"]
+          data["account_sid"],
       );
     }
     // ensure the json data is a string
@@ -117,7 +117,7 @@ class TwilioRoute {
     ) {
       throw new Error(
         "Expected the field `auth_token` to be a primitive type in the JSON string but got " +
-          data["auth_token"]
+          data["auth_token"],
       );
     }
     // validate the optional field `filter`
@@ -129,7 +129,7 @@ class TwilioRoute {
     if (!Array.isArray(data["fleets"])) {
       throw new Error(
         "Expected the field `fleets` to be an array in the JSON data but got " +
-          data["fleets"]
+          data["fleets"],
       );
     }
     // ensure the json data is a string
@@ -139,7 +139,7 @@ class TwilioRoute {
     ) {
       throw new Error(
         "Expected the field `from` to be a primitive type in the JSON string but got " +
-          data["from"]
+          data["from"],
       );
     }
     // ensure the json data is a string
@@ -151,7 +151,7 @@ class TwilioRoute {
     ) {
       throw new Error(
         "Expected the field `message` to be a primitive type in the JSON string but got " +
-          data["message"]
+          data["message"],
       );
     }
     // ensure the json data is a string
@@ -161,7 +161,7 @@ class TwilioRoute {
     ) {
       throw new Error(
         "Expected the field `to` to be a primitive type in the JSON string but got " +
-          data["to"]
+          data["to"],
       );
     }
 

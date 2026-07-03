@@ -67,7 +67,7 @@ class GetProducts200Response {
       if (!Array.isArray(data["products"])) {
         throw new Error(
           "Expected the field `products` to be an array in the JSON data but got " +
-            data["products"]
+            data["products"],
         );
       }
       // validate the optional field `products` (array)

@@ -88,7 +88,7 @@ class RouteLog {
     ) {
       throw new Error(
         "Expected the field `date` to be a primitive type in the JSON string but got " +
-          data["date"]
+          data["date"],
       );
     }
     // ensure the json data is a string
@@ -101,7 +101,7 @@ class RouteLog {
     ) {
       throw new Error(
         "Expected the field `event_uid` to be a primitive type in the JSON string but got " +
-          data["event_uid"]
+          data["event_uid"],
       );
     }
     // ensure the json data is a string
@@ -114,7 +114,7 @@ class RouteLog {
     ) {
       throw new Error(
         "Expected the field `route_uid` to be a primitive type in the JSON string but got " +
-          data["route_uid"]
+          data["route_uid"],
       );
     }
     // ensure the json data is a string
@@ -124,7 +124,7 @@ class RouteLog {
     ) {
       throw new Error(
         "Expected the field `status` to be a primitive type in the JSON string but got " +
-          data["status"]
+          data["status"],
       );
     }
     // ensure the json data is a string
@@ -134,7 +134,7 @@ class RouteLog {
     ) {
       throw new Error(
         "Expected the field `text` to be a primitive type in the JSON string but got " +
-          data["text"]
+          data["text"],
       );
     }
     // ensure the json data is a string
@@ -144,7 +144,7 @@ class RouteLog {
     ) {
       throw new Error(
         "Expected the field `url` to be a primitive type in the JSON string but got " +
-          data["url"]
+          data["url"],
       );
     }
 

@@ -49,13 +49,13 @@ class Monitor {
       if (data.hasOwnProperty("aggregate_function")) {
         obj["aggregate_function"] = ApiClient.convertToType(
           data["aggregate_function"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("aggregate_window")) {
         obj["aggregate_window"] = ApiClient.convertToType(
           data["aggregate_window"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("alert")) {
@@ -69,13 +69,13 @@ class Monitor {
       if (data.hasOwnProperty("condition_type")) {
         obj["condition_type"] = ApiClient.convertToType(
           data["condition_type"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("description")) {
         obj["description"] = ApiClient.convertToType(
           data["description"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("disabled")) {
@@ -89,7 +89,7 @@ class Monitor {
       if (data.hasOwnProperty("last_routed_at")) {
         obj["last_routed_at"] = ApiClient.convertToType(
           data["last_routed_at"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("name")) {
@@ -98,19 +98,19 @@ class Monitor {
       if (data.hasOwnProperty("notefile_filter")) {
         obj["notefile_filter"] = ApiClient.convertToType(
           data["notefile_filter"],
-          ["String"]
+          ["String"],
         );
       }
       if (data.hasOwnProperty("per_device")) {
         obj["per_device"] = ApiClient.convertToType(
           data["per_device"],
-          "Boolean"
+          "Boolean",
         );
       }
       if (data.hasOwnProperty("routing_cooldown_period")) {
         obj["routing_cooldown_period"] = ApiClient.convertToType(
           data["routing_cooldown_period"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("silenced")) {
@@ -119,13 +119,13 @@ class Monitor {
       if (data.hasOwnProperty("source_selector")) {
         obj["source_selector"] = ApiClient.convertToType(
           data["source_selector"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("source_type")) {
         obj["source_type"] = ApiClient.convertToType(
           data["source_type"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("threshold")) {
@@ -137,19 +137,19 @@ class Monitor {
       if (data.hasOwnProperty("usage_scope")) {
         obj["usage_scope"] = ApiClient.convertToType(
           data["usage_scope"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("usage_type")) {
         obj["usage_type"] = ApiClient.convertToType(
           data["usage_type"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("usage_window")) {
         obj["usage_window"] = ApiClient.convertToType(
           data["usage_window"],
-          "Number"
+          "Number",
         );
       }
     } else if (data === null) {
@@ -174,7 +174,7 @@ class Monitor {
     ) {
       throw new Error(
         "Expected the field `aggregate_function` to be a primitive type in the JSON string but got " +
-          data["aggregate_function"]
+          data["aggregate_function"],
       );
     }
     // ensure the json data is a string
@@ -187,7 +187,7 @@ class Monitor {
     ) {
       throw new Error(
         "Expected the field `aggregate_window` to be a primitive type in the JSON string but got " +
-          data["aggregate_window"]
+          data["aggregate_window"],
       );
     }
     if (data["alert_routes"]) {
@@ -196,7 +196,7 @@ class Monitor {
       if (!Array.isArray(data["alert_routes"])) {
         throw new Error(
           "Expected the field `alert_routes` to be an array in the JSON data but got " +
-            data["alert_routes"]
+            data["alert_routes"],
         );
       }
       // validate the optional field `alert_routes` (array)
@@ -214,7 +214,7 @@ class Monitor {
     ) {
       throw new Error(
         "Expected the field `condition_type` to be a primitive type in the JSON string but got " +
-          data["condition_type"]
+          data["condition_type"],
       );
     }
     // ensure the json data is a string
@@ -227,14 +227,14 @@ class Monitor {
     ) {
       throw new Error(
         "Expected the field `description` to be a primitive type in the JSON string but got " +
-          data["description"]
+          data["description"],
       );
     }
     // ensure the json data is an array
     if (!Array.isArray(data["fleet_filter"])) {
       throw new Error(
         "Expected the field `fleet_filter` to be an array in the JSON data but got " +
-          data["fleet_filter"]
+          data["fleet_filter"],
       );
     }
     // ensure the json data is a string
@@ -247,7 +247,7 @@ class Monitor {
     ) {
       throw new Error(
         "Expected the field `last_routed_at` to be a primitive type in the JSON string but got " +
-          data["last_routed_at"]
+          data["last_routed_at"],
       );
     }
     // ensure the json data is a string
@@ -257,14 +257,14 @@ class Monitor {
     ) {
       throw new Error(
         "Expected the field `name` to be a primitive type in the JSON string but got " +
-          data["name"]
+          data["name"],
       );
     }
     // ensure the json data is an array
     if (!Array.isArray(data["notefile_filter"])) {
       throw new Error(
         "Expected the field `notefile_filter` to be an array in the JSON data but got " +
-          data["notefile_filter"]
+          data["notefile_filter"],
       );
     }
     // ensure the json data is a string
@@ -277,7 +277,7 @@ class Monitor {
     ) {
       throw new Error(
         "Expected the field `routing_cooldown_period` to be a primitive type in the JSON string but got " +
-          data["routing_cooldown_period"]
+          data["routing_cooldown_period"],
       );
     }
     // ensure the json data is a string
@@ -290,7 +290,7 @@ class Monitor {
     ) {
       throw new Error(
         "Expected the field `source_selector` to be a primitive type in the JSON string but got " +
-          data["source_selector"]
+          data["source_selector"],
       );
     }
     // ensure the json data is a string
@@ -303,7 +303,7 @@ class Monitor {
     ) {
       throw new Error(
         "Expected the field `source_type` to be a primitive type in the JSON string but got " +
-          data["source_type"]
+          data["source_type"],
       );
     }
     // ensure the json data is a string
@@ -313,7 +313,7 @@ class Monitor {
     ) {
       throw new Error(
         "Expected the field `uid` to be a primitive type in the JSON string but got " +
-          data["uid"]
+          data["uid"],
       );
     }
     // ensure the json data is a string
@@ -326,7 +326,7 @@ class Monitor {
     ) {
       throw new Error(
         "Expected the field `usage_scope` to be a primitive type in the JSON string but got " +
-          data["usage_scope"]
+          data["usage_scope"],
       );
     }
     // ensure the json data is a string
@@ -339,7 +339,7 @@ class Monitor {
     ) {
       throw new Error(
         "Expected the field `usage_type` to be a primitive type in the JSON string but got " +
-          data["usage_type"]
+          data["usage_type"],
       );
     }
 

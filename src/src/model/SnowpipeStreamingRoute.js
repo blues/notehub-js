@@ -50,13 +50,13 @@ class SnowpipeStreamingRoute {
       if (data.hasOwnProperty("account_name")) {
         obj["account_name"] = ApiClient.convertToType(
           data["account_name"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("database_name")) {
         obj["database_name"] = ApiClient.convertToType(
           data["database_name"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("filter")) {
@@ -68,7 +68,7 @@ class SnowpipeStreamingRoute {
       if (data.hasOwnProperty("organization_name")) {
         obj["organization_name"] = ApiClient.convertToType(
           data["organization_name"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("pem")) {
@@ -80,13 +80,13 @@ class SnowpipeStreamingRoute {
       if (data.hasOwnProperty("private_key_name")) {
         obj["private_key_name"] = ApiClient.convertToType(
           data["private_key_name"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("schema_name")) {
         obj["schema_name"] = ApiClient.convertToType(
           data["schema_name"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("timeout")) {
@@ -94,7 +94,7 @@ class SnowpipeStreamingRoute {
       }
       if (data.hasOwnProperty("transform")) {
         obj["transform"] = RouteTransformSettings.constructFromObject(
-          data["transform"]
+          data["transform"],
         );
       }
       if (data.hasOwnProperty("user_name")) {
@@ -122,7 +122,7 @@ class SnowpipeStreamingRoute {
     ) {
       throw new Error(
         "Expected the field `account_name` to be a primitive type in the JSON string but got " +
-          data["account_name"]
+          data["account_name"],
       );
     }
     // ensure the json data is a string
@@ -135,7 +135,7 @@ class SnowpipeStreamingRoute {
     ) {
       throw new Error(
         "Expected the field `database_name` to be a primitive type in the JSON string but got " +
-          data["database_name"]
+          data["database_name"],
       );
     }
     // validate the optional field `filter`
@@ -147,7 +147,7 @@ class SnowpipeStreamingRoute {
     if (!Array.isArray(data["fleets"])) {
       throw new Error(
         "Expected the field `fleets` to be an array in the JSON data but got " +
-          data["fleets"]
+          data["fleets"],
       );
     }
     // ensure the json data is a string
@@ -160,7 +160,7 @@ class SnowpipeStreamingRoute {
     ) {
       throw new Error(
         "Expected the field `organization_name` to be a primitive type in the JSON string but got " +
-          data["organization_name"]
+          data["organization_name"],
       );
     }
     // ensure the json data is a string
@@ -170,7 +170,7 @@ class SnowpipeStreamingRoute {
     ) {
       throw new Error(
         "Expected the field `pem` to be a primitive type in the JSON string but got " +
-          data["pem"]
+          data["pem"],
       );
     }
     // ensure the json data is a string
@@ -183,7 +183,7 @@ class SnowpipeStreamingRoute {
     ) {
       throw new Error(
         "Expected the field `pipe_name` to be a primitive type in the JSON string but got " +
-          data["pipe_name"]
+          data["pipe_name"],
       );
     }
     // ensure the json data is a string
@@ -196,7 +196,7 @@ class SnowpipeStreamingRoute {
     ) {
       throw new Error(
         "Expected the field `private_key_name` to be a primitive type in the JSON string but got " +
-          data["private_key_name"]
+          data["private_key_name"],
       );
     }
     // ensure the json data is a string
@@ -209,7 +209,7 @@ class SnowpipeStreamingRoute {
     ) {
       throw new Error(
         "Expected the field `schema_name` to be a primitive type in the JSON string but got " +
-          data["schema_name"]
+          data["schema_name"],
       );
     }
     // validate the optional field `transform`
@@ -227,7 +227,7 @@ class SnowpipeStreamingRoute {
     ) {
       throw new Error(
         "Expected the field `user_name` to be a primitive type in the JSON string but got " +
-          data["user_name"]
+          data["user_name"],
       );
     }
 

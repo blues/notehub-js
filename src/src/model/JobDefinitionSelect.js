@@ -49,7 +49,7 @@ class JobDefinitionSelect {
       if (data.hasOwnProperty("all_devices")) {
         obj["all_devices"] = ApiClient.convertToType(
           data["all_devices"],
-          "Boolean"
+          "Boolean",
         );
       }
       if (data.hasOwnProperty("comment")) {
@@ -66,7 +66,7 @@ class JobDefinitionSelect {
       if (data.hasOwnProperty("devices_in_fleets")) {
         obj["devices_in_fleets"] = ApiClient.convertToType(
           data["devices_in_fleets"],
-          ["String"]
+          ["String"],
         );
       }
     } else if (data === null) {
@@ -90,28 +90,28 @@ class JobDefinitionSelect {
     ) {
       throw new Error(
         "Expected the field `comment` to be a primitive type in the JSON string but got " +
-          data["comment"]
+          data["comment"],
       );
     }
     // ensure the json data is an array
     if (!Array.isArray(data["devices"])) {
       throw new Error(
         "Expected the field `devices` to be an array in the JSON data but got " +
-          data["devices"]
+          data["devices"],
       );
     }
     // ensure the json data is an array
     if (!Array.isArray(data["devices_by_sn"])) {
       throw new Error(
         "Expected the field `devices_by_sn` to be an array in the JSON data but got " +
-          data["devices_by_sn"]
+          data["devices_by_sn"],
       );
     }
     // ensure the json data is an array
     if (!Array.isArray(data["devices_in_fleets"])) {
       throw new Error(
         "Expected the field `devices_in_fleets` to be an array in the JSON data but got " +
-          data["devices_in_fleets"]
+          data["devices_in_fleets"],
       );
     }
 

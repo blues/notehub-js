@@ -53,7 +53,7 @@ class CreateProjectRequest {
       if (data.hasOwnProperty("billing_account_uid")) {
         obj["billing_account_uid"] = ApiClient.convertToType(
           data["billing_account_uid"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("label")) {
@@ -78,7 +78,7 @@ class CreateProjectRequest {
           "The required field `" +
             property +
             "` is not found in the JSON data: " +
-            JSON.stringify(data)
+            JSON.stringify(data),
         );
       }
     }
@@ -92,7 +92,7 @@ class CreateProjectRequest {
     ) {
       throw new Error(
         "Expected the field `billing_account_uid` to be a primitive type in the JSON string but got " +
-          data["billing_account_uid"]
+          data["billing_account_uid"],
       );
     }
     // ensure the json data is a string
@@ -102,7 +102,7 @@ class CreateProjectRequest {
     ) {
       throw new Error(
         "Expected the field `label` to be a primitive type in the JSON string but got " +
-          data["label"]
+          data["label"],
       );
     }
 

@@ -48,7 +48,7 @@ class PersonalAccessTokenInfo {
       if (data.hasOwnProperty("description")) {
         obj["description"] = ApiClient.convertToType(
           data["description"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("expires_at")) {
@@ -60,7 +60,7 @@ class PersonalAccessTokenInfo {
       if (data.hasOwnProperty("suspended")) {
         obj["suspended"] = ApiClient.convertToType(
           data["suspended"],
-          "Boolean"
+          "Boolean",
         );
       }
     } else if (data === null) {
@@ -85,7 +85,7 @@ class PersonalAccessTokenInfo {
     ) {
       throw new Error(
         "Expected the field `description` to be a primitive type in the JSON string but got " +
-          data["description"]
+          data["description"],
       );
     }
     // ensure the json data is a string
@@ -95,7 +95,7 @@ class PersonalAccessTokenInfo {
     ) {
       throw new Error(
         "Expected the field `name` to be a primitive type in the JSON string but got " +
-          data["name"]
+          data["name"],
       );
     }
 

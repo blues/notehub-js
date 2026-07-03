@@ -36,7 +36,7 @@ class EnvTreeJsonNode {
       inheritedVarCount,
       type,
       varCount,
-      variables
+      variables,
     );
   }
 
@@ -51,7 +51,7 @@ class EnvTreeJsonNode {
     inheritedVarCount,
     type,
     varCount,
-    variables
+    variables,
   ) {
     obj["children"] = children;
     obj["inherited_var_count"] = inheritedVarCount;
@@ -85,13 +85,13 @@ class EnvTreeJsonNode {
       if (data.hasOwnProperty("device_uid")) {
         obj["device_uid"] = ApiClient.convertToType(
           data["device_uid"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("fleet_label")) {
         obj["fleet_label"] = ApiClient.convertToType(
           data["fleet_label"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("fleet_uid")) {
@@ -100,7 +100,7 @@ class EnvTreeJsonNode {
       if (data.hasOwnProperty("inherited_var_count")) {
         obj["inherited_var_count"] = ApiClient.convertToType(
           data["inherited_var_count"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("type")) {
@@ -134,7 +134,7 @@ class EnvTreeJsonNode {
           "The required field `" +
             property +
             "` is not found in the JSON data: " +
-            JSON.stringify(data)
+            JSON.stringify(data),
         );
       }
     }
@@ -148,7 +148,7 @@ class EnvTreeJsonNode {
     ) {
       throw new Error(
         "Expected the field `app_label` to be a primitive type in the JSON string but got " +
-          data["app_label"]
+          data["app_label"],
       );
     }
     // ensure the json data is a string
@@ -160,7 +160,7 @@ class EnvTreeJsonNode {
     ) {
       throw new Error(
         "Expected the field `app_uid` to be a primitive type in the JSON string but got " +
-          data["app_uid"]
+          data["app_uid"],
       );
     }
     if (data["children"]) {
@@ -169,7 +169,7 @@ class EnvTreeJsonNode {
       if (!Array.isArray(data["children"])) {
         throw new Error(
           "Expected the field `children` to be an array in the JSON data but got " +
-            data["children"]
+            data["children"],
         );
       }
       // validate the optional field `children` (array)
@@ -187,7 +187,7 @@ class EnvTreeJsonNode {
     ) {
       throw new Error(
         "Expected the field `device_uid` to be a primitive type in the JSON string but got " +
-          data["device_uid"]
+          data["device_uid"],
       );
     }
     // ensure the json data is a string
@@ -200,7 +200,7 @@ class EnvTreeJsonNode {
     ) {
       throw new Error(
         "Expected the field `fleet_label` to be a primitive type in the JSON string but got " +
-          data["fleet_label"]
+          data["fleet_label"],
       );
     }
     // ensure the json data is a string
@@ -213,7 +213,7 @@ class EnvTreeJsonNode {
     ) {
       throw new Error(
         "Expected the field `fleet_uid` to be a primitive type in the JSON string but got " +
-          data["fleet_uid"]
+          data["fleet_uid"],
       );
     }
     // ensure the json data is a string
@@ -223,7 +223,7 @@ class EnvTreeJsonNode {
     ) {
       throw new Error(
         "Expected the field `type` to be a primitive type in the JSON string but got " +
-          data["type"]
+          data["type"],
       );
     }
     // ensure the json data is a string
@@ -233,7 +233,7 @@ class EnvTreeJsonNode {
     ) {
       throw new Error(
         "Expected the field `url` to be a primitive type in the JSON string but got " +
-          data["url"]
+          data["url"],
       );
     }
     if (data["variables"]) {
@@ -242,7 +242,7 @@ class EnvTreeJsonNode {
       if (!Array.isArray(data["variables"])) {
         throw new Error(
           "Expected the field `variables` to be an array in the JSON data but got " +
-            data["variables"]
+            data["variables"],
         );
       }
       // validate the optional field `variables` (array)

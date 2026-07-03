@@ -106,7 +106,7 @@ class TowerLocation {
     ) {
       throw new Error(
         "Expected the field `c` to be a primitive type in the JSON string but got " +
-          data["c"]
+          data["c"],
       );
     }
     // ensure the json data is a string
@@ -116,7 +116,7 @@ class TowerLocation {
     ) {
       throw new Error(
         "Expected the field `l` to be a primitive type in the JSON string but got " +
-          data["l"]
+          data["l"],
       );
     }
     // ensure the json data is a string
@@ -126,7 +126,7 @@ class TowerLocation {
     ) {
       throw new Error(
         "Expected the field `n` to be a primitive type in the JSON string but got " +
-          data["n"]
+          data["n"],
       );
     }
     // ensure the json data is a string
@@ -136,7 +136,7 @@ class TowerLocation {
     ) {
       throw new Error(
         "Expected the field `source` to be a primitive type in the JSON string but got " +
-          data["source"]
+          data["source"],
       );
     }
     // ensure the json data is a string
@@ -146,7 +146,7 @@ class TowerLocation {
     ) {
       throw new Error(
         "Expected the field `zone` to be a primitive type in the JSON string but got " +
-          data["zone"]
+          data["zone"],
       );
     }
 

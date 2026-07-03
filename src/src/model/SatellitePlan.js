@@ -59,19 +59,19 @@ class SatellitePlan {
       if (data.hasOwnProperty("last_session_at")) {
         obj["last_session_at"] = ApiClient.convertToType(
           data["last_session_at"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("minimum_billable_bytes")) {
         obj["minimum_billable_bytes"] = ApiClient.convertToType(
           data["minimum_billable_bytes"],
-          "Number"
+          "Number",
         );
       }
       if (data.hasOwnProperty("ntn_provider")) {
         obj["ntn_provider"] = ApiClient.convertToType(
           data["ntn_provider"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("psid")) {
@@ -79,7 +79,7 @@ class SatellitePlan {
       }
       if (data.hasOwnProperty("satellite_data_usage")) {
         obj["satellite_data_usage"] = SatelliteDataUsage.constructFromObject(
-          data["satellite_data_usage"]
+          data["satellite_data_usage"],
         );
       }
     } else if (data === null) {
@@ -101,7 +101,7 @@ class SatellitePlan {
           "The required field `" +
             property +
             "` is not found in the JSON data: " +
-            JSON.stringify(data)
+            JSON.stringify(data),
         );
       }
     }
@@ -115,7 +115,7 @@ class SatellitePlan {
     ) {
       throw new Error(
         "Expected the field `ntn_provider` to be a primitive type in the JSON string but got " +
-          data["ntn_provider"]
+          data["ntn_provider"],
       );
     }
     // ensure the json data is a string
@@ -125,7 +125,7 @@ class SatellitePlan {
     ) {
       throw new Error(
         "Expected the field `psid` to be a primitive type in the JSON string but got " +
-          data["psid"]
+          data["psid"],
       );
     }
     // validate the optional field `satellite_data_usage`

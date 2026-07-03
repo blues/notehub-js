@@ -73,7 +73,7 @@ class RepositoryListResponse {
           "The required field `" +
             property +
             "` is not found in the JSON data: " +
-            JSON.stringify(data)
+            JSON.stringify(data),
         );
       }
     }
@@ -83,7 +83,7 @@ class RepositoryListResponse {
       if (!Array.isArray(data["repositories"])) {
         throw new Error(
           "Expected the field `repositories` to be an array in the JSON data but got " +
-            data["repositories"]
+            data["repositories"],
         );
       }
       // validate the optional field `repositories` (array)

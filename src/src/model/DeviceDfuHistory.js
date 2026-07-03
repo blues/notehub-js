@@ -49,13 +49,13 @@ class DeviceDfuHistory {
 
       if (data.hasOwnProperty("current")) {
         obj["current"] = DeviceDfuHistoryCurrent.constructFromObject(
-          data["current"]
+          data["current"],
         );
       }
       if (data.hasOwnProperty("device_uid")) {
         obj["device_uid"] = ApiClient.convertToType(
           data["device_uid"],
-          "String"
+          "String",
         );
       }
       if (data.hasOwnProperty("history")) {
@@ -90,7 +90,7 @@ class DeviceDfuHistory {
     ) {
       throw new Error(
         "Expected the field `device_uid` to be a primitive type in the JSON string but got " +
-          data["device_uid"]
+          data["device_uid"],
       );
     }
     if (data["history"]) {
@@ -99,7 +99,7 @@ class DeviceDfuHistory {
       if (!Array.isArray(data["history"])) {
         throw new Error(
           "Expected the field `history` to be an array in the JSON data but got " +
-            data["history"]
+            data["history"],
         );
       }
       // validate the optional field `history` (array)
