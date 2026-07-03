@@ -8,6 +8,8 @@
 import Event from "../model/Event";
 
 declare class GetEvents200Response {
+  constructor(events: Event[], hasMore: boolean);
+
   "events": Event[];
   "has_more": boolean;
   "through"?: string;

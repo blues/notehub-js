@@ -8,6 +8,8 @@
 import SchemaProperty from "../model/SchemaProperty";
 
 declare class NotefileSchema {
+  constructor(notefile: string, properties: SchemaProperty[]);
+
   "notefile": string;
   "properties": SchemaProperty[];
 

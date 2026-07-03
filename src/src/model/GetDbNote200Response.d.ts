@@ -6,6 +6,8 @@
  */
 
 declare class GetDbNote200Response {
+  constructor();
+
   "body"?: { [key: string]: any };
   "payload"?: string;
   "time"?: number;

@@ -8,6 +8,8 @@
 import OrganizationRole from "../model/OrganizationRole";
 
 declare class Organization {
+  constructor(name: string, role: OrganizationRole, uid: string);
+
   "name": string;
   "role": OrganizationRole;
   "uid": string;

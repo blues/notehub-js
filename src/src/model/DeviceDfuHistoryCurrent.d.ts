@@ -6,6 +6,8 @@
  */
 
 declare class DeviceDfuHistoryCurrent {
+  constructor();
+
   "builder"?: string;
   "built"?: string;
   "description"?: string;

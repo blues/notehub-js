@@ -6,6 +6,8 @@
  */
 
 declare class AddDeviceToFleetsRequest {
+  constructor(fleetUids: string[]);
+
   "fleet_uids": string[];
 
   static constructFromObject(

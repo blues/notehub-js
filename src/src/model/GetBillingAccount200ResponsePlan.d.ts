@@ -6,6 +6,8 @@
  */
 
 declare class GetBillingAccount200ResponsePlan {
+  constructor();
+
   "current_balance"?: number;
   "end_date"?: Date;
   "event_capacity"?: number;

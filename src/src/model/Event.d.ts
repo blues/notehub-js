@@ -6,6 +6,8 @@
  */
 
 declare class Event {
+  constructor();
+
   "app"?: string;
   "bars"?: number;
   "best_country"?: string;

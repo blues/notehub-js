@@ -8,6 +8,8 @@
 import Alert from "../model/Alert";
 
 declare class GetAlerts200Response {
+  constructor(alerts: Alert[], hasMore: boolean);
+
   "alerts": Alert[];
   "has_more": boolean;
 

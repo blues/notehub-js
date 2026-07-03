@@ -6,6 +6,14 @@
  */
 
 declare class UsageEventsData {
+  constructor(
+    period: Date,
+    platformEvents: number,
+    totalDevices: number,
+    totalEvents: number,
+    watchdogEvents: number,
+  );
+
   "billable_events"?: number;
   "device"?: string;
   "fleet"?: string;

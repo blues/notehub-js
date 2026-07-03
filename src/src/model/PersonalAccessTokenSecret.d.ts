@@ -6,6 +6,8 @@
  */
 
 declare class PersonalAccessTokenSecret {
+  constructor();
+
   "secret"?: string;
   "uid"?: string;
 

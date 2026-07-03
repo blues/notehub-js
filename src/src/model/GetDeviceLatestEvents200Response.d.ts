@@ -8,6 +8,8 @@
 import Event from "../model/Event";
 
 declare class GetDeviceLatestEvents200Response {
+  constructor();
+
   "latest_events"?: Event[];
 
   static constructFromObject(

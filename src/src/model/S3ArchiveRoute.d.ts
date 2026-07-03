@@ -9,6 +9,8 @@ import Filter from "../model/Filter";
 import RouteTransformSettings from "../model/RouteTransformSettings";
 
 declare class S3ArchiveRoute {
+  constructor();
+
   "archive_count_exceeds"?: number;
   "archive_every_mins"?: number;
   "archive_id"?: string;

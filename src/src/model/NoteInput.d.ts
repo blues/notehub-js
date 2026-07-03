@@ -6,6 +6,8 @@
  */
 
 declare class NoteInput {
+  constructor();
+
   "body"?: { [key: string]: { [key: string]: any } };
   "payload"?: Blob;
 

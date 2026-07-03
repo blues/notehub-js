@@ -6,6 +6,8 @@
  */
 
 declare class AlertNotificationsInner {
+  constructor();
+
   "notification_type"?: "email" | "slack";
   "recipients"?: string;
   "status"?: number;

@@ -6,6 +6,8 @@
  */
 
 declare class SignalDevice200Response {
+  constructor();
+
   "connected"?: boolean;
 
   static constructFromObject(

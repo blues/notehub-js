@@ -6,6 +6,8 @@
  */
 
 declare class JobDefinitionSelect {
+  constructor();
+
   "all_devices"?: boolean;
   "comment"?: string;
   "devices"?: string[];

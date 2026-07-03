@@ -8,6 +8,8 @@
 import Device from "../model/Device";
 
 declare class GetDevices200Response {
+  constructor(devices: Device[], hasMore: boolean);
+
   "devices": Device[];
   "has_more": boolean;
 

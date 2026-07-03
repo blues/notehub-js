@@ -6,6 +6,8 @@
  */
 
 declare class UsageData {
+  constructor(period: Date, totalBytes: number);
+
   "billable_bytes_total"?: number;
   "downlink_bytes"?: number;
   "downlink_bytes_billable"?: number;

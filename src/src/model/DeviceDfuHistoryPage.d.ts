@@ -8,6 +8,8 @@
 import DeviceDfuHistory from "../model/DeviceDfuHistory";
 
 declare class DeviceDfuHistoryPage {
+  constructor();
+
   "devices"?: DeviceDfuHistory[];
   "has_more"?: boolean;
 

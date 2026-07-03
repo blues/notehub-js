@@ -8,6 +8,8 @@
 import Role from "../model/Role";
 
 declare class ProjectMember {
+  constructor(email: string, name: string, role: Role);
+
   "email": string;
   "name": string;
   "role": Role;

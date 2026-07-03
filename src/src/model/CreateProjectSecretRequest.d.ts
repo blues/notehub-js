@@ -6,6 +6,8 @@
  */
 
 declare class CreateProjectSecretRequest {
+  constructor(name: string, value: string);
+
   "name": string;
   "value": string;
 

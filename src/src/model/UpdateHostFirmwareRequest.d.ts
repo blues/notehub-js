@@ -6,6 +6,8 @@
  */
 
 declare class UpdateHostFirmwareRequest {
+  constructor();
+
   "info"?: { [key: string]: { [key: string]: any } };
   "notes"?: string;
   "version"?: string;

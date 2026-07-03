@@ -8,6 +8,11 @@
 import GetDeviceJourneys200ResponseJourneysInner from "../model/GetDeviceJourneys200ResponseJourneysInner";
 
 declare class GetDeviceJourneys200Response {
+  constructor(
+    hasMore: boolean,
+    journeys: GetDeviceJourneys200ResponseJourneysInner[],
+  );
+
   "has_more": boolean;
   "journeys": GetDeviceJourneys200ResponseJourneysInner[];
 

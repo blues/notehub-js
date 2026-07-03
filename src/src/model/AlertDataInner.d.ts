@@ -6,6 +6,8 @@
  */
 
 declare class AlertDataInner {
+  constructor();
+
   "alert_source"?: "app" | "device";
   "source"?: string;
   "source_type"?: "event" | "device";

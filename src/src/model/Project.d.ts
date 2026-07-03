@@ -9,6 +9,8 @@ import Contact from "../model/Contact";
 import Role from "../model/Role";
 
 declare class Project {
+  constructor(created: Date, label: string, uid: string);
+
   "administrative_contact"?: Contact;
   "created": Date;
   "label": string;

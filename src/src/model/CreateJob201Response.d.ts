@@ -6,6 +6,8 @@
  */
 
 declare class CreateJob201Response {
+  constructor(jobUid: string);
+
   "job_uid": string;
 
   static constructFromObject(

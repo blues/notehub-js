@@ -9,6 +9,8 @@ import Filter from "../model/Filter";
 import RouteTransformSettings from "../model/RouteTransformSettings";
 
 declare class SlackRoute {
+  constructor();
+
   "bearer"?: string;
   "blocks"?: string;
   "channel"?: string;

@@ -8,6 +8,8 @@
 import DataUsage from "../model/DataUsage";
 
 declare class CellularPlan {
+  constructor();
+
   "activated"?: number;
   "data_usage"?: DataUsage;
   "expires_at"?: number;

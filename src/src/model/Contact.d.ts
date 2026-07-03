@@ -6,6 +6,8 @@
  */
 
 declare class Contact {
+  constructor();
+
   "email"?: string;
   "name"?: string;
   "organization"?: string;

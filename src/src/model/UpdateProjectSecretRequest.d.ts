@@ -6,6 +6,8 @@
  */
 
 declare class UpdateProjectSecretRequest {
+  constructor(value: string);
+
   "value": string;
 
   static constructFromObject(

@@ -9,6 +9,8 @@ import Filter from "../model/Filter";
 import RouteTransformSettings from "../model/RouteTransformSettings";
 
 declare class AzureRoute {
+  constructor();
+
   "filter"?: Filter;
   "fleets"?: string[];
   "functions_key_secret"?: string;

@@ -6,6 +6,8 @@
  */
 
 declare class LoginRequest {
+  constructor();
+
   "password"?: string;
   "username"?: string;
 

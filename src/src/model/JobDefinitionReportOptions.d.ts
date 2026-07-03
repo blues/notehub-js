@@ -6,6 +6,8 @@
  */
 
 declare class JobDefinitionReportOptions {
+  constructor();
+
   "app_fleets"?: boolean;
   "app_info"?: boolean;
   "app_vars"?: boolean;

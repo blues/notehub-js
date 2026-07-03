@@ -6,6 +6,8 @@
  */
 
 declare class WebhookSettings {
+  constructor();
+
   "disabled"?: boolean;
   "id"?: string;
   "transform"?: string;

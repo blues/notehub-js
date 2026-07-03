@@ -6,6 +6,8 @@
  */
 
 declare class DeviceDfuStateMachineNode {
+  constructor();
+
   "datetime"?: string;
   "description"?: string;
   "phase"?: string;

@@ -6,6 +6,8 @@
  */
 
 declare class BatchJobRequests {
+  constructor();
+
   "comment"?: string;
   "connectivity_assurance_disable"?: boolean;
   "connectivity_assurance_enable"?: boolean;

@@ -6,6 +6,8 @@
  */
 
 declare class DfuActionRequest {
+  constructor();
+
   "filename"?: string;
 
   static constructFromObject(

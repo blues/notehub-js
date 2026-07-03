@@ -6,6 +6,8 @@
  */
 
 declare class Job {
+  constructor(created: number, createdBy: string, jobUid: string, name: string);
+
   "created": number;
   "created_by": string;
   "job_uid": string;

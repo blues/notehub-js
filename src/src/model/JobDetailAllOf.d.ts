@@ -8,6 +8,8 @@
 import JobDefinition from "../model/JobDefinition";
 
 declare class JobDetailAllOf {
+  constructor();
+
   "definition"?: JobDefinition;
 
   static constructFromObject(data: any, obj?: JobDetailAllOf): JobDetailAllOf;

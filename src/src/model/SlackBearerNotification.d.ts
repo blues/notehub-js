@@ -6,6 +6,8 @@
  */
 
 declare class SlackBearerNotification {
+  constructor();
+
   "channel"?: string;
   "message_type"?: "text" | "blocks";
   "text"?: string;

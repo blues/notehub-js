@@ -8,6 +8,13 @@
 import GetDeviceJourney200ResponseJourney from "../model/GetDeviceJourney200ResponseJourney";
 
 declare class GetDeviceJourney200Response {
+  constructor(
+    endDate: Date,
+    journey: GetDeviceJourney200ResponseJourney,
+    journeyId: number,
+    startDate: Date,
+  );
+
   "end_date": Date;
   "journey": GetDeviceJourney200ResponseJourney;
   "journey_id": number;

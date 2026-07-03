@@ -6,6 +6,8 @@
  */
 
 declare class RadRoute {
+  constructor();
+
   "client_id"?: string;
   "client_secret"?: string;
   "data_feed_key"?: string;

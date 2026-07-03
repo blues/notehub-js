@@ -6,6 +6,14 @@
  */
 
 declare class UsageSessionsData {
+  constructor(
+    firstSyncSessions: number,
+    period: Date,
+    sessions: number,
+    totalBytes: number,
+    totalDevices: number,
+  );
+
   "device"?: string;
   "first_sync_sessions": number;
   "fleet"?: string;

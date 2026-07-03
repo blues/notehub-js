@@ -9,6 +9,8 @@ import Filter from "../model/Filter";
 import RouteTransformSettings from "../model/RouteTransformSettings";
 
 declare class AwsRoute {
+  constructor();
+
   "access_key_id"?: string;
   "access_key_secret"?: string;
   "channel"?: string;

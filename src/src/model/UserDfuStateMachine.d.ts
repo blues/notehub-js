@@ -9,6 +9,8 @@ import UploadMetadata from "../model/UploadMetadata";
 import UserDfuStateMachineStatus from "../model/UserDfuStateMachineStatus";
 
 declare class UserDfuStateMachine {
+  constructor();
+
   "created"?: Date;
   "from_version"?: string;
   "metadata"?: UploadMetadata;

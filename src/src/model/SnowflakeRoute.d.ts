@@ -9,6 +9,8 @@ import Filter from "../model/Filter";
 import RouteTransformSettings from "../model/RouteTransformSettings";
 
 declare class SnowflakeRoute {
+  constructor();
+
   "account_name"?: string;
   "filter"?: Filter;
   "fleets"?: string[];

@@ -6,6 +6,8 @@
  */
 
 declare class DataSetField {
+  constructor();
+
   "datatype"?: 0 | 1 | 2;
   "jsonata"?: string;
   "name"?: string;

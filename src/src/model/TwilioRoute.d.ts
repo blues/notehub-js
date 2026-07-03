@@ -8,6 +8,8 @@
 import Filter from "../model/Filter";
 
 declare class TwilioRoute {
+  constructor();
+
   "account_sid"?: string;
   "auth_token"?: string;
   "filter"?: Filter;

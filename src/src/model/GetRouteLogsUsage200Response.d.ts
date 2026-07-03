@@ -8,6 +8,8 @@
 import UsageRouteLogsData from "../model/UsageRouteLogsData";
 
 declare class GetRouteLogsUsage200Response {
+  constructor(routeLogs: UsageRouteLogsData[]);
+
   "route_logs": UsageRouteLogsData[];
   "truncated"?: boolean;
 

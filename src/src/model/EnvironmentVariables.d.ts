@@ -6,6 +6,8 @@
  */
 
 declare class EnvironmentVariables {
+  constructor(environmentVariables: { [key: string]: string });
+
   "environment_variables": { [key: string]: string };
 
   static constructFromObject(

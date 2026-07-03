@@ -8,6 +8,8 @@
 import WebhookSettings from "../model/WebhookSettings";
 
 declare class GetWebhooks200Response {
+  constructor();
+
   "webhooks"?: WebhookSettings[];
 
   static constructFromObject(

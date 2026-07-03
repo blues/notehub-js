@@ -9,6 +9,8 @@ import Filter from "../model/Filter";
 import RouteTransformSettings from "../model/RouteTransformSettings";
 
 declare class QubitroRoute {
+  constructor();
+
   "filter"?: Filter;
   "fleets"?: string[];
   "project_id"?: string;

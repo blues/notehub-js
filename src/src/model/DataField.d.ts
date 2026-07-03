@@ -6,6 +6,8 @@
  */
 
 declare class DataField {
+  constructor();
+
   "name"?: string;
 
   static constructFromObject(data: any, obj?: DataField): DataField;

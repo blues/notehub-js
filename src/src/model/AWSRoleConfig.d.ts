@@ -6,6 +6,8 @@
  */
 
 declare class AWSRoleConfig {
+  constructor(awsAccountId: string, externalId: string);
+
   "aws_account_id": string;
   "external_id": string;
 

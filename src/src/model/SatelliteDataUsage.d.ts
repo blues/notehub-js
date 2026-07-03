@@ -6,6 +6,13 @@
  */
 
 declare class SatelliteDataUsage {
+  constructor(
+    bytesRemaining: number,
+    bytesTotal: number,
+    bytesUsed: number,
+    bytesUsedBillable: number,
+  );
+
   "bytes_remaining": number;
   "bytes_total": number;
   "bytes_used": number;

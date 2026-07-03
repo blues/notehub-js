@@ -6,6 +6,8 @@
  */
 
 declare class DFUState {
+  constructor();
+
   "began"?: number;
   "crc32"?: number;
   "errors"?: number;

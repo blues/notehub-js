@@ -6,6 +6,8 @@
  */
 
 declare class RunJob200Response {
+  constructor(reportUid: string);
+
   "report_uid": string;
 
   static constructFromObject(

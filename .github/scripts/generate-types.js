@@ -327,6 +327,31 @@ function generateOneOf(className, js, members) {
   );
 }
 
+// The class constructor signature, taken from the JS constructor's arg list and its own
+// JSDoc. Model constructor JSDoc is name-first (`@param fleetUids {Array.<String>}`),
+// unlike constructFromObject's type-first `@param {Object} data`, so we isolate the JSDoc
+// block that immediately precedes `constructor(` (without crossing any `*/`) and parse
+// only name-first @param tags from it.
+function constructorSignature(js, ctx) {
+  const sig = js.match(
+    /\/\*\*((?:(?!\*\/)[\s\S])*?)\*\/\s*\n\s*constructor\s*\(([^)]*)\)/,
+  );
+  if (!sig) return null;
+  const args = sig[2]
+    .split(",")
+    .map((s) => s.split("=")[0].trim())
+    .filter(Boolean);
+  if (!args.length) return `  constructor();`;
+  const typeByParam = {};
+  const re = /@param\s+([A-Za-z0-9_$]+)\s+\{([^}]+)\}/g;
+  let m;
+  while ((m = re.exec(sig[1]))) typeByParam[m[1]] = m[2].trim();
+  const params = args.map(
+    (name) => `${name}: ${jsdocToTs(typeByParam[name], ctx)}`,
+  );
+  return `  constructor(${params.join(", ")});`;
+}
+
 function generateEnumClass(className, js) {
   const members = [];
   const re = /^\s{2}([A-Za-z0-9_]+) = ("(?:[^"\\]|\\.)*"|\d+(?:\.\d+)?);/gm;
@@ -354,12 +379,14 @@ function generateModel(className, js) {
   const nestedEnums = parseNestedEnums(js, className);
   const ctx = { refs, selfClass: className, nestedEnums };
 
+  const ctorLine = constructorSignature(js, ctx);
   const lines = propLines(js, className, ctx);
   const enumLines = enumMemberLines(nestedEnums);
   const hasValidate = /static validateJSON\(/.test(js);
 
   let body = "";
-  if (lines.length) body += lines.join("\n") + "\n";
+  if (ctorLine) body += ctorLine + "\n";
+  if (lines.length) body += (body ? "\n" : "") + lines.join("\n") + "\n";
   if (enumLines.length)
     body += (body ? "\n" : "") + enumLines.join("\n") + "\n";
   body += `${body ? "\n" : ""}  static constructFromObject(data: any, obj?: ${className}): ${className};\n`;

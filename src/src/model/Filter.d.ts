@@ -6,6 +6,8 @@
  */
 
 declare class Filter {
+  constructor();
+
   "files"?: string[];
   "system_notefiles"?: boolean;
   "type"?: string;

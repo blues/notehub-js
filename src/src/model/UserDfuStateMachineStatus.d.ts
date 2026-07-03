@@ -6,6 +6,8 @@
  */
 
 declare class UserDfuStateMachineStatus {
+  constructor();
+
   "date"?: Date;
   "phase"?: string;
   "phase_description"?: string;

@@ -8,6 +8,8 @@
 import JobRun from "../model/JobRun";
 
 declare class GetJobRuns200Response {
+  constructor(runs: JobRun[]);
+
   "runs": JobRun[];
 
   static constructFromObject(

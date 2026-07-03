@@ -23,6 +23,8 @@ import ThingworxRoute from "../model/ThingworxRoute";
 import TwilioRoute from "../model/TwilioRoute";
 
 declare class NotehubRoute {
+  constructor();
+
   "aws"?: AwsRoute;
   "azure"?: AzureRoute;
   "blynk"?: BlynkRoute;

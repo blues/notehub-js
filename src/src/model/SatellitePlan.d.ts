@@ -8,6 +8,8 @@
 import SatelliteDataUsage from "../model/SatelliteDataUsage";
 
 declare class SatellitePlan {
+  constructor(activated: number, ntnProvider: string, psid: string);
+
   "activated": number;
   "last_session_at"?: number;
   "minimum_billable_bytes"?: number;

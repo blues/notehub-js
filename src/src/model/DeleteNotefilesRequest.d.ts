@@ -6,6 +6,8 @@
  */
 
 declare class DeleteNotefilesRequest {
+  constructor();
+
   "files"?: string[];
 
   static constructFromObject(

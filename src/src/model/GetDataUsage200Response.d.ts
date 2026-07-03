@@ -8,6 +8,8 @@
 import GetDataUsage200ResponseDataInner from "../model/GetDataUsage200ResponseDataInner";
 
 declare class GetDataUsage200Response {
+  constructor();
+
   "data"?: GetDataUsage200ResponseDataInner[];
   "truncated"?: boolean;
 

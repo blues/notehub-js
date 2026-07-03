@@ -6,6 +6,8 @@
  */
 
 declare class SlackWebHookNotification {
+  constructor();
+
   "message_type"?: "text" | "blocks";
   "text"?: string;
   "url"?: string;

@@ -6,6 +6,8 @@
  */
 
 declare class SchemaProperty {
+  constructor(type: "string" | "number" | "boolean" | "array" | "object");
+
   "items"?: SchemaProperty[];
   "name"?: string;
   "properties"?: SchemaProperty[];

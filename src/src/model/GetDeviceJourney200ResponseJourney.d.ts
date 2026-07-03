@@ -8,6 +8,8 @@
 import Event from "../model/Event";
 
 declare class GetDeviceJourney200ResponseJourney {
+  constructor(events: Event[], hasMore: boolean);
+
   "events": Event[];
   "has_more": boolean;
 

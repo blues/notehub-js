@@ -8,6 +8,8 @@
 import Job from "../model/Job";
 
 declare class GetJobs200Response {
+  constructor(jobs: Job[]);
+
   "jobs": Job[];
 
   static constructFromObject(

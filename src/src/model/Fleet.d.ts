@@ -8,6 +8,8 @@
 import FleetConnectivityAssurance from "../model/FleetConnectivityAssurance";
 
 declare class Fleet {
+  constructor(created: Date, label: string, uid: string);
+
   "connectivity_assurance"?: FleetConnectivityAssurance;
   "created": Date;
   "environment_variables"?: { [key: string]: string };

@@ -8,6 +8,8 @@
 import DFUState from "../model/DFUState";
 
 declare class DFUEnv {
+  constructor();
+
   "card"?: DFUState;
   "user"?: DFUState;
 

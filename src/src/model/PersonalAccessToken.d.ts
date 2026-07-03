@@ -8,6 +8,8 @@
 import PersonalAccessTokenCreatedBy from "../model/PersonalAccessTokenCreatedBy";
 
 declare class PersonalAccessToken {
+  constructor();
+
   "created_at"?: Date;
   "created_by"?: PersonalAccessTokenCreatedBy;
   "description"?: string;

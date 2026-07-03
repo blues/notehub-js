@@ -6,6 +6,8 @@
  */
 
 declare class DeleteJob200Response {
+  constructor(success: boolean);
+
   "success": boolean;
 
   static constructFromObject(

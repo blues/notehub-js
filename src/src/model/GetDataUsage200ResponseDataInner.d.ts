@@ -8,6 +8,8 @@
 import UsageData from "../model/UsageData";
 
 declare class GetDataUsage200ResponseDataInner {
+  constructor(data: UsageData[], type: "cellular" | "satellite");
+
   "data": UsageData[];
   "device"?: string;
   "device_count"?: number;

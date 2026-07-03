@@ -8,6 +8,8 @@
 import Repository from "../model/Repository";
 
 declare class RepositoryListResponse {
+  constructor(repositories: Repository[]);
+
   "repositories": Repository[];
 
   static constructFromObject(

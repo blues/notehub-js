@@ -6,6 +6,8 @@
  */
 
 declare class Repository {
+  constructor();
+
   "fleet_uids"?: string[];
   "name"?: string;
   "project_uids"?: string[];

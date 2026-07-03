@@ -6,6 +6,8 @@
  */
 
 declare class ProjectSecret {
+  constructor(created: Date, createdBy: string, name: string);
+
   "created": Date;
   "created_by": string;
   "modified"?: Date;

@@ -6,6 +6,8 @@
  */
 
 declare class FirmwareInfo {
+  constructor();
+
   "built"?: string;
   "created"?: string;
   "description"?: string;

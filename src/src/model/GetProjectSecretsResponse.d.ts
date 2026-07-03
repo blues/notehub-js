@@ -8,6 +8,8 @@
 import ProjectSecret from "../model/ProjectSecret";
 
 declare class GetProjectSecretsResponse {
+  constructor(secrets: ProjectSecret[]);
+
   "secrets": ProjectSecret[];
 
   static constructFromObject(

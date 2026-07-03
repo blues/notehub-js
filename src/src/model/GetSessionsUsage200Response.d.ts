@@ -8,6 +8,8 @@
 import UsageSessionsData from "../model/UsageSessionsData";
 
 declare class GetSessionsUsage200Response {
+  constructor(sessions: UsageSessionsData[], truncated: boolean);
+
   "sessions": UsageSessionsData[];
   "truncated": boolean;
 

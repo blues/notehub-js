@@ -9,6 +9,8 @@ import DeviceDfuHistoryCurrent from "../model/DeviceDfuHistoryCurrent";
 import DeviceDfuStateMachine from "../model/DeviceDfuStateMachine";
 
 declare class DeviceDfuHistory {
+  constructor();
+
   "current"?: DeviceDfuHistoryCurrent;
   "device_uid"?: string;
   "history"?: DeviceDfuStateMachine[];

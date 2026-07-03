@@ -8,6 +8,8 @@
 import RouteTransformSettings from "../model/RouteTransformSettings";
 
 declare class ProxyRoute {
+  constructor();
+
   "alias"?: string;
   "fleets"?: string[];
   "http_headers"?: { [key: string]: string };

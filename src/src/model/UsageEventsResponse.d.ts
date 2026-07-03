@@ -8,6 +8,8 @@
 import UsageEventsData from "../model/UsageEventsData";
 
 declare class UsageEventsResponse {
+  constructor(data: UsageEventsData[]);
+
   "data": UsageEventsData[];
   "truncated"?: boolean;
 

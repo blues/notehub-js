@@ -8,6 +8,8 @@
 import Project from "../model/Project";
 
 declare class GetProjects200Response {
+  constructor();
+
   "projects"?: Project[];
 
   static constructFromObject(

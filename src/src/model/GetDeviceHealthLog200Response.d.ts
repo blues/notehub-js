@@ -8,6 +8,8 @@
 import GetDeviceHealthLog200ResponseHealthLogInner from "../model/GetDeviceHealthLog200ResponseHealthLogInner";
 
 declare class GetDeviceHealthLog200Response {
+  constructor(healthLog: GetDeviceHealthLog200ResponseHealthLogInner[]);
+
   "health_log": GetDeviceHealthLog200ResponseHealthLogInner[];
 
   static constructFromObject(

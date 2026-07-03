@@ -6,6 +6,8 @@
  */
 
 declare class RepositoryTokenRequest {
+  constructor();
+
   "intent"?: "read";
   "ttl_seconds"?: number;
 

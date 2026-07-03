@@ -8,6 +8,8 @@
 import MonitorAlertRoutesInner from "../model/MonitorAlertRoutesInner";
 
 declare class Monitor {
+  constructor();
+
   "aggregate_function"?: "none" | "sum" | "average" | "max" | "min";
   "aggregate_window"?: string;
   "alert"?: boolean;

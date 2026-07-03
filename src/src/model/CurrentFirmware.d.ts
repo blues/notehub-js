@@ -8,6 +8,8 @@
 import Firmware from "../model/Firmware";
 
 declare class CurrentFirmware {
+  constructor();
+
   "metadata"?: Firmware;
   "version"?: string;
 

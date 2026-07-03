@@ -8,6 +8,8 @@
 import Note from "../model/Note";
 
 declare class Notefile {
+  constructor(id: string, notes: Note[]);
+
   "id": string;
   "notes": Note[];
   "template"?: string;

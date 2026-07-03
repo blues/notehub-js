@@ -6,6 +6,15 @@
  */
 
 declare class Location {
+  constructor(
+    country: string,
+    latitude: number,
+    longitude: number,
+    name: string,
+    timezone: string,
+    when: string,
+  );
+
   "country": string;
   "latitude": number;
   "longitude": number;

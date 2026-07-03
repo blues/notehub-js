@@ -8,6 +8,8 @@
 import ProjectMember from "../model/ProjectMember";
 
 declare class GetProjectMembers200Response {
+  constructor(members: ProjectMember[]);
+
   "members": ProjectMember[];
 
   static constructFromObject(

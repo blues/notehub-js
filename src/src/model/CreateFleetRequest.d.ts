@@ -8,6 +8,8 @@
 import FleetConnectivityAssurance from "../model/FleetConnectivityAssurance";
 
 declare class CreateFleetRequest {
+  constructor();
+
   "connectivity_assurance"?: FleetConnectivityAssurance;
   "label"?: string;
   "smart_rule"?: string;

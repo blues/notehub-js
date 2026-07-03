@@ -8,6 +8,11 @@
 import GetDevicePublicKeys200ResponseDevicePublicKeysInner from "../model/GetDevicePublicKeys200ResponseDevicePublicKeysInner";
 
 declare class GetDevicePublicKeys200Response {
+  constructor(
+    devicePublicKeys: GetDevicePublicKeys200ResponseDevicePublicKeysInner[],
+    hasMore: boolean,
+  );
+
   "device_public_keys": GetDevicePublicKeys200ResponseDevicePublicKeysInner[];
   "has_more": boolean;
 

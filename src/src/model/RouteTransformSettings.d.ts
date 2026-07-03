@@ -6,6 +6,8 @@
  */
 
 declare class RouteTransformSettings {
+  constructor();
+
   "format"?: string;
   "jsonata"?: string;
   "jsonata_in"?: string;

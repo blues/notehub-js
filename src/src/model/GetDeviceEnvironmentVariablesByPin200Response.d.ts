@@ -6,6 +6,11 @@
  */
 
 declare class GetDeviceEnvironmentVariablesByPin200Response {
+  constructor(
+    environmentVariables: { [key: string]: string },
+    environmentVariablesEnvDefault: { [key: string]: string },
+  );
+
   static constructFromObject(
     data: any,
     obj?: GetDeviceEnvironmentVariablesByPin200Response,

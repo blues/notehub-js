@@ -6,6 +6,8 @@
  */
 
 declare class GetDevicePublicKey200Response {
+  constructor(key: string, uid: string);
+
   "key": string;
   "uid": string;
 

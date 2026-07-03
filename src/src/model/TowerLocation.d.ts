@@ -6,6 +6,8 @@
  */
 
 declare class TowerLocation {
+  constructor();
+
   "c"?: string;
   "cid"?: number;
   "l"?: string;

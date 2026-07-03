@@ -6,6 +6,8 @@
  */
 
 declare class EmailNotification {
+  constructor();
+
   "email"?: string;
 
   static constructFromObject(

@@ -6,6 +6,8 @@
  */
 
 declare class Login200Response {
+  constructor();
+
   "session_token"?: string;
 
   static constructFromObject(

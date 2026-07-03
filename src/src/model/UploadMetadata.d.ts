@@ -8,6 +8,8 @@
 import Firmware from "../model/Firmware";
 
 declare class UploadMetadata {
+  constructor();
+
   "contains"?: string;
   "crc32"?: number;
   "created"?: number;

@@ -6,6 +6,8 @@
  */
 
 declare class CancelJobRun200Response {
+  constructor(successful: boolean);
+
   "successful": boolean;
 
   static constructFromObject(

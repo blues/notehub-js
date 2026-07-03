@@ -8,6 +8,14 @@
 import MonitorAlertRoutesInner from "../model/MonitorAlertRoutesInner";
 
 declare class CreateMonitor {
+  constructor(
+    alertRoutes: MonitorAlertRoutesInner[],
+    description: string,
+    name: string,
+    sourceType: "event" | "heartbeat",
+    threshold: number,
+  );
+
   "aggregate_function"?: "none" | "sum" | "average" | "max" | "min";
   "aggregate_window"?: string;
   "alert"?: boolean;

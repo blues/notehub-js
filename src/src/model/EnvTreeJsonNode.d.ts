@@ -8,6 +8,14 @@
 import EnvVar from "../model/EnvVar";
 
 declare class EnvTreeJsonNode {
+  constructor(
+    children: EnvTreeJsonNode[],
+    inheritedVarCount: number,
+    type: string,
+    varCount: number,
+    variables: EnvVar[],
+  );
+
   "app_label"?: string;
   "app_uid"?: string;
   "children": EnvTreeJsonNode[];

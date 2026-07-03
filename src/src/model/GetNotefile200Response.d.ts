@@ -6,6 +6,8 @@
  */
 
 declare class GetNotefile200Response {
+  constructor();
+
   "changes"?: number;
   "notes"?: { [key: string]: any };
   "total"?: number;

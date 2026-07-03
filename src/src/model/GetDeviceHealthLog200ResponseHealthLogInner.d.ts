@@ -6,6 +6,8 @@
  */
 
 declare class GetDeviceHealthLog200ResponseHealthLogInner {
+  constructor(alert: boolean, text: string, when: Date);
+
   "alert": boolean;
   "text": string;
   "when": Date;

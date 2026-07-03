@@ -6,6 +6,8 @@
  */
 
 declare class Error {
+  constructor(code: number, err: string, status: string);
+
   "code": number;
   "debug"?: string;
   "details"?: { [key: string]: any };

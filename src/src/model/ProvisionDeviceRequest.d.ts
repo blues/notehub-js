@@ -6,6 +6,8 @@
  */
 
 declare class ProvisionDeviceRequest {
+  constructor(productUid: string);
+
   "device_sn"?: string;
   "fleet_uids"?: string[];
   "product_uid": string;

@@ -8,6 +8,8 @@
 import Event from "../model/Event";
 
 declare class GetEventsByCursor200Response {
+  constructor(events: Event[], hasMore: boolean, nextCursor: string);
+
   "events": Event[];
   "has_more": boolean;
   "next_cursor": string;

@@ -6,6 +6,8 @@
  */
 
 declare class GetDevicePublicKeys200ResponseDevicePublicKeysInner {
+  constructor();
+
   "key"?: string;
   "uid"?: string;
 

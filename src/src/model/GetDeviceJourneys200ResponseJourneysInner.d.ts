@@ -6,6 +6,13 @@
  */
 
 declare class GetDeviceJourneys200ResponseJourneysInner {
+  constructor(
+    endDate: Date,
+    journeyId: number,
+    startDate: Date,
+    totalEvents: number,
+  );
+
   "end_date": Date;
   "journey_id": number;
   "start_date": Date;

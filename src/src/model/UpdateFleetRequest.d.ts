@@ -8,6 +8,8 @@
 import FleetConnectivityAssurance from "../model/FleetConnectivityAssurance";
 
 declare class UpdateFleetRequest {
+  constructor();
+
   "addDevices"?: string[];
   "connectivity_assurance"?: FleetConnectivityAssurance;
   "label"?: string;

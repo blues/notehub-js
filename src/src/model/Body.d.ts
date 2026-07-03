@@ -6,6 +6,8 @@
  */
 
 declare class Body {
+  constructor();
+
   "body"?: { [key: string]: any };
 
   static constructFromObject(data: any, obj?: Body): Body;

@@ -9,6 +9,8 @@ import Filter from "../model/Filter";
 import RouteTransformSettings from "../model/RouteTransformSettings";
 
 declare class SnowpipeStreamingRoute {
+  constructor();
+
   "account_name"?: string;
   "database_name"?: string;
   "filter"?: Filter;

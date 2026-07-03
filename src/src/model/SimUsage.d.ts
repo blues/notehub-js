@@ -6,6 +6,8 @@
  */
 
 declare class SimUsage {
+  constructor();
+
   "iccid"?: string;
   "last_updated"?: number;
   "lifetime_used"?: number;

@@ -9,6 +9,8 @@ import Filter from "../model/Filter";
 import RouteTransformSettings from "../model/RouteTransformSettings";
 
 declare class ThingworxRoute {
+  constructor();
+
   "app_key"?: string;
   "filter"?: Filter;
   "fleets"?: string[];

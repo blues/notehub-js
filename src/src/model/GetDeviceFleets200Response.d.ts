@@ -8,6 +8,8 @@
 import Fleet from "../model/Fleet";
 
 declare class GetDeviceFleets200Response {
+  constructor(fleets: Fleet[]);
+
   "fleets": Fleet[];
 
   static constructFromObject(

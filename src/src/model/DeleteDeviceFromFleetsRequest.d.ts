@@ -6,6 +6,8 @@
  */
 
 declare class DeleteDeviceFromFleetsRequest {
+  constructor(fleetUids: string[]);
+
   "fleet_uids": string[];
 
   static constructFromObject(

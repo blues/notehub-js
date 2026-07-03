@@ -6,6 +6,15 @@
  */
 
 declare class RepositoryTokenResponse {
+  constructor(
+    database: string,
+    expiresAt: Date,
+    host: string,
+    password: string,
+    port: number,
+    username: string,
+  );
+
   "database": string;
   "expires_at": Date;
   "host": string;

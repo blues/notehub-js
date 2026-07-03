@@ -9,6 +9,8 @@ import Filter from "../model/Filter";
 import RouteTransformSettings from "../model/RouteTransformSettings";
 
 declare class GoogleRoute {
+  constructor();
+
   "filter"?: Filter;
   "fleets"?: string[];
   "throttle_ms"?: number;

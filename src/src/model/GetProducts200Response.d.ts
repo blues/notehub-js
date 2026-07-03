@@ -8,6 +8,8 @@
 import Product from "../model/Product";
 
 declare class GetProducts200Response {
+  constructor();
+
   "products"?: Product[];
 
   static constructFromObject(

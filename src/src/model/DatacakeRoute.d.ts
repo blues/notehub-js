@@ -9,6 +9,8 @@ import Filter from "../model/Filter";
 import RouteTransformSettings from "../model/RouteTransformSettings";
 
 declare class DatacakeRoute {
+  constructor();
+
   "disable_http_headers"?: boolean;
   "filter"?: Filter;
   "fleets"?: string[];

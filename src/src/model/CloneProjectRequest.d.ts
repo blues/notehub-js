@@ -6,6 +6,8 @@
  */
 
 declare class CloneProjectRequest {
+  constructor(billingAccountUid: string, label: string);
+
   "billing_account_uid": string;
   "disable_clone_fleets"?: boolean;
   "disable_clone_routes"?: boolean;

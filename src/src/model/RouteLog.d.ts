@@ -6,6 +6,8 @@
  */
 
 declare class RouteLog {
+  constructor();
+
   "attn"?: boolean;
   "date"?: string;
   "duration"?: number;

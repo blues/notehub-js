@@ -8,6 +8,8 @@
 import Organization from "../model/Organization";
 
 declare class GetOrganizations200Response {
+  constructor();
+
   "organizations"?: Organization[];
 
   static constructFromObject(

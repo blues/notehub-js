@@ -6,6 +6,8 @@
  */
 
 declare class OAuth2TokenResponse {
+  constructor(accessToken: string, expiresIn: number, tokenType: string);
+
   "access_token": string;
   "expires_in": number;
   "scope"?: string;

@@ -6,6 +6,8 @@
  */
 
 declare class CreateUpdateRepository {
+  constructor();
+
   "fleet_uids"?: string[];
   "name"?: string;
   "project_uids"?: string[];

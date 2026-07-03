@@ -6,6 +6,17 @@
  */
 
 declare class JobRun {
+  constructor(
+    dryRun: boolean,
+    jobName: string,
+    jobUid: string,
+    reportUid: string,
+    status: string,
+    submitted: number,
+    submittedBy: string,
+    updated: number,
+  );
+
   "cancel"?: boolean;
   "completed"?: number;
   "dry_run": boolean;

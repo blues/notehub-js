@@ -8,6 +8,8 @@
 import BillingAccountRole from "../model/BillingAccountRole";
 
 declare class BillingAccount {
+  constructor(name: string, role: BillingAccountRole, uid: string);
+
   "name": string;
   "role": BillingAccountRole;
   "uid": string;

@@ -6,6 +6,8 @@
  */
 
 declare class NotehubRouteSummary {
+  constructor();
+
   "disabled"?: boolean;
   "label"?: string;
   "modified"?: Date;

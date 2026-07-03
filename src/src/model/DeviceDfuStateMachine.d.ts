@@ -8,6 +8,8 @@
 import DeviceDfuStateMachineNode from "../model/DeviceDfuStateMachineNode";
 
 declare class DeviceDfuStateMachine {
+  constructor();
+
   "current_version"?: string;
   "initiated"?: string;
   "requested_version"?: string;

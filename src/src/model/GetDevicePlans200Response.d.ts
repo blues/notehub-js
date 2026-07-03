@@ -8,6 +8,8 @@
 import CellularPlan from "../model/CellularPlan";
 
 declare class GetDevicePlans200Response {
+  constructor();
+
   "cellular_plans"?: CellularPlan[];
 
   static constructFromObject(

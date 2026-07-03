@@ -10,6 +10,8 @@ import JobDefinitionReportOptions from "../model/JobDefinitionReportOptions";
 import JobDefinitionSelect from "../model/JobDefinitionSelect";
 
 declare class JobDefinition {
+  constructor();
+
   "comment"?: string;
   "default_requests"?: BatchJobRequests;
   "device_requests"?: { [key: string]: BatchJobRequests };

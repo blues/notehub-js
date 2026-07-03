@@ -8,6 +8,8 @@
 import BillingAccount from "../model/BillingAccount";
 
 declare class GetBillingAccounts200Response {
+  constructor();
+
   "billing_accounts"?: BillingAccount[];
 
   static constructFromObject(

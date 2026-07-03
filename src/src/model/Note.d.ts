@@ -6,6 +6,12 @@
  */
 
 declare class Note {
+  constructor(
+    body: { [key: string]: { [key: string]: any } },
+    id: string,
+    time: number,
+  );
+
   "body": { [key: string]: { [key: string]: any } };
   "edge"?: boolean;
   "id": string;

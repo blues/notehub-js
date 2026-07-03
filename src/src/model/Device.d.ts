@@ -12,6 +12,15 @@ import Location from "../model/Location";
 import SimUsage from "../model/SimUsage";
 
 declare class Device {
+  constructor(
+    fleetUids: string[],
+    productUid: string,
+    provisioned: Date,
+    temperature: number,
+    uid: string,
+    voltage: number,
+  );
+
   "best_location"?: Location;
   "cellular_usage"?: SimUsage[];
   "contact"?: Contact;

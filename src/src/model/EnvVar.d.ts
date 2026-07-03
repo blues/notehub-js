@@ -6,6 +6,8 @@
  */
 
 declare class EnvVar {
+  constructor();
+
   "key"?: string;
   "precedence"?: number;
   "used"?: boolean;

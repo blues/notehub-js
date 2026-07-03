@@ -6,6 +6,13 @@
  */
 
 declare class UsageRouteLogsData {
+  constructor(
+    failedRoutes: number,
+    period: Date,
+    successfulRoutes: number,
+    totalRoutes: number,
+  );
+
   "avg_latency_ms"?: number;
   "failed_routes": number;
   "period": Date;

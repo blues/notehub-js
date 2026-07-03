@@ -8,6 +8,8 @@
 import GetBillingAccount200ResponsePlan from "../model/GetBillingAccount200ResponsePlan";
 
 declare class GetBillingAccount200Response {
+  constructor();
+
   "contact_uid"?: string;
   "email"?: string;
   "name"?: string;

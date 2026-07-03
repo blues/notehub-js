@@ -6,6 +6,8 @@
  */
 
 declare class DeviceUsage {
+  constructor();
+
   "bytes_rcvd"?: number;
   "bytes_rcvd_secondary"?: number;
   "bytes_sent"?: number;

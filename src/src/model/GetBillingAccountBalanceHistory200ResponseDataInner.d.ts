@@ -6,6 +6,12 @@
  */
 
 declare class GetBillingAccountBalanceHistory200ResponseDataInner {
+  constructor(
+    period: Date,
+    remainingEventCapacity: number,
+    totalEventCapacityUsed: number,
+  );
+
   "period": Date;
 
   static constructFromObject(

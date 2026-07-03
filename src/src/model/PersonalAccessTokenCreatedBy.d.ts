@@ -6,6 +6,8 @@
  */
 
 declare class PersonalAccessTokenCreatedBy {
+  constructor();
+
   "email"?: string;
   "name"?: string;
   "uid"?: string;

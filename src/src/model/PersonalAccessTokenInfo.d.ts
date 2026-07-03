@@ -6,6 +6,8 @@
  */
 
 declare class PersonalAccessTokenInfo {
+  constructor();
+
   "description"?: string;
   "expires_at"?: Date;
   "name"?: string;

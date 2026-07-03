@@ -8,6 +8,8 @@
 import DeviceDfuStatus from "../model/DeviceDfuStatus";
 
 declare class DeviceDfuStatusPage {
+  constructor();
+
   "devices"?: DeviceDfuStatus[];
   "has_more"?: boolean;
 

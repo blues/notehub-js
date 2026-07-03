@@ -6,6 +6,8 @@
  */
 
 declare class CreateProjectRequest {
+  constructor(billingAccountUid: string, label: string);
+
   "billing_account_uid": string;
   "label": string;
 

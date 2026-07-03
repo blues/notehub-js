@@ -9,6 +9,8 @@ import Filter from "../model/Filter";
 import RouteTransformSettings from "../model/RouteTransformSettings";
 
 declare class MqttRoute {
+  constructor();
+
   "broker"?: string;
   "certificate"?: string;
   "certificate_name"?: string;

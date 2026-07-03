@@ -8,6 +8,8 @@
 import DeviceSession from "../model/DeviceSession";
 
 declare class GetDeviceSessions200Response {
+  constructor(hasMore: boolean, sessions: DeviceSession[]);
+
   "has_more": boolean;
   "sessions": DeviceSession[];
 

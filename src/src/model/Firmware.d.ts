@@ -6,6 +6,8 @@
  */
 
 declare class Firmware {
+  constructor();
+
   "builder"?: string;
   "built"?: string;
   "firmware"?: string;

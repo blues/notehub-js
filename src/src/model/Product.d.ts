@@ -6,6 +6,8 @@
  */
 
 declare class Product {
+  constructor(disableDevicesByDefault: boolean, label: string, uid: string);
+
   "auto_provision_fleets"?: string[];
   "disable_devices_by_default": boolean;
   "label": string;

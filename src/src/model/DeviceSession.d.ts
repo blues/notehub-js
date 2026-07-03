@@ -9,6 +9,8 @@ import DeviceUsage from "../model/DeviceUsage";
 import TowerLocation from "../model/TowerLocation";
 
 declare class DeviceSession {
+  constructor();
+
   "apn"?: string;
   "bars"?: number;
   "bearer"?: string;

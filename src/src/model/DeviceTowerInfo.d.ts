@@ -6,6 +6,8 @@
  */
 
 declare class DeviceTowerInfo {
+  constructor();
+
   "cell_id"?: number;
   "lac"?: number;
   "mcc"?: number;

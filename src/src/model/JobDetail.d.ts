@@ -8,6 +8,8 @@
 import JobDefinition from "../model/JobDefinition";
 
 declare class JobDetail {
+  constructor(created: number, createdBy: string, jobUid: string, name: string);
+
   "created": number;
   "created_by": string;
   "job_uid": string;

@@ -9,6 +9,8 @@ import AlertDataInner from "../model/AlertDataInner";
 import AlertNotificationsInner from "../model/AlertNotificationsInner";
 
 declare class Alert {
+  constructor();
+
   "alert_source"?: "app" | "device";
   "created_at"?: number;
   "data"?: AlertDataInner[];

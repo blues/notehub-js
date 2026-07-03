@@ -6,6 +6,8 @@
  */
 
 declare class CreatedRepository {
+  constructor();
+
   "fleet_uids"?: string[];
   "name"?: string;
   "password"?: string;

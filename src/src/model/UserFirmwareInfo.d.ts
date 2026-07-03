@@ -9,6 +9,8 @@ import CurrentFirmware from "../model/CurrentFirmware";
 import UserDfuStateMachine from "../model/UserDfuStateMachine";
 
 declare class UserFirmwareInfo {
+  constructor();
+
   "current_firmware"?: CurrentFirmware;
   "firmware_update"?: UserDfuStateMachine;
 

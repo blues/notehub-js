@@ -8,6 +8,8 @@
 import GetBillingAccountBalanceHistory200ResponseDataInner from "../model/GetBillingAccountBalanceHistory200ResponseDataInner";
 
 declare class GetBillingAccountBalanceHistory200Response {
+  constructor();
+
   "data"?: GetBillingAccountBalanceHistory200ResponseDataInner[];
 
   static constructFromObject(

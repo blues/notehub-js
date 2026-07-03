@@ -6,6 +6,8 @@
  */
 
 declare class DataUsage {
+  constructor(kbRemaining: number, kbTotal: number, kbUsed: number);
+
   "kb_remaining": number;
   "kb_total": number;
   "kb_used": number;

@@ -6,6 +6,8 @@
  */
 
 declare class FleetConnectivityAssurance {
+  constructor();
+
   "enabled"?: boolean;
 
   static constructFromObject(
