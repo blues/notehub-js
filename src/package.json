@@ -4,8 +4,9 @@
   "description": "The OpenAPI definition for the Notehub.io API. ",
   "license": "MIT",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "build": "babel src -d dist",
+    "build": "babel src -d dist --copy-files",
     "prepare": "npm run build",
     "test": "mocha --require @babel/register --recursive"
   },

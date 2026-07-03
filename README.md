@@ -55,7 +55,20 @@ import * as NotehubJs from "@blues-inc/notehub-js";
 const defaultClient = NotehubJs.ApiClient.instance;
 ```
 
-> **NOTE:** Using `import` to access the library in a TypeScript project currently will cause an error because there is not yet a `@types` file for it. To make the error disappear, declare the module in a file with a `.d.ts` extension. `declare module '@blues-inc/notehub-js';`
+> **NOTE:** TypeScript declarations ship with the package (no `@types` install or `declare module` workaround needed). The API classes, their methods, and all models are fully typed:
+>
+> ```typescript
+> import * as NotehubJs from "@blues-inc/notehub-js";
+>
+> const client = NotehubJs.ApiClient.instance;
+> client.authentications["personalAccessToken"].accessToken = "<PAT>";
+>
+> const api = new NotehubJs.DeviceApi();
+> const res = await api.getDevices("app:...", { pageSize: 25 });
+> res.devices?.[0]?.serial_number; // typed as string | undefined
+> ```
+>
+> The declarations are auto-generated from the library sources by `.github/scripts/generate-types.js` (run as part of `npm run generateDocs`), so they stay in sync with each release.
 
 **require**
 
