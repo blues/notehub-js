@@ -24,11 +24,7 @@ Then install it via:
 npm install @blues-inc/notehub-js --save
 ```
 
-Finally, you need to build the module:
-
-```shell
-pnpm run build
-```
+The published package ships prebuilt (the `dist/` folder), so consumers do not need a build step.
 
 ##### Local development
 
