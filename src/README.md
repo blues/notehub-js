@@ -27,7 +27,7 @@ npm install @blues-inc/notehub-js --save
 Finally, you need to build the module:
 
 ```shell
-npm run build
+pnpm run build
 ```
 
 ##### Local development
@@ -35,25 +35,25 @@ npm run build
 To use the library locally without publishing to a remote npm registry, first install the dependencies by changing into the directory containing `package.json` (and this README). Let's call this `JAVASCRIPT_CLIENT_DIR`. Then run:
 
 ```shell
-npm install
+pnpm install
 ```
 
-Next, [link](https://docs.npmjs.com/cli/link) it globally in npm with the following, also from `JAVASCRIPT_CLIENT_DIR`:
+Next, [link](https://pnpm.io/cli/link) it globally with the following, also from `JAVASCRIPT_CLIENT_DIR`:
 
 ```shell
-npm link
+pnpm link --global
 ```
 
 To use the link you just defined in your project, switch to the directory you want to use your @blues-inc/notehub-js from, and run:
 
 ```shell
-npm link /path/to/<JAVASCRIPT_CLIENT_DIR>
+pnpm link --global @blues-inc/notehub-js
 ```
 
 Finally, you need to build the module:
 
 ```shell
-npm run build
+pnpm run build
 ```
 
 #### git

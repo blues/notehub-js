@@ -225,13 +225,13 @@ Instructions for how to modify or run this project locally.
 
 ### Initial Project Setup & Dependencies
 
-This project uses [Node.js](https://nodejs.org/en/) as a runtime, [npm](https://www.npmjs.com/) as a package manager, and [Volta](https://volta.sh/) as a way of enforcing consistent versions of all JavaScript-based tools. You can install these dependencies by completing the steps below.
+This project uses [Node.js](https://nodejs.org/en/) as a runtime, [pnpm](https://pnpm.io/) as a package manager, and [Volta](https://volta.sh/) as a way of enforcing consistent versions of all JavaScript-based tools. You can install these dependencies by completing the steps below.
 
 1. Install Volta by following its [installation instructions](https://docs.volta.sh/guide/getting-started).
-2. Run the command below in a terminal to install the appropriate versions of both Node.js and npm.
+2. Run the command below in a terminal to install the version of Node.js pinned in `package.json`.
 
 ```shell
-$ volta install node npm
+$ volta install node
 ```
 
 3. This repository uses [pnpm](https://pnpm.io/) as its package manager. The pinned version is declared in the root `package.json` `packageManager` field, so the easiest way to get it is to enable [Corepack](https://nodejs.org/api/corepack.html) (bundled with Node.js):

@@ -33,3 +33,27 @@ jobs:
 
       - name: Run tests
         run: pnpm test
+
+  type-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v6
+
+      - name: Use Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24.x
+          cache: "pnpm"
+          cache-dependency-path: pnpm-lock.yaml
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # Compile a consumer smoke test against the generated .d.ts so declaration
+      # regressions fail CI (see type-tests/).
+      - name: Type-check generated declarations
+        run: pnpm run test:types
