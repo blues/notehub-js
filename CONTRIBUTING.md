@@ -54,7 +54,7 @@ Here are some ways _you_ can contribute:
 
 - Please add tests if you changed code. Contributions without tests won't be accepted.
   - There are many test shells already mocked out in the [`src/test/`](src/test/) folder that just need to be uncommented and filled in.
-  - Run unit tests from the command line via `npm run test`.
+  - Run unit tests from the command line via `pnpm test` (from within the `src/` folder).
 - If you don't know how to add tests, please put in a PR and leave a comment asking for help.
   We love helping!
 

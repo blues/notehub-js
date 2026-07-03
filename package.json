@@ -2,20 +2,16 @@
   "name": "notehub-js",
   "description": "JavaScript library for accessing the Blues Wireless Notehub API endpoints",
   "main": "./src/dist/index.js",
+  "packageManager": "pnpm@11.9.0",
   "scripts": {
     "downloadJsTemplate": "openapi-generator-cli author template -g javascript --library javascript",
-    "generateDocs": "openapi-generator-cli generate -g javascript --library javascript -t libTemplate -o src -i openapi.filtered.yaml -c config.json && npx prettier --write \"src/docs/**/*.md\" \"src/src/**/*.js\" \"src/README.md\" \"src/package.json\" && npm run generateTypes",
-    "generateTypes": "node ./.github/scripts/generate-types.js && npx prettier --write \"src/src/**/*.d.ts\"",
-    "installAndShrinkwrap": "cd src && npm install && npm shrinkwrap",
+    "generateDocs": "openapi-generator-cli generate -g javascript --library javascript -t libTemplate -o src -i openapi.filtered.yaml -c config.json && pnpm exec prettier --write \"src/docs/**/*.md\" \"src/src/**/*.js\" \"src/README.md\" \"src/package.json\" && pnpm run generateTypes",
+    "generateTypes": "node ./.github/scripts/generate-types.js && pnpm exec prettier --write \"src/src/**/*.d.ts\"",
+    "installSrcDeps": "cd src && pnpm install",
     "filterOpenapi": "node ./.github/scripts/filter-deprecated-params.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prepare": "husky install",
-    "prepareFreshRelease": "npm run filterOpenapi && npm run generateDocs && npm run installAndShrinkwrap"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "pretty-quick --staged"
-    }
+    "prepare": "husky",
+    "prepareFreshRelease": "pnpm run filterOpenapi && pnpm run generateDocs && pnpm run installSrcDeps"
   },
   "repository": {
     "type": "git",

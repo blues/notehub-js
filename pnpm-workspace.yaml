@@ -1,0 +1,10 @@
+# pnpm workspace. The root package holds the code-generation tooling; the generated,
+# independently-published SDK lives in `src/` as the sole workspace package.
+packages:
+  - src
+
+# pnpm blocks dependency lifecycle (build) scripts by default. The only dependency with
+# one is @openapitools/openapi-generator-cli, whose postinstall is just an Open Collective
+# donation banner — intentionally skipped.
+allowBuilds:
+  "@openapitools/openapi-generator-cli": false

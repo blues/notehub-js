@@ -20,8 +20,8 @@ fi
 CURRENT_VERSION=$1
 echo "Current project version: $CURRENT_VERSION"
 
-# Query npm for existing versions of the package
-EXISTING_VERSIONS=$(npm show @blues-inc/notehub-js versions --json)
+# Query the registry for existing versions of the package
+EXISTING_VERSIONS=$(pnpm view @blues-inc/notehub-js versions --json)
 echo "Existing versions on npm: $EXISTING_VERSIONS"
 
 # Extract current version without any existing beta suffix

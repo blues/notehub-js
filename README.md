@@ -68,7 +68,7 @@ const defaultClient = NotehubJs.ApiClient.instance;
 > res.devices?.[0]?.serial_number; // typed as string | undefined
 > ```
 >
-> The declarations are auto-generated from the library sources by `.github/scripts/generate-types.js` (run as part of `npm run generateDocs`), so they stay in sync with each release.
+> The declarations are auto-generated from the library sources by `.github/scripts/generate-types.js` (run as part of `pnpm run generateDocs`), so they stay in sync with each release.
 
 **require**
 
@@ -119,12 +119,12 @@ let opts = {
 apiInstance.getProjectDevices(projectUID, opts).then(
   (data) => {
     console.log(
-      "API called successfully. Returned data: " + JSON.stringify(data)
+      "API called successfully. Returned data: " + JSON.stringify(data),
     );
   },
   (error) => {
     console.error(error);
-  }
+  },
 );
 ```
 
@@ -201,7 +201,7 @@ Files and folders to be aware of in the root of the project.
 > If you ever need a fresh copy of the JS library template, run the following script command in the terminal to download it:
 >
 > ```shell
-> $ npm run downloadJsTemplate
+> $ pnpm run downloadJsTemplate
 > ```
 
 - The [`config.json`](config.json) file is a configuration file of additional properties used by the OpenAPI Generator and its JavaScript library template to define certain variables like license type, project name, project version, etc.
@@ -234,16 +234,22 @@ This project uses [Node.js](https://nodejs.org/en/) as a runtime, [npm](https://
 $ volta install node npm
 ```
 
-3. Navigate to the root of the folder in your terminal or command prompt and run `npm install`, which installs the repo's npm dependencies, including the [`prettier`](https://prettier.io/), [`pretty-quick`](https://www.npmjs.com/package/pretty-quick), and [`husky`](https://typicode.github.io/husky/#/?id=automatic-recommended) libraries which will format any files staged for commit according to our coding style as defined in the `.prettierrc` file.
+3. This repository uses [pnpm](https://pnpm.io/) as its package manager. The pinned version is declared in the root `package.json` `packageManager` field, so the easiest way to get it is to enable [Corepack](https://nodejs.org/api/corepack.html) (bundled with Node.js):
 
 ```shell
-$ npm install
+$ corepack enable
 ```
 
-The project also uses the [OpenAPI Generator's CLI tool](https://openapi-generator.tech/docs/installation), so it's recommended to install that tool globally through the terminal.
+4. Navigate to the root of the folder in your terminal or command prompt and run `pnpm install`, which installs the repo's dependencies, including the [`prettier`](https://prettier.io/), [`pretty-quick`](https://www.npmjs.com/package/pretty-quick), and [`husky`](https://typicode.github.io/husky/#/?id=automatic-recommended) libraries which will format any files staged for commit according to our coding style as defined in the `.prettierrc` file.
 
 ```shell
-$ npm install @openapitools/openapi-generator-cli -g
+$ pnpm install
+```
+
+The project also uses the [OpenAPI Generator's CLI tool](https://openapi-generator.tech/docs/installation) (also available as a dev dependency), so it's recommended to install that tool globally through the terminal.
+
+```shell
+$ pnpm add -g @openapitools/openapi-generator-cli
 ```
 
 Now you should be ready to make any changes or modifications.
@@ -305,19 +311,19 @@ If you'd like to test some changes you've made to the notehub-js API locally bef
 - Install first.
 
 ```shell
-$ npm install
+$ pnpm install
 ```
 
 - Build next.
 
 ```shell
-$ npm run build
+$ pnpm run build
 ```
 
-7. Still inside the `src/` folder, [link](https://docs.npmjs.com/cli/link) it globally with npm.
+7. Still inside the `src/` folder, [link](https://pnpm.io/cli/link) it globally with pnpm.
 
 ```shell
-$ npm link
+$ pnpm link --global
 ```
 
 8. Then go to the local JavaScript project where you want to use it, and add it as a local dependency in the project's `package.json` file with a relative path to the local library on your machine. The file path will probably look something like:
@@ -331,7 +337,7 @@ $ npm link
 9. Install the module inside of your project.
 
 ```shell
-npm install
+pnpm install
 ```
 
 10. Import the library using `import` or `require` as [documented above](#installation-of-the-notehub-js-library) in your application code and test it out.

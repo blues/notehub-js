@@ -4,9 +4,10 @@
   "description": "{{{projectDescription}}}",
   "license": "{{licenseName}}",
   "main": "dist{{#invokerPackage}}/{{.}}{{/invokerPackage}}/index.js",
+  "types": "dist{{#invokerPackage}}/{{.}}{{/invokerPackage}}/index.d.ts",
   "scripts": {
-    "build": "babel src -d dist",
-    "prepare": "npm run build",
+    "build": "babel src -d dist --copy-files",
+    "prepare": "pnpm run build",
     "test": "mocha --require @babel/register --recursive"
   },
   "repository": {
