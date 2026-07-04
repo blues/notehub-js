@@ -5822,6 +5822,7 @@ components:
           description: Millisecond-accurate Unix epoch timestamp for when the event was captured on the device
           type: integer
           format: int64
+          example: 1656010061123
         where_country:
           description: Country
           type: string
