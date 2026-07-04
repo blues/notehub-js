@@ -5819,9 +5819,9 @@ components:
           description: When the event was captured on the device
           type: number
         when_ms:
-          description: Millisecond component of when (0-999) for the captured event timestamp
-          type: number
-          format: double
+          description: Millisecond-accurate Unix epoch timestamp for when the event was captured on the device
+          type: integer
+          format: int64
         where_country:
           description: Country
           type: string
