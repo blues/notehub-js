@@ -376,7 +376,7 @@ paths:
         permission: read
   '/v1/organizations/{organizationUID}/event-balance':
     get:
-      operationId: GetOrganizationBalance
+      operationId: GetOrganizationEventBalance
       description: Get the current event balance for an organization
       parameters:
         - $ref: '#/components/parameters/organizationUIDParam'
