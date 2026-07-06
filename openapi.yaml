@@ -203,43 +203,6 @@ paths:
         - billing_account
       x-custom-attributes:
         permission: read
-  '/v1/billing-accounts/{billingAccountUID}/balance':
-    get:
-      operationId: GetBillingAccountBalance
-      description: Get the current event balance for a billing account
-      parameters:
-        - $ref: '#/components/parameters/billingAccountUIDParam'
-      responses:
-        '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  last_updated_when:
-                    description: The date through which the balance was calculated (today at midnight UTC)
-                    type: string
-                    format: date-time
-                  remaining_event_capacity:
-                    type: integer
-                    format: int64
-                  total_event_capacity_used:
-                    type: integer
-                    format: int64
-                required:
-                  - remaining_event_capacity
-                  - total_event_capacity_used
-                  - last_updated_when
-        default:
-          $ref: '#/components/responses/ErrorResponse'
-      deprecated: true
-      security:
-        - personalAccessToken: []
-      tags:
-        - billing_account
-      x-custom-attributes:
-        permission: read
   '/v1/billing-accounts/{billingAccountUID}/balance-history':
     get:
       operationId: GetBillingAccountBalanceHistory
@@ -365,42 +328,6 @@ paths:
         - organization
       x-custom-attributes:
         permission: read
-  '/v1/organizations/{organizationUID}/balance':
-    get:
-      operationId: GetOrganizationBalance
-      description: Get the current event balance for an organization
-      parameters:
-        - $ref: '#/components/parameters/organizationUIDParam'
-      responses:
-        '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  last_updated_when:
-                    description: The date through which the balance was calculated (today at midnight UTC)
-                    type: string
-                    format: date-time
-                  remaining_event_capacity:
-                    type: integer
-                    format: int64
-                  total_event_capacity_used:
-                    type: integer
-                    format: int64
-                required:
-                  - remaining_event_capacity
-                  - total_event_capacity_used
-                  - last_updated_when
-        default:
-          $ref: '#/components/responses/ErrorResponse'
-      security:
-        - personalAccessToken: []
-      tags:
-        - organization
-      x-custom-attributes:
-        permission: read
   '/v1/organizations/{organizationUID}/balance-history':
     get:
       operationId: GetOrganizationBalanceHistory
@@ -439,6 +366,42 @@ paths:
                     description: The date through which the balance history was calculated (today at midnight UTC)
                     type: string
                     format: date-time
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - organization
+      x-custom-attributes:
+        permission: read
+  '/v1/organizations/{organizationUID}/event-balance':
+    get:
+      operationId: GetOrganizationBalance
+      description: Get the current event balance for an organization
+      parameters:
+        - $ref: '#/components/parameters/organizationUIDParam'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  last_updated_when:
+                    description: The date through which the balance was calculated (today at midnight UTC)
+                    type: string
+                    format: date-time
+                  remaining_event_capacity:
+                    type: integer
+                    format: int64
+                  total_event_capacity_used:
+                    type: integer
+                    format: int64
+                required:
+                  - remaining_event_capacity
+                  - total_event_capacity_used
+                  - last_updated_when
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
@@ -4459,10 +4422,10 @@ components:
       schema:
         type: string
     repositoryKey:
-      description: The secret key used to access this repository
+      description: The secret key used to access this repository. Optional - a caller authenticated with a session or personal access token may instead be authorized if their actor holds the required permission on the events of every project this repository references.
       in: header
       name: X-Repository-Key
-      required: true
+      required: false
       schema:
         type: string
     repositoryUIDParam:
@@ -5163,6 +5126,9 @@ components:
             - 0
             - 1
             - 2
+            - 5
+            - 6
+            - 7
         jsonata:
           description: the JSONata expression used to populate this field
           type: string
