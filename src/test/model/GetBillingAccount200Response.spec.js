@@ -50,6 +50,18 @@
       //expect(instance).to.be.a(NotehubJs.GetBillingAccount200Response);
     });
 
+    it('should have the property contactUid (base name: "contact_uid")', function () {
+      // uncomment below and update the code to test the property contactUid
+      //var instance = new NotehubJs.GetBillingAccount200Response();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property email (base name: "email")', function () {
+      // uncomment below and update the code to test the property email
+      //var instance = new NotehubJs.GetBillingAccount200Response();
+      //expect(instance).to.be();
+    });
+
     it('should have the property name (base name: "name")', function () {
       // uncomment below and update the code to test the property name
       //var instance = new NotehubJs.GetBillingAccount200Response();

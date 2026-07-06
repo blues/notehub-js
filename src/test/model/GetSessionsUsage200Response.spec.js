@@ -55,5 +55,11 @@
       //var instance = new NotehubJs.GetSessionsUsage200Response();
       //expect(instance).to.be();
     });
+
+    it('should have the property truncated (base name: "truncated")', function () {
+      // uncomment below and update the code to test the property truncated
+      //var instance = new NotehubJs.GetSessionsUsage200Response();
+      //expect(instance).to.be();
+    });
   });
 });

@@ -64,6 +64,16 @@
         done();
       });
     });
+    describe("createNotefile", function () {
+      it("should call createNotefile successfully", function (done) {
+        //uncomment below and update the code to test createNotefile
+        //instance.createNotefile(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
     describe("deleteDevice", function () {
       it("should call deleteDevice successfully", function (done) {
         //uncomment below and update the code to test deleteDevice
@@ -114,30 +124,10 @@
         done();
       });
     });
-    describe("disableDeviceConnectivityAssurance", function () {
-      it("should call disableDeviceConnectivityAssurance successfully", function (done) {
-        //uncomment below and update the code to test disableDeviceConnectivityAssurance
-        //instance.disableDeviceConnectivityAssurance(function(error) {
-        //  if (error) throw error;
-        //expect().to.be();
-        //});
-        done();
-      });
-    });
     describe("enableDevice", function () {
       it("should call enableDevice successfully", function (done) {
         //uncomment below and update the code to test enableDevice
         //instance.enableDevice(function(error) {
-        //  if (error) throw error;
-        //expect().to.be();
-        //});
-        done();
-      });
-    });
-    describe("enableDeviceConnectivityAssurance", function () {
-      it("should call enableDeviceConnectivityAssurance successfully", function (done) {
-        //uncomment below and update the code to test enableDeviceConnectivityAssurance
-        //instance.enableDeviceConnectivityAssurance(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});
@@ -198,6 +188,26 @@
       it("should call getDeviceHealthLog successfully", function (done) {
         //uncomment below and update the code to test getDeviceHealthLog
         //instance.getDeviceHealthLog(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
+    describe("getDeviceJourney", function () {
+      it("should call getDeviceJourney successfully", function (done) {
+        //uncomment below and update the code to test getDeviceJourney
+        //instance.getDeviceJourney(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
+    describe("getDeviceJourneys", function () {
+      it("should call getDeviceJourneys successfully", function (done) {
+        //uncomment below and update the code to test getDeviceJourneys
+        //instance.getDeviceJourneys(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});

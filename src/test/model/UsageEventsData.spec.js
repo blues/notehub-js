@@ -50,6 +50,12 @@
       //expect(instance).to.be.a(NotehubJs.UsageEventsData);
     });
 
+    it('should have the property billableEvents (base name: "billable_events")', function () {
+      // uncomment below and update the code to test the property billableEvents
+      //var instance = new NotehubJs.UsageEventsData();
+      //expect(instance).to.be();
+    });
+
     it('should have the property device (base name: "device")', function () {
       // uncomment below and update the code to test the property device
       //var instance = new NotehubJs.UsageEventsData();
@@ -80,6 +86,12 @@
       //expect(instance).to.be();
     });
 
+    it('should have the property totalDaysInPeriod (base name: "total_days_in_period")', function () {
+      // uncomment below and update the code to test the property totalDaysInPeriod
+      //var instance = new NotehubJs.UsageEventsData();
+      //expect(instance).to.be();
+    });
+
     it('should have the property totalDevices (base name: "total_devices")', function () {
       // uncomment below and update the code to test the property totalDevices
       //var instance = new NotehubJs.UsageEventsData();
@@ -88,6 +100,18 @@
 
     it('should have the property totalEvents (base name: "total_events")', function () {
       // uncomment below and update the code to test the property totalEvents
+      //var instance = new NotehubJs.UsageEventsData();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property totalFwUpdates (base name: "total_fw_updates")', function () {
+      // uncomment below and update the code to test the property totalFwUpdates
+      //var instance = new NotehubJs.UsageEventsData();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property totalReboots (base name: "total_reboots")', function () {
+      // uncomment below and update the code to test the property totalReboots
       //var instance = new NotehubJs.UsageEventsData();
       //expect(instance).to.be();
     });

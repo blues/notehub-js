@@ -50,14 +50,26 @@
       //expect(instance).to.be.a(NotehubJs.UsageData);
     });
 
-    it('should have the property bytesReceived (base name: "bytes_received")', function () {
-      // uncomment below and update the code to test the property bytesReceived
+    it('should have the property billableBytesTotal (base name: "billable_bytes_total")', function () {
+      // uncomment below and update the code to test the property billableBytesTotal
       //var instance = new NotehubJs.UsageData();
       //expect(instance).to.be();
     });
 
-    it('should have the property bytesSent (base name: "bytes_sent")', function () {
-      // uncomment below and update the code to test the property bytesSent
+    it('should have the property downlinkBytes (base name: "downlink_bytes")', function () {
+      // uncomment below and update the code to test the property downlinkBytes
+      //var instance = new NotehubJs.UsageData();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property downlinkBytesBillable (base name: "downlink_bytes_billable")', function () {
+      // uncomment below and update the code to test the property downlinkBytesBillable
+      //var instance = new NotehubJs.UsageData();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property downlinkPackets (base name: "downlink_packets")', function () {
+      // uncomment below and update the code to test the property downlinkPackets
       //var instance = new NotehubJs.UsageData();
       //expect(instance).to.be();
     });
@@ -70,6 +82,24 @@
 
     it('should have the property totalBytes (base name: "total_bytes")', function () {
       // uncomment below and update the code to test the property totalBytes
+      //var instance = new NotehubJs.UsageData();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property uplinkBytes (base name: "uplink_bytes")', function () {
+      // uncomment below and update the code to test the property uplinkBytes
+      //var instance = new NotehubJs.UsageData();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property uplinkBytesBillable (base name: "uplink_bytes_billable")', function () {
+      // uncomment below and update the code to test the property uplinkBytesBillable
+      //var instance = new NotehubJs.UsageData();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property uplinkPackets (base name: "uplink_packets")', function () {
+      // uncomment below and update the code to test the property uplinkPackets
       //var instance = new NotehubJs.UsageData();
       //expect(instance).to.be();
     });

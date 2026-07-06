@@ -94,10 +94,30 @@
         done();
       });
     });
+    describe("createProjectSecret", function () {
+      it("should call createProjectSecret successfully", function (done) {
+        //uncomment below and update the code to test createProjectSecret
+        //instance.createProjectSecret(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
     describe("deleteDeviceFromFleets", function () {
       it("should call deleteDeviceFromFleets successfully", function (done) {
         //uncomment below and update the code to test deleteDeviceFromFleets
         //instance.deleteDeviceFromFleets(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
+    describe("deleteFirmware", function () {
+      it("should call deleteFirmware successfully", function (done) {
+        //uncomment below and update the code to test deleteFirmware
+        //instance.deleteFirmware(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});
@@ -154,6 +174,16 @@
         done();
       });
     });
+    describe("deleteProjectSecret", function () {
+      it("should call deleteProjectSecret successfully", function (done) {
+        //uncomment below and update the code to test deleteProjectSecret
+        //instance.deleteProjectSecret(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
     describe("disableGlobalEventTransformation", function () {
       it("should call disableGlobalEventTransformation successfully", function (done) {
         //uncomment below and update the code to test disableGlobalEventTransformation
@@ -164,10 +194,30 @@
         done();
       });
     });
+    describe("downloadFirmware", function () {
+      it("should call downloadFirmware successfully", function (done) {
+        //uncomment below and update the code to test downloadFirmware
+        //instance.downloadFirmware(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
     describe("enableGlobalEventTransformation", function () {
       it("should call enableGlobalEventTransformation successfully", function (done) {
         //uncomment below and update the code to test enableGlobalEventTransformation
         //instance.enableGlobalEventTransformation(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
+    describe("getAWSRoleConfig", function () {
+      it("should call getAWSRoleConfig successfully", function (done) {
+        //uncomment below and update the code to test getAWSRoleConfig
+        //instance.getAWSRoleConfig(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});
@@ -344,6 +394,16 @@
         done();
       });
     });
+    describe("getProjectSecrets", function () {
+      it("should call getProjectSecrets successfully", function (done) {
+        //uncomment below and update the code to test getProjectSecrets
+        //instance.getProjectSecrets(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
     describe("getProjects", function () {
       it("should call getProjects successfully", function (done) {
         //uncomment below and update the code to test getProjects
@@ -394,10 +454,30 @@
         done();
       });
     });
+    describe("updateFirmware", function () {
+      it("should call updateFirmware successfully", function (done) {
+        //uncomment below and update the code to test updateFirmware
+        //instance.updateFirmware(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
     describe("updateFleet", function () {
       it("should call updateFleet successfully", function (done) {
         //uncomment below and update the code to test updateFleet
         //instance.updateFleet(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
+    describe("updateProjectSecret", function () {
+      it("should call updateProjectSecret successfully", function (done) {
+        //uncomment below and update the code to test updateProjectSecret
+        //instance.updateProjectSecret(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});

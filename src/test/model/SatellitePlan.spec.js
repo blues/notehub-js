@@ -56,14 +56,14 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property billableBytes (base name: "billable_bytes")', function () {
-      // uncomment below and update the code to test the property billableBytes
+    it('should have the property lastSessionAt (base name: "last_session_at")', function () {
+      // uncomment below and update the code to test the property lastSessionAt
       //var instance = new NotehubJs.SatellitePlan();
       //expect(instance).to.be();
     });
 
-    it('should have the property lastUpdated (base name: "last_updated")', function () {
-      // uncomment below and update the code to test the property lastUpdated
+    it('should have the property minimumBillableBytes (base name: "minimum_billable_bytes")', function () {
+      // uncomment below and update the code to test the property minimumBillableBytes
       //var instance = new NotehubJs.SatellitePlan();
       //expect(instance).to.be();
     });
@@ -76,6 +76,12 @@
 
     it('should have the property psid (base name: "psid")', function () {
       // uncomment below and update the code to test the property psid
+      //var instance = new NotehubJs.SatellitePlan();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property satelliteDataUsage (base name: "satellite_data_usage")', function () {
+      // uncomment below and update the code to test the property satelliteDataUsage
       //var instance = new NotehubJs.SatellitePlan();
       //expect(instance).to.be();
     });

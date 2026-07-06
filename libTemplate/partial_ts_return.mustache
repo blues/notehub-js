@@ -1,0 +1,1 @@
+{{! TS type for an operation's return value (unwrapped Promise payload). }}{{^returnType}}void{{/returnType}}{{#returnType}}{{#isArray}}{{returnBaseType}}[]{{/isArray}}{{^isArray}}{{#isMap}}{ [key: string]: any }{{/isMap}}{{^isMap}}{{returnType}}{{/isMap}}{{/isArray}}{{/returnType}}

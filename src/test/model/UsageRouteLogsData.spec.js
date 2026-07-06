@@ -50,6 +50,12 @@
       //expect(instance).to.be.a(NotehubJs.UsageRouteLogsData);
     });
 
+    it('should have the property avgLatencyMs (base name: "avg_latency_ms")', function () {
+      // uncomment below and update the code to test the property avgLatencyMs
+      //var instance = new NotehubJs.UsageRouteLogsData();
+      //expect(instance).to.be();
+    });
+
     it('should have the property failedRoutes (base name: "failed_routes")', function () {
       // uncomment below and update the code to test the property failedRoutes
       //var instance = new NotehubJs.UsageRouteLogsData();

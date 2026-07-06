@@ -110,6 +110,12 @@
       //expect(instance).to.be();
     });
 
+    it('should have the property roleArn (base name: "role_arn")', function () {
+      // uncomment below and update the code to test the property roleArn
+      //var instance = new NotehubJs.AwsRoute();
+      //expect(instance).to.be();
+    });
+
     it('should have the property throttleMs (base name: "throttle_ms")', function () {
       // uncomment below and update the code to test the property throttleMs
       //var instance = new NotehubJs.AwsRoute();

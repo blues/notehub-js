@@ -1,0 +1,3 @@
+{{! TS type for an API PARAMETER. Enums render as their base scalar (string/number),
+    matching the library's existing signatures — narrowing to a literal union here would
+    be a breaking change for callers passing a plain string. }}{{#isArray}}{{#items}}{{>partial_ts_param}}{{/items}}[]{{/isArray}}{{^isArray}}{{#isMap}}{ [key: string]: {{#items}}{{>partial_ts_param}}{{/items}} }{{/isMap}}{{^isMap}}{{>partial_ts_scalar}}{{/isMap}}{{/isArray}}

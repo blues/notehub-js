@@ -110,6 +110,12 @@
       //expect(instance).to.be();
     });
 
+    it('should have the property notes (base name: "notes")', function () {
+      // uncomment below and update the code to test the property notes
+      //var instance = new NotehubJs.NotehubRoute();
+      //expect(instance).to.be();
+    });
+
     it('should have the property proxy (base name: "proxy")', function () {
       // uncomment below and update the code to test the property proxy
       //var instance = new NotehubJs.NotehubRoute();

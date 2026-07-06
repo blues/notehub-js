@@ -74,6 +74,16 @@
         done();
       });
     });
+    describe("deleteJobRun", function () {
+      it("should call deleteJobRun successfully", function (done) {
+        //uncomment below and update the code to test deleteJobRun
+        //instance.deleteJobRun(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
     describe("getJob", function () {
       it("should call getJob successfully", function (done) {
         //uncomment below and update the code to test getJob

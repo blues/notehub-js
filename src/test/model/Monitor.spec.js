@@ -157,5 +157,23 @@
       //var instance = new NotehubJs.Monitor();
       //expect(instance).to.be();
     });
+
+    it('should have the property usageScope (base name: "usage_scope")', function () {
+      // uncomment below and update the code to test the property usageScope
+      //var instance = new NotehubJs.Monitor();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property usageType (base name: "usage_type")', function () {
+      // uncomment below and update the code to test the property usageType
+      //var instance = new NotehubJs.Monitor();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property usageWindow (base name: "usage_window")', function () {
+      // uncomment below and update the code to test the property usageWindow
+      //var instance = new NotehubJs.Monitor();
+      //expect(instance).to.be();
+    });
   });
 });

@@ -62,6 +62,12 @@
       //expect(instance).to.be();
     });
 
+    it('should have the property deviceCount (base name: "device_count")', function () {
+      // uncomment below and update the code to test the property deviceCount
+      //var instance = new NotehubJs.GetDataUsage200ResponseDataInner();
+      //expect(instance).to.be();
+    });
+
     it('should have the property fleet (base name: "fleet")', function () {
       // uncomment below and update the code to test the property fleet
       //var instance = new NotehubJs.GetDataUsage200ResponseDataInner();
@@ -74,8 +80,8 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property imsi (base name: "imsi")', function () {
-      // uncomment below and update the code to test the property imsi
+    it('should have the property psid (base name: "psid")', function () {
+      // uncomment below and update the code to test the property psid
       //var instance = new NotehubJs.GetDataUsage200ResponseDataInner();
       //expect(instance).to.be();
     });

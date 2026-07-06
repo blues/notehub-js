@@ -56,6 +56,12 @@
       //expect(instance).to.be();
     });
 
+    it('should have the property firstSyncSessions (base name: "first_sync_sessions")', function () {
+      // uncomment below and update the code to test the property firstSyncSessions
+      //var instance = new NotehubJs.UsageSessionsData();
+      //expect(instance).to.be();
+    });
+
     it('should have the property fleet (base name: "fleet")', function () {
       // uncomment below and update the code to test the property fleet
       //var instance = new NotehubJs.UsageSessionsData();
@@ -70,6 +76,18 @@
 
     it('should have the property sessions (base name: "sessions")', function () {
       // uncomment below and update the code to test the property sessions
+      //var instance = new NotehubJs.UsageSessionsData();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property sessionsByTransport (base name: "sessions_by_transport")', function () {
+      // uncomment below and update the code to test the property sessionsByTransport
+      //var instance = new NotehubJs.UsageSessionsData();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property tlsSessions (base name: "tls_sessions")', function () {
+      // uncomment below and update the code to test the property tlsSessions
       //var instance = new NotehubJs.UsageSessionsData();
       //expect(instance).to.be();
     });

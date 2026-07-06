@@ -5,5 +5,27 @@
   "npmRepository": "https://registry.npmjs.org",
   "projectVersion": "6.4.0",
   "sourceFolder": "src",
-  "usePromises": true
+  "usePromises": true,
+  "files": {
+    "model.d.ts.mustache": {
+      "templateType": "Model",
+      "destinationFilename": ".ts",
+      "folder": "src/model"
+    },
+    "api.d.ts.mustache": {
+      "templateType": "API",
+      "destinationFilename": ".ts",
+      "folder": "src/api"
+    },
+    "index.d.mustache": {
+      "templateType": "SupportingFiles",
+      "destinationFilename": "index.d.ts",
+      "folder": "src"
+    },
+    "ApiClient.d.mustache": {
+      "templateType": "SupportingFiles",
+      "destinationFilename": "ApiClient.d.ts",
+      "folder": "src"
+    }
+  }
 }

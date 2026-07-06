@@ -44,6 +44,26 @@
   };
 
   describe("BillingAccountApi", function () {
+    describe("getBillingAccount", function () {
+      it("should call getBillingAccount successfully", function (done) {
+        //uncomment below and update the code to test getBillingAccount
+        //instance.getBillingAccount(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
+    describe("getBillingAccountBalanceHistory", function () {
+      it("should call getBillingAccountBalanceHistory successfully", function (done) {
+        //uncomment below and update the code to test getBillingAccountBalanceHistory
+        //instance.getBillingAccountBalanceHistory(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
     describe("getBillingAccounts", function () {
       it("should call getBillingAccounts successfully", function (done) {
         //uncomment below and update the code to test getBillingAccounts

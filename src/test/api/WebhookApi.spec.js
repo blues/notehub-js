@@ -44,10 +44,40 @@
   };
 
   describe("WebhookApi", function () {
+    describe("createLegacyWebhookEvent", function () {
+      it("should call createLegacyWebhookEvent successfully", function (done) {
+        //uncomment below and update the code to test createLegacyWebhookEvent
+        //instance.createLegacyWebhookEvent(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
     describe("createWebhook", function () {
       it("should call createWebhook successfully", function (done) {
         //uncomment below and update the code to test createWebhook
         //instance.createWebhook(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
+    describe("createWebhookDeviceEventByProduct", function () {
+      it("should call createWebhookDeviceEventByProduct successfully", function (done) {
+        //uncomment below and update the code to test createWebhookDeviceEventByProduct
+        //instance.createWebhookDeviceEventByProduct(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
+    describe("createWebhookEventByProduct", function () {
+      it("should call createWebhookEventByProduct successfully", function (done) {
+        //uncomment below and update the code to test createWebhookEventByProduct
+        //instance.createWebhookEventByProduct(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});
@@ -74,6 +104,16 @@
         done();
       });
     });
+    describe("getWebhookSettingsByProduct", function () {
+      it("should call getWebhookSettingsByProduct successfully", function (done) {
+        //uncomment below and update the code to test getWebhookSettingsByProduct
+        //instance.getWebhookSettingsByProduct(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
     describe("getWebhooks", function () {
       it("should call getWebhooks successfully", function (done) {
         //uncomment below and update the code to test getWebhooks
@@ -84,10 +124,30 @@
         done();
       });
     });
+    describe("updateLegacyWebhookSession", function () {
+      it("should call updateLegacyWebhookSession successfully", function (done) {
+        //uncomment below and update the code to test updateLegacyWebhookSession
+        //instance.updateLegacyWebhookSession(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
     describe("updateWebhook", function () {
       it("should call updateWebhook successfully", function (done) {
         //uncomment below and update the code to test updateWebhook
         //instance.updateWebhook(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
+    describe("updateWebhookSettingsByProduct", function () {
+      it("should call updateWebhookSettingsByProduct successfully", function (done) {
+        //uncomment below and update the code to test updateWebhookSettingsByProduct
+        //instance.updateWebhookSettingsByProduct(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});

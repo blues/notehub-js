@@ -62,14 +62,26 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property definition (base name: "definition")', function () {
-      // uncomment below and update the code to test the property definition
+    it('should have the property jobUid (base name: "job_uid")', function () {
+      // uncomment below and update the code to test the property jobUid
       //var instance = new NotehubJs.Job();
       //expect(instance).to.be();
     });
 
-    it('should have the property jobUid (base name: "job_uid")', function () {
-      // uncomment below and update the code to test the property jobUid
+    it('should have the property lastRunCompleted (base name: "last_run_completed")', function () {
+      // uncomment below and update the code to test the property lastRunCompleted
+      //var instance = new NotehubJs.Job();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property lastRunStatus (base name: "last_run_status")', function () {
+      // uncomment below and update the code to test the property lastRunStatus
+      //var instance = new NotehubJs.Job();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property lastRunSubmitted (base name: "last_run_submitted")', function () {
+      // uncomment below and update the code to test the property lastRunSubmitted
       //var instance = new NotehubJs.Job();
       //expect(instance).to.be();
     });

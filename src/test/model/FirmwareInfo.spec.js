@@ -74,8 +74,20 @@
       //expect(instance).to.be();
     });
 
+    it('should have the property info (base name: "info")', function () {
+      // uncomment below and update the code to test the property info
+      //var instance = new NotehubJs.FirmwareInfo();
+      //expect(instance).to.be();
+    });
+
     it('should have the property md5 (base name: "md5")', function () {
       // uncomment below and update the code to test the property md5
+      //var instance = new NotehubJs.FirmwareInfo();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property notes (base name: "notes")', function () {
+      // uncomment below and update the code to test the property notes
       //var instance = new NotehubJs.FirmwareInfo();
       //expect(instance).to.be();
     });
