@@ -270,7 +270,7 @@ paths:
         - organization
       x-custom-attributes:
         permission: read
-  '/v1/organizations/{organizationUID}':
+  /v1/organizations/{organizationUID}:
     get:
       operationId: GetOrganization
       description: Get Organization Information
@@ -324,7 +324,7 @@ paths:
         - organization
       x-custom-attributes:
         permission: read
-  '/v1/organizations/{organizationUID}/balance-history':
+  /v1/organizations/{organizationUID}/balance-history:
     get:
       operationId: GetOrganizationBalanceHistory
       description: Get Organization Balance history
@@ -414,7 +414,7 @@ paths:
         - $ref: '#/components/parameters/productUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
       requestBody:
-        description: A Note-shaped event with notefile name, JSON body, and optional base64-encoded payload.
+        description: A Note-shaped event. Typically contains the notefile name (file), a JSON body, and an optional base64-encoded payload, but any additional Note fields (e.g. when, sn, where_lat, where_lon) are accepted and honored.
         required: true
         content:
           application/json:
@@ -1611,6 +1611,7 @@ paths:
                   time:
                     description: The time the Note was added to the Notecard or Notehub
                     type: integer
+                    format: int64
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
@@ -2070,6 +2071,7 @@ paths:
         - $ref: '#/components/parameters/pageSizeParam'
         - $ref: '#/components/parameters/pageNumParam'
         - $ref: '#/components/parameters/deviceUIDParamQuery'
+        - $ref: '#/components/parameters/sensorUIDParamQuery'
         - $ref: '#/components/parameters/sortByParam'
         - $ref: '#/components/parameters/sortOrderParam'
         - $ref: '#/components/parameters/startDateParam'
@@ -2124,6 +2126,7 @@ paths:
         - $ref: '#/components/parameters/filesQueryParam'
         - $ref: '#/components/parameters/fleetUIDQueryParam'
         - $ref: '#/components/parameters/deviceUIDParamQuery'
+        - $ref: '#/components/parameters/sensorUIDParamQuery'
       responses:
         '200':
           $ref: '#/components/responses/EventsByCursorResponse'
@@ -2611,6 +2614,7 @@ paths:
         - $ref: '#/components/parameters/pageSizeParam'
         - $ref: '#/components/parameters/pageNumParam'
         - $ref: '#/components/parameters/deviceUIDParamQuery'
+        - $ref: '#/components/parameters/sensorUIDParamQuery'
         - $ref: '#/components/parameters/sortByParam'
         - $ref: '#/components/parameters/sortOrderParam'
         - $ref: '#/components/parameters/startDateParam'
@@ -2664,6 +2668,7 @@ paths:
         - $ref: '#/components/parameters/systemFilesOnlyParam'
         - $ref: '#/components/parameters/filesQueryParam'
         - $ref: '#/components/parameters/deviceUIDParamQuery'
+        - $ref: '#/components/parameters/sensorUIDParamQuery'
         - $ref: '#/components/parameters/startDateParam'
         - $ref: '#/components/parameters/endDateParam'
       responses:
@@ -4097,6 +4102,7 @@ components:
       required: false
       schema:
         type: integer
+        format: int64
         minimum: 0
     eventUIDFilterQueryParam:
       description: Filter by Event UID
@@ -4378,10 +4384,10 @@ components:
       schema:
         type: string
     repositoryKey:
-      description: The secret key used to access this repository
+      description: The secret key used to access this repository. Optional - a caller authenticated with a session or personal access token may instead be authorized if their actor holds the required permission on the events of every project this repository references.
       in: header
       name: X-Repository-Key
-      required: true
+      required: false
       schema:
         type: string
     repositoryUIDParam:
@@ -4457,6 +4463,17 @@ components:
       required: false
       schema:
         type: string
+    sensorUIDParamQuery:
+      description: A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix.
+      explode: true
+      in: query
+      name: sensorUID
+      required: false
+      schema:
+        type: array
+        items:
+          type: string
+      style: form
     serialNumberFilterParam:
       description: Filter by Serial Number
       explode: true
@@ -4536,6 +4553,7 @@ components:
       required: false
       schema:
         type: integer
+        format: int64
         minimum: 0
     systemFilesOnlyParam:
       in: query
@@ -4623,6 +4641,7 @@ components:
         created_at:
           description: The time the alert was created
           type: integer
+          format: int64
         data:
           type: array
           items:
@@ -4706,7 +4725,6 @@ components:
       type: array
       items:
         type: string
-      properties: {}
     AwsRoute:
       type: object
       properties:
@@ -4839,7 +4857,6 @@ components:
         - role
     BillingAccountRole:
       type: string
-      properties: {}
       enum:
         - billing_admin
         - billing_manager
@@ -4906,7 +4923,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/SimUsage'
-      properties: {}
     Contact:
       type: object
       properties:
@@ -4920,8 +4936,6 @@ components:
           type: string
       nullable: true
     CreateMonitor:
-      type: ''
-      properties: {}
       allOf:
         - $ref: '#/components/schemas/Monitor'
         - required:
@@ -4960,7 +4974,7 @@ components:
           description: repository name
           type: string
         password:
-          description: 'read-only password for the database, also used as X-Repository-Token header for subsequent API calls.  This value is only served once when the repository is created'
+          description: read-only password for the database, also used as X-Repository-Token header for subsequent API calls.  This value is only served once when the repository is created
           type: string
         project_uids:
           $ref: '#/components/schemas/AppUIDList'
@@ -4990,19 +5004,31 @@ components:
       properties:
         began:
           description: The time when the DFU began
-          type: number
+          type: integer
+          format: int64
+          example: 1617181920
         crc32:
           description: Used for image verification
-          type: number
+          type: integer
+          format: int64
+          example: 67890
+          maximum: 4294967295
+          minimum: 0
         errors:
           description: The number of consecutive errors the DFU process has encountered
-          type: number
+          type: integer
+          format: int64
+          example: 2
+          minimum: 0
         file:
           description: Firmware filename
           type: string
         length:
           description: Length of firmware file
-          type: number
+          type: integer
+          format: int64
+          example: 4096
+          minimum: 0
         md5:
           description: Used for image verification
           type: string
@@ -5028,10 +5054,16 @@ components:
             - completed
         read:
           description: The amount the notecard has read of the image from notehub
-          type: number
+          type: integer
+          format: int64
+          example: 1024
+          minimum: 0
         retry:
           description: Value of _fw_retry environment var at time of DFU initialization
-          type: number
+          type: integer
+          format: int64
+          example: 1
+          minimum: 0
         status:
           description: Status message
           type: string
@@ -5042,7 +5074,9 @@ components:
             - user
         updated:
           description: Last updated timestamp
-          type: number
+          type: integer
+          format: int64
+          example: 1617181930
         version:
           description: Last known version, which is generally a JSON object contained within the firmware image
           type: string
@@ -5054,7 +5088,6 @@ components:
           description: The name of the field
           type: string
     DataSet:
-      type: ''
       properties:
         fields:
           type: array
@@ -5082,6 +5115,9 @@ components:
             - 0
             - 1
             - 2
+            - 5
+            - 6
+            - 7
         jsonata:
           description: the JSONata expression used to populate this field
           type: string
@@ -5138,6 +5174,9 @@ components:
     Device:
       type: object
       properties:
+        best_id:
+          description: The best ID for the device, preference for the serial number over device UID
+          type: string
         best_location:
           $ref: '#/components/schemas/Location'
         cellular_usage:
@@ -5536,7 +5575,6 @@ components:
           example: example@blues.com
     Empty:
       type: object
-      properties: {}
     EnvTreeJsonNode:
       type: object
       properties:
@@ -5635,7 +5673,10 @@ components:
           type: string
         bars:
           description: Bars. Only available on _session.qo events.
-          type: number
+          type: integer
+          format: int32
+          example: 2
+          minimum: 0
         best_country:
           description: Country
           type: string
@@ -5654,7 +5695,9 @@ components:
           type: string
         best_location_when:
           description: Unix timestamp
-          type: number
+          type: integer
+          format: int64
+          example: 1652709545
         best_lon:
           description: Longitude
           type: number
@@ -5682,7 +5725,10 @@ components:
           type: string
         moved:
           description: The number of times the device was sensed to have moved between the last session and this session. Only available on _session.qo events.
-          type: number
+          type: integer
+          format: int64
+          example: 7
+          minimum: 0
         note:
           description: The note ID in the notefile
           type: string
@@ -5710,19 +5756,30 @@ components:
           type: string
         rsrp:
           description: RSRP. Only available on _session.qo events.
-          type: number
+          type: integer
+          format: int32
+          example: -91
         rsrq:
           description: RSRQ. Only available on _session.qo events.
-          type: number
+          type: integer
+          format: int32
+          example: -13
         rssi:
           description: Received Signal Strength Indicator (RSSI) is an estimated measurement of how well a device can receive signals. Only available on _session.qo events.
-          type: number
+          type: integer
+          format: int32
+          example: -72
+        sensor:
+          description: Sensor UID, for events originating from a sensor attached to the device
+          type: string
         session:
           description: Session UID (globally unique)
           type: string
         sinr:
           description: SINR. Only available on _session.qo events.
-          type: number
+          type: integer
+          format: int32
+          example: 18
         sku:
           description: SKU. Only available on _session.qo events.
           type: string
@@ -5761,7 +5818,9 @@ components:
           type: string
         tower_when:
           description: Unix timestamp
-          type: number
+          type: integer
+          format: int64
+          example: 1669667691
         transport:
           description: The transport used for this event, e.g., "cellular", "wifi", ", etc.
           type: string
@@ -5781,22 +5840,37 @@ components:
           format: double
         tri_points:
           description: Triangulation points
-          type: number
+          type: integer
+          format: int32
+          example: 6
+          minimum: 0
         tri_timezone:
           description: Timezone
           type: string
         tri_when:
           description: Unix timestamp
-          type: number
+          type: integer
+          format: int64
+          example: 1652709545
         updates:
-          type: number
+          type: integer
+          format: int32
+          example: 1
+          minimum: 0
         voltage:
           description: Device voltage. Only available on _session.qo events.
           type: number
           format: double
         when:
           description: When the event was captured on the device
-          type: number
+          type: integer
+          format: int64
+          example: 1656010061
+        when_ms:
+          description: Millisecond-accurate Unix epoch timestamp for when the event was captured on the device
+          type: integer
+          format: int64
+          example: 1656010061123
         where_country:
           description: Country
           type: string
@@ -5819,7 +5893,9 @@ components:
           type: string
         where_when:
           description: Unix timestamp
-          type: number
+          type: integer
+          format: int64
+          example: 1652709545
     Filter:
       description: |
         Filter applied to route data. Controls which notefiles are sent through the route.
@@ -5957,12 +6033,10 @@ components:
     FleetRule:
       description: JSONata expression that will be evaluated to determine device membership into this fleet, if the expression evaluates to a 1, the device will be included, if it evaluates to -1 it will be removed, and if it evaluates to 0 or errors it will be left unchanged.
       type: string
-      properties: {}
     FleetsUIDList:
       type: array
       items:
         type: string
-      properties: {}
     GetProjectSecretsResponse:
       type: object
       properties:
@@ -6021,7 +6095,6 @@ components:
       additionalProperties: false
     JSONata:
       type: object
-      properties: {}
     Job:
       type: object
       properties:
@@ -6133,8 +6206,6 @@ components:
             - fleet:00000000-0000-0000-0000-000000000000
     JobDetail:
       description: Batch job with full definition
-      type: ''
-      properties: {}
       allOf:
         - $ref: '#/components/schemas/Job'
         - properties:
@@ -6444,7 +6515,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Notefile'
-      properties: {}
     NotefileSchema:
       type: object
       properties:
@@ -6587,7 +6657,6 @@ components:
         - role
     OrganizationRole:
       type: string
-      properties: {}
       enum:
         - org_admin
         - billing_manager
@@ -6880,7 +6949,6 @@ components:
         - expires_at
     Role:
       type: string
-      properties: {}
       enum:
         - owner
         - developer
@@ -7326,18 +7394,25 @@ components:
           type: string
         crc32:
           type: integer
+          format: int64
+          maximum: 4294967295
+          minimum: 0
         created:
           type: integer
+          format: int64
         firmware:
           $ref: '#/components/schemas/Firmware'
         found:
           type: string
         length:
           type: integer
+          format: int64
+          minimum: 0
         md5:
           type: string
         modified:
           type: integer
+          format: int64
         name:
           type: string
         notes:
@@ -7562,7 +7637,6 @@ components:
     UsageTruncatedField:
       description: If the data is truncated that means that the parameters selected resulted in a response of over | the requested limit of data points, in order to ensure
       type: boolean
-      properties: {}
     UserDfuStateMachine:
       type: object
       properties:
@@ -7697,16 +7771,12 @@ components:
       content:
         application/json:
           schema:
-            type: ''
-            properties: {}
             $ref: '#/components/schemas/EnvironmentVariables'
     ErrorResponse:
       description: The response body in case of an API error.
       content:
         application/json:
           schema:
-            type: ''
-            properties: {}
             $ref: '#/components/schemas/Error'
     EventsByCursorResponse:
       description: The response body from a GET events by cursor request.
@@ -7829,7 +7899,6 @@ components:
         text/csv:
           schema:
             type: string
-            properties: {}
             format: binary
           example: |
             eventUID,deviceUID,when,best_location_type,best_lat,best_lon,body.temperature,body.humidity
@@ -7885,16 +7954,12 @@ components:
       content:
         application/json:
           schema:
-            type: ''
-            properties: {}
             $ref: '#/components/schemas/JobDetail'
     GetJobRunResponse:
       description: Job run details
       content:
         application/json:
           schema:
-            type: ''
-            properties: {}
             $ref: '#/components/schemas/JobRun'
     GetJobRunsResponse:
       description: List of job runs
@@ -7927,8 +7992,6 @@ components:
       content:
         application/json:
           schema:
-            type: ''
-            properties: {}
             $ref: '#/components/schemas/GetProjectSecretsResponse'
     LatestResponse:
       description: The response body for a Latest Events request.
@@ -8011,7 +8074,6 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/Monitor'
-            properties: {}
             required:
               - monitors
     NoteResponse:
