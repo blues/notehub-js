@@ -5213,6 +5213,7 @@ components:
         recent_when:
           type: string
           format: date-time
+          nullable: true
         serial_number:
           type: string
         sku:
