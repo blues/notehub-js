@@ -5102,6 +5102,11 @@ components:
         name:
           description: The name of the data set
           type: string
+        notefiles:
+          description: If non-empty, only events from these notefiles populate the dataset. Empty or omitted means all notefiles.
+          type: array
+          items:
+            type: string
         time:
           description: JSONata expression resulting in the relevant time field
           type: string
@@ -5118,6 +5123,7 @@ components:
             - 5
             - 6
             - 7
+            - 8
         jsonata:
           description: the JSONata expression used to populate this field
           type: string
