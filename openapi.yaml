@@ -5757,6 +5757,9 @@ components:
         payload:
           description: A base64-encoded binary payload
           type: string
+        platform:
+          description: Whether this is a platform event (administrative, e.g. _health.qo, _session.qo) rather than user data
+          type: boolean
         product:
           description: Product UID (globally unique)
           type: string
