@@ -5093,6 +5093,14 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/DataSetField'
+        is_optimized:
+          description: True once the dataset's underlying table has been deduplicated/optimized. Server-populated; ignored on input.
+          type: boolean
+          readOnly: true
+        is_ready:
+          description: True once the dataset has been fully loaded from the repository's archive after backfill completed. Server-populated; ignored on input.
+          type: boolean
+          readOnly: true
         lat:
           description: JSONata expression resulting in the latitude field
           type: string
