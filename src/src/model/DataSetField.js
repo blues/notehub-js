@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The DataSetField model module.
  * @module model/DataSetField
- * @version 6.4.0
+ * @version 6.5.0
  */
 class DataSetField {
   /**
@@ -134,6 +134,30 @@ DataSetField["DatatypeEnum"] = {
    * @const
    */
   2: 2,
+
+  /**
+   * value: 5
+   * @const
+   */
+  5: 5,
+
+  /**
+   * value: 6
+   * @const
+   */
+  6: 6,
+
+  /**
+   * value: 7
+   * @const
+   */
+  7: 7,
+
+  /**
+   * value: 8
+   * @const
+   */
+  8: 8,
 };
 
 export default DataSetField;

@@ -20,7 +20,7 @@ import GetOrganizations200Response from "../model/GetOrganizations200Response";
 /**
  * Organization service.
  * @module api/OrganizationApi
- * @version 6.4.0
+ * @version 6.5.0
  */
 export default class OrganizationApi {
   /**

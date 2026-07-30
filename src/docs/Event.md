@@ -32,6 +32,7 @@
 | **rsrp**             | **Number**  | RSRP. Only available on \_session.qo events.                                                                                                           | [optional] |
 | **rsrq**             | **Number**  | RSRQ. Only available on \_session.qo events.                                                                                                           | [optional] |
 | **rssi**             | **Number**  | Received Signal Strength Indicator (RSSI) is an estimated measurement of how well a device can receive signals. Only available on \_session.qo events. | [optional] |
+| **sensor**           | **String**  | Sensor UID, for events originating from a sensor attached to the device                                                                                | [optional] |
 | **session**          | **String**  | Session UID (globally unique)                                                                                                                          | [optional] |
 | **sinr**             | **Number**  | SINR. Only available on \_session.qo events.                                                                                                           | [optional] |
 | **sku**              | **String**  | SKU. Only available on \_session.qo events.                                                                                                            | [optional] |
@@ -57,6 +58,7 @@
 | **updates**          | **Number**  |                                                                                                                                                        | [optional] |
 | **voltage**          | **Number**  | Device voltage. Only available on \_session.qo events.                                                                                                 | [optional] |
 | **when**             | **Number**  | When the event was captured on the device                                                                                                              | [optional] |
+| **whenMs**           | **Number**  | Millisecond-accurate Unix epoch timestamp for when the event was captured on the device                                                                | [optional] |
 | **whereCountry**     | **String**  | Country                                                                                                                                                | [optional] |
 | **whereLat**         | **Number**  | Latitude                                                                                                                                               | [optional] |
 | **whereLocation**    | **String**  | Location                                                                                                                                               | [optional] |

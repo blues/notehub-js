@@ -38,7 +38,7 @@ import SignalDevice200Response from "../model/SignalDevice200Response";
 /**
  * Device service.
  * @module api/DeviceApi
- * @version 6.4.0
+ * @version 6.5.0
  */
 export default class DeviceApi {
   /**
@@ -1189,10 +1189,10 @@ export default class DeviceApi {
   }
 
   /**
-   * Get a single journey for a device along with its `_track.qo` events. The events array is paginated via `pageSize` / `pageNum`; use `journey.has_more` to detect additional pages.
+   * Get a single journey for a device along with its events. The events array is paginated via `pageSize` / `pageNum`; use `journey.has_more` to detect additional pages.
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
-   * @param {Number} journeyID Identifier of the journey, taken from the `journey` field on `_track.qo` events (a Unix timestamp marking the start of the journey).
+   * @param {Number} journeyID Identifier of the journey, taken from the numeric `journey` field in the event body (a Unix timestamp marking the start of the journey).
    * @param {Object} opts Optional parameters
    * @param {Number} opts.pageSize  (default to 50)
    * @param {Number} opts.pageNum  (default to 1)
@@ -1258,10 +1258,10 @@ export default class DeviceApi {
   }
 
   /**
-   * Get a single journey for a device along with its `_track.qo` events. The events array is paginated via `pageSize` / `pageNum`; use `journey.has_more` to detect additional pages.
+   * Get a single journey for a device along with its events. The events array is paginated via `pageSize` / `pageNum`; use `journey.has_more` to detect additional pages.
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
-   * @param {Number} journeyID Identifier of the journey, taken from the `journey` field on `_track.qo` events (a Unix timestamp marking the start of the journey).
+   * @param {Number} journeyID Identifier of the journey, taken from the numeric `journey` field in the event body (a Unix timestamp marking the start of the journey).
    * @param {Object} opts Optional parameters
    * @param {Number} opts.pageSize  (default to 50)
    * @param {Number} opts.pageNum  (default to 1)
@@ -1279,7 +1279,7 @@ export default class DeviceApi {
   }
 
   /**
-   * Get the list of journeys for a device, derived from `_track.qo` events. Returns journey metadata only (no event payloads). Capped at 100 most recent journeys; `has_more` is true when the cap is hit.
+   * Get the list of journeys for a device, derived from events whose body contains `journey` and `jcount` fields. Returns journey metadata only (no event payloads). Capped at 100 most recent journeys; `has_more` is true when the cap is hit.
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
    * @param {Object} opts Optional parameters
@@ -1335,7 +1335,7 @@ export default class DeviceApi {
   }
 
   /**
-   * Get the list of journeys for a device, derived from `_track.qo` events. Returns journey metadata only (no event payloads). Capped at 100 most recent journeys; `has_more` is true when the cap is hit.
+   * Get the list of journeys for a device, derived from events whose body contains `journey` and `jcount` fields. Returns journey metadata only (no event payloads). Capped at 100 most recent journeys; `has_more` is true when the cap is hit.
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
    * @param {Object} opts Optional parameters

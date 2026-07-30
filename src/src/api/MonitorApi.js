@@ -19,7 +19,7 @@ import Monitor from "../model/Monitor";
 /**
  * Monitor service.
  * @module api/MonitorApi
- * @version 6.4.0
+ * @version 6.5.0
  */
 export default class MonitorApi {
   /**
@@ -36,21 +36,21 @@ export default class MonitorApi {
   /**
    * Create a new Monitor
    * @param {String} projectOrProductUID
-   * @param {module:model/Monitor} body Body or payload of monitor to be created
+   * @param {module:model/CreateMonitor} createMonitor Body or payload of monitor to be created
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Monitor} and HTTP response
    */
-  createMonitorWithHttpInfo(projectOrProductUID, body) {
-    let postBody = body;
+  createMonitorWithHttpInfo(projectOrProductUID, createMonitor) {
+    let postBody = createMonitor;
     // verify the required parameter 'projectOrProductUID' is set
     if (projectOrProductUID === undefined || projectOrProductUID === null) {
       throw new Error(
         "Missing the required parameter 'projectOrProductUID' when calling createMonitor"
       );
     }
-    // verify the required parameter 'body' is set
-    if (body === undefined || body === null) {
+    // verify the required parameter 'createMonitor' is set
+    if (createMonitor === undefined || createMonitor === null) {
       throw new Error(
-        "Missing the required parameter 'body' when calling createMonitor"
+        "Missing the required parameter 'createMonitor' when calling createMonitor"
       );
     }
 
@@ -84,15 +84,16 @@ export default class MonitorApi {
   /**
    * Create a new Monitor
    * @param {String} projectOrProductUID
-   * @param {module:model/Monitor} body Body or payload of monitor to be created
+   * @param {module:model/CreateMonitor} createMonitor Body or payload of monitor to be created
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Monitor}
    */
-  createMonitor(projectOrProductUID, body) {
-    return this.createMonitorWithHttpInfo(projectOrProductUID, body).then(
-      function (response_and_data) {
-        return response_and_data.data;
-      }
-    );
+  createMonitor(projectOrProductUID, createMonitor) {
+    return this.createMonitorWithHttpInfo(
+      projectOrProductUID,
+      createMonitor
+    ).then(function (response_and_data) {
+      return response_and_data.data;
+    });
   }
 
   /**

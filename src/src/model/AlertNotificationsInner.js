@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The AlertNotificationsInner model module.
  * @module model/AlertNotificationsInner
- * @version 6.4.0
+ * @version 6.5.0
  */
 class AlertNotificationsInner {
   /**

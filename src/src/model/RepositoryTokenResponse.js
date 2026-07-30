@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The RepositoryTokenResponse model module.
  * @module model/RepositoryTokenResponse
- * @version 6.4.0
+ * @version 6.5.0
  */
 class RepositoryTokenResponse {
   /**

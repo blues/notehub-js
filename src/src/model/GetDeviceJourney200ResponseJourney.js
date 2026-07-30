@@ -17,12 +17,12 @@ import Event from "./Event";
 /**
  * The GetDeviceJourney200ResponseJourney model module.
  * @module model/GetDeviceJourney200ResponseJourney
- * @version 6.4.0
+ * @version 6.5.0
  */
 class GetDeviceJourney200ResponseJourney {
   /**
    * Constructs a new <code>GetDeviceJourney200ResponseJourney</code>.
-   * Paginated &#x60;_track.qo&#x60; events for the journey.
+   * Paginated events for the journey.
    * @alias module:model/GetDeviceJourney200ResponseJourney
    * @param events {Array.<module:model/Event>}
    * @param hasMore {Boolean}

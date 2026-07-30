@@ -18,7 +18,7 @@ import RouteTransformSettings from "./RouteTransformSettings";
 /**
  * The BlynkRoute model module.
  * @module model/BlynkRoute
- * @version 6.4.0
+ * @version 6.5.0
  */
 class BlynkRoute {
   /**

@@ -21,7 +21,7 @@ import SimUsage from "./SimUsage";
 /**
  * The Device model module.
  * @module model/Device
- * @version 6.4.0
+ * @version 6.5.0
  */
 class Device {
   /**
@@ -79,6 +79,9 @@ class Device {
     if (data) {
       obj = obj || new Device();
 
+      if (data.hasOwnProperty("best_id")) {
+        obj["best_id"] = ApiClient.convertToType(data["best_id"], "String");
+      }
       if (data.hasOwnProperty("best_location")) {
         obj["best_location"] = Location.constructFromObject(
           data["best_location"]
@@ -197,6 +200,18 @@ class Device {
             JSON.stringify(data)
         );
       }
+    }
+    // ensure the json data is a string
+    if (
+      data["best_id"] &&
+      !(
+        typeof data["best_id"] === "string" || data["best_id"] instanceof String
+      )
+    ) {
+      throw new Error(
+        "Expected the field `best_id` to be a primitive type in the JSON string but got " +
+          data["best_id"]
+      );
     }
     // validate the optional field `best_location`
     if (data["best_location"]) {
@@ -339,6 +354,12 @@ Device.RequiredProperties = [
   "uid",
   "voltage",
 ];
+
+/**
+ * The best ID for the device, preference for the serial number over device UID
+ * @member {String} best_id
+ */
+Device.prototype["best_id"] = undefined;
 
 /**
  * @member {module:model/Location} best_location

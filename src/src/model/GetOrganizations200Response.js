@@ -17,7 +17,7 @@ import Organization from "./Organization";
 /**
  * The GetOrganizations200Response model module.
  * @module model/GetOrganizations200Response
- * @version 6.4.0
+ * @version 6.5.0
  */
 class GetOrganizations200Response {
   /**

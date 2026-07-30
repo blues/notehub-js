@@ -18,7 +18,7 @@ import RouteTransformSettings from "./RouteTransformSettings";
 /**
  * The SnowpipeStreamingRoute model module.
  * @module model/SnowpipeStreamingRoute
- * @version 6.4.0
+ * @version 6.5.0
  */
 class SnowpipeStreamingRoute {
   /**

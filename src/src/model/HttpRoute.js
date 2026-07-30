@@ -18,7 +18,7 @@ import RouteTransformSettings from "./RouteTransformSettings";
 /**
  * The HttpRoute model module.
  * @module model/HttpRoute
- * @version 6.4.0
+ * @version 6.5.0
  */
 class HttpRoute {
   /**

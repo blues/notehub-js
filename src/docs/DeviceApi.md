@@ -811,7 +811,7 @@ apiInstance.getDeviceHealthLog(projectOrProductUID, deviceUID, opts).then(
 
 > GetDeviceJourney200Response getDeviceJourney(projectOrProductUID, deviceUID, journeyID, opts)
 
-Get a single journey for a device along with its &#x60;\_track.qo&#x60; events. The events array is paginated via &#x60;pageSize&#x60; / &#x60;pageNum&#x60;; use &#x60;journey.has_more&#x60; to detect additional pages.
+Get a single journey for a device along with its events. The events array is paginated via &#x60;pageSize&#x60; / &#x60;pageNum&#x60;; use &#x60;journey.has_more&#x60; to detect additional pages.
 
 ### Example
 
@@ -824,7 +824,7 @@ personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
 let apiInstance = new NotehubJs.DeviceApi();
 let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String |
 let deviceUID = "dev:000000000000000"; // String |
-let journeyID = 789; // Number | Identifier of the journey, taken from the `journey` field on `_track.qo` events (a Unix timestamp marking the start of the journey).
+let journeyID = 789; // Number | Identifier of the journey, taken from the numeric `journey` field in the event body (a Unix timestamp marking the start of the journey).
 let opts = {
   pageSize: 50, // Number |
   pageNum: 1, // Number |
@@ -845,13 +845,13 @@ apiInstance
 
 ### Parameters
 
-| Name                    | Type       | Description                                                                                                                                               | Notes                      |
-| ----------------------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------- |
-| **projectOrProductUID** | **String** |                                                                                                                                                           |
-| **deviceUID**           | **String** |                                                                                                                                                           |
-| **journeyID**           | **Number** | Identifier of the journey, taken from the &#x60;journey&#x60; field on &#x60;\_track.qo&#x60; events (a Unix timestamp marking the start of the journey). |
-| **pageSize**            | **Number** |                                                                                                                                                           | [optional] [default to 50] |
-| **pageNum**             | **Number** |                                                                                                                                                           | [optional] [default to 1]  |
+| Name                    | Type       | Description                                                                                                                                        | Notes                      |
+| ----------------------- | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------- |
+| **projectOrProductUID** | **String** |                                                                                                                                                    |
+| **deviceUID**           | **String** |                                                                                                                                                    |
+| **journeyID**           | **Number** | Identifier of the journey, taken from the numeric &#x60;journey&#x60; field in the event body (a Unix timestamp marking the start of the journey). |
+| **pageSize**            | **Number** |                                                                                                                                                    | [optional] [default to 50] |
+| **pageNum**             | **Number** |                                                                                                                                                    | [optional] [default to 1]  |
 
 ### Return type
 
@@ -870,7 +870,7 @@ apiInstance
 
 > GetDeviceJourneys200Response getDeviceJourneys(projectOrProductUID, deviceUID, opts)
 
-Get the list of journeys for a device, derived from &#x60;\_track.qo&#x60; events. Returns journey metadata only (no event payloads). Capped at 100 most recent journeys; &#x60;has_more&#x60; is true when the cap is hit.
+Get the list of journeys for a device, derived from events whose body contains &#x60;journey&#x60; and &#x60;jcount&#x60; fields. Returns journey metadata only (no event payloads). Capped at 100 most recent journeys; &#x60;has_more&#x60; is true when the cap is hit.
 
 ### Example
 

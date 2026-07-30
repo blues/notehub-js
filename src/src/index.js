@@ -40,12 +40,15 @@ import CurrentFirmware from "./model/CurrentFirmware";
 import DFUEnv from "./model/DFUEnv";
 import DFUState from "./model/DFUState";
 import DataField from "./model/DataField";
+import DataSet from "./model/DataSet";
 import DataSetField from "./model/DataSetField";
 import DataUsage from "./model/DataUsage";
 import DatacakeRoute from "./model/DatacakeRoute";
 import DeleteDeviceFromFleetsRequest from "./model/DeleteDeviceFromFleetsRequest";
 import DeleteJob200Response from "./model/DeleteJob200Response";
 import DeleteNotefilesRequest from "./model/DeleteNotefilesRequest";
+import DescriptionRecord from "./model/DescriptionRecord";
+import DescriptionRecordList from "./model/DescriptionRecordList";
 import Device from "./model/Device";
 import DeviceDfuHistory from "./model/DeviceDfuHistory";
 import DeviceDfuHistoryCurrent from "./model/DeviceDfuHistoryCurrent";
@@ -181,6 +184,7 @@ import WebhookSettings from "./model/WebhookSettings";
 import AlertApi from "./api/AlertApi";
 import AuthorizationApi from "./api/AuthorizationApi";
 import BillingAccountApi from "./api/BillingAccountApi";
+import DescriptionApi from "./api/DescriptionApi";
 import DeviceApi from "./api/DeviceApi";
 import EventApi from "./api/EventApi";
 import ExternalDevicesApi from "./api/ExternalDevicesApi";
@@ -221,7 +225,7 @@ import WebhookApi from "./api/WebhookApi";
  * </pre>
  * </p>
  * @module index
- * @version 6.4.0
+ * @version 6.5.0
  */
 export {
   /**
@@ -399,6 +403,12 @@ export {
   DataField,
 
   /**
+   * The DataSet model constructor.
+   * @property {module:model/DataSet}
+   */
+  DataSet,
+
+  /**
    * The DataSetField model constructor.
    * @property {module:model/DataSetField}
    */
@@ -433,6 +443,18 @@ export {
    * @property {module:model/DeleteNotefilesRequest}
    */
   DeleteNotefilesRequest,
+
+  /**
+   * The DescriptionRecord model constructor.
+   * @property {module:model/DescriptionRecord}
+   */
+  DescriptionRecord,
+
+  /**
+   * The DescriptionRecordList model constructor.
+   * @property {module:model/DescriptionRecordList}
+   */
+  DescriptionRecordList,
 
   /**
    * The Device model constructor.
@@ -1243,6 +1265,12 @@ export {
    * @property {module:api/BillingAccountApi}
    */
   BillingAccountApi,
+
+  /**
+   * The DescriptionApi service constructor.
+   * @property {module:api/DescriptionApi}
+   */
+  DescriptionApi,
 
   /**
    * The DeviceApi service constructor.

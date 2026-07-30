@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The GetDeviceEnvironmentVariablesByPin200Response model module.
  * @module model/GetDeviceEnvironmentVariablesByPin200Response
- * @version 6.4.0
+ * @version 6.5.0
  */
 class GetDeviceEnvironmentVariablesByPin200Response {
   /**
@@ -54,6 +54,12 @@ class GetDeviceEnvironmentVariablesByPin200Response {
     if (data) {
       obj = obj || new GetDeviceEnvironmentVariablesByPin200Response();
 
+      if (data.hasOwnProperty("environment_variable_notes")) {
+        obj["environment_variable_notes"] = ApiClient.convertToType(
+          data["environment_variable_notes"],
+          { String: "String" }
+        );
+      }
       if (data.hasOwnProperty("environment_variables")) {
         obj["environment_variables"] = ApiClient.convertToType(
           data["environment_variables"],
@@ -104,6 +110,14 @@ GetDeviceEnvironmentVariablesByPin200Response.RequiredProperties = [
   "environment_variables",
   "environment_variables_env_default",
 ];
+
+/**
+ * Optional per-variable annotations for device-level environment variables, keyed by variable name.
+ * @member {Object.<String, String>} environment_variable_notes
+ */
+GetDeviceEnvironmentVariablesByPin200Response.prototype[
+  "environment_variable_notes"
+] = undefined;
 
 /**
  * The environment variables for this device that have been set using host firmware or the Notehub API or UI.

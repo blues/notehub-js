@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The EnvironmentVariables model module.
  * @module model/EnvironmentVariables
- * @version 6.4.0
+ * @version 6.5.0
  */
 class EnvironmentVariables {
   /**
@@ -48,6 +48,12 @@ class EnvironmentVariables {
     if (data) {
       obj = obj || new EnvironmentVariables();
 
+      if (data.hasOwnProperty("environment_variable_notes")) {
+        obj["environment_variable_notes"] = ApiClient.convertToType(
+          data["environment_variable_notes"],
+          { String: "String" }
+        );
+      }
       if (data.hasOwnProperty("environment_variables")) {
         obj["environment_variables"] = ApiClient.convertToType(
           data["environment_variables"],
@@ -83,6 +89,12 @@ class EnvironmentVariables {
 }
 
 EnvironmentVariables.RequiredProperties = ["environment_variables"];
+
+/**
+ * Optional per-variable annotations, keyed by variable name. Setting a key to an empty string removes its note. A 400 error is returned for any key that does not already exist as a stored variable and is not included in environment_variables in the same request.
+ * @member {Object.<String, String>} environment_variable_notes
+ */
+EnvironmentVariables.prototype["environment_variable_notes"] = undefined;
 
 /**
  * @member {Object.<String, String>} environment_variables
