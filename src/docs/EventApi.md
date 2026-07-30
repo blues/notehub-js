@@ -30,6 +30,7 @@ let opts = {
   pageSize: 50, // Number |
   pageNum: 1, // Number |
   deviceUID: ["null"], // [String] | A Device UID.
+  sensorUID: ["null"], // [String] | A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix.
   sortBy: "'captured'", // String |
   sortOrder: "'asc'", // String |
   startDate: 1628631763, // Number | Start date for filtering results, specified as a Unix timestamp
@@ -64,6 +65,7 @@ apiInstance.getEvents(projectOrProductUID, opts).then(
 | **pageSize**            | **Number**                |                                                                                                                                                                  | [optional] [default to 50]                 |
 | **pageNum**             | **Number**                |                                                                                                                                                                  | [optional] [default to 1]                  |
 | **deviceUID**           | [**[String]**](String.md) | A Device UID.                                                                                                                                                    | [optional]                                 |
+| **sensorUID**           | [**[String]**](String.md) | A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix.                                                | [optional]                                 |
 | **sortBy**              | **String**                |                                                                                                                                                                  | [optional] [default to &#39;captured&#39;] |
 | **sortOrder**           | **String**                |                                                                                                                                                                  | [optional] [default to &#39;asc&#39;]      |
 | **startDate**           | **Number**                | Start date for filtering results, specified as a Unix timestamp                                                                                                  | [optional]                                 |
@@ -115,6 +117,7 @@ let opts = {
   files: "_health.qo, data.qo", // String |
   fleetUID: "fleetUID_example", // String |
   deviceUID: ["null"], // [String] | A Device UID.
+  sensorUID: ["null"], // [String] | A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix.
 };
 apiInstance.getEventsByCursor(projectOrProductUID, opts).then(
   (data) => {
@@ -140,6 +143,7 @@ apiInstance.getEventsByCursor(projectOrProductUID, opts).then(
 | **files**               | **String**                |                                                                                                                                                                                                                                                                                                                                                                            | [optional]                            |
 | **fleetUID**            | **String**                |                                                                                                                                                                                                                                                                                                                                                                            | [optional]                            |
 | **deviceUID**           | [**[String]**](String.md) | A Device UID.                                                                                                                                                                                                                                                                                                                                                              | [optional]                            |
+| **sensorUID**           | [**[String]**](String.md) | A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix.                                                                                                                                                                                                                                                          | [optional]                            |
 
 ### Return type
 
@@ -175,6 +179,7 @@ let opts = {
   pageSize: 50, // Number |
   pageNum: 1, // Number |
   deviceUID: ["null"], // [String] | A Device UID.
+  sensorUID: ["null"], // [String] | A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix.
   sortBy: "'captured'", // String |
   sortOrder: "'asc'", // String |
   startDate: 1628631763, // Number | Start date for filtering results, specified as a Unix timestamp
@@ -209,6 +214,7 @@ apiInstance.getFleetEvents(projectOrProductUID, fleetUID, opts).then(
 | **pageSize**            | **Number**                |                                                                                                                                                                  | [optional] [default to 50]                 |
 | **pageNum**             | **Number**                |                                                                                                                                                                  | [optional] [default to 1]                  |
 | **deviceUID**           | [**[String]**](String.md) | A Device UID.                                                                                                                                                    | [optional]                                 |
+| **sensorUID**           | [**[String]**](String.md) | A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix.                                                | [optional]                                 |
 | **sortBy**              | **String**                |                                                                                                                                                                  | [optional] [default to &#39;captured&#39;] |
 | **sortOrder**           | **String**                |                                                                                                                                                                  | [optional] [default to &#39;asc&#39;]      |
 | **startDate**           | **Number**                | Start date for filtering results, specified as a Unix timestamp                                                                                                  | [optional]                                 |
@@ -259,6 +265,7 @@ let opts = {
   systemFilesOnly: true, // Boolean |
   files: "_health.qo, data.qo", // String |
   deviceUID: ["null"], // [String] | A Device UID.
+  sensorUID: ["null"], // [String] | A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix.
   startDate: 1628631763, // Number | Start date for filtering results, specified as a Unix timestamp
   endDate: 1657894210, // Number | End date for filtering results, specified as a Unix timestamp
 };
@@ -286,6 +293,7 @@ apiInstance.getFleetEventsByCursor(projectOrProductUID, fleetUID, opts).then(
 | **systemFilesOnly**     | **Boolean**               |                                                                                                                                                                                                                                                                                                                                                                            | [optional]                            |
 | **files**               | **String**                |                                                                                                                                                                                                                                                                                                                                                                            | [optional]                            |
 | **deviceUID**           | [**[String]**](String.md) | A Device UID.                                                                                                                                                                                                                                                                                                                                                              | [optional]                            |
+| **sensorUID**           | [**[String]**](String.md) | A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix.                                                                                                                                                                                                                                                          | [optional]                            |
 | **startDate**           | **Number**                | Start date for filtering results, specified as a Unix timestamp                                                                                                                                                                                                                                                                                                            | [optional]                            |
 | **endDate**             | **Number**                | End date for filtering results, specified as a Unix timestamp                                                                                                                                                                                                                                                                                                              | [optional]                            |
 

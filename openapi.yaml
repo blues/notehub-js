@@ -246,6 +246,92 @@ paths:
         - billing_account
       x-custom-attributes:
         permission: read
+  /v1/description:
+    get:
+      operationId: ListGlobalDescriptions
+      description: List metadata for all global description records.
+      responses:
+        '200':
+          description: Description record metadata.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescriptionRecordList'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - description
+      x-custom-attributes:
+        permission: read
+  '/v1/description/{descriptionName}':
+    delete:
+      operationId: DeleteGlobalDescription
+      description: Delete a global description record by name (Blues staff only).
+      responses:
+        '204':
+          description: Description record deleted successfully.
+        '403':
+          $ref: '#/components/responses/ErrorResponse'
+        '404':
+          $ref: '#/components/responses/ErrorResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - description
+      x-custom-attributes:
+        permission: delete
+    get:
+      operationId: GetGlobalDescription
+      description: Get a global description record. Returns the raw content with its stored Content-Type.
+      responses:
+        '200':
+          $ref: '#/components/responses/DescriptionContentResponse'
+        '404':
+          $ref: '#/components/responses/ErrorResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - description
+      x-custom-attributes:
+        permission: read
+    parameters:
+      - $ref: '#/components/parameters/descriptionNameParam'
+    post:
+      operationId: SetGlobalDescription
+      description: 'Create or replace a global description record, Blues staff only (up to 10MB). The request Content-Type is stored and returned on GET; when omitted it is detected (JSON or text).'
+      requestBody:
+        description: The description content (up to 10MB). The request Content-Type is stored and returned on GET; when omitted it is detected (JSON or text).
+        required: true
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+      responses:
+        '200':
+          description: Description record created or updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescriptionRecord'
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        '403':
+          $ref: '#/components/responses/ErrorResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - description
+      x-custom-attributes:
+        permission: create
   /v1/organizations:
     get:
       operationId: GetOrganizations
@@ -865,6 +951,95 @@ paths:
       x-custom-attributes:
         permission: create
         resource: 'blues:resources:app:APPSERIAL:settings'
+  '/v1/projects/{projectOrProductUID}/description':
+    get:
+      operationId: ListProjectDescriptions
+      description: List metadata for all description records in a project.
+      responses:
+        '200':
+          description: Description record metadata.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescriptionRecordList'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - description
+      x-custom-attributes:
+        permission: read
+        resource: 'blues:resources:app:APPSERIAL:settings'
+    parameters:
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
+  '/v1/projects/{projectOrProductUID}/description/{descriptionName}':
+    delete:
+      operationId: DeleteProjectDescription
+      description: Delete a project description record by name.
+      responses:
+        '204':
+          description: Description record deleted successfully.
+        '404':
+          $ref: '#/components/responses/ErrorResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - description
+      x-custom-attributes:
+        permission: delete
+        resource: 'blues:resources:app:APPSERIAL:settings'
+    get:
+      operationId: GetProjectDescription
+      description: Get a project description record. Returns the raw content with its stored Content-Type.
+      responses:
+        '200':
+          $ref: '#/components/responses/DescriptionContentResponse'
+        '404':
+          $ref: '#/components/responses/ErrorResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - description
+      x-custom-attributes:
+        permission: read
+        resource: 'blues:resources:app:APPSERIAL:settings'
+    parameters:
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
+      - $ref: '#/components/parameters/descriptionNameParam'
+    post:
+      operationId: SetProjectDescription
+      description: Create or replace a project description record (up to 10MB). The request Content-Type is stored and returned on GET; when omitted it is detected (JSON or text).
+      requestBody:
+        description: The description content (up to 10MB). The request Content-Type is stored and returned on GET; when omitted it is detected (JSON or text).
+        required: true
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+      responses:
+        '200':
+          description: Description record created or updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescriptionRecord'
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - description
+      x-custom-attributes:
+        permission: create
+        resource: 'blues:resources:app:APPSERIAL:settings'
   '/v1/projects/{projectOrProductUID}/devices':
     get:
       operationId: GetDevices
@@ -1316,7 +1491,7 @@ paths:
     get:
       operationId: GetDeviceJourneys
       description: |
-        Get the list of journeys for a device, derived from `_track.qo` events. Returns journey metadata only (no event payloads). Capped at 100 most recent journeys; `has_more` is true when the cap is hit.
+        Get the list of journeys for a device, derived from events whose body contains `journey` and `jcount` fields. Returns journey metadata only (no event payloads). Capped at 100 most recent journeys; `has_more` is true when the cap is hit.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
@@ -1342,7 +1517,7 @@ paths:
                           format: date-time
                         journey_id:
                           description: |
-                            Identifier of the journey, taken from the `journey` field on `_track.qo` events. This value is itself a Unix timestamp marking the start of the journey.
+                            Identifier of the journey, taken from the numeric `journey` field in the event body. This value is itself a Unix timestamp marking the start of the journey.
                           type: integer
                           format: int64
                         start_date:
@@ -1350,7 +1525,7 @@ paths:
                           type: string
                           format: date-time
                         total_events:
-                          description: The number of _track.qo events in the journey.
+                          description: The number of events in the journey.
                           type: integer
                           format: int64
                       required:
@@ -1375,14 +1550,14 @@ paths:
     get:
       operationId: GetDeviceJourney
       description: |
-        Get a single journey for a device along with its `_track.qo` events. The events array is paginated via `pageSize` / `pageNum`; use `journey.has_more` to detect additional pages.
+        Get a single journey for a device along with its events. The events array is paginated via `pageSize` / `pageNum`; use `journey.has_more` to detect additional pages.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
         - name: journeyID
           in: path
           description: |
-            Identifier of the journey, taken from the `journey` field on `_track.qo` events (a Unix timestamp marking the start of the journey).
+            Identifier of the journey, taken from the numeric `journey` field in the event body (a Unix timestamp marking the start of the journey).
           required: true
           schema:
             type: integer
@@ -1402,7 +1577,7 @@ paths:
                     type: string
                     format: date-time
                   journey:
-                    description: Paginated `_track.qo` events for the journey.
+                    description: Paginated events for the journey.
                     type: object
                     properties:
                       events:
@@ -1611,6 +1786,7 @@ paths:
                   time:
                     description: The time the Note was added to the Notecard or Notehub
                     type: integer
+                    format: int64
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
@@ -2070,6 +2246,7 @@ paths:
         - $ref: '#/components/parameters/pageSizeParam'
         - $ref: '#/components/parameters/pageNumParam'
         - $ref: '#/components/parameters/deviceUIDParamQuery'
+        - $ref: '#/components/parameters/sensorUIDParamQuery'
         - $ref: '#/components/parameters/sortByParam'
         - $ref: '#/components/parameters/sortOrderParam'
         - $ref: '#/components/parameters/startDateParam'
@@ -2124,6 +2301,7 @@ paths:
         - $ref: '#/components/parameters/filesQueryParam'
         - $ref: '#/components/parameters/fleetUIDQueryParam'
         - $ref: '#/components/parameters/deviceUIDParamQuery'
+        - $ref: '#/components/parameters/sensorUIDParamQuery'
       responses:
         '200':
           $ref: '#/components/responses/EventsByCursorResponse'
@@ -2611,6 +2789,7 @@ paths:
         - $ref: '#/components/parameters/pageSizeParam'
         - $ref: '#/components/parameters/pageNumParam'
         - $ref: '#/components/parameters/deviceUIDParamQuery'
+        - $ref: '#/components/parameters/sensorUIDParamQuery'
         - $ref: '#/components/parameters/sortByParam'
         - $ref: '#/components/parameters/sortOrderParam'
         - $ref: '#/components/parameters/startDateParam'
@@ -2664,6 +2843,7 @@ paths:
         - $ref: '#/components/parameters/systemFilesOnlyParam'
         - $ref: '#/components/parameters/filesQueryParam'
         - $ref: '#/components/parameters/deviceUIDParamQuery'
+        - $ref: '#/components/parameters/sensorUIDParamQuery'
         - $ref: '#/components/parameters/startDateParam'
         - $ref: '#/components/parameters/endDateParam'
       responses:
@@ -4045,6 +4225,13 @@ components:
         enum:
           - captured
           - uploaded
+    descriptionNameParam:
+      example: _health.qo
+      in: path
+      name: descriptionName
+      required: true
+      schema:
+        type: string
     deviceTagsParam:
       in: query
       name: deviceTags
@@ -4097,6 +4284,7 @@ components:
       required: false
       schema:
         type: integer
+        format: int64
         minimum: 0
     eventUIDFilterQueryParam:
       description: Filter by Event UID
@@ -4378,10 +4566,10 @@ components:
       schema:
         type: string
     repositoryKey:
-      description: The secret key used to access this repository
+      description: The secret key used to access this repository. Optional - a caller authenticated with a session or personal access token may instead be authorized if their actor holds the required permission on the events of every project this repository references.
       in: header
       name: X-Repository-Key
-      required: true
+      required: false
       schema:
         type: string
     repositoryUIDParam:
@@ -4457,6 +4645,17 @@ components:
       required: false
       schema:
         type: string
+    sensorUIDParamQuery:
+      description: 'A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix.'
+      explode: true
+      in: query
+      name: sensorUID
+      required: false
+      schema:
+        type: array
+        items:
+          type: string
+      style: form
     serialNumberFilterParam:
       description: Filter by Serial Number
       explode: true
@@ -4536,6 +4735,7 @@ components:
       required: false
       schema:
         type: integer
+        format: int64
         minimum: 0
     systemFilesOnlyParam:
       in: query
@@ -4623,6 +4823,7 @@ components:
         created_at:
           description: The time the alert was created
           type: integer
+          format: int64
         data:
           type: array
           items:
@@ -4706,7 +4907,6 @@ components:
       type: array
       items:
         type: string
-      properties: {}
     AwsRoute:
       type: object
       properties:
@@ -4839,7 +5039,6 @@ components:
         - role
     BillingAccountRole:
       type: string
-      properties: {}
       enum:
         - billing_admin
         - billing_manager
@@ -4906,7 +5105,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/SimUsage'
-      properties: {}
     Contact:
       type: object
       properties:
@@ -4920,8 +5118,6 @@ components:
           type: string
       nullable: true
     CreateMonitor:
-      type: ''
-      properties: {}
       allOf:
         - $ref: '#/components/schemas/Monitor'
         - required:
@@ -4990,19 +5186,31 @@ components:
       properties:
         began:
           description: The time when the DFU began
-          type: number
+          type: integer
+          format: int64
+          example: 1617181920
         crc32:
           description: Used for image verification
-          type: number
+          type: integer
+          format: int64
+          example: 67890
+          maximum: 4294967295
+          minimum: 0
         errors:
           description: The number of consecutive errors the DFU process has encountered
-          type: number
+          type: integer
+          format: int64
+          example: 2
+          minimum: 0
         file:
           description: Firmware filename
           type: string
         length:
           description: Length of firmware file
-          type: number
+          type: integer
+          format: int64
+          example: 4096
+          minimum: 0
         md5:
           description: Used for image verification
           type: string
@@ -5028,10 +5236,16 @@ components:
             - completed
         read:
           description: The amount the notecard has read of the image from notehub
-          type: number
+          type: integer
+          format: int64
+          example: 1024
+          minimum: 0
         retry:
           description: Value of _fw_retry environment var at time of DFU initialization
-          type: number
+          type: integer
+          format: int64
+          example: 1
+          minimum: 0
         status:
           description: Status message
           type: string
@@ -5042,7 +5256,9 @@ components:
             - user
         updated:
           description: Last updated timestamp
-          type: number
+          type: integer
+          format: int64
+          example: 1617181930
         version:
           description: 'Last known version, which is generally a JSON object contained within the firmware image'
           type: string
@@ -5054,12 +5270,19 @@ components:
           description: The name of the field
           type: string
     DataSet:
-      type: ''
       properties:
         fields:
           type: array
           items:
             $ref: '#/components/schemas/DataSetField'
+        is_optimized:
+          description: True once the dataset's underlying table has been deduplicated/optimized. Server-populated; ignored on input.
+          type: boolean
+          readOnly: true
+        is_ready:
+          description: True once the dataset has been fully loaded from the repository's archive after backfill completed. Server-populated; ignored on input.
+          type: boolean
+          readOnly: true
         lat:
           description: JSONata expression resulting in the latitude field
           type: string
@@ -5069,6 +5292,11 @@ components:
         name:
           description: The name of the data set
           type: string
+        notefiles:
+          description: 'If non-empty, only events from these notefiles populate the dataset. Empty or omitted means all notefiles.'
+          type: array
+          items:
+            type: string
         time:
           description: JSONata expression resulting in the relevant time field
           type: string
@@ -5082,6 +5310,10 @@ components:
             - 0
             - 1
             - 2
+            - 5
+            - 6
+            - 7
+            - 8
         jsonata:
           description: the JSONata expression used to populate this field
           type: string
@@ -5135,9 +5367,66 @@ components:
           type: string
           format: uri
       additionalProperties: false
+    DescriptionRecord:
+      description: Metadata for a stored description record. The content itself is returned by GET on the record.
+      type: object
+      properties:
+        content_type:
+          description: 'The stored content type, either "application/json" or "text/plain; charset=utf-8".'
+          type: string
+        created_at:
+          description: When the record was first created (Unix seconds).
+          type: integer
+          format: int64
+        created_by:
+          description: The actor who created the record.
+          type: string
+        length:
+          description: The content length in bytes.
+          type: integer
+          format: int64
+        md5:
+          description: The hex-encoded MD5 of the content.
+          type: string
+        modified_at:
+          description: When the record was last updated (Unix seconds).
+          type: integer
+          format: int64
+        modified_by:
+          description: The actor who last updated the record.
+          type: string
+        name:
+          description: 'The record name (letters, digits, ''.'', ''_'' or ''-'').'
+          type: string
+        owner_uid:
+          description: The owning project (app) UID for project-scoped records; empty for global.
+          type: string
+        scope:
+          description: The ownership scope of the record ("global" or "project").
+          type: string
+      required:
+        - name
+        - scope
+        - content_type
+        - length
+        - md5
+        - created_at
+        - modified_at
+    DescriptionRecordList:
+      type: object
+      properties:
+        descriptions:
+          type: array
+          items:
+            $ref: '#/components/schemas/DescriptionRecord'
+      required:
+        - descriptions
     Device:
       type: object
       properties:
+        best_id:
+          description: 'The best ID for the device, preference for the serial number over device UID'
+          type: string
         best_location:
           $ref: '#/components/schemas/Location'
         cellular_usage:
@@ -5536,7 +5825,6 @@ components:
           example: example@blues.com
     Empty:
       type: object
-      properties: {}
     EnvTreeJsonNode:
       type: object
       properties:
@@ -5578,6 +5866,10 @@ components:
       properties:
         key:
           type: string
+        note:
+          description: Optional free-form text for annotating the environment variable.
+          type: string
+          maxLength: 1024
         precedence:
           type: integer
         used:
@@ -5587,6 +5879,12 @@ components:
     EnvironmentVariables:
       type: object
       properties:
+        environment_variable_notes:
+          description: 'Optional per-variable annotations, keyed by variable name. Setting a key to an empty string removes its note. A 400 error is returned for any key that does not already exist as a stored variable and is not included in environment_variables in the same request.'
+          type: object
+          additionalProperties:
+            maxLength: 1024
+            type: string
         environment_variables:
           type: object
           additionalProperties:
@@ -5625,7 +5923,10 @@ components:
           type: string
         bars:
           description: Bars. Only available on _session.qo events.
-          type: number
+          type: integer
+          format: int32
+          example: 2
+          minimum: 0
         best_country:
           description: Country
           type: string
@@ -5644,7 +5945,9 @@ components:
           type: string
         best_location_when:
           description: Unix timestamp
-          type: number
+          type: integer
+          format: int64
+          example: 1652709545
         best_lon:
           description: Longitude
           type: number
@@ -5672,7 +5975,10 @@ components:
           type: string
         moved:
           description: The number of times the device was sensed to have moved between the last session and this session. Only available on _session.qo events.
-          type: number
+          type: integer
+          format: int64
+          example: 7
+          minimum: 0
         note:
           description: The note ID in the notefile
           type: string
@@ -5700,19 +6006,30 @@ components:
           type: string
         rsrp:
           description: RSRP. Only available on _session.qo events.
-          type: number
+          type: integer
+          format: int32
+          example: -91
         rsrq:
           description: RSRQ. Only available on _session.qo events.
-          type: number
+          type: integer
+          format: int32
+          example: -13
         rssi:
           description: Received Signal Strength Indicator (RSSI) is an estimated measurement of how well a device can receive signals. Only available on _session.qo events.
-          type: number
+          type: integer
+          format: int32
+          example: -72
+        sensor:
+          description: 'Sensor UID, for events originating from a sensor attached to the device'
+          type: string
         session:
           description: Session UID (globally unique)
           type: string
         sinr:
           description: SINR. Only available on _session.qo events.
-          type: number
+          type: integer
+          format: int32
+          example: 18
         sku:
           description: SKU. Only available on _session.qo events.
           type: string
@@ -5751,7 +6068,9 @@ components:
           type: string
         tower_when:
           description: Unix timestamp
-          type: number
+          type: integer
+          format: int64
+          example: 1669667691
         transport:
           description: 'The transport used for this event, e.g., "cellular", "wifi", ", etc.'
           type: string
@@ -5771,22 +6090,37 @@ components:
           format: double
         tri_points:
           description: Triangulation points
-          type: number
+          type: integer
+          format: int32
+          example: 6
+          minimum: 0
         tri_timezone:
           description: Timezone
           type: string
         tri_when:
           description: Unix timestamp
-          type: number
+          type: integer
+          format: int64
+          example: 1652709545
         updates:
-          type: number
+          type: integer
+          format: int32
+          example: 1
+          minimum: 0
         voltage:
           description: Device voltage. Only available on _session.qo events.
           type: number
           format: double
         when:
           description: When the event was captured on the device
-          type: number
+          type: integer
+          format: int64
+          example: 1656010061
+        when_ms:
+          description: Millisecond-accurate Unix epoch timestamp for when the event was captured on the device
+          type: integer
+          format: int64
+          example: 1656010061123
         where_country:
           description: Country
           type: string
@@ -5809,7 +6143,9 @@ components:
           type: string
         where_when:
           description: Unix timestamp
-          type: number
+          type: integer
+          format: int64
+          example: 1652709545
     Filter:
       description: |
         Filter applied to route data. Controls which notefiles are sent through the route.
@@ -5947,12 +6283,10 @@ components:
     FleetRule:
       description: 'JSONata expression that will be evaluated to determine device membership into this fleet, if the expression evaluates to a 1, the device will be included, if it evaluates to -1 it will be removed, and if it evaluates to 0 or errors it will be left unchanged.'
       type: string
-      properties: {}
     FleetsUIDList:
       type: array
       items:
         type: string
-      properties: {}
     GetProjectSecretsResponse:
       type: object
       properties:
@@ -6011,7 +6345,6 @@ components:
       additionalProperties: false
     JSONata:
       type: object
-      properties: {}
     Job:
       type: object
       properties:
@@ -6123,8 +6456,6 @@ components:
             - 'fleet:00000000-0000-0000-0000-000000000000'
     JobDetail:
       description: Batch job with full definition
-      type: ''
-      properties: {}
       allOf:
         - $ref: '#/components/schemas/Job'
         - properties:
@@ -6434,7 +6765,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Notefile'
-      properties: {}
     NotefileSchema:
       type: object
       properties:
@@ -6577,7 +6907,6 @@ components:
         - role
     OrganizationRole:
       type: string
-      properties: {}
       enum:
         - org_admin
         - billing_manager
@@ -6870,7 +7199,6 @@ components:
         - expires_at
     Role:
       type: string
-      properties: {}
       enum:
         - owner
         - developer
@@ -7316,18 +7644,25 @@ components:
           type: string
         crc32:
           type: integer
+          format: int64
+          maximum: 4294967295
+          minimum: 0
         created:
           type: integer
+          format: int64
         firmware:
           $ref: '#/components/schemas/Firmware'
         found:
           type: string
         length:
           type: integer
+          format: int64
+          minimum: 0
         md5:
           type: string
         modified:
           type: integer
+          format: int64
         name:
           type: string
         notes:
@@ -7552,7 +7887,6 @@ components:
     UsageTruncatedField:
       description: 'If the data is truncated that means that the parameters selected resulted in a response of over | the requested limit of data points, in order to ensure'
       type: boolean
-      properties: {}
     UserDfuStateMachine:
       type: object
       properties:
@@ -7654,6 +7988,13 @@ components:
                 type: boolean
             required:
               - success
+    DescriptionContentResponse:
+      description: 'The description content, returned with its stored Content-Type.'
+      content:
+        application/octet-stream:
+          schema:
+            type: string
+            format: binary
     DevicePlansResponse:
       description: Response body for /plans
       content:
@@ -7687,16 +8028,12 @@ components:
       content:
         application/json:
           schema:
-            type: ''
-            properties: {}
             $ref: '#/components/schemas/EnvironmentVariables'
     ErrorResponse:
       description: The response body in case of an API error.
       content:
         application/json:
           schema:
-            type: ''
-            properties: {}
             $ref: '#/components/schemas/Error'
     EventsByCursorResponse:
       description: The response body from a GET events by cursor request.
@@ -7819,7 +8156,6 @@ components:
         text/csv:
           schema:
             type: string
-            properties: {}
             format: binary
           example: |
             eventUID,deviceUID,when,best_location_type,best_lat,best_lon,body.temperature,body.humidity
@@ -7846,6 +8182,12 @@ components:
           schema:
             type: object
             properties:
+              environment_variable_notes:
+                description: 'Optional per-variable annotations for device-level environment variables, keyed by variable name.'
+                type: object
+                additionalProperties:
+                  maxLength: 1024
+                  type: string
               environment_variables:
                 description: The environment variables for this device that have been set using host firmware or the Notehub API or UI.
                 type: object
@@ -7869,16 +8211,12 @@ components:
       content:
         application/json:
           schema:
-            type: ''
-            properties: {}
             $ref: '#/components/schemas/JobDetail'
     GetJobRunResponse:
       description: Job run details
       content:
         application/json:
           schema:
-            type: ''
-            properties: {}
             $ref: '#/components/schemas/JobRun'
     GetJobRunsResponse:
       description: List of job runs
@@ -7911,8 +8249,6 @@ components:
       content:
         application/json:
           schema:
-            type: ''
-            properties: {}
             $ref: '#/components/schemas/GetProjectSecretsResponse'
     LatestResponse:
       description: The response body for a Latest Events request.
@@ -7995,7 +8331,6 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/Monitor'
-            properties: {}
             required:
               - monitors
     NoteResponse:

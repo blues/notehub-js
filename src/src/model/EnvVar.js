@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The EnvVar model module.
  * @module model/EnvVar
- * @version 6.4.0
+ * @version 6.5.0
  */
 class EnvVar {
   /**
@@ -47,6 +47,9 @@ class EnvVar {
 
       if (data.hasOwnProperty("key")) {
         obj["key"] = ApiClient.convertToType(data["key"], "String");
+      }
+      if (data.hasOwnProperty("note")) {
+        obj["note"] = ApiClient.convertToType(data["note"], "String");
       }
       if (data.hasOwnProperty("precedence")) {
         obj["precedence"] = ApiClient.convertToType(
@@ -84,6 +87,16 @@ class EnvVar {
     }
     // ensure the json data is a string
     if (
+      data["note"] &&
+      !(typeof data["note"] === "string" || data["note"] instanceof String)
+    ) {
+      throw new Error(
+        "Expected the field `note` to be a primitive type in the JSON string but got " +
+          data["note"]
+      );
+    }
+    // ensure the json data is a string
+    if (
       data["value"] &&
       !(typeof data["value"] === "string" || data["value"] instanceof String)
     ) {
@@ -101,6 +114,12 @@ class EnvVar {
  * @member {String} key
  */
 EnvVar.prototype["key"] = undefined;
+
+/**
+ * Optional free-form text for annotating the environment variable.
+ * @member {String} note
+ */
+EnvVar.prototype["note"] = undefined;
 
 /**
  * @member {Number} precedence

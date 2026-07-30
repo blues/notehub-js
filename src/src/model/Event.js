@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The Event model module.
  * @module model/Event
- * @version 6.4.0
+ * @version 6.5.0
  */
 class Event {
   /**
@@ -153,6 +153,9 @@ class Event {
       if (data.hasOwnProperty("rssi")) {
         obj["rssi"] = ApiClient.convertToType(data["rssi"], "Number");
       }
+      if (data.hasOwnProperty("sensor")) {
+        obj["sensor"] = ApiClient.convertToType(data["sensor"], "String");
+      }
       if (data.hasOwnProperty("session")) {
         obj["session"] = ApiClient.convertToType(data["session"], "String");
       }
@@ -251,6 +254,9 @@ class Event {
       }
       if (data.hasOwnProperty("when")) {
         obj["when"] = ApiClient.convertToType(data["when"], "Number");
+      }
+      if (data.hasOwnProperty("when_ms")) {
+        obj["when_ms"] = ApiClient.convertToType(data["when_ms"], "Number");
       }
       if (data.hasOwnProperty("where_country")) {
         obj["where_country"] = ApiClient.convertToType(
@@ -489,6 +495,16 @@ class Event {
       throw new Error(
         "Expected the field `req` to be a primitive type in the JSON string but got " +
           data["req"]
+      );
+    }
+    // ensure the json data is a string
+    if (
+      data["sensor"] &&
+      !(typeof data["sensor"] === "string" || data["sensor"] instanceof String)
+    ) {
+      throw new Error(
+        "Expected the field `sensor` to be a primitive type in the JSON string but got " +
+          data["sensor"]
       );
     }
     // ensure the json data is a string
@@ -863,6 +879,12 @@ Event.prototype["rsrq"] = undefined;
 Event.prototype["rssi"] = undefined;
 
 /**
+ * Sensor UID, for events originating from a sensor attached to the device
+ * @member {String} sensor
+ */
+Event.prototype["sensor"] = undefined;
+
+/**
  * Session UID (globally unique)
  * @member {String} session
  */
@@ -1010,6 +1032,12 @@ Event.prototype["voltage"] = undefined;
  * @member {Number} when
  */
 Event.prototype["when"] = undefined;
+
+/**
+ * Millisecond-accurate Unix epoch timestamp for when the event was captured on the device
+ * @member {Number} when_ms
+ */
+Event.prototype["when_ms"] = undefined;
 
 /**
  * Country

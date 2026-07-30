@@ -17,7 +17,7 @@ import OrganizationRole from "./OrganizationRole";
 /**
  * The Organization model module.
  * @module model/Organization
- * @version 6.4.0
+ * @version 6.5.0
  */
 class Organization {
   /**

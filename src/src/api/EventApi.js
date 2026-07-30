@@ -20,7 +20,7 @@ import RouteLog from "../model/RouteLog";
 /**
  * Event service.
  * @module api/EventApi
- * @version 6.4.0
+ * @version 6.5.0
  */
 export default class EventApi {
   /**
@@ -41,6 +41,7 @@ export default class EventApi {
    * @param {Number} opts.pageSize  (default to 50)
    * @param {Number} opts.pageNum  (default to 1)
    * @param {Array.<String>} opts.deviceUID A Device UID.
+   * @param {Array.<String>} opts.sensorUID A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix.
    * @param {module:model/String} opts.sortBy  (default to 'captured')
    * @param {module:model/String} opts.sortOrder  (default to 'asc')
    * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
@@ -74,6 +75,10 @@ export default class EventApi {
       pageNum: opts["pageNum"],
       deviceUID: this.apiClient.buildCollectionParam(
         opts["deviceUID"],
+        "multi"
+      ),
+      sensorUID: this.apiClient.buildCollectionParam(
+        opts["sensorUID"],
         "multi"
       ),
       sortBy: opts["sortBy"],
@@ -126,6 +131,7 @@ export default class EventApi {
    * @param {Number} opts.pageSize  (default to 50)
    * @param {Number} opts.pageNum  (default to 1)
    * @param {Array.<String>} opts.deviceUID A Device UID.
+   * @param {Array.<String>} opts.sensorUID A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix.
    * @param {module:model/String} opts.sortBy  (default to 'captured')
    * @param {module:model/String} opts.sortOrder  (default to 'asc')
    * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
@@ -160,6 +166,7 @@ export default class EventApi {
    * @param {String} opts.files
    * @param {String} opts.fleetUID
    * @param {Array.<String>} opts.deviceUID A Device UID.
+   * @param {Array.<String>} opts.sensorUID A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetEventsByCursor200Response} and HTTP response
    */
   getEventsByCursorWithHttpInfo(projectOrProductUID, opts) {
@@ -184,6 +191,10 @@ export default class EventApi {
       fleetUID: opts["fleetUID"],
       deviceUID: this.apiClient.buildCollectionParam(
         opts["deviceUID"],
+        "multi"
+      ),
+      sensorUID: this.apiClient.buildCollectionParam(
+        opts["sensorUID"],
         "multi"
       ),
     };
@@ -221,6 +232,7 @@ export default class EventApi {
    * @param {String} opts.files
    * @param {String} opts.fleetUID
    * @param {Array.<String>} opts.deviceUID A Device UID.
+   * @param {Array.<String>} opts.sensorUID A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetEventsByCursor200Response}
    */
   getEventsByCursor(projectOrProductUID, opts) {
@@ -239,6 +251,7 @@ export default class EventApi {
    * @param {Number} opts.pageSize  (default to 50)
    * @param {Number} opts.pageNum  (default to 1)
    * @param {Array.<String>} opts.deviceUID A Device UID.
+   * @param {Array.<String>} opts.sensorUID A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix.
    * @param {module:model/String} opts.sortBy  (default to 'captured')
    * @param {module:model/String} opts.sortOrder  (default to 'asc')
    * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
@@ -278,6 +291,10 @@ export default class EventApi {
       pageNum: opts["pageNum"],
       deviceUID: this.apiClient.buildCollectionParam(
         opts["deviceUID"],
+        "multi"
+      ),
+      sensorUID: this.apiClient.buildCollectionParam(
+        opts["sensorUID"],
         "multi"
       ),
       sortBy: opts["sortBy"],
@@ -330,6 +347,7 @@ export default class EventApi {
    * @param {Number} opts.pageSize  (default to 50)
    * @param {Number} opts.pageNum  (default to 1)
    * @param {Array.<String>} opts.deviceUID A Device UID.
+   * @param {Array.<String>} opts.sensorUID A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix.
    * @param {module:model/String} opts.sortBy  (default to 'captured')
    * @param {module:model/String} opts.sortOrder  (default to 'asc')
    * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
@@ -365,6 +383,7 @@ export default class EventApi {
    * @param {Boolean} opts.systemFilesOnly
    * @param {String} opts.files
    * @param {Array.<String>} opts.deviceUID A Device UID.
+   * @param {Array.<String>} opts.sensorUID A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix.
    * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
    * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetEventsByCursor200Response} and HTTP response
@@ -397,6 +416,10 @@ export default class EventApi {
       files: opts["files"],
       deviceUID: this.apiClient.buildCollectionParam(
         opts["deviceUID"],
+        "multi"
+      ),
+      sensorUID: this.apiClient.buildCollectionParam(
+        opts["sensorUID"],
         "multi"
       ),
       startDate: opts["startDate"],
@@ -436,6 +459,7 @@ export default class EventApi {
    * @param {Boolean} opts.systemFilesOnly
    * @param {String} opts.files
    * @param {Array.<String>} opts.deviceUID A Device UID.
+   * @param {Array.<String>} opts.sensorUID A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix.
    * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
    * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetEventsByCursor200Response}

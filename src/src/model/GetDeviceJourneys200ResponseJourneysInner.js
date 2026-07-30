@@ -16,16 +16,16 @@ import ApiClient from "../ApiClient";
 /**
  * The GetDeviceJourneys200ResponseJourneysInner model module.
  * @module model/GetDeviceJourneys200ResponseJourneysInner
- * @version 6.4.0
+ * @version 6.5.0
  */
 class GetDeviceJourneys200ResponseJourneysInner {
   /**
    * Constructs a new <code>GetDeviceJourneys200ResponseJourneysInner</code>.
    * @alias module:model/GetDeviceJourneys200ResponseJourneysInner
    * @param endDate {Date} Latest event time within the journey.
-   * @param journeyId {Number} Identifier of the journey, taken from the `journey` field on `_track.qo` events. This value is itself a Unix timestamp marking the start of the journey.
+   * @param journeyId {Number} Identifier of the journey, taken from the numeric `journey` field in the event body. This value is itself a Unix timestamp marking the start of the journey.
    * @param startDate {Date} Earliest event time within the journey.
-   * @param totalEvents {Number} The number of _track.qo events in the journey.
+   * @param totalEvents {Number} The number of events in the journey.
    */
   constructor(endDate, journeyId, startDate, totalEvents) {
     GetDeviceJourneys200ResponseJourneysInner.initialize(
@@ -120,7 +120,7 @@ GetDeviceJourneys200ResponseJourneysInner.RequiredProperties = [
 GetDeviceJourneys200ResponseJourneysInner.prototype["end_date"] = undefined;
 
 /**
- * Identifier of the journey, taken from the `journey` field on `_track.qo` events. This value is itself a Unix timestamp marking the start of the journey.
+ * Identifier of the journey, taken from the numeric `journey` field in the event body. This value is itself a Unix timestamp marking the start of the journey.
  * @member {Number} journey_id
  */
 GetDeviceJourneys200ResponseJourneysInner.prototype["journey_id"] = undefined;
@@ -132,7 +132,7 @@ GetDeviceJourneys200ResponseJourneysInner.prototype["journey_id"] = undefined;
 GetDeviceJourneys200ResponseJourneysInner.prototype["start_date"] = undefined;
 
 /**
- * The number of _track.qo events in the journey.
+ * The number of events in the journey.
  * @member {Number} total_events
  */
 GetDeviceJourneys200ResponseJourneysInner.prototype["total_events"] = undefined;
