@@ -246,6 +246,92 @@ paths:
         - billing_account
       x-custom-attributes:
         permission: read
+  /v1/description:
+    get:
+      operationId: ListGlobalDescriptions
+      description: List metadata for all global description records.
+      responses:
+        '200':
+          description: Description record metadata.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescriptionRecordList'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - description
+      x-custom-attributes:
+        permission: read
+  /v1/description/{descriptionName}:
+    delete:
+      operationId: DeleteGlobalDescription
+      description: Delete a global description record by name (Blues staff only).
+      responses:
+        '204':
+          description: Description record deleted successfully.
+        '403':
+          $ref: '#/components/responses/ErrorResponse'
+        '404':
+          $ref: '#/components/responses/ErrorResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - description
+      x-custom-attributes:
+        permission: delete
+    get:
+      operationId: GetGlobalDescription
+      description: Get a global description record. Returns the raw content with its stored Content-Type.
+      responses:
+        '200':
+          $ref: '#/components/responses/DescriptionContentResponse'
+        '404':
+          $ref: '#/components/responses/ErrorResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - description
+      x-custom-attributes:
+        permission: read
+    parameters:
+      - $ref: '#/components/parameters/descriptionNameParam'
+    post:
+      operationId: SetGlobalDescription
+      description: Create or replace a global description record, Blues staff only (up to 10MB). The request Content-Type is stored and returned on GET; when omitted it is detected (JSON or text).
+      requestBody:
+        description: The description content (up to 10MB). The request Content-Type is stored and returned on GET; when omitted it is detected (JSON or text).
+        required: true
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+      responses:
+        '200':
+          description: Description record created or updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescriptionRecord'
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        '403':
+          $ref: '#/components/responses/ErrorResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - description
+      x-custom-attributes:
+        permission: create
   /v1/organizations:
     get:
       operationId: GetOrganizations
@@ -862,6 +948,95 @@ paths:
         - personalAccessToken: []
       tags:
         - project
+      x-custom-attributes:
+        permission: create
+        resource: blues:resources:app:APPSERIAL:settings
+  /v1/projects/{projectOrProductUID}/description:
+    get:
+      operationId: ListProjectDescriptions
+      description: List metadata for all description records in a project.
+      responses:
+        '200':
+          description: Description record metadata.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescriptionRecordList'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - description
+      x-custom-attributes:
+        permission: read
+        resource: blues:resources:app:APPSERIAL:settings
+    parameters:
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
+  /v1/projects/{projectOrProductUID}/description/{descriptionName}:
+    delete:
+      operationId: DeleteProjectDescription
+      description: Delete a project description record by name.
+      responses:
+        '204':
+          description: Description record deleted successfully.
+        '404':
+          $ref: '#/components/responses/ErrorResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - description
+      x-custom-attributes:
+        permission: delete
+        resource: blues:resources:app:APPSERIAL:settings
+    get:
+      operationId: GetProjectDescription
+      description: Get a project description record. Returns the raw content with its stored Content-Type.
+      responses:
+        '200':
+          $ref: '#/components/responses/DescriptionContentResponse'
+        '404':
+          $ref: '#/components/responses/ErrorResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - description
+      x-custom-attributes:
+        permission: read
+        resource: blues:resources:app:APPSERIAL:settings
+    parameters:
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
+      - $ref: '#/components/parameters/descriptionNameParam'
+    post:
+      operationId: SetProjectDescription
+      description: Create or replace a project description record (up to 10MB). The request Content-Type is stored and returned on GET; when omitted it is detected (JSON or text).
+      requestBody:
+        description: The description content (up to 10MB). The request Content-Type is stored and returned on GET; when omitted it is detected (JSON or text).
+        required: true
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+      responses:
+        '200':
+          description: Description record created or updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescriptionRecord'
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - description
       x-custom-attributes:
         permission: create
         resource: blues:resources:app:APPSERIAL:settings
@@ -4050,6 +4225,13 @@ components:
         enum:
           - captured
           - uploaded
+    descriptionNameParam:
+      example: _health.qo
+      in: path
+      name: descriptionName
+      required: true
+      schema:
+        type: string
     deviceTagsParam:
       in: query
       name: deviceTags
@@ -5225,7 +5407,7 @@ components:
           type: integer
           format: int64
           nullable: true
-        started_at:
+        started:
           description: When this reload started.
           type: string
           format: date-time
@@ -5234,6 +5416,60 @@ components:
           type: integer
           format: int64
       nullable: true
+    DescriptionRecord:
+      description: Metadata for a stored description record. The content itself is returned by GET on the record.
+      type: object
+      properties:
+        content_type:
+          description: The stored content type, either "application/json" or "text/plain; charset=utf-8".
+          type: string
+        created_at:
+          description: When the record was first created (Unix seconds).
+          type: integer
+          format: int64
+        created_by:
+          description: The actor who created the record.
+          type: string
+        length:
+          description: The content length in bytes.
+          type: integer
+          format: int64
+        md5:
+          description: The hex-encoded MD5 of the content.
+          type: string
+        modified_at:
+          description: When the record was last updated (Unix seconds).
+          type: integer
+          format: int64
+        modified_by:
+          description: The actor who last updated the record.
+          type: string
+        name:
+          description: The record name (letters, digits, '.', '_' or '-').
+          type: string
+        owner_uid:
+          description: The owning project (app) UID for project-scoped records; empty for global.
+          type: string
+        scope:
+          description: The ownership scope of the record ("global" or "project").
+          type: string
+      required:
+        - name
+        - scope
+        - content_type
+        - length
+        - md5
+        - created_at
+        - modified_at
+    DescriptionRecordList:
+      type: object
+      properties:
+        descriptions:
+          type: array
+          items:
+            $ref: '#/components/schemas/DescriptionRecord'
+      required:
+        - descriptions
     Device:
       type: object
       properties:
@@ -7803,6 +8039,13 @@ components:
                 type: boolean
             required:
               - success
+    DescriptionContentResponse:
+      description: The description content, returned with its stored Content-Type.
+      content:
+        application/octet-stream:
+          schema:
+            type: string
+            format: binary
     DevicePlansResponse:
       description: Response body for /plans
       content:
