@@ -1664,6 +1664,7 @@ paths:
           required: false
           schema:
             type: integer
+            format: int32
         - name: deleted
           in: query
           description: true to return deleted notes.
@@ -1687,12 +1688,14 @@ paths:
                   changes:
                     description: The number of pending changes in the Notefile.
                     type: integer
+                    format: int32
                   notes:
                     description: An object with a key for each note and a value object with the body of each Note and the time the Note was added.
                     type: object
                   total:
                     description: The total number of notes.
                     type: integer
+                    format: int32
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
@@ -4163,6 +4166,7 @@ components:
       required: false
       schema:
         type: integer
+        format: int32
     datasetLocationNearQueryParam:
       description: Latitude and Longitude for location-based filtering, location_near_radius must also be provided
       in: query
@@ -4178,6 +4182,7 @@ components:
       required: false
       schema:
         type: integer
+        format: int32
     datasetNameParam:
       description: The name of the data set
       in: path
@@ -4440,6 +4445,7 @@ components:
       required: false
       schema:
         type: integer
+        format: int32
         default: 50
         minimum: 1
     locationParam:
@@ -4516,6 +4522,7 @@ components:
       required: false
       schema:
         type: integer
+        format: int32
         default: 1
         minimum: 1
     pageSizeParam:
@@ -4524,6 +4531,7 @@ components:
       required: false
       schema:
         type: integer
+        format: int32
         default: 50
         maximum: 10000
         minimum: 1
@@ -4773,6 +4781,7 @@ components:
       required: false
       schema:
         type: integer
+        format: int32
         default: 200000
         maximum: 400000
         minimum: 1
@@ -4849,6 +4858,7 @@ components:
               value:
                 description: The value that triggered the alert
                 type: number
+                format: float
               when:
                 description: The time the alert was created
                 type: string
@@ -4887,6 +4897,7 @@ components:
               status:
                 description: The status of the notification
                 type: number
+                format: float
             type: object
         resolved:
           description: If true, the alert has been resolved
@@ -4900,9 +4911,11 @@ components:
         value:
           description: The value that triggered the alert
           type: number
+          format: float
         version:
           description: The version of the alert
           type: integer
+          format: int32
     AppUIDList:
       type: array
       items:
@@ -4964,8 +4977,10 @@ components:
           type: string
         throttle_ms:
           type: integer
+          format: int32
         timeout:
           type: integer
+          format: int32
         transform:
           $ref: '#/components/schemas/RouteTransformSettings'
         url:
@@ -4989,8 +5004,10 @@ components:
           type: string
         throttle_ms:
           type: integer
+          format: int32
         timeout:
           type: integer
+          format: int32
         transform:
           $ref: '#/components/schemas/RouteTransformSettings'
         url:
@@ -5082,8 +5099,10 @@ components:
           type: string
         throttle_ms:
           type: integer
+          format: int32
         timeout:
           type: integer
+          format: int32
         transform:
           $ref: '#/components/schemas/RouteTransformSettings'
       additionalProperties: false
@@ -5333,6 +5352,7 @@ components:
         datatype:
           description: The datatype of the field
           type: integer
+          format: int32
           enum:
             - 0
             - 1
@@ -5386,8 +5406,10 @@ components:
             type: string
         throttle_ms:
           type: integer
+          format: int32
         timeout:
           type: integer
+          format: int32
         transform:
           $ref: '#/components/schemas/RouteTransformSettings'
         url:
@@ -5518,12 +5540,16 @@ components:
           properties:
             cell_id:
               type: integer
+              format: int32
             lac:
               type: integer
+              format: int32
             mcc:
               type: integer
+              format: int32
             mnc:
               type: integer
+              format: int32
         tower_location:
           $ref: '#/components/schemas/Location'
         triangulated_location:
@@ -5893,6 +5919,7 @@ components:
           type: string
         inherited_var_count:
           type: integer
+          format: int32
         type:
           type: string
         url:
@@ -5900,6 +5927,7 @@ components:
           format: uri
         var_count:
           type: integer
+          format: int32
         variables:
           type: array
           items:
@@ -5921,6 +5949,7 @@ components:
           maxLength: 1024
         precedence:
           type: integer
+          format: int32
         used:
           type: boolean
         value:
@@ -5946,6 +5975,7 @@ components:
         code:
           description: The HTTP error code associated with the error.
           type: integer
+          format: int32
           maximum: 599
           minimum: 300
         debug:
@@ -6233,12 +6263,16 @@ components:
           type: string
         ver_build:
           type: integer
+          format: int32
         ver_major:
           type: integer
+          format: int32
         ver_minor:
           type: integer
+          format: int32
         ver_patch:
           type: integer
+          format: int32
         version:
           type: string
       nullable: true
@@ -6356,8 +6390,10 @@ components:
             type: string
         throttle_ms:
           type: integer
+          format: int32
         timeout:
           type: integer
+          format: int32
         token:
           type: string
         transform:
@@ -6384,8 +6420,10 @@ components:
             type: string
         throttle_ms:
           type: integer
+          format: int32
         timeout:
           type: integer
+          format: int32
         transform:
           $ref: '#/components/schemas/RouteTransformSettings'
         url:
@@ -6702,6 +6740,7 @@ components:
         threshold:
           description: The type of condition to apply to the value selected by the source_selector
           type: integer
+          format: int32
         uid:
           type: string
         usage_scope:
@@ -6742,8 +6781,10 @@ components:
           type: string
         throttle_ms:
           type: integer
+          format: int32
         timeout:
           type: integer
+          format: int32
         topic:
           type: string
         transform:
@@ -6928,6 +6969,7 @@ components:
         expires_in:
           description: Lifetime in seconds of the access token.
           type: integer
+          format: int32
           example: 1799
         scope:
           description: Granted scopes (space-delimited).
@@ -7125,6 +7167,7 @@ components:
             type: string
         timeout:
           type: integer
+          format: int32
         transform:
           $ref: '#/components/schemas/RouteTransformSettings'
         url:
@@ -7144,8 +7187,10 @@ components:
           type: string
         throttle_ms:
           type: integer
+          format: int32
         timeout:
           type: integer
+          format: int32
         transform:
           $ref: '#/components/schemas/RouteTransformSettings'
         webhook_signing_key:
@@ -7163,6 +7208,7 @@ components:
           type: string
         event_id:
           type: integer
+          format: int32
         fleets:
           type: array
           items:
@@ -7171,6 +7217,7 @@ components:
           type: boolean
         throttle_ms:
           type: integer
+          format: int32
       additionalProperties: false
     Repository:
       type: object
@@ -7212,6 +7259,7 @@ components:
             Requested credential lifetime in seconds. Clamped server-side to
             [60, 3600]. Defaults to 900 (15 minutes) if omitted.
           type: integer
+          format: int32
           default: 900
           maximum: 3600
           minimum: 60
@@ -7238,6 +7286,7 @@ components:
         port:
           description: Storage service port
           type: integer
+          format: int32
         username:
           description: Ephemeral storage service username (prefixed with `u_`)
           type: string
@@ -7269,6 +7318,7 @@ components:
         duration:
           description: The duration of the route in milliseconds
           type: integer
+          format: int32
         event_uid:
           description: The event UID.
           type: string
@@ -7307,8 +7357,10 @@ components:
       properties:
         archive_count_exceeds:
           type: integer
+          format: int32
         archive_every_mins:
           type: integer
+          format: int32
         archive_id:
           type: string
         bucket_endpoint:
@@ -7335,8 +7387,10 @@ components:
           type: string
         throttle_ms:
           type: integer
+          format: int32
         timeout:
           type: integer
+          format: int32
         transform:
           $ref: '#/components/schemas/RouteTransformSettings'
         url:
@@ -7494,8 +7548,10 @@ components:
           type: string
         throttle_ms:
           type: integer
+          format: int32
         timeout:
           type: integer
+          format: int32
         transform:
           $ref: '#/components/schemas/RouteTransformSettings'
         webhook_url:
@@ -7536,6 +7592,7 @@ components:
           type: string
         timeout:
           type: integer
+          format: int32
         transform:
           $ref: '#/components/schemas/RouteTransformSettings'
         user_name:
@@ -7566,6 +7623,7 @@ components:
           type: string
         timeout:
           type: integer
+          format: int32
         transform:
           $ref: '#/components/schemas/RouteTransformSettings'
         user_name:
@@ -7584,8 +7642,10 @@ components:
             type: string
         throttle_ms:
           type: integer
+          format: int32
         timeout:
           type: integer
+          format: int32
         transform:
           $ref: '#/components/schemas/RouteTransformSettings'
         url:
@@ -7601,12 +7661,14 @@ components:
         cid:
           description: Cell ID
           type: integer
+          format: int32
         l:
           description: Open Location Code
           type: string
         lac:
           description: Location Area Code
           type: integer
+          format: int32
         lat:
           description: Latitude
           type: number
@@ -7618,9 +7680,11 @@ components:
         mcc:
           description: Mobile Country Code
           type: integer
+          format: int32
         mnc:
           description: Mobile Network Code
           type: integer
+          format: int32
         n:
           description: Name of the location
           type: string
@@ -7634,9 +7698,11 @@ components:
         towers:
           description: Number of triangulation points
           type: integer
+          format: int32
         z:
           description: Timezone ID
           type: integer
+          format: int32
         zone:
           description: Timezone name
           type: string
@@ -7660,8 +7726,10 @@ components:
           type: string
         throttle_ms:
           type: integer
+          format: int32
         timeout:
           type: integer
+          format: int32
         to:
           type: string
       additionalProperties: false
@@ -8397,6 +8465,7 @@ components:
               total:
                 description: The total number of notes active on the Notefile.
                 type: integer
+                format: int32
     RunJobResponse:
       description: Job execution started
       content:
@@ -8502,6 +8571,7 @@ components:
                     device_count:
                       description: the number of devices represented by this data point
                       type: integer
+                      format: int32
                     fleet:
                       description: The fleet UID this usage data belongs to (only present when aggregate is 'fleet')
                       type: string
