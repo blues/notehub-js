@@ -4935,6 +4935,7 @@ components:
         file_count:
           description: Number of archive files.
           type: integer
+          format: int64
         record_count:
           description: Total number of records across all archive files. Null when the count cannot be determined because one or more archive files predate the record-count filename format.
           type: integer
