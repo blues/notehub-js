@@ -5003,6 +5003,30 @@ components:
           type: string
           format: uri
       additionalProperties: false
+    BatchJobNoteRequest:
+      description: A single note.add/note.update/note.delete request against a device's own notefile
+      type: object
+      properties:
+        body:
+          description: The note's JSON body (used by note.add and note.update)
+          type: object
+          additionalProperties: true
+        file:
+          description: The notefile to operate on (e.g. data.qi, config.dbs)
+          type: string
+        note:
+          description: The note ID. Required for note.update and note.delete, and for note.add against a database (.dbs/.db) notefile. Must be omitted for note.add against a queue (.qi/.qo) notefile.
+          type: string
+        req:
+          description: The note operation to perform
+          type: string
+          enum:
+            - note.add
+            - note.update
+            - note.delete
+      required:
+        - req
+        - file
     BatchJobRequests:
       description: Operations to apply to a device
       type: object
@@ -5036,6 +5060,11 @@ components:
           type: array
           items:
             type: string
+        note_reqs:
+          description: "note.add/note.update/note.delete requests to perform against the device's own notefiles. When both default_requests and a device's device_requests specify note_reqs, they merge by identity (req, file, note): a device-specific entry with the same identity as a default entry replaces it; entries unique to either side (no collision) all still apply."
+          type: array
+          items:
+            $ref: '#/components/schemas/BatchJobNoteRequest'
         provision_product:
           description: Product UID to provision the device with if not already provisioned
           type: string
