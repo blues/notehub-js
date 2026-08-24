@@ -1463,19 +1463,7 @@ paths:
                   health_log:
                     type: array
                     items:
-                      properties:
-                        alert:
-                          type: boolean
-                        text:
-                          type: string
-                        when:
-                          type: string
-                          format: date-time
-                      required:
-                        - when
-                        - alert
-                        - text
-                      type: object
+                      $ref: '#/components/schemas/HealthLog'
                 required:
                   - health_log
         default:
@@ -5015,6 +5003,30 @@ components:
           type: string
           format: uri
       additionalProperties: false
+    BatchJobNoteRequest:
+      description: A single note.add/note.update/note.delete request against a device's own notefile
+      type: object
+      properties:
+        body:
+          description: The note's JSON body (used by note.add and note.update)
+          type: object
+          additionalProperties: true
+        file:
+          description: The notefile to operate on (e.g. data.qi, config.dbs)
+          type: string
+        note:
+          description: The note ID. Required for note.update and note.delete, and for note.add against a database (.dbs/.db) notefile. Must be omitted for note.add against a queue (.qi/.qo) notefile.
+          type: string
+        req:
+          description: The note operation to perform
+          type: string
+          enum:
+            - note.add
+            - note.update
+            - note.delete
+      required:
+        - req
+        - file
     BatchJobRequests:
       description: Operations to apply to a device
       type: object
@@ -5048,6 +5060,11 @@ components:
           type: array
           items:
             type: string
+        note_reqs:
+          description: "note.add/note.update/note.delete requests to perform against the device's own notefiles. When both default_requests and a device's device_requests specify note_reqs, they merge by identity (req, file, note): a device-specific entry with the same identity as a default entry replaces it; entries unique to either side (no collision) all still apply."
+          type: array
+          items:
+            $ref: '#/components/schemas/BatchJobNoteRequest'
         provision_product:
           description: Product UID to provision the device with if not already provisioned
           type: string
@@ -5519,6 +5536,10 @@ components:
             type: string
         gps_location:
           $ref: '#/components/schemas/Location'
+        health_log:
+          type: array
+          items:
+            $ref: '#/components/schemas/HealthLog'
         last_activity:
           type: string
           format: date-time
@@ -5528,9 +5549,30 @@ components:
         provisioned:
           type: string
           format: date-time
+        recent_event_count:
+          type: array
+          items:
+            format: int32
+            type: integer
+        recent_session_count:
+          type: array
+          items:
+            format: int32
+            type: integer
+        recent_session_seconds:
+          type: array
+          items:
+            format: int32
+            type: integer
+        recent_when:
+          type: string
+          format: date-time
+          nullable: true
         serial_number:
           type: string
         sku:
+          type: string
+        tags:
           type: string
         temperature:
           type: number
@@ -6071,6 +6113,9 @@ components:
         payload:
           description: A base64-encoded binary payload
           type: string
+        platform:
+          description: Whether this is a platform event (administrative, e.g. _health.qo, _session.qo) rather than user data
+          type: boolean
         product:
           description: Product UID (globally unique)
           type: string
@@ -6403,6 +6448,20 @@ components:
           type: string
           format: uri
       additionalProperties: false
+    HealthLog:
+      type: object
+      properties:
+        alert:
+          type: boolean
+        text:
+          type: string
+        when:
+          type: string
+          format: date-time
+      required:
+        - when
+        - alert
+        - text
     HttpRoute:
       type: object
       properties:
@@ -8197,7 +8256,7 @@ components:
                 event: dfa3747d-688b-4250-935b-5dd60354313c
                 file: air.qo
                 product: product:com.blues.project.demo
-                received: 1656011227.006928
+                received: 1.656011227006928e+09===
                 req: note.add
                 session: b623132c-6afb-4740-bc39-e3634e38f064
                 sn: My Device
@@ -8258,7 +8317,7 @@ components:
                 event: dfa3747d-688b-4250-935b-5dd60354313c
                 file: air.qo
                 product: product:com.blues.project.demo
-                received: 1656011227.006928
+                received: 1.656011227006928e+09===
                 req: note.add
                 session: b623132c-6afb-4740-bc39-e3634e38f064
                 sn: My Device
@@ -8391,7 +8450,7 @@ components:
                 event: 81bd2bf1-0399-4978-bc46-8f779b4af350
                 file: _session.qo
                 product: product:com.blues.app:myapp
-                received: 1669667707.564694
+                received: 1.669667707564694e+09===
                 req: session.begin
                 session: ed18884b-f2a6-419f-b856-d28dc8f0892b
                 tls: true
@@ -8411,7 +8470,7 @@ components:
                 event: 916d4c81-06ae-4263-9b55-7a3a0f73cb5a
                 file: data.qo
                 product: product:com.blues.app:myapp
-                received: 1669667713.221659
+                received: 1.669667713221659e+09===
                 req: note.add
                 session: 28cdc39f-9f62-4789-b0a3-2f35f9448ced
                 sn: tj-1
@@ -8432,7 +8491,7 @@ components:
                 event: e98c2c3b-edbe-4fe7-af57-2196cc843eb7
                 file: sensors.qo
                 product: product:com.blues.app:myapp
-                received: 1669667711.85316
+                received: 1.66966771185316e+09===
                 req: note.add
                 session: 7211392c-6895-43f8-9256-790655348be5
                 tower_country: US
@@ -8538,7 +8597,7 @@ components:
                   l: 86MG3HF5+P25
                   lac: 17169
                   lat: 43.0742625
-                  lon: -89.44239062499999
+                  lon: -89.44239062499999===
                   mcc: 310
                   mnc: 410
                   n: Shorewood Hills WI
