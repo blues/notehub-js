@@ -3,14 +3,14 @@ info:
   contact:
     email: engineering@blues.io
     name: Blues Engineering
-    url: 'https://dev.blues.io/support/'
+    url: https://dev.blues.io/support/
   description: |
     The OpenAPI definition for the Notehub.io API.
   title: Notehub API
   version: 1.2.0
 servers:
   - description: Production server
-    url: 'https://api.notefile.net'
+    url: https://api.notefile.net
 paths:
   /auth/login:
     post:
@@ -148,7 +148,7 @@ paths:
         - billing_account
       x-custom-attributes:
         permission: read
-  '/v1/billing-accounts/{billingAccountUID}':
+  /v1/billing-accounts/{billingAccountUID}:
     get:
       operationId: GetBillingAccount
       description: Get Billing Account Information
@@ -203,7 +203,7 @@ paths:
         - billing_account
       x-custom-attributes:
         permission: read
-  '/v1/billing-accounts/{billingAccountUID}/balance-history':
+  /v1/billing-accounts/{billingAccountUID}/balance-history:
     get:
       operationId: GetBillingAccountBalanceHistory
       description: Get Billing Account Balance history
@@ -265,7 +265,7 @@ paths:
         - description
       x-custom-attributes:
         permission: read
-  '/v1/description/{descriptionName}':
+  /v1/description/{descriptionName}:
     delete:
       operationId: DeleteGlobalDescription
       description: Delete a global description record by name (Blues staff only).
@@ -304,7 +304,7 @@ paths:
       - $ref: '#/components/parameters/descriptionNameParam'
     post:
       operationId: SetGlobalDescription
-      description: 'Create or replace a global description record, Blues staff only (up to 10MB). The request Content-Type is stored and returned on GET; when omitted it is detected (JSON or text).'
+      description: Create or replace a global description record, Blues staff only (up to 10MB). The request Content-Type is stored and returned on GET; when omitted it is detected (JSON or text).
       requestBody:
         description: The description content (up to 10MB). The request Content-Type is stored and returned on GET; when omitted it is detected (JSON or text).
         required: true
@@ -356,7 +356,7 @@ paths:
         - organization
       x-custom-attributes:
         permission: read
-  '/v1/organizations/{organizationUID}':
+  /v1/organizations/{organizationUID}:
     get:
       operationId: GetOrganization
       description: Get Organization Information
@@ -410,7 +410,7 @@ paths:
         - organization
       x-custom-attributes:
         permission: read
-  '/v1/organizations/{organizationUID}/balance-history':
+  /v1/organizations/{organizationUID}/balance-history:
     get:
       operationId: GetOrganizationBalanceHistory
       description: Get Organization Balance history
@@ -452,7 +452,7 @@ paths:
         - organization
       x-custom-attributes:
         permission: read
-  '/v1/products/{productUID}/devices/{deviceUID}/environment_variables_with_pin':
+  /v1/products/{productUID}/devices/{deviceUID}/environment_variables_with_pin:
     get:
       operationId: GetDeviceEnvironmentVariablesByPin
       description: Get environment variables of a device with device pin authorization
@@ -492,15 +492,15 @@ paths:
         - device
       x-custom-attributes:
         permission: update
-  '/v1/products/{productUID}/devices/{deviceUID}/webhook-event':
+  /v1/products/{productUID}/devices/{deviceUID}/webhook-event:
     post:
       operationId: CreateLegacyWebhookEvent
-      description: 'Legacy endpoint for sending an event from a webhook, associated with the given device (provisioning it if necessary). The request body is a Note-shaped object containing the notefile name, body, and optional payload.'
+      description: Legacy endpoint for sending an event from a webhook, associated with the given device (provisioning it if necessary). The request body is a Note-shaped object containing the notefile name, body, and optional payload.
       parameters:
         - $ref: '#/components/parameters/productUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
       requestBody:
-        description: 'A Note-shaped event. Typically contains the notefile name (file), a JSON body, and an optional base64-encoded payload, but any additional Note fields (e.g. when, sn, where_lat, where_lon) are accepted and honored.'
+        description: A Note-shaped event. Typically contains the notefile name (file), a JSON body, and an optional base64-encoded payload, but any additional Note fields (e.g. when, sn, where_lat, where_lon) are accepted and honored.
         required: true
         content:
           application/json:
@@ -523,8 +523,8 @@ paths:
         - webhook
       x-custom-attributes:
         permission: create
-        resource: 'blues:resources:app:APPSERIAL:notes'
-  '/v1/products/{productUID}/devices/{deviceUID}/webhook-session':
+        resource: blues:resources:app:APPSERIAL:notes
+  /v1/products/{productUID}/devices/{deviceUID}/webhook-session:
     put:
       operationId: UpdateLegacyWebhookSession
       description: Legacy endpoint for opening or updating a webhook session for the given device (provisioning the device if necessary). Used by external services that need to maintain a callable session against a device behind a webhook.
@@ -550,8 +550,8 @@ paths:
         - webhook
       x-custom-attributes:
         permission: create
-        resource: 'blues:resources:app:APPSERIAL:notes'
-  '/v1/products/{productUID}/ext-devices/{deviceUID}/event':
+        resource: blues:resources:app:APPSERIAL:notes
+  /v1/products/{productUID}/ext-devices/{deviceUID}/event:
     post:
       operationId: CreateEventExtDevice
       description: Creates an event using specified webhook
@@ -576,8 +576,8 @@ paths:
         - external devices
       x-custom-attributes:
         permission: create
-        resource: 'blues:resources:app:APPSERIAL:notes'
-  '/v1/products/{productUID}/ext-devices/{deviceUID}/session/close':
+        resource: blues:resources:app:APPSERIAL:notes
+  /v1/products/{productUID}/ext-devices/{deviceUID}/session/close:
     post:
       operationId: ExtDeviceSessionClose
       description: Closes the session for the specified device if open
@@ -602,8 +602,8 @@ paths:
         - external devices
       x-custom-attributes:
         permission: create
-        resource: 'blues:resources:app:APPSERIAL:notes'
-  '/v1/products/{productUID}/ext-devices/{deviceUID}/session/open':
+        resource: blues:resources:app:APPSERIAL:notes
+  /v1/products/{productUID}/ext-devices/{deviceUID}/session/open:
     post:
       operationId: ExtDeviceSessionOpen
       description: Create a Session for the specified device.  | If a session is currently open it will be closed and a new one opened.
@@ -628,8 +628,8 @@ paths:
         - external devices
       x-custom-attributes:
         permission: create
-        resource: 'blues:resources:app:APPSERIAL:notes'
-  '/v1/products/{productUID}/project':
+        resource: blues:resources:app:APPSERIAL:notes
+  /v1/products/{productUID}/project:
     get:
       operationId: GetProjectByProduct
       description: Get a Project by ProductUID
@@ -655,11 +655,11 @@ paths:
         - project
       x-custom-attributes:
         permission: read
-        resource: 'blues:resources:app:APPSERIAL:settings'
-  '/v1/products/{productUID}/webhooks/{webhookUID}/devices/{deviceUID}/event':
+        resource: blues:resources:app:APPSERIAL:settings
+  /v1/products/{productUID}/webhooks/{webhookUID}/devices/{deviceUID}/event:
     post:
       operationId: CreateWebhookDeviceEventByProduct
-      description: 'Sends an event to be processed by the specified webhook, addressed by productUID, associated with the given device (provisioning it if necessary). The entire request body becomes the event body. The webhook''s configured JSONata transform, if any, is applied before routing.'
+      description: Sends an event to be processed by the specified webhook, addressed by productUID, associated with the given device (provisioning it if necessary). The entire request body becomes the event body. The webhook's configured JSONata transform, if any, is applied before routing.
       parameters:
         - $ref: '#/components/parameters/productUIDParam'
         - $ref: '#/components/parameters/webhookUIDParam'
@@ -683,11 +683,11 @@ paths:
         - webhook
       x-custom-attributes:
         permission: create
-        resource: 'blues:resources:app:APPSERIAL:notes'
-  '/v1/products/{productUID}/webhooks/{webhookUID}/event':
+        resource: blues:resources:app:APPSERIAL:notes
+  /v1/products/{productUID}/webhooks/{webhookUID}/event:
     post:
       operationId: CreateWebhookEventByProduct
-      description: 'Sends an event to be processed by the specified webhook, addressed by productUID. The entire request body becomes the event body. The webhook''s configured JSONata transform, if any, is applied before routing. The event is not associated with a specific device.'
+      description: Sends an event to be processed by the specified webhook, addressed by productUID. The entire request body becomes the event body. The webhook's configured JSONata transform, if any, is applied before routing. The event is not associated with a specific device.
       parameters:
         - $ref: '#/components/parameters/productUIDParam'
         - $ref: '#/components/parameters/webhookUIDParam'
@@ -710,11 +710,11 @@ paths:
         - webhook
       x-custom-attributes:
         permission: create
-        resource: 'blues:resources:app:APPSERIAL:notes'
-  '/v1/products/{productUID}/webhooks/{webhookUID}/settings':
+        resource: blues:resources:app:APPSERIAL:notes
+  /v1/products/{productUID}/webhooks/{webhookUID}/settings:
     get:
       operationId: GetWebhookSettingsByProduct
-      description: 'Retrieves the configuration settings for the specified webhook, addressed by productUID.'
+      description: Retrieves the configuration settings for the specified webhook, addressed by productUID.
       parameters:
         - $ref: '#/components/parameters/productUIDParam'
         - $ref: '#/components/parameters/webhookUIDParam'
@@ -733,10 +733,10 @@ paths:
         - webhook
       x-custom-attributes:
         permission: update
-        resource: 'blues:resources:app:APPSERIAL:settings'
+        resource: blues:resources:app:APPSERIAL:settings
     put:
       operationId: UpdateWebhookSettingsByProduct
-      description: 'Updates the configuration settings for the specified webhook, addressed by productUID. Update body will completely replace the existing settings.'
+      description: Updates the configuration settings for the specified webhook, addressed by productUID. Update body will completely replace the existing settings.
       parameters:
         - $ref: '#/components/parameters/productUIDParam'
         - $ref: '#/components/parameters/webhookUIDParam'
@@ -760,7 +760,7 @@ paths:
         - webhook
       x-custom-attributes:
         permission: update
-        resource: 'blues:resources:app:APPSERIAL:settings'
+        resource: blues:resources:app:APPSERIAL:settings
   /v1/projects:
     get:
       operationId: GetProjects
@@ -821,7 +821,7 @@ paths:
         - project
       x-custom-attributes:
         permission: create
-  '/v1/projects/{projectOrProductUID}':
+  /v1/projects/{projectOrProductUID}:
     delete:
       operationId: DeleteProject
       description: Delete a Project by ProjectUID
@@ -838,7 +838,7 @@ paths:
         - project
       x-custom-attributes:
         permission: delete
-        resource: 'blues:resources:app:APPSERIAL:settings'
+        resource: blues:resources:app:APPSERIAL:settings
     get:
       operationId: GetProject
       description: Get a Project by ProjectUID
@@ -859,8 +859,8 @@ paths:
         - project
       x-custom-attributes:
         permission: read
-        resource: 'blues:resources:app:APPSERIAL:settings'
-  '/v1/projects/{projectOrProductUID}/alerts':
+        resource: blues:resources:app:APPSERIAL:settings
+  /v1/projects/{projectOrProductUID}/alerts:
     get:
       operationId: GetAlerts
       description: Get list of defined Alerts
@@ -880,8 +880,8 @@ paths:
         - alert
       x-custom-attributes:
         permission: read
-        resource: 'blues:resources:app:APPSERIAL:devices'
-  '/v1/projects/{projectOrProductUID}/aws-role-config':
+        resource: blues:resources:app:APPSERIAL:devices
+  /v1/projects/{projectOrProductUID}/aws-role-config:
     get:
       operationId: GetAWSRoleConfig
       summary: Get AWS role configuration for role-based authentication
@@ -905,8 +905,8 @@ paths:
         - project
       x-custom-attributes:
         permission: read
-        resource: 'blues:resources:app:APPSERIAL:settings'
-  '/v1/projects/{projectOrProductUID}/clone':
+        resource: blues:resources:app:APPSERIAL:settings
+  /v1/projects/{projectOrProductUID}/clone:
     post:
       operationId: CloneProject
       description: Clone a Project
@@ -921,7 +921,7 @@ paths:
               type: object
               properties:
                 billing_account_uid:
-                  description: 'The billing account UID for the project. The caller of the API must be able to create projects within the billing account, otherwise an error will be returned.'
+                  description: The billing account UID for the project. The caller of the API must be able to create projects within the billing account, otherwise an error will be returned.
                   type: string
                 disable_clone_fleets:
                   description: Whether to disallow the cloning of the fleets from the parent project.  Default is false if not specified.
@@ -950,8 +950,8 @@ paths:
         - project
       x-custom-attributes:
         permission: create
-        resource: 'blues:resources:app:APPSERIAL:settings'
-  '/v1/projects/{projectOrProductUID}/description':
+        resource: blues:resources:app:APPSERIAL:settings
+  /v1/projects/{projectOrProductUID}/description:
     get:
       operationId: ListProjectDescriptions
       description: List metadata for all description records in a project.
@@ -970,10 +970,10 @@ paths:
         - description
       x-custom-attributes:
         permission: read
-        resource: 'blues:resources:app:APPSERIAL:settings'
+        resource: blues:resources:app:APPSERIAL:settings
     parameters:
       - $ref: '#/components/parameters/projectOrProductUIDParam'
-  '/v1/projects/{projectOrProductUID}/description/{descriptionName}':
+  /v1/projects/{projectOrProductUID}/description/{descriptionName}:
     delete:
       operationId: DeleteProjectDescription
       description: Delete a project description record by name.
@@ -990,7 +990,7 @@ paths:
         - description
       x-custom-attributes:
         permission: delete
-        resource: 'blues:resources:app:APPSERIAL:settings'
+        resource: blues:resources:app:APPSERIAL:settings
     get:
       operationId: GetProjectDescription
       description: Get a project description record. Returns the raw content with its stored Content-Type.
@@ -1007,7 +1007,7 @@ paths:
         - description
       x-custom-attributes:
         permission: read
-        resource: 'blues:resources:app:APPSERIAL:settings'
+        resource: blues:resources:app:APPSERIAL:settings
     parameters:
       - $ref: '#/components/parameters/projectOrProductUIDParam'
       - $ref: '#/components/parameters/descriptionNameParam'
@@ -1039,8 +1039,8 @@ paths:
         - description
       x-custom-attributes:
         permission: create
-        resource: 'blues:resources:app:APPSERIAL:settings'
-  '/v1/projects/{projectOrProductUID}/devices':
+        resource: blues:resources:app:APPSERIAL:settings
+  /v1/projects/{projectOrProductUID}/devices:
     get:
       operationId: GetDevices
       description: Get Devices of a Project
@@ -1068,8 +1068,8 @@ paths:
         - device
       x-custom-attributes:
         permission: read
-        resource: 'blues:resources:app:APPSERIAL:devices'
-  '/v1/projects/{projectOrProductUID}/devices/{deviceUID}':
+        resource: blues:resources:app:APPSERIAL:devices
+  /v1/projects/{projectOrProductUID}/devices/{deviceUID}:
     delete:
       operationId: DeleteDevice
       description: Delete Device
@@ -1084,7 +1084,7 @@ paths:
         - device
       x-custom-attributes:
         permission: delete
-        resource: 'blues:resources:app:APPSERIAL:devices'
+        resource: blues:resources:app:APPSERIAL:devices
     get:
       operationId: GetDevice
       description: Get Device
@@ -1103,11 +1103,11 @@ paths:
         - device
       x-custom-attributes:
         permission: read
-        resource: 'blues:resources:app:APPSERIAL:devices'
+        resource: blues:resources:app:APPSERIAL:devices
     parameters:
       - $ref: '#/components/parameters/projectOrProductUIDParam'
       - $ref: '#/components/parameters/deviceUIDParam'
-  '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/dfu/{firmwareType}/history':
+  /v1/projects/{projectOrProductUID}/devices/{deviceUID}/dfu/{firmwareType}/history:
     get:
       operationId: GetDeviceDfuHistory
       description: Get device DFU history for host or Notecard firmware
@@ -1130,8 +1130,8 @@ paths:
         - project
       x-custom-attributes:
         permission: read
-        resource: 'blues:resources:app:APPSERIAL:settings'
-  '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/dfu/{firmwareType}/status':
+        resource: blues:resources:app:APPSERIAL:settings
+  /v1/projects/{projectOrProductUID}/devices/{deviceUID}/dfu/{firmwareType}/status:
     get:
       operationId: GetDeviceDfuStatus
       description: Get device DFU history for host or Notecard firmware
@@ -1154,8 +1154,8 @@ paths:
         - project
       x-custom-attributes:
         permission: read
-        resource: 'blues:resources:app:APPSERIAL:settings'
-  '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/disable':
+        resource: blues:resources:app:APPSERIAL:settings
+  /v1/projects/{projectOrProductUID}/devices/{deviceUID}/disable:
     post:
       operationId: DisableDevice
       description: Disable Device
@@ -1173,8 +1173,8 @@ paths:
         - device
       x-custom-attributes:
         permission: update
-        resource: 'blues:resources:app:APPSERIAL:devices'
-  '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/enable':
+        resource: blues:resources:app:APPSERIAL:devices
+  /v1/projects/{projectOrProductUID}/devices/{deviceUID}/enable:
     post:
       operationId: EnableDevice
       description: Enable Device
@@ -1192,8 +1192,8 @@ paths:
         - device
       x-custom-attributes:
         permission: update
-        resource: 'blues:resources:app:APPSERIAL:devices'
-  '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_hierarchy':
+        resource: blues:resources:app:APPSERIAL:devices
+  /v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_hierarchy:
     get:
       operationId: GetDeviceEnvironmentHierarchy
       summary: Get environment variable hierarchy for a device
@@ -1217,8 +1217,8 @@ paths:
         - device
       x-custom-attributes:
         permission: read
-        resource: 'blues:resources:app:APPSERIAL:devices'
-  '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_variables':
+        resource: blues:resources:app:APPSERIAL:devices
+  /v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_variables:
     get:
       operationId: GetDeviceEnvironmentVariables
       description: Get environment variables of a device
@@ -1233,7 +1233,7 @@ paths:
         - device
       x-custom-attributes:
         permission: read
-        resource: 'blues:resources:app:APPSERIAL:devices'
+        resource: blues:resources:app:APPSERIAL:devices
     parameters:
       - $ref: '#/components/parameters/projectOrProductUIDParam'
       - $ref: '#/components/parameters/deviceUIDParam'
@@ -1258,8 +1258,8 @@ paths:
         - device
       x-custom-attributes:
         permission: update
-        resource: 'blues:resources:app:APPSERIAL:devices'
-  '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_variables/{key}':
+        resource: blues:resources:app:APPSERIAL:devices
+  /v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_variables/{key}:
     delete:
       operationId: DeleteDeviceEnvironmentVariable
       description: Delete environment variable of a device
@@ -1283,8 +1283,8 @@ paths:
         - device
       x-custom-attributes:
         permission: delete
-        resource: 'blues:resources:app:APPSERIAL:devices'
-  '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/files':
+        resource: blues:resources:app:APPSERIAL:devices
+  /v1/projects/{projectOrProductUID}/devices/{deviceUID}/files:
     delete:
       operationId: DeleteNotefiles
       description: Deletes Notefiles and the Notes they contain.
@@ -1314,7 +1314,7 @@ paths:
         - device
       x-custom-attributes:
         permission: delete
-        resource: 'blues:resources:app:APPSERIAL:notefiles'
+        resource: blues:resources:app:APPSERIAL:notefiles
     get:
       operationId: ListNotefiles
       description: Lists .qi and .db files for the device
@@ -1350,8 +1350,8 @@ paths:
         - device
       x-custom-attributes:
         permission: read
-        resource: 'blues:resources:app:APPSERIAL:notefiles'
-  '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/fleets':
+        resource: blues:resources:app:APPSERIAL:notefiles
+  /v1/projects/{projectOrProductUID}/devices/{deviceUID}/fleets:
     delete:
       operationId: DeleteDeviceFromFleets
       description: Remove Device from Fleets
@@ -1382,7 +1382,7 @@ paths:
         - project
       x-custom-attributes:
         permission: delete
-        resource: 'blues:resources:app:APPSERIAL:devices'
+        resource: blues:resources:app:APPSERIAL:devices
     get:
       operationId: GetDeviceFleets
       description: Get Device Fleets
@@ -1397,7 +1397,7 @@ paths:
         - project
       x-custom-attributes:
         permission: read
-        resource: 'blues:resources:app:APPSERIAL:devices'
+        resource: blues:resources:app:APPSERIAL:devices
     parameters:
       - $ref: '#/components/parameters/projectOrProductUIDParam'
       - $ref: '#/components/parameters/deviceUIDParam'
@@ -1431,8 +1431,8 @@ paths:
         - project
       x-custom-attributes:
         permission: update
-        resource: 'blues:resources:app:APPSERIAL:devices'
-  '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/health-log':
+        resource: blues:resources:app:APPSERIAL:devices
+  /v1/projects/{projectOrProductUID}/devices/{deviceUID}/health-log:
     get:
       operationId: GetDeviceHealthLog
       description: Get Device Health Log
@@ -1463,19 +1463,7 @@ paths:
                   health_log:
                     type: array
                     items:
-                      properties:
-                        alert:
-                          type: boolean
-                        text:
-                          type: string
-                        when:
-                          type: string
-                          format: date-time
-                      required:
-                        - when
-                        - alert
-                        - text
-                      type: object
+                      $ref: '#/components/schemas/HealthLog'
                 required:
                   - health_log
         default:
@@ -1486,8 +1474,8 @@ paths:
         - device
       x-custom-attributes:
         permission: read
-        resource: 'blues:resources:app:APPSERIAL:devices'
-  '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/journeys':
+        resource: blues:resources:app:APPSERIAL:devices
+  /v1/projects/{projectOrProductUID}/devices/{deviceUID}/journeys:
     get:
       operationId: GetDeviceJourneys
       description: |
@@ -1545,8 +1533,8 @@ paths:
         - device
       x-custom-attributes:
         permission: read
-        resource: 'blues:resources:app:APPSERIAL:devices'
-  '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/journeys/{journeyID}':
+        resource: blues:resources:app:APPSERIAL:devices
+  /v1/projects/{projectOrProductUID}/devices/{deviceUID}/journeys/{journeyID}:
     get:
       operationId: GetDeviceJourney
       description: |
@@ -1610,8 +1598,8 @@ paths:
         - device
       x-custom-attributes:
         permission: read
-        resource: 'blues:resources:app:APPSERIAL:devices'
-  '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/latest':
+        resource: blues:resources:app:APPSERIAL:devices
+  /v1/projects/{projectOrProductUID}/devices/{deviceUID}/latest:
     get:
       operationId: GetDeviceLatestEvents
       description: Get Device Latest Events
@@ -1629,8 +1617,8 @@ paths:
         - device
       x-custom-attributes:
         permission: read
-        resource: 'blues:resources:app:APPSERIAL:devices'
-  '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/notefiles/{notefileID}':
+        resource: blues:resources:app:APPSERIAL:devices
+  /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notefiles/{notefileID}:
     post:
       operationId: CreateNotefile
       description: Creates an empty Notefile on the device.
@@ -1649,11 +1637,11 @@ paths:
         - device
       x-custom-attributes:
         permission: create
-        resource: 'blues:resources:app:APPSERIAL:notefiles'
-  '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}':
+        resource: blues:resources:app:APPSERIAL:notefiles
+  /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}:
     get:
       operationId: GetNotefile
-      description: 'For .qi files, returns the queued up notes.  For .db files, returns all notes in the notefile'
+      description: For .qi files, returns the queued up notes.  For .db files, returns all notes in the notefile
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
@@ -1664,6 +1652,7 @@ paths:
           required: false
           schema:
             type: integer
+            format: int32
         - name: deleted
           in: query
           description: true to return deleted notes.
@@ -1687,12 +1676,14 @@ paths:
                   changes:
                     description: The number of pending changes in the Notefile.
                     type: integer
+                    format: int32
                   notes:
                     description: An object with a key for each note and a value object with the body of each Note and the time the Note was added.
                     type: object
                   total:
                     description: The total number of notes.
                     type: integer
+                    format: int32
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
@@ -1701,10 +1692,10 @@ paths:
         - device
       x-custom-attributes:
         permission: read
-        resource: 'blues:resources:app:APPSERIAL:notefiles'
+        resource: blues:resources:app:APPSERIAL:notefiles
     post:
       operationId: AddQiNote
-      description: 'Adds a Note to a Notefile, creating the Notefile if it doesn''t yet exist.'
+      description: Adds a Note to a Notefile, creating the Notefile if it doesn't yet exist.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
@@ -1727,8 +1718,8 @@ paths:
         - device
       x-custom-attributes:
         permission: create
-        resource: 'blues:resources:app:APPSERIAL:notes'
-  '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}':
+        resource: blues:resources:app:APPSERIAL:notes
+  /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}:
     delete:
       operationId: DeleteNote
       description: Delete a note from a .db or .qi notefile
@@ -1748,7 +1739,7 @@ paths:
         - device
       x-custom-attributes:
         permission: delete
-        resource: 'blues:resources:app:APPSERIAL:notes'
+        resource: blues:resources:app:APPSERIAL:notes
     get:
       operationId: GetDbNote
       description: Get a note from a .db or .qi notefile
@@ -1795,7 +1786,7 @@ paths:
         - device
       x-custom-attributes:
         permission: read
-        resource: 'blues:resources:app:APPSERIAL:notes'
+        resource: blues:resources:app:APPSERIAL:notes
     post:
       operationId: AddDbNote
       description: Add a Note to a .db notefile.  if noteID is '-' then payload is ignored and empty notefile is created
@@ -1822,7 +1813,7 @@ paths:
         - device
       x-custom-attributes:
         permission: create
-        resource: 'blues:resources:app:APPSERIAL:notes'
+        resource: blues:resources:app:APPSERIAL:notes
     put:
       operationId: UpdateDbNote
       description: Update a note in a .db or .qi notefile
@@ -1849,11 +1840,11 @@ paths:
         - device
       x-custom-attributes:
         permission: update
-        resource: 'blues:resources:app:APPSERIAL:notes'
-  '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/plans':
+        resource: blues:resources:app:APPSERIAL:notes
+  /v1/projects/{projectOrProductUID}/devices/{deviceUID}/plans:
     get:
       operationId: GetDevicePlans
-      description: 'Get Data Plans associated with the device, this include the primary sim, any external sim, as well as any satellite connections.'
+      description: Get Data Plans associated with the device, this include the primary sim, any external sim, as well as any satellite connections.
       responses:
         '200':
           $ref: '#/components/responses/DevicePlansResponse'
@@ -1865,11 +1856,11 @@ paths:
         - device
       x-custom-attributes:
         permission: read
-        resource: 'blues:resources:app:APPSERIAL:devices'
+        resource: blues:resources:app:APPSERIAL:devices
     parameters:
       - $ref: '#/components/parameters/projectOrProductUIDParam'
       - $ref: '#/components/parameters/deviceUIDParam'
-  '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/provision':
+  /v1/projects/{projectOrProductUID}/devices/{deviceUID}/provision:
     post:
       operationId: ProvisionDevice
       description: Provision Device for a Project
@@ -1914,8 +1905,8 @@ paths:
         - device
       x-custom-attributes:
         permission: create
-        resource: 'blues:resources:app:APPSERIAL:devices'
-  '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/public-key':
+        resource: blues:resources:app:APPSERIAL:devices
+  /v1/projects/{projectOrProductUID}/devices/{deviceUID}/public-key:
     get:
       operationId: GetDevicePublicKey
       description: Get Device Public Key
@@ -1945,8 +1936,8 @@ paths:
         - device
       x-custom-attributes:
         permission: read
-        resource: 'blues:resources:app:APPSERIAL:devices'
-  '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/sessions':
+        resource: blues:resources:app:APPSERIAL:devices
+  /v1/projects/{projectOrProductUID}/devices/{deviceUID}/sessions:
     get:
       operationId: GetDeviceSessions
       description: Get Device Sessions
@@ -1969,8 +1960,8 @@ paths:
         - device
       x-custom-attributes:
         permission: read
-        resource: 'blues:resources:app:APPSERIAL:devices'
-  '/v1/projects/{projectOrProductUID}/devices/{deviceUID}/signal':
+        resource: blues:resources:app:APPSERIAL:devices
+  /v1/projects/{projectOrProductUID}/devices/{deviceUID}/signal:
     post:
       operationId: SignalDevice
       description: Send a signal from Notehub to a Notecard.
@@ -2003,8 +1994,8 @@ paths:
         - device
       x-custom-attributes:
         permission: create
-        resource: 'blues:resources:app:APPSERIAL:devices'
-  '/v1/projects/{projectOrProductUID}/devices/public-keys':
+        resource: blues:resources:app:APPSERIAL:devices
+  /v1/projects/{projectOrProductUID}/devices/public-keys:
     get:
       operationId: GetDevicePublicKeys
       description: Get Device Public Keys of a Project
@@ -2042,8 +2033,8 @@ paths:
         - device
       x-custom-attributes:
         permission: read
-        resource: 'blues:resources:app:APPSERIAL:devices'
-  '/v1/projects/{projectOrProductUID}/dfu/{firmwareType}/{action}':
+        resource: blues:resources:app:APPSERIAL:devices
+  /v1/projects/{projectOrProductUID}/dfu/{firmwareType}/{action}:
     post:
       operationId: PerformDfuAction
       description: Update/cancel host or notecard firmware updates
@@ -2078,8 +2069,8 @@ paths:
         - project
       x-custom-attributes:
         permission: create
-        resource: 'blues:resources:app:APPSERIAL:devices'
-  '/v1/projects/{projectOrProductUID}/dfu/{firmwareType}/history':
+        resource: blues:resources:app:APPSERIAL:devices
+  /v1/projects/{projectOrProductUID}/dfu/{firmwareType}/history:
     get:
       operationId: GetDevicesDfuHistory
       description: Get host or Notecard DFU history for all devices that match the filter criteria
@@ -2114,8 +2105,8 @@ paths:
         - project
       x-custom-attributes:
         permission: read
-        resource: 'blues:resources:app:APPSERIAL:settings'
-  '/v1/projects/{projectOrProductUID}/dfu/{firmwareType}/status':
+        resource: blues:resources:app:APPSERIAL:settings
+  /v1/projects/{projectOrProductUID}/dfu/{firmwareType}/status:
     get:
       operationId: GetDevicesDfuStatus
       description: Get host or Notecard DFU history for all devices that match the filter criteria
@@ -2150,8 +2141,8 @@ paths:
         - project
       x-custom-attributes:
         permission: read
-        resource: 'blues:resources:app:APPSERIAL:settings'
-  '/v1/projects/{projectOrProductUID}/environment_hierarchy':
+        resource: blues:resources:app:APPSERIAL:settings
+  /v1/projects/{projectOrProductUID}/environment_hierarchy:
     get:
       operationId: GetProjectEnvironmentHierarchy
       summary: Get environment variable hierarchy for a device
@@ -2174,8 +2165,8 @@ paths:
         - project
       x-custom-attributes:
         permission: read
-        resource: 'blues:resources:app:APPSERIAL:settings'
-  '/v1/projects/{projectOrProductUID}/environment_variables':
+        resource: blues:resources:app:APPSERIAL:settings
+  /v1/projects/{projectOrProductUID}/environment_variables:
     get:
       operationId: GetProjectEnvironmentVariables
       description: Get environment variables of a project
@@ -2190,7 +2181,7 @@ paths:
         - project
       x-custom-attributes:
         permission: read
-        resource: 'blues:resources:app:APPSERIAL:settings'
+        resource: blues:resources:app:APPSERIAL:settings
     parameters:
       - $ref: '#/components/parameters/projectOrProductUIDParam'
     put:
@@ -2212,8 +2203,8 @@ paths:
         - project
       x-custom-attributes:
         permission: update
-        resource: 'blues:resources:app:APPSERIAL:settings'
-  '/v1/projects/{projectOrProductUID}/environment_variables/{key}':
+        resource: blues:resources:app:APPSERIAL:settings
+  /v1/projects/{projectOrProductUID}/environment_variables/{key}:
     delete:
       operationId: DeleteProjectEnvironmentVariable
       description: Delete an environment variable of a project by key
@@ -2236,8 +2227,8 @@ paths:
         - project
       x-custom-attributes:
         permission: delete
-        resource: 'blues:resources:app:APPSERIAL:settings'
-  '/v1/projects/{projectOrProductUID}/events':
+        resource: blues:resources:app:APPSERIAL:settings
+  /v1/projects/{projectOrProductUID}/events:
     get:
       operationId: GetEvents
       description: Get Events of a Project
@@ -2287,8 +2278,8 @@ paths:
         - event
       x-custom-attributes:
         permission: read
-        resource: 'blues:resources:app:APPSERIAL:events'
-  '/v1/projects/{projectOrProductUID}/events-cursor':
+        resource: blues:resources:app:APPSERIAL:events
+  /v1/projects/{projectOrProductUID}/events-cursor:
     get:
       operationId: GetEventsByCursor
       description: Get Events of a Project by cursor
@@ -2313,8 +2304,8 @@ paths:
         - event
       x-custom-attributes:
         permission: read
-        resource: 'blues:resources:app:APPSERIAL:events'
-  '/v1/projects/{projectOrProductUID}/events/{eventUID}/route-logs':
+        resource: blues:resources:app:APPSERIAL:events
+  /v1/projects/{projectOrProductUID}/events/{eventUID}/route-logs:
     get:
       operationId: GetRouteLogsByEvent
       description: Get Route Logs by Event UID
@@ -2338,8 +2329,8 @@ paths:
         - event
       x-custom-attributes:
         permission: read
-        resource: 'blues:resources:app:APPSERIAL:events'
-  '/v1/projects/{projectOrProductUID}/firmware':
+        resource: blues:resources:app:APPSERIAL:events
+  /v1/projects/{projectOrProductUID}/firmware:
     get:
       operationId: GetFirmwareInfo
       description: Get Available Firmware Information
@@ -2371,8 +2362,8 @@ paths:
         - project
       x-custom-attributes:
         permission: read
-        resource: 'blues:resources:app:APPSERIAL:devices'
-  '/v1/projects/{projectOrProductUID}/firmware/{firmwareType}/{filename}':
+        resource: blues:resources:app:APPSERIAL:devices
+  /v1/projects/{projectOrProductUID}/firmware/{firmwareType}/{filename}:
     delete:
       operationId: DeleteFirmware
       description: |
@@ -2402,7 +2393,7 @@ paths:
         - project
       x-custom-attributes:
         permission: delete
-        resource: 'blues:resources:app:APPSERIAL:settings'
+        resource: blues:resources:app:APPSERIAL:settings
     get:
       operationId: DownloadFirmware
       description: Download firmware binary
@@ -2430,7 +2421,7 @@ paths:
         - project
       x-custom-attributes:
         permission: read
-        resource: 'blues:resources:app:APPSERIAL:settings'
+        resource: blues:resources:app:APPSERIAL:settings
     post:
       operationId: UpdateFirmware
       description: |
@@ -2471,7 +2462,7 @@ paths:
         - project
       x-custom-attributes:
         permission: update
-        resource: 'blues:resources:app:APPSERIAL:settings'
+        resource: blues:resources:app:APPSERIAL:settings
     put:
       operationId: UploadFirmware
       description: Upload firmware binary
@@ -2485,7 +2476,7 @@ paths:
             type: string
         - name: version
           in: query
-          description: 'Firmware version (optional). If not provided, the version will be extracted from firmware binary if available, otherwise left empty'
+          description: Firmware version (optional). If not provided, the version will be extracted from firmware binary if available, otherwise left empty
           required: false
           schema:
             type: string
@@ -2518,8 +2509,8 @@ paths:
         - project
       x-custom-attributes:
         permission: read
-        resource: 'blues:resources:app:APPSERIAL:settings'
-  '/v1/projects/{projectOrProductUID}/fleets':
+        resource: blues:resources:app:APPSERIAL:settings
+  /v1/projects/{projectOrProductUID}/fleets:
     get:
       operationId: GetFleets
       description: Get Project Fleets
@@ -2534,7 +2525,7 @@ paths:
         - project
       x-custom-attributes:
         permission: read
-        resource: 'blues:resources:app:APPSERIAL:fleets'
+        resource: blues:resources:app:APPSERIAL:fleets
     parameters:
       - $ref: '#/components/parameters/projectOrProductUIDParam'
     post:
@@ -2551,7 +2542,7 @@ paths:
                 connectivity_assurance:
                   $ref: '#/components/schemas/FleetConnectivityAssurance'
                 label:
-                  description: 'The label, or name,  for the Fleet.'
+                  description: The label, or name,  for the Fleet.
                   type: string
                 smart_rule:
                   $ref: '#/components/schemas/FleetRule'
@@ -2572,8 +2563,8 @@ paths:
         - project
       x-custom-attributes:
         permission: create
-        resource: 'blues:resources:app:APPSERIAL:fleets'
-  '/v1/projects/{projectOrProductUID}/fleets/{fleetUID}':
+        resource: blues:resources:app:APPSERIAL:fleets
+  /v1/projects/{projectOrProductUID}/fleets/{fleetUID}:
     delete:
       operationId: DeleteFleet
       description: Delete Fleet
@@ -2588,7 +2579,7 @@ paths:
         - project
       x-custom-attributes:
         permission: delete
-        resource: 'blues:resources:app:APPSERIAL:fleets'
+        resource: blues:resources:app:APPSERIAL:fleets
     get:
       operationId: GetFleet
       description: Get Fleet
@@ -2605,7 +2596,7 @@ paths:
         - project
       x-custom-attributes:
         permission: read
-        resource: 'blues:resources:app:APPSERIAL:fleets'
+        resource: blues:resources:app:APPSERIAL:fleets
     parameters:
       - $ref: '#/components/parameters/projectOrProductUIDParam'
       - $ref: '#/components/parameters/fleetUIDParam'
@@ -2658,8 +2649,8 @@ paths:
         - project
       x-custom-attributes:
         permission: update
-        resource: 'blues:resources:app:APPSERIAL:fleets'
-  '/v1/projects/{projectOrProductUID}/fleets/{fleetUID}/devices':
+        resource: blues:resources:app:APPSERIAL:fleets
+  /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/devices:
     get:
       operationId: GetFleetDevices
       description: Get Devices of a Fleet within a Project
@@ -2687,8 +2678,8 @@ paths:
         - device
       x-custom-attributes:
         permission: read
-        resource: 'blues:resources:app:APPSERIAL:devices'
-  '/v1/projects/{projectOrProductUID}/fleets/{fleetUID}/environment_hierarchy':
+        resource: blues:resources:app:APPSERIAL:devices
+  /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/environment_hierarchy:
     get:
       operationId: GetFleetEnvironmentHierarchy
       summary: Get environment variable hierarchy for a device
@@ -2712,8 +2703,8 @@ paths:
         - project
       x-custom-attributes:
         permission: read
-        resource: 'blues:resources:app:APPSERIAL:fleets'
-  '/v1/projects/{projectOrProductUID}/fleets/{fleetUID}/environment_variables':
+        resource: blues:resources:app:APPSERIAL:fleets
+  /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/environment_variables:
     get:
       operationId: GetFleetEnvironmentVariables
       description: Get environment variables of a fleet
@@ -2728,7 +2719,7 @@ paths:
         - project
       x-custom-attributes:
         permission: read
-        resource: 'blues:resources:app:APPSERIAL:fleets'
+        resource: blues:resources:app:APPSERIAL:fleets
     parameters:
       - $ref: '#/components/parameters/projectOrProductUIDParam'
       - $ref: '#/components/parameters/fleetUIDParam'
@@ -2753,8 +2744,8 @@ paths:
         - project
       x-custom-attributes:
         permission: update
-        resource: 'blues:resources:app:APPSERIAL:fleets'
-  '/v1/projects/{projectOrProductUID}/fleets/{fleetUID}/environment_variables/{key}':
+        resource: blues:resources:app:APPSERIAL:fleets
+  /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/environment_variables/{key}:
     delete:
       operationId: DeleteFleetEnvironmentVariable
       description: Delete environment variables of a fleet
@@ -2778,8 +2769,8 @@ paths:
         - project
       x-custom-attributes:
         permission: delete
-        resource: 'blues:resources:app:APPSERIAL:fleets'
-  '/v1/projects/{projectOrProductUID}/fleets/{fleetUID}/events':
+        resource: blues:resources:app:APPSERIAL:fleets
+  /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/events:
     get:
       operationId: GetFleetEvents
       description: Get Events of a Fleet
@@ -2829,8 +2820,8 @@ paths:
         - event
       x-custom-attributes:
         permission: read
-        resource: 'blues:resources:app:APPSERIAL:events'
-  '/v1/projects/{projectOrProductUID}/fleets/{fleetUID}/events-cursor':
+        resource: blues:resources:app:APPSERIAL:events
+  /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/events-cursor:
     get:
       operationId: GetFleetEventsByCursor
       description: Get Events of a Fleet by cursor
@@ -2857,8 +2848,8 @@ paths:
         - event
       x-custom-attributes:
         permission: read
-        resource: 'blues:resources:app:APPSERIAL:events'
-  '/v1/projects/{projectOrProductUID}/global-transformation':
+        resource: blues:resources:app:APPSERIAL:events
+  /v1/projects/{projectOrProductUID}/global-transformation:
     post:
       operationId: SetGlobalEventTransformation
       description: Set the project-level event JSONata transformation
@@ -2882,8 +2873,8 @@ paths:
         - project
       x-custom-attributes:
         permission: update
-        resource: 'blues:resources:app:APPSERIAL:settings'
-  '/v1/projects/{projectOrProductUID}/global-transformation/disable':
+        resource: blues:resources:app:APPSERIAL:settings
+  /v1/projects/{projectOrProductUID}/global-transformation/disable:
     post:
       operationId: DisableGlobalEventTransformation
       description: Disable the project-level event JSONata transformation
@@ -2900,8 +2891,8 @@ paths:
         - project
       x-custom-attributes:
         permission: update
-        resource: 'blues:resources:app:APPSERIAL:settings'
-  '/v1/projects/{projectOrProductUID}/global-transformation/enable':
+        resource: blues:resources:app:APPSERIAL:settings
+  /v1/projects/{projectOrProductUID}/global-transformation/enable:
     post:
       operationId: EnableGlobalEventTransformation
       description: Enable the project-level event JSONata transformation
@@ -2918,8 +2909,8 @@ paths:
         - project
       x-custom-attributes:
         permission: update
-        resource: 'blues:resources:app:APPSERIAL:settings'
-  '/v1/projects/{projectOrProductUID}/jobs':
+        resource: blues:resources:app:APPSERIAL:settings
+  /v1/projects/{projectOrProductUID}/jobs:
     get:
       operationId: GetJobs
       description: List all batch jobs for a project
@@ -2936,7 +2927,7 @@ paths:
         - jobs
       x-custom-attributes:
         permission: read
-        resource: 'blues:resources:app:APPSERIAL:settings'
+        resource: blues:resources:app:APPSERIAL:settings
     post:
       operationId: CreateJob
       description: Create a new batch job with an optional name
@@ -2968,8 +2959,8 @@ paths:
         - jobs
       x-custom-attributes:
         permission: create
-        resource: 'blues:resources:app:APPSERIAL:settings'
-  '/v1/projects/{projectOrProductUID}/jobs/{jobUID}':
+        resource: blues:resources:app:APPSERIAL:settings
+  /v1/projects/{projectOrProductUID}/jobs/{jobUID}:
     delete:
       operationId: DeleteJob
       description: Delete a batch job
@@ -2989,7 +2980,7 @@ paths:
         - jobs
       x-custom-attributes:
         permission: delete
-        resource: 'blues:resources:app:APPSERIAL:settings'
+        resource: blues:resources:app:APPSERIAL:settings
     get:
       operationId: GetJob
       description: Get a specific batch job definition
@@ -3009,8 +3000,8 @@ paths:
         - jobs
       x-custom-attributes:
         permission: read
-        resource: 'blues:resources:app:APPSERIAL:settings'
-  '/v1/projects/{projectOrProductUID}/jobs/{jobUID}/run':
+        resource: blues:resources:app:APPSERIAL:settings
+  /v1/projects/{projectOrProductUID}/jobs/{jobUID}/run:
     post:
       operationId: RunJob
       description: Execute a batch job
@@ -3037,8 +3028,8 @@ paths:
         - jobs
       x-custom-attributes:
         permission: create
-        resource: 'blues:resources:app:APPSERIAL:settings'
-  '/v1/projects/{projectOrProductUID}/jobs/{jobUID}/runs':
+        resource: blues:resources:app:APPSERIAL:settings
+  /v1/projects/{projectOrProductUID}/jobs/{jobUID}/runs:
     get:
       operationId: GetJobRuns
       description: List all runs for a specific job
@@ -3071,8 +3062,8 @@ paths:
         - jobs
       x-custom-attributes:
         permission: read
-        resource: 'blues:resources:app:APPSERIAL:settings'
-  '/v1/projects/{projectOrProductUID}/jobs/runs/{reportUID}':
+        resource: blues:resources:app:APPSERIAL:settings
+  /v1/projects/{projectOrProductUID}/jobs/runs/{reportUID}:
     delete:
       operationId: DeleteJobRun
       description: Delete the results of a job run
@@ -3098,7 +3089,7 @@ paths:
         - $ref: '#/components/parameters/reportUIDParam'
         - name: view
           in: query
-          description: 'Controls the level of detail returned: ''summary'' returns metadata only, ''detail'' returns the full result payload'
+          description: "Controls the level of detail returned: 'summary' returns metadata only, 'detail' returns the full result payload"
           required: false
           schema:
             type: string
@@ -3119,8 +3110,8 @@ paths:
         - jobs
       x-custom-attributes:
         permission: read
-        resource: 'blues:resources:app:APPSERIAL:settings'
-  '/v1/projects/{projectOrProductUID}/jobs/runs/{reportUID}/cancel':
+        resource: blues:resources:app:APPSERIAL:settings
+  /v1/projects/{projectOrProductUID}/jobs/runs/{reportUID}/cancel:
     post:
       operationId: CancelJobRun
       description: Cancel a running job execution
@@ -3140,8 +3131,8 @@ paths:
         - jobs
       x-custom-attributes:
         permission: delete
-        resource: 'blues:resources:app:APPSERIAL:settings'
-  '/v1/projects/{projectOrProductUID}/members':
+        resource: blues:resources:app:APPSERIAL:settings
+  /v1/projects/{projectOrProductUID}/members:
     get:
       operationId: GetProjectMembers
       description: Get Project Members
@@ -3167,10 +3158,10 @@ paths:
         - project
       x-custom-attributes:
         permission: read
-        resource: 'blues:resources:app:APPSERIAL:accounts'
+        resource: blues:resources:app:APPSERIAL:accounts
     parameters:
       - $ref: '#/components/parameters/projectOrProductUIDParam'
-  '/v1/projects/{projectOrProductUID}/monitors':
+  /v1/projects/{projectOrProductUID}/monitors:
     get:
       operationId: GetMonitors
       description: Get list of defined Monitors
@@ -3187,7 +3178,7 @@ paths:
         - monitor
       x-custom-attributes:
         permission: read
-        resource: 'blues:resources:app:APPSERIAL:devices'
+        resource: blues:resources:app:APPSERIAL:devices
     post:
       operationId: CreateMonitor
       description: Create a new Monitor
@@ -3215,8 +3206,8 @@ paths:
         - monitor
       x-custom-attributes:
         permission: create
-        resource: 'blues:resources:app:APPSERIAL:devices'
-  '/v1/projects/{projectOrProductUID}/monitors/{monitorUID}':
+        resource: blues:resources:app:APPSERIAL:devices
+  /v1/projects/{projectOrProductUID}/monitors/{monitorUID}:
     delete:
       operationId: DeleteMonitor
       description: Delete Monitor
@@ -3238,7 +3229,7 @@ paths:
         - monitor
       x-custom-attributes:
         permission: delete
-        resource: 'blues:resources:app:APPSERIAL:devices'
+        resource: blues:resources:app:APPSERIAL:devices
     get:
       operationId: GetMonitor
       description: Get Monitor
@@ -3260,7 +3251,7 @@ paths:
         - monitor
       x-custom-attributes:
         permission: read
-        resource: 'blues:resources:app:APPSERIAL:devices'
+        resource: blues:resources:app:APPSERIAL:devices
     put:
       operationId: UpdateMonitor
       description: Update Monitor
@@ -3289,8 +3280,8 @@ paths:
         - monitor
       x-custom-attributes:
         permission: update
-        resource: 'blues:resources:app:APPSERIAL:devices'
-  '/v1/projects/{projectOrProductUID}/products':
+        resource: blues:resources:app:APPSERIAL:devices
+  /v1/projects/{projectOrProductUID}/products:
     get:
       operationId: GetProducts
       description: Get Products within a Project
@@ -3314,7 +3305,7 @@ paths:
         - project
       x-custom-attributes:
         permission: read
-        resource: 'blues:resources:app:APPSERIAL:products'
+        resource: blues:resources:app:APPSERIAL:products
     parameters:
       - $ref: '#/components/parameters/projectOrProductUIDParam'
     post:
@@ -3333,7 +3324,7 @@ paths:
                   items:
                     type: string
                 disable_devices_by_default:
-                  description: 'If `true`, devices provisioned to this product will be automatically disabled by default.'
+                  description: If `true`, devices provisioned to this product will be automatically disabled by default.
                   type: boolean
                 label:
                   description: The label for the Product.
@@ -3359,8 +3350,8 @@ paths:
         - project
       x-custom-attributes:
         permission: create
-        resource: 'blues:resources:app:APPSERIAL:settings'
-  '/v1/projects/{projectOrProductUID}/products/{productUID}':
+        resource: blues:resources:app:APPSERIAL:settings
+  /v1/projects/{projectOrProductUID}/products/{productUID}:
     delete:
       operationId: DeleteProduct
       description: Delete a product
@@ -3375,11 +3366,11 @@ paths:
         - project
       x-custom-attributes:
         permission: delete
-        resource: 'blues:resources:app:APPSERIAL:settings'
+        resource: blues:resources:app:APPSERIAL:settings
     parameters:
       - $ref: '#/components/parameters/projectOrProductUIDParam'
       - $ref: '#/components/parameters/productUIDParam'
-  '/v1/projects/{projectOrProductUID}/routes':
+  /v1/projects/{projectOrProductUID}/routes:
     get:
       operationId: GetRoutes
       description: Get all Routes within a Project
@@ -3393,34 +3384,34 @@ paths:
               example:
                 - disabled: false
                   label: success route
-                  modified: '2020-03-09T17:58:37Z'
+                  modified: 2020-03-09T17:58:37Z
                   type: http
-                  uid: 'route:8d65a087d5d290ce5bdf03aeff2becc0'
+                  uid: route:8d65a087d5d290ce5bdf03aeff2becc0
                 - disabled: false
                   label: failing route
-                  modified: '2020-03-09T17:59:15Z'
+                  modified: 2020-03-09T17:59:15Z
                   type: http
-                  uid: 'route:a9eaad31d5cee8d01a42762f71fb777a'
+                  uid: route:a9eaad31d5cee8d01a42762f71fb777a
                 - disabled: true
                   label: disabled route
-                  modified: '2020-03-09T17:59:44Z'
+                  modified: 2020-03-09T17:59:44Z
                   type: http
-                  uid: 'route:02ddc0e6e236c2a7e482da62047229ad'
+                  uid: route:02ddc0e6e236c2a7e482da62047229ad
                 - disabled: false
                   label: Proxy Route
-                  modified: '2020-03-09T17:58:36Z'
+                  modified: 2020-03-09T17:58:36Z
                   type: proxy
-                  uid: 'route:0ac565deb7b478a250bb82348b9cfdd4'
+                  uid: route:0ac565deb7b478a250bb82348b9cfdd4
                 - disabled: false
                   label: Myjsonlive Webtest
-                  modified: '2020-03-09T17:58:35Z'
+                  modified: 2020-03-09T17:58:35Z
                   type: proxy
-                  uid: 'route:fb1b9e0aba1bf030311ba2c3c1e3efd7'
+                  uid: route:fb1b9e0aba1bf030311ba2c3c1e3efd7
                 - disabled: false
                   label: Myjsonlive Echo
-                  modified: '2020-03-09T17:58:34Z'
+                  modified: 2020-03-09T17:58:34Z
                   type: proxy
-                  uid: 'route:7804818f84a3be6193e14d804fe7fca7'
+                  uid: route:7804818f84a3be6193e14d804fe7fca7
               schema:
                 type: array
                 items:
@@ -3434,7 +3425,7 @@ paths:
         - route
       x-custom-attributes:
         permission: read
-        resource: 'blues:resources:app:APPSERIAL:routes'
+        resource: blues:resources:app:APPSERIAL:routes
     post:
       operationId: CreateRoute
       description: Create Route within a Project
@@ -3453,13 +3444,13 @@ paths:
                     disable_http_headers: false
                     filter: {}
                     fleets:
-                      - 'fleet:1042ddc5-3b2c-4cec-b1fb-d3040538094d'
+                      - fleet:1042ddc5-3b2c-4cec-b1fb-d3040538094d
                     http_headers:
                       X-My-Header: value
                     throttle_ms: 100
                     timeout: 5000
                     transform: {}
-                    url: 'https://example.com/ingest'
+                    url: https://example.com/ingest
                   label: Route Label
             schema:
               $ref: '#/components/schemas/NotehubRoute'
@@ -3476,16 +3467,16 @@ paths:
                     system_notefiles: false
                     type: ''
                   fleets:
-                    - 'fleet:1042ddc5-3b2c-4cec-b1fb-d3040538094d'
+                    - fleet:1042ddc5-3b2c-4cec-b1fb-d3040538094d
                   http_headers: null
                   throttle_ms: 100
                   timeout: 0
                   transform: {}
-                  url: 'http://route.url'
+                  url: http://route.url
                 label: Route Label
-                modified: '2020-03-09T17:59:44Z'
+                modified: 2020-03-09T17:59:44Z
                 type: http
-                uid: 'route:8d65a087d5d290ce5bdf03aeff2becc0'
+                uid: route:8d65a087d5d290ce5bdf03aeff2becc0
               schema:
                 $ref: '#/components/schemas/NotehubRoute'
         default:
@@ -3496,8 +3487,8 @@ paths:
         - route
       x-custom-attributes:
         permission: create
-        resource: 'blues:resources:app:APPSERIAL:routes'
-  '/v1/projects/{projectOrProductUID}/routes/{routeUID}':
+        resource: blues:resources:app:APPSERIAL:routes
+  /v1/projects/{projectOrProductUID}/routes/{routeUID}:
     delete:
       operationId: DeleteRoute
       description: Delete single route within a project
@@ -3515,7 +3506,7 @@ paths:
         - route
       x-custom-attributes:
         permission: delete
-        resource: 'blues:resources:app:APPSERIAL:routes'
+        resource: blues:resources:app:APPSERIAL:routes
     get:
       operationId: GetRoute
       description: Get single route within a project
@@ -3535,16 +3526,16 @@ paths:
                     system_notefiles: false
                     type: ''
                   fleets:
-                    - 'fleet:1042ddc5-3b2c-4cec-b1fb-d3040538094d'
+                    - fleet:1042ddc5-3b2c-4cec-b1fb-d3040538094d
                   http_headers: null
                   throttle_ms: 100
                   timeout: 0
                   transform: {}
-                  url: 'http://route.url'
+                  url: http://route.url
                 label: Route Label
-                modified: '2020-03-09T17:59:44Z'
+                modified: 2020-03-09T17:59:44Z
                 type: http
-                uid: 'route:8d65a087d5d290ce5bdf03aeff2becc0'
+                uid: route:8d65a087d5d290ce5bdf03aeff2becc0
               schema:
                 $ref: '#/components/schemas/NotehubRoute'
         default:
@@ -3555,7 +3546,7 @@ paths:
         - route
       x-custom-attributes:
         permission: update
-        resource: 'blues:resources:app:APPSERIAL:routes'
+        resource: blues:resources:app:APPSERIAL:routes
     put:
       operationId: UpdateRoute
       description: Update route by UID
@@ -3618,8 +3609,8 @@ paths:
         - route
       x-custom-attributes:
         permission: update
-        resource: 'blues:resources:app:APPSERIAL:routes'
-  '/v1/projects/{projectOrProductUID}/routes/{routeUID}/route-logs':
+        resource: blues:resources:app:APPSERIAL:routes
+  /v1/projects/{projectOrProductUID}/routes/{routeUID}/route-logs:
     get:
       operationId: GetRouteLogsByRoute
       description: Get Route Logs by Route UID
@@ -3655,8 +3646,8 @@ paths:
         - route
       x-custom-attributes:
         permission: read
-        resource: 'blues:resources:app:APPSERIAL:routes'
-  '/v1/projects/{projectOrProductUID}/schemas':
+        resource: blues:resources:app:APPSERIAL:routes
+  /v1/projects/{projectOrProductUID}/schemas:
     get:
       operationId: GetNotefileSchemas
       summary: Get variable format for a notefile
@@ -3677,11 +3668,11 @@ paths:
         - project
       x-custom-attributes:
         permission: read
-        resource: 'blues:resources:app:APPSERIAL:settings'
-  '/v1/projects/{projectOrProductUID}/secrets':
+        resource: blues:resources:app:APPSERIAL:settings
+  /v1/projects/{projectOrProductUID}/secrets:
     get:
       operationId: GetProjectSecrets
-      description: 'Get all secrets for a project (metadata only, values are never returned)'
+      description: Get all secrets for a project (metadata only, values are never returned)
       responses:
         '200':
           $ref: '#/components/responses/GetProjectSecretsResponse'
@@ -3693,7 +3684,7 @@ paths:
         - project
       x-custom-attributes:
         permission: read
-        resource: 'blues:resources:app:APPSERIAL:settings'
+        resource: blues:resources:app:APPSERIAL:settings
     parameters:
       - $ref: '#/components/parameters/projectOrProductUIDParam'
     post:
@@ -3724,8 +3715,8 @@ paths:
         - project
       x-custom-attributes:
         permission: create
-        resource: 'blues:resources:app:APPSERIAL:settings'
-  '/v1/projects/{projectOrProductUID}/secrets/{secretName}':
+        resource: blues:resources:app:APPSERIAL:settings
+  /v1/projects/{projectOrProductUID}/secrets/{secretName}:
     delete:
       operationId: DeleteProjectSecret
       description: Delete a project secret by name
@@ -3742,7 +3733,7 @@ paths:
         - project
       x-custom-attributes:
         permission: delete
-        resource: 'blues:resources:app:APPSERIAL:settings'
+        resource: blues:resources:app:APPSERIAL:settings
     parameters:
       - $ref: '#/components/parameters/projectOrProductUIDParam'
       - name: secretName
@@ -3777,8 +3768,8 @@ paths:
         - project
       x-custom-attributes:
         permission: update
-        resource: 'blues:resources:app:APPSERIAL:settings'
-  '/v1/projects/{projectOrProductUID}/usage/data':
+        resource: blues:resources:app:APPSERIAL:settings
+  /v1/projects/{projectOrProductUID}/usage/data:
     get:
       operationId: GetDataUsage
       description: Get data usage in bytes for a project with time range and period aggregation
@@ -3821,11 +3812,11 @@ paths:
         - usage
       x-custom-attributes:
         permission: read
-        resource: 'blues:resources:app:APPSERIAL:events'
-  '/v1/projects/{projectOrProductUID}/usage/events':
+        resource: blues:resources:app:APPSERIAL:events
+  /v1/projects/{projectOrProductUID}/usage/events:
     get:
       operationId: GetEventsUsage
-      description: 'Get events usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied'
+      description: Get events usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/startDateParam'
@@ -3866,7 +3857,7 @@ paths:
           style: form
         - name: skipRecentData
           in: query
-          description: 'When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects.'
+          description: When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects.
           required: false
           schema:
             type: boolean
@@ -3893,11 +3884,11 @@ paths:
         - usage
       x-custom-attributes:
         permission: read
-        resource: 'blues:resources:app:APPSERIAL:events'
-  '/v1/projects/{projectOrProductUID}/usage/route-logs':
+        resource: blues:resources:app:APPSERIAL:events
+  /v1/projects/{projectOrProductUID}/usage/route-logs:
     get:
       operationId: GetRouteLogsUsage
-      description: 'Get route logs usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied'
+      description: Get route logs usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/startDateParam'
@@ -3926,7 +3917,7 @@ paths:
               - project
         - name: skipRecentData
           in: query
-          description: 'When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects.'
+          description: When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects.
           required: false
           schema:
             type: boolean
@@ -3942,11 +3933,11 @@ paths:
         - usage
       x-custom-attributes:
         permission: read
-        resource: 'blues:resources:app:APPSERIAL:events'
-  '/v1/projects/{projectOrProductUID}/usage/sessions':
+        resource: blues:resources:app:APPSERIAL:events
+  /v1/projects/{projectOrProductUID}/usage/sessions:
     get:
       operationId: GetSessionsUsage
-      description: 'Get sessions usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied'
+      description: Get sessions usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/startDateParam'
@@ -3977,7 +3968,7 @@ paths:
               - project
         - name: skipRecentData
           in: query
-          description: 'When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects.'
+          description: When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects.
           required: false
           schema:
             type: boolean
@@ -3993,8 +3984,8 @@ paths:
         - usage
       x-custom-attributes:
         permission: read
-        resource: 'blues:resources:app:APPSERIAL:events'
-  '/v1/projects/{projectOrProductUID}/webhooks':
+        resource: blues:resources:app:APPSERIAL:events
+  /v1/projects/{projectOrProductUID}/webhooks:
     get:
       operationId: GetWebhooks
       description: Retrieves all webhooks for the specified project
@@ -4020,8 +4011,8 @@ paths:
         - webhook
       x-custom-attributes:
         permission: update
-        resource: 'blues:resources:app:APPSERIAL:settings'
-  '/v1/projects/{projectOrProductUID}/webhooks/{webhookUID}':
+        resource: blues:resources:app:APPSERIAL:settings
+  /v1/projects/{projectOrProductUID}/webhooks/{webhookUID}:
     delete:
       operationId: DeleteWebhook
       description: Deletes the specified webhook
@@ -4039,7 +4030,7 @@ paths:
         - webhook
       x-custom-attributes:
         permission: update
-        resource: 'blues:resources:app:APPSERIAL:settings'
+        resource: blues:resources:app:APPSERIAL:settings
     get:
       operationId: GetWebhook
       description: Retrieves the configuration settings for the specified webhook
@@ -4061,7 +4052,7 @@ paths:
         - webhook
       x-custom-attributes:
         permission: update
-        resource: 'blues:resources:app:APPSERIAL:settings'
+        resource: blues:resources:app:APPSERIAL:settings
     post:
       operationId: CreateWebhook
       description: Creates a webhook for the specified product with the given name. The name | must be unique within the project.
@@ -4090,7 +4081,7 @@ paths:
         - webhook
       x-custom-attributes:
         permission: update
-        resource: 'blues:resources:app:APPSERIAL:settings'
+        resource: blues:resources:app:APPSERIAL:settings
     put:
       operationId: UpdateWebhook
       description: Updates the configuration settings for the specified webhook. | Webhook will be created if it does not exist. Update body will completely replace the existing settings.
@@ -4117,7 +4108,7 @@ paths:
         - webhook
       x-custom-attributes:
         permission: update
-        resource: 'blues:resources:app:APPSERIAL:settings'
+        resource: blues:resources:app:APPSERIAL:settings
 components:
   parameters:
     billingAccountUIDParam:
@@ -4136,7 +4127,7 @@ components:
       schema:
         type: string
     datasetAggregateWindowQueryParam:
-      description: 'Aggregate results into buckets for a time duration, expressed in Postgres INTERVAL format'
+      description: Aggregate results into buckets for a time duration, expressed in Postgres INTERVAL format
       in: query
       name: aggregate_window
       required: false
@@ -4150,7 +4141,7 @@ components:
       schema:
         type: boolean
     datasetEndQueryParam:
-      description: 'End of the time range, as an ISO-8601 date or relative to now. If omitted, current time is used.'
+      description: End of the time range, as an ISO-8601 date or relative to now. If omitted, current time is used.
       in: query
       name: end
       required: false
@@ -4163,21 +4154,23 @@ components:
       required: false
       schema:
         type: integer
+        format: int32
     datasetLocationNearQueryParam:
-      description: 'Latitude and Longitude for location-based filtering, location_near_radius must also be provided'
+      description: Latitude and Longitude for location-based filtering, location_near_radius must also be provided
       in: query
       name: location_near
       required: false
       schema:
         type: string
-        example: '42.393125,-71.185015'
+        example: 42.393125,-71.185015
     datasetLocationRadiusQueryParam:
-      description: 'Distance from location_near in meters, location_near must also be provided'
+      description: Distance from location_near in meters, location_near must also be provided
       in: query
       name: location_near_radius
       required: false
       schema:
         type: integer
+        format: int32
     datasetNameParam:
       description: The name of the data set
       in: path
@@ -4193,28 +4186,28 @@ components:
       schema:
         type: string
     datasetSelectQueryParam:
-      description: 'Comma separated list of fields to include. Supports aggregate functions (avg, sum, min, max, count, most_recent).'
+      description: Comma separated list of fields to include. Supports aggregate functions (avg, sum, min, max, count, most_recent).
       in: query
       name: select
       required: false
       schema:
         type: string
     datasetStartQueryParam:
-      description: 'Start of the time range, as an ISO-8601 date or relative to now (e.g. -1y). Relative dates follow the Postgres INTERVAL format.'
+      description: Start of the time range, as an ISO-8601 date or relative to now (e.g. -1y). Relative dates follow the Postgres INTERVAL format.
       in: query
       name: start
       required: true
       schema:
         type: string
     datasetWhereQueryParam:
-      description: 'Additional filters using boolean logic mini-language (e.g. and.(device.eq.dev:123,temp.gt.100))'
+      description: Additional filters using boolean logic mini-language (e.g. and.(device.eq.dev:123,temp.gt.100))
       in: query
       name: where
       required: false
       schema:
         type: string
     dateTypeParam:
-      description: 'Which date to filter on, either ''captured'' or ''uploaded''.  This will apply to the startDate and endDate parameters'
+      description: Which date to filter on, either 'captured' or 'uploaded'.  This will apply to the startDate and endDate parameters
       example: uploaded
       in: query
       name: dateType
@@ -4241,7 +4234,7 @@ components:
         items:
           type: string
     deviceUIDParam:
-      example: 'dev:000000000000000'
+      example: dev:000000000000000
       in: path
       name: deviceUID
       required: true
@@ -4277,7 +4270,7 @@ components:
           - update
           - cancel
     endDateParam:
-      description: 'End date for filtering results, specified as a Unix timestamp'
+      description: End date for filtering results, specified as a Unix timestamp
       example: 1657894210
       in: query
       name: endDate
@@ -4312,7 +4305,7 @@ components:
       schema:
         type: string
     filesQueryParam:
-      example: '_health.qo, data.qo'
+      example: _health.qo, data.qo
       in: query
       name: files
       required: false
@@ -4332,7 +4325,7 @@ components:
           - version
           - length
     firmwareSortOrderParam:
-      description: 'Sort order (asc for ascending, desc for descending)'
+      description: Sort order (asc for ascending, desc for descending)
       in: query
       name: sortOrder
       required: false
@@ -4358,7 +4351,7 @@ components:
       schema:
         type: string
     firstSyncParam:
-      description: 'When true, filters results to only show first sync sessions'
+      description: When true, filters results to only show first sync sessions
       in: query
       name: firstSync
       required: false
@@ -4440,6 +4433,7 @@ components:
       required: false
       schema:
         type: integer
+        format: int32
         default: 50
         minimum: 1
     locationParam:
@@ -4460,7 +4454,7 @@ components:
       schema:
         type: string
     monitorUIDParam:
-      example: 'monitor:8bAdf00d-000f-51c-af-01d5eaf00dbad'
+      example: monitor:8bAdf00d-000f-51c-af-01d5eaf00dbad
       in: path
       name: monitorUID
       required: true
@@ -4516,6 +4510,7 @@ components:
       required: false
       schema:
         type: integer
+        format: int32
         default: 1
         minimum: 1
     pageSizeParam:
@@ -4524,6 +4519,7 @@ components:
       required: false
       schema:
         type: integer
+        format: int32
         default: 50
         maximum: 10000
         minimum: 1
@@ -4534,7 +4530,7 @@ components:
       schema:
         type: string
     productUIDParam:
-      example: 'com.blues.bridge:sensors'
+      example: com.blues.bridge:sensors
       in: path
       name: productUID
       required: true
@@ -4551,7 +4547,7 @@ components:
           type: string
       style: form
     projectOrProductUIDParam:
-      example: 'app:2606f411-dea6-44a0-9743-1130f57d77d8'
+      example: app:2606f411-dea6-44a0-9743-1130f57d77d8
       in: path
       name: projectOrProductUID
       required: true
@@ -4578,7 +4574,7 @@ components:
       required: true
       schema:
         type: string
-        example: 'rid:2606f411-dea6-44a0-9743-1130f57d77d8'
+        example: rid:2606f411-dea6-44a0-9743-1130f57d77d8
     responseStatusParam:
       example: 500
       in: query
@@ -4609,7 +4605,7 @@ components:
           - asc
           - desc
     routeUIDParam:
-      example: 'route:cbd20093cba58392c9f9bbdd0cdeb1a0'
+      example: route:cbd20093cba58392c9f9bbdd0cdeb1a0
       in: path
       name: routeUID
       required: true
@@ -4639,14 +4635,14 @@ components:
             - failure
           type: string
     selectFieldsParam:
-      description: 'Comma-separated list of fields to select from JSON payload (e.g., "field1,field2.subfield,field3"), this will reflect the columns in the CSV output.'
+      description: Comma-separated list of fields to select from JSON payload (e.g., "field1,field2.subfield,field3"), this will reflect the columns in the CSV output.
       in: query
       name: selectFields
       required: false
       schema:
         type: string
     sensorUIDParamQuery:
-      description: 'A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix.'
+      description: A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix.
       explode: true
       in: query
       name: sensorUID
@@ -4728,7 +4724,7 @@ components:
           - asc
           - desc
     startDateParam:
-      description: 'Start date for filtering results, specified as a Unix timestamp'
+      description: Start date for filtering results, specified as a Unix timestamp
       example: 1628631763
       in: query
       name: startDate
@@ -4773,6 +4769,7 @@ components:
       required: false
       schema:
         type: integer
+        format: int32
         default: 200000
         maximum: 400000
         minimum: 1
@@ -4849,6 +4846,7 @@ components:
               value:
                 description: The value that triggered the alert
                 type: number
+                format: float
               when:
                 description: The time the alert was created
                 type: string
@@ -4887,9 +4885,10 @@ components:
               status:
                 description: The status of the notification
                 type: number
+                format: float
             type: object
         resolved:
-          description: 'If true, the alert has been resolved'
+          description: If true, the alert has been resolved
           type: boolean
         source:
           description: The UID of the source of the alert
@@ -4900,13 +4899,41 @@ components:
         value:
           description: The value that triggered the alert
           type: number
+          format: float
         version:
           description: The version of the alert
           type: integer
+          format: int32
     AppUIDList:
       type: array
       items:
         type: string
+    ArchiveStats:
+      description: Statistics about a repository's data archive.
+      type: object
+      properties:
+        begin:
+          description: Timestamp of the earliest archived record.
+          type: string
+          format: date-time
+        end:
+          description: Timestamp of the latest archived record.
+          type: string
+          format: date-time
+        file_count:
+          description: Number of archive files.
+          type: integer
+          format: int64
+        record_count:
+          description: Total number of records across all archive files. Null when the count cannot be determined because one or more archive files predate the record-count filename format.
+          type: integer
+          format: int64
+          nullable: true
+        total_size_bytes:
+          description: Total size of all archive files, in bytes.
+          type: integer
+          format: int64
+      nullable: true
     AwsRoute:
       type: object
       properties:
@@ -4939,8 +4966,10 @@ components:
           type: string
         throttle_ms:
           type: integer
+          format: int32
         timeout:
           type: integer
+          format: int32
         transform:
           $ref: '#/components/schemas/RouteTransformSettings'
         url:
@@ -4964,14 +4993,40 @@ components:
           type: string
         throttle_ms:
           type: integer
+          format: int32
         timeout:
           type: integer
+          format: int32
         transform:
           $ref: '#/components/schemas/RouteTransformSettings'
         url:
           type: string
           format: uri
       additionalProperties: false
+    BatchJobNoteRequest:
+      description: A single note.add/note.update/note.delete request against a device's own notefile
+      type: object
+      properties:
+        body:
+          description: The note's JSON body (used by note.add and note.update)
+          type: object
+          additionalProperties: true
+        file:
+          description: The notefile to operate on (e.g. data.qi, config.dbs)
+          type: string
+        note:
+          description: The note ID. Required for note.update and note.delete, and for note.add against a database (.dbs/.db) notefile. Must be omitted for note.add against a queue (.qi/.qo) notefile.
+          type: string
+        req:
+          description: The note operation to perform
+          type: string
+          enum:
+            - note.add
+            - note.update
+            - note.delete
+      required:
+        - req
+        - file
     BatchJobRequests:
       description: Operations to apply to a device
       type: object
@@ -5005,6 +5060,11 @@ components:
           type: array
           items:
             type: string
+        note_reqs:
+          description: "note.add/note.update/note.delete requests to perform against the device's own notefiles. When both default_requests and a device's device_requests specify note_reqs, they merge by identity (req, file, note): a device-specific entry with the same identity as a default entry replaces it; entries unique to either side (no collision) all still apply."
+          type: array
+          items:
+            $ref: '#/components/schemas/BatchJobNoteRequest'
         provision_product:
           description: Product UID to provision the device with if not already provisioned
           type: string
@@ -5057,8 +5117,10 @@ components:
           type: string
         throttle_ms:
           type: integer
+          format: int32
         timeout:
           type: integer
+          format: int32
         transform:
           $ref: '#/components/schemas/RouteTransformSettings'
       additionalProperties: false
@@ -5098,9 +5160,9 @@ components:
           type: integer
           format: int64
         plan_type:
-          description: 'Description of the SIM plan type including data allowance, region, and validity period'
+          description: Description of the SIM plan type including data allowance, region, and validity period
           type: string
-          example: '500MB, North America, 10-year lifetime'
+          example: 500MB, North America, 10-year lifetime
     CellularUsage:
       type: array
       items:
@@ -5133,7 +5195,7 @@ components:
           description: The secret name (alphanumeric and underscores only).
           type: string
         value:
-          description: 'The secret value (encrypted at rest, never returned after creation).'
+          description: The secret value (encrypted at rest, never returned after creation).
           type: string
       required:
         - name
@@ -5156,7 +5218,7 @@ components:
           description: repository name
           type: string
         password:
-          description: 'read-only password for the database, also used as X-Repository-Token header for subsequent API calls.  This value is only served once when the repository is created'
+          description: read-only password for the database, also used as X-Repository-Token header for subsequent API calls.  This value is only served once when the repository is created
           type: string
         project_uids:
           $ref: '#/components/schemas/AppUIDList'
@@ -5260,7 +5322,7 @@ components:
           format: int64
           example: 1617181930
         version:
-          description: 'Last known version, which is generally a JSON object contained within the firmware image'
+          description: Last known version, which is generally a JSON object contained within the firmware image
           type: string
       nullable: true
     DataField:
@@ -5293,10 +5355,12 @@ components:
           description: The name of the data set
           type: string
         notefiles:
-          description: 'If non-empty, only events from these notefiles populate the dataset. Empty or omitted means all notefiles.'
+          description: If non-empty, only events from these notefiles populate the dataset. Empty or omitted means all notefiles.
           type: array
           items:
             type: string
+        reload:
+          $ref: '#/components/schemas/DatasetReloadProgress'
         time:
           description: JSONata expression resulting in the relevant time field
           type: string
@@ -5306,6 +5370,7 @@ components:
         datatype:
           description: The datatype of the field
           type: integer
+          format: int32
           enum:
             - 0
             - 1
@@ -5359,20 +5424,44 @@ components:
             type: string
         throttle_ms:
           type: integer
+          format: int32
         timeout:
           type: integer
+          format: int32
         transform:
           $ref: '#/components/schemas/RouteTransformSettings'
         url:
           type: string
           format: uri
       additionalProperties: false
+    DatasetReloadProgress:
+      description: Live progress of an in-flight reload of this dataset; absent when not reloading.
+      type: object
+      properties:
+        archive_records_read:
+          description: Archived records read so far.
+          type: integer
+          format: int64
+        archive_records_total:
+          description: Approximate total archived records to read. Null when it cannot be determined because some archive files predate the record-count filename format.
+          type: integer
+          format: int64
+          nullable: true
+        started:
+          description: When this reload started.
+          type: string
+          format: date-time
+        tail_records_read:
+          description: Unarchived (Kafka tail) records read so far.
+          type: integer
+          format: int64
+      nullable: true
     DescriptionRecord:
       description: Metadata for a stored description record. The content itself is returned by GET on the record.
       type: object
       properties:
         content_type:
-          description: 'The stored content type, either "application/json" or "text/plain; charset=utf-8".'
+          description: The stored content type, either "application/json" or "text/plain; charset=utf-8".
           type: string
         created_at:
           description: When the record was first created (Unix seconds).
@@ -5396,7 +5485,7 @@ components:
           description: The actor who last updated the record.
           type: string
         name:
-          description: 'The record name (letters, digits, ''.'', ''_'' or ''-'').'
+          description: The record name (letters, digits, '.', '_' or '-').
           type: string
         owner_uid:
           description: The owning project (app) UID for project-scoped records; empty for global.
@@ -5425,7 +5514,7 @@ components:
       type: object
       properties:
         best_id:
-          description: 'The best ID for the device, preference for the serial number over device UID'
+          description: The best ID for the device, preference for the serial number over device UID
           type: string
         best_location:
           $ref: '#/components/schemas/Location'
@@ -5447,6 +5536,10 @@ components:
             type: string
         gps_location:
           $ref: '#/components/schemas/Location'
+        health_log:
+          type: array
+          items:
+            $ref: '#/components/schemas/HealthLog'
         last_activity:
           type: string
           format: date-time
@@ -5456,9 +5549,30 @@ components:
         provisioned:
           type: string
           format: date-time
+        recent_event_count:
+          type: array
+          items:
+            format: int32
+            type: integer
+        recent_session_count:
+          type: array
+          items:
+            format: int32
+            type: integer
+        recent_session_seconds:
+          type: array
+          items:
+            format: int32
+            type: integer
+        recent_when:
+          type: string
+          format: date-time
+          nullable: true
         serial_number:
           type: string
         sku:
+          type: string
+        tags:
           type: string
         temperature:
           type: number
@@ -5469,12 +5583,16 @@ components:
           properties:
             cell_id:
               type: integer
+              format: int32
             lac:
               type: integer
+              format: int32
             mcc:
               type: integer
+              format: int32
             mnc:
               type: integer
+              format: int32
         tower_location:
           $ref: '#/components/schemas/Location'
         triangulated_location:
@@ -5622,7 +5740,7 @@ components:
         bssid:
           type: string
         cell:
-          description: 'Cell ID where the session originated and quality ("mcc,mnc,lac,cellid")'
+          description: Cell ID where the session originated and quality ("mcc,mnc,lac,cellid")
           type: string
         continuous:
           description: Was this a continuous connection?
@@ -5844,6 +5962,7 @@ components:
           type: string
         inherited_var_count:
           type: integer
+          format: int32
         type:
           type: string
         url:
@@ -5851,6 +5970,7 @@ components:
           format: uri
         var_count:
           type: integer
+          format: int32
         variables:
           type: array
           items:
@@ -5872,6 +5992,7 @@ components:
           maxLength: 1024
         precedence:
           type: integer
+          format: int32
         used:
           type: boolean
         value:
@@ -5880,7 +6001,7 @@ components:
       type: object
       properties:
         environment_variable_notes:
-          description: 'Optional per-variable annotations, keyed by variable name. Setting a key to an empty string removes its note. A 400 error is returned for any key that does not already exist as a stored variable and is not included in environment_variables in the same request.'
+          description: Optional per-variable annotations, keyed by variable name. Setting a key to an empty string removes its note. A 400 error is returned for any key that does not already exist as a stored variable and is not included in environment_variables in the same request.
           type: object
           additionalProperties:
             maxLength: 1024
@@ -5897,6 +6018,7 @@ components:
         code:
           description: The HTTP error code associated with the error.
           type: integer
+          format: int32
           maximum: 599
           minimum: 300
         debug:
@@ -5931,7 +6053,7 @@ components:
           description: Country
           type: string
         best_id:
-          description: 'The device serial number, or the DeviceUID if the serial number is not set'
+          description: The device serial number, or the DeviceUID if the serial number is not set
           type: string
         best_lat:
           description: Latitude
@@ -5941,7 +6063,7 @@ components:
           description: Location
           type: string
         best_location_type:
-          description: 'One of "gps", "triangulated", or "tower"'
+          description: One of "gps", "triangulated", or "tower"
           type: string
         best_location_when:
           description: Unix timestamp
@@ -5991,6 +6113,9 @@ components:
         payload:
           description: A base64-encoded binary payload
           type: string
+        platform:
+          description: Whether this is a platform event (administrative, e.g. _health.qo, _session.qo) rather than user data
+          type: boolean
         product:
           description: Product UID (globally unique)
           type: string
@@ -6020,7 +6145,7 @@ components:
           format: int32
           example: -72
         sensor:
-          description: 'Sensor UID, for events originating from a sensor attached to the device'
+          description: Sensor UID, for events originating from a sensor attached to the device
           type: string
         session:
           description: Session UID (globally unique)
@@ -6072,7 +6197,7 @@ components:
           format: int64
           example: 1669667691
         transport:
-          description: 'The transport used for this event, e.g., "cellular", "wifi", ", etc.'
+          description: The transport used for this event, e.g., "cellular", "wifi", ", etc.
           type: string
         tri_country:
           description: Country
@@ -6184,12 +6309,16 @@ components:
           type: string
         ver_build:
           type: integer
+          format: int32
         ver_major:
           type: integer
+          format: int32
         ver_minor:
           type: integer
+          format: int32
         ver_patch:
           type: integer
+          format: int32
         version:
           type: string
       nullable: true
@@ -6281,7 +6410,7 @@ components:
         enabled: true
       nullable: true
     FleetRule:
-      description: 'JSONata expression that will be evaluated to determine device membership into this fleet, if the expression evaluates to a 1, the device will be included, if it evaluates to -1 it will be removed, and if it evaluates to 0 or errors it will be left unchanged.'
+      description: JSONata expression that will be evaluated to determine device membership into this fleet, if the expression evaluates to a 1, the device will be included, if it evaluates to -1 it will be removed, and if it evaluates to 0 or errors it will be left unchanged.
       type: string
     FleetsUIDList:
       type: array
@@ -6307,8 +6436,10 @@ components:
             type: string
         throttle_ms:
           type: integer
+          format: int32
         timeout:
           type: integer
+          format: int32
         token:
           type: string
         transform:
@@ -6317,6 +6448,20 @@ components:
           type: string
           format: uri
       additionalProperties: false
+    HealthLog:
+      type: object
+      properties:
+        alert:
+          type: boolean
+        text:
+          type: string
+        when:
+          type: string
+          format: date-time
+      required:
+        - when
+        - alert
+        - text
     HttpRoute:
       type: object
       properties:
@@ -6325,7 +6470,7 @@ components:
         filter:
           $ref: '#/components/schemas/Filter'
         fleets:
-          description: 'If non-empty, applies only to the listed fleets.'
+          description: If non-empty, applies only to the listed fleets.
           type: array
           items:
             type: string
@@ -6335,8 +6480,10 @@ components:
             type: string
         throttle_ms:
           type: integer
+          format: int32
         timeout:
           type: integer
+          format: int32
         transform:
           $ref: '#/components/schemas/RouteTransformSettings'
         url:
@@ -6390,7 +6537,7 @@ components:
         default_requests:
           $ref: '#/components/schemas/BatchJobRequests'
         device_requests:
-          description: 'Device-specific request overrides, keyed by device UID'
+          description: Device-specific request overrides, keyed by device UID
           type: object
           additionalProperties:
             $ref: '#/components/schemas/BatchJobRequests'
@@ -6436,7 +6583,7 @@ components:
               items:
                 type: string
             devices_by_sn:
-              description: 'Serial number patterns to match (supports glob wildcards *, ?, [...])'
+              description: Serial number patterns to match (supports glob wildcards *, ?, [...])
               type: array
               items:
                 type: string
@@ -6453,7 +6600,7 @@ components:
             log_level: '1'
         select:
           devices_in_fleets:
-            - 'fleet:00000000-0000-0000-0000-000000000000'
+            - fleet:00000000-0000-0000-0000-000000000000
     JobDetail:
       description: Batch job with full definition
       allOf:
@@ -6495,12 +6642,12 @@ components:
           type: object
           example:
             devices:
-              'dev:000000000000001':
+              dev:000000000000001:
                 status: completed
                 vars_set:
                   firmware_channel: production
                   log_level: '1'
-              'dev:000000000000002':
+              dev:000000000000002:
                 status: completed
                 vars_set:
                   firmware_channel: production
@@ -6522,7 +6669,7 @@ components:
           format: int64
           example: 1775252900
         status:
-          description: 'Current status (submitted, running, completed, cancelled, failed)'
+          description: Current status (submitted, running, completed, cancelled, failed)
           type: string
           example: completed successfully
         submitted:
@@ -6577,7 +6724,7 @@ components:
       type: object
       properties:
         aggregate_function:
-          description: 'Aggregate function to apply to the selected values before applying the condition. [none, sum, average, max, min]'
+          description: Aggregate function to apply to the selected values before applying the condition. [none, sum, average, max, min]
           type: string
           enum:
             - none
@@ -6589,9 +6736,9 @@ components:
           description: The time window to aggregate the selected values. It follows the format of a number followed by a time unit
           type: string
           example: 10m or 5h30m40s
-          pattern: '^[0-9]+[smh]$'
+          pattern: ^[0-9]+[smh]$
         alert:
-          description: 'If true, the monitor is in alert state.'
+          description: If true, the monitor is in alert state.
           type: boolean
         alert_routes:
           type: array
@@ -6601,7 +6748,7 @@ components:
               - $ref: '#/components/schemas/SlackBearerNotification'
               - $ref: '#/components/schemas/EmailNotification'
         condition_type:
-          description: 'A comparison operation to apply to the value selected by the source_selector [greater_than, greater_than_or_equal_to, less_than, less_than_or_equal_to, equal_to, not_equal_to]'
+          description: A comparison operation to apply to the value selected by the source_selector [greater_than, greater_than_or_equal_to, less_than, less_than_or_equal_to, equal_to, not_equal_to]
           type: string
           enum:
             - greater_than
@@ -6614,7 +6761,7 @@ components:
         description:
           type: string
         disabled:
-          description: 'If true, the monitor will not be evaluated.'
+          description: If true, the monitor will not be evaluated.
           type: boolean
         fleet_filter:
           type: array
@@ -6630,18 +6777,18 @@ components:
           items:
             type: string
         per_device:
-          description: 'Only relevant when using an aggregate_function. If true, the monitor will be evaluated per device, | rather than across the set of selected devices. If true then if a single device matches the specified criteria, | and alert will be created, otherwise the aggregate function will be applied across all devices.'
+          description: Only relevant when using an aggregate_function. If true, the monitor will be evaluated per device, | rather than across the set of selected devices. If true then if a single device matches the specified criteria, | and alert will be created, otherwise the aggregate function will be applied across all devices.
           type: boolean
         routing_cooldown_period:
           description: The time period to wait before routing another event after the monitor | has been triggered. It follows the format of a number followed by a time unit.
           type: string
           example: 10m or 5h30m40s
-          pattern: '^[0-9]+[smh]$'
+          pattern: ^[0-9]+[smh]$
         silenced:
-          description: 'If true, alerts will be created, but no notifications will be sent.'
+          description: If true, alerts will be created, but no notifications will be sent.
           type: boolean
         source_selector:
-          description: 'A valid JSONata expression that selects the value to monitor from the source. | It should return a single, numeric value.'
+          description: A valid JSONata expression that selects the value to monitor from the source. | It should return a single, numeric value.
           type: string
           example: body.temperature
         source_type:
@@ -6653,6 +6800,7 @@ components:
         threshold:
           description: The type of condition to apply to the value selected by the source_selector
           type: integer
+          format: int32
         uid:
           type: string
         usage_scope:
@@ -6693,8 +6841,10 @@ components:
           type: string
         throttle_ms:
           type: integer
+          format: int32
         timeout:
           type: integer
+          format: int32
         topic:
           type: string
         transform:
@@ -6713,7 +6863,7 @@ components:
           description: True if originated from an edge source.
           type: boolean
         id:
-          description: 'Note name/identifier (e.g., "1:435", "my_note").'
+          description: Note name/identifier (e.g., "1:435", "my_note").
           type: string
         payload:
           description: Optional base64-encoded payload.
@@ -6748,7 +6898,7 @@ components:
       type: object
       properties:
         id:
-          description: 'Notefile id (e.g., "test.qi", "config.db").'
+          description: Notefile id (e.g., "test.qi", "config.db").
           type: string
         notes:
           type: array
@@ -6761,7 +6911,7 @@ components:
         - id
         - notes
     NotefileList:
-      description: 'Array of notefiles, each containing its notes.'
+      description: Array of notefiles, each containing its notes.
       type: array
       items:
         $ref: '#/components/schemas/Notefile'
@@ -6851,7 +7001,7 @@ components:
           default: http
         uid:
           type: string
-          default: 'route:8d65a087d5d290ce5bdf03aeff2becc0'
+          default: route:8d65a087d5d290ce5bdf03aeff2becc0
     OAuth2Error:
       type: object
       properties:
@@ -6879,6 +7029,7 @@ components:
         expires_in:
           description: Lifetime in seconds of the access token.
           type: integer
+          format: int32
           example: 1799
         scope:
           description: Granted scopes (space-delimited).
@@ -6943,7 +7094,7 @@ components:
           format: date-time
           nullable: true
         last_used:
-          description: 'When it was last used, if ever'
+          description: When it was last used, if ever
           type: string
           format: date-time
           nullable: true
@@ -6951,7 +7102,7 @@ components:
           description: Name for this API Key
           type: string
         suspended:
-          description: 'if true, this token cannot be used'
+          description: if true, this token cannot be used
           type: boolean
         uid:
           description: Unique and public identifier
@@ -6969,7 +7120,7 @@ components:
         name:
           type: string
         suspended:
-          description: 'if true, the token is temporarily suspended'
+          description: if true, the token is temporarily suspended
           type: boolean
       required:
         - expiresAt
@@ -7076,6 +7227,7 @@ components:
             type: string
         timeout:
           type: integer
+          format: int32
         transform:
           $ref: '#/components/schemas/RouteTransformSettings'
         url:
@@ -7095,8 +7247,10 @@ components:
           type: string
         throttle_ms:
           type: integer
+          format: int32
         timeout:
           type: integer
+          format: int32
         transform:
           $ref: '#/components/schemas/RouteTransformSettings'
         webhook_signing_key:
@@ -7114,6 +7268,7 @@ components:
           type: string
         event_id:
           type: integer
+          format: int32
         fleets:
           type: array
           items:
@@ -7122,10 +7277,13 @@ components:
           type: boolean
         throttle_ms:
           type: integer
+          format: int32
       additionalProperties: false
     Repository:
       type: object
       properties:
+        archive:
+          $ref: '#/components/schemas/ArchiveStats'
         fleet_uids:
           $ref: '#/components/schemas/FleetsUIDList'
         name:
@@ -7161,6 +7319,7 @@ components:
             Requested credential lifetime in seconds. Clamped server-side to
             [60, 3600]. Defaults to 900 (15 minutes) if omitted.
           type: integer
+          format: int32
           default: 900
           maximum: 3600
           minimum: 60
@@ -7187,6 +7346,7 @@ components:
         port:
           description: Storage service port
           type: integer
+          format: int32
         username:
           description: Ephemeral storage service username (prefixed with `u_`)
           type: string
@@ -7210,7 +7370,7 @@ components:
       type: object
       properties:
         attn:
-          description: 'If true, an error was returned when routing'
+          description: If true, an error was returned when routing
           type: boolean
         date:
           description: The date of the logs.
@@ -7218,6 +7378,7 @@ components:
         duration:
           description: The duration of the route in milliseconds
           type: integer
+          format: int32
         event_uid:
           description: The event UID.
           type: string
@@ -7240,7 +7401,7 @@ components:
       type: object
       properties:
         format:
-          description: 'Output format for transformed data (e.g., "json", "xml", "text").'
+          description: Output format for transformed data (e.g., "json", "xml", "text").
           type: string
           example: json
         jsonata:
@@ -7256,8 +7417,10 @@ components:
       properties:
         archive_count_exceeds:
           type: integer
+          format: int32
         archive_every_mins:
           type: integer
+          format: int32
         archive_id:
           type: string
         bucket_endpoint:
@@ -7284,8 +7447,10 @@ components:
           type: string
         throttle_ms:
           type: integer
+          format: int32
         timeout:
           type: integer
+          format: int32
         transform:
           $ref: '#/components/schemas/RouteTransformSettings'
         url:
@@ -7345,7 +7510,7 @@ components:
         psid:
           description: Provider-specific identifier for the satellite subscription
           type: string
-          example: 'skylo:5746354465786'
+          example: skylo:5746354465786
         satellite_data_usage:
           $ref: '#/components/schemas/SatelliteDataUsage'
       nullable: true
@@ -7419,7 +7584,7 @@ components:
             - text
             - blocks
         text:
-          description: 'The text of the message, or the blocks definition'
+          description: The text of the message, or the blocks definition
           type: string
         token:
           description: The bearer token for the Slack app.
@@ -7443,8 +7608,10 @@ components:
           type: string
         throttle_ms:
           type: integer
+          format: int32
         timeout:
           type: integer
+          format: int32
         transform:
           $ref: '#/components/schemas/RouteTransformSettings'
         webhook_url:
@@ -7461,7 +7628,7 @@ components:
             - text
             - blocks
         text:
-          description: 'The text of the message, or the blocks definition'
+          description: The text of the message, or the blocks definition
           type: string
         url:
           description: The URL of the Slack webhook.
@@ -7485,6 +7652,7 @@ components:
           type: string
         timeout:
           type: integer
+          format: int32
         transform:
           $ref: '#/components/schemas/RouteTransformSettings'
         user_name:
@@ -7515,6 +7683,7 @@ components:
           type: string
         timeout:
           type: integer
+          format: int32
         transform:
           $ref: '#/components/schemas/RouteTransformSettings'
         user_name:
@@ -7533,8 +7702,10 @@ components:
             type: string
         throttle_ms:
           type: integer
+          format: int32
         timeout:
           type: integer
+          format: int32
         transform:
           $ref: '#/components/schemas/RouteTransformSettings'
         url:
@@ -7550,12 +7721,14 @@ components:
         cid:
           description: Cell ID
           type: integer
+          format: int32
         l:
           description: Open Location Code
           type: string
         lac:
           description: Location Area Code
           type: integer
+          format: int32
         lat:
           description: Latitude
           type: number
@@ -7567,10 +7740,12 @@ components:
         mcc:
           description: Mobile Country Code
           type: integer
+          format: int32
         mnc:
           description: Mobile Network Code
           type: integer
-        'n':
+          format: int32
+        n:
           description: Name of the location
           type: string
         source:
@@ -7583,9 +7758,11 @@ components:
         towers:
           description: Number of triangulation points
           type: integer
+          format: int32
         z:
           description: Timezone ID
           type: integer
+          format: int32
         zone:
           description: Timezone name
           type: string
@@ -7609,8 +7786,10 @@ components:
           type: string
         throttle_ms:
           type: integer
+          format: int32
         timeout:
           type: integer
+          format: int32
         to:
           type: string
       additionalProperties: false
@@ -7633,7 +7812,7 @@ components:
       type: object
       properties:
         value:
-          description: 'The new secret value (encrypted at rest, never returned).'
+          description: The new secret value (encrypted at rest, never returned).
           type: string
       required:
         - value
@@ -7698,7 +7877,7 @@ components:
         period:
           type: string
           format: date-time
-          example: '2025-07-23T00:00:00Z'
+          example: 2025-07-23T00:00:00Z
         total_bytes:
           type: integer
           format: int64
@@ -7722,16 +7901,16 @@ components:
       type: object
       properties:
         billable_events:
-          description: 'Events that are billable, this include all events except platform events'
+          description: Events that are billable, this include all events except platform events
           type: integer
           format: int64
           example: 10
         device:
           type: string
-          example: 'dev:123456789012345'
+          example: dev:123456789012345
         fleet:
           type: string
-          example: 'fleet:1042ddc5-3b2c-4cec-b1fb-d3040538094d'
+          example: fleet:1042ddc5-3b2c-4cec-b1fb-d3040538094d
         notefiles:
           description: Count of events per notefile. Only present when includeNotefiles=true is specified.
           type: object
@@ -7745,14 +7924,14 @@ components:
         period:
           type: string
           format: date-time
-          example: '2025-07-23T00:00:00Z'
+          example: 2025-07-23T00:00:00Z
         platform_events:
-          description: 'Total platform events. Platform events are _log, _session, _health, and _geolocate events some of which are send from the device, some generated by notehub. These events are not billed.'
+          description: Total platform events. Platform events are _log, _session, _health, and _geolocate events some of which are send from the device, some generated by notehub. These events are not billed.
           type: integer
           format: int64
           example: 15
         total_days_in_period:
-          description: 'The total number of days in this period. Useful for calculating daily averages for month period. Note that the current period will be the total number of days in the current period, including days in the future.'
+          description: The total number of days in this period. Useful for calculating daily averages for month period. Note that the current period will be the total number of days in the current period, including days in the future.
           type: integer
           format: int32
         total_devices:
@@ -7760,7 +7939,7 @@ components:
           type: integer
           format: int64
         total_events:
-          description: 'Total events the device sent to notehub, including associated notehub generated events'
+          description: Total events the device sent to notehub, including associated notehub generated events
           type: integer
           format: int64
           example: 42
@@ -7777,7 +7956,7 @@ components:
           example: 2
           nullable: true
         watchdog_events:
-          description: 'Watchdog events are events generated by notehub when a watchdog timer is configured for a device to indicate is has not been online for a period of time. These events are billed but should not be used to indicate a device is active, or connected, at this time.'
+          description: Watchdog events are events generated by notehub when a watchdog timer is configured for a device to indicate is has not been online for a period of time. These events are billed but should not be used to indicate a device is active, or connected, at this time.
           type: integer
           format: int64
           example: 10
@@ -7814,11 +7993,11 @@ components:
         period:
           type: string
           format: date-time
-          example: '2025-07-23T00:00:00Z'
+          example: 2025-07-23T00:00:00Z
         route:
           description: The route UID (only present when aggregate is 'route')
           type: string
-          example: 'route:cbd20093cba58392c9f9bbdd0cdeb1a0'
+          example: route:cbd20093cba58392c9f9bbdd0cdeb1a0
         successful_routes:
           type: integer
           format: int64
@@ -7837,7 +8016,7 @@ components:
       properties:
         device:
           type: string
-          example: 'dev:123456789012345'
+          example: dev:123456789012345
         first_sync_sessions:
           description: Number of first sync sessions in this period
           type: integer
@@ -7845,17 +8024,17 @@ components:
           example: 2
         fleet:
           type: string
-          example: 'fleet:1042ddc5-3b2c-4cec-b1fb-d3040538094d'
+          example: fleet:1042ddc5-3b2c-4cec-b1fb-d3040538094d
         period:
           type: string
           format: date-time
-          example: '2025-07-23T00:00:00Z'
+          example: 2025-07-23T00:00:00Z
         sessions:
           type: integer
           format: int64
           example: 12
         sessions_by_transport:
-          description: 'Count of sessions grouped by transport type prefix (e.g. cell, wifi, ntn, lorawan)'
+          description: Count of sessions grouped by transport type prefix (e.g. cell, wifi, ntn, lorawan)
           type: object
           example:
             cell: 8
@@ -7885,7 +8064,7 @@ components:
         - total_bytes
         - total_devices
     UsageTruncatedField:
-      description: 'If the data is truncated that means that the parameters selected resulted in a response of over | the requested limit of data points, in order to ensure'
+      description: If the data is truncated that means that the parameters selected resulted in a response of over | the requested limit of data points, in order to ensure
       type: boolean
     UserDfuStateMachine:
       type: object
@@ -7989,7 +8168,7 @@ components:
             required:
               - success
     DescriptionContentResponse:
-      description: 'The description content, returned with its stored Content-Type.'
+      description: The description content, returned with its stored Content-Type.
       content:
         application/octet-stream:
           schema:
@@ -8059,7 +8238,7 @@ components:
               - has_more
           example:
             events:
-              - app: 'app:218f6217-9f78-432e-9fe0-02ca8b5a216c'
+              - app: app:218f6217-9f78-432e-9fe0-02ca8b5a216c
                 best_country: US
                 best_id: My Device
                 best_lat: 34.82476372
@@ -8073,15 +8252,15 @@ components:
                   pressure: 97705.66
                   temperature: 24.0625
                   voltage: 2.598
-                device: 'dev:5c0272311928'
+                device: dev:5c0272311928
                 event: dfa3747d-688b-4250-935b-5dd60354313c
                 file: air.qo
-                product: 'product:com.blues.project.demo'
+                product: product:com.blues.project.demo
                 received: 1656011227.006928
                 req: note.add
                 session: b623132c-6afb-4740-bc39-e3634e38f064
                 sn: My Device
-                tower_id: '0,0,0,0'
+                tower_id: 0,0,0,0
                 tri_country: US
                 tri_lat: 34.82475372
                 tri_location: Atlanta GA
@@ -8120,7 +8299,7 @@ components:
               - has_more
           example:
             events:
-              - app: 'app:218f6217-9f78-432e-9fe0-02ca8b5a216c'
+              - app: app:218f6217-9f78-432e-9fe0-02ca8b5a216c
                 best_country: US
                 best_id: My Device
                 best_lat: 34.82476372
@@ -8134,15 +8313,15 @@ components:
                   pressure: 97705.66
                   temperature: 24.0625
                   voltage: 2.598
-                device: 'dev:5c0272311928'
+                device: dev:5c0272311928
                 event: dfa3747d-688b-4250-935b-5dd60354313c
                 file: air.qo
-                product: 'product:com.blues.project.demo'
+                product: product:com.blues.project.demo
                 received: 1656011227.006928
                 req: note.add
                 session: b623132c-6afb-4740-bc39-e3634e38f064
                 sn: My Device
-                tower_id: '0,0,0,0'
+                tower_id: 0,0,0,0
                 tri_country: US
                 tri_lat: 34.82475372
                 tri_location: Atlanta GA
@@ -8183,7 +8362,7 @@ components:
             type: object
             properties:
               environment_variable_notes:
-                description: 'Optional per-variable annotations for device-level environment variables, keyed by variable name.'
+                description: Optional per-variable annotations for device-level environment variables, keyed by variable name.
                 type: object
                 additionalProperties:
                   maxLength: 1024
@@ -8194,7 +8373,7 @@ components:
                 additionalProperties:
                   type: string
               environment_variables_effective:
-                description: 'The environment variables as they will be seen by the device, fully resolved with project/fleet/device prioritization rules.'
+                description: The environment variables as they will be seen by the device, fully resolved with project/fleet/device prioritization rules.
                 type: object
                 additionalProperties:
                   type: string
@@ -8264,59 +8443,59 @@ components:
                   $ref: '#/components/schemas/Event'
           example:
             latest_events:
-              - app: 'app:2e49f10a-76a9-4e2d-8b18-cef0b8b46446'
+              - app: app:2e49f10a-76a9-4e2d-8b18-cef0b8b46446
                 body:
                   why: sensors.qo requested sync (sensors.qo) (TLS)
-                device: 'dev:864475040523995'
+                device: dev:864475040523995
                 event: 81bd2bf1-0399-4978-bc46-8f779b4af350
                 file: _session.qo
-                product: 'product:com.blues.app:myapp'
+                product: product:com.blues.app:myapp
                 received: 1669667707.564694
                 req: session.begin
                 session: ed18884b-f2a6-419f-b856-d28dc8f0892b
                 tls: true
                 tower_country: US
-                tower_id: '310,410,20483,184692495'
+                tower_id: 310,410,20483,184692495
                 tower_lat: 43.769062500000004
                 tower_location: Waverly MI
                 tower_lon: -83.657359375
                 tower_timezone: America/Detroit
                 tower_when: 1669667691
                 when: 1669667707
-              - app: 'app:2e49f10a-76a9-4e2d-8b18-cef0b8b46446'
+              - app: app:2e49f10a-76a9-4e2d-8b18-cef0b8b46446
                 body:
                   humid: 56.23
                   temp: 35.5
-                device: 'dev:864475040523995'
+                device: dev:864475040523995
                 event: 916d4c81-06ae-4263-9b55-7a3a0f73cb5a
                 file: data.qo
-                product: 'product:com.blues.app:myapp'
+                product: product:com.blues.app:myapp
                 received: 1669667713.221659
                 req: note.add
                 session: 28cdc39f-9f62-4789-b0a3-2f35f9448ced
                 sn: tj-1
                 tower_country: US
-                tower_id: '310,410,20483,184692495'
+                tower_id: 310,410,20483,184692495
                 tower_lat: 43.769062500000004
                 tower_location: Waverly MI
                 tower_lon: -83.657359375
                 tower_timezone: America/Detroit
                 tower_when: 1669667677
                 when: 1669667689
-              - app: 'app:2e49f10a-76a9-4e2d-8b18-cef0b8b46446'
+              - app: app:2e49f10a-76a9-4e2d-8b18-cef0b8b46446
                 body:
                   humidity: 69.88647200683693
                   pressure: 993.6294496104914
                   temp: 21.273027181770885
-                device: 'dev:864475040523995'
+                device: dev:864475040523995
                 event: e98c2c3b-edbe-4fe7-af57-2196cc843eb7
                 file: sensors.qo
-                product: 'product:com.blues.app:myapp'
+                product: product:com.blues.app:myapp
                 received: 1669667711.85316
                 req: note.add
                 session: 7211392c-6895-43f8-9256-790655348be5
                 tower_country: US
-                tower_id: '310,410,20483,184692496'
+                tower_id: 310,410,20483,184692496
                 tower_lat: 43.747037500000005
                 tower_location: Waverly MI
                 tower_lon: -83.665859375
@@ -8346,6 +8525,7 @@ components:
               total:
                 description: The total number of notes active on the Notefile.
                 type: integer
+                format: int32
     RunJobResponse:
       description: Job execution started
       content:
@@ -8380,12 +8560,12 @@ components:
               - apn: a-notehub.com.attz
                 bars: 2
                 bearer: LTE FDD
-                cell: '310,410,17169,77315594'
+                cell: 310,410,17169,77315594
                 continuous: true
-                device: 'dev:000000000000000'
+                device: dev:000000000000000
                 events: 14
                 fleets:
-                  - 'fleet:46be9834-5te6-42c1-0000-b5ea05e248d7'
+                  - fleet:46be9834-5te6-42c1-0000-b5ea05e248d7
                 hp_cycles_data: 3
                 hp_cycles_total: 3
                 hp_secs_data: 7659
@@ -8401,7 +8581,7 @@ components:
                   notes_sent: 12
                   sessions_tls: 1
                   since: 1667250832
-                product: 'product:com.blues.demo:project'
+                product: product:com.blues.demo:project
                 rat: lte
                 rsrp: -91
                 rsrq: -13
@@ -8420,7 +8600,7 @@ components:
                   lon: -89.44239062499999
                   mcc: 310
                   mnc: 410
-                  'n': Shorewood Hills WI
+                  n: Shorewood Hills WI
                   time: 1667250835
                   towers: 1
                   zone: America/Chicago
@@ -8447,14 +8627,15 @@ components:
                     device:
                       description: The device UID this usage data belongs to (only present when aggregate is 'device')
                       type: string
-                      example: 'dev:123456789012345'
+                      example: dev:123456789012345
                     device_count:
                       description: the number of devices represented by this data point
                       type: integer
+                      format: int32
                     fleet:
                       description: The fleet UID this usage data belongs to (only present when aggregate is 'fleet')
                       type: string
-                      example: 'fleet:1042ddc5-3b2c-4cec-b1fb-d3040538094d'
+                      example: fleet:1042ddc5-3b2c-4cec-b1fb-d3040538094d
                     iccid:
                       description: The ICCID of the cellular SIM card (only present when type is 'cellular')
                       type: string
@@ -8462,7 +8643,7 @@ components:
                     psid:
                       description: The PSID (Packet Service ID) of the satellite (or other packet-based device)
                       type: string
-                      example: 'skylo:5746354465786'
+                      example: skylo:5746354465786
                     type:
                       description: The type of connectivity
                       type: string
@@ -8533,10 +8714,10 @@ tags:
     name: webhook
   - description: APIs for events and sessions for external devices
     name: external devices
-  - description: 'Project Usage information related to events, route logs, sessions, and data usage'
+  - description: Project Usage information related to events, route logs, sessions, and data usage
     name: usage
   - description: Batch job operations
     name: jobs
 externalDocs:
   description: Find out more about Blues
-  url: 'https://blues.io'
+  url: https://blues.io
