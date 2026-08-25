@@ -8256,7 +8256,7 @@ components:
                 event: dfa3747d-688b-4250-935b-5dd60354313c
                 file: air.qo
                 product: product:com.blues.project.demo
-                received: 1.656011227006928e+09===
+                received: 1656011227.006928
                 req: note.add
                 session: b623132c-6afb-4740-bc39-e3634e38f064
                 sn: My Device
@@ -8317,7 +8317,7 @@ components:
                 event: dfa3747d-688b-4250-935b-5dd60354313c
                 file: air.qo
                 product: product:com.blues.project.demo
-                received: 1.656011227006928e+09===
+                received: 1656011227.006928
                 req: note.add
                 session: b623132c-6afb-4740-bc39-e3634e38f064
                 sn: My Device
@@ -8450,7 +8450,7 @@ components:
                 event: 81bd2bf1-0399-4978-bc46-8f779b4af350
                 file: _session.qo
                 product: product:com.blues.app:myapp
-                received: 1.669667707564694e+09===
+                received: 1669667707.564694
                 req: session.begin
                 session: ed18884b-f2a6-419f-b856-d28dc8f0892b
                 tls: true
@@ -8470,7 +8470,7 @@ components:
                 event: 916d4c81-06ae-4263-9b55-7a3a0f73cb5a
                 file: data.qo
                 product: product:com.blues.app:myapp
-                received: 1.669667713221659e+09===
+                received: 1669667713.221659
                 req: note.add
                 session: 28cdc39f-9f62-4789-b0a3-2f35f9448ced
                 sn: tj-1
@@ -8491,7 +8491,7 @@ components:
                 event: e98c2c3b-edbe-4fe7-af57-2196cc843eb7
                 file: sensors.qo
                 product: product:com.blues.app:myapp
-                received: 1.66966771185316e+09===
+                received: 1669667711.85316
                 req: note.add
                 session: 7211392c-6895-43f8-9256-790655348be5
                 tower_country: US
@@ -8597,7 +8597,7 @@ components:
                   l: 86MG3HF5+P25
                   lac: 17169
                   lat: 43.0742625
-                  lon: -89.44239062499999===
+                  lon: -89.44239062499999
                   mcc: 310
                   mnc: 410
                   n: Shorewood Hills WI
