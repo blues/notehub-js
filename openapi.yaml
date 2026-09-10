@@ -5361,8 +5361,11 @@ components:
             type: string
         reload:
           $ref: '#/components/schemas/DatasetReloadProgress'
+        rows:
+          description: "Optional JSONata expression that expands one event into several rows. It evaluates to one row object per row, whose keys are the dataset's columns: an array of objects, or a single object for one row. Both are accepted because JSONata collapses a one-element sequence to the element, so the same expression yields an array for an event carrying several readings and a bare object for one carrying a single reading. A result that is undefined or empty contributes no rows and is not an error; anything that is not an object, or an array containing one, is rejected. When set it is the only expression that reads the event: each field below takes the row object key matching its name, and time/lat/lon name a key too. Omit it and the dataset produces one row per event, with each field's own jsonata expression reading the event directly. event.uploaded and event.captured always resolve against the event either way."
+          type: string
         time:
-          description: JSONata expression resulting in the relevant time field
+          description: JSONata expression resulting in the row's time. Required for a dataset with no rows expression. With one it defaults to the row object's "time" key, and only needs setting to name a different key, or to reach past the row as event.uploaded and event.captured do. lat and lon work the same way and are what declare that the dataset has a location column at all.
           type: string
     DataSetField:
       type: object
@@ -5375,12 +5378,13 @@ components:
             - 0
             - 1
             - 2
+            - 3
             - 5
             - 6
             - 7
             - 8
         jsonata:
-          description: the JSONata expression used to populate this field
+          description: "The JSONata expression that populates this field from the event. Required for a dataset with no rows expression. Must be omitted when the dataset has one: the column is then taken from the row object key matching this field's name, and supplying an expression here is rejected rather than silently ignored."
           type: string
         name:
           description: The name of the field
