@@ -2465,8 +2465,7 @@ paths:
         resource: blues:resources:app:APPSERIAL:firmware:host
     put:
       operationId: UploadFirmware
-      description: |
-        Upload firmware binary
+      description: Upload firmware binary
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/firmwareTypeParam'
