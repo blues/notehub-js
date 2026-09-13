@@ -2466,7 +2466,7 @@ paths:
     put:
       operationId: UploadFirmware
       description: |
-        Upload firmware binary. Host uploads require project host-firmware create permission. Notecard uploads require global Notecard-firmware create permission and access to the project in the URL.
+        Upload firmware binary
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/firmwareTypeParam'
