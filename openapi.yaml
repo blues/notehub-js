@@ -2393,7 +2393,7 @@ paths:
         - project
       x-custom-attributes:
         permission: delete
-        resource: blues:resources:app:APPSERIAL:settings
+        resource: blues:resources:app:APPSERIAL:firmware:host
     get:
       operationId: DownloadFirmware
       description: Download firmware binary
@@ -2421,7 +2421,7 @@ paths:
         - project
       x-custom-attributes:
         permission: read
-        resource: blues:resources:app:APPSERIAL:settings
+        resource: blues:resources:app:APPSERIAL:firmware:host
     post:
       operationId: UpdateFirmware
       description: |
@@ -2462,7 +2462,7 @@ paths:
         - project
       x-custom-attributes:
         permission: update
-        resource: blues:resources:app:APPSERIAL:settings
+        resource: blues:resources:app:APPSERIAL:firmware:host
     put:
       operationId: UploadFirmware
       description: Upload firmware binary
@@ -2508,8 +2508,8 @@ paths:
       tags:
         - project
       x-custom-attributes:
-        permission: read
-        resource: blues:resources:app:APPSERIAL:settings
+        permission: create
+        resource: blues:resources:app:APPSERIAL:firmware:host
   /v1/projects/{projectOrProductUID}/fleets:
     get:
       operationId: GetFleets
