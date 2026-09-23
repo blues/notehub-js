@@ -5570,6 +5570,8 @@ components:
           type: string
           format: date-time
           nullable: true
+        sensors:
+          $ref: '#/components/schemas/DeviceSensors'
         serial_number:
           type: string
         sku:
@@ -5729,6 +5731,23 @@ components:
         has_more:
           type: boolean
           default: false
+    DeviceSensor:
+      description: A sensor attached to a device
+      type: object
+      properties:
+        last_activity_date:
+          description: UTC midnight of the most recent day on which this sensor was active
+          type: string
+          format: date-time
+        sensor_uid:
+          description: Unique identifier of the sensor
+          type: string
+      required:
+        - sensor_uid
+    DeviceSensors:
+      type: array
+      items:
+        $ref: '#/components/schemas/DeviceSensor'
     DeviceSession:
       type: object
       properties:
