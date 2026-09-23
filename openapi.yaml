@@ -6770,7 +6770,7 @@ components:
               - $ref: '#/components/schemas/SlackBearerNotification'
               - $ref: '#/components/schemas/EmailNotification'
         condition_type:
-          description: 'A comparison operation to apply to the value selected by the source_selector [greater_than, greater_than_or_equal_to, less_than, less_than_or_equal_to, equal_to, not_equal_to]'
+          description: 'A comparison operation to apply to the value selected by the source_selector. Required for event and usage monitors; set automatically for heartbeat monitors. [greater_than, greater_than_or_equal_to, less_than, less_than_or_equal_to, equal_to, not_equal_to]'
           type: string
           enum:
             - greater_than
@@ -6822,7 +6822,7 @@ components:
             - heartbeat
             - usage
         threshold:
-          description: The type of condition to apply to the value selected by the source_selector
+          description: The value that condition_type compares against. For heartbeat monitors this is seconds of inactivity; for usage monitors it is bytes.
           type: integer
           format: int32
         uid:
