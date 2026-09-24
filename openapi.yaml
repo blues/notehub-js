@@ -2026,7 +2026,7 @@ paths:
                       properties:
                         deleted:
                           description: |
-                            True when this device has been deleted. Only ever present for a caller reading the project as a change feed, via a `cursor`.
+                            True if this device has been deleted. Only present when reading with a `cursor`.
                           type: boolean
                         key:
                           type: string
@@ -2037,7 +2037,7 @@ paths:
                     type: boolean
                   next_cursor_modified:
                     description: |
-                      The cursor to pass as the `cursor` parameter of the next call to this endpoint. Treat it as an opaque token: it identifies an exact record, and resuming from it continues strictly after that record. It is returned whether or not there are more results, so a caller that has reached the end keeps polling with this same value until something changes.
+                      Cursor to pass on the next call. Returned even when there are no more results, so it can be used to poll for changes.
                     type: string
                 required:
                   - device_public_keys
@@ -2093,13 +2093,13 @@ paths:
       description: |-
         Get host or Notecard DFU history for all devices that match the filter criteria
 
-        When read with a `cursor`, this feed follows writes to the DEVICE record. Firmware state is held separately, so a change made through fleet or project firmware settings may not appear until something else writes that device. A consumer needing complete firmware state should periodically re-read without a cursor.
+        With a `cursor`, changes made through fleet or project firmware settings will not appear until the device itself is next updated.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/firmwareTypeParam'
         - $ref: '#/components/parameters/pageSizeParam'
         - $ref: '#/components/parameters/pageNumParam'
-        - $ref: '#/components/parameters/dfuCursorParam'
+        - $ref: '#/components/parameters/cursorParam'
         - $ref: '#/components/parameters/sortByParam'
         - $ref: '#/components/parameters/sortOrderParam'
         - $ref: '#/components/parameters/deviceUIDParamQuery'
@@ -2138,13 +2138,13 @@ paths:
       description: |-
         Get host or Notecard DFU history for all devices that match the filter criteria
 
-        When read with a `cursor`, this feed follows writes to the DEVICE record. Firmware state is held separately, so a change made through fleet or project firmware settings may not appear until something else writes that device. A consumer needing complete firmware state should periodically re-read without a cursor.
+        With a `cursor`, changes made through fleet or project firmware settings will not appear until the device itself is next updated.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/firmwareTypeParam'
         - $ref: '#/components/parameters/pageSizeParam'
         - $ref: '#/components/parameters/pageNumParam'
-        - $ref: '#/components/parameters/dfuCursorParam'
+        - $ref: '#/components/parameters/cursorParam'
         - $ref: '#/components/parameters/sortByParam'
         - $ref: '#/components/parameters/sortOrderParam'
         - $ref: '#/components/parameters/deviceUIDParamQuery'
@@ -4164,19 +4164,7 @@ components:
         type: string
     cursorParam:
       description: |
-        A cursor marking where this page begins. Obtain it from the `next_cursor_modified` value, or the `X-Next-Cursor-Modified` response header, of a previous call to the same endpoint. Start a fresh read with `cursor=0`. Treat the value as opaque: its internal form may change.
-
-        Supplying a cursor reads the collection as a CHANGE FEED rather than paging a snapshot, which means three things. Results are ordered oldest-change-first, so `pageNum` and any sort options are ignored. A record that is updated appears again, at its new position. A record that is deleted also appears, carrying `deleted: true`, which is how a caller keeping its own copy learns to drop it.
-
-        This is the efficient way to enumerate a large collection and the only way to watch it for changes. A page is a seek to a position rather than a scan of everything before it, so reading deep into a collection does not get slower the further you go. The alerts feed is the exception: it sorts on an unindexed column.
-
-        A cursor returned by this endpoint identifies an exact record, so resuming from it continues strictly after that record. The bare `cursor=0` bootstrap instead starts at or before the first record, so the very first page of a fresh read may repeat a record you have already seen if you switch to a feed from an ordinary page. Use the record's own identifier to discard duplicates.
-
-        Omitting this parameter leaves the endpoint's original paging behavior unchanged, including its response body.
-
-        Events additionally accept a legacy cursor here: the `next_cursor` value from a previous call, which is the UID of an event. That form pages in the original order and never returns deleted events.
-
-        Cursors are meaningful only within the project that issued them.
+        Used to sequentially read results in order of creation or modification. Start with cursor=0, then pass the returned next_cursor_modified (or X-Next-Cursor-Modified header) as the next cursor.
       in: query
       name: cursor
       required: false
@@ -4325,28 +4313,6 @@ components:
         enum:
           - update
           - cancel
-    dfuCursorParam:
-      description: |
-        A cursor marking where this page begins. Obtain it from the `next_cursor_modified` value, or the `X-Next-Cursor-Modified` response header, of a previous call to the same endpoint. Start a fresh read with `cursor=0`. Treat the value as opaque: its internal form may change.
-
-        Supplying a cursor reads the collection as a CHANGE FEED rather than paging a snapshot, which means three things. Results are ordered oldest-change-first, so `pageNum` and any sort options are ignored. A record that is updated appears again, at its new position. A record that is deleted also appears, carrying `deleted: true`, which is how a caller keeping its own copy learns to drop it.
-
-        On THIS endpoint the feed follows writes to the device record. Firmware state is held separately, so a change made through fleet or project firmware settings may not appear until something else writes that device. A consumer needing complete firmware state should periodically re-read without a cursor.
-
-        This is the efficient way to enumerate a large collection and the only way to watch it for changes. A page is a seek to a position rather than a scan of everything before it, so reading deep into a collection does not get slower the further you go. The alerts feed is the exception: it sorts on an unindexed column.
-
-        A cursor returned by this endpoint identifies an exact record, so resuming from it continues strictly after that record. The bare `cursor=0` bootstrap instead starts at or before the first record, so the very first page of a fresh read may repeat a record you have already seen if you switch to a feed from an ordinary page. Use the record's own identifier to discard duplicates.
-
-        Omitting this parameter leaves the endpoint's original paging behavior unchanged, including its response body.
-
-        Events additionally accept a legacy cursor here: the `next_cursor` value from a previous call, which is the UID of an event. That form pages in the original order and never returns deleted events.
-
-        Cursors are meaningful only within the project that issued them.
-      in: query
-      name: cursor
-      required: false
-      schema:
-        type: string
     endDateParam:
       description: End date for filtering results, specified as a Unix timestamp
       example: 1657894210
@@ -4506,8 +4472,7 @@ components:
       schema:
         type: string
     limitParam:
-      description: |
-        How many events to return in one page. The rate limit counts requests, not events, so a bulk reader should ask for the largest page it can rather than making many small calls. Values above the maximum are rejected.
+      description: Maximum number of events to return.
       in: query
       name: limit
       required: false
@@ -5607,7 +5572,7 @@ components:
           $ref: '#/components/schemas/Contact'
         deleted:
           description: |
-            True when this device has been deleted. Only ever present for a caller reading the project as a change feed, via a `cursor`; every other read omits deleted devices entirely. A consumer keeping its own copy should treat this as the instruction to drop the device.
+            True if this device has been deleted. Only present when reading with a `cursor`.
           type: boolean
         dfu:
           $ref: '#/components/schemas/DFUEnv'
@@ -5723,7 +5688,7 @@ components:
               type: string
         deleted:
           description: |
-            True when this device has been deleted. Only ever present for a caller reading the project as a change feed, via a `cursor`. A consumer keeping its own copy should treat this as the instruction to drop the device.
+            True if this device has been deleted. Only present when reading with a `cursor`.
           type: boolean
         device_uid:
           description: Device UID
@@ -5744,7 +5709,7 @@ components:
           default: false
         next_cursor_modified:
           description: |
-            The cursor to pass as the `cursor` parameter of the next call to this endpoint. Treat it as an opaque token: it identifies an exact record, and resuming from it continues strictly after that record. It is returned whether or not there are more results, so a caller that has reached the end keeps polling with this same value until something changes.
+            Cursor to pass on the next call. Returned even when there are no more results, so it can be used to poll for changes.
           type: string
     DeviceDfuStateMachine:
       description: Represents a single request to update the host or Notecard firmware
@@ -5806,7 +5771,7 @@ components:
               type: string
         deleted:
           description: |
-            True when this device has been deleted. Only ever present for a caller reading the project as a change feed, via a `cursor`. A consumer keeping its own copy should treat this as the instruction to drop the device.
+            True if this device has been deleted. Only present when reading with a `cursor`.
           type: boolean
         device_uid:
           description: Device UID
@@ -5828,7 +5793,7 @@ components:
           default: false
         next_cursor_modified:
           description: |
-            The cursor to pass as the `cursor` parameter of the next call to this endpoint. Treat it as an opaque token: it identifies an exact record, and resuming from it continues strictly after that record. It is returned whether or not there are more results, so a caller that has reached the end keeps polling with this same value until something changes.
+            Cursor to pass on the next call. Returned even when there are no more results, so it can be used to poll for changes.
           type: string
     DeviceSession:
       type: object
@@ -6188,7 +6153,7 @@ components:
           type: string
         deleted:
           description: |
-            True when this event has been deleted. Only ever present for a caller reading the project as a change feed, via a `next_cursor_modified` cursor; every other read omits deleted events entirely. A consumer keeping its own copy of a project's events should treat this as the instruction to drop the event.
+            True if this event has been deleted. Only present when reading with a `cursor`.
           type: boolean
         device:
           description: Device UID (globally unique)
@@ -8226,7 +8191,7 @@ components:
   headers:
     HasMoreHeader:
       description: |
-        "true" when more results are available after this page, "false" otherwise. Returned by every paginated endpoint alongside `X-Next-Cursor-Modified`. Endpoints whose response body is an object also return the same value as a `has_more` field.
+        True if there are more results.
       schema:
         type: string
         enum:
@@ -8234,9 +8199,7 @@ components:
           - 'false'
     NextCursorModifiedHeader:
       description: |
-        The cursor to pass as the `cursor` query parameter of the next call to this endpoint, Treat it as an opaque token: it identifies an exact record, and resuming from it continues strictly after that record. It is returned whether or not there are more results, so a caller that has reached the end keeps polling with this same value until something changes.
-
-        Every paginated endpoint returns this header, so a client can be written against the headers alone and work identically everywhere. Endpoints whose response body is an object also return the same value as a `next_cursor_modified` field; the one whose body is a bare array can only return it here.
+        Cursor to pass on the next call. Returned even when there are no more results, so it can be used to poll for changes.
       schema:
         type: string
   responses:
@@ -8262,7 +8225,7 @@ components:
                 type: boolean
               next_cursor_modified:
                 description: |
-                  The cursor to pass as the `cursor` parameter of the next call to this endpoint. Treat it as an opaque token: it identifies an exact record, and resuming from it continues strictly after that record. It is returned whether or not there are more results, so a caller that has reached the end keeps polling with this same value until something changes.
+                  Cursor to pass on the next call. Returned even when there are no more results, so it can be used to poll for changes.
                 type: string
             required:
               - alerts
@@ -8342,7 +8305,7 @@ components:
                 type: boolean
               next_cursor_modified:
                 description: |
-                  The cursor to pass as the `cursor` parameter of the next call to this endpoint. Treat it as an opaque token: it identifies an exact record, and resuming from it continues strictly after that record. It is returned whether or not there are more results, so a caller that has reached the end keeps polling with this same value until something changes.
+                  Cursor to pass on the next call. Returned even when there are no more results, so it can be used to poll for changes.
                 type: string
             required:
               - devices
@@ -8379,14 +8342,11 @@ components:
                 description: True if there are more events
                 type: boolean
               next_cursor:
-                description: |
-                  The cursor value of the next result, which is intended to be used as the "cursor" parameter value of the next call to this method. An empty string is returned if there are no more results after this results set.
+                description: Legacy event-UID cursor.
                 type: string
               next_cursor_modified:
                 description: |
-                  The cursor to pass as the `cursor` parameter of the next call to this endpoint. Treat it as an opaque token: it identifies an exact record, and resuming from it continues strictly after that record. It is returned whether or not there are more results, so a caller that has reached the end keeps polling with this same value until something changes.
-
-                  The very tail of the stream is eventually consistent. An event's timestamp is taken when it is accepted and the row becomes visible when its write completes, so two events accepted at almost the same moment can become visible out of order. A caller that must not miss an event should re-read the last few moments of the stream periodically, using the `event` UID to discard duplicates, rather than treating the cursor as a guarantee that nothing earlier can still appear.
+                  Cursor to pass on the next call. Returned even when there are no more results, so it can be used to poll for changes.
                 type: string
             required:
               - events
@@ -8450,7 +8410,7 @@ components:
                 type: boolean
               next_cursor_modified:
                 description: |
-                  The cursor to pass as the `cursor` parameter of the next call to this endpoint. Treat it as an opaque token: it identifies an exact record, and resuming from it continues strictly after that record. It is returned whether or not there are more results, so a caller that has reached the end keeps polling with this same value until something changes.
+                  Cursor to pass on the next call. Returned even when there are no more results, so it can be used to poll for changes.
                 type: string
               through:
                 description: The UID of the last event returned
@@ -8715,7 +8675,7 @@ components:
                 type: boolean
               next_cursor_modified:
                 description: |
-                  The cursor to pass as the `cursor` parameter of the next call to this endpoint. Treat it as an opaque token: it identifies an exact record, and resuming from it continues strictly after that record. It is returned whether or not there are more results, so a caller that has reached the end keeps polling with this same value until something changes.
+                  Cursor to pass on the next call. Returned even when there are no more results, so it can be used to poll for changes.
                 type: string
               sessions:
                 type: array
