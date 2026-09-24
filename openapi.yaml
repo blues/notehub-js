@@ -2090,10 +2090,8 @@ paths:
   /v1/projects/{projectOrProductUID}/dfu/{firmwareType}/history:
     get:
       operationId: GetDevicesDfuHistory
-      description: |-
-        Get host or Notecard DFU history for all devices that match the filter criteria
-
-        With a `cursor`, changes made through fleet or project firmware settings will not appear until the device itself is next updated.
+      description: |
+        Get host or Notecard DFU history for all devices that match the filter criteria. With a `cursor`, changes made through fleet or project firmware settings will not appear until the device itself is next updated.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/firmwareTypeParam'
@@ -2135,10 +2133,8 @@ paths:
   /v1/projects/{projectOrProductUID}/dfu/{firmwareType}/status:
     get:
       operationId: GetDevicesDfuStatus
-      description: |-
-        Get host or Notecard DFU history for all devices that match the filter criteria
-
-        With a `cursor`, changes made through fleet or project firmware settings will not appear until the device itself is next updated.
+      description: |
+        Get host or Notecard DFU history for all devices that match the filter criteria. With a `cursor`, changes made through fleet or project firmware settings will not appear until the device itself is next updated.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/firmwareTypeParam'
