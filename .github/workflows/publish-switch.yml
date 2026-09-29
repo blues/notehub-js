@@ -2,7 +2,7 @@ name: Publish switch
 
 on:
   release:
-    types: [created]
+    types: [published]
   push:
     branches:
       - "test-release-**"
@@ -12,6 +12,11 @@ on:
 permissions:
   id-token: write # Required for OIDC
   contents: write # Required for beta version updates
+
+# A newer push to the same test-release branch supersedes an older beta; never cancel a release.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'push' }}
 
 jobs:
   publish-prod:

@@ -6,12 +6,18 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
+    # Repo-wide, not per-branch: concurrent runs compute the same next beta
+    # version and all but one fail with E409.
+    concurrency:
+      group: npm-beta-publish
+      queue: max
     permissions:
       id-token: write
       contents: write
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Get current version from config.json
         id: get_version
@@ -33,13 +39,13 @@ jobs:
           echo "Updated project version to: $new_version"
 
       - name: Setup .npmrc file to publish to npm
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
           node-version: "24.x"
           registry-url: "https://registry.npmjs.org"
 
       - name: Update npm
-        run: sudo npm install -g npm@latest
+        run: npm install -g npm@11
 
       - name: Verify npm version
         run: npm --version
