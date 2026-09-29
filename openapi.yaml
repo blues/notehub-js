@@ -6406,9 +6406,7 @@ components:
           format: int64
           example: 1652709545
         triangulate:
-          description: Raw triangulation data used to derive the tri_* location fields. Only available on _session.qo events.
-          type: object
-          nullable: true
+          $ref: '#/components/schemas/Triangulation'
         updates:
           type: integer
           format: int32
@@ -7951,6 +7949,94 @@ components:
         zone:
           description: Timezone name
           type: string
+    Triangulation:
+      description: Radio scan data used to derive the tri_* location fields. Only available on _session.qo events.
+      type: object
+      properties:
+        cell_towers:
+          type: array
+          items:
+            $ref: '#/components/schemas/TriangulationCellTower'
+        gps:
+          type: array
+          items:
+            $ref: '#/components/schemas/TriangulationGps'
+        wifi_access_points:
+          type: array
+          items:
+            $ref: '#/components/schemas/TriangulationWifiAccessPoint'
+      nullable: true
+    TriangulationCellTower:
+      type: object
+      properties:
+        asu:
+          type: integer
+          format: int32
+        cell_id:
+          type: integer
+          format: int64
+        location_area_code:
+          description: Location area code (GSM/WCDMA) or tracking area code (LTE)
+          type: integer
+          format: int64
+        mobile_country_code:
+          type: integer
+          format: int32
+        mobile_network_code:
+          type: integer
+          format: int32
+        psc:
+          description: Primary scrambling code (WCDMA) or physical cell ID (LTE)
+          type: integer
+          format: int32
+        radio_type:
+          description: Radio access technology, e.g. "lte" or "gsm"
+          type: string
+        signal_strength:
+          description: Signal strength in dBm
+          type: integer
+          format: int32
+        time:
+          description: Unix timestamp of the scan
+          type: integer
+          format: int64
+    TriangulationGps:
+      type: object
+      properties:
+        age:
+          type: integer
+          format: int64
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
+        timestamp:
+          type: integer
+          format: int64
+    TriangulationWifiAccessPoint:
+      type: object
+      properties:
+        channel:
+          type: integer
+          format: int32
+        frequency:
+          type: integer
+          format: int32
+        mac_address:
+          description: BSSID of the access point
+          type: string
+        signal_strength:
+          description: Signal strength in dBm
+          type: integer
+          format: int32
+        ssid:
+          type: string
+        time:
+          description: Unix timestamp of the scan
+          type: integer
+          format: int64
     TwilioRoute:
       type: object
       properties:
