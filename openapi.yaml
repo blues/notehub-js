@@ -2393,7 +2393,7 @@ paths:
         - project
       x-custom-attributes:
         permission: delete
-        resource: blues:resources:app:APPSERIAL:settings
+        resource: blues:resources:app:APPSERIAL:firmware:host
     get:
       operationId: DownloadFirmware
       description: Download firmware binary
@@ -2421,7 +2421,7 @@ paths:
         - project
       x-custom-attributes:
         permission: read
-        resource: blues:resources:app:APPSERIAL:settings
+        resource: blues:resources:app:APPSERIAL:firmware:host
     post:
       operationId: UpdateFirmware
       description: |
@@ -2462,7 +2462,7 @@ paths:
         - project
       x-custom-attributes:
         permission: update
-        resource: blues:resources:app:APPSERIAL:settings
+        resource: blues:resources:app:APPSERIAL:firmware:host
     put:
       operationId: UploadFirmware
       description: Upload firmware binary
@@ -2508,8 +2508,8 @@ paths:
       tags:
         - project
       x-custom-attributes:
-        permission: read
-        resource: blues:resources:app:APPSERIAL:settings
+        permission: create
+        resource: blues:resources:app:APPSERIAL:firmware:host
   /v1/projects/{projectOrProductUID}/fleets:
     get:
       operationId: GetFleets
@@ -5184,9 +5184,7 @@ components:
         - $ref: '#/components/schemas/Monitor'
         - required:
             - name
-            - description
             - alert_routes
-            - source_type
             - threshold
     CreateProjectSecretRequest:
       type: object
@@ -5361,8 +5359,11 @@ components:
             type: string
         reload:
           $ref: '#/components/schemas/DatasetReloadProgress'
+        rows:
+          description: "Optional JSONata expression that expands one event into several rows. It evaluates to one row object per row, whose keys are the dataset's columns: an array of objects, or a single object for one row. Both are accepted because JSONata collapses a one-element sequence to the element, so the same expression yields an array for an event carrying several readings and a bare object for one carrying a single reading. A result that is undefined or empty contributes no rows and is not an error; anything that is not an object, or an array containing one, is rejected. When set it is the only expression that reads the event: each field below takes the row object key matching its name, and time/lat/lon name a key too. Omit it and the dataset produces one row per event, with each field's own jsonata expression reading the event directly. event.uploaded and event.captured always resolve against the event either way."
+          type: string
         time:
-          description: JSONata expression resulting in the relevant time field
+          description: JSONata expression resulting in the row's time. Required for a dataset with no rows expression. With one it defaults to the row object's "time" key, and only needs setting to name a different key, or to reach past the row as event.uploaded and event.captured do. lat and lon work the same way and are what declare that the dataset has a location column at all.
           type: string
     DataSetField:
       type: object
@@ -5375,12 +5376,13 @@ components:
             - 0
             - 1
             - 2
+            - 3
             - 5
             - 6
             - 7
             - 8
         jsonata:
-          description: the JSONata expression used to populate this field
+          description: "The JSONata expression that populates this field from the event. Required for a dataset with no rows expression. Must be omitted when the dataset has one: the column is then taken from the row object key matching this field's name, and supplying an expression here is rejected rather than silently ignored."
           type: string
         name:
           description: The name of the field
@@ -5568,6 +5570,8 @@ components:
           type: string
           format: date-time
           nullable: true
+        sensors:
+          $ref: '#/components/schemas/DeviceSensors'
         serial_number:
           type: string
         sku:
@@ -5727,6 +5731,23 @@ components:
         has_more:
           type: boolean
           default: false
+    DeviceSensor:
+      description: A sensor attached to a device
+      type: object
+      properties:
+        last_activity_date:
+          description: UTC midnight of the most recent day on which this sensor was active
+          type: string
+          format: date-time
+        sensor_uid:
+          description: Unique identifier of the sensor
+          type: string
+      required:
+        - sensor_uid
+    DeviceSensors:
+      type: array
+      items:
+        $ref: '#/components/schemas/DeviceSensor'
     DeviceSession:
       type: object
       properties:
@@ -6885,14 +6906,15 @@ components:
       type: object
       properties:
         aggregate_function:
-          description: Aggregate function to apply to the selected values before applying the condition. [none, sum, average, max, min]
+          description: Aggregate function to apply to the selected values before applying the condition. [none, avg, max, min, sum, count]
           type: string
           enum:
             - none
-            - sum
-            - average
+            - avg
             - max
             - min
+            - sum
+            - count
         aggregate_window:
           description: The time window to aggregate the selected values. It follows the format of a number followed by a time unit
           type: string
@@ -6909,7 +6931,7 @@ components:
               - $ref: '#/components/schemas/SlackBearerNotification'
               - $ref: '#/components/schemas/EmailNotification'
         condition_type:
-          description: A comparison operation to apply to the value selected by the source_selector [greater_than, greater_than_or_equal_to, less_than, less_than_or_equal_to, equal_to, not_equal_to]
+          description: A comparison operation to apply to the value selected by the source_selector. Required for event and usage monitors; set automatically for heartbeat monitors. [greater_than, greater_than_or_equal_to, less_than, less_than_or_equal_to, equal_to, not_equal_to]
           type: string
           enum:
             - greater_than
@@ -6918,9 +6940,9 @@ components:
             - less_than_or_equal_to
             - equal_to
             - not_equal_to
-            - count
         description:
           type: string
+          default: ''
         disabled:
           description: If true, the monitor will not be evaluated.
           type: boolean
@@ -6949,17 +6971,19 @@ components:
           description: If true, alerts will be created, but no notifications will be sent.
           type: boolean
         source_selector:
-          description: A valid JSONata expression that selects the value to monitor from the source. | It should return a single, numeric value.
+          description: A dot-delimited path to a single numeric value within the event body.
           type: string
-          example: body.temperature
+          example: temperature
         source_type:
-          description: The type of source to monitor. Supported values are "event" and "heartbeat".
+          description: The type of source to monitor. Defaults to "event".
           type: string
+          default: event
           enum:
             - event
             - heartbeat
+            - usage
         threshold:
-          description: The type of condition to apply to the value selected by the source_selector
+          description: The value that condition_type compares against. For heartbeat monitors this is seconds of inactivity; for usage monitors it is bytes.
           type: integer
           format: int32
         uid:
