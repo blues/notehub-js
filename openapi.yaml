@@ -202,6 +202,7 @@ paths:
       tags:
         - billing_account
       x-custom-attributes:
+        global-roles: support-admin,sales-admin,admin
         permission: read
         resource: blues:resources:billing-account:usage
   /v1/billing-accounts/{billingAccountUID}/balance-history:
@@ -246,6 +247,7 @@ paths:
       tags:
         - billing_account
       x-custom-attributes:
+        global-roles: support-admin,sales-admin,admin
         permission: read
         resource: blues:resources:billing-account:usage
   /v1/description:
@@ -413,6 +415,7 @@ paths:
       tags:
         - organization
       x-custom-attributes:
+        global-roles: support-admin,sales-admin,admin
         permission: read
         resource: blues:resources:billing-account:usage
   /v1/organizations/{organizationUID}/balance-history:
@@ -456,6 +459,7 @@ paths:
       tags:
         - organization
       x-custom-attributes:
+        global-roles: support-admin,sales-admin,admin
         permission: read
         resource: blues:resources:billing-account:usage
   /v1/products/{productUID}/devices/{deviceUID}/environment_variables_with_pin:
@@ -5971,8 +5975,6 @@ components:
           description: Email Address
           type: string
           example: example@blues.com
-      required:
-        - email
     Empty:
       type: object
     EnvTreeJsonNode:
@@ -7624,8 +7626,6 @@ components:
         token:
           description: The bearer token for the Slack app.
           type: string
-      required:
-        - token
     SlackRoute:
       type: object
       properties:
@@ -7670,8 +7670,6 @@ components:
         url:
           description: The URL of the Slack webhook.
           type: string
-      required:
-        - url
     SnowflakeRoute:
       type: object
       properties:
