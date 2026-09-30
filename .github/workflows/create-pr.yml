@@ -6,18 +6,58 @@ on:
     branches-ignore:
       - "main"
       - "test-release-**"
+      - "dependabot/**"
+
+permissions:
+  contents: read
+  pull-requests: write
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
-  create_pr_repo_sync:
+  create_pr:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      HAS_APP_KEY: ${{ secrets.BLUES_HUB_AUTOMATION_PRIVATE_KEY != '' }}
     steps:
-      - uses: actions/checkout@v3
-      - name: Create pull request
-        id: open-pr
-        uses: repo-sync/pull-request@v2
+      # A PR opened with GITHUB_TOKEN leaves its Tests run waiting for manual approval.
+      - name: Generate app token
+        id: app-token
+        if: vars.BLUES_HUB_AUTOMATION_APP_ID != '' && env.HAS_APP_KEY == 'true'
+        continue-on-error: true
+        uses: actions/create-github-app-token@v3
         with:
-          destination_branch: "main"
-          pr_title: "feat: PLACEHOLDER TITLE"
-          pr_template: ".github/PULL_REQUEST_TEMPLATE.md"
-          pr_reviewer: "tjvantoll"
-          pr_draft: true
+          app-id: ${{ vars.BLUES_HUB_AUTOMATION_APP_ID }}
+          private-key: ${{ secrets.BLUES_HUB_AUTOMATION_PRIVATE_KEY }}
+          permission-contents: read
+          permission-pull-requests: write
+
+      - name: Create pull request
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token || github.token }}
+          GH_REPO: ${{ github.repository }}
+          BRANCH: ${{ github.ref_name }}
+          USING_APP_TOKEN: ${{ steps.app-token.outputs.token != '' }}
+        run: |
+          set -euo pipefail
+          existing=$(gh pr list --head "$BRANCH" --base main --json number --jq '.[].number')
+          if [ -n "$existing" ]; then
+            echo "Pull request #$existing for $BRANCH already exists."
+            exit 0
+          fi
+          changed=$(gh api "repos/$GH_REPO/compare/main...$BRANCH" --jq '.files | length')
+          if [ "$changed" -eq 0 ]; then
+            echo "No changes between main and $BRANCH."
+            exit 0
+          fi
+          if [ "$USING_APP_TOKEN" != "true" ]; then
+            echo "::warning::No app token (BLUES_HUB_AUTOMATION_APP_ID variable or BLUES_HUB_AUTOMATION_PRIVATE_KEY secret is missing or invalid); opening the PR with GITHUB_TOKEN, so its Tests run will wait for approval."
+          fi
+          gh api "repos/$GH_REPO/contents/.github/PULL_REQUEST_TEMPLATE.md?ref=$GITHUB_SHA" \
+            -H "Accept: application/vnd.github.raw+json" > "$RUNNER_TEMP/pr-body.md"
+          gh pr create --base main --head "$BRANCH" --draft \
+            --title "feat: PLACEHOLDER TITLE" \
+            --body-file "$RUNNER_TEMP/pr-body.md" \
+            --reviewer tjvantoll
