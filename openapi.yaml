@@ -4409,7 +4409,7 @@ components:
           - json
           - csv
     hostFirmwareParam:
-      description: Host firmware filter
+      description: Host firmware filter. Matches any value containing the filter text. Use `*` as a wildcard and `\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
       explode: true
       in: query
       name: hostFirmware
@@ -4437,7 +4437,7 @@ components:
         default: 50
         minimum: 1
     locationParam:
-      description: Location filter
+      description: Location filter. Matches any value containing the filter text. Use `*` as a wildcard and `\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
       explode: true
       in: query
       name: location
@@ -4475,7 +4475,7 @@ components:
       schema:
         type: boolean
     notecardFirmwareParam:
-      description: Firmware version filter
+      description: Firmware version filter. Matches any value containing the filter text. Use `*` as a wildcard and `\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
       explode: true
       in: query
       name: notecardFirmware
@@ -4537,6 +4537,7 @@ components:
       schema:
         type: string
     productUIDQueryParam:
+      description: Product UID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
       explode: true
       in: query
       name: productUID
@@ -4664,7 +4665,7 @@ components:
           type: string
       style: form
     serialNumberParam:
-      description: Serial number filter
+      description: Serial number filter. Matches any value containing the filter text. Use `*` as a wildcard and `\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
       explode: true
       in: query
       name: serialNumber
@@ -4686,7 +4687,7 @@ components:
           type: string
       style: form
     skuParam:
-      description: SKU filter
+      description: SKU filter. Matches any value containing the filter text. Use `*` as a wildcard and `\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
       explode: true
       in: query
       name: sku
@@ -4740,7 +4741,7 @@ components:
       schema:
         type: boolean
     tagParam:
-      description: Tag filter
+      description: Tag filter. Matches the whole tag, case-insensitive. Use `*` as a wildcard and `\*` to match a literal `*`; all other characters, including `%` and `_`, match literally. For example, `51*` matches tags starting with `51`.
       explode: true
       in: query
       name: tag
@@ -5570,6 +5571,8 @@ components:
           type: string
           format: date-time
           nullable: true
+        sensors:
+          $ref: '#/components/schemas/DeviceSensors'
         serial_number:
           type: string
         sku:
@@ -5729,6 +5732,23 @@ components:
         has_more:
           type: boolean
           default: false
+    DeviceSensor:
+      description: A sensor attached to a device
+      type: object
+      properties:
+        last_activity_date:
+          description: UTC midnight of the most recent day on which this sensor was active
+          type: string
+          format: date-time
+        sensor_uid:
+          description: Unique identifier of the sensor
+          type: string
+      required:
+        - sensor_uid
+    DeviceSensors:
+      type: array
+      items:
+        $ref: '#/components/schemas/DeviceSensor'
     DeviceSession:
       type: object
       properties:
@@ -6726,14 +6746,15 @@ components:
       type: object
       properties:
         aggregate_function:
-          description: 'Aggregate function to apply to the selected values before applying the condition. [none, sum, average, max, min]'
+          description: 'Aggregate function to apply to the selected values before applying the condition. [none, avg, max, min, sum, count]'
           type: string
           enum:
             - none
-            - sum
-            - average
+            - avg
             - max
             - min
+            - sum
+            - count
         aggregate_window:
           description: The time window to aggregate the selected values. It follows the format of a number followed by a time unit
           type: string
@@ -6750,7 +6771,7 @@ components:
               - $ref: '#/components/schemas/SlackBearerNotification'
               - $ref: '#/components/schemas/EmailNotification'
         condition_type:
-          description: 'A comparison operation to apply to the value selected by the source_selector [greater_than, greater_than_or_equal_to, less_than, less_than_or_equal_to, equal_to, not_equal_to]'
+          description: 'A comparison operation to apply to the value selected by the source_selector. Required for event and usage monitors; set automatically for heartbeat monitors. [greater_than, greater_than_or_equal_to, less_than, less_than_or_equal_to, equal_to, not_equal_to]'
           type: string
           enum:
             - greater_than
@@ -6759,7 +6780,6 @@ components:
             - less_than_or_equal_to
             - equal_to
             - not_equal_to
-            - count
         description:
           type: string
           default: ''
@@ -6801,10 +6821,9 @@ components:
           enum:
             - event
             - heartbeat
-            - device
             - usage
         threshold:
-          description: The type of condition to apply to the value selected by the source_selector
+          description: The value that condition_type compares against. For heartbeat monitors this is seconds of inactivity; for usage monitors it is bytes.
           type: integer
           format: int32
         uid:
