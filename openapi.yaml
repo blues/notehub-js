@@ -6771,7 +6771,7 @@ components:
           description: The time window to aggregate the selected values. It follows the format of a number followed by a time unit
           type: string
           example: 10m or 5h30m40s
-          pattern: ^([0-9]+([.][0-9]+)?(ns|us|µs|ms|s|m|h))+$
+          pattern: ^(([0-9]+[.]?[0-9]*|[.][0-9]+)(ns|us|µs|ms|s|m|h))+$
         alert:
           description: If true, the monitor is in alert state.
           type: boolean
@@ -6818,7 +6818,7 @@ components:
           description: The time period to wait before routing another event after the monitor | has been triggered. It follows the format of a number followed by a time unit.
           type: string
           example: 10m or 5h30m40s
-          pattern: ^([0-9]+([.][0-9]+)?(ns|us|µs|ms|s|m|h))+$
+          pattern: ^(([0-9]+[.]?[0-9]*|[.][0-9]+)(ns|us|µs|ms|s|m|h))+$
         silenced:
           description: If true, alerts will be created, but no notifications will be sent.
           type: boolean
