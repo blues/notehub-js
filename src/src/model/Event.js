@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The Event model module.
  * @module model/Event
- * @version 6.5.0
+ * @version 6.6.0
  */
 class Event {
   /**
@@ -131,6 +131,9 @@ class Event {
       }
       if (data.hasOwnProperty("payload")) {
         obj["payload"] = ApiClient.convertToType(data["payload"], "String");
+      }
+      if (data.hasOwnProperty("platform")) {
+        obj["platform"] = ApiClient.convertToType(data["platform"], "Boolean");
       }
       if (data.hasOwnProperty("product")) {
         obj["product"] = ApiClient.convertToType(data["product"], "String");
@@ -835,6 +838,12 @@ Event.prototype["orientation"] = undefined;
  * @member {String} payload
  */
 Event.prototype["payload"] = undefined;
+
+/**
+ * Whether this is a platform event (administrative, e.g. _health.qo, _session.qo) rather than user data
+ * @member {Boolean} platform
+ */
+Event.prototype["platform"] = undefined;
 
 /**
  * Product UID (globally unique)

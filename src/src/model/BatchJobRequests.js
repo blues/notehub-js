@@ -12,11 +12,12 @@
  */
 
 import ApiClient from "../ApiClient";
+import BatchJobNoteRequest from "./BatchJobNoteRequest";
 
 /**
  * The BatchJobRequests model module.
  * @module model/BatchJobRequests
- * @version 6.5.0
+ * @version 6.6.0
  */
 class BatchJobRequests {
   /**
@@ -84,6 +85,11 @@ class BatchJobRequests {
           data["fleets_to_leave"],
           ["String"]
         );
+      }
+      if (data.hasOwnProperty("note_reqs")) {
+        obj["note_reqs"] = ApiClient.convertToType(data["note_reqs"], [
+          BatchJobNoteRequest,
+        ]);
       }
       if (data.hasOwnProperty("provision_product")) {
         obj["provision_product"] = ApiClient.convertToType(
@@ -155,6 +161,20 @@ class BatchJobRequests {
         "Expected the field `fleets_to_leave` to be an array in the JSON data but got " +
           data["fleets_to_leave"]
       );
+    }
+    if (data["note_reqs"]) {
+      // data not null
+      // ensure the json data is an array
+      if (!Array.isArray(data["note_reqs"])) {
+        throw new Error(
+          "Expected the field `note_reqs` to be an array in the JSON data but got " +
+            data["note_reqs"]
+        );
+      }
+      // validate the optional field `note_reqs` (array)
+      for (const item of data["note_reqs"]) {
+        BatchJobNoteRequest.validateJsonObject(item);
+      }
     }
     // ensure the json data is a string
     if (
@@ -246,6 +266,12 @@ BatchJobRequests.prototype["fleets_to_join"] = undefined;
  * @member {Array.<String>} fleets_to_leave
  */
 BatchJobRequests.prototype["fleets_to_leave"] = undefined;
+
+/**
+ * note.add/note.update/note.delete requests to perform against the device's own notefiles. When both default_requests and a device's device_requests specify note_reqs, they merge by identity (req, file, note): a device-specific entry with the same identity as a default entry replaces it; entries unique to either side (no collision) all still apply.
+ * @member {Array.<module:model/BatchJobNoteRequest>} note_reqs
+ */
+BatchJobRequests.prototype["note_reqs"] = undefined;
 
 /**
  * Product UID to provision the device with if not already provisioned

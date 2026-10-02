@@ -1202,14 +1202,14 @@ let opts = {
   pageSize: 50, // Number |
   pageNum: 1, // Number |
   deviceUID: ["null"], // [String] | A Device UID.
-  tag: ["null"], // [String] | Tag filter
-  serialNumber: ["null"], // [String] | Serial number filter
+  tag: ["null"], // [String] | Tag filter. Matches the whole tag, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally. For example, `51*` matches tags starting with `51`.
+  serialNumber: ["null"], // [String] | Serial number filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
   fleetUID: ["null"], // [String] |
-  notecardFirmware: ["null"], // [String] | Firmware version filter
-  location: ["null"], // [String] | Location filter
-  hostFirmware: ["null"], // [String] | Host firmware filter
-  productUID: ["null"], // [String] |
-  sku: ["null"], // [String] | SKU filter
+  notecardFirmware: ["null"], // [String] | Firmware version filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
+  location: ["null"], // [String] | Location filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
+  hostFirmware: ["null"], // [String] | Host firmware filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
+  productUID: ["null"], // [String] | Product UID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
+  sku: ["null"], // [String] | SKU filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
 };
 apiInstance.getDevices(projectOrProductUID, opts).then(
   (data) => {
@@ -1225,20 +1225,20 @@ apiInstance.getDevices(projectOrProductUID, opts).then(
 
 ### Parameters
 
-| Name                    | Type                      | Description             | Notes                      |
-| ----------------------- | ------------------------- | ----------------------- | -------------------------- |
-| **projectOrProductUID** | **String**                |                         |
-| **pageSize**            | **Number**                |                         | [optional] [default to 50] |
-| **pageNum**             | **Number**                |                         | [optional] [default to 1]  |
-| **deviceUID**           | [**[String]**](String.md) | A Device UID.           | [optional]                 |
-| **tag**                 | [**[String]**](String.md) | Tag filter              | [optional]                 |
-| **serialNumber**        | [**[String]**](String.md) | Serial number filter    | [optional]                 |
-| **fleetUID**            | [**[String]**](String.md) |                         | [optional]                 |
-| **notecardFirmware**    | [**[String]**](String.md) | Firmware version filter | [optional]                 |
-| **location**            | [**[String]**](String.md) | Location filter         | [optional]                 |
-| **hostFirmware**        | [**[String]**](String.md) | Host firmware filter    | [optional]                 |
-| **productUID**          | [**[String]**](String.md) |                         | [optional]                 |
-| **sku**                 | [**[String]**](String.md) | SKU filter              | [optional]                 |
+| Name                    | Type                      | Description                                                                                                                                                                                                                                                                                           | Notes                      |
+| ----------------------- | ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------- |
+| **projectOrProductUID** | **String**                |                                                                                                                                                                                                                                                                                                       |
+| **pageSize**            | **Number**                |                                                                                                                                                                                                                                                                                                       | [optional] [default to 50] |
+| **pageNum**             | **Number**                |                                                                                                                                                                                                                                                                                                       | [optional] [default to 1]  |
+| **deviceUID**           | [**[String]**](String.md) | A Device UID.                                                                                                                                                                                                                                                                                         | [optional]                 |
+| **tag**                 | [**[String]**](String.md) | Tag filter. Matches the whole tag, case-insensitive. Use &#x60;_&#x60; as a wildcard and &#x60;\\_&#x60; to match a literal &#x60;_&#x60;; all other characters, including &#x60;%&#x60; and &#x60;\_&#x60;, match literally. For example, &#x60;51_&#x60; matches tags starting with &#x60;51&#x60;. | [optional]                 |
+| **serialNumber**        | [**[String]**](String.md) | Serial number filter. Matches any value containing the filter text. Use &#x60;_&#x60; as a wildcard and &#x60;\\_&#x60; to match a literal &#x60;\*&#x60;; all other characters, including &#x60;%&#x60; and &#x60;\_&#x60;, match literally.                                                         | [optional]                 |
+| **fleetUID**            | [**[String]**](String.md) |                                                                                                                                                                                                                                                                                                       | [optional]                 |
+| **notecardFirmware**    | [**[String]**](String.md) | Firmware version filter. Matches any value containing the filter text. Use &#x60;_&#x60; as a wildcard and &#x60;\\_&#x60; to match a literal &#x60;\*&#x60;; all other characters, including &#x60;%&#x60; and &#x60;\_&#x60;, match literally.                                                      | [optional]                 |
+| **location**            | [**[String]**](String.md) | Location filter. Matches any value containing the filter text. Use &#x60;_&#x60; as a wildcard and &#x60;\\_&#x60; to match a literal &#x60;\*&#x60;; all other characters, including &#x60;%&#x60; and &#x60;\_&#x60;, match literally.                                                              | [optional]                 |
+| **hostFirmware**        | [**[String]**](String.md) | Host firmware filter. Matches any value containing the filter text. Use &#x60;_&#x60; as a wildcard and &#x60;\\_&#x60; to match a literal &#x60;\*&#x60;; all other characters, including &#x60;%&#x60; and &#x60;\_&#x60;, match literally.                                                         | [optional]                 |
+| **productUID**          | [**[String]**](String.md) | Product UID filter. Matches any value containing the filter text, case-insensitive. Use &#x60;_&#x60; as a wildcard and &#x60;\\_&#x60; to match a literal &#x60;\*&#x60;; all other characters, including &#x60;%&#x60; and &#x60;\_&#x60;, match literally.                                         | [optional]                 |
+| **sku**                 | [**[String]**](String.md) | SKU filter. Matches any value containing the filter text. Use &#x60;_&#x60; as a wildcard and &#x60;\\_&#x60; to match a literal &#x60;\*&#x60;; all other characters, including &#x60;%&#x60; and &#x60;\_&#x60;, match literally.                                                                   | [optional]                 |
 
 ### Return type
 
@@ -1274,13 +1274,13 @@ let opts = {
   pageSize: 50, // Number |
   pageNum: 1, // Number |
   deviceUID: ["null"], // [String] | A Device UID.
-  tag: ["null"], // [String] | Tag filter
-  serialNumber: ["null"], // [String] | Serial number filter
-  notecardFirmware: ["null"], // [String] | Firmware version filter
-  location: ["null"], // [String] | Location filter
-  hostFirmware: ["null"], // [String] | Host firmware filter
-  productUID: ["null"], // [String] |
-  sku: ["null"], // [String] | SKU filter
+  tag: ["null"], // [String] | Tag filter. Matches the whole tag, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally. For example, `51*` matches tags starting with `51`.
+  serialNumber: ["null"], // [String] | Serial number filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
+  notecardFirmware: ["null"], // [String] | Firmware version filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
+  location: ["null"], // [String] | Location filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
+  hostFirmware: ["null"], // [String] | Host firmware filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
+  productUID: ["null"], // [String] | Product UID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
+  sku: ["null"], // [String] | SKU filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
 };
 apiInstance.getFleetDevices(projectOrProductUID, fleetUID, opts).then(
   (data) => {
@@ -1296,20 +1296,20 @@ apiInstance.getFleetDevices(projectOrProductUID, fleetUID, opts).then(
 
 ### Parameters
 
-| Name                    | Type                      | Description             | Notes                      |
-| ----------------------- | ------------------------- | ----------------------- | -------------------------- |
-| **projectOrProductUID** | **String**                |                         |
-| **fleetUID**            | **String**                |                         |
-| **pageSize**            | **Number**                |                         | [optional] [default to 50] |
-| **pageNum**             | **Number**                |                         | [optional] [default to 1]  |
-| **deviceUID**           | [**[String]**](String.md) | A Device UID.           | [optional]                 |
-| **tag**                 | [**[String]**](String.md) | Tag filter              | [optional]                 |
-| **serialNumber**        | [**[String]**](String.md) | Serial number filter    | [optional]                 |
-| **notecardFirmware**    | [**[String]**](String.md) | Firmware version filter | [optional]                 |
-| **location**            | [**[String]**](String.md) | Location filter         | [optional]                 |
-| **hostFirmware**        | [**[String]**](String.md) | Host firmware filter    | [optional]                 |
-| **productUID**          | [**[String]**](String.md) |                         | [optional]                 |
-| **sku**                 | [**[String]**](String.md) | SKU filter              | [optional]                 |
+| Name                    | Type                      | Description                                                                                                                                                                                                                                                                                           | Notes                      |
+| ----------------------- | ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------- |
+| **projectOrProductUID** | **String**                |                                                                                                                                                                                                                                                                                                       |
+| **fleetUID**            | **String**                |                                                                                                                                                                                                                                                                                                       |
+| **pageSize**            | **Number**                |                                                                                                                                                                                                                                                                                                       | [optional] [default to 50] |
+| **pageNum**             | **Number**                |                                                                                                                                                                                                                                                                                                       | [optional] [default to 1]  |
+| **deviceUID**           | [**[String]**](String.md) | A Device UID.                                                                                                                                                                                                                                                                                         | [optional]                 |
+| **tag**                 | [**[String]**](String.md) | Tag filter. Matches the whole tag, case-insensitive. Use &#x60;_&#x60; as a wildcard and &#x60;\\_&#x60; to match a literal &#x60;_&#x60;; all other characters, including &#x60;%&#x60; and &#x60;\_&#x60;, match literally. For example, &#x60;51_&#x60; matches tags starting with &#x60;51&#x60;. | [optional]                 |
+| **serialNumber**        | [**[String]**](String.md) | Serial number filter. Matches any value containing the filter text. Use &#x60;_&#x60; as a wildcard and &#x60;\\_&#x60; to match a literal &#x60;\*&#x60;; all other characters, including &#x60;%&#x60; and &#x60;\_&#x60;, match literally.                                                         | [optional]                 |
+| **notecardFirmware**    | [**[String]**](String.md) | Firmware version filter. Matches any value containing the filter text. Use &#x60;_&#x60; as a wildcard and &#x60;\\_&#x60; to match a literal &#x60;\*&#x60;; all other characters, including &#x60;%&#x60; and &#x60;\_&#x60;, match literally.                                                      | [optional]                 |
+| **location**            | [**[String]**](String.md) | Location filter. Matches any value containing the filter text. Use &#x60;_&#x60; as a wildcard and &#x60;\\_&#x60; to match a literal &#x60;\*&#x60;; all other characters, including &#x60;%&#x60; and &#x60;\_&#x60;, match literally.                                                              | [optional]                 |
+| **hostFirmware**        | [**[String]**](String.md) | Host firmware filter. Matches any value containing the filter text. Use &#x60;_&#x60; as a wildcard and &#x60;\\_&#x60; to match a literal &#x60;\*&#x60;; all other characters, including &#x60;%&#x60; and &#x60;\_&#x60;, match literally.                                                         | [optional]                 |
+| **productUID**          | [**[String]**](String.md) | Product UID filter. Matches any value containing the filter text, case-insensitive. Use &#x60;_&#x60; as a wildcard and &#x60;\\_&#x60; to match a literal &#x60;\*&#x60;; all other characters, including &#x60;%&#x60; and &#x60;\_&#x60;, match literally.                                         | [optional]                 |
+| **sku**                 | [**[String]**](String.md) | SKU filter. Matches any value containing the filter text. Use &#x60;_&#x60; as a wildcard and &#x60;\\_&#x60; to match a literal &#x60;\*&#x60;; all other characters, including &#x60;%&#x60; and &#x60;\_&#x60;, match literally.                                                                   | [optional]                 |
 
 ### Return type
 

@@ -38,7 +38,7 @@ import SignalDevice200Response from "../model/SignalDevice200Response";
 /**
  * Device service.
  * @module api/DeviceApi
- * @version 6.5.0
+ * @version 6.6.0
  */
 export default class DeviceApi {
   /**
@@ -1699,14 +1699,14 @@ export default class DeviceApi {
    * @param {Number} opts.pageSize  (default to 50)
    * @param {Number} opts.pageNum  (default to 1)
    * @param {Array.<String>} opts.deviceUID A Device UID.
-   * @param {Array.<String>} opts.tag Tag filter
-   * @param {Array.<String>} opts.serialNumber Serial number filter
+   * @param {Array.<String>} opts.tag Tag filter. Matches the whole tag, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally. For example, `51*` matches tags starting with `51`.
+   * @param {Array.<String>} opts.serialNumber Serial number filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
    * @param {Array.<String>} opts.fleetUID
-   * @param {Array.<String>} opts.notecardFirmware Firmware version filter
-   * @param {Array.<String>} opts.location Location filter
-   * @param {Array.<String>} opts.hostFirmware Host firmware filter
-   * @param {Array.<String>} opts.productUID
-   * @param {Array.<String>} opts.sku SKU filter
+   * @param {Array.<String>} opts.notecardFirmware Firmware version filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
+   * @param {Array.<String>} opts.location Location filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
+   * @param {Array.<String>} opts.hostFirmware Host firmware filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
+   * @param {Array.<String>} opts.productUID Product UID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
+   * @param {Array.<String>} opts.sku SKU filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetDevices200Response} and HTTP response
    */
   getDevicesWithHttpInfo(projectOrProductUID, opts) {
@@ -1780,14 +1780,14 @@ export default class DeviceApi {
    * @param {Number} opts.pageSize  (default to 50)
    * @param {Number} opts.pageNum  (default to 1)
    * @param {Array.<String>} opts.deviceUID A Device UID.
-   * @param {Array.<String>} opts.tag Tag filter
-   * @param {Array.<String>} opts.serialNumber Serial number filter
+   * @param {Array.<String>} opts.tag Tag filter. Matches the whole tag, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally. For example, `51*` matches tags starting with `51`.
+   * @param {Array.<String>} opts.serialNumber Serial number filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
    * @param {Array.<String>} opts.fleetUID
-   * @param {Array.<String>} opts.notecardFirmware Firmware version filter
-   * @param {Array.<String>} opts.location Location filter
-   * @param {Array.<String>} opts.hostFirmware Host firmware filter
-   * @param {Array.<String>} opts.productUID
-   * @param {Array.<String>} opts.sku SKU filter
+   * @param {Array.<String>} opts.notecardFirmware Firmware version filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
+   * @param {Array.<String>} opts.location Location filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
+   * @param {Array.<String>} opts.hostFirmware Host firmware filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
+   * @param {Array.<String>} opts.productUID Product UID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
+   * @param {Array.<String>} opts.sku SKU filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetDevices200Response}
    */
   getDevices(projectOrProductUID, opts) {
@@ -1806,13 +1806,13 @@ export default class DeviceApi {
    * @param {Number} opts.pageSize  (default to 50)
    * @param {Number} opts.pageNum  (default to 1)
    * @param {Array.<String>} opts.deviceUID A Device UID.
-   * @param {Array.<String>} opts.tag Tag filter
-   * @param {Array.<String>} opts.serialNumber Serial number filter
-   * @param {Array.<String>} opts.notecardFirmware Firmware version filter
-   * @param {Array.<String>} opts.location Location filter
-   * @param {Array.<String>} opts.hostFirmware Host firmware filter
-   * @param {Array.<String>} opts.productUID
-   * @param {Array.<String>} opts.sku SKU filter
+   * @param {Array.<String>} opts.tag Tag filter. Matches the whole tag, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally. For example, `51*` matches tags starting with `51`.
+   * @param {Array.<String>} opts.serialNumber Serial number filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
+   * @param {Array.<String>} opts.notecardFirmware Firmware version filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
+   * @param {Array.<String>} opts.location Location filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
+   * @param {Array.<String>} opts.hostFirmware Host firmware filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
+   * @param {Array.<String>} opts.productUID Product UID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
+   * @param {Array.<String>} opts.sku SKU filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetDevices200Response} and HTTP response
    */
   getFleetDevicesWithHttpInfo(projectOrProductUID, fleetUID, opts) {
@@ -1893,13 +1893,13 @@ export default class DeviceApi {
    * @param {Number} opts.pageSize  (default to 50)
    * @param {Number} opts.pageNum  (default to 1)
    * @param {Array.<String>} opts.deviceUID A Device UID.
-   * @param {Array.<String>} opts.tag Tag filter
-   * @param {Array.<String>} opts.serialNumber Serial number filter
-   * @param {Array.<String>} opts.notecardFirmware Firmware version filter
-   * @param {Array.<String>} opts.location Location filter
-   * @param {Array.<String>} opts.hostFirmware Host firmware filter
-   * @param {Array.<String>} opts.productUID
-   * @param {Array.<String>} opts.sku SKU filter
+   * @param {Array.<String>} opts.tag Tag filter. Matches the whole tag, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally. For example, `51*` matches tags starting with `51`.
+   * @param {Array.<String>} opts.serialNumber Serial number filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
+   * @param {Array.<String>} opts.notecardFirmware Firmware version filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
+   * @param {Array.<String>} opts.location Location filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
+   * @param {Array.<String>} opts.hostFirmware Host firmware filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
+   * @param {Array.<String>} opts.productUID Product UID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
+   * @param {Array.<String>} opts.sku SKU filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetDevices200Response}
    */
   getFleetDevices(projectOrProductUID, fleetUID, opts) {

@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The DataSetField model module.
  * @module model/DataSetField
- * @version 6.5.0
+ * @version 6.6.0
  */
 class DataSetField {
   /**
@@ -100,7 +100,7 @@ class DataSetField {
 DataSetField.prototype["datatype"] = undefined;
 
 /**
- * the JSONata expression used to populate this field
+ * The JSONata expression that populates this field from the event. Required for a dataset with no rows expression. Must be omitted when the dataset has one: the column is then taken from the row object key matching this field's name, and supplying an expression here is rejected rather than silently ignored.
  * @member {String} jsonata
  */
 DataSetField.prototype["jsonata"] = undefined;
@@ -134,6 +134,12 @@ DataSetField["DatatypeEnum"] = {
    * @const
    */
   2: 2,
+
+  /**
+   * value: 3
+   * @const
+   */
+  3: 3,
 
   /**
    * value: 5

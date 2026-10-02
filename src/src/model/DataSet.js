@@ -13,11 +13,12 @@
 
 import ApiClient from "../ApiClient";
 import DataSetField from "./DataSetField";
+import DatasetReloadProgress from "./DatasetReloadProgress";
 
 /**
  * The DataSet model module.
  * @module model/DataSet
- * @version 6.5.0
+ * @version 6.6.0
  */
 class DataSet {
   /**
@@ -71,6 +72,14 @@ class DataSet {
         obj["notefiles"] = ApiClient.convertToType(data["notefiles"], [
           "String",
         ]);
+      }
+      if (data.hasOwnProperty("reload")) {
+        obj["reload"] = DatasetReloadProgress.constructFromObject(
+          data["reload"]
+        );
+      }
+      if (data.hasOwnProperty("rows")) {
+        obj["rows"] = ApiClient.convertToType(data["rows"], "String");
       }
       if (data.hasOwnProperty("time")) {
         obj["time"] = ApiClient.convertToType(data["time"], "String");
@@ -138,6 +147,21 @@ class DataSet {
           data["notefiles"]
       );
     }
+    // validate the optional field `reload`
+    if (data["reload"]) {
+      // data not null
+      DatasetReloadProgress.validateJSON(data["reload"]);
+    }
+    // ensure the json data is a string
+    if (
+      data["rows"] &&
+      !(typeof data["rows"] === "string" || data["rows"] instanceof String)
+    ) {
+      throw new Error(
+        "Expected the field `rows` to be a primitive type in the JSON string but got " +
+          data["rows"]
+      );
+    }
     // ensure the json data is a string
     if (
       data["time"] &&
@@ -195,7 +219,18 @@ DataSet.prototype["name"] = undefined;
 DataSet.prototype["notefiles"] = undefined;
 
 /**
- * JSONata expression resulting in the relevant time field
+ * @member {module:model/DatasetReloadProgress} reload
+ */
+DataSet.prototype["reload"] = undefined;
+
+/**
+ * Optional JSONata expression that expands one event into several rows. It evaluates to one row object per row, whose keys are the dataset's columns: an array of objects, or a single object for one row. Both are accepted because JSONata collapses a one-element sequence to the element, so the same expression yields an array for an event carrying several readings and a bare object for one carrying a single reading. A result that is undefined or empty contributes no rows and is not an error; anything that is not an object, or an array containing one, is rejected. When set it is the only expression that reads the event: each field below takes the row object key matching its name, and time/lat/lon name a key too. Omit it and the dataset produces one row per event, with each field's own jsonata expression reading the event directly. event.uploaded and event.captured always resolve against the event either way.
+ * @member {String} rows
+ */
+DataSet.prototype["rows"] = undefined;
+
+/**
+ * JSONata expression resulting in the row's time. Required for a dataset with no rows expression. With one it defaults to the row object's \"time\" key, and only needs setting to name a different key, or to reach past the row as event.uploaded and event.captured do. lat and lon work the same way and are what declare that the dataset has a location column at all.
  * @member {String} time
  */
 DataSet.prototype["time"] = undefined;

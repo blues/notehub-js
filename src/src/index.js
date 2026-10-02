@@ -17,8 +17,10 @@ import AddDeviceToFleetsRequest from "./model/AddDeviceToFleetsRequest";
 import Alert from "./model/Alert";
 import AlertDataInner from "./model/AlertDataInner";
 import AlertNotificationsInner from "./model/AlertNotificationsInner";
+import ArchiveStats from "./model/ArchiveStats";
 import AwsRoute from "./model/AwsRoute";
 import AzureRoute from "./model/AzureRoute";
+import BatchJobNoteRequest from "./model/BatchJobNoteRequest";
 import BatchJobRequests from "./model/BatchJobRequests";
 import BillingAccount from "./model/BillingAccount";
 import BillingAccountRole from "./model/BillingAccountRole";
@@ -44,6 +46,7 @@ import DataSet from "./model/DataSet";
 import DataSetField from "./model/DataSetField";
 import DataUsage from "./model/DataUsage";
 import DatacakeRoute from "./model/DatacakeRoute";
+import DatasetReloadProgress from "./model/DatasetReloadProgress";
 import DeleteDeviceFromFleetsRequest from "./model/DeleteDeviceFromFleetsRequest";
 import DeleteJob200Response from "./model/DeleteJob200Response";
 import DeleteNotefilesRequest from "./model/DeleteNotefilesRequest";
@@ -57,6 +60,7 @@ import DeviceDfuStateMachine from "./model/DeviceDfuStateMachine";
 import DeviceDfuStateMachineNode from "./model/DeviceDfuStateMachineNode";
 import DeviceDfuStatus from "./model/DeviceDfuStatus";
 import DeviceDfuStatusPage from "./model/DeviceDfuStatusPage";
+import DeviceSensor from "./model/DeviceSensor";
 import DeviceSession from "./model/DeviceSession";
 import DeviceTowerInfo from "./model/DeviceTowerInfo";
 import DeviceUsage from "./model/DeviceUsage";
@@ -84,7 +88,6 @@ import GetDbNote200Response from "./model/GetDbNote200Response";
 import GetDeviceEnvironmentVariablesByPin200Response from "./model/GetDeviceEnvironmentVariablesByPin200Response";
 import GetDeviceFleets200Response from "./model/GetDeviceFleets200Response";
 import GetDeviceHealthLog200Response from "./model/GetDeviceHealthLog200Response";
-import GetDeviceHealthLog200ResponseHealthLogInner from "./model/GetDeviceHealthLog200ResponseHealthLogInner";
 import GetDeviceJourney200Response from "./model/GetDeviceJourney200Response";
 import GetDeviceJourney200ResponseJourney from "./model/GetDeviceJourney200ResponseJourney";
 import GetDeviceJourneys200Response from "./model/GetDeviceJourneys200Response";
@@ -110,6 +113,7 @@ import GetRouteLogsUsage200Response from "./model/GetRouteLogsUsage200Response";
 import GetSessionsUsage200Response from "./model/GetSessionsUsage200Response";
 import GetWebhooks200Response from "./model/GetWebhooks200Response";
 import GoogleRoute from "./model/GoogleRoute";
+import HealthLog from "./model/HealthLog";
 import HttpRoute from "./model/HttpRoute";
 import Job from "./model/Job";
 import JobDefinition from "./model/JobDefinition";
@@ -225,7 +229,7 @@ import WebhookApi from "./api/WebhookApi";
  * </pre>
  * </p>
  * @module index
- * @version 6.5.0
+ * @version 6.6.0
  */
 export {
   /**
@@ -265,6 +269,12 @@ export {
   AlertNotificationsInner,
 
   /**
+   * The ArchiveStats model constructor.
+   * @property {module:model/ArchiveStats}
+   */
+  ArchiveStats,
+
+  /**
    * The AwsRoute model constructor.
    * @property {module:model/AwsRoute}
    */
@@ -275,6 +285,12 @@ export {
    * @property {module:model/AzureRoute}
    */
   AzureRoute,
+
+  /**
+   * The BatchJobNoteRequest model constructor.
+   * @property {module:model/BatchJobNoteRequest}
+   */
+  BatchJobNoteRequest,
 
   /**
    * The BatchJobRequests model constructor.
@@ -427,6 +443,12 @@ export {
   DatacakeRoute,
 
   /**
+   * The DatasetReloadProgress model constructor.
+   * @property {module:model/DatasetReloadProgress}
+   */
+  DatasetReloadProgress,
+
+  /**
    * The DeleteDeviceFromFleetsRequest model constructor.
    * @property {module:model/DeleteDeviceFromFleetsRequest}
    */
@@ -503,6 +525,12 @@ export {
    * @property {module:model/DeviceDfuStatusPage}
    */
   DeviceDfuStatusPage,
+
+  /**
+   * The DeviceSensor model constructor.
+   * @property {module:model/DeviceSensor}
+   */
+  DeviceSensor,
 
   /**
    * The DeviceSession model constructor.
@@ -667,12 +695,6 @@ export {
   GetDeviceHealthLog200Response,
 
   /**
-   * The GetDeviceHealthLog200ResponseHealthLogInner model constructor.
-   * @property {module:model/GetDeviceHealthLog200ResponseHealthLogInner}
-   */
-  GetDeviceHealthLog200ResponseHealthLogInner,
-
-  /**
    * The GetDeviceJourney200Response model constructor.
    * @property {module:model/GetDeviceJourney200Response}
    */
@@ -821,6 +843,12 @@ export {
    * @property {module:model/GoogleRoute}
    */
   GoogleRoute,
+
+  /**
+   * The HealthLog model constructor.
+   * @property {module:model/HealthLog}
+   */
+  HealthLog,
 
   /**
    * The HttpRoute model constructor.

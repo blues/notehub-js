@@ -14,11 +14,18 @@
 | **firmwareNotecard**     | **String**                                |                                                                              | [optional] |
 | **fleetUids**            | **[String]**                              |                                                                              |
 | **gpsLocation**          | [**Location**](Location.md)               |                                                                              | [optional] |
+| **healthLog**            | [**[HealthLog]**](HealthLog.md)           |                                                                              | [optional] |
 | **lastActivity**         | **Date**                                  |                                                                              | [optional] |
 | **productUid**           | **String**                                |                                                                              |
 | **provisioned**          | **Date**                                  |                                                                              |
+| **recentEventCount**     | **[Number]**                              |                                                                              | [optional] |
+| **recentSessionCount**   | **[Number]**                              |                                                                              | [optional] |
+| **recentSessionSeconds** | **[Number]**                              |                                                                              | [optional] |
+| **recentWhen**           | **Date**                                  |                                                                              | [optional] |
+| **sensors**              | [**[DeviceSensor]**](DeviceSensor.md)     |                                                                              | [optional] |
 | **serialNumber**         | **String**                                |                                                                              | [optional] |
 | **sku**                  | **String**                                |                                                                              | [optional] |
+| **tags**                 | **String**                                |                                                                              | [optional] |
 | **temperature**          | **Number**                                |                                                                              |
 | **towerInfo**            | [**DeviceTowerInfo**](DeviceTowerInfo.md) |                                                                              | [optional] |
 | **towerLocation**        | [**Location**](Location.md)               |                                                                              | [optional] |

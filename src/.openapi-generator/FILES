@@ -8,9 +8,11 @@ docs/Alert.md
 docs/AlertApi.md
 docs/AlertDataInner.md
 docs/AlertNotificationsInner.md
+docs/ArchiveStats.md
 docs/AuthorizationApi.md
 docs/AwsRoute.md
 docs/AzureRoute.md
+docs/BatchJobNoteRequest.md
 docs/BatchJobRequests.md
 docs/BillingAccount.md
 docs/BillingAccountApi.md
@@ -37,6 +39,7 @@ docs/DataSet.md
 docs/DataSetField.md
 docs/DataUsage.md
 docs/DatacakeRoute.md
+docs/DatasetReloadProgress.md
 docs/DeleteDeviceFromFleetsRequest.md
 docs/DeleteJob200Response.md
 docs/DeleteNotefilesRequest.md
@@ -52,6 +55,7 @@ docs/DeviceDfuStateMachine.md
 docs/DeviceDfuStateMachineNode.md
 docs/DeviceDfuStatus.md
 docs/DeviceDfuStatusPage.md
+docs/DeviceSensor.md
 docs/DeviceSession.md
 docs/DeviceTowerInfo.md
 docs/DeviceUsage.md
@@ -81,7 +85,6 @@ docs/GetDbNote200Response.md
 docs/GetDeviceEnvironmentVariablesByPin200Response.md
 docs/GetDeviceFleets200Response.md
 docs/GetDeviceHealthLog200Response.md
-docs/GetDeviceHealthLog200ResponseHealthLogInner.md
 docs/GetDeviceJourney200Response.md
 docs/GetDeviceJourney200ResponseJourney.md
 docs/GetDeviceJourneys200Response.md
@@ -107,6 +110,7 @@ docs/GetRouteLogsUsage200Response.md
 docs/GetSessionsUsage200Response.md
 docs/GetWebhooks200Response.md
 docs/GoogleRoute.md
+docs/HealthLog.md
 docs/HttpRoute.md
 docs/Job.md
 docs/JobDefinition.md
@@ -209,8 +213,10 @@ src/model/AddDeviceToFleetsRequest.js
 src/model/Alert.js
 src/model/AlertDataInner.js
 src/model/AlertNotificationsInner.js
+src/model/ArchiveStats.js
 src/model/AwsRoute.js
 src/model/AzureRoute.js
+src/model/BatchJobNoteRequest.js
 src/model/BatchJobRequests.js
 src/model/BillingAccount.js
 src/model/BillingAccountRole.js
@@ -236,6 +242,7 @@ src/model/DataSet.js
 src/model/DataSetField.js
 src/model/DataUsage.js
 src/model/DatacakeRoute.js
+src/model/DatasetReloadProgress.js
 src/model/DeleteDeviceFromFleetsRequest.js
 src/model/DeleteJob200Response.js
 src/model/DeleteNotefilesRequest.js
@@ -249,6 +256,7 @@ src/model/DeviceDfuStateMachine.js
 src/model/DeviceDfuStateMachineNode.js
 src/model/DeviceDfuStatus.js
 src/model/DeviceDfuStatusPage.js
+src/model/DeviceSensor.js
 src/model/DeviceSession.js
 src/model/DeviceTowerInfo.js
 src/model/DeviceUsage.js
@@ -276,7 +284,6 @@ src/model/GetDbNote200Response.js
 src/model/GetDeviceEnvironmentVariablesByPin200Response.js
 src/model/GetDeviceFleets200Response.js
 src/model/GetDeviceHealthLog200Response.js
-src/model/GetDeviceHealthLog200ResponseHealthLogInner.js
 src/model/GetDeviceJourney200Response.js
 src/model/GetDeviceJourney200ResponseJourney.js
 src/model/GetDeviceJourneys200Response.js
@@ -302,6 +309,7 @@ src/model/GetRouteLogsUsage200Response.js
 src/model/GetSessionsUsage200Response.js
 src/model/GetWebhooks200Response.js
 src/model/GoogleRoute.js
+src/model/HealthLog.js
 src/model/HttpRoute.js
 src/model/Job.js
 src/model/JobDefinition.js
@@ -373,7 +381,8 @@ src/model/UserDfuStateMachine.js
 src/model/UserDfuStateMachineStatus.js
 src/model/UserFirmwareInfo.js
 src/model/WebhookSettings.js
-test/api/DescriptionApi.spec.js
-test/model/DataSet.spec.js
-test/model/DescriptionRecord.spec.js
-test/model/DescriptionRecordList.spec.js
+test/model/ArchiveStats.spec.js
+test/model/BatchJobNoteRequest.spec.js
+test/model/DatasetReloadProgress.spec.js
+test/model/DeviceSensor.spec.js
+test/model/HealthLog.spec.js
