@@ -3782,6 +3782,37 @@ paths:
       x-custom-attributes:
         permission: update
         resource: blues:resources:app:APPSERIAL:settings
+  /v1/projects/{projectOrProductUID}/usage/api:
+    get:
+      operationId: GetApiUsage
+      description: Get billable Notehub API request usage for a project, broken down by endpoint and time period, when endDate is 0 or unspecified the current time is implied. Only requests that are billed against the project's plan are counted
+      parameters:
+        - $ref: '#/components/parameters/projectOrProductUIDParam'
+        - $ref: '#/components/parameters/startDateParam'
+        - $ref: '#/components/parameters/endDateParam'
+        - $ref: '#/components/parameters/usageLimitQueryParam'
+        - name: period
+          in: query
+          description: Period type for aggregation
+          required: true
+          schema:
+            type: string
+            enum:
+              - day
+              - week
+              - month
+      responses:
+        '200':
+          $ref: '#/components/responses/UsageApiResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - usage
+      x-custom-attributes:
+        permission: read
+        resource: blues:resources:app:APPSERIAL:events
   /v1/projects/{projectOrProductUID}/usage/data:
     get:
       operationId: GetDataUsage
@@ -4422,7 +4453,7 @@ components:
           - json
           - csv
     hostFirmwareParam:
-      description: Host firmware filter
+      description: Host firmware filter. Matches any value containing the filter text. Use `*` as a wildcard and `\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
       explode: true
       in: query
       name: hostFirmware
@@ -4450,7 +4481,7 @@ components:
         default: 50
         minimum: 1
     locationParam:
-      description: Location filter
+      description: Location filter. Matches any value containing the filter text. Use `*` as a wildcard and `\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
       explode: true
       in: query
       name: location
@@ -4488,7 +4519,7 @@ components:
       schema:
         type: boolean
     notecardFirmwareParam:
-      description: Firmware version filter
+      description: Firmware version filter. Matches any value containing the filter text. Use `*` as a wildcard and `\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
       explode: true
       in: query
       name: notecardFirmware
@@ -4550,6 +4581,7 @@ components:
       schema:
         type: string
     productUIDQueryParam:
+      description: Product UID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
       explode: true
       in: query
       name: productUID
@@ -4677,7 +4709,7 @@ components:
           type: string
       style: form
     serialNumberParam:
-      description: Serial number filter
+      description: Serial number filter. Matches any value containing the filter text. Use `*` as a wildcard and `\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
       explode: true
       in: query
       name: serialNumber
@@ -4699,7 +4731,7 @@ components:
           type: string
       style: form
     skuParam:
-      description: SKU filter
+      description: SKU filter. Matches any value containing the filter text. Use `*` as a wildcard and `\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
       explode: true
       in: query
       name: sku
@@ -4753,7 +4785,7 @@ components:
       schema:
         type: boolean
     tagParam:
-      description: Tag filter
+      description: Tag filter. Matches the whole tag, case-insensitive. Use `*` as a wildcard and `\*` to match a literal `*`; all other characters, including `%` and `_`, match literally. For example, `51*` matches tags starting with `51`.
       explode: true
       in: query
       name: tag
@@ -7892,6 +7924,29 @@ components:
         version:
           description: User-specified version string provided at time of upload
           type: string
+    UsageApiData:
+      type: object
+      properties:
+        endpoint:
+          description: The templated path of the endpoint the requests were made against, with path parameters left unsubstituted. Empty if the endpoint could not be resolved for these requests.
+          type: string
+          example: /v1/projects/{projectOrProductUID}/devices
+        method:
+          description: The HTTP method of the requests counted in this data point. Empty if the endpoint could not be resolved for these requests.
+          type: string
+          example: GET
+        period:
+          type: string
+          format: date-time
+          example: 2025-07-23T00:00:00Z
+        requests:
+          description: Number of billable API requests in this period.
+          type: integer
+          format: int64
+          example: 1284
+      required:
+        - period
+        - requests
     UsageData:
       type: object
       properties:
@@ -8646,6 +8701,21 @@ components:
                 voltage: 4.174
                 when: 1667251044
                 work: 1667251046
+    UsageApiResponse:
+      description: Response body for Notehub API request usage
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UsageApiData'
+              truncated:
+                $ref: '#/components/schemas/UsageTruncatedField'
+            required:
+              - data
     UsageDataResponse:
       description: Response body for Data Usage
       content:
