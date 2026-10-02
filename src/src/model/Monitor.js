@@ -17,7 +17,7 @@ import MonitorAlertRoutesInner from "./MonitorAlertRoutesInner";
 /**
  * The Monitor model module.
  * @module model/Monitor
- * @version 6.5.0
+ * @version 6.6.0
  */
 class Monitor {
   /**
@@ -348,7 +348,7 @@ class Monitor {
 }
 
 /**
- * Aggregate function to apply to the selected values before applying the condition. [none, sum, average, max, min]
+ * Aggregate function to apply to the selected values before applying the condition. [none, avg, max, min, sum, count]
  * @member {module:model/Monitor.AggregateFunctionEnum} aggregate_function
  */
 Monitor.prototype["aggregate_function"] = undefined;
@@ -371,15 +371,16 @@ Monitor.prototype["alert"] = undefined;
 Monitor.prototype["alert_routes"] = undefined;
 
 /**
- * A comparison operation to apply to the value selected by the source_selector [greater_than, greater_than_or_equal_to, less_than, less_than_or_equal_to, equal_to, not_equal_to]
+ * A comparison operation to apply to the value selected by the source_selector. Required for event and usage monitors; set automatically for heartbeat monitors. [greater_than, greater_than_or_equal_to, less_than, less_than_or_equal_to, equal_to, not_equal_to]
  * @member {module:model/Monitor.ConditionTypeEnum} condition_type
  */
 Monitor.prototype["condition_type"] = undefined;
 
 /**
  * @member {String} description
+ * @default ''
  */
-Monitor.prototype["description"] = undefined;
+Monitor.prototype["description"] = "";
 
 /**
  * If true, the monitor will not be evaluated.
@@ -427,19 +428,20 @@ Monitor.prototype["routing_cooldown_period"] = undefined;
 Monitor.prototype["silenced"] = undefined;
 
 /**
- * A valid JSONata expression that selects the value to monitor from the source. | It should return a single, numeric value.
+ * A dot-delimited path to a single numeric value within the event body.
  * @member {String} source_selector
  */
 Monitor.prototype["source_selector"] = undefined;
 
 /**
- * The type of source to monitor. Supported values are \"event\" and \"heartbeat\".
+ * The type of source to monitor. Defaults to \"event\".
  * @member {module:model/Monitor.SourceTypeEnum} source_type
+ * @default 'event'
  */
-Monitor.prototype["source_type"] = undefined;
+Monitor.prototype["source_type"] = "event";
 
 /**
- * The type of condition to apply to the value selected by the source_selector
+ * The value that condition_type compares against. For heartbeat monitors this is seconds of inactivity; for usage monitors it is bytes.
  * @member {Number} threshold
  */
 Monitor.prototype["threshold"] = undefined;
@@ -480,16 +482,10 @@ Monitor["AggregateFunctionEnum"] = {
   none: "none",
 
   /**
-   * value: "sum"
+   * value: "avg"
    * @const
    */
-  sum: "sum",
-
-  /**
-   * value: "average"
-   * @const
-   */
-  average: "average",
+  avg: "avg",
 
   /**
    * value: "max"
@@ -502,6 +498,18 @@ Monitor["AggregateFunctionEnum"] = {
    * @const
    */
   min: "min",
+
+  /**
+   * value: "sum"
+   * @const
+   */
+  sum: "sum",
+
+  /**
+   * value: "count"
+   * @const
+   */
+  count: "count",
 };
 
 /**
@@ -545,12 +553,6 @@ Monitor["ConditionTypeEnum"] = {
    * @const
    */
   not_equal_to: "not_equal_to",
-
-  /**
-   * value: "count"
-   * @const
-   */
-  count: "count",
 };
 
 /**
@@ -570,6 +572,12 @@ Monitor["SourceTypeEnum"] = {
    * @const
    */
   heartbeat: "heartbeat",
+
+  /**
+   * value: "usage"
+   * @const
+   */
+  usage: "usage",
 };
 
 export default Monitor;

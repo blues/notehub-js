@@ -14,14 +14,16 @@
 import ApiClient from "../ApiClient";
 import Contact from "./Contact";
 import DFUEnv from "./DFUEnv";
+import DeviceSensor from "./DeviceSensor";
 import DeviceTowerInfo from "./DeviceTowerInfo";
+import HealthLog from "./HealthLog";
 import Location from "./Location";
 import SimUsage from "./SimUsage";
 
 /**
  * The Device model module.
  * @module model/Device
- * @version 6.5.0
+ * @version 6.6.0
  */
 class Device {
   /**
@@ -124,6 +126,11 @@ class Device {
           data["gps_location"]
         );
       }
+      if (data.hasOwnProperty("health_log")) {
+        obj["health_log"] = ApiClient.convertToType(data["health_log"], [
+          HealthLog,
+        ]);
+      }
       if (data.hasOwnProperty("last_activity")) {
         obj["last_activity"] = ApiClient.convertToType(
           data["last_activity"],
@@ -142,6 +149,35 @@ class Device {
           "Date"
         );
       }
+      if (data.hasOwnProperty("recent_event_count")) {
+        obj["recent_event_count"] = ApiClient.convertToType(
+          data["recent_event_count"],
+          ["Number"]
+        );
+      }
+      if (data.hasOwnProperty("recent_session_count")) {
+        obj["recent_session_count"] = ApiClient.convertToType(
+          data["recent_session_count"],
+          ["Number"]
+        );
+      }
+      if (data.hasOwnProperty("recent_session_seconds")) {
+        obj["recent_session_seconds"] = ApiClient.convertToType(
+          data["recent_session_seconds"],
+          ["Number"]
+        );
+      }
+      if (data.hasOwnProperty("recent_when")) {
+        obj["recent_when"] = ApiClient.convertToType(
+          data["recent_when"],
+          "Date"
+        );
+      }
+      if (data.hasOwnProperty("sensors")) {
+        obj["sensors"] = ApiClient.convertToType(data["sensors"], [
+          DeviceSensor,
+        ]);
+      }
       if (data.hasOwnProperty("serial_number")) {
         obj["serial_number"] = ApiClient.convertToType(
           data["serial_number"],
@@ -150,6 +186,9 @@ class Device {
       }
       if (data.hasOwnProperty("sku")) {
         obj["sku"] = ApiClient.convertToType(data["sku"], "String");
+      }
+      if (data.hasOwnProperty("tags")) {
+        obj["tags"] = ApiClient.convertToType(data["tags"], "String");
       }
       if (data.hasOwnProperty("temperature")) {
         obj["temperature"] = ApiClient.convertToType(
@@ -280,6 +319,20 @@ class Device {
       // data not null
       Location.validateJSON(data["gps_location"]);
     }
+    if (data["health_log"]) {
+      // data not null
+      // ensure the json data is an array
+      if (!Array.isArray(data["health_log"])) {
+        throw new Error(
+          "Expected the field `health_log` to be an array in the JSON data but got " +
+            data["health_log"]
+        );
+      }
+      // validate the optional field `health_log` (array)
+      for (const item of data["health_log"]) {
+        HealthLog.validateJsonObject(item);
+      }
+    }
     // ensure the json data is a string
     if (
       data["product_uid"] &&
@@ -292,6 +345,41 @@ class Device {
         "Expected the field `product_uid` to be a primitive type in the JSON string but got " +
           data["product_uid"]
       );
+    }
+    // ensure the json data is an array
+    if (!Array.isArray(data["recent_event_count"])) {
+      throw new Error(
+        "Expected the field `recent_event_count` to be an array in the JSON data but got " +
+          data["recent_event_count"]
+      );
+    }
+    // ensure the json data is an array
+    if (!Array.isArray(data["recent_session_count"])) {
+      throw new Error(
+        "Expected the field `recent_session_count` to be an array in the JSON data but got " +
+          data["recent_session_count"]
+      );
+    }
+    // ensure the json data is an array
+    if (!Array.isArray(data["recent_session_seconds"])) {
+      throw new Error(
+        "Expected the field `recent_session_seconds` to be an array in the JSON data but got " +
+          data["recent_session_seconds"]
+      );
+    }
+    if (data["sensors"]) {
+      // data not null
+      // ensure the json data is an array
+      if (!Array.isArray(data["sensors"])) {
+        throw new Error(
+          "Expected the field `sensors` to be an array in the JSON data but got " +
+            data["sensors"]
+        );
+      }
+      // validate the optional field `sensors` (array)
+      for (const item of data["sensors"]) {
+        DeviceSensor.validateJsonObject(item);
+      }
     }
     // ensure the json data is a string
     if (
@@ -314,6 +402,16 @@ class Device {
       throw new Error(
         "Expected the field `sku` to be a primitive type in the JSON string but got " +
           data["sku"]
+      );
+    }
+    // ensure the json data is a string
+    if (
+      data["tags"] &&
+      !(typeof data["tags"] === "string" || data["tags"] instanceof String)
+    ) {
+      throw new Error(
+        "Expected the field `tags` to be a primitive type in the JSON string but got " +
+          data["tags"]
       );
     }
     // validate the optional field `tower_info`
@@ -407,6 +505,11 @@ Device.prototype["fleet_uids"] = undefined;
 Device.prototype["gps_location"] = undefined;
 
 /**
+ * @member {Array.<module:model/HealthLog>} health_log
+ */
+Device.prototype["health_log"] = undefined;
+
+/**
  * @member {Date} last_activity
  */
 Device.prototype["last_activity"] = undefined;
@@ -422,6 +525,31 @@ Device.prototype["product_uid"] = undefined;
 Device.prototype["provisioned"] = undefined;
 
 /**
+ * @member {Array.<Number>} recent_event_count
+ */
+Device.prototype["recent_event_count"] = undefined;
+
+/**
+ * @member {Array.<Number>} recent_session_count
+ */
+Device.prototype["recent_session_count"] = undefined;
+
+/**
+ * @member {Array.<Number>} recent_session_seconds
+ */
+Device.prototype["recent_session_seconds"] = undefined;
+
+/**
+ * @member {Date} recent_when
+ */
+Device.prototype["recent_when"] = undefined;
+
+/**
+ * @member {Array.<module:model/DeviceSensor>} sensors
+ */
+Device.prototype["sensors"] = undefined;
+
+/**
  * @member {String} serial_number
  */
 Device.prototype["serial_number"] = undefined;
@@ -430,6 +558,11 @@ Device.prototype["serial_number"] = undefined;
  * @member {String} sku
  */
 Device.prototype["sku"] = undefined;
+
+/**
+ * @member {String} tags
+ */
+Device.prototype["tags"] = undefined;
 
 /**
  * @member {Number} temperature

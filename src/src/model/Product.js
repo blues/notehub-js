@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The Product model module.
  * @module model/Product
- * @version 6.5.0
+ * @version 6.6.0
  */
 class Product {
   /**

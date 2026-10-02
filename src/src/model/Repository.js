@@ -12,11 +12,12 @@
  */
 
 import ApiClient from "../ApiClient";
+import ArchiveStats from "./ArchiveStats";
 
 /**
  * The Repository model module.
  * @module model/Repository
- * @version 6.5.0
+ * @version 6.6.0
  */
 class Repository {
   /**
@@ -45,6 +46,9 @@ class Repository {
     if (data) {
       obj = obj || new Repository();
 
+      if (data.hasOwnProperty("archive")) {
+        obj["archive"] = ArchiveStats.constructFromObject(data["archive"]);
+      }
       if (data.hasOwnProperty("fleet_uids")) {
         obj["fleet_uids"] = ApiClient.convertToType(data["fleet_uids"], [
           "String",
@@ -73,6 +77,11 @@ class Repository {
    * @return {boolean} to indicate whether the JSON data is valid with respect to <code>Repository</code>.
    */
   static validateJSON(data) {
+    // validate the optional field `archive`
+    if (data["archive"]) {
+      // data not null
+      ArchiveStats.validateJSON(data["archive"]);
+    }
     // ensure the json data is an array
     if (!Array.isArray(data["fleet_uids"])) {
       throw new Error(
@@ -111,6 +120,11 @@ class Repository {
     return true;
   }
 }
+
+/**
+ * @member {module:model/ArchiveStats} archive
+ */
+Repository.prototype["archive"] = undefined;
 
 /**
  * @member {Array.<String>} fleet_uids

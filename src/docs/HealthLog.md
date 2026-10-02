@@ -1,4 +1,4 @@
-# NotehubJs.GetDeviceHealthLog200ResponseHealthLogInner
+# NotehubJs.HealthLog
 
 ## Properties
 

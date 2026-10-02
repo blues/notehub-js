@@ -14,25 +14,20 @@
 import ApiClient from "../ApiClient";
 
 /**
- * The GetDeviceHealthLog200ResponseHealthLogInner model module.
- * @module model/GetDeviceHealthLog200ResponseHealthLogInner
- * @version 6.5.0
+ * The HealthLog model module.
+ * @module model/HealthLog
+ * @version 6.6.0
  */
-class GetDeviceHealthLog200ResponseHealthLogInner {
+class HealthLog {
   /**
-   * Constructs a new <code>GetDeviceHealthLog200ResponseHealthLogInner</code>.
-   * @alias module:model/GetDeviceHealthLog200ResponseHealthLogInner
+   * Constructs a new <code>HealthLog</code>.
+   * @alias module:model/HealthLog
    * @param alert {Boolean}
    * @param text {String}
    * @param when {Date}
    */
   constructor(alert, text, when) {
-    GetDeviceHealthLog200ResponseHealthLogInner.initialize(
-      this,
-      alert,
-      text,
-      when
-    );
+    HealthLog.initialize(this, alert, text, when);
   }
 
   /**
@@ -47,15 +42,15 @@ class GetDeviceHealthLog200ResponseHealthLogInner {
   }
 
   /**
-   * Constructs a <code>GetDeviceHealthLog200ResponseHealthLogInner</code> from a plain JavaScript object, optionally creating a new instance.
+   * Constructs a <code>HealthLog</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/GetDeviceHealthLog200ResponseHealthLogInner} obj Optional instance to populate.
-   * @return {module:model/GetDeviceHealthLog200ResponseHealthLogInner} The populated <code>GetDeviceHealthLog200ResponseHealthLogInner</code> instance.
+   * @param {module:model/HealthLog} obj Optional instance to populate.
+   * @return {module:model/HealthLog} The populated <code>HealthLog</code> instance.
    */
   static constructFromObject(data, obj) {
     if (data) {
-      obj = obj || new GetDeviceHealthLog200ResponseHealthLogInner();
+      obj = obj || new HealthLog();
 
       if (data.hasOwnProperty("alert")) {
         obj["alert"] = ApiClient.convertToType(data["alert"], "Boolean");
@@ -73,13 +68,13 @@ class GetDeviceHealthLog200ResponseHealthLogInner {
   }
 
   /**
-   * Validates the JSON data with respect to <code>GetDeviceHealthLog200ResponseHealthLogInner</code>.
+   * Validates the JSON data with respect to <code>HealthLog</code>.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @return {boolean} to indicate whether the JSON data is valid with respect to <code>GetDeviceHealthLog200ResponseHealthLogInner</code>.
+   * @return {boolean} to indicate whether the JSON data is valid with respect to <code>HealthLog</code>.
    */
   static validateJSON(data) {
     // check to make sure all required properties are present in the JSON string
-    for (const property of GetDeviceHealthLog200ResponseHealthLogInner.RequiredProperties) {
+    for (const property of HealthLog.RequiredProperties) {
       if (!data[property]) {
         throw new Error(
           "The required field `" +
@@ -104,25 +99,21 @@ class GetDeviceHealthLog200ResponseHealthLogInner {
   }
 }
 
-GetDeviceHealthLog200ResponseHealthLogInner.RequiredProperties = [
-  "alert",
-  "text",
-  "when",
-];
+HealthLog.RequiredProperties = ["alert", "text", "when"];
 
 /**
  * @member {Boolean} alert
  */
-GetDeviceHealthLog200ResponseHealthLogInner.prototype["alert"] = undefined;
+HealthLog.prototype["alert"] = undefined;
 
 /**
  * @member {String} text
  */
-GetDeviceHealthLog200ResponseHealthLogInner.prototype["text"] = undefined;
+HealthLog.prototype["text"] = undefined;
 
 /**
  * @member {Date} when
  */
-GetDeviceHealthLog200ResponseHealthLogInner.prototype["when"] = undefined;
+HealthLog.prototype["when"] = undefined;
 
-export default GetDeviceHealthLog200ResponseHealthLogInner;
+export default HealthLog;

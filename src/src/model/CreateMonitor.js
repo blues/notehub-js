@@ -18,7 +18,7 @@ import MonitorAlertRoutesInner from "./MonitorAlertRoutesInner";
 /**
  * The CreateMonitor model module.
  * @module model/CreateMonitor
- * @version 6.5.0
+ * @version 6.6.0
  */
 class CreateMonitor {
   /**
@@ -26,21 +26,12 @@ class CreateMonitor {
    * @alias module:model/CreateMonitor
    * @implements module:model/Monitor
    * @param alertRoutes {Array.<module:model/MonitorAlertRoutesInner>}
-   * @param description {String}
    * @param name {String}
-   * @param sourceType {module:model/CreateMonitor.SourceTypeEnum} The type of source to monitor. Supported values are \"event\" and \"heartbeat\".
-   * @param threshold {Number} The type of condition to apply to the value selected by the source_selector
+   * @param threshold {Number} The value that condition_type compares against. For heartbeat monitors this is seconds of inactivity; for usage monitors it is bytes.
    */
-  constructor(alertRoutes, description, name, sourceType, threshold) {
+  constructor(alertRoutes, name, threshold) {
     Monitor.initialize(this);
-    CreateMonitor.initialize(
-      this,
-      alertRoutes,
-      description,
-      name,
-      sourceType,
-      threshold
-    );
+    CreateMonitor.initialize(this, alertRoutes, name, threshold);
   }
 
   /**
@@ -48,18 +39,9 @@ class CreateMonitor {
    * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
    * Only for internal use.
    */
-  static initialize(
-    obj,
-    alertRoutes,
-    description,
-    name,
-    sourceType,
-    threshold
-  ) {
+  static initialize(obj, alertRoutes, name, threshold) {
     obj["alert_routes"] = alertRoutes;
-    obj["description"] = description;
     obj["name"] = name;
-    obj["source_type"] = sourceType;
     obj["threshold"] = threshold;
   }
 
@@ -387,16 +369,10 @@ class CreateMonitor {
   }
 }
 
-CreateMonitor.RequiredProperties = [
-  "alert_routes",
-  "description",
-  "name",
-  "source_type",
-  "threshold",
-];
+CreateMonitor.RequiredProperties = ["alert_routes", "name", "threshold"];
 
 /**
- * Aggregate function to apply to the selected values before applying the condition. [none, sum, average, max, min]
+ * Aggregate function to apply to the selected values before applying the condition. [none, avg, max, min, sum, count]
  * @member {module:model/CreateMonitor.AggregateFunctionEnum} aggregate_function
  */
 CreateMonitor.prototype["aggregate_function"] = undefined;
@@ -419,15 +395,16 @@ CreateMonitor.prototype["alert"] = undefined;
 CreateMonitor.prototype["alert_routes"] = undefined;
 
 /**
- * A comparison operation to apply to the value selected by the source_selector [greater_than, greater_than_or_equal_to, less_than, less_than_or_equal_to, equal_to, not_equal_to]
+ * A comparison operation to apply to the value selected by the source_selector. Required for event and usage monitors; set automatically for heartbeat monitors. [greater_than, greater_than_or_equal_to, less_than, less_than_or_equal_to, equal_to, not_equal_to]
  * @member {module:model/CreateMonitor.ConditionTypeEnum} condition_type
  */
 CreateMonitor.prototype["condition_type"] = undefined;
 
 /**
  * @member {String} description
+ * @default ''
  */
-CreateMonitor.prototype["description"] = undefined;
+CreateMonitor.prototype["description"] = "";
 
 /**
  * If true, the monitor will not be evaluated.
@@ -475,19 +452,20 @@ CreateMonitor.prototype["routing_cooldown_period"] = undefined;
 CreateMonitor.prototype["silenced"] = undefined;
 
 /**
- * A valid JSONata expression that selects the value to monitor from the source. | It should return a single, numeric value.
+ * A dot-delimited path to a single numeric value within the event body.
  * @member {String} source_selector
  */
 CreateMonitor.prototype["source_selector"] = undefined;
 
 /**
- * The type of source to monitor. Supported values are \"event\" and \"heartbeat\".
+ * The type of source to monitor. Defaults to \"event\".
  * @member {module:model/CreateMonitor.SourceTypeEnum} source_type
+ * @default 'event'
  */
-CreateMonitor.prototype["source_type"] = undefined;
+CreateMonitor.prototype["source_type"] = "event";
 
 /**
- * The type of condition to apply to the value selected by the source_selector
+ * The value that condition_type compares against. For heartbeat monitors this is seconds of inactivity; for usage monitors it is bytes.
  * @member {Number} threshold
  */
 CreateMonitor.prototype["threshold"] = undefined;
@@ -517,7 +495,7 @@ CreateMonitor.prototype["usage_window"] = undefined;
 
 // Implement Monitor interface:
 /**
- * Aggregate function to apply to the selected values before applying the condition. [none, sum, average, max, min]
+ * Aggregate function to apply to the selected values before applying the condition. [none, avg, max, min, sum, count]
  * @member {module:model/Monitor.AggregateFunctionEnum} aggregate_function
  */
 Monitor.prototype["aggregate_function"] = undefined;
@@ -536,14 +514,15 @@ Monitor.prototype["alert"] = undefined;
  */
 Monitor.prototype["alert_routes"] = undefined;
 /**
- * A comparison operation to apply to the value selected by the source_selector [greater_than, greater_than_or_equal_to, less_than, less_than_or_equal_to, equal_to, not_equal_to]
+ * A comparison operation to apply to the value selected by the source_selector. Required for event and usage monitors; set automatically for heartbeat monitors. [greater_than, greater_than_or_equal_to, less_than, less_than_or_equal_to, equal_to, not_equal_to]
  * @member {module:model/Monitor.ConditionTypeEnum} condition_type
  */
 Monitor.prototype["condition_type"] = undefined;
 /**
  * @member {String} description
+ * @default ''
  */
-Monitor.prototype["description"] = undefined;
+Monitor.prototype["description"] = "";
 /**
  * If true, the monitor will not be evaluated.
  * @member {Boolean} disabled
@@ -582,17 +561,18 @@ Monitor.prototype["routing_cooldown_period"] = undefined;
  */
 Monitor.prototype["silenced"] = undefined;
 /**
- * A valid JSONata expression that selects the value to monitor from the source. | It should return a single, numeric value.
+ * A dot-delimited path to a single numeric value within the event body.
  * @member {String} source_selector
  */
 Monitor.prototype["source_selector"] = undefined;
 /**
- * The type of source to monitor. Supported values are \"event\" and \"heartbeat\".
+ * The type of source to monitor. Defaults to \"event\".
  * @member {module:model/Monitor.SourceTypeEnum} source_type
+ * @default 'event'
  */
-Monitor.prototype["source_type"] = undefined;
+Monitor.prototype["source_type"] = "event";
 /**
- * The type of condition to apply to the value selected by the source_selector
+ * The value that condition_type compares against. For heartbeat monitors this is seconds of inactivity; for usage monitors it is bytes.
  * @member {Number} threshold
  */
 Monitor.prototype["threshold"] = undefined;
@@ -629,16 +609,10 @@ CreateMonitor["AggregateFunctionEnum"] = {
   none: "none",
 
   /**
-   * value: "sum"
+   * value: "avg"
    * @const
    */
-  sum: "sum",
-
-  /**
-   * value: "average"
-   * @const
-   */
-  average: "average",
+  avg: "avg",
 
   /**
    * value: "max"
@@ -651,6 +625,18 @@ CreateMonitor["AggregateFunctionEnum"] = {
    * @const
    */
   min: "min",
+
+  /**
+   * value: "sum"
+   * @const
+   */
+  sum: "sum",
+
+  /**
+   * value: "count"
+   * @const
+   */
+  count: "count",
 };
 
 /**
@@ -694,12 +680,6 @@ CreateMonitor["ConditionTypeEnum"] = {
    * @const
    */
   not_equal_to: "not_equal_to",
-
-  /**
-   * value: "count"
-   * @const
-   */
-  count: "count",
 };
 
 /**
@@ -719,6 +699,12 @@ CreateMonitor["SourceTypeEnum"] = {
    * @const
    */
   heartbeat: "heartbeat",
+
+  /**
+   * value: "usage"
+   * @const
+   */
+  usage: "usage",
 };
 
 export default CreateMonitor;

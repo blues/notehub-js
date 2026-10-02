@@ -28,7 +28,7 @@
   var instance;
 
   beforeEach(function () {
-    instance = new NotehubJs.GetDeviceHealthLog200ResponseHealthLogInner();
+    instance = new NotehubJs.DatasetReloadProgress();
   });
 
   var getProperty = function (object, getter, property) {
@@ -43,28 +43,34 @@
     else object[property] = value;
   };
 
-  describe("GetDeviceHealthLog200ResponseHealthLogInner", function () {
-    it("should create an instance of GetDeviceHealthLog200ResponseHealthLogInner", function () {
-      // uncomment below and update the code to test GetDeviceHealthLog200ResponseHealthLogInner
-      //var instance = new NotehubJs.GetDeviceHealthLog200ResponseHealthLogInner();
-      //expect(instance).to.be.a(NotehubJs.GetDeviceHealthLog200ResponseHealthLogInner);
+  describe("DatasetReloadProgress", function () {
+    it("should create an instance of DatasetReloadProgress", function () {
+      // uncomment below and update the code to test DatasetReloadProgress
+      //var instance = new NotehubJs.DatasetReloadProgress();
+      //expect(instance).to.be.a(NotehubJs.DatasetReloadProgress);
     });
 
-    it('should have the property alert (base name: "alert")', function () {
-      // uncomment below and update the code to test the property alert
-      //var instance = new NotehubJs.GetDeviceHealthLog200ResponseHealthLogInner();
+    it('should have the property archiveRecordsRead (base name: "archive_records_read")', function () {
+      // uncomment below and update the code to test the property archiveRecordsRead
+      //var instance = new NotehubJs.DatasetReloadProgress();
       //expect(instance).to.be();
     });
 
-    it('should have the property text (base name: "text")', function () {
-      // uncomment below and update the code to test the property text
-      //var instance = new NotehubJs.GetDeviceHealthLog200ResponseHealthLogInner();
+    it('should have the property archiveRecordsTotal (base name: "archive_records_total")', function () {
+      // uncomment below and update the code to test the property archiveRecordsTotal
+      //var instance = new NotehubJs.DatasetReloadProgress();
       //expect(instance).to.be();
     });
 
-    it('should have the property when (base name: "when")', function () {
-      // uncomment below and update the code to test the property when
-      //var instance = new NotehubJs.GetDeviceHealthLog200ResponseHealthLogInner();
+    it('should have the property started (base name: "started")', function () {
+      // uncomment below and update the code to test the property started
+      //var instance = new NotehubJs.DatasetReloadProgress();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property tailRecordsRead (base name: "tail_records_read")', function () {
+      // uncomment below and update the code to test the property tailRecordsRead
+      //var instance = new NotehubJs.DatasetReloadProgress();
       //expect(instance).to.be();
     });
   });

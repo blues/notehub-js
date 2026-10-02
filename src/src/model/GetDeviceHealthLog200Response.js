@@ -12,18 +12,18 @@
  */
 
 import ApiClient from "../ApiClient";
-import GetDeviceHealthLog200ResponseHealthLogInner from "./GetDeviceHealthLog200ResponseHealthLogInner";
+import HealthLog from "./HealthLog";
 
 /**
  * The GetDeviceHealthLog200Response model module.
  * @module model/GetDeviceHealthLog200Response
- * @version 6.5.0
+ * @version 6.6.0
  */
 class GetDeviceHealthLog200Response {
   /**
    * Constructs a new <code>GetDeviceHealthLog200Response</code>.
    * @alias module:model/GetDeviceHealthLog200Response
-   * @param healthLog {Array.<module:model/GetDeviceHealthLog200ResponseHealthLogInner>}
+   * @param healthLog {Array.<module:model/HealthLog>}
    */
   constructor(healthLog) {
     GetDeviceHealthLog200Response.initialize(this, healthLog);
@@ -51,7 +51,7 @@ class GetDeviceHealthLog200Response {
 
       if (data.hasOwnProperty("health_log")) {
         obj["health_log"] = ApiClient.convertToType(data["health_log"], [
-          GetDeviceHealthLog200ResponseHealthLogInner,
+          HealthLog,
         ]);
       }
     } else if (data === null) {
@@ -88,7 +88,7 @@ class GetDeviceHealthLog200Response {
       }
       // validate the optional field `health_log` (array)
       for (const item of data["health_log"]) {
-        GetDeviceHealthLog200ResponseHealthLogInner.validateJsonObject(item);
+        HealthLog.validateJsonObject(item);
       }
     }
 
@@ -99,7 +99,7 @@ class GetDeviceHealthLog200Response {
 GetDeviceHealthLog200Response.RequiredProperties = ["health_log"];
 
 /**
- * @member {Array.<module:model/GetDeviceHealthLog200ResponseHealthLogInner>} health_log
+ * @member {Array.<module:model/HealthLog>} health_log
  */
 GetDeviceHealthLog200Response.prototype["health_log"] = undefined;
 
