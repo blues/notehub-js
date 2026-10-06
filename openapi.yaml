@@ -5388,9 +5388,20 @@ components:
           description: True once the dataset has been fully loaded from the repository's archive after backfill completed. Server-populated; ignored on input.
           type: boolean
           readOnly: true
+        lambda_name:
+          description: Name of the Lambda function deployed for a Python dataset. Derived from the repository and dataset name; set when the function is deployed.
+          type: string
+          readOnly: true
+        lambda_version:
+          description: Published Lambda version this dataset is pinned to. A reload invokes this version rather than the latest, so republishing a projection never changes how a replay projects.
+          type: string
+          readOnly: true
         lat:
           description: JSONata expression resulting in the latitude field
           type: string
+        location:
+          description: Whether the dataset has a location column, taken from each row's "lat" and "lon" keys. For Python datasets only; a JSONata dataset declares a location column by setting both lat and lon.
+          type: boolean
         lon:
           description: JSONata expression resulting in the Longitude field
           type: string
@@ -5402,6 +5413,10 @@ components:
           type: array
           items:
             type: string
+        python:
+          description: 'Optional Python source projecting each event, as an alternative to JSONata. It defines one function, with type annotations required: "def rows(record: dict[str, Any]) -> list[dict[str, Any]]". It returns zero or more row objects per event, whose keys are the dataset''s columns -- the same convention the rows expression uses. Returning an empty list contributes no rows and is not an error; anything else, None included, is an error for that event. Mutually exclusive with rows, time, lat, lon and every field''s own jsonata expression, since a Python projection produces whole row objects and leaves nothing for them to do. Use it for payloads JSONata cannot decode, such as packed binary, base64-wrapped blobs, protobuf or CBOR. At most 64 KiB. Rows must come back in the same order every time rows() runs over the same event: a row''s position in the list identifies it, so an order that varies (such as iterating over a set) makes a replay insert duplicates. Sort the list if the order is not already fixed.'
+          type: string
+          maxLength: 65536
         reload:
           $ref: '#/components/schemas/DatasetReloadProgress'
         rows:
