@@ -6352,6 +6352,12 @@ components:
           type: integer
           format: int64
           example: 1652709545
+        wire_length:
+          description: Approximate number of bytes that the note's body and payload occupied on the wire when transmitted from the device to Notehub
+          type: integer
+          format: int64
+          example: 128
+          minimum: 0
     Filter:
       description: |
         Filter applied to route data. Controls which notefiles are sent through the route.
