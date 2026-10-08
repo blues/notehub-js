@@ -4204,7 +4204,7 @@ components:
         type: string
     cursorParam:
       description: |
-        Used to sequentially read results in order of creation or modification. Start with cursor=0, then pass the returned next_cursor_modified (or X-Next-Cursor-Modified header) as the next cursor.
+        Reads results in order of modification time. The cursor is a modification time expressed as Unix epoch microseconds (UTC). A cursor returned by the server may carry a period and a serial number after the microseconds, which orders results modified within the same microsecond; pass it back unchanged. Start with cursor=0, or with any epoch-microsecond time to begin from that moment, then pass the returned next_cursor_modified (or X-Next-Cursor-Modified header) as the next cursor.
       in: query
       name: cursor
       required: false
@@ -8445,7 +8445,7 @@ components:
                 description: True if there are more events
                 type: boolean
               next_cursor:
-                description: Legacy event-UID cursor.
+                description: Legacy form of cursor that has been deprecated.
                 type: string
               next_cursor_modified:
                 description: |
