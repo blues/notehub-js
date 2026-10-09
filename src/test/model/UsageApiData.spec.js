@@ -28,7 +28,7 @@
   var instance;
 
   beforeEach(function () {
-    instance = new NotehubJs.PersonalAccessTokenCreatedBy();
+    instance = new NotehubJs.UsageApiData();
   });
 
   var getProperty = function (object, getter, property) {
@@ -43,28 +43,34 @@
     else object[property] = value;
   };
 
-  describe("PersonalAccessTokenCreatedBy", function () {
-    it("should create an instance of PersonalAccessTokenCreatedBy", function () {
-      // uncomment below and update the code to test PersonalAccessTokenCreatedBy
-      //var instance = new NotehubJs.PersonalAccessTokenCreatedBy();
-      //expect(instance).to.be.a(NotehubJs.PersonalAccessTokenCreatedBy);
+  describe("UsageApiData", function () {
+    it("should create an instance of UsageApiData", function () {
+      // uncomment below and update the code to test UsageApiData
+      //var instance = new NotehubJs.UsageApiData();
+      //expect(instance).to.be.a(NotehubJs.UsageApiData);
     });
 
-    it('should have the property email (base name: "email")', function () {
-      // uncomment below and update the code to test the property email
-      //var instance = new NotehubJs.PersonalAccessTokenCreatedBy();
+    it('should have the property endpoint (base name: "endpoint")', function () {
+      // uncomment below and update the code to test the property endpoint
+      //var instance = new NotehubJs.UsageApiData();
       //expect(instance).to.be();
     });
 
-    it('should have the property name (base name: "name")', function () {
-      // uncomment below and update the code to test the property name
-      //var instance = new NotehubJs.PersonalAccessTokenCreatedBy();
+    it('should have the property method (base name: "method")', function () {
+      // uncomment below and update the code to test the property method
+      //var instance = new NotehubJs.UsageApiData();
       //expect(instance).to.be();
     });
 
-    it('should have the property uid (base name: "uid")', function () {
-      // uncomment below and update the code to test the property uid
-      //var instance = new NotehubJs.PersonalAccessTokenCreatedBy();
+    it('should have the property period (base name: "period")', function () {
+      // uncomment below and update the code to test the property period
+      //var instance = new NotehubJs.UsageApiData();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property requests (base name: "requests")', function () {
+      // uncomment below and update the code to test the property requests
+      //var instance = new NotehubJs.UsageApiData();
       //expect(instance).to.be();
     });
   });

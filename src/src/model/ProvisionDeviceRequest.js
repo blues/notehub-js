@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The ProvisionDeviceRequest model module.
  * @module model/ProvisionDeviceRequest
- * @version 6.6.0
+ * @version 6.7.0
  */
 class ProvisionDeviceRequest {
   /**

@@ -13,6 +13,7 @@
 
 import ApiClient from "../ApiClient";
 import Error from "../model/Error";
+import GetApiUsage200Response from "../model/GetApiUsage200Response";
 import GetDataUsage200Response from "../model/GetDataUsage200Response";
 import GetRouteLogsUsage200Response from "../model/GetRouteLogsUsage200Response";
 import GetSessionsUsage200Response from "../model/GetSessionsUsage200Response";
@@ -21,7 +22,7 @@ import UsageEventsResponse from "../model/UsageEventsResponse";
 /**
  * Usage service.
  * @module api/UsageApi
- * @version 6.6.0
+ * @version 6.7.0
  */
 export default class UsageApi {
   /**
@@ -33,6 +34,82 @@ export default class UsageApi {
    */
   constructor(apiClient) {
     this.apiClient = apiClient || ApiClient.instance;
+  }
+
+  /**
+   * Get billable Notehub API request usage for a project, broken down by endpoint and time period, when endDate is 0 or unspecified the current time is implied. Only requests that are billed against the project's plan are counted
+   * @param {String} projectOrProductUID
+   * @param {module:model/String} period Period type for aggregation
+   * @param {Object} opts Optional parameters
+   * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
+   * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
+   * @param {Number} opts.limit Limit the number of data points returned (default to 200000)
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetApiUsage200Response} and HTTP response
+   */
+  getApiUsageWithHttpInfo(projectOrProductUID, period, opts) {
+    opts = opts || {};
+    let postBody = null;
+    // verify the required parameter 'projectOrProductUID' is set
+    if (projectOrProductUID === undefined || projectOrProductUID === null) {
+      throw new Error(
+        "Missing the required parameter 'projectOrProductUID' when calling getApiUsage"
+      );
+    }
+    // verify the required parameter 'period' is set
+    if (period === undefined || period === null) {
+      throw new Error(
+        "Missing the required parameter 'period' when calling getApiUsage"
+      );
+    }
+
+    let pathParams = {
+      projectOrProductUID: projectOrProductUID,
+    };
+    let queryParams = {
+      startDate: opts["startDate"],
+      endDate: opts["endDate"],
+      limit: opts["limit"],
+      period: period,
+    };
+    let headerParams = {};
+    let formParams = {};
+
+    let authNames = ["personalAccessToken"];
+    let contentTypes = [];
+    let accepts = ["application/json"];
+    let returnType = GetApiUsage200Response;
+    return this.apiClient.callApi(
+      "/v1/projects/{projectOrProductUID}/usage/api",
+      "GET",
+      pathParams,
+      queryParams,
+      headerParams,
+      formParams,
+      postBody,
+      authNames,
+      contentTypes,
+      accepts,
+      returnType,
+      null
+    );
+  }
+
+  /**
+   * Get billable Notehub API request usage for a project, broken down by endpoint and time period, when endDate is 0 or unspecified the current time is implied. Only requests that are billed against the project's plan are counted
+   * @param {String} projectOrProductUID
+   * @param {module:model/String} period Period type for aggregation
+   * @param {Object} opts Optional parameters
+   * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
+   * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
+   * @param {Number} opts.limit Limit the number of data points returned (default to 200000)
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetApiUsage200Response}
+   */
+  getApiUsage(projectOrProductUID, period, opts) {
+    return this.getApiUsageWithHttpInfo(projectOrProductUID, period, opts).then(
+      function (response_and_data) {
+        return response_and_data.data;
+      }
+    );
   }
 
   /**

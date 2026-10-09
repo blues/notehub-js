@@ -17,7 +17,7 @@ import Repository from "./Repository";
 /**
  * The RepositoryListResponse model module.
  * @module model/RepositoryListResponse
- * @version 6.6.0
+ * @version 6.7.0
  */
 class RepositoryListResponse {
   /**

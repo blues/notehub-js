@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The UpdateHostFirmwareRequest model module.
  * @module model/UpdateHostFirmwareRequest
- * @version 6.6.0
+ * @version 6.7.0
  */
 class UpdateHostFirmwareRequest {
   /**

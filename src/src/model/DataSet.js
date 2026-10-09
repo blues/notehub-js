@@ -18,7 +18,7 @@ import DatasetReloadProgress from "./DatasetReloadProgress";
 /**
  * The DataSet model module.
  * @module model/DataSet
- * @version 6.6.0
+ * @version 6.7.0
  */
 class DataSet {
   /**
@@ -59,8 +59,23 @@ class DataSet {
       if (data.hasOwnProperty("is_ready")) {
         obj["is_ready"] = ApiClient.convertToType(data["is_ready"], "Boolean");
       }
+      if (data.hasOwnProperty("lambda_name")) {
+        obj["lambda_name"] = ApiClient.convertToType(
+          data["lambda_name"],
+          "String"
+        );
+      }
+      if (data.hasOwnProperty("lambda_version")) {
+        obj["lambda_version"] = ApiClient.convertToType(
+          data["lambda_version"],
+          "String"
+        );
+      }
       if (data.hasOwnProperty("lat")) {
         obj["lat"] = ApiClient.convertToType(data["lat"], "String");
+      }
+      if (data.hasOwnProperty("location")) {
+        obj["location"] = ApiClient.convertToType(data["location"], "Boolean");
       }
       if (data.hasOwnProperty("lon")) {
         obj["lon"] = ApiClient.convertToType(data["lon"], "String");
@@ -72,6 +87,9 @@ class DataSet {
         obj["notefiles"] = ApiClient.convertToType(data["notefiles"], [
           "String",
         ]);
+      }
+      if (data.hasOwnProperty("python")) {
+        obj["python"] = ApiClient.convertToType(data["python"], "String");
       }
       if (data.hasOwnProperty("reload")) {
         obj["reload"] = DatasetReloadProgress.constructFromObject(
@@ -112,6 +130,32 @@ class DataSet {
     }
     // ensure the json data is a string
     if (
+      data["lambda_name"] &&
+      !(
+        typeof data["lambda_name"] === "string" ||
+        data["lambda_name"] instanceof String
+      )
+    ) {
+      throw new Error(
+        "Expected the field `lambda_name` to be a primitive type in the JSON string but got " +
+          data["lambda_name"]
+      );
+    }
+    // ensure the json data is a string
+    if (
+      data["lambda_version"] &&
+      !(
+        typeof data["lambda_version"] === "string" ||
+        data["lambda_version"] instanceof String
+      )
+    ) {
+      throw new Error(
+        "Expected the field `lambda_version` to be a primitive type in the JSON string but got " +
+          data["lambda_version"]
+      );
+    }
+    // ensure the json data is a string
+    if (
       data["lat"] &&
       !(typeof data["lat"] === "string" || data["lat"] instanceof String)
     ) {
@@ -145,6 +189,16 @@ class DataSet {
       throw new Error(
         "Expected the field `notefiles` to be an array in the JSON data but got " +
           data["notefiles"]
+      );
+    }
+    // ensure the json data is a string
+    if (
+      data["python"] &&
+      !(typeof data["python"] === "string" || data["python"] instanceof String)
+    ) {
+      throw new Error(
+        "Expected the field `python` to be a primitive type in the JSON string but got " +
+          data["python"]
       );
     }
     // validate the optional field `reload`
@@ -195,10 +249,28 @@ DataSet.prototype["is_optimized"] = undefined;
 DataSet.prototype["is_ready"] = undefined;
 
 /**
+ * Name of the Lambda function deployed for a Python dataset. Derived from the repository and dataset name; set when the function is deployed.
+ * @member {String} lambda_name
+ */
+DataSet.prototype["lambda_name"] = undefined;
+
+/**
+ * Published Lambda version this dataset is pinned to. A reload invokes this version rather than the latest, so republishing a projection never changes how a replay projects.
+ * @member {String} lambda_version
+ */
+DataSet.prototype["lambda_version"] = undefined;
+
+/**
  * JSONata expression resulting in the latitude field
  * @member {String} lat
  */
 DataSet.prototype["lat"] = undefined;
+
+/**
+ * Whether the dataset has a location column, taken from each row's \"lat\" and \"lon\" keys. For Python datasets only; a JSONata dataset declares a location column by setting both lat and lon.
+ * @member {Boolean} location
+ */
+DataSet.prototype["location"] = undefined;
 
 /**
  * JSONata expression resulting in the Longitude field
@@ -217,6 +289,12 @@ DataSet.prototype["name"] = undefined;
  * @member {Array.<String>} notefiles
  */
 DataSet.prototype["notefiles"] = undefined;
+
+/**
+ * Optional Python source projecting each event, as an alternative to JSONata. It defines one function, with type annotations required: \"def rows(record: dict[str, Any]) -> list[dict[str, Any]]\". It returns zero or more row objects per event, whose keys are the dataset's columns -- the same convention the rows expression uses. Returning an empty list contributes no rows and is not an error; anything else, None included, is an error for that event. Mutually exclusive with rows, time, lat, lon and every field's own jsonata expression, since a Python projection produces whole row objects and leaves nothing for them to do. Use it for payloads JSONata cannot decode, such as packed binary, base64-wrapped blobs, protobuf or CBOR. At most 64 KiB. Rows must come back in the same order every time rows() runs over the same event: a row's position in the list identifies it, so an order that varies (such as iterating over a set) makes a replay insert duplicates. Sort the list if the order is not already fixed.
+ * @member {String} python
+ */
+DataSet.prototype["python"] = undefined;
 
 /**
  * @member {module:model/DatasetReloadProgress} reload

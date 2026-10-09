@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The CreatedRepository model module.
  * @module model/CreatedRepository
- * @version 6.6.0
+ * @version 6.7.0
  */
 class CreatedRepository {
   /**
@@ -153,7 +153,7 @@ CreatedRepository.prototype["fleet_uids"] = undefined;
 CreatedRepository.prototype["name"] = undefined;
 
 /**
- * read-only password for the database, also used as X-Repository-Token header for subsequent API calls.  This value is only served once when the repository is created
+ * read-only password for the database, also used as X-Repository-Token header for subsequent API calls.  This value is only served once when the repository is created, and never to a scoped token, which queries through the repository token endpoint instead
  * @member {String} password
  */
 CreatedRepository.prototype["password"] = undefined;

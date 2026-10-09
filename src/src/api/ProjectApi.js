@@ -46,7 +46,7 @@ import UpdateProjectSecretRequest from "../model/UpdateProjectSecretRequest";
 /**
  * Project service.
  * @module api/ProjectApi
- * @version 6.6.0
+ * @version 6.7.0
  */
 export default class ProjectApi {
   /**

@@ -74,6 +74,7 @@ docs/FirmwareInfo.md
 docs/Fleet.md
 docs/FleetConnectivityAssurance.md
 docs/GetAlerts200Response.md
+docs/GetApiUsage200Response.md
 docs/GetBillingAccount200Response.md
 docs/GetBillingAccount200ResponsePlan.md
 docs/GetBillingAccountBalanceHistory200Response.md
@@ -138,10 +139,6 @@ docs/OAuth2TokenResponse.md
 docs/Organization.md
 docs/OrganizationApi.md
 docs/OrganizationRole.md
-docs/PersonalAccessToken.md
-docs/PersonalAccessTokenCreatedBy.md
-docs/PersonalAccessTokenInfo.md
-docs/PersonalAccessTokenSecret.md
 docs/Product.md
 docs/Project.md
 docs/ProjectApi.md
@@ -179,6 +176,7 @@ docs/UpdateHostFirmwareRequest.md
 docs/UpdateProjectSecretRequest.md
 docs/UploadMetadata.md
 docs/UsageApi.md
+docs/UsageApiData.md
 docs/UsageData.md
 docs/UsageEventsData.md
 docs/UsageEventsResponse.md
@@ -273,6 +271,7 @@ src/model/FirmwareInfo.js
 src/model/Fleet.js
 src/model/FleetConnectivityAssurance.js
 src/model/GetAlerts200Response.js
+src/model/GetApiUsage200Response.js
 src/model/GetBillingAccount200Response.js
 src/model/GetBillingAccount200ResponsePlan.js
 src/model/GetBillingAccountBalanceHistory200Response.js
@@ -334,10 +333,6 @@ src/model/OAuth2Error.js
 src/model/OAuth2TokenResponse.js
 src/model/Organization.js
 src/model/OrganizationRole.js
-src/model/PersonalAccessToken.js
-src/model/PersonalAccessTokenCreatedBy.js
-src/model/PersonalAccessTokenInfo.js
-src/model/PersonalAccessTokenSecret.js
 src/model/Product.js
 src/model/Project.js
 src/model/ProjectMember.js
@@ -372,6 +367,7 @@ src/model/UpdateFleetRequest.js
 src/model/UpdateHostFirmwareRequest.js
 src/model/UpdateProjectSecretRequest.js
 src/model/UploadMetadata.js
+src/model/UsageApiData.js
 src/model/UsageData.js
 src/model/UsageEventsData.js
 src/model/UsageEventsResponse.js
@@ -381,8 +377,5 @@ src/model/UserDfuStateMachine.js
 src/model/UserDfuStateMachineStatus.js
 src/model/UserFirmwareInfo.js
 src/model/WebhookSettings.js
-test/model/ArchiveStats.spec.js
-test/model/BatchJobNoteRequest.spec.js
-test/model/DatasetReloadProgress.spec.js
-test/model/DeviceSensor.spec.js
-test/model/HealthLog.spec.js
+test/model/GetApiUsage200Response.spec.js
+test/model/UsageApiData.spec.js

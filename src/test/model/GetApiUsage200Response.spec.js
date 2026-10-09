@@ -28,7 +28,7 @@
   var instance;
 
   beforeEach(function () {
-    instance = new NotehubJs.PersonalAccessTokenSecret();
+    instance = new NotehubJs.GetApiUsage200Response();
   });
 
   var getProperty = function (object, getter, property) {
@@ -43,22 +43,22 @@
     else object[property] = value;
   };
 
-  describe("PersonalAccessTokenSecret", function () {
-    it("should create an instance of PersonalAccessTokenSecret", function () {
-      // uncomment below and update the code to test PersonalAccessTokenSecret
-      //var instance = new NotehubJs.PersonalAccessTokenSecret();
-      //expect(instance).to.be.a(NotehubJs.PersonalAccessTokenSecret);
+  describe("GetApiUsage200Response", function () {
+    it("should create an instance of GetApiUsage200Response", function () {
+      // uncomment below and update the code to test GetApiUsage200Response
+      //var instance = new NotehubJs.GetApiUsage200Response();
+      //expect(instance).to.be.a(NotehubJs.GetApiUsage200Response);
     });
 
-    it('should have the property secret (base name: "secret")', function () {
-      // uncomment below and update the code to test the property secret
-      //var instance = new NotehubJs.PersonalAccessTokenSecret();
+    it('should have the property data (base name: "data")', function () {
+      // uncomment below and update the code to test the property data
+      //var instance = new NotehubJs.GetApiUsage200Response();
       //expect(instance).to.be();
     });
 
-    it('should have the property uid (base name: "uid")', function () {
-      // uncomment below and update the code to test the property uid
-      //var instance = new NotehubJs.PersonalAccessTokenSecret();
+    it('should have the property truncated (base name: "truncated")', function () {
+      // uncomment below and update the code to test the property truncated
+      //var instance = new NotehubJs.GetApiUsage200Response();
       //expect(instance).to.be();
     });
   });

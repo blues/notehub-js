@@ -67,3 +67,4 @@
 | **whereOlc**         | **String**  | Open Location Code                                                                                                                                     | [optional] |
 | **whereTimezone**    | **String**  | Timezone                                                                                                                                               | [optional] |
 | **whereWhen**        | **Number**  | Unix timestamp                                                                                                                                         | [optional] |
+| **wireLength**       | **Number**  | Approximate number of bytes that the note&#39;s body and payload occupied on the wire when transmitted from the device to Notehub                      | [optional] |

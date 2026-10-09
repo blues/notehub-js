@@ -12,21 +12,21 @@
  */
 
 import ApiClient from "../ApiClient";
-import UsageEventsData from "./UsageEventsData";
+import UsageApiData from "./UsageApiData";
 
 /**
- * The UsageEventsResponse model module.
- * @module model/UsageEventsResponse
+ * The GetApiUsage200Response model module.
+ * @module model/GetApiUsage200Response
  * @version 6.7.0
  */
-class UsageEventsResponse {
+class GetApiUsage200Response {
   /**
-   * Constructs a new <code>UsageEventsResponse</code>.
-   * @alias module:model/UsageEventsResponse
-   * @param data {Array.<module:model/UsageEventsData>}
+   * Constructs a new <code>GetApiUsage200Response</code>.
+   * @alias module:model/GetApiUsage200Response
+   * @param data {Array.<module:model/UsageApiData>}
    */
   constructor(data) {
-    UsageEventsResponse.initialize(this, data);
+    GetApiUsage200Response.initialize(this, data);
   }
 
   /**
@@ -39,18 +39,18 @@ class UsageEventsResponse {
   }
 
   /**
-   * Constructs a <code>UsageEventsResponse</code> from a plain JavaScript object, optionally creating a new instance.
+   * Constructs a <code>GetApiUsage200Response</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/UsageEventsResponse} obj Optional instance to populate.
-   * @return {module:model/UsageEventsResponse} The populated <code>UsageEventsResponse</code> instance.
+   * @param {module:model/GetApiUsage200Response} obj Optional instance to populate.
+   * @return {module:model/GetApiUsage200Response} The populated <code>GetApiUsage200Response</code> instance.
    */
   static constructFromObject(data, obj) {
     if (data) {
-      obj = obj || new UsageEventsResponse();
+      obj = obj || new GetApiUsage200Response();
 
       if (data.hasOwnProperty("data")) {
-        obj["data"] = ApiClient.convertToType(data["data"], [UsageEventsData]);
+        obj["data"] = ApiClient.convertToType(data["data"], [UsageApiData]);
       }
       if (data.hasOwnProperty("truncated")) {
         obj["truncated"] = ApiClient.convertToType(
@@ -65,13 +65,13 @@ class UsageEventsResponse {
   }
 
   /**
-   * Validates the JSON data with respect to <code>UsageEventsResponse</code>.
+   * Validates the JSON data with respect to <code>GetApiUsage200Response</code>.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @return {boolean} to indicate whether the JSON data is valid with respect to <code>UsageEventsResponse</code>.
+   * @return {boolean} to indicate whether the JSON data is valid with respect to <code>GetApiUsage200Response</code>.
    */
   static validateJSON(data) {
     // check to make sure all required properties are present in the JSON string
-    for (const property of UsageEventsResponse.RequiredProperties) {
+    for (const property of GetApiUsage200Response.RequiredProperties) {
       if (!data[property]) {
         throw new Error(
           "The required field `" +
@@ -92,7 +92,7 @@ class UsageEventsResponse {
       }
       // validate the optional field `data` (array)
       for (const item of data["data"]) {
-        UsageEventsData.validateJsonObject(item);
+        UsageApiData.validateJsonObject(item);
       }
     }
 
@@ -100,17 +100,17 @@ class UsageEventsResponse {
   }
 }
 
-UsageEventsResponse.RequiredProperties = ["data"];
+GetApiUsage200Response.RequiredProperties = ["data"];
 
 /**
- * @member {Array.<module:model/UsageEventsData>} data
+ * @member {Array.<module:model/UsageApiData>} data
  */
-UsageEventsResponse.prototype["data"] = undefined;
+GetApiUsage200Response.prototype["data"] = undefined;
 
 /**
  * If the data is truncated that means that the parameters selected resulted in a response of over | the requested limit of data points, in order to ensure
  * @member {Boolean} truncated
  */
-UsageEventsResponse.prototype["truncated"] = undefined;
+GetApiUsage200Response.prototype["truncated"] = undefined;
 
-export default UsageEventsResponse;
+export default GetApiUsage200Response;

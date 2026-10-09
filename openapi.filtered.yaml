@@ -203,7 +203,9 @@ paths:
       tags:
         - billing_account
       x-custom-attributes:
+        global-roles: support-admin,sales-admin,admin
         permission: read
+        resource: blues:resources:billing-account:usage
   /v1/billing-accounts/{billingAccountUID}/balance-history:
     get:
       operationId: GetBillingAccountBalanceHistory
@@ -246,7 +248,9 @@ paths:
       tags:
         - billing_account
       x-custom-attributes:
+        global-roles: support-admin,sales-admin,admin
         permission: read
+        resource: blues:resources:billing-account:usage
   /v1/description:
     get:
       operationId: ListGlobalDescriptions
@@ -285,6 +289,7 @@ paths:
         - description
       x-custom-attributes:
         permission: delete
+        resource: blues:resources:description
     get:
       operationId: GetGlobalDescription
       description:
@@ -341,6 +346,7 @@ paths:
         - description
       x-custom-attributes:
         permission: create
+        resource: blues:resources:description
   /v1/organizations:
     get:
       operationId: GetOrganizations
@@ -418,7 +424,9 @@ paths:
       tags:
         - organization
       x-custom-attributes:
+        global-roles: support-admin,sales-admin,admin
         permission: read
+        resource: blues:resources:billing-account:usage
   /v1/organizations/{organizationUID}/balance-history:
     get:
       operationId: GetOrganizationBalanceHistory
@@ -460,7 +468,9 @@ paths:
       tags:
         - organization
       x-custom-attributes:
+        global-roles: support-admin,sales-admin,admin
         permission: read
+        resource: blues:resources:billing-account:usage
   /v1/products/{productUID}/devices/{deviceUID}/environment_variables_with_pin:
     get:
       operationId: GetDeviceEnvironmentVariablesByPin
@@ -3147,6 +3157,9 @@ paths:
         - personalAccessToken: []
       tags:
         - jobs
+      x-custom-attributes:
+        permission: delete
+        resource: blues:resources:app:APPSERIAL:settings
     get:
       operationId: GetJobRun
       description: Get the result of a job execution
@@ -3841,6 +3854,41 @@ paths:
       x-custom-attributes:
         permission: update
         resource: blues:resources:app:APPSERIAL:settings
+  /v1/projects/{projectOrProductUID}/usage/api:
+    get:
+      operationId: GetApiUsage
+      description:
+        Get billable Notehub API request usage for a project, broken down
+        by endpoint and time period, when endDate is 0 or unspecified the
+        current time is implied. Only requests that are billed against the
+        project's plan are counted
+      parameters:
+        - $ref: "#/components/parameters/projectOrProductUIDParam"
+        - $ref: "#/components/parameters/startDateParam"
+        - $ref: "#/components/parameters/endDateParam"
+        - $ref: "#/components/parameters/usageLimitQueryParam"
+        - name: period
+          in: query
+          description: Period type for aggregation
+          required: true
+          schema:
+            type: string
+            enum:
+              - day
+              - week
+              - month
+      responses:
+        "200":
+          $ref: "#/components/responses/UsageApiResponse"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+      security:
+        - personalAccessToken: []
+      tags:
+        - usage
+      x-custom-attributes:
+        permission: read
+        resource: blues:resources:app:APPSERIAL:events
   /v1/projects/{projectOrProductUID}/usage/data:
     get:
       operationId: GetDataUsage
@@ -5378,7 +5426,9 @@ components:
         password:
           description: read-only password for the database, also used as
             X-Repository-Token header for subsequent API calls.  This value is
-            only served once when the repository is created
+            only served once when the repository is created, and never to a
+            scoped token, which queries through the repository token endpoint
+            instead
           type: string
         project_uids:
           $ref: "#/components/schemas/AppUIDList"
@@ -5519,9 +5569,29 @@ components:
             input.
           type: boolean
           readOnly: true
+        lambda_name:
+          description:
+            Name of the Lambda function deployed for a Python dataset. Derived
+            from the repository and dataset name; set when the function is
+            deployed.
+          type: string
+          readOnly: true
+        lambda_version:
+          description:
+            Published Lambda version this dataset is pinned to. A reload
+            invokes this version rather than the latest, so republishing a
+            projection never changes how a replay projects.
+          type: string
+          readOnly: true
         lat:
           description: JSONata expression resulting in the latitude field
           type: string
+        location:
+          description:
+            Whether the dataset has a location column, taken from each row's
+            "lat" and "lon" keys. For Python datasets only; a JSONata dataset
+            declares a location column by setting both lat and lon.
+          type: boolean
         lon:
           description: JSONata expression resulting in the Longitude field
           type: string
@@ -5535,6 +5605,26 @@ components:
           type: array
           items:
             type: string
+        python:
+          description:
+            'Optional Python source projecting each event, as an alternative to
+            JSONata. It defines one function, with type annotations required:
+            "def rows(record: dict[str, Any]) -> list[dict[str, Any]]". It
+            returns zero or more row objects per event, whose keys are the
+            dataset''s columns -- the same convention the rows expression uses.
+            Returning an empty list contributes no rows and is not an error;
+            anything else, None included, is an error for that event. Mutually
+            exclusive with rows, time, lat, lon and every field''s own jsonata
+            expression, since a Python projection produces whole row objects and
+            leaves nothing for them to do. Use it for payloads JSONata cannot
+            decode, such as packed binary, base64-wrapped blobs, protobuf or
+            CBOR. At most 64 KiB. Rows must come back in the same order every
+            time rows() runs over the same event: a row''s position in the list
+            identifies it, so an order that varies (such as iterating over a
+            set) makes a replay insert duplicates. Sort the list if the order is
+            not already fixed.'
+          type: string
+          maxLength: 65536
         reload:
           $ref: "#/components/schemas/DatasetReloadProgress"
         rows:
@@ -6531,6 +6621,14 @@ components:
           type: integer
           format: int64
           example: 1652709545
+        wire_length:
+          description:
+            Approximate number of bytes that the note's body and payload
+            occupied on the wire when transmitted from the device to Notehub
+          type: integer
+          format: int64
+          example: 128
+          minimum: 0
     Filter:
       description: >
         Filter applied to route data. Controls which notefiles are sent through
@@ -7018,7 +7116,7 @@ components:
             format of a number followed by a time unit
           type: string
           example: 10m or 5h30m40s
-          pattern: ^[0-9]+[smh]$
+          pattern: ^(([0-9]+[.]?[0-9]*|[.][0-9]+)(ns|us|µs|ms|s|m|h))+$
         alert:
           description: If true, the monitor is in alert state.
           type: boolean
@@ -7078,7 +7176,7 @@ components:
             followed by a time unit.
           type: string
           example: 10m or 5h30m40s
-          pattern: ^[0-9]+[smh]$
+          pattern: ^(([0-9]+[.]?[0-9]*|[.][0-9]+)(ns|us|µs|ms|s|m|h))+$
         silenced:
           description: If true, alerts will be created, but no notifications will be sent.
           type: boolean
@@ -7099,8 +7197,8 @@ components:
             The value that condition_type compares against. For heartbeat
             monitors this is seconds of inactivity; for usage monitors it is
             bytes.
-          type: integer
-          format: int32
+          type: number
+          format: double
         uid:
           type: string
         usage_scope:
@@ -7374,71 +7472,6 @@ components:
         - ORG_ROLE_BILLING_MANAGER
         - ORG_ROLE_PROJECT_CREATOR
         - ORG_ROLE_MEMBER
-    PersonalAccessToken:
-      type: object
-      properties:
-        created_at:
-          description: When the key was created
-          type: string
-          format: date-time
-        created_by:
-          description: The user that created this key
-          type: object
-          properties:
-            email:
-              type: string
-            name:
-              type: string
-            uid:
-              type: string
-        description:
-          description: Optional description for this API Key
-          type: string
-        expires_at:
-          description: When the key expires
-          type: string
-          format: date-time
-          nullable: true
-        last_used:
-          description: When it was last used, if ever
-          type: string
-          format: date-time
-          nullable: true
-        name:
-          description: Name for this API Key
-          type: string
-        suspended:
-          description: if true, this token cannot be used
-          type: boolean
-        uid:
-          description: Unique and public identifier
-          type: string
-    PersonalAccessTokenInfo:
-      type: object
-      properties:
-        description:
-          type: string
-        expires_at:
-          description: New expiration timestamp for the personal access token
-          type: string
-          format: date-time
-          nullable: true
-        name:
-          type: string
-        suspended:
-          description: if true, the token is temporarily suspended
-          type: boolean
-      required:
-        - expiresAt
-    PersonalAccessTokenSecret:
-      type: object
-      properties:
-        secret:
-          description: The secret
-          type: string
-        uid:
-          description: Unique and public identifier
-          type: string
     Product:
       type: object
       properties:
@@ -7625,7 +7658,8 @@ components:
         ttl_seconds:
           description: |
             Requested credential lifetime in seconds. Clamped server-side to
-            [60, 3600]. Defaults to 900 (15 minutes) if omitted.
+            [60, 3600], or to [60, 900] for a scoped token. Defaults to 900
+            (15 minutes) if omitted.
           type: integer
           format: int32
           default: 900
@@ -8166,6 +8200,34 @@ components:
         version:
           description: User-specified version string provided at time of upload
           type: string
+    UsageApiData:
+      type: object
+      properties:
+        endpoint:
+          description:
+            The templated path of the endpoint the requests were made against,
+            with path parameters left unsubstituted. Empty if the endpoint could
+            not be resolved for these requests.
+          type: string
+          example: /v1/projects/{projectOrProductUID}/devices
+        method:
+          description:
+            The HTTP method of the requests counted in this data point. Empty
+            if the endpoint could not be resolved for these requests.
+          type: string
+          example: GET
+        period:
+          type: string
+          format: date-time
+          example: 2025-07-23T00:00:00Z
+        requests:
+          description: Number of billable API requests in this period.
+          type: integer
+          format: int64
+          example: 1284
+      required:
+        - period
+        - requests
     UsageData:
       type: object
       properties:
@@ -8958,6 +9020,21 @@ components:
                 voltage: 4.174
                 when: 1667251044
                 work: 1667251046
+    UsageApiResponse:
+      description: Response body for Notehub API request usage
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: "#/components/schemas/UsageApiData"
+              truncated:
+                $ref: "#/components/schemas/UsageTruncatedField"
+            required:
+              - data
     UsageDataResponse:
       description: Response body for Data Usage
       content:

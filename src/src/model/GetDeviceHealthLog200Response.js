@@ -17,7 +17,7 @@ import HealthLog from "./HealthLog";
 /**
  * The GetDeviceHealthLog200Response model module.
  * @module model/GetDeviceHealthLog200Response
- * @version 6.6.0
+ * @version 6.7.0
  */
 class GetDeviceHealthLog200Response {
   /**

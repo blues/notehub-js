@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The Event model module.
  * @module model/Event
- * @version 6.6.0
+ * @version 6.7.0
  */
 class Event {
   /**
@@ -291,6 +291,12 @@ class Event {
       if (data.hasOwnProperty("where_when")) {
         obj["where_when"] = ApiClient.convertToType(
           data["where_when"],
+          "Number"
+        );
+      }
+      if (data.hasOwnProperty("wire_length")) {
+        obj["wire_length"] = ApiClient.convertToType(
+          data["wire_length"],
           "Number"
         );
       }
@@ -1089,5 +1095,11 @@ Event.prototype["where_timezone"] = undefined;
  * @member {Number} where_when
  */
 Event.prototype["where_when"] = undefined;
+
+/**
+ * Approximate number of bytes that the note's body and payload occupied on the wire when transmitted from the device to Notehub
+ * @member {Number} wire_length
+ */
+Event.prototype["wire_length"] = undefined;
 
 export default Event;
