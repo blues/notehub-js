@@ -19,7 +19,7 @@ import Error from "../model/Error";
 /**
  * Description service.
  * @module api/DescriptionApi
- * @version 6.6.0
+ * @version 6.7.0
  */
 export default class DescriptionApi {
   /**

@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The BatchJobNoteRequest model module.
  * @module model/BatchJobNoteRequest
- * @version 6.6.0
+ * @version 6.7.0
  */
 class BatchJobNoteRequest {
   /**

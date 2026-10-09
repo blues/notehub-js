@@ -17,7 +17,7 @@ import BatchJobNoteRequest from "./BatchJobNoteRequest";
 /**
  * The BatchJobRequests model module.
  * @module model/BatchJobRequests
- * @version 6.6.0
+ * @version 6.7.0
  */
 class BatchJobRequests {
   /**

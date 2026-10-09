@@ -4,10 +4,68 @@ All URIs are relative to *https://api.notefile.net*
 
 | Method                                                 | HTTP request                                                | Description |
 | ------------------------------------------------------ | ----------------------------------------------------------- | ----------- |
+| [**getApiUsage**](UsageApi.md#getApiUsage)             | **GET** /v1/projects/{projectOrProductUID}/usage/api        |
 | [**getDataUsage**](UsageApi.md#getDataUsage)           | **GET** /v1/projects/{projectOrProductUID}/usage/data       |
 | [**getEventsUsage**](UsageApi.md#getEventsUsage)       | **GET** /v1/projects/{projectOrProductUID}/usage/events     |
 | [**getRouteLogsUsage**](UsageApi.md#getRouteLogsUsage) | **GET** /v1/projects/{projectOrProductUID}/usage/route-logs |
 | [**getSessionsUsage**](UsageApi.md#getSessionsUsage)   | **GET** /v1/projects/{projectOrProductUID}/usage/sessions   |
+
+## getApiUsage
+
+> GetApiUsage200Response getApiUsage(projectOrProductUID, period, opts)
+
+Get billable Notehub API request usage for a project, broken down by endpoint and time period, when endDate is 0 or unspecified the current time is implied. Only requests that are billed against the project&#39;s plan are counted
+
+### Example
+
+```javascript
+import * as NotehubJs from "@blues-inc/notehub-js";
+let defaultClient = NotehubJs.ApiClient.instance;
+let personalAccessToken = defaultClient.authentications["personalAccessToken"];
+personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
+
+let apiInstance = new NotehubJs.UsageApi();
+let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String |
+let period = "period_example"; // String | Period type for aggregation
+let opts = {
+  startDate: 1628631763, // Number | Start date for filtering results, specified as a Unix timestamp
+  endDate: 1657894210, // Number | End date for filtering results, specified as a Unix timestamp
+  limit: 200000, // Number | Limit the number of data points returned
+};
+apiInstance.getApiUsage(projectOrProductUID, period, opts).then(
+  (data) => {
+    console.log(
+      "API called successfully. Returned data: " + JSON.stringify(data)
+    );
+  },
+  (error) => {
+    console.error(error);
+  }
+);
+```
+
+### Parameters
+
+| Name                    | Type       | Description                                                     | Notes                          |
+| ----------------------- | ---------- | --------------------------------------------------------------- | ------------------------------ |
+| **projectOrProductUID** | **String** |                                                                 |
+| **period**              | **String** | Period type for aggregation                                     |
+| **startDate**           | **Number** | Start date for filtering results, specified as a Unix timestamp | [optional]                     |
+| **endDate**             | **Number** | End date for filtering results, specified as a Unix timestamp   | [optional]                     |
+| **limit**               | **Number** | Limit the number of data points returned                        | [optional] [default to 200000] |
+
+### Return type
+
+[**GetApiUsage200Response**](GetApiUsage200Response.md)
+
+### Authorization
+
+[personalAccessToken](../README.md#personalAccessToken)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 ## getDataUsage
 

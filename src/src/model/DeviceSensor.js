@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The DeviceSensor model module.
  * @module model/DeviceSensor
- * @version 6.6.0
+ * @version 6.7.0
  */
 class DeviceSensor {
   /**

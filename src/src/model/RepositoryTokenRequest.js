@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The RepositoryTokenRequest model module.
  * @module model/RepositoryTokenRequest
- * @version 6.6.0
+ * @version 6.7.0
  */
 class RepositoryTokenRequest {
   /**
@@ -89,7 +89,7 @@ class RepositoryTokenRequest {
 RepositoryTokenRequest.prototype["intent"] = "read";
 
 /**
- * Requested credential lifetime in seconds. Clamped server-side to [60, 3600]. Defaults to 900 (15 minutes) if omitted.
+ * Requested credential lifetime in seconds. Clamped server-side to [60, 3600], or to [60, 900] for a scoped token. Defaults to 900 (15 minutes) if omitted.
  * @member {Number} ttl_seconds
  * @default 900
  */

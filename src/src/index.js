@@ -77,6 +77,7 @@ import FirmwareInfo from "./model/FirmwareInfo";
 import Fleet from "./model/Fleet";
 import FleetConnectivityAssurance from "./model/FleetConnectivityAssurance";
 import GetAlerts200Response from "./model/GetAlerts200Response";
+import GetApiUsage200Response from "./model/GetApiUsage200Response";
 import GetBillingAccount200Response from "./model/GetBillingAccount200Response";
 import GetBillingAccount200ResponsePlan from "./model/GetBillingAccount200ResponsePlan";
 import GetBillingAccountBalanceHistory200Response from "./model/GetBillingAccountBalanceHistory200Response";
@@ -138,10 +139,6 @@ import OAuth2Error from "./model/OAuth2Error";
 import OAuth2TokenResponse from "./model/OAuth2TokenResponse";
 import Organization from "./model/Organization";
 import OrganizationRole from "./model/OrganizationRole";
-import PersonalAccessToken from "./model/PersonalAccessToken";
-import PersonalAccessTokenCreatedBy from "./model/PersonalAccessTokenCreatedBy";
-import PersonalAccessTokenInfo from "./model/PersonalAccessTokenInfo";
-import PersonalAccessTokenSecret from "./model/PersonalAccessTokenSecret";
 import Product from "./model/Product";
 import Project from "./model/Project";
 import ProjectMember from "./model/ProjectMember";
@@ -176,6 +173,7 @@ import UpdateFleetRequest from "./model/UpdateFleetRequest";
 import UpdateHostFirmwareRequest from "./model/UpdateHostFirmwareRequest";
 import UpdateProjectSecretRequest from "./model/UpdateProjectSecretRequest";
 import UploadMetadata from "./model/UploadMetadata";
+import UsageApiData from "./model/UsageApiData";
 import UsageData from "./model/UsageData";
 import UsageEventsData from "./model/UsageEventsData";
 import UsageEventsResponse from "./model/UsageEventsResponse";
@@ -229,7 +227,7 @@ import WebhookApi from "./api/WebhookApi";
  * </pre>
  * </p>
  * @module index
- * @version 6.6.0
+ * @version 6.7.0
  */
 export {
   /**
@@ -629,6 +627,12 @@ export {
   GetAlerts200Response,
 
   /**
+   * The GetApiUsage200Response model constructor.
+   * @property {module:model/GetApiUsage200Response}
+   */
+  GetApiUsage200Response,
+
+  /**
    * The GetBillingAccount200Response model constructor.
    * @property {module:model/GetBillingAccount200Response}
    */
@@ -995,30 +999,6 @@ export {
   OrganizationRole,
 
   /**
-   * The PersonalAccessToken model constructor.
-   * @property {module:model/PersonalAccessToken}
-   */
-  PersonalAccessToken,
-
-  /**
-   * The PersonalAccessTokenCreatedBy model constructor.
-   * @property {module:model/PersonalAccessTokenCreatedBy}
-   */
-  PersonalAccessTokenCreatedBy,
-
-  /**
-   * The PersonalAccessTokenInfo model constructor.
-   * @property {module:model/PersonalAccessTokenInfo}
-   */
-  PersonalAccessTokenInfo,
-
-  /**
-   * The PersonalAccessTokenSecret model constructor.
-   * @property {module:model/PersonalAccessTokenSecret}
-   */
-  PersonalAccessTokenSecret,
-
-  /**
    * The Product model constructor.
    * @property {module:model/Product}
    */
@@ -1221,6 +1201,12 @@ export {
    * @property {module:model/UploadMetadata}
    */
   UploadMetadata,
+
+  /**
+   * The UsageApiData model constructor.
+   * @property {module:model/UsageApiData}
+   */
+  UsageApiData,
 
   /**
    * The UsageData model constructor.

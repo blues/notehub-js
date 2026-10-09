@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The JobDefinitionReportOptions model module.
  * @module model/JobDefinitionReportOptions
- * @version 6.6.0
+ * @version 6.7.0
  */
 class JobDefinitionReportOptions {
   /**
