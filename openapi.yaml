@@ -2023,8 +2023,8 @@ paths:
           headers:
             X-Has-More:
               $ref: '#/components/headers/HasMoreHeader'
-            X-Next-Cursor-Modified:
-              $ref: '#/components/headers/NextCursorModifiedHeader'
+            X-Next-Cursor:
+              $ref: '#/components/headers/NextCursorHeader'
           content:
             application/json:
               schema:
@@ -2045,9 +2045,9 @@ paths:
                       type: object
                   has_more:
                     type: boolean
-                  next_cursor_modified:
+                  next_cursor:
                     description: |
-                      Cursor to pass on the next call. Returned even when there are no more results, so it can be used to poll for changes.
+                      Pass this opaque value as a cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes.
                     type: string
                 required:
                   - device_public_keys
@@ -2125,8 +2125,8 @@ paths:
           headers:
             X-Has-More:
               $ref: '#/components/headers/HasMoreHeader'
-            X-Next-Cursor-Modified:
-              $ref: '#/components/headers/NextCursorModifiedHeader'
+            X-Next-Cursor:
+              $ref: '#/components/headers/NextCursorHeader'
           content:
             application/json:
               schema:
@@ -2168,8 +2168,8 @@ paths:
           headers:
             X-Has-More:
               $ref: '#/components/headers/HasMoreHeader'
-            X-Next-Cursor-Modified:
-              $ref: '#/components/headers/NextCursorModifiedHeader'
+            X-Next-Cursor:
+              $ref: '#/components/headers/NextCursorHeader'
           content:
             application/json:
               schema:
@@ -3683,8 +3683,8 @@ paths:
           headers:
             X-Has-More:
               $ref: '#/components/headers/HasMoreHeader'
-            X-Next-Cursor-Modified:
-              $ref: '#/components/headers/NextCursorModifiedHeader'
+            X-Next-Cursor:
+              $ref: '#/components/headers/NextCursorHeader'
           content:
             application/json:
               schema:
@@ -4204,7 +4204,7 @@ components:
         type: string
     cursorParam:
       description: |
-        Reads results in order of modification time. The cursor is a modification time expressed as Unix epoch microseconds (UTC). A cursor returned by the server may carry a period and a serial number after the microseconds, which orders results modified within the same microsecond; pass it back unchanged. Start with cursor=0, or with any epoch-microsecond time to begin from that moment, then pass the returned next_cursor_modified (or X-Next-Cursor-Modified header) as the next cursor.
+        If supplied, the results will be returned in ascending order of modification time. To start from a specific time, specify cursor as Unix epoch microseconds (UTC) or zero to start from the beginning. Or, to start where the last search left off, set cursor to the returned value of next_cursor (or the X-Next-Cursor header).
       in: query
       name: cursor
       required: false
@@ -5765,9 +5765,9 @@ components:
         has_more:
           type: boolean
           default: false
-        next_cursor_modified:
+        next_cursor:
           description: |
-            Cursor to pass on the next call. Returned even when there are no more results, so it can be used to poll for changes.
+            Pass this opaque value as a cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes.
           type: string
     DeviceDfuStateMachine:
       description: Represents a single request to update the host or Notecard firmware
@@ -5849,9 +5849,9 @@ components:
         has_more:
           type: boolean
           default: false
-        next_cursor_modified:
+        next_cursor:
           description: |
-            Cursor to pass on the next call. Returned even when there are no more results, so it can be used to poll for changes.
+            Pass this opaque value as a cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes.
           type: string
     DeviceSensor:
       description: A sensor attached to a device
@@ -8300,9 +8300,9 @@ components:
         enum:
           - 'true'
           - 'false'
-    NextCursorModifiedHeader:
+    NextCursorHeader:
       description: |
-        Cursor to pass on the next call. Returned even when there are no more results, so it can be used to poll for changes.
+        Pass this opaque value as a cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes.
       schema:
         type: string
   responses:
@@ -8311,8 +8311,8 @@ components:
       headers:
         X-Has-More:
           $ref: '#/components/headers/HasMoreHeader'
-        X-Next-Cursor-Modified:
-          $ref: '#/components/headers/NextCursorModifiedHeader'
+        X-Next-Cursor:
+          $ref: '#/components/headers/NextCursorHeader'
       content:
         application/json:
           schema:
@@ -8326,9 +8326,9 @@ components:
               has_more:
                 description: True if there are more alerts
                 type: boolean
-              next_cursor_modified:
+              next_cursor:
                 description: |
-                  Cursor to pass on the next call. Returned even when there are no more results, so it can be used to poll for changes.
+                  Pass this opaque value as a cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes.
                 type: string
             required:
               - alerts
@@ -8393,8 +8393,8 @@ components:
       headers:
         X-Has-More:
           $ref: '#/components/headers/HasMoreHeader'
-        X-Next-Cursor-Modified:
-          $ref: '#/components/headers/NextCursorModifiedHeader'
+        X-Next-Cursor:
+          $ref: '#/components/headers/NextCursorHeader'
       content:
         application/json:
           schema:
@@ -8406,9 +8406,9 @@ components:
                   $ref: '#/components/schemas/Device'
               has_more:
                 type: boolean
-              next_cursor_modified:
+              next_cursor:
                 description: |
-                  Cursor to pass on the next call. Returned even when there are no more results, so it can be used to poll for changes.
+                  Pass this opaque value as a cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes.
                 type: string
             required:
               - devices
@@ -8430,8 +8430,8 @@ components:
       headers:
         X-Has-More:
           $ref: '#/components/headers/HasMoreHeader'
-        X-Next-Cursor-Modified:
-          $ref: '#/components/headers/NextCursorModifiedHeader'
+        X-Next-Cursor:
+          $ref: '#/components/headers/NextCursorHeader'
       content:
         application/json:
           schema:
@@ -8447,9 +8447,9 @@ components:
               next_cursor:
                 description: Legacy form of cursor that has been deprecated.
                 type: string
-              next_cursor_modified:
+              next_cursor:
                 description: |
-                  Cursor to pass on the next call. Returned even when there are no more results, so it can be used to poll for changes.
+                  Pass this opaque value as a cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes.
                 type: string
             required:
               - events
@@ -8491,14 +8491,14 @@ components:
                 when: 1656010061
             has_more: false
             next_cursor: ''
-            next_cursor_modified: '1789084800000000'
+            next_cursor: '1789084800000000'
     EventsResponse:
       description: The response body from a GET events request.
       headers:
         X-Has-More:
           $ref: '#/components/headers/HasMoreHeader'
-        X-Next-Cursor-Modified:
-          $ref: '#/components/headers/NextCursorModifiedHeader'
+        X-Next-Cursor:
+          $ref: '#/components/headers/NextCursorHeader'
       content:
         application/json:
           schema:
@@ -8511,9 +8511,9 @@ components:
               has_more:
                 description: True if there are more events
                 type: boolean
-              next_cursor_modified:
+              next_cursor:
                 description: |
-                  Cursor to pass on the next call. Returned even when there are no more results, so it can be used to poll for changes.
+                  Pass this opaque value as a cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes.
                 type: string
               through:
                 description: The UID of the last event returned
@@ -8767,8 +8767,8 @@ components:
       headers:
         X-Has-More:
           $ref: '#/components/headers/HasMoreHeader'
-        X-Next-Cursor-Modified:
-          $ref: '#/components/headers/NextCursorModifiedHeader'
+        X-Next-Cursor:
+          $ref: '#/components/headers/NextCursorHeader'
       content:
         application/json:
           schema:
@@ -8776,9 +8776,9 @@ components:
             properties:
               has_more:
                 type: boolean
-              next_cursor_modified:
+              next_cursor:
                 description: |
-                  Cursor to pass on the next call. Returned even when there are no more results, so it can be used to poll for changes.
+                  Pass this opaque value as a cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes.
                 type: string
               sessions:
                 type: array
