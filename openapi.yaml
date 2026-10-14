@@ -878,6 +878,7 @@ paths:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/pageSizeParam'
         - $ref: '#/components/parameters/pageNumParam'
+        - $ref: '#/components/parameters/cursorParam'
         - $ref: '#/components/parameters/monitorUIDQueryParam'
       responses:
         '200':
@@ -1058,6 +1059,7 @@ paths:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/pageSizeParam'
         - $ref: '#/components/parameters/pageNumParam'
+        - $ref: '#/components/parameters/cursorParam'
         - $ref: '#/components/parameters/deviceUIDParamQuery'
         - $ref: '#/components/parameters/tagParam'
         - $ref: '#/components/parameters/serialNumberParam'
@@ -1956,6 +1958,7 @@ paths:
         - $ref: '#/components/parameters/deviceUIDParam'
         - $ref: '#/components/parameters/pageSizeParam'
         - $ref: '#/components/parameters/pageNumParam'
+        - $ref: '#/components/parameters/cursorParam'
         - $ref: '#/components/parameters/startDateParam'
         - $ref: '#/components/parameters/endDateParam'
         - $ref: '#/components/parameters/firstSyncParam'
@@ -2013,9 +2016,15 @@ paths:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/pageSizeParam'
         - $ref: '#/components/parameters/pageNumParam'
+        - $ref: '#/components/parameters/cursorParam'
       responses:
         '200':
           description: Successful operation
+          headers:
+            X-Has-More:
+              $ref: '#/components/headers/HasMoreHeader'
+            X-Next-Cursor:
+              $ref: '#/components/headers/NextCursorHeader'
           content:
             application/json:
               schema:
@@ -2025,6 +2034,10 @@ paths:
                     type: array
                     items:
                       properties:
+                        deleted:
+                          description: |
+                            True if this device has been deleted. Only present when reading with a `cursor`.
+                          type: boolean
                         key:
                           type: string
                         uid:
@@ -2032,6 +2045,10 @@ paths:
                       type: object
                   has_more:
                     type: boolean
+                  next_cursor:
+                    description: |
+                      Pass this opaque value as a cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes.
+                    type: string
                 required:
                   - device_public_keys
                   - has_more
@@ -2083,12 +2100,14 @@ paths:
   /v1/projects/{projectOrProductUID}/dfu/{firmwareType}/history:
     get:
       operationId: GetDevicesDfuHistory
-      description: Get host or Notecard DFU history for all devices that match the filter criteria
+      description: |
+        Get host or Notecard DFU history for all devices that match the filter criteria. With a `cursor`, changes made through fleet or project firmware settings will not appear until the device itself is next updated.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/firmwareTypeParam'
         - $ref: '#/components/parameters/pageSizeParam'
         - $ref: '#/components/parameters/pageNumParam'
+        - $ref: '#/components/parameters/cursorParam'
         - $ref: '#/components/parameters/sortByParam'
         - $ref: '#/components/parameters/sortOrderParam'
         - $ref: '#/components/parameters/deviceUIDParamQuery'
@@ -2103,6 +2122,11 @@ paths:
       responses:
         '200':
           description: Success
+          headers:
+            X-Has-More:
+              $ref: '#/components/headers/HasMoreHeader'
+            X-Next-Cursor:
+              $ref: '#/components/headers/NextCursorHeader'
           content:
             application/json:
               schema:
@@ -2119,12 +2143,14 @@ paths:
   /v1/projects/{projectOrProductUID}/dfu/{firmwareType}/status:
     get:
       operationId: GetDevicesDfuStatus
-      description: Get host or Notecard DFU history for all devices that match the filter criteria
+      description: |
+        Get host or Notecard DFU history for all devices that match the filter criteria. With a `cursor`, changes made through fleet or project firmware settings will not appear until the device itself is next updated.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/firmwareTypeParam'
         - $ref: '#/components/parameters/pageSizeParam'
         - $ref: '#/components/parameters/pageNumParam'
+        - $ref: '#/components/parameters/cursorParam'
         - $ref: '#/components/parameters/sortByParam'
         - $ref: '#/components/parameters/sortOrderParam'
         - $ref: '#/components/parameters/deviceUIDParamQuery'
@@ -2139,6 +2165,11 @@ paths:
       responses:
         '200':
           description: Success
+          headers:
+            X-Has-More:
+              $ref: '#/components/headers/HasMoreHeader'
+            X-Next-Cursor:
+              $ref: '#/components/headers/NextCursorHeader'
           content:
             application/json:
               schema:
@@ -2246,6 +2277,7 @@ paths:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/pageSizeParam'
         - $ref: '#/components/parameters/pageNumParam'
+        - $ref: '#/components/parameters/cursorParam'
         - $ref: '#/components/parameters/deviceUIDParamQuery'
         - $ref: '#/components/parameters/sensorUIDParamQuery'
         - $ref: '#/components/parameters/sortByParam'
@@ -2292,7 +2324,7 @@ paths:
   /v1/projects/{projectOrProductUID}/events-cursor:
     get:
       operationId: GetEventsByCursor
-      description: Get Events of a Project by cursor
+      description: 'DEPRECATED: Use Get Events of a Project instead with the cursor parameter.'
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/limitParam'
@@ -2669,6 +2701,7 @@ paths:
         - $ref: '#/components/parameters/fleetUIDParam'
         - $ref: '#/components/parameters/pageSizeParam'
         - $ref: '#/components/parameters/pageNumParam'
+        - $ref: '#/components/parameters/cursorParam'
         - $ref: '#/components/parameters/deviceUIDParamQuery'
         - $ref: '#/components/parameters/tagParam'
         - $ref: '#/components/parameters/serialNumberParam'
@@ -2789,6 +2822,7 @@ paths:
         - $ref: '#/components/parameters/fleetUIDParam'
         - $ref: '#/components/parameters/pageSizeParam'
         - $ref: '#/components/parameters/pageNumParam'
+        - $ref: '#/components/parameters/cursorParam'
         - $ref: '#/components/parameters/deviceUIDParamQuery'
         - $ref: '#/components/parameters/sensorUIDParamQuery'
         - $ref: '#/components/parameters/sortByParam'
@@ -2834,7 +2868,7 @@ paths:
   /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/events-cursor:
     get:
       operationId: GetFleetEventsByCursor
-      description: Get Events of a Fleet by cursor
+      description: 'DEPRECATED: Use Get Events of a Fleet instead with the cursor parameter.'
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/fleetUIDParam'
@@ -3632,6 +3666,7 @@ paths:
         - $ref: '#/components/parameters/routeUIDParam'
         - $ref: '#/components/parameters/pageSizeParam'
         - $ref: '#/components/parameters/pageNumParam'
+        - $ref: '#/components/parameters/cursorParam'
         - $ref: '#/components/parameters/deviceUIDParamQuery'
         - $ref: '#/components/parameters/routeLogsSortByParam'
         - $ref: '#/components/parameters/routeLogsSortOrderParam'
@@ -3645,6 +3680,11 @@ paths:
       responses:
         '200':
           description: Successful operation
+          headers:
+            X-Has-More:
+              $ref: '#/components/headers/HasMoreHeader'
+            X-Next-Cursor:
+              $ref: '#/components/headers/NextCursorHeader'
           content:
             application/json:
               schema:
@@ -4164,7 +4204,7 @@ components:
         type: string
     cursorParam:
       description: |
-        A cursor, which can be obtained from the `next_cursor` value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included.
+        If supplied, the results will be returned in ascending order of modification time. To start from a specific time, specify cursor as Unix epoch microseconds (UTC) or 0 to start from the beginning. Or, to start where the last search left off, set cursor to the returned value of next_cursor (or the X-Next-Cursor header).
       in: query
       name: cursor
       required: false
@@ -4472,6 +4512,7 @@ components:
       schema:
         type: string
     limitParam:
+      description: Maximum number of events to return.
       in: query
       name: limit
       required: false
@@ -4479,6 +4520,7 @@ components:
         type: integer
         format: int32
         default: 50
+        maximum: 10000
         minimum: 1
     locationParam:
       description: Location filter. Matches any value containing the filter text. Use `*` as a wildcard and `\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
@@ -5584,6 +5626,10 @@ components:
           $ref: '#/components/schemas/CellularUsage'
         contact:
           $ref: '#/components/schemas/Contact'
+        deleted:
+          description: |
+            True if this device has been deleted. Only present when reading with a `cursor`.
+          type: boolean
         dfu:
           $ref: '#/components/schemas/DFUEnv'
         disabled:
@@ -5698,6 +5744,10 @@ components:
             version:
               description: Firmware version
               type: string
+        deleted:
+          description: |
+            True if this device has been deleted. Only present when reading with a `cursor`.
+          type: boolean
         device_uid:
           description: Device UID
           type: string
@@ -5715,6 +5765,10 @@ components:
         has_more:
           type: boolean
           default: false
+        next_cursor:
+          description: |
+            Pass this opaque value as a cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes.
+          type: string
     DeviceDfuStateMachine:
       description: Represents a single request to update the host or Notecard firmware
       type: object
@@ -5773,6 +5827,10 @@ components:
             version:
               description: Firmware version
               type: string
+        deleted:
+          description: |
+            True if this device has been deleted. Only present when reading with a `cursor`.
+          type: boolean
         device_uid:
           description: Device UID
           type: string
@@ -5791,6 +5849,10 @@ components:
         has_more:
           type: boolean
           default: false
+        next_cursor:
+          description: |
+            Pass this opaque value as a cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes.
+          type: string
     DeviceSensor:
       description: A sensor attached to a device
       type: object
@@ -6164,6 +6226,10 @@ components:
         bssid:
           description: BSSID. Only available on _session.qo events.
           type: string
+        deleted:
+          description: |
+            True if this event has been deleted. Only present when reading with a `cursor`.
+          type: boolean
         device:
           description: Device UID (globally unique)
           type: string
@@ -8161,9 +8227,28 @@ components:
         transform:
           description: Transformation to be applied to the event
           type: string
+  headers:
+    HasMoreHeader:
+      description: |
+        True if there are more results.
+      schema:
+        type: string
+        enum:
+          - 'true'
+          - 'false'
+    NextCursorHeader:
+      description: |
+        Pass this value as a cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes.
+      schema:
+        type: string
   responses:
     AlertsResponse:
       description: The response body from GET /alerts
+      headers:
+        X-Has-More:
+          $ref: '#/components/headers/HasMoreHeader'
+        X-Next-Cursor:
+          $ref: '#/components/headers/NextCursorHeader'
       content:
         application/json:
           schema:
@@ -8177,6 +8262,10 @@ components:
               has_more:
                 description: True if there are more alerts
                 type: boolean
+              next_cursor:
+                description: |
+                  Pass this opaque value as a cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes.
+                type: string
             required:
               - alerts
               - has_more
@@ -8237,6 +8326,11 @@ components:
                 nullable: true
     DevicesResponse:
       description: List of Devices
+      headers:
+        X-Has-More:
+          $ref: '#/components/headers/HasMoreHeader'
+        X-Next-Cursor:
+          $ref: '#/components/headers/NextCursorHeader'
       content:
         application/json:
           schema:
@@ -8248,6 +8342,10 @@ components:
                   $ref: '#/components/schemas/Device'
               has_more:
                 type: boolean
+              next_cursor:
+                description: |
+                  Pass this opaque value as a cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes.
+                type: string
             required:
               - devices
               - has_more
@@ -8265,6 +8363,11 @@ components:
             $ref: '#/components/schemas/Error'
     EventsByCursorResponse:
       description: The response body from a GET events by cursor request.
+      headers:
+        X-Has-More:
+          $ref: '#/components/headers/HasMoreHeader'
+        X-Next-Cursor:
+          $ref: '#/components/headers/NextCursorHeader'
       content:
         application/json:
           schema:
@@ -8279,7 +8382,7 @@ components:
                 type: boolean
               next_cursor:
                 description: |
-                  The cursor value of the next result, which is intended to be used as the "cursor" parameter value of the next call to this method. An empty string is returned if there are no more results after this results set.
+                  A legacy cursor, which can be obtained from the `next_cursor` value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included.
                 type: string
             required:
               - events
@@ -8325,9 +8428,9 @@ components:
       description: The response body from a GET events request.
       headers:
         X-Has-More:
-          description: True if there are more events
-          schema:
-            type: boolean
+          $ref: '#/components/headers/HasMoreHeader'
+        X-Next-Cursor:
+          $ref: '#/components/headers/NextCursorHeader'
       content:
         application/json:
           schema:
@@ -8340,6 +8443,10 @@ components:
               has_more:
                 description: True if there are more events
                 type: boolean
+              next_cursor:
+                description: |
+                  Pass this value as the cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes.
+                type: string
               through:
                 description: The UID of the last event returned
                 type: string
@@ -8589,6 +8696,11 @@ components:
               - report_uid
     SessionResponse:
       description: The response body for a session request.
+      headers:
+        X-Has-More:
+          $ref: '#/components/headers/HasMoreHeader'
+        X-Next-Cursor:
+          $ref: '#/components/headers/NextCursorHeader'
       content:
         application/json:
           schema:
@@ -8596,6 +8708,10 @@ components:
             properties:
               has_more:
                 type: boolean
+              next_cursor:
+                description: |
+                  Pass this opaque value as a cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes.
+                type: string
               sessions:
                 type: array
                 items:
