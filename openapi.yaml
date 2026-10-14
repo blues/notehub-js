@@ -2324,7 +2324,7 @@ paths:
   /v1/projects/{projectOrProductUID}/events-cursor:
     get:
       operationId: GetEventsByCursor
-      description: Get Events of a Project by cursor
+      description: 'DEPRECATED: Use Get Events of a Project instead with the cursor parameter.'
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/limitParam'
@@ -2868,7 +2868,7 @@ paths:
   /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/events-cursor:
     get:
       operationId: GetFleetEventsByCursor
-      description: Get Events of a Fleet by cursor
+      description: 'DEPRECATED: Use Get Events of a Fleet instead with the cursor parameter.'
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/fleetUIDParam'
@@ -4204,7 +4204,7 @@ components:
         type: string
     cursorParam:
       description: |
-        If supplied, the results will be returned in ascending order of modification time. To start from a specific time, specify cursor as Unix epoch microseconds (UTC) or zero to start from the beginning. Or, to start where the last search left off, set cursor to the returned value of next_cursor (or the X-Next-Cursor header).
+        If supplied, the results will be returned in ascending order of modification time. To start from a specific time, specify cursor as Unix epoch microseconds (UTC) or 0 to start from the beginning. Or, to start where the last search left off, set cursor to the returned value of next_cursor (or the X-Next-Cursor header).
       in: query
       name: cursor
       required: false
@@ -5303,7 +5303,7 @@ components:
           description: repository name
           type: string
         password:
-          description: read-only password for the database, also used as X-Repository-Token header for subsequent API calls.  This value is only served once when the repository is created
+          description: read-only password for the database, also used as X-Repository-Token header for subsequent API calls.  This value is only served once when the repository is created, and never to a scoped token, which queries through the repository token endpoint instead
           type: string
         project_uids:
           $ref: '#/components/schemas/AppUIDList'
@@ -7224,71 +7224,6 @@ components:
         - ORG_ROLE_BILLING_MANAGER
         - ORG_ROLE_PROJECT_CREATOR
         - ORG_ROLE_MEMBER
-    PersonalAccessToken:
-      type: object
-      properties:
-        created_at:
-          description: When the key was created
-          type: string
-          format: date-time
-        created_by:
-          description: The user that created this key
-          type: object
-          properties:
-            email:
-              type: string
-            name:
-              type: string
-            uid:
-              type: string
-        description:
-          description: Optional description for this API Key
-          type: string
-        expires_at:
-          description: When the key expires
-          type: string
-          format: date-time
-          nullable: true
-        last_used:
-          description: When it was last used, if ever
-          type: string
-          format: date-time
-          nullable: true
-        name:
-          description: Name for this API Key
-          type: string
-        suspended:
-          description: if true, this token cannot be used
-          type: boolean
-        uid:
-          description: Unique and public identifier
-          type: string
-    PersonalAccessTokenInfo:
-      type: object
-      properties:
-        description:
-          type: string
-        expires_at:
-          description: New expiration timestamp for the personal access token
-          type: string
-          format: date-time
-          nullable: true
-        name:
-          type: string
-        suspended:
-          description: if true, the token is temporarily suspended
-          type: boolean
-      required:
-        - expiresAt
-    PersonalAccessTokenSecret:
-      type: object
-      properties:
-        secret:
-          description: The secret
-          type: string
-        uid:
-          description: Unique and public identifier
-          type: string
     Product:
       type: object
       properties:
@@ -7473,7 +7408,8 @@ components:
         ttl_seconds:
           description: |
             Requested credential lifetime in seconds. Clamped server-side to
-            [60, 3600]. Defaults to 900 (15 minutes) if omitted.
+            [60, 3600], or to [60, 900] for a scoped token. Defaults to 900
+            (15 minutes) if omitted.
           type: integer
           format: int32
           default: 900
@@ -8302,7 +8238,7 @@ components:
           - 'false'
     NextCursorHeader:
       description: |
-        Pass this opaque value as a cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes.
+        Pass this value as a cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes.
       schema:
         type: string
   responses:
@@ -8445,11 +8381,8 @@ components:
                 description: True if there are more events
                 type: boolean
               next_cursor:
-                description: Legacy form of cursor that has been deprecated.
-                type: string
-              next_cursor:
                 description: |
-                  Pass this opaque value as a cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes.
+                  A legacy cursor, which can be obtained from the `next_cursor` value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included.
                 type: string
             required:
               - events
@@ -8491,7 +8424,6 @@ components:
                 when: 1656010061
             has_more: false
             next_cursor: ''
-            next_cursor: '1789084800000000'
     EventsResponse:
       description: The response body from a GET events request.
       headers:
@@ -8513,7 +8445,7 @@ components:
                 type: boolean
               next_cursor:
                 description: |
-                  Pass this opaque value as a cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes.
+                  Pass this value as the cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes.
                 type: string
               through:
                 description: The UID of the last event returned
