@@ -3826,7 +3826,7 @@ paths:
     get:
       operationId: GetSkills
       summary: Read all Project Skills (Product Skills)
-      description: "Read Project Skills (also called Product Skills) using a project UID or product UID. Returns every current skill with full metadata and exact content in one consistent snapshot; an empty project returns skills: []. This is the starting point for agents to learn a project's capabilities and workflows. Requires Viewer access; default public Viewer access allows nonmembers and unauthenticated callers. For larger sets, use ListSkills then GetSkill."
+      description: "Read Project Skills (also called Product Skills) using a project UID or product UID. Returns every current skill with full metadata and exact content in one consistent snapshot; an empty project returns skills: []. This is the starting point for agents to learn a project's capabilities and workflows. For larger sets, use ListSkills then GetSkill."
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - name: If-None-Match
@@ -3848,7 +3848,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/SkillSet'
         '304':
-          description: Representation unchanged (authorization is still checked)
+          description: Representation unchanged
         '400':
           description: Invalid name, content, kinds or precondition syntax
           content:
@@ -3886,7 +3886,7 @@ paths:
     delete:
       operationId: DeleteSkill
       summary: Delete a Project Skill (Product Skill)
-      description: Delete a named document from Project Skills (also called Product Skills), using a project UID or product UID. Requires Developer access or above and If-Match with the current skill revision. Removes the skill and its older stored versions so old content cannot reappear.
+      description: Delete a named document from Project Skills (also called Product Skills), using a project UID or product UID. Requires If-Match with the current skill revision. Removes the skill and its older stored versions so old content cannot reappear. Used only during Skill Training.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - name: name
@@ -3944,7 +3944,7 @@ paths:
     get:
       operationId: GetSkill
       summary: Read a Project Skill (Product Skill)
-      description: Read one document from Project Skills (also called Product Skills) by its relative Markdown name, using a project UID or product UID. Returns full metadata and exact content. Requires Viewer access; default public Viewer access allows nonmembers and unauthenticated callers. Use If-Match to require a specific revision, or If-None-Match to skip unchanged content.
+      description: Read one document from Project Skills (also called Product Skills) by its relative Markdown name, using a project UID or product UID. Returns full metadata and exact content. Use If-Match to require a specific revision, or If-None-Match to skip unchanged content.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - name: name
@@ -3978,7 +3978,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Skill'
         '304':
-          description: Representation unchanged (authorization is still checked)
+          description: Representation unchanged
         '400':
           description: Invalid name, content, kinds or precondition syntax
           content:
@@ -4027,7 +4027,7 @@ paths:
     put:
       operationId: PutSkill
       summary: Create or replace a Project Skill (Product Skill)
-      description: 'Create or replace a Markdown document in Project Skills (also called Product Skills), using a project UID or product UID. Requires Developer access or above; replacement checks both Create and Delete permissions. Create with If-None-Match: *, or replace with If-Match: "revision" from GetSkill. Content is preserved exactly. Omit kinds to preserve existing kinds, or send [] to clear them. An identical write returns unchanged.'
+      description: 'Create or replace a Markdown document in Project Skills (also called Product Skills), using a project UID or product UID. Create with If-None-Match: *, or replace with If-Match: "revision" from GetSkill. Content is preserved exactly. Omit kinds to preserve existing kinds, or send [] to clear them. An identical write returns unchanged. Used only during Skill Training.'
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - name: name
@@ -4123,7 +4123,7 @@ paths:
     get:
       operationId: ListSkills
       summary: List Project Skills (Product Skills) metadata
-      description: Browse Project Skills (also called Product Skills) using a project UID or product UID. Returns every skill's name, kinds, size, revision, timestamps and links in one call, without content. Use GetSkills for all content or GetSkill for one document. Requires Viewer access; default public Viewer access allows nonmembers and unauthenticated callers.
+      description: Browse Project Skills (also called Product Skills) using a project UID or product UID. Returns every skill's name, kinds, size, revision, timestamps and links in one call, without content. Use GetSkills for all content or GetSkill for one document.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - name: If-None-Match
@@ -4145,7 +4145,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/SkillCatalog'
         '304':
-          description: Representation unchanged (authorization is still checked)
+          description: Representation unchanged
         '400':
           description: Invalid name, content, kinds or precondition syntax
           content:
@@ -9410,7 +9410,7 @@ tags:
     name: usage
   - description: Batch job operations
     name: jobs
-  - description: Project Skills (also called Product Skills) are Markdown guides for agents working with a project's devices and data. Address the same collection with a project UID or product UID. Start with GetSkills for all content, or ListSkills to browse metadata. Viewer access includes default public Viewers; writes require Developer access or above.
+  - description: Project Skills (also called Product Skills) are Markdown guides for agents working with a project's devices and data. Address the same collection with a project UID or product UID. Start with GetSkills for all content, or ListSkills to browse metadata.
     name: Skills
 externalDocs:
   description: Find out more about Blues
