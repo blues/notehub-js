@@ -5293,7 +5293,11 @@ components:
         name:
           type: string
         project_uids:
-          $ref: '#/components/schemas/AppUIDList'
+          description: The project whose events the repository holds. A repository can reference at most one project.
+          type: array
+          items:
+            type: string
+          maxItems: 1
     CreatedRepository:
       type: object
       properties:
