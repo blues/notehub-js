@@ -15,7 +15,7 @@ paths:
   /auth/login:
     post:
       operationId: Login
-      description: Gets an API key from username and password
+      description: Gets an access token from username and password
       requestBody:
         required: true
         content:
