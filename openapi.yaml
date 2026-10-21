@@ -15,7 +15,7 @@ paths:
   /auth/login:
     post:
       operationId: Login
-      description: Gets an API key from username and password
+      description: Gets an access token from username and password
       requestBody:
         required: true
         content:
@@ -123,129 +123,6 @@ paths:
                 $ref: '#/components/schemas/OAuth2Error'
       tags:
         - authorization
-  /v1/billing-accounts:
-    get:
-      operationId: GetBillingAccounts
-      description: Get Billing Accounts accessible by the api_key
-      responses:
-        '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  billing_accounts:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/BillingAccount'
-        default:
-          $ref: '#/components/responses/ErrorResponse'
-      deprecated: true
-      security:
-        - personalAccessToken: []
-      tags:
-        - billing_account
-      x-custom-attributes:
-        permission: read
-  /v1/billing-accounts/{billingAccountUID}:
-    get:
-      operationId: GetBillingAccount
-      description: Get Billing Account Information
-      parameters:
-        - $ref: '#/components/parameters/billingAccountUIDParam'
-      responses:
-        '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  contact_uid:
-                    type: string
-                  email:
-                    type: string
-                  name:
-                    type: string
-                  owner:
-                    type: string
-                  plan:
-                    type: object
-                    properties:
-                      current_balance:
-                        type: integer
-                        format: int64
-                      end_date:
-                        type: string
-                        format: date-time
-                      event_capacity:
-                        type: integer
-                        format: int64
-                      start_date:
-                        type: string
-                        format: date-time
-                      type:
-                        type: string
-                        enum:
-                          - Enterprise
-                          - Essentials
-                  suspended:
-                    type: boolean
-                  uid:
-                    type: string
-        default:
-          $ref: '#/components/responses/ErrorResponse'
-      deprecated: true
-      security:
-        - personalAccessToken: []
-      tags:
-        - billing_account
-      x-custom-attributes:
-        permission: read
-  /v1/billing-accounts/{billingAccountUID}/balance-history:
-    get:
-      operationId: GetBillingAccountBalanceHistory
-      description: Get Billing Account Balance history
-      parameters:
-        - $ref: '#/components/parameters/billingAccountUIDParam'
-        - $ref: '#/components/parameters/startDateParam'
-        - $ref: '#/components/parameters/endDateParam'
-      responses:
-        '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  data:
-                    type: array
-                    items:
-                      properties:
-                        period:
-                          type: string
-                          format: date-time
-                        remaining_event_capacity:
-                          type: integer
-                          format: int64
-                        total_event_capacity_used:
-                          type: integer
-                          format: int64
-                      required:
-                        - remaining_event_capacity
-                        - total_event_capacity_used
-                        - period
-                      type: object
-        default:
-          $ref: '#/components/responses/ErrorResponse'
-      deprecated: true
-      security:
-        - personalAccessToken: []
-      tags:
-        - billing_account
-      x-custom-attributes:
-        permission: read
   /v1/description:
     get:
       operationId: ListGlobalDescriptions
@@ -284,6 +161,7 @@ paths:
         - description
       x-custom-attributes:
         permission: delete
+        resource: blues:resources:description
     get:
       operationId: GetGlobalDescription
       description: Get a global description record. Returns the raw content with its stored Content-Type.
@@ -332,6 +210,7 @@ paths:
         - description
       x-custom-attributes:
         permission: create
+        resource: blues:resources:description
   /v1/organizations:
     get:
       operationId: GetOrganizations
@@ -409,7 +288,9 @@ paths:
       tags:
         - organization
       x-custom-attributes:
+        global-roles: support-admin,sales-admin,admin
         permission: read
+        resource: blues:resources:billing-account:usage
   /v1/organizations/{organizationUID}/balance-history:
     get:
       operationId: GetOrganizationBalanceHistory
@@ -451,7 +332,9 @@ paths:
       tags:
         - organization
       x-custom-attributes:
+        global-roles: support-admin,sales-admin,admin
         permission: read
+        resource: blues:resources:billing-account:usage
   /v1/products/{productUID}/devices/{deviceUID}/environment_variables_with_pin:
     get:
       operationId: GetDeviceEnvironmentVariablesByPin
@@ -798,7 +681,7 @@ paths:
               properties:
                 billing_account_uid:
                   description: |
-                    The billing account UID for the project. The caller of the API must be able to create projects within the billing account, otherwise an error will be returned.
+                    The OrganizationUID for the project. The caller of the API must be able to create projects within the billing account, otherwise an error will be returned.
                   type: string
                 label:
                   description: The label for the project.
@@ -868,6 +751,7 @@ paths:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/pageSizeParam'
         - $ref: '#/components/parameters/pageNumParam'
+        - $ref: '#/components/parameters/cursorParam'
         - $ref: '#/components/parameters/monitorUIDQueryParam'
       responses:
         '200':
@@ -921,7 +805,7 @@ paths:
               type: object
               properties:
                 billing_account_uid:
-                  description: The billing account UID for the project. The caller of the API must be able to create projects within the billing account, otherwise an error will be returned.
+                  description: The OrganizationUID for the project. The caller of the API must be able to create projects within the billing account, otherwise an error will be returned.
                   type: string
                 disable_clone_fleets:
                   description: Whether to disallow the cloning of the fleets from the parent project.  Default is false if not specified.
@@ -1048,6 +932,7 @@ paths:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/pageSizeParam'
         - $ref: '#/components/parameters/pageNumParam'
+        - $ref: '#/components/parameters/cursorParam'
         - $ref: '#/components/parameters/deviceUIDParamQuery'
         - $ref: '#/components/parameters/tagParam'
         - $ref: '#/components/parameters/serialNumberParam'
@@ -1946,6 +1831,7 @@ paths:
         - $ref: '#/components/parameters/deviceUIDParam'
         - $ref: '#/components/parameters/pageSizeParam'
         - $ref: '#/components/parameters/pageNumParam'
+        - $ref: '#/components/parameters/cursorParam'
         - $ref: '#/components/parameters/startDateParam'
         - $ref: '#/components/parameters/endDateParam'
         - $ref: '#/components/parameters/firstSyncParam'
@@ -2003,9 +1889,15 @@ paths:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/pageSizeParam'
         - $ref: '#/components/parameters/pageNumParam'
+        - $ref: '#/components/parameters/cursorParam'
       responses:
         '200':
           description: Successful operation
+          headers:
+            X-Has-More:
+              $ref: '#/components/headers/HasMoreHeader'
+            X-Next-Cursor:
+              $ref: '#/components/headers/NextCursorHeader'
           content:
             application/json:
               schema:
@@ -2015,6 +1907,10 @@ paths:
                     type: array
                     items:
                       properties:
+                        deleted:
+                          description: |
+                            True if this device has been deleted. Only present when reading with a `cursor`.
+                          type: boolean
                         key:
                           type: string
                         uid:
@@ -2022,6 +1918,10 @@ paths:
                       type: object
                   has_more:
                     type: boolean
+                  next_cursor:
+                    description: |
+                      Pass this opaque value as a cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes.
+                    type: string
                 required:
                   - device_public_keys
                   - has_more
@@ -2073,12 +1973,14 @@ paths:
   /v1/projects/{projectOrProductUID}/dfu/{firmwareType}/history:
     get:
       operationId: GetDevicesDfuHistory
-      description: Get host or Notecard DFU history for all devices that match the filter criteria
+      description: |
+        Get host or Notecard DFU history for all devices that match the filter criteria. With a `cursor`, changes made through fleet or project firmware settings will not appear until the device itself is next updated.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/firmwareTypeParam'
         - $ref: '#/components/parameters/pageSizeParam'
         - $ref: '#/components/parameters/pageNumParam'
+        - $ref: '#/components/parameters/cursorParam'
         - $ref: '#/components/parameters/sortByParam'
         - $ref: '#/components/parameters/sortOrderParam'
         - $ref: '#/components/parameters/deviceUIDParamQuery'
@@ -2093,6 +1995,11 @@ paths:
       responses:
         '200':
           description: Success
+          headers:
+            X-Has-More:
+              $ref: '#/components/headers/HasMoreHeader'
+            X-Next-Cursor:
+              $ref: '#/components/headers/NextCursorHeader'
           content:
             application/json:
               schema:
@@ -2109,12 +2016,14 @@ paths:
   /v1/projects/{projectOrProductUID}/dfu/{firmwareType}/status:
     get:
       operationId: GetDevicesDfuStatus
-      description: Get host or Notecard DFU history for all devices that match the filter criteria
+      description: |
+        Get host or Notecard DFU history for all devices that match the filter criteria. With a `cursor`, changes made through fleet or project firmware settings will not appear until the device itself is next updated.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/firmwareTypeParam'
         - $ref: '#/components/parameters/pageSizeParam'
         - $ref: '#/components/parameters/pageNumParam'
+        - $ref: '#/components/parameters/cursorParam'
         - $ref: '#/components/parameters/sortByParam'
         - $ref: '#/components/parameters/sortOrderParam'
         - $ref: '#/components/parameters/deviceUIDParamQuery'
@@ -2129,6 +2038,11 @@ paths:
       responses:
         '200':
           description: Success
+          headers:
+            X-Has-More:
+              $ref: '#/components/headers/HasMoreHeader'
+            X-Next-Cursor:
+              $ref: '#/components/headers/NextCursorHeader'
           content:
             application/json:
               schema:
@@ -2236,6 +2150,7 @@ paths:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/pageSizeParam'
         - $ref: '#/components/parameters/pageNumParam'
+        - $ref: '#/components/parameters/cursorParam'
         - $ref: '#/components/parameters/deviceUIDParamQuery'
         - $ref: '#/components/parameters/sensorUIDParamQuery'
         - $ref: '#/components/parameters/sortByParam'
@@ -2251,22 +2166,6 @@ paths:
         - $ref: '#/components/parameters/sessionUIDFilterParam'
         - $ref: '#/components/parameters/eventUIDFilterQueryParam'
         - $ref: '#/components/parameters/selectFieldsParam'
-        - name: deviceUIDs
-          in: query
-          description: Deprecated.
-          required: false
-          schema:
-            type: array
-            items:
-              type: string
-          deprecated: true
-        - name: since
-          in: query
-          description: Deprecated.
-          required: false
-          schema:
-            type: string
-          deprecated: true
       responses:
         '200':
           $ref: '#/components/responses/EventsResponse'
@@ -2279,36 +2178,10 @@ paths:
       x-custom-attributes:
         permission: read
         resource: blues:resources:app:APPSERIAL:events
-  /v1/projects/{projectOrProductUID}/events-cursor:
-    get:
-      operationId: GetEventsByCursor
-      description: Get Events of a Project by cursor
-      parameters:
-        - $ref: '#/components/parameters/projectOrProductUIDParam'
-        - $ref: '#/components/parameters/limitParam'
-        - $ref: '#/components/parameters/cursorParam'
-        - $ref: '#/components/parameters/sortOrderParam'
-        - $ref: '#/components/parameters/systemFilesOnlyParam'
-        - $ref: '#/components/parameters/filesQueryParam'
-        - $ref: '#/components/parameters/fleetUIDQueryParam'
-        - $ref: '#/components/parameters/deviceUIDParamQuery'
-        - $ref: '#/components/parameters/sensorUIDParamQuery'
-      responses:
-        '200':
-          $ref: '#/components/responses/EventsByCursorResponse'
-        default:
-          $ref: '#/components/responses/ErrorResponse'
-      security:
-        - personalAccessToken: []
-      tags:
-        - event
-      x-custom-attributes:
-        permission: read
-        resource: blues:resources:app:APPSERIAL:events
   /v1/projects/{projectOrProductUID}/events/{eventUID}/route-logs:
     get:
       operationId: GetRouteLogsByEvent
-      description: Get Route Logs by Event UID
+      description: Get Route Logs by EventUID
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/eventUIDParam'
@@ -2393,7 +2266,7 @@ paths:
         - project
       x-custom-attributes:
         permission: delete
-        resource: blues:resources:app:APPSERIAL:settings
+        resource: blues:resources:app:APPSERIAL:firmware:host
     get:
       operationId: DownloadFirmware
       description: Download firmware binary
@@ -2421,7 +2294,7 @@ paths:
         - project
       x-custom-attributes:
         permission: read
-        resource: blues:resources:app:APPSERIAL:settings
+        resource: blues:resources:app:APPSERIAL:firmware:host
     post:
       operationId: UpdateFirmware
       description: |
@@ -2462,7 +2335,7 @@ paths:
         - project
       x-custom-attributes:
         permission: update
-        resource: blues:resources:app:APPSERIAL:settings
+        resource: blues:resources:app:APPSERIAL:firmware:host
     put:
       operationId: UploadFirmware
       description: Upload firmware binary
@@ -2508,8 +2381,8 @@ paths:
       tags:
         - project
       x-custom-attributes:
-        permission: read
-        resource: blues:resources:app:APPSERIAL:settings
+        permission: create
+        resource: blues:resources:app:APPSERIAL:firmware:host
   /v1/projects/{projectOrProductUID}/fleets:
     get:
       operationId: GetFleets
@@ -2659,6 +2532,7 @@ paths:
         - $ref: '#/components/parameters/fleetUIDParam'
         - $ref: '#/components/parameters/pageSizeParam'
         - $ref: '#/components/parameters/pageNumParam'
+        - $ref: '#/components/parameters/cursorParam'
         - $ref: '#/components/parameters/deviceUIDParamQuery'
         - $ref: '#/components/parameters/tagParam'
         - $ref: '#/components/parameters/serialNumberParam'
@@ -2779,6 +2653,7 @@ paths:
         - $ref: '#/components/parameters/fleetUIDParam'
         - $ref: '#/components/parameters/pageSizeParam'
         - $ref: '#/components/parameters/pageNumParam'
+        - $ref: '#/components/parameters/cursorParam'
         - $ref: '#/components/parameters/deviceUIDParamQuery'
         - $ref: '#/components/parameters/sensorUIDParamQuery'
         - $ref: '#/components/parameters/sortByParam'
@@ -2793,53 +2668,9 @@ paths:
         - $ref: '#/components/parameters/sessionUIDFilterParam'
         - $ref: '#/components/parameters/eventUIDFilterQueryParam'
         - $ref: '#/components/parameters/selectFieldsParam'
-        - name: deviceUIDs
-          in: query
-          description: Deprecated.
-          required: false
-          schema:
-            type: array
-            items:
-              type: string
-          deprecated: true
-        - name: since
-          in: query
-          description: Deprecated.
-          required: false
-          schema:
-            type: string
-          deprecated: true
       responses:
         '200':
           $ref: '#/components/responses/EventsResponse'
-        default:
-          $ref: '#/components/responses/ErrorResponse'
-      security:
-        - personalAccessToken: []
-      tags:
-        - event
-      x-custom-attributes:
-        permission: read
-        resource: blues:resources:app:APPSERIAL:events
-  /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/events-cursor:
-    get:
-      operationId: GetFleetEventsByCursor
-      description: Get Events of a Fleet by cursor
-      parameters:
-        - $ref: '#/components/parameters/projectOrProductUIDParam'
-        - $ref: '#/components/parameters/fleetUIDParam'
-        - $ref: '#/components/parameters/limitParam'
-        - $ref: '#/components/parameters/cursorParam'
-        - $ref: '#/components/parameters/sortOrderParam'
-        - $ref: '#/components/parameters/systemFilesOnlyParam'
-        - $ref: '#/components/parameters/filesQueryParam'
-        - $ref: '#/components/parameters/deviceUIDParamQuery'
-        - $ref: '#/components/parameters/sensorUIDParamQuery'
-        - $ref: '#/components/parameters/startDateParam'
-        - $ref: '#/components/parameters/endDateParam'
-      responses:
-        '200':
-          $ref: '#/components/responses/EventsByCursorResponse'
         default:
           $ref: '#/components/responses/ErrorResponse'
       security:
@@ -3081,6 +2912,9 @@ paths:
         - personalAccessToken: []
       tags:
         - jobs
+      x-custom-attributes:
+        permission: delete
+        resource: blues:resources:app:APPSERIAL:settings
     get:
       operationId: GetJobRun
       description: Get the result of a job execution
@@ -3613,12 +3447,13 @@ paths:
   /v1/projects/{projectOrProductUID}/routes/{routeUID}/route-logs:
     get:
       operationId: GetRouteLogsByRoute
-      description: Get Route Logs by Route UID
+      description: Get Route Logs by RouteUID
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/routeUIDParam'
         - $ref: '#/components/parameters/pageSizeParam'
         - $ref: '#/components/parameters/pageNumParam'
+        - $ref: '#/components/parameters/cursorParam'
         - $ref: '#/components/parameters/deviceUIDParamQuery'
         - $ref: '#/components/parameters/routeLogsSortByParam'
         - $ref: '#/components/parameters/routeLogsSortOrderParam'
@@ -3632,6 +3467,11 @@ paths:
       responses:
         '200':
           description: Successful operation
+          headers:
+            X-Has-More:
+              $ref: '#/components/headers/HasMoreHeader'
+            X-Next-Cursor:
+              $ref: '#/components/headers/NextCursorHeader'
           content:
             application/json:
               schema:
@@ -3769,6 +3609,37 @@ paths:
       x-custom-attributes:
         permission: update
         resource: blues:resources:app:APPSERIAL:settings
+  /v1/projects/{projectOrProductUID}/usage/api:
+    get:
+      operationId: GetApiUsage
+      description: Get billable Notehub API request usage for a project, broken down by endpoint and time period, when endDate is 0 or unspecified the current time is implied. Only requests that are billed against the project's plan are counted
+      parameters:
+        - $ref: '#/components/parameters/projectOrProductUIDParam'
+        - $ref: '#/components/parameters/startDateParam'
+        - $ref: '#/components/parameters/endDateParam'
+        - $ref: '#/components/parameters/usageLimitQueryParam'
+        - name: period
+          in: query
+          description: Period type for aggregation
+          required: true
+          schema:
+            type: string
+            enum:
+              - day
+              - week
+              - month
+      responses:
+        '200':
+          $ref: '#/components/responses/UsageApiResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - usage
+      x-custom-attributes:
+        permission: read
+        resource: blues:resources:app:APPSERIAL:events
   /v1/projects/{projectOrProductUID}/usage/data:
     get:
       operationId: GetDataUsage
@@ -4120,7 +3991,7 @@ components:
         type: string
     cursorParam:
       description: |
-        A cursor, which can be obtained from the `next_cursor` value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included.
+        If supplied, the results will be returned in ascending order of modification time. To start from a specific time, specify cursor as Unix epoch microseconds (UTC) or 0 to start from the beginning. Or, to start where the last search left off, set cursor to the returned value of next_cursor (or the X-Next-Cursor header).
       in: query
       name: cursor
       required: false
@@ -4241,7 +4112,7 @@ components:
       schema:
         type: string
     deviceUIDParamQuery:
-      description: A Device UID.
+      description: A DeviceUID.
       explode: true
       in: query
       name: deviceUID
@@ -4252,7 +4123,7 @@ components:
           type: string
       style: form
     deviceUIDsParamQuery:
-      description: An array of Device UIDs.
+      description: An array of DeviceUIDs.
       in: query
       name: deviceUIDs
       required: false
@@ -4280,7 +4151,7 @@ components:
         format: int64
         minimum: 0
     eventUIDFilterQueryParam:
-      description: Filter by Event UID
+      description: Filter by EventUID
       explode: true
       in: query
       name: eventUID
@@ -4359,7 +4230,7 @@ components:
         type: boolean
         default: false
     fleetUIDFilterQueryParam:
-      description: Filter by Fleet UID
+      description: Filter by FleetUID
       explode: true
       in: query
       name: fleetUID
@@ -4409,7 +4280,7 @@ components:
           - json
           - csv
     hostFirmwareParam:
-      description: Host firmware filter
+      description: Host firmware filter. Matches any value containing the filter text. Use `*` as a wildcard and `\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
       explode: true
       in: query
       name: hostFirmware
@@ -4428,6 +4299,7 @@ components:
       schema:
         type: string
     limitParam:
+      description: Maximum number of events to return.
       in: query
       name: limit
       required: false
@@ -4435,9 +4307,10 @@ components:
         type: integer
         format: int32
         default: 50
+        maximum: 10000
         minimum: 1
     locationParam:
-      description: Location filter
+      description: Location filter. Matches any value containing the filter text. Use `*` as a wildcard and `\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
       explode: true
       in: query
       name: location
@@ -4475,7 +4348,7 @@ components:
       schema:
         type: boolean
     notecardFirmwareParam:
-      description: Firmware version filter
+      description: Firmware version filter. Matches any value containing the filter text. Use `*` as a wildcard and `\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
       explode: true
       in: query
       name: notecardFirmware
@@ -4537,6 +4410,7 @@ components:
       schema:
         type: string
     productUIDQueryParam:
+      description: ProductUID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
       explode: true
       in: query
       name: productUID
@@ -4612,7 +4486,7 @@ components:
       schema:
         type: string
     routeUIDParamQuery:
-      description: A Route UID.
+      description: A RouteUID.
       explode: true
       in: query
       name: routeUID
@@ -4642,7 +4516,7 @@ components:
       schema:
         type: string
     sensorUIDParamQuery:
-      description: A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix.
+      description: A SensorUID to filter events by, matched exactly against the event sensor field. The value may carry any prefix.
       explode: true
       in: query
       name: sensorUID
@@ -4664,7 +4538,7 @@ components:
           type: string
       style: form
     serialNumberParam:
-      description: Serial number filter
+      description: Serial number filter. Matches any value containing the filter text. Use `*` as a wildcard and `\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
       explode: true
       in: query
       name: serialNumber
@@ -4675,7 +4549,7 @@ components:
           type: string
       style: form
     sessionUIDFilterParam:
-      description: Filter by Session UID
+      description: Filter by SessionUID
       explode: true
       in: query
       name: sessionUID
@@ -4686,7 +4560,7 @@ components:
           type: string
       style: form
     skuParam:
-      description: SKU filter
+      description: SKU filter. Matches any value containing the filter text. Use `*` as a wildcard and `\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
       explode: true
       in: query
       name: sku
@@ -4740,7 +4614,7 @@ components:
       schema:
         type: boolean
     tagParam:
-      description: Tag filter
+      description: Tag filter. Matches the whole tag, case-insensitive. Use `*` as a wildcard and `\*` to match a literal `*`; all other characters, including `%` and `_`, match literally. For example, `51*` matches tags starting with `51`.
       explode: true
       in: query
       name: tag
@@ -4780,7 +4654,7 @@ components:
       schema:
         type: string
     webhookUIDParam:
-      description: Webhook UID
+      description: WebhookUID
       in: path
       name: webhookUID
       required: true
@@ -4852,7 +4726,7 @@ components:
                 type: string
             type: object
         device_uid:
-          description: Device UID
+          description: DeviceUID
           type: string
         field_name:
           description: The field name that triggered the alert
@@ -4867,7 +4741,7 @@ components:
             - event
             - device
         monitor_uid:
-          description: Monitor UID
+          description: MonitorUID
           type: string
         notifications:
           type: array
@@ -4894,7 +4768,7 @@ components:
           description: The UID of the source of the alert
           type: string
         uid:
-          description: Alert UID
+          description: AlertUID
           type: string
         value:
           description: The value that triggered the alert
@@ -5003,6 +4877,30 @@ components:
           type: string
           format: uri
       additionalProperties: false
+    BatchJobNoteRequest:
+      description: A single note.add/note.update/note.delete request against a device's own notefile
+      type: object
+      properties:
+        body:
+          description: The note's JSON body (used by note.add and note.update)
+          type: object
+          additionalProperties: true
+        file:
+          description: The notefile to operate on (e.g. data.qi, config.dbs)
+          type: string
+        note:
+          description: The note ID. Required for note.update and note.delete, and for note.add against a database (.dbs/.db) notefile. Must be omitted for note.add against a queue (.qi/.qo) notefile.
+          type: string
+        req:
+          description: The note operation to perform
+          type: string
+          enum:
+            - note.add
+            - note.update
+            - note.delete
+      required:
+        - req
+        - file
     BatchJobRequests:
       description: Operations to apply to a device
       type: object
@@ -5022,22 +4920,27 @@ components:
           description: Enable the device
           type: boolean
         fleets_to_default:
-          description: Fleet UIDs to assign to the device if it has no fleets
+          description: FleetUIDs to assign to the device if it has no fleets
           type: array
           items:
             type: string
         fleets_to_join:
-          description: Fleet UIDs to add the device to
+          description: FleetUIDs to add the device to
           type: array
           items:
             type: string
         fleets_to_leave:
-          description: Fleet UIDs to remove the device from
+          description: FleetUIDs to remove the device from
           type: array
           items:
             type: string
+        note_reqs:
+          description: "note.add/note.update/note.delete requests to perform against the device's own notefiles. When both default_requests and a device's device_requests specify note_reqs, they merge by identity (req, file, note): a device-specific entry with the same identity as a default entry replaces it; entries unique to either side (no collision) all still apply."
+          type: array
+          items:
+            $ref: '#/components/schemas/BatchJobNoteRequest'
         provision_product:
-          description: Product UID to provision the device with if not already provisioned
+          description: ProductUID to provision the device with if not already provisioned
           type: string
         sn_to_default:
           description: Set the device serial number only if not already set
@@ -5155,9 +5058,7 @@ components:
         - $ref: '#/components/schemas/Monitor'
         - required:
             - name
-            - description
             - alert_routes
-            - source_type
             - threshold
     CreateProjectSecretRequest:
       type: object
@@ -5179,7 +5080,11 @@ components:
         name:
           type: string
         project_uids:
-          $ref: '#/components/schemas/AppUIDList'
+          description: The project whose events the repository holds. A repository can reference at most one project.
+          type: array
+          items:
+            type: string
+          maxItems: 1
     CreatedRepository:
       type: object
       properties:
@@ -5189,7 +5094,7 @@ components:
           description: repository name
           type: string
         password:
-          description: read-only password for the database, also used as X-Repository-Token header for subsequent API calls.  This value is only served once when the repository is created
+          description: read-only password for the database, also used as X-Repository-Token header for subsequent API calls.  This value is only served once when the repository is created, and never to a scoped token, which queries through the repository token endpoint instead
           type: string
         project_uids:
           $ref: '#/components/schemas/AppUIDList'
@@ -5316,9 +5221,20 @@ components:
           description: True once the dataset has been fully loaded from the repository's archive after backfill completed. Server-populated; ignored on input.
           type: boolean
           readOnly: true
+        lambda_name:
+          description: Name of the Lambda function deployed for a Python dataset. Derived from the repository and dataset name; set when the function is deployed.
+          type: string
+          readOnly: true
+        lambda_version:
+          description: Published Lambda version this dataset is pinned to. A reload invokes this version rather than the latest, so republishing a projection never changes how a replay projects.
+          type: string
+          readOnly: true
         lat:
           description: JSONata expression resulting in the latitude field
           type: string
+        location:
+          description: Whether the dataset has a location column, taken from each row's "lat" and "lon" keys. For Python datasets only; a JSONata dataset declares a location column by setting both lat and lon.
+          type: boolean
         lon:
           description: JSONata expression resulting in the Longitude field
           type: string
@@ -5330,10 +5246,17 @@ components:
           type: array
           items:
             type: string
+        python:
+          description: 'Optional Python source projecting each event, as an alternative to JSONata. It defines one function, with type annotations required: "def rows(record: dict[str, Any]) -> list[dict[str, Any]]". It returns zero or more row objects per event, whose keys are the dataset''s columns -- the same convention the rows expression uses. Returning an empty list contributes no rows and is not an error; anything else, None included, is an error for that event. Mutually exclusive with rows, time, lat, lon and every field''s own jsonata expression, since a Python projection produces whole row objects and leaves nothing for them to do. Use it for payloads JSONata cannot decode, such as packed binary, base64-wrapped blobs, protobuf or CBOR. At most 64 KiB. Rows must come back in the same order every time rows() runs over the same event: a row''s position in the list identifies it, so an order that varies (such as iterating over a set) makes a replay insert duplicates. Sort the list if the order is not already fixed.'
+          type: string
+          maxLength: 65536
         reload:
           $ref: '#/components/schemas/DatasetReloadProgress'
+        rows:
+          description: "Optional JSONata expression that expands one event into several rows. It evaluates to one row object per row, whose keys are the dataset's columns: an array of objects, or a single object for one row. Both are accepted because JSONata collapses a one-element sequence to the element, so the same expression yields an array for an event carrying several readings and a bare object for one carrying a single reading. A result that is undefined or empty contributes no rows and is not an error; anything that is not an object, or an array containing one, is rejected. When set it is the only expression that reads the event: each field below takes the row object key matching its name, and time/lat/lon name a key too. Omit it and the dataset produces one row per event, with each field's own jsonata expression reading the event directly. event.uploaded and event.captured always resolve against the event either way."
+          type: string
         time:
-          description: JSONata expression resulting in the relevant time field
+          description: JSONata expression resulting in the row's time. Required for a dataset with no rows expression. With one it defaults to the row object's "time" key, and only needs setting to name a different key, or to reach past the row as event.uploaded and event.captured do. lat and lon work the same way and are what declare that the dataset has a location column at all.
           type: string
     DataSetField:
       type: object
@@ -5346,12 +5269,13 @@ components:
             - 0
             - 1
             - 2
+            - 3
             - 5
             - 6
             - 7
             - 8
         jsonata:
-          description: the JSONata expression used to populate this field
+          description: "The JSONata expression that populates this field from the event. Required for a dataset with no rows expression. Must be omitted when the dataset has one: the column is then taken from the row object key matching this field's name, and supplying an expression here is rejected rather than silently ignored."
           type: string
         name:
           description: The name of the field
@@ -5485,7 +5409,7 @@ components:
       type: object
       properties:
         best_id:
-          description: The best ID for the device, preference for the serial number over device UID
+          description: The best ID for the device, preference for the serial number over DeviceUID
           type: string
         best_location:
           $ref: '#/components/schemas/Location'
@@ -5493,6 +5417,10 @@ components:
           $ref: '#/components/schemas/CellularUsage'
         contact:
           $ref: '#/components/schemas/Contact'
+        deleted:
+          description: |
+            True if this device has been deleted. Only present when reading with a `cursor`.
+          type: boolean
         dfu:
           $ref: '#/components/schemas/DFUEnv'
         disabled:
@@ -5539,6 +5467,8 @@ components:
           type: string
           format: date-time
           nullable: true
+        sensors:
+          $ref: '#/components/schemas/DeviceSensors'
         serial_number:
           type: string
         sku:
@@ -5605,8 +5535,12 @@ components:
             version:
               description: Firmware version
               type: string
+        deleted:
+          description: |
+            True if this device has been deleted. Only present when reading with a `cursor`.
+          type: boolean
         device_uid:
-          description: Device UID
+          description: DeviceUID
           type: string
         history:
           type: array
@@ -5622,6 +5556,10 @@ components:
         has_more:
           type: boolean
           default: false
+        next_cursor:
+          description: |
+            Pass this opaque value as a cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes.
+          type: string
     DeviceDfuStateMachine:
       description: Represents a single request to update the host or Notecard firmware
       type: object
@@ -5680,8 +5618,12 @@ components:
             version:
               description: Firmware version
               type: string
+        deleted:
+          description: |
+            True if this device has been deleted. Only present when reading with a `cursor`.
+          type: boolean
         device_uid:
-          description: Device UID
+          description: DeviceUID
           type: string
         dfu_in_progress:
           description: true if there is a DFU currently in progress
@@ -5698,6 +5640,27 @@ components:
         has_more:
           type: boolean
           default: false
+        next_cursor:
+          description: |
+            Pass this opaque value as a cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes.
+          type: string
+    DeviceSensor:
+      description: A sensor attached to a device
+      type: object
+      properties:
+        last_activity_date:
+          description: UTC midnight of the most recent day on which this sensor was active
+          type: string
+          format: date-time
+        sensor_uid:
+          description: Unique identifier of the sensor
+          type: string
+      required:
+        - sensor_uid
+    DeviceSensors:
+      type: array
+      items:
+        $ref: '#/components/schemas/DeviceSensor'
     DeviceSession:
       type: object
       properties:
@@ -5717,7 +5680,7 @@ components:
           description: Was this a continuous connection?
           type: boolean
         device:
-          description: Device UID
+          description: DeviceUID
           type: string
         events:
           description: Number of events routed
@@ -5728,7 +5691,7 @@ components:
           type: integer
           format: int64
         fleets:
-          description: Array of Fleet UIDs
+          description: Array of FleetUIDs
           type: array
           items:
             type: string
@@ -5776,7 +5739,7 @@ components:
         power_usb:
           type: boolean
         product:
-          description: Product UID
+          description: ProductUID
           type: string
         rat:
           type: string
@@ -5793,7 +5756,7 @@ components:
           type: string
           format: byte
         session:
-          description: Session UID
+          description: SessionUID
           type: string
         session_began:
           description: UNIX timestamp of session start
@@ -6012,7 +5975,7 @@ components:
       type: object
       properties:
         app:
-          description: App UID (globally unique)
+          description: AppUID (globally unique)
           type: string
         bars:
           description: Bars. Only available on _session.qo events.
@@ -6054,14 +6017,18 @@ components:
         bssid:
           description: BSSID. Only available on _session.qo events.
           type: string
+        deleted:
+          description: |
+            True if this event has been deleted. Only present when reading with a `cursor`.
+          type: boolean
         device:
-          description: Device UID (globally unique)
+          description: DeviceUID (globally unique)
           type: string
         environment:
           description: Routed environment variables beginning with "$". Only available on _session.qo events.
           type: object
         event:
-          description: Event UID (globally unique)
+          description: EventUID (globally unique)
           type: string
         file:
           description: The notefile associated with this event
@@ -6088,7 +6055,7 @@ components:
           description: Whether this is a platform event (administrative, e.g. _health.qo, _session.qo) rather than user data
           type: boolean
         product:
-          description: Product UID (globally unique)
+          description: ProductUID (globally unique)
           type: string
         rat:
           description: Rat. Only available on _session.qo events.
@@ -6116,10 +6083,10 @@ components:
           format: int32
           example: -72
         sensor:
-          description: Sensor UID, for events originating from a sensor attached to the device
+          description: SensorUID, for events originating from a sensor attached to the device
           type: string
         session:
-          description: Session UID (globally unique)
+          description: SessionUID (globally unique)
           type: string
         sinr:
           description: SINR. Only available on _session.qo events.
@@ -6242,6 +6209,12 @@ components:
           type: integer
           format: int64
           example: 1652709545
+        wire_length:
+          description: Approximate number of bytes that the note's body and payload occupied on the wire when transmitted from the device to Notehub
+          type: integer
+          format: int64
+          example: 128
+          minimum: 0
     Filter:
       description: |
         Filter applied to route data. Controls which notefiles are sent through the route.
@@ -6360,7 +6333,7 @@ components:
         smart_rule_enabled:
           type: boolean
         uid:
-          description: Fleet UID
+          description: FleetUID
           type: string
         watchdog_mins:
           description: A watchdog timer is used to generate an event every N minutes of inactivity. 0 means no watchdog
@@ -6508,7 +6481,7 @@ components:
         default_requests:
           $ref: '#/components/schemas/BatchJobRequests'
         device_requests:
-          description: Device-specific request overrides, keyed by device UID
+          description: Device-specific request overrides, keyed by DeviceUID
           type: object
           additionalProperties:
             $ref: '#/components/schemas/BatchJobRequests'
@@ -6549,7 +6522,7 @@ components:
             comment:
               type: string
             devices:
-              description: Specific device UIDs to include
+              description: Specific DeviceUIDs to include
               type: array
               items:
                 type: string
@@ -6559,7 +6532,7 @@ components:
               items:
                 type: string
             devices_in_fleets:
-              description: Fleet UIDs whose devices should be included
+              description: FleetUIDs whose devices should be included
               type: array
               items:
                 type: string
@@ -6695,19 +6668,20 @@ components:
       type: object
       properties:
         aggregate_function:
-          description: Aggregate function to apply to the selected values before applying the condition. [none, sum, average, max, min]
+          description: Aggregate function to apply to the selected values before applying the condition. [none, avg, max, min, sum, count]
           type: string
           enum:
             - none
-            - sum
-            - average
+            - avg
             - max
             - min
+            - sum
+            - count
         aggregate_window:
           description: The time window to aggregate the selected values. It follows the format of a number followed by a time unit
           type: string
           example: 10m or 5h30m40s
-          pattern: ^[0-9]+[smh]$
+          pattern: ^(([0-9]+[.]?[0-9]*|[.][0-9]+)(ns|us|µs|ms|s|m|h))+$
         alert:
           description: If true, the monitor is in alert state.
           type: boolean
@@ -6719,7 +6693,7 @@ components:
               - $ref: '#/components/schemas/SlackBearerNotification'
               - $ref: '#/components/schemas/EmailNotification'
         condition_type:
-          description: A comparison operation to apply to the value selected by the source_selector [greater_than, greater_than_or_equal_to, less_than, less_than_or_equal_to, equal_to, not_equal_to]
+          description: A comparison operation to apply to the value selected by the source_selector. Required for event and usage monitors; set automatically for heartbeat monitors. [greater_than, greater_than_or_equal_to, less_than, less_than_or_equal_to, equal_to, not_equal_to]
           type: string
           enum:
             - greater_than
@@ -6728,9 +6702,9 @@ components:
             - less_than_or_equal_to
             - equal_to
             - not_equal_to
-            - count
         description:
           type: string
+          default: ''
         disabled:
           description: If true, the monitor will not be evaluated.
           type: boolean
@@ -6754,24 +6728,26 @@ components:
           description: The time period to wait before routing another event after the monitor | has been triggered. It follows the format of a number followed by a time unit.
           type: string
           example: 10m or 5h30m40s
-          pattern: ^[0-9]+[smh]$
+          pattern: ^(([0-9]+[.]?[0-9]*|[.][0-9]+)(ns|us|µs|ms|s|m|h))+$
         silenced:
           description: If true, alerts will be created, but no notifications will be sent.
           type: boolean
         source_selector:
-          description: A valid JSONata expression that selects the value to monitor from the source. | It should return a single, numeric value.
+          description: A dot-delimited path to a single numeric value within the event body.
           type: string
-          example: body.temperature
+          example: temperature
         source_type:
-          description: The type of source to monitor. Supported values are "event" and "heartbeat".
+          description: The type of source to monitor. Defaults to "event".
           type: string
+          default: event
           enum:
             - event
             - heartbeat
+            - usage
         threshold:
-          description: The type of condition to apply to the value selected by the source_selector
-          type: integer
-          format: int32
+          description: The value that condition_type compares against. For heartbeat monitors this is seconds of inactivity; for usage monitors it is bytes.
+          type: number
+          format: double
         uid:
           type: string
         usage_scope:
@@ -7039,71 +7015,6 @@ components:
         - ORG_ROLE_BILLING_MANAGER
         - ORG_ROLE_PROJECT_CREATOR
         - ORG_ROLE_MEMBER
-    PersonalAccessToken:
-      type: object
-      properties:
-        created_at:
-          description: When the key was created
-          type: string
-          format: date-time
-        created_by:
-          description: The user that created this key
-          type: object
-          properties:
-            email:
-              type: string
-            name:
-              type: string
-            uid:
-              type: string
-        description:
-          description: Optional description for this API Key
-          type: string
-        expires_at:
-          description: When the key expires
-          type: string
-          format: date-time
-          nullable: true
-        last_used:
-          description: When it was last used, if ever
-          type: string
-          format: date-time
-          nullable: true
-        name:
-          description: Name for this API Key
-          type: string
-        suspended:
-          description: if true, this token cannot be used
-          type: boolean
-        uid:
-          description: Unique and public identifier
-          type: string
-    PersonalAccessTokenInfo:
-      type: object
-      properties:
-        description:
-          type: string
-        expires_at:
-          description: New expiration timestamp for the personal access token
-          type: string
-          format: date-time
-          nullable: true
-        name:
-          type: string
-        suspended:
-          description: if true, the token is temporarily suspended
-          type: boolean
-      required:
-        - expiresAt
-    PersonalAccessTokenSecret:
-      type: object
-      properties:
-        secret:
-          description: The secret
-          type: string
-        uid:
-          description: Unique and public identifier
-          type: string
     Product:
       type: object
       properties:
@@ -7288,7 +7199,8 @@ components:
         ttl_seconds:
           description: |
             Requested credential lifetime in seconds. Clamped server-side to
-            [60, 3600]. Defaults to 900 (15 minutes) if omitted.
+            [60, 3600], or to [60, 900] for a scoped token. Defaults to 900
+            (15 minutes) if omitted.
           type: integer
           format: int32
           default: 900
@@ -7351,10 +7263,10 @@ components:
           type: integer
           format: int32
         event_uid:
-          description: The event UID.
+          description: The EventUID.
           type: string
         route_uid:
-          description: The route UID.
+          description: The routeUID.
           type: string
         status:
           description: The status of the event.
@@ -7826,6 +7738,29 @@ components:
         version:
           description: User-specified version string provided at time of upload
           type: string
+    UsageApiData:
+      type: object
+      properties:
+        endpoint:
+          description: The templated path of the endpoint the requests were made against, with path parameters left unsubstituted. Empty if the endpoint could not be resolved for these requests.
+          type: string
+          example: /v1/projects/{projectOrProductUID}/devices
+        method:
+          description: The HTTP method of the requests counted in this data point. Empty if the endpoint could not be resolved for these requests.
+          type: string
+          example: GET
+        period:
+          type: string
+          format: date-time
+          example: 2025-07-23T00:00:00Z
+        requests:
+          description: Number of billable API requests in this period.
+          type: integer
+          format: int64
+          example: 1284
+      required:
+        - period
+        - requests
     UsageData:
       type: object
       properties:
@@ -7966,7 +7901,7 @@ components:
           format: date-time
           example: 2025-07-23T00:00:00Z
         route:
-          description: The route UID (only present when aggregate is 'route')
+          description: The routeUID (only present when aggregate is 'route')
           type: string
           example: route:cbd20093cba58392c9f9bbdd0cdeb1a0
         successful_routes:
@@ -8083,9 +8018,28 @@ components:
         transform:
           description: Transformation to be applied to the event
           type: string
+  headers:
+    HasMoreHeader:
+      description: |
+        True if there are more results.
+      schema:
+        type: string
+        enum:
+          - 'true'
+          - 'false'
+    NextCursorHeader:
+      description: |
+        Pass this value as a cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes.
+      schema:
+        type: string
   responses:
     AlertsResponse:
       description: The response body from GET /alerts
+      headers:
+        X-Has-More:
+          $ref: '#/components/headers/HasMoreHeader'
+        X-Next-Cursor:
+          $ref: '#/components/headers/NextCursorHeader'
       content:
         application/json:
           schema:
@@ -8099,6 +8053,10 @@ components:
               has_more:
                 description: True if there are more alerts
                 type: boolean
+              next_cursor:
+                description: |
+                  Pass this opaque value as a cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes.
+                type: string
             required:
               - alerts
               - has_more
@@ -8159,6 +8117,11 @@ components:
                 nullable: true
     DevicesResponse:
       description: List of Devices
+      headers:
+        X-Has-More:
+          $ref: '#/components/headers/HasMoreHeader'
+        X-Next-Cursor:
+          $ref: '#/components/headers/NextCursorHeader'
       content:
         application/json:
           schema:
@@ -8170,6 +8133,10 @@ components:
                   $ref: '#/components/schemas/Device'
               has_more:
                 type: boolean
+              next_cursor:
+                description: |
+                  Pass this opaque value as a cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes.
+                type: string
             required:
               - devices
               - has_more
@@ -8187,6 +8154,11 @@ components:
             $ref: '#/components/schemas/Error'
     EventsByCursorResponse:
       description: The response body from a GET events by cursor request.
+      headers:
+        X-Has-More:
+          $ref: '#/components/headers/HasMoreHeader'
+        X-Next-Cursor:
+          $ref: '#/components/headers/NextCursorHeader'
       content:
         application/json:
           schema:
@@ -8201,7 +8173,7 @@ components:
                 type: boolean
               next_cursor:
                 description: |
-                  The cursor value of the next result, which is intended to be used as the "cursor" parameter value of the next call to this method. An empty string is returned if there are no more results after this results set.
+                  A legacy cursor, which can be obtained from the `next_cursor` value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this EventUID is not found, the parameter is ignored and the results set is the same as if the parameter was not included.
                 type: string
             required:
               - events
@@ -8227,7 +8199,7 @@ components:
                 event: dfa3747d-688b-4250-935b-5dd60354313c
                 file: air.qo
                 product: product:com.blues.project.demo
-                received: 1.656011227006928e+09===
+                received: 1656011227.006928
                 req: note.add
                 session: b623132c-6afb-4740-bc39-e3634e38f064
                 sn: My Device
@@ -8247,9 +8219,9 @@ components:
       description: The response body from a GET events request.
       headers:
         X-Has-More:
-          description: True if there are more events
-          schema:
-            type: boolean
+          $ref: '#/components/headers/HasMoreHeader'
+        X-Next-Cursor:
+          $ref: '#/components/headers/NextCursorHeader'
       content:
         application/json:
           schema:
@@ -8262,6 +8234,10 @@ components:
               has_more:
                 description: True if there are more events
                 type: boolean
+              next_cursor:
+                description: |
+                  Pass this value as the cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes.
+                type: string
               through:
                 description: The UID of the last event returned
                 type: string
@@ -8288,7 +8264,7 @@ components:
                 event: dfa3747d-688b-4250-935b-5dd60354313c
                 file: air.qo
                 product: product:com.blues.project.demo
-                received: 1.656011227006928e+09===
+                received: 1656011227.006928
                 req: note.add
                 session: b623132c-6afb-4740-bc39-e3634e38f064
                 sn: My Device
@@ -8421,7 +8397,7 @@ components:
                 event: 81bd2bf1-0399-4978-bc46-8f779b4af350
                 file: _session.qo
                 product: product:com.blues.app:myapp
-                received: 1.669667707564694e+09===
+                received: 1669667707.564694
                 req: session.begin
                 session: ed18884b-f2a6-419f-b856-d28dc8f0892b
                 tls: true
@@ -8441,7 +8417,7 @@ components:
                 event: 916d4c81-06ae-4263-9b55-7a3a0f73cb5a
                 file: data.qo
                 product: product:com.blues.app:myapp
-                received: 1.669667713221659e+09===
+                received: 1669667713.221659
                 req: note.add
                 session: 28cdc39f-9f62-4789-b0a3-2f35f9448ced
                 sn: tj-1
@@ -8462,7 +8438,7 @@ components:
                 event: e98c2c3b-edbe-4fe7-af57-2196cc843eb7
                 file: sensors.qo
                 product: product:com.blues.app:myapp
-                received: 1.66966771185316e+09===
+                received: 1669667711.85316
                 req: note.add
                 session: 7211392c-6895-43f8-9256-790655348be5
                 tower_country: US
@@ -8511,6 +8487,11 @@ components:
               - report_uid
     SessionResponse:
       description: The response body for a session request.
+      headers:
+        X-Has-More:
+          $ref: '#/components/headers/HasMoreHeader'
+        X-Next-Cursor:
+          $ref: '#/components/headers/NextCursorHeader'
       content:
         application/json:
           schema:
@@ -8518,6 +8499,10 @@ components:
             properties:
               has_more:
                 type: boolean
+              next_cursor:
+                description: |
+                  Pass this opaque value as a cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes.
+                type: string
               sessions:
                 type: array
                 items:
@@ -8568,7 +8553,7 @@ components:
                   l: 86MG3HF5+P25
                   lac: 17169
                   lat: 43.0742625
-                  lon: -89.44239062499999===
+                  lon: -89.44239062499999
                   mcc: 310
                   mnc: 410
                   n: Shorewood Hills WI
@@ -8580,6 +8565,21 @@ components:
                 voltage: 4.174
                 when: 1667251044
                 work: 1667251046
+    UsageApiResponse:
+      description: Response body for Notehub API request usage
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UsageApiData'
+              truncated:
+                $ref: '#/components/schemas/UsageTruncatedField'
+            required:
+              - data
     UsageDataResponse:
       description: Response body for Data Usage
       content:
@@ -8596,7 +8596,7 @@ components:
                       items:
                         $ref: '#/components/schemas/UsageData'
                     device:
-                      description: The device UID this usage data belongs to (only present when aggregate is 'device')
+                      description: The DeviceUID this usage data belongs to (only present when aggregate is 'device')
                       type: string
                       example: dev:123456789012345
                     device_count:
@@ -8604,7 +8604,7 @@ components:
                       type: integer
                       format: int32
                     fleet:
-                      description: The fleet UID this usage data belongs to (only present when aggregate is 'fleet')
+                      description: The FleetUID this usage data belongs to (only present when aggregate is 'fleet')
                       type: string
                       example: fleet:1042ddc5-3b2c-4cec-b1fb-d3040538094d
                     iccid:
