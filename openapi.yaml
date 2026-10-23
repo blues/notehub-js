@@ -3609,6 +3609,294 @@ paths:
       x-custom-attributes:
         permission: update
         resource: blues:resources:app:APPSERIAL:settings
+  /v1/projects/{projectOrProductUID}/skills:
+    get:
+      operationId: GetSkills
+      summary: List Project Skills (Product Skills)
+      description: "List all skill metadata. Set includeContent=true to include exact Markdown content in one consistent snapshot. No pagination; an empty project returns skills: []. On 413, list metadata and use GetSkill for individual documents. Subprojects read their parent's skills."
+      parameters:
+        - $ref: '#/components/parameters/projectOrProductUIDParam'
+        - name: includeContent
+          in: query
+          description: Use true to include exact Markdown content. Omit or use false for metadata only.
+          schema:
+            type: boolean
+            default: false
+        - name: If-None-Match
+          in: header
+          description: Return 304 if an ETag from GetSkills matches, or use * to match any current representation.
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          headers:
+            ETag:
+              description: ETag for this representation; metadata and full-content responses have different ETags.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SkillSet'
+        '304':
+          description: Representation unchanged
+        '400':
+          description: Invalid includeContent value or conditional header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: Stored skill content is invalid; repair it through the upload API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '413':
+          description: Response exceeds 8 MiB of included content or 17 MiB of JSON; omit includeContent and read individual skills
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: Error with details.reason and, when relevant, details.name and details.field.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - personalAccessToken: []
+        - {}
+      tags:
+        - Skills
+      x-custom-attributes:
+        permission: read
+        public-read: 'true'
+        resource: blues:resources:app:APPSERIAL:notefiles
+  /v1/projects/{projectOrProductUID}/skills/{skillName}:
+    delete:
+      operationId: DeleteSkill
+      summary: Delete a Project Skill (Product Skill)
+      description: 'Skill Training: delete a skill and all its stored versions. Requires If-Match: "revision" from GetSkill. Subproject writes must target the parent project.'
+      parameters:
+        - $ref: '#/components/parameters/projectOrProductUIDParam'
+        - $ref: '#/components/parameters/skillNameParam'
+        - name: If-Match
+          in: header
+          description: Required; use one strong ETag or quoted skill revision. Wildcards and weak tags are rejected.
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Skill and all superseded versions deleted
+        '400':
+          description: Invalid name or conditional header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Skill not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '412':
+          description: Revision precondition failed; reread before retrying
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '428':
+          description: Write precondition required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: Error with details.reason and, when relevant, details.name and details.field.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - personalAccessToken: []
+      tags:
+        - Skills
+      x-custom-attributes:
+        permission: delete
+        resource: blues:resources:app:APPSERIAL:firmware:host
+    get:
+      operationId: GetSkill
+      summary: Read a Project Skill (Product Skill)
+      description: Read one skill with metadata and exact Markdown content. Use links.self from GetSkills, or URL-encode the entire skill name as one path parameter. If-Match requires a revision; If-None-Match skips unchanged content.
+      parameters:
+        - $ref: '#/components/parameters/projectOrProductUIDParam'
+        - $ref: '#/components/parameters/skillNameParam'
+        - name: If-Match
+          in: header
+          description: Optionally require one strong ETag or quoted skill revision; wildcards and weak tags are rejected.
+          required: false
+          schema:
+            type: string
+        - name: If-None-Match
+          in: header
+          description: Return 304 if an ETag for this skill matches, or use * to match any existing skill at this name.
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          headers:
+            ETag:
+              description: Quoted opaque revision. Send it unchanged in If-Match when editing or deleting.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Skill'
+        '304':
+          description: Representation unchanged
+        '400':
+          description: Invalid name or conditional header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Skill not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: Stored skill content is invalid; repair it through the upload API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '412':
+          description: Revision precondition failed; reread before retrying
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '413':
+          description: Skill exceeds the 17 MiB encoded JSON response limit; legacy content can expand during encoding
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: Error with details.reason and, when relevant, details.name and details.field.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - personalAccessToken: []
+        - {}
+      tags:
+        - Skills
+      x-custom-attributes:
+        permission: read
+        public-read: 'true'
+        resource: blues:resources:app:APPSERIAL:notefiles
+    put:
+      operationId: PutSkill
+      summary: Create or replace a Project Skill (Product Skill)
+      description: 'Skill Training: create with If-None-Match: *, or replace with If-Match: "revision" from GetSkill. Send content and optional kinds. Omit kinds to preserve them; [] clears them. An identical write returns unchanged. Subproject writes must target the parent project.'
+      parameters:
+        - $ref: '#/components/parameters/projectOrProductUIDParam'
+        - $ref: '#/components/parameters/skillNameParam'
+        - name: If-Match
+          in: header
+          description: Required for replacement; use one strong ETag or quoted skill revision. Wildcards and weak tags are rejected.
+          required: false
+          schema:
+            type: string
+        - name: If-None-Match
+          in: header
+          description: Use * to create only if the name is absent; cannot be combined with If-Match.
+          required: false
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              content: |
+                # Project guide
+              kinds:
+                - index
+            schema:
+              $ref: '#/components/schemas/SkillWrite'
+      responses:
+        '200':
+          description: Successful operation
+          headers:
+            ETag:
+              description: Quoted opaque revision. Send it unchanged in If-Match when editing or deleting.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SkillWriteResult'
+        '201':
+          description: Skill created
+          headers:
+            ETag:
+              description: Quoted opaque revision. Send it unchanged in If-Match when editing or deleting.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SkillWriteResult'
+        '400':
+          description: Invalid name, content, kinds or precondition syntax
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '412':
+          description: Revision precondition failed; reread before retrying
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '413':
+          description: Content exceeds 1 MiB or the encoded JSON request exceeds 2 MiB plus 64 KiB
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '428':
+          description: Write precondition required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: Error with details.reason and, when relevant, details.name and details.field.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - personalAccessToken: []
+      tags:
+        - Skills
+      x-custom-attributes:
+        permission: create
+        resource: blues:resources:app:APPSERIAL:firmware:host
   /v1/projects/{projectOrProductUID}/usage/api:
     get:
       operationId: GetApiUsage
@@ -4559,6 +4847,14 @@ components:
         items:
           type: string
       style: form
+    skillNameParam:
+      description: 'Relative .md name, case-insensitive, at most 512 UTF-8 bytes. In URLs, encode the whole name once: references/devices.md becomes references%2Fdevices.md; a literal % becomes %25. Pass the unencoded name to SDKs. Spaces, Unicode and punctuation are allowed. No absolute paths, dot segments, empty segments, backslashes, colons, control characters or surrounding segment whitespace.'
+      example: references/devices.md
+      in: path
+      name: skillName
+      required: true
+      schema:
+        type: string
     skuParam:
       description: SKU filter. Matches any value containing the filter text. Use `*` as a wildcard and `\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
       explode: true
@@ -7454,6 +7750,150 @@ components:
           description: Bytes used on the SIMs current data plan
           type: integer
           format: int64
+    Skill:
+      description: A Project Skill (also called a Product Skill) with full metadata and exact Markdown content.
+      type: object
+      properties:
+        content:
+          description: Exact UTF-8 document. Always present, including for an empty document.
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        kinds:
+          description: Effective stored kinds, independent of document front matter.
+          type: array
+          items:
+            type: string
+        links:
+          $ref: '#/components/schemas/SkillLinks'
+        name:
+          type: string
+          example: references/devices.md
+        revision:
+          description: Opaque concurrency token; ETag is this value wrapped in double quotes.
+          type: string
+        size_bytes:
+          description: UTF-8 content byte count.
+          type: integer
+          format: int64
+        updated_at:
+          type: string
+          format: date-time
+      required:
+        - name
+        - kinds
+        - size_bytes
+        - revision
+        - created_at
+        - updated_at
+        - links
+        - content
+    SkillLinks:
+      type: object
+      properties:
+        catalog:
+          description: Relative metadata catalog URL.
+          type: string
+        self:
+          description: Relative URL for this named skill.
+          type: string
+      required:
+        - self
+        - catalog
+    SkillSet:
+      description: Complete skill collection from one snapshot. Content is included only when requested.
+      type: object
+      properties:
+        complete:
+          description: Always true for a successful response; no silent truncation.
+          type: boolean
+        project_uid:
+          type: string
+        set_revision:
+          type: string
+        skills:
+          type: array
+          items:
+            $ref: '#/components/schemas/SkillSummary'
+        total:
+          type: integer
+          format: int64
+      required:
+        - project_uid
+        - set_revision
+        - total
+        - skills
+        - complete
+    SkillSummary:
+      description: Skill metadata, with content only when includeContent=true.
+      type: object
+      properties:
+        content:
+          description: Exact Markdown when includeContent=true; present even when empty. Otherwise omitted.
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        kinds:
+          description: Effective stored kinds, independent of document front matter.
+          type: array
+          items:
+            type: string
+        links:
+          $ref: '#/components/schemas/SkillLinks'
+        name:
+          type: string
+          example: references/devices.md
+        revision:
+          description: Opaque concurrency token; ETag is this value wrapped in double quotes.
+          type: string
+        size_bytes:
+          description: UTF-8 content byte count.
+          type: integer
+          format: int64
+        updated_at:
+          type: string
+          format: date-time
+      required:
+        - name
+        - kinds
+        - size_bytes
+        - revision
+        - created_at
+        - updated_at
+        - links
+    SkillWrite:
+      type: object
+      properties:
+        content:
+          description: Exact UTF-8, at most 1 MiB decoded. Empty is valid; null is not. JSON request limit is 2 MiB plus 64 KiB, including escaping and metadata.
+          type: string
+        kinds:
+          description: Lowercase kinds; publish is reserved. Omit to preserve on replacement, or use [] to clear.
+          type: array
+          items:
+            maxLength: 64
+            pattern: ^[a-z0-9_-]+$
+            type: string
+          maxItems: 32
+      additionalProperties: false
+      required:
+        - content
+    SkillWriteResult:
+      type: object
+      properties:
+        outcome:
+          type: string
+          enum:
+            - created
+            - updated
+            - unchanged
+        skill:
+          $ref: '#/components/schemas/Skill'
+      required:
+        - outcome
+        - skill
     SlackBearerNotification:
       type: object
       properties:
@@ -8689,6 +9129,8 @@ tags:
     name: usage
   - description: Batch job operations
     name: jobs
+  - description: Project Skills (also called Product Skills) are Markdown guides for agents working with a project's devices and data. Use a project UID or product UID. GetSkills lists metadata; set includeContent=true to read all guides. GetSkill reads one guide. Writes are for Skill Training.
+    name: Skills
 externalDocs:
   description: Find out more about Blues
   url: https://blues.io
