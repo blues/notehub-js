@@ -752,7 +752,6 @@ paths:
         - $ref: '#/components/parameters/pageSizeParam'
         - $ref: '#/components/parameters/pageNumParam'
         - $ref: '#/components/parameters/cursorParam'
-        - $ref: '#/components/parameters/cursorDirectionParam'
         - $ref: '#/components/parameters/monitorUIDQueryParam'
       responses:
         '200':
@@ -934,7 +933,6 @@ paths:
         - $ref: '#/components/parameters/pageSizeParam'
         - $ref: '#/components/parameters/pageNumParam'
         - $ref: '#/components/parameters/cursorParam'
-        - $ref: '#/components/parameters/cursorDirectionParam'
         - $ref: '#/components/parameters/deviceUIDParamQuery'
         - $ref: '#/components/parameters/tagParam'
         - $ref: '#/components/parameters/serialNumberParam'
@@ -1834,7 +1832,6 @@ paths:
         - $ref: '#/components/parameters/pageSizeParam'
         - $ref: '#/components/parameters/pageNumParam'
         - $ref: '#/components/parameters/cursorParam'
-        - $ref: '#/components/parameters/cursorDirectionParam'
         - $ref: '#/components/parameters/startDateParam'
         - $ref: '#/components/parameters/endDateParam'
         - $ref: '#/components/parameters/firstSyncParam'
@@ -1893,7 +1890,6 @@ paths:
         - $ref: '#/components/parameters/pageSizeParam'
         - $ref: '#/components/parameters/pageNumParam'
         - $ref: '#/components/parameters/cursorParam'
-        - $ref: '#/components/parameters/cursorDirectionParam'
       responses:
         '200':
           description: Successful operation
@@ -1985,7 +1981,6 @@ paths:
         - $ref: '#/components/parameters/pageSizeParam'
         - $ref: '#/components/parameters/pageNumParam'
         - $ref: '#/components/parameters/cursorParam'
-        - $ref: '#/components/parameters/cursorDirectionParam'
         - $ref: '#/components/parameters/sortByParam'
         - $ref: '#/components/parameters/sortOrderParam'
         - $ref: '#/components/parameters/deviceUIDParamQuery'
@@ -2029,7 +2024,6 @@ paths:
         - $ref: '#/components/parameters/pageSizeParam'
         - $ref: '#/components/parameters/pageNumParam'
         - $ref: '#/components/parameters/cursorParam'
-        - $ref: '#/components/parameters/cursorDirectionParam'
         - $ref: '#/components/parameters/sortByParam'
         - $ref: '#/components/parameters/sortOrderParam'
         - $ref: '#/components/parameters/deviceUIDParamQuery'
@@ -2157,7 +2151,6 @@ paths:
         - $ref: '#/components/parameters/pageSizeParam'
         - $ref: '#/components/parameters/pageNumParam'
         - $ref: '#/components/parameters/cursorParam'
-        - $ref: '#/components/parameters/cursorDirectionParam'
         - $ref: '#/components/parameters/deviceUIDParamQuery'
         - $ref: '#/components/parameters/sensorUIDParamQuery'
         - $ref: '#/components/parameters/sortByParam'
@@ -2540,7 +2533,6 @@ paths:
         - $ref: '#/components/parameters/pageSizeParam'
         - $ref: '#/components/parameters/pageNumParam'
         - $ref: '#/components/parameters/cursorParam'
-        - $ref: '#/components/parameters/cursorDirectionParam'
         - $ref: '#/components/parameters/deviceUIDParamQuery'
         - $ref: '#/components/parameters/tagParam'
         - $ref: '#/components/parameters/serialNumberParam'
@@ -2662,7 +2654,6 @@ paths:
         - $ref: '#/components/parameters/pageSizeParam'
         - $ref: '#/components/parameters/pageNumParam'
         - $ref: '#/components/parameters/cursorParam'
-        - $ref: '#/components/parameters/cursorDirectionParam'
         - $ref: '#/components/parameters/deviceUIDParamQuery'
         - $ref: '#/components/parameters/sensorUIDParamQuery'
         - $ref: '#/components/parameters/sortByParam'
@@ -3463,7 +3454,6 @@ paths:
         - $ref: '#/components/parameters/pageSizeParam'
         - $ref: '#/components/parameters/pageNumParam'
         - $ref: '#/components/parameters/cursorParam'
-        - $ref: '#/components/parameters/cursorDirectionParam'
         - $ref: '#/components/parameters/deviceUIDParamQuery'
         - $ref: '#/components/parameters/routeLogsSortByParam'
         - $ref: '#/components/parameters/routeLogsSortOrderParam'
@@ -4287,20 +4277,9 @@ components:
       required: true
       schema:
         type: string
-    cursorDirectionParam:
-      description: |
-        Read direction for cursor: asc (the default) returns the oldest changes first, desc the newest first. desc requires a start time as the cursor. Send the same direction with each next_cursor. To fill a cache, read desc from a recent start time, then read asc from that same start time to keep it current.
-      in: query
-      name: direction
-      required: false
-      schema:
-        type: string
-        enum:
-          - asc
-          - desc
     cursorParam:
       description: |
-        If supplied, the results will be returned in ascending order of modification time (or descending, with direction=desc). To start from a specific time, specify cursor as Unix epoch microseconds (UTC) or 0 to start from the beginning. Or, to start where the last search left off, set cursor to the returned value of next_cursor (or the X-Next-Cursor header).
+        If supplied, the results will be returned in ascending order of modification time. To start from a specific time, specify cursor as Unix epoch microseconds (UTC) or 0 to start from the beginning. Make it negative to read backward from that time, newest first. Or, to start where the last search left off, set cursor to the returned value of next_cursor (or the X-Next-Cursor header), which keeps the direction. To fill a cache, read from -<time>, then from <time> to keep it current.
       in: query
       name: cursor
       required: false
