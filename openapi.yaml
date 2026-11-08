@@ -4594,8 +4594,7 @@ components:
       schema:
         type: integer
         format: int32
-        default: 50
-        maximum: 10000
+        default: 1000
         minimum: 1
     locationParam:
       description: Location filter. Matches any value containing the filter text. Use `*` as a wildcard and `\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
@@ -4681,8 +4680,7 @@ components:
       schema:
         type: integer
         format: int32
-        default: 50
-        maximum: 10000
+        default: 1000
         minimum: 1
     productQueryParam:
       in: query
