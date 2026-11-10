@@ -12,42 +12,6 @@ servers:
   - description: Production server
     url: https://api.notefile.net
 paths:
-  /auth/login:
-    post:
-      operationId: Login
-      description: Gets an access token from username and password
-      requestBody:
-        required: true
-        content:
-          application/json:
-            example:
-              password: test-password
-              username: name@example.com
-            schema:
-              type: object
-              properties:
-                password:
-                  type: string
-                username:
-                  type: string
-      responses:
-        '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  session_token:
-                    type: string
-        '400':
-          description: Bad Request
-        '500':
-          description: Internal Server Error
-      tags:
-        - authorization
-      x-custom-attributes:
-        permission: create
   /oauth2/token:
     post:
       operationId: OAuth2ClientCredentials
