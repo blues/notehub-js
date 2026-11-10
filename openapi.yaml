@@ -12,42 +12,6 @@ servers:
   - description: Production server
     url: https://api.notefile.net
 paths:
-  /auth/login:
-    post:
-      operationId: Login
-      description: Gets an access token from username and password
-      requestBody:
-        required: true
-        content:
-          application/json:
-            example:
-              password: test-password
-              username: name@example.com
-            schema:
-              type: object
-              properties:
-                password:
-                  type: string
-                username:
-                  type: string
-      responses:
-        '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  session_token:
-                    type: string
-        '400':
-          description: Bad Request
-        '500':
-          description: Internal Server Error
-      tags:
-        - authorization
-      x-custom-attributes:
-        permission: create
   /oauth2/token:
     post:
       operationId: OAuth2ClientCredentials
@@ -4594,8 +4558,7 @@ components:
       schema:
         type: integer
         format: int32
-        default: 50
-        maximum: 10000
+        default: 1000
         minimum: 1
     locationParam:
       description: Location filter. Matches any value containing the filter text. Use `*` as a wildcard and `\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
@@ -4681,8 +4644,7 @@ components:
       schema:
         type: integer
         format: int32
-        default: 50
-        maximum: 10000
+        default: 1000
         minimum: 1
     productQueryParam:
       in: query
