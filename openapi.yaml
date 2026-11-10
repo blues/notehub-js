@@ -483,8 +483,6 @@ paths:
       description: |
         Get the project that a ProductUID belongs to. Returns the same object as `GetProject`,
         which also accepts a ProductUID in place of a ProjectUID.
-
-        Any role.
       parameters:
         - name: productUID
           in: path
@@ -711,8 +709,6 @@ paths:
       description: |
         Get a project's label, creation time, contacts, and the caller's `role` in it. Accepts a
         ProductUID in place of the ProjectUID.
-
-        Any role.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
       responses:
@@ -761,8 +757,6 @@ paths:
         Get the AWS account ID and External ID for the IAM role trust policy used by AWS routes
         with role-based authentication. The External ID is created on the first call and stays the
         same after that.
-
-        Any role.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
       responses:
@@ -2990,8 +2984,6 @@ paths:
       description: |
         List the project's members with each one's name and role. Emails are filled in only when
         the caller is an Owner. Not paginated.
-
-        Any role.
       responses:
         '200':
           description: Successful operation
@@ -3145,8 +3137,6 @@ paths:
         List the project's ProductUIDs, each with its label, auto-provision fleets, and whether new
         devices start disabled. UIDs here include the `product:` prefix; `CreateProduct` returns
         them without it. Not paginated.
-
-        Any role.
       responses:
         '200':
           description: Successful operation
@@ -3535,8 +3525,6 @@ paths:
       description: |
         List the project's Notefiles, each with the event `body` fields Notehub has seen in it and
         their JSON types. Inferred from received events.
-
-        Any role.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
       responses:
