@@ -2363,6 +2363,7 @@ paths:
         - $ref: '#/components/parameters/firmwareTypeParam'
         - name: filename
           in: path
+          description: Name to store the file under. Notehub adds `$` and a timestamp before the extension, except for a Notecard firmware name that already contains `$`.
           required: true
           schema:
             type: string
