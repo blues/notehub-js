@@ -1797,7 +1797,7 @@ paths:
                   nullable: true
                 product_uid:
                   description: |
-                    ProductUID to provision the device under, e.g. `product:com.blues.bridge:sensors`.
+                    ProductUID to provision the device under, e.g. `com.blues.bridge:sensors`.
                     Must belong to this project.
                   type: string
               required:
@@ -5806,7 +5806,7 @@ components:
           format: date-time
           nullable: true
         product_uid:
-          description: ProductUID the device uses, e.g. `product:com.blues.bridge:sensors`.
+          description: ProductUID the device uses, e.g. `com.blues.bridge:sensors`.
           type: string
         provisioned:
           description: When the device was added to the project.
