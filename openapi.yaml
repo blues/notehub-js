@@ -90,7 +90,11 @@ paths:
   /v1/description:
     get:
       operationId: ListGlobalDescriptions
-      description: List metadata for all global description records.
+      summary: List global description records
+      description: |
+        List the platform-wide description records that Blues publishes, without their content.
+        Any signed-in user can read them. For a project's own records, use
+        `ListProjectDescriptions`.
       responses:
         '200':
           description: Description record metadata.
@@ -109,7 +113,11 @@ paths:
   /v1/description/{descriptionName}:
     delete:
       operationId: DeleteGlobalDescription
-      description: Delete a global description record by name (Blues staff only).
+      summary: Delete a global description record
+      description: |
+        Delete one platform-wide description record.
+
+        Blues staff only; returns 403 for anyone else. Returns 404 if the record doesn't exist.
       responses:
         '204':
           description: Description record deleted successfully.
@@ -128,7 +136,12 @@ paths:
         resource: blues:resources:description
     get:
       operationId: GetGlobalDescription
-      description: Get a global description record. Returns the raw content with its stored Content-Type.
+      summary: Get a global description record
+      description: |
+        Get the content of one platform-wide description record, served with the Content-Type it was
+        stored with. Any signed-in user can read it.
+
+        Returns 404 if the record doesn't exist.
       responses:
         '200':
           $ref: '#/components/responses/DescriptionContentResponse'
@@ -146,9 +159,15 @@ paths:
       - $ref: '#/components/parameters/descriptionNameParam'
     post:
       operationId: SetGlobalDescription
-      description: Create or replace a global description record, Blues staff only (up to 10MB). The request Content-Type is stored and returned on GET; when omitted it is detected (JSON or text).
+      summary: Create or replace a global description record
+      description: |
+        Store a platform-wide named document that every signed-in user can read, replacing any
+        record with that name. The Content-Type is handled as in `SetProjectDescription`.
+
+        Blues staff only; returns 403 for anyone else. Returns 400 if the content is over 10 MB or
+        the name isn't valid.
       requestBody:
-        description: The description content (up to 10MB). The request Content-Type is stored and returned on GET; when omitted it is detected (JSON or text).
+        description: The document to store, up to 10 MB. Send its Content-Type, such as `text/markdown`; Markdown isn't detected.
         required: true
         content:
           application/octet-stream:
@@ -842,7 +861,12 @@ paths:
   /v1/projects/{projectOrProductUID}/description:
     get:
       operationId: ListProjectDescriptions
-      description: List metadata for all description records in a project.
+      summary: List a project's description records
+      description: |
+        List a project's description records by name, with each one's content type, size and
+        change history but not its content. A description record is a named document, such as
+        Markdown, JSON or plain text, that explains the project's data. For Blues' platform-wide records,
+        use `ListGlobalDescriptions`.
       responses:
         '200':
           description: Description record metadata.
@@ -864,7 +888,11 @@ paths:
   /v1/projects/{projectOrProductUID}/description/{descriptionName}:
     delete:
       operationId: DeleteProjectDescription
-      description: Delete a project description record by name.
+      summary: Delete a project description record
+      description: |
+        Delete one of a project's description records.
+
+        Requires the Owner or Developer role. Returns 404 if the record doesn't exist.
       responses:
         '204':
           description: Description record deleted successfully.
@@ -881,7 +909,12 @@ paths:
         resource: blues:resources:app:APPSERIAL:settings
     get:
       operationId: GetProjectDescription
-      description: Get a project description record. Returns the raw content with its stored Content-Type.
+      summary: Get a project description record
+      description: |
+        Get the content of one of a project's description records, served with the Content-Type it
+        was stored with. For the metadata of every record, use `ListProjectDescriptions`.
+
+        Returns 404 if the record doesn't exist.
       responses:
         '200':
           $ref: '#/components/responses/DescriptionContentResponse'
@@ -901,9 +934,16 @@ paths:
       - $ref: '#/components/parameters/descriptionNameParam'
     post:
       operationId: SetProjectDescription
-      description: Create or replace a project description record (up to 10MB). The request Content-Type is stored and returned on GET; when omitted it is detected (JSON or text).
+      summary: Create or replace a project description record
+      description: |
+        Store a named document in a project, replacing any record with that name. The request's
+        Content-Type is stored and served back by `GetProjectDescription`; if it's missing or
+        `application/octet-stream`, the type is detected from the content.
+
+        Requires the Owner or Developer role. Returns 400 if the content is over 10 MB or the name
+        isn't valid.
       requestBody:
-        description: The description content (up to 10MB). The request Content-Type is stored and returned on GET; when omitted it is detected (JSON or text).
+        description: The document to store, up to 10 MB. Send its Content-Type, such as `text/markdown`; Markdown isn't detected.
         required: true
         content:
           application/octet-stream:
@@ -4750,6 +4790,7 @@ components:
           - captured
           - uploaded
     descriptionNameParam:
+      description: Record name, 1-128 letters, digits, `.`, `_` or `-`, e.g. `_health.qo`.
       example: _health.qo
       in: path
       name: descriptionName
@@ -6039,7 +6080,7 @@ components:
       type: object
       properties:
         content_type:
-          description: The stored content type, either "application/json" or "text/plain; charset=utf-8".
+          description: The Content-Type served on GET, as sent when the record was stored or detected from its content.
           type: string
         created_at:
           description: When the record was first created (Unix seconds).
@@ -6066,10 +6107,13 @@ components:
           description: The record name (letters, digits, '.', '_' or '-').
           type: string
         owner_uid:
-          description: The owning project (app) UID for project-scoped records; empty for global.
+          description: ProjectUID of the owning project, e.g. `app:2606f411-dea6-44a0-9743-1130f57d77d8`. Empty for a global record.
           type: string
         scope:
-          description: The ownership scope of the record ("global" or "project").
+          description: |
+            Where the record is stored.
+            - `project`: in one project
+            - `global`: platform-wide, readable by every signed-in user
           type: string
       required:
         - name
