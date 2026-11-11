@@ -919,7 +919,12 @@ paths:
   /v1/projects/{projectOrProductUID}/devices:
     get:
       operationId: GetDevices
-      description: Get Devices of a Project
+      summary: List devices in a project
+      description: |
+        List the devices in a project, with optional filters such as tag, serial number, fleet,
+        location and firmware version. For one fleet's devices, use `GetFleetDevices`.
+
+        Paginated.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/pageSizeParam'
@@ -949,7 +954,12 @@ paths:
   /v1/projects/{projectOrProductUID}/devices/{deviceUID}:
     delete:
       operationId: DeleteDevice
-      description: Delete Device
+      summary: Delete a device
+      description: |
+        Delete a device and its notefiles from a project. Its events are kept. A Notecard that
+        syncs again is added back as a new device; to block it instead, use `DisableDevice`.
+
+        Requires the Owner or Developer role.
       responses:
         '204':
           description: Successful operation
@@ -964,7 +974,11 @@ paths:
         resource: blues:resources:app:APPSERIAL:devices
     get:
       operationId: GetDevice
-      description: Get Device
+      summary: Get a device
+      description: |
+        Get one device's details: serial number, product, fleets, locations, firmware versions,
+        SIM usage and DFU state. To find devices by tag, serial number or other fields, use
+        `GetDevices`.
       responses:
         '200':
           description: Successful operation
@@ -1046,7 +1060,12 @@ paths:
   /v1/projects/{projectOrProductUID}/devices/{deviceUID}/disable:
     post:
       operationId: DisableDevice
-      description: Disable Device
+      summary: Disable a device
+      description: |
+        Stop a device from connecting to Notehub, ending any open session. The device and its
+        data stay in the project; undo with `EnableDevice`. Does nothing if it's already disabled.
+
+        Requires the Owner or Developer role.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
@@ -1065,7 +1084,13 @@ paths:
   /v1/projects/{projectOrProductUID}/devices/{deviceUID}/enable:
     post:
       operationId: EnableDevice
-      description: Enable Device
+      summary: Enable a device
+      description: |
+        Re-enable a device turned off with `DisableDevice`, so it can connect to Notehub again.
+        Does nothing if the device is already enabled.
+
+        Requires the Owner or Developer role. Returns 409 if the device's cellular service was
+        deactivated; it must be reactivated instead.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
@@ -1336,7 +1361,13 @@ paths:
   /v1/projects/{projectOrProductUID}/devices/{deviceUID}/health-log:
     get:
       operationId: GetDeviceHealthLog
-      description: Get Device Health Log
+      summary: Get a device's health log
+      description: |
+        Get a device's health log: timestamped status messages such as restarts and completed
+        firmware updates. Only the latest 100 entries are kept.
+
+        To filter by date, pass both `startDate` and `endDate`; `startDate` alone returns 400, and
+        the same value for both returns every entry.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
@@ -1344,7 +1375,10 @@ paths:
         - $ref: '#/components/parameters/endDateParam'
         - name: log_type
           in: query
-          description: Return only specified log types
+          description: |
+            Return only these kinds of entry. If omitted, all entries are returned.
+            - `boot`: the device restarted
+            - `dfu_completed`: a host firmware update finished
           required: false
           schema:
             type: array
@@ -1379,8 +1413,14 @@ paths:
   /v1/projects/{projectOrProductUID}/devices/{deviceUID}/journeys:
     get:
       operationId: GetDeviceJourneys
+      summary: List a device's journeys
       description: |
-        Get the list of journeys for a device, derived from events whose body contains `journey` and `jcount` fields. Returns journey metadata only (no event payloads). Capped at 100 most recent journeys; `has_more` is true when the cap is hit.
+        List a device's journeys, newest first, without their events. A journey is the events
+        whose body has the same `journey` value and a `jcount` field; one-event journeys are left
+        out. For a journey's events, use `GetDeviceJourney`.
+
+        Returns at most 100; `has_more` is true if there are more. `startDate` and `endDate` filter
+        on the journey's start. Returns 403 if the organization is suspended.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
@@ -1438,8 +1478,13 @@ paths:
   /v1/projects/{projectOrProductUID}/devices/{deviceUID}/journeys/{journeyID}:
     get:
       operationId: GetDeviceJourney
+      summary: Get a journey and its events
       description: |
-        Get a single journey for a device along with its events. The events array is paginated via `pageSize` / `pageNum`; use `journey.has_more` to detect additional pages.
+        Get one journey's start and end time and its events, oldest first. Only events with a
+        location are included, and a run of events at the same location is reduced to the first.
+
+        The events are paginated; `journey.has_more` is true if there are more. Returns 404 if the
+        journey doesn't exist, and 403 if the organization is suspended.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
@@ -1503,7 +1548,12 @@ paths:
   /v1/projects/{projectOrProductUID}/devices/{deviceUID}/latest:
     get:
       operationId: GetDeviceLatestEvents
-      description: Get Device Latest Events
+      summary: Get a device's latest event per notefile
+      description: |
+        Get the most recent event from each of a device's notefiles, sorted by notefile name.
+        `_env.qo` is left out. To search a device's event history, use `GetEvents`.
+
+        Returns 403 if the organization is suspended.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
@@ -1745,7 +1795,12 @@ paths:
   /v1/projects/{projectOrProductUID}/devices/{deviceUID}/plans:
     get:
       operationId: GetDevicePlans
-      description: Get Data Plans associated with the device, this include the primary sim, any external sim, as well as any satellite connections.
+      summary: Get a device's cellular data plans
+      description: |
+        Get the data plan of each cellular SIM in a device: plan type, data used and remaining, and
+        expiry. Covers the built-in SIM and any external SIM, but not satellite plans.
+
+        Returns 404 if the device has no cellular or satellite SIM.
       responses:
         '200':
           $ref: '#/components/responses/DevicePlansResponse'
@@ -1764,12 +1819,18 @@ paths:
   /v1/projects/{projectOrProductUID}/devices/{deviceUID}/provision:
     post:
       operationId: ProvisionDevice
-      description: Provision Device for a Project
+      summary: Provision a Notecard
+      description: |
+        Add a Notecard to a project before it first connects, with its product, serial number and
+        fleets. A device that already exists isn't reset and keeps its fleets.
+
+        Requires the Owner or Developer role. Returns 404 if `product_uid` doesn't exist, and 400
+        if it belongs to another project or `deviceUID` isn't a valid Notecard DeviceUID.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
       requestBody:
-        description: Provision a device to a specific ProductUID
+        description: The product, serial number and fleets for the device.
         required: true
         content:
           application/json:
@@ -1777,16 +1838,20 @@ paths:
               type: object
               properties:
                 device_sn:
-                  description: The serial number to assign to the device.
+                  description: Serial number to give the device. Ignored if the device already has one.
                   type: string
                 fleet_uids:
-                  description: The fleetUIDs to provision the device to.
+                  description: |
+                    FleetUIDs to put a new device in. If omitted or empty, the product's auto-provision
+                    fleets are used. Ignored if the device already exists.
                   type: array
                   items:
                     type: string
                   nullable: true
                 product_uid:
-                  description: The ProductUID that the device should use.
+                  description: |
+                    ProductUID to provision the device under, e.g. `com.blues.bridge:sensors`.
+                    Must belong to this project.
                   type: string
               required:
                 - product_uid
@@ -1810,7 +1875,10 @@ paths:
   /v1/projects/{projectOrProductUID}/devices/{deviceUID}/public-key:
     get:
       operationId: GetDevicePublicKey
-      description: Get Device Public Key
+      summary: Get a device's public key
+      description: |
+        Get one Notecard's public key, in PEM format. For every device in the project, use
+        `GetDevicePublicKeys`.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
@@ -1823,8 +1891,10 @@ paths:
                 type: object
                 properties:
                   key:
+                    description: The Notecard's public key in PEM format. Empty if it hasn't reported one.
                     type: string
                   uid:
+                    description: DeviceUID, e.g. `dev:864475040509284`.
                     type: string
                 required:
                   - uid
@@ -1841,7 +1911,13 @@ paths:
   /v1/projects/{projectOrProductUID}/devices/{deviceUID}/sessions:
     get:
       operationId: GetDeviceSessions
-      description: Get Device Sessions
+      summary: List a device's sessions
+      description: |
+        List a device's sessions, its connections to Notehub. Each shows why it opened and closed,
+        signal strength, location and data usage. `startDate` and `endDate` filter on when the
+        session began.
+
+        Paginated.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
@@ -1866,12 +1942,19 @@ paths:
   /v1/projects/{projectOrProductUID}/devices/{deviceUID}/signal:
     post:
       operationId: SignalDevice
-      description: Send a signal from Notehub to a Notecard.
+      summary: Send a signal to a connected Notecard
+      description: |
+        Send a JSON object straight to a Notecard, which the host can read with `hub.signal`.
+        It's delivered only if the Notecard is connected to Notehub at that moment, and is never
+        queued; `connected` in the response says whether it was. To queue data for the next sync,
+        use `AddQiNote` instead.
+
+        Requires the Owner or Developer role. Returns 400 if the body has a `type` field.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
       requestBody:
-        description: Body or payload of signal to be sent to the device
+        description: The signal to send.
         required: true
         content:
           application/json:
@@ -1886,7 +1969,7 @@ paths:
                 type: object
                 properties:
                   connected:
-                    description: true if the Notecard is connected to Notehub.
+                    description: True if the Notecard was connected and the signal was delivered. False means it was dropped.
                     type: boolean
         default:
           $ref: '#/components/responses/ErrorResponse'
@@ -1900,7 +1983,11 @@ paths:
   /v1/projects/{projectOrProductUID}/devices/public-keys:
     get:
       operationId: GetDevicePublicKeys
-      description: Get Device Public Keys of a Project
+      summary: List public keys of all devices
+      description: |
+        List the public key of every device in a project. For one device, use `GetDevicePublicKey`.
+
+        Paginated. Deleted devices are included only when reading with a `cursor`.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/pageSizeParam'
@@ -1928,8 +2015,10 @@ paths:
                             True if this device has been deleted. Only present when reading with a `cursor`.
                           type: boolean
                         key:
+                          description: The Notecard's public key in PEM format. Empty if it hasn't reported one.
                           type: string
                         uid:
+                          description: DeviceUID, e.g. `dev:864475040509284`.
                           type: string
                       type: object
                   has_more:
@@ -2635,7 +2724,12 @@ paths:
   /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/devices:
     get:
       operationId: GetFleetDevices
-      description: Get Devices of a Fleet within a Project
+      summary: List devices in a fleet
+      description: |
+        List the devices in one fleet, with the same filters as `GetDevices`. To list a device's
+        fleets instead, use `GetDeviceFleets`.
+
+        Paginated. Returns 404 if the fleet doesn't exist.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/fleetUIDParam'
@@ -4709,7 +4803,7 @@ components:
       schema:
         type: string
     firstSyncParam:
-      description: When true, filters results to only show first sync sessions
+      description: If true, return only sessions whose `why_session_opened` begins with "first sync".
       in: query
       name: firstSync
       required: false
@@ -5500,6 +5594,7 @@ components:
       type: object
       properties:
         body:
+          description: The JSON object to send to the Notecard. Must not have a `type` field, which the Notecard reserves.
           type: object
     CellularPlan:
       type: object
@@ -5512,6 +5607,7 @@ components:
         data_usage:
           $ref: '#/components/schemas/DataUsage'
         expires_at:
+          description: When the current plan expires, as a Unix timestamp in seconds. Omitted on the Essentials plan.
           type: integer
           format: int64
         iccid:
@@ -5523,7 +5619,7 @@ components:
           type: string
           example: '310170830688975'
         last_updated:
-          description: Time this plan information was last updated
+          description: When this plan information was last updated, as a Unix timestamp in seconds.
           type: integer
           format: int64
           example: 1656010061
@@ -5904,10 +6000,13 @@ components:
       required:
         - descriptions
     Device:
+      description: |
+        A device in a project. `best_location` is the best of `gps_location`,
+        `triangulated_location` and `tower_location`; each is null when unknown.
       type: object
       properties:
         best_id:
-          description: The best ID for the device, preference for the serial number over DeviceUID
+          description: The serial number if set, otherwise the DeviceUID. Use it as a display name.
           type: string
         best_location:
           $ref: '#/components/schemas/Location'
@@ -5922,74 +6021,95 @@ components:
         dfu:
           $ref: '#/components/schemas/DFUEnv'
         disabled:
+          description: True if the device was disabled with `DisableDevice` and can't connect.
           type: boolean
         firmware_host:
+          description: Host firmware version, as reported by the device. Usually a JSON string.
           type: string
         firmware_notecard:
+          description: Notecard firmware version, as reported by the device.
           type: string
         fleet_uids:
+          description: FleetUIDs of the fleets the device is in.
           type: array
           items:
             type: string
         gps_location:
           $ref: '#/components/schemas/Location'
         health_log:
+          description: Not returned by `GetDevice`, `GetDevices` or `GetFleetDevices`; use `GetDeviceHealthLog`.
           type: array
           items:
             $ref: '#/components/schemas/HealthLog'
         last_activity:
+          description: When the device was last active in a session. Null if it has never connected.
           type: string
           format: date-time
           nullable: true
         product_uid:
+          description: ProductUID the device uses, e.g. `com.blues.bridge:sensors`.
           type: string
         provisioned:
+          description: When the device was added to the project.
           type: string
           format: date-time
         recent_event_count:
+          description: Not returned by `GetDevice`, `GetDevices` or `GetFleetDevices`.
           type: array
           items:
             format: int32
             type: integer
         recent_session_count:
+          description: Not returned by `GetDevice`, `GetDevices` or `GetFleetDevices`.
           type: array
           items:
             format: int32
             type: integer
         recent_session_seconds:
+          description: Not returned by `GetDevice`, `GetDevices` or `GetFleetDevices`.
           type: array
           items:
             format: int32
             type: integer
         recent_when:
+          description: Not returned by `GetDevice`, `GetDevices` or `GetFleetDevices`.
           type: string
           format: date-time
           nullable: true
         sensors:
           $ref: '#/components/schemas/DeviceSensors'
         serial_number:
+          description: Serial number, from the `_sn` environment variable if set. Empty if none.
           type: string
         sku:
+          description: Notecard SKU, e.g. `NOTE-WBNAW`.
           type: string
         tags:
+          description: Comma-separated tags, from the `_tags` environment variable. Empty if none.
           type: string
         temperature:
+          description: Last reported Notecard temperature, in degrees Celsius.
           type: number
           format: double
         tower_info:
+          description: The cell tower the device last used. Null if unknown.
           type: object
           nullable: true
           properties:
             cell_id:
+              description: Cell ID.
               type: integer
               format: int32
             lac:
+              description: Location area code.
               type: integer
               format: int32
             mcc:
+              description: Mobile country code.
               type: integer
               format: int32
             mnc:
+              description: Mobile network code.
               type: integer
               format: int32
         tower_location:
@@ -5997,8 +6117,10 @@ components:
         triangulated_location:
           $ref: '#/components/schemas/Location'
         uid:
+          description: DeviceUID, e.g. `dev:864475040509284`.
           type: string
         voltage:
+          description: Last reported supply voltage, in volts.
           type: number
           format: double
       required:
@@ -6897,10 +7019,13 @@ components:
       type: object
       properties:
         alert:
+          description: True if the entry was flagged as an alert.
           type: boolean
         text:
+          description: The log message. Restart entries begin with `boot`.
           type: string
         when:
+          description: When the entry was recorded.
           type: string
           format: date-time
       required:
@@ -7144,18 +7269,24 @@ components:
       type: object
       properties:
         country:
+          description: Two-letter country code, e.g. `US`.
           type: string
         latitude:
+          description: Latitude in degrees.
           type: number
           format: double
         longitude:
+          description: Longitude in degrees.
           type: number
           format: double
         name:
+          description: Place name, e.g. `Waverly MI`.
           type: string
         timezone:
+          description: IANA time zone, e.g. `America/Detroit`.
           type: string
         when:
+          description: When the location was recorded, in RFC 3339 format. Empty if unknown.
           type: string
       nullable: true
       required:
@@ -8772,6 +8903,7 @@ components:
             type: object
             properties:
               cellular_plans:
+                description: One entry per cellular SIM. Empty for a device with only a satellite connection.
                 type: array
                 items:
                   $ref: '#/components/schemas/CellularPlan'
@@ -9045,7 +9177,7 @@ components:
             type: object
             properties:
               latest_events:
-                description: The set of latest events.  Will always include the current "session.begin" event.
+                description: The most recent event from each notefile, sorted by notefile name.
                 type: array
                 items:
                   $ref: '#/components/schemas/Event'
