@@ -4658,7 +4658,7 @@ components:
       schema:
         type: string
     datasetAggregateWindowQueryParam:
-      description: Aggregate results into buckets for a time duration, expressed in Postgres INTERVAL format
+      description: Group results into time buckets of this length, e.g. `1h`.
       in: query
       name: aggregate_window
       required: false
@@ -4672,7 +4672,7 @@ components:
       schema:
         type: boolean
     datasetEndQueryParam:
-      description: End of the time range, as an ISO-8601 date or relative to now. If omitted, current time is used.
+      description: End time, in the same formats as `start`. Defaults to now.
       in: query
       name: end
       required: false
@@ -4687,7 +4687,7 @@ components:
         type: integer
         format: int32
     datasetLocationNearQueryParam:
-      description: Latitude and Longitude for location-based filtering, location_near_radius must also be provided
+      description: Latitude and longitude, e.g. `42.393125,-71.185015`. Requires `location_near_radius`.
       in: query
       name: location_near
       required: false
@@ -4695,7 +4695,7 @@ components:
         type: string
         example: 42.393125,-71.185015
     datasetLocationRadiusQueryParam:
-      description: Distance from location_near in meters, location_near must also be provided
+      description: Distance from `location_near`, in meters. Requires `location_near`.
       in: query
       name: location_near_radius
       required: false
@@ -4703,7 +4703,7 @@ components:
         type: integer
         format: int32
     datasetNameParam:
-      description: The name of the data set
+      description: Dataset name, as given to `CreateRepositoryDataset`.
       in: path
       name: name
       required: true
@@ -4717,14 +4717,14 @@ components:
       schema:
         type: string
     datasetSelectQueryParam:
-      description: Comma separated list of fields to include. Supports aggregate functions (avg, sum, min, max, count, most_recent).
+      description: Comma-separated columns to return. Can use avg, sum, min, max, count and most_recent.
       in: query
       name: select
       required: false
       schema:
         type: string
     datasetStartQueryParam:
-      description: Start of the time range, as an ISO-8601 date or relative to now (e.g. -1y). Relative dates follow the Postgres INTERVAL format.
+      description: Start time, as RFC 3339, Unix seconds, or relative to now such as `-1d`.
       in: query
       name: start
       required: true
@@ -5104,19 +5104,20 @@ components:
       schema:
         type: string
     repositoryKey:
-      description: The secret key used to access this repository. Optional - a caller authenticated with a session or personal access token may instead be authorized if their actor holds the required permission on the events of every project this repository references.
+      description: The repository key (`password` from `CreateRepository`). Not needed if you have a role in its projects.
       in: header
       name: X-Repository-Key
       required: false
       schema:
         type: string
     repositoryUIDParam:
+      description: Repository UID, e.g. `repo:2606f411-dea6-44a0-9743-1130f57d77d8`. List with `GetRepositories`.
       in: path
       name: repositoryUID
       required: true
       schema:
         type: string
-        example: rid:2606f411-dea6-44a0-9743-1130f57d77d8
+        example: repo:2606f411-dea6-44a0-9743-1130f57d77d8
     responseStatusParam:
       example: 500
       in: query
@@ -5759,6 +5760,7 @@ components:
         fleet_uids:
           $ref: '#/components/schemas/FleetsUIDList'
         name:
+          description: Repository name.
           type: string
         project_uids:
           description: The project whose events the repository holds. A repository can reference at most one project.
@@ -5772,18 +5774,18 @@ components:
         fleet_uids:
           $ref: '#/components/schemas/FleetsUIDList'
         name:
-          description: repository name
+          description: Repository name.
           type: string
         password:
-          description: read-only password for the database, also used as X-Repository-Token header for subsequent API calls.  This value is only served once when the repository is created, and never to a scoped token, which queries through the repository token endpoint instead
+          description: The repository key, for `X-Repository-Key` and as the database password. Returned only here, never to a scoped token.
           type: string
         project_uids:
           $ref: '#/components/schemas/AppUIDList'
         uid:
-          description: The unique identifier for the data repository
+          description: Repository UID, e.g. `repo:2606f411-dea6-44a0-9743-1130f57d77d8`.
           type: string
         user:
-          description: read-only user for database
+          description: Read-only database user that goes with `password`.
           type: string
     CurrentFirmware:
       type: object
@@ -5928,16 +5930,16 @@ components:
           items:
             type: string
         python:
-          description: 'Optional Python source projecting each event, as an alternative to JSONata. It defines one function, with type annotations required: "def rows(record: dict[str, Any]) -> list[dict[str, Any]]". It returns zero or more row objects per event, whose keys are the dataset''s columns -- the same convention the rows expression uses. Returning an empty list contributes no rows and is not an error; anything else, None included, is an error for that event. Mutually exclusive with rows, time, lat, lon and every field''s own jsonata expression, since a Python projection produces whole row objects and leaves nothing for them to do. Use it for payloads JSONata cannot decode, such as packed binary, base64-wrapped blobs, protobuf or CBOR. At most 64 KiB. Rows must come back in the same order every time rows() runs over the same event: a row''s position in the list identifies it, so an order that varies (such as iterating over a set) makes a replay insert duplicates. Sort the list if the order is not already fixed.'
+          description: "Optional Python projection: `def rows(record: dict[str, Any]) -> list[dict[str, Any]]`, called once per `RepositoryRecord`. Return rows in a fixed order, or a reload duplicates them. Can't be combined with JSONata fields. Max 64 KiB."
           type: string
           maxLength: 65536
         reload:
           $ref: '#/components/schemas/DatasetReloadProgress'
         rows:
-          description: "Optional JSONata expression that expands one event into several rows. It evaluates to one row object per row, whose keys are the dataset's columns: an array of objects, or a single object for one row. Both are accepted because JSONata collapses a one-element sequence to the element, so the same expression yields an array for an event carrying several readings and a bare object for one carrying a single reading. A result that is undefined or empty contributes no rows and is not an error; anything that is not an object, or an array containing one, is rejected. When set it is the only expression that reads the event: each field below takes the row object key matching its name, and time/lat/lon name a key too. Omit it and the dataset produces one row per event, with each field's own jsonata expression reading the event directly. event.uploaded and event.captured always resolve against the event either way."
+          description: Optional JSONata expression turning one `RepositoryRecord` into row objects whose keys are the columns. When set, fields, `time`, `lat` and `lon` name row keys instead.
           type: string
         time:
-          description: JSONata expression resulting in the row's time. Required for a dataset with no rows expression. With one it defaults to the row object's "time" key, and only needs setting to name a different key, or to reach past the row as event.uploaded and event.captured do. lat and lon work the same way and are what declare that the dataset has a location column at all.
+          description: JSONata expression for the row's time. Required without `rows`; with `rows`, defaults to the row's `time` key.
           type: string
     DataSetField:
       type: object
@@ -5956,7 +5958,7 @@ components:
             - 7
             - 8
         jsonata:
-          description: "The JSONata expression that populates this field from the event. Required for a dataset with no rows expression. Must be omitted when the dataset has one: the column is then taken from the row object key matching this field's name, and supplying an expression here is rejected rather than silently ignored."
+          description: JSONata expression for this column. Required without the dataset's `rows` expression; must be omitted with it.
           type: string
         name:
           description: The name of the field
@@ -7897,12 +7899,12 @@ components:
         fleet_uids:
           $ref: '#/components/schemas/FleetsUIDList'
         name:
-          description: repository name
+          description: Repository name.
           type: string
         project_uids:
           $ref: '#/components/schemas/AppUIDList'
         uid:
-          description: The unique identifier for the data repository
+          description: Repository UID, e.g. `repo:2606f411-dea6-44a0-9743-1130f57d77d8`.
           type: string
     RepositoryListResponse:
       type: object
@@ -7913,6 +7915,23 @@ components:
             $ref: '#/components/schemas/Repository'
       required:
         - repositories
+    RepositoryRecord:
+      description: |
+        One event in a repository's archive, with the session it arrived in and the device's
+        environment at the time. `GetRepositoryData` returns one per line, and dataset JSONata
+        expressions and Python functions read one at a time, as in `event.body.temp`. `session`
+        is often absent, and `env` is absent in older records.
+      type: object
+      properties:
+        env:
+          description: The device's environment variables when the event arrived, after merging project and fleet ones.
+          type: object
+          additionalProperties:
+            type: string
+        event:
+          $ref: '#/components/schemas/Event'
+        session:
+          $ref: '#/components/schemas/DeviceSession'
     RepositoryTokenRequest:
       type: object
       properties:
