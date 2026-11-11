@@ -2412,7 +2412,14 @@ paths:
   /v1/projects/{projectOrProductUID}/events:
     get:
       operationId: GetEvents
-      description: Get Events of a Project
+      summary: List events in a project
+      description: |
+        List a project's events, filtered by device, notefile, date, fleet, session and more. Use
+        `cursor` to read events in the order Notehub stored them and to poll for new ones. Set
+        `format=csv` for CSV. For one fleet, use `GetFleetEvents`.
+
+        Paginated. Returns 403 if the organization is suspended, and 500 if the query times out;
+        narrow the filters and retry.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/pageSizeParam'
@@ -2448,7 +2455,12 @@ paths:
   /v1/projects/{projectOrProductUID}/events/{eventUID}/route-logs:
     get:
       operationId: GetRouteLogsByEvent
-      description: Get Route Logs by EventUID
+      summary: Get an event's route logs
+      description: |
+        Get the log of every attempt to send one event to each route, with the response status,
+        body and duration. For a route's logs across events, use `GetRouteLogsByRoute`.
+
+        Returns 404 if the event doesn't exist.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/eventUIDParam'
@@ -2997,7 +3009,13 @@ paths:
   /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/events:
     get:
       operationId: GetFleetEvents
-      description: Get Events of a Fleet
+      summary: List events in a fleet
+      description: |
+        List the events from one fleet, with the same filters, `cursor` and CSV output as
+        `GetEvents`.
+
+        Paginated. Returns 403 if the organization is suspended, and 500 if the query times out;
+        narrow the filters and retry.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/fleetUIDParam'
@@ -3597,7 +3615,10 @@ paths:
   /v1/projects/{projectOrProductUID}/routes:
     get:
       operationId: GetRoutes
-      description: Get all Routes within a Project
+      summary: List routes
+      description: |
+        List a project's routes with their type and label and whether they're disabled, without
+        their settings. For a route's settings, use `GetRoute`.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
       responses:
@@ -3652,7 +3673,14 @@ paths:
         resource: blues:resources:app:APPSERIAL:routes
     post:
       operationId: CreateRoute
-      description: Create Route within a Project
+      summary: Create a route
+      description: |
+        Create a route that sends a project's events to a destination such as a URL, an MQTT broker
+        or a cloud service. Set `type` and fill in the object it names. Omit `fleets` to send every
+        fleet's events. Unknown FleetUIDs are ignored, so `fleets: []` or a list of only unknown
+        UIDs gives a route that sends nothing.
+
+        Requires the Owner or Developer role. Returns 400 for invalid settings.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
       requestBody:
@@ -3715,7 +3743,12 @@ paths:
   /v1/projects/{projectOrProductUID}/routes/{routeUID}:
     delete:
       operationId: DeleteRoute
-      description: Delete single route within a project
+      summary: Delete a route
+      description: |
+        Delete a route so it stops sending events. To pause it instead, set `disabled` with
+        `UpdateRoute`.
+
+        Requires the Owner or Developer role.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/routeUIDParam'
@@ -3733,7 +3766,12 @@ paths:
         resource: blues:resources:app:APPSERIAL:routes
     get:
       operationId: GetRoute
-      description: Get single route within a project
+      summary: Get a route
+      description: |
+        Get one route's full settings: destination, filter, transform and fleets. Secrets such as
+        passwords and keys come back as `(omitted)`.
+
+        Requires the Owner or Developer role. Viewers can use `GetRoutes`. Returns 404 if the route doesn't exist.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/routeUIDParam'
@@ -3773,7 +3811,13 @@ paths:
         resource: blues:resources:app:APPSERIAL:routes
     put:
       operationId: UpdateRoute
-      description: Update route by UID
+      summary: Update a route
+      description: |
+        Change a route's settings. Fields you leave out keep their values, and a secret sent back
+        as `(omitted)` is kept, but leaving out `notes` clears it.
+
+        Requires the Owner or Developer role. Returns 404 if the route doesn't exist, and 400 for
+        invalid settings.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/routeUIDParam'
@@ -3837,7 +3881,13 @@ paths:
   /v1/projects/{projectOrProductUID}/routes/{routeUID}/route-logs:
     get:
       operationId: GetRouteLogsByRoute
-      description: Get Route Logs by RouteUID
+      summary: List a route's logs
+      description: |
+        List a route's attempts to send events, newest first, with each one's event, response
+        status, body and duration. Filter by device, notefile, date, success or HTTP status. For
+        one event, use `GetRouteLogsByEvent`.
+
+        Paginated. Returns 404 if the route doesn't exist.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/routeUIDParam'
@@ -4778,7 +4828,10 @@ components:
       schema:
         type: string
     dateTypeParam:
-      description: Which date to filter on, either 'captured' or 'uploaded'.  This will apply to the startDate and endDate parameters
+      description: |
+        Which time `startDate` and `endDate` filter on.
+        - `captured`: when the Notecard created the event
+        - `uploaded`: when Notehub received it
       example: uploaded
       in: query
       name: dateType
@@ -4855,7 +4908,7 @@ components:
         format: int64
         minimum: 0
     eventUIDFilterQueryParam:
-      description: Filter by EventUID
+      description: EventUID to filter by. Repeat for more than one.
       explode: true
       in: query
       name: eventUID
@@ -4866,6 +4919,7 @@ components:
           type: string
       style: form
     eventUIDParam:
+      description: EventUID, e.g. `4506f411-dea6-44a0-9743-1130f57d7747`.
       example: 4506f411-dea6-44a0-9743-1130f57d7747
       in: path
       name: eventUID
@@ -4881,6 +4935,7 @@ components:
       schema:
         type: string
     filesQueryParam:
+      description: Comma-separated notefiles, e.g. `data.qo,_health.qo`. Don't combine with `systemFilesOnly`.
       example: _health.qo, data.qo
       in: query
       name: files
@@ -4976,7 +5031,10 @@ components:
         items:
           type: string
     formatParam:
-      description: Response format (JSON or CSV)
+      description: |
+        Response format.
+        - `json`: a JSON object with `events`
+        - `csv`: CSV, with the columns in `selectFields`
       in: query
       name: format
       required: false
@@ -5006,7 +5064,7 @@ components:
       schema:
         type: string
     limitParam:
-      description: Maximum number of events to return.
+      description: The most events to return.
       in: query
       name: limit
       required: false
@@ -5049,6 +5107,7 @@ components:
         type: string
       style: form
     mostRecentOnlyParam:
+      description: If true, return only the latest attempt for each event.
       in: query
       name: mostRecentOnly
       required: false
@@ -5160,6 +5219,7 @@ components:
         type: string
         example: repo:2606f411-dea6-44a0-9743-1130f57d77d8
     responseStatusParam:
+      description: Response status codes to include, e.g. `500`.
       example: 500
       in: query
       name: responseStatus
@@ -5169,6 +5229,10 @@ components:
         items:
           type: string
     routeLogsSortByParam:
+      description: |
+        Field to sort by.
+        - `date`: when the attempt was made
+        - `event`: the order the events arrived in, then the attempt time
       in: query
       name: sortBy
       required: false
@@ -5179,6 +5243,10 @@ components:
           - date
           - event
     routeLogsSortOrderParam:
+      description: |
+        Sort direction.
+        - `asc`: oldest first
+        - `desc`: newest first
       in: query
       name: sortOrder
       required: false
@@ -5189,6 +5257,7 @@ components:
           - asc
           - desc
     routeUIDParam:
+      description: RouteUID, e.g. `route:cbd20093cba58392c9f9bbdd0cdeb1a0`. List with `GetRoutes`.
       example: route:cbd20093cba58392c9f9bbdd0cdeb1a0
       in: path
       name: routeUID
@@ -5207,6 +5276,10 @@ components:
           type: string
       style: form
     routingStatusParam:
+      description: |
+        Return only attempts with this outcome.
+        - `success`: the destination accepted the event
+        - `failure`: the attempt failed
       example: failure
       in: query
       name: routingStatus
@@ -5219,14 +5292,14 @@ components:
             - failure
           type: string
     selectFieldsParam:
-      description: Comma-separated list of fields to select from JSON payload (e.g., "field1,field2.subfield,field3"), this will reflect the columns in the CSV output.
+      description: Comma-separated event fields to return, e.g. `device,when,body.temp`. Also sets the CSV columns.
       in: query
       name: selectFields
       required: false
       schema:
         type: string
     sensorUIDParamQuery:
-      description: A SensorUID to filter events by, matched exactly against the event sensor field. The value may carry any prefix.
+      description: SensorUID to filter by, matched exactly. Repeat for more than one.
       explode: true
       in: query
       name: sensorUID
@@ -5237,7 +5310,7 @@ components:
           type: string
       style: form
     serialNumberFilterParam:
-      description: Filter by Serial Number
+      description: Serial number to filter by. Repeat for more than one.
       explode: true
       in: query
       name: serialNumber
@@ -5259,7 +5332,7 @@ components:
           type: string
       style: form
     sessionUIDFilterParam:
-      description: Filter by SessionUID
+      description: SessionUID to filter by. Repeat for more than one.
       explode: true
       in: query
       name: sessionUID
@@ -5326,6 +5399,7 @@ components:
         format: int64
         minimum: 0
     systemFilesOnlyParam:
+      description: If true, return only events from system notefiles, such as `_session.qo` and `_health.qo`.
       in: query
       name: systemFilesOnly
       required: false
@@ -7643,7 +7717,7 @@ components:
         - notefile
         - properties
     NotehubRoute:
-      description: Route resource as stored/returned by the server.
+      description: A route, which sends a project's events to a destination. Only the object named by `type` is used.
       type: object
       properties:
         aws:
@@ -7655,6 +7729,7 @@ components:
         datacake:
           $ref: '#/components/schemas/DatacakeRoute'
         disabled:
+          description: If true, the route sends no events.
           type: boolean
           default: false
         google:
@@ -7662,8 +7737,10 @@ components:
         http:
           $ref: '#/components/schemas/HttpRoute'
         label:
+          description: Route name. Required.
           type: string
         modified:
+          description: When the route was last changed.
           type: string
           format: date-time
           readOnly: true
@@ -7692,9 +7769,22 @@ components:
         twilio:
           $ref: '#/components/schemas/TwilioRoute'
         type:
-          description: Mirrors hublib.RouteType.
+          description: |
+            Route type. Fill in the object named in parentheses.
+            - `http`: send each event to a URL (`http`)
+            - `proxy`: let Notecards make `web.*` requests through Notehub (`proxy`)
+            - `mqtt`: publish to an MQTT broker (`mqtt`)
+            - `google-function`: call a Google Cloud Function (`google`)
+            - `aws-lambda`, `aws-lambda-with-access-key`, `aws-sqs`, `aws-sqs-with-access-key`, `aws-sqs-fifo`, `aws-sqs-fifo-with-access-key`, `aws-sqs-with-role`, `aws-iot-analytics` (`aws`)
+            - `azure-function`, `azure-function-with-key`, `azure-service-bus-with-sas-token` (`azure`)
+            - `snowflake` (`snowflake`); `snowpipe-streaming` (`snowpipe_streaming`)
+            - `s3-archive` (`s3archive`)
+            - `slack-bearer`, `slack-webhook` (`slack`)
+            - `radnote-radresp-fixed-survey`, `radnote-radresp-field-survey`, `radnote-radresp-mobile-survey`, `radnote-radresp-mobile-equipment-survey`, `radnote-missionedge-fixed-survey` (`radnote`)
+            - `thingworx`, `twilio`, `datacake`, `blynk`, `qubitro` (object of the same name)
           type: string
         uid:
+          description: RouteUID, e.g. `route:cbd20093cba58392c9f9bbdd0cdeb1a0`.
           type: string
           readOnly: true
       additionalProperties: false
@@ -7702,19 +7792,24 @@ components:
       type: object
       properties:
         disabled:
+          description: True if the route is turned off and sends nothing.
           type: boolean
           default: false
         label:
+          description: Route name.
           type: string
           default: success route
         modified:
+          description: When the route was last changed.
           type: string
           format: date-time
           readOnly: true
         type:
+          description: Route type; see `NotehubRoute.type`.
           type: string
           default: http
         uid:
+          description: RouteUID.
           type: string
           default: route:8d65a087d5d290ce5bdf03aeff2becc0
     OAuth2Error:
@@ -8050,29 +8145,29 @@ components:
       type: object
       properties:
         attn:
-          description: If true, an error was returned when routing
+          description: True if the attempt failed.
           type: boolean
         date:
-          description: The date of the logs.
+          description: When the attempt was made, in RFC 3339 format.
           type: string
         duration:
-          description: The duration of the route in milliseconds
+          description: How long the attempt took, in milliseconds.
           type: integer
           format: int32
         event_uid:
-          description: The EventUID.
+          description: EventUID of the event that was sent.
           type: string
         route_uid:
-          description: The routeUID.
+          description: RouteUID of the route.
           type: string
         status:
-          description: The status of the event.
+          description: The destination's response status, such as `200`.
           type: string
         text:
-          description: The response body of the route.
+          description: The destination's response body, or an error message.
           type: string
         url:
-          description: The URL of the route.
+          description: The URL the event was sent to.
           type: string
     RouteTransformSettings:
       description: |
