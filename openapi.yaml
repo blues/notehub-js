@@ -2407,7 +2407,7 @@ paths:
         Create a fleet in the project. Connectivity assurance is on unless
         `connectivity_assurance.enabled` is `false`. A second call creates another fleet.
 
-        Requires the Owner or Developer role.
+        Requires the Owner or Developer role. Returns 400 if `label` is missing or empty.
       requestBody:
         description: The new fleet's name and settings.
         required: true
@@ -2419,7 +2419,7 @@ paths:
                 connectivity_assurance:
                   $ref: '#/components/schemas/FleetConnectivityAssurance'
                 label:
-                  description: Fleet name shown in Notehub.
+                  description: Fleet name shown in Notehub. Required.
                   type: string
                 smart_rule:
                   $ref: '#/components/schemas/FleetRule'
@@ -2495,10 +2495,11 @@ paths:
       summary: Update a fleet
       description: |
         Change a fleet's label, smart rule, watchdog or connectivity assurance, or add and remove
-        devices. Always send `smart_rule_enabled`: leaving it out turns the smart rule off. An
-        empty `label` or `smart_rule` keeps the current value; `-` clears it.
+        devices. Always send `smart_rule_enabled`; leaving it out turns the smart rule off. Empty
+        `label` or `smart_rule` keeps the current value; `-` clears `smart_rule`.
 
-        Requires the Owner or Developer role. Returns 400 for an unknown fleet or DeviceUID.
+        Requires the Owner or Developer role. Returns 400 for an unknown fleet or `label` of `-`,
+        and for a bad DeviceUID after saving the other changes.
       requestBody:
         description: The fields to change. Fields left out keep their values, except `smart_rule_enabled`.
         required: true
@@ -2515,7 +2516,7 @@ paths:
                 connectivity_assurance:
                   $ref: '#/components/schemas/FleetConnectivityAssurance'
                 label:
-                  description: New fleet name. Empty keeps the current name; `-` clears it.
+                  description: New fleet name. Empty keeps the current name; a fleet must have one, so `-` returns 400.
                   type: string
                 removeDevices:
                   description: DeviceUIDs to remove from the fleet. Each must be in the project and not also in `addDevices`.
