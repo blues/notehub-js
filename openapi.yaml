@@ -167,7 +167,7 @@ paths:
         Blues staff only; returns 403 for anyone else. Returns 400 if the content is over 10 MB or
         the name isn't valid.
       requestBody:
-        description: The document to store, up to 10 MB. Send its real Content-Type, such as `application/pdf`.
+        description: The document to store, up to 10 MB. Send its Content-Type, such as `text/markdown`; Markdown isn't detected.
         required: true
         content:
           application/octet-stream:
@@ -825,7 +825,7 @@ paths:
       description: |
         List a project's description records by name, with each one's content type, size and
         change history but not its content. A description record is a named document, such as
-        text, JSON or a PDF, that explains the project's data. For Blues' platform-wide records,
+        Markdown, JSON or plain text, that explains the project's data. For Blues' platform-wide records,
         use `ListGlobalDescriptions`.
       responses:
         '200':
@@ -903,7 +903,7 @@ paths:
         Requires the Owner or Developer role. Returns 400 if the content is over 10 MB or the name
         isn't valid.
       requestBody:
-        description: The document to store, up to 10 MB. Send its real Content-Type, such as `application/pdf`.
+        description: The document to store, up to 10 MB. Send its Content-Type, such as `text/markdown`; Markdown isn't detected.
         required: true
         content:
           application/octet-stream:
