@@ -13,7 +13,7 @@
     "Create API classes with new NotehubJs.DeviceApi(), new NotehubJs.ProjectApi(), new NotehubJs.EventApi(), and so on. Each uses the shared NotehubJs.ApiClient.instance unless you pass an ApiClient to its constructor.",
     "notehub-js methods are camelCase and return Promises. Pass required path parameters positionally and optional parameters in a trailing opts object, e.g. new NotehubJs.DeviceApi().getDevices(projectOrProductUID, { pageSize: 50, pageNum: 1 }).",
     "Devices, Notes, Notefiles, and device environment variables are in DeviceApi; fleets, products, firmware, DFU, and project environment variables are in ProjectApi; events are in EventApi; routes are in RouteApi.",
-    "Paged methods such as getDevices take pageSize and pageNum and return hasMore. To read many events, call EventApi.getEventsByCursor and pass each response's nextCursor as the cursor option of the next call.",
+    "Paged methods such as getDevices take pageSize and pageNum options. Responses keep the API's snake_case keys: read data.has_more, and pass data.next_cursor from EventApi.getEventsByCursor as the next call's cursor option (not hasMore or nextCursor).",
     "Copy Api class, method, parameter, and model names exactly from this SDK's src/docs files or the Notehub API reference (https://dev.blues.io/api-reference/notehub-api/); do not invent methods, parameters, or response fields."
   ]
 }
