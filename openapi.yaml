@@ -780,9 +780,9 @@ paths:
       operationId: CloneProject
       summary: Clone a project
       description: |
-        Create a new project with copies of this project's settings, environment variables,
-        transformation, fleets and routes. Devices, products and members are not copied, and
-        copied fleets get new FleetUIDs.
+        Create a new project as a copy of this one. Settings, environment variables,
+        transformation, fleets, routes and host firmware are copied; devices, products and members
+        aren't. Copied fleets get new FleetUIDs.
 
         Requires the Owner role (400 otherwise), a verified email address (401 otherwise), and
         permission to create projects in the target organization (403 otherwise).
@@ -2677,12 +2677,13 @@ paths:
       operationId: SetGlobalEventTransformation
       summary: Set the global event transformation
       description: |
-        Set the project's JSONata expression that rewrites each new event before it is stored and
-        routed. It can change `body`, `payload` and `details`, or discard the event with
-        `$doNotRoute()`. Doesn't change whether the transformation is enabled.
+        Set the project's JSONata expression that rewrites each new event before it's stored and
+        routed. It can change `body`, `payload`, `details`, `file` and `note`, or drop the event
+        with `$doNotRoute()`; an event it fails on is kept with `error` set. Doesn't enable or
+        disable it.
 
-        Requires the Owner or Developer role. Returns 400 if the expression doesn't compile, or for
-        a sub-project, whose parent's transformation applies.
+        Requires the Owner or Developer role. Returns 400 if it doesn't compile, or for a
+        sub-project, which uses its parent's.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
       requestBody:
