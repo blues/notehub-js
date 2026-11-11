@@ -2352,12 +2352,12 @@ paths:
       operationId: UploadFirmware
       summary: Upload firmware
       description: |
-        Upload a host or Notecard firmware binary. Notehub adds a `$YYYYMMDDHHMMSS` timestamp to
-        `filename`; use the returned `filename` from then on.
+        Upload a host or Notecard firmware binary. Notehub usually adds a timestamp to `filename`;
+        use the returned `filename` from then on.
 
         Requires the Owner or Developer role. Returns 400 for host firmware on a sub-project, whose
-        parent manages it. A file that's too large (host 1.5 MB, Notecard 1 MB) or of the wrong
-        type returns 500.
+        parent manages it, and 500 for a wrong file type or a file over the limit: 1.5 MB for host
+        firmware, 2 MB for `notecard-s3-*` and 1 MB for other Notecard firmware.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/firmwareTypeParam'
