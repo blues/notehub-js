@@ -4693,13 +4693,13 @@ components:
       schema:
         type: string
     repositoryUIDParam:
-      description: Repository UID, e.g. `rid:2606f411-dea6-44a0-9743-1130f57d77d8`. List with `GetRepositories`.
+      description: Repository UID, e.g. `repo:2606f411-dea6-44a0-9743-1130f57d77d8`. List with `GetRepositories`.
       in: path
       name: repositoryUID
       required: true
       schema:
         type: string
-        example: rid:2606f411-dea6-44a0-9743-1130f57d77d8
+        example: repo:2606f411-dea6-44a0-9743-1130f57d77d8
     responseStatusParam:
       example: 500
       in: query
@@ -5359,7 +5359,7 @@ components:
         project_uids:
           $ref: '#/components/schemas/AppUIDList'
         uid:
-          description: Repository UID, e.g. `rid:2606f411-dea6-44a0-9743-1130f57d77d8`.
+          description: Repository UID, e.g. `repo:2606f411-dea6-44a0-9743-1130f57d77d8`.
           type: string
         user:
           description: Read-only database user that goes with `password`.
@@ -7434,7 +7434,7 @@ components:
         project_uids:
           $ref: '#/components/schemas/AppUIDList'
         uid:
-          description: Repository UID, e.g. `rid:2606f411-dea6-44a0-9743-1130f57d77d8`.
+          description: Repository UID, e.g. `repo:2606f411-dea6-44a0-9743-1130f57d77d8`.
           type: string
     RepositoryListResponse:
       type: object
