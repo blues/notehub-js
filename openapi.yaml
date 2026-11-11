@@ -1312,9 +1312,10 @@ paths:
       summary: Get a device's health log
       description: |
         Get a device's health log: timestamped status messages such as restarts and completed
-        firmware updates.
+        firmware updates. Only the latest 100 entries are kept.
 
-        To filter by date, pass both `startDate` and `endDate`; `startDate` alone returns 400.
+        To filter by date, pass both `startDate` and `endDate`; `startDate` alone returns 400, and
+        the same value for both returns every entry.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
