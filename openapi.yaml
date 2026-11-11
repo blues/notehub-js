@@ -3253,8 +3253,7 @@ paths:
         or a cloud service. Set `type` and fill in the object it names. Omit `fleets` to send every
         fleet's events; unknown FleetUIDs are ignored.
 
-        Requires the Owner or Developer role. Returns 400 for invalid settings, and 409 if another MQTT route on the
-        same broker uses the same client ID.
+        Requires the Owner or Developer role. Returns 400 for invalid settings.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
       requestBody:
