@@ -1231,10 +1231,14 @@ paths:
   /v1/projects/{projectOrProductUID}/devices/{deviceUID}/fleets:
     delete:
       operationId: DeleteDeviceFromFleets
-      description: Remove Device from Fleets
+      summary: Remove a device from fleets
+      description: |
+        Remove a device from one or more fleets and return the fleets it's still in. Fleets it
+        isn't in are ignored, so a retry is safe.
+
+        Requires the Owner or Developer role.
       requestBody:
-        description: |
-          The fleets to remove from the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error.
+        description: The fleets to remove the device from.
         required: true
         content:
           application/json:
@@ -1242,7 +1246,7 @@ paths:
               type: object
               properties:
                 fleet_uids:
-                  description: The fleetUIDs to remove from the device.
+                  description: FleetUIDs to remove the device from.
                   type: array
                   items:
                     type: string
@@ -1262,7 +1266,12 @@ paths:
         resource: blues:resources:app:APPSERIAL:devices
     get:
       operationId: GetDeviceFleets
-      description: Get Device Fleets
+      summary: List a device's fleets
+      description: |
+        List the fleets a device belongs to, with only each fleet's UID, label and creation time.
+        For a fleet's full details use `GetFleet`.
+
+        Returns 404 if the device isn't in the project.
       responses:
         '200':
           $ref: '#/components/responses/FleetsResponse'
@@ -1280,10 +1289,14 @@ paths:
       - $ref: '#/components/parameters/deviceUIDParam'
     put:
       operationId: AddDeviceToFleets
-      description: Add Device to Fleets
+      summary: Add a device to fleets
+      description: |
+        Add a device to one or more fleets, keeping the fleets it's already in, and return all its
+        fleets. Fleets it's already in are skipped, so a retry is safe.
+
+        Requires the Owner or Developer role. Returns 400 if a fleet doesn't exist.
       requestBody:
-        description: |
-          The fleets to add to the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error.
+        description: The fleets to add the device to.
         required: true
         content:
           application/json:
@@ -1291,7 +1304,7 @@ paths:
               type: object
               properties:
                 fleet_uids:
-                  description: The fleetUIDs to add to the device.
+                  description: FleetUIDs to add the device to.
                   type: array
                   items:
                     type: string
@@ -2051,7 +2064,11 @@ paths:
   /v1/projects/{projectOrProductUID}/environment_hierarchy:
     get:
       operationId: GetProjectEnvironmentHierarchy
-      summary: Get environment variable hierarchy for a device
+      summary: Get the project environment hierarchy
+      description: |
+        Get the project's environment variables as a one-node environment hierarchy tree. The fleet
+        and device hierarchy operations use the same format; for plain key/value pairs, use
+        `GetProjectEnvironmentVariables`.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
       responses:
@@ -2062,7 +2079,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/EnvTreeJsonNode'
         '404':
-          description: Project or device not found
+          description: Project not found
         '500':
           description: Server error
       security:
@@ -2075,7 +2092,11 @@ paths:
   /v1/projects/{projectOrProductUID}/environment_variables:
     get:
       operationId: GetProjectEnvironmentVariables
-      description: Get environment variables of a project
+      summary: Get project environment variables
+      description: |
+        Get the environment variables set on the project, with their notes. Fleet and device
+        variables override these; for what a device actually sees, use
+        `GetDeviceEnvironmentVariables`.
       responses:
         '200':
           $ref: '#/components/responses/EnvironmentVariablesResponse'
@@ -2092,7 +2113,13 @@ paths:
       - $ref: '#/components/parameters/projectOrProductUIDParam'
     put:
       operationId: SetProjectEnvironmentVariables
-      description: Set environment variables of a project
+      summary: Set project environment variables
+      description: |
+        Add or change project environment variables; variables you don't send keep their values. A
+        value of `""` or `-` deletes that variable. Setting `_fw`, `_fwc` or `_fwm` starts a host,
+        Notecard or modem firmware update.
+
+        Requires the Owner or Developer role. Returns 400 if a note's key isn't a variable.
       requestBody:
         content:
           application/json:
@@ -2113,12 +2140,17 @@ paths:
   /v1/projects/{projectOrProductUID}/environment_variables/{key}:
     delete:
       operationId: DeleteProjectEnvironmentVariable
-      description: Delete an environment variable of a project by key
+      summary: Delete a project environment variable
+      description: |
+        Delete one project environment variable and return the ones left. Deleting a variable that
+        doesn't exist still succeeds.
+
+        Requires the Owner or Developer role.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - name: key
           in: path
-          description: The environment variable key to delete.
+          description: Name of the environment variable to delete.
           required: true
           schema:
             type: string
@@ -2378,7 +2410,10 @@ paths:
   /v1/projects/{projectOrProductUID}/fleets:
     get:
       operationId: GetFleets
-      description: Get Project Fleets
+      summary: List fleets
+      description: |
+        List the project's fleets with each one's label, smart rule, watchdog and environment
+        variables. Doesn't include `smart_rule_enabled`. Not paginated.
       responses:
         '200':
           $ref: '#/components/responses/FleetsResponse'
@@ -2395,9 +2430,14 @@ paths:
       - $ref: '#/components/parameters/projectOrProductUIDParam'
     post:
       operationId: CreateFleet
-      description: Create Fleet
+      summary: Create a fleet
+      description: |
+        Create a fleet in the project. Connectivity assurance is on unless
+        `connectivity_assurance.enabled` is `false`. A second call creates another fleet.
+
+        Requires the Owner or Developer role. Returns 400 if `label` is missing or empty.
       requestBody:
-        description: Fleet to be added
+        description: The new fleet's name and settings.
         required: true
         content:
           application/json:
@@ -2407,11 +2447,12 @@ paths:
                 connectivity_assurance:
                   $ref: '#/components/schemas/FleetConnectivityAssurance'
                 label:
-                  description: The label, or name,  for the Fleet.
+                  description: Fleet name shown in Notehub. Required.
                   type: string
                 smart_rule:
                   $ref: '#/components/schemas/FleetRule'
                 smart_rule_enabled:
+                  description: If `true`, `smart_rule` adds and removes devices. Default `false`.
                   type: boolean
       responses:
         '201':
@@ -2432,7 +2473,14 @@ paths:
   /v1/projects/{projectOrProductUID}/fleets/{fleetUID}:
     delete:
       operationId: DeleteFleet
-      description: Delete Fleet
+      summary: Delete a fleet
+      description: |
+        Delete a fleet and remove it from all its devices. The devices stay in the project; the
+        fleet's environment variables are deleted. To remove one device from a fleet, use
+        `DeleteDeviceFromFleets`.
+
+        Requires the Owner or Developer role. Returns 400 if the fleet does not exist, including on
+        a retry.
       responses:
         '204':
           description: Successful operation
@@ -2447,7 +2495,12 @@ paths:
         resource: blues:resources:app:APPSERIAL:fleets
     get:
       operationId: GetFleet
-      description: Get Fleet
+      summary: Get a fleet
+      description: |
+        Get one fleet's label, smart rule, watchdog and environment variables. Doesn't include
+        `smart_rule_enabled`.
+
+        Returns 404 if the fleet doesn't exist.
       responses:
         '200':
           description: Successful operation
@@ -2467,9 +2520,16 @@ paths:
       - $ref: '#/components/parameters/fleetUIDParam'
     put:
       operationId: UpdateFleet
-      description: Update Fleet
+      summary: Update a fleet
+      description: |
+        Change a fleet's label, smart rule, watchdog or connectivity assurance, or add and remove
+        devices. Always send `smart_rule_enabled`; leaving it out turns the smart rule off. Empty
+        `label` or `smart_rule` keeps the current value; `-` clears `smart_rule`.
+
+        Requires the Owner or Developer role. Returns 400 for an unknown fleet or `label` of `-`,
+        and for a bad DeviceUID after saving the other changes.
       requestBody:
-        description: Fleet details to update
+        description: The fields to change. Fields left out keep their values, except `smart_rule_enabled`.
         required: true
         content:
           application/json:
@@ -2477,26 +2537,27 @@ paths:
               type: object
               properties:
                 addDevices:
-                  description: List of DeviceUIDs to add to fleet
+                  description: DeviceUIDs to add to the fleet. Each must be in the project and not also in `removeDevices`.
                   type: array
                   items:
                     type: string
                 connectivity_assurance:
                   $ref: '#/components/schemas/FleetConnectivityAssurance'
                 label:
-                  description: The label for the Fleet.
+                  description: New fleet name. Empty keeps the current name; a fleet must have one, so `-` returns 400.
                   type: string
                 removeDevices:
-                  description: List of DeviceUIDs to remove from fleet
+                  description: DeviceUIDs to remove from the fleet. Each must be in the project and not also in `addDevices`.
                   type: array
                   items:
                     type: string
                 smart_rule:
                   $ref: '#/components/schemas/FleetRule'
                 smart_rule_enabled:
+                  description: Whether `smart_rule` adds and removes devices. Always send it; omitting it sets `false`.
                   type: boolean
                 watchdog_mins:
-                  description: A watchdog timer is used to generate an event every N minutes of inactivity. 0 means no watchdog
+                  description: Minutes of inactivity before Notehub generates a watchdog event. Omit or `0` to keep the current value; a negative value turns it off.
                   type: integer
                   format: int64
       responses:
@@ -2548,7 +2609,12 @@ paths:
   /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/environment_hierarchy:
     get:
       operationId: GetFleetEnvironmentHierarchy
-      summary: Get environment variable hierarchy for a device
+      summary: Get a fleet's environment hierarchy
+      description: |
+        Get a fleet's environment variables and the project variables it inherits, as a tree. Each
+        variable has its precedence and whether it is used or overridden.
+
+        Returns 500 if the fleet doesn't exist.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/fleetUIDParam'
@@ -2560,7 +2626,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/EnvTreeJsonNode'
         '404':
-          description: Project or device not found
+          description: Project not found
         '500':
           description: Server error
       security:
@@ -2573,7 +2639,12 @@ paths:
   /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/environment_variables:
     get:
       operationId: GetFleetEnvironmentVariables
-      description: Get environment variables of a fleet
+      summary: Get fleet environment variables
+      description: |
+        Get the environment variables set on a fleet, with their notes. They override project
+        variables, and device variables override them.
+
+        Returns 404 if the fleet doesn't exist.
       responses:
         '200':
           $ref: '#/components/responses/EnvironmentVariablesResponse'
@@ -2591,9 +2662,16 @@ paths:
       - $ref: '#/components/parameters/fleetUIDParam'
     put:
       operationId: SetFleetEnvironmentVariables
-      description: Set environment variables of a fleet
+      summary: Set fleet environment variables
+      description: |
+        Add or change a fleet's environment variables; variables you don't send keep their values.
+        A value of `""` or `-` deletes that variable. Setting `_fw`, `_fwc` or `_fwm` starts a
+        host, Notecard or modem firmware update.
+
+        Requires the Owner or Developer role. Returns 404 if the fleet doesn't exist, and 400 if a
+        note's key isn't a variable.
       requestBody:
-        description: Environment variables to be added to the fleet
+        description: The variables to add or change, and optional notes.
         required: true
         content:
           application/json:
@@ -2614,13 +2692,18 @@ paths:
   /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/environment_variables/{key}:
     delete:
       operationId: DeleteFleetEnvironmentVariable
-      description: Delete environment variables of a fleet
+      summary: Delete a fleet environment variable
+      description: |
+        Delete one fleet environment variable and return the ones left.
+
+        Requires the Owner or Developer role. Returns 404 if the fleet or the variable doesn't
+        exist.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/fleetUIDParam'
         - name: key
           in: path
-          description: The environment variable key to delete.
+          description: Name of the environment variable to delete.
           required: true
           schema:
             type: string
@@ -3547,7 +3630,10 @@ paths:
   /v1/projects/{projectOrProductUID}/secrets:
     get:
       operationId: GetProjectSecrets
-      description: Get all secrets for a project (metadata only, values are never returned)
+      summary: List project secrets
+      description: |
+        List the project's secrets by name, with who created and last changed each one and when.
+        Values are never returned.
       responses:
         '200':
           $ref: '#/components/responses/GetProjectSecretsResponse'
@@ -3564,7 +3650,13 @@ paths:
       - $ref: '#/components/parameters/projectOrProductUIDParam'
     post:
       operationId: CreateProjectSecret
-      description: Create a new project secret
+      summary: Create a project secret
+      description: |
+        Store a secret value that routes and alerts can reference as `[$$name]` without exposing
+        it. The value can't be read back.
+
+        Requires the Owner or Developer role. Returns 409 if the name is taken, and 400 if it's
+        invalid.
       requestBody:
         required: true
         content:
@@ -3594,7 +3686,12 @@ paths:
   /v1/projects/{projectOrProductUID}/secrets/{secretName}:
     delete:
       operationId: DeleteProjectSecret
-      description: Delete a project secret by name
+      summary: Delete a project secret
+      description: |
+        Delete a project secret. Routes and alerts that still reference it can no longer resolve
+        it.
+
+        Requires the Owner or Developer role. Returns 404 if the secret doesn't exist.
       responses:
         '204':
           description: Secret deleted successfully
@@ -3613,13 +3710,18 @@ paths:
       - $ref: '#/components/parameters/projectOrProductUIDParam'
       - name: secretName
         in: path
-        description: The name of the secret.
+        description: Name of the secret, as listed by `GetProjectSecrets`.
         required: true
         schema:
           type: string
     put:
       operationId: UpdateProjectSecret
-      description: Update the value of an existing project secret
+      summary: Update a project secret
+      description: |
+        Replace the value of an existing project secret. Routes and alerts that reference it use the
+        new value from then on.
+
+        Requires the Owner or Developer role. Returns 404 if the secret doesn't exist.
       requestBody:
         required: true
         content:
@@ -5393,10 +5495,10 @@ components:
       type: object
       properties:
         name:
-          description: The secret name (alphanumeric and underscores only).
+          description: 1 to 64 letters, digits or underscores. Routes and alerts reference the secret as `[$$name]`.
           type: string
         value:
-          description: The secret value (encrypted at rest, never returned after creation).
+          description: The secret value. Encrypted at rest and never returned.
           type: string
       required:
         - name
@@ -6646,26 +6748,27 @@ components:
         connectivity_assurance:
           $ref: '#/components/schemas/FleetConnectivityAssurance'
         created:
-          description: RFC3339 timestamp in UTC
+          description: When the fleet was created.
           type: string
           format: date-time
         environment_variables:
-          description: The environment variables for this device that have been set using the Notehub API or UI.
+          description: Environment variables set on this fleet. Not returned by `GetDeviceFleets`.
           type: object
           additionalProperties:
             type: string
         label:
-          description: Fleet label
+          description: Fleet name shown in Notehub.
           type: string
         smart_rule:
           $ref: '#/components/schemas/FleetRule'
         smart_rule_enabled:
+          description: Whether `smart_rule` adds and removes devices. Returned only by `CreateFleet` and `UpdateFleet`.
           type: boolean
         uid:
-          description: FleetUID
+          description: FleetUID, e.g. `fleet:1042ddc5-3b2c-4cec-b1fb-d3040538094d`.
           type: string
         watchdog_mins:
-          description: A watchdog timer is used to generate an event every N minutes of inactivity. 0 means no watchdog
+          description: Minutes of inactivity before Notehub generates a watchdog event. `0` means no watchdog.
           type: integer
           format: int64
       required:
@@ -6683,7 +6786,7 @@ components:
         enabled: true
       nullable: true
     FleetRule:
-      description: JSONata expression that will be evaluated to determine device membership into this fleet, if the expression evaluates to a 1, the device will be included, if it evaluates to -1 it will be removed, and if it evaluates to 0 or errors it will be left unchanged.
+      description: 'JSONata expression for smart fleet membership: `1` adds the device, `-1` removes it, and `0` or an error leaves it unchanged.'
       type: string
     FleetsUIDList:
       type: array
@@ -7415,17 +7518,17 @@ components:
           type: string
           format: date-time
         created_by:
-          description: The actor who created the secret.
+          description: UID of the user or OAuth client that created the secret.
           type: string
         modified:
-          description: When the secret was last updated.
+          description: When the secret's value was last set.
           type: string
           format: date-time
         modified_by:
-          description: The actor who last updated the secret.
+          description: UID of the user or OAuth client that last set the secret's value.
           type: string
         name:
-          description: The secret name (alphanumeric and underscores only).
+          description: The secret's name. Routes and alerts reference it as `[$$name]`.
           type: string
       required:
         - name
@@ -8184,7 +8287,7 @@ components:
       type: object
       properties:
         value:
-          description: The new secret value (encrypted at rest, never returned).
+          description: The new secret value. Encrypted at rest and never returned.
           type: string
       required:
         - value
