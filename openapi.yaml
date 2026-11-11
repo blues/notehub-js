@@ -5507,16 +5507,16 @@ components:
           items:
             type: string
         python:
-          description: 'Optional Python source projecting each event, as an alternative to JSONata. It defines one function, with type annotations required: "def rows(record: dict[str, Any]) -> list[dict[str, Any]]". It returns zero or more row objects per event, whose keys are the dataset''s columns -- the same convention the rows expression uses. Returning an empty list contributes no rows and is not an error; anything else, None included, is an error for that event. Mutually exclusive with rows, time, lat, lon and every field''s own jsonata expression, since a Python projection produces whole row objects and leaves nothing for them to do. Use it for payloads JSONata cannot decode, such as packed binary, base64-wrapped blobs, protobuf or CBOR. At most 64 KiB. Rows must come back in the same order every time rows() runs over the same event: a row''s position in the list identifies it, so an order that varies (such as iterating over a set) makes a replay insert duplicates. Sort the list if the order is not already fixed.'
+          description: "Optional Python projection: `def rows(record: dict[str, Any]) -> list[dict[str, Any]]`, called once per `RepositoryRecord`. Return rows in a fixed order, or a reload duplicates them. Can't be combined with JSONata fields. Max 64 KiB."
           type: string
           maxLength: 65536
         reload:
           $ref: '#/components/schemas/DatasetReloadProgress'
         rows:
-          description: "Optional JSONata expression that expands one event into several rows. It evaluates to one row object per row, whose keys are the dataset's columns: an array of objects, or a single object for one row. Both are accepted because JSONata collapses a one-element sequence to the element, so the same expression yields an array for an event carrying several readings and a bare object for one carrying a single reading. A result that is undefined or empty contributes no rows and is not an error; anything that is not an object, or an array containing one, is rejected. When set it is the only expression that reads the event: each field below takes the row object key matching its name, and time/lat/lon name a key too. Omit it and the dataset produces one row per event, with each field's own jsonata expression reading the event directly. event.uploaded and event.captured always resolve against the event either way."
+          description: Optional JSONata expression turning one `RepositoryRecord` into row objects whose keys are the columns. When set, fields, `time`, `lat` and `lon` name row keys instead.
           type: string
         time:
-          description: JSONata expression resulting in the row's time. Required for a dataset with no rows expression. With one it defaults to the row object's "time" key, and only needs setting to name a different key, or to reach past the row as event.uploaded and event.captured do. lat and lon work the same way and are what declare that the dataset has a location column at all.
+          description: JSONata expression for the row's time. Required without `rows`; with `rows`, defaults to the row's `time` key.
           type: string
     DataSetField:
       type: object
@@ -5535,7 +5535,7 @@ components:
             - 7
             - 8
         jsonata:
-          description: "The JSONata expression that populates this field from the event. Required for a dataset with no rows expression. Must be omitted when the dataset has one: the column is then taken from the row object key matching this field's name, and supplying an expression here is rejected rather than silently ignored."
+          description: JSONata expression for this column. Required without the dataset's `rows` expression; must be omitted with it.
           type: string
         name:
           description: The name of the field
