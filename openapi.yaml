@@ -302,7 +302,13 @@ paths:
   /v1/products/{productUID}/devices/{deviceUID}/environment_variables_with_pin:
     get:
       operationId: GetDeviceEnvironmentVariablesByPin
-      description: Get environment variables of a device with device pin authorization
+      summary: Get device environment variables using a PIN
+      description: |
+        Get a device's environment variables using its PIN instead of an API token. Pass the PIN in
+        `X-Auth-Token`. Made for device dashboard pages; with a token, use
+        `GetDeviceEnvironmentVariables`, which also returns effective values.
+
+        Returns 401 if the project's device dashboard URL has no `[pin]`, or the PIN is wrong.
       responses:
         '200':
           $ref: '#/components/responses/GetDeviceEnvironmentVariablesResponse'
@@ -320,9 +326,15 @@ paths:
       - $ref: '#/components/parameters/XAuthTokenHeader'
     put:
       operationId: SetDeviceEnvironmentVariablesByPin
-      description: Set environment variables of a device with device pin authorization
+      summary: Set device environment variables using a PIN
+      description: |
+        Add or change a device's environment variables using its PIN instead of an API token. Pass
+        the PIN in `X-Auth-Token`. Works like `SetDeviceEnvironmentVariables`: a value
+        of `""` or `-` deletes that variable.
+
+        Returns 401 if the project's device dashboard URL has no `[pin]`, or the PIN is wrong.
       requestBody:
-        description: Environment variables to be added to the device
+        description: The variables to add or change, and optional notes.
         required: true
         content:
           application/json:
@@ -1109,7 +1121,11 @@ paths:
   /v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_hierarchy:
     get:
       operationId: GetDeviceEnvironmentHierarchy
-      summary: Get environment variable hierarchy for a device
+      summary: Get a device's environment hierarchy
+      description: |
+        Get a device's environment variables and the fleet and project variables it inherits, as
+        a tree. Each variable has its precedence and whether it is used or overridden. For just the
+        resolved values, use `GetDeviceEnvironmentVariables`.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
@@ -1134,7 +1150,12 @@ paths:
   /v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_variables:
     get:
       operationId: GetDeviceEnvironmentVariables
-      description: Get environment variables of a device
+      summary: Get device environment variables
+      description: |
+        Get a device's own environment variables, its `env.default` values, and its effective
+        values. Effective values merge in project and fleet variables, which device variables
+        override. To see where each value comes from, use
+        `GetDeviceEnvironmentHierarchy`.
       responses:
         '200':
           $ref: '#/components/responses/GetDeviceEnvironmentVariablesResponse'
@@ -1152,9 +1173,15 @@ paths:
       - $ref: '#/components/parameters/deviceUIDParam'
     put:
       operationId: SetDeviceEnvironmentVariables
-      description: Set environment variables of a device
+      summary: Set device environment variables
+      description: |
+        Add or change a device's environment variables; variables you don't send keep their values.
+        A value of `""` or `-` deletes that variable. Setting `_fw`, `_fwc` or `_fwm` starts a
+        host, Notecard or modem firmware update.
+
+        Requires the Owner or Developer role. Returns 400 if a note's key isn't a variable.
       requestBody:
-        description: Environment variables to be added to the device
+        description: The variables to add or change, and optional notes.
         required: true
         content:
           application/json:
@@ -1175,7 +1202,12 @@ paths:
   /v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_variables/{key}:
     delete:
       operationId: DeleteDeviceEnvironmentVariable
-      description: Delete environment variable of a device
+      summary: Delete a device environment variable
+      description: |
+        Delete one device environment variable and return the ones left. Fleet and project
+        variables with the same name then apply. Deleting a variable that doesn't exist succeeds.
+
+        Requires the Owner or Developer role.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
@@ -1200,11 +1232,16 @@ paths:
   /v1/projects/{projectOrProductUID}/devices/{deviceUID}/files:
     delete:
       operationId: DeleteNotefiles
-      description: Deletes Notefiles and the Notes they contain.
+      summary: Delete notefiles
+      description: |
+        Delete notefiles and all their notes from a device. To delete one note, use `DeleteNote`.
+
+        Requires the Owner or Developer role. Returns 400 if `files` is empty.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
       requestBody:
+        description: The notefiles to delete.
         required: true
         content:
           application/json:
@@ -1212,7 +1249,7 @@ paths:
               type: object
               properties:
                 files:
-                  description: Name of notefiles to delete
+                  description: Names of the notefiles to delete, e.g. `config.db`.
                   type: array
                   items:
                     type: string
@@ -1230,13 +1267,18 @@ paths:
         resource: blues:resources:app:APPSERIAL:notefiles
     get:
       operationId: ListNotefiles
-      description: Lists .qi and .db files for the device
+      summary: List a device's notefiles and notes
+      description: |
+        List a device's notefiles with the notes in each, sorted `.qo`, then `.qi`, then `.db`.
+        `.qo` notefiles are listed without notes, since Notehub empties them as it processes
+        them. Most system notefiles (names starting with `_`) are left out. For one notefile, use
+        `GetNotefile`.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
         - name: files
           in: query
-          description: One or more files to obtain change information from.
+          description: Notefiles to include, e.g. `config.db`. If omitted, all are listed.
           required: false
           schema:
             type: array
@@ -1572,7 +1614,12 @@ paths:
   /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notefiles/{notefileID}:
     post:
       operationId: CreateNotefile
-      description: Creates an empty Notefile on the device.
+      summary: Create an empty notefile
+      description: |
+        Create an empty notefile on a device. `AddQiNote` creates a notefile when needed, so this is
+        only required for an empty one.
+
+        Requires the Owner or Developer role. Returns 400 if the notefile already exists.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
@@ -1592,27 +1639,34 @@ paths:
   /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}:
     get:
       operationId: GetNotefile
-      description: For .qi files, returns the queued up notes.  For .db files, returns all notes in the notefile
+      summary: Get the notes in a notefile
+      description: |
+        Get the notes in one notefile on a device. For a `.qi` notefile, that's the notes still
+        queued; for a `.db` notefile, every note. To list all of a device's notefiles with their notes,
+        use `ListNotefiles`.
+
+        With `delete=true`, the returned notes are deleted, which requires the Owner or Developer
+        role. Returns 400 if `notefileID` has no valid notefile extension.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
         - $ref: '#/components/parameters/notefileIDParam'
         - name: max
           in: query
-          description: The maximum number of Notes to return in the request.
+          description: The most notes to return.
           required: false
           schema:
             type: integer
             format: int32
         - name: deleted
           in: query
-          description: true to return deleted notes.
+          description: If true, also return deleted notes.
           required: false
           schema:
             type: boolean
         - name: delete
           in: query
-          description: true to delete the notes returned by the request.
+          description: If true, delete the notes this request returns. Requires the Owner or Developer role.
           required: false
           schema:
             type: boolean
@@ -1646,7 +1700,14 @@ paths:
         resource: blues:resources:app:APPSERIAL:notefiles
     post:
       operationId: AddQiNote
-      description: Adds a Note to a Notefile, creating the Notefile if it doesn't yet exist.
+      summary: Queue a note for a Notecard
+      description: |
+        Add a note to an inbound queue (`.qi`) notefile on a device, creating the notefile if
+        needed. The Notecard receives it on its next sync. For a `.db` notefile, use `AddDbNote`;
+        to reach a connected Notecard immediately, use `SignalDevice`.
+
+        Requires the Owner or Developer role. Returns 400 unless the notefile ends in `.qi` or
+        `.qis`, or if `payload` isn't valid base64.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
@@ -1673,7 +1734,12 @@ paths:
   /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}:
     delete:
       operationId: DeleteNote
-      description: Delete a note from a .db or .qi notefile
+      summary: Delete a note
+      description: |
+        Delete one note from a notefile on a device. To delete whole notefiles, use
+        `DeleteNotefiles`.
+
+        Requires the Owner or Developer role.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
@@ -1693,7 +1759,13 @@ paths:
         resource: blues:resources:app:APPSERIAL:notes
     get:
       operationId: GetDbNote
-      description: Get a note from a .db or .qi notefile
+      summary: Get a note
+      description: |
+        Get one note's body, payload and time from a notefile on a device. To get every note in a
+        notefile, use `GetNotefile`.
+
+        With `delete=true`, the note is deleted after it is read, which requires the Owner or
+        Developer role.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
@@ -1701,13 +1773,13 @@ paths:
         - $ref: '#/components/parameters/noteIDParam'
         - name: delete
           in: query
-          description: Whether to delete the note from the DB notefile
+          description: If true, delete the note after returning it. Requires the Owner or Developer role.
           required: false
           schema:
             type: boolean
         - name: deleted
           in: query
-          description: Whether to return deleted notes
+          description: If true, also return the note if it has been deleted.
           required: false
           schema:
             type: boolean
@@ -1740,7 +1812,14 @@ paths:
         resource: blues:resources:app:APPSERIAL:notes
     post:
       operationId: AddDbNote
-      description: Add a Note to a .db notefile.  if noteID is '-' then payload is ignored and empty notefile is created
+      summary: Add a note to a .db notefile
+      description: |
+        Add a note with the given ID to a database notefile on a device, synced to the Notecard on
+        its next sync. To change an existing note, use `UpdateDbNote`; to queue a note in a `.qi`
+        notefile, use `AddQiNote`.
+
+        Requires the Owner or Developer role. Returns 400 unless the notefile ends in `.db` or
+        `.dbs`, or if `payload` isn't valid base64.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
@@ -1767,7 +1846,13 @@ paths:
         resource: blues:resources:app:APPSERIAL:notes
     put:
       operationId: UpdateDbNote
-      description: Update a note in a .db or .qi notefile
+      summary: Update a note in a .db notefile
+      description: |
+        Replace the body and payload of a note in a database notefile on a device, synced to the
+        Notecard on its next sync. To add a new note, use `AddDbNote`.
+
+        Requires the Owner or Developer role. Returns 400 unless the notefile ends in `.db` or
+        `.dbs`, or if `payload` isn't valid base64.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
@@ -4940,12 +5025,14 @@ components:
           type: string
       style: form
     notefileIDParam:
+      description: Notefile name, including its extension, e.g. `config.db` or `commands.qi`.
       in: path
       name: notefileID
       required: true
       schema:
         type: string
     noteIDParam:
+      description: Note ID within the notefile, e.g. `my_note`. Notes in a `.qi` notefile have IDs like `1:435`.
       in: path
       name: noteID
       required: true
@@ -5254,7 +5341,7 @@ components:
         type: string
         example: Abc_123-2646f411-dc56-44a0-9743-4130f47a74h8
     XAuthTokenHeader:
-      description: For accessing endpoints by Device pin.
+      description: The device's PIN, used instead of an API token.
       in: header
       name: X-Auth-Token
       required: true
@@ -7456,7 +7543,7 @@ components:
           type: integer
           format: int64
         where:
-          description: Optional location/metadata string.
+          description: Place name where the note was created, from its latitude and longitude. Empty if unknown.
           type: string
       required:
         - id
@@ -7485,6 +7572,7 @@ components:
             $ref: '#/components/schemas/Note'
           minItems: 0
         template:
+          description: The notefile's body template, if it has one.
           type: string
       required:
         - id
