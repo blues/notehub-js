@@ -95,15 +95,15 @@ let defaultClient = NotehubJs.ApiClient.instance;
 let personalAccessToken = defaultClient.authentications["personalAccessToken"];
 personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
 
-let apiInstance = new NotehubJs.ProjectApi();
-let projectUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8;"; // String |
+let apiInstance = new NotehubJs.DeviceApi();
+let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String |
 let opts = {
   pageSize: 50, // Number |
   pageNum: 1, // Number |
 };
 
 // Want to use async/await? Add the 'async' keyword to your outer function/method.
-apiInstance.getProjectDevices(projectUID, opts).then(
+apiInstance.getDevices(projectOrProductUID, opts).then(
   (data) => {
     console.log(
       "API called successfully. Returned data: " + JSON.stringify(data)
