@@ -987,7 +987,12 @@ paths:
   /v1/projects/{projectOrProductUID}/devices/{deviceUID}/dfu/{firmwareType}/history:
     get:
       operationId: GetDeviceDfuHistory
-      description: Get device DFU history for host or Notecard firmware
+      summary: Get a device's firmware update history
+      description: |
+        Get a device's current host or Notecard firmware version and every firmware update
+        requested for it, newest first. For just the latest update, use `GetDeviceDfuStatus`.
+
+        Returns 400 if the device isn't in the project.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
@@ -1011,7 +1016,13 @@ paths:
   /v1/projects/{projectOrProductUID}/devices/{deviceUID}/dfu/{firmwareType}/status:
     get:
       operationId: GetDeviceDfuStatus
-      description: Get device DFU history for host or Notecard firmware
+      summary: Get a device's firmware update status
+      description: |
+        Get a device's current host or Notecard firmware version and its latest firmware update.
+        Includes whether an update is in progress. For every past update, use
+        `GetDeviceDfuHistory`.
+
+        Returns 400 if the device isn't in the project.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
@@ -1942,7 +1953,14 @@ paths:
   /v1/projects/{projectOrProductUID}/dfu/{firmwareType}/{action}:
     post:
       operationId: PerformDfuAction
-      description: Update/cancel host or notecard firmware updates
+      summary: Start or cancel firmware updates
+      description: |
+        Start or cancel a host or Notecard firmware update on every device matching the filters.
+        With no filters, that is every device in the project. `update` sets each device's `_fw` or
+        `_fwc` variable to `filename`.
+
+        Requires the Owner or Developer role. `update` returns 404 if the file isn't found, and can
+        return 400 if a matching device already has an update in progress.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/firmwareTypeParam'
@@ -1978,8 +1996,14 @@ paths:
   /v1/projects/{projectOrProductUID}/dfu/{firmwareType}/history:
     get:
       operationId: GetDevicesDfuHistory
+      summary: List devices' firmware update history
       description: |
-        Get host or Notecard DFU history for all devices that match the filter criteria. With a `cursor`, changes made through fleet or project firmware settings will not appear until the device itself is next updated.
+        List every host or Notecard firmware update requested for each matching device, newest
+        first. Includes each device's current firmware version. For just the latest update, use
+        `GetDevicesDfuStatus`.
+
+        Paginated, by page or `cursor`. With a `cursor`, changes made through fleet or project
+        firmware settings don't appear until the device itself is next updated.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/firmwareTypeParam'
@@ -2021,8 +2045,13 @@ paths:
   /v1/projects/{projectOrProductUID}/dfu/{firmwareType}/status:
     get:
       operationId: GetDevicesDfuStatus
+      summary: List devices' firmware status
       description: |
-        Get host or Notecard DFU history for all devices that match the filter criteria. With a `cursor`, changes made through fleet or project firmware settings will not appear until the device itself is next updated.
+        List the host or Notecard firmware version each matching device runs now, with its latest
+        firmware update. Use this to find which firmware devices run.
+
+        Paginated, by page or `cursor`. With a `cursor`, changes made through fleet or project
+        firmware settings don't appear until the device itself is next updated.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/firmwareTypeParam'
@@ -2230,7 +2259,11 @@ paths:
   /v1/projects/{projectOrProductUID}/firmware:
     get:
       operationId: GetFirmwareInfo
-      description: Get Available Firmware Information
+      summary: List firmware
+      description: |
+        List the host firmware uploaded to the project and the Notecard firmware available to it.
+        Text filters match substrings, and unpublished Notecard builds are left out unless
+        `unpublished` is `true`. Not paginated.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/productQueryParam'
@@ -2263,8 +2296,13 @@ paths:
   /v1/projects/{projectOrProductUID}/firmware/{firmwareType}/{filename}:
     delete:
       operationId: DeleteFirmware
+      summary: Delete host firmware
       description: |
-        Delete a host firmware binary. The filename must be the full stored filename including the timestamp suffix (e.g. test$20260324190911.bin) as returned by the firmware upload or list endpoints.
+        Delete a host firmware file by its stored filename, including its `$` timestamp suffix.
+        Notecard firmware can't be deleted.
+
+        Requires the Owner or Developer role. Returns 404 if the file doesn't exist, and 400 for a
+        sub-project, whose parent manages host firmware.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - name: firmwareType
@@ -2293,7 +2331,12 @@ paths:
         resource: blues:resources:app:APPSERIAL:firmware:host
     get:
       operationId: DownloadFirmware
-      description: Download firmware binary
+      summary: Download host firmware
+      description: |
+        Download a host firmware binary by its stored filename, including its `$` timestamp suffix.
+        Notecard firmware can't be downloaded (400).
+
+        Requires the Owner or Developer role. Returns 404 if the file doesn't exist.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/firmwareTypeParam'
@@ -2321,8 +2364,13 @@ paths:
         resource: blues:resources:app:APPSERIAL:firmware:host
     post:
       operationId: UpdateFirmware
+      summary: Update host firmware metadata
       description: |
-        Update the metadata of an existing host firmware entry. The filename must be the full stored filename including the timestamp suffix (e.g. test$20260324190911.bin) as returned by the firmware upload or list endpoints.
+        Change a host firmware file's `version`, `notes` or `info`; fields you leave out or send
+        empty keep their values. Use the stored filename, including its `$` timestamp suffix.
+
+        Requires the Owner or Developer role. Returns 400 for a sub-project, whose parent manages
+        host firmware, and 404 if the file doesn't exist.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - name: firmwareType
@@ -2362,12 +2410,20 @@ paths:
         resource: blues:resources:app:APPSERIAL:firmware:host
     put:
       operationId: UploadFirmware
-      description: Upload firmware binary
+      summary: Upload firmware
+      description: |
+        Upload a host or Notecard firmware binary. Notehub usually adds a timestamp to `filename`;
+        use the returned `filename` from then on.
+
+        Requires the Owner or Developer role. Returns 400 for host firmware on a sub-project, whose
+        parent manages it, and 500 for a wrong file type or a file over the limit: 1.5 MB for host
+        firmware, 2 MB for `notecard-s3-*` and 1 MB for other Notecard firmware.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/firmwareTypeParam'
         - name: filename
           in: path
+          description: Name to store the file under. Notehub adds `$` and a timestamp before the extension, except for a Notecard firmware name that already contains `$`.
           required: true
           schema:
             type: string
@@ -4557,6 +4613,9 @@ components:
         items:
           type: string
     dfuActionParam:
+      description: |
+        - `update`: start updating to the firmware in `filename`
+        - `cancel`: cancel any update in progress
       in: path
       name: action
       required: true
@@ -4594,6 +4653,7 @@ components:
       schema:
         type: string
     filenameQueryParam:
+      description: Only firmware whose stored filename contains this text.
       example: notecard-7.2.2.16518$20240410043100.bin
       in: query
       name: filename
@@ -4632,6 +4692,7 @@ components:
           - asc
           - desc
     firmwareTypeParam:
+      description: "Which firmware: `host` (the host microcontroller's) or `notecard`."
       in: path
       name: firmwareType
       required: true
@@ -4641,6 +4702,7 @@ components:
           - host
           - notecard
     firmwareTypeQueryParam:
+      description: Only list `host` or `notecard` firmware. Omit for both.
       in: query
       name: firmwareType
       required: false
@@ -4745,6 +4807,7 @@ components:
           type: string
       style: form
     md5QueryParam:
+      description: Only firmware whose MD5 hash contains this text.
       in: query
       name: md5
       required: false
@@ -4820,6 +4883,7 @@ components:
         default: 1000
         minimum: 1
     productQueryParam:
+      description: Only firmware whose product contains this text.
       in: query
       name: product
       required: false
@@ -5056,12 +5120,14 @@ components:
           type: string
       style: form
     targetQueryParam:
+      description: Only firmware whose target contains this text.
       in: query
       name: target
       required: false
       schema:
         type: string
     unpublishedQueryParam:
+      description: If `true`, also list unpublished Notecard firmware.
       in: query
       name: unpublished
       required: false
@@ -5079,6 +5145,7 @@ components:
         maximum: 400000
         minimum: 1
     versionQueryParam:
+      description: Only firmware whose version contains this text.
       in: query
       name: version
       required: false
@@ -5964,7 +6031,7 @@ components:
               description: Firmware product
               type: string
             version:
-              description: Firmware version
+              description: Firmware version the device runs, or `Unknown (device has not fully sync'd)`.
               type: string
         deleted:
           description: |
@@ -5974,6 +6041,7 @@ components:
           description: DeviceUID
           type: string
         history:
+          description: Every firmware update requested for this device, newest first.
           type: array
           items:
             $ref: '#/components/schemas/DeviceDfuStateMachine'
@@ -6005,11 +6073,12 @@ components:
           description: Version of the firmware that was requested to be installed
           type: string
         updates:
+          description: Status updates reported for this firmware update.
           type: array
           items:
             $ref: '#/components/schemas/DeviceDfuStateMachineNode'
     DeviceDfuStateMachineNode:
-      description: Represents a single request to update the host or Notecard firmware
+      description: One status update in a host or Notecard firmware update.
       type: object
       properties:
         datetime:
@@ -6047,7 +6116,7 @@ components:
               description: Firmware product
               type: string
             version:
-              description: Firmware version
+              description: Firmware version the device runs, or `Unknown (device has not fully sync'd)`.
               type: string
         deleted:
           description: |
@@ -6057,7 +6126,7 @@ components:
           description: DeviceUID
           type: string
         dfu_in_progress:
-          description: true if there is a DFU currently in progress
+          description: "`true` while the device's latest firmware update hasn't finished."
           type: boolean
         status:
           $ref: '#/components/schemas/DeviceDfuStateMachine'
@@ -6297,7 +6366,7 @@ components:
       type: object
       properties:
         filename:
-          description: The name of the firmware file
+          description: Stored firmware filename to install, as listed by `GetFirmwareInfo`. Required for `update`; ignored for `cancel`.
           type: string
     EmailNotification:
       type: object
@@ -6704,13 +6773,13 @@ components:
           description: The date the firmware was built.
           type: string
         created:
-          description: The date the firmware was created.
+          description: Upload time, as Unix epoch seconds in a string.
           type: string
         description:
-          description: A description of the firmware.
+          description: Not currently filled in.
           type: string
         filename:
-          description: The name of the firmware file.
+          description: Stored filename, with the `$` timestamp suffix Notehub adds on upload. Use it in other firmware and DFU operations.
           type: string
         info:
           description: User-defined metadata
@@ -6728,7 +6797,7 @@ components:
           description: The product that the firmware is for.
           type: string
         published:
-          description: True if the firmware is published.
+          description: '`true` for all host firmware, and for Notecard firmware that Blues has published.'
           type: boolean
         tags:
           description: A list of tags associated with the firmware.
@@ -6737,7 +6806,7 @@ components:
           description: The target device for the firmware.
           type: string
         type:
-          description: The type of firmware.
+          description: '`host` or `notecard`.'
           type: string
         version:
           description: The version of the firmware.
@@ -8274,14 +8343,14 @@ components:
       type: object
       properties:
         info:
-          description: Arbitrary JSON metadata associated with this firmware entry.
+          description: JSON metadata for this firmware. Replaces the stored object when present.
           type: object
           additionalProperties: true
         notes:
-          description: Notes describing this firmware version.
+          description: New notes for this firmware. Empty keeps the current notes.
           type: string
         version:
-          description: The firmware version string.
+          description: New version string. Empty keeps the current version.
           type: string
     UpdateProjectSecretRequest:
       type: object
