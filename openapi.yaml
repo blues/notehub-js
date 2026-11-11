@@ -3251,7 +3251,8 @@ paths:
       description: |
         Create a route that sends a project's events to a destination such as a URL, an MQTT broker
         or a cloud service. Set `type` and fill in the object it names. Omit `fleets` to send every
-        fleet's events; unknown FleetUIDs are ignored.
+        fleet's events. Unknown FleetUIDs are ignored, so `fleets: []` or a list of only unknown
+        UIDs gives a route that sends nothing.
 
         Requires the Owner or Developer role. Returns 400 for invalid settings.
       parameters:
