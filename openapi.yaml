@@ -3389,8 +3389,8 @@ paths:
         Change a route's settings. Fields you leave out keep their values, and a secret sent back
         as `(omitted)` is kept, but leaving out `notes` clears it.
 
-        Requires the Owner or Developer role. Returns 404 if the route doesn't exist, 400 for invalid settings, and 409
-        if another MQTT route on the same broker uses the same client ID.
+        Requires the Owner or Developer role. Returns 404 if the route doesn't exist, and 400 for
+        invalid settings.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/routeUIDParam'
