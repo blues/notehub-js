@@ -479,10 +479,14 @@ paths:
   /v1/products/{productUID}/project:
     get:
       operationId: GetProjectByProduct
-      description: Get a Project by ProductUID
+      summary: Get the project for a ProductUID
+      description: |
+        Get the project that a ProductUID belongs to. Returns the same object as `GetProject`,
+        which also accepts a ProductUID in place of a ProjectUID.
       parameters:
         - name: productUID
           in: path
+          description: ProductUID, e.g. `com.blues.airnote`, with or without the `product:` prefix.
           required: true
           schema:
             type: string
@@ -611,7 +615,10 @@ paths:
   /v1/projects:
     get:
       operationId: GetProjects
-      description: Get Projects accessible by the api_key
+      summary: List projects
+      description: |
+        List every project the caller is a member of, with the caller's `role` in each. Not
+        paginated.
       responses:
         '200':
           description: Successful operation
@@ -634,9 +641,15 @@ paths:
         permission: read
     post:
       operationId: CreateProject
-      description: Create a Project
+      summary: Create a project
+      description: |
+        Create a project in an organization, with one default fleet, no products, and the caller
+        as its Owner. A second call creates another project.
+
+        Requires a verified email address (401 otherwise) and permission to create projects in the
+        organization (403 otherwise).
       requestBody:
-        description: Project to be created
+        description: The new project's name and organization.
         required: true
         content:
           application/json:
@@ -644,11 +657,10 @@ paths:
               type: object
               properties:
                 billing_account_uid:
-                  description: |
-                    The OrganizationUID for the project. The caller of the API must be able to create projects within the billing account, otherwise an error will be returned.
+                  description: UID of the organization that owns and is billed for the project. List them with `GetBillingAccounts`.
                   type: string
                 label:
-                  description: The label for the project.
+                  description: Project name shown in Notehub.
                   type: string
               required:
                 - label
@@ -671,7 +683,12 @@ paths:
   /v1/projects/{projectOrProductUID}:
     delete:
       operationId: DeleteProject
-      description: Delete a Project by ProjectUID
+      summary: Delete a project
+      description: |
+        Delete a project, its ProductUIDs, and every member's access to it. Can't be undone
+        through the API.
+
+        Requires the Owner or Developer role. Returns 200 with no body.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
       responses:
@@ -688,7 +705,10 @@ paths:
         resource: blues:resources:app:APPSERIAL:settings
     get:
       operationId: GetProject
-      description: Get a Project by ProjectUID
+      summary: Get a project
+      description: |
+        Get a project's label, creation time, contacts, and the caller's `role` in it. Accepts a
+        ProductUID in place of the ProjectUID.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
       responses:
@@ -734,8 +754,9 @@ paths:
       operationId: GetAWSRoleConfig
       summary: Get AWS role configuration for role-based authentication
       description: |
-        Returns the AWS Account ID and External ID needed to configure an IAM role
-        trust policy for role-based authentication on AWS routes.
+        Get the AWS account ID and External ID for the IAM role trust policy used by AWS routes
+        with role-based authentication. The External ID is created on the first call and stays the
+        same after that.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
       responses:
@@ -757,11 +778,18 @@ paths:
   /v1/projects/{projectOrProductUID}/clone:
     post:
       operationId: CloneProject
-      description: Clone a Project
+      summary: Clone a project
+      description: |
+        Create a new project as a copy of this one. Settings, environment variables,
+        transformation, fleets, routes and host firmware are copied; devices, products and members
+        aren't. Copied fleets get new FleetUIDs.
+
+        Requires the Owner role (400 otherwise), a verified email address (401 otherwise), and
+        permission to create projects in the target organization (403 otherwise).
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
       requestBody:
-        description: Project to be cloned
+        description: The new project's name and organization, and what to leave out of the copy.
         required: true
         content:
           application/json:
@@ -769,16 +797,16 @@ paths:
               type: object
               properties:
                 billing_account_uid:
-                  description: The OrganizationUID for the project. The caller of the API must be able to create projects within the billing account, otherwise an error will be returned.
+                  description: UID of the organization that owns the new project. List them with `GetBillingAccounts`.
                   type: string
                 disable_clone_fleets:
-                  description: Whether to disallow the cloning of the fleets from the parent project.  Default is false if not specified.
+                  description: If `true`, the new project gets one default fleet instead of copies of this project's fleets. Default `false`.
                   type: boolean
                 disable_clone_routes:
-                  description: Whether to disallow the cloning of the routes from the parent project.  Default is false if not specified.
+                  description: If `true`, the new project starts with no routes. Default `false`.
                   type: boolean
                 label:
-                  description: The label for the project.
+                  description: Name of the new project.
                   type: string
               required:
                 - label
@@ -2647,11 +2675,19 @@ paths:
   /v1/projects/{projectOrProductUID}/global-transformation:
     post:
       operationId: SetGlobalEventTransformation
-      description: Set the project-level event JSONata transformation
+      summary: Set the global event transformation
+      description: |
+        Set the project's JSONata expression that rewrites each new event before it's stored and
+        routed. It can change `body`, `payload`, `details`, `file` and `note`, or drop the event
+        with `$doNotRoute()`; an event it fails on is kept with `error` set. Doesn't enable or
+        disable it.
+
+        Requires the Owner or Developer role. Returns 400 if it doesn't compile, or for a
+        sub-project, which uses its parent's.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
       requestBody:
-        description: JSONata expression which will be applied to each event before it is persisted and routed
+        description: JSONata expression as plain text. An empty body clears the transformation.
         required: true
         content:
           text/plain:
@@ -2672,7 +2708,13 @@ paths:
   /v1/projects/{projectOrProductUID}/global-transformation/disable:
     post:
       operationId: DisableGlobalEventTransformation
-      description: Disable the project-level event JSONata transformation
+      summary: Disable the global event transformation
+      description: |
+        Stop applying the project's global event transformation to new events. The expression is
+        kept, so `EnableGlobalEventTransformation` can turn it back on.
+
+        Requires the Owner or Developer role. Returns 400 for a sub-project, whose parent's
+        transformation applies.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
       responses:
@@ -2690,7 +2732,13 @@ paths:
   /v1/projects/{projectOrProductUID}/global-transformation/enable:
     post:
       operationId: EnableGlobalEventTransformation
-      description: Enable the project-level event JSONata transformation
+      summary: Enable the global event transformation
+      description: |
+        Resume applying the project's global event transformation to new events, without changing
+        the expression. Undoes `DisableGlobalEventTransformation`.
+
+        Requires the Owner or Developer role. Returns 400 for a sub-project, whose parent's
+        transformation applies.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
       responses:
@@ -2933,7 +2981,10 @@ paths:
   /v1/projects/{projectOrProductUID}/members:
     get:
       operationId: GetProjectMembers
-      description: Get Project Members
+      summary: List project members
+      description: |
+        List the project's members with each one's name and role. Emails are filled in only when
+        the caller is an Owner. Not paginated.
       responses:
         '200':
           description: Successful operation
@@ -3082,7 +3133,11 @@ paths:
   /v1/projects/{projectOrProductUID}/products:
     get:
       operationId: GetProducts
-      description: Get Products within a Project
+      summary: List a project's products
+      description: |
+        List the project's ProductUIDs, each with its label, auto-provision fleets, and whether new
+        devices start disabled. UIDs here include the `product:` prefix; `CreateProduct` returns
+        them without it. Not paginated.
       responses:
         '200':
           description: Successful operation
@@ -3108,9 +3163,16 @@ paths:
       - $ref: '#/components/parameters/projectOrProductUIDParam'
     post:
       operationId: CreateProduct
-      description: Create Product within a Project
+      summary: Create a product
+      description: |
+        Add a ProductUID to the project, formed from the caller's reversed email and `product_uid`.
+        For `jane@acme.com` and `sensors` it is `com.acme.jane:sensors`.
+
+        Requires the Owner or Developer role and a verified email address (400 otherwise). Returns
+        404 if an `auto_provision_fleets` entry isn't a fleet in this project, and 500 if
+        `product_uid` is invalid or already taken.
       requestBody:
-        description: Product to be created
+        description: The new product's UID suffix, name and provisioning settings.
         required: true
         content:
           application/json:
@@ -3118,17 +3180,18 @@ paths:
               type: object
               properties:
                 auto_provision_fleets:
+                  description: FleetUIDs that devices are added to when first provisioned with this ProductUID.
                   type: array
                   items:
                     type: string
                 disable_devices_by_default:
-                  description: If `true`, devices provisioned to this product will be automatically disabled by default.
+                  description: If `true`, devices provisioned with this ProductUID start out disabled.
                   type: boolean
                 label:
-                  description: The label for the Product.
+                  description: Product name shown in Notehub.
                   type: string
                 product_uid:
-                  description: The requested uid for the Product. Will be prefixed with the user's reversed email.
+                  description: Suffix of the new ProductUID. Must start with a lowercase letter and contain only lowercase letters, digits, `.`, `_` or `-`.
                   type: string
               required:
                 - product_uid
@@ -3152,7 +3215,12 @@ paths:
   /v1/projects/{projectOrProductUID}/products/{productUID}:
     delete:
       operationId: DeleteProduct
-      description: Delete a product
+      summary: Delete a product
+      description: |
+        Remove a ProductUID from the project. Accepts the UID with or without the `product:`
+        prefix.
+
+        Requires the Owner or Developer role. Returns 404 if the project has no such ProductUID.
       responses:
         '204':
           description: Successful operation
@@ -3454,7 +3522,10 @@ paths:
   /v1/projects/{projectOrProductUID}/schemas:
     get:
       operationId: GetNotefileSchemas
-      summary: Get variable format for a notefile
+      summary: List Notefile schemas
+      description: |
+        List the project's Notefiles, each with the event `body` fields Notehub has seen in it and
+        their JSON types. Inferred from received events.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
       responses:
@@ -7124,8 +7195,10 @@ components:
       type: object
       properties:
         notefile:
+          description: Notefile name, e.g. `sensors.qo`.
           type: string
         properties:
+          description: Fields seen in this Notefile's event `body`. Event envelope fields such as `when` and `device` are not included.
           type: array
           items:
             $ref: '#/components/schemas/SchemaProperty'
@@ -7277,15 +7350,19 @@ components:
       type: object
       properties:
         auto_provision_fleets:
+          description: FleetUIDs that devices are added to when first provisioned with this ProductUID.
           type: array
           items:
             type: string
           nullable: true
         disable_devices_by_default:
+          description: If `true`, devices provisioned with this ProductUID start out disabled.
           type: boolean
         label:
+          description: Product name shown in Notehub.
           type: string
         uid:
+          description: ProductUID, e.g. `com.blues.bridge:sensors`. `GetProducts` returns it with a `product:` prefix.
           type: string
       required:
         - uid
@@ -7297,15 +7374,18 @@ components:
         administrative_contact:
           $ref: '#/components/schemas/Contact'
         created:
+          description: When the project was created.
           type: string
           format: date-time
         label:
+          description: Project name shown in Notehub.
           type: string
         role:
           $ref: '#/components/schemas/Role'
         technical_contact:
           $ref: '#/components/schemas/Contact'
         uid:
+          description: ProjectUID, e.g. `app:2606f411-dea6-44a0-9743-1130f57d77d8`.
           type: string
       required:
         - uid
@@ -7315,11 +7395,10 @@ components:
       type: object
       properties:
         email:
-          description: |
-            The email address of the project member.
-            This property will only be populated if the viewer is an owner of the project.
+          description: The member's email address. Empty unless the caller is an Owner of the project.
           type: string
         name:
+          description: The member's display name.
           type: string
         role:
           $ref: '#/components/schemas/Role'
@@ -7499,6 +7578,12 @@ components:
         - database
         - expires_at
     Role:
+      description: |
+        A role in a project; `null` when the caller has no role in it.
+        - `owner`: full access, including members and billing
+        - `developer`: manage devices, fleets, routes and settings
+        - `viewer`: read-only
+        - `support`: temporary access granted to Blues support
       type: string
       enum:
         - owner
@@ -7664,7 +7749,7 @@ components:
       type: object
       properties:
         items:
-          description: Used if type is array
+          description: For an array, the type of its elements, inferred from the first element.
           type: array
           items:
             $ref: '#/components/schemas/SchemaProperty'
@@ -7672,11 +7757,12 @@ components:
           description: Name of the field (optional for array/object children)
           type: string
         properties:
-          description: Used if type is object
+          description: For an object, its fields.
           type: array
           items:
             $ref: '#/components/schemas/SchemaProperty'
         type:
+          description: The field's JSON type.
           type: string
           enum:
             - string
@@ -7685,6 +7771,7 @@ components:
             - array
             - object
         updated_at:
+          description: When Notehub recorded this field, usually when it first appeared.
           type: string
           format: date-time
       required:
