@@ -321,7 +321,13 @@ paths:
   /v1/products/{productUID}/devices/{deviceUID}/environment_variables_with_pin:
     get:
       operationId: GetDeviceEnvironmentVariablesByPin
-      description: Get environment variables of a device with device pin authorization
+      summary: Get device environment variables using a PIN
+      description: |
+        Get a device's environment variables using its PIN instead of an API token. Pass the PIN in
+        `X-Auth-Token`. Made for device dashboard pages; with a token, use
+        `GetDeviceEnvironmentVariables`, which also returns effective values.
+
+        Returns 401 if the project's device dashboard URL has no `[pin]`, or the PIN is wrong.
       responses:
         '200':
           $ref: '#/components/responses/GetDeviceEnvironmentVariablesResponse'
@@ -339,9 +345,15 @@ paths:
       - $ref: '#/components/parameters/XAuthTokenHeader'
     put:
       operationId: SetDeviceEnvironmentVariablesByPin
-      description: Set environment variables of a device with device pin authorization
+      summary: Set device environment variables using a PIN
+      description: |
+        Add or change a device's environment variables using its PIN instead of an API token. Pass
+        the PIN in `X-Auth-Token`. Works like `SetDeviceEnvironmentVariables`: a value
+        of `""` or `-` deletes that variable.
+
+        Returns 401 if the project's device dashboard URL has no `[pin]`, or the PIN is wrong.
       requestBody:
-        description: Environment variables to be added to the device
+        description: The variables to add or change, and optional notes.
         required: true
         content:
           application/json:
@@ -498,10 +510,14 @@ paths:
   /v1/products/{productUID}/project:
     get:
       operationId: GetProjectByProduct
-      description: Get a Project by ProductUID
+      summary: Get the project for a ProductUID
+      description: |
+        Get the project that a ProductUID belongs to. Returns the same object as `GetProject`,
+        which also accepts a ProductUID in place of a ProjectUID.
       parameters:
         - name: productUID
           in: path
+          description: ProductUID, e.g. `com.blues.airnote`, with or without the `product:` prefix.
           required: true
           schema:
             type: string
@@ -630,7 +646,10 @@ paths:
   /v1/projects:
     get:
       operationId: GetProjects
-      description: Get Projects accessible by the api_key
+      summary: List projects
+      description: |
+        List every project the caller is a member of, with the caller's `role` in each. Not
+        paginated.
       responses:
         '200':
           description: Successful operation
@@ -653,9 +672,15 @@ paths:
         permission: read
     post:
       operationId: CreateProject
-      description: Create a Project
+      summary: Create a project
+      description: |
+        Create a project in an organization, with one default fleet, no products, and the caller
+        as its Owner. A second call creates another project.
+
+        Requires a verified email address (401 otherwise) and permission to create projects in the
+        organization (403 otherwise).
       requestBody:
-        description: Project to be created
+        description: The new project's name and organization.
         required: true
         content:
           application/json:
@@ -663,11 +688,10 @@ paths:
               type: object
               properties:
                 billing_account_uid:
-                  description: |
-                    The OrganizationUID for the project. The caller of the API must be able to create projects within the billing account, otherwise an error will be returned.
+                  description: UID of the organization that owns and is billed for the project. List them with `GetBillingAccounts`.
                   type: string
                 label:
-                  description: The label for the project.
+                  description: Project name shown in Notehub.
                   type: string
               required:
                 - label
@@ -690,7 +714,12 @@ paths:
   /v1/projects/{projectOrProductUID}:
     delete:
       operationId: DeleteProject
-      description: Delete a Project by ProjectUID
+      summary: Delete a project
+      description: |
+        Delete a project, its ProductUIDs, and every member's access to it. Can't be undone
+        through the API.
+
+        Requires the Owner or Developer role. Returns 200 with no body.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
       responses:
@@ -707,7 +736,10 @@ paths:
         resource: blues:resources:app:APPSERIAL:settings
     get:
       operationId: GetProject
-      description: Get a Project by ProjectUID
+      summary: Get a project
+      description: |
+        Get a project's label, creation time, contacts, and the caller's `role` in it. Accepts a
+        ProductUID in place of the ProjectUID.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
       responses:
@@ -753,8 +785,9 @@ paths:
       operationId: GetAWSRoleConfig
       summary: Get AWS role configuration for role-based authentication
       description: |
-        Returns the AWS Account ID and External ID needed to configure an IAM role
-        trust policy for role-based authentication on AWS routes.
+        Get the AWS account ID and External ID for the IAM role trust policy used by AWS routes
+        with role-based authentication. The External ID is created on the first call and stays the
+        same after that.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
       responses:
@@ -776,11 +809,18 @@ paths:
   /v1/projects/{projectOrProductUID}/clone:
     post:
       operationId: CloneProject
-      description: Clone a Project
+      summary: Clone a project
+      description: |
+        Create a new project as a copy of this one. Settings, environment variables,
+        transformation, fleets, routes and host firmware are copied; devices, products and members
+        aren't. Copied fleets get new FleetUIDs.
+
+        Requires the Owner role (400 otherwise), a verified email address (401 otherwise), and
+        permission to create projects in the target organization (403 otherwise).
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
       requestBody:
-        description: Project to be cloned
+        description: The new project's name and organization, and what to leave out of the copy.
         required: true
         content:
           application/json:
@@ -788,16 +828,16 @@ paths:
               type: object
               properties:
                 billing_account_uid:
-                  description: The OrganizationUID for the project. The caller of the API must be able to create projects within the billing account, otherwise an error will be returned.
+                  description: UID of the organization that owns the new project. List them with `GetBillingAccounts`.
                   type: string
                 disable_clone_fleets:
-                  description: Whether to disallow the cloning of the fleets from the parent project.  Default is false if not specified.
+                  description: If `true`, the new project gets one default fleet instead of copies of this project's fleets. Default `false`.
                   type: boolean
                 disable_clone_routes:
-                  description: Whether to disallow the cloning of the routes from the parent project.  Default is false if not specified.
+                  description: If `true`, the new project starts with no routes. Default `false`.
                   type: boolean
                 label:
-                  description: The label for the project.
+                  description: Name of the new project.
                   type: string
               required:
                 - label
@@ -931,7 +971,12 @@ paths:
   /v1/projects/{projectOrProductUID}/devices:
     get:
       operationId: GetDevices
-      description: Get Devices of a Project
+      summary: List devices in a project
+      description: |
+        List the devices in a project, with optional filters such as tag, serial number, fleet,
+        location and firmware version. For one fleet's devices, use `GetFleetDevices`.
+
+        Paginated.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/pageSizeParam'
@@ -961,7 +1006,12 @@ paths:
   /v1/projects/{projectOrProductUID}/devices/{deviceUID}:
     delete:
       operationId: DeleteDevice
-      description: Delete Device
+      summary: Delete a device
+      description: |
+        Delete a device and its notefiles from a project. Its events are kept. A Notecard that
+        syncs again is added back as a new device; to block it instead, use `DisableDevice`.
+
+        Requires the Owner or Developer role.
       responses:
         '204':
           description: Successful operation
@@ -976,7 +1026,11 @@ paths:
         resource: blues:resources:app:APPSERIAL:devices
     get:
       operationId: GetDevice
-      description: Get Device
+      summary: Get a device
+      description: |
+        Get one device's details: serial number, product, fleets, locations, firmware versions,
+        SIM usage and DFU state. To find devices by tag, serial number or other fields, use
+        `GetDevices`.
       responses:
         '200':
           description: Successful operation
@@ -999,7 +1053,12 @@ paths:
   /v1/projects/{projectOrProductUID}/devices/{deviceUID}/dfu/{firmwareType}/history:
     get:
       operationId: GetDeviceDfuHistory
-      description: Get device DFU history for host or Notecard firmware
+      summary: Get a device's firmware update history
+      description: |
+        Get a device's current host or Notecard firmware version and every firmware update
+        requested for it, newest first. For just the latest update, use `GetDeviceDfuStatus`.
+
+        Returns 400 if the device isn't in the project.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
@@ -1023,7 +1082,13 @@ paths:
   /v1/projects/{projectOrProductUID}/devices/{deviceUID}/dfu/{firmwareType}/status:
     get:
       operationId: GetDeviceDfuStatus
-      description: Get device DFU history for host or Notecard firmware
+      summary: Get a device's firmware update status
+      description: |
+        Get a device's current host or Notecard firmware version and its latest firmware update.
+        Includes whether an update is in progress. For every past update, use
+        `GetDeviceDfuHistory`.
+
+        Returns 400 if the device isn't in the project.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
@@ -1047,7 +1112,12 @@ paths:
   /v1/projects/{projectOrProductUID}/devices/{deviceUID}/disable:
     post:
       operationId: DisableDevice
-      description: Disable Device
+      summary: Disable a device
+      description: |
+        Stop a device from connecting to Notehub, ending any open session. The device and its
+        data stay in the project; undo with `EnableDevice`. Does nothing if it's already disabled.
+
+        Requires the Owner or Developer role.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
@@ -1066,7 +1136,13 @@ paths:
   /v1/projects/{projectOrProductUID}/devices/{deviceUID}/enable:
     post:
       operationId: EnableDevice
-      description: Enable Device
+      summary: Enable a device
+      description: |
+        Re-enable a device turned off with `DisableDevice`, so it can connect to Notehub again.
+        Does nothing if the device is already enabled.
+
+        Requires the Owner or Developer role. Returns 409 if the device's cellular service was
+        deactivated; it must be reactivated instead.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
@@ -1085,7 +1161,11 @@ paths:
   /v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_hierarchy:
     get:
       operationId: GetDeviceEnvironmentHierarchy
-      summary: Get environment variable hierarchy for a device
+      summary: Get a device's environment hierarchy
+      description: |
+        Get a device's environment variables and the fleet and project variables it inherits, as
+        a tree. Each variable has its precedence and whether it is used or overridden. For just the
+        resolved values, use `GetDeviceEnvironmentVariables`.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
@@ -1110,7 +1190,12 @@ paths:
   /v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_variables:
     get:
       operationId: GetDeviceEnvironmentVariables
-      description: Get environment variables of a device
+      summary: Get device environment variables
+      description: |
+        Get a device's own environment variables, its `env.default` values, and its effective
+        values. Effective values merge in project and fleet variables, which device variables
+        override. To see where each value comes from, use
+        `GetDeviceEnvironmentHierarchy`.
       responses:
         '200':
           $ref: '#/components/responses/GetDeviceEnvironmentVariablesResponse'
@@ -1128,9 +1213,15 @@ paths:
       - $ref: '#/components/parameters/deviceUIDParam'
     put:
       operationId: SetDeviceEnvironmentVariables
-      description: Set environment variables of a device
+      summary: Set device environment variables
+      description: |
+        Add or change a device's environment variables; variables you don't send keep their values.
+        A value of `""` or `-` deletes that variable. Setting `_fw`, `_fwc` or `_fwm` starts a
+        host, Notecard or modem firmware update.
+
+        Requires the Owner or Developer role. Returns 400 if a note's key isn't a variable.
       requestBody:
-        description: Environment variables to be added to the device
+        description: The variables to add or change, and optional notes.
         required: true
         content:
           application/json:
@@ -1151,7 +1242,12 @@ paths:
   /v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_variables/{key}:
     delete:
       operationId: DeleteDeviceEnvironmentVariable
-      description: Delete environment variable of a device
+      summary: Delete a device environment variable
+      description: |
+        Delete one device environment variable and return the ones left. Fleet and project
+        variables with the same name then apply. Deleting a variable that doesn't exist succeeds.
+
+        Requires the Owner or Developer role.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
@@ -1176,11 +1272,16 @@ paths:
   /v1/projects/{projectOrProductUID}/devices/{deviceUID}/files:
     delete:
       operationId: DeleteNotefiles
-      description: Deletes Notefiles and the Notes they contain.
+      summary: Delete notefiles
+      description: |
+        Delete notefiles and all their notes from a device. To delete one note, use `DeleteNote`.
+
+        Requires the Owner or Developer role. Returns 400 if `files` is empty.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
       requestBody:
+        description: The notefiles to delete.
         required: true
         content:
           application/json:
@@ -1188,7 +1289,7 @@ paths:
               type: object
               properties:
                 files:
-                  description: Name of notefiles to delete
+                  description: Names of the notefiles to delete, e.g. `config.db`.
                   type: array
                   items:
                     type: string
@@ -1206,13 +1307,18 @@ paths:
         resource: blues:resources:app:APPSERIAL:notefiles
     get:
       operationId: ListNotefiles
-      description: Lists .qi and .db files for the device
+      summary: List a device's notefiles and notes
+      description: |
+        List a device's notefiles with the notes in each, sorted `.qo`, then `.qi`, then `.db`.
+        `.qo` notefiles are listed without notes, since Notehub empties them as it processes
+        them. Most system notefiles (names starting with `_`) are left out. For one notefile, use
+        `GetNotefile`.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
         - name: files
           in: query
-          description: One or more files to obtain change information from.
+          description: Notefiles to include, e.g. `config.db`. If omitted, all are listed.
           required: false
           schema:
             type: array
@@ -1243,10 +1349,14 @@ paths:
   /v1/projects/{projectOrProductUID}/devices/{deviceUID}/fleets:
     delete:
       operationId: DeleteDeviceFromFleets
-      description: Remove Device from Fleets
+      summary: Remove a device from fleets
+      description: |
+        Remove a device from one or more fleets and return the fleets it's still in. Fleets it
+        isn't in are ignored, so a retry is safe.
+
+        Requires the Owner or Developer role.
       requestBody:
-        description: |
-          The fleets to remove from the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error.
+        description: The fleets to remove the device from.
         required: true
         content:
           application/json:
@@ -1254,7 +1364,7 @@ paths:
               type: object
               properties:
                 fleet_uids:
-                  description: The fleetUIDs to remove from the device.
+                  description: FleetUIDs to remove the device from.
                   type: array
                   items:
                     type: string
@@ -1274,7 +1384,12 @@ paths:
         resource: blues:resources:app:APPSERIAL:devices
     get:
       operationId: GetDeviceFleets
-      description: Get Device Fleets
+      summary: List a device's fleets
+      description: |
+        List the fleets a device belongs to, with only each fleet's UID, label and creation time.
+        For a fleet's full details use `GetFleet`.
+
+        Returns 404 if the device isn't in the project.
       responses:
         '200':
           $ref: '#/components/responses/FleetsResponse'
@@ -1292,10 +1407,14 @@ paths:
       - $ref: '#/components/parameters/deviceUIDParam'
     put:
       operationId: AddDeviceToFleets
-      description: Add Device to Fleets
+      summary: Add a device to fleets
+      description: |
+        Add a device to one or more fleets, keeping the fleets it's already in, and return all its
+        fleets. Fleets it's already in are skipped, so a retry is safe.
+
+        Requires the Owner or Developer role. Returns 400 if a fleet doesn't exist.
       requestBody:
-        description: |
-          The fleets to add to the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error.
+        description: The fleets to add the device to.
         required: true
         content:
           application/json:
@@ -1303,7 +1422,7 @@ paths:
               type: object
               properties:
                 fleet_uids:
-                  description: The fleetUIDs to add to the device.
+                  description: FleetUIDs to add the device to.
                   type: array
                   items:
                     type: string
@@ -1324,7 +1443,13 @@ paths:
   /v1/projects/{projectOrProductUID}/devices/{deviceUID}/health-log:
     get:
       operationId: GetDeviceHealthLog
-      description: Get Device Health Log
+      summary: Get a device's health log
+      description: |
+        Get a device's health log: timestamped status messages such as restarts and completed
+        firmware updates. Only the latest 100 entries are kept.
+
+        To filter by date, pass both `startDate` and `endDate`; `startDate` alone returns 400, and
+        the same value for both returns every entry.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
@@ -1332,7 +1457,10 @@ paths:
         - $ref: '#/components/parameters/endDateParam'
         - name: log_type
           in: query
-          description: Return only specified log types
+          description: |
+            Return only these kinds of entry. If omitted, all entries are returned.
+            - `boot`: the device restarted
+            - `dfu_completed`: a host firmware update finished
           required: false
           schema:
             type: array
@@ -1367,8 +1495,14 @@ paths:
   /v1/projects/{projectOrProductUID}/devices/{deviceUID}/journeys:
     get:
       operationId: GetDeviceJourneys
+      summary: List a device's journeys
       description: |
-        Get the list of journeys for a device, derived from events whose body contains `journey` and `jcount` fields. Returns journey metadata only (no event payloads). Capped at 100 most recent journeys; `has_more` is true when the cap is hit.
+        List a device's journeys, newest first, without their events. A journey is the events
+        whose body has the same `journey` value and a `jcount` field; one-event journeys are left
+        out. For a journey's events, use `GetDeviceJourney`.
+
+        Returns at most 100; `has_more` is true if there are more. `startDate` and `endDate` filter
+        on the journey's start. Returns 403 if the organization is suspended.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
@@ -1426,8 +1560,13 @@ paths:
   /v1/projects/{projectOrProductUID}/devices/{deviceUID}/journeys/{journeyID}:
     get:
       operationId: GetDeviceJourney
+      summary: Get a journey and its events
       description: |
-        Get a single journey for a device along with its events. The events array is paginated via `pageSize` / `pageNum`; use `journey.has_more` to detect additional pages.
+        Get one journey's start and end time and its events, oldest first. Only events with a
+        location are included, and a run of events at the same location is reduced to the first.
+
+        The events are paginated; `journey.has_more` is true if there are more. Returns 404 if the
+        journey doesn't exist, and 403 if the organization is suspended.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
@@ -1491,7 +1630,12 @@ paths:
   /v1/projects/{projectOrProductUID}/devices/{deviceUID}/latest:
     get:
       operationId: GetDeviceLatestEvents
-      description: Get Device Latest Events
+      summary: Get a device's latest event per notefile
+      description: |
+        Get the most recent event from each of a device's notefiles, sorted by notefile name.
+        `_env.qo` is left out. To search a device's event history, use `GetEvents`.
+
+        Returns 403 if the organization is suspended.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
@@ -1510,7 +1654,12 @@ paths:
   /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notefiles/{notefileID}:
     post:
       operationId: CreateNotefile
-      description: Creates an empty Notefile on the device.
+      summary: Create an empty notefile
+      description: |
+        Create an empty notefile on a device. `AddQiNote` creates a notefile when needed, so this is
+        only required for an empty one.
+
+        Requires the Owner or Developer role. Returns 400 if the notefile already exists.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
@@ -1530,27 +1679,34 @@ paths:
   /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}:
     get:
       operationId: GetNotefile
-      description: For .qi files, returns the queued up notes.  For .db files, returns all notes in the notefile
+      summary: Get the notes in a notefile
+      description: |
+        Get the notes in one notefile on a device. For a `.qi` notefile, that's the notes still
+        queued; for a `.db` notefile, every note. To list all of a device's notefiles with their notes,
+        use `ListNotefiles`.
+
+        With `delete=true`, the returned notes are deleted, which requires the Owner or Developer
+        role. Returns 400 if `notefileID` has no valid notefile extension.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
         - $ref: '#/components/parameters/notefileIDParam'
         - name: max
           in: query
-          description: The maximum number of Notes to return in the request.
+          description: The most notes to return.
           required: false
           schema:
             type: integer
             format: int32
         - name: deleted
           in: query
-          description: true to return deleted notes.
+          description: If true, also return deleted notes.
           required: false
           schema:
             type: boolean
         - name: delete
           in: query
-          description: true to delete the notes returned by the request.
+          description: If true, delete the notes this request returns. Requires the Owner or Developer role.
           required: false
           schema:
             type: boolean
@@ -1584,7 +1740,14 @@ paths:
         resource: blues:resources:app:APPSERIAL:notefiles
     post:
       operationId: AddQiNote
-      description: Adds a Note to a Notefile, creating the Notefile if it doesn't yet exist.
+      summary: Queue a note for a Notecard
+      description: |
+        Add a note to an inbound queue (`.qi`) notefile on a device, creating the notefile if
+        needed. The Notecard receives it on its next sync. For a `.db` notefile, use `AddDbNote`;
+        to reach a connected Notecard immediately, use `SignalDevice`.
+
+        Requires the Owner or Developer role. Returns 400 unless the notefile ends in `.qi` or
+        `.qis`, or if `payload` isn't valid base64.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
@@ -1611,7 +1774,12 @@ paths:
   /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}:
     delete:
       operationId: DeleteNote
-      description: Delete a note from a .db or .qi notefile
+      summary: Delete a note
+      description: |
+        Delete one note from a notefile on a device. To delete whole notefiles, use
+        `DeleteNotefiles`.
+
+        Requires the Owner or Developer role.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
@@ -1631,7 +1799,13 @@ paths:
         resource: blues:resources:app:APPSERIAL:notes
     get:
       operationId: GetDbNote
-      description: Get a note from a .db or .qi notefile
+      summary: Get a note
+      description: |
+        Get one note's body, payload and time from a notefile on a device. To get every note in a
+        notefile, use `GetNotefile`.
+
+        With `delete=true`, the note is deleted after it is read, which requires the Owner or
+        Developer role.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
@@ -1639,13 +1813,13 @@ paths:
         - $ref: '#/components/parameters/noteIDParam'
         - name: delete
           in: query
-          description: Whether to delete the note from the DB notefile
+          description: If true, delete the note after returning it. Requires the Owner or Developer role.
           required: false
           schema:
             type: boolean
         - name: deleted
           in: query
-          description: Whether to return deleted notes
+          description: If true, also return the note if it has been deleted.
           required: false
           schema:
             type: boolean
@@ -1678,7 +1852,14 @@ paths:
         resource: blues:resources:app:APPSERIAL:notes
     post:
       operationId: AddDbNote
-      description: Add a Note to a .db notefile.  if noteID is '-' then payload is ignored and empty notefile is created
+      summary: Add a note to a .db notefile
+      description: |
+        Add a note with the given ID to a database notefile on a device, synced to the Notecard on
+        its next sync. To change an existing note, use `UpdateDbNote`; to queue a note in a `.qi`
+        notefile, use `AddQiNote`.
+
+        Requires the Owner or Developer role. Returns 400 unless the notefile ends in `.db` or
+        `.dbs`, or if `payload` isn't valid base64.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
@@ -1705,7 +1886,13 @@ paths:
         resource: blues:resources:app:APPSERIAL:notes
     put:
       operationId: UpdateDbNote
-      description: Update a note in a .db or .qi notefile
+      summary: Update a note in a .db notefile
+      description: |
+        Replace the body and payload of a note in a database notefile on a device, synced to the
+        Notecard on its next sync. To add a new note, use `AddDbNote`.
+
+        Requires the Owner or Developer role. Returns 400 unless the notefile ends in `.db` or
+        `.dbs`, or if `payload` isn't valid base64.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
@@ -1733,7 +1920,12 @@ paths:
   /v1/projects/{projectOrProductUID}/devices/{deviceUID}/plans:
     get:
       operationId: GetDevicePlans
-      description: Get Data Plans associated with the device, this include the primary sim, any external sim, as well as any satellite connections.
+      summary: Get a device's cellular data plans
+      description: |
+        Get the data plan of each cellular SIM in a device: plan type, data used and remaining, and
+        expiry. Covers the built-in SIM and any external SIM, but not satellite plans.
+
+        Returns 404 if the device has no cellular or satellite SIM.
       responses:
         '200':
           $ref: '#/components/responses/DevicePlansResponse'
@@ -1752,12 +1944,18 @@ paths:
   /v1/projects/{projectOrProductUID}/devices/{deviceUID}/provision:
     post:
       operationId: ProvisionDevice
-      description: Provision Device for a Project
+      summary: Provision a Notecard
+      description: |
+        Add a Notecard to a project before it first connects, with its product, serial number and
+        fleets. A device that already exists isn't reset and keeps its fleets.
+
+        Requires the Owner or Developer role. Returns 404 if `product_uid` doesn't exist, and 400
+        if it belongs to another project or `deviceUID` isn't a valid Notecard DeviceUID.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
       requestBody:
-        description: Provision a device to a specific ProductUID
+        description: The product, serial number and fleets for the device.
         required: true
         content:
           application/json:
@@ -1765,16 +1963,20 @@ paths:
               type: object
               properties:
                 device_sn:
-                  description: The serial number to assign to the device.
+                  description: Serial number to give the device. Ignored if the device already has one.
                   type: string
                 fleet_uids:
-                  description: The fleetUIDs to provision the device to.
+                  description: |
+                    FleetUIDs to put a new device in. If omitted or empty, the product's auto-provision
+                    fleets are used. Ignored if the device already exists.
                   type: array
                   items:
                     type: string
                   nullable: true
                 product_uid:
-                  description: The ProductUID that the device should use.
+                  description: |
+                    ProductUID to provision the device under, e.g. `com.blues.bridge:sensors`.
+                    Must belong to this project.
                   type: string
               required:
                 - product_uid
@@ -1798,7 +2000,10 @@ paths:
   /v1/projects/{projectOrProductUID}/devices/{deviceUID}/public-key:
     get:
       operationId: GetDevicePublicKey
-      description: Get Device Public Key
+      summary: Get a device's public key
+      description: |
+        Get one Notecard's public key, in PEM format. For every device in the project, use
+        `GetDevicePublicKeys`.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
@@ -1811,8 +2016,10 @@ paths:
                 type: object
                 properties:
                   key:
+                    description: The Notecard's public key in PEM format. Empty if it hasn't reported one.
                     type: string
                   uid:
+                    description: DeviceUID, e.g. `dev:864475040509284`.
                     type: string
                 required:
                   - uid
@@ -1829,7 +2036,13 @@ paths:
   /v1/projects/{projectOrProductUID}/devices/{deviceUID}/sessions:
     get:
       operationId: GetDeviceSessions
-      description: Get Device Sessions
+      summary: List a device's sessions
+      description: |
+        List a device's sessions, its connections to Notehub. Each shows why it opened and closed,
+        signal strength, location and data usage. `startDate` and `endDate` filter on when the
+        session began.
+
+        Paginated.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
@@ -1854,12 +2067,19 @@ paths:
   /v1/projects/{projectOrProductUID}/devices/{deviceUID}/signal:
     post:
       operationId: SignalDevice
-      description: Send a signal from Notehub to a Notecard.
+      summary: Send a signal to a connected Notecard
+      description: |
+        Send a JSON object straight to a Notecard, which the host can read with `hub.signal`.
+        It's delivered only if the Notecard is connected to Notehub at that moment, and is never
+        queued; `connected` in the response says whether it was. To queue data for the next sync,
+        use `AddQiNote` instead.
+
+        Requires the Owner or Developer role. Returns 400 if the body has a `type` field.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
       requestBody:
-        description: Body or payload of signal to be sent to the device
+        description: The signal to send.
         required: true
         content:
           application/json:
@@ -1874,7 +2094,7 @@ paths:
                 type: object
                 properties:
                   connected:
-                    description: true if the Notecard is connected to Notehub.
+                    description: True if the Notecard was connected and the signal was delivered. False means it was dropped.
                     type: boolean
         default:
           $ref: '#/components/responses/ErrorResponse'
@@ -1888,7 +2108,11 @@ paths:
   /v1/projects/{projectOrProductUID}/devices/public-keys:
     get:
       operationId: GetDevicePublicKeys
-      description: Get Device Public Keys of a Project
+      summary: List public keys of all devices
+      description: |
+        List the public key of every device in a project. For one device, use `GetDevicePublicKey`.
+
+        Paginated. Deleted devices are included only when reading with a `cursor`.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/pageSizeParam'
@@ -1916,8 +2140,10 @@ paths:
                             True if this device has been deleted. Only present when reading with a `cursor`.
                           type: boolean
                         key:
+                          description: The Notecard's public key in PEM format. Empty if it hasn't reported one.
                           type: string
                         uid:
+                          description: DeviceUID, e.g. `dev:864475040509284`.
                           type: string
                       type: object
                   has_more:
@@ -1941,7 +2167,14 @@ paths:
   /v1/projects/{projectOrProductUID}/dfu/{firmwareType}/{action}:
     post:
       operationId: PerformDfuAction
-      description: Update/cancel host or notecard firmware updates
+      summary: Start or cancel firmware updates
+      description: |
+        Start or cancel a host or Notecard firmware update on every device matching the filters.
+        With no filters, that is every device in the project. `update` sets each device's `_fw` or
+        `_fwc` variable to `filename`.
+
+        Requires the Owner or Developer role. `update` returns 404 if the file isn't found, and can
+        return 400 if a matching device already has an update in progress.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/firmwareTypeParam'
@@ -1977,8 +2210,14 @@ paths:
   /v1/projects/{projectOrProductUID}/dfu/{firmwareType}/history:
     get:
       operationId: GetDevicesDfuHistory
+      summary: List devices' firmware update history
       description: |
-        Get host or Notecard DFU history for all devices that match the filter criteria. With a `cursor`, changes made through fleet or project firmware settings will not appear until the device itself is next updated.
+        List every host or Notecard firmware update requested for each matching device, newest
+        first. Includes each device's current firmware version. For just the latest update, use
+        `GetDevicesDfuStatus`.
+
+        Paginated, by page or `cursor`. With a `cursor`, changes made through fleet or project
+        firmware settings don't appear until the device itself is next updated.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/firmwareTypeParam'
@@ -2020,8 +2259,13 @@ paths:
   /v1/projects/{projectOrProductUID}/dfu/{firmwareType}/status:
     get:
       operationId: GetDevicesDfuStatus
+      summary: List devices' firmware status
       description: |
-        Get host or Notecard DFU history for all devices that match the filter criteria. With a `cursor`, changes made through fleet or project firmware settings will not appear until the device itself is next updated.
+        List the host or Notecard firmware version each matching device runs now, with its latest
+        firmware update. Use this to find which firmware devices run.
+
+        Paginated, by page or `cursor`. With a `cursor`, changes made through fleet or project
+        firmware settings don't appear until the device itself is next updated.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/firmwareTypeParam'
@@ -2063,7 +2307,11 @@ paths:
   /v1/projects/{projectOrProductUID}/environment_hierarchy:
     get:
       operationId: GetProjectEnvironmentHierarchy
-      summary: Get environment variable hierarchy for a device
+      summary: Get the project environment hierarchy
+      description: |
+        Get the project's environment variables as a one-node environment hierarchy tree. The fleet
+        and device hierarchy operations use the same format; for plain key/value pairs, use
+        `GetProjectEnvironmentVariables`.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
       responses:
@@ -2074,7 +2322,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/EnvTreeJsonNode'
         '404':
-          description: Project or device not found
+          description: Project not found
         '500':
           description: Server error
       security:
@@ -2087,7 +2335,11 @@ paths:
   /v1/projects/{projectOrProductUID}/environment_variables:
     get:
       operationId: GetProjectEnvironmentVariables
-      description: Get environment variables of a project
+      summary: Get project environment variables
+      description: |
+        Get the environment variables set on the project, with their notes. Fleet and device
+        variables override these; for what a device actually sees, use
+        `GetDeviceEnvironmentVariables`.
       responses:
         '200':
           $ref: '#/components/responses/EnvironmentVariablesResponse'
@@ -2104,7 +2356,13 @@ paths:
       - $ref: '#/components/parameters/projectOrProductUIDParam'
     put:
       operationId: SetProjectEnvironmentVariables
-      description: Set environment variables of a project
+      summary: Set project environment variables
+      description: |
+        Add or change project environment variables; variables you don't send keep their values. A
+        value of `""` or `-` deletes that variable. Setting `_fw`, `_fwc` or `_fwm` starts a host,
+        Notecard or modem firmware update.
+
+        Requires the Owner or Developer role. Returns 400 if a note's key isn't a variable.
       requestBody:
         content:
           application/json:
@@ -2125,12 +2383,17 @@ paths:
   /v1/projects/{projectOrProductUID}/environment_variables/{key}:
     delete:
       operationId: DeleteProjectEnvironmentVariable
-      description: Delete an environment variable of a project by key
+      summary: Delete a project environment variable
+      description: |
+        Delete one project environment variable and return the ones left. Deleting a variable that
+        doesn't exist still succeeds.
+
+        Requires the Owner or Developer role.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - name: key
           in: path
-          description: The environment variable key to delete.
+          description: Name of the environment variable to delete.
           required: true
           schema:
             type: string
@@ -2210,7 +2473,11 @@ paths:
   /v1/projects/{projectOrProductUID}/firmware:
     get:
       operationId: GetFirmwareInfo
-      description: Get Available Firmware Information
+      summary: List firmware
+      description: |
+        List the host firmware uploaded to the project and the Notecard firmware available to it.
+        Text filters match substrings, and unpublished Notecard builds are left out unless
+        `unpublished` is `true`. Not paginated.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/productQueryParam'
@@ -2243,8 +2510,13 @@ paths:
   /v1/projects/{projectOrProductUID}/firmware/{firmwareType}/{filename}:
     delete:
       operationId: DeleteFirmware
+      summary: Delete host firmware
       description: |
-        Delete a host firmware binary. The filename must be the full stored filename including the timestamp suffix (e.g. test$20260324190911.bin) as returned by the firmware upload or list endpoints.
+        Delete a host firmware file by its stored filename, including its `$` timestamp suffix.
+        Notecard firmware can't be deleted.
+
+        Requires the Owner or Developer role. Returns 404 if the file doesn't exist, and 400 for a
+        sub-project, whose parent manages host firmware.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - name: firmwareType
@@ -2273,7 +2545,12 @@ paths:
         resource: blues:resources:app:APPSERIAL:firmware:host
     get:
       operationId: DownloadFirmware
-      description: Download firmware binary
+      summary: Download host firmware
+      description: |
+        Download a host firmware binary by its stored filename, including its `$` timestamp suffix.
+        Notecard firmware can't be downloaded (400).
+
+        Requires the Owner or Developer role. Returns 404 if the file doesn't exist.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/firmwareTypeParam'
@@ -2301,8 +2578,13 @@ paths:
         resource: blues:resources:app:APPSERIAL:firmware:host
     post:
       operationId: UpdateFirmware
+      summary: Update host firmware metadata
       description: |
-        Update the metadata of an existing host firmware entry. The filename must be the full stored filename including the timestamp suffix (e.g. test$20260324190911.bin) as returned by the firmware upload or list endpoints.
+        Change a host firmware file's `version`, `notes` or `info`; fields you leave out or send
+        empty keep their values. Use the stored filename, including its `$` timestamp suffix.
+
+        Requires the Owner or Developer role. Returns 400 for a sub-project, whose parent manages
+        host firmware, and 404 if the file doesn't exist.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - name: firmwareType
@@ -2342,12 +2624,20 @@ paths:
         resource: blues:resources:app:APPSERIAL:firmware:host
     put:
       operationId: UploadFirmware
-      description: Upload firmware binary
+      summary: Upload firmware
+      description: |
+        Upload a host or Notecard firmware binary. Notehub usually adds a timestamp to `filename`;
+        use the returned `filename` from then on.
+
+        Requires the Owner or Developer role. Returns 400 for host firmware on a sub-project, whose
+        parent manages it, and 500 for a wrong file type or a file over the limit: 1.5 MB for host
+        firmware, 2 MB for `notecard-s3-*` and 1 MB for other Notecard firmware.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/firmwareTypeParam'
         - name: filename
           in: path
+          description: Name to store the file under. Notehub adds `$` and a timestamp before the extension, except for a Notecard firmware name that already contains `$`.
           required: true
           schema:
             type: string
@@ -2390,7 +2680,10 @@ paths:
   /v1/projects/{projectOrProductUID}/fleets:
     get:
       operationId: GetFleets
-      description: Get Project Fleets
+      summary: List fleets
+      description: |
+        List the project's fleets with each one's label, smart rule, watchdog and environment
+        variables. Doesn't include `smart_rule_enabled`. Not paginated.
       responses:
         '200':
           $ref: '#/components/responses/FleetsResponse'
@@ -2407,9 +2700,14 @@ paths:
       - $ref: '#/components/parameters/projectOrProductUIDParam'
     post:
       operationId: CreateFleet
-      description: Create Fleet
+      summary: Create a fleet
+      description: |
+        Create a fleet in the project. Connectivity assurance is on unless
+        `connectivity_assurance.enabled` is `false`. A second call creates another fleet.
+
+        Requires the Owner or Developer role. Returns 400 if `label` is missing or empty.
       requestBody:
-        description: Fleet to be added
+        description: The new fleet's name and settings.
         required: true
         content:
           application/json:
@@ -2419,11 +2717,12 @@ paths:
                 connectivity_assurance:
                   $ref: '#/components/schemas/FleetConnectivityAssurance'
                 label:
-                  description: The label, or name,  for the Fleet.
+                  description: Fleet name shown in Notehub. Required.
                   type: string
                 smart_rule:
                   $ref: '#/components/schemas/FleetRule'
                 smart_rule_enabled:
+                  description: If `true`, `smart_rule` adds and removes devices. Default `false`.
                   type: boolean
       responses:
         '201':
@@ -2444,7 +2743,14 @@ paths:
   /v1/projects/{projectOrProductUID}/fleets/{fleetUID}:
     delete:
       operationId: DeleteFleet
-      description: Delete Fleet
+      summary: Delete a fleet
+      description: |
+        Delete a fleet and remove it from all its devices. The devices stay in the project; the
+        fleet's environment variables are deleted. To remove one device from a fleet, use
+        `DeleteDeviceFromFleets`.
+
+        Requires the Owner or Developer role. Returns 400 if the fleet does not exist, including on
+        a retry.
       responses:
         '204':
           description: Successful operation
@@ -2459,7 +2765,12 @@ paths:
         resource: blues:resources:app:APPSERIAL:fleets
     get:
       operationId: GetFleet
-      description: Get Fleet
+      summary: Get a fleet
+      description: |
+        Get one fleet's label, smart rule, watchdog and environment variables. Doesn't include
+        `smart_rule_enabled`.
+
+        Returns 404 if the fleet doesn't exist.
       responses:
         '200':
           description: Successful operation
@@ -2479,9 +2790,16 @@ paths:
       - $ref: '#/components/parameters/fleetUIDParam'
     put:
       operationId: UpdateFleet
-      description: Update Fleet
+      summary: Update a fleet
+      description: |
+        Change a fleet's label, smart rule, watchdog or connectivity assurance, or add and remove
+        devices. Always send `smart_rule_enabled`; leaving it out turns the smart rule off. Empty
+        `label` or `smart_rule` keeps the current value; `-` clears `smart_rule`.
+
+        Requires the Owner or Developer role. Returns 400 for an unknown fleet or `label` of `-`,
+        and for a bad DeviceUID after saving the other changes.
       requestBody:
-        description: Fleet details to update
+        description: The fields to change. Fields left out keep their values, except `smart_rule_enabled`.
         required: true
         content:
           application/json:
@@ -2489,26 +2807,27 @@ paths:
               type: object
               properties:
                 addDevices:
-                  description: List of DeviceUIDs to add to fleet
+                  description: DeviceUIDs to add to the fleet. Each must be in the project and not also in `removeDevices`.
                   type: array
                   items:
                     type: string
                 connectivity_assurance:
                   $ref: '#/components/schemas/FleetConnectivityAssurance'
                 label:
-                  description: The label for the Fleet.
+                  description: New fleet name. Empty keeps the current name; a fleet must have one, so `-` returns 400.
                   type: string
                 removeDevices:
-                  description: List of DeviceUIDs to remove from fleet
+                  description: DeviceUIDs to remove from the fleet. Each must be in the project and not also in `addDevices`.
                   type: array
                   items:
                     type: string
                 smart_rule:
                   $ref: '#/components/schemas/FleetRule'
                 smart_rule_enabled:
+                  description: Whether `smart_rule` adds and removes devices. Always send it; omitting it sets `false`.
                   type: boolean
                 watchdog_mins:
-                  description: A watchdog timer is used to generate an event every N minutes of inactivity. 0 means no watchdog
+                  description: Minutes of inactivity before Notehub generates a watchdog event. Omit or `0` to keep the current value; a negative value turns it off.
                   type: integer
                   format: int64
       responses:
@@ -2530,7 +2849,12 @@ paths:
   /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/devices:
     get:
       operationId: GetFleetDevices
-      description: Get Devices of a Fleet within a Project
+      summary: List devices in a fleet
+      description: |
+        List the devices in one fleet, with the same filters as `GetDevices`. To list a device's
+        fleets instead, use `GetDeviceFleets`.
+
+        Paginated. Returns 404 if the fleet doesn't exist.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/fleetUIDParam'
@@ -2560,7 +2884,12 @@ paths:
   /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/environment_hierarchy:
     get:
       operationId: GetFleetEnvironmentHierarchy
-      summary: Get environment variable hierarchy for a device
+      summary: Get a fleet's environment hierarchy
+      description: |
+        Get a fleet's environment variables and the project variables it inherits, as a tree. Each
+        variable has its precedence and whether it is used or overridden.
+
+        Returns 500 if the fleet doesn't exist.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/fleetUIDParam'
@@ -2572,7 +2901,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/EnvTreeJsonNode'
         '404':
-          description: Project or device not found
+          description: Project not found
         '500':
           description: Server error
       security:
@@ -2585,7 +2914,12 @@ paths:
   /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/environment_variables:
     get:
       operationId: GetFleetEnvironmentVariables
-      description: Get environment variables of a fleet
+      summary: Get fleet environment variables
+      description: |
+        Get the environment variables set on a fleet, with their notes. They override project
+        variables, and device variables override them.
+
+        Returns 404 if the fleet doesn't exist.
       responses:
         '200':
           $ref: '#/components/responses/EnvironmentVariablesResponse'
@@ -2603,9 +2937,16 @@ paths:
       - $ref: '#/components/parameters/fleetUIDParam'
     put:
       operationId: SetFleetEnvironmentVariables
-      description: Set environment variables of a fleet
+      summary: Set fleet environment variables
+      description: |
+        Add or change a fleet's environment variables; variables you don't send keep their values.
+        A value of `""` or `-` deletes that variable. Setting `_fw`, `_fwc` or `_fwm` starts a
+        host, Notecard or modem firmware update.
+
+        Requires the Owner or Developer role. Returns 404 if the fleet doesn't exist, and 400 if a
+        note's key isn't a variable.
       requestBody:
-        description: Environment variables to be added to the fleet
+        description: The variables to add or change, and optional notes.
         required: true
         content:
           application/json:
@@ -2626,13 +2967,18 @@ paths:
   /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/environment_variables/{key}:
     delete:
       operationId: DeleteFleetEnvironmentVariable
-      description: Delete environment variables of a fleet
+      summary: Delete a fleet environment variable
+      description: |
+        Delete one fleet environment variable and return the ones left.
+
+        Requires the Owner or Developer role. Returns 404 if the fleet or the variable doesn't
+        exist.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/fleetUIDParam'
         - name: key
           in: path
-          description: The environment variable key to delete.
+          description: Name of the environment variable to delete.
           required: true
           schema:
             type: string
@@ -2687,11 +3033,19 @@ paths:
   /v1/projects/{projectOrProductUID}/global-transformation:
     post:
       operationId: SetGlobalEventTransformation
-      description: Set the project-level event JSONata transformation
+      summary: Set the global event transformation
+      description: |
+        Set the project's JSONata expression that rewrites each new event before it's stored and
+        routed. It can change `body`, `payload`, `details`, `file` and `note`, or drop the event
+        with `$doNotRoute()`; an event it fails on is kept with `error` set. Doesn't enable or
+        disable it.
+
+        Requires the Owner or Developer role. Returns 400 if it doesn't compile, or for a
+        sub-project, which uses its parent's.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
       requestBody:
-        description: JSONata expression which will be applied to each event before it is persisted and routed
+        description: JSONata expression as plain text. An empty body clears the transformation.
         required: true
         content:
           text/plain:
@@ -2712,7 +3066,13 @@ paths:
   /v1/projects/{projectOrProductUID}/global-transformation/disable:
     post:
       operationId: DisableGlobalEventTransformation
-      description: Disable the project-level event JSONata transformation
+      summary: Disable the global event transformation
+      description: |
+        Stop applying the project's global event transformation to new events. The expression is
+        kept, so `EnableGlobalEventTransformation` can turn it back on.
+
+        Requires the Owner or Developer role. Returns 400 for a sub-project, whose parent's
+        transformation applies.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
       responses:
@@ -2730,7 +3090,13 @@ paths:
   /v1/projects/{projectOrProductUID}/global-transformation/enable:
     post:
       operationId: EnableGlobalEventTransformation
-      description: Enable the project-level event JSONata transformation
+      summary: Enable the global event transformation
+      description: |
+        Resume applying the project's global event transformation to new events, without changing
+        the expression. Undoes `DisableGlobalEventTransformation`.
+
+        Requires the Owner or Developer role. Returns 400 for a sub-project, whose parent's
+        transformation applies.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
       responses:
@@ -2973,7 +3339,10 @@ paths:
   /v1/projects/{projectOrProductUID}/members:
     get:
       operationId: GetProjectMembers
-      description: Get Project Members
+      summary: List project members
+      description: |
+        List the project's members with each one's name and role. Emails are filled in only when
+        the caller is an Owner. Not paginated.
       responses:
         '200':
           description: Successful operation
@@ -3122,7 +3491,11 @@ paths:
   /v1/projects/{projectOrProductUID}/products:
     get:
       operationId: GetProducts
-      description: Get Products within a Project
+      summary: List a project's products
+      description: |
+        List the project's ProductUIDs, each with its label, auto-provision fleets, and whether new
+        devices start disabled. UIDs here include the `product:` prefix; `CreateProduct` returns
+        them without it. Not paginated.
       responses:
         '200':
           description: Successful operation
@@ -3148,9 +3521,16 @@ paths:
       - $ref: '#/components/parameters/projectOrProductUIDParam'
     post:
       operationId: CreateProduct
-      description: Create Product within a Project
+      summary: Create a product
+      description: |
+        Add a ProductUID to the project, formed from the caller's reversed email and `product_uid`.
+        For `jane@acme.com` and `sensors` it is `com.acme.jane:sensors`.
+
+        Requires the Owner or Developer role and a verified email address (400 otherwise). Returns
+        404 if an `auto_provision_fleets` entry isn't a fleet in this project, and 500 if
+        `product_uid` is invalid or already taken.
       requestBody:
-        description: Product to be created
+        description: The new product's UID suffix, name and provisioning settings.
         required: true
         content:
           application/json:
@@ -3158,17 +3538,18 @@ paths:
               type: object
               properties:
                 auto_provision_fleets:
+                  description: FleetUIDs that devices are added to when first provisioned with this ProductUID.
                   type: array
                   items:
                     type: string
                 disable_devices_by_default:
-                  description: If `true`, devices provisioned to this product will be automatically disabled by default.
+                  description: If `true`, devices provisioned with this ProductUID start out disabled.
                   type: boolean
                 label:
-                  description: The label for the Product.
+                  description: Product name shown in Notehub.
                   type: string
                 product_uid:
-                  description: The requested uid for the Product. Will be prefixed with the user's reversed email.
+                  description: Suffix of the new ProductUID. Must start with a lowercase letter and contain only lowercase letters, digits, `.`, `_` or `-`.
                   type: string
               required:
                 - product_uid
@@ -3192,7 +3573,12 @@ paths:
   /v1/projects/{projectOrProductUID}/products/{productUID}:
     delete:
       operationId: DeleteProduct
-      description: Delete a product
+      summary: Delete a product
+      description: |
+        Remove a ProductUID from the project. Accepts the UID with or without the `product:`
+        prefix.
+
+        Requires the Owner or Developer role. Returns 404 if the project has no such ProductUID.
       responses:
         '204':
           description: Successful operation
@@ -3494,7 +3880,10 @@ paths:
   /v1/projects/{projectOrProductUID}/schemas:
     get:
       operationId: GetNotefileSchemas
-      summary: Get variable format for a notefile
+      summary: List Notefile schemas
+      description: |
+        List the project's Notefiles, each with the event `body` fields Notehub has seen in it and
+        their JSON types. Inferred from received events.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
       responses:
@@ -3516,7 +3905,10 @@ paths:
   /v1/projects/{projectOrProductUID}/secrets:
     get:
       operationId: GetProjectSecrets
-      description: Get all secrets for a project (metadata only, values are never returned)
+      summary: List project secrets
+      description: |
+        List the project's secrets by name, with who created and last changed each one and when.
+        Values are never returned.
       responses:
         '200':
           $ref: '#/components/responses/GetProjectSecretsResponse'
@@ -3533,7 +3925,13 @@ paths:
       - $ref: '#/components/parameters/projectOrProductUIDParam'
     post:
       operationId: CreateProjectSecret
-      description: Create a new project secret
+      summary: Create a project secret
+      description: |
+        Store a secret value that routes and alerts can reference as `[$$name]` without exposing
+        it. The value can't be read back.
+
+        Requires the Owner or Developer role. Returns 409 if the name is taken, and 400 if it's
+        invalid.
       requestBody:
         required: true
         content:
@@ -3563,7 +3961,12 @@ paths:
   /v1/projects/{projectOrProductUID}/secrets/{secretName}:
     delete:
       operationId: DeleteProjectSecret
-      description: Delete a project secret by name
+      summary: Delete a project secret
+      description: |
+        Delete a project secret. Routes and alerts that still reference it can no longer resolve
+        it.
+
+        Requires the Owner or Developer role. Returns 404 if the secret doesn't exist.
       responses:
         '204':
           description: Secret deleted successfully
@@ -3582,13 +3985,18 @@ paths:
       - $ref: '#/components/parameters/projectOrProductUIDParam'
       - name: secretName
         in: path
-        description: The name of the secret.
+        description: Name of the secret, as listed by `GetProjectSecrets`.
         required: true
         schema:
           type: string
     put:
       operationId: UpdateProjectSecret
-      description: Update the value of an existing project secret
+      summary: Update a project secret
+      description: |
+        Replace the value of an existing project secret. Routes and alerts that reference it use the
+        new value from then on.
+
+        Requires the Owner or Developer role. Returns 404 if the secret doesn't exist.
       requestBody:
         required: true
         content:
@@ -4290,7 +4698,7 @@ components:
       schema:
         type: string
     datasetAggregateWindowQueryParam:
-      description: Aggregate results into buckets for a time duration, expressed in Postgres INTERVAL format
+      description: Group results into time buckets of this length, e.g. `1h`.
       in: query
       name: aggregate_window
       required: false
@@ -4304,7 +4712,7 @@ components:
       schema:
         type: boolean
     datasetEndQueryParam:
-      description: End of the time range, as an ISO-8601 date or relative to now. If omitted, current time is used.
+      description: End time, in the same formats as `start`. Defaults to now.
       in: query
       name: end
       required: false
@@ -4319,7 +4727,7 @@ components:
         type: integer
         format: int32
     datasetLocationNearQueryParam:
-      description: Latitude and Longitude for location-based filtering, location_near_radius must also be provided
+      description: Latitude and longitude, e.g. `42.393125,-71.185015`. Requires `location_near_radius`.
       in: query
       name: location_near
       required: false
@@ -4327,7 +4735,7 @@ components:
         type: string
         example: 42.393125,-71.185015
     datasetLocationRadiusQueryParam:
-      description: Distance from location_near in meters, location_near must also be provided
+      description: Distance from `location_near`, in meters. Requires `location_near`.
       in: query
       name: location_near_radius
       required: false
@@ -4335,7 +4743,7 @@ components:
         type: integer
         format: int32
     datasetNameParam:
-      description: The name of the data set
+      description: Dataset name, as given to `CreateRepositoryDataset`.
       in: path
       name: name
       required: true
@@ -4349,14 +4757,14 @@ components:
       schema:
         type: string
     datasetSelectQueryParam:
-      description: Comma separated list of fields to include. Supports aggregate functions (avg, sum, min, max, count, most_recent).
+      description: Comma-separated columns to return. Can use avg, sum, min, max, count and most_recent.
       in: query
       name: select
       required: false
       schema:
         type: string
     datasetStartQueryParam:
-      description: Start of the time range, as an ISO-8601 date or relative to now (e.g. -1y). Relative dates follow the Postgres INTERVAL format.
+      description: Start time, as RFC 3339, Unix seconds, or relative to now such as `-1d`.
       in: query
       name: start
       required: true
@@ -4425,6 +4833,9 @@ components:
         items:
           type: string
     dfuActionParam:
+      description: |
+        - `update`: start updating to the firmware in `filename`
+        - `cancel`: cancel any update in progress
       in: path
       name: action
       required: true
@@ -4462,6 +4873,7 @@ components:
       schema:
         type: string
     filenameQueryParam:
+      description: Only firmware whose stored filename contains this text.
       example: notecard-7.2.2.16518$20240410043100.bin
       in: query
       name: filename
@@ -4500,6 +4912,7 @@ components:
           - asc
           - desc
     firmwareTypeParam:
+      description: "Which firmware: `host` (the host microcontroller's) or `notecard`."
       in: path
       name: firmwareType
       required: true
@@ -4509,13 +4922,14 @@ components:
           - host
           - notecard
     firmwareTypeQueryParam:
+      description: Only list `host` or `notecard` firmware. Omit for both.
       in: query
       name: firmwareType
       required: false
       schema:
         type: string
     firstSyncParam:
-      description: When true, filters results to only show first sync sessions
+      description: If true, return only sessions whose `why_session_opened` begins with "first sync".
       in: query
       name: firstSync
       required: false
@@ -4613,6 +5027,7 @@ components:
           type: string
       style: form
     md5QueryParam:
+      description: Only firmware whose MD5 hash contains this text.
       in: query
       name: md5
       required: false
@@ -4651,12 +5066,14 @@ components:
           type: string
       style: form
     notefileIDParam:
+      description: Notefile name, including its extension, e.g. `config.db` or `commands.qi`.
       in: path
       name: notefileID
       required: true
       schema:
         type: string
     noteIDParam:
+      description: Note ID within the notefile, e.g. `my_note`. Notes in a `.qi` notefile have IDs like `1:435`.
       in: path
       name: noteID
       required: true
@@ -4688,6 +5105,7 @@ components:
         default: 1000
         minimum: 1
     productQueryParam:
+      description: Only firmware whose product contains this text.
       in: query
       name: product
       required: false
@@ -4727,19 +5145,20 @@ components:
       schema:
         type: string
     repositoryKey:
-      description: The secret key used to access this repository. Optional - a caller authenticated with a session or personal access token may instead be authorized if their actor holds the required permission on the events of every project this repository references.
+      description: The repository key (`password` from `CreateRepository`). Not needed if you have a role in its projects.
       in: header
       name: X-Repository-Key
       required: false
       schema:
         type: string
     repositoryUIDParam:
+      description: Repository UID, e.g. `repo:2606f411-dea6-44a0-9743-1130f57d77d8`. List with `GetRepositories`.
       in: path
       name: repositoryUID
       required: true
       schema:
         type: string
-        example: rid:2606f411-dea6-44a0-9743-1130f57d77d8
+        example: repo:2606f411-dea6-44a0-9743-1130f57d77d8
     responseStatusParam:
       example: 500
       in: query
@@ -4924,12 +5343,14 @@ components:
           type: string
       style: form
     targetQueryParam:
+      description: Only firmware whose target contains this text.
       in: query
       name: target
       required: false
       schema:
         type: string
     unpublishedQueryParam:
+      description: If `true`, also list unpublished Notecard firmware.
       in: query
       name: unpublished
       required: false
@@ -4947,6 +5368,7 @@ components:
         maximum: 400000
         minimum: 1
     versionQueryParam:
+      description: Only firmware whose version contains this text.
       in: query
       name: version
       required: false
@@ -4961,7 +5383,7 @@ components:
         type: string
         example: Abc_123-2646f411-dc56-44a0-9743-4130f47a74h8
     XAuthTokenHeader:
-      description: For accessing endpoints by Device pin.
+      description: The device's PIN, used instead of an API token.
       in: header
       name: X-Auth-Token
       required: true
@@ -5301,6 +5723,7 @@ components:
       type: object
       properties:
         body:
+          description: The JSON object to send to the Notecard. Must not have a `type` field, which the Notecard reserves.
           type: object
     CellularPlan:
       type: object
@@ -5313,6 +5736,7 @@ components:
         data_usage:
           $ref: '#/components/schemas/DataUsage'
         expires_at:
+          description: When the current plan expires, as a Unix timestamp in seconds. Omitted on the Essentials plan.
           type: integer
           format: int64
         iccid:
@@ -5324,7 +5748,7 @@ components:
           type: string
           example: '310170830688975'
         last_updated:
-          description: Time this plan information was last updated
+          description: When this plan information was last updated, as a Unix timestamp in seconds.
           type: integer
           format: int64
           example: 1656010061
@@ -5363,10 +5787,10 @@ components:
       type: object
       properties:
         name:
-          description: The secret name (alphanumeric and underscores only).
+          description: 1 to 64 letters, digits or underscores. Routes and alerts reference the secret as `[$$name]`.
           type: string
         value:
-          description: The secret value (encrypted at rest, never returned after creation).
+          description: The secret value. Encrypted at rest and never returned.
           type: string
       required:
         - name
@@ -5377,6 +5801,7 @@ components:
         fleet_uids:
           $ref: '#/components/schemas/FleetsUIDList'
         name:
+          description: Repository name.
           type: string
         project_uids:
           description: The project whose events the repository holds. A repository can reference at most one project.
@@ -5390,18 +5815,18 @@ components:
         fleet_uids:
           $ref: '#/components/schemas/FleetsUIDList'
         name:
-          description: repository name
+          description: Repository name.
           type: string
         password:
-          description: read-only password for the database, also used as X-Repository-Token header for subsequent API calls.  This value is only served once when the repository is created, and never to a scoped token, which queries through the repository token endpoint instead
+          description: The repository key, for `X-Repository-Key` and as the database password. Returned only here, never to a scoped token.
           type: string
         project_uids:
           $ref: '#/components/schemas/AppUIDList'
         uid:
-          description: The unique identifier for the data repository
+          description: Repository UID, e.g. `repo:2606f411-dea6-44a0-9743-1130f57d77d8`.
           type: string
         user:
-          description: read-only user for database
+          description: Read-only database user that goes with `password`.
           type: string
     CurrentFirmware:
       type: object
@@ -5546,16 +5971,16 @@ components:
           items:
             type: string
         python:
-          description: 'Optional Python source projecting each event, as an alternative to JSONata. It defines one function, with type annotations required: "def rows(record: dict[str, Any]) -> list[dict[str, Any]]". It returns zero or more row objects per event, whose keys are the dataset''s columns -- the same convention the rows expression uses. Returning an empty list contributes no rows and is not an error; anything else, None included, is an error for that event. Mutually exclusive with rows, time, lat, lon and every field''s own jsonata expression, since a Python projection produces whole row objects and leaves nothing for them to do. Use it for payloads JSONata cannot decode, such as packed binary, base64-wrapped blobs, protobuf or CBOR. At most 64 KiB. Rows must come back in the same order every time rows() runs over the same event: a row''s position in the list identifies it, so an order that varies (such as iterating over a set) makes a replay insert duplicates. Sort the list if the order is not already fixed.'
+          description: "Optional Python projection: `def rows(record: dict[str, Any]) -> list[dict[str, Any]]`, called once per `RepositoryRecord`. Return rows in a fixed order, or a reload duplicates them. Can't be combined with JSONata fields. Max 64 KiB."
           type: string
           maxLength: 65536
         reload:
           $ref: '#/components/schemas/DatasetReloadProgress'
         rows:
-          description: "Optional JSONata expression that expands one event into several rows. It evaluates to one row object per row, whose keys are the dataset's columns: an array of objects, or a single object for one row. Both are accepted because JSONata collapses a one-element sequence to the element, so the same expression yields an array for an event carrying several readings and a bare object for one carrying a single reading. A result that is undefined or empty contributes no rows and is not an error; anything that is not an object, or an array containing one, is rejected. When set it is the only expression that reads the event: each field below takes the row object key matching its name, and time/lat/lon name a key too. Omit it and the dataset produces one row per event, with each field's own jsonata expression reading the event directly. event.uploaded and event.captured always resolve against the event either way."
+          description: Optional JSONata expression turning one `RepositoryRecord` into row objects whose keys are the columns. When set, fields, `time`, `lat` and `lon` name row keys instead.
           type: string
         time:
-          description: JSONata expression resulting in the row's time. Required for a dataset with no rows expression. With one it defaults to the row object's "time" key, and only needs setting to name a different key, or to reach past the row as event.uploaded and event.captured do. lat and lon work the same way and are what declare that the dataset has a location column at all.
+          description: JSONata expression for the row's time. Required without `rows`; with `rows`, defaults to the row's `time` key.
           type: string
     DataSetField:
       type: object
@@ -5574,7 +5999,7 @@ components:
             - 7
             - 8
         jsonata:
-          description: "The JSONata expression that populates this field from the event. Required for a dataset with no rows expression. Must be omitted when the dataset has one: the column is then taken from the row object key matching this field's name, and supplying an expression here is rejected rather than silently ignored."
+          description: JSONata expression for this column. Required without the dataset's `rows` expression; must be omitted with it.
           type: string
         name:
           description: The name of the field
@@ -5708,10 +6133,13 @@ components:
       required:
         - descriptions
     Device:
+      description: |
+        A device in a project. `best_location` is the best of `gps_location`,
+        `triangulated_location` and `tower_location`; each is null when unknown.
       type: object
       properties:
         best_id:
-          description: The best ID for the device, preference for the serial number over DeviceUID
+          description: The serial number if set, otherwise the DeviceUID. Use it as a display name.
           type: string
         best_location:
           $ref: '#/components/schemas/Location'
@@ -5726,74 +6154,95 @@ components:
         dfu:
           $ref: '#/components/schemas/DFUEnv'
         disabled:
+          description: True if the device was disabled with `DisableDevice` and can't connect.
           type: boolean
         firmware_host:
+          description: Host firmware version, as reported by the device. Usually a JSON string.
           type: string
         firmware_notecard:
+          description: Notecard firmware version, as reported by the device.
           type: string
         fleet_uids:
+          description: FleetUIDs of the fleets the device is in.
           type: array
           items:
             type: string
         gps_location:
           $ref: '#/components/schemas/Location'
         health_log:
+          description: Not returned by `GetDevice`, `GetDevices` or `GetFleetDevices`; use `GetDeviceHealthLog`.
           type: array
           items:
             $ref: '#/components/schemas/HealthLog'
         last_activity:
+          description: When the device was last active in a session. Null if it has never connected.
           type: string
           format: date-time
           nullable: true
         product_uid:
+          description: ProductUID the device uses, e.g. `com.blues.bridge:sensors`.
           type: string
         provisioned:
+          description: When the device was added to the project.
           type: string
           format: date-time
         recent_event_count:
+          description: Not returned by `GetDevice`, `GetDevices` or `GetFleetDevices`.
           type: array
           items:
             format: int32
             type: integer
         recent_session_count:
+          description: Not returned by `GetDevice`, `GetDevices` or `GetFleetDevices`.
           type: array
           items:
             format: int32
             type: integer
         recent_session_seconds:
+          description: Not returned by `GetDevice`, `GetDevices` or `GetFleetDevices`.
           type: array
           items:
             format: int32
             type: integer
         recent_when:
+          description: Not returned by `GetDevice`, `GetDevices` or `GetFleetDevices`.
           type: string
           format: date-time
           nullable: true
         sensors:
           $ref: '#/components/schemas/DeviceSensors'
         serial_number:
+          description: Serial number, from the `_sn` environment variable if set. Empty if none.
           type: string
         sku:
+          description: Notecard SKU, e.g. `NOTE-WBNAW`.
           type: string
         tags:
+          description: Comma-separated tags, from the `_tags` environment variable. Empty if none.
           type: string
         temperature:
+          description: Last reported Notecard temperature, in degrees Celsius.
           type: number
           format: double
         tower_info:
+          description: The cell tower the device last used. Null if unknown.
           type: object
           nullable: true
           properties:
             cell_id:
+              description: Cell ID.
               type: integer
               format: int32
             lac:
+              description: Location area code.
               type: integer
               format: int32
             mcc:
+              description: Mobile country code.
               type: integer
               format: int32
             mnc:
+              description: Mobile network code.
               type: integer
               format: int32
         tower_location:
@@ -5801,8 +6250,10 @@ components:
         triangulated_location:
           $ref: '#/components/schemas/Location'
         uid:
+          description: DeviceUID, e.g. `dev:864475040509284`.
           type: string
         voltage:
+          description: Last reported supply voltage, in volts.
           type: number
           format: double
       required:
@@ -5835,7 +6286,7 @@ components:
               description: Firmware product
               type: string
             version:
-              description: Firmware version
+              description: Firmware version the device runs, or `Unknown (device has not fully sync'd)`.
               type: string
         deleted:
           description: |
@@ -5845,6 +6296,7 @@ components:
           description: DeviceUID
           type: string
         history:
+          description: Every firmware update requested for this device, newest first.
           type: array
           items:
             $ref: '#/components/schemas/DeviceDfuStateMachine'
@@ -5876,11 +6328,12 @@ components:
           description: Version of the firmware that was requested to be installed
           type: string
         updates:
+          description: Status updates reported for this firmware update.
           type: array
           items:
             $ref: '#/components/schemas/DeviceDfuStateMachineNode'
     DeviceDfuStateMachineNode:
-      description: Represents a single request to update the host or Notecard firmware
+      description: One status update in a host or Notecard firmware update.
       type: object
       properties:
         datetime:
@@ -5918,7 +6371,7 @@ components:
               description: Firmware product
               type: string
             version:
-              description: Firmware version
+              description: Firmware version the device runs, or `Unknown (device has not fully sync'd)`.
               type: string
         deleted:
           description: |
@@ -5928,7 +6381,7 @@ components:
           description: DeviceUID
           type: string
         dfu_in_progress:
-          description: true if there is a DFU currently in progress
+          description: "`true` while the device's latest firmware update hasn't finished."
           type: boolean
         status:
           $ref: '#/components/schemas/DeviceDfuStateMachine'
@@ -6168,7 +6621,7 @@ components:
       type: object
       properties:
         filename:
-          description: The name of the firmware file
+          description: Stored firmware filename to install, as listed by `GetFirmwareInfo`. Required for `update`; ignored for `cancel`.
           type: string
     EmailNotification:
       type: object
@@ -6575,13 +7028,13 @@ components:
           description: The date the firmware was built.
           type: string
         created:
-          description: The date the firmware was created.
+          description: Upload time, as Unix epoch seconds in a string.
           type: string
         description:
-          description: A description of the firmware.
+          description: Not currently filled in.
           type: string
         filename:
-          description: The name of the firmware file.
+          description: Stored filename, with the `$` timestamp suffix Notehub adds on upload. Use it in other firmware and DFU operations.
           type: string
         info:
           description: User-defined metadata
@@ -6599,7 +7052,7 @@ components:
           description: The product that the firmware is for.
           type: string
         published:
-          description: True if the firmware is published.
+          description: '`true` for all host firmware, and for Notecard firmware that Blues has published.'
           type: boolean
         tags:
           description: A list of tags associated with the firmware.
@@ -6608,7 +7061,7 @@ components:
           description: The target device for the firmware.
           type: string
         type:
-          description: The type of firmware.
+          description: '`host` or `notecard`.'
           type: string
         version:
           description: The version of the firmware.
@@ -6619,26 +7072,27 @@ components:
         connectivity_assurance:
           $ref: '#/components/schemas/FleetConnectivityAssurance'
         created:
-          description: RFC3339 timestamp in UTC
+          description: When the fleet was created.
           type: string
           format: date-time
         environment_variables:
-          description: The environment variables for this device that have been set using the Notehub API or UI.
+          description: Environment variables set on this fleet. Not returned by `GetDeviceFleets`.
           type: object
           additionalProperties:
             type: string
         label:
-          description: Fleet label
+          description: Fleet name shown in Notehub.
           type: string
         smart_rule:
           $ref: '#/components/schemas/FleetRule'
         smart_rule_enabled:
+          description: Whether `smart_rule` adds and removes devices. Returned only by `CreateFleet` and `UpdateFleet`.
           type: boolean
         uid:
-          description: FleetUID
+          description: FleetUID, e.g. `fleet:1042ddc5-3b2c-4cec-b1fb-d3040538094d`.
           type: string
         watchdog_mins:
-          description: A watchdog timer is used to generate an event every N minutes of inactivity. 0 means no watchdog
+          description: Minutes of inactivity before Notehub generates a watchdog event. `0` means no watchdog.
           type: integer
           format: int64
       required:
@@ -6656,7 +7110,7 @@ components:
         enabled: true
       nullable: true
     FleetRule:
-      description: JSONata expression that will be evaluated to determine device membership into this fleet, if the expression evaluates to a 1, the device will be included, if it evaluates to -1 it will be removed, and if it evaluates to 0 or errors it will be left unchanged.
+      description: 'JSONata expression for smart fleet membership: `1` adds the device, `-1` removes it, and `0` or an error leaves it unchanged.'
       type: string
     FleetsUIDList:
       type: array
@@ -6698,10 +7152,13 @@ components:
       type: object
       properties:
         alert:
+          description: True if the entry was flagged as an alert.
           type: boolean
         text:
+          description: The log message. Restart entries begin with `boot`.
           type: string
         when:
+          description: When the entry was recorded.
           type: string
           format: date-time
       required:
@@ -6945,18 +7402,24 @@ components:
       type: object
       properties:
         country:
+          description: Two-letter country code, e.g. `US`.
           type: string
         latitude:
+          description: Latitude in degrees.
           type: number
           format: double
         longitude:
+          description: Longitude in degrees.
           type: number
           format: double
         name:
+          description: Place name, e.g. `Waverly MI`.
           type: string
         timezone:
+          description: IANA time zone, e.g. `America/Detroit`.
           type: string
         when:
+          description: When the location was recorded, in RFC 3339 format. Empty if unknown.
           type: string
       nullable: true
       required:
@@ -7126,7 +7589,7 @@ components:
           type: integer
           format: int64
         where:
-          description: Optional location/metadata string.
+          description: Place name where the note was created, from its latitude and longitude. Empty if unknown.
           type: string
       required:
         - id
@@ -7155,6 +7618,7 @@ components:
             $ref: '#/components/schemas/Note'
           minItems: 0
         template:
+          description: The notefile's body template, if it has one.
           type: string
       required:
         - id
@@ -7168,8 +7632,10 @@ components:
       type: object
       properties:
         notefile:
+          description: Notefile name, e.g. `sensors.qo`.
           type: string
         properties:
+          description: Fields seen in this Notefile's event `body`. Event envelope fields such as `when` and `device` are not included.
           type: array
           items:
             $ref: '#/components/schemas/SchemaProperty'
@@ -7321,15 +7787,19 @@ components:
       type: object
       properties:
         auto_provision_fleets:
+          description: FleetUIDs that devices are added to when first provisioned with this ProductUID.
           type: array
           items:
             type: string
           nullable: true
         disable_devices_by_default:
+          description: If `true`, devices provisioned with this ProductUID start out disabled.
           type: boolean
         label:
+          description: Product name shown in Notehub.
           type: string
         uid:
+          description: ProductUID, e.g. `com.blues.bridge:sensors`. `GetProducts` returns it with a `product:` prefix.
           type: string
       required:
         - uid
@@ -7341,15 +7811,18 @@ components:
         administrative_contact:
           $ref: '#/components/schemas/Contact'
         created:
+          description: When the project was created.
           type: string
           format: date-time
         label:
+          description: Project name shown in Notehub.
           type: string
         role:
           $ref: '#/components/schemas/Role'
         technical_contact:
           $ref: '#/components/schemas/Contact'
         uid:
+          description: ProjectUID, e.g. `app:2606f411-dea6-44a0-9743-1130f57d77d8`.
           type: string
       required:
         - uid
@@ -7359,11 +7832,10 @@ components:
       type: object
       properties:
         email:
-          description: |
-            The email address of the project member.
-            This property will only be populated if the viewer is an owner of the project.
+          description: The member's email address. Empty unless the caller is an Owner of the project.
           type: string
         name:
+          description: The member's display name.
           type: string
         role:
           $ref: '#/components/schemas/Role'
@@ -7380,17 +7852,17 @@ components:
           type: string
           format: date-time
         created_by:
-          description: The actor who created the secret.
+          description: UID of the user or OAuth client that created the secret.
           type: string
         modified:
-          description: When the secret was last updated.
+          description: When the secret's value was last set.
           type: string
           format: date-time
         modified_by:
-          description: The actor who last updated the secret.
+          description: UID of the user or OAuth client that last set the secret's value.
           type: string
         name:
-          description: The secret name (alphanumeric and underscores only).
+          description: The secret's name. Routes and alerts reference it as `[$$name]`.
           type: string
       required:
         - name
@@ -7471,12 +7943,12 @@ components:
         fleet_uids:
           $ref: '#/components/schemas/FleetsUIDList'
         name:
-          description: repository name
+          description: Repository name.
           type: string
         project_uids:
           $ref: '#/components/schemas/AppUIDList'
         uid:
-          description: The unique identifier for the data repository
+          description: Repository UID, e.g. `repo:2606f411-dea6-44a0-9743-1130f57d77d8`.
           type: string
     RepositoryListResponse:
       type: object
@@ -7487,6 +7959,23 @@ components:
             $ref: '#/components/schemas/Repository'
       required:
         - repositories
+    RepositoryRecord:
+      description: |
+        One event in a repository's archive, with the session it arrived in and the device's
+        environment at the time. `GetRepositoryData` returns one per line, and dataset JSONata
+        expressions and Python functions read one at a time, as in `event.body.temp`. `session`
+        is often absent, and `env` is absent in older records.
+      type: object
+      properties:
+        env:
+          description: The device's environment variables when the event arrived, after merging project and fleet ones.
+          type: object
+          additionalProperties:
+            type: string
+        event:
+          $ref: '#/components/schemas/Event'
+        session:
+          $ref: '#/components/schemas/DeviceSession'
     RepositoryTokenRequest:
       type: object
       properties:
@@ -7543,6 +8032,12 @@ components:
         - database
         - expires_at
     Role:
+      description: |
+        A role in a project; `null` when the caller has no role in it.
+        - `owner`: full access, including members and billing
+        - `developer`: manage devices, fleets, routes and settings
+        - `viewer`: read-only
+        - `support`: temporary access granted to Blues support
       type: string
       enum:
         - owner
@@ -7708,7 +8203,7 @@ components:
       type: object
       properties:
         items:
-          description: Used if type is array
+          description: For an array, the type of its elements, inferred from the first element.
           type: array
           items:
             $ref: '#/components/schemas/SchemaProperty'
@@ -7716,11 +8211,12 @@ components:
           description: Name of the field (optional for array/object children)
           type: string
         properties:
-          description: Used if type is object
+          description: For an object, its fields.
           type: array
           items:
             $ref: '#/components/schemas/SchemaProperty'
         type:
+          description: The field's JSON type.
           type: string
           enum:
             - string
@@ -7729,6 +8225,7 @@ components:
             - array
             - object
         updated_at:
+          description: When Notehub recorded this field, usually when it first appeared.
           type: string
           format: date-time
       required:
@@ -8128,20 +8625,20 @@ components:
       type: object
       properties:
         info:
-          description: Arbitrary JSON metadata associated with this firmware entry.
+          description: JSON metadata for this firmware. Replaces the stored object when present.
           type: object
           additionalProperties: true
         notes:
-          description: Notes describing this firmware version.
+          description: New notes for this firmware. Empty keeps the current notes.
           type: string
         version:
-          description: The firmware version string.
+          description: New version string. Empty keeps the current version.
           type: string
     UpdateProjectSecretRequest:
       type: object
       properties:
         value:
-          description: The new secret value (encrypted at rest, never returned).
+          description: The new secret value. Encrypted at rest and never returned.
           type: string
       required:
         - value
@@ -8557,6 +9054,7 @@ components:
             type: object
             properties:
               cellular_plans:
+                description: One entry per cellular SIM. Empty for a device with only a satellite connection.
                 type: array
                 items:
                   $ref: '#/components/schemas/CellularPlan'
@@ -8830,7 +9328,7 @@ components:
             type: object
             properties:
               latest_events:
-                description: The set of latest events.  Will always include the current "session.begin" event.
+                description: The most recent event from each notefile, sorted by notefile name.
                 type: array
                 items:
                   $ref: '#/components/schemas/Event'
