@@ -7445,6 +7445,23 @@ components:
             $ref: '#/components/schemas/Repository'
       required:
         - repositories
+    RepositoryRecord:
+      description: |
+        One event in a repository's archive, with the session it arrived in and the device's
+        environment at the time. `GetRepositoryData` returns one per line, and dataset JSONata
+        expressions and Python functions read one at a time, as in `event.body.temp`. `session`
+        is often absent, and `env` is absent in older records.
+      type: object
+      properties:
+        env:
+          description: The device's environment variables when the event arrived, after merging project and fleet ones.
+          type: object
+          additionalProperties:
+            type: string
+        event:
+          $ref: '#/components/schemas/Event'
+        session:
+          $ref: '#/components/schemas/DeviceSession'
     RepositoryTokenRequest:
       type: object
       properties:
