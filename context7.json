@@ -1,0 +1,19 @@
+{
+  "$schema": "https://context7.com/schema/context7.json",
+  "url": "https://context7.com/blues/notehub-js",
+  "public_key": "pk_nVFOrz6sC1j4Aqx8A32xw",
+  "projectTitle": "notehub-js: JavaScript client for the Blues Notehub API",
+  "description": "notehub-js, published on npm as @blues-inc/notehub-js, is the JavaScript client library for the Blues Notehub REST API at https://api.notefile.net, generated from the Notehub OpenAPI specification. It provides Promise-based API classes and models for Notehub projects, devices, fleets, events, routes, environment variables, firmware updates, monitors, jobs, and usage data.",
+  "folders": [
+    "src"
+  ],
+  "rules": [
+    "Install with npm install @blues-inc/notehub-js and import that scoped name, e.g. import * as NotehubJs from \"@blues-inc/notehub-js\". The package ships no TypeScript declarations; in TypeScript, add declare module \"@blues-inc/notehub-js\".",
+    "Authorize Notehub API requests to https://api.notefile.net with an Authorization: Bearer header carrying a Notehub personal access token or an OAuth bearer token. In notehub-js, set ApiClient.instance.authentications[\"personalAccessToken\"].accessToken.",
+    "Create API classes with new NotehubJs.DeviceApi(), new NotehubJs.ProjectApi(), new NotehubJs.EventApi(), and so on. Each uses the shared NotehubJs.ApiClient.instance unless you pass an ApiClient to its constructor.",
+    "notehub-js methods are camelCase and return Promises. Pass required path parameters positionally and optional parameters in a trailing opts object, e.g. new NotehubJs.DeviceApi().getDevices(projectOrProductUID, { pageSize: 50, pageNum: 1 }).",
+    "Devices, Notes, Notefiles, and device environment variables are in DeviceApi; fleets, products, firmware, DFU, and project environment variables are in ProjectApi; events are in EventApi; routes are in RouteApi.",
+    "Paged methods such as getDevices take pageSize and pageNum and return hasMore. To read many events, call EventApi.getEventsByCursor and pass each response's nextCursor as the cursor option of the next call.",
+    "Copy Api class, method, parameter, and model names exactly from this SDK's src/docs files or the Notehub API reference (https://dev.blues.io/api-reference/notehub-api/); do not invent methods, parameters, or response fields."
+  ]
+}
