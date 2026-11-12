@@ -3028,7 +3028,8 @@ paths:
         Delete a monitor so it stops raising alerts. Returns an empty monitor object. To pause it
         instead, set `disabled` with `UpdateMonitor`.
 
-        Requires the Owner or Developer role. Returns 404 if the monitor doesn't exist.
+        Requires the Owner or Developer role. Returns 404 if the monitor never existed; deleting it
+        again succeeds.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/monitorUIDParam'
@@ -3055,7 +3056,7 @@ paths:
         Get one monitor's settings and whether it's in alert. Slack credentials in `alert_routes`
         come back as `(omitted)`.
 
-        Returns 404 if the monitor doesn't exist.
+        Returns 404 if the monitor never existed; a deleted monitor is still returned.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/monitorUIDParam'
@@ -5002,11 +5003,12 @@ components:
                 description: The UID of the source of the alert
                 type: string
               source_type:
-                description: The type of source.
+                description: The `source_type` of the monitor that raised the alert.
                 type: string
                 enum:
                   - event
-                  - device
+                  - heartbeat
+                  - usage
               source_uid:
                 description: The UID of the source of the alert
                 type: string
@@ -5032,7 +5034,8 @@ components:
           type: string
           enum:
             - event
-            - device
+            - heartbeat
+            - usage
         monitor_uid:
           description: MonitorUID
           type: string
@@ -7063,7 +7066,7 @@ components:
           description: |
             For usage monitors, what usage is summed over.
             - `device`: each device on its own
-            - `fleet`: all matching devices together
+            - `fleet`: each fleet in `fleet_filter` on its own. Requires `fleet_filter`, or the monitor never fires.
           type: string
         usage_type:
           description: |
