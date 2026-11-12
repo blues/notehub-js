@@ -393,7 +393,14 @@ paths:
   /v1/products/{productUID}/devices/{deviceUID}/webhook-event:
     post:
       operationId: CreateLegacyWebhookEvent
-      description: Legacy endpoint for sending an event from a webhook, associated with the given device (provisioning it if necessary). The request body is a Note-shaped object containing the notefile name, body, and optional payload.
+      summary: Add a note-shaped event from a device (legacy)
+      description: |
+        Legacy: add an event from a device, adding the device to the project if it's new. The body
+        is note-shaped: `file`, `body`, an optional base64 `payload`, and other event fields such as
+        `when` and `sn`. No webhook transform applies. New integrations should use
+        `CreateWebhookDeviceEventByProduct`.
+
+        Requires the Owner or Developer role. Returns 400 if there's no `body` or `payload`.
       parameters:
         - $ref: '#/components/parameters/productUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
@@ -425,12 +432,18 @@ paths:
   /v1/products/{productUID}/devices/{deviceUID}/webhook-session:
     put:
       operationId: UpdateLegacyWebhookSession
-      description: Legacy endpoint for opening or updating a webhook session for the given device (provisioning the device if necessary). Used by external services that need to maintain a callable session against a device behind a webhook.
+      summary: Open or close a webhook device's session (legacy)
+      description: |
+        Legacy: open, update or close a webhook device's session, adding the device if it's new.
+        The body is a session: set `why_session_opened` to open one, `why_session_closed` to close
+        it, both to close and reopen, or neither to update the open session.
+
+        Requires the Owner or Developer role. Returns 400 when updating with no session open.
       parameters:
         - $ref: '#/components/parameters/productUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
       requestBody:
-        description: Optional session metadata.
+        description: Session fields, such as `why_session_opened`, `why_session_closed` and signal or location values.
         required: false
         content:
           application/json:
@@ -579,13 +592,19 @@ paths:
   /v1/products/{productUID}/webhooks/{webhookUID}/devices/{deviceUID}/event:
     post:
       operationId: CreateWebhookDeviceEventByProduct
-      description: Sends an event to be processed by the specified webhook, addressed by productUID, associated with the given device (provisioning it if necessary). The entire request body becomes the event body. The webhook's configured JSONata transform, if any, is applied before routing.
+      summary: Send a device's event through a webhook
+      description: |
+        Post JSON to a webhook as one device's event, like `CreateWebhookEventByProduct`, adding the
+        device if it's new. The DeviceUID is lower-cased and gets `dev:ext:` unless it has its own
+        sub-prefix, so `dev:abc` becomes `dev:ext:abc`, not an existing Notecard.
+
+        Requires the Owner or Developer role. Returns 400 if the transform fails, and 500 if the webhook is disabled.
       parameters:
         - $ref: '#/components/parameters/productUIDParam'
         - $ref: '#/components/parameters/webhookUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
       requestBody:
-        description: The event body (arbitrary JSON)
+        description: Any JSON object; it becomes the event body, or the transform's input.
         required: true
         content:
           application/json:
@@ -607,12 +626,19 @@ paths:
   /v1/products/{productUID}/webhooks/{webhookUID}/event:
     post:
       operationId: CreateWebhookEventByProduct
-      description: Sends an event to be processed by the specified webhook, addressed by productUID. The entire request body becomes the event body. The webhook's configured JSONata transform, if any, is applied before routing. The event is not associated with a specific device.
+      summary: Send an event through a webhook
+      description: |
+        Post JSON to a webhook. The body becomes the event body, in `<webhookUID>.qo`, from
+        `dev:ext:webhook`; a `transform` can change all three, but must set `body`. For a specific
+        device, use `CreateWebhookDeviceEventByProduct`.
+
+        Requires the Owner or Developer role. Returns 400 if the transform fails or sets no `body`,
+        and 500 if the webhook is disabled.
       parameters:
         - $ref: '#/components/parameters/productUIDParam'
         - $ref: '#/components/parameters/webhookUIDParam'
       requestBody:
-        description: The event body (arbitrary JSON)
+        description: Any JSON object; it becomes the event body, or the transform's input.
         required: true
         content:
           application/json:
@@ -634,7 +660,12 @@ paths:
   /v1/products/{productUID}/webhooks/{webhookUID}/settings:
     get:
       operationId: GetWebhookSettingsByProduct
-      description: Retrieves the configuration settings for the specified webhook, addressed by productUID.
+      summary: Get a webhook by ProductUID
+      description: |
+        Get one webhook's settings, like `GetWebhook`, but addressed by ProductUID instead of the
+        project.
+
+        Requires the Owner or Developer role. Returns 500, not 404, if the webhook doesn't exist.
       parameters:
         - $ref: '#/components/parameters/productUIDParam'
         - $ref: '#/components/parameters/webhookUIDParam'
@@ -656,7 +687,13 @@ paths:
         resource: blues:resources:app:APPSERIAL:settings
     put:
       operationId: UpdateWebhookSettingsByProduct
-      description: Updates the configuration settings for the specified webhook, addressed by productUID. Update body will completely replace the existing settings.
+      summary: Update a webhook by ProductUID
+      description: |
+        Replace a webhook's settings, like `UpdateWebhook`, but addressed by ProductUID. Creates the
+        webhook if it doesn't exist.
+
+        Requires the Owner or Developer role. Returns 400 if the ID has characters other than letters, digits, `-` and
+        `_`.
       parameters:
         - $ref: '#/components/parameters/productUIDParam'
         - $ref: '#/components/parameters/webhookUIDParam'
@@ -799,7 +836,12 @@ paths:
   /v1/projects/{projectOrProductUID}/alerts:
     get:
       operationId: GetAlerts
-      description: Get list of defined Alerts
+      summary: List alerts
+      description: |
+        List the alerts a project's monitors have raised, with each one's value, device and the
+        notifications sent. Set `monitorUID` for one monitor's alerts.
+
+        Paginated.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/pageSizeParam'
@@ -3467,7 +3509,10 @@ paths:
   /v1/projects/{projectOrProductUID}/monitors:
     get:
       operationId: GetMonitors
-      description: Get list of defined Monitors
+      summary: List monitors
+      description: |
+        List a project's monitors with their settings and whether each is in alert. For the alerts
+        they've raised, use `GetAlerts`.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
       responses:
@@ -3484,7 +3529,14 @@ paths:
         resource: blues:resources:app:APPSERIAL:devices
     post:
       operationId: CreateMonitor
-      description: Create a new Monitor
+      summary: Create a monitor
+      description: |
+        Create a monitor that raises an alert and notifies email or Slack when its condition holds.
+        It can watch an event value (`event`, the default), devices going quiet (`heartbeat`), or
+        data usage (`usage`).
+
+        Requires the Owner or Developer role. Returns 403 if the project's plan doesn't allow the
+        monitor, and 400 for invalid settings.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
       requestBody:
@@ -3513,7 +3565,13 @@ paths:
   /v1/projects/{projectOrProductUID}/monitors/{monitorUID}:
     delete:
       operationId: DeleteMonitor
-      description: Delete Monitor
+      summary: Delete a monitor
+      description: |
+        Delete a monitor so it stops raising alerts. Returns an empty monitor object. To pause it
+        instead, set `disabled` with `UpdateMonitor`.
+
+        Requires the Owner or Developer role. Returns 404 if the monitor never existed; deleting it
+        again succeeds.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/monitorUIDParam'
@@ -3535,7 +3593,12 @@ paths:
         resource: blues:resources:app:APPSERIAL:devices
     get:
       operationId: GetMonitor
-      description: Get Monitor
+      summary: Get a monitor
+      description: |
+        Get one monitor's settings and whether it's in alert. Slack credentials in `alert_routes`
+        come back as `(omitted)`.
+
+        Returns 404 if the monitor never existed; a deleted monitor is still returned.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/monitorUIDParam'
@@ -3557,7 +3620,15 @@ paths:
         resource: blues:resources:app:APPSERIAL:devices
     put:
       operationId: UpdateMonitor
-      description: Update Monitor
+      summary: Update a monitor
+      description: |
+        Replace a monitor's settings with the whole monitor, as `GetMonitor` returns it. Omitted
+        fields are cleared or reset, except `source_type`, `fleet_filter`, `notefile_filter`,
+        `condition_type`, `aggregate_window` and `alert_routes`. Slack credentials left as
+        `(omitted)` are kept.
+
+        Requires the Owner or Developer role. Returns 403 if the plan doesn't allow a new
+        `source_type`.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/monitorUIDParam'
@@ -4733,7 +4804,12 @@ paths:
   /v1/projects/{projectOrProductUID}/webhooks:
     get:
       operationId: GetWebhooks
-      description: Retrieves all webhooks for the specified project
+      summary: List webhooks
+      description: |
+        List a project's inbound webhooks with their transforms and whether they're disabled. An
+        inbound webhook lets an outside service post data that Notehub turns into events.
+
+        Requires the Owner or Developer role.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
       responses:
@@ -4760,7 +4836,12 @@ paths:
   /v1/projects/{projectOrProductUID}/webhooks/{webhookUID}:
     delete:
       operationId: DeleteWebhook
-      description: Deletes the specified webhook
+      summary: Delete a webhook
+      description: |
+        Delete a webhook's settings. Posts to its ID are still accepted, just without a
+        transform; to stop accepting them, set `disabled` with `UpdateWebhook` instead.
+
+        Requires the Owner or Developer role. Returns 404 if the webhook doesn't exist.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/webhookUIDParam'
@@ -4778,7 +4859,11 @@ paths:
         resource: blues:resources:app:APPSERIAL:settings
     get:
       operationId: GetWebhook
-      description: Retrieves the configuration settings for the specified webhook
+      summary: Get a webhook
+      description: |
+        Get one webhook's transform and whether it's disabled.
+
+        Requires the Owner or Developer role. Returns 404 if the webhook doesn't exist.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/webhookUIDParam'
@@ -4800,7 +4885,14 @@ paths:
         resource: blues:resources:app:APPSERIAL:settings
     post:
       operationId: CreateWebhook
-      description: Creates a webhook for the specified product with the given name. The name | must be unique within the project.
+      summary: Create a webhook
+      description: |
+        Create an inbound webhook that outside services post to with `CreateWebhookEventByProduct`.
+        Its events go to the notefile `<webhookUID>.qo` unless its JSONata `transform` sets `file`.
+        Use a lower-case ID; the event endpoints look it up in lower case.
+
+        Requires the Owner or Developer role. Returns 409 if the ID is taken, and 400 if it has characters other than
+        letters, digits, `-` and `_`.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/webhookUIDParam'
@@ -4809,10 +4901,9 @@ paths:
         content:
           application/json:
             example:
-              settings:
-                disabled: false
-                id: Abc_123-2646f411-dc56-44a0-9743-4130f47a74h8
-                transform: '{"device":body.end_device_ids.dev_eui,"sn":body.end_device_ids.device_id,"body":body.uplink_message.decoded_payload,"details":body}'
+              disabled: false
+              id: ttn-uplink
+              transform: '{"device":body.end_device_ids.dev_eui,"sn":body.end_device_ids.device_id,"body":body.uplink_message.decoded_payload,"details":body}'
             schema:
               $ref: '#/components/schemas/WebhookSettings'
       responses:
@@ -4829,7 +4920,12 @@ paths:
         resource: blues:resources:app:APPSERIAL:settings
     put:
       operationId: UpdateWebhook
-      description: Updates the configuration settings for the specified webhook. | Webhook will be created if it does not exist. Update body will completely replace the existing settings.
+      summary: Update a webhook
+      description: |
+        Replace a webhook's settings, creating the webhook if it doesn't exist. Send every field:
+        a missing `transform` is cleared and a missing `disabled` enables the webhook.
+
+        Requires the Owner or Developer role.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/webhookUIDParam'
@@ -5217,6 +5313,7 @@ components:
       schema:
         type: string
     monitorUIDParam:
+      description: MonitorUID, `monitor:` followed by a UUID. List with `GetMonitors`.
       example: monitor:8bAdf00d-000f-51c-af-01d5eaf00dbad
       in: path
       name: monitorUID
@@ -5224,6 +5321,7 @@ components:
       schema:
         type: string
     monitorUIDQueryParam:
+      description: Return only this monitor's alerts.
       explode: true
       in: query
       name: monitorUID
@@ -5575,13 +5673,13 @@ components:
       schema:
         type: string
     webhookUIDParam:
-      description: WebhookUID
+      description: Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`.
       in: path
       name: webhookUID
       required: true
       schema:
         type: string
-        example: Abc_123-2646f411-dc56-44a0-9743-4130f47a74h8
+        example: ttn-uplink
     XAuthTokenHeader:
       description: The device's PIN, used instead of an API token.
       in: header
@@ -5613,7 +5711,7 @@ components:
             - app
             - device
         created_at:
-          description: The time the alert was created
+          description: When the alert was raised, as a Unix timestamp in seconds.
           type: integer
           format: int64
         data:
@@ -5630,11 +5728,12 @@ components:
                 description: The UID of the source of the alert
                 type: string
               source_type:
-                description: The type of source.
+                description: The `source_type` of the monitor that raised the alert.
                 type: string
                 enum:
                   - event
-                  - device
+                  - heartbeat
+                  - usage
               source_uid:
                 description: The UID of the source of the alert
                 type: string
@@ -5650,17 +5749,18 @@ components:
           description: DeviceUID
           type: string
         field_name:
-          description: The field name that triggered the alert
+          description: The monitor's `source_selector`.
           type: string
         monitor_name:
           description: Monitor Name
           type: string
         monitor_type:
-          description: The type of monitor that triggered the alert
+          description: The `source_type` of the monitor that raised the alert.
           type: string
           enum:
             - event
-            - device
+            - heartbeat
+            - usage
         monitor_uid:
           description: MonitorUID
           type: string
@@ -6827,7 +6927,7 @@ components:
       type: object
       properties:
         email:
-          description: Email Address
+          description: Email address, or several separated by commas.
           type: string
           example: example@blues.com
     Empty:
@@ -7633,7 +7733,11 @@ components:
       type: object
       properties:
         aggregate_function:
-          description: Aggregate function to apply to the selected values before applying the condition. [none, avg, max, min, sum, count]
+          description: |
+            How values in `aggregate_window` are combined before the comparison.
+            - `none`: compare each value on its own
+            - `avg`, `max`, `min`, `sum`: compare the average, largest, smallest or total
+            - `count`: compare the number of matching events; needs no `source_selector`
           type: string
           enum:
             - none
@@ -7643,7 +7747,7 @@ components:
             - sum
             - count
         aggregate_window:
-          description: The time window to aggregate the selected values. It follows the format of a number followed by a time unit
+          description: The time window for `aggregate_function`, such as `10m` or `5h30m40s`.
           type: string
           example: 10m or 5h30m40s
           pattern: ^(([0-9]+[.]?[0-9]*|[.][0-9]+)(ns|us|µs|ms|s|m|h))+$
@@ -7651,6 +7755,7 @@ components:
           description: If true, the monitor is in alert state.
           type: boolean
         alert_routes:
+          description: Where to send notifications, by email or Slack. Required to create a monitor.
           type: array
           items:
             oneOf:
@@ -7658,7 +7763,7 @@ components:
               - $ref: '#/components/schemas/SlackBearerNotification'
               - $ref: '#/components/schemas/EmailNotification'
         condition_type:
-          description: A comparison operation to apply to the value selected by the source_selector. Required for event and usage monitors; set automatically for heartbeat monitors. [greater_than, greater_than_or_equal_to, less_than, less_than_or_equal_to, equal_to, not_equal_to]
+          description: How the value is compared with `threshold`. Required for event and usage monitors; heartbeat monitors always use `greater_than_or_equal_to`.
           type: string
           enum:
             - greater_than
@@ -7668,29 +7773,33 @@ components:
             - equal_to
             - not_equal_to
         description:
+          description: Free-form description.
           type: string
           default: ''
         disabled:
           description: If true, the monitor will not be evaluated.
           type: boolean
         fleet_filter:
+          description: Watch only devices in these fleets (FleetUIDs).
           type: array
           items:
             type: string
         last_routed_at:
-          description: The last time the monitor was evaluated and routed.
+          description: When the monitor last sent notifications.
           type: string
         name:
+          description: Monitor name. Required to create a monitor.
           type: string
         notefile_filter:
+          description: Watch only events from these notefiles, e.g. `data.qo`. Not allowed for heartbeat monitors.
           type: array
           items:
             type: string
         per_device:
-          description: Only relevant when using an aggregate_function. If true, the monitor will be evaluated per device, | rather than across the set of selected devices. If true then if a single device matches the specified criteria, | and alert will be created, otherwise the aggregate function will be applied across all devices.
+          description: With an `aggregate_function`, aggregate each device on its own, so one device can raise an alert. If false, aggregate across all devices.
           type: boolean
         routing_cooldown_period:
-          description: The time period to wait before routing another event after the monitor | has been triggered. It follows the format of a number followed by a time unit.
+          description: How long to wait after notifying before notifying again, such as `10m` or `5h30m`. Defaults to `5m`.
           type: string
           example: 10m or 5h30m40s
           pattern: ^(([0-9]+[.]?[0-9]*|[.][0-9]+)(ns|us|µs|ms|s|m|h))+$
@@ -7698,11 +7807,17 @@ components:
           description: If true, alerts will be created, but no notifications will be sent.
           type: boolean
         source_selector:
-          description: A dot-delimited path to a single numeric value within the event body.
+          description: |
+            Dot path to a numeric value inside the event body, such as `temperature`, not
+            `body.temperature`. Required for event monitors unless `aggregate_function` is `count`.
           type: string
           example: temperature
         source_type:
-          description: The type of source to monitor. Defaults to "event".
+          description: |
+            What the monitor watches. Defaults to `event` on create.
+            - `event`: a numeric value in event bodies, read with `source_selector`
+            - `heartbeat`: devices that go `threshold` seconds without activity
+            - `usage`: cellular or satellite data usage
           type: string
           default: event
           enum:
@@ -7714,15 +7829,22 @@ components:
           type: number
           format: double
         uid:
+          description: MonitorUID, `monitor:` followed by a UUID.
           type: string
         usage_scope:
-          description: 'For usage monitors: the scope of aggregation. Supported values are "device" and "fleet".'
+          description: |
+            For usage monitors, what usage is summed over.
+            - `device`: each device on its own
+            - `fleet`: each fleet in `fleet_filter` on its own. Requires `fleet_filter`, or the monitor never fires.
           type: string
         usage_type:
-          description: 'For usage monitors: the type of data usage to monitor. Supported values are "cellular" and "satellite".'
+          description: |
+            For usage monitors, which data to watch.
+            - `cellular`: cellular data
+            - `satellite`: satellite data
           type: string
         usage_window:
-          description: 'For usage monitors: the rolling time window in days to sum usage over (e.g. 30 for 30 days).'
+          description: For usage monitors, the rolling window to sum usage over, in days, e.g. `30`.
           type: integer
           format: int32
     MqttRoute:
@@ -8628,13 +8750,16 @@ components:
           description: The channel to send the message to.
           type: string
         message_type:
-          description: text or blocks
+          description: |
+            How `text` is read.
+            - `text`: plain message text
+            - `blocks`: a Slack Block Kit JSON definition
           type: string
           enum:
             - text
             - blocks
         text:
-          description: The text of the message, or the blocks definition
+          description: The message, or Block Kit JSON. Event placeholders such as `[.body.temp]` aren't allowed.
           type: string
         token:
           description: The bearer token for the Slack app.
@@ -8672,13 +8797,16 @@ components:
       type: object
       properties:
         message_type:
-          description: text or blocks
+          description: |
+            How `text` is read.
+            - `text`: plain message text
+            - `blocks`: a Slack Block Kit JSON definition
           type: string
           enum:
             - text
             - blocks
         text:
-          description: The text of the message, or the blocks definition
+          description: The message, or Block Kit JSON. Event placeholders such as `[.body.temp]` aren't allowed.
           type: string
         url:
           description: The URL of the Slack webhook.
@@ -9177,13 +9305,15 @@ components:
       type: object
       properties:
         disabled:
-          description: Flag indicating if the webhook is disabled
+          description: If true, posts to the webhook return an error and create no events.
           type: boolean
         id:
-          description: Webhook ID
+          description: Webhook ID, also the default notefile name (`<id>.qo`). Letters, digits, `-` and `_`.
           type: string
         transform:
-          description: Transformation to be applied to the event
+          description: |
+            JSONata expression applied to the event, with the post under `body`. Its output replaces the
+            event and must set `body`. `$doNotRoute()` drops it.
           type: string
   headers:
     HasMoreHeader:
