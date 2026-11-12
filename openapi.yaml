@@ -455,8 +455,9 @@ paths:
       summary: Add an event from an external device
       description: |
         Add an event from a device that isn't a Notecard, adding the device to the project if it's new.
-        A DeviceUID without a prefix becomes `dev:ext:<deviceUID>`. Notehub sets `when` to the current
-        time and adds `.qo` to a `file` with no extension.
+        The DeviceUID is lower-cased and gets `dev:ext:` unless it has its own sub-prefix, so `dev:123`
+        becomes `dev:ext:123`. Notehub sets `when` to the current time and adds `.qo` to a `file` with
+        no extension.
 
         Requires the Owner or Developer role.
       parameters:
@@ -486,8 +487,8 @@ paths:
       operationId: ExtDeviceSessionClose
       summary: Close an external device's session
       description: |
-        Close an external device's session, if one is open, adding the device to the project if it's
-        new.
+        Close an external device's session, if one is open, adding the device if it's new. The DeviceUID
+        gets `dev:ext:` as in `CreateEventExtDevice`.
 
         Requires the Owner or Developer role.
       parameters:
@@ -517,9 +518,9 @@ paths:
       operationId: ExtDeviceSessionOpen
       summary: Open an external device's session
       description: |
-        Open a session for an external device, adding the device to the project if it's new. An open
-        session is closed first, with `why_session_closed` as the reason. To close it, use
-        `ExtDeviceSessionClose`.
+        Open a session for an external device, adding the device if it's new. An open session is closed
+        first, with `why_session_closed` as the reason. The DeviceUID gets `dev:ext:` as in
+        `CreateEventExtDevice`.
 
         Requires the Owner or Developer role. Returns 500 if webhooks are disabled for the project.
       parameters:
@@ -3195,7 +3196,8 @@ paths:
         doesn't run until `RunJob`. Each call creates a new job with its own UID; names needn't be
         unique.
 
-        Requires the Owner or Developer role. Returns 400 without a `name` or for an invalid definition.
+        Requires the Owner or Developer role. Returns 400 without a `name`; an invalid definition
+        returns 500.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - name: name
@@ -3351,9 +3353,9 @@ paths:
       operationId: DeleteJobRun
       summary: Delete a job run
       description: |
-        Delete a job run and its results.
+        Delete a job run and its results. Deleting a run that doesn't exist also succeeds.
 
-        Requires the Owner or Developer role. Returns 404 if the run doesn't exist.
+        Requires the Owner or Developer role.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/reportUIDParam'
@@ -4645,7 +4647,7 @@ paths:
               - month
         - name: aggregate
           in: query
-          description: How to group the counts, such as per device or one total for the project.
+          description: How to group the counts, per route or one total for the project.
           required: false
           schema:
             type: string
