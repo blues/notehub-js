@@ -373,7 +373,14 @@ paths:
   /v1/products/{productUID}/devices/{deviceUID}/webhook-event:
     post:
       operationId: CreateLegacyWebhookEvent
-      description: Legacy endpoint for sending an event from a webhook, associated with the given device (provisioning it if necessary). The request body is a Note-shaped object containing the notefile name, body, and optional payload.
+      summary: Add a note-shaped event from a device (legacy)
+      description: |
+        Legacy: add an event from a device, adding the device to the project if it's new. The body
+        is note-shaped: `file`, `body`, an optional base64 `payload`, and other event fields such as
+        `when` and `sn`. No webhook transform applies. New integrations should use
+        `CreateWebhookDeviceEventByProduct`.
+
+        Requires the Owner or Developer role. Returns 400 if there's no `body` or `payload`.
       parameters:
         - $ref: '#/components/parameters/productUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
@@ -405,12 +412,18 @@ paths:
   /v1/products/{productUID}/devices/{deviceUID}/webhook-session:
     put:
       operationId: UpdateLegacyWebhookSession
-      description: Legacy endpoint for opening or updating a webhook session for the given device (provisioning the device if necessary). Used by external services that need to maintain a callable session against a device behind a webhook.
+      summary: Open or close a webhook device's session (legacy)
+      description: |
+        Legacy: open, update or close a webhook device's session, adding the device if it's new.
+        The body is a session: set `why_session_opened` to open one, `why_session_closed` to close
+        it, both to close and reopen, or neither to update the open session.
+
+        Requires the Owner or Developer role. Returns 400 when updating with no session open.
       parameters:
         - $ref: '#/components/parameters/productUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
       requestBody:
-        description: Optional session metadata.
+        description: Session fields, such as `why_session_opened`, `why_session_closed` and signal or location values.
         required: false
         content:
           application/json:
@@ -541,13 +554,19 @@ paths:
   /v1/products/{productUID}/webhooks/{webhookUID}/devices/{deviceUID}/event:
     post:
       operationId: CreateWebhookDeviceEventByProduct
-      description: Sends an event to be processed by the specified webhook, addressed by productUID, associated with the given device (provisioning it if necessary). The entire request body becomes the event body. The webhook's configured JSONata transform, if any, is applied before routing.
+      summary: Send a device's event through a webhook
+      description: |
+        Post JSON to a webhook as one device's event, like `CreateWebhookEventByProduct`, adding the
+        device if it's new. The DeviceUID is lower-cased and gets `dev:ext:` unless it has its own
+        sub-prefix, so `dev:abc` becomes `dev:ext:abc`, not an existing Notecard.
+
+        Requires the Owner or Developer role. Returns 400 if the transform fails, and 500 if the webhook is disabled.
       parameters:
         - $ref: '#/components/parameters/productUIDParam'
         - $ref: '#/components/parameters/webhookUIDParam'
         - $ref: '#/components/parameters/deviceUIDParam'
       requestBody:
-        description: The event body (arbitrary JSON)
+        description: Any JSON object; it becomes the event body, or the transform's input.
         required: true
         content:
           application/json:
@@ -569,12 +588,19 @@ paths:
   /v1/products/{productUID}/webhooks/{webhookUID}/event:
     post:
       operationId: CreateWebhookEventByProduct
-      description: Sends an event to be processed by the specified webhook, addressed by productUID. The entire request body becomes the event body. The webhook's configured JSONata transform, if any, is applied before routing. The event is not associated with a specific device.
+      summary: Send an event through a webhook
+      description: |
+        Post JSON to a webhook. The body becomes the event body, in `<webhookUID>.qo`, from
+        `dev:ext:webhook`; a `transform` can change all three, but must set `body`. For a specific
+        device, use `CreateWebhookDeviceEventByProduct`.
+
+        Requires the Owner or Developer role. Returns 400 if the transform fails or sets no `body`,
+        and 500 if the webhook is disabled.
       parameters:
         - $ref: '#/components/parameters/productUIDParam'
         - $ref: '#/components/parameters/webhookUIDParam'
       requestBody:
-        description: The event body (arbitrary JSON)
+        description: Any JSON object; it becomes the event body, or the transform's input.
         required: true
         content:
           application/json:
@@ -596,7 +622,12 @@ paths:
   /v1/products/{productUID}/webhooks/{webhookUID}/settings:
     get:
       operationId: GetWebhookSettingsByProduct
-      description: Retrieves the configuration settings for the specified webhook, addressed by productUID.
+      summary: Get a webhook by ProductUID
+      description: |
+        Get one webhook's settings, like `GetWebhook`, but addressed by ProductUID instead of the
+        project.
+
+        Requires the Owner or Developer role. Returns 500, not 404, if the webhook doesn't exist.
       parameters:
         - $ref: '#/components/parameters/productUIDParam'
         - $ref: '#/components/parameters/webhookUIDParam'
@@ -618,7 +649,13 @@ paths:
         resource: blues:resources:app:APPSERIAL:settings
     put:
       operationId: UpdateWebhookSettingsByProduct
-      description: Updates the configuration settings for the specified webhook, addressed by productUID. Update body will completely replace the existing settings.
+      summary: Update a webhook by ProductUID
+      description: |
+        Replace a webhook's settings, like `UpdateWebhook`, but addressed by ProductUID. Creates the
+        webhook if it doesn't exist.
+
+        Requires the Owner or Developer role. Returns 400 if the ID has characters other than letters, digits, `-` and
+        `_`.
       parameters:
         - $ref: '#/components/parameters/productUIDParam'
         - $ref: '#/components/parameters/webhookUIDParam'
@@ -4643,7 +4680,12 @@ paths:
   /v1/projects/{projectOrProductUID}/webhooks:
     get:
       operationId: GetWebhooks
-      description: Retrieves all webhooks for the specified project
+      summary: List webhooks
+      description: |
+        List a project's inbound webhooks with their transforms and whether they're disabled. An
+        inbound webhook lets an outside service post data that Notehub turns into events.
+
+        Requires the Owner or Developer role.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
       responses:
@@ -4670,7 +4712,12 @@ paths:
   /v1/projects/{projectOrProductUID}/webhooks/{webhookUID}:
     delete:
       operationId: DeleteWebhook
-      description: Deletes the specified webhook
+      summary: Delete a webhook
+      description: |
+        Delete a webhook's settings. Posts to its ID are still accepted, just without a
+        transform; to stop accepting them, set `disabled` with `UpdateWebhook` instead.
+
+        Requires the Owner or Developer role. Returns 404 if the webhook doesn't exist.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/webhookUIDParam'
@@ -4688,7 +4735,11 @@ paths:
         resource: blues:resources:app:APPSERIAL:settings
     get:
       operationId: GetWebhook
-      description: Retrieves the configuration settings for the specified webhook
+      summary: Get a webhook
+      description: |
+        Get one webhook's transform and whether it's disabled.
+
+        Requires the Owner or Developer role. Returns 404 if the webhook doesn't exist.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/webhookUIDParam'
@@ -4710,7 +4761,14 @@ paths:
         resource: blues:resources:app:APPSERIAL:settings
     post:
       operationId: CreateWebhook
-      description: Creates a webhook for the specified product with the given name. The name | must be unique within the project.
+      summary: Create a webhook
+      description: |
+        Create an inbound webhook that outside services post to with `CreateWebhookEventByProduct`.
+        Its events go to the notefile `<webhookUID>.qo` unless its JSONata `transform` sets `file`.
+        Use a lower-case ID; the event endpoints look it up in lower case.
+
+        Requires the Owner or Developer role. Returns 409 if the ID is taken, and 400 if it has characters other than
+        letters, digits, `-` and `_`.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/webhookUIDParam'
@@ -4719,10 +4777,9 @@ paths:
         content:
           application/json:
             example:
-              settings:
-                disabled: false
-                id: Abc_123-2646f411-dc56-44a0-9743-4130f47a74h8
-                transform: '{"device":body.end_device_ids.dev_eui,"sn":body.end_device_ids.device_id,"body":body.uplink_message.decoded_payload,"details":body}'
+              disabled: false
+              id: ttn-uplink
+              transform: '{"device":body.end_device_ids.dev_eui,"sn":body.end_device_ids.device_id,"body":body.uplink_message.decoded_payload,"details":body}'
             schema:
               $ref: '#/components/schemas/WebhookSettings'
       responses:
@@ -4739,7 +4796,12 @@ paths:
         resource: blues:resources:app:APPSERIAL:settings
     put:
       operationId: UpdateWebhook
-      description: Updates the configuration settings for the specified webhook. | Webhook will be created if it does not exist. Update body will completely replace the existing settings.
+      summary: Update a webhook
+      description: |
+        Replace a webhook's settings, creating the webhook if it doesn't exist. Send every field:
+        a missing `transform` is cleared and a missing `disabled` enables the webhook.
+
+        Requires the Owner or Developer role.
       parameters:
         - $ref: '#/components/parameters/projectOrProductUIDParam'
         - $ref: '#/components/parameters/webhookUIDParam'
@@ -5485,13 +5547,13 @@ components:
       schema:
         type: string
     webhookUIDParam:
-      description: WebhookUID
+      description: Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`.
       in: path
       name: webhookUID
       required: true
       schema:
         type: string
-        example: Abc_123-2646f411-dc56-44a0-9743-4130f47a74h8
+        example: ttn-uplink
     XAuthTokenHeader:
       description: The device's PIN, used instead of an API token.
       in: header
@@ -9114,13 +9176,15 @@ components:
       type: object
       properties:
         disabled:
-          description: Flag indicating if the webhook is disabled
+          description: If true, posts to the webhook return an error and create no events.
           type: boolean
         id:
-          description: Webhook ID
+          description: Webhook ID, also the default notefile name (`<id>.qo`). Letters, digits, `-` and `_`.
           type: string
         transform:
-          description: Transformation to be applied to the event
+          description: |
+            JSONata expression applied to the event, with the post under `body`. Its output replaces the
+            event and must set `body`. `$doNotRoute()` drops it.
           type: string
   headers:
     HasMoreHeader:
