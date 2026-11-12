@@ -556,9 +556,9 @@ paths:
       operationId: CreateWebhookDeviceEventByProduct
       summary: Send a device's event through a webhook
       description: |
-        Post JSON to a webhook as one device's event, like `CreateWebhookEventByProduct`. The device
-        is added to the project if it's new; a DeviceUID without a prefix becomes
-        `dev:ext:<deviceUID>`, in lower case.
+        Post JSON to a webhook as one device's event, like `CreateWebhookEventByProduct`, adding the
+        device if it's new. The DeviceUID is lower-cased and gets `dev:ext:` unless it has its own
+        sub-prefix, so `dev:abc` becomes `dev:ext:abc`, not an existing Notecard.
 
         Requires the Owner or Developer role. Returns 400 if the transform fails, and 500 if the webhook is disabled.
       parameters:
@@ -590,11 +590,12 @@ paths:
       operationId: CreateWebhookEventByProduct
       summary: Send an event through a webhook
       description: |
-        Post JSON to a webhook. The whole body becomes the event body, in the notefile
-        `<webhookUID>.qo`, from the device `dev:ext:webhook`, unless the webhook's `transform` sets
-        other values. For a specific device, use `CreateWebhookDeviceEventByProduct`.
+        Post JSON to a webhook. The body becomes the event body, in `<webhookUID>.qo`, from
+        `dev:ext:webhook`; a `transform` can change all three, but must set `body`. For a specific
+        device, use `CreateWebhookDeviceEventByProduct`.
 
-        Requires the Owner or Developer role. Returns 400 if the transform fails, and 500 if the webhook is disabled.
+        Requires the Owner or Developer role. Returns 400 if the transform fails or sets no `body`,
+        and 500 if the webhook is disabled.
       parameters:
         - $ref: '#/components/parameters/productUIDParam'
         - $ref: '#/components/parameters/webhookUIDParam'
@@ -9116,8 +9117,8 @@ components:
           type: string
         transform:
           description: |
-            Optional JSONata expression that turns each post into the event, setting fields such as
-            `device`, `sn`, `body` and `file`. `$doNotRoute()` drops the post.
+            JSONata expression applied to the event, with the post under `body`. Its output replaces the
+            event and must set `body`. `$doNotRoute()` drops it.
           type: string
   headers:
     HasMoreHeader:
