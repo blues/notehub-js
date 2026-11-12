@@ -4281,9 +4281,9 @@ paths:
       operationId: GetSkill
       summary: Get a project skill
       description: |
-        Get one skill's metadata and exact Markdown content. Use `links.self` from `GetSkills`, or URL-
-        encode the whole skill name as one path parameter. `If-Match` requires a revision; `If-None-
-        Match` skips unchanged content.
+        Get one skill's metadata and exact Markdown content. Use `links.self` from `GetSkills`, or
+        URL-encode the whole skill name as one path parameter. `If-Match` requires a revision;
+        `If-None-Match` skips unchanged content.
 
         Any role can read it, and so can anonymous callers when the project's default access is Viewer.
       parameters:
