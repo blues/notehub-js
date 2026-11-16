@@ -2120,7 +2120,7 @@ paths:
       description: |
         List a device's sessions, its connections to Notehub. Each shows why it opened and closed,
         signal strength, location and data usage. `startDate` and `endDate` filter on when the
-        session began.
+        session began. For every device's sessions, use `GetSessions`.
 
         Paginated.
       parameters:
@@ -4220,6 +4220,38 @@ paths:
       x-custom-attributes:
         permission: update
         resource: blues:resources:app:APPSERIAL:settings
+  /v1/projects/{projectOrProductUID}/sessions:
+    get:
+      operationId: GetSessions
+      summary: List sessions in a project
+      description: |
+        List the sessions of every device in a project, as `GetDeviceSessions` does for one device.
+        `startDate` and `endDate` filter on when the session began. `deviceUID` and `fleetUID` each
+        match any of their values; `fleetUID` matches the fleets recorded on the session.
+
+        Paginated.
+      parameters:
+        - $ref: '#/components/parameters/projectOrProductUIDParam'
+        - $ref: '#/components/parameters/pageSizeParam'
+        - $ref: '#/components/parameters/pageNumParam'
+        - $ref: '#/components/parameters/cursorParam'
+        - $ref: '#/components/parameters/startDateParam'
+        - $ref: '#/components/parameters/endDateParam'
+        - $ref: '#/components/parameters/firstSyncParam'
+        - $ref: '#/components/parameters/deviceUIDParamQuery'
+        - $ref: '#/components/parameters/fleetUIDsQueryParam'
+      responses:
+        '200':
+          $ref: '#/components/responses/SessionResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - device
+      x-custom-attributes:
+        permission: read
+        resource: blues:resources:app:APPSERIAL:devices
   /v1/projects/{projectOrProductUID}/skills:
     get:
       operationId: GetSkills
