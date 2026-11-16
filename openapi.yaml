@@ -2230,7 +2230,7 @@ paths:
                     type: boolean
                   next_cursor:
                     description: |
-                      Pass this opaque value as a cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes.
+                      Pass this value (epoch microseconds, optionally `.N`) as a cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes.
                     type: string
                 required:
                   - device_public_keys
@@ -4962,7 +4962,7 @@ components:
         type: string
     cursorParam:
       description: |
-        If supplied, the results will be returned in ascending order of modification time. To start from a specific time, specify cursor as Unix epoch microseconds (UTC) or 0 to start from the beginning. Or, to start where the last search left off, set cursor to the returned value of next_cursor (or the X-Next-Cursor header).
+        If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped.
       in: query
       name: cursor
       required: false
@@ -6612,7 +6612,7 @@ components:
           default: false
         next_cursor:
           description: |
-            Pass this opaque value as a cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes.
+            Pass this value (epoch microseconds, optionally `.N`) as a cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes.
           type: string
     DeviceDfuStateMachine:
       description: Represents a single request to update the host or Notecard firmware
@@ -6697,7 +6697,7 @@ components:
           default: false
         next_cursor:
           description: |
-            Pass this opaque value as a cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes.
+            Pass this value (epoch microseconds, optionally `.N`) as a cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes.
           type: string
     DeviceSensor:
       description: A sensor attached to a device
@@ -9352,7 +9352,7 @@ components:
                 type: boolean
               next_cursor:
                 description: |
-                  Pass this opaque value as a cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes.
+                  Pass this value (epoch microseconds, optionally `.N`) as a cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes.
                 type: string
             required:
               - alerts
@@ -9433,7 +9433,7 @@ components:
                 type: boolean
               next_cursor:
                 description: |
-                  Pass this opaque value as a cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes.
+                  Pass this value (epoch microseconds, optionally `.N`) as a cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes.
                 type: string
             required:
               - devices
@@ -9799,7 +9799,7 @@ components:
                 type: boolean
               next_cursor:
                 description: |
-                  Pass this opaque value as a cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes.
+                  Pass this value (epoch microseconds, optionally `.N`) as a cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes.
                 type: string
               sessions:
                 type: array
