@@ -16,14 +16,14 @@ import ApiClient from "../ApiClient";
 /**
  * The CloneProjectRequest model module.
  * @module model/CloneProjectRequest
- * @version 6.7.0
+ * @version 6.8.0
  */
 class CloneProjectRequest {
   /**
    * Constructs a new <code>CloneProjectRequest</code>.
    * @alias module:model/CloneProjectRequest
-   * @param billingAccountUid {String} The billing account UID for the project. The caller of the API must be able to create projects within the billing account, otherwise an error will be returned.
-   * @param label {String} The label for the project.
+   * @param billingAccountUid {String} UID of the organization that owns the new project. List them with `GetBillingAccounts`.
+   * @param label {String} Name of the new project.
    */
   constructor(billingAccountUid, label) {
     CloneProjectRequest.initialize(this, billingAccountUid, label);
@@ -125,25 +125,25 @@ class CloneProjectRequest {
 CloneProjectRequest.RequiredProperties = ["billing_account_uid", "label"];
 
 /**
- * The billing account UID for the project. The caller of the API must be able to create projects within the billing account, otherwise an error will be returned.
+ * UID of the organization that owns the new project. List them with `GetBillingAccounts`.
  * @member {String} billing_account_uid
  */
 CloneProjectRequest.prototype["billing_account_uid"] = undefined;
 
 /**
- * Whether to disallow the cloning of the fleets from the parent project.  Default is false if not specified.
+ * If `true`, the new project gets one default fleet instead of copies of this project's fleets. Default `false`.
  * @member {Boolean} disable_clone_fleets
  */
 CloneProjectRequest.prototype["disable_clone_fleets"] = undefined;
 
 /**
- * Whether to disallow the cloning of the routes from the parent project.  Default is false if not specified.
+ * If `true`, the new project starts with no routes. Default `false`.
  * @member {Boolean} disable_clone_routes
  */
 CloneProjectRequest.prototype["disable_clone_routes"] = undefined;
 
 /**
- * The label for the project.
+ * Name of the new project.
  * @member {String} label
  */
 CloneProjectRequest.prototype["label"] = undefined;

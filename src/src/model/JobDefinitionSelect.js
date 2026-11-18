@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The JobDefinitionSelect model module.
  * @module model/JobDefinitionSelect
- * @version 6.7.0
+ * @version 6.8.0
  */
 class JobDefinitionSelect {
   /**
@@ -131,7 +131,7 @@ JobDefinitionSelect.prototype["all_devices"] = undefined;
 JobDefinitionSelect.prototype["comment"] = undefined;
 
 /**
- * Specific device UIDs to include
+ * Specific DeviceUIDs to include
  * @member {Array.<String>} devices
  */
 JobDefinitionSelect.prototype["devices"] = undefined;
@@ -143,7 +143,7 @@ JobDefinitionSelect.prototype["devices"] = undefined;
 JobDefinitionSelect.prototype["devices_by_sn"] = undefined;
 
 /**
- * Fleet UIDs whose devices should be included
+ * FleetUIDs whose devices should be included
  * @member {Array.<String>} devices_in_fleets
  */
 JobDefinitionSelect.prototype["devices_in_fleets"] = undefined;

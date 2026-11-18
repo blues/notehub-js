@@ -2,22 +2,24 @@
 
 All URIs are relative to *https://api.notefile.net*
 
-| Method                                                                     | HTTP request                                                                | Description |
-| -------------------------------------------------------------------------- | --------------------------------------------------------------------------- | ----------- |
-| [**deleteGlobalDescription**](DescriptionApi.md#deleteGlobalDescription)   | **DELETE** /v1/description/{descriptionName}                                |
-| [**deleteProjectDescription**](DescriptionApi.md#deleteProjectDescription) | **DELETE** /v1/projects/{projectOrProductUID}/description/{descriptionName} |
-| [**getGlobalDescription**](DescriptionApi.md#getGlobalDescription)         | **GET** /v1/description/{descriptionName}                                   |
-| [**getProjectDescription**](DescriptionApi.md#getProjectDescription)       | **GET** /v1/projects/{projectOrProductUID}/description/{descriptionName}    |
-| [**listGlobalDescriptions**](DescriptionApi.md#listGlobalDescriptions)     | **GET** /v1/description                                                     |
-| [**listProjectDescriptions**](DescriptionApi.md#listProjectDescriptions)   | **GET** /v1/projects/{projectOrProductUID}/description                      |
-| [**setGlobalDescription**](DescriptionApi.md#setGlobalDescription)         | **POST** /v1/description/{descriptionName}                                  |
-| [**setProjectDescription**](DescriptionApi.md#setProjectDescription)       | **POST** /v1/projects/{projectOrProductUID}/description/{descriptionName}   |
+| Method                                                                     | HTTP request                                                                | Description                                    |
+| -------------------------------------------------------------------------- | --------------------------------------------------------------------------- | ---------------------------------------------- |
+| [**deleteGlobalDescription**](DescriptionApi.md#deleteGlobalDescription)   | **DELETE** /v1/description/{descriptionName}                                | Delete a global description record             |
+| [**deleteProjectDescription**](DescriptionApi.md#deleteProjectDescription) | **DELETE** /v1/projects/{projectOrProductUID}/description/{descriptionName} | Delete a project description record            |
+| [**getGlobalDescription**](DescriptionApi.md#getGlobalDescription)         | **GET** /v1/description/{descriptionName}                                   | Get a global description record                |
+| [**getProjectDescription**](DescriptionApi.md#getProjectDescription)       | **GET** /v1/projects/{projectOrProductUID}/description/{descriptionName}    | Get a project description record               |
+| [**listGlobalDescriptions**](DescriptionApi.md#listGlobalDescriptions)     | **GET** /v1/description                                                     | List global description records                |
+| [**listProjectDescriptions**](DescriptionApi.md#listProjectDescriptions)   | **GET** /v1/projects/{projectOrProductUID}/description                      | List a project&#39;s description records       |
+| [**setGlobalDescription**](DescriptionApi.md#setGlobalDescription)         | **POST** /v1/description/{descriptionName}                                  | Create or replace a global description record  |
+| [**setProjectDescription**](DescriptionApi.md#setProjectDescription)       | **POST** /v1/projects/{projectOrProductUID}/description/{descriptionName}   | Create or replace a project description record |
 
 ## deleteGlobalDescription
 
 > deleteGlobalDescription(descriptionName)
 
-Delete a global description record by name (Blues staff only).
+Delete a global description record
+
+Delete one platform-wide description record. Blues staff only; returns 403 for anyone else. Returns 404 if the record doesn&#39;t exist.
 
 ### Example
 
@@ -28,7 +30,7 @@ let personalAccessToken = defaultClient.authentications["personalAccessToken"];
 personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
 
 let apiInstance = new NotehubJs.DescriptionApi();
-let descriptionName = "_health.qo"; // String |
+let descriptionName = "_health.qo"; // String | Record name, 1-128 letters, digits, `.`, `_` or `-`, e.g. `_health.qo`.
 apiInstance.deleteGlobalDescription(descriptionName).then(
   () => {
     console.log("API called successfully.");
@@ -41,9 +43,9 @@ apiInstance.deleteGlobalDescription(descriptionName).then(
 
 ### Parameters
 
-| Name                | Type       | Description | Notes |
-| ------------------- | ---------- | ----------- | ----- |
-| **descriptionName** | **String** |             |
+| Name                | Type       | Description                                                                                                       | Notes |
+| ------------------- | ---------- | ----------------------------------------------------------------------------------------------------------------- | ----- |
+| **descriptionName** | **String** | Record name, 1-128 letters, digits, &#x60;.&#x60;, &#x60;\_&#x60; or &#x60;-&#x60;, e.g. &#x60;\_health.qo&#x60;. |
 
 ### Return type
 
@@ -62,7 +64,9 @@ null (empty response body)
 
 > deleteProjectDescription(projectOrProductUID, descriptionName)
 
-Delete a project description record by name.
+Delete a project description record
+
+Delete one of a project&#39;s description records. Requires the Owner or Developer role. Returns 404 if the record doesn&#39;t exist.
 
 ### Example
 
@@ -74,7 +78,7 @@ personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
 
 let apiInstance = new NotehubJs.DescriptionApi();
 let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String |
-let descriptionName = "_health.qo"; // String |
+let descriptionName = "_health.qo"; // String | Record name, 1-128 letters, digits, `.`, `_` or `-`, e.g. `_health.qo`.
 apiInstance.deleteProjectDescription(projectOrProductUID, descriptionName).then(
   () => {
     console.log("API called successfully.");
@@ -87,10 +91,10 @@ apiInstance.deleteProjectDescription(projectOrProductUID, descriptionName).then(
 
 ### Parameters
 
-| Name                    | Type       | Description | Notes |
-| ----------------------- | ---------- | ----------- | ----- |
-| **projectOrProductUID** | **String** |             |
-| **descriptionName**     | **String** |             |
+| Name                    | Type       | Description                                                                                                       | Notes |
+| ----------------------- | ---------- | ----------------------------------------------------------------------------------------------------------------- | ----- |
+| **projectOrProductUID** | **String** |                                                                                                                   |
+| **descriptionName**     | **String** | Record name, 1-128 letters, digits, &#x60;.&#x60;, &#x60;\_&#x60; or &#x60;-&#x60;, e.g. &#x60;\_health.qo&#x60;. |
 
 ### Return type
 
@@ -109,7 +113,9 @@ null (empty response body)
 
 > File getGlobalDescription(descriptionName)
 
-Get a global description record. Returns the raw content with its stored Content-Type.
+Get a global description record
+
+Get the content of one platform-wide description record, served with the Content-Type it was stored with. Any signed-in user can read it. Returns 404 if the record doesn&#39;t exist.
 
 ### Example
 
@@ -120,7 +126,7 @@ let personalAccessToken = defaultClient.authentications["personalAccessToken"];
 personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
 
 let apiInstance = new NotehubJs.DescriptionApi();
-let descriptionName = "_health.qo"; // String |
+let descriptionName = "_health.qo"; // String | Record name, 1-128 letters, digits, `.`, `_` or `-`, e.g. `_health.qo`.
 apiInstance.getGlobalDescription(descriptionName).then(
   (data) => {
     console.log(
@@ -135,9 +141,9 @@ apiInstance.getGlobalDescription(descriptionName).then(
 
 ### Parameters
 
-| Name                | Type       | Description | Notes |
-| ------------------- | ---------- | ----------- | ----- |
-| **descriptionName** | **String** |             |
+| Name                | Type       | Description                                                                                                       | Notes |
+| ------------------- | ---------- | ----------------------------------------------------------------------------------------------------------------- | ----- |
+| **descriptionName** | **String** | Record name, 1-128 letters, digits, &#x60;.&#x60;, &#x60;\_&#x60; or &#x60;-&#x60;, e.g. &#x60;\_health.qo&#x60;. |
 
 ### Return type
 
@@ -156,7 +162,9 @@ apiInstance.getGlobalDescription(descriptionName).then(
 
 > File getProjectDescription(projectOrProductUID, descriptionName)
 
-Get a project description record. Returns the raw content with its stored Content-Type.
+Get a project description record
+
+Get the content of one of a project&#39;s description records, served with the Content-Type it was stored with. For the metadata of every record, use &#x60;ListProjectDescriptions&#x60;. Returns 404 if the record doesn&#39;t exist.
 
 ### Example
 
@@ -168,7 +176,7 @@ personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
 
 let apiInstance = new NotehubJs.DescriptionApi();
 let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String |
-let descriptionName = "_health.qo"; // String |
+let descriptionName = "_health.qo"; // String | Record name, 1-128 letters, digits, `.`, `_` or `-`, e.g. `_health.qo`.
 apiInstance.getProjectDescription(projectOrProductUID, descriptionName).then(
   (data) => {
     console.log(
@@ -183,10 +191,10 @@ apiInstance.getProjectDescription(projectOrProductUID, descriptionName).then(
 
 ### Parameters
 
-| Name                    | Type       | Description | Notes |
-| ----------------------- | ---------- | ----------- | ----- |
-| **projectOrProductUID** | **String** |             |
-| **descriptionName**     | **String** |             |
+| Name                    | Type       | Description                                                                                                       | Notes |
+| ----------------------- | ---------- | ----------------------------------------------------------------------------------------------------------------- | ----- |
+| **projectOrProductUID** | **String** |                                                                                                                   |
+| **descriptionName**     | **String** | Record name, 1-128 letters, digits, &#x60;.&#x60;, &#x60;\_&#x60; or &#x60;-&#x60;, e.g. &#x60;\_health.qo&#x60;. |
 
 ### Return type
 
@@ -205,7 +213,9 @@ apiInstance.getProjectDescription(projectOrProductUID, descriptionName).then(
 
 > DescriptionRecordList listGlobalDescriptions()
 
-List metadata for all global description records.
+List global description records
+
+List the platform-wide description records that Blues publishes, without their content. Any signed-in user can read them. For a project&#39;s own records, use &#x60;ListProjectDescriptions&#x60;.
 
 ### Example
 
@@ -249,7 +259,9 @@ This endpoint does not need any parameter.
 
 > DescriptionRecordList listProjectDescriptions(projectOrProductUID)
 
-List metadata for all description records in a project.
+List a project&#39;s description records
+
+List a project&#39;s description records by name, with each one&#39;s content type, size and change history but not its content. A description record is a named document, such as Markdown, JSON or plain text, that explains the project&#39;s data. For Blues&#39; platform-wide records, use &#x60;ListGlobalDescriptions&#x60;.
 
 ### Example
 
@@ -296,7 +308,9 @@ apiInstance.listProjectDescriptions(projectOrProductUID).then(
 
 > DescriptionRecord setGlobalDescription(descriptionName, body)
 
-Create or replace a global description record, Blues staff only (up to 10MB). The request Content-Type is stored and returned on GET; when omitted it is detected (JSON or text).
+Create or replace a global description record
+
+Store a platform-wide named document that every signed-in user can read, replacing any record with that name. The Content-Type is handled as in &#x60;SetProjectDescription&#x60;. Blues staff only; returns 403 for anyone else. Returns 400 if the content is over 10 MB or the name isn&#39;t valid.
 
 ### Example
 
@@ -307,8 +321,8 @@ let personalAccessToken = defaultClient.authentications["personalAccessToken"];
 personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
 
 let apiInstance = new NotehubJs.DescriptionApi();
-let descriptionName = "_health.qo"; // String |
-let body = "/path/to/file"; // File | The description content (up to 10MB). The request Content-Type is stored and returned on GET; when omitted it is detected (JSON or text).
+let descriptionName = "_health.qo"; // String | Record name, 1-128 letters, digits, `.`, `_` or `-`, e.g. `_health.qo`.
+let body = "/path/to/file"; // File | The document to store, up to 10 MB. Send its Content-Type, such as `text/markdown`; Markdown isn't detected.
 apiInstance.setGlobalDescription(descriptionName, body).then(
   (data) => {
     console.log(
@@ -323,10 +337,10 @@ apiInstance.setGlobalDescription(descriptionName, body).then(
 
 ### Parameters
 
-| Name                | Type       | Description                                                                                                                               | Notes |
-| ------------------- | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----- |
-| **descriptionName** | **String** |                                                                                                                                           |
-| **body**            | **File**   | The description content (up to 10MB). The request Content-Type is stored and returned on GET; when omitted it is detected (JSON or text). |
+| Name                | Type       | Description                                                                                                                | Notes |
+| ------------------- | ---------- | -------------------------------------------------------------------------------------------------------------------------- | ----- |
+| **descriptionName** | **String** | Record name, 1-128 letters, digits, &#x60;.&#x60;, &#x60;\_&#x60; or &#x60;-&#x60;, e.g. &#x60;\_health.qo&#x60;.          |
+| **body**            | **File**   | The document to store, up to 10 MB. Send its Content-Type, such as &#x60;text/markdown&#x60;; Markdown isn&#39;t detected. |
 
 ### Return type
 
@@ -345,7 +359,9 @@ apiInstance.setGlobalDescription(descriptionName, body).then(
 
 > DescriptionRecord setProjectDescription(projectOrProductUID, descriptionName, body)
 
-Create or replace a project description record (up to 10MB). The request Content-Type is stored and returned on GET; when omitted it is detected (JSON or text).
+Create or replace a project description record
+
+Store a named document in a project, replacing any record with that name. The request&#39;s Content-Type is stored and served back by &#x60;GetProjectDescription&#x60;; if it&#39;s missing or &#x60;application/octet-stream&#x60;, the type is detected from the content. Requires the Owner or Developer role. Returns 400 if the content is over 10 MB or the name isn&#39;t valid.
 
 ### Example
 
@@ -357,8 +373,8 @@ personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
 
 let apiInstance = new NotehubJs.DescriptionApi();
 let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String |
-let descriptionName = "_health.qo"; // String |
-let body = "/path/to/file"; // File | The description content (up to 10MB). The request Content-Type is stored and returned on GET; when omitted it is detected (JSON or text).
+let descriptionName = "_health.qo"; // String | Record name, 1-128 letters, digits, `.`, `_` or `-`, e.g. `_health.qo`.
+let body = "/path/to/file"; // File | The document to store, up to 10 MB. Send its Content-Type, such as `text/markdown`; Markdown isn't detected.
 apiInstance
   .setProjectDescription(projectOrProductUID, descriptionName, body)
   .then(
@@ -375,11 +391,11 @@ apiInstance
 
 ### Parameters
 
-| Name                    | Type       | Description                                                                                                                               | Notes |
-| ----------------------- | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----- |
-| **projectOrProductUID** | **String** |                                                                                                                                           |
-| **descriptionName**     | **String** |                                                                                                                                           |
-| **body**                | **File**   | The description content (up to 10MB). The request Content-Type is stored and returned on GET; when omitted it is detected (JSON or text). |
+| Name                    | Type       | Description                                                                                                                | Notes |
+| ----------------------- | ---------- | -------------------------------------------------------------------------------------------------------------------------- | ----- |
+| **projectOrProductUID** | **String** |                                                                                                                            |
+| **descriptionName**     | **String** | Record name, 1-128 letters, digits, &#x60;.&#x60;, &#x60;\_&#x60; or &#x60;-&#x60;, e.g. &#x60;\_health.qo&#x60;.          |
+| **body**                | **File**   | The document to store, up to 10 MB. Send its Content-Type, such as &#x60;text/markdown&#x60;; Markdown isn&#39;t detected. |
 
 ### Return type
 

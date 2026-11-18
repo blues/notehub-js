@@ -17,7 +17,7 @@ import Alert from "./Alert";
 /**
  * The GetAlerts200Response model module.
  * @module model/GetAlerts200Response
- * @version 6.7.0
+ * @version 6.8.0
  */
 class GetAlerts200Response {
   /**
@@ -57,6 +57,12 @@ class GetAlerts200Response {
       if (data.hasOwnProperty("has_more")) {
         obj["has_more"] = ApiClient.convertToType(data["has_more"], "Boolean");
       }
+      if (data.hasOwnProperty("next_cursor")) {
+        obj["next_cursor"] = ApiClient.convertToType(
+          data["next_cursor"],
+          "String"
+        );
+      }
     } else if (data === null) {
       return null;
     }
@@ -94,6 +100,19 @@ class GetAlerts200Response {
         Alert.validateJsonObject(item);
       }
     }
+    // ensure the json data is a string
+    if (
+      data["next_cursor"] &&
+      !(
+        typeof data["next_cursor"] === "string" ||
+        data["next_cursor"] instanceof String
+      )
+    ) {
+      throw new Error(
+        "Expected the field `next_cursor` to be a primitive type in the JSON string but got " +
+          data["next_cursor"]
+      );
+    }
 
     return true;
   }
@@ -112,5 +131,11 @@ GetAlerts200Response.prototype["alerts"] = undefined;
  * @member {Boolean} has_more
  */
 GetAlerts200Response.prototype["has_more"] = undefined;
+
+/**
+ * Pass this value (epoch microseconds, optionally `.N`) as a cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes.
+ * @member {String} next_cursor
+ */
+GetAlerts200Response.prototype["next_cursor"] = undefined;
 
 export default GetAlerts200Response;

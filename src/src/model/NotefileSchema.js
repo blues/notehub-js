@@ -17,14 +17,14 @@ import SchemaProperty from "./SchemaProperty";
 /**
  * The NotefileSchema model module.
  * @module model/NotefileSchema
- * @version 6.7.0
+ * @version 6.8.0
  */
 class NotefileSchema {
   /**
    * Constructs a new <code>NotefileSchema</code>.
    * @alias module:model/NotefileSchema
-   * @param notefile {String}
-   * @param properties {Array.<module:model/SchemaProperty>}
+   * @param notefile {String} Notefile name, e.g. `sensors.qo`.
+   * @param properties {Array.<module:model/SchemaProperty>} Fields seen in this Notefile's event `body`. Event envelope fields such as `when` and `device` are not included.
    */
   constructor(notefile, properties) {
     NotefileSchema.initialize(this, notefile, properties);
@@ -117,11 +117,13 @@ class NotefileSchema {
 NotefileSchema.RequiredProperties = ["notefile", "properties"];
 
 /**
+ * Notefile name, e.g. `sensors.qo`.
  * @member {String} notefile
  */
 NotefileSchema.prototype["notefile"] = undefined;
 
 /**
+ * Fields seen in this Notefile's event `body`. Event envelope fields such as `when` and `device` are not included.
  * @member {Array.<module:model/SchemaProperty>} properties
  */
 NotefileSchema.prototype["properties"] = undefined;

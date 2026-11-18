@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The NotehubRouteSummary model module.
  * @module model/NotehubRouteSummary
- * @version 6.7.0
+ * @version 6.8.0
  */
 class NotehubRouteSummary {
   /**
@@ -108,29 +108,34 @@ class NotehubRouteSummary {
 }
 
 /**
+ * True if the route is turned off and sends nothing.
  * @member {Boolean} disabled
  * @default false
  */
 NotehubRouteSummary.prototype["disabled"] = false;
 
 /**
+ * Route name.
  * @member {String} label
  * @default 'success route'
  */
 NotehubRouteSummary.prototype["label"] = "success route";
 
 /**
+ * When the route was last changed.
  * @member {Date} modified
  */
 NotehubRouteSummary.prototype["modified"] = undefined;
 
 /**
+ * Route type; see `NotehubRoute.type`.
  * @member {String} type
  * @default 'http'
  */
 NotehubRouteSummary.prototype["type"] = "http";
 
 /**
+ * RouteUID.
  * @member {String} uid
  * @default 'route:8d65a087d5d290ce5bdf03aeff2becc0'
  */

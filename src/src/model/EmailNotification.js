@@ -16,15 +16,16 @@ import ApiClient from "../ApiClient";
 /**
  * The EmailNotification model module.
  * @module model/EmailNotification
- * @version 6.7.0
+ * @version 6.8.0
  */
 class EmailNotification {
   /**
    * Constructs a new <code>EmailNotification</code>.
    * @alias module:model/EmailNotification
+   * @param email {String} Email address, or several separated by commas.
    */
-  constructor() {
-    EmailNotification.initialize(this);
+  constructor(email) {
+    EmailNotification.initialize(this, email);
   }
 
   /**
@@ -32,7 +33,9 @@ class EmailNotification {
    * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
    * Only for internal use.
    */
-  static initialize(obj) {}
+  static initialize(obj, email) {
+    obj["email"] = email;
+  }
 
   /**
    * Constructs a <code>EmailNotification</code> from a plain JavaScript object, optionally creating a new instance.
@@ -60,6 +63,17 @@ class EmailNotification {
    * @return {boolean} to indicate whether the JSON data is valid with respect to <code>EmailNotification</code>.
    */
   static validateJSON(data) {
+    // check to make sure all required properties are present in the JSON string
+    for (const property of EmailNotification.RequiredProperties) {
+      if (!data[property]) {
+        throw new Error(
+          "The required field `" +
+            property +
+            "` is not found in the JSON data: " +
+            JSON.stringify(data)
+        );
+      }
+    }
     // ensure the json data is a string
     if (
       data["email"] &&
@@ -75,8 +89,10 @@ class EmailNotification {
   }
 }
 
+EmailNotification.RequiredProperties = ["email"];
+
 /**
- * Email Address
+ * Email address, or several separated by commas.
  * @member {String} email
  */
 EmailNotification.prototype["email"] = undefined;

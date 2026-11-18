@@ -16,13 +16,13 @@ import ApiClient from "../ApiClient";
 /**
  * The ProvisionDeviceRequest model module.
  * @module model/ProvisionDeviceRequest
- * @version 6.7.0
+ * @version 6.8.0
  */
 class ProvisionDeviceRequest {
   /**
    * Constructs a new <code>ProvisionDeviceRequest</code>.
    * @alias module:model/ProvisionDeviceRequest
-   * @param productUid {String} The ProductUID that the device should use.
+   * @param productUid {String} ProductUID to provision the device under, e.g. `com.blues.bridge:sensors`. Must belong to this project.
    */
   constructor(productUid) {
     ProvisionDeviceRequest.initialize(this, productUid);
@@ -126,19 +126,19 @@ class ProvisionDeviceRequest {
 ProvisionDeviceRequest.RequiredProperties = ["product_uid"];
 
 /**
- * The serial number to assign to the device.
+ * Serial number to give the device. Ignored if the device already has one.
  * @member {String} device_sn
  */
 ProvisionDeviceRequest.prototype["device_sn"] = undefined;
 
 /**
- * The fleetUIDs to provision the device to.
+ * FleetUIDs to put a new device in. If omitted or empty, the product's auto-provision fleets are used. Ignored if the device already exists.
  * @member {Array.<String>} fleet_uids
  */
 ProvisionDeviceRequest.prototype["fleet_uids"] = undefined;
 
 /**
- * The ProductUID that the device should use.
+ * ProductUID to provision the device under, e.g. `com.blues.bridge:sensors`. Must belong to this project.
  * @member {String} product_uid
  */
 ProvisionDeviceRequest.prototype["product_uid"] = undefined;

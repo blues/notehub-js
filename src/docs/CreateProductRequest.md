@@ -2,9 +2,9 @@
 
 ## Properties
 
-| Name                        | Type         | Description                                                                                         | Notes      |
-| --------------------------- | ------------ | --------------------------------------------------------------------------------------------------- | ---------- |
-| **autoProvisionFleets**     | **[String]** |                                                                                                     | [optional] |
-| **disableDevicesByDefault** | **Boolean**  | If &#x60;true&#x60;, devices provisioned to this product will be automatically disabled by default. | [optional] |
-| **label**                   | **String**   | The label for the Product.                                                                          |
-| **productUid**              | **String**   | The requested uid for the Product. Will be prefixed with the user&#39;s reversed email.             |
+| Name                        | Type         | Description                                                                                                                                                  | Notes      |
+| --------------------------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- |
+| **autoProvisionFleets**     | **[String]** | FleetUIDs that devices are added to when first provisioned with this ProductUID.                                                                             | [optional] |
+| **disableDevicesByDefault** | **Boolean**  | If &#x60;true&#x60;, devices provisioned with this ProductUID start out disabled.                                                                            | [optional] |
+| **label**                   | **String**   | Product name shown in Notehub.                                                                                                                               |
+| **productUid**              | **String**   | Suffix of the new ProductUID. Must start with a lowercase letter and contain only lowercase letters, digits, &#x60;.&#x60;, &#x60;\_&#x60; or &#x60;-&#x60;. |

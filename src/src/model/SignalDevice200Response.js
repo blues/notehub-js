@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The SignalDevice200Response model module.
  * @module model/SignalDevice200Response
- * @version 6.7.0
+ * @version 6.8.0
  */
 class SignalDevice200Response {
   /**
@@ -68,7 +68,7 @@ class SignalDevice200Response {
 }
 
 /**
- * true if the Notecard is connected to Notehub.
+ * True if the Notecard was connected and the signal was delivered. False means it was dropped.
  * @member {Boolean} connected
  */
 SignalDevice200Response.prototype["connected"] = undefined;

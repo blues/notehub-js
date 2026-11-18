@@ -2,62 +2,17 @@
 
 All URIs are relative to *https://api.notefile.net*
 
-| Method                                                                     | HTTP request           | Description                                          |
-| -------------------------------------------------------------------------- | ---------------------- | ---------------------------------------------------- |
-| [**login**](AuthorizationApi.md#login)                                     | **POST** /auth/login   |
-| [**oAuth2ClientCredentials**](AuthorizationApi.md#oAuth2ClientCredentials) | **POST** /oauth2/token | Issue an OAuth 2.0 access token (Client Credentials) |
-
-## login
-
-> Login200Response login(loginRequest)
-
-Gets an API key from username and password
-
-### Example
-
-```javascript
-import * as NotehubJs from "@blues-inc/notehub-js";
-
-let apiInstance = new NotehubJs.AuthorizationApi();
-let loginRequest = { password: "test-password", username: "name@example.com" }; // LoginRequest |
-apiInstance.login(loginRequest).then(
-  (data) => {
-    console.log(
-      "API called successfully. Returned data: " + JSON.stringify(data)
-    );
-  },
-  (error) => {
-    console.error(error);
-  }
-);
-```
-
-### Parameters
-
-| Name             | Type                                | Description | Notes |
-| ---------------- | ----------------------------------- | ----------- | ----- |
-| **loginRequest** | [**LoginRequest**](LoginRequest.md) |             |
-
-### Return type
-
-[**Login200Response**](Login200Response.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
+| Method                                                                     | HTTP request           | Description                                       |
+| -------------------------------------------------------------------------- | ---------------------- | ------------------------------------------------- |
+| [**oAuth2ClientCredentials**](AuthorizationApi.md#oAuth2ClientCredentials) | **POST** /oauth2/token | Get an access token with OAuth client credentials |
 
 ## oAuth2ClientCredentials
 
 > OAuth2TokenResponse oAuth2ClientCredentials(clientId, clientSecret, grantType, opts)
 
-Issue an OAuth 2.0 access token (Client Credentials)
+Get an access token with OAuth client credentials
 
-Exchanges client credentials for an access token. Parameters must be sent as application/x-www-form-urlencoded.
+Exchange an OAuth client&#39;s ID and secret for a bearer access token, using the OAuth 2.0 client credentials grant. Send the parameters form-encoded, not as JSON. Returns 401 for a bad client ID or secret, and 403 for a scope the client can&#39;t have.
 
 ### Example
 

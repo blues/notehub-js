@@ -2,7 +2,7 @@
 
 ## Properties
 
-| Name                  | Type       | Description                                                                                                                                                     | Notes |
-| --------------------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----- |
-| **billingAccountUid** | **String** | The billing account UID for the project. The caller of the API must be able to create projects within the billing account, otherwise an error will be returned. |
-| **label**             | **String** | The label for the project.                                                                                                                                      |
+| Name                  | Type       | Description                                                                                                     | Notes |
+| --------------------- | ---------- | --------------------------------------------------------------------------------------------------------------- | ----- |
+| **billingAccountUid** | **String** | UID of the organization that owns and is billed for the project. List them with &#x60;GetBillingAccounts&#x60;. |
+| **label**             | **String** | Project name shown in Notehub.                                                                                  |

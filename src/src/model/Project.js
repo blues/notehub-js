@@ -18,15 +18,15 @@ import Role from "./Role";
 /**
  * The Project model module.
  * @module model/Project
- * @version 6.7.0
+ * @version 6.8.0
  */
 class Project {
   /**
    * Constructs a new <code>Project</code>.
    * @alias module:model/Project
-   * @param created {Date}
-   * @param label {String}
-   * @param uid {String}
+   * @param created {Date} When the project was created.
+   * @param label {String} Project name shown in Notehub.
+   * @param uid {String} ProjectUID, e.g. `app:2606f411-dea6-44a0-9743-1130f57d77d8`.
    */
   constructor(created, label, uid) {
     Project.initialize(this, created, label, uid);
@@ -142,11 +142,13 @@ Project.RequiredProperties = ["created", "label", "uid"];
 Project.prototype["administrative_contact"] = undefined;
 
 /**
+ * When the project was created.
  * @member {Date} created
  */
 Project.prototype["created"] = undefined;
 
 /**
+ * Project name shown in Notehub.
  * @member {String} label
  */
 Project.prototype["label"] = undefined;
@@ -162,6 +164,7 @@ Project.prototype["role"] = undefined;
 Project.prototype["technical_contact"] = undefined;
 
 /**
+ * ProjectUID, e.g. `app:2606f411-dea6-44a0-9743-1130f57d77d8`.
  * @member {String} uid
  */
 Project.prototype["uid"] = undefined;

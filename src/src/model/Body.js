@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The Body model module.
  * @module model/Body
- * @version 6.7.0
+ * @version 6.8.0
  */
 class Body {
   /**
@@ -65,6 +65,7 @@ class Body {
 }
 
 /**
+ * The JSON object to send to the Notecard. Must not have a `type` field, which the Notecard reserves.
  * @member {Object} body
  */
 Body.prototype["body"] = undefined;

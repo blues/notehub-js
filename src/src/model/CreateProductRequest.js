@@ -16,14 +16,14 @@ import ApiClient from "../ApiClient";
 /**
  * The CreateProductRequest model module.
  * @module model/CreateProductRequest
- * @version 6.7.0
+ * @version 6.8.0
  */
 class CreateProductRequest {
   /**
    * Constructs a new <code>CreateProductRequest</code>.
    * @alias module:model/CreateProductRequest
-   * @param label {String} The label for the Product.
-   * @param productUid {String} The requested uid for the Product. Will be prefixed with the user's reversed email.
+   * @param label {String} Product name shown in Notehub.
+   * @param productUid {String} Suffix of the new ProductUID. Must start with a lowercase letter and contain only lowercase letters, digits, `.`, `_` or `-`.
    */
   constructor(label, productUid) {
     CreateProductRequest.initialize(this, label, productUid);
@@ -132,24 +132,25 @@ class CreateProductRequest {
 CreateProductRequest.RequiredProperties = ["label", "product_uid"];
 
 /**
+ * FleetUIDs that devices are added to when first provisioned with this ProductUID.
  * @member {Array.<String>} auto_provision_fleets
  */
 CreateProductRequest.prototype["auto_provision_fleets"] = undefined;
 
 /**
- * If `true`, devices provisioned to this product will be automatically disabled by default.
+ * If `true`, devices provisioned with this ProductUID start out disabled.
  * @member {Boolean} disable_devices_by_default
  */
 CreateProductRequest.prototype["disable_devices_by_default"] = undefined;
 
 /**
- * The label for the Product.
+ * Product name shown in Notehub.
  * @member {String} label
  */
 CreateProductRequest.prototype["label"] = undefined;
 
 /**
- * The requested uid for the Product. Will be prefixed with the user's reversed email.
+ * Suffix of the new ProductUID. Must start with a lowercase letter and contain only lowercase letters, digits, `.`, `_` or `-`.
  * @member {String} product_uid
  */
 CreateProductRequest.prototype["product_uid"] = undefined;

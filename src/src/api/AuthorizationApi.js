@@ -12,15 +12,13 @@
  */
 
 import ApiClient from "../ApiClient";
-import Login200Response from "../model/Login200Response";
-import LoginRequest from "../model/LoginRequest";
 import OAuth2Error from "../model/OAuth2Error";
 import OAuth2TokenResponse from "../model/OAuth2TokenResponse";
 
 /**
  * Authorization service.
  * @module api/AuthorizationApi
- * @version 6.7.0
+ * @version 6.8.0
  */
 export default class AuthorizationApi {
   /**
@@ -35,60 +33,8 @@ export default class AuthorizationApi {
   }
 
   /**
-   * Gets an API key from username and password
-   * @param {module:model/LoginRequest} loginRequest
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Login200Response} and HTTP response
-   */
-  loginWithHttpInfo(loginRequest) {
-    let postBody = loginRequest;
-    // verify the required parameter 'loginRequest' is set
-    if (loginRequest === undefined || loginRequest === null) {
-      throw new Error(
-        "Missing the required parameter 'loginRequest' when calling login"
-      );
-    }
-
-    let pathParams = {};
-    let queryParams = {};
-    let headerParams = {};
-    let formParams = {};
-
-    let authNames = [];
-    let contentTypes = ["application/json"];
-    let accepts = ["application/json"];
-    let returnType = Login200Response;
-    return this.apiClient.callApi(
-      "/auth/login",
-      "POST",
-      pathParams,
-      queryParams,
-      headerParams,
-      formParams,
-      postBody,
-      authNames,
-      contentTypes,
-      accepts,
-      returnType,
-      null
-    );
-  }
-
-  /**
-   * Gets an API key from username and password
-   * @param {module:model/LoginRequest} loginRequest
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Login200Response}
-   */
-  login(loginRequest) {
-    return this.loginWithHttpInfo(loginRequest).then(function (
-      response_and_data
-    ) {
-      return response_and_data.data;
-    });
-  }
-
-  /**
-   * Issue an OAuth 2.0 access token (Client Credentials)
-   * Exchanges client credentials for an access token. Parameters must be sent as application/x-www-form-urlencoded.
+   * Get an access token with OAuth client credentials
+   * Exchange an OAuth client's ID and secret for a bearer access token, using the OAuth 2.0 client credentials grant. Send the parameters form-encoded, not as JSON.  Returns 401 for a bad client ID or secret, and 403 for a scope the client can't have.
    * @param {String} clientId
    * @param {String} clientSecret
    * @param {module:model/String} grantType
@@ -149,8 +95,8 @@ export default class AuthorizationApi {
   }
 
   /**
-   * Issue an OAuth 2.0 access token (Client Credentials)
-   * Exchanges client credentials for an access token. Parameters must be sent as application/x-www-form-urlencoded.
+   * Get an access token with OAuth client credentials
+   * Exchange an OAuth client's ID and secret for a bearer access token, using the OAuth 2.0 client credentials grant. Send the parameters form-encoded, not as JSON.  Returns 401 for a bad client ID or secret, and 403 for a scope the client can't have.
    * @param {String} clientId
    * @param {String} clientSecret
    * @param {module:model/String} grantType

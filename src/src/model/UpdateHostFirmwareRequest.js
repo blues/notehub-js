@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The UpdateHostFirmwareRequest model module.
  * @module model/UpdateHostFirmwareRequest
- * @version 6.7.0
+ * @version 6.8.0
  */
 class UpdateHostFirmwareRequest {
   /**
@@ -95,19 +95,19 @@ class UpdateHostFirmwareRequest {
 }
 
 /**
- * Arbitrary JSON metadata associated with this firmware entry.
+ * JSON metadata for this firmware. Replaces the stored object when present.
  * @member {Object.<String, Object>} info
  */
 UpdateHostFirmwareRequest.prototype["info"] = undefined;
 
 /**
- * Notes describing this firmware version.
+ * New notes for this firmware. Empty keeps the current notes.
  * @member {String} notes
  */
 UpdateHostFirmwareRequest.prototype["notes"] = undefined;
 
 /**
- * The firmware version string.
+ * New version string. Empty keeps the current version.
  * @member {String} version
  */
 UpdateHostFirmwareRequest.prototype["version"] = undefined;

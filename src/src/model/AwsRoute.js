@@ -18,7 +18,7 @@ import RouteTransformSettings from "./RouteTransformSettings";
 /**
  * The AwsRoute model module.
  * @module model/AwsRoute
- * @version 6.7.0
+ * @version 6.8.0
  */
 class AwsRoute {
   /**

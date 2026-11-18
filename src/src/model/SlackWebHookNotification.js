@@ -16,15 +16,16 @@ import ApiClient from "../ApiClient";
 /**
  * The SlackWebHookNotification model module.
  * @module model/SlackWebHookNotification
- * @version 6.7.0
+ * @version 6.8.0
  */
 class SlackWebHookNotification {
   /**
    * Constructs a new <code>SlackWebHookNotification</code>.
    * @alias module:model/SlackWebHookNotification
+   * @param url {String} The URL of the Slack webhook. Returned as `(omitted)`. Sending it back keeps the stored URL if the monitor has only one Slack webhook route.
    */
-  constructor() {
-    SlackWebHookNotification.initialize(this);
+  constructor(url) {
+    SlackWebHookNotification.initialize(this, url);
   }
 
   /**
@@ -32,7 +33,9 @@ class SlackWebHookNotification {
    * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
    * Only for internal use.
    */
-  static initialize(obj) {}
+  static initialize(obj, url) {
+    obj["url"] = url;
+  }
 
   /**
    * Constructs a <code>SlackWebHookNotification</code> from a plain JavaScript object, optionally creating a new instance.
@@ -69,6 +72,17 @@ class SlackWebHookNotification {
    * @return {boolean} to indicate whether the JSON data is valid with respect to <code>SlackWebHookNotification</code>.
    */
   static validateJSON(data) {
+    // check to make sure all required properties are present in the JSON string
+    for (const property of SlackWebHookNotification.RequiredProperties) {
+      if (!data[property]) {
+        throw new Error(
+          "The required field `" +
+            property +
+            "` is not found in the JSON data: " +
+            JSON.stringify(data)
+        );
+      }
+    }
     // ensure the json data is a string
     if (
       data["message_type"] &&
@@ -107,20 +121,22 @@ class SlackWebHookNotification {
   }
 }
 
+SlackWebHookNotification.RequiredProperties = ["url"];
+
 /**
- * text or blocks
+ * How `text` is read. - `text`: plain message text - `blocks`: a Slack Block Kit JSON definition
  * @member {module:model/SlackWebHookNotification.MessageTypeEnum} message_type
  */
 SlackWebHookNotification.prototype["message_type"] = undefined;
 
 /**
- * The text of the message, or the blocks definition
+ * The message, or Block Kit JSON. Event placeholders such as `[.body.temp]` aren't allowed.
  * @member {String} text
  */
 SlackWebHookNotification.prototype["text"] = undefined;
 
 /**
- * The URL of the Slack webhook.
+ * The URL of the Slack webhook. Returned as `(omitted)`. Sending it back keeps the stored URL if the monitor has only one Slack webhook route.
  * @member {String} url
  */
 SlackWebHookNotification.prototype["url"] = undefined;

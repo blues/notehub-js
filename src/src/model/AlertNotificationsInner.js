@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The AlertNotificationsInner model module.
  * @module model/AlertNotificationsInner
- * @version 6.7.0
+ * @version 6.8.0
  */
 class AlertNotificationsInner {
   /**
@@ -104,7 +104,7 @@ class AlertNotificationsInner {
 }
 
 /**
- * The type of notification
+ * How the notification was sent. - `email`: by email - `slack-webhook`: to a Slack webhook - `slack-bearer`: through a Slack app, with a bearer token - `twilio`: by SMS, through Twilio
  * @member {module:model/AlertNotificationsInner.NotificationTypeEnum} notification_type
  */
 AlertNotificationsInner.prototype["notification_type"] = undefined;
@@ -134,10 +134,22 @@ AlertNotificationsInner["NotificationTypeEnum"] = {
   email: "email",
 
   /**
-   * value: "slack"
+   * value: "slack-webhook"
    * @const
    */
-  slack: "slack",
+  "slack-webhook": "slack-webhook",
+
+  /**
+   * value: "slack-bearer"
+   * @const
+   */
+  "slack-bearer": "slack-bearer",
+
+  /**
+   * value: "twilio"
+   * @const
+   */
+  twilio: "twilio",
 };
 
 export default AlertNotificationsInner;

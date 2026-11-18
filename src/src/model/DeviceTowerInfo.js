@@ -16,11 +16,12 @@ import ApiClient from "../ApiClient";
 /**
  * The DeviceTowerInfo model module.
  * @module model/DeviceTowerInfo
- * @version 6.7.0
+ * @version 6.8.0
  */
 class DeviceTowerInfo {
   /**
    * Constructs a new <code>DeviceTowerInfo</code>.
+   * The cell tower the device last used. Null if unknown.
    * @alias module:model/DeviceTowerInfo
    */
   constructor() {
@@ -74,21 +75,25 @@ class DeviceTowerInfo {
 }
 
 /**
+ * Cell ID.
  * @member {Number} cell_id
  */
 DeviceTowerInfo.prototype["cell_id"] = undefined;
 
 /**
+ * Location area code.
  * @member {Number} lac
  */
 DeviceTowerInfo.prototype["lac"] = undefined;
 
 /**
+ * Mobile country code.
  * @member {Number} mcc
  */
 DeviceTowerInfo.prototype["mcc"] = undefined;
 
 /**
+ * Mobile network code.
  * @member {Number} mnc
  */
 DeviceTowerInfo.prototype["mnc"] = undefined;

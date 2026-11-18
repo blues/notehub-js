@@ -17,7 +17,7 @@ import GetDevicePublicKeys200ResponseDevicePublicKeysInner from "./GetDevicePubl
 /**
  * The GetDevicePublicKeys200Response model module.
  * @module model/GetDevicePublicKeys200Response
- * @version 6.7.0
+ * @version 6.8.0
  */
 class GetDevicePublicKeys200Response {
   /**
@@ -60,6 +60,12 @@ class GetDevicePublicKeys200Response {
       if (data.hasOwnProperty("has_more")) {
         obj["has_more"] = ApiClient.convertToType(data["has_more"], "Boolean");
       }
+      if (data.hasOwnProperty("next_cursor")) {
+        obj["next_cursor"] = ApiClient.convertToType(
+          data["next_cursor"],
+          "String"
+        );
+      }
     } else if (data === null) {
       return null;
     }
@@ -99,6 +105,19 @@ class GetDevicePublicKeys200Response {
         );
       }
     }
+    // ensure the json data is a string
+    if (
+      data["next_cursor"] &&
+      !(
+        typeof data["next_cursor"] === "string" ||
+        data["next_cursor"] instanceof String
+      )
+    ) {
+      throw new Error(
+        "Expected the field `next_cursor` to be a primitive type in the JSON string but got " +
+          data["next_cursor"]
+      );
+    }
 
     return true;
   }
@@ -118,5 +137,11 @@ GetDevicePublicKeys200Response.prototype["device_public_keys"] = undefined;
  * @member {Boolean} has_more
  */
 GetDevicePublicKeys200Response.prototype["has_more"] = undefined;
+
+/**
+ * Pass this value (epoch microseconds, optionally `.N`) as a cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes.
+ * @member {String} next_cursor
+ */
+GetDevicePublicKeys200Response.prototype["next_cursor"] = undefined;
 
 export default GetDevicePublicKeys200Response;

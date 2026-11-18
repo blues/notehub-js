@@ -18,7 +18,7 @@ import TowerLocation from "./TowerLocation";
 /**
  * The DeviceSession model module.
  * @module model/DeviceSession
- * @version 6.7.0
+ * @version 6.8.0
  */
 class DeviceSession {
   /**
@@ -584,7 +584,7 @@ DeviceSession.prototype["cell"] = undefined;
 DeviceSession.prototype["continuous"] = undefined;
 
 /**
- * Device UID
+ * DeviceUID
  * @member {String} device
  */
 DeviceSession.prototype["device"] = undefined;
@@ -602,7 +602,7 @@ DeviceSession.prototype["events"] = undefined;
 DeviceSession.prototype["failed_connects"] = undefined;
 
 /**
- * Array of Fleet UIDs
+ * Array of FleetUIDs
  * @member {Array.<String>} fleets
  */
 DeviceSession.prototype["fleets"] = undefined;
@@ -690,7 +690,7 @@ DeviceSession.prototype["power_primary"] = undefined;
 DeviceSession.prototype["power_usb"] = undefined;
 
 /**
- * Product UID
+ * ProductUID
  * @member {String} product
  */
 DeviceSession.prototype["product"] = undefined;
@@ -721,7 +721,7 @@ DeviceSession.prototype["rssi"] = undefined;
 DeviceSession.prototype["scan"] = undefined;
 
 /**
- * Session UID
+ * SessionUID
  * @member {String} session
  */
 DeviceSession.prototype["session"] = undefined;

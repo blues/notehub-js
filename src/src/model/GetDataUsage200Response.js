@@ -17,7 +17,7 @@ import GetDataUsage200ResponseDataInner from "./GetDataUsage200ResponseDataInner
 /**
  * The GetDataUsage200Response model module.
  * @module model/GetDataUsage200Response
- * @version 6.7.0
+ * @version 6.8.0
  */
 class GetDataUsage200Response {
   /**
@@ -94,7 +94,7 @@ class GetDataUsage200Response {
 GetDataUsage200Response.prototype["data"] = undefined;
 
 /**
- * If the data is truncated that means that the parameters selected resulted in a response of over | the requested limit of data points, in order to ensure
+ * True if there were more data points than `limit`; only the first `limit` are returned.
  * @member {Boolean} truncated
  */
 GetDataUsage200Response.prototype["truncated"] = undefined;

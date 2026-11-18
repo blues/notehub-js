@@ -18,7 +18,7 @@ import GetAlerts200Response from "../model/GetAlerts200Response";
 /**
  * Alert service.
  * @module api/AlertApi
- * @version 6.7.0
+ * @version 6.8.0
  */
 export default class AlertApi {
   /**
@@ -33,12 +33,14 @@ export default class AlertApi {
   }
 
   /**
-   * Get list of defined Alerts
+   * List alerts
+   * List the alerts a project's monitors have raised, with each one's value, device and the notifications sent. Set `monitorUID` for one monitor's alerts.  Paginated.
    * @param {String} projectOrProductUID
    * @param {Object} opts Optional parameters
-   * @param {Number} opts.pageSize  (default to 50)
+   * @param {Number} opts.pageSize  (default to 1000)
    * @param {Number} opts.pageNum  (default to 1)
-   * @param {String} opts.monitorUID
+   * @param {String} opts.cursor If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped.
+   * @param {String} opts.monitorUID Return only this monitor's alerts.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetAlerts200Response} and HTTP response
    */
   getAlertsWithHttpInfo(projectOrProductUID, opts) {
@@ -57,6 +59,7 @@ export default class AlertApi {
     let queryParams = {
       pageSize: opts["pageSize"],
       pageNum: opts["pageNum"],
+      cursor: opts["cursor"],
       monitorUID: opts["monitorUID"],
     };
     let headerParams = {};
@@ -83,12 +86,14 @@ export default class AlertApi {
   }
 
   /**
-   * Get list of defined Alerts
+   * List alerts
+   * List the alerts a project's monitors have raised, with each one's value, device and the notifications sent. Set `monitorUID` for one monitor's alerts.  Paginated.
    * @param {String} projectOrProductUID
    * @param {Object} opts Optional parameters
-   * @param {Number} opts.pageSize  (default to 50)
+   * @param {Number} opts.pageSize  (default to 1000)
    * @param {Number} opts.pageNum  (default to 1)
-   * @param {String} opts.monitorUID
+   * @param {String} opts.cursor If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped.
+   * @param {String} opts.monitorUID Return only this monitor's alerts.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetAlerts200Response}
    */
   getAlerts(projectOrProductUID, opts) {

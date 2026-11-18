@@ -15,17 +15,18 @@ import ApiClient from "../ApiClient";
 import EmailNotification from "./EmailNotification";
 import SlackBearerNotification from "./SlackBearerNotification";
 import SlackWebHookNotification from "./SlackWebHookNotification";
+import TwilioNotification from "./TwilioNotification";
 
 /**
  * The MonitorAlertRoutesInner model module.
  * @module model/MonitorAlertRoutesInner
- * @version 6.7.0
+ * @version 6.8.0
  */
 class MonitorAlertRoutesInner {
   /**
    * Constructs a new <code>MonitorAlertRoutesInner</code>.
    * @alias module:model/MonitorAlertRoutesInner
-   * @param {(module:model/EmailNotification|module:model/SlackBearerNotification|module:model/SlackWebHookNotification)} instance The actual instance to initialize MonitorAlertRoutesInner.
+   * @param {(module:model/EmailNotification|module:model/SlackBearerNotification|module:model/SlackWebHookNotification|module:model/TwilioNotification)} instance The actual instance to initialize MonitorAlertRoutesInner.
    */
   constructor(instance = null) {
     if (instance === null) {
@@ -86,15 +87,31 @@ class MonitorAlertRoutesInner {
       errorMessages.push("Failed to construct EmailNotification: " + err);
     }
 
+    try {
+      if (typeof instance === "TwilioNotification") {
+        this.actualInstance = instance;
+      } else {
+        // plain JS object
+        // validate the object
+        TwilioNotification.validateJSON(instance); // throw an exception if no match
+        // create TwilioNotification from JS object
+        this.actualInstance = TwilioNotification.constructFromObject(instance);
+      }
+      match++;
+    } catch (err) {
+      // json data failed to deserialize into TwilioNotification
+      errorMessages.push("Failed to construct TwilioNotification: " + err);
+    }
+
     if (match > 1) {
       throw new Error(
-        "Multiple matches found constructing `MonitorAlertRoutesInner` with oneOf schemas EmailNotification, SlackBearerNotification, SlackWebHookNotification. Input: " +
+        "Multiple matches found constructing `MonitorAlertRoutesInner` with oneOf schemas EmailNotification, SlackBearerNotification, SlackWebHookNotification, TwilioNotification. Input: " +
           JSON.stringify(instance)
       );
     } else if (match === 0) {
       this.actualInstance = null; // clear the actual instance in case there are multiple matches
       throw new Error(
-        "No match found constructing `MonitorAlertRoutesInner` with oneOf schemas EmailNotification, SlackBearerNotification, SlackWebHookNotification. Details: " +
+        "No match found constructing `MonitorAlertRoutesInner` with oneOf schemas EmailNotification, SlackBearerNotification, SlackWebHookNotification, TwilioNotification. Details: " +
           errorMessages.join(", ")
       );
     } else {
@@ -115,16 +132,16 @@ class MonitorAlertRoutesInner {
   }
 
   /**
-   * Gets the actaul instance, which can be <code>EmailNotification</code>, <code>SlackBearerNotification</code>, <code>SlackWebHookNotification</code>.
-   * @return {(module:model/EmailNotification|module:model/SlackBearerNotification|module:model/SlackWebHookNotification)} The actual instance.
+   * Gets the actaul instance, which can be <code>EmailNotification</code>, <code>SlackBearerNotification</code>, <code>SlackWebHookNotification</code>, <code>TwilioNotification</code>.
+   * @return {(module:model/EmailNotification|module:model/SlackBearerNotification|module:model/SlackWebHookNotification|module:model/TwilioNotification)} The actual instance.
    */
   getActualInstance() {
     return this.actualInstance;
   }
 
   /**
-   * Sets the actaul instance, which can be <code>EmailNotification</code>, <code>SlackBearerNotification</code>, <code>SlackWebHookNotification</code>.
-   * @param {(module:model/EmailNotification|module:model/SlackBearerNotification|module:model/SlackWebHookNotification)} obj The actual instance.
+   * Sets the actaul instance, which can be <code>EmailNotification</code>, <code>SlackBearerNotification</code>, <code>SlackWebHookNotification</code>, <code>TwilioNotification</code>.
+   * @param {(module:model/EmailNotification|module:model/SlackBearerNotification|module:model/SlackWebHookNotification|module:model/TwilioNotification)} obj The actual instance.
    */
   setActualInstance(obj) {
     this.actualInstance =
@@ -150,19 +167,19 @@ class MonitorAlertRoutesInner {
 }
 
 /**
- * text or blocks
+ * How `text` is read. - `text`: plain message text - `blocks`: a Slack Block Kit JSON definition
  * @member {module:model/MonitorAlertRoutesInner.MessageTypeEnum} message_type
  */
 MonitorAlertRoutesInner.prototype["message_type"] = undefined;
 
 /**
- * The text of the message, or the blocks definition
+ * The message, or Block Kit JSON. Event placeholders such as `[.body.temp]` aren't allowed.
  * @member {String} text
  */
 MonitorAlertRoutesInner.prototype["text"] = undefined;
 
 /**
- * The URL of the Slack webhook.
+ * The URL of the Slack webhook. Returned as `(omitted)`. Sending it back keeps the stored URL if the monitor has only one Slack webhook route.
  * @member {String} url
  */
 MonitorAlertRoutesInner.prototype["url"] = undefined;
@@ -174,21 +191,52 @@ MonitorAlertRoutesInner.prototype["url"] = undefined;
 MonitorAlertRoutesInner.prototype["channel"] = undefined;
 
 /**
- * The bearer token for the Slack app.
+ * The bearer token for the Slack app. Returned as `(omitted)`. Sending it back keeps the stored token if the monitor has only one Slack bearer route.
  * @member {String} token
  */
 MonitorAlertRoutesInner.prototype["token"] = undefined;
 
 /**
- * Email Address
+ * Email address, or several separated by commas.
  * @member {String} email
  */
 MonitorAlertRoutesInner.prototype["email"] = undefined;
+
+/**
+ * The Twilio account SID.
+ * @member {String} account_sid
+ */
+MonitorAlertRoutesInner.prototype["account_sid"] = undefined;
+
+/**
+ * The Twilio auth token. Returned as `(omitted)`. Sending it back keeps the stored token if the monitor has only one Twilio route.
+ * @member {String} auth_token
+ */
+MonitorAlertRoutesInner.prototype["auth_token"] = undefined;
+
+/**
+ * The number to send the SMS from, in E.164 format, e.g. `+15551234567`.
+ * @member {String} from
+ */
+MonitorAlertRoutesInner.prototype["from"] = undefined;
+
+/**
+ * The text of the SMS. Event placeholders such as `[.body.temp]` aren't allowed.
+ * @member {String} message
+ */
+MonitorAlertRoutesInner.prototype["message"] = undefined;
+
+/**
+ * The number to send the SMS to, in E.164 format.
+ * @member {String} to
+ */
+MonitorAlertRoutesInner.prototype["to"] = undefined;
 
 MonitorAlertRoutesInner.OneOf = [
   "EmailNotification",
   "SlackBearerNotification",
   "SlackWebHookNotification",
+  "TwilioNotification",
 ];
 
 export default MonitorAlertRoutesInner;

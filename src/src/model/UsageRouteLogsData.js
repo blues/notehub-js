@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The UsageRouteLogsData model module.
  * @module model/UsageRouteLogsData
- * @version 6.7.0
+ * @version 6.8.0
  */
 class UsageRouteLogsData {
   /**
@@ -152,7 +152,7 @@ UsageRouteLogsData.prototype["failed_routes"] = undefined;
 UsageRouteLogsData.prototype["period"] = undefined;
 
 /**
- * The route UID (only present when aggregate is 'route')
+ * The routeUID (only present when aggregate is 'route')
  * @member {String} route
  */
 UsageRouteLogsData.prototype["route"] = undefined;

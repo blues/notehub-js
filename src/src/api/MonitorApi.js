@@ -19,7 +19,7 @@ import Monitor from "../model/Monitor";
 /**
  * Monitor service.
  * @module api/MonitorApi
- * @version 6.7.0
+ * @version 6.8.0
  */
 export default class MonitorApi {
   /**
@@ -34,7 +34,8 @@ export default class MonitorApi {
   }
 
   /**
-   * Create a new Monitor
+   * Create a monitor
+   * Create a monitor that raises an alert and notifies email, Slack or Twilio when its condition holds. It can watch an event value (`event`, the default), devices going quiet (`heartbeat`), or data usage (`usage`).  Requires the Owner or Developer role. Returns 403 if the project's plan doesn't allow the monitor, and 400 for invalid settings.
    * @param {String} projectOrProductUID
    * @param {module:model/CreateMonitor} createMonitor Body or payload of monitor to be created
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Monitor} and HTTP response
@@ -82,7 +83,8 @@ export default class MonitorApi {
   }
 
   /**
-   * Create a new Monitor
+   * Create a monitor
+   * Create a monitor that raises an alert and notifies email, Slack or Twilio when its condition holds. It can watch an event value (`event`, the default), devices going quiet (`heartbeat`), or data usage (`usage`).  Requires the Owner or Developer role. Returns 403 if the project's plan doesn't allow the monitor, and 400 for invalid settings.
    * @param {String} projectOrProductUID
    * @param {module:model/CreateMonitor} createMonitor Body or payload of monitor to be created
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Monitor}
@@ -97,9 +99,10 @@ export default class MonitorApi {
   }
 
   /**
-   * Delete Monitor
+   * Delete a monitor
+   * Delete a monitor so it stops raising alerts. Returns an empty monitor object. To pause it instead, set `disabled` with `UpdateMonitor`.  Requires the Owner or Developer role. Returns 404 if the monitor never existed; deleting it again succeeds.
    * @param {String} projectOrProductUID
-   * @param {String} monitorUID
+   * @param {String} monitorUID MonitorUID, `monitor:` followed by a UUID. List with `GetMonitors`.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Monitor} and HTTP response
    */
   deleteMonitorWithHttpInfo(projectOrProductUID, monitorUID) {
@@ -146,9 +149,10 @@ export default class MonitorApi {
   }
 
   /**
-   * Delete Monitor
+   * Delete a monitor
+   * Delete a monitor so it stops raising alerts. Returns an empty monitor object. To pause it instead, set `disabled` with `UpdateMonitor`.  Requires the Owner or Developer role. Returns 404 if the monitor never existed; deleting it again succeeds.
    * @param {String} projectOrProductUID
-   * @param {String} monitorUID
+   * @param {String} monitorUID MonitorUID, `monitor:` followed by a UUID. List with `GetMonitors`.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Monitor}
    */
   deleteMonitor(projectOrProductUID, monitorUID) {
@@ -160,9 +164,10 @@ export default class MonitorApi {
   }
 
   /**
-   * Get Monitor
+   * Get a monitor
+   * Get one monitor's settings and whether it's in alert. Slack and Twilio credentials in `alert_routes` come back as `(omitted)`.  Returns 404 if the monitor never existed; a deleted monitor is still returned.
    * @param {String} projectOrProductUID
-   * @param {String} monitorUID
+   * @param {String} monitorUID MonitorUID, `monitor:` followed by a UUID. List with `GetMonitors`.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Monitor} and HTTP response
    */
   getMonitorWithHttpInfo(projectOrProductUID, monitorUID) {
@@ -209,9 +214,10 @@ export default class MonitorApi {
   }
 
   /**
-   * Get Monitor
+   * Get a monitor
+   * Get one monitor's settings and whether it's in alert. Slack and Twilio credentials in `alert_routes` come back as `(omitted)`.  Returns 404 if the monitor never existed; a deleted monitor is still returned.
    * @param {String} projectOrProductUID
-   * @param {String} monitorUID
+   * @param {String} monitorUID MonitorUID, `monitor:` followed by a UUID. List with `GetMonitors`.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Monitor}
    */
   getMonitor(projectOrProductUID, monitorUID) {
@@ -223,7 +229,8 @@ export default class MonitorApi {
   }
 
   /**
-   * Get list of defined Monitors
+   * List monitors
+   * List a project's monitors with their settings and whether each is in alert. For the alerts they've raised, use `GetAlerts`.
    * @param {String} projectOrProductUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link Array.<module:model/Monitor>} and HTTP response
    */
@@ -264,7 +271,8 @@ export default class MonitorApi {
   }
 
   /**
-   * Get list of defined Monitors
+   * List monitors
+   * List a project's monitors with their settings and whether each is in alert. For the alerts they've raised, use `GetAlerts`.
    * @param {String} projectOrProductUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link Array.<module:model/Monitor>}
    */
@@ -277,9 +285,10 @@ export default class MonitorApi {
   }
 
   /**
-   * Update Monitor
+   * Update a monitor
+   * Replace a monitor's settings with the whole monitor, as `GetMonitor` returns it. Omitted fields are cleared or reset, except `source_type`, `fleet_filter`, `notefile_filter`, `condition_type`, `aggregate_window` and `alert_routes`. Slack and Twilio credentials left as `(omitted)` are kept.  Requires the Owner or Developer role. Returns 403 if the plan doesn't allow a new `source_type`.
    * @param {String} projectOrProductUID
-   * @param {String} monitorUID
+   * @param {String} monitorUID MonitorUID, `monitor:` followed by a UUID. List with `GetMonitors`.
    * @param {module:model/Monitor} monitor Body or payload of monitor to be created
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Monitor} and HTTP response
    */
@@ -333,9 +342,10 @@ export default class MonitorApi {
   }
 
   /**
-   * Update Monitor
+   * Update a monitor
+   * Replace a monitor's settings with the whole monitor, as `GetMonitor` returns it. Omitted fields are cleared or reset, except `source_type`, `fleet_filter`, `notefile_filter`, `condition_type`, `aggregate_window` and `alert_routes`. Slack and Twilio credentials left as `(omitted)` are kept.  Requires the Owner or Developer role. Returns 403 if the plan doesn't allow a new `source_type`.
    * @param {String} projectOrProductUID
-   * @param {String} monitorUID
+   * @param {String} monitorUID MonitorUID, `monitor:` followed by a UUID. List with `GetMonitors`.
    * @param {module:model/Monitor} monitor Body or payload of monitor to be created
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Monitor}
    */

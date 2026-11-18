@@ -18,7 +18,7 @@ import DeviceDfuStateMachine from "./DeviceDfuStateMachine";
 /**
  * The DeviceDfuStatus model module.
  * @module model/DeviceDfuStatus
- * @version 6.7.0
+ * @version 6.8.0
  */
 class DeviceDfuStatus {
   /**
@@ -51,6 +51,9 @@ class DeviceDfuStatus {
         obj["current"] = DeviceDfuHistoryCurrent.constructFromObject(
           data["current"]
         );
+      }
+      if (data.hasOwnProperty("deleted")) {
+        obj["deleted"] = ApiClient.convertToType(data["deleted"], "Boolean");
       }
       if (data.hasOwnProperty("device_uid")) {
         obj["device_uid"] = ApiClient.convertToType(
@@ -115,13 +118,19 @@ class DeviceDfuStatus {
 DeviceDfuStatus.prototype["current"] = undefined;
 
 /**
- * Device UID
+ * True if this device has been deleted. Only present when reading with a `cursor`.
+ * @member {Boolean} deleted
+ */
+DeviceDfuStatus.prototype["deleted"] = undefined;
+
+/**
+ * DeviceUID
  * @member {String} device_uid
  */
 DeviceDfuStatus.prototype["device_uid"] = undefined;
 
 /**
- * true if there is a DFU currently in progress
+ * `true` while the device's latest firmware update hasn't finished.
  * @member {Boolean} dfu_in_progress
  */
 DeviceDfuStatus.prototype["dfu_in_progress"] = undefined;

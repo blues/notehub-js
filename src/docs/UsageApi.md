@@ -2,19 +2,21 @@
 
 All URIs are relative to *https://api.notefile.net*
 
-| Method                                                 | HTTP request                                                | Description |
-| ------------------------------------------------------ | ----------------------------------------------------------- | ----------- |
-| [**getApiUsage**](UsageApi.md#getApiUsage)             | **GET** /v1/projects/{projectOrProductUID}/usage/api        |
-| [**getDataUsage**](UsageApi.md#getDataUsage)           | **GET** /v1/projects/{projectOrProductUID}/usage/data       |
-| [**getEventsUsage**](UsageApi.md#getEventsUsage)       | **GET** /v1/projects/{projectOrProductUID}/usage/events     |
-| [**getRouteLogsUsage**](UsageApi.md#getRouteLogsUsage) | **GET** /v1/projects/{projectOrProductUID}/usage/route-logs |
-| [**getSessionsUsage**](UsageApi.md#getSessionsUsage)   | **GET** /v1/projects/{projectOrProductUID}/usage/sessions   |
+| Method                                                 | HTTP request                                                | Description                           |
+| ------------------------------------------------------ | ----------------------------------------------------------- | ------------------------------------- |
+| [**getApiUsage**](UsageApi.md#getApiUsage)             | **GET** /v1/projects/{projectOrProductUID}/usage/api        | Get billable API usage                |
+| [**getDataUsage**](UsageApi.md#getDataUsage)           | **GET** /v1/projects/{projectOrProductUID}/usage/data       | Get cellular and satellite data usage |
+| [**getEventsUsage**](UsageApi.md#getEventsUsage)       | **GET** /v1/projects/{projectOrProductUID}/usage/events     | Get event usage                       |
+| [**getRouteLogsUsage**](UsageApi.md#getRouteLogsUsage) | **GET** /v1/projects/{projectOrProductUID}/usage/route-logs | Get route log usage                   |
+| [**getSessionsUsage**](UsageApi.md#getSessionsUsage)   | **GET** /v1/projects/{projectOrProductUID}/usage/sessions   | Get session usage                     |
 
 ## getApiUsage
 
 > GetApiUsage200Response getApiUsage(projectOrProductUID, period, opts)
 
-Get billable Notehub API request usage for a project, broken down by endpoint and time period, when endDate is 0 or unspecified the current time is implied. Only requests that are billed against the project&#39;s plan are counted
+Get billable API usage
+
+Count a project&#39;s billable Notehub API requests per day, week or month, by endpoint. Only requests billed against the project&#39;s plan are counted. Returns 400 if &#x60;startDate&#x60; is after &#x60;endDate&#x60;.
 
 ### Example
 
@@ -26,11 +28,11 @@ personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
 
 let apiInstance = new NotehubJs.UsageApi();
 let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String |
-let period = "period_example"; // String | Period type for aggregation
+let period = "period_example"; // String | The length of time each data point covers.
 let opts = {
   startDate: 1628631763, // Number | Start date for filtering results, specified as a Unix timestamp
   endDate: 1657894210, // Number | End date for filtering results, specified as a Unix timestamp
-  limit: 200000, // Number | Limit the number of data points returned
+  limit: 200000, // Number | The most data points to return. If there are more, `truncated` is true.
 };
 apiInstance.getApiUsage(projectOrProductUID, period, opts).then(
   (data) => {
@@ -46,13 +48,13 @@ apiInstance.getApiUsage(projectOrProductUID, period, opts).then(
 
 ### Parameters
 
-| Name                    | Type       | Description                                                     | Notes                          |
-| ----------------------- | ---------- | --------------------------------------------------------------- | ------------------------------ |
-| **projectOrProductUID** | **String** |                                                                 |
-| **period**              | **String** | Period type for aggregation                                     |
-| **startDate**           | **Number** | Start date for filtering results, specified as a Unix timestamp | [optional]                     |
-| **endDate**             | **Number** | End date for filtering results, specified as a Unix timestamp   | [optional]                     |
-| **limit**               | **Number** | Limit the number of data points returned                        | [optional] [default to 200000] |
+| Name                    | Type       | Description                                                                       | Notes                          |
+| ----------------------- | ---------- | --------------------------------------------------------------------------------- | ------------------------------ |
+| **projectOrProductUID** | **String** |                                                                                   |
+| **period**              | **String** | The length of time each data point covers.                                        |
+| **startDate**           | **Number** | Start date for filtering results, specified as a Unix timestamp                   | [optional]                     |
+| **endDate**             | **Number** | End date for filtering results, specified as a Unix timestamp                     | [optional]                     |
+| **limit**               | **Number** | The most data points to return. If there are more, &#x60;truncated&#x60; is true. | [optional] [default to 200000] |
 
 ### Return type
 
@@ -71,7 +73,9 @@ apiInstance.getApiUsage(projectOrProductUID, period, opts).then(
 
 > GetDataUsage200Response getDataUsage(projectOrProductUID, period, opts)
 
-Get data usage in bytes for a project with time range and period aggregation
+Get cellular and satellite data usage
+
+Get the cellular and satellite data a project&#39;s devices used, in bytes. It&#39;s counted per day, week or month, by device, fleet or the whole project. If there are more data points than &#x60;limit&#x60;, the rest are dropped and &#x60;truncated&#x60; is true. Returns 400 for an unknown device, or if &#x60;endDate&#x60; is before &#x60;startDate&#x60;.
 
 ### Example
 
@@ -83,14 +87,14 @@ personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
 
 let apiInstance = new NotehubJs.UsageApi();
 let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String |
-let period = "period_example"; // String | Period type for aggregation
+let period = "period_example"; // String | The length of time each data point covers.
 let opts = {
   startDate: 1628631763, // Number | Start date for filtering results, specified as a Unix timestamp
   endDate: 1657894210, // Number | End date for filtering results, specified as a Unix timestamp
-  deviceUID: ["null"], // [String] | A Device UID.
-  fleetUID: ["null"], // [String] | Filter by Fleet UID
-  limit: 200000, // Number | Limit the number of data points returned
-  aggregate: "'device'", // String | Aggregation level for results
+  deviceUID: ["null"], // [String] | A DeviceUID.
+  fleetUID: ["null"], // [String] | Filter by FleetUID
+  limit: 200000, // Number | The most data points to return. If there are more, `truncated` is true.
+  aggregate: "'device'", // String | How to group the counts, such as per device or one total for the project.
 };
 apiInstance.getDataUsage(projectOrProductUID, period, opts).then(
   (data) => {
@@ -106,16 +110,16 @@ apiInstance.getDataUsage(projectOrProductUID, period, opts).then(
 
 ### Parameters
 
-| Name                    | Type                      | Description                                                     | Notes                                    |
-| ----------------------- | ------------------------- | --------------------------------------------------------------- | ---------------------------------------- |
-| **projectOrProductUID** | **String**                |                                                                 |
-| **period**              | **String**                | Period type for aggregation                                     |
-| **startDate**           | **Number**                | Start date for filtering results, specified as a Unix timestamp | [optional]                               |
-| **endDate**             | **Number**                | End date for filtering results, specified as a Unix timestamp   | [optional]                               |
-| **deviceUID**           | [**[String]**](String.md) | A Device UID.                                                   | [optional]                               |
-| **fleetUID**            | [**[String]**](String.md) | Filter by Fleet UID                                             | [optional]                               |
-| **limit**               | **Number**                | Limit the number of data points returned                        | [optional] [default to 200000]           |
-| **aggregate**           | **String**                | Aggregation level for results                                   | [optional] [default to &#39;device&#39;] |
+| Name                    | Type                      | Description                                                                       | Notes                                    |
+| ----------------------- | ------------------------- | --------------------------------------------------------------------------------- | ---------------------------------------- |
+| **projectOrProductUID** | **String**                |                                                                                   |
+| **period**              | **String**                | The length of time each data point covers.                                        |
+| **startDate**           | **Number**                | Start date for filtering results, specified as a Unix timestamp                   | [optional]                               |
+| **endDate**             | **Number**                | End date for filtering results, specified as a Unix timestamp                     | [optional]                               |
+| **deviceUID**           | [**[String]**](String.md) | A DeviceUID.                                                                      | [optional]                               |
+| **fleetUID**            | [**[String]**](String.md) | Filter by FleetUID                                                                | [optional]                               |
+| **limit**               | **Number**                | The most data points to return. If there are more, &#x60;truncated&#x60; is true. | [optional] [default to 200000]           |
+| **aggregate**           | **String**                | How to group the counts, such as per device or one total for the project.         | [optional] [default to &#39;device&#39;] |
 
 ### Return type
 
@@ -134,7 +138,9 @@ apiInstance.getDataUsage(projectOrProductUID, period, opts).then(
 
 > UsageEventsResponse getEventsUsage(projectOrProductUID, period, opts)
 
-Get events usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied
+Get event usage
+
+Count a project&#39;s events per day, week or month, by device, fleet or the whole project, optionally per notefile. Summaries lag; with &#x60;period&#x3D;day&#x60; and no &#x60;endDate&#x60;, the latest day is filled in from recent events unless &#x60;skipRecentData&#x60; is true. Returns 400 if &#x60;startDate&#x60; is after &#x60;endDate&#x60;.
 
 ### Example
 
@@ -146,17 +152,17 @@ personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
 
 let apiInstance = new NotehubJs.UsageApi();
 let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String |
-let period = "period_example"; // String | Period type for aggregation
+let period = "period_example"; // String | The length of time each data point covers.
 let opts = {
   startDate: 1628631763, // Number | Start date for filtering results, specified as a Unix timestamp
   endDate: 1657894210, // Number | End date for filtering results, specified as a Unix timestamp
-  deviceUID: ["null"], // [String] | A Device UID.
-  fleetUID: ["null"], // [String] | Filter by Fleet UID
-  limit: 200000, // Number | Limit the number of data points returned
-  aggregate: "'device'", // String | Aggregation level for results
-  notefile: ["null"], // [String] | Filter to specific notefiles
-  skipRecentData: false, // Boolean | When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects.
-  includeNotefiles: false, // Boolean | Include per-notefile event counts in the response
+  deviceUID: ["null"], // [String] | A DeviceUID.
+  fleetUID: ["null"], // [String] | Filter by FleetUID
+  limit: 200000, // Number | The most data points to return. If there are more, `truncated` is true.
+  aggregate: "'device'", // String | How to group the counts, such as per device or one total for the project.
+  notefile: ["null"], // [String] | Count only events from these notefiles.
+  skipRecentData: false, // Boolean | If true, return only summarized data, without filling in the latest day. Faster for large projects.
+  includeNotefiles: false, // Boolean | If true, include event counts for each notefile.
 };
 apiInstance.getEventsUsage(projectOrProductUID, period, opts).then(
   (data) => {
@@ -172,19 +178,19 @@ apiInstance.getEventsUsage(projectOrProductUID, period, opts).then(
 
 ### Parameters
 
-| Name                    | Type                      | Description                                                                                                                                               | Notes                                    |
-| ----------------------- | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
-| **projectOrProductUID** | **String**                |                                                                                                                                                           |
-| **period**              | **String**                | Period type for aggregation                                                                                                                               |
-| **startDate**           | **Number**                | Start date for filtering results, specified as a Unix timestamp                                                                                           | [optional]                               |
-| **endDate**             | **Number**                | End date for filtering results, specified as a Unix timestamp                                                                                             | [optional]                               |
-| **deviceUID**           | [**[String]**](String.md) | A Device UID.                                                                                                                                             | [optional]                               |
-| **fleetUID**            | [**[String]**](String.md) | Filter by Fleet UID                                                                                                                                       | [optional]                               |
-| **limit**               | **Number**                | Limit the number of data points returned                                                                                                                  | [optional] [default to 200000]           |
-| **aggregate**           | **String**                | Aggregation level for results                                                                                                                             | [optional] [default to &#39;device&#39;] |
-| **notefile**            | [**[String]**](String.md) | Filter to specific notefiles                                                                                                                              | [optional]                               |
-| **skipRecentData**      | **Boolean**               | When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects. | [optional] [default to false]            |
-| **includeNotefiles**    | **Boolean**               | Include per-notefile event counts in the response                                                                                                         | [optional] [default to false]            |
+| Name                    | Type                      | Description                                                                                         | Notes                                    |
+| ----------------------- | ------------------------- | --------------------------------------------------------------------------------------------------- | ---------------------------------------- |
+| **projectOrProductUID** | **String**                |                                                                                                     |
+| **period**              | **String**                | The length of time each data point covers.                                                          |
+| **startDate**           | **Number**                | Start date for filtering results, specified as a Unix timestamp                                     | [optional]                               |
+| **endDate**             | **Number**                | End date for filtering results, specified as a Unix timestamp                                       | [optional]                               |
+| **deviceUID**           | [**[String]**](String.md) | A DeviceUID.                                                                                        | [optional]                               |
+| **fleetUID**            | [**[String]**](String.md) | Filter by FleetUID                                                                                  | [optional]                               |
+| **limit**               | **Number**                | The most data points to return. If there are more, &#x60;truncated&#x60; is true.                   | [optional] [default to 200000]           |
+| **aggregate**           | **String**                | How to group the counts, such as per device or one total for the project.                           | [optional] [default to &#39;device&#39;] |
+| **notefile**            | [**[String]**](String.md) | Count only events from these notefiles.                                                             | [optional]                               |
+| **skipRecentData**      | **Boolean**               | If true, return only summarized data, without filling in the latest day. Faster for large projects. | [optional] [default to false]            |
+| **includeNotefiles**    | **Boolean**               | If true, include event counts for each notefile.                                                    | [optional] [default to false]            |
 
 ### Return type
 
@@ -203,7 +209,9 @@ apiInstance.getEventsUsage(projectOrProductUID, period, opts).then(
 
 > GetRouteLogsUsage200Response getRouteLogsUsage(projectOrProductUID, period, opts)
 
-Get route logs usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied
+Get route log usage
+
+Count a project&#39;s attempts to send events to routes per day, week or month, by route or for the whole project. If there are more data points than &#x60;limit&#x60;, the rest are dropped and &#x60;truncated&#x60; is true.
 
 ### Example
 
@@ -215,14 +223,14 @@ personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
 
 let apiInstance = new NotehubJs.UsageApi();
 let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String |
-let period = "period_example"; // String | Period type for aggregation
+let period = "period_example"; // String | The length of time each data point covers.
 let opts = {
   startDate: 1628631763, // Number | Start date for filtering results, specified as a Unix timestamp
   endDate: 1657894210, // Number | End date for filtering results, specified as a Unix timestamp
-  routeUID: ["null"], // [String] | A Route UID.
-  limit: 200000, // Number | Limit the number of data points returned
-  aggregate: "'route'", // String | Aggregation level for results
-  skipRecentData: false, // Boolean | When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects.
+  routeUID: ["null"], // [String] | A RouteUID.
+  limit: 200000, // Number | The most data points to return. If there are more, `truncated` is true.
+  aggregate: "'route'", // String | How to group the counts, per route or one total for the project.
+  skipRecentData: false, // Boolean | If true, return only summarized data, without filling in the latest day. Faster for large projects.
 };
 apiInstance.getRouteLogsUsage(projectOrProductUID, period, opts).then(
   (data) => {
@@ -238,16 +246,16 @@ apiInstance.getRouteLogsUsage(projectOrProductUID, period, opts).then(
 
 ### Parameters
 
-| Name                    | Type                      | Description                                                                                                                                               | Notes                                   |
-| ----------------------- | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------- |
-| **projectOrProductUID** | **String**                |                                                                                                                                                           |
-| **period**              | **String**                | Period type for aggregation                                                                                                                               |
-| **startDate**           | **Number**                | Start date for filtering results, specified as a Unix timestamp                                                                                           | [optional]                              |
-| **endDate**             | **Number**                | End date for filtering results, specified as a Unix timestamp                                                                                             | [optional]                              |
-| **routeUID**            | [**[String]**](String.md) | A Route UID.                                                                                                                                              | [optional]                              |
-| **limit**               | **Number**                | Limit the number of data points returned                                                                                                                  | [optional] [default to 200000]          |
-| **aggregate**           | **String**                | Aggregation level for results                                                                                                                             | [optional] [default to &#39;route&#39;] |
-| **skipRecentData**      | **Boolean**               | When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects. | [optional] [default to false]           |
+| Name                    | Type                      | Description                                                                                         | Notes                                   |
+| ----------------------- | ------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------- |
+| **projectOrProductUID** | **String**                |                                                                                                     |
+| **period**              | **String**                | The length of time each data point covers.                                                          |
+| **startDate**           | **Number**                | Start date for filtering results, specified as a Unix timestamp                                     | [optional]                              |
+| **endDate**             | **Number**                | End date for filtering results, specified as a Unix timestamp                                       | [optional]                              |
+| **routeUID**            | [**[String]**](String.md) | A RouteUID.                                                                                         | [optional]                              |
+| **limit**               | **Number**                | The most data points to return. If there are more, &#x60;truncated&#x60; is true.                   | [optional] [default to 200000]          |
+| **aggregate**           | **String**                | How to group the counts, per route or one total for the project.                                    | [optional] [default to &#39;route&#39;] |
+| **skipRecentData**      | **Boolean**               | If true, return only summarized data, without filling in the latest day. Faster for large projects. | [optional] [default to false]           |
 
 ### Return type
 
@@ -266,7 +274,9 @@ apiInstance.getRouteLogsUsage(projectOrProductUID, period, opts).then(
 
 > GetSessionsUsage200Response getSessionsUsage(projectOrProductUID, period, opts)
 
-Get sessions usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied
+Get session usage
+
+Count a project&#39;s device sessions per day, week or month, by device, fleet or the whole project. If there are more data points than &#x60;limit&#x60;, the rest are dropped and &#x60;truncated&#x60; is true. Returns 400 if &#x60;startDate&#x60; is after &#x60;endDate&#x60;.
 
 ### Example
 
@@ -278,15 +288,15 @@ personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
 
 let apiInstance = new NotehubJs.UsageApi();
 let projectOrProductUID = "app:2606f411-dea6-44a0-9743-1130f57d77d8"; // String |
-let period = "period_example"; // String | Period type for aggregation
+let period = "period_example"; // String | The length of time each data point covers.
 let opts = {
   startDate: 1628631763, // Number | Start date for filtering results, specified as a Unix timestamp
   endDate: 1657894210, // Number | End date for filtering results, specified as a Unix timestamp
-  deviceUID: ["null"], // [String] | A Device UID.
-  fleetUID: ["null"], // [String] | Filter by Fleet UID
-  limit: 200000, // Number | Limit the number of data points returned
-  aggregate: "'device'", // String | Aggregation level for results
-  skipRecentData: false, // Boolean | When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects.
+  deviceUID: ["null"], // [String] | A DeviceUID.
+  fleetUID: ["null"], // [String] | Filter by FleetUID
+  limit: 200000, // Number | The most data points to return. If there are more, `truncated` is true.
+  aggregate: "'device'", // String | How to group the counts, such as per device or one total for the project.
+  skipRecentData: false, // Boolean | If true, return only summarized data, without filling in the latest day. Faster for large projects.
 };
 apiInstance.getSessionsUsage(projectOrProductUID, period, opts).then(
   (data) => {
@@ -302,17 +312,17 @@ apiInstance.getSessionsUsage(projectOrProductUID, period, opts).then(
 
 ### Parameters
 
-| Name                    | Type                      | Description                                                                                                                                               | Notes                                    |
-| ----------------------- | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
-| **projectOrProductUID** | **String**                |                                                                                                                                                           |
-| **period**              | **String**                | Period type for aggregation                                                                                                                               |
-| **startDate**           | **Number**                | Start date for filtering results, specified as a Unix timestamp                                                                                           | [optional]                               |
-| **endDate**             | **Number**                | End date for filtering results, specified as a Unix timestamp                                                                                             | [optional]                               |
-| **deviceUID**           | [**[String]**](String.md) | A Device UID.                                                                                                                                             | [optional]                               |
-| **fleetUID**            | [**[String]**](String.md) | Filter by Fleet UID                                                                                                                                       | [optional]                               |
-| **limit**               | **Number**                | Limit the number of data points returned                                                                                                                  | [optional] [default to 200000]           |
-| **aggregate**           | **String**                | Aggregation level for results                                                                                                                             | [optional] [default to &#39;device&#39;] |
-| **skipRecentData**      | **Boolean**               | When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects. | [optional] [default to false]            |
+| Name                    | Type                      | Description                                                                                         | Notes                                    |
+| ----------------------- | ------------------------- | --------------------------------------------------------------------------------------------------- | ---------------------------------------- |
+| **projectOrProductUID** | **String**                |                                                                                                     |
+| **period**              | **String**                | The length of time each data point covers.                                                          |
+| **startDate**           | **Number**                | Start date for filtering results, specified as a Unix timestamp                                     | [optional]                               |
+| **endDate**             | **Number**                | End date for filtering results, specified as a Unix timestamp                                       | [optional]                               |
+| **deviceUID**           | [**[String]**](String.md) | A DeviceUID.                                                                                        | [optional]                               |
+| **fleetUID**            | [**[String]**](String.md) | Filter by FleetUID                                                                                  | [optional]                               |
+| **limit**               | **Number**                | The most data points to return. If there are more, &#x60;truncated&#x60; is true.                   | [optional] [default to 200000]           |
+| **aggregate**           | **String**                | How to group the counts, such as per device or one total for the project.                           | [optional] [default to &#39;device&#39;] |
+| **skipRecentData**      | **Boolean**               | If true, return only summarized data, without filling in the latest day. Faster for large projects. | [optional] [default to false]            |
 
 ### Return type
 

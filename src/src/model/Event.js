@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The Event model module.
  * @module model/Event
- * @version 6.7.0
+ * @version 6.8.0
  */
 class Event {
   /**
@@ -95,6 +95,9 @@ class Event {
       }
       if (data.hasOwnProperty("bssid")) {
         obj["bssid"] = ApiClient.convertToType(data["bssid"], "String");
+      }
+      if (data.hasOwnProperty("deleted")) {
+        obj["deleted"] = ApiClient.convertToType(data["deleted"], "Boolean");
       }
       if (data.hasOwnProperty("device")) {
         obj["device"] = ApiClient.convertToType(data["device"], "String");
@@ -720,7 +723,7 @@ class Event {
 }
 
 /**
- * App UID (globally unique)
+ * AppUID (globally unique)
  * @member {String} app
  */
 Event.prototype["app"] = undefined;
@@ -792,7 +795,13 @@ Event.prototype["body"] = undefined;
 Event.prototype["bssid"] = undefined;
 
 /**
- * Device UID (globally unique)
+ * True if this event has been deleted. Only present when reading with a `cursor`.
+ * @member {Boolean} deleted
+ */
+Event.prototype["deleted"] = undefined;
+
+/**
+ * DeviceUID (globally unique)
  * @member {String} device
  */
 Event.prototype["device"] = undefined;
@@ -804,7 +813,7 @@ Event.prototype["device"] = undefined;
 Event.prototype["environment"] = undefined;
 
 /**
- * Event UID (globally unique)
+ * EventUID (globally unique)
  * @member {String} event
  */
 Event.prototype["event"] = undefined;
@@ -852,7 +861,7 @@ Event.prototype["payload"] = undefined;
 Event.prototype["platform"] = undefined;
 
 /**
- * Product UID (globally unique)
+ * ProductUID (globally unique)
  * @member {String} product
  */
 Event.prototype["product"] = undefined;
@@ -894,13 +903,13 @@ Event.prototype["rsrq"] = undefined;
 Event.prototype["rssi"] = undefined;
 
 /**
- * Sensor UID, for events originating from a sensor attached to the device
+ * SensorUID, for events originating from a sensor attached to the device
  * @member {String} sensor
  */
 Event.prototype["sensor"] = undefined;
 
 /**
- * Session UID (globally unique)
+ * SessionUID (globally unique)
  * @member {String} session
  */
 Event.prototype["session"] = undefined;

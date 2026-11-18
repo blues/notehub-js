@@ -17,7 +17,7 @@ import UsageRouteLogsData from "./UsageRouteLogsData";
 /**
  * The GetRouteLogsUsage200Response model module.
  * @module model/GetRouteLogsUsage200Response
- * @version 6.7.0
+ * @version 6.8.0
  */
 class GetRouteLogsUsage200Response {
   /**
@@ -110,7 +110,7 @@ GetRouteLogsUsage200Response.RequiredProperties = ["route_logs"];
 GetRouteLogsUsage200Response.prototype["route_logs"] = undefined;
 
 /**
- * If the data is truncated that means that the parameters selected resulted in a response of over | the requested limit of data points, in order to ensure
+ * True if there were more data points than `limit`; only the first `limit` are returned.
  * @member {Boolean} truncated
  */
 GetRouteLogsUsage200Response.prototype["truncated"] = undefined;

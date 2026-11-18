@@ -16,14 +16,14 @@ import ApiClient from "../ApiClient";
 /**
  * The GetDevicePublicKey200Response model module.
  * @module model/GetDevicePublicKey200Response
- * @version 6.7.0
+ * @version 6.8.0
  */
 class GetDevicePublicKey200Response {
   /**
    * Constructs a new <code>GetDevicePublicKey200Response</code>.
    * @alias module:model/GetDevicePublicKey200Response
-   * @param key {String}
-   * @param uid {String}
+   * @param key {String} The Notecard's public key in PEM format. Empty if it hasn't reported one.
+   * @param uid {String} DeviceUID, e.g. `dev:864475040509284`.
    */
   constructor(key, uid) {
     GetDevicePublicKey200Response.initialize(this, key, uid);
@@ -107,11 +107,13 @@ class GetDevicePublicKey200Response {
 GetDevicePublicKey200Response.RequiredProperties = ["key", "uid"];
 
 /**
+ * The Notecard's public key in PEM format. Empty if it hasn't reported one.
  * @member {String} key
  */
 GetDevicePublicKey200Response.prototype["key"] = undefined;
 
 /**
+ * DeviceUID, e.g. `dev:864475040509284`.
  * @member {String} uid
  */
 GetDevicePublicKey200Response.prototype["uid"] = undefined;

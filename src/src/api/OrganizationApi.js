@@ -13,14 +13,14 @@
 
 import ApiClient from "../ApiClient";
 import Error from "../model/Error";
-import GetBillingAccount200Response from "../model/GetBillingAccount200Response";
-import GetBillingAccountBalanceHistory200Response from "../model/GetBillingAccountBalanceHistory200Response";
+import GetOrganization200Response from "../model/GetOrganization200Response";
+import GetOrganizationBalanceHistory200Response from "../model/GetOrganizationBalanceHistory200Response";
 import GetOrganizations200Response from "../model/GetOrganizations200Response";
 
 /**
  * Organization service.
  * @module api/OrganizationApi
- * @version 6.7.0
+ * @version 6.8.0
  */
 export default class OrganizationApi {
   /**
@@ -35,9 +35,10 @@ export default class OrganizationApi {
   }
 
   /**
-   * Get Organization Information
-   * @param {String} organizationUID
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetBillingAccount200Response} and HTTP response
+   * Get an organization
+   * Get an organization's name, owner, contact email and current plan. The plan has its type, event capacity, billing period and remaining balance. For the daily history, use `GetOrganizationBalanceHistory`.  Requires the `org_admin`, `billing_manager` or `org_support` role in the organization. Returns 403 if your membership is deactivated.
+   * @param {String} organizationUID Organization UID. List with `GetOrganizations`.
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetOrganization200Response} and HTTP response
    */
   getOrganizationWithHttpInfo(organizationUID) {
     let postBody = null;
@@ -58,7 +59,7 @@ export default class OrganizationApi {
     let authNames = ["personalAccessToken"];
     let contentTypes = [];
     let accepts = ["application/json"];
-    let returnType = GetBillingAccount200Response;
+    let returnType = GetOrganization200Response;
     return this.apiClient.callApi(
       "/v1/organizations/{organizationUID}",
       "GET",
@@ -76,9 +77,10 @@ export default class OrganizationApi {
   }
 
   /**
-   * Get Organization Information
-   * @param {String} organizationUID
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetBillingAccount200Response}
+   * Get an organization
+   * Get an organization's name, owner, contact email and current plan. The plan has its type, event capacity, billing period and remaining balance. For the daily history, use `GetOrganizationBalanceHistory`.  Requires the `org_admin`, `billing_manager` or `org_support` role in the organization. Returns 403 if your membership is deactivated.
+   * @param {String} organizationUID Organization UID. List with `GetOrganizations`.
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetOrganization200Response}
    */
   getOrganization(organizationUID) {
     return this.getOrganizationWithHttpInfo(organizationUID).then(function (
@@ -89,12 +91,13 @@ export default class OrganizationApi {
   }
 
   /**
-   * Get Organization Balance history
-   * @param {String} organizationUID
+   * Get an organization's daily balance
+   * Get an organization's events used and remaining event capacity for each day. The range is `startDate` to `endDate`, which default to the start of the billing period and today.  Requires the `org_admin`, `billing_manager` or `org_support` role in the organization. Returns 400 if `startDate` is after `endDate`.
+   * @param {String} organizationUID Organization UID. List with `GetOrganizations`.
    * @param {Object} opts Optional parameters
    * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
    * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetBillingAccountBalanceHistory200Response} and HTTP response
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetOrganizationBalanceHistory200Response} and HTTP response
    */
   getOrganizationBalanceHistoryWithHttpInfo(organizationUID, opts) {
     opts = opts || {};
@@ -119,7 +122,7 @@ export default class OrganizationApi {
     let authNames = ["personalAccessToken"];
     let contentTypes = [];
     let accepts = ["application/json"];
-    let returnType = GetBillingAccountBalanceHistory200Response;
+    let returnType = GetOrganizationBalanceHistory200Response;
     return this.apiClient.callApi(
       "/v1/organizations/{organizationUID}/balance-history",
       "GET",
@@ -137,12 +140,13 @@ export default class OrganizationApi {
   }
 
   /**
-   * Get Organization Balance history
-   * @param {String} organizationUID
+   * Get an organization's daily balance
+   * Get an organization's events used and remaining event capacity for each day. The range is `startDate` to `endDate`, which default to the start of the billing period and today.  Requires the `org_admin`, `billing_manager` or `org_support` role in the organization. Returns 400 if `startDate` is after `endDate`.
+   * @param {String} organizationUID Organization UID. List with `GetOrganizations`.
    * @param {Object} opts Optional parameters
    * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
    * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetBillingAccountBalanceHistory200Response}
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetOrganizationBalanceHistory200Response}
    */
   getOrganizationBalanceHistory(organizationUID, opts) {
     return this.getOrganizationBalanceHistoryWithHttpInfo(
@@ -154,7 +158,8 @@ export default class OrganizationApi {
   }
 
   /**
-   * Get Organizations accessible by the api_key
+   * List your organizations
+   * List the organizations you belong to, with your role in each. A scoped token gets an empty list.  Returns 401 if your email address isn't verified.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetOrganizations200Response} and HTTP response
    */
   getOrganizationsWithHttpInfo() {
@@ -186,7 +191,8 @@ export default class OrganizationApi {
   }
 
   /**
-   * Get Organizations accessible by the api_key
+   * List your organizations
+   * List the organizations you belong to, with your role in each. A scoped token gets an empty list.  Returns 401 if your email address isn't verified.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetOrganizations200Response}
    */
   getOrganizations() {

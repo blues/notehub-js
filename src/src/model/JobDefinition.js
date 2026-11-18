@@ -19,7 +19,7 @@ import JobDefinitionSelect from "./JobDefinitionSelect";
 /**
  * The JobDefinition model module.
  * @module model/JobDefinition
- * @version 6.7.0
+ * @version 6.8.0
  */
 class JobDefinition {
   /**
@@ -127,7 +127,7 @@ JobDefinition.prototype["comment"] = undefined;
 JobDefinition.prototype["default_requests"] = undefined;
 
 /**
- * Device-specific request overrides, keyed by device UID
+ * Device-specific request overrides, keyed by DeviceUID
  * @member {Object.<String, module:model/BatchJobRequests>} device_requests
  */
 JobDefinition.prototype["device_requests"] = undefined;

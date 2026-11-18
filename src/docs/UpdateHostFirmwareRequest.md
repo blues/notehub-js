@@ -2,8 +2,8 @@
 
 ## Properties
 
-| Name        | Type                 | Description                                                  | Notes      |
-| ----------- | -------------------- | ------------------------------------------------------------ | ---------- |
-| **info**    | **{String: Object}** | Arbitrary JSON metadata associated with this firmware entry. | [optional] |
-| **notes**   | **String**           | Notes describing this firmware version.                      | [optional] |
-| **version** | **String**           | The firmware version string.                                 | [optional] |
+| Name        | Type                 | Description                                                               | Notes      |
+| ----------- | -------------------- | ------------------------------------------------------------------------- | ---------- |
+| **info**    | **{String: Object}** | JSON metadata for this firmware. Replaces the stored object when present. | [optional] |
+| **notes**   | **String**           | New notes for this firmware. Empty keeps the current notes.               | [optional] |
+| **version** | **String**           | New version string. Empty keeps the current version.                      | [optional] |

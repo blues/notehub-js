@@ -19,7 +19,7 @@ import Event from "../model/Event";
 /**
  * ExternalDevices service.
  * @module api/ExternalDevicesApi
- * @version 6.7.0
+ * @version 6.8.0
  */
 export default class ExternalDevicesApi {
   /**
@@ -34,10 +34,11 @@ export default class ExternalDevicesApi {
   }
 
   /**
-   * Creates an event using specified webhook
+   * Add an event from an external device
+   * Add an event from a device that isn't a Notecard, adding the device to the project if it's new. The DeviceUID is lower-cased and gets `dev:ext:` unless it has its own sub-prefix, so `dev:123` becomes `dev:ext:123`. Notehub sets `when` to the current time and adds `.qo` to a `file` with no extension.  Requires the Owner or Developer role.
    * @param {String} productUID
    * @param {String} deviceUID
-   * @param {module:model/Event} event Event Object
+   * @param {module:model/Event} event The event. `file`, `body` and `payload` are the usual fields.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
    */
   createEventExtDeviceWithHttpInfo(productUID, deviceUID, event) {
@@ -90,10 +91,11 @@ export default class ExternalDevicesApi {
   }
 
   /**
-   * Creates an event using specified webhook
+   * Add an event from an external device
+   * Add an event from a device that isn't a Notecard, adding the device to the project if it's new. The DeviceUID is lower-cased and gets `dev:ext:` unless it has its own sub-prefix, so `dev:123` becomes `dev:ext:123`. Notehub sets `when` to the current time and adds `.qo` to a `file` with no extension.  Requires the Owner or Developer role.
    * @param {String} productUID
    * @param {String} deviceUID
-   * @param {module:model/Event} event Event Object
+   * @param {module:model/Event} event The event. `file`, `body` and `payload` are the usual fields.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}
    */
   createEventExtDevice(productUID, deviceUID, event) {
@@ -107,10 +109,11 @@ export default class ExternalDevicesApi {
   }
 
   /**
-   * Closes the session for the specified device if open
+   * Close an external device's session
+   * Close an external device's session, if one is open, adding the device if it's new. The DeviceUID gets `dev:ext:` as in `CreateEventExtDevice`.  Requires the Owner or Developer role.
    * @param {String} productUID
    * @param {String} deviceUID
-   * @param {module:model/DeviceSession} deviceSession Session Object
+   * @param {module:model/DeviceSession} deviceSession Session fields, such as `why_session_opened` or `why_session_closed`.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
    */
   extDeviceSessionCloseWithHttpInfo(productUID, deviceUID, deviceSession) {
@@ -163,10 +166,11 @@ export default class ExternalDevicesApi {
   }
 
   /**
-   * Closes the session for the specified device if open
+   * Close an external device's session
+   * Close an external device's session, if one is open, adding the device if it's new. The DeviceUID gets `dev:ext:` as in `CreateEventExtDevice`.  Requires the Owner or Developer role.
    * @param {String} productUID
    * @param {String} deviceUID
-   * @param {module:model/DeviceSession} deviceSession Session Object
+   * @param {module:model/DeviceSession} deviceSession Session fields, such as `why_session_opened` or `why_session_closed`.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}
    */
   extDeviceSessionClose(productUID, deviceUID, deviceSession) {
@@ -180,10 +184,11 @@ export default class ExternalDevicesApi {
   }
 
   /**
-   * Create a Session for the specified device.  | If a session is currently open it will be closed and a new one opened.
+   * Open an external device's session
+   * Open a session for an external device, adding the device if it's new. An open session is closed first, with `why_session_closed` as the reason. The DeviceUID gets `dev:ext:` as in `CreateEventExtDevice`.  Requires the Owner or Developer role. Returns 500 if webhooks are disabled for the project.
    * @param {String} productUID
    * @param {String} deviceUID
-   * @param {module:model/DeviceSession} deviceSession Session Object
+   * @param {module:model/DeviceSession} deviceSession Session fields, such as `why_session_opened` or `why_session_closed`.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
    */
   extDeviceSessionOpenWithHttpInfo(productUID, deviceUID, deviceSession) {
@@ -236,10 +241,11 @@ export default class ExternalDevicesApi {
   }
 
   /**
-   * Create a Session for the specified device.  | If a session is currently open it will be closed and a new one opened.
+   * Open an external device's session
+   * Open a session for an external device, adding the device if it's new. An open session is closed first, with `why_session_closed` as the reason. The DeviceUID gets `dev:ext:` as in `CreateEventExtDevice`.  Requires the Owner or Developer role. Returns 500 if webhooks are disabled for the project.
    * @param {String} productUID
    * @param {String} deviceUID
-   * @param {module:model/DeviceSession} deviceSession Session Object
+   * @param {module:model/DeviceSession} deviceSession Session fields, such as `why_session_opened` or `why_session_closed`.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}
    */
   extDeviceSessionOpen(productUID, deviceUID, deviceSession) {

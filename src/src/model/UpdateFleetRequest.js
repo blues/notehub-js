@@ -17,7 +17,7 @@ import FleetConnectivityAssurance from "./FleetConnectivityAssurance";
 /**
  * The UpdateFleetRequest model module.
  * @module model/UpdateFleetRequest
- * @version 6.7.0
+ * @version 6.8.0
  */
 class UpdateFleetRequest {
   /**
@@ -143,7 +143,7 @@ class UpdateFleetRequest {
 }
 
 /**
- * List of DeviceUIDs to add to fleet
+ * DeviceUIDs to add to the fleet. Each must be in the project and not also in `removeDevices`.
  * @member {Array.<String>} addDevices
  */
 UpdateFleetRequest.prototype["addDevices"] = undefined;
@@ -154,30 +154,31 @@ UpdateFleetRequest.prototype["addDevices"] = undefined;
 UpdateFleetRequest.prototype["connectivity_assurance"] = undefined;
 
 /**
- * The label for the Fleet.
+ * New fleet name. Empty keeps the current name; a fleet must have one, so `-` returns 400.
  * @member {String} label
  */
 UpdateFleetRequest.prototype["label"] = undefined;
 
 /**
- * List of DeviceUIDs to remove from fleet
+ * DeviceUIDs to remove from the fleet. Each must be in the project and not also in `addDevices`.
  * @member {Array.<String>} removeDevices
  */
 UpdateFleetRequest.prototype["removeDevices"] = undefined;
 
 /**
- * JSONata expression that will be evaluated to determine device membership into this fleet, if the expression evaluates to a 1, the device will be included, if it evaluates to -1 it will be removed, and if it evaluates to 0 or errors it will be left unchanged.
+ * JSONata expression for smart fleet membership: `1` adds the device, `-1` removes it, and `0` or an error leaves it unchanged.
  * @member {String} smart_rule
  */
 UpdateFleetRequest.prototype["smart_rule"] = undefined;
 
 /**
+ * Whether `smart_rule` adds and removes devices. Always send it; omitting it sets `false`.
  * @member {Boolean} smart_rule_enabled
  */
 UpdateFleetRequest.prototype["smart_rule_enabled"] = undefined;
 
 /**
- * A watchdog timer is used to generate an event every N minutes of inactivity. 0 means no watchdog
+ * Minutes of inactivity before Notehub generates a watchdog event. Omit or `0` to keep the current value; a negative value turns it off.
  * @member {Number} watchdog_mins
  */
 UpdateFleetRequest.prototype["watchdog_mins"] = undefined;

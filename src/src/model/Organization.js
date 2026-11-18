@@ -17,15 +17,15 @@ import OrganizationRole from "./OrganizationRole";
 /**
  * The Organization model module.
  * @module model/Organization
- * @version 6.7.0
+ * @version 6.8.0
  */
 class Organization {
   /**
    * Constructs a new <code>Organization</code>.
    * @alias module:model/Organization
-   * @param name {String}
+   * @param name {String} Organization name.
    * @param role {module:model/OrganizationRole}
-   * @param uid {String}
+   * @param uid {String} Organization UID.
    */
   constructor(name, role, uid) {
     Organization.initialize(this, name, role, uid);
@@ -113,6 +113,7 @@ class Organization {
 Organization.RequiredProperties = ["name", "role", "uid"];
 
 /**
+ * Organization name.
  * @member {String} name
  */
 Organization.prototype["name"] = undefined;
@@ -123,6 +124,7 @@ Organization.prototype["name"] = undefined;
 Organization.prototype["role"] = undefined;
 
 /**
+ * Organization UID.
  * @member {String} uid
  */
 Organization.prototype["uid"] = undefined;

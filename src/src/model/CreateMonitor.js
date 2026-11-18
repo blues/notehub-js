@@ -18,15 +18,15 @@ import MonitorAlertRoutesInner from "./MonitorAlertRoutesInner";
 /**
  * The CreateMonitor model module.
  * @module model/CreateMonitor
- * @version 6.7.0
+ * @version 6.8.0
  */
 class CreateMonitor {
   /**
    * Constructs a new <code>CreateMonitor</code>.
    * @alias module:model/CreateMonitor
    * @implements module:model/Monitor
-   * @param alertRoutes {Array.<module:model/MonitorAlertRoutesInner>}
-   * @param name {String}
+   * @param alertRoutes {Array.<module:model/MonitorAlertRoutesInner>} Where to send notifications, by email, Slack or Twilio. Required to create a monitor.
+   * @param name {String} Monitor name. Required to create a monitor.
    * @param threshold {Number} The value that condition_type compares against. For heartbeat monitors this is seconds of inactivity; for usage monitors it is bytes.
    */
   constructor(alertRoutes, name, threshold) {
@@ -372,13 +372,13 @@ class CreateMonitor {
 CreateMonitor.RequiredProperties = ["alert_routes", "name", "threshold"];
 
 /**
- * Aggregate function to apply to the selected values before applying the condition. [none, avg, max, min, sum, count]
+ * How values in `aggregate_window` are combined before the comparison. - `none`: compare each value on its own - `avg`, `max`, `min`, `sum`: compare the average, largest, smallest or total - `count`: compare the number of matching events; needs no `source_selector`
  * @member {module:model/CreateMonitor.AggregateFunctionEnum} aggregate_function
  */
 CreateMonitor.prototype["aggregate_function"] = undefined;
 
 /**
- * The time window to aggregate the selected values. It follows the format of a number followed by a time unit
+ * The time window for `aggregate_function`, such as `10m` or `5h30m40s`.
  * @member {String} aggregate_window
  */
 CreateMonitor.prototype["aggregate_window"] = undefined;
@@ -390,17 +390,19 @@ CreateMonitor.prototype["aggregate_window"] = undefined;
 CreateMonitor.prototype["alert"] = undefined;
 
 /**
+ * Where to send notifications, by email, Slack or Twilio. Required to create a monitor.
  * @member {Array.<module:model/MonitorAlertRoutesInner>} alert_routes
  */
 CreateMonitor.prototype["alert_routes"] = undefined;
 
 /**
- * A comparison operation to apply to the value selected by the source_selector. Required for event and usage monitors; set automatically for heartbeat monitors. [greater_than, greater_than_or_equal_to, less_than, less_than_or_equal_to, equal_to, not_equal_to]
+ * How the value is compared with `threshold`. Required for event and usage monitors; heartbeat monitors always use `greater_than_or_equal_to`.
  * @member {module:model/CreateMonitor.ConditionTypeEnum} condition_type
  */
 CreateMonitor.prototype["condition_type"] = undefined;
 
 /**
+ * Free-form description.
  * @member {String} description
  * @default ''
  */
@@ -413,34 +415,37 @@ CreateMonitor.prototype["description"] = "";
 CreateMonitor.prototype["disabled"] = undefined;
 
 /**
+ * Watch only devices in these fleets (FleetUIDs).
  * @member {Array.<String>} fleet_filter
  */
 CreateMonitor.prototype["fleet_filter"] = undefined;
 
 /**
- * The last time the monitor was evaluated and routed.
+ * When the monitor last sent notifications.
  * @member {String} last_routed_at
  */
 CreateMonitor.prototype["last_routed_at"] = undefined;
 
 /**
+ * Monitor name. Required to create a monitor.
  * @member {String} name
  */
 CreateMonitor.prototype["name"] = undefined;
 
 /**
+ * Watch only events from these notefiles, e.g. `data.qo`. Not allowed for heartbeat monitors.
  * @member {Array.<String>} notefile_filter
  */
 CreateMonitor.prototype["notefile_filter"] = undefined;
 
 /**
- * Only relevant when using an aggregate_function. If true, the monitor will be evaluated per device, | rather than across the set of selected devices. If true then if a single device matches the specified criteria, | and alert will be created, otherwise the aggregate function will be applied across all devices.
+ * With an `aggregate_function`, aggregate each device on its own, so one device can raise an alert. If false, aggregate across all devices.
  * @member {Boolean} per_device
  */
 CreateMonitor.prototype["per_device"] = undefined;
 
 /**
- * The time period to wait before routing another event after the monitor | has been triggered. It follows the format of a number followed by a time unit.
+ * How long to wait after notifying before notifying again, such as `10m` or `5h30m`. Defaults to `5m`.
  * @member {String} routing_cooldown_period
  */
 CreateMonitor.prototype["routing_cooldown_period"] = undefined;
@@ -452,13 +457,13 @@ CreateMonitor.prototype["routing_cooldown_period"] = undefined;
 CreateMonitor.prototype["silenced"] = undefined;
 
 /**
- * A dot-delimited path to a single numeric value within the event body.
+ * Dot path to a numeric value inside the event body, such as `temperature`, not `body.temperature`. Required for event monitors unless `aggregate_function` is `count`.
  * @member {String} source_selector
  */
 CreateMonitor.prototype["source_selector"] = undefined;
 
 /**
- * The type of source to monitor. Defaults to \"event\".
+ * What the monitor watches. Defaults to `event` on create. - `event`: a numeric value in event bodies, read with `source_selector` - `heartbeat`: devices that go `threshold` seconds without activity - `usage`: cellular or satellite data usage
  * @member {module:model/CreateMonitor.SourceTypeEnum} source_type
  * @default 'event'
  */
@@ -471,36 +476,37 @@ CreateMonitor.prototype["source_type"] = "event";
 CreateMonitor.prototype["threshold"] = undefined;
 
 /**
+ * MonitorUID, `monitor:` followed by a UUID.
  * @member {String} uid
  */
 CreateMonitor.prototype["uid"] = undefined;
 
 /**
- * For usage monitors: the scope of aggregation. Supported values are \"device\" and \"fleet\".
+ * For usage monitors, what usage is summed over. - `device`: each device on its own - `fleet`: each fleet in `fleet_filter` on its own. Requires `fleet_filter`, or the monitor never fires.
  * @member {String} usage_scope
  */
 CreateMonitor.prototype["usage_scope"] = undefined;
 
 /**
- * For usage monitors: the type of data usage to monitor. Supported values are \"cellular\" and \"satellite\".
+ * For usage monitors, which data to watch. - `cellular`: cellular data - `satellite`: satellite data
  * @member {String} usage_type
  */
 CreateMonitor.prototype["usage_type"] = undefined;
 
 /**
- * For usage monitors: the rolling time window in days to sum usage over (e.g. 30 for 30 days).
+ * For usage monitors, the rolling window to sum usage over, in days, e.g. `30`.
  * @member {Number} usage_window
  */
 CreateMonitor.prototype["usage_window"] = undefined;
 
 // Implement Monitor interface:
 /**
- * Aggregate function to apply to the selected values before applying the condition. [none, avg, max, min, sum, count]
+ * How values in `aggregate_window` are combined before the comparison. - `none`: compare each value on its own - `avg`, `max`, `min`, `sum`: compare the average, largest, smallest or total - `count`: compare the number of matching events; needs no `source_selector`
  * @member {module:model/Monitor.AggregateFunctionEnum} aggregate_function
  */
 Monitor.prototype["aggregate_function"] = undefined;
 /**
- * The time window to aggregate the selected values. It follows the format of a number followed by a time unit
+ * The time window for `aggregate_function`, such as `10m` or `5h30m40s`.
  * @member {String} aggregate_window
  */
 Monitor.prototype["aggregate_window"] = undefined;
@@ -510,15 +516,17 @@ Monitor.prototype["aggregate_window"] = undefined;
  */
 Monitor.prototype["alert"] = undefined;
 /**
+ * Where to send notifications, by email, Slack or Twilio. Required to create a monitor.
  * @member {Array.<module:model/MonitorAlertRoutesInner>} alert_routes
  */
 Monitor.prototype["alert_routes"] = undefined;
 /**
- * A comparison operation to apply to the value selected by the source_selector. Required for event and usage monitors; set automatically for heartbeat monitors. [greater_than, greater_than_or_equal_to, less_than, less_than_or_equal_to, equal_to, not_equal_to]
+ * How the value is compared with `threshold`. Required for event and usage monitors; heartbeat monitors always use `greater_than_or_equal_to`.
  * @member {module:model/Monitor.ConditionTypeEnum} condition_type
  */
 Monitor.prototype["condition_type"] = undefined;
 /**
+ * Free-form description.
  * @member {String} description
  * @default ''
  */
@@ -529,29 +537,32 @@ Monitor.prototype["description"] = "";
  */
 Monitor.prototype["disabled"] = undefined;
 /**
+ * Watch only devices in these fleets (FleetUIDs).
  * @member {Array.<String>} fleet_filter
  */
 Monitor.prototype["fleet_filter"] = undefined;
 /**
- * The last time the monitor was evaluated and routed.
+ * When the monitor last sent notifications.
  * @member {String} last_routed_at
  */
 Monitor.prototype["last_routed_at"] = undefined;
 /**
+ * Monitor name. Required to create a monitor.
  * @member {String} name
  */
 Monitor.prototype["name"] = undefined;
 /**
+ * Watch only events from these notefiles, e.g. `data.qo`. Not allowed for heartbeat monitors.
  * @member {Array.<String>} notefile_filter
  */
 Monitor.prototype["notefile_filter"] = undefined;
 /**
- * Only relevant when using an aggregate_function. If true, the monitor will be evaluated per device, | rather than across the set of selected devices. If true then if a single device matches the specified criteria, | and alert will be created, otherwise the aggregate function will be applied across all devices.
+ * With an `aggregate_function`, aggregate each device on its own, so one device can raise an alert. If false, aggregate across all devices.
  * @member {Boolean} per_device
  */
 Monitor.prototype["per_device"] = undefined;
 /**
- * The time period to wait before routing another event after the monitor | has been triggered. It follows the format of a number followed by a time unit.
+ * How long to wait after notifying before notifying again, such as `10m` or `5h30m`. Defaults to `5m`.
  * @member {String} routing_cooldown_period
  */
 Monitor.prototype["routing_cooldown_period"] = undefined;
@@ -561,12 +572,12 @@ Monitor.prototype["routing_cooldown_period"] = undefined;
  */
 Monitor.prototype["silenced"] = undefined;
 /**
- * A dot-delimited path to a single numeric value within the event body.
+ * Dot path to a numeric value inside the event body, such as `temperature`, not `body.temperature`. Required for event monitors unless `aggregate_function` is `count`.
  * @member {String} source_selector
  */
 Monitor.prototype["source_selector"] = undefined;
 /**
- * The type of source to monitor. Defaults to \"event\".
+ * What the monitor watches. Defaults to `event` on create. - `event`: a numeric value in event bodies, read with `source_selector` - `heartbeat`: devices that go `threshold` seconds without activity - `usage`: cellular or satellite data usage
  * @member {module:model/Monitor.SourceTypeEnum} source_type
  * @default 'event'
  */
@@ -577,21 +588,22 @@ Monitor.prototype["source_type"] = "event";
  */
 Monitor.prototype["threshold"] = undefined;
 /**
+ * MonitorUID, `monitor:` followed by a UUID.
  * @member {String} uid
  */
 Monitor.prototype["uid"] = undefined;
 /**
- * For usage monitors: the scope of aggregation. Supported values are \"device\" and \"fleet\".
+ * For usage monitors, what usage is summed over. - `device`: each device on its own - `fleet`: each fleet in `fleet_filter` on its own. Requires `fleet_filter`, or the monitor never fires.
  * @member {String} usage_scope
  */
 Monitor.prototype["usage_scope"] = undefined;
 /**
- * For usage monitors: the type of data usage to monitor. Supported values are \"cellular\" and \"satellite\".
+ * For usage monitors, which data to watch. - `cellular`: cellular data - `satellite`: satellite data
  * @member {String} usage_type
  */
 Monitor.prototype["usage_type"] = undefined;
 /**
- * For usage monitors: the rolling time window in days to sum usage over (e.g. 30 for 30 days).
+ * For usage monitors, the rolling window to sum usage over, in days, e.g. `30`.
  * @member {Number} usage_window
  */
 Monitor.prototype["usage_window"] = undefined;

@@ -10,10 +10,10 @@
 | **bssid**            | **String**                            |                                                                                     | [optional] |
 | **cell**             | **String**                            | Cell ID where the session originated and quality (\&quot;mcc,mnc,lac,cellid\&quot;) | [optional] |
 | **continuous**       | **Boolean**                           | Was this a continuous connection?                                                   | [optional] |
-| **device**           | **String**                            | Device UID                                                                          | [optional] |
+| **device**           | **String**                            | DeviceUID                                                                           | [optional] |
 | **events**           | **Number**                            | Number of events routed                                                             | [optional] |
 | **failedConnects**   | **Number**                            | Number of failed connection attempts in the prior session                           | [optional] |
-| **fleets**           | **[String]**                          | Array of Fleet UIDs                                                                 | [optional] |
+| **fleets**           | **[String]**                          | Array of FleetUIDs                                                                  | [optional] |
 | **hpCyclesData**     | **Number**                            |                                                                                     | [optional] |
 | **hpCyclesGps**      | **Number**                            |                                                                                     | [optional] |
 | **hpCyclesTotal**    | **Number**                            |                                                                                     | [optional] |
@@ -30,13 +30,13 @@
 | **powerMah**         | **Number**                            |                                                                                     | [optional] |
 | **powerPrimary**     | **Boolean**                           |                                                                                     | [optional] |
 | **powerUsb**         | **Boolean**                           |                                                                                     | [optional] |
-| **product**          | **String**                            | Product UID                                                                         | [optional] |
+| **product**          | **String**                            | ProductUID                                                                          | [optional] |
 | **rat**              | **String**                            |                                                                                     | [optional] |
 | **rsrp**             | **Number**                            |                                                                                     | [optional] |
 | **rsrq**             | **Number**                            |                                                                                     | [optional] |
 | **rssi**             | **Number**                            |                                                                                     | [optional] |
 | **scan**             | **Blob**                              |                                                                                     | [optional] |
-| **session**          | **String**                            | Session UID                                                                         | [optional] |
+| **session**          | **String**                            | SessionUID                                                                          | [optional] |
 | **sessionBegan**     | **Number**                            | UNIX timestamp of session start                                                     | [optional] |
 | **sessionEnded**     | **Number**                            | UNIX timestamp of session end                                                       | [optional] |
 | **sinr**             | **Number**                            |                                                                                     | [optional] |

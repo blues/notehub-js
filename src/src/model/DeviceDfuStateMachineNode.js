@@ -16,12 +16,12 @@ import ApiClient from "../ApiClient";
 /**
  * The DeviceDfuStateMachineNode model module.
  * @module model/DeviceDfuStateMachineNode
- * @version 6.7.0
+ * @version 6.8.0
  */
 class DeviceDfuStateMachineNode {
   /**
    * Constructs a new <code>DeviceDfuStateMachineNode</code>.
-   * Represents a single request to update the host or Notecard firmware
+   * One status update in a host or Notecard firmware update.
    * @alias module:model/DeviceDfuStateMachineNode
    */
   constructor() {

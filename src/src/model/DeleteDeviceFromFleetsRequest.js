@@ -16,13 +16,13 @@ import ApiClient from "../ApiClient";
 /**
  * The DeleteDeviceFromFleetsRequest model module.
  * @module model/DeleteDeviceFromFleetsRequest
- * @version 6.7.0
+ * @version 6.8.0
  */
 class DeleteDeviceFromFleetsRequest {
   /**
    * Constructs a new <code>DeleteDeviceFromFleetsRequest</code>.
    * @alias module:model/DeleteDeviceFromFleetsRequest
-   * @param fleetUids {Array.<String>} The fleetUIDs to remove from the device.
+   * @param fleetUids {Array.<String>} FleetUIDs to remove the device from.
    */
   constructor(fleetUids) {
     DeleteDeviceFromFleetsRequest.initialize(this, fleetUids);
@@ -91,7 +91,7 @@ class DeleteDeviceFromFleetsRequest {
 DeleteDeviceFromFleetsRequest.RequiredProperties = ["fleet_uids"];
 
 /**
- * The fleetUIDs to remove from the device.
+ * FleetUIDs to remove the device from.
  * @member {Array.<String>} fleet_uids
  */
 DeleteDeviceFromFleetsRequest.prototype["fleet_uids"] = undefined;

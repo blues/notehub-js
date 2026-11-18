@@ -26,7 +26,7 @@ import RunJob200Response from "../model/RunJob200Response";
 /**
  * Jobs service.
  * @module api/JobsApi
- * @version 6.7.0
+ * @version 6.8.0
  */
 export default class JobsApi {
   /**
@@ -41,9 +41,10 @@ export default class JobsApi {
   }
 
   /**
-   * Cancel a running job execution
+   * Cancel a job run
+   * Ask a running job to stop. `successful` is false if the run couldn't be cancelled.  Requires the Owner or Developer role. Returns 404 if the run doesn't exist.
    * @param {String} projectOrProductUID
-   * @param {String} reportUID Unique identifier for a job run report
+   * @param {String} reportUID Job run UID, as returned by `RunJob`.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/CancelJobRun200Response} and HTTP response
    */
   cancelJobRunWithHttpInfo(projectOrProductUID, reportUID) {
@@ -90,9 +91,10 @@ export default class JobsApi {
   }
 
   /**
-   * Cancel a running job execution
+   * Cancel a job run
+   * Ask a running job to stop. `successful` is false if the run couldn't be cancelled.  Requires the Owner or Developer role. Returns 404 if the run doesn't exist.
    * @param {String} projectOrProductUID
-   * @param {String} reportUID Unique identifier for a job run report
+   * @param {String} reportUID Job run UID, as returned by `RunJob`.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/CancelJobRun200Response}
    */
   cancelJobRun(projectOrProductUID, reportUID) {
@@ -104,9 +106,10 @@ export default class JobsApi {
   }
 
   /**
-   * Create a new batch job with an optional name
+   * Create a batch job
+   * Create a batch job from a definition that selects devices and the changes to make to them. It doesn't run until `RunJob`. Each call creates a new job with its own UID; names needn't be unique.  Requires the Owner or Developer role. Returns 400 without a `name`; an invalid definition returns 500.
    * @param {String} projectOrProductUID
-   * @param {String} name Name for the job
+   * @param {String} name Job name, shown in lists. It doesn't have to be unique.
    * @param {module:model/JobDefinition} jobDefinition The batch job definition
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/CreateJob201Response} and HTTP response
    */
@@ -161,9 +164,10 @@ export default class JobsApi {
   }
 
   /**
-   * Create a new batch job with an optional name
+   * Create a batch job
+   * Create a batch job from a definition that selects devices and the changes to make to them. It doesn't run until `RunJob`. Each call creates a new job with its own UID; names needn't be unique.  Requires the Owner or Developer role. Returns 400 without a `name`; an invalid definition returns 500.
    * @param {String} projectOrProductUID
-   * @param {String} name Name for the job
+   * @param {String} name Job name, shown in lists. It doesn't have to be unique.
    * @param {module:model/JobDefinition} jobDefinition The batch job definition
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/CreateJob201Response}
    */
@@ -179,8 +183,9 @@ export default class JobsApi {
 
   /**
    * Delete a batch job
+   * Delete a batch job.  Requires the Owner or Developer role. Returns 404 if the job doesn't exist.
    * @param {String} projectOrProductUID
-   * @param {String} jobUID Unique identifier for a batch job
+   * @param {String} jobUID Batch job UID, as returned by `CreateJob`.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/DeleteJob200Response} and HTTP response
    */
   deleteJobWithHttpInfo(projectOrProductUID, jobUID) {
@@ -228,8 +233,9 @@ export default class JobsApi {
 
   /**
    * Delete a batch job
+   * Delete a batch job.  Requires the Owner or Developer role. Returns 404 if the job doesn't exist.
    * @param {String} projectOrProductUID
-   * @param {String} jobUID Unique identifier for a batch job
+   * @param {String} jobUID Batch job UID, as returned by `CreateJob`.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/DeleteJob200Response}
    */
   deleteJob(projectOrProductUID, jobUID) {
@@ -241,9 +247,10 @@ export default class JobsApi {
   }
 
   /**
-   * Delete the results of a job run
+   * Delete a job run
+   * Delete a job run and its results. Deleting a run that doesn't exist also succeeds.  Requires the Owner or Developer role.
    * @param {String} projectOrProductUID
-   * @param {String} reportUID Unique identifier for a job run report
+   * @param {String} reportUID Job run UID, as returned by `RunJob`.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
    */
   deleteJobRunWithHttpInfo(projectOrProductUID, reportUID) {
@@ -290,9 +297,10 @@ export default class JobsApi {
   }
 
   /**
-   * Delete the results of a job run
+   * Delete a job run
+   * Delete a job run and its results. Deleting a run that doesn't exist also succeeds.  Requires the Owner or Developer role.
    * @param {String} projectOrProductUID
-   * @param {String} reportUID Unique identifier for a job run report
+   * @param {String} reportUID Job run UID, as returned by `RunJob`.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}
    */
   deleteJobRun(projectOrProductUID, reportUID) {
@@ -304,9 +312,10 @@ export default class JobsApi {
   }
 
   /**
-   * Get a specific batch job definition
+   * Get a batch job
+   * Get one batch job's definition and its latest run's status.  Returns 404 if the job doesn't exist.
    * @param {String} projectOrProductUID
-   * @param {String} jobUID Unique identifier for a batch job
+   * @param {String} jobUID Batch job UID, as returned by `CreateJob`.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/JobDetail} and HTTP response
    */
   getJobWithHttpInfo(projectOrProductUID, jobUID) {
@@ -353,9 +362,10 @@ export default class JobsApi {
   }
 
   /**
-   * Get a specific batch job definition
+   * Get a batch job
+   * Get one batch job's definition and its latest run's status.  Returns 404 if the job doesn't exist.
    * @param {String} projectOrProductUID
-   * @param {String} jobUID Unique identifier for a batch job
+   * @param {String} jobUID Batch job UID, as returned by `CreateJob`.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/JobDetail}
    */
   getJob(projectOrProductUID, jobUID) {
@@ -367,9 +377,10 @@ export default class JobsApi {
   }
 
   /**
-   * Get the result of a job execution
+   * Get a job run
+   * Get a job run's status and, with `view=detail`, its full results.  Returns 404 if the run doesn't exist.
    * @param {String} projectOrProductUID
-   * @param {String} reportUID Unique identifier for a job run report
+   * @param {String} reportUID Job run UID, as returned by `RunJob`.
    * @param {Object} opts Optional parameters
    * @param {module:model/String} opts.view Controls the level of detail returned: 'summary' returns metadata only, 'detail' returns the full result payload (default to 'summary')
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/JobRun} and HTTP response
@@ -421,9 +432,10 @@ export default class JobsApi {
   }
 
   /**
-   * Get the result of a job execution
+   * Get a job run
+   * Get a job run's status and, with `view=detail`, its full results.  Returns 404 if the run doesn't exist.
    * @param {String} projectOrProductUID
-   * @param {String} reportUID Unique identifier for a job run report
+   * @param {String} reportUID Job run UID, as returned by `RunJob`.
    * @param {Object} opts Optional parameters
    * @param {module:model/String} opts.view Controls the level of detail returned: 'summary' returns metadata only, 'detail' returns the full result payload (default to 'summary')
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/JobRun}
@@ -439,12 +451,13 @@ export default class JobsApi {
   }
 
   /**
-   * List all runs for a specific job
+   * List a job's runs
+   * List a batch job's runs, optionally filtered by status or dry-run flag.  Returns 404 if the job doesn't exist.
    * @param {String} projectOrProductUID
-   * @param {String} jobUID Unique identifier for a batch job
+   * @param {String} jobUID Batch job UID, as returned by `CreateJob`.
    * @param {Object} opts Optional parameters
-   * @param {String} opts.status Filter runs by status
-   * @param {Boolean} opts.dryRun Filter runs by dry run flag
+   * @param {String} opts.status Return only runs with this status.
+   * @param {Boolean} opts.dryRun If set, return only dry runs (`true`) or only real runs (`false`).
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetJobRuns200Response} and HTTP response
    */
   getJobRunsWithHttpInfo(projectOrProductUID, jobUID, opts) {
@@ -495,12 +508,13 @@ export default class JobsApi {
   }
 
   /**
-   * List all runs for a specific job
+   * List a job's runs
+   * List a batch job's runs, optionally filtered by status or dry-run flag.  Returns 404 if the job doesn't exist.
    * @param {String} projectOrProductUID
-   * @param {String} jobUID Unique identifier for a batch job
+   * @param {String} jobUID Batch job UID, as returned by `CreateJob`.
    * @param {Object} opts Optional parameters
-   * @param {String} opts.status Filter runs by status
-   * @param {Boolean} opts.dryRun Filter runs by dry run flag
+   * @param {String} opts.status Return only runs with this status.
+   * @param {Boolean} opts.dryRun If set, return only dry runs (`true`) or only real runs (`false`).
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetJobRuns200Response}
    */
   getJobRuns(projectOrProductUID, jobUID, opts) {
@@ -512,7 +526,8 @@ export default class JobsApi {
   }
 
   /**
-   * List all batch jobs for a project
+   * List batch jobs
+   * List a project's batch jobs with their latest run's status. A batch job applies changes, such as environment variables, to a selected set of devices.
    * @param {String} projectOrProductUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetJobs200Response} and HTTP response
    */
@@ -553,7 +568,8 @@ export default class JobsApi {
   }
 
   /**
-   * List all batch jobs for a project
+   * List batch jobs
+   * List a project's batch jobs with their latest run's status. A batch job applies changes, such as environment variables, to a selected set of devices.
    * @param {String} projectOrProductUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetJobs200Response}
    */
@@ -566,11 +582,12 @@ export default class JobsApi {
   }
 
   /**
-   * Execute a batch job
+   * Run a batch job
+   * Start a run of a batch job and return its run UID. The run continues in the background, and `GetJobRun` shows its progress. With `dry_run=true`, it reports what would change without changing anything.  Requires the Owner or Developer role. Returns 404 if the job doesn't exist.
    * @param {String} projectOrProductUID
-   * @param {String} jobUID Unique identifier for a batch job
+   * @param {String} jobUID Batch job UID, as returned by `CreateJob`.
    * @param {Object} opts Optional parameters
-   * @param {Boolean} opts.dryRun Run job in dry-run mode without making actual changes (default to false)
+   * @param {Boolean} opts.dryRun If true, report what the job would change without changing anything. (default to false)
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/RunJob200Response} and HTTP response
    */
   runJobWithHttpInfo(projectOrProductUID, jobUID, opts) {
@@ -620,11 +637,12 @@ export default class JobsApi {
   }
 
   /**
-   * Execute a batch job
+   * Run a batch job
+   * Start a run of a batch job and return its run UID. The run continues in the background, and `GetJobRun` shows its progress. With `dry_run=true`, it reports what would change without changing anything.  Requires the Owner or Developer role. Returns 404 if the job doesn't exist.
    * @param {String} projectOrProductUID
-   * @param {String} jobUID Unique identifier for a batch job
+   * @param {String} jobUID Batch job UID, as returned by `CreateJob`.
    * @param {Object} opts Optional parameters
-   * @param {Boolean} opts.dryRun Run job in dry-run mode without making actual changes (default to false)
+   * @param {Boolean} opts.dryRun If true, report what the job would change without changing anything. (default to false)
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/RunJob200Response}
    */
   runJob(projectOrProductUID, jobUID, opts) {

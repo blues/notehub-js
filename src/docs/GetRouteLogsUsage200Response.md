@@ -2,7 +2,7 @@
 
 ## Properties
 
-| Name          | Type                                              | Description                                                                                     | Notes                                                  |
-| ------------- | ------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ------------------------------------------------------ | ---------- |
-| **routeLogs** | [**[UsageRouteLogsData]**](UsageRouteLogsData.md) |                                                                                                 |
-| **truncated** | **Boolean**                                       | If the data is truncated that means that the parameters selected resulted in a response of over | the requested limit of data points, in order to ensure | [optional] |
+| Name          | Type                                              | Description                                                                                                | Notes      |
+| ------------- | ------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------- |
+| **routeLogs** | [**[UsageRouteLogsData]**](UsageRouteLogsData.md) |                                                                                                            |
+| **truncated** | **Boolean**                                       | True if there were more data points than &#x60;limit&#x60;; only the first &#x60;limit&#x60; are returned. | [optional] |

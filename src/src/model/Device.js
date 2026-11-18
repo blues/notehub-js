@@ -23,18 +23,19 @@ import SimUsage from "./SimUsage";
 /**
  * The Device model module.
  * @module model/Device
- * @version 6.7.0
+ * @version 6.8.0
  */
 class Device {
   /**
    * Constructs a new <code>Device</code>.
+   * A device in a project. &#x60;best_location&#x60; is the best of &#x60;gps_location&#x60;, &#x60;triangulated_location&#x60; and &#x60;tower_location&#x60;; each is null when unknown.
    * @alias module:model/Device
-   * @param fleetUids {Array.<String>}
-   * @param productUid {String}
-   * @param provisioned {Date}
-   * @param temperature {Number}
-   * @param uid {String}
-   * @param voltage {Number}
+   * @param fleetUids {Array.<String>} FleetUIDs of the fleets the device is in.
+   * @param productUid {String} ProductUID the device uses, e.g. `com.blues.bridge:sensors`.
+   * @param provisioned {Date} When the device was added to the project.
+   * @param temperature {Number} Last reported Notecard temperature, in degrees Celsius.
+   * @param uid {String} DeviceUID, e.g. `dev:864475040509284`.
+   * @param voltage {Number} Last reported supply voltage, in volts.
    */
   constructor(fleetUids, productUid, provisioned, temperature, uid, voltage) {
     Device.initialize(
@@ -97,6 +98,9 @@ class Device {
       }
       if (data.hasOwnProperty("contact")) {
         obj["contact"] = Contact.constructFromObject(data["contact"]);
+      }
+      if (data.hasOwnProperty("deleted")) {
+        obj["deleted"] = ApiClient.convertToType(data["deleted"], "Boolean");
       }
       if (data.hasOwnProperty("dfu")) {
         obj["dfu"] = DFUEnv.constructFromObject(data["dfu"]);
@@ -454,7 +458,7 @@ Device.RequiredProperties = [
 ];
 
 /**
- * The best ID for the device, preference for the serial number over device UID
+ * The serial number if set, otherwise the DeviceUID. Use it as a display name.
  * @member {String} best_id
  */
 Device.prototype["best_id"] = undefined;
@@ -475,26 +479,36 @@ Device.prototype["cellular_usage"] = undefined;
 Device.prototype["contact"] = undefined;
 
 /**
+ * True if this device has been deleted. Only present when reading with a `cursor`.
+ * @member {Boolean} deleted
+ */
+Device.prototype["deleted"] = undefined;
+
+/**
  * @member {module:model/DFUEnv} dfu
  */
 Device.prototype["dfu"] = undefined;
 
 /**
+ * True if the device was disabled with `DisableDevice` and can't connect.
  * @member {Boolean} disabled
  */
 Device.prototype["disabled"] = undefined;
 
 /**
+ * Host firmware version, as reported by the device. Usually a JSON string.
  * @member {String} firmware_host
  */
 Device.prototype["firmware_host"] = undefined;
 
 /**
+ * Notecard firmware version, as reported by the device.
  * @member {String} firmware_notecard
  */
 Device.prototype["firmware_notecard"] = undefined;
 
 /**
+ * FleetUIDs of the fleets the device is in.
  * @member {Array.<String>} fleet_uids
  */
 Device.prototype["fleet_uids"] = undefined;
@@ -505,41 +519,49 @@ Device.prototype["fleet_uids"] = undefined;
 Device.prototype["gps_location"] = undefined;
 
 /**
+ * Not returned by `GetDevice`, `GetDevices` or `GetFleetDevices`; use `GetDeviceHealthLog`.
  * @member {Array.<module:model/HealthLog>} health_log
  */
 Device.prototype["health_log"] = undefined;
 
 /**
+ * When the device was last active in a session. Null if it has never connected.
  * @member {Date} last_activity
  */
 Device.prototype["last_activity"] = undefined;
 
 /**
+ * ProductUID the device uses, e.g. `com.blues.bridge:sensors`.
  * @member {String} product_uid
  */
 Device.prototype["product_uid"] = undefined;
 
 /**
+ * When the device was added to the project.
  * @member {Date} provisioned
  */
 Device.prototype["provisioned"] = undefined;
 
 /**
+ * Not returned by `GetDevice`, `GetDevices` or `GetFleetDevices`.
  * @member {Array.<Number>} recent_event_count
  */
 Device.prototype["recent_event_count"] = undefined;
 
 /**
+ * Not returned by `GetDevice`, `GetDevices` or `GetFleetDevices`.
  * @member {Array.<Number>} recent_session_count
  */
 Device.prototype["recent_session_count"] = undefined;
 
 /**
+ * Not returned by `GetDevice`, `GetDevices` or `GetFleetDevices`.
  * @member {Array.<Number>} recent_session_seconds
  */
 Device.prototype["recent_session_seconds"] = undefined;
 
 /**
+ * Not returned by `GetDevice`, `GetDevices` or `GetFleetDevices`.
  * @member {Date} recent_when
  */
 Device.prototype["recent_when"] = undefined;
@@ -550,21 +572,25 @@ Device.prototype["recent_when"] = undefined;
 Device.prototype["sensors"] = undefined;
 
 /**
+ * Serial number, from the `_sn` environment variable if set. Empty if none.
  * @member {String} serial_number
  */
 Device.prototype["serial_number"] = undefined;
 
 /**
+ * Notecard SKU, e.g. `NOTE-WBNAW`.
  * @member {String} sku
  */
 Device.prototype["sku"] = undefined;
 
 /**
+ * Comma-separated tags, from the `_tags` environment variable. Empty if none.
  * @member {String} tags
  */
 Device.prototype["tags"] = undefined;
 
 /**
+ * Last reported Notecard temperature, in degrees Celsius.
  * @member {Number} temperature
  */
 Device.prototype["temperature"] = undefined;
@@ -585,11 +611,13 @@ Device.prototype["tower_location"] = undefined;
 Device.prototype["triangulated_location"] = undefined;
 
 /**
+ * DeviceUID, e.g. `dev:864475040509284`.
  * @member {String} uid
  */
 Device.prototype["uid"] = undefined;
 
 /**
+ * Last reported supply voltage, in volts.
  * @member {Number} voltage
  */
 Device.prototype["voltage"] = undefined;

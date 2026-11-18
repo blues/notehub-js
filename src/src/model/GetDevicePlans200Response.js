@@ -17,7 +17,7 @@ import CellularPlan from "./CellularPlan";
 /**
  * The GetDevicePlans200Response model module.
  * @module model/GetDevicePlans200Response
- * @version 6.7.0
+ * @version 6.8.0
  */
 class GetDevicePlans200Response {
   /**
@@ -84,6 +84,7 @@ class GetDevicePlans200Response {
 }
 
 /**
+ * One entry per cellular SIM. Empty for a device with only a satellite connection.
  * @member {Array.<module:model/CellularPlan>} cellular_plans
  */
 GetDevicePlans200Response.prototype["cellular_plans"] = undefined;

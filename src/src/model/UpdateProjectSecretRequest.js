@@ -16,13 +16,13 @@ import ApiClient from "../ApiClient";
 /**
  * The UpdateProjectSecretRequest model module.
  * @module model/UpdateProjectSecretRequest
- * @version 6.7.0
+ * @version 6.8.0
  */
 class UpdateProjectSecretRequest {
   /**
    * Constructs a new <code>UpdateProjectSecretRequest</code>.
    * @alias module:model/UpdateProjectSecretRequest
-   * @param value {String} The new secret value (encrypted at rest, never returned).
+   * @param value {String} The new secret value. Encrypted at rest and never returned.
    */
   constructor(value) {
     UpdateProjectSecretRequest.initialize(this, value);
@@ -92,7 +92,7 @@ class UpdateProjectSecretRequest {
 UpdateProjectSecretRequest.RequiredProperties = ["value"];
 
 /**
- * The new secret value (encrypted at rest, never returned).
+ * The new secret value. Encrypted at rest and never returned.
  * @member {String} value
  */
 UpdateProjectSecretRequest.prototype["value"] = undefined;

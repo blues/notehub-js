@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The CreateUpdateRepository model module.
  * @module model/CreateUpdateRepository
- * @version 6.7.0
+ * @version 6.8.0
  */
 class CreateUpdateRepository {
   /**
@@ -105,11 +105,13 @@ class CreateUpdateRepository {
 CreateUpdateRepository.prototype["fleet_uids"] = undefined;
 
 /**
+ * Repository name.
  * @member {String} name
  */
 CreateUpdateRepository.prototype["name"] = undefined;
 
 /**
+ * The project whose events the repository holds. A repository can reference at most one project.
  * @member {Array.<String>} project_uids
  */
 CreateUpdateRepository.prototype["project_uids"] = undefined;

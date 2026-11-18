@@ -16,14 +16,14 @@ import ApiClient from "../ApiClient";
 /**
  * The CreateProjectSecretRequest model module.
  * @module model/CreateProjectSecretRequest
- * @version 6.7.0
+ * @version 6.8.0
  */
 class CreateProjectSecretRequest {
   /**
    * Constructs a new <code>CreateProjectSecretRequest</code>.
    * @alias module:model/CreateProjectSecretRequest
-   * @param name {String} The secret name (alphanumeric and underscores only).
-   * @param value {String} The secret value (encrypted at rest, never returned after creation).
+   * @param name {String} 1 to 64 letters, digits or underscores. Routes and alerts reference the secret as `[$$name]`.
+   * @param value {String} The secret value. Encrypted at rest and never returned.
    */
   constructor(name, value) {
     CreateProjectSecretRequest.initialize(this, name, value);
@@ -107,13 +107,13 @@ class CreateProjectSecretRequest {
 CreateProjectSecretRequest.RequiredProperties = ["name", "value"];
 
 /**
- * The secret name (alphanumeric and underscores only).
+ * 1 to 64 letters, digits or underscores. Routes and alerts reference the secret as `[$$name]`.
  * @member {String} name
  */
 CreateProjectSecretRequest.prototype["name"] = undefined;
 
 /**
- * The secret value (encrypted at rest, never returned after creation).
+ * The secret value. Encrypted at rest and never returned.
  * @member {String} value
  */
 CreateProjectSecretRequest.prototype["value"] = undefined;

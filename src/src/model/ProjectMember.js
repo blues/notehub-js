@@ -17,14 +17,14 @@ import Role from "./Role";
 /**
  * The ProjectMember model module.
  * @module model/ProjectMember
- * @version 6.7.0
+ * @version 6.8.0
  */
 class ProjectMember {
   /**
    * Constructs a new <code>ProjectMember</code>.
    * @alias module:model/ProjectMember
-   * @param email {String} The email address of the project member. This property will only be populated if the viewer is an owner of the project.
-   * @param name {String}
+   * @param email {String} The member's email address. Empty unless the caller is an Owner of the project.
+   * @param name {String} The member's display name.
    * @param role {module:model/Role}
    */
   constructor(email, name, role) {
@@ -113,12 +113,13 @@ class ProjectMember {
 ProjectMember.RequiredProperties = ["email", "name", "role"];
 
 /**
- * The email address of the project member. This property will only be populated if the viewer is an owner of the project.
+ * The member's email address. Empty unless the caller is an Owner of the project.
  * @member {String} email
  */
 ProjectMember.prototype["email"] = undefined;
 
 /**
+ * The member's display name.
  * @member {String} name
  */
 ProjectMember.prototype["name"] = undefined;
