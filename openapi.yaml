@@ -2120,7 +2120,7 @@ paths:
       description: |
         List a device's sessions, its connections to Notehub. Each shows why it opened and closed,
         signal strength, location and data usage. `startDate` and `endDate` filter on when the
-        session began.
+        session began. For every device's sessions, use `GetSessions`.
 
         Paginated.
       parameters:
@@ -2230,7 +2230,7 @@ paths:
                     type: boolean
                   next_cursor:
                     description: |
-                      Pass this opaque value as a cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes.
+                      Pass this value (epoch microseconds, optionally `.N`) as a cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes.
                     type: string
                 required:
                   - device_public_keys
@@ -3531,9 +3531,9 @@ paths:
       operationId: CreateMonitor
       summary: Create a monitor
       description: |
-        Create a monitor that raises an alert and notifies email or Slack when its condition holds.
-        It can watch an event value (`event`, the default), devices going quiet (`heartbeat`), or
-        data usage (`usage`).
+        Create a monitor that raises an alert and notifies email, Slack or Twilio when its
+        condition holds. It can watch an event value (`event`, the default), devices going quiet
+        (`heartbeat`), or data usage (`usage`).
 
         Requires the Owner or Developer role. Returns 403 if the project's plan doesn't allow the
         monitor, and 400 for invalid settings.
@@ -3595,8 +3595,8 @@ paths:
       operationId: GetMonitor
       summary: Get a monitor
       description: |
-        Get one monitor's settings and whether it's in alert. Slack credentials in `alert_routes`
-        come back as `(omitted)`.
+        Get one monitor's settings and whether it's in alert. Slack and Twilio credentials in
+        `alert_routes` come back as `(omitted)`.
 
         Returns 404 if the monitor never existed; a deleted monitor is still returned.
       parameters:
@@ -3624,8 +3624,8 @@ paths:
       description: |
         Replace a monitor's settings with the whole monitor, as `GetMonitor` returns it. Omitted
         fields are cleared or reset, except `source_type`, `fleet_filter`, `notefile_filter`,
-        `condition_type`, `aggregate_window` and `alert_routes`. Slack credentials left as
-        `(omitted)` are kept.
+        `condition_type`, `aggregate_window` and `alert_routes`. Slack and Twilio credentials left
+        as `(omitted)` are kept.
 
         Requires the Owner or Developer role. Returns 403 if the plan doesn't allow a new
         `source_type`.
@@ -3894,8 +3894,7 @@ paths:
       operationId: DeleteRoute
       summary: Delete a route
       description: |
-        Delete a route so it stops sending events. To pause it instead, set `disabled: true` with
-        `UpdateRoute`; note that `UpdateRoute` can't set it back to `false`.
+        Delete a route so it stops sending events.
 
         Requires the Owner or Developer role.
       parameters:
@@ -3962,9 +3961,14 @@ paths:
       operationId: UpdateRoute
       summary: Update a route
       description: |
-        Change a route's settings. Fields you leave out keep their values, but leaving out `notes`
-        clears it. `false`, `0` and `[]` are ignored, so this can't re-enable a route or clear a list. A
-        secret sent back as `(omitted)` is kept, except Slack's.
+        Replace a route's settings with what `GetRoute` returns, with the fields you send merged
+        over it. `false`, `0`, `""` and `[]` are ignored, so this can't re-enable a route or clear a
+        value or list; but leaving out `notes` clears it. A secret sent back as `(omitted)` is kept,
+        except Slack's.
+
+        Every update resets settings the API doesn't show: auto-retry, denied fleets, Basic auth
+        credentials, proxy caching, and the transform on Slack and S3 routes. A route sending from
+        no fleets starts sending from all of them unless you send a non-empty `fleets`.
 
         Requires the Owner or Developer role. Returns 404 if the route doesn't exist, and 400 for
         invalid settings.
@@ -4221,6 +4225,38 @@ paths:
       x-custom-attributes:
         permission: update
         resource: blues:resources:app:APPSERIAL:settings
+  /v1/projects/{projectOrProductUID}/sessions:
+    get:
+      operationId: GetSessions
+      summary: List sessions in a project
+      description: |
+        List the sessions of every device in a project, as `GetDeviceSessions` does for one device.
+        `startDate` and `endDate` filter on when the session began. `deviceUID` and `fleetUID` each
+        match any of their values; `fleetUID` matches the fleets recorded on the session.
+
+        Paginated.
+      parameters:
+        - $ref: '#/components/parameters/projectOrProductUIDParam'
+        - $ref: '#/components/parameters/pageSizeParam'
+        - $ref: '#/components/parameters/pageNumParam'
+        - $ref: '#/components/parameters/cursorParam'
+        - $ref: '#/components/parameters/startDateParam'
+        - $ref: '#/components/parameters/endDateParam'
+        - $ref: '#/components/parameters/firstSyncParam'
+        - $ref: '#/components/parameters/deviceUIDParamQuery'
+        - $ref: '#/components/parameters/fleetUIDsQueryParam'
+      responses:
+        '200':
+          $ref: '#/components/responses/SessionResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - device
+      x-custom-attributes:
+        permission: read
+        resource: blues:resources:app:APPSERIAL:devices
   /v1/projects/{projectOrProductUID}/skills:
     get:
       operationId: GetSkills
@@ -4962,7 +4998,7 @@ components:
       schema:
         type: string
     cursorParam:
-      description: Read in modification order from `0`, a Unix time in microseconds, or the previous `next_cursor`.
+      description: Read in ascending modification order. Start with `0` for the beginning, or a Unix time in microseconds (inclusive), e.g. now minus 30 days. To resume, pass back `next_cursor` or `X-Next-Cursor` unchanged; its `.N` suffix ensures no row repeats or is skipped.
       in: query
       name: cursor
       required: false
@@ -5089,7 +5125,7 @@ components:
       schema:
         type: string
     deviceUIDParamQuery:
-      description: DeviceUIDs to filter by. Repeat for more than one.
+      description: DeviceUIDs to filter by. Device and DFU calls match substrings, any case.
       explode: true
       in: query
       name: deviceUID
@@ -5438,7 +5474,7 @@ components:
       schema:
         type: string
     repositoryKey:
-      description: The repository key (`password` from `CreateRepository`). Not needed with a role in its projects.
+      description: The `password` from `CreateRepository`. Not needed if your role allows the call in all its projects.
       in: header
       name: X-Repository-Key
       required: false
@@ -5727,7 +5763,7 @@ components:
           type: integer
           format: int64
         data:
-          description: The readings that raised the alert.
+          description: Readings recorded while the alert was open (for usage monitors, the latest total). Empty unless `aggregate_function` is `none`.
           type: array
           items:
             properties:
@@ -5783,11 +5819,18 @@ components:
           items:
             properties:
               notification_type:
-                description: The type of notification
+                description: |
+                  How the notification was sent.
+                  - `email`: by email
+                  - `slack-webhook`: to a Slack webhook
+                  - `slack-bearer`: through a Slack app, with a bearer token
+                  - `twilio`: by SMS, through Twilio
                 type: string
                 enum:
                   - email
-                  - slack
+                  - slack-webhook
+                  - slack-bearer
+                  - twilio
               recipients:
                 description: The recipients of the notification
                 type: string
@@ -5927,7 +5970,7 @@ components:
         transform:
           $ref: '#/components/schemas/RouteTransformSettings'
         url:
-          description: Azure Function URL, or Service Bus queue URL for `azure-service-bus-with-sas-token`. Required.
+          description: Azure Function URL, or for `azure-service-bus-with-sas-token` the send URL `https://<namespace>.servicebus.windows.net/<queue>/messages`. Required.
           type: string
           format: uri
       additionalProperties: false
@@ -6671,7 +6714,7 @@ components:
           default: false
         next_cursor:
           description: |
-            Pass this opaque value as a cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes.
+            Pass this value (epoch microseconds, optionally `.N`) as a cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes.
           type: string
     DeviceDfuStateMachine:
       description: Represents a single request to update the host or Notecard firmware
@@ -6758,7 +6801,7 @@ components:
           default: false
         next_cursor:
           description: |
-            Pass this opaque value as a cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes.
+            Pass this value (epoch microseconds, optionally `.N`) as a cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes.
           type: string
     DeviceSensor:
       description: A sensor attached to a device
@@ -6948,14 +6991,14 @@ components:
           description: Country code for `where_lat` and `where_lon`.
           type: string
         where_lat:
-          description: Latitude of the last GPS location in a note sent during the session.
+          description: "Latitude of the Notecard's latest known location: the one it reported when the session opened, or a newer one from a note."
           type: number
           format: double
         where_location:
           description: Place name for `where_lat` and `where_lon`.
           type: string
         where_lon:
-          description: Longitude of the last GPS location in a note sent during the session.
+          description: "Longitude of the Notecard's latest known location: the one it reported when the session opened, or a newer one from a note."
           type: number
           format: double
         where_timezone:
@@ -7029,6 +7072,8 @@ components:
           description: Email address, or several separated by commas.
           type: string
           example: example@blues.com
+      required:
+        - email
     Empty:
       type: object
     EnvTreeJsonNode:
@@ -7041,7 +7086,7 @@ components:
           description: ProjectUID, for a project level.
           type: string
         children:
-          description: The levels below this one.
+          description: Nodes this one inherits from; its own variables override theirs.
           type: array
           items:
             $ref: '#/components/schemas/EnvTreeJsonNode'
@@ -7055,7 +7100,7 @@ components:
           description: FleetUID, for a fleet level.
           type: string
         inherited_var_count:
-          description: Number of variables this node inherits from the nodes above it.
+          description: How many of those come from the nodes under it, which this one inherits from.
           type: integer
           format: int32
         type:
@@ -7066,7 +7111,7 @@ components:
           type: string
           format: uri
         var_count:
-          description: Number of variables in this node.
+          description: Number of variables in this node and all nodes under it, including overridden ones.
           type: integer
           format: int32
         variables:
@@ -7129,7 +7174,7 @@ components:
           description: Extra information to help debug the error.
           type: string
         details:
-          description: More detail about the error, such as the request body or a reason code.
+          description: More detail about the error, such as the `transaction_id` to quote to support.
           type: object
         err:
           description: Human readable error message.
@@ -7411,7 +7456,7 @@ components:
             - `include`: only the notefiles in `files`
             - `exclude`: every notefile except those in `files`
           type: string
-          example: inclusion
+          example: include
     Firmware:
       type: object
       properties:
@@ -7889,13 +7934,14 @@ components:
           description: If true, the monitor is in alert state.
           type: boolean
         alert_routes:
-          description: Where to send notifications, by email or Slack. Required to create a monitor.
+          description: Where to send notifications, by email, Slack or Twilio. Required to create a monitor.
           type: array
           items:
             oneOf:
               - $ref: '#/components/schemas/SlackWebHookNotification'
               - $ref: '#/components/schemas/SlackBearerNotification'
               - $ref: '#/components/schemas/EmailNotification'
+              - $ref: '#/components/schemas/TwilioNotification'
         condition_type:
           description: How the value is compared with `threshold`. Required for event and usage monitors; heartbeat monitors always use `greater_than_or_equal_to`.
           type: string
@@ -8374,7 +8420,7 @@ components:
           items:
             type: string
         http_headers:
-          description: HTTP headers added to each proxied request; values may contain placeholders. A `Content-Type` or `User-Agent` here replaces the default.
+          description: HTTP headers added to each proxied request; values may contain placeholders. A `User-Agent` here replaces the default.
           type: object
           additionalProperties:
             type: string
@@ -8603,7 +8649,7 @@ components:
             - `text`: `{"text": "<body as a JSON string>"}`
             - `jsonata`: the output of `jsonata`
           type: string
-          example: json
+          example: flatten
         jsonata:
           description: JSONata expression whose output is delivered instead of the event, when `format` is `jsonata`. On proxy routes, it reshapes the request body.
           type: string
@@ -8969,8 +9015,10 @@ components:
           description: The message, or Block Kit JSON. Event placeholders such as `[.body.temp]` aren't allowed.
           type: string
         token:
-          description: The bearer token for the Slack app.
+          description: The bearer token for the Slack app. Returned as `(omitted)`. Sending it back keeps the stored token if the monitor has only one Slack bearer route.
           type: string
+      required:
+        - token
     SlackRoute:
       type: object
       properties:
@@ -9024,8 +9072,10 @@ components:
           description: The message, or Block Kit JSON. Event placeholders such as `[.body.temp]` aren't allowed.
           type: string
         url:
-          description: The URL of the Slack webhook.
+          description: The URL of the Slack webhook. Returned as `(omitted)`. Sending it back keeps the stored URL if the monitor has only one Slack webhook route.
           type: string
+      required:
+        - url
     SnowflakeRoute:
       description: Settings for a Snowflake route. `transform.format` must be `jsonata` with `transform.jsonata` set; its output is posted to the Snowflake SQL API.
       type: object
@@ -9060,7 +9110,7 @@ components:
           type: string
       additionalProperties: false
     SnowpipeStreamingRoute:
-      description: Settings for a Snowpipe Streaming route. `transform.jsonata` is required, and its output must be a JSON object, which becomes one row.
+      description: Settings for a Snowpipe Streaming route. Needs `transform.format` `jsonata` and `transform.jsonata`; its output must be a JSON object, which becomes one row.
       type: object
       properties:
         account_name:
@@ -9183,6 +9233,26 @@ components:
         zone:
           description: Timezone name
           type: string
+    TwilioNotification:
+      type: object
+      properties:
+        account_sid:
+          description: The Twilio account SID.
+          type: string
+        auth_token:
+          description: The Twilio auth token. Returned as `(omitted)`. Sending it back keeps the stored token if the monitor has only one Twilio route.
+          type: string
+        from:
+          description: The number to send the SMS from, in E.164 format, e.g. `+15551234567`.
+          type: string
+        message:
+          description: The text of the SMS. Event placeholders such as `[.body.temp]` aren't allowed.
+          type: string
+        to:
+          description: The number to send the SMS to, in E.164 format.
+          type: string
+      required:
+        - account_sid
     TwilioRoute:
       type: object
       properties:
@@ -9618,7 +9688,7 @@ components:
                 type: boolean
               next_cursor:
                 description: |
-                  Pass this opaque value as a cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes.
+                  Pass this value (epoch microseconds, optionally `.N`) as a cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes.
                 type: string
             required:
               - alerts
@@ -9699,7 +9769,7 @@ components:
                 type: boolean
               next_cursor:
                 description: |
-                  Pass this opaque value as a cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes.
+                  Pass this value (epoch microseconds, optionally `.N`) as a cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes.
                 type: string
             required:
               - devices
@@ -10065,7 +10135,7 @@ components:
                 type: boolean
               next_cursor:
                 description: |
-                  Pass this opaque value as a cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes.
+                  Pass this value (epoch microseconds, optionally `.N`) as a cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes.
                 type: string
               sessions:
                 type: array
