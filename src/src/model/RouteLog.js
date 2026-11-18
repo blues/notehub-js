@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The RouteLog model module.
  * @module model/RouteLog
- * @version 6.7.0
+ * @version 7.0.0
  */
 class RouteLog {
   /**
@@ -153,49 +153,49 @@ class RouteLog {
 }
 
 /**
- * If true, an error was returned when routing
+ * True if the attempt failed.
  * @member {Boolean} attn
  */
 RouteLog.prototype["attn"] = undefined;
 
 /**
- * The date of the logs.
+ * When the attempt was made, in RFC 3339 format.
  * @member {String} date
  */
 RouteLog.prototype["date"] = undefined;
 
 /**
- * The duration of the route in milliseconds
+ * How long the attempt took, in milliseconds.
  * @member {Number} duration
  */
 RouteLog.prototype["duration"] = undefined;
 
 /**
- * The event UID.
+ * EventUID of the event that was sent.
  * @member {String} event_uid
  */
 RouteLog.prototype["event_uid"] = undefined;
 
 /**
- * The route UID.
+ * RouteUID of the route.
  * @member {String} route_uid
  */
 RouteLog.prototype["route_uid"] = undefined;
 
 /**
- * The status of the event.
+ * The destination's response status, such as `200`.
  * @member {String} status
  */
 RouteLog.prototype["status"] = undefined;
 
 /**
- * The response body of the route.
+ * The destination's response body, or an error message.
  * @member {String} text
  */
 RouteLog.prototype["text"] = undefined;
 
 /**
- * The URL of the route.
+ * The URL the event was sent to.
  * @member {String} url
  */
 RouteLog.prototype["url"] = undefined;

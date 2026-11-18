@@ -16,15 +16,15 @@ import ApiClient from "../ApiClient";
 /**
  * The HealthLog model module.
  * @module model/HealthLog
- * @version 6.7.0
+ * @version 7.0.0
  */
 class HealthLog {
   /**
    * Constructs a new <code>HealthLog</code>.
    * @alias module:model/HealthLog
-   * @param alert {Boolean}
-   * @param text {String}
-   * @param when {Date}
+   * @param alert {Boolean} True if the entry was flagged as an alert.
+   * @param text {String} The log message. Restart entries begin with `boot`.
+   * @param when {Date} When the entry was recorded.
    */
   constructor(alert, text, when) {
     HealthLog.initialize(this, alert, text, when);
@@ -102,16 +102,19 @@ class HealthLog {
 HealthLog.RequiredProperties = ["alert", "text", "when"];
 
 /**
+ * True if the entry was flagged as an alert.
  * @member {Boolean} alert
  */
 HealthLog.prototype["alert"] = undefined;
 
 /**
+ * The log message. Restart entries begin with `boot`.
  * @member {String} text
  */
 HealthLog.prototype["text"] = undefined;
 
 /**
+ * When the entry was recorded.
  * @member {Date} when
  */
 HealthLog.prototype["when"] = undefined;

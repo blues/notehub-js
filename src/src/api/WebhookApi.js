@@ -19,7 +19,7 @@ import WebhookSettings from "../model/WebhookSettings";
 /**
  * Webhook service.
  * @module api/WebhookApi
- * @version 6.7.0
+ * @version 7.0.0
  */
 export default class WebhookApi {
   /**
@@ -34,7 +34,8 @@ export default class WebhookApi {
   }
 
   /**
-   * Legacy endpoint for sending an event from a webhook, associated with the given device (provisioning it if necessary). The request body is a Note-shaped object containing the notefile name, body, and optional payload.
+   * Add a note-shaped event from a device (legacy)
+   * Legacy: add an event from a device, adding the device to the project if it's new. The body is note-shaped: `file`, `body`, an optional base64 `payload`, and other event fields such as `when` and `sn`. No webhook transform applies. New integrations should use `CreateWebhookDeviceEventByProduct`.  Requires the Owner or Developer role. Returns 400 if there's no `body` or `payload`.
    * @param {String} productUID
    * @param {String} deviceUID
    * @param {Object.<String, {String: Object}>} requestBody A Note-shaped event. Typically contains the notefile name (file), a JSON body, and an optional base64-encoded payload, but any additional Note fields (e.g. when, sn, where_lat, where_lon) are accepted and honored.
@@ -90,7 +91,8 @@ export default class WebhookApi {
   }
 
   /**
-   * Legacy endpoint for sending an event from a webhook, associated with the given device (provisioning it if necessary). The request body is a Note-shaped object containing the notefile name, body, and optional payload.
+   * Add a note-shaped event from a device (legacy)
+   * Legacy: add an event from a device, adding the device to the project if it's new. The body is note-shaped: `file`, `body`, an optional base64 `payload`, and other event fields such as `when` and `sn`. No webhook transform applies. New integrations should use `CreateWebhookDeviceEventByProduct`.  Requires the Owner or Developer role. Returns 400 if there's no `body` or `payload`.
    * @param {String} productUID
    * @param {String} deviceUID
    * @param {Object.<String, {String: Object}>} requestBody A Note-shaped event. Typically contains the notefile name (file), a JSON body, and an optional base64-encoded payload, but any additional Note fields (e.g. when, sn, where_lat, where_lon) are accepted and honored.
@@ -107,9 +109,10 @@ export default class WebhookApi {
   }
 
   /**
-   * Creates a webhook for the specified product with the given name. The name | must be unique within the project.
+   * Create a webhook
+   * Create an inbound webhook that outside services post to with `CreateWebhookEventByProduct`. Its events go to the notefile `<webhookUID>.qo` unless its JSONata `transform` sets `file`. Use a lower-case ID; the event endpoints look it up in lower case.  Requires the Owner or Developer role. Returns 409 if the ID is taken, and 400 if it has characters other than letters, digits, `-` and `_`.
    * @param {String} projectOrProductUID
-   * @param {String} webhookUID Webhook UID
+   * @param {String} webhookUID Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`.
    * @param {module:model/WebhookSettings} webhookSettings
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
    */
@@ -163,9 +166,10 @@ export default class WebhookApi {
   }
 
   /**
-   * Creates a webhook for the specified product with the given name. The name | must be unique within the project.
+   * Create a webhook
+   * Create an inbound webhook that outside services post to with `CreateWebhookEventByProduct`. Its events go to the notefile `<webhookUID>.qo` unless its JSONata `transform` sets `file`. Use a lower-case ID; the event endpoints look it up in lower case.  Requires the Owner or Developer role. Returns 409 if the ID is taken, and 400 if it has characters other than letters, digits, `-` and `_`.
    * @param {String} projectOrProductUID
-   * @param {String} webhookUID Webhook UID
+   * @param {String} webhookUID Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`.
    * @param {module:model/WebhookSettings} webhookSettings
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}
    */
@@ -180,11 +184,12 @@ export default class WebhookApi {
   }
 
   /**
-   * Sends an event to be processed by the specified webhook, addressed by productUID, associated with the given device (provisioning it if necessary). The entire request body becomes the event body. The webhook's configured JSONata transform, if any, is applied before routing.
+   * Send a device's event through a webhook
+   * Post JSON to a webhook as one device's event, like `CreateWebhookEventByProduct`, adding the device if it's new. The DeviceUID is lower-cased and gets `dev:ext:` unless it has its own sub-prefix, so `dev:abc` becomes `dev:ext:abc`, not an existing Notecard.  Requires the Owner or Developer role. Returns 400 if the transform fails, and 500 if the webhook is disabled.
    * @param {String} productUID
-   * @param {String} webhookUID Webhook UID
+   * @param {String} webhookUID Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`.
    * @param {String} deviceUID
-   * @param {Object.<String, {String: Object}>} requestBody The event body (arbitrary JSON)
+   * @param {Object.<String, {String: Object}>} requestBody Any JSON object; it becomes the event body, or the transform's input.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
    */
   createWebhookDeviceEventByProductWithHttpInfo(
@@ -249,11 +254,12 @@ export default class WebhookApi {
   }
 
   /**
-   * Sends an event to be processed by the specified webhook, addressed by productUID, associated with the given device (provisioning it if necessary). The entire request body becomes the event body. The webhook's configured JSONata transform, if any, is applied before routing.
+   * Send a device's event through a webhook
+   * Post JSON to a webhook as one device's event, like `CreateWebhookEventByProduct`, adding the device if it's new. The DeviceUID is lower-cased and gets `dev:ext:` unless it has its own sub-prefix, so `dev:abc` becomes `dev:ext:abc`, not an existing Notecard.  Requires the Owner or Developer role. Returns 400 if the transform fails, and 500 if the webhook is disabled.
    * @param {String} productUID
-   * @param {String} webhookUID Webhook UID
+   * @param {String} webhookUID Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`.
    * @param {String} deviceUID
-   * @param {Object.<String, {String: Object}>} requestBody The event body (arbitrary JSON)
+   * @param {Object.<String, {String: Object}>} requestBody Any JSON object; it becomes the event body, or the transform's input.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}
    */
   createWebhookDeviceEventByProduct(
@@ -273,10 +279,11 @@ export default class WebhookApi {
   }
 
   /**
-   * Sends an event to be processed by the specified webhook, addressed by productUID. The entire request body becomes the event body. The webhook's configured JSONata transform, if any, is applied before routing. The event is not associated with a specific device.
+   * Send an event through a webhook
+   * Post JSON to a webhook. The body becomes the event body, in `<webhookUID>.qo`, from `dev:ext:webhook`; a `transform` can change all three, but must set `body`. For a specific device, use `CreateWebhookDeviceEventByProduct`.  Requires the Owner or Developer role. Returns 400 if the transform fails or sets no `body`, and 500 if the webhook is disabled.
    * @param {String} productUID
-   * @param {String} webhookUID Webhook UID
-   * @param {Object.<String, {String: Object}>} requestBody The event body (arbitrary JSON)
+   * @param {String} webhookUID Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`.
+   * @param {Object.<String, {String: Object}>} requestBody Any JSON object; it becomes the event body, or the transform's input.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
    */
   createWebhookEventByProductWithHttpInfo(productUID, webhookUID, requestBody) {
@@ -329,10 +336,11 @@ export default class WebhookApi {
   }
 
   /**
-   * Sends an event to be processed by the specified webhook, addressed by productUID. The entire request body becomes the event body. The webhook's configured JSONata transform, if any, is applied before routing. The event is not associated with a specific device.
+   * Send an event through a webhook
+   * Post JSON to a webhook. The body becomes the event body, in `<webhookUID>.qo`, from `dev:ext:webhook`; a `transform` can change all three, but must set `body`. For a specific device, use `CreateWebhookDeviceEventByProduct`.  Requires the Owner or Developer role. Returns 400 if the transform fails or sets no `body`, and 500 if the webhook is disabled.
    * @param {String} productUID
-   * @param {String} webhookUID Webhook UID
-   * @param {Object.<String, {String: Object}>} requestBody The event body (arbitrary JSON)
+   * @param {String} webhookUID Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`.
+   * @param {Object.<String, {String: Object}>} requestBody Any JSON object; it becomes the event body, or the transform's input.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}
    */
   createWebhookEventByProduct(productUID, webhookUID, requestBody) {
@@ -346,9 +354,10 @@ export default class WebhookApi {
   }
 
   /**
-   * Deletes the specified webhook
+   * Delete a webhook
+   * Delete a webhook's settings. Posts to its ID are still accepted, just without a transform; to stop accepting them, set `disabled` with `UpdateWebhook` instead.  Requires the Owner or Developer role. Returns 404 if the webhook doesn't exist.
    * @param {String} projectOrProductUID
-   * @param {String} webhookUID Webhook UID
+   * @param {String} webhookUID Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
    */
   deleteWebhookWithHttpInfo(projectOrProductUID, webhookUID) {
@@ -395,9 +404,10 @@ export default class WebhookApi {
   }
 
   /**
-   * Deletes the specified webhook
+   * Delete a webhook
+   * Delete a webhook's settings. Posts to its ID are still accepted, just without a transform; to stop accepting them, set `disabled` with `UpdateWebhook` instead.  Requires the Owner or Developer role. Returns 404 if the webhook doesn't exist.
    * @param {String} projectOrProductUID
-   * @param {String} webhookUID Webhook UID
+   * @param {String} webhookUID Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}
    */
   deleteWebhook(projectOrProductUID, webhookUID) {
@@ -409,9 +419,10 @@ export default class WebhookApi {
   }
 
   /**
-   * Retrieves the configuration settings for the specified webhook
+   * Get a webhook
+   * Get one webhook's transform and whether it's disabled.  Requires the Owner or Developer role. Returns 404 if the webhook doesn't exist.
    * @param {String} projectOrProductUID
-   * @param {String} webhookUID Webhook UID
+   * @param {String} webhookUID Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/WebhookSettings} and HTTP response
    */
   getWebhookWithHttpInfo(projectOrProductUID, webhookUID) {
@@ -458,9 +469,10 @@ export default class WebhookApi {
   }
 
   /**
-   * Retrieves the configuration settings for the specified webhook
+   * Get a webhook
+   * Get one webhook's transform and whether it's disabled.  Requires the Owner or Developer role. Returns 404 if the webhook doesn't exist.
    * @param {String} projectOrProductUID
-   * @param {String} webhookUID Webhook UID
+   * @param {String} webhookUID Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/WebhookSettings}
    */
   getWebhook(projectOrProductUID, webhookUID) {
@@ -472,9 +484,10 @@ export default class WebhookApi {
   }
 
   /**
-   * Retrieves the configuration settings for the specified webhook, addressed by productUID.
+   * Get a webhook by ProductUID
+   * Get one webhook's settings, like `GetWebhook`, but addressed by ProductUID instead of the project.  Requires the Owner or Developer role. Returns 500, not 404, if the webhook doesn't exist.
    * @param {String} productUID
-   * @param {String} webhookUID Webhook UID
+   * @param {String} webhookUID Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/WebhookSettings} and HTTP response
    */
   getWebhookSettingsByProductWithHttpInfo(productUID, webhookUID) {
@@ -521,9 +534,10 @@ export default class WebhookApi {
   }
 
   /**
-   * Retrieves the configuration settings for the specified webhook, addressed by productUID.
+   * Get a webhook by ProductUID
+   * Get one webhook's settings, like `GetWebhook`, but addressed by ProductUID instead of the project.  Requires the Owner or Developer role. Returns 500, not 404, if the webhook doesn't exist.
    * @param {String} productUID
-   * @param {String} webhookUID Webhook UID
+   * @param {String} webhookUID Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/WebhookSettings}
    */
   getWebhookSettingsByProduct(productUID, webhookUID) {
@@ -536,7 +550,8 @@ export default class WebhookApi {
   }
 
   /**
-   * Retrieves all webhooks for the specified project
+   * List webhooks
+   * List a project's inbound webhooks with their transforms and whether they're disabled. An inbound webhook lets an outside service post data that Notehub turns into events.  Requires the Owner or Developer role.
    * @param {String} projectOrProductUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetWebhooks200Response} and HTTP response
    */
@@ -577,7 +592,8 @@ export default class WebhookApi {
   }
 
   /**
-   * Retrieves all webhooks for the specified project
+   * List webhooks
+   * List a project's inbound webhooks with their transforms and whether they're disabled. An inbound webhook lets an outside service post data that Notehub turns into events.  Requires the Owner or Developer role.
    * @param {String} projectOrProductUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetWebhooks200Response}
    */
@@ -590,11 +606,12 @@ export default class WebhookApi {
   }
 
   /**
-   * Legacy endpoint for opening or updating a webhook session for the given device (provisioning the device if necessary). Used by external services that need to maintain a callable session against a device behind a webhook.
+   * Open or close a webhook device's session (legacy)
+   * Legacy: open, update or close a webhook device's session, adding the device if it's new. The body is a session: set `why_session_opened` to open one, `why_session_closed` to close it, both to close and reopen, or neither to update the open session.  Requires the Owner or Developer role. Returns 400 when updating with no session open.
    * @param {String} productUID
    * @param {String} deviceUID
    * @param {Object} opts Optional parameters
-   * @param {Object.<String, {String: Object}>} opts.requestBody Optional session metadata.
+   * @param {Object.<String, {String: Object}>} opts.requestBody Session fields, such as `why_session_opened`, `why_session_closed` and signal or location values.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
    */
   updateLegacyWebhookSessionWithHttpInfo(productUID, deviceUID, opts) {
@@ -642,11 +659,12 @@ export default class WebhookApi {
   }
 
   /**
-   * Legacy endpoint for opening or updating a webhook session for the given device (provisioning the device if necessary). Used by external services that need to maintain a callable session against a device behind a webhook.
+   * Open or close a webhook device's session (legacy)
+   * Legacy: open, update or close a webhook device's session, adding the device if it's new. The body is a session: set `why_session_opened` to open one, `why_session_closed` to close it, both to close and reopen, or neither to update the open session.  Requires the Owner or Developer role. Returns 400 when updating with no session open.
    * @param {String} productUID
    * @param {String} deviceUID
    * @param {Object} opts Optional parameters
-   * @param {Object.<String, {String: Object}>} opts.requestBody Optional session metadata.
+   * @param {Object.<String, {String: Object}>} opts.requestBody Session fields, such as `why_session_opened`, `why_session_closed` and signal or location values.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}
    */
   updateLegacyWebhookSession(productUID, deviceUID, opts) {
@@ -660,9 +678,10 @@ export default class WebhookApi {
   }
 
   /**
-   * Updates the configuration settings for the specified webhook. | Webhook will be created if it does not exist. Update body will completely replace the existing settings.
+   * Update a webhook
+   * Replace a webhook's settings, creating the webhook if it doesn't exist. Send every field: a missing `transform` is cleared and a missing `disabled` enables the webhook.  Requires the Owner or Developer role.
    * @param {String} projectOrProductUID
-   * @param {String} webhookUID Webhook UID
+   * @param {String} webhookUID Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`.
    * @param {module:model/WebhookSettings} webhookSettings
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
    */
@@ -716,9 +735,10 @@ export default class WebhookApi {
   }
 
   /**
-   * Updates the configuration settings for the specified webhook. | Webhook will be created if it does not exist. Update body will completely replace the existing settings.
+   * Update a webhook
+   * Replace a webhook's settings, creating the webhook if it doesn't exist. Send every field: a missing `transform` is cleared and a missing `disabled` enables the webhook.  Requires the Owner or Developer role.
    * @param {String} projectOrProductUID
-   * @param {String} webhookUID Webhook UID
+   * @param {String} webhookUID Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`.
    * @param {module:model/WebhookSettings} webhookSettings
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}
    */
@@ -733,9 +753,10 @@ export default class WebhookApi {
   }
 
   /**
-   * Updates the configuration settings for the specified webhook, addressed by productUID. Update body will completely replace the existing settings.
+   * Update a webhook by ProductUID
+   * Replace a webhook's settings, like `UpdateWebhook`, but addressed by ProductUID. Creates the webhook if it doesn't exist.  Requires the Owner or Developer role. Returns 400 if the ID has characters other than letters, digits, `-` and `_`.
    * @param {String} productUID
-   * @param {String} webhookUID Webhook UID
+   * @param {String} webhookUID Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`.
    * @param {module:model/WebhookSettings} webhookSettings
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
    */
@@ -793,9 +814,10 @@ export default class WebhookApi {
   }
 
   /**
-   * Updates the configuration settings for the specified webhook, addressed by productUID. Update body will completely replace the existing settings.
+   * Update a webhook by ProductUID
+   * Replace a webhook's settings, like `UpdateWebhook`, but addressed by ProductUID. Creates the webhook if it doesn't exist.  Requires the Owner or Developer role. Returns 400 if the ID has characters other than letters, digits, `-` and `_`.
    * @param {String} productUID
-   * @param {String} webhookUID Webhook UID
+   * @param {String} webhookUID Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`.
    * @param {module:model/WebhookSettings} webhookSettings
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}
    */

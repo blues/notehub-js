@@ -17,7 +17,7 @@ import DataUsage from "./DataUsage";
 /**
  * The CellularPlan model module.
  * @module model/CellularPlan
- * @version 6.7.0
+ * @version 7.0.0
  */
 class CellularPlan {
   /**
@@ -146,6 +146,7 @@ CellularPlan.prototype["activated"] = undefined;
 CellularPlan.prototype["data_usage"] = undefined;
 
 /**
+ * When the current plan expires, as a Unix timestamp in seconds. Omitted on the Essentials plan.
  * @member {Number} expires_at
  */
 CellularPlan.prototype["expires_at"] = undefined;
@@ -163,7 +164,7 @@ CellularPlan.prototype["iccid"] = undefined;
 CellularPlan.prototype["imsi"] = undefined;
 
 /**
- * Time this plan information was last updated
+ * When this plan information was last updated, as a Unix timestamp in seconds.
  * @member {Number} last_updated
  */
 CellularPlan.prototype["last_updated"] = undefined;

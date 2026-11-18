@@ -16,15 +16,16 @@ import ApiClient from "../ApiClient";
 /**
  * The SlackBearerNotification model module.
  * @module model/SlackBearerNotification
- * @version 6.7.0
+ * @version 7.0.0
  */
 class SlackBearerNotification {
   /**
    * Constructs a new <code>SlackBearerNotification</code>.
    * @alias module:model/SlackBearerNotification
+   * @param token {String} The bearer token for the Slack app. Returned as `(omitted)`. Sending it back keeps the stored token if the monitor has only one Slack bearer route.
    */
-  constructor() {
-    SlackBearerNotification.initialize(this);
+  constructor(token) {
+    SlackBearerNotification.initialize(this, token);
   }
 
   /**
@@ -32,7 +33,9 @@ class SlackBearerNotification {
    * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
    * Only for internal use.
    */
-  static initialize(obj) {}
+  static initialize(obj, token) {
+    obj["token"] = token;
+  }
 
   /**
    * Constructs a <code>SlackBearerNotification</code> from a plain JavaScript object, optionally creating a new instance.
@@ -72,6 +75,17 @@ class SlackBearerNotification {
    * @return {boolean} to indicate whether the JSON data is valid with respect to <code>SlackBearerNotification</code>.
    */
   static validateJSON(data) {
+    // check to make sure all required properties are present in the JSON string
+    for (const property of SlackBearerNotification.RequiredProperties) {
+      if (!data[property]) {
+        throw new Error(
+          "The required field `" +
+            property +
+            "` is not found in the JSON data: " +
+            JSON.stringify(data)
+        );
+      }
+    }
     // ensure the json data is a string
     if (
       data["channel"] &&
@@ -122,6 +136,8 @@ class SlackBearerNotification {
   }
 }
 
+SlackBearerNotification.RequiredProperties = ["token"];
+
 /**
  * The channel to send the message to.
  * @member {String} channel
@@ -129,19 +145,19 @@ class SlackBearerNotification {
 SlackBearerNotification.prototype["channel"] = undefined;
 
 /**
- * text or blocks
+ * How `text` is read. - `text`: plain message text - `blocks`: a Slack Block Kit JSON definition
  * @member {module:model/SlackBearerNotification.MessageTypeEnum} message_type
  */
 SlackBearerNotification.prototype["message_type"] = undefined;
 
 /**
- * The text of the message, or the blocks definition
+ * The message, or Block Kit JSON. Event placeholders such as `[.body.temp]` aren't allowed.
  * @member {String} text
  */
 SlackBearerNotification.prototype["text"] = undefined;
 
 /**
- * The bearer token for the Slack app.
+ * The bearer token for the Slack app. Returned as `(omitted)`. Sending it back keeps the stored token if the monitor has only one Slack bearer route.
  * @member {String} token
  */
 SlackBearerNotification.prototype["token"] = undefined;

@@ -17,7 +17,7 @@ import UsageEventsData from "./UsageEventsData";
 /**
  * The UsageEventsResponse model module.
  * @module model/UsageEventsResponse
- * @version 6.7.0
+ * @version 7.0.0
  */
 class UsageEventsResponse {
   /**
@@ -108,7 +108,7 @@ UsageEventsResponse.RequiredProperties = ["data"];
 UsageEventsResponse.prototype["data"] = undefined;
 
 /**
- * If the data is truncated that means that the parameters selected resulted in a response of over | the requested limit of data points, in order to ensure
+ * True if there were more data points than `limit`; only the first `limit` are returned.
  * @member {Boolean} truncated
  */
 UsageEventsResponse.prototype["truncated"] = undefined;

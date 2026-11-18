@@ -17,7 +17,7 @@ import ArchiveStats from "./ArchiveStats";
 /**
  * The Repository model module.
  * @module model/Repository
- * @version 6.7.0
+ * @version 7.0.0
  */
 class Repository {
   /**
@@ -132,7 +132,7 @@ Repository.prototype["archive"] = undefined;
 Repository.prototype["fleet_uids"] = undefined;
 
 /**
- * repository name
+ * Repository name.
  * @member {String} name
  */
 Repository.prototype["name"] = undefined;
@@ -143,7 +143,7 @@ Repository.prototype["name"] = undefined;
 Repository.prototype["project_uids"] = undefined;
 
 /**
- * The unique identifier for the data repository
+ * Repository UID, e.g. `repo:2606f411-dea6-44a0-9743-1130f57d77d8`.
  * @member {String} uid
  */
 Repository.prototype["uid"] = undefined;

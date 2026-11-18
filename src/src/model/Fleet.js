@@ -17,15 +17,15 @@ import FleetConnectivityAssurance from "./FleetConnectivityAssurance";
 /**
  * The Fleet model module.
  * @module model/Fleet
- * @version 6.7.0
+ * @version 7.0.0
  */
 class Fleet {
   /**
    * Constructs a new <code>Fleet</code>.
    * @alias module:model/Fleet
-   * @param created {Date} RFC3339 timestamp in UTC
-   * @param label {String} Fleet label
-   * @param uid {String} Fleet UID
+   * @param created {Date} When the fleet was created.
+   * @param label {String} Fleet name shown in Notehub.
+   * @param uid {String} FleetUID, e.g. `fleet:1042ddc5-3b2c-4cec-b1fb-d3040538094d`.
    */
   constructor(created, label, uid) {
     Fleet.initialize(this, created, label, uid);
@@ -166,42 +166,43 @@ Fleet.RequiredProperties = ["created", "label", "uid"];
 Fleet.prototype["connectivity_assurance"] = undefined;
 
 /**
- * RFC3339 timestamp in UTC
+ * When the fleet was created.
  * @member {Date} created
  */
 Fleet.prototype["created"] = undefined;
 
 /**
- * The environment variables for this device that have been set using the Notehub API or UI.
+ * Environment variables set on this fleet. Not returned by `GetDeviceFleets`.
  * @member {Object.<String, String>} environment_variables
  */
 Fleet.prototype["environment_variables"] = undefined;
 
 /**
- * Fleet label
+ * Fleet name shown in Notehub.
  * @member {String} label
  */
 Fleet.prototype["label"] = undefined;
 
 /**
- * JSONata expression that will be evaluated to determine device membership into this fleet, if the expression evaluates to a 1, the device will be included, if it evaluates to -1 it will be removed, and if it evaluates to 0 or errors it will be left unchanged.
+ * JSONata expression for smart fleet membership: `1` adds the device, `-1` removes it, and `0` or an error leaves it unchanged.
  * @member {String} smart_rule
  */
 Fleet.prototype["smart_rule"] = undefined;
 
 /**
+ * Whether `smart_rule` adds and removes devices. Returned only by `CreateFleet` and `UpdateFleet`.
  * @member {Boolean} smart_rule_enabled
  */
 Fleet.prototype["smart_rule_enabled"] = undefined;
 
 /**
- * Fleet UID
+ * FleetUID, e.g. `fleet:1042ddc5-3b2c-4cec-b1fb-d3040538094d`.
  * @member {String} uid
  */
 Fleet.prototype["uid"] = undefined;
 
 /**
- * A watchdog timer is used to generate an event every N minutes of inactivity. 0 means no watchdog
+ * Minutes of inactivity before Notehub generates a watchdog event. `0` means no watchdog.
  * @member {Number} watchdog_mins
  */
 Fleet.prototype["watchdog_mins"] = undefined;

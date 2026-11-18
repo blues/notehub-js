@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The DfuActionRequest model module.
  * @module model/DfuActionRequest
- * @version 6.7.0
+ * @version 7.0.0
  */
 class DfuActionRequest {
   /**
@@ -79,7 +79,7 @@ class DfuActionRequest {
 }
 
 /**
- * The name of the firmware file
+ * Stored firmware filename to install, as listed by `GetFirmwareInfo`. Required for `update`; ignored for `cancel`.
  * @member {String} filename
  */
 DfuActionRequest.prototype["filename"] = undefined;

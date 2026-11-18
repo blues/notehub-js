@@ -14,13 +14,12 @@
 import ApiClient from "../ApiClient";
 import Error from "../model/Error";
 import GetEvents200Response from "../model/GetEvents200Response";
-import GetEventsByCursor200Response from "../model/GetEventsByCursor200Response";
 import RouteLog from "../model/RouteLog";
 
 /**
  * Event service.
  * @module api/EventApi
- * @version 6.7.0
+ * @version 7.0.0
  */
 export default class EventApi {
   /**
@@ -35,26 +34,28 @@ export default class EventApi {
   }
 
   /**
-   * Get Events of a Project
+   * List events in a project
+   * List a project's events, filtered by device, notefile, date, fleet, session and more. Use `cursor` to read events in the order Notehub stored them and to poll for new ones. Set `format=csv` for CSV. For one fleet, use `GetFleetEvents`.  Paginated. Returns 403 if the organization is suspended, and 500 if the query times out; narrow the filters and retry.
    * @param {String} projectOrProductUID
    * @param {Object} opts Optional parameters
-   * @param {Number} opts.pageSize  (default to 50)
+   * @param {Number} opts.pageSize  (default to 1000)
    * @param {Number} opts.pageNum  (default to 1)
-   * @param {Array.<String>} opts.deviceUID A Device UID.
-   * @param {Array.<String>} opts.sensorUID A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix.
+   * @param {String} opts.cursor If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped.
+   * @param {Array.<String>} opts.deviceUID A DeviceUID.
+   * @param {Array.<String>} opts.sensorUID SensorUID to filter by, matched exactly. Repeat for more than one.
    * @param {module:model/String} opts.sortBy  (default to 'captured')
    * @param {module:model/String} opts.sortOrder  (default to 'asc')
    * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
    * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
-   * @param {module:model/String} opts.dateType Which date to filter on, either 'captured' or 'uploaded'.  This will apply to the startDate and endDate parameters (default to 'captured')
-   * @param {Boolean} opts.systemFilesOnly
-   * @param {String} opts.files
-   * @param {module:model/String} opts.format Response format (JSON or CSV) (default to 'json')
-   * @param {Array.<String>} opts.serialNumber Filter by Serial Number
-   * @param {Array.<String>} opts.fleetUID Filter by Fleet UID
-   * @param {Array.<String>} opts.sessionUID Filter by Session UID
-   * @param {Array.<String>} opts.eventUID Filter by Event UID
-   * @param {String} opts.selectFields Comma-separated list of fields to select from JSON payload (e.g., \"field1,field2.subfield,field3\"), this will reflect the columns in the CSV output.
+   * @param {module:model/String} opts.dateType Which time `startDate` and `endDate` filter on. - `captured`: when the Notecard created the event - `uploaded`: when Notehub received it  (default to 'captured')
+   * @param {Boolean} opts.systemFilesOnly If true, return only events from system notefiles, such as `_session.qo` and `_health.qo`.
+   * @param {String} opts.files Comma-separated notefiles, e.g. `data.qo,_health.qo`. Don't combine with `systemFilesOnly`.
+   * @param {module:model/String} opts.format Response format. - `json`: a JSON object with `events` - `csv`: CSV, with the columns in `selectFields`  (default to 'json')
+   * @param {Array.<String>} opts.serialNumber Serial number to filter by. Repeat for more than one.
+   * @param {Array.<String>} opts.fleetUID Filter by FleetUID
+   * @param {Array.<String>} opts.sessionUID SessionUID to filter by. Repeat for more than one.
+   * @param {Array.<String>} opts.eventUID EventUID to filter by. Repeat for more than one.
+   * @param {String} opts.selectFields Comma-separated event fields to return, e.g. `device,when,body.temp`. Also sets the CSV columns.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetEvents200Response} and HTTP response
    */
   getEventsWithHttpInfo(projectOrProductUID, opts) {
@@ -73,6 +74,7 @@ export default class EventApi {
     let queryParams = {
       pageSize: opts["pageSize"],
       pageNum: opts["pageNum"],
+      cursor: opts["cursor"],
       deviceUID: this.apiClient.buildCollectionParam(
         opts["deviceUID"],
         "multi"
@@ -125,26 +127,28 @@ export default class EventApi {
   }
 
   /**
-   * Get Events of a Project
+   * List events in a project
+   * List a project's events, filtered by device, notefile, date, fleet, session and more. Use `cursor` to read events in the order Notehub stored them and to poll for new ones. Set `format=csv` for CSV. For one fleet, use `GetFleetEvents`.  Paginated. Returns 403 if the organization is suspended, and 500 if the query times out; narrow the filters and retry.
    * @param {String} projectOrProductUID
    * @param {Object} opts Optional parameters
-   * @param {Number} opts.pageSize  (default to 50)
+   * @param {Number} opts.pageSize  (default to 1000)
    * @param {Number} opts.pageNum  (default to 1)
-   * @param {Array.<String>} opts.deviceUID A Device UID.
-   * @param {Array.<String>} opts.sensorUID A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix.
+   * @param {String} opts.cursor If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped.
+   * @param {Array.<String>} opts.deviceUID A DeviceUID.
+   * @param {Array.<String>} opts.sensorUID SensorUID to filter by, matched exactly. Repeat for more than one.
    * @param {module:model/String} opts.sortBy  (default to 'captured')
    * @param {module:model/String} opts.sortOrder  (default to 'asc')
    * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
    * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
-   * @param {module:model/String} opts.dateType Which date to filter on, either 'captured' or 'uploaded'.  This will apply to the startDate and endDate parameters (default to 'captured')
-   * @param {Boolean} opts.systemFilesOnly
-   * @param {String} opts.files
-   * @param {module:model/String} opts.format Response format (JSON or CSV) (default to 'json')
-   * @param {Array.<String>} opts.serialNumber Filter by Serial Number
-   * @param {Array.<String>} opts.fleetUID Filter by Fleet UID
-   * @param {Array.<String>} opts.sessionUID Filter by Session UID
-   * @param {Array.<String>} opts.eventUID Filter by Event UID
-   * @param {String} opts.selectFields Comma-separated list of fields to select from JSON payload (e.g., \"field1,field2.subfield,field3\"), this will reflect the columns in the CSV output.
+   * @param {module:model/String} opts.dateType Which time `startDate` and `endDate` filter on. - `captured`: when the Notecard created the event - `uploaded`: when Notehub received it  (default to 'captured')
+   * @param {Boolean} opts.systemFilesOnly If true, return only events from system notefiles, such as `_session.qo` and `_health.qo`.
+   * @param {String} opts.files Comma-separated notefiles, e.g. `data.qo,_health.qo`. Don't combine with `systemFilesOnly`.
+   * @param {module:model/String} opts.format Response format. - `json`: a JSON object with `events` - `csv`: CSV, with the columns in `selectFields`  (default to 'json')
+   * @param {Array.<String>} opts.serialNumber Serial number to filter by. Repeat for more than one.
+   * @param {Array.<String>} opts.fleetUID Filter by FleetUID
+   * @param {Array.<String>} opts.sessionUID SessionUID to filter by. Repeat for more than one.
+   * @param {Array.<String>} opts.eventUID EventUID to filter by. Repeat for more than one.
+   * @param {String} opts.selectFields Comma-separated event fields to return, e.g. `device,when,body.temp`. Also sets the CSV columns.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetEvents200Response}
    */
   getEvents(projectOrProductUID, opts) {
@@ -156,114 +160,28 @@ export default class EventApi {
   }
 
   /**
-   * Get Events of a Project by cursor
-   * @param {String} projectOrProductUID
-   * @param {Object} opts Optional parameters
-   * @param {Number} opts.limit  (default to 50)
-   * @param {String} opts.cursor A cursor, which can be obtained from the `next_cursor` value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included.
-   * @param {module:model/String} opts.sortOrder  (default to 'asc')
-   * @param {Boolean} opts.systemFilesOnly
-   * @param {String} opts.files
-   * @param {String} opts.fleetUID
-   * @param {Array.<String>} opts.deviceUID A Device UID.
-   * @param {Array.<String>} opts.sensorUID A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix.
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetEventsByCursor200Response} and HTTP response
-   */
-  getEventsByCursorWithHttpInfo(projectOrProductUID, opts) {
-    opts = opts || {};
-    let postBody = null;
-    // verify the required parameter 'projectOrProductUID' is set
-    if (projectOrProductUID === undefined || projectOrProductUID === null) {
-      throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling getEventsByCursor"
-      );
-    }
-
-    let pathParams = {
-      projectOrProductUID: projectOrProductUID,
-    };
-    let queryParams = {
-      limit: opts["limit"],
-      cursor: opts["cursor"],
-      sortOrder: opts["sortOrder"],
-      systemFilesOnly: opts["systemFilesOnly"],
-      files: opts["files"],
-      fleetUID: opts["fleetUID"],
-      deviceUID: this.apiClient.buildCollectionParam(
-        opts["deviceUID"],
-        "multi"
-      ),
-      sensorUID: this.apiClient.buildCollectionParam(
-        opts["sensorUID"],
-        "multi"
-      ),
-    };
-    let headerParams = {};
-    let formParams = {};
-
-    let authNames = ["personalAccessToken"];
-    let contentTypes = [];
-    let accepts = ["application/json"];
-    let returnType = GetEventsByCursor200Response;
-    return this.apiClient.callApi(
-      "/v1/projects/{projectOrProductUID}/events-cursor",
-      "GET",
-      pathParams,
-      queryParams,
-      headerParams,
-      formParams,
-      postBody,
-      authNames,
-      contentTypes,
-      accepts,
-      returnType,
-      null
-    );
-  }
-
-  /**
-   * Get Events of a Project by cursor
-   * @param {String} projectOrProductUID
-   * @param {Object} opts Optional parameters
-   * @param {Number} opts.limit  (default to 50)
-   * @param {String} opts.cursor A cursor, which can be obtained from the `next_cursor` value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included.
-   * @param {module:model/String} opts.sortOrder  (default to 'asc')
-   * @param {Boolean} opts.systemFilesOnly
-   * @param {String} opts.files
-   * @param {String} opts.fleetUID
-   * @param {Array.<String>} opts.deviceUID A Device UID.
-   * @param {Array.<String>} opts.sensorUID A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix.
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetEventsByCursor200Response}
-   */
-  getEventsByCursor(projectOrProductUID, opts) {
-    return this.getEventsByCursorWithHttpInfo(projectOrProductUID, opts).then(
-      function (response_and_data) {
-        return response_and_data.data;
-      }
-    );
-  }
-
-  /**
-   * Get Events of a Fleet
+   * List events in a fleet
+   * List the events from one fleet, with the same filters, `cursor` and CSV output as `GetEvents`.  Paginated. Returns 403 if the organization is suspended, and 500 if the query times out; narrow the filters and retry.
    * @param {String} projectOrProductUID
    * @param {String} fleetUID
    * @param {Object} opts Optional parameters
-   * @param {Number} opts.pageSize  (default to 50)
+   * @param {Number} opts.pageSize  (default to 1000)
    * @param {Number} opts.pageNum  (default to 1)
-   * @param {Array.<String>} opts.deviceUID A Device UID.
-   * @param {Array.<String>} opts.sensorUID A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix.
+   * @param {String} opts.cursor If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped.
+   * @param {Array.<String>} opts.deviceUID A DeviceUID.
+   * @param {Array.<String>} opts.sensorUID SensorUID to filter by, matched exactly. Repeat for more than one.
    * @param {module:model/String} opts.sortBy  (default to 'captured')
    * @param {module:model/String} opts.sortOrder  (default to 'asc')
    * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
    * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
-   * @param {module:model/String} opts.dateType Which date to filter on, either 'captured' or 'uploaded'.  This will apply to the startDate and endDate parameters (default to 'captured')
-   * @param {Boolean} opts.systemFilesOnly
-   * @param {String} opts.files
-   * @param {module:model/String} opts.format Response format (JSON or CSV) (default to 'json')
-   * @param {Array.<String>} opts.serialNumber Filter by Serial Number
-   * @param {Array.<String>} opts.sessionUID Filter by Session UID
-   * @param {Array.<String>} opts.eventUID Filter by Event UID
-   * @param {String} opts.selectFields Comma-separated list of fields to select from JSON payload (e.g., \"field1,field2.subfield,field3\"), this will reflect the columns in the CSV output.
+   * @param {module:model/String} opts.dateType Which time `startDate` and `endDate` filter on. - `captured`: when the Notecard created the event - `uploaded`: when Notehub received it  (default to 'captured')
+   * @param {Boolean} opts.systemFilesOnly If true, return only events from system notefiles, such as `_session.qo` and `_health.qo`.
+   * @param {String} opts.files Comma-separated notefiles, e.g. `data.qo,_health.qo`. Don't combine with `systemFilesOnly`.
+   * @param {module:model/String} opts.format Response format. - `json`: a JSON object with `events` - `csv`: CSV, with the columns in `selectFields`  (default to 'json')
+   * @param {Array.<String>} opts.serialNumber Serial number to filter by. Repeat for more than one.
+   * @param {Array.<String>} opts.sessionUID SessionUID to filter by. Repeat for more than one.
+   * @param {Array.<String>} opts.eventUID EventUID to filter by. Repeat for more than one.
+   * @param {String} opts.selectFields Comma-separated event fields to return, e.g. `device,when,body.temp`. Also sets the CSV columns.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetEvents200Response} and HTTP response
    */
   getFleetEventsWithHttpInfo(projectOrProductUID, fleetUID, opts) {
@@ -289,6 +207,7 @@ export default class EventApi {
     let queryParams = {
       pageSize: opts["pageSize"],
       pageNum: opts["pageNum"],
+      cursor: opts["cursor"],
       deviceUID: this.apiClient.buildCollectionParam(
         opts["deviceUID"],
         "multi"
@@ -340,26 +259,28 @@ export default class EventApi {
   }
 
   /**
-   * Get Events of a Fleet
+   * List events in a fleet
+   * List the events from one fleet, with the same filters, `cursor` and CSV output as `GetEvents`.  Paginated. Returns 403 if the organization is suspended, and 500 if the query times out; narrow the filters and retry.
    * @param {String} projectOrProductUID
    * @param {String} fleetUID
    * @param {Object} opts Optional parameters
-   * @param {Number} opts.pageSize  (default to 50)
+   * @param {Number} opts.pageSize  (default to 1000)
    * @param {Number} opts.pageNum  (default to 1)
-   * @param {Array.<String>} opts.deviceUID A Device UID.
-   * @param {Array.<String>} opts.sensorUID A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix.
+   * @param {String} opts.cursor If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped.
+   * @param {Array.<String>} opts.deviceUID A DeviceUID.
+   * @param {Array.<String>} opts.sensorUID SensorUID to filter by, matched exactly. Repeat for more than one.
    * @param {module:model/String} opts.sortBy  (default to 'captured')
    * @param {module:model/String} opts.sortOrder  (default to 'asc')
    * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
    * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
-   * @param {module:model/String} opts.dateType Which date to filter on, either 'captured' or 'uploaded'.  This will apply to the startDate and endDate parameters (default to 'captured')
-   * @param {Boolean} opts.systemFilesOnly
-   * @param {String} opts.files
-   * @param {module:model/String} opts.format Response format (JSON or CSV) (default to 'json')
-   * @param {Array.<String>} opts.serialNumber Filter by Serial Number
-   * @param {Array.<String>} opts.sessionUID Filter by Session UID
-   * @param {Array.<String>} opts.eventUID Filter by Event UID
-   * @param {String} opts.selectFields Comma-separated list of fields to select from JSON payload (e.g., \"field1,field2.subfield,field3\"), this will reflect the columns in the CSV output.
+   * @param {module:model/String} opts.dateType Which time `startDate` and `endDate` filter on. - `captured`: when the Notecard created the event - `uploaded`: when Notehub received it  (default to 'captured')
+   * @param {Boolean} opts.systemFilesOnly If true, return only events from system notefiles, such as `_session.qo` and `_health.qo`.
+   * @param {String} opts.files Comma-separated notefiles, e.g. `data.qo,_health.qo`. Don't combine with `systemFilesOnly`.
+   * @param {module:model/String} opts.format Response format. - `json`: a JSON object with `events` - `csv`: CSV, with the columns in `selectFields`  (default to 'json')
+   * @param {Array.<String>} opts.serialNumber Serial number to filter by. Repeat for more than one.
+   * @param {Array.<String>} opts.sessionUID SessionUID to filter by. Repeat for more than one.
+   * @param {Array.<String>} opts.eventUID EventUID to filter by. Repeat for more than one.
+   * @param {String} opts.selectFields Comma-separated event fields to return, e.g. `device,when,body.temp`. Also sets the CSV columns.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetEvents200Response}
    */
   getFleetEvents(projectOrProductUID, fleetUID, opts) {
@@ -373,111 +294,10 @@ export default class EventApi {
   }
 
   /**
-   * Get Events of a Fleet by cursor
+   * Get an event's route logs
+   * Get the log of every attempt to send one event to each route, with the response status, body and duration. For a route's logs across events, use `GetRouteLogsByRoute`.  Returns 404 if the event doesn't exist.
    * @param {String} projectOrProductUID
-   * @param {String} fleetUID
-   * @param {Object} opts Optional parameters
-   * @param {Number} opts.limit  (default to 50)
-   * @param {String} opts.cursor A cursor, which can be obtained from the `next_cursor` value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included.
-   * @param {module:model/String} opts.sortOrder  (default to 'asc')
-   * @param {Boolean} opts.systemFilesOnly
-   * @param {String} opts.files
-   * @param {Array.<String>} opts.deviceUID A Device UID.
-   * @param {Array.<String>} opts.sensorUID A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix.
-   * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
-   * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetEventsByCursor200Response} and HTTP response
-   */
-  getFleetEventsByCursorWithHttpInfo(projectOrProductUID, fleetUID, opts) {
-    opts = opts || {};
-    let postBody = null;
-    // verify the required parameter 'projectOrProductUID' is set
-    if (projectOrProductUID === undefined || projectOrProductUID === null) {
-      throw new Error(
-        "Missing the required parameter 'projectOrProductUID' when calling getFleetEventsByCursor"
-      );
-    }
-    // verify the required parameter 'fleetUID' is set
-    if (fleetUID === undefined || fleetUID === null) {
-      throw new Error(
-        "Missing the required parameter 'fleetUID' when calling getFleetEventsByCursor"
-      );
-    }
-
-    let pathParams = {
-      projectOrProductUID: projectOrProductUID,
-      fleetUID: fleetUID,
-    };
-    let queryParams = {
-      limit: opts["limit"],
-      cursor: opts["cursor"],
-      sortOrder: opts["sortOrder"],
-      systemFilesOnly: opts["systemFilesOnly"],
-      files: opts["files"],
-      deviceUID: this.apiClient.buildCollectionParam(
-        opts["deviceUID"],
-        "multi"
-      ),
-      sensorUID: this.apiClient.buildCollectionParam(
-        opts["sensorUID"],
-        "multi"
-      ),
-      startDate: opts["startDate"],
-      endDate: opts["endDate"],
-    };
-    let headerParams = {};
-    let formParams = {};
-
-    let authNames = ["personalAccessToken"];
-    let contentTypes = [];
-    let accepts = ["application/json"];
-    let returnType = GetEventsByCursor200Response;
-    return this.apiClient.callApi(
-      "/v1/projects/{projectOrProductUID}/fleets/{fleetUID}/events-cursor",
-      "GET",
-      pathParams,
-      queryParams,
-      headerParams,
-      formParams,
-      postBody,
-      authNames,
-      contentTypes,
-      accepts,
-      returnType,
-      null
-    );
-  }
-
-  /**
-   * Get Events of a Fleet by cursor
-   * @param {String} projectOrProductUID
-   * @param {String} fleetUID
-   * @param {Object} opts Optional parameters
-   * @param {Number} opts.limit  (default to 50)
-   * @param {String} opts.cursor A cursor, which can be obtained from the `next_cursor` value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included.
-   * @param {module:model/String} opts.sortOrder  (default to 'asc')
-   * @param {Boolean} opts.systemFilesOnly
-   * @param {String} opts.files
-   * @param {Array.<String>} opts.deviceUID A Device UID.
-   * @param {Array.<String>} opts.sensorUID A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix.
-   * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
-   * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
-   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetEventsByCursor200Response}
-   */
-  getFleetEventsByCursor(projectOrProductUID, fleetUID, opts) {
-    return this.getFleetEventsByCursorWithHttpInfo(
-      projectOrProductUID,
-      fleetUID,
-      opts
-    ).then(function (response_and_data) {
-      return response_and_data.data;
-    });
-  }
-
-  /**
-   * Get Route Logs by Event UID
-   * @param {String} projectOrProductUID
-   * @param {String} eventUID
+   * @param {String} eventUID EventUID, e.g. `4506f411-dea6-44a0-9743-1130f57d7747`.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link Array.<module:model/RouteLog>} and HTTP response
    */
   getRouteLogsByEventWithHttpInfo(projectOrProductUID, eventUID) {
@@ -524,9 +344,10 @@ export default class EventApi {
   }
 
   /**
-   * Get Route Logs by Event UID
+   * Get an event's route logs
+   * Get the log of every attempt to send one event to each route, with the response status, body and duration. For a route's logs across events, use `GetRouteLogsByRoute`.  Returns 404 if the event doesn't exist.
    * @param {String} projectOrProductUID
-   * @param {String} eventUID
+   * @param {String} eventUID EventUID, e.g. `4506f411-dea6-44a0-9743-1130f57d7747`.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link Array.<module:model/RouteLog>}
    */
   getRouteLogsByEvent(projectOrProductUID, eventUID) {

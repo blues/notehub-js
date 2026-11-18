@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The GetDevicePublicKeys200ResponseDevicePublicKeysInner model module.
  * @module model/GetDevicePublicKeys200ResponseDevicePublicKeysInner
- * @version 6.7.0
+ * @version 7.0.0
  */
 class GetDevicePublicKeys200ResponseDevicePublicKeysInner {
   /**
@@ -45,6 +45,9 @@ class GetDevicePublicKeys200ResponseDevicePublicKeysInner {
     if (data) {
       obj = obj || new GetDevicePublicKeys200ResponseDevicePublicKeysInner();
 
+      if (data.hasOwnProperty("deleted")) {
+        obj["deleted"] = ApiClient.convertToType(data["deleted"], "Boolean");
+      }
       if (data.hasOwnProperty("key")) {
         obj["key"] = ApiClient.convertToType(data["key"], "String");
       }
@@ -89,12 +92,21 @@ class GetDevicePublicKeys200ResponseDevicePublicKeysInner {
 }
 
 /**
+ * True if this device has been deleted. Only present when reading with a `cursor`.
+ * @member {Boolean} deleted
+ */
+GetDevicePublicKeys200ResponseDevicePublicKeysInner.prototype["deleted"] =
+  undefined;
+
+/**
+ * The Notecard's public key in PEM format. Empty if it hasn't reported one.
  * @member {String} key
  */
 GetDevicePublicKeys200ResponseDevicePublicKeysInner.prototype["key"] =
   undefined;
 
 /**
+ * DeviceUID, e.g. `dev:864475040509284`.
  * @member {String} uid
  */
 GetDevicePublicKeys200ResponseDevicePublicKeysInner.prototype["uid"] =

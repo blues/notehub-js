@@ -18,7 +18,7 @@ import AlertNotificationsInner from "./AlertNotificationsInner";
 /**
  * The Alert model module.
  * @module model/Alert
- * @version 6.7.0
+ * @version 7.0.0
  */
 class Alert {
   /**
@@ -262,7 +262,7 @@ class Alert {
 Alert.prototype["alert_source"] = undefined;
 
 /**
- * The time the alert was created
+ * When the alert was raised, as a Unix timestamp in seconds.
  * @member {Number} created_at
  */
 Alert.prototype["created_at"] = undefined;
@@ -273,13 +273,13 @@ Alert.prototype["created_at"] = undefined;
 Alert.prototype["data"] = undefined;
 
 /**
- * Device UID
+ * DeviceUID
  * @member {String} device_uid
  */
 Alert.prototype["device_uid"] = undefined;
 
 /**
- * The field name that triggered the alert
+ * The monitor's `source_selector`.
  * @member {String} field_name
  */
 Alert.prototype["field_name"] = undefined;
@@ -291,13 +291,13 @@ Alert.prototype["field_name"] = undefined;
 Alert.prototype["monitor_name"] = undefined;
 
 /**
- * The type of monitor that triggered the alert
+ * The `source_type` of the monitor that raised the alert.
  * @member {module:model/Alert.MonitorTypeEnum} monitor_type
  */
 Alert.prototype["monitor_type"] = undefined;
 
 /**
- * Monitor UID
+ * MonitorUID
  * @member {String} monitor_uid
  */
 Alert.prototype["monitor_uid"] = undefined;
@@ -320,7 +320,7 @@ Alert.prototype["resolved"] = undefined;
 Alert.prototype["source"] = undefined;
 
 /**
- * Alert UID
+ * AlertUID
  * @member {String} uid
  */
 Alert.prototype["uid"] = undefined;
@@ -369,10 +369,16 @@ Alert["MonitorTypeEnum"] = {
   event: "event",
 
   /**
-   * value: "device"
+   * value: "heartbeat"
    * @const
    */
-  device: "device",
+  heartbeat: "heartbeat",
+
+  /**
+   * value: "usage"
+   * @const
+   */
+  usage: "usage",
 };
 
 export default Alert;

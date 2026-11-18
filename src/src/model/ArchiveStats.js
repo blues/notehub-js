@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The ArchiveStats model module.
  * @module model/ArchiveStats
- * @version 6.7.0
+ * @version 7.0.0
  */
 class ArchiveStats {
   /**

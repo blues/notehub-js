@@ -2,6 +2,6 @@
 
 ## Properties
 
-| Name      | Type       | Description   | Notes      |
-| --------- | ---------- | ------------- | ---------- |
-| **email** | **String** | Email Address | [optional] |
+| Name      | Type       | Description                                    | Notes |
+| --------- | ---------- | ---------------------------------------------- | ----- |
+| **email** | **String** | Email address, or several separated by commas. |

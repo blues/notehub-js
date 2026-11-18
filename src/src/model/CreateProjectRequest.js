@@ -16,14 +16,14 @@ import ApiClient from "../ApiClient";
 /**
  * The CreateProjectRequest model module.
  * @module model/CreateProjectRequest
- * @version 6.7.0
+ * @version 7.0.0
  */
 class CreateProjectRequest {
   /**
    * Constructs a new <code>CreateProjectRequest</code>.
    * @alias module:model/CreateProjectRequest
-   * @param billingAccountUid {String} The billing account UID for the project. The caller of the API must be able to create projects within the billing account, otherwise an error will be returned.
-   * @param label {String} The label for the project.
+   * @param billingAccountUid {String} UID of the organization that owns and is billed for the project. List them with `GetBillingAccounts`.
+   * @param label {String} Project name shown in Notehub.
    */
   constructor(billingAccountUid, label) {
     CreateProjectRequest.initialize(this, billingAccountUid, label);
@@ -113,13 +113,13 @@ class CreateProjectRequest {
 CreateProjectRequest.RequiredProperties = ["billing_account_uid", "label"];
 
 /**
- * The billing account UID for the project. The caller of the API must be able to create projects within the billing account, otherwise an error will be returned.
+ * UID of the organization that owns and is billed for the project. List them with `GetBillingAccounts`.
  * @member {String} billing_account_uid
  */
 CreateProjectRequest.prototype["billing_account_uid"] = undefined;
 
 /**
- * The label for the project.
+ * Project name shown in Notehub.
  * @member {String} label
  */
 CreateProjectRequest.prototype["label"] = undefined;

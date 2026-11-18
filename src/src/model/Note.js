@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The Note model module.
  * @module model/Note
- * @version 6.7.0
+ * @version 7.0.0
  */
 class Note {
   /**
@@ -160,7 +160,7 @@ Note.prototype["pending"] = undefined;
 Note.prototype["time"] = undefined;
 
 /**
- * Optional location/metadata string.
+ * Place name where the note was created, from its latitude and longitude. Empty if unknown.
  * @member {String} where
  */
 Note.prototype["where"] = undefined;

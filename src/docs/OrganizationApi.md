@@ -2,17 +2,19 @@
 
 All URIs are relative to *https://api.notefile.net*
 
-| Method                                                                                | HTTP request                                                | Description |
-| ------------------------------------------------------------------------------------- | ----------------------------------------------------------- | ----------- |
-| [**getOrganization**](OrganizationApi.md#getOrganization)                             | **GET** /v1/organizations/{organizationUID}                 |
-| [**getOrganizationBalanceHistory**](OrganizationApi.md#getOrganizationBalanceHistory) | **GET** /v1/organizations/{organizationUID}/balance-history |
-| [**getOrganizations**](OrganizationApi.md#getOrganizations)                           | **GET** /v1/organizations                                   |
+| Method                                                                                | HTTP request                                                | Description                             |
+| ------------------------------------------------------------------------------------- | ----------------------------------------------------------- | --------------------------------------- |
+| [**getOrganization**](OrganizationApi.md#getOrganization)                             | **GET** /v1/organizations/{organizationUID}                 | Get an organization                     |
+| [**getOrganizationBalanceHistory**](OrganizationApi.md#getOrganizationBalanceHistory) | **GET** /v1/organizations/{organizationUID}/balance-history | Get an organization&#39;s daily balance |
+| [**getOrganizations**](OrganizationApi.md#getOrganizations)                           | **GET** /v1/organizations                                   | List your organizations                 |
 
 ## getOrganization
 
-> GetBillingAccount200Response getOrganization(organizationUID)
+> GetOrganization200Response getOrganization(organizationUID)
 
-Get Organization Information
+Get an organization
+
+Get an organization&#39;s name, owner, contact email and current plan. The plan has its type, event capacity, billing period and remaining balance. For the daily history, use &#x60;GetOrganizationBalanceHistory&#x60;. Requires the &#x60;org_admin&#x60;, &#x60;billing_manager&#x60; or &#x60;org_support&#x60; role in the organization. Returns 403 if your membership is deactivated.
 
 ### Example
 
@@ -23,7 +25,7 @@ let personalAccessToken = defaultClient.authentications["personalAccessToken"];
 personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
 
 let apiInstance = new NotehubJs.OrganizationApi();
-let organizationUID = "00000000-0000-0000-000000000001"; // String |
+let organizationUID = "00000000-0000-0000-000000000001"; // String | Organization UID. List with `GetOrganizations`.
 apiInstance.getOrganization(organizationUID).then(
   (data) => {
     console.log(
@@ -38,13 +40,13 @@ apiInstance.getOrganization(organizationUID).then(
 
 ### Parameters
 
-| Name                | Type       | Description | Notes |
-| ------------------- | ---------- | ----------- | ----- |
-| **organizationUID** | **String** |             |
+| Name                | Type       | Description                                               | Notes |
+| ------------------- | ---------- | --------------------------------------------------------- | ----- |
+| **organizationUID** | **String** | Organization UID. List with &#x60;GetOrganizations&#x60;. |
 
 ### Return type
 
-[**GetBillingAccount200Response**](GetBillingAccount200Response.md)
+[**GetOrganization200Response**](GetOrganization200Response.md)
 
 ### Authorization
 
@@ -57,9 +59,11 @@ apiInstance.getOrganization(organizationUID).then(
 
 ## getOrganizationBalanceHistory
 
-> GetBillingAccountBalanceHistory200Response getOrganizationBalanceHistory(organizationUID, opts)
+> GetOrganizationBalanceHistory200Response getOrganizationBalanceHistory(organizationUID, opts)
 
-Get Organization Balance history
+Get an organization&#39;s daily balance
+
+Get an organization&#39;s events used and remaining event capacity for each day. The range is &#x60;startDate&#x60; to &#x60;endDate&#x60;, which default to the start of the billing period and today. Requires the &#x60;org_admin&#x60;, &#x60;billing_manager&#x60; or &#x60;org_support&#x60; role in the organization. Returns 400 if &#x60;startDate&#x60; is after &#x60;endDate&#x60;.
 
 ### Example
 
@@ -70,7 +74,7 @@ let personalAccessToken = defaultClient.authentications["personalAccessToken"];
 personalAccessToken.accessToken = "YOUR ACCESS TOKEN";
 
 let apiInstance = new NotehubJs.OrganizationApi();
-let organizationUID = "00000000-0000-0000-000000000001"; // String |
+let organizationUID = "00000000-0000-0000-000000000001"; // String | Organization UID. List with `GetOrganizations`.
 let opts = {
   startDate: 1628631763, // Number | Start date for filtering results, specified as a Unix timestamp
   endDate: 1657894210, // Number | End date for filtering results, specified as a Unix timestamp
@@ -91,13 +95,13 @@ apiInstance.getOrganizationBalanceHistory(organizationUID, opts).then(
 
 | Name                | Type       | Description                                                     | Notes      |
 | ------------------- | ---------- | --------------------------------------------------------------- | ---------- |
-| **organizationUID** | **String** |                                                                 |
+| **organizationUID** | **String** | Organization UID. List with &#x60;GetOrganizations&#x60;.       |
 | **startDate**       | **Number** | Start date for filtering results, specified as a Unix timestamp | [optional] |
 | **endDate**         | **Number** | End date for filtering results, specified as a Unix timestamp   | [optional] |
 
 ### Return type
 
-[**GetBillingAccountBalanceHistory200Response**](GetBillingAccountBalanceHistory200Response.md)
+[**GetOrganizationBalanceHistory200Response**](GetOrganizationBalanceHistory200Response.md)
 
 ### Authorization
 
@@ -112,7 +116,9 @@ apiInstance.getOrganizationBalanceHistory(organizationUID, opts).then(
 
 > GetOrganizations200Response getOrganizations()
 
-Get Organizations accessible by the api_key
+List your organizations
+
+List the organizations you belong to, with your role in each. A scoped token gets an empty list. Returns 401 if your email address isn&#39;t verified.
 
 ### Example
 

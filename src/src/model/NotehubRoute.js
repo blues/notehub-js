@@ -32,12 +32,12 @@ import TwilioRoute from "./TwilioRoute";
 /**
  * The NotehubRoute model module.
  * @module model/NotehubRoute
- * @version 6.7.0
+ * @version 7.0.0
  */
 class NotehubRoute {
   /**
    * Constructs a new <code>NotehubRoute</code>.
-   * Route resource as stored/returned by the server.
+   * A route, which sends a project&#39;s events to a destination. Only the object named by &#x60;type&#x60; is used.
    * @alias module:model/NotehubRoute
    */
   constructor() {
@@ -294,6 +294,7 @@ NotehubRoute.prototype["blynk"] = undefined;
 NotehubRoute.prototype["datacake"] = undefined;
 
 /**
+ * If true, the route sends no events.
  * @member {Boolean} disabled
  * @default false
  */
@@ -310,11 +311,13 @@ NotehubRoute.prototype["google"] = undefined;
 NotehubRoute.prototype["http"] = undefined;
 
 /**
+ * Route name. Required.
  * @member {String} label
  */
 NotehubRoute.prototype["label"] = undefined;
 
 /**
+ * When the route was last changed.
  * @member {Date} modified
  */
 NotehubRoute.prototype["modified"] = undefined;
@@ -376,12 +379,13 @@ NotehubRoute.prototype["thingworx"] = undefined;
 NotehubRoute.prototype["twilio"] = undefined;
 
 /**
- * Mirrors hublib.RouteType.
+ * Route type. Fill in the object named in parentheses. - `http`: send each event to a URL (`http`) - `proxy`: let Notecards make `web.*` requests through Notehub (`proxy`) - `mqtt`: publish to an MQTT broker (`mqtt`) - `google-function`: call a Google Cloud Function (`google`) - `aws-lambda`, `aws-lambda-with-access-key`, `aws-sqs`, `aws-sqs-with-access-key`, `aws-sqs-fifo`, `aws-sqs-fifo-with-access-key`, `aws-sqs-with-role`, `aws-iot-analytics` (`aws`) - `azure-function`, `azure-function-with-key`, `azure-service-bus-with-sas-token` (`azure`) - `snowflake` (`snowflake`); `snowpipe-streaming` (`snowpipe_streaming`) - `s3-archive` (`s3archive`) - `slack-bearer`, `slack-webhook` (`slack`) - `radnote-radresp-fixed-survey`, `radnote-radresp-field-survey`, `radnote-radresp-mobile-survey`, `radnote-radresp-mobile-equipment-survey`, `radnote-missionedge-fixed-survey` (`radnote`) - `thingworx`, `twilio`, `datacake`, `blynk`, `qubitro` (object of the same name)
  * @member {String} type
  */
 NotehubRoute.prototype["type"] = undefined;
 
 /**
+ * RouteUID, e.g. `route:cbd20093cba58392c9f9bbdd0cdeb1a0`.
  * @member {String} uid
  */
 NotehubRoute.prototype["uid"] = undefined;

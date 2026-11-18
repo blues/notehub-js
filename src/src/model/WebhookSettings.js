@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The WebhookSettings model module.
  * @module model/WebhookSettings
- * @version 6.7.0
+ * @version 7.0.0
  */
 class WebhookSettings {
   /**
@@ -95,19 +95,19 @@ class WebhookSettings {
 }
 
 /**
- * Flag indicating if the webhook is disabled
+ * If true, posts to the webhook return an error and create no events.
  * @member {Boolean} disabled
  */
 WebhookSettings.prototype["disabled"] = undefined;
 
 /**
- * Webhook ID
+ * Webhook ID, also the default notefile name (`<id>.qo`). Letters, digits, `-` and `_`.
  * @member {String} id
  */
 WebhookSettings.prototype["id"] = undefined;
 
 /**
- * Transformation to be applied to the event
+ * JSONata expression applied to the event, with the post under `body`. Its output replaces the event and must set `body`. `$doNotRoute()` drops it.
  * @member {String} transform
  */
 WebhookSettings.prototype["transform"] = undefined;

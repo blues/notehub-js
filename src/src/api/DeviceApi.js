@@ -38,7 +38,7 @@ import SignalDevice200Response from "../model/SignalDevice200Response";
 /**
  * Device service.
  * @module api/DeviceApi
- * @version 6.7.0
+ * @version 7.0.0
  */
 export default class DeviceApi {
   /**
@@ -53,11 +53,12 @@ export default class DeviceApi {
   }
 
   /**
-   * Add a Note to a .db notefile.  if noteID is '-' then payload is ignored and empty notefile is created
+   * Add a note to a .db notefile
+   * Add a note with the given ID to a database notefile on a device, synced to the Notecard on its next sync. To change an existing note, use `UpdateDbNote`; to queue a note in a `.qi` notefile, use `AddQiNote`.  Requires the Owner or Developer role. Returns 400 unless the notefile ends in `.db` or `.dbs`, or if `payload` isn't valid base64.
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
-   * @param {String} notefileID
-   * @param {String} noteID
+   * @param {String} notefileID Notefile name, including its extension, e.g. `config.db` or `commands.qi`.
+   * @param {String} noteID Note ID within the notefile, e.g. `my_note`. Notes in a `.qi` notefile have IDs like `1:435`.
    * @param {module:model/NoteInput} noteInput Body or payload of note to be added to the device
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
    */
@@ -131,11 +132,12 @@ export default class DeviceApi {
   }
 
   /**
-   * Add a Note to a .db notefile.  if noteID is '-' then payload is ignored and empty notefile is created
+   * Add a note to a .db notefile
+   * Add a note with the given ID to a database notefile on a device, synced to the Notecard on its next sync. To change an existing note, use `UpdateDbNote`; to queue a note in a `.qi` notefile, use `AddQiNote`.  Requires the Owner or Developer role. Returns 400 unless the notefile ends in `.db` or `.dbs`, or if `payload` isn't valid base64.
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
-   * @param {String} notefileID
-   * @param {String} noteID
+   * @param {String} notefileID Notefile name, including its extension, e.g. `config.db` or `commands.qi`.
+   * @param {String} noteID Note ID within the notefile, e.g. `my_note`. Notes in a `.qi` notefile have IDs like `1:435`.
    * @param {module:model/NoteInput} noteInput Body or payload of note to be added to the device
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}
    */
@@ -152,10 +154,11 @@ export default class DeviceApi {
   }
 
   /**
-   * Adds a Note to a Notefile, creating the Notefile if it doesn't yet exist.
+   * Queue a note for a Notecard
+   * Add a note to an inbound queue (`.qi`) notefile on a device, creating the notefile if needed. The Notecard receives it on its next sync. For a `.db` notefile, use `AddDbNote`; to reach a connected Notecard immediately, use `SignalDevice`.  Requires the Owner or Developer role. Returns 400 unless the notefile ends in `.qi` or `.qis`, or if `payload` isn't valid base64.
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
-   * @param {String} notefileID
+   * @param {String} notefileID Notefile name, including its extension, e.g. `config.db` or `commands.qi`.
    * @param {module:model/NoteInput} noteInput Body or payload of note to be added to the device
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
    */
@@ -216,10 +219,11 @@ export default class DeviceApi {
   }
 
   /**
-   * Adds a Note to a Notefile, creating the Notefile if it doesn't yet exist.
+   * Queue a note for a Notecard
+   * Add a note to an inbound queue (`.qi`) notefile on a device, creating the notefile if needed. The Notecard receives it on its next sync. For a `.db` notefile, use `AddDbNote`; to reach a connected Notecard immediately, use `SignalDevice`.  Requires the Owner or Developer role. Returns 400 unless the notefile ends in `.qi` or `.qis`, or if `payload` isn't valid base64.
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
-   * @param {String} notefileID
+   * @param {String} notefileID Notefile name, including its extension, e.g. `config.db` or `commands.qi`.
    * @param {module:model/NoteInput} noteInput Body or payload of note to be added to the device
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}
    */
@@ -235,10 +239,11 @@ export default class DeviceApi {
   }
 
   /**
-   * Creates an empty Notefile on the device.
+   * Create an empty notefile
+   * Create an empty notefile on a device. `AddQiNote` creates a notefile when needed, so this is only required for an empty one.  Requires the Owner or Developer role. Returns 400 if the notefile already exists.
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
-   * @param {String} notefileID
+   * @param {String} notefileID Notefile name, including its extension, e.g. `config.db` or `commands.qi`.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
    */
   createNotefileWithHttpInfo(projectOrProductUID, deviceUID, notefileID) {
@@ -292,10 +297,11 @@ export default class DeviceApi {
   }
 
   /**
-   * Creates an empty Notefile on the device.
+   * Create an empty notefile
+   * Create an empty notefile on a device. `AddQiNote` creates a notefile when needed, so this is only required for an empty one.  Requires the Owner or Developer role. Returns 400 if the notefile already exists.
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
-   * @param {String} notefileID
+   * @param {String} notefileID Notefile name, including its extension, e.g. `config.db` or `commands.qi`.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}
    */
   createNotefile(projectOrProductUID, deviceUID, notefileID) {
@@ -309,7 +315,8 @@ export default class DeviceApi {
   }
 
   /**
-   * Delete Device
+   * Delete a device
+   * Delete a device and its notefiles from a project. Its events are kept. A Notecard that syncs again is added back as a new device; to block it instead, use `DisableDevice`.  Requires the Owner or Developer role.
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
@@ -358,7 +365,8 @@ export default class DeviceApi {
   }
 
   /**
-   * Delete Device
+   * Delete a device
+   * Delete a device and its notefiles from a project. Its events are kept. A Notecard that syncs again is added back as a new device; to block it instead, use `DisableDevice`.  Requires the Owner or Developer role.
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}
@@ -372,7 +380,8 @@ export default class DeviceApi {
   }
 
   /**
-   * Delete environment variable of a device
+   * Delete a device environment variable
+   * Delete one device environment variable and return the ones left. Fleet and project variables with the same name then apply. Deleting a variable that doesn't exist succeeds.  Requires the Owner or Developer role.
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
    * @param {String} key The environment variable key to delete.
@@ -433,7 +442,8 @@ export default class DeviceApi {
   }
 
   /**
-   * Delete environment variable of a device
+   * Delete a device environment variable
+   * Delete one device environment variable and return the ones left. Fleet and project variables with the same name then apply. Deleting a variable that doesn't exist succeeds.  Requires the Owner or Developer role.
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
    * @param {String} key The environment variable key to delete.
@@ -450,11 +460,12 @@ export default class DeviceApi {
   }
 
   /**
-   * Delete a note from a .db or .qi notefile
+   * Delete a note
+   * Delete one note from a notefile on a device. To delete whole notefiles, use `DeleteNotefiles`.  Requires the Owner or Developer role.
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
-   * @param {String} notefileID
-   * @param {String} noteID
+   * @param {String} notefileID Notefile name, including its extension, e.g. `config.db` or `commands.qi`.
+   * @param {String} noteID Note ID within the notefile, e.g. `my_note`. Notes in a `.qi` notefile have IDs like `1:435`.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
    */
   deleteNoteWithHttpInfo(projectOrProductUID, deviceUID, notefileID, noteID) {
@@ -515,11 +526,12 @@ export default class DeviceApi {
   }
 
   /**
-   * Delete a note from a .db or .qi notefile
+   * Delete a note
+   * Delete one note from a notefile on a device. To delete whole notefiles, use `DeleteNotefiles`.  Requires the Owner or Developer role.
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
-   * @param {String} notefileID
-   * @param {String} noteID
+   * @param {String} notefileID Notefile name, including its extension, e.g. `config.db` or `commands.qi`.
+   * @param {String} noteID Note ID within the notefile, e.g. `my_note`. Notes in a `.qi` notefile have IDs like `1:435`.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}
    */
   deleteNote(projectOrProductUID, deviceUID, notefileID, noteID) {
@@ -534,10 +546,11 @@ export default class DeviceApi {
   }
 
   /**
-   * Deletes Notefiles and the Notes they contain.
+   * Delete notefiles
+   * Delete notefiles and all their notes from a device. To delete one note, use `DeleteNote`.  Requires the Owner or Developer role. Returns 400 if `files` is empty.
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
-   * @param {module:model/DeleteNotefilesRequest} deleteNotefilesRequest
+   * @param {module:model/DeleteNotefilesRequest} deleteNotefilesRequest The notefiles to delete.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
    */
   deleteNotefilesWithHttpInfo(
@@ -597,10 +610,11 @@ export default class DeviceApi {
   }
 
   /**
-   * Deletes Notefiles and the Notes they contain.
+   * Delete notefiles
+   * Delete notefiles and all their notes from a device. To delete one note, use `DeleteNote`.  Requires the Owner or Developer role. Returns 400 if `files` is empty.
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
-   * @param {module:model/DeleteNotefilesRequest} deleteNotefilesRequest
+   * @param {module:model/DeleteNotefilesRequest} deleteNotefilesRequest The notefiles to delete.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}
    */
   deleteNotefiles(projectOrProductUID, deviceUID, deleteNotefilesRequest) {
@@ -614,7 +628,8 @@ export default class DeviceApi {
   }
 
   /**
-   * Disable Device
+   * Disable a device
+   * Stop a device from connecting to Notehub, ending any open session. The device and its data stay in the project; undo with `EnableDevice`. Does nothing if it's already disabled.  Requires the Owner or Developer role.
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
@@ -663,7 +678,8 @@ export default class DeviceApi {
   }
 
   /**
-   * Disable Device
+   * Disable a device
+   * Stop a device from connecting to Notehub, ending any open session. The device and its data stay in the project; undo with `EnableDevice`. Does nothing if it's already disabled.  Requires the Owner or Developer role.
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}
@@ -677,7 +693,8 @@ export default class DeviceApi {
   }
 
   /**
-   * Enable Device
+   * Enable a device
+   * Re-enable a device turned off with `DisableDevice`, so it can connect to Notehub again. Does nothing if the device is already enabled.  Requires the Owner or Developer role. Returns 409 if the device's cellular service was deactivated; it must be reactivated instead.
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
@@ -726,7 +743,8 @@ export default class DeviceApi {
   }
 
   /**
-   * Enable Device
+   * Enable a device
+   * Re-enable a device turned off with `DisableDevice`, so it can connect to Notehub again. Does nothing if the device is already enabled.  Requires the Owner or Developer role. Returns 409 if the device's cellular service was deactivated; it must be reactivated instead.
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}
@@ -740,14 +758,15 @@ export default class DeviceApi {
   }
 
   /**
-   * Get a note from a .db or .qi notefile
+   * Get a note
+   * Get one note's body, payload and time from a notefile on a device. To get every note in a notefile, use `GetNotefile`.  With `delete=true`, the note is deleted after it is read, which requires the Owner or Developer role.
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
-   * @param {String} notefileID
-   * @param {String} noteID
+   * @param {String} notefileID Notefile name, including its extension, e.g. `config.db` or `commands.qi`.
+   * @param {String} noteID Note ID within the notefile, e.g. `my_note`. Notes in a `.qi` notefile have IDs like `1:435`.
    * @param {Object} opts Optional parameters
-   * @param {Boolean} opts._delete Whether to delete the note from the DB notefile
-   * @param {Boolean} opts.deleted Whether to return deleted notes
+   * @param {Boolean} opts._delete If true, delete the note after returning it. Requires the Owner or Developer role.
+   * @param {Boolean} opts.deleted If true, also return the note if it has been deleted.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetDbNote200Response} and HTTP response
    */
   getDbNoteWithHttpInfo(
@@ -818,14 +837,15 @@ export default class DeviceApi {
   }
 
   /**
-   * Get a note from a .db or .qi notefile
+   * Get a note
+   * Get one note's body, payload and time from a notefile on a device. To get every note in a notefile, use `GetNotefile`.  With `delete=true`, the note is deleted after it is read, which requires the Owner or Developer role.
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
-   * @param {String} notefileID
-   * @param {String} noteID
+   * @param {String} notefileID Notefile name, including its extension, e.g. `config.db` or `commands.qi`.
+   * @param {String} noteID Note ID within the notefile, e.g. `my_note`. Notes in a `.qi` notefile have IDs like `1:435`.
    * @param {Object} opts Optional parameters
-   * @param {Boolean} opts._delete Whether to delete the note from the DB notefile
-   * @param {Boolean} opts.deleted Whether to return deleted notes
+   * @param {Boolean} opts._delete If true, delete the note after returning it. Requires the Owner or Developer role.
+   * @param {Boolean} opts.deleted If true, also return the note if it has been deleted.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetDbNote200Response}
    */
   getDbNote(projectOrProductUID, deviceUID, notefileID, noteID, opts) {
@@ -841,7 +861,8 @@ export default class DeviceApi {
   }
 
   /**
-   * Get Device
+   * Get a device
+   * Get one device's details: serial number, product, fleets, locations, firmware versions, SIM usage and DFU state. To find devices by tag, serial number or other fields, use `GetDevices`.
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Device} and HTTP response
@@ -890,7 +911,8 @@ export default class DeviceApi {
   }
 
   /**
-   * Get Device
+   * Get a device
+   * Get one device's details: serial number, product, fleets, locations, firmware versions, SIM usage and DFU state. To find devices by tag, serial number or other fields, use `GetDevices`.
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Device}
@@ -904,7 +926,8 @@ export default class DeviceApi {
   }
 
   /**
-   * Get environment variable hierarchy for a device
+   * Get a device's environment hierarchy
+   * Get a device's environment variables and the fleet and project variables it inherits, as a tree. Each variable has its precedence and whether it is used or overridden. For just the resolved values, use `GetDeviceEnvironmentVariables`.
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/EnvTreeJsonNode} and HTTP response
@@ -953,7 +976,8 @@ export default class DeviceApi {
   }
 
   /**
-   * Get environment variable hierarchy for a device
+   * Get a device's environment hierarchy
+   * Get a device's environment variables and the fleet and project variables it inherits, as a tree. Each variable has its precedence and whether it is used or overridden. For just the resolved values, use `GetDeviceEnvironmentVariables`.
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/EnvTreeJsonNode}
@@ -968,7 +992,8 @@ export default class DeviceApi {
   }
 
   /**
-   * Get environment variables of a device
+   * Get device environment variables
+   * Get a device's own environment variables, its `env.default` values, and its effective values. Effective values merge in project and fleet variables, which device variables override. To see where each value comes from, use `GetDeviceEnvironmentHierarchy`.
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetDeviceEnvironmentVariablesByPin200Response} and HTTP response
@@ -1017,7 +1042,8 @@ export default class DeviceApi {
   }
 
   /**
-   * Get environment variables of a device
+   * Get device environment variables
+   * Get a device's own environment variables, its `env.default` values, and its effective values. Effective values merge in project and fleet variables, which device variables override. To see where each value comes from, use `GetDeviceEnvironmentHierarchy`.
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetDeviceEnvironmentVariablesByPin200Response}
@@ -1032,10 +1058,11 @@ export default class DeviceApi {
   }
 
   /**
-   * Get environment variables of a device with device pin authorization
+   * Get device environment variables using a PIN
+   * Get a device's environment variables using its PIN instead of an API token. Pass the PIN in `X-Auth-Token`. Made for device dashboard pages; with a token, use `GetDeviceEnvironmentVariables`, which also returns effective values.  Returns 401 if the project's device dashboard URL has no `[pin]`, or the PIN is wrong.
    * @param {String} productUID
    * @param {String} deviceUID
-   * @param {String} xAuthToken For accessing endpoints by Device pin.
+   * @param {String} xAuthToken The device's PIN, used instead of an API token.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetDeviceEnvironmentVariablesByPin200Response} and HTTP response
    */
   getDeviceEnvironmentVariablesByPinWithHttpInfo(
@@ -1094,10 +1121,11 @@ export default class DeviceApi {
   }
 
   /**
-   * Get environment variables of a device with device pin authorization
+   * Get device environment variables using a PIN
+   * Get a device's environment variables using its PIN instead of an API token. Pass the PIN in `X-Auth-Token`. Made for device dashboard pages; with a token, use `GetDeviceEnvironmentVariables`, which also returns effective values.  Returns 401 if the project's device dashboard URL has no `[pin]`, or the PIN is wrong.
    * @param {String} productUID
    * @param {String} deviceUID
-   * @param {String} xAuthToken For accessing endpoints by Device pin.
+   * @param {String} xAuthToken The device's PIN, used instead of an API token.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetDeviceEnvironmentVariablesByPin200Response}
    */
   getDeviceEnvironmentVariablesByPin(productUID, deviceUID, xAuthToken) {
@@ -1111,13 +1139,14 @@ export default class DeviceApi {
   }
 
   /**
-   * Get Device Health Log
+   * Get a device's health log
+   * Get a device's health log: timestamped status messages such as restarts and completed firmware updates. Only the latest 100 entries are kept.  To filter by date, pass both `startDate` and `endDate`; `startDate` alone returns 400, and the same value for both returns every entry.
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
    * @param {Object} opts Optional parameters
    * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
    * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
-   * @param {Array.<module:model/String>} opts.logType Return only specified log types
+   * @param {Array.<module:model/String>} opts.logType Return only these kinds of entry. If omitted, all entries are returned. - `boot`: the device restarted - `dfu_completed`: a host firmware update finished
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetDeviceHealthLog200Response} and HTTP response
    */
   getDeviceHealthLogWithHttpInfo(projectOrProductUID, deviceUID, opts) {
@@ -1169,13 +1198,14 @@ export default class DeviceApi {
   }
 
   /**
-   * Get Device Health Log
+   * Get a device's health log
+   * Get a device's health log: timestamped status messages such as restarts and completed firmware updates. Only the latest 100 entries are kept.  To filter by date, pass both `startDate` and `endDate`; `startDate` alone returns 400, and the same value for both returns every entry.
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
    * @param {Object} opts Optional parameters
    * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
    * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
-   * @param {Array.<module:model/String>} opts.logType Return only specified log types
+   * @param {Array.<module:model/String>} opts.logType Return only these kinds of entry. If omitted, all entries are returned. - `boot`: the device restarted - `dfu_completed`: a host firmware update finished
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetDeviceHealthLog200Response}
    */
   getDeviceHealthLog(projectOrProductUID, deviceUID, opts) {
@@ -1189,12 +1219,13 @@ export default class DeviceApi {
   }
 
   /**
-   * Get a single journey for a device along with its events. The events array is paginated via `pageSize` / `pageNum`; use `journey.has_more` to detect additional pages.
+   * Get a journey and its events
+   * Get one journey's start and end time and its events, oldest first. Only events with a location are included, and a run of events at the same location is reduced to the first.  The events are paginated; `journey.has_more` is true if there are more. Returns 404 if the journey doesn't exist, and 403 if the organization is suspended.
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
    * @param {Number} journeyID Identifier of the journey, taken from the numeric `journey` field in the event body (a Unix timestamp marking the start of the journey).
    * @param {Object} opts Optional parameters
-   * @param {Number} opts.pageSize  (default to 50)
+   * @param {Number} opts.pageSize  (default to 1000)
    * @param {Number} opts.pageNum  (default to 1)
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetDeviceJourney200Response} and HTTP response
    */
@@ -1258,12 +1289,13 @@ export default class DeviceApi {
   }
 
   /**
-   * Get a single journey for a device along with its events. The events array is paginated via `pageSize` / `pageNum`; use `journey.has_more` to detect additional pages.
+   * Get a journey and its events
+   * Get one journey's start and end time and its events, oldest first. Only events with a location are included, and a run of events at the same location is reduced to the first.  The events are paginated; `journey.has_more` is true if there are more. Returns 404 if the journey doesn't exist, and 403 if the organization is suspended.
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
    * @param {Number} journeyID Identifier of the journey, taken from the numeric `journey` field in the event body (a Unix timestamp marking the start of the journey).
    * @param {Object} opts Optional parameters
-   * @param {Number} opts.pageSize  (default to 50)
+   * @param {Number} opts.pageSize  (default to 1000)
    * @param {Number} opts.pageNum  (default to 1)
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetDeviceJourney200Response}
    */
@@ -1279,7 +1311,8 @@ export default class DeviceApi {
   }
 
   /**
-   * Get the list of journeys for a device, derived from events whose body contains `journey` and `jcount` fields. Returns journey metadata only (no event payloads). Capped at 100 most recent journeys; `has_more` is true when the cap is hit.
+   * List a device's journeys
+   * List a device's journeys, newest first, without their events. A journey is the events whose body has the same `journey` value and a `jcount` field; one-event journeys are left out. For a journey's events, use `GetDeviceJourney`.  Returns at most 100; `has_more` is true if there are more. `startDate` and `endDate` filter on the journey's start. Returns 403 if the organization is suspended.
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
    * @param {Object} opts Optional parameters
@@ -1335,7 +1368,8 @@ export default class DeviceApi {
   }
 
   /**
-   * Get the list of journeys for a device, derived from events whose body contains `journey` and `jcount` fields. Returns journey metadata only (no event payloads). Capped at 100 most recent journeys; `has_more` is true when the cap is hit.
+   * List a device's journeys
+   * List a device's journeys, newest first, without their events. A journey is the events whose body has the same `journey` value and a `jcount` field; one-event journeys are left out. For a journey's events, use `GetDeviceJourney`.  Returns at most 100; `has_more` is true if there are more. `startDate` and `endDate` filter on the journey's start. Returns 403 if the organization is suspended.
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
    * @param {Object} opts Optional parameters
@@ -1354,7 +1388,8 @@ export default class DeviceApi {
   }
 
   /**
-   * Get Device Latest Events
+   * Get a device's latest event per notefile
+   * Get the most recent event from each of a device's notefiles, sorted by notefile name. `_env.qo` is left out. To search a device's event history, use `GetEvents`.  Returns 403 if the organization is suspended.
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetDeviceLatestEvents200Response} and HTTP response
@@ -1403,7 +1438,8 @@ export default class DeviceApi {
   }
 
   /**
-   * Get Device Latest Events
+   * Get a device's latest event per notefile
+   * Get the most recent event from each of a device's notefiles, sorted by notefile name. `_env.qo` is left out. To search a device's event history, use `GetEvents`.  Returns 403 if the organization is suspended.
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetDeviceLatestEvents200Response}
@@ -1418,7 +1454,8 @@ export default class DeviceApi {
   }
 
   /**
-   * Get Data Plans associated with the device, this include the primary sim, any external sim, as well as any satellite connections.
+   * Get a device's cellular data plans
+   * Get the data plan of each cellular SIM in a device: plan type, data used and remaining, and expiry. Covers the built-in SIM and any external SIM, but not satellite plans.  Returns 404 if the device has no cellular or satellite SIM.
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetDevicePlans200Response} and HTTP response
@@ -1467,7 +1504,8 @@ export default class DeviceApi {
   }
 
   /**
-   * Get Data Plans associated with the device, this include the primary sim, any external sim, as well as any satellite connections.
+   * Get a device's cellular data plans
+   * Get the data plan of each cellular SIM in a device: plan type, data used and remaining, and expiry. Covers the built-in SIM and any external SIM, but not satellite plans.  Returns 404 if the device has no cellular or satellite SIM.
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetDevicePlans200Response}
@@ -1481,7 +1519,8 @@ export default class DeviceApi {
   }
 
   /**
-   * Get Device Public Key
+   * Get a device's public key
+   * Get one Notecard's public key, in PEM format. For every device in the project, use `GetDevicePublicKeys`.
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetDevicePublicKey200Response} and HTTP response
@@ -1530,7 +1569,8 @@ export default class DeviceApi {
   }
 
   /**
-   * Get Device Public Key
+   * Get a device's public key
+   * Get one Notecard's public key, in PEM format. For every device in the project, use `GetDevicePublicKeys`.
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetDevicePublicKey200Response}
@@ -1545,11 +1585,13 @@ export default class DeviceApi {
   }
 
   /**
-   * Get Device Public Keys of a Project
+   * List public keys of all devices
+   * List the public key of every device in a project. For one device, use `GetDevicePublicKey`.  Paginated. Deleted devices are included only when reading with a `cursor`.
    * @param {String} projectOrProductUID
    * @param {Object} opts Optional parameters
-   * @param {Number} opts.pageSize  (default to 50)
+   * @param {Number} opts.pageSize  (default to 1000)
    * @param {Number} opts.pageNum  (default to 1)
+   * @param {String} opts.cursor If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetDevicePublicKeys200Response} and HTTP response
    */
   getDevicePublicKeysWithHttpInfo(projectOrProductUID, opts) {
@@ -1568,6 +1610,7 @@ export default class DeviceApi {
     let queryParams = {
       pageSize: opts["pageSize"],
       pageNum: opts["pageNum"],
+      cursor: opts["cursor"],
     };
     let headerParams = {};
     let formParams = {};
@@ -1593,11 +1636,13 @@ export default class DeviceApi {
   }
 
   /**
-   * Get Device Public Keys of a Project
+   * List public keys of all devices
+   * List the public key of every device in a project. For one device, use `GetDevicePublicKey`.  Paginated. Deleted devices are included only when reading with a `cursor`.
    * @param {String} projectOrProductUID
    * @param {Object} opts Optional parameters
-   * @param {Number} opts.pageSize  (default to 50)
+   * @param {Number} opts.pageSize  (default to 1000)
    * @param {Number} opts.pageNum  (default to 1)
+   * @param {String} opts.cursor If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetDevicePublicKeys200Response}
    */
   getDevicePublicKeys(projectOrProductUID, opts) {
@@ -1609,15 +1654,17 @@ export default class DeviceApi {
   }
 
   /**
-   * Get Device Sessions
+   * List a device's sessions
+   * List a device's sessions, its connections to Notehub. Each shows why it opened and closed, signal strength, location and data usage. `startDate` and `endDate` filter on when the session began. For every device's sessions, use `GetSessions`.  Paginated.
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
    * @param {Object} opts Optional parameters
-   * @param {Number} opts.pageSize  (default to 50)
+   * @param {Number} opts.pageSize  (default to 1000)
    * @param {Number} opts.pageNum  (default to 1)
+   * @param {String} opts.cursor If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped.
    * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
    * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
-   * @param {Boolean} opts.firstSync When true, filters results to only show first sync sessions (default to false)
+   * @param {Boolean} opts.firstSync If true, return only sessions whose `why_session_opened` begins with \"first sync\". (default to false)
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetDeviceSessions200Response} and HTTP response
    */
   getDeviceSessionsWithHttpInfo(projectOrProductUID, deviceUID, opts) {
@@ -1643,6 +1690,7 @@ export default class DeviceApi {
     let queryParams = {
       pageSize: opts["pageSize"],
       pageNum: opts["pageNum"],
+      cursor: opts["cursor"],
       startDate: opts["startDate"],
       endDate: opts["endDate"],
       firstSync: opts["firstSync"],
@@ -1671,15 +1719,17 @@ export default class DeviceApi {
   }
 
   /**
-   * Get Device Sessions
+   * List a device's sessions
+   * List a device's sessions, its connections to Notehub. Each shows why it opened and closed, signal strength, location and data usage. `startDate` and `endDate` filter on when the session began. For every device's sessions, use `GetSessions`.  Paginated.
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
    * @param {Object} opts Optional parameters
-   * @param {Number} opts.pageSize  (default to 50)
+   * @param {Number} opts.pageSize  (default to 1000)
    * @param {Number} opts.pageNum  (default to 1)
+   * @param {String} opts.cursor If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped.
    * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
    * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
-   * @param {Boolean} opts.firstSync When true, filters results to only show first sync sessions (default to false)
+   * @param {Boolean} opts.firstSync If true, return only sessions whose `why_session_opened` begins with \"first sync\". (default to false)
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetDeviceSessions200Response}
    */
   getDeviceSessions(projectOrProductUID, deviceUID, opts) {
@@ -1693,19 +1743,21 @@ export default class DeviceApi {
   }
 
   /**
-   * Get Devices of a Project
+   * List devices in a project
+   * List the devices in a project, with optional filters such as tag, serial number, fleet, location and firmware version. For one fleet's devices, use `GetFleetDevices`.  Paginated.
    * @param {String} projectOrProductUID
    * @param {Object} opts Optional parameters
-   * @param {Number} opts.pageSize  (default to 50)
+   * @param {Number} opts.pageSize  (default to 1000)
    * @param {Number} opts.pageNum  (default to 1)
-   * @param {Array.<String>} opts.deviceUID A Device UID.
+   * @param {String} opts.cursor If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped.
+   * @param {Array.<String>} opts.deviceUID A DeviceUID.
    * @param {Array.<String>} opts.tag Tag filter. Matches the whole tag, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally. For example, `51*` matches tags starting with `51`.
    * @param {Array.<String>} opts.serialNumber Serial number filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
    * @param {Array.<String>} opts.fleetUID
    * @param {Array.<String>} opts.notecardFirmware Firmware version filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
    * @param {Array.<String>} opts.location Location filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
    * @param {Array.<String>} opts.hostFirmware Host firmware filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
-   * @param {Array.<String>} opts.productUID Product UID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
+   * @param {Array.<String>} opts.productUID ProductUID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
    * @param {Array.<String>} opts.sku SKU filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetDevices200Response} and HTTP response
    */
@@ -1725,6 +1777,7 @@ export default class DeviceApi {
     let queryParams = {
       pageSize: opts["pageSize"],
       pageNum: opts["pageNum"],
+      cursor: opts["cursor"],
       deviceUID: this.apiClient.buildCollectionParam(
         opts["deviceUID"],
         "multi"
@@ -1774,19 +1827,21 @@ export default class DeviceApi {
   }
 
   /**
-   * Get Devices of a Project
+   * List devices in a project
+   * List the devices in a project, with optional filters such as tag, serial number, fleet, location and firmware version. For one fleet's devices, use `GetFleetDevices`.  Paginated.
    * @param {String} projectOrProductUID
    * @param {Object} opts Optional parameters
-   * @param {Number} opts.pageSize  (default to 50)
+   * @param {Number} opts.pageSize  (default to 1000)
    * @param {Number} opts.pageNum  (default to 1)
-   * @param {Array.<String>} opts.deviceUID A Device UID.
+   * @param {String} opts.cursor If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped.
+   * @param {Array.<String>} opts.deviceUID A DeviceUID.
    * @param {Array.<String>} opts.tag Tag filter. Matches the whole tag, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally. For example, `51*` matches tags starting with `51`.
    * @param {Array.<String>} opts.serialNumber Serial number filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
    * @param {Array.<String>} opts.fleetUID
    * @param {Array.<String>} opts.notecardFirmware Firmware version filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
    * @param {Array.<String>} opts.location Location filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
    * @param {Array.<String>} opts.hostFirmware Host firmware filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
-   * @param {Array.<String>} opts.productUID Product UID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
+   * @param {Array.<String>} opts.productUID ProductUID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
    * @param {Array.<String>} opts.sku SKU filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetDevices200Response}
    */
@@ -1799,19 +1854,21 @@ export default class DeviceApi {
   }
 
   /**
-   * Get Devices of a Fleet within a Project
+   * List devices in a fleet
+   * List the devices in one fleet, with the same filters as `GetDevices`. To list a device's fleets instead, use `GetDeviceFleets`.  Paginated. Returns 404 if the fleet doesn't exist.
    * @param {String} projectOrProductUID
    * @param {String} fleetUID
    * @param {Object} opts Optional parameters
-   * @param {Number} opts.pageSize  (default to 50)
+   * @param {Number} opts.pageSize  (default to 1000)
    * @param {Number} opts.pageNum  (default to 1)
-   * @param {Array.<String>} opts.deviceUID A Device UID.
+   * @param {String} opts.cursor If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped.
+   * @param {Array.<String>} opts.deviceUID A DeviceUID.
    * @param {Array.<String>} opts.tag Tag filter. Matches the whole tag, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally. For example, `51*` matches tags starting with `51`.
    * @param {Array.<String>} opts.serialNumber Serial number filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
    * @param {Array.<String>} opts.notecardFirmware Firmware version filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
    * @param {Array.<String>} opts.location Location filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
    * @param {Array.<String>} opts.hostFirmware Host firmware filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
-   * @param {Array.<String>} opts.productUID Product UID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
+   * @param {Array.<String>} opts.productUID ProductUID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
    * @param {Array.<String>} opts.sku SKU filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetDevices200Response} and HTTP response
    */
@@ -1838,6 +1895,7 @@ export default class DeviceApi {
     let queryParams = {
       pageSize: opts["pageSize"],
       pageNum: opts["pageNum"],
+      cursor: opts["cursor"],
       deviceUID: this.apiClient.buildCollectionParam(
         opts["deviceUID"],
         "multi"
@@ -1886,19 +1944,21 @@ export default class DeviceApi {
   }
 
   /**
-   * Get Devices of a Fleet within a Project
+   * List devices in a fleet
+   * List the devices in one fleet, with the same filters as `GetDevices`. To list a device's fleets instead, use `GetDeviceFleets`.  Paginated. Returns 404 if the fleet doesn't exist.
    * @param {String} projectOrProductUID
    * @param {String} fleetUID
    * @param {Object} opts Optional parameters
-   * @param {Number} opts.pageSize  (default to 50)
+   * @param {Number} opts.pageSize  (default to 1000)
    * @param {Number} opts.pageNum  (default to 1)
-   * @param {Array.<String>} opts.deviceUID A Device UID.
+   * @param {String} opts.cursor If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped.
+   * @param {Array.<String>} opts.deviceUID A DeviceUID.
    * @param {Array.<String>} opts.tag Tag filter. Matches the whole tag, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally. For example, `51*` matches tags starting with `51`.
    * @param {Array.<String>} opts.serialNumber Serial number filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
    * @param {Array.<String>} opts.notecardFirmware Firmware version filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
    * @param {Array.<String>} opts.location Location filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
    * @param {Array.<String>} opts.hostFirmware Host firmware filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
-   * @param {Array.<String>} opts.productUID Product UID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
+   * @param {Array.<String>} opts.productUID ProductUID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
    * @param {Array.<String>} opts.sku SKU filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetDevices200Response}
    */
@@ -1913,14 +1973,15 @@ export default class DeviceApi {
   }
 
   /**
-   * For .qi files, returns the queued up notes.  For .db files, returns all notes in the notefile
+   * Get the notes in a notefile
+   * Get the notes in one notefile on a device. For a `.qi` notefile, that's the notes still queued; for a `.db` notefile, every note. To list all of a device's notefiles with their notes, use `ListNotefiles`.  With `delete=true`, the returned notes are deleted, which requires the Owner or Developer role. Returns 400 if `notefileID` has no valid notefile extension.
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
-   * @param {String} notefileID
+   * @param {String} notefileID Notefile name, including its extension, e.g. `config.db` or `commands.qi`.
    * @param {Object} opts Optional parameters
-   * @param {Number} opts.max The maximum number of Notes to return in the request.
-   * @param {Boolean} opts.deleted true to return deleted notes.
-   * @param {Boolean} opts._delete true to delete the notes returned by the request.
+   * @param {Number} opts.max The most notes to return.
+   * @param {Boolean} opts.deleted If true, also return deleted notes.
+   * @param {Boolean} opts._delete If true, delete the notes this request returns. Requires the Owner or Developer role.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetNotefile200Response} and HTTP response
    */
   getNotefileWithHttpInfo(projectOrProductUID, deviceUID, notefileID, opts) {
@@ -1979,14 +2040,15 @@ export default class DeviceApi {
   }
 
   /**
-   * For .qi files, returns the queued up notes.  For .db files, returns all notes in the notefile
+   * Get the notes in a notefile
+   * Get the notes in one notefile on a device. For a `.qi` notefile, that's the notes still queued; for a `.db` notefile, every note. To list all of a device's notefiles with their notes, use `ListNotefiles`.  With `delete=true`, the returned notes are deleted, which requires the Owner or Developer role. Returns 400 if `notefileID` has no valid notefile extension.
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
-   * @param {String} notefileID
+   * @param {String} notefileID Notefile name, including its extension, e.g. `config.db` or `commands.qi`.
    * @param {Object} opts Optional parameters
-   * @param {Number} opts.max The maximum number of Notes to return in the request.
-   * @param {Boolean} opts.deleted true to return deleted notes.
-   * @param {Boolean} opts._delete true to delete the notes returned by the request.
+   * @param {Number} opts.max The most notes to return.
+   * @param {Boolean} opts.deleted If true, also return deleted notes.
+   * @param {Boolean} opts._delete If true, delete the notes this request returns. Requires the Owner or Developer role.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetNotefile200Response}
    */
   getNotefile(projectOrProductUID, deviceUID, notefileID, opts) {
@@ -2001,11 +2063,99 @@ export default class DeviceApi {
   }
 
   /**
-   * Lists .qi and .db files for the device
+   * List sessions in a project
+   * List the sessions of every device in a project, as `GetDeviceSessions` does for one device. `startDate` and `endDate` filter on when the session began. `deviceUID` and `fleetUID` each match any of their values; `fleetUID` matches the fleets recorded on the session.  Paginated.
+   * @param {String} projectOrProductUID
+   * @param {Object} opts Optional parameters
+   * @param {Number} opts.pageSize  (default to 1000)
+   * @param {Number} opts.pageNum  (default to 1)
+   * @param {String} opts.cursor If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped.
+   * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
+   * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
+   * @param {Boolean} opts.firstSync If true, return only sessions whose `why_session_opened` begins with \"first sync\". (default to false)
+   * @param {Array.<String>} opts.deviceUID A DeviceUID.
+   * @param {Array.<String>} opts.fleetUID
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetDeviceSessions200Response} and HTTP response
+   */
+  getSessionsWithHttpInfo(projectOrProductUID, opts) {
+    opts = opts || {};
+    let postBody = null;
+    // verify the required parameter 'projectOrProductUID' is set
+    if (projectOrProductUID === undefined || projectOrProductUID === null) {
+      throw new Error(
+        "Missing the required parameter 'projectOrProductUID' when calling getSessions"
+      );
+    }
+
+    let pathParams = {
+      projectOrProductUID: projectOrProductUID,
+    };
+    let queryParams = {
+      pageSize: opts["pageSize"],
+      pageNum: opts["pageNum"],
+      cursor: opts["cursor"],
+      startDate: opts["startDate"],
+      endDate: opts["endDate"],
+      firstSync: opts["firstSync"],
+      deviceUID: this.apiClient.buildCollectionParam(
+        opts["deviceUID"],
+        "multi"
+      ),
+      fleetUID: this.apiClient.buildCollectionParam(opts["fleetUID"], "multi"),
+    };
+    let headerParams = {};
+    let formParams = {};
+
+    let authNames = ["personalAccessToken"];
+    let contentTypes = [];
+    let accepts = ["application/json"];
+    let returnType = GetDeviceSessions200Response;
+    return this.apiClient.callApi(
+      "/v1/projects/{projectOrProductUID}/sessions",
+      "GET",
+      pathParams,
+      queryParams,
+      headerParams,
+      formParams,
+      postBody,
+      authNames,
+      contentTypes,
+      accepts,
+      returnType,
+      null
+    );
+  }
+
+  /**
+   * List sessions in a project
+   * List the sessions of every device in a project, as `GetDeviceSessions` does for one device. `startDate` and `endDate` filter on when the session began. `deviceUID` and `fleetUID` each match any of their values; `fleetUID` matches the fleets recorded on the session.  Paginated.
+   * @param {String} projectOrProductUID
+   * @param {Object} opts Optional parameters
+   * @param {Number} opts.pageSize  (default to 1000)
+   * @param {Number} opts.pageNum  (default to 1)
+   * @param {String} opts.cursor If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped.
+   * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
+   * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
+   * @param {Boolean} opts.firstSync If true, return only sessions whose `why_session_opened` begins with \"first sync\". (default to false)
+   * @param {Array.<String>} opts.deviceUID A DeviceUID.
+   * @param {Array.<String>} opts.fleetUID
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetDeviceSessions200Response}
+   */
+  getSessions(projectOrProductUID, opts) {
+    return this.getSessionsWithHttpInfo(projectOrProductUID, opts).then(
+      function (response_and_data) {
+        return response_and_data.data;
+      }
+    );
+  }
+
+  /**
+   * List a device's notefiles and notes
+   * List a device's notefiles with the notes in each, sorted `.qo`, then `.qi`, then `.db`. `.qo` notefiles are listed without notes, since Notehub empties them as it processes them. Most system notefiles (names starting with `_`) are left out. For one notefile, use `GetNotefile`.
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
    * @param {Object} opts Optional parameters
-   * @param {Array.<String>} opts.files One or more files to obtain change information from.
+   * @param {Array.<String>} opts.files Notefiles to include, e.g. `config.db`. If omitted, all are listed.
    * @param {Boolean} opts.pending show only files that are pending sync to the Notecard
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link Array.<module:model/Notefile>} and HTTP response
    */
@@ -2057,11 +2207,12 @@ export default class DeviceApi {
   }
 
   /**
-   * Lists .qi and .db files for the device
+   * List a device's notefiles and notes
+   * List a device's notefiles with the notes in each, sorted `.qo`, then `.qi`, then `.db`. `.qo` notefiles are listed without notes, since Notehub empties them as it processes them. Most system notefiles (names starting with `_`) are left out. For one notefile, use `GetNotefile`.
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
    * @param {Object} opts Optional parameters
-   * @param {Array.<String>} opts.files One or more files to obtain change information from.
+   * @param {Array.<String>} opts.files Notefiles to include, e.g. `config.db`. If omitted, all are listed.
    * @param {Boolean} opts.pending show only files that are pending sync to the Notecard
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link Array.<module:model/Notefile>}
    */
@@ -2076,10 +2227,11 @@ export default class DeviceApi {
   }
 
   /**
-   * Provision Device for a Project
+   * Provision a Notecard
+   * Add a Notecard to a project before it first connects, with its product, serial number and fleets. A device that already exists isn't reset and keeps its fleets.  Requires the Owner or Developer role. Returns 404 if `product_uid` doesn't exist, and 400 if it belongs to another project or `deviceUID` isn't a valid Notecard DeviceUID.
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
-   * @param {module:model/ProvisionDeviceRequest} provisionDeviceRequest Provision a device to a specific ProductUID
+   * @param {module:model/ProvisionDeviceRequest} provisionDeviceRequest The product, serial number and fleets for the device.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link Object} and HTTP response
    */
   provisionDeviceWithHttpInfo(
@@ -2139,10 +2291,11 @@ export default class DeviceApi {
   }
 
   /**
-   * Provision Device for a Project
+   * Provision a Notecard
+   * Add a Notecard to a project before it first connects, with its product, serial number and fleets. A device that already exists isn't reset and keeps its fleets.  Requires the Owner or Developer role. Returns 404 if `product_uid` doesn't exist, and 400 if it belongs to another project or `deviceUID` isn't a valid Notecard DeviceUID.
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
-   * @param {module:model/ProvisionDeviceRequest} provisionDeviceRequest Provision a device to a specific ProductUID
+   * @param {module:model/ProvisionDeviceRequest} provisionDeviceRequest The product, serial number and fleets for the device.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link Object}
    */
   provisionDevice(projectOrProductUID, deviceUID, provisionDeviceRequest) {
@@ -2156,10 +2309,11 @@ export default class DeviceApi {
   }
 
   /**
-   * Set environment variables of a device
+   * Set device environment variables
+   * Add or change a device's environment variables; variables you don't send keep their values. A value of `\"\"` or `-` deletes that variable. Setting `_fw`, `_fwc` or `_fwm` starts a host, Notecard or modem firmware update.  Requires the Owner or Developer role. Returns 400 if a note's key isn't a variable.
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
-   * @param {module:model/EnvironmentVariables} environmentVariables Environment variables to be added to the device
+   * @param {module:model/EnvironmentVariables} environmentVariables The variables to add or change, and optional notes.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/EnvironmentVariables} and HTTP response
    */
   setDeviceEnvironmentVariablesWithHttpInfo(
@@ -2216,10 +2370,11 @@ export default class DeviceApi {
   }
 
   /**
-   * Set environment variables of a device
+   * Set device environment variables
+   * Add or change a device's environment variables; variables you don't send keep their values. A value of `\"\"` or `-` deletes that variable. Setting `_fw`, `_fwc` or `_fwm` starts a host, Notecard or modem firmware update.  Requires the Owner or Developer role. Returns 400 if a note's key isn't a variable.
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
-   * @param {module:model/EnvironmentVariables} environmentVariables Environment variables to be added to the device
+   * @param {module:model/EnvironmentVariables} environmentVariables The variables to add or change, and optional notes.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/EnvironmentVariables}
    */
   setDeviceEnvironmentVariables(
@@ -2237,11 +2392,12 @@ export default class DeviceApi {
   }
 
   /**
-   * Set environment variables of a device with device pin authorization
+   * Set device environment variables using a PIN
+   * Add or change a device's environment variables using its PIN instead of an API token. Pass the PIN in `X-Auth-Token`. Works like `SetDeviceEnvironmentVariables`: a value of `\"\"` or `-` deletes that variable.  Returns 401 if the project's device dashboard URL has no `[pin]`, or the PIN is wrong.
    * @param {String} productUID
    * @param {String} deviceUID
-   * @param {String} xAuthToken For accessing endpoints by Device pin.
-   * @param {module:model/EnvironmentVariables} environmentVariables Environment variables to be added to the device
+   * @param {String} xAuthToken The device's PIN, used instead of an API token.
+   * @param {module:model/EnvironmentVariables} environmentVariables The variables to add or change, and optional notes.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/EnvironmentVariables} and HTTP response
    */
   setDeviceEnvironmentVariablesByPinWithHttpInfo(
@@ -2307,11 +2463,12 @@ export default class DeviceApi {
   }
 
   /**
-   * Set environment variables of a device with device pin authorization
+   * Set device environment variables using a PIN
+   * Add or change a device's environment variables using its PIN instead of an API token. Pass the PIN in `X-Auth-Token`. Works like `SetDeviceEnvironmentVariables`: a value of `\"\"` or `-` deletes that variable.  Returns 401 if the project's device dashboard URL has no `[pin]`, or the PIN is wrong.
    * @param {String} productUID
    * @param {String} deviceUID
-   * @param {String} xAuthToken For accessing endpoints by Device pin.
-   * @param {module:model/EnvironmentVariables} environmentVariables Environment variables to be added to the device
+   * @param {String} xAuthToken The device's PIN, used instead of an API token.
+   * @param {module:model/EnvironmentVariables} environmentVariables The variables to add or change, and optional notes.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/EnvironmentVariables}
    */
   setDeviceEnvironmentVariablesByPin(
@@ -2331,10 +2488,11 @@ export default class DeviceApi {
   }
 
   /**
-   * Send a signal from Notehub to a Notecard.
+   * Send a signal to a connected Notecard
+   * Send a JSON object straight to a Notecard, which the host can read with `hub.signal`. It's delivered only if the Notecard is connected to Notehub at that moment, and is never queued; `connected` in the response says whether it was. To queue data for the next sync, use `AddQiNote` instead.  Requires the Owner or Developer role. Returns 400 if the body has a `type` field.
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
-   * @param {module:model/Body} body Body or payload of signal to be sent to the device
+   * @param {module:model/Body} body The signal to send.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/SignalDevice200Response} and HTTP response
    */
   signalDeviceWithHttpInfo(projectOrProductUID, deviceUID, body) {
@@ -2387,10 +2545,11 @@ export default class DeviceApi {
   }
 
   /**
-   * Send a signal from Notehub to a Notecard.
+   * Send a signal to a connected Notecard
+   * Send a JSON object straight to a Notecard, which the host can read with `hub.signal`. It's delivered only if the Notecard is connected to Notehub at that moment, and is never queued; `connected` in the response says whether it was. To queue data for the next sync, use `AddQiNote` instead.  Requires the Owner or Developer role. Returns 400 if the body has a `type` field.
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
-   * @param {module:model/Body} body Body or payload of signal to be sent to the device
+   * @param {module:model/Body} body The signal to send.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/SignalDevice200Response}
    */
   signalDevice(projectOrProductUID, deviceUID, body) {
@@ -2404,11 +2563,12 @@ export default class DeviceApi {
   }
 
   /**
-   * Update a note in a .db or .qi notefile
+   * Update a note in a .db notefile
+   * Replace the body and payload of a note in a database notefile on a device, synced to the Notecard on its next sync. To add a new note, use `AddDbNote`.  Requires the Owner or Developer role. Returns 400 unless the notefile ends in `.db` or `.dbs`, or if `payload` isn't valid base64.
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
-   * @param {String} notefileID
-   * @param {String} noteID
+   * @param {String} notefileID Notefile name, including its extension, e.g. `config.db` or `commands.qi`.
+   * @param {String} noteID Note ID within the notefile, e.g. `my_note`. Notes in a `.qi` notefile have IDs like `1:435`.
    * @param {module:model/NoteInput} noteInput Body or payload of note to be added to the device
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
    */
@@ -2482,11 +2642,12 @@ export default class DeviceApi {
   }
 
   /**
-   * Update a note in a .db or .qi notefile
+   * Update a note in a .db notefile
+   * Replace the body and payload of a note in a database notefile on a device, synced to the Notecard on its next sync. To add a new note, use `AddDbNote`.  Requires the Owner or Developer role. Returns 400 unless the notefile ends in `.db` or `.dbs`, or if `payload` isn't valid base64.
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
-   * @param {String} notefileID
-   * @param {String} noteID
+   * @param {String} notefileID Notefile name, including its extension, e.g. `config.db` or `commands.qi`.
+   * @param {String} noteID Note ID within the notefile, e.g. `my_note`. Notes in a `.qi` notefile have IDs like `1:435`.
    * @param {module:model/NoteInput} noteInput Body or payload of note to be added to the device
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}
    */

@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The ProjectSecret model module.
  * @module model/ProjectSecret
- * @version 6.7.0
+ * @version 7.0.0
  */
 class ProjectSecret {
   /**
@@ -24,8 +24,8 @@ class ProjectSecret {
    * Metadata for a project secret. The value is never returned.
    * @alias module:model/ProjectSecret
    * @param created {Date} When the secret was first created.
-   * @param createdBy {String} The actor who created the secret.
-   * @param name {String} The secret name (alphanumeric and underscores only).
+   * @param createdBy {String} UID of the user or OAuth client that created the secret.
+   * @param name {String} The secret's name. Routes and alerts reference it as `[$$name]`.
    */
   constructor(created, createdBy, name) {
     ProjectSecret.initialize(this, created, createdBy, name);
@@ -147,25 +147,25 @@ ProjectSecret.RequiredProperties = ["created", "created_by", "name"];
 ProjectSecret.prototype["created"] = undefined;
 
 /**
- * The actor who created the secret.
+ * UID of the user or OAuth client that created the secret.
  * @member {String} created_by
  */
 ProjectSecret.prototype["created_by"] = undefined;
 
 /**
- * When the secret was last updated.
+ * When the secret's value was last set.
  * @member {Date} modified
  */
 ProjectSecret.prototype["modified"] = undefined;
 
 /**
- * The actor who last updated the secret.
+ * UID of the user or OAuth client that last set the secret's value.
  * @member {String} modified_by
  */
 ProjectSecret.prototype["modified_by"] = undefined;
 
 /**
- * The secret name (alphanumeric and underscores only).
+ * The secret's name. Routes and alerts reference it as `[$$name]`.
  * @member {String} name
  */
 ProjectSecret.prototype["name"] = undefined;

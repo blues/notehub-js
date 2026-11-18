@@ -16,13 +16,13 @@ import ApiClient from "../ApiClient";
 /**
  * The AddDeviceToFleetsRequest model module.
  * @module model/AddDeviceToFleetsRequest
- * @version 6.7.0
+ * @version 7.0.0
  */
 class AddDeviceToFleetsRequest {
   /**
    * Constructs a new <code>AddDeviceToFleetsRequest</code>.
    * @alias module:model/AddDeviceToFleetsRequest
-   * @param fleetUids {Array.<String>} The fleetUIDs to add to the device.
+   * @param fleetUids {Array.<String>} FleetUIDs to add the device to.
    */
   constructor(fleetUids) {
     AddDeviceToFleetsRequest.initialize(this, fleetUids);
@@ -91,7 +91,7 @@ class AddDeviceToFleetsRequest {
 AddDeviceToFleetsRequest.RequiredProperties = ["fleet_uids"];
 
 /**
- * The fleetUIDs to add to the device.
+ * FleetUIDs to add the device to.
  * @member {Array.<String>} fleet_uids
  */
 AddDeviceToFleetsRequest.prototype["fleet_uids"] = undefined;

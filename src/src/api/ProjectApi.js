@@ -46,7 +46,7 @@ import UpdateProjectSecretRequest from "../model/UpdateProjectSecretRequest";
 /**
  * Project service.
  * @module api/ProjectApi
- * @version 6.7.0
+ * @version 7.0.0
  */
 export default class ProjectApi {
   /**
@@ -61,10 +61,11 @@ export default class ProjectApi {
   }
 
   /**
-   * Add Device to Fleets
+   * Add a device to fleets
+   * Add a device to one or more fleets, keeping the fleets it's already in, and return all its fleets. Fleets it's already in are skipped, so a retry is safe.  Requires the Owner or Developer role. Returns 400 if a fleet doesn't exist.
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
-   * @param {module:model/AddDeviceToFleetsRequest} addDeviceToFleetsRequest The fleets to add to the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error.
+   * @param {module:model/AddDeviceToFleetsRequest} addDeviceToFleetsRequest The fleets to add the device to.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetDeviceFleets200Response} and HTTP response
    */
   addDeviceToFleetsWithHttpInfo(
@@ -124,10 +125,11 @@ export default class ProjectApi {
   }
 
   /**
-   * Add Device to Fleets
+   * Add a device to fleets
+   * Add a device to one or more fleets, keeping the fleets it's already in, and return all its fleets. Fleets it's already in are skipped, so a retry is safe.  Requires the Owner or Developer role. Returns 400 if a fleet doesn't exist.
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
-   * @param {module:model/AddDeviceToFleetsRequest} addDeviceToFleetsRequest The fleets to add to the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error.
+   * @param {module:model/AddDeviceToFleetsRequest} addDeviceToFleetsRequest The fleets to add the device to.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetDeviceFleets200Response}
    */
   addDeviceToFleets(projectOrProductUID, deviceUID, addDeviceToFleetsRequest) {
@@ -141,9 +143,10 @@ export default class ProjectApi {
   }
 
   /**
-   * Clone a Project
+   * Clone a project
+   * Create a new project as a copy of this one. Settings, environment variables, transformation, fleets, routes and host firmware are copied; devices, products and members aren't. Copied fleets get new FleetUIDs.  Requires the Owner role (400 otherwise), a verified email address (401 otherwise), and permission to create projects in the target organization (403 otherwise).
    * @param {String} projectOrProductUID
-   * @param {module:model/CloneProjectRequest} cloneProjectRequest Project to be cloned
+   * @param {module:model/CloneProjectRequest} cloneProjectRequest The new project's name and organization, and what to leave out of the copy.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Project} and HTTP response
    */
   cloneProjectWithHttpInfo(projectOrProductUID, cloneProjectRequest) {
@@ -189,9 +192,10 @@ export default class ProjectApi {
   }
 
   /**
-   * Clone a Project
+   * Clone a project
+   * Create a new project as a copy of this one. Settings, environment variables, transformation, fleets, routes and host firmware are copied; devices, products and members aren't. Copied fleets get new FleetUIDs.  Requires the Owner role (400 otherwise), a verified email address (401 otherwise), and permission to create projects in the target organization (403 otherwise).
    * @param {String} projectOrProductUID
-   * @param {module:model/CloneProjectRequest} cloneProjectRequest Project to be cloned
+   * @param {module:model/CloneProjectRequest} cloneProjectRequest The new project's name and organization, and what to leave out of the copy.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Project}
    */
   cloneProject(projectOrProductUID, cloneProjectRequest) {
@@ -204,9 +208,10 @@ export default class ProjectApi {
   }
 
   /**
-   * Create Fleet
+   * Create a fleet
+   * Create a fleet in the project. Connectivity assurance is on unless `connectivity_assurance.enabled` is `false`. A second call creates another fleet.  Requires the Owner or Developer role. Returns 400 if `label` is missing or empty.
    * @param {String} projectOrProductUID
-   * @param {module:model/CreateFleetRequest} createFleetRequest Fleet to be added
+   * @param {module:model/CreateFleetRequest} createFleetRequest The new fleet's name and settings.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Fleet} and HTTP response
    */
   createFleetWithHttpInfo(projectOrProductUID, createFleetRequest) {
@@ -252,9 +257,10 @@ export default class ProjectApi {
   }
 
   /**
-   * Create Fleet
+   * Create a fleet
+   * Create a fleet in the project. Connectivity assurance is on unless `connectivity_assurance.enabled` is `false`. A second call creates another fleet.  Requires the Owner or Developer role. Returns 400 if `label` is missing or empty.
    * @param {String} projectOrProductUID
-   * @param {module:model/CreateFleetRequest} createFleetRequest Fleet to be added
+   * @param {module:model/CreateFleetRequest} createFleetRequest The new fleet's name and settings.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Fleet}
    */
   createFleet(projectOrProductUID, createFleetRequest) {
@@ -267,9 +273,10 @@ export default class ProjectApi {
   }
 
   /**
-   * Create Product within a Project
+   * Create a product
+   * Add a ProductUID to the project, formed from the caller's reversed email and `product_uid`. For `jane@acme.com` and `sensors` it is `com.acme.jane:sensors`.  Requires the Owner or Developer role and a verified email address (400 otherwise). Returns 404 if an `auto_provision_fleets` entry isn't a fleet in this project, and 500 if `product_uid` is invalid or already taken.
    * @param {String} projectOrProductUID
-   * @param {module:model/CreateProductRequest} createProductRequest Product to be created
+   * @param {module:model/CreateProductRequest} createProductRequest The new product's UID suffix, name and provisioning settings.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Product} and HTTP response
    */
   createProductWithHttpInfo(projectOrProductUID, createProductRequest) {
@@ -315,9 +322,10 @@ export default class ProjectApi {
   }
 
   /**
-   * Create Product within a Project
+   * Create a product
+   * Add a ProductUID to the project, formed from the caller's reversed email and `product_uid`. For `jane@acme.com` and `sensors` it is `com.acme.jane:sensors`.  Requires the Owner or Developer role and a verified email address (400 otherwise). Returns 404 if an `auto_provision_fleets` entry isn't a fleet in this project, and 500 if `product_uid` is invalid or already taken.
    * @param {String} projectOrProductUID
-   * @param {module:model/CreateProductRequest} createProductRequest Product to be created
+   * @param {module:model/CreateProductRequest} createProductRequest The new product's UID suffix, name and provisioning settings.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Product}
    */
   createProduct(projectOrProductUID, createProductRequest) {
@@ -330,8 +338,9 @@ export default class ProjectApi {
   }
 
   /**
-   * Create a Project
-   * @param {module:model/CreateProjectRequest} createProjectRequest Project to be created
+   * Create a project
+   * Create a project in an organization, with one default fleet, no products, and the caller as its Owner. A second call creates another project.  Requires a verified email address (401 otherwise) and permission to create projects in the organization (403 otherwise).
+   * @param {module:model/CreateProjectRequest} createProjectRequest The new project's name and organization.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Project} and HTTP response
    */
   createProjectWithHttpInfo(createProjectRequest) {
@@ -369,8 +378,9 @@ export default class ProjectApi {
   }
 
   /**
-   * Create a Project
-   * @param {module:model/CreateProjectRequest} createProjectRequest Project to be created
+   * Create a project
+   * Create a project in an organization, with one default fleet, no products, and the caller as its Owner. A second call creates another project.  Requires a verified email address (401 otherwise) and permission to create projects in the organization (403 otherwise).
+   * @param {module:model/CreateProjectRequest} createProjectRequest The new project's name and organization.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Project}
    */
   createProject(createProjectRequest) {
@@ -382,7 +392,8 @@ export default class ProjectApi {
   }
 
   /**
-   * Create a new project secret
+   * Create a project secret
+   * Store a secret value that routes and alerts can reference as `[$$name]` without exposing it. The value can't be read back.  Requires the Owner or Developer role. Returns 409 if the name is taken, and 400 if it's invalid.
    * @param {String} projectOrProductUID
    * @param {module:model/CreateProjectSecretRequest} createProjectSecretRequest
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/ProjectSecret} and HTTP response
@@ -436,7 +447,8 @@ export default class ProjectApi {
   }
 
   /**
-   * Create a new project secret
+   * Create a project secret
+   * Store a secret value that routes and alerts can reference as `[$$name]` without exposing it. The value can't be read back.  Requires the Owner or Developer role. Returns 409 if the name is taken, and 400 if it's invalid.
    * @param {String} projectOrProductUID
    * @param {module:model/CreateProjectSecretRequest} createProjectSecretRequest
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/ProjectSecret}
@@ -451,10 +463,11 @@ export default class ProjectApi {
   }
 
   /**
-   * Remove Device from Fleets
+   * Remove a device from fleets
+   * Remove a device from one or more fleets and return the fleets it's still in. Fleets it isn't in are ignored, so a retry is safe.  Requires the Owner or Developer role.
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
-   * @param {module:model/DeleteDeviceFromFleetsRequest} deleteDeviceFromFleetsRequest The fleets to remove from the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error.
+   * @param {module:model/DeleteDeviceFromFleetsRequest} deleteDeviceFromFleetsRequest The fleets to remove the device from.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetDeviceFleets200Response} and HTTP response
    */
   deleteDeviceFromFleetsWithHttpInfo(
@@ -514,10 +527,11 @@ export default class ProjectApi {
   }
 
   /**
-   * Remove Device from Fleets
+   * Remove a device from fleets
+   * Remove a device from one or more fleets and return the fleets it's still in. Fleets it isn't in are ignored, so a retry is safe.  Requires the Owner or Developer role.
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
-   * @param {module:model/DeleteDeviceFromFleetsRequest} deleteDeviceFromFleetsRequest The fleets to remove from the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error.
+   * @param {module:model/DeleteDeviceFromFleetsRequest} deleteDeviceFromFleetsRequest The fleets to remove the device from.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetDeviceFleets200Response}
    */
   deleteDeviceFromFleets(
@@ -535,7 +549,8 @@ export default class ProjectApi {
   }
 
   /**
-   * Delete a host firmware binary. The filename must be the full stored filename including the timestamp suffix (e.g. test$20260324190911.bin) as returned by the firmware upload or list endpoints.
+   * Delete host firmware
+   * Delete a host firmware file by its stored filename, including its `$` timestamp suffix. Notecard firmware can't be deleted.  Requires the Owner or Developer role. Returns 404 if the file doesn't exist, and 400 for a sub-project, whose parent manages host firmware.
    * @param {String} projectOrProductUID
    * @param {module:model/String} firmwareType
    * @param {String} filename
@@ -592,7 +607,8 @@ export default class ProjectApi {
   }
 
   /**
-   * Delete a host firmware binary. The filename must be the full stored filename including the timestamp suffix (e.g. test$20260324190911.bin) as returned by the firmware upload or list endpoints.
+   * Delete host firmware
+   * Delete a host firmware file by its stored filename, including its `$` timestamp suffix. Notecard firmware can't be deleted.  Requires the Owner or Developer role. Returns 404 if the file doesn't exist, and 400 for a sub-project, whose parent manages host firmware.
    * @param {String} projectOrProductUID
    * @param {module:model/String} firmwareType
    * @param {String} filename
@@ -609,7 +625,8 @@ export default class ProjectApi {
   }
 
   /**
-   * Delete Fleet
+   * Delete a fleet
+   * Delete a fleet and remove it from all its devices. The devices stay in the project; the fleet's environment variables are deleted. To remove one device from a fleet, use `DeleteDeviceFromFleets`.  Requires the Owner or Developer role. Returns 400 if the fleet does not exist, including on a retry.
    * @param {String} projectOrProductUID
    * @param {String} fleetUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
@@ -658,7 +675,8 @@ export default class ProjectApi {
   }
 
   /**
-   * Delete Fleet
+   * Delete a fleet
+   * Delete a fleet and remove it from all its devices. The devices stay in the project; the fleet's environment variables are deleted. To remove one device from a fleet, use `DeleteDeviceFromFleets`.  Requires the Owner or Developer role. Returns 400 if the fleet does not exist, including on a retry.
    * @param {String} projectOrProductUID
    * @param {String} fleetUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}
@@ -672,10 +690,11 @@ export default class ProjectApi {
   }
 
   /**
-   * Delete environment variables of a fleet
+   * Delete a fleet environment variable
+   * Delete one fleet environment variable and return the ones left.  Requires the Owner or Developer role. Returns 404 if the fleet or the variable doesn't exist.
    * @param {String} projectOrProductUID
    * @param {String} fleetUID
-   * @param {String} key The environment variable key to delete.
+   * @param {String} key Name of the environment variable to delete.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/EnvironmentVariables} and HTTP response
    */
   deleteFleetEnvironmentVariableWithHttpInfo(
@@ -733,10 +752,11 @@ export default class ProjectApi {
   }
 
   /**
-   * Delete environment variables of a fleet
+   * Delete a fleet environment variable
+   * Delete one fleet environment variable and return the ones left.  Requires the Owner or Developer role. Returns 404 if the fleet or the variable doesn't exist.
    * @param {String} projectOrProductUID
    * @param {String} fleetUID
-   * @param {String} key The environment variable key to delete.
+   * @param {String} key Name of the environment variable to delete.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/EnvironmentVariables}
    */
   deleteFleetEnvironmentVariable(projectOrProductUID, fleetUID, key) {
@@ -751,6 +771,7 @@ export default class ProjectApi {
 
   /**
    * Delete a product
+   * Remove a ProductUID from the project. Accepts the UID with or without the `product:` prefix.  Requires the Owner or Developer role. Returns 404 if the project has no such ProductUID.
    * @param {String} projectOrProductUID
    * @param {String} productUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
@@ -800,6 +821,7 @@ export default class ProjectApi {
 
   /**
    * Delete a product
+   * Remove a ProductUID from the project. Accepts the UID with or without the `product:` prefix.  Requires the Owner or Developer role. Returns 404 if the project has no such ProductUID.
    * @param {String} projectOrProductUID
    * @param {String} productUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}
@@ -813,7 +835,8 @@ export default class ProjectApi {
   }
 
   /**
-   * Delete a Project by ProjectUID
+   * Delete a project
+   * Delete a project, its ProductUIDs, and every member's access to it. Can't be undone through the API.  Requires the Owner or Developer role. Returns 200 with no body.
    * @param {String} projectOrProductUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
    */
@@ -854,7 +877,8 @@ export default class ProjectApi {
   }
 
   /**
-   * Delete a Project by ProjectUID
+   * Delete a project
+   * Delete a project, its ProductUIDs, and every member's access to it. Can't be undone through the API.  Requires the Owner or Developer role. Returns 200 with no body.
    * @param {String} projectOrProductUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}
    */
@@ -867,9 +891,10 @@ export default class ProjectApi {
   }
 
   /**
-   * Delete an environment variable of a project by key
+   * Delete a project environment variable
+   * Delete one project environment variable and return the ones left. Deleting a variable that doesn't exist still succeeds.  Requires the Owner or Developer role.
    * @param {String} projectOrProductUID
-   * @param {String} key The environment variable key to delete.
+   * @param {String} key Name of the environment variable to delete.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/EnvironmentVariables} and HTTP response
    */
   deleteProjectEnvironmentVariableWithHttpInfo(projectOrProductUID, key) {
@@ -916,9 +941,10 @@ export default class ProjectApi {
   }
 
   /**
-   * Delete an environment variable of a project by key
+   * Delete a project environment variable
+   * Delete one project environment variable and return the ones left. Deleting a variable that doesn't exist still succeeds.  Requires the Owner or Developer role.
    * @param {String} projectOrProductUID
-   * @param {String} key The environment variable key to delete.
+   * @param {String} key Name of the environment variable to delete.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/EnvironmentVariables}
    */
   deleteProjectEnvironmentVariable(projectOrProductUID, key) {
@@ -931,9 +957,10 @@ export default class ProjectApi {
   }
 
   /**
-   * Delete a project secret by name
+   * Delete a project secret
+   * Delete a project secret. Routes and alerts that still reference it can no longer resolve it.  Requires the Owner or Developer role. Returns 404 if the secret doesn't exist.
    * @param {String} projectOrProductUID
-   * @param {String} secretName The name of the secret.
+   * @param {String} secretName Name of the secret, as listed by `GetProjectSecrets`.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
    */
   deleteProjectSecretWithHttpInfo(projectOrProductUID, secretName) {
@@ -980,9 +1007,10 @@ export default class ProjectApi {
   }
 
   /**
-   * Delete a project secret by name
+   * Delete a project secret
+   * Delete a project secret. Routes and alerts that still reference it can no longer resolve it.  Requires the Owner or Developer role. Returns 404 if the secret doesn't exist.
    * @param {String} projectOrProductUID
-   * @param {String} secretName The name of the secret.
+   * @param {String} secretName Name of the secret, as listed by `GetProjectSecrets`.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}
    */
   deleteProjectSecret(projectOrProductUID, secretName) {
@@ -995,7 +1023,8 @@ export default class ProjectApi {
   }
 
   /**
-   * Disable the project-level event JSONata transformation
+   * Disable the global event transformation
+   * Stop applying the project's global event transformation to new events. The expression is kept, so `EnableGlobalEventTransformation` can turn it back on.  Requires the Owner or Developer role. Returns 400 for a sub-project, whose parent's transformation applies.
    * @param {String} projectOrProductUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
    */
@@ -1036,7 +1065,8 @@ export default class ProjectApi {
   }
 
   /**
-   * Disable the project-level event JSONata transformation
+   * Disable the global event transformation
+   * Stop applying the project's global event transformation to new events. The expression is kept, so `EnableGlobalEventTransformation` can turn it back on.  Requires the Owner or Developer role. Returns 400 for a sub-project, whose parent's transformation applies.
    * @param {String} projectOrProductUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}
    */
@@ -1049,9 +1079,10 @@ export default class ProjectApi {
   }
 
   /**
-   * Download firmware binary
+   * Download host firmware
+   * Download a host firmware binary by its stored filename, including its `$` timestamp suffix. Notecard firmware can't be downloaded (400).  Requires the Owner or Developer role. Returns 404 if the file doesn't exist.
    * @param {String} projectOrProductUID
-   * @param {module:model/String} firmwareType
+   * @param {module:model/String} firmwareType Which firmware: `host` (the host microcontroller's) or `notecard`.
    * @param {String} filename
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link File} and HTTP response
    */
@@ -1106,9 +1137,10 @@ export default class ProjectApi {
   }
 
   /**
-   * Download firmware binary
+   * Download host firmware
+   * Download a host firmware binary by its stored filename, including its `$` timestamp suffix. Notecard firmware can't be downloaded (400).  Requires the Owner or Developer role. Returns 404 if the file doesn't exist.
    * @param {String} projectOrProductUID
-   * @param {module:model/String} firmwareType
+   * @param {module:model/String} firmwareType Which firmware: `host` (the host microcontroller's) or `notecard`.
    * @param {String} filename
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link File}
    */
@@ -1123,7 +1155,8 @@ export default class ProjectApi {
   }
 
   /**
-   * Enable the project-level event JSONata transformation
+   * Enable the global event transformation
+   * Resume applying the project's global event transformation to new events, without changing the expression. Undoes `DisableGlobalEventTransformation`.  Requires the Owner or Developer role. Returns 400 for a sub-project, whose parent's transformation applies.
    * @param {String} projectOrProductUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
    */
@@ -1164,7 +1197,8 @@ export default class ProjectApi {
   }
 
   /**
-   * Enable the project-level event JSONata transformation
+   * Enable the global event transformation
+   * Resume applying the project's global event transformation to new events, without changing the expression. Undoes `DisableGlobalEventTransformation`.  Requires the Owner or Developer role. Returns 400 for a sub-project, whose parent's transformation applies.
    * @param {String} projectOrProductUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}
    */
@@ -1178,7 +1212,7 @@ export default class ProjectApi {
 
   /**
    * Get AWS role configuration for role-based authentication
-   * Returns the AWS Account ID and External ID needed to configure an IAM role trust policy for role-based authentication on AWS routes.
+   * Get the AWS account ID and External ID for the IAM role trust policy used by AWS routes with role-based authentication. The External ID is created on the first call and stays the same after that.
    * @param {String} projectOrProductUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/AWSRoleConfig} and HTTP response
    */
@@ -1220,7 +1254,7 @@ export default class ProjectApi {
 
   /**
    * Get AWS role configuration for role-based authentication
-   * Returns the AWS Account ID and External ID needed to configure an IAM role trust policy for role-based authentication on AWS routes.
+   * Get the AWS account ID and External ID for the IAM role trust policy used by AWS routes with role-based authentication. The External ID is created on the first call and stays the same after that.
    * @param {String} projectOrProductUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/AWSRoleConfig}
    */
@@ -1233,10 +1267,11 @@ export default class ProjectApi {
   }
 
   /**
-   * Get device DFU history for host or Notecard firmware
+   * Get a device's firmware update history
+   * Get a device's current host or Notecard firmware version and every firmware update requested for it, newest first. For just the latest update, use `GetDeviceDfuStatus`.  Returns 400 if the device isn't in the project.
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
-   * @param {module:model/String} firmwareType
+   * @param {module:model/String} firmwareType Which firmware: `host` (the host microcontroller's) or `notecard`.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/DeviceDfuHistory} and HTTP response
    */
   getDeviceDfuHistoryWithHttpInfo(
@@ -1294,10 +1329,11 @@ export default class ProjectApi {
   }
 
   /**
-   * Get device DFU history for host or Notecard firmware
+   * Get a device's firmware update history
+   * Get a device's current host or Notecard firmware version and every firmware update requested for it, newest first. For just the latest update, use `GetDeviceDfuStatus`.  Returns 400 if the device isn't in the project.
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
-   * @param {module:model/String} firmwareType
+   * @param {module:model/String} firmwareType Which firmware: `host` (the host microcontroller's) or `notecard`.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/DeviceDfuHistory}
    */
   getDeviceDfuHistory(projectOrProductUID, deviceUID, firmwareType) {
@@ -1311,10 +1347,11 @@ export default class ProjectApi {
   }
 
   /**
-   * Get device DFU history for host or Notecard firmware
+   * Get a device's firmware update status
+   * Get a device's current host or Notecard firmware version and its latest firmware update. Includes whether an update is in progress. For every past update, use `GetDeviceDfuHistory`.  Returns 400 if the device isn't in the project.
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
-   * @param {module:model/String} firmwareType
+   * @param {module:model/String} firmwareType Which firmware: `host` (the host microcontroller's) or `notecard`.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/DeviceDfuStatus} and HTTP response
    */
   getDeviceDfuStatusWithHttpInfo(projectOrProductUID, deviceUID, firmwareType) {
@@ -1368,10 +1405,11 @@ export default class ProjectApi {
   }
 
   /**
-   * Get device DFU history for host or Notecard firmware
+   * Get a device's firmware update status
+   * Get a device's current host or Notecard firmware version and its latest firmware update. Includes whether an update is in progress. For every past update, use `GetDeviceDfuHistory`.  Returns 400 if the device isn't in the project.
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
-   * @param {module:model/String} firmwareType
+   * @param {module:model/String} firmwareType Which firmware: `host` (the host microcontroller's) or `notecard`.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/DeviceDfuStatus}
    */
   getDeviceDfuStatus(projectOrProductUID, deviceUID, firmwareType) {
@@ -1385,7 +1423,8 @@ export default class ProjectApi {
   }
 
   /**
-   * Get Device Fleets
+   * List a device's fleets
+   * List the fleets a device belongs to, with only each fleet's UID, label and creation time. For a fleet's full details use `GetFleet`.  Returns 404 if the device isn't in the project.
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetDeviceFleets200Response} and HTTP response
@@ -1434,7 +1473,8 @@ export default class ProjectApi {
   }
 
   /**
-   * Get Device Fleets
+   * List a device's fleets
+   * List the fleets a device belongs to, with only each fleet's UID, label and creation time. For a fleet's full details use `GetFleet`.  Returns 404 if the device isn't in the project.
    * @param {String} projectOrProductUID
    * @param {String} deviceUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetDeviceFleets200Response}
@@ -1449,22 +1489,24 @@ export default class ProjectApi {
   }
 
   /**
-   * Get host or Notecard DFU history for all devices that match the filter criteria
+   * List devices' firmware update history
+   * List every host or Notecard firmware update requested for each matching device, newest first. Includes each device's current firmware version. For just the latest update, use `GetDevicesDfuStatus`.  Paginated, by page or `cursor`. With a `cursor`, changes made through fleet or project firmware settings don't appear until the device itself is next updated.
    * @param {String} projectOrProductUID
-   * @param {module:model/String} firmwareType
+   * @param {module:model/String} firmwareType Which firmware: `host` (the host microcontroller's) or `notecard`.
    * @param {Object} opts Optional parameters
-   * @param {Number} opts.pageSize  (default to 50)
+   * @param {Number} opts.pageSize  (default to 1000)
    * @param {Number} opts.pageNum  (default to 1)
+   * @param {String} opts.cursor If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped.
    * @param {module:model/String} opts.sortBy  (default to 'captured')
    * @param {module:model/String} opts.sortOrder  (default to 'asc')
-   * @param {Array.<String>} opts.deviceUID A Device UID.
+   * @param {Array.<String>} opts.deviceUID A DeviceUID.
    * @param {Array.<String>} opts.tag Tag filter. Matches the whole tag, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally. For example, `51*` matches tags starting with `51`.
    * @param {Array.<String>} opts.serialNumber Serial number filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
    * @param {String} opts.fleetUID
    * @param {Array.<String>} opts.notecardFirmware Firmware version filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
    * @param {Array.<String>} opts.location Location filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
    * @param {Array.<String>} opts.hostFirmware Host firmware filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
-   * @param {Array.<String>} opts.productUID Product UID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
+   * @param {Array.<String>} opts.productUID ProductUID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
    * @param {Array.<String>} opts.sku SKU filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/DeviceDfuHistoryPage} and HTTP response
    */
@@ -1491,6 +1533,7 @@ export default class ProjectApi {
     let queryParams = {
       pageSize: opts["pageSize"],
       pageNum: opts["pageNum"],
+      cursor: opts["cursor"],
       sortBy: opts["sortBy"],
       sortOrder: opts["sortOrder"],
       deviceUID: this.apiClient.buildCollectionParam(
@@ -1542,22 +1585,24 @@ export default class ProjectApi {
   }
 
   /**
-   * Get host or Notecard DFU history for all devices that match the filter criteria
+   * List devices' firmware update history
+   * List every host or Notecard firmware update requested for each matching device, newest first. Includes each device's current firmware version. For just the latest update, use `GetDevicesDfuStatus`.  Paginated, by page or `cursor`. With a `cursor`, changes made through fleet or project firmware settings don't appear until the device itself is next updated.
    * @param {String} projectOrProductUID
-   * @param {module:model/String} firmwareType
+   * @param {module:model/String} firmwareType Which firmware: `host` (the host microcontroller's) or `notecard`.
    * @param {Object} opts Optional parameters
-   * @param {Number} opts.pageSize  (default to 50)
+   * @param {Number} opts.pageSize  (default to 1000)
    * @param {Number} opts.pageNum  (default to 1)
+   * @param {String} opts.cursor If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped.
    * @param {module:model/String} opts.sortBy  (default to 'captured')
    * @param {module:model/String} opts.sortOrder  (default to 'asc')
-   * @param {Array.<String>} opts.deviceUID A Device UID.
+   * @param {Array.<String>} opts.deviceUID A DeviceUID.
    * @param {Array.<String>} opts.tag Tag filter. Matches the whole tag, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally. For example, `51*` matches tags starting with `51`.
    * @param {Array.<String>} opts.serialNumber Serial number filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
    * @param {String} opts.fleetUID
    * @param {Array.<String>} opts.notecardFirmware Firmware version filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
    * @param {Array.<String>} opts.location Location filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
    * @param {Array.<String>} opts.hostFirmware Host firmware filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
-   * @param {Array.<String>} opts.productUID Product UID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
+   * @param {Array.<String>} opts.productUID ProductUID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
    * @param {Array.<String>} opts.sku SKU filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/DeviceDfuHistoryPage}
    */
@@ -1572,22 +1617,24 @@ export default class ProjectApi {
   }
 
   /**
-   * Get host or Notecard DFU history for all devices that match the filter criteria
+   * List devices' firmware status
+   * List the host or Notecard firmware version each matching device runs now, with its latest firmware update. Use this to find which firmware devices run.  Paginated, by page or `cursor`. With a `cursor`, changes made through fleet or project firmware settings don't appear until the device itself is next updated.
    * @param {String} projectOrProductUID
-   * @param {module:model/String} firmwareType
+   * @param {module:model/String} firmwareType Which firmware: `host` (the host microcontroller's) or `notecard`.
    * @param {Object} opts Optional parameters
-   * @param {Number} opts.pageSize  (default to 50)
+   * @param {Number} opts.pageSize  (default to 1000)
    * @param {Number} opts.pageNum  (default to 1)
+   * @param {String} opts.cursor If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped.
    * @param {module:model/String} opts.sortBy  (default to 'captured')
    * @param {module:model/String} opts.sortOrder  (default to 'asc')
-   * @param {Array.<String>} opts.deviceUID A Device UID.
+   * @param {Array.<String>} opts.deviceUID A DeviceUID.
    * @param {Array.<String>} opts.tag Tag filter. Matches the whole tag, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally. For example, `51*` matches tags starting with `51`.
    * @param {Array.<String>} opts.serialNumber Serial number filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
    * @param {String} opts.fleetUID
    * @param {Array.<String>} opts.notecardFirmware Firmware version filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
    * @param {Array.<String>} opts.location Location filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
    * @param {Array.<String>} opts.hostFirmware Host firmware filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
-   * @param {Array.<String>} opts.productUID Product UID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
+   * @param {Array.<String>} opts.productUID ProductUID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
    * @param {Array.<String>} opts.sku SKU filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/DeviceDfuStatusPage} and HTTP response
    */
@@ -1614,6 +1661,7 @@ export default class ProjectApi {
     let queryParams = {
       pageSize: opts["pageSize"],
       pageNum: opts["pageNum"],
+      cursor: opts["cursor"],
       sortBy: opts["sortBy"],
       sortOrder: opts["sortOrder"],
       deviceUID: this.apiClient.buildCollectionParam(
@@ -1665,22 +1713,24 @@ export default class ProjectApi {
   }
 
   /**
-   * Get host or Notecard DFU history for all devices that match the filter criteria
+   * List devices' firmware status
+   * List the host or Notecard firmware version each matching device runs now, with its latest firmware update. Use this to find which firmware devices run.  Paginated, by page or `cursor`. With a `cursor`, changes made through fleet or project firmware settings don't appear until the device itself is next updated.
    * @param {String} projectOrProductUID
-   * @param {module:model/String} firmwareType
+   * @param {module:model/String} firmwareType Which firmware: `host` (the host microcontroller's) or `notecard`.
    * @param {Object} opts Optional parameters
-   * @param {Number} opts.pageSize  (default to 50)
+   * @param {Number} opts.pageSize  (default to 1000)
    * @param {Number} opts.pageNum  (default to 1)
+   * @param {String} opts.cursor If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped.
    * @param {module:model/String} opts.sortBy  (default to 'captured')
    * @param {module:model/String} opts.sortOrder  (default to 'asc')
-   * @param {Array.<String>} opts.deviceUID A Device UID.
+   * @param {Array.<String>} opts.deviceUID A DeviceUID.
    * @param {Array.<String>} opts.tag Tag filter. Matches the whole tag, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally. For example, `51*` matches tags starting with `51`.
    * @param {Array.<String>} opts.serialNumber Serial number filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
    * @param {String} opts.fleetUID
    * @param {Array.<String>} opts.notecardFirmware Firmware version filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
    * @param {Array.<String>} opts.location Location filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
    * @param {Array.<String>} opts.hostFirmware Host firmware filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
-   * @param {Array.<String>} opts.productUID Product UID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
+   * @param {Array.<String>} opts.productUID ProductUID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
    * @param {Array.<String>} opts.sku SKU filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/DeviceDfuStatusPage}
    */
@@ -1695,16 +1745,17 @@ export default class ProjectApi {
   }
 
   /**
-   * Get Available Firmware Information
+   * List firmware
+   * List the host firmware uploaded to the project and the Notecard firmware available to it. Text filters match substrings, and unpublished Notecard builds are left out unless `unpublished` is `true`. Not paginated.
    * @param {String} projectOrProductUID
    * @param {Object} opts Optional parameters
-   * @param {String} opts.product
-   * @param {String} opts.firmwareType
-   * @param {String} opts.version
-   * @param {String} opts.target
-   * @param {String} opts.filename
-   * @param {String} opts.md5
-   * @param {Boolean} opts.unpublished
+   * @param {String} opts.product Only firmware whose product contains this text.
+   * @param {String} opts.firmwareType Only list `host` or `notecard` firmware. Omit for both.
+   * @param {String} opts.version Only firmware whose version contains this text.
+   * @param {String} opts.target Only firmware whose target contains this text.
+   * @param {String} opts.filename Only firmware whose stored filename contains this text.
+   * @param {String} opts.md5 Only firmware whose MD5 hash contains this text.
+   * @param {Boolean} opts.unpublished If `true`, also list unpublished Notecard firmware.
    * @param {module:model/String} opts.sortBy Field to sort by (default to 'created')
    * @param {module:model/String} opts.sortOrder Sort order (asc for ascending, desc for descending) (default to 'desc')
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link Array.<module:model/FirmwareInfo>} and HTTP response
@@ -1757,16 +1808,17 @@ export default class ProjectApi {
   }
 
   /**
-   * Get Available Firmware Information
+   * List firmware
+   * List the host firmware uploaded to the project and the Notecard firmware available to it. Text filters match substrings, and unpublished Notecard builds are left out unless `unpublished` is `true`. Not paginated.
    * @param {String} projectOrProductUID
    * @param {Object} opts Optional parameters
-   * @param {String} opts.product
-   * @param {String} opts.firmwareType
-   * @param {String} opts.version
-   * @param {String} opts.target
-   * @param {String} opts.filename
-   * @param {String} opts.md5
-   * @param {Boolean} opts.unpublished
+   * @param {String} opts.product Only firmware whose product contains this text.
+   * @param {String} opts.firmwareType Only list `host` or `notecard` firmware. Omit for both.
+   * @param {String} opts.version Only firmware whose version contains this text.
+   * @param {String} opts.target Only firmware whose target contains this text.
+   * @param {String} opts.filename Only firmware whose stored filename contains this text.
+   * @param {String} opts.md5 Only firmware whose MD5 hash contains this text.
+   * @param {Boolean} opts.unpublished If `true`, also list unpublished Notecard firmware.
    * @param {module:model/String} opts.sortBy Field to sort by (default to 'created')
    * @param {module:model/String} opts.sortOrder Sort order (asc for ascending, desc for descending) (default to 'desc')
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link Array.<module:model/FirmwareInfo>}
@@ -1780,7 +1832,8 @@ export default class ProjectApi {
   }
 
   /**
-   * Get Fleet
+   * Get a fleet
+   * Get one fleet's label, smart rule, watchdog and environment variables. Doesn't include `smart_rule_enabled`.  Returns 404 if the fleet doesn't exist.
    * @param {String} projectOrProductUID
    * @param {String} fleetUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Fleet} and HTTP response
@@ -1829,7 +1882,8 @@ export default class ProjectApi {
   }
 
   /**
-   * Get Fleet
+   * Get a fleet
+   * Get one fleet's label, smart rule, watchdog and environment variables. Doesn't include `smart_rule_enabled`.  Returns 404 if the fleet doesn't exist.
    * @param {String} projectOrProductUID
    * @param {String} fleetUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Fleet}
@@ -1843,7 +1897,8 @@ export default class ProjectApi {
   }
 
   /**
-   * Get environment variable hierarchy for a device
+   * Get a fleet's environment hierarchy
+   * Get a fleet's environment variables and the project variables it inherits, as a tree. Each variable has its precedence and whether it is used or overridden.  Returns 500 if the fleet doesn't exist.
    * @param {String} projectOrProductUID
    * @param {String} fleetUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/EnvTreeJsonNode} and HTTP response
@@ -1892,7 +1947,8 @@ export default class ProjectApi {
   }
 
   /**
-   * Get environment variable hierarchy for a device
+   * Get a fleet's environment hierarchy
+   * Get a fleet's environment variables and the project variables it inherits, as a tree. Each variable has its precedence and whether it is used or overridden.  Returns 500 if the fleet doesn't exist.
    * @param {String} projectOrProductUID
    * @param {String} fleetUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/EnvTreeJsonNode}
@@ -1907,7 +1963,8 @@ export default class ProjectApi {
   }
 
   /**
-   * Get environment variables of a fleet
+   * Get fleet environment variables
+   * Get the environment variables set on a fleet, with their notes. They override project variables, and device variables override them.  Returns 404 if the fleet doesn't exist.
    * @param {String} projectOrProductUID
    * @param {String} fleetUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/EnvironmentVariables} and HTTP response
@@ -1956,7 +2013,8 @@ export default class ProjectApi {
   }
 
   /**
-   * Get environment variables of a fleet
+   * Get fleet environment variables
+   * Get the environment variables set on a fleet, with their notes. They override project variables, and device variables override them.  Returns 404 if the fleet doesn't exist.
    * @param {String} projectOrProductUID
    * @param {String} fleetUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/EnvironmentVariables}
@@ -1971,7 +2029,8 @@ export default class ProjectApi {
   }
 
   /**
-   * Get Project Fleets
+   * List fleets
+   * List the project's fleets with each one's label, smart rule, watchdog and environment variables. Doesn't include `smart_rule_enabled`. Not paginated.
    * @param {String} projectOrProductUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetDeviceFleets200Response} and HTTP response
    */
@@ -2012,7 +2071,8 @@ export default class ProjectApi {
   }
 
   /**
-   * Get Project Fleets
+   * List fleets
+   * List the project's fleets with each one's label, smart rule, watchdog and environment variables. Doesn't include `smart_rule_enabled`. Not paginated.
    * @param {String} projectOrProductUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetDeviceFleets200Response}
    */
@@ -2025,7 +2085,8 @@ export default class ProjectApi {
   }
 
   /**
-   * Get variable format for a notefile
+   * List Notefile schemas
+   * List the project's Notefiles, each with the event `body` fields Notehub has seen in it and their JSON types. Inferred from received events.
    * @param {String} projectOrProductUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link Array.<module:model/NotefileSchema>} and HTTP response
    */
@@ -2066,7 +2127,8 @@ export default class ProjectApi {
   }
 
   /**
-   * Get variable format for a notefile
+   * List Notefile schemas
+   * List the project's Notefiles, each with the event `body` fields Notehub has seen in it and their JSON types. Inferred from received events.
    * @param {String} projectOrProductUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link Array.<module:model/NotefileSchema>}
    */
@@ -2079,7 +2141,8 @@ export default class ProjectApi {
   }
 
   /**
-   * Get Products within a Project
+   * List a project's products
+   * List the project's ProductUIDs, each with its label, auto-provision fleets, and whether new devices start disabled. UIDs here include the `product:` prefix; `CreateProduct` returns them without it. Not paginated.
    * @param {String} projectOrProductUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetProducts200Response} and HTTP response
    */
@@ -2120,7 +2183,8 @@ export default class ProjectApi {
   }
 
   /**
-   * Get Products within a Project
+   * List a project's products
+   * List the project's ProductUIDs, each with its label, auto-provision fleets, and whether new devices start disabled. UIDs here include the `product:` prefix; `CreateProduct` returns them without it. Not paginated.
    * @param {String} projectOrProductUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetProducts200Response}
    */
@@ -2133,7 +2197,8 @@ export default class ProjectApi {
   }
 
   /**
-   * Get a Project by ProjectUID
+   * Get a project
+   * Get a project's label, creation time, contacts, and the caller's `role` in it. Accepts a ProductUID in place of the ProjectUID.
    * @param {String} projectOrProductUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Project} and HTTP response
    */
@@ -2174,7 +2239,8 @@ export default class ProjectApi {
   }
 
   /**
-   * Get a Project by ProjectUID
+   * Get a project
+   * Get a project's label, creation time, contacts, and the caller's `role` in it. Accepts a ProductUID in place of the ProjectUID.
    * @param {String} projectOrProductUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Project}
    */
@@ -2187,8 +2253,9 @@ export default class ProjectApi {
   }
 
   /**
-   * Get a Project by ProductUID
-   * @param {String} productUID
+   * Get the project for a ProductUID
+   * Get the project that a ProductUID belongs to. Returns the same object as `GetProject`, which also accepts a ProductUID in place of a ProjectUID.
+   * @param {String} productUID ProductUID, e.g. `com.blues.airnote`, with or without the `product:` prefix.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Project} and HTTP response
    */
   getProjectByProductWithHttpInfo(productUID) {
@@ -2228,8 +2295,9 @@ export default class ProjectApi {
   }
 
   /**
-   * Get a Project by ProductUID
-   * @param {String} productUID
+   * Get the project for a ProductUID
+   * Get the project that a ProductUID belongs to. Returns the same object as `GetProject`, which also accepts a ProductUID in place of a ProjectUID.
+   * @param {String} productUID ProductUID, e.g. `com.blues.airnote`, with or without the `product:` prefix.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Project}
    */
   getProjectByProduct(productUID) {
@@ -2241,7 +2309,8 @@ export default class ProjectApi {
   }
 
   /**
-   * Get environment variable hierarchy for a device
+   * Get the project environment hierarchy
+   * Get the project's environment variables as a one-node environment hierarchy tree. The fleet and device hierarchy operations use the same format; for plain key/value pairs, use `GetProjectEnvironmentVariables`.
    * @param {String} projectOrProductUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/EnvTreeJsonNode} and HTTP response
    */
@@ -2282,7 +2351,8 @@ export default class ProjectApi {
   }
 
   /**
-   * Get environment variable hierarchy for a device
+   * Get the project environment hierarchy
+   * Get the project's environment variables as a one-node environment hierarchy tree. The fleet and device hierarchy operations use the same format; for plain key/value pairs, use `GetProjectEnvironmentVariables`.
    * @param {String} projectOrProductUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/EnvTreeJsonNode}
    */
@@ -2295,7 +2365,8 @@ export default class ProjectApi {
   }
 
   /**
-   * Get environment variables of a project
+   * Get project environment variables
+   * Get the environment variables set on the project, with their notes. Fleet and device variables override these; for what a device actually sees, use `GetDeviceEnvironmentVariables`.
    * @param {String} projectOrProductUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/EnvironmentVariables} and HTTP response
    */
@@ -2336,7 +2407,8 @@ export default class ProjectApi {
   }
 
   /**
-   * Get environment variables of a project
+   * Get project environment variables
+   * Get the environment variables set on the project, with their notes. Fleet and device variables override these; for what a device actually sees, use `GetDeviceEnvironmentVariables`.
    * @param {String} projectOrProductUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/EnvironmentVariables}
    */
@@ -2349,7 +2421,8 @@ export default class ProjectApi {
   }
 
   /**
-   * Get Project Members
+   * List project members
+   * List the project's members with each one's name and role. Emails are filled in only when the caller is an Owner. Not paginated.
    * @param {String} projectOrProductUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetProjectMembers200Response} and HTTP response
    */
@@ -2390,7 +2463,8 @@ export default class ProjectApi {
   }
 
   /**
-   * Get Project Members
+   * List project members
+   * List the project's members with each one's name and role. Emails are filled in only when the caller is an Owner. Not paginated.
    * @param {String} projectOrProductUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetProjectMembers200Response}
    */
@@ -2403,7 +2477,8 @@ export default class ProjectApi {
   }
 
   /**
-   * Get all secrets for a project (metadata only, values are never returned)
+   * List project secrets
+   * List the project's secrets by name, with who created and last changed each one and when. Values are never returned.
    * @param {String} projectOrProductUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetProjectSecretsResponse} and HTTP response
    */
@@ -2444,7 +2519,8 @@ export default class ProjectApi {
   }
 
   /**
-   * Get all secrets for a project (metadata only, values are never returned)
+   * List project secrets
+   * List the project's secrets by name, with who created and last changed each one and when. Values are never returned.
    * @param {String} projectOrProductUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetProjectSecretsResponse}
    */
@@ -2457,7 +2533,8 @@ export default class ProjectApi {
   }
 
   /**
-   * Get Projects accessible by the api_key
+   * List projects
+   * List every project the caller is a member of, with the caller's `role` in each. Not paginated.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetProjects200Response} and HTTP response
    */
   getProjectsWithHttpInfo() {
@@ -2489,7 +2566,8 @@ export default class ProjectApi {
   }
 
   /**
-   * Get Projects accessible by the api_key
+   * List projects
+   * List every project the caller is a member of, with the caller's `role` in each. Not paginated.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetProjects200Response}
    */
   getProjects() {
@@ -2499,19 +2577,20 @@ export default class ProjectApi {
   }
 
   /**
-   * Update/cancel host or notecard firmware updates
+   * Start or cancel firmware updates
+   * Start or cancel a host or Notecard firmware update on every device matching the filters. With no filters, that is every device in the project. `update` sets each device's `_fw` or `_fwc` variable to `filename`.  Requires the Owner or Developer role. `update` returns 404 if the file isn't found, and can return 400 if a matching device already has an update in progress.
    * @param {String} projectOrProductUID
-   * @param {module:model/String} firmwareType
-   * @param {module:model/String} action
+   * @param {module:model/String} firmwareType Which firmware: `host` (the host microcontroller's) or `notecard`.
+   * @param {module:model/String} action - `update`: start updating to the firmware in `filename` - `cancel`: cancel any update in progress
    * @param {Object} opts Optional parameters
-   * @param {Array.<String>} opts.deviceUID A Device UID.
+   * @param {Array.<String>} opts.deviceUID A DeviceUID.
    * @param {Array.<String>} opts.tag Tag filter. Matches the whole tag, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally. For example, `51*` matches tags starting with `51`.
    * @param {Array.<String>} opts.serialNumber Serial number filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
    * @param {String} opts.fleetUID
    * @param {Array.<String>} opts.notecardFirmware Firmware version filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
    * @param {Array.<String>} opts.location Location filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
    * @param {Array.<String>} opts.hostFirmware Host firmware filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
-   * @param {Array.<String>} opts.productUID Product UID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
+   * @param {Array.<String>} opts.productUID ProductUID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
    * @param {Array.<String>} opts.sku SKU filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
    * @param {module:model/DfuActionRequest} opts.dfuActionRequest Which firmware in the case of an update action
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
@@ -2598,19 +2677,20 @@ export default class ProjectApi {
   }
 
   /**
-   * Update/cancel host or notecard firmware updates
+   * Start or cancel firmware updates
+   * Start or cancel a host or Notecard firmware update on every device matching the filters. With no filters, that is every device in the project. `update` sets each device's `_fw` or `_fwc` variable to `filename`.  Requires the Owner or Developer role. `update` returns 404 if the file isn't found, and can return 400 if a matching device already has an update in progress.
    * @param {String} projectOrProductUID
-   * @param {module:model/String} firmwareType
-   * @param {module:model/String} action
+   * @param {module:model/String} firmwareType Which firmware: `host` (the host microcontroller's) or `notecard`.
+   * @param {module:model/String} action - `update`: start updating to the firmware in `filename` - `cancel`: cancel any update in progress
    * @param {Object} opts Optional parameters
-   * @param {Array.<String>} opts.deviceUID A Device UID.
+   * @param {Array.<String>} opts.deviceUID A DeviceUID.
    * @param {Array.<String>} opts.tag Tag filter. Matches the whole tag, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally. For example, `51*` matches tags starting with `51`.
    * @param {Array.<String>} opts.serialNumber Serial number filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
    * @param {String} opts.fleetUID
    * @param {Array.<String>} opts.notecardFirmware Firmware version filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
    * @param {Array.<String>} opts.location Location filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
    * @param {Array.<String>} opts.hostFirmware Host firmware filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
-   * @param {Array.<String>} opts.productUID Product UID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
+   * @param {Array.<String>} opts.productUID ProductUID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
    * @param {Array.<String>} opts.sku SKU filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
    * @param {module:model/DfuActionRequest} opts.dfuActionRequest Which firmware in the case of an update action
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}
@@ -2627,10 +2707,11 @@ export default class ProjectApi {
   }
 
   /**
-   * Set environment variables of a fleet
+   * Set fleet environment variables
+   * Add or change a fleet's environment variables; variables you don't send keep their values. A value of `\"\"` or `-` deletes that variable. Setting `_fw`, `_fwc` or `_fwm` starts a host, Notecard or modem firmware update.  Requires the Owner or Developer role. Returns 404 if the fleet doesn't exist, and 400 if a note's key isn't a variable.
    * @param {String} projectOrProductUID
    * @param {String} fleetUID
-   * @param {module:model/EnvironmentVariables} environmentVariables Environment variables to be added to the fleet
+   * @param {module:model/EnvironmentVariables} environmentVariables The variables to add or change, and optional notes.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/EnvironmentVariables} and HTTP response
    */
   setFleetEnvironmentVariablesWithHttpInfo(
@@ -2687,10 +2768,11 @@ export default class ProjectApi {
   }
 
   /**
-   * Set environment variables of a fleet
+   * Set fleet environment variables
+   * Add or change a fleet's environment variables; variables you don't send keep their values. A value of `\"\"` or `-` deletes that variable. Setting `_fw`, `_fwc` or `_fwm` starts a host, Notecard or modem firmware update.  Requires the Owner or Developer role. Returns 404 if the fleet doesn't exist, and 400 if a note's key isn't a variable.
    * @param {String} projectOrProductUID
    * @param {String} fleetUID
-   * @param {module:model/EnvironmentVariables} environmentVariables Environment variables to be added to the fleet
+   * @param {module:model/EnvironmentVariables} environmentVariables The variables to add or change, and optional notes.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/EnvironmentVariables}
    */
   setFleetEnvironmentVariables(
@@ -2708,9 +2790,10 @@ export default class ProjectApi {
   }
 
   /**
-   * Set the project-level event JSONata transformation
+   * Set the global event transformation
+   * Set the project's JSONata expression that rewrites each new event before it's stored and routed. It can change `body`, `payload`, `details`, `file` and `note`, or drop the event with `$doNotRoute()`; an event it fails on is kept with `error` set. Doesn't enable or disable it.  Requires the Owner or Developer role. Returns 400 if it doesn't compile, or for a sub-project, which uses its parent's.
    * @param {String} projectOrProductUID
-   * @param {String} body JSONata expression which will be applied to each event before it is persisted and routed
+   * @param {String} body JSONata expression as plain text. An empty body clears the transformation.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
    */
   setGlobalEventTransformationWithHttpInfo(projectOrProductUID, body) {
@@ -2756,9 +2839,10 @@ export default class ProjectApi {
   }
 
   /**
-   * Set the project-level event JSONata transformation
+   * Set the global event transformation
+   * Set the project's JSONata expression that rewrites each new event before it's stored and routed. It can change `body`, `payload`, `details`, `file` and `note`, or drop the event with `$doNotRoute()`; an event it fails on is kept with `error` set. Doesn't enable or disable it.  Requires the Owner or Developer role. Returns 400 if it doesn't compile, or for a sub-project, which uses its parent's.
    * @param {String} projectOrProductUID
-   * @param {String} body JSONata expression which will be applied to each event before it is persisted and routed
+   * @param {String} body JSONata expression as plain text. An empty body clears the transformation.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}
    */
   setGlobalEventTransformation(projectOrProductUID, body) {
@@ -2771,7 +2855,8 @@ export default class ProjectApi {
   }
 
   /**
-   * Set environment variables of a project
+   * Set project environment variables
+   * Add or change project environment variables; variables you don't send keep their values. A value of `\"\"` or `-` deletes that variable. Setting `_fw`, `_fwc` or `_fwm` starts a host, Notecard or modem firmware update.  Requires the Owner or Developer role. Returns 400 if a note's key isn't a variable.
    * @param {String} projectOrProductUID
    * @param {Object} opts Optional parameters
    * @param {module:model/EnvironmentVariables} opts.environmentVariables
@@ -2815,7 +2900,8 @@ export default class ProjectApi {
   }
 
   /**
-   * Set environment variables of a project
+   * Set project environment variables
+   * Add or change project environment variables; variables you don't send keep their values. A value of `\"\"` or `-` deletes that variable. Setting `_fw`, `_fwc` or `_fwm` starts a host, Notecard or modem firmware update.  Requires the Owner or Developer role. Returns 400 if a note's key isn't a variable.
    * @param {String} projectOrProductUID
    * @param {Object} opts Optional parameters
    * @param {module:model/EnvironmentVariables} opts.environmentVariables
@@ -2831,7 +2917,8 @@ export default class ProjectApi {
   }
 
   /**
-   * Update the metadata of an existing host firmware entry. The filename must be the full stored filename including the timestamp suffix (e.g. test$20260324190911.bin) as returned by the firmware upload or list endpoints.
+   * Update host firmware metadata
+   * Change a host firmware file's `version`, `notes` or `info`; fields you leave out or send empty keep their values. Use the stored filename, including its `$` timestamp suffix.  Requires the Owner or Developer role. Returns 400 for a sub-project, whose parent manages host firmware, and 404 if the file doesn't exist.
    * @param {String} projectOrProductUID
    * @param {module:model/String} firmwareType
    * @param {String} filename
@@ -2903,7 +2990,8 @@ export default class ProjectApi {
   }
 
   /**
-   * Update the metadata of an existing host firmware entry. The filename must be the full stored filename including the timestamp suffix (e.g. test$20260324190911.bin) as returned by the firmware upload or list endpoints.
+   * Update host firmware metadata
+   * Change a host firmware file's `version`, `notes` or `info`; fields you leave out or send empty keep their values. Use the stored filename, including its `$` timestamp suffix.  Requires the Owner or Developer role. Returns 400 for a sub-project, whose parent manages host firmware, and 404 if the file doesn't exist.
    * @param {String} projectOrProductUID
    * @param {module:model/String} firmwareType
    * @param {String} filename
@@ -2927,10 +3015,11 @@ export default class ProjectApi {
   }
 
   /**
-   * Update Fleet
+   * Update a fleet
+   * Change a fleet's label, smart rule, watchdog or connectivity assurance, or add and remove devices. Always send `smart_rule_enabled`; leaving it out turns the smart rule off. Empty `label` or `smart_rule` keeps the current value; `-` clears `smart_rule`.  Requires the Owner or Developer role. Returns 400 for an unknown fleet or `label` of `-`, and for a bad DeviceUID after saving the other changes.
    * @param {String} projectOrProductUID
    * @param {String} fleetUID
-   * @param {module:model/UpdateFleetRequest} updateFleetRequest Fleet details to update
+   * @param {module:model/UpdateFleetRequest} updateFleetRequest The fields to change. Fields left out keep their values, except `smart_rule_enabled`.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Fleet} and HTTP response
    */
   updateFleetWithHttpInfo(projectOrProductUID, fleetUID, updateFleetRequest) {
@@ -2983,10 +3072,11 @@ export default class ProjectApi {
   }
 
   /**
-   * Update Fleet
+   * Update a fleet
+   * Change a fleet's label, smart rule, watchdog or connectivity assurance, or add and remove devices. Always send `smart_rule_enabled`; leaving it out turns the smart rule off. Empty `label` or `smart_rule` keeps the current value; `-` clears `smart_rule`.  Requires the Owner or Developer role. Returns 400 for an unknown fleet or `label` of `-`, and for a bad DeviceUID after saving the other changes.
    * @param {String} projectOrProductUID
    * @param {String} fleetUID
-   * @param {module:model/UpdateFleetRequest} updateFleetRequest Fleet details to update
+   * @param {module:model/UpdateFleetRequest} updateFleetRequest The fields to change. Fields left out keep their values, except `smart_rule_enabled`.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Fleet}
    */
   updateFleet(projectOrProductUID, fleetUID, updateFleetRequest) {
@@ -3000,9 +3090,10 @@ export default class ProjectApi {
   }
 
   /**
-   * Update the value of an existing project secret
+   * Update a project secret
+   * Replace the value of an existing project secret. Routes and alerts that reference it use the new value from then on.  Requires the Owner or Developer role. Returns 404 if the secret doesn't exist.
    * @param {String} projectOrProductUID
-   * @param {String} secretName The name of the secret.
+   * @param {String} secretName Name of the secret, as listed by `GetProjectSecrets`.
    * @param {module:model/UpdateProjectSecretRequest} updateProjectSecretRequest
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/ProjectSecret} and HTTP response
    */
@@ -3063,9 +3154,10 @@ export default class ProjectApi {
   }
 
   /**
-   * Update the value of an existing project secret
+   * Update a project secret
+   * Replace the value of an existing project secret. Routes and alerts that reference it use the new value from then on.  Requires the Owner or Developer role. Returns 404 if the secret doesn't exist.
    * @param {String} projectOrProductUID
-   * @param {String} secretName The name of the secret.
+   * @param {String} secretName Name of the secret, as listed by `GetProjectSecrets`.
    * @param {module:model/UpdateProjectSecretRequest} updateProjectSecretRequest
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/ProjectSecret}
    */
@@ -3084,10 +3176,11 @@ export default class ProjectApi {
   }
 
   /**
-   * Upload firmware binary
+   * Upload firmware
+   * Upload a host or Notecard firmware binary. Notehub usually adds a timestamp to `filename`; use the returned `filename` from then on.  Requires the Owner or Developer role. Returns 400 for host firmware on a sub-project, whose parent manages it, and 500 for a wrong file type or a file over the limit: 1.5 MB for host firmware, 2 MB for `notecard-s3-*` and 1 MB for other Notecard firmware.
    * @param {String} projectOrProductUID
-   * @param {module:model/String} firmwareType
-   * @param {String} filename
+   * @param {module:model/String} firmwareType Which firmware: `host` (the host microcontroller's) or `notecard`.
+   * @param {String} filename Name to store the file under. Notehub adds `$` and a timestamp before the extension, except for a Notecard firmware name that already contains `$`.
    * @param {File} body contents of the firmware binary
    * @param {Object} opts Optional parameters
    * @param {String} opts.version Firmware version (optional). If not provided, the version will be extracted from firmware binary if available, otherwise left empty
@@ -3161,10 +3254,11 @@ export default class ProjectApi {
   }
 
   /**
-   * Upload firmware binary
+   * Upload firmware
+   * Upload a host or Notecard firmware binary. Notehub usually adds a timestamp to `filename`; use the returned `filename` from then on.  Requires the Owner or Developer role. Returns 400 for host firmware on a sub-project, whose parent manages it, and 500 for a wrong file type or a file over the limit: 1.5 MB for host firmware, 2 MB for `notecard-s3-*` and 1 MB for other Notecard firmware.
    * @param {String} projectOrProductUID
-   * @param {module:model/String} firmwareType
-   * @param {String} filename
+   * @param {module:model/String} firmwareType Which firmware: `host` (the host microcontroller's) or `notecard`.
+   * @param {String} filename Name to store the file under. Notehub adds `$` and a timestamp before the extension, except for a Notecard firmware name that already contains `$`.
    * @param {File} body contents of the firmware binary
    * @param {Object} opts Optional parameters
    * @param {String} opts.version Firmware version (optional). If not provided, the version will be extracted from firmware binary if available, otherwise left empty

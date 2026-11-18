@@ -2,11 +2,11 @@
 
 ## Properties
 
-| Name         | Type       | Description                                                                                                                                                                                                                                                                                                            | Notes      |
-| ------------ | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
-| **datatype** | **Number** | The datatype of the field                                                                                                                                                                                                                                                                                              | [optional] |
-| **jsonata**  | **String** | The JSONata expression that populates this field from the event. Required for a dataset with no rows expression. Must be omitted when the dataset has one: the column is then taken from the row object key matching this field&#39;s name, and supplying an expression here is rejected rather than silently ignored. | [optional] |
-| **name**     | **String** | The name of the field                                                                                                                                                                                                                                                                                                  | [optional] |
+| Name         | Type       | Description                                                                                                                  | Notes      |
+| ------------ | ---------- | ---------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| **datatype** | **Number** | The datatype of the field                                                                                                    | [optional] |
+| **jsonata**  | **String** | JSONata expression for this column. Required without the dataset&#39;s &#x60;rows&#x60; expression; must be omitted with it. | [optional] |
+| **name**     | **String** | The name of the field                                                                                                        | [optional] |
 
 ## Enum: DatatypeEnum
 

@@ -16,15 +16,15 @@ import ApiClient from "../ApiClient";
 /**
  * The Product model module.
  * @module model/Product
- * @version 6.7.0
+ * @version 7.0.0
  */
 class Product {
   /**
    * Constructs a new <code>Product</code>.
    * @alias module:model/Product
-   * @param disableDevicesByDefault {Boolean}
-   * @param label {String}
-   * @param uid {String}
+   * @param disableDevicesByDefault {Boolean} If `true`, devices provisioned with this ProductUID start out disabled.
+   * @param label {String} Product name shown in Notehub.
+   * @param uid {String} ProductUID, e.g. `com.blues.bridge:sensors`. `GetProducts` returns it with a `product:` prefix.
    */
   constructor(disableDevicesByDefault, label, uid) {
     Product.initialize(this, disableDevicesByDefault, label, uid);
@@ -128,21 +128,25 @@ class Product {
 Product.RequiredProperties = ["disable_devices_by_default", "label", "uid"];
 
 /**
+ * FleetUIDs that devices are added to when first provisioned with this ProductUID.
  * @member {Array.<String>} auto_provision_fleets
  */
 Product.prototype["auto_provision_fleets"] = undefined;
 
 /**
+ * If `true`, devices provisioned with this ProductUID start out disabled.
  * @member {Boolean} disable_devices_by_default
  */
 Product.prototype["disable_devices_by_default"] = undefined;
 
 /**
+ * Product name shown in Notehub.
  * @member {String} label
  */
 Product.prototype["label"] = undefined;
 
 /**
+ * ProductUID, e.g. `com.blues.bridge:sensors`. `GetProducts` returns it with a `product:` prefix.
  * @member {String} uid
  */
 Product.prototype["uid"] = undefined;

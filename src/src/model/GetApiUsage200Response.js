@@ -17,7 +17,7 @@ import UsageApiData from "./UsageApiData";
 /**
  * The GetApiUsage200Response model module.
  * @module model/GetApiUsage200Response
- * @version 6.7.0
+ * @version 7.0.0
  */
 class GetApiUsage200Response {
   /**
@@ -108,7 +108,7 @@ GetApiUsage200Response.RequiredProperties = ["data"];
 GetApiUsage200Response.prototype["data"] = undefined;
 
 /**
- * If the data is truncated that means that the parameters selected resulted in a response of over | the requested limit of data points, in order to ensure
+ * True if there were more data points than `limit`; only the first `limit` are returned.
  * @member {Boolean} truncated
  */
 GetApiUsage200Response.prototype["truncated"] = undefined;

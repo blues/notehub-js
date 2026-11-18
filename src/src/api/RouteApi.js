@@ -20,7 +20,7 @@ import RouteLog from "../model/RouteLog";
 /**
  * Route service.
  * @module api/RouteApi
- * @version 6.7.0
+ * @version 7.0.0
  */
 export default class RouteApi {
   /**
@@ -35,7 +35,8 @@ export default class RouteApi {
   }
 
   /**
-   * Create Route within a Project
+   * Create a route
+   * Create a route that sends a project's events to a destination such as a URL, an MQTT broker or a cloud service. Set `type` and fill in the object it names. Omit `fleets` to send every fleet's events. Unknown FleetUIDs are ignored, so `fleets: []` or a list of only unknown UIDs gives a route that sends nothing.  Requires the Owner or Developer role. Returns 400 for invalid settings.
    * @param {String} projectOrProductUID
    * @param {module:model/NotehubRoute} notehubRoute Route to be created
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/NotehubRoute} and HTTP response
@@ -83,7 +84,8 @@ export default class RouteApi {
   }
 
   /**
-   * Create Route within a Project
+   * Create a route
+   * Create a route that sends a project's events to a destination such as a URL, an MQTT broker or a cloud service. Set `type` and fill in the object it names. Omit `fleets` to send every fleet's events. Unknown FleetUIDs are ignored, so `fleets: []` or a list of only unknown UIDs gives a route that sends nothing.  Requires the Owner or Developer role. Returns 400 for invalid settings.
    * @param {String} projectOrProductUID
    * @param {module:model/NotehubRoute} notehubRoute Route to be created
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/NotehubRoute}
@@ -97,9 +99,10 @@ export default class RouteApi {
   }
 
   /**
-   * Delete single route within a project
+   * Delete a route
+   * Delete a route so it stops sending events. To pause it instead, set `disabled` with `UpdateRoute`.  Requires the Owner or Developer role.
    * @param {String} projectOrProductUID
-   * @param {String} routeUID
+   * @param {String} routeUID RouteUID, e.g. `route:cbd20093cba58392c9f9bbdd0cdeb1a0`. List with `GetRoutes`.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
    */
   deleteRouteWithHttpInfo(projectOrProductUID, routeUID) {
@@ -146,9 +149,10 @@ export default class RouteApi {
   }
 
   /**
-   * Delete single route within a project
+   * Delete a route
+   * Delete a route so it stops sending events. To pause it instead, set `disabled` with `UpdateRoute`.  Requires the Owner or Developer role.
    * @param {String} projectOrProductUID
-   * @param {String} routeUID
+   * @param {String} routeUID RouteUID, e.g. `route:cbd20093cba58392c9f9bbdd0cdeb1a0`. List with `GetRoutes`.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}
    */
   deleteRoute(projectOrProductUID, routeUID) {
@@ -160,9 +164,10 @@ export default class RouteApi {
   }
 
   /**
-   * Get single route within a project
+   * Get a route
+   * Get one route's full settings: destination, filter, transform and fleets. Secrets such as passwords and keys come back as `(omitted)`.  Requires the Owner or Developer role. Viewers can use `GetRoutes`. Returns 404 if the route doesn't exist.
    * @param {String} projectOrProductUID
-   * @param {String} routeUID
+   * @param {String} routeUID RouteUID, e.g. `route:cbd20093cba58392c9f9bbdd0cdeb1a0`. List with `GetRoutes`.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/NotehubRoute} and HTTP response
    */
   getRouteWithHttpInfo(projectOrProductUID, routeUID) {
@@ -209,9 +214,10 @@ export default class RouteApi {
   }
 
   /**
-   * Get single route within a project
+   * Get a route
+   * Get one route's full settings: destination, filter, transform and fleets. Secrets such as passwords and keys come back as `(omitted)`.  Requires the Owner or Developer role. Viewers can use `GetRoutes`. Returns 404 if the route doesn't exist.
    * @param {String} projectOrProductUID
-   * @param {String} routeUID
+   * @param {String} routeUID RouteUID, e.g. `route:cbd20093cba58392c9f9bbdd0cdeb1a0`. List with `GetRoutes`.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/NotehubRoute}
    */
   getRoute(projectOrProductUID, routeUID) {
@@ -223,22 +229,24 @@ export default class RouteApi {
   }
 
   /**
-   * Get Route Logs by Route UID
+   * List a route's logs
+   * List a route's attempts to send events, newest first, with each one's event, response status, body and duration. Filter by device, notefile, date, success or HTTP status. For one event, use `GetRouteLogsByEvent`.  Paginated. Returns 404 if the route doesn't exist.
    * @param {String} projectOrProductUID
-   * @param {String} routeUID
+   * @param {String} routeUID RouteUID, e.g. `route:cbd20093cba58392c9f9bbdd0cdeb1a0`. List with `GetRoutes`.
    * @param {Object} opts Optional parameters
-   * @param {Number} opts.pageSize  (default to 50)
+   * @param {Number} opts.pageSize  (default to 1000)
    * @param {Number} opts.pageNum  (default to 1)
-   * @param {Array.<String>} opts.deviceUID A Device UID.
-   * @param {module:model/String} opts.sortBy  (default to 'date')
-   * @param {module:model/String} opts.sortOrder  (default to 'desc')
+   * @param {String} opts.cursor If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped.
+   * @param {Array.<String>} opts.deviceUID A DeviceUID.
+   * @param {module:model/String} opts.sortBy Field to sort by. - `date`: when the attempt was made - `event`: the order the events arrived in, then the attempt time  (default to 'date')
+   * @param {module:model/String} opts.sortOrder Sort direction. - `asc`: oldest first - `desc`: newest first  (default to 'desc')
    * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
    * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
-   * @param {Boolean} opts.systemFilesOnly
-   * @param {Boolean} opts.mostRecentOnly
-   * @param {String} opts.files
-   * @param {Array.<module:model/String>} opts.routingStatus
-   * @param {Array.<String>} opts.responseStatus
+   * @param {Boolean} opts.systemFilesOnly If true, return only events from system notefiles, such as `_session.qo` and `_health.qo`.
+   * @param {Boolean} opts.mostRecentOnly If true, return only the latest attempt for each event.
+   * @param {String} opts.files Comma-separated notefiles, e.g. `data.qo,_health.qo`. Don't combine with `systemFilesOnly`.
+   * @param {Array.<module:model/String>} opts.routingStatus Return only attempts with this outcome. - `success`: the destination accepted the event - `failure`: the attempt failed
+   * @param {Array.<String>} opts.responseStatus Response status codes to include, e.g. `500`.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link Array.<module:model/RouteLog>} and HTTP response
    */
   getRouteLogsByRouteWithHttpInfo(projectOrProductUID, routeUID, opts) {
@@ -264,6 +272,7 @@ export default class RouteApi {
     let queryParams = {
       pageSize: opts["pageSize"],
       pageNum: opts["pageNum"],
+      cursor: opts["cursor"],
       deviceUID: this.apiClient.buildCollectionParam(
         opts["deviceUID"],
         "multi"
@@ -308,22 +317,24 @@ export default class RouteApi {
   }
 
   /**
-   * Get Route Logs by Route UID
+   * List a route's logs
+   * List a route's attempts to send events, newest first, with each one's event, response status, body and duration. Filter by device, notefile, date, success or HTTP status. For one event, use `GetRouteLogsByEvent`.  Paginated. Returns 404 if the route doesn't exist.
    * @param {String} projectOrProductUID
-   * @param {String} routeUID
+   * @param {String} routeUID RouteUID, e.g. `route:cbd20093cba58392c9f9bbdd0cdeb1a0`. List with `GetRoutes`.
    * @param {Object} opts Optional parameters
-   * @param {Number} opts.pageSize  (default to 50)
+   * @param {Number} opts.pageSize  (default to 1000)
    * @param {Number} opts.pageNum  (default to 1)
-   * @param {Array.<String>} opts.deviceUID A Device UID.
-   * @param {module:model/String} opts.sortBy  (default to 'date')
-   * @param {module:model/String} opts.sortOrder  (default to 'desc')
+   * @param {String} opts.cursor If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped.
+   * @param {Array.<String>} opts.deviceUID A DeviceUID.
+   * @param {module:model/String} opts.sortBy Field to sort by. - `date`: when the attempt was made - `event`: the order the events arrived in, then the attempt time  (default to 'date')
+   * @param {module:model/String} opts.sortOrder Sort direction. - `asc`: oldest first - `desc`: newest first  (default to 'desc')
    * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
    * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
-   * @param {Boolean} opts.systemFilesOnly
-   * @param {Boolean} opts.mostRecentOnly
-   * @param {String} opts.files
-   * @param {Array.<module:model/String>} opts.routingStatus
-   * @param {Array.<String>} opts.responseStatus
+   * @param {Boolean} opts.systemFilesOnly If true, return only events from system notefiles, such as `_session.qo` and `_health.qo`.
+   * @param {Boolean} opts.mostRecentOnly If true, return only the latest attempt for each event.
+   * @param {String} opts.files Comma-separated notefiles, e.g. `data.qo,_health.qo`. Don't combine with `systemFilesOnly`.
+   * @param {Array.<module:model/String>} opts.routingStatus Return only attempts with this outcome. - `success`: the destination accepted the event - `failure`: the attempt failed
+   * @param {Array.<String>} opts.responseStatus Response status codes to include, e.g. `500`.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link Array.<module:model/RouteLog>}
    */
   getRouteLogsByRoute(projectOrProductUID, routeUID, opts) {
@@ -337,7 +348,8 @@ export default class RouteApi {
   }
 
   /**
-   * Get all Routes within a Project
+   * List routes
+   * List a project's routes with their type and label and whether they're disabled, without their settings. For a route's settings, use `GetRoute`.
    * @param {String} projectOrProductUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link Array.<module:model/NotehubRouteSummary>} and HTTP response
    */
@@ -378,7 +390,8 @@ export default class RouteApi {
   }
 
   /**
-   * Get all Routes within a Project
+   * List routes
+   * List a project's routes with their type and label and whether they're disabled, without their settings. For a route's settings, use `GetRoute`.
    * @param {String} projectOrProductUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link Array.<module:model/NotehubRouteSummary>}
    */
@@ -391,9 +404,10 @@ export default class RouteApi {
   }
 
   /**
-   * Update route by UID
+   * Update a route
+   * Change a route's settings. Fields you leave out keep their values, and a secret sent back as `(omitted)` is kept, but leaving out `notes` clears it.  Requires the Owner or Developer role. Returns 404 if the route doesn't exist, and 400 for invalid settings.
    * @param {String} projectOrProductUID
-   * @param {String} routeUID
+   * @param {String} routeUID RouteUID, e.g. `route:cbd20093cba58392c9f9bbdd0cdeb1a0`. List with `GetRoutes`.
    * @param {module:model/NotehubRoute} notehubRoute Route settings to be updated
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/NotehubRoute} and HTTP response
    */
@@ -447,9 +461,10 @@ export default class RouteApi {
   }
 
   /**
-   * Update route by UID
+   * Update a route
+   * Change a route's settings. Fields you leave out keep their values, and a secret sent back as `(omitted)` is kept, but leaving out `notes` clears it.  Requires the Owner or Developer role. Returns 404 if the route doesn't exist, and 400 for invalid settings.
    * @param {String} projectOrProductUID
-   * @param {String} routeUID
+   * @param {String} routeUID RouteUID, e.g. `route:cbd20093cba58392c9f9bbdd0cdeb1a0`. List with `GetRoutes`.
    * @param {module:model/NotehubRoute} notehubRoute Route settings to be updated
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/NotehubRoute}
    */

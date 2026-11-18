@@ -17,7 +17,7 @@ import Note from "./Note";
 /**
  * The Notefile model module.
  * @module model/Notefile
- * @version 6.7.0
+ * @version 7.0.0
  */
 class Notefile {
   /**
@@ -139,6 +139,7 @@ Notefile.prototype["id"] = undefined;
 Notefile.prototype["notes"] = undefined;
 
 /**
+ * The notefile's body template, if it has one.
  * @member {String} template
  */
 Notefile.prototype["template"] = undefined;

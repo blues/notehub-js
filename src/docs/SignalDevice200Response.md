@@ -2,6 +2,6 @@
 
 ## Properties
 
-| Name          | Type        | Description                                   | Notes      |
-| ------------- | ----------- | --------------------------------------------- | ---------- |
-| **connected** | **Boolean** | true if the Notecard is connected to Notehub. | [optional] |
+| Name          | Type        | Description                                                                                  | Notes      |
+| ------------- | ----------- | -------------------------------------------------------------------------------------------- | ---------- |
+| **connected** | **Boolean** | True if the Notecard was connected and the signal was delivered. False means it was dropped. | [optional] |

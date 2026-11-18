@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The CancelJobRun200Response model module.
  * @module model/CancelJobRun200Response
- * @version 6.7.0
+ * @version 7.0.0
  */
 class CancelJobRun200Response {
   /**

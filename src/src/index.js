@@ -78,11 +78,6 @@ import Fleet from "./model/Fleet";
 import FleetConnectivityAssurance from "./model/FleetConnectivityAssurance";
 import GetAlerts200Response from "./model/GetAlerts200Response";
 import GetApiUsage200Response from "./model/GetApiUsage200Response";
-import GetBillingAccount200Response from "./model/GetBillingAccount200Response";
-import GetBillingAccount200ResponsePlan from "./model/GetBillingAccount200ResponsePlan";
-import GetBillingAccountBalanceHistory200Response from "./model/GetBillingAccountBalanceHistory200Response";
-import GetBillingAccountBalanceHistory200ResponseDataInner from "./model/GetBillingAccountBalanceHistory200ResponseDataInner";
-import GetBillingAccounts200Response from "./model/GetBillingAccounts200Response";
 import GetDataUsage200Response from "./model/GetDataUsage200Response";
 import GetDataUsage200ResponseDataInner from "./model/GetDataUsage200ResponseDataInner";
 import GetDbNote200Response from "./model/GetDbNote200Response";
@@ -101,10 +96,13 @@ import GetDevicePublicKeys200ResponseDevicePublicKeysInner from "./model/GetDevi
 import GetDeviceSessions200Response from "./model/GetDeviceSessions200Response";
 import GetDevices200Response from "./model/GetDevices200Response";
 import GetEvents200Response from "./model/GetEvents200Response";
-import GetEventsByCursor200Response from "./model/GetEventsByCursor200Response";
 import GetJobRuns200Response from "./model/GetJobRuns200Response";
 import GetJobs200Response from "./model/GetJobs200Response";
 import GetNotefile200Response from "./model/GetNotefile200Response";
+import GetOrganization200Response from "./model/GetOrganization200Response";
+import GetOrganization200ResponsePlan from "./model/GetOrganization200ResponsePlan";
+import GetOrganizationBalanceHistory200Response from "./model/GetOrganizationBalanceHistory200Response";
+import GetOrganizationBalanceHistory200ResponseDataInner from "./model/GetOrganizationBalanceHistory200ResponseDataInner";
 import GetOrganizations200Response from "./model/GetOrganizations200Response";
 import GetProducts200Response from "./model/GetProducts200Response";
 import GetProjectMembers200Response from "./model/GetProjectMembers200Response";
@@ -124,8 +122,6 @@ import JobDetail from "./model/JobDetail";
 import JobDetailAllOf from "./model/JobDetailAllOf";
 import JobRun from "./model/JobRun";
 import Location from "./model/Location";
-import Login200Response from "./model/Login200Response";
-import LoginRequest from "./model/LoginRequest";
 import Monitor from "./model/Monitor";
 import MonitorAlertRoutesInner from "./model/MonitorAlertRoutesInner";
 import MqttRoute from "./model/MqttRoute";
@@ -149,6 +145,7 @@ import QubitroRoute from "./model/QubitroRoute";
 import RadRoute from "./model/RadRoute";
 import Repository from "./model/Repository";
 import RepositoryListResponse from "./model/RepositoryListResponse";
+import RepositoryRecord from "./model/RepositoryRecord";
 import RepositoryTokenRequest from "./model/RepositoryTokenRequest";
 import RepositoryTokenResponse from "./model/RepositoryTokenResponse";
 import Role from "./model/Role";
@@ -161,6 +158,12 @@ import SatellitePlan from "./model/SatellitePlan";
 import SchemaProperty from "./model/SchemaProperty";
 import SignalDevice200Response from "./model/SignalDevice200Response";
 import SimUsage from "./model/SimUsage";
+import Skill from "./model/Skill";
+import SkillLinks from "./model/SkillLinks";
+import SkillSet from "./model/SkillSet";
+import SkillSummary from "./model/SkillSummary";
+import SkillWrite from "./model/SkillWrite";
+import SkillWriteResult from "./model/SkillWriteResult";
 import SlackBearerNotification from "./model/SlackBearerNotification";
 import SlackRoute from "./model/SlackRoute";
 import SlackWebHookNotification from "./model/SlackWebHookNotification";
@@ -168,6 +171,7 @@ import SnowflakeRoute from "./model/SnowflakeRoute";
 import SnowpipeStreamingRoute from "./model/SnowpipeStreamingRoute";
 import ThingworxRoute from "./model/ThingworxRoute";
 import TowerLocation from "./model/TowerLocation";
+import TwilioNotification from "./model/TwilioNotification";
 import TwilioRoute from "./model/TwilioRoute";
 import UpdateFleetRequest from "./model/UpdateFleetRequest";
 import UpdateHostFirmwareRequest from "./model/UpdateHostFirmwareRequest";
@@ -185,7 +189,6 @@ import UserFirmwareInfo from "./model/UserFirmwareInfo";
 import WebhookSettings from "./model/WebhookSettings";
 import AlertApi from "./api/AlertApi";
 import AuthorizationApi from "./api/AuthorizationApi";
-import BillingAccountApi from "./api/BillingAccountApi";
 import DescriptionApi from "./api/DescriptionApi";
 import DeviceApi from "./api/DeviceApi";
 import EventApi from "./api/EventApi";
@@ -195,6 +198,7 @@ import MonitorApi from "./api/MonitorApi";
 import OrganizationApi from "./api/OrganizationApi";
 import ProjectApi from "./api/ProjectApi";
 import RouteApi from "./api/RouteApi";
+import SkillsApi from "./api/SkillsApi";
 import UsageApi from "./api/UsageApi";
 import WebhookApi from "./api/WebhookApi";
 
@@ -227,7 +231,7 @@ import WebhookApi from "./api/WebhookApi";
  * </pre>
  * </p>
  * @module index
- * @version 6.7.0
+ * @version 7.0.0
  */
 export {
   /**
@@ -633,36 +637,6 @@ export {
   GetApiUsage200Response,
 
   /**
-   * The GetBillingAccount200Response model constructor.
-   * @property {module:model/GetBillingAccount200Response}
-   */
-  GetBillingAccount200Response,
-
-  /**
-   * The GetBillingAccount200ResponsePlan model constructor.
-   * @property {module:model/GetBillingAccount200ResponsePlan}
-   */
-  GetBillingAccount200ResponsePlan,
-
-  /**
-   * The GetBillingAccountBalanceHistory200Response model constructor.
-   * @property {module:model/GetBillingAccountBalanceHistory200Response}
-   */
-  GetBillingAccountBalanceHistory200Response,
-
-  /**
-   * The GetBillingAccountBalanceHistory200ResponseDataInner model constructor.
-   * @property {module:model/GetBillingAccountBalanceHistory200ResponseDataInner}
-   */
-  GetBillingAccountBalanceHistory200ResponseDataInner,
-
-  /**
-   * The GetBillingAccounts200Response model constructor.
-   * @property {module:model/GetBillingAccounts200Response}
-   */
-  GetBillingAccounts200Response,
-
-  /**
    * The GetDataUsage200Response model constructor.
    * @property {module:model/GetDataUsage200Response}
    */
@@ -771,12 +745,6 @@ export {
   GetEvents200Response,
 
   /**
-   * The GetEventsByCursor200Response model constructor.
-   * @property {module:model/GetEventsByCursor200Response}
-   */
-  GetEventsByCursor200Response,
-
-  /**
    * The GetJobRuns200Response model constructor.
    * @property {module:model/GetJobRuns200Response}
    */
@@ -793,6 +761,30 @@ export {
    * @property {module:model/GetNotefile200Response}
    */
   GetNotefile200Response,
+
+  /**
+   * The GetOrganization200Response model constructor.
+   * @property {module:model/GetOrganization200Response}
+   */
+  GetOrganization200Response,
+
+  /**
+   * The GetOrganization200ResponsePlan model constructor.
+   * @property {module:model/GetOrganization200ResponsePlan}
+   */
+  GetOrganization200ResponsePlan,
+
+  /**
+   * The GetOrganizationBalanceHistory200Response model constructor.
+   * @property {module:model/GetOrganizationBalanceHistory200Response}
+   */
+  GetOrganizationBalanceHistory200Response,
+
+  /**
+   * The GetOrganizationBalanceHistory200ResponseDataInner model constructor.
+   * @property {module:model/GetOrganizationBalanceHistory200ResponseDataInner}
+   */
+  GetOrganizationBalanceHistory200ResponseDataInner,
 
   /**
    * The GetOrganizations200Response model constructor.
@@ -907,18 +899,6 @@ export {
    * @property {module:model/Location}
    */
   Location,
-
-  /**
-   * The Login200Response model constructor.
-   * @property {module:model/Login200Response}
-   */
-  Login200Response,
-
-  /**
-   * The LoginRequest model constructor.
-   * @property {module:model/LoginRequest}
-   */
-  LoginRequest,
 
   /**
    * The Monitor model constructor.
@@ -1059,6 +1039,12 @@ export {
   RepositoryListResponse,
 
   /**
+   * The RepositoryRecord model constructor.
+   * @property {module:model/RepositoryRecord}
+   */
+  RepositoryRecord,
+
+  /**
    * The RepositoryTokenRequest model constructor.
    * @property {module:model/RepositoryTokenRequest}
    */
@@ -1131,6 +1117,42 @@ export {
   SimUsage,
 
   /**
+   * The Skill model constructor.
+   * @property {module:model/Skill}
+   */
+  Skill,
+
+  /**
+   * The SkillLinks model constructor.
+   * @property {module:model/SkillLinks}
+   */
+  SkillLinks,
+
+  /**
+   * The SkillSet model constructor.
+   * @property {module:model/SkillSet}
+   */
+  SkillSet,
+
+  /**
+   * The SkillSummary model constructor.
+   * @property {module:model/SkillSummary}
+   */
+  SkillSummary,
+
+  /**
+   * The SkillWrite model constructor.
+   * @property {module:model/SkillWrite}
+   */
+  SkillWrite,
+
+  /**
+   * The SkillWriteResult model constructor.
+   * @property {module:model/SkillWriteResult}
+   */
+  SkillWriteResult,
+
+  /**
    * The SlackBearerNotification model constructor.
    * @property {module:model/SlackBearerNotification}
    */
@@ -1171,6 +1193,12 @@ export {
    * @property {module:model/TowerLocation}
    */
   TowerLocation,
+
+  /**
+   * The TwilioNotification model constructor.
+   * @property {module:model/TwilioNotification}
+   */
+  TwilioNotification,
 
   /**
    * The TwilioRoute model constructor.
@@ -1275,12 +1303,6 @@ export {
   AuthorizationApi,
 
   /**
-   * The BillingAccountApi service constructor.
-   * @property {module:api/BillingAccountApi}
-   */
-  BillingAccountApi,
-
-  /**
    * The DescriptionApi service constructor.
    * @property {module:api/DescriptionApi}
    */
@@ -1333,6 +1355,12 @@ export {
    * @property {module:api/RouteApi}
    */
   RouteApi,
+
+  /**
+   * The SkillsApi service constructor.
+   * @property {module:api/SkillsApi}
+   */
+  SkillsApi,
 
   /**
    * The UsageApi service constructor.

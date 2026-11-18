@@ -17,14 +17,14 @@ import UsageSessionsData from "./UsageSessionsData";
 /**
  * The GetSessionsUsage200Response model module.
  * @module model/GetSessionsUsage200Response
- * @version 6.7.0
+ * @version 7.0.0
  */
 class GetSessionsUsage200Response {
   /**
    * Constructs a new <code>GetSessionsUsage200Response</code>.
    * @alias module:model/GetSessionsUsage200Response
    * @param sessions {Array.<module:model/UsageSessionsData>}
-   * @param truncated {Boolean} If the data is truncated that means that the parameters selected resulted in a response of over | the requested limit of data points, in order to ensure
+   * @param truncated {Boolean} True if there were more data points than `limit`; only the first `limit` are returned.
    */
   constructor(sessions, truncated) {
     GetSessionsUsage200Response.initialize(this, sessions, truncated);
@@ -112,7 +112,7 @@ GetSessionsUsage200Response.RequiredProperties = ["sessions", "truncated"];
 GetSessionsUsage200Response.prototype["sessions"] = undefined;
 
 /**
- * If the data is truncated that means that the parameters selected resulted in a response of over | the requested limit of data points, in order to ensure
+ * True if there were more data points than `limit`; only the first `limit` are returned.
  * @member {Boolean} truncated
  */
 GetSessionsUsage200Response.prototype["truncated"] = undefined;

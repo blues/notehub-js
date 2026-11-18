@@ -17,7 +17,7 @@ import BatchJobNoteRequest from "./BatchJobNoteRequest";
 /**
  * The BatchJobRequests model module.
  * @module model/BatchJobRequests
- * @version 6.7.0
+ * @version 7.0.0
  */
 class BatchJobRequests {
   /**
@@ -250,19 +250,19 @@ BatchJobRequests.prototype["disable"] = undefined;
 BatchJobRequests.prototype["enable"] = undefined;
 
 /**
- * Fleet UIDs to assign to the device if it has no fleets
+ * FleetUIDs to assign to the device if it has no fleets
  * @member {Array.<String>} fleets_to_default
  */
 BatchJobRequests.prototype["fleets_to_default"] = undefined;
 
 /**
- * Fleet UIDs to add the device to
+ * FleetUIDs to add the device to
  * @member {Array.<String>} fleets_to_join
  */
 BatchJobRequests.prototype["fleets_to_join"] = undefined;
 
 /**
- * Fleet UIDs to remove the device from
+ * FleetUIDs to remove the device from
  * @member {Array.<String>} fleets_to_leave
  */
 BatchJobRequests.prototype["fleets_to_leave"] = undefined;
@@ -274,7 +274,7 @@ BatchJobRequests.prototype["fleets_to_leave"] = undefined;
 BatchJobRequests.prototype["note_reqs"] = undefined;
 
 /**
- * Product UID to provision the device with if not already provisioned
+ * ProductUID to provision the device with if not already provisioned
  * @member {String} provision_product
  */
 BatchJobRequests.prototype["provision_product"] = undefined;

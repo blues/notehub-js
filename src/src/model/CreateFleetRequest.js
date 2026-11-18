@@ -17,7 +17,7 @@ import FleetConnectivityAssurance from "./FleetConnectivityAssurance";
 /**
  * The CreateFleetRequest model module.
  * @module model/CreateFleetRequest
- * @version 6.7.0
+ * @version 7.0.0
  */
 class CreateFleetRequest {
   /**
@@ -118,18 +118,19 @@ class CreateFleetRequest {
 CreateFleetRequest.prototype["connectivity_assurance"] = undefined;
 
 /**
- * The label, or name,  for the Fleet.
+ * Fleet name shown in Notehub. Required.
  * @member {String} label
  */
 CreateFleetRequest.prototype["label"] = undefined;
 
 /**
- * JSONata expression that will be evaluated to determine device membership into this fleet, if the expression evaluates to a 1, the device will be included, if it evaluates to -1 it will be removed, and if it evaluates to 0 or errors it will be left unchanged.
+ * JSONata expression for smart fleet membership: `1` adds the device, `-1` removes it, and `0` or an error leaves it unchanged.
  * @member {String} smart_rule
  */
 CreateFleetRequest.prototype["smart_rule"] = undefined;
 
 /**
+ * If `true`, `smart_rule` adds and removes devices. Default `false`.
  * @member {Boolean} smart_rule_enabled
  */
 CreateFleetRequest.prototype["smart_rule_enabled"] = undefined;

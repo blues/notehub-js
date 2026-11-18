@@ -2,6 +2,6 @@
 
 ## Properties
 
-| Name          | Type         | Description                         | Notes |
-| ------------- | ------------ | ----------------------------------- | ----- |
-| **fleetUids** | **[String]** | The fleetUIDs to add to the device. |
+| Name          | Type         | Description                     | Notes |
+| ------------- | ------------ | ------------------------------- | ----- |
+| **fleetUids** | **[String]** | FleetUIDs to add the device to. |

@@ -19,7 +19,7 @@ import Error from "../model/Error";
 /**
  * Description service.
  * @module api/DescriptionApi
- * @version 6.7.0
+ * @version 7.0.0
  */
 export default class DescriptionApi {
   /**
@@ -34,8 +34,9 @@ export default class DescriptionApi {
   }
 
   /**
-   * Delete a global description record by name (Blues staff only).
-   * @param {String} descriptionName
+   * Delete a global description record
+   * Delete one platform-wide description record.  Blues staff only; returns 403 for anyone else. Returns 404 if the record doesn't exist.
+   * @param {String} descriptionName Record name, 1-128 letters, digits, `.`, `_` or `-`, e.g. `_health.qo`.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
    */
   deleteGlobalDescriptionWithHttpInfo(descriptionName) {
@@ -75,8 +76,9 @@ export default class DescriptionApi {
   }
 
   /**
-   * Delete a global description record by name (Blues staff only).
-   * @param {String} descriptionName
+   * Delete a global description record
+   * Delete one platform-wide description record.  Blues staff only; returns 403 for anyone else. Returns 404 if the record doesn't exist.
+   * @param {String} descriptionName Record name, 1-128 letters, digits, `.`, `_` or `-`, e.g. `_health.qo`.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}
    */
   deleteGlobalDescription(descriptionName) {
@@ -88,9 +90,10 @@ export default class DescriptionApi {
   }
 
   /**
-   * Delete a project description record by name.
+   * Delete a project description record
+   * Delete one of a project's description records.  Requires the Owner or Developer role. Returns 404 if the record doesn't exist.
    * @param {String} projectOrProductUID
-   * @param {String} descriptionName
+   * @param {String} descriptionName Record name, 1-128 letters, digits, `.`, `_` or `-`, e.g. `_health.qo`.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
    */
   deleteProjectDescriptionWithHttpInfo(projectOrProductUID, descriptionName) {
@@ -137,9 +140,10 @@ export default class DescriptionApi {
   }
 
   /**
-   * Delete a project description record by name.
+   * Delete a project description record
+   * Delete one of a project's description records.  Requires the Owner or Developer role. Returns 404 if the record doesn't exist.
    * @param {String} projectOrProductUID
-   * @param {String} descriptionName
+   * @param {String} descriptionName Record name, 1-128 letters, digits, `.`, `_` or `-`, e.g. `_health.qo`.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}
    */
   deleteProjectDescription(projectOrProductUID, descriptionName) {
@@ -152,8 +156,9 @@ export default class DescriptionApi {
   }
 
   /**
-   * Get a global description record. Returns the raw content with its stored Content-Type.
-   * @param {String} descriptionName
+   * Get a global description record
+   * Get the content of one platform-wide description record, served with the Content-Type it was stored with. Any signed-in user can read it.  Returns 404 if the record doesn't exist.
+   * @param {String} descriptionName Record name, 1-128 letters, digits, `.`, `_` or `-`, e.g. `_health.qo`.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link File} and HTTP response
    */
   getGlobalDescriptionWithHttpInfo(descriptionName) {
@@ -193,8 +198,9 @@ export default class DescriptionApi {
   }
 
   /**
-   * Get a global description record. Returns the raw content with its stored Content-Type.
-   * @param {String} descriptionName
+   * Get a global description record
+   * Get the content of one platform-wide description record, served with the Content-Type it was stored with. Any signed-in user can read it.  Returns 404 if the record doesn't exist.
+   * @param {String} descriptionName Record name, 1-128 letters, digits, `.`, `_` or `-`, e.g. `_health.qo`.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link File}
    */
   getGlobalDescription(descriptionName) {
@@ -206,9 +212,10 @@ export default class DescriptionApi {
   }
 
   /**
-   * Get a project description record. Returns the raw content with its stored Content-Type.
+   * Get a project description record
+   * Get the content of one of a project's description records, served with the Content-Type it was stored with. For the metadata of every record, use `ListProjectDescriptions`.  Returns 404 if the record doesn't exist.
    * @param {String} projectOrProductUID
-   * @param {String} descriptionName
+   * @param {String} descriptionName Record name, 1-128 letters, digits, `.`, `_` or `-`, e.g. `_health.qo`.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link File} and HTTP response
    */
   getProjectDescriptionWithHttpInfo(projectOrProductUID, descriptionName) {
@@ -255,9 +262,10 @@ export default class DescriptionApi {
   }
 
   /**
-   * Get a project description record. Returns the raw content with its stored Content-Type.
+   * Get a project description record
+   * Get the content of one of a project's description records, served with the Content-Type it was stored with. For the metadata of every record, use `ListProjectDescriptions`.  Returns 404 if the record doesn't exist.
    * @param {String} projectOrProductUID
-   * @param {String} descriptionName
+   * @param {String} descriptionName Record name, 1-128 letters, digits, `.`, `_` or `-`, e.g. `_health.qo`.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link File}
    */
   getProjectDescription(projectOrProductUID, descriptionName) {
@@ -270,7 +278,8 @@ export default class DescriptionApi {
   }
 
   /**
-   * List metadata for all global description records.
+   * List global description records
+   * List the platform-wide description records that Blues publishes, without their content. Any signed-in user can read them. For a project's own records, use `ListProjectDescriptions`.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/DescriptionRecordList} and HTTP response
    */
   listGlobalDescriptionsWithHttpInfo() {
@@ -302,7 +311,8 @@ export default class DescriptionApi {
   }
 
   /**
-   * List metadata for all global description records.
+   * List global description records
+   * List the platform-wide description records that Blues publishes, without their content. Any signed-in user can read them. For a project's own records, use `ListProjectDescriptions`.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/DescriptionRecordList}
    */
   listGlobalDescriptions() {
@@ -314,7 +324,8 @@ export default class DescriptionApi {
   }
 
   /**
-   * List metadata for all description records in a project.
+   * List a project's description records
+   * List a project's description records by name, with each one's content type, size and change history but not its content. A description record is a named document, such as Markdown, JSON or plain text, that explains the project's data. For Blues' platform-wide records, use `ListGlobalDescriptions`.
    * @param {String} projectOrProductUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/DescriptionRecordList} and HTTP response
    */
@@ -355,7 +366,8 @@ export default class DescriptionApi {
   }
 
   /**
-   * List metadata for all description records in a project.
+   * List a project's description records
+   * List a project's description records by name, with each one's content type, size and change history but not its content. A description record is a named document, such as Markdown, JSON or plain text, that explains the project's data. For Blues' platform-wide records, use `ListGlobalDescriptions`.
    * @param {String} projectOrProductUID
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/DescriptionRecordList}
    */
@@ -368,9 +380,10 @@ export default class DescriptionApi {
   }
 
   /**
-   * Create or replace a global description record, Blues staff only (up to 10MB). The request Content-Type is stored and returned on GET; when omitted it is detected (JSON or text).
-   * @param {String} descriptionName
-   * @param {File} body The description content (up to 10MB). The request Content-Type is stored and returned on GET; when omitted it is detected (JSON or text).
+   * Create or replace a global description record
+   * Store a platform-wide named document that every signed-in user can read, replacing any record with that name. The Content-Type is handled as in `SetProjectDescription`.  Blues staff only; returns 403 for anyone else. Returns 400 if the content is over 10 MB or the name isn't valid.
+   * @param {String} descriptionName Record name, 1-128 letters, digits, `.`, `_` or `-`, e.g. `_health.qo`.
+   * @param {File} body The document to store, up to 10 MB. Send its Content-Type, such as `text/markdown`; Markdown isn't detected.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/DescriptionRecord} and HTTP response
    */
   setGlobalDescriptionWithHttpInfo(descriptionName, body) {
@@ -416,9 +429,10 @@ export default class DescriptionApi {
   }
 
   /**
-   * Create or replace a global description record, Blues staff only (up to 10MB). The request Content-Type is stored and returned on GET; when omitted it is detected (JSON or text).
-   * @param {String} descriptionName
-   * @param {File} body The description content (up to 10MB). The request Content-Type is stored and returned on GET; when omitted it is detected (JSON or text).
+   * Create or replace a global description record
+   * Store a platform-wide named document that every signed-in user can read, replacing any record with that name. The Content-Type is handled as in `SetProjectDescription`.  Blues staff only; returns 403 for anyone else. Returns 400 if the content is over 10 MB or the name isn't valid.
+   * @param {String} descriptionName Record name, 1-128 letters, digits, `.`, `_` or `-`, e.g. `_health.qo`.
+   * @param {File} body The document to store, up to 10 MB. Send its Content-Type, such as `text/markdown`; Markdown isn't detected.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/DescriptionRecord}
    */
   setGlobalDescription(descriptionName, body) {
@@ -430,10 +444,11 @@ export default class DescriptionApi {
   }
 
   /**
-   * Create or replace a project description record (up to 10MB). The request Content-Type is stored and returned on GET; when omitted it is detected (JSON or text).
+   * Create or replace a project description record
+   * Store a named document in a project, replacing any record with that name. The request's Content-Type is stored and served back by `GetProjectDescription`; if it's missing or `application/octet-stream`, the type is detected from the content.  Requires the Owner or Developer role. Returns 400 if the content is over 10 MB or the name isn't valid.
    * @param {String} projectOrProductUID
-   * @param {String} descriptionName
-   * @param {File} body The description content (up to 10MB). The request Content-Type is stored and returned on GET; when omitted it is detected (JSON or text).
+   * @param {String} descriptionName Record name, 1-128 letters, digits, `.`, `_` or `-`, e.g. `_health.qo`.
+   * @param {File} body The document to store, up to 10 MB. Send its Content-Type, such as `text/markdown`; Markdown isn't detected.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/DescriptionRecord} and HTTP response
    */
   setProjectDescriptionWithHttpInfo(
@@ -490,10 +505,11 @@ export default class DescriptionApi {
   }
 
   /**
-   * Create or replace a project description record (up to 10MB). The request Content-Type is stored and returned on GET; when omitted it is detected (JSON or text).
+   * Create or replace a project description record
+   * Store a named document in a project, replacing any record with that name. The request's Content-Type is stored and served back by `GetProjectDescription`; if it's missing or `application/octet-stream`, the type is detected from the content.  Requires the Owner or Developer role. Returns 400 if the content is over 10 MB or the name isn't valid.
    * @param {String} projectOrProductUID
-   * @param {String} descriptionName
-   * @param {File} body The description content (up to 10MB). The request Content-Type is stored and returned on GET; when omitted it is detected (JSON or text).
+   * @param {String} descriptionName Record name, 1-128 letters, digits, `.`, `_` or `-`, e.g. `_health.qo`.
+   * @param {File} body The document to store, up to 10 MB. Send its Content-Type, such as `text/markdown`; Markdown isn't detected.
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/DescriptionRecord}
    */
   setProjectDescription(projectOrProductUID, descriptionName, body) {

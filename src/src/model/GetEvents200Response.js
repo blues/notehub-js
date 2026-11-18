@@ -17,7 +17,7 @@ import Event from "./Event";
 /**
  * The GetEvents200Response model module.
  * @module model/GetEvents200Response
- * @version 6.7.0
+ * @version 7.0.0
  */
 class GetEvents200Response {
   /**
@@ -56,6 +56,12 @@ class GetEvents200Response {
       }
       if (data.hasOwnProperty("has_more")) {
         obj["has_more"] = ApiClient.convertToType(data["has_more"], "Boolean");
+      }
+      if (data.hasOwnProperty("next_cursor")) {
+        obj["next_cursor"] = ApiClient.convertToType(
+          data["next_cursor"],
+          "String"
+        );
       }
       if (data.hasOwnProperty("through")) {
         obj["through"] = ApiClient.convertToType(data["through"], "String");
@@ -99,6 +105,19 @@ class GetEvents200Response {
     }
     // ensure the json data is a string
     if (
+      data["next_cursor"] &&
+      !(
+        typeof data["next_cursor"] === "string" ||
+        data["next_cursor"] instanceof String
+      )
+    ) {
+      throw new Error(
+        "Expected the field `next_cursor` to be a primitive type in the JSON string but got " +
+          data["next_cursor"]
+      );
+    }
+    // ensure the json data is a string
+    if (
       data["through"] &&
       !(
         typeof data["through"] === "string" || data["through"] instanceof String
@@ -126,6 +145,12 @@ GetEvents200Response.prototype["events"] = undefined;
  * @member {Boolean} has_more
  */
 GetEvents200Response.prototype["has_more"] = undefined;
+
+/**
+ * Pass this value as the cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes.
+ * @member {String} next_cursor
+ */
+GetEvents200Response.prototype["next_cursor"] = undefined;
 
 /**
  * The UID of the last event returned

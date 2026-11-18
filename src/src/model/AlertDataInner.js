@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The AlertDataInner model module.
  * @module model/AlertDataInner
- * @version 6.7.0
+ * @version 7.0.0
  */
 class AlertDataInner {
   /**
@@ -161,7 +161,7 @@ AlertDataInner.prototype["alert_source"] = undefined;
 AlertDataInner.prototype["source"] = undefined;
 
 /**
- * The type of source.
+ * The `source_type` of the monitor that raised the alert.
  * @member {module:model/AlertDataInner.SourceTypeEnum} source_type
  */
 AlertDataInner.prototype["source_type"] = undefined;
@@ -216,10 +216,16 @@ AlertDataInner["SourceTypeEnum"] = {
   event: "event",
 
   /**
-   * value: "device"
+   * value: "heartbeat"
    * @const
    */
-  device: "device",
+  heartbeat: "heartbeat",
+
+  /**
+   * value: "usage"
+   * @const
+   */
+  usage: "usage",
 };
 
 export default AlertDataInner;

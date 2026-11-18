@@ -22,7 +22,7 @@ import UsageEventsResponse from "../model/UsageEventsResponse";
 /**
  * Usage service.
  * @module api/UsageApi
- * @version 6.7.0
+ * @version 7.0.0
  */
 export default class UsageApi {
   /**
@@ -37,13 +37,14 @@ export default class UsageApi {
   }
 
   /**
-   * Get billable Notehub API request usage for a project, broken down by endpoint and time period, when endDate is 0 or unspecified the current time is implied. Only requests that are billed against the project's plan are counted
+   * Get billable API usage
+   * Count a project's billable Notehub API requests per day, week or month, by endpoint. Only requests billed against the project's plan are counted.  Returns 400 if `startDate` is after `endDate`.
    * @param {String} projectOrProductUID
-   * @param {module:model/String} period Period type for aggregation
+   * @param {module:model/String} period The length of time each data point covers.
    * @param {Object} opts Optional parameters
    * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
    * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
-   * @param {Number} opts.limit Limit the number of data points returned (default to 200000)
+   * @param {Number} opts.limit The most data points to return. If there are more, `truncated` is true. (default to 200000)
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetApiUsage200Response} and HTTP response
    */
   getApiUsageWithHttpInfo(projectOrProductUID, period, opts) {
@@ -95,13 +96,14 @@ export default class UsageApi {
   }
 
   /**
-   * Get billable Notehub API request usage for a project, broken down by endpoint and time period, when endDate is 0 or unspecified the current time is implied. Only requests that are billed against the project's plan are counted
+   * Get billable API usage
+   * Count a project's billable Notehub API requests per day, week or month, by endpoint. Only requests billed against the project's plan are counted.  Returns 400 if `startDate` is after `endDate`.
    * @param {String} projectOrProductUID
-   * @param {module:model/String} period Period type for aggregation
+   * @param {module:model/String} period The length of time each data point covers.
    * @param {Object} opts Optional parameters
    * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
    * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
-   * @param {Number} opts.limit Limit the number of data points returned (default to 200000)
+   * @param {Number} opts.limit The most data points to return. If there are more, `truncated` is true. (default to 200000)
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetApiUsage200Response}
    */
   getApiUsage(projectOrProductUID, period, opts) {
@@ -113,16 +115,17 @@ export default class UsageApi {
   }
 
   /**
-   * Get data usage in bytes for a project with time range and period aggregation
+   * Get cellular and satellite data usage
+   * Get the cellular and satellite data a project's devices used, in bytes. It's counted per day, week or month, by device, fleet or the whole project. If there are more data points than `limit`, the rest are dropped and `truncated` is true.  Returns 400 for an unknown device, or if `endDate` is before `startDate`.
    * @param {String} projectOrProductUID
-   * @param {module:model/String} period Period type for aggregation
+   * @param {module:model/String} period The length of time each data point covers.
    * @param {Object} opts Optional parameters
    * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
    * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
-   * @param {Array.<String>} opts.deviceUID A Device UID.
-   * @param {Array.<String>} opts.fleetUID Filter by Fleet UID
-   * @param {Number} opts.limit Limit the number of data points returned (default to 200000)
-   * @param {module:model/String} opts.aggregate Aggregation level for results (default to 'device')
+   * @param {Array.<String>} opts.deviceUID A DeviceUID.
+   * @param {Array.<String>} opts.fleetUID Filter by FleetUID
+   * @param {Number} opts.limit The most data points to return. If there are more, `truncated` is true. (default to 200000)
+   * @param {module:model/String} opts.aggregate How to group the counts, such as per device or one total for the project. (default to 'device')
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetDataUsage200Response} and HTTP response
    */
   getDataUsageWithHttpInfo(projectOrProductUID, period, opts) {
@@ -180,16 +183,17 @@ export default class UsageApi {
   }
 
   /**
-   * Get data usage in bytes for a project with time range and period aggregation
+   * Get cellular and satellite data usage
+   * Get the cellular and satellite data a project's devices used, in bytes. It's counted per day, week or month, by device, fleet or the whole project. If there are more data points than `limit`, the rest are dropped and `truncated` is true.  Returns 400 for an unknown device, or if `endDate` is before `startDate`.
    * @param {String} projectOrProductUID
-   * @param {module:model/String} period Period type for aggregation
+   * @param {module:model/String} period The length of time each data point covers.
    * @param {Object} opts Optional parameters
    * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
    * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
-   * @param {Array.<String>} opts.deviceUID A Device UID.
-   * @param {Array.<String>} opts.fleetUID Filter by Fleet UID
-   * @param {Number} opts.limit Limit the number of data points returned (default to 200000)
-   * @param {module:model/String} opts.aggregate Aggregation level for results (default to 'device')
+   * @param {Array.<String>} opts.deviceUID A DeviceUID.
+   * @param {Array.<String>} opts.fleetUID Filter by FleetUID
+   * @param {Number} opts.limit The most data points to return. If there are more, `truncated` is true. (default to 200000)
+   * @param {module:model/String} opts.aggregate How to group the counts, such as per device or one total for the project. (default to 'device')
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetDataUsage200Response}
    */
   getDataUsage(projectOrProductUID, period, opts) {
@@ -203,19 +207,20 @@ export default class UsageApi {
   }
 
   /**
-   * Get events usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied
+   * Get event usage
+   * Count a project's events per day, week or month, by device, fleet or the whole project, optionally per notefile. Summaries lag; with `period=day` and no `endDate`, the latest day is filled in from recent events unless `skipRecentData` is true.  Returns 400 if `startDate` is after `endDate`.
    * @param {String} projectOrProductUID
-   * @param {module:model/String} period Period type for aggregation
+   * @param {module:model/String} period The length of time each data point covers.
    * @param {Object} opts Optional parameters
    * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
    * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
-   * @param {Array.<String>} opts.deviceUID A Device UID.
-   * @param {Array.<String>} opts.fleetUID Filter by Fleet UID
-   * @param {Number} opts.limit Limit the number of data points returned (default to 200000)
-   * @param {module:model/String} opts.aggregate Aggregation level for results (default to 'device')
-   * @param {Array.<String>} opts.notefile Filter to specific notefiles
-   * @param {Boolean} opts.skipRecentData When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects. (default to false)
-   * @param {Boolean} opts.includeNotefiles Include per-notefile event counts in the response (default to false)
+   * @param {Array.<String>} opts.deviceUID A DeviceUID.
+   * @param {Array.<String>} opts.fleetUID Filter by FleetUID
+   * @param {Number} opts.limit The most data points to return. If there are more, `truncated` is true. (default to 200000)
+   * @param {module:model/String} opts.aggregate How to group the counts, such as per device or one total for the project. (default to 'device')
+   * @param {Array.<String>} opts.notefile Count only events from these notefiles.
+   * @param {Boolean} opts.skipRecentData If true, return only summarized data, without filling in the latest day. Faster for large projects. (default to false)
+   * @param {Boolean} opts.includeNotefiles If true, include event counts for each notefile. (default to false)
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/UsageEventsResponse} and HTTP response
    */
   getEventsUsageWithHttpInfo(projectOrProductUID, period, opts) {
@@ -276,19 +281,20 @@ export default class UsageApi {
   }
 
   /**
-   * Get events usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied
+   * Get event usage
+   * Count a project's events per day, week or month, by device, fleet or the whole project, optionally per notefile. Summaries lag; with `period=day` and no `endDate`, the latest day is filled in from recent events unless `skipRecentData` is true.  Returns 400 if `startDate` is after `endDate`.
    * @param {String} projectOrProductUID
-   * @param {module:model/String} period Period type for aggregation
+   * @param {module:model/String} period The length of time each data point covers.
    * @param {Object} opts Optional parameters
    * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
    * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
-   * @param {Array.<String>} opts.deviceUID A Device UID.
-   * @param {Array.<String>} opts.fleetUID Filter by Fleet UID
-   * @param {Number} opts.limit Limit the number of data points returned (default to 200000)
-   * @param {module:model/String} opts.aggregate Aggregation level for results (default to 'device')
-   * @param {Array.<String>} opts.notefile Filter to specific notefiles
-   * @param {Boolean} opts.skipRecentData When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects. (default to false)
-   * @param {Boolean} opts.includeNotefiles Include per-notefile event counts in the response (default to false)
+   * @param {Array.<String>} opts.deviceUID A DeviceUID.
+   * @param {Array.<String>} opts.fleetUID Filter by FleetUID
+   * @param {Number} opts.limit The most data points to return. If there are more, `truncated` is true. (default to 200000)
+   * @param {module:model/String} opts.aggregate How to group the counts, such as per device or one total for the project. (default to 'device')
+   * @param {Array.<String>} opts.notefile Count only events from these notefiles.
+   * @param {Boolean} opts.skipRecentData If true, return only summarized data, without filling in the latest day. Faster for large projects. (default to false)
+   * @param {Boolean} opts.includeNotefiles If true, include event counts for each notefile. (default to false)
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/UsageEventsResponse}
    */
   getEventsUsage(projectOrProductUID, period, opts) {
@@ -302,16 +308,17 @@ export default class UsageApi {
   }
 
   /**
-   * Get route logs usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied
+   * Get route log usage
+   * Count a project's attempts to send events to routes per day, week or month, by route or for the whole project. If there are more data points than `limit`, the rest are dropped and `truncated` is true.
    * @param {String} projectOrProductUID
-   * @param {module:model/String} period Period type for aggregation
+   * @param {module:model/String} period The length of time each data point covers.
    * @param {Object} opts Optional parameters
    * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
    * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
-   * @param {Array.<String>} opts.routeUID A Route UID.
-   * @param {Number} opts.limit Limit the number of data points returned (default to 200000)
-   * @param {module:model/String} opts.aggregate Aggregation level for results (default to 'route')
-   * @param {Boolean} opts.skipRecentData When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects. (default to false)
+   * @param {Array.<String>} opts.routeUID A RouteUID.
+   * @param {Number} opts.limit The most data points to return. If there are more, `truncated` is true. (default to 200000)
+   * @param {module:model/String} opts.aggregate How to group the counts, per route or one total for the project. (default to 'route')
+   * @param {Boolean} opts.skipRecentData If true, return only summarized data, without filling in the latest day. Faster for large projects. (default to false)
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetRouteLogsUsage200Response} and HTTP response
    */
   getRouteLogsUsageWithHttpInfo(projectOrProductUID, period, opts) {
@@ -366,16 +373,17 @@ export default class UsageApi {
   }
 
   /**
-   * Get route logs usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied
+   * Get route log usage
+   * Count a project's attempts to send events to routes per day, week or month, by route or for the whole project. If there are more data points than `limit`, the rest are dropped and `truncated` is true.
    * @param {String} projectOrProductUID
-   * @param {module:model/String} period Period type for aggregation
+   * @param {module:model/String} period The length of time each data point covers.
    * @param {Object} opts Optional parameters
    * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
    * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
-   * @param {Array.<String>} opts.routeUID A Route UID.
-   * @param {Number} opts.limit Limit the number of data points returned (default to 200000)
-   * @param {module:model/String} opts.aggregate Aggregation level for results (default to 'route')
-   * @param {Boolean} opts.skipRecentData When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects. (default to false)
+   * @param {Array.<String>} opts.routeUID A RouteUID.
+   * @param {Number} opts.limit The most data points to return. If there are more, `truncated` is true. (default to 200000)
+   * @param {module:model/String} opts.aggregate How to group the counts, per route or one total for the project. (default to 'route')
+   * @param {Boolean} opts.skipRecentData If true, return only summarized data, without filling in the latest day. Faster for large projects. (default to false)
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetRouteLogsUsage200Response}
    */
   getRouteLogsUsage(projectOrProductUID, period, opts) {
@@ -389,17 +397,18 @@ export default class UsageApi {
   }
 
   /**
-   * Get sessions usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied
+   * Get session usage
+   * Count a project's device sessions per day, week or month, by device, fleet or the whole project. If there are more data points than `limit`, the rest are dropped and `truncated` is true.  Returns 400 if `startDate` is after `endDate`.
    * @param {String} projectOrProductUID
-   * @param {module:model/String} period Period type for aggregation
+   * @param {module:model/String} period The length of time each data point covers.
    * @param {Object} opts Optional parameters
    * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
    * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
-   * @param {Array.<String>} opts.deviceUID A Device UID.
-   * @param {Array.<String>} opts.fleetUID Filter by Fleet UID
-   * @param {Number} opts.limit Limit the number of data points returned (default to 200000)
-   * @param {module:model/String} opts.aggregate Aggregation level for results (default to 'device')
-   * @param {Boolean} opts.skipRecentData When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects. (default to false)
+   * @param {Array.<String>} opts.deviceUID A DeviceUID.
+   * @param {Array.<String>} opts.fleetUID Filter by FleetUID
+   * @param {Number} opts.limit The most data points to return. If there are more, `truncated` is true. (default to 200000)
+   * @param {module:model/String} opts.aggregate How to group the counts, such as per device or one total for the project. (default to 'device')
+   * @param {Boolean} opts.skipRecentData If true, return only summarized data, without filling in the latest day. Faster for large projects. (default to false)
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetSessionsUsage200Response} and HTTP response
    */
   getSessionsUsageWithHttpInfo(projectOrProductUID, period, opts) {
@@ -458,17 +467,18 @@ export default class UsageApi {
   }
 
   /**
-   * Get sessions usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied
+   * Get session usage
+   * Count a project's device sessions per day, week or month, by device, fleet or the whole project. If there are more data points than `limit`, the rest are dropped and `truncated` is true.  Returns 400 if `startDate` is after `endDate`.
    * @param {String} projectOrProductUID
-   * @param {module:model/String} period Period type for aggregation
+   * @param {module:model/String} period The length of time each data point covers.
    * @param {Object} opts Optional parameters
    * @param {Number} opts.startDate Start date for filtering results, specified as a Unix timestamp
    * @param {Number} opts.endDate End date for filtering results, specified as a Unix timestamp
-   * @param {Array.<String>} opts.deviceUID A Device UID.
-   * @param {Array.<String>} opts.fleetUID Filter by Fleet UID
-   * @param {Number} opts.limit Limit the number of data points returned (default to 200000)
-   * @param {module:model/String} opts.aggregate Aggregation level for results (default to 'device')
-   * @param {Boolean} opts.skipRecentData When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects. (default to false)
+   * @param {Array.<String>} opts.deviceUID A DeviceUID.
+   * @param {Array.<String>} opts.fleetUID Filter by FleetUID
+   * @param {Number} opts.limit The most data points to return. If there are more, `truncated` is true. (default to 200000)
+   * @param {module:model/String} opts.aggregate How to group the counts, such as per device or one total for the project. (default to 'device')
+   * @param {Boolean} opts.skipRecentData If true, return only summarized data, without filling in the latest day. Faster for large projects. (default to false)
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetSessionsUsage200Response}
    */
   getSessionsUsage(projectOrProductUID, period, opts) {

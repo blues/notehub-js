@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The DeleteNotefilesRequest model module.
  * @module model/DeleteNotefilesRequest
- * @version 6.7.0
+ * @version 7.0.0
  */
 class DeleteNotefilesRequest {
   /**
@@ -73,7 +73,7 @@ class DeleteNotefilesRequest {
 }
 
 /**
- * Name of notefiles to delete
+ * Names of the notefiles to delete, e.g. `config.db`.
  * @member {Array.<String>} files
  */
 DeleteNotefilesRequest.prototype["files"] = undefined;

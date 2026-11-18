@@ -18,7 +18,7 @@ import DeviceDfuStateMachine from "./DeviceDfuStateMachine";
 /**
  * The DeviceDfuHistory model module.
  * @module model/DeviceDfuHistory
- * @version 6.7.0
+ * @version 7.0.0
  */
 class DeviceDfuHistory {
   /**
@@ -51,6 +51,9 @@ class DeviceDfuHistory {
         obj["current"] = DeviceDfuHistoryCurrent.constructFromObject(
           data["current"]
         );
+      }
+      if (data.hasOwnProperty("deleted")) {
+        obj["deleted"] = ApiClient.convertToType(data["deleted"], "Boolean");
       }
       if (data.hasOwnProperty("device_uid")) {
         obj["device_uid"] = ApiClient.convertToType(
@@ -118,12 +121,19 @@ class DeviceDfuHistory {
 DeviceDfuHistory.prototype["current"] = undefined;
 
 /**
- * Device UID
+ * True if this device has been deleted. Only present when reading with a `cursor`.
+ * @member {Boolean} deleted
+ */
+DeviceDfuHistory.prototype["deleted"] = undefined;
+
+/**
+ * DeviceUID
  * @member {String} device_uid
  */
 DeviceDfuHistory.prototype["device_uid"] = undefined;
 
 /**
+ * Every firmware update requested for this device, newest first.
  * @member {Array.<module:model/DeviceDfuStateMachine>} history
  */
 DeviceDfuHistory.prototype["history"] = undefined;

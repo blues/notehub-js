@@ -16,18 +16,18 @@ import ApiClient from "../ApiClient";
 /**
  * The Location model module.
  * @module model/Location
- * @version 6.7.0
+ * @version 7.0.0
  */
 class Location {
   /**
    * Constructs a new <code>Location</code>.
    * @alias module:model/Location
-   * @param country {String}
-   * @param latitude {Number}
-   * @param longitude {Number}
-   * @param name {String}
-   * @param timezone {String}
-   * @param when {String}
+   * @param country {String} Two-letter country code, e.g. `US`.
+   * @param latitude {Number} Latitude in degrees.
+   * @param longitude {Number} Longitude in degrees.
+   * @param name {String} Place name, e.g. `Waverly MI`.
+   * @param timezone {String} IANA time zone, e.g. `America/Detroit`.
+   * @param when {String} When the location was recorded, in RFC 3339 format. Empty if unknown.
    */
   constructor(country, latitude, longitude, name, timezone, when) {
     Location.initialize(
@@ -167,31 +167,37 @@ Location.RequiredProperties = [
 ];
 
 /**
+ * Two-letter country code, e.g. `US`.
  * @member {String} country
  */
 Location.prototype["country"] = undefined;
 
 /**
+ * Latitude in degrees.
  * @member {Number} latitude
  */
 Location.prototype["latitude"] = undefined;
 
 /**
+ * Longitude in degrees.
  * @member {Number} longitude
  */
 Location.prototype["longitude"] = undefined;
 
 /**
+ * Place name, e.g. `Waverly MI`.
  * @member {String} name
  */
 Location.prototype["name"] = undefined;
 
 /**
+ * IANA time zone, e.g. `America/Detroit`.
  * @member {String} timezone
  */
 Location.prototype["timezone"] = undefined;
 
 /**
+ * When the location was recorded, in RFC 3339 format. Empty if unknown.
  * @member {String} when
  */
 Location.prototype["when"] = undefined;

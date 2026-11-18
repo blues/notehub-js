@@ -16,13 +16,13 @@ import ApiClient from "../ApiClient";
 /**
  * The SchemaProperty model module.
  * @module model/SchemaProperty
- * @version 6.7.0
+ * @version 7.0.0
  */
 class SchemaProperty {
   /**
    * Constructs a new <code>SchemaProperty</code>.
    * @alias module:model/SchemaProperty
-   * @param type {module:model/SchemaProperty.TypeEnum}
+   * @param type {module:model/SchemaProperty.TypeEnum} The field's JSON type.
    */
   constructor(type) {
     SchemaProperty.initialize(this, type);
@@ -144,7 +144,7 @@ class SchemaProperty {
 SchemaProperty.RequiredProperties = ["type"];
 
 /**
- * Used if type is array
+ * For an array, the type of its elements, inferred from the first element.
  * @member {Array.<module:model/SchemaProperty>} items
  */
 SchemaProperty.prototype["items"] = undefined;
@@ -156,17 +156,19 @@ SchemaProperty.prototype["items"] = undefined;
 SchemaProperty.prototype["name"] = undefined;
 
 /**
- * Used if type is object
+ * For an object, its fields.
  * @member {Array.<module:model/SchemaProperty>} properties
  */
 SchemaProperty.prototype["properties"] = undefined;
 
 /**
+ * The field's JSON type.
  * @member {module:model/SchemaProperty.TypeEnum} type
  */
 SchemaProperty.prototype["type"] = undefined;
 
 /**
+ * When Notehub recorded this field, usually when it first appeared.
  * @member {Date} updated_at
  */
 SchemaProperty.prototype["updated_at"] = undefined;

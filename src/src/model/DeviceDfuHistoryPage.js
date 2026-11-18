@@ -17,7 +17,7 @@ import DeviceDfuHistory from "./DeviceDfuHistory";
 /**
  * The DeviceDfuHistoryPage model module.
  * @module model/DeviceDfuHistoryPage
- * @version 6.7.0
+ * @version 7.0.0
  */
 class DeviceDfuHistoryPage {
   /**
@@ -54,6 +54,12 @@ class DeviceDfuHistoryPage {
       if (data.hasOwnProperty("has_more")) {
         obj["has_more"] = ApiClient.convertToType(data["has_more"], "Boolean");
       }
+      if (data.hasOwnProperty("next_cursor")) {
+        obj["next_cursor"] = ApiClient.convertToType(
+          data["next_cursor"],
+          "String"
+        );
+      }
     } else if (data === null) {
       return null;
     }
@@ -80,6 +86,19 @@ class DeviceDfuHistoryPage {
         DeviceDfuHistory.validateJsonObject(item);
       }
     }
+    // ensure the json data is a string
+    if (
+      data["next_cursor"] &&
+      !(
+        typeof data["next_cursor"] === "string" ||
+        data["next_cursor"] instanceof String
+      )
+    ) {
+      throw new Error(
+        "Expected the field `next_cursor` to be a primitive type in the JSON string but got " +
+          data["next_cursor"]
+      );
+    }
 
     return true;
   }
@@ -95,5 +114,11 @@ DeviceDfuHistoryPage.prototype["devices"] = undefined;
  * @default false
  */
 DeviceDfuHistoryPage.prototype["has_more"] = false;
+
+/**
+ * Pass this value (epoch microseconds, optionally `.N`) as a cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes.
+ * @member {String} next_cursor
+ */
+DeviceDfuHistoryPage.prototype["next_cursor"] = undefined;
 
 export default DeviceDfuHistoryPage;

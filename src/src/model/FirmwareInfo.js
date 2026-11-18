@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The FirmwareInfo model module.
  * @module model/FirmwareInfo
- * @version 6.7.0
+ * @version 7.0.0
  */
 class FirmwareInfo {
   /**
@@ -255,19 +255,19 @@ class FirmwareInfo {
 FirmwareInfo.prototype["built"] = undefined;
 
 /**
- * The date the firmware was created.
+ * Upload time, as Unix epoch seconds in a string.
  * @member {String} created
  */
 FirmwareInfo.prototype["created"] = undefined;
 
 /**
- * A description of the firmware.
+ * Not currently filled in.
  * @member {String} description
  */
 FirmwareInfo.prototype["description"] = undefined;
 
 /**
- * The name of the firmware file.
+ * Stored filename, with the `$` timestamp suffix Notehub adds on upload. Use it in other firmware and DFU operations.
  * @member {String} filename
  */
 FirmwareInfo.prototype["filename"] = undefined;
@@ -303,7 +303,7 @@ FirmwareInfo.prototype["organization"] = undefined;
 FirmwareInfo.prototype["product"] = undefined;
 
 /**
- * True if the firmware is published.
+ * `true` for all host firmware, and for Notecard firmware that Blues has published.
  * @member {Boolean} published
  */
 FirmwareInfo.prototype["published"] = undefined;
@@ -321,7 +321,7 @@ FirmwareInfo.prototype["tags"] = undefined;
 FirmwareInfo.prototype["target"] = undefined;
 
 /**
- * The type of firmware.
+ * `host` or `notecard`.
  * @member {String} type
  */
 FirmwareInfo.prototype["type"] = undefined;

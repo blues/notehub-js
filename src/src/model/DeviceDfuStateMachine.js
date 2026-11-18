@@ -17,7 +17,7 @@ import DeviceDfuStateMachineNode from "./DeviceDfuStateMachineNode";
 /**
  * The DeviceDfuStateMachine model module.
  * @module model/DeviceDfuStateMachine
- * @version 6.7.0
+ * @version 7.0.0
  */
 class DeviceDfuStateMachine {
   /**
@@ -156,6 +156,7 @@ DeviceDfuStateMachine.prototype["initiated"] = undefined;
 DeviceDfuStateMachine.prototype["requested_version"] = undefined;
 
 /**
+ * Status updates reported for this firmware update.
  * @member {Array.<module:model/DeviceDfuStateMachineNode>} updates
  */
 DeviceDfuStateMachine.prototype["updates"] = undefined;

@@ -17,7 +17,7 @@ import UsageData from "./UsageData";
 /**
  * The GetDataUsage200ResponseDataInner model module.
  * @module model/GetDataUsage200ResponseDataInner
- * @version 6.7.0
+ * @version 7.0.0
  */
 class GetDataUsage200ResponseDataInner {
   /**
@@ -175,7 +175,7 @@ GetDataUsage200ResponseDataInner.RequiredProperties = ["data", "type"];
 GetDataUsage200ResponseDataInner.prototype["data"] = undefined;
 
 /**
- * The device UID this usage data belongs to (only present when aggregate is 'device')
+ * The DeviceUID this usage data belongs to (only present when aggregate is 'device')
  * @member {String} device
  */
 GetDataUsage200ResponseDataInner.prototype["device"] = undefined;
@@ -187,7 +187,7 @@ GetDataUsage200ResponseDataInner.prototype["device"] = undefined;
 GetDataUsage200ResponseDataInner.prototype["device_count"] = undefined;
 
 /**
- * The fleet UID this usage data belongs to (only present when aggregate is 'fleet')
+ * The FleetUID this usage data belongs to (only present when aggregate is 'fleet')
  * @member {String} fleet
  */
 GetDataUsage200ResponseDataInner.prototype["fleet"] = undefined;

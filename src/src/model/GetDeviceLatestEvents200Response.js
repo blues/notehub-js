@@ -17,7 +17,7 @@ import Event from "./Event";
 /**
  * The GetDeviceLatestEvents200Response model module.
  * @module model/GetDeviceLatestEvents200Response
- * @version 6.7.0
+ * @version 7.0.0
  */
 class GetDeviceLatestEvents200Response {
   /**
@@ -83,7 +83,7 @@ class GetDeviceLatestEvents200Response {
 }
 
 /**
- * The set of latest events.  Will always include the current \"session.begin\" event.
+ * The most recent event from each notefile, sorted by notefile name.
  * @member {Array.<module:model/Event>} latest_events
  */
 GetDeviceLatestEvents200Response.prototype["latest_events"] = undefined;
