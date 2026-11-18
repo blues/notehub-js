@@ -2120,7 +2120,7 @@ paths:
       description: |
         List a device's sessions, its connections to Notehub. Each shows why it opened and closed,
         signal strength, location and data usage. `startDate` and `endDate` filter on when the
-        session began.
+        session began. For every device's sessions, use `GetSessions`.
 
         Paginated.
       parameters:
@@ -2230,7 +2230,7 @@ paths:
                     type: boolean
                   next_cursor:
                     description: |
-                      Pass this opaque value as a cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes.
+                      Pass this value (epoch microseconds, optionally `.N`) as a cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes.
                     type: string
                 required:
                   - device_public_keys
@@ -3531,9 +3531,9 @@ paths:
       operationId: CreateMonitor
       summary: Create a monitor
       description: |
-        Create a monitor that raises an alert and notifies email or Slack when its condition holds.
-        It can watch an event value (`event`, the default), devices going quiet (`heartbeat`), or
-        data usage (`usage`).
+        Create a monitor that raises an alert and notifies email, Slack or Twilio when its
+        condition holds. It can watch an event value (`event`, the default), devices going quiet
+        (`heartbeat`), or data usage (`usage`).
 
         Requires the Owner or Developer role. Returns 403 if the project's plan doesn't allow the
         monitor, and 400 for invalid settings.
@@ -3595,8 +3595,8 @@ paths:
       operationId: GetMonitor
       summary: Get a monitor
       description: |
-        Get one monitor's settings and whether it's in alert. Slack credentials in `alert_routes`
-        come back as `(omitted)`.
+        Get one monitor's settings and whether it's in alert. Slack and Twilio credentials in
+        `alert_routes` come back as `(omitted)`.
 
         Returns 404 if the monitor never existed; a deleted monitor is still returned.
       parameters:
@@ -3624,8 +3624,8 @@ paths:
       description: |
         Replace a monitor's settings with the whole monitor, as `GetMonitor` returns it. Omitted
         fields are cleared or reset, except `source_type`, `fleet_filter`, `notefile_filter`,
-        `condition_type`, `aggregate_window` and `alert_routes`. Slack credentials left as
-        `(omitted)` are kept.
+        `condition_type`, `aggregate_window` and `alert_routes`. Slack and Twilio credentials left
+        as `(omitted)` are kept.
 
         Requires the Owner or Developer role. Returns 403 if the plan doesn't allow a new
         `source_type`.
@@ -4220,6 +4220,38 @@ paths:
       x-custom-attributes:
         permission: update
         resource: blues:resources:app:APPSERIAL:settings
+  /v1/projects/{projectOrProductUID}/sessions:
+    get:
+      operationId: GetSessions
+      summary: List sessions in a project
+      description: |
+        List the sessions of every device in a project, as `GetDeviceSessions` does for one device.
+        `startDate` and `endDate` filter on when the session began. `deviceUID` and `fleetUID` each
+        match any of their values; `fleetUID` matches the fleets recorded on the session.
+
+        Paginated.
+      parameters:
+        - $ref: '#/components/parameters/projectOrProductUIDParam'
+        - $ref: '#/components/parameters/pageSizeParam'
+        - $ref: '#/components/parameters/pageNumParam'
+        - $ref: '#/components/parameters/cursorParam'
+        - $ref: '#/components/parameters/startDateParam'
+        - $ref: '#/components/parameters/endDateParam'
+        - $ref: '#/components/parameters/firstSyncParam'
+        - $ref: '#/components/parameters/deviceUIDParamQuery'
+        - $ref: '#/components/parameters/fleetUIDsQueryParam'
+      responses:
+        '200':
+          $ref: '#/components/responses/SessionResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+        - personalAccessToken: []
+      tags:
+        - device
+      x-custom-attributes:
+        permission: read
+        resource: blues:resources:app:APPSERIAL:devices
   /v1/projects/{projectOrProductUID}/skills:
     get:
       operationId: GetSkills
@@ -4962,7 +4994,7 @@ components:
         type: string
     cursorParam:
       description: |
-        If supplied, the results will be returned in ascending order of modification time. To start from a specific time, specify cursor as Unix epoch microseconds (UTC) or 0 to start from the beginning. Or, to start where the last search left off, set cursor to the returned value of next_cursor (or the X-Next-Cursor header).
+        If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped.
       in: query
       name: cursor
       required: false
@@ -5769,11 +5801,18 @@ components:
           items:
             properties:
               notification_type:
-                description: The type of notification
+                description: |
+                  How the notification was sent.
+                  - `email`: by email
+                  - `slack-webhook`: to a Slack webhook
+                  - `slack-bearer`: through a Slack app, with a bearer token
+                  - `twilio`: by SMS, through Twilio
                 type: string
                 enum:
                   - email
-                  - slack
+                  - slack-webhook
+                  - slack-bearer
+                  - twilio
               recipients:
                 description: The recipients of the notification
                 type: string
@@ -6612,7 +6651,7 @@ components:
           default: false
         next_cursor:
           description: |
-            Pass this opaque value as a cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes.
+            Pass this value (epoch microseconds, optionally `.N`) as a cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes.
           type: string
     DeviceDfuStateMachine:
       description: Represents a single request to update the host or Notecard firmware
@@ -6697,7 +6736,7 @@ components:
           default: false
         next_cursor:
           description: |
-            Pass this opaque value as a cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes.
+            Pass this value (epoch microseconds, optionally `.N`) as a cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes.
           type: string
     DeviceSensor:
       description: A sensor attached to a device
@@ -6930,6 +6969,8 @@ components:
           description: Email address, or several separated by commas.
           type: string
           example: example@blues.com
+      required:
+        - email
     Empty:
       type: object
     EnvTreeJsonNode:
@@ -7755,13 +7796,14 @@ components:
           description: If true, the monitor is in alert state.
           type: boolean
         alert_routes:
-          description: Where to send notifications, by email or Slack. Required to create a monitor.
+          description: Where to send notifications, by email, Slack or Twilio. Required to create a monitor.
           type: array
           items:
             oneOf:
               - $ref: '#/components/schemas/SlackWebHookNotification'
               - $ref: '#/components/schemas/SlackBearerNotification'
               - $ref: '#/components/schemas/EmailNotification'
+              - $ref: '#/components/schemas/TwilioNotification'
         condition_type:
           description: How the value is compared with `threshold`. Required for event and usage monitors; heartbeat monitors always use `greater_than_or_equal_to`.
           type: string
@@ -8762,8 +8804,10 @@ components:
           description: The message, or Block Kit JSON. Event placeholders such as `[.body.temp]` aren't allowed.
           type: string
         token:
-          description: The bearer token for the Slack app.
+          description: The bearer token for the Slack app. Returned as `(omitted)`. Sending it back keeps the stored token if the monitor has only one Slack bearer route.
           type: string
+      required:
+        - token
     SlackRoute:
       type: object
       properties:
@@ -8809,8 +8853,10 @@ components:
           description: The message, or Block Kit JSON. Event placeholders such as `[.body.temp]` aren't allowed.
           type: string
         url:
-          description: The URL of the Slack webhook.
+          description: The URL of the Slack webhook. Returned as `(omitted)`. Sending it back keeps the stored URL if the monitor has only one Slack webhook route.
           type: string
+      required:
+        - url
     SnowflakeRoute:
       type: object
       properties:
@@ -8944,6 +8990,26 @@ components:
         zone:
           description: Timezone name
           type: string
+    TwilioNotification:
+      type: object
+      properties:
+        account_sid:
+          description: The Twilio account SID.
+          type: string
+        auth_token:
+          description: The Twilio auth token. Returned as `(omitted)`. Sending it back keeps the stored token if the monitor has only one Twilio route.
+          type: string
+        from:
+          description: The number to send the SMS from, in E.164 format, e.g. `+15551234567`.
+          type: string
+        message:
+          description: The text of the SMS. Event placeholders such as `[.body.temp]` aren't allowed.
+          type: string
+        to:
+          description: The number to send the SMS to, in E.164 format.
+          type: string
+      required:
+        - account_sid
     TwilioRoute:
       type: object
       properties:
@@ -9352,7 +9418,7 @@ components:
                 type: boolean
               next_cursor:
                 description: |
-                  Pass this opaque value as a cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes.
+                  Pass this value (epoch microseconds, optionally `.N`) as a cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes.
                 type: string
             required:
               - alerts
@@ -9433,7 +9499,7 @@ components:
                 type: boolean
               next_cursor:
                 description: |
-                  Pass this opaque value as a cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes.
+                  Pass this value (epoch microseconds, optionally `.N`) as a cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes.
                 type: string
             required:
               - devices
@@ -9799,7 +9865,7 @@ components:
                 type: boolean
               next_cursor:
                 description: |
-                  Pass this opaque value as a cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes.
+                  Pass this value (epoch microseconds, optionally `.N`) as a cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes.
                 type: string
               sessions:
                 type: array
