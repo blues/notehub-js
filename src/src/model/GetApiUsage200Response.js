@@ -17,7 +17,7 @@ import UsageApiData from "./UsageApiData";
 /**
  * The GetApiUsage200Response model module.
  * @module model/GetApiUsage200Response
- * @version 6.8.0
+ * @version 7.0.0
  */
 class GetApiUsage200Response {
   /**

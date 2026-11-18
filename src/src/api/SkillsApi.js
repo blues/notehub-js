@@ -21,7 +21,7 @@ import SkillWriteResult from "../model/SkillWriteResult";
 /**
  * Skills service.
  * @module api/SkillsApi
- * @version 6.8.0
+ * @version 7.0.0
  */
 export default class SkillsApi {
   /**

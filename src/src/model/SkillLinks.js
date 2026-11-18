@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The SkillLinks model module.
  * @module model/SkillLinks
- * @version 6.8.0
+ * @version 7.0.0
  */
 class SkillLinks {
   /**

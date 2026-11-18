@@ -18,7 +18,7 @@ import DatasetReloadProgress from "./DatasetReloadProgress";
 /**
  * The DataSet model module.
  * @module model/DataSet
- * @version 6.8.0
+ * @version 7.0.0
  */
 class DataSet {
   /**

@@ -18,7 +18,7 @@ import Event from "./Event";
 /**
  * The RepositoryRecord model module.
  * @module model/RepositoryRecord
- * @version 6.8.0
+ * @version 7.0.0
  */
 class RepositoryRecord {
   /**

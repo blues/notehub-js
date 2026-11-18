@@ -17,7 +17,7 @@ import GetOrganization200ResponsePlan from "./GetOrganization200ResponsePlan";
 /**
  * The GetOrganization200Response model module.
  * @module model/GetOrganization200Response
- * @version 6.8.0
+ * @version 7.0.0
  */
 class GetOrganization200Response {
   /**

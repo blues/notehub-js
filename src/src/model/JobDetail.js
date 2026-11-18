@@ -19,7 +19,7 @@ import JobDetailAllOf from "./JobDetailAllOf";
 /**
  * The JobDetail model module.
  * @module model/JobDetail
- * @version 6.8.0
+ * @version 7.0.0
  */
 class JobDetail {
   /**

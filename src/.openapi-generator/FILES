@@ -385,16 +385,3 @@ src/model/UserDfuStateMachine.js
 src/model/UserDfuStateMachineStatus.js
 src/model/UserFirmwareInfo.js
 src/model/WebhookSettings.js
-test/api/SkillsApi.spec.js
-test/model/GetOrganization200Response.spec.js
-test/model/GetOrganization200ResponsePlan.spec.js
-test/model/GetOrganizationBalanceHistory200Response.spec.js
-test/model/GetOrganizationBalanceHistory200ResponseDataInner.spec.js
-test/model/RepositoryRecord.spec.js
-test/model/Skill.spec.js
-test/model/SkillLinks.spec.js
-test/model/SkillSet.spec.js
-test/model/SkillSummary.spec.js
-test/model/SkillWrite.spec.js
-test/model/SkillWriteResult.spec.js
-test/model/TwilioNotification.spec.js

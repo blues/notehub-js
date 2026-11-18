@@ -1,6 +1,6 @@
 {
   "name": "@blues-inc/notehub-js",
-  "version": "6.8.0",
+  "version": "7.0.0",
   "description": "The OpenAPI definition for the Notehub.io API. ",
   "license": "MIT",
   "main": "dist/index.js",

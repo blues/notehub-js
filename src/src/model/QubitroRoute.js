@@ -18,7 +18,7 @@ import RouteTransformSettings from "./RouteTransformSettings";
 /**
  * The QubitroRoute model module.
  * @module model/QubitroRoute
- * @version 6.8.0
+ * @version 7.0.0
  */
 class QubitroRoute {
   /**

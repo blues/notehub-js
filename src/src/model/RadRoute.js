@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The RadRoute model module.
  * @module model/RadRoute
- * @version 6.8.0
+ * @version 7.0.0
  */
 class RadRoute {
   /**

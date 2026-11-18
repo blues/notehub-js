@@ -17,7 +17,7 @@ import DescriptionRecord from "./DescriptionRecord";
 /**
  * The DescriptionRecordList model module.
  * @module model/DescriptionRecordList
- * @version 6.8.0
+ * @version 7.0.0
  */
 class DescriptionRecordList {
   /**

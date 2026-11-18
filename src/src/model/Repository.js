@@ -17,7 +17,7 @@ import ArchiveStats from "./ArchiveStats";
 /**
  * The Repository model module.
  * @module model/Repository
- * @version 6.8.0
+ * @version 7.0.0
  */
 class Repository {
   /**

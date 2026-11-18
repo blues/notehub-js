@@ -17,7 +17,7 @@ import SkillLinks from "./SkillLinks";
 /**
  * The Skill model module.
  * @module model/Skill
- * @version 6.8.0
+ * @version 7.0.0
  */
 class Skill {
   /**

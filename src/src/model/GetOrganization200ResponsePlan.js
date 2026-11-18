@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The GetOrganization200ResponsePlan model module.
  * @module model/GetOrganization200ResponsePlan
- * @version 6.8.0
+ * @version 7.0.0
  */
 class GetOrganization200ResponsePlan {
   /**

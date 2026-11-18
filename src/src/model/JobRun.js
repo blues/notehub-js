@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The JobRun model module.
  * @module model/JobRun
- * @version 6.8.0
+ * @version 7.0.0
  */
 class JobRun {
   /**

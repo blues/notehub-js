@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The SlackBearerNotification model module.
  * @module model/SlackBearerNotification
- * @version 6.8.0
+ * @version 7.0.0
  */
 class SlackBearerNotification {
   /**

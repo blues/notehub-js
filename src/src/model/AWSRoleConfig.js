@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The AWSRoleConfig model module.
  * @module model/AWSRoleConfig
- * @version 6.8.0
+ * @version 7.0.0
  */
 class AWSRoleConfig {
   /**

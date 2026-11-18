@@ -18,7 +18,7 @@ import RouteTransformSettings from "./RouteTransformSettings";
 /**
  * The GoogleRoute model module.
  * @module model/GoogleRoute
- * @version 6.8.0
+ * @version 7.0.0
  */
 class GoogleRoute {
   /**

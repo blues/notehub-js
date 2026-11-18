@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The UpdateProjectSecretRequest model module.
  * @module model/UpdateProjectSecretRequest
- * @version 6.8.0
+ * @version 7.0.0
  */
 class UpdateProjectSecretRequest {
   /**

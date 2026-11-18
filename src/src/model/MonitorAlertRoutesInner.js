@@ -20,7 +20,7 @@ import TwilioNotification from "./TwilioNotification";
 /**
  * The MonitorAlertRoutesInner model module.
  * @module model/MonitorAlertRoutesInner
- * @version 6.8.0
+ * @version 7.0.0
  */
 class MonitorAlertRoutesInner {
   /**

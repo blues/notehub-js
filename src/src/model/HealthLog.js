@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The HealthLog model module.
  * @module model/HealthLog
- * @version 6.8.0
+ * @version 7.0.0
  */
 class HealthLog {
   /**

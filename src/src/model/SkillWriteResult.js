@@ -17,7 +17,7 @@ import Skill from "./Skill";
 /**
  * The SkillWriteResult model module.
  * @module model/SkillWriteResult
- * @version 6.8.0
+ * @version 7.0.0
  */
 class SkillWriteResult {
   /**

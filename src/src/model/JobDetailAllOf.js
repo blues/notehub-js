@@ -17,7 +17,7 @@ import JobDefinition from "./JobDefinition";
 /**
  * The JobDetailAllOf model module.
  * @module model/JobDetailAllOf
- * @version 6.8.0
+ * @version 7.0.0
  */
 class JobDetailAllOf {
   /**

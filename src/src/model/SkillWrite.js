@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The SkillWrite model module.
  * @module model/SkillWrite
- * @version 6.8.0
+ * @version 7.0.0
  */
 class SkillWrite {
   /**

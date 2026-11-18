@@ -23,7 +23,7 @@ import SimUsage from "./SimUsage";
 /**
  * The Device model module.
  * @module model/Device
- * @version 6.8.0
+ * @version 7.0.0
  */
 class Device {
   /**

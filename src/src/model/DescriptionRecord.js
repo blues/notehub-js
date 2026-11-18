@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The DescriptionRecord model module.
  * @module model/DescriptionRecord
- * @version 6.8.0
+ * @version 7.0.0
  */
 class DescriptionRecord {
   /**

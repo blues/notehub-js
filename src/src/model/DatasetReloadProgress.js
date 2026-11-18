@@ -16,7 +16,7 @@ import ApiClient from "../ApiClient";
 /**
  * The DatasetReloadProgress model module.
  * @module model/DatasetReloadProgress
- * @version 6.8.0
+ * @version 7.0.0
  */
 class DatasetReloadProgress {
   /**

@@ -17,7 +17,7 @@ import GetOrganizationBalanceHistory200ResponseDataInner from "./GetOrganization
 /**
  * The GetOrganizationBalanceHistory200Response model module.
  * @module model/GetOrganizationBalanceHistory200Response
- * @version 6.8.0
+ * @version 7.0.0
  */
 class GetOrganizationBalanceHistory200Response {
   /**
