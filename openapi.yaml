@@ -1082,6 +1082,7 @@ paths:
         - device
       x-custom-attributes:
         permission: read
+        public-read: signed-in
         resource: blues:resources:app:APPSERIAL:devices
   /v1/projects/{projectOrProductUID}/devices/{deviceUID}:
     delete:
@@ -1126,6 +1127,7 @@ paths:
         - device
       x-custom-attributes:
         permission: read
+        public-read: signed-in
         resource: blues:resources:app:APPSERIAL:devices
     parameters:
       - $ref: '#/components/parameters/projectOrProductUIDParam'
@@ -1425,6 +1427,7 @@ paths:
         - device
       x-custom-attributes:
         permission: read
+        public-read: signed-in
         resource: blues:resources:app:APPSERIAL:notefiles
   /v1/projects/{projectOrProductUID}/devices/{deviceUID}/fleets:
     delete:
@@ -1481,6 +1484,7 @@ paths:
         - project
       x-custom-attributes:
         permission: read
+        public-read: signed-in
         resource: blues:resources:app:APPSERIAL:devices
     parameters:
       - $ref: '#/components/parameters/projectOrProductUIDParam'
@@ -1571,6 +1575,7 @@ paths:
         - device
       x-custom-attributes:
         permission: read
+        public-read: signed-in
         resource: blues:resources:app:APPSERIAL:devices
   /v1/projects/{projectOrProductUID}/devices/{deviceUID}/journeys:
     get:
@@ -1730,6 +1735,7 @@ paths:
         - device
       x-custom-attributes:
         permission: read
+        public-read: signed-in
         resource: blues:resources:app:APPSERIAL:devices
   /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notefiles/{notefileID}:
     post:
@@ -1817,6 +1823,7 @@ paths:
         - device
       x-custom-attributes:
         permission: read
+        public-read: signed-in
         resource: blues:resources:app:APPSERIAL:notefiles
     post:
       operationId: AddQiNote
@@ -1929,6 +1936,7 @@ paths:
         - device
       x-custom-attributes:
         permission: read
+        public-read: signed-in
         resource: blues:resources:app:APPSERIAL:notes
     post:
       operationId: AddDbNote
@@ -2143,6 +2151,7 @@ paths:
         - device
       x-custom-attributes:
         permission: read
+        public-read: signed-in
         resource: blues:resources:app:APPSERIAL:devices
   /v1/projects/{projectOrProductUID}/devices/{deviceUID}/signal:
     post:
@@ -2531,6 +2540,7 @@ paths:
         - event
       x-custom-attributes:
         permission: read
+        public-read: signed-in
         resource: blues:resources:app:APPSERIAL:events
   /v1/projects/{projectOrProductUID}/events/{eventUID}/route-logs:
     get:
@@ -2787,6 +2797,7 @@ paths:
         - project
       x-custom-attributes:
         permission: read
+        public-read: signed-in
         resource: blues:resources:app:APPSERIAL:fleets
     parameters:
       - $ref: '#/components/parameters/projectOrProductUIDParam'
@@ -2876,6 +2887,7 @@ paths:
         - project
       x-custom-attributes:
         permission: read
+        public-read: signed-in
         resource: blues:resources:app:APPSERIAL:fleets
     parameters:
       - $ref: '#/components/parameters/projectOrProductUIDParam'
@@ -2972,6 +2984,7 @@ paths:
         - device
       x-custom-attributes:
         permission: read
+        public-read: signed-in
         resource: blues:resources:app:APPSERIAL:devices
   /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/environment_hierarchy:
     get:
@@ -3127,6 +3140,7 @@ paths:
         - event
       x-custom-attributes:
         permission: read
+        public-read: signed-in
         resource: blues:resources:app:APPSERIAL:events
   /v1/projects/{projectOrProductUID}/global-transformation:
     post:
@@ -3683,6 +3697,7 @@ paths:
         - project
       x-custom-attributes:
         permission: read
+        public-read: signed-in
         resource: blues:resources:app:APPSERIAL:products
     parameters:
       - $ref: '#/components/parameters/projectOrProductUIDParam'
@@ -4100,6 +4115,7 @@ paths:
         - project
       x-custom-attributes:
         permission: read
+        public-read: signed-in
         resource: blues:resources:app:APPSERIAL:settings
   /v1/projects/{projectOrProductUID}/secrets:
     get:
@@ -4251,6 +4267,7 @@ paths:
         - device
       x-custom-attributes:
         permission: read
+        public-read: signed-in
         resource: blues:resources:app:APPSERIAL:devices
   /v1/projects/{projectOrProductUID}/skills:
     get:
