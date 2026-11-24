@@ -7070,6 +7070,9 @@ components:
     Event:
       type: object
       properties:
+        apn:
+          description: Cellular APN. Only available on _session.qo events.
+          type: string
         app:
           description: AppUID (globally unique)
           type: string
@@ -7079,6 +7082,21 @@ components:
           format: int32
           example: 2
           minimum: 0
+        batch_number:
+          description: The 1-based position of this event within its batch
+          type: integer
+          format: int64
+        batch_received:
+          description: The unix timestamp when the enclosing batch was received
+          type: number
+          format: double
+        batch_total:
+          description: The total number of events in the enclosing batch
+          type: integer
+          format: int64
+        bearer:
+          description: Network bearer. Only available on _session.qo events.
+          type: string
         best_country:
           description: Country
           type: string
@@ -7110,24 +7128,139 @@ components:
         body:
           description: A JSON object containing event details
           type: object
+          nullable: true
         bssid:
           description: BSSID. Only available on _session.qo events.
           type: string
+        bulk:
+          description: Whether the event originated from a bulk/binary data transfer. Not emitted by the events endpoints.
+          type: boolean
+        card_rcvd_bytes:
+          description: Bytes received by the Notecard during this session. Only available on _session.qo events.
+          type: integer
+          format: int64
+        card_rcvd_bytes_secondary:
+          description: Bytes received by the Notecard over its secondary interface. Only available on _session.qo events.
+          type: integer
+          format: int64
+        card_rcvd_notes:
+          description: Notes received by the Notecard during this session. Only available on _session.qo events.
+          type: integer
+          format: int64
+        card_sent_bytes:
+          description: Bytes sent by the Notecard during this session. Only available on _session.qo events.
+          type: integer
+          format: int64
+        card_sent_bytes_secondary:
+          description: Bytes sent by the Notecard over its secondary interface. Only available on _session.qo events.
+          type: integer
+          format: int64
+        card_sent_notes:
+          description: Notes sent by the Notecard during this session. Only available on _session.qo events.
+          type: integer
+          format: int64
+        card_tcp_sessions:
+          description: TCP sessions opened by the Notecard during this session. Only available on _session.qo events.
+          type: integer
+          format: int64
+        card_tls_sessions:
+          description: TLS sessions opened by the Notecard during this session. Only available on _session.qo events.
+          type: integer
+          format: int64
+        cellid:
+          description: Cell ID where the session originated. Only available on _session.qo events.
+          type: string
+        continuous:
+          description: Whether the device was using a continuous connection for this session
+          type: boolean
         deleted:
           description: |
             True if this event has been deleted. Only present when reading with a `cursor`.
           type: boolean
+        details:
+          description: Additional structured detail about the event, e.g. the text lines carried by a _health.qo event
+          type: object
+          nullable: true
         device:
           description: DeviceUID (globally unique)
           type: string
         environment:
           description: Routed environment variables beginning with "$". Only available on _session.qo events.
           type: object
+          additionalProperties:
+            type: string
+          nullable: true
+        err:
+          description: Error text associated with processing or routing this event, if any
+          type: string
         event:
           description: EventUID (globally unique)
           type: string
         file:
           description: The notefile associated with this event
+          type: string
+        firmware:
+          description: Device firmware version as an integer. Only available on _session.qo events.
+          type: integer
+          format: int64
+        firmware_host:
+          description: The host firmware version reported by the device
+          type: string
+        firmware_notecard:
+          description: The Notecard firmware version reported by the device
+          type: string
+        fleets:
+          description: Array of Fleet UIDs the device belonged to when the event was created
+          type: array
+          items:
+            type: string
+          nullable: true
+        hub_duration_secs:
+          description: Duration of the session in seconds. Only available on _session.qo events.
+          type: integer
+          format: int64
+        hub_events_routed:
+          description: Number of events routed during this session. Only available on _session.qo events.
+          type: integer
+          format: int64
+        hub_last_work_done:
+          description: Unix timestamp of the last time work was done for this session. Only available on _session.qo events.
+          type: integer
+          format: int64
+        hub_rcvd_bytes:
+          description: Bytes received by Notehub during this session. Only available on _session.qo events.
+          type: integer
+          format: int64
+        hub_rcvd_notes:
+          description: Notes received by Notehub during this session. Only available on _session.qo events.
+          type: integer
+          format: int64
+        hub_sent_bytes:
+          description: Bytes sent by Notehub during this session. Only available on _session.qo events.
+          type: integer
+          format: int64
+        hub_sent_notes:
+          description: Notes sent by Notehub during this session. Only available on _session.qo events.
+          type: integer
+          format: int64
+        hub_tcp_sessions:
+          description: TCP sessions opened by Notehub during this session. Only available on _session.qo events.
+          type: integer
+          format: int64
+        hub_tls_sessions:
+          description: TLS sessions opened by Notehub during this session. Only available on _session.qo events.
+          type: integer
+          format: int64
+        hub_wire_rcvd_bytes:
+          description: Raw bytes received by Notehub on the session's TCP/TLS connection, as measured by Notehub. Only available on _session.qo events.
+          type: integer
+          format: int64
+        hub_wire_sent_bytes:
+          description: Raw bytes sent by Notehub on the session's TCP/TLS connection, as measured by Notehub. Only available on _session.qo events.
+          type: integer
+          format: int64
+        iccid:
+          description: SIM ICCID. Only available on _session.qo events.
           type: string
         moved:
           description: The number of times the device was sensed to have moved between the last session and this session. Only available on _session.qo events.
@@ -7147,12 +7280,33 @@ components:
         payload:
           description: A base64-encoded binary payload
           type: string
+          format: byte
+        payload_length:
+          description: The size in bytes of the original payload. Set only when the payload was removed for storage reasons, in which case payload is absent.
+          type: integer
+          format: int64
         platform:
           description: Whether this is a platform event (administrative, e.g. _health.qo, _session.qo) rather than user data
+          type: boolean
+        power_charging:
+          description: Whether the device was charging. Only available on _session.qo events.
+          type: boolean
+        power_mah:
+          description: Milliamp-hours consumed. Only available on _session.qo events.
+          type: number
+          format: double
+        power_primary:
+          description: Whether the device was on primary battery power. Only available on _session.qo events.
+          type: boolean
+        power_usb:
+          description: Whether the device was on USB power. Only available on _session.qo events.
           type: boolean
         product:
           description: ProductUID (globally unique)
           type: string
+        queued:
+          description: Whether the note was still queued on the device when the event was created. Not emitted by the events endpoints.
+          type: boolean
         rat:
           description: Rat. Only available on _session.qo events.
           type: string
@@ -7184,6 +7338,11 @@ components:
         session:
           description: SessionUID (globally unique)
           type: string
+        session_began:
+          description: Unix timestamp of when the session began
+          type: integer
+          format: int64
+          example: 1656010061
         sinr:
           description: SINR. Only available on _session.qo events.
           type: integer
@@ -7197,6 +7356,9 @@ components:
           type: string
         ssid:
           description: SSID. Only available on _session.qo events.
+          type: string
+        status:
+          description: 'Routing status of the event: "success", "failure", or "in_progress". Not emitted by the events endpoints.'
           type: string
         temp:
           description: Device temperature. Only available on _session.qo events.
@@ -7261,6 +7423,8 @@ components:
           type: integer
           format: int64
           example: 1652709545
+        triangulate:
+          $ref: '#/components/schemas/Triangulation'
         updates:
           type: integer
           format: int32
@@ -8335,6 +8499,8 @@ components:
           type: string
         project_uids:
           $ref: '#/components/schemas/AppUIDList'
+        raw_data:
+          $ref: '#/components/schemas/RepositoryRawData'
         uid:
           description: Repository UID, e.g. `repo:2606f411-dea6-44a0-9743-1130f57d77d8`.
           type: string
@@ -8347,6 +8513,35 @@ components:
             $ref: '#/components/schemas/Repository'
       required:
         - repositories
+    RepositoryRawData:
+      description: Status of a repository's raw event table. Absent for metadata repositories, which have no raw event table.
+      type: object
+      properties:
+        live_since:
+          description: New events are in the table from this time on. Null until live ingestion into the table has started.
+          type: string
+          format: date-time
+          nullable: true
+        loaded_through:
+          description: While `status` is `loading`, history is loaded up to this time. Null otherwise.
+          type: string
+          format: date-time
+          nullable: true
+        status:
+          description: |-
+            How much event history the table holds.
+            - `history_not_loaded`: only events received since `live_since` are in the table.
+            - `loading`: older events are being added, up to `loaded_through`.
+            - `complete`: all archived events are in the table.
+          type: string
+          enum:
+            - history_not_loaded
+            - loading
+            - complete
+        table:
+          description: Name of the raw event table in the repository's database. Always `_events`.
+          type: string
+      nullable: true
     RepositoryRecord:
       description: |
         One event in a repository's archive, with the session it arrived in and the device's
@@ -8990,6 +9185,94 @@ components:
         zone:
           description: Timezone name
           type: string
+    Triangulation:
+      description: Radio scan data used to derive the tri_* location fields. Only available on _session.qo events.
+      type: object
+      properties:
+        cell_towers:
+          type: array
+          items:
+            $ref: '#/components/schemas/TriangulationCellTower'
+        gps:
+          type: array
+          items:
+            $ref: '#/components/schemas/TriangulationGps'
+        wifi_access_points:
+          type: array
+          items:
+            $ref: '#/components/schemas/TriangulationWifiAccessPoint'
+      nullable: true
+    TriangulationCellTower:
+      type: object
+      properties:
+        asu:
+          type: integer
+          format: int32
+        cell_id:
+          type: integer
+          format: int64
+        location_area_code:
+          description: Location area code (GSM/WCDMA) or tracking area code (LTE)
+          type: integer
+          format: int64
+        mobile_country_code:
+          type: integer
+          format: int32
+        mobile_network_code:
+          type: integer
+          format: int32
+        psc:
+          description: Primary scrambling code (WCDMA) or physical cell ID (LTE)
+          type: integer
+          format: int32
+        radio_type:
+          description: Radio access technology, e.g. "lte" or "gsm"
+          type: string
+        signal_strength:
+          description: Signal strength in dBm
+          type: integer
+          format: int32
+        time:
+          description: Unix timestamp of the scan
+          type: integer
+          format: int64
+    TriangulationGps:
+      type: object
+      properties:
+        age:
+          type: integer
+          format: int64
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
+        timestamp:
+          type: integer
+          format: int64
+    TriangulationWifiAccessPoint:
+      type: object
+      properties:
+        channel:
+          type: integer
+          format: int32
+        frequency:
+          type: integer
+          format: int32
+        mac_address:
+          description: BSSID of the access point
+          type: string
+        signal_strength:
+          description: Signal strength in dBm
+          type: integer
+          format: int32
+        ssid:
+          type: string
+        time:
+          description: Unix timestamp of the scan
+          type: integer
+          format: int64
     TwilioNotification:
       type: object
       properties:
